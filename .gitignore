@@ -1,0 +1,6 @@
+.idea/
+.vscode/
+node_modules/
+dist/
+.rempl_client_id
+*.log

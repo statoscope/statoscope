@@ -1,0 +1,20 @@
+{
+  "eslintConfig": {
+    "env": {
+      "node": true,
+      "mocha": true,
+      "es6": true
+    },
+    "rules": {
+      "no-duplicate-case": 2,
+      "no-undef": 2,
+      "no-unused-vars": [
+        2,
+        {
+          "vars": "all",
+          "args": "after-used"
+        }
+      ]
+    }
+  }
+}

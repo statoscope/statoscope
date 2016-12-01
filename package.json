@@ -1,0 +1,31 @@
+{
+  "name": "rempl-webpack-analyzer",
+  "version": "0.1.0",
+  "description": "Webpack plugin and UI for analyzing webpack building process through rempl",
+  "scripts": {
+    "codestyle": "jscs src && eslint src",
+    "build:dev": "basis build",
+    "build": "npm run codestyle && basis build --pack --css-usage --css-optimize-names --js-cut-dev",
+    "start": "http-server ."
+  },
+  "main": "./src/plugin/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smelukov/rempl-webpack-analyzer.git"
+  },
+  "author": "Sergey Melyukov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/smelukov/rempl-webpack-analyzer/issues"
+  },
+  "homepage": "https://github.com/smelukov/rempl-webpack-analyzer#readme",
+  "dependencies": {
+    "rempl": "1.0.0-alpha1"
+  },
+  "devDependencies": {
+    "basisjs": "^1.10.0",
+    "eslint": "^3.11.1",
+    "http-server": "^0.9.0",
+    "jscs": "^3.0.7"
+  }
+}
