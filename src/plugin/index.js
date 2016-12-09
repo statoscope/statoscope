@@ -1,4 +1,4 @@
-var rempl = require('rempl');
+var rempl = require('rempl').provider;
 
 function RemplPlugin(options) {
     var self = this;

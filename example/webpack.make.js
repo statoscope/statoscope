@@ -184,7 +184,7 @@ module.exports = function makeWebpackConfig (options) {
     webpack: webpack, // pass the webpack instance
     url: 'http://localhost:8177', // URL of rempl server
     ui: {
-      url: fs.readFileSync('/path/to/dist/ui/script.js', { encoding: 'utf-8' }) // builded UI bundle
+      script: fs.readFileSync('../dist/ui/script.js', { encoding: 'utf-8' }) // builded UI bundle
     }
   }));
 
