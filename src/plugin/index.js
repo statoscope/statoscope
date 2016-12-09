@@ -1,4 +1,4 @@
-var rempl = require('rempl').observer.nodejs;
+var rempl = require('rempl');
 
 function RemplPlugin(options) {
     var self = this;
