@@ -7,7 +7,7 @@ Webpack plugin and UI for analyzing webpack building process through [rempl](htt
 ```bash
 rempl server  # run rempl server
 npm i         # install deps
-npm run build     # build the UI
+npm run build # build the UI
 ```
 
 > Also, you can use the [GUI](https://github.com/rempl/menubar-server) to control rempl server.
