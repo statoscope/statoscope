@@ -1,3 +1,10 @@
+## 0.1.4 - 2016-12-11
+
+### Updated
+
+- readme
+- installation logic
+
 ## 0.1.3 - 2016-12-11
 
 ### Updated
