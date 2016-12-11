@@ -1,3 +1,10 @@
+## 0.1.5 - 2016-12-12
+
+### Fixed
+
+- installation logic
+- included bundle to package
+
 ## 0.1.4 - 2016-12-11
 
 ### Updated
