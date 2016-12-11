@@ -1,3 +1,15 @@
+## 0.1.3 - 2016-12-11
+
+### Updated
+
+- rempl version
+- readme
+
+### Fixed
+
+- eslint config and warnings
+- some refactoring (simplified plugin usage)
+
 ## 0.1.2 - 2016-12-09
 
 ### Fixed
