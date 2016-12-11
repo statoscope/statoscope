@@ -1,20 +1,29 @@
 {
-  "eslintConfig": {
-    "env": {
-      "node": true,
-      "mocha": true,
-      "es6": true
+    "parserOptions": {
+        "sourceType": "module"
     },
+    "env": {
+        "node": true,
+        "browser": true
+    },
+    "globals": {
+        "basis": true,
+        "resource": true,
+        "asset": true,
+        "rempl": true
+    },
+    "extends": [
+        "eslint:recommended"
+    ],
     "rules": {
-      "no-duplicate-case": 2,
-      "no-undef": 2,
-      "no-unused-vars": [
-        2,
-        {
-          "vars": "all",
-          "args": "after-used"
-        }
-      ]
+        "no-duplicate-case": "error",
+        "no-undef": "error",
+        "no-unused-vars": [
+            "error",
+            {
+                "vars": "all",
+                "args": "after-used"
+            }
+        ]
     }
-  }
 }

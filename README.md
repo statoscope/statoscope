@@ -2,12 +2,20 @@
 
 Webpack plugin and UI for analyzing webpack building process through [rempl](https://github.com/rempl/rempl)
 
+![https://cloud.githubusercontent.com/assets/6654581/21076877/59962384-bf48-11e6-862d-0bfc13244ded.png](https://cloud.githubusercontent.com/assets/6654581/21076877/59962384-bf48-11e6-862d-0bfc13244ded.png)
+
+## Install
+
+```bash
+npm install rempl-webpack-analyzer --save-dev
+```
+
 ## Usage:
 
 ```bash
-rempl server  # run rempl server
 npm i         # install deps
 npm run build # build the UI
+rempl         # run rempl server
 ```
 
 > Also, you can use the [GUI](https://github.com/rempl/menubar-server) to control rempl server.
@@ -18,13 +26,7 @@ var RemplPlugin = require('rempl-webpack-analyzer');
 
 // ...
 
-config.plugins.push(new RemplPlugin({
-  webpack: webpack, // pass the webpack instance
-  url: 'http://localhost:8177', // URL of rempl server
-  ui: {
-    script: fs.readFileSync('/path/to/dist/ui/script.js', { encoding: 'utf-8' }) // builded UI bundle
-  }
-}));
+plugins.push(new RemplPlugin());
 ```
     
 You can use the [example](example) to see how it works:
@@ -33,6 +35,21 @@ cd example
 npm i
 npm run dev
 ```
-Then open rempl server URL in your browser (e.g. [http://localhost:8177](http://localhost:8177))
+Then open rempl server URL in your browser ([http://localhost:8177](http://localhost:8177) by default)
 
-<img width="839" alt="screenshot at 09 13-33-21" src="https://cloud.githubusercontent.com/assets/6654581/21046112/19195d2e-be14-11e6-97bc-3cbf63f882b3.png">
+> Make sure that your rempl server is up.
+
+## Plugin config
+
+If you don't want to use default plugin config, then you can set your own config:
+```js
+new RemplPlugin({
+    url: 'http://localhost:8177', // rempl server URL
+    ui: {
+        script: fs.readFileSync('/path/to/ui/bundle.js', utf-8), // packed UI bundle (js + html + css + etc...)
+        url: 'http://localhost:8080' // or URL to UI
+    }
+});
+```
+
+> if ui.url and ui.script is specified then ui.url will used

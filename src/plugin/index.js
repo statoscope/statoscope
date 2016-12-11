@@ -1,82 +1,112 @@
-var rempl = require('rempl').provider;
+var webpack = require('webpack');
+var rempl = require('rempl');
+var path = require('path');
+var fs = require('fs');
 
-function RemplPlugin(options) {
-    var self = this;
+function deepExtend(target) {
+    var sources = Array.prototype.slice.call(arguments, 1);
 
-    this.webpack = options.webpack;
-    this.url = options.url;
+    if (typeof target != 'object' || !target) {
+        return;
+    }
 
-    if (options.ui) {
-        if (typeof options.ui == 'string') {
-            this.ui = {
-                url: options.ui
-            };
-        } else {
-            this.ui = options.ui;
+    for (var i = 0; i < sources.length; i++) {
+        var source = sources[i];
+
+        if (typeof source == 'object' && source) {
+            for (var sourceKey in source) {
+                if (source.hasOwnProperty(sourceKey)) {
+                    var value = source[sourceKey];
+
+                    if (typeof value == 'object' && value) {
+                        target[sourceKey] = deepExtend({}, value);
+                    } else {
+                        target[sourceKey] = value;
+                    }
+                }
+            }
         }
     }
+
+    return target;
+}
+
+function RemplPlugin(options) {
+    var defaultOptions = {
+        url: 'http://localhost:8177',
+        ui: {
+            // lazy fetching the UI
+            get script() {
+                if (!this.__bundleCache) {
+                    this.__bundleCache = fs.readFileSync(path.resolve(__dirname, '../../dist/ui/script.js'), 'utf-8');
+                }
+
+                return this.__bundleCache;
+            }
+        }
+    };
+
+    options = deepExtend({}, defaultOptions, options);
 
     this.lastStatus = '';
     this.lastProgress = 0;
     this.lastProfile = {};
 
-    this.transport = rempl('webpack analyzer', function(settings, callback) {
-        if (self.ui.url) {
-            callback(null, 'url', self.ui.url);
+    this.transport = rempl.createPublisher('webpack analyzer', function(settings, callback) {
+        if (options.ui.url) {
+            callback(null, 'url', options.ui.url);
         } else {
-            callback(null, 'script', self.ui.script);
+            callback(null, 'script', options.ui.script);
         }
-    }, this.url);
+    }, options.url);
 
     this.transport.define({
         getLast: function(cb) {
-            self.transport.ns('status').send(self.lastStatus);
-            self.transport.ns('progress').send(self.lastProgress);
-            self.transport.ns('profile').send(self.lastProfile);
+            this.transport.ns('status').publish(this.lastStatus);
+            this.transport.ns('progress').publish(this.lastProgress);
+            this.transport.ns('profile').publish(this.lastProfile);
             cb();
-        }
+        }.bind(this)
     });
 }
 
 RemplPlugin.prototype.apply = function(compiler) {
-    var self = this;
-
-    compiler.apply(new this.webpack.ProgressPlugin(function(percent, msg) {
-        self.lastStatus = 'compiling';
-        self.transport.ns('status').send(self.lastStatus);
-        self.transport.ns('progress').send(percent);
-        self.lastProgress = percent;
-    }));
+    compiler.apply(new webpack.ProgressPlugin(function(percent) {
+        this.lastStatus = 'compiling';
+        this.transport.ns('status').publish(this.lastStatus);
+        this.transport.ns('progress').publish(percent);
+        this.lastProgress = percent;
+    }.bind(this)));
 
     compiler.plugin('emit', function(compilation, done) {
         var stats = compilation.getStats();
 
-        self.lastProfile = stats.toJson();
-        self.lastProfile.hasErrors = stats.hasErrors();
-        self.lastProfile.hasWarnings = stats.hasWarnings();
-        self.transport.ns('profile').send(self.lastProfile);
+        this.lastProfile = stats.toJson();
+        this.lastProfile.hasErrors = stats.hasErrors();
+        this.lastProfile.hasWarnings = stats.hasWarnings();
+        this.transport.ns('profile').publish(this.lastProfile);
         done();
-    });
+    }.bind(this));
 
     compiler.plugin('compile', function() {
-        self.lastStatus = 'compiling';
-        self.transport.ns('status').send(self.lastStatus);
-    });
+        this.lastStatus = 'compiling';
+        this.transport.ns('status').publish(this.lastStatus);
+    }.bind(this));
 
     compiler.plugin('invalid', function() {
-        self.lastStatus = 'invalidated';
-        self.transport.ns('status').send(self.lastStatus);
-    });
+        this.lastStatus = 'invalidated';
+        this.transport.ns('status').publish(this.lastStatus);
+    }.bind(this));
 
     compiler.plugin('done', function() {
-        self.lastStatus = 'success';
-        self.transport.ns('status').send(self.lastStatus);
-    });
+        this.lastStatus = 'success';
+        this.transport.ns('status').publish(this.lastStatus);
+    }.bind(this));
 
     compiler.plugin('failed', function() {
-        self.lastStatus = 'failed';
-        self.transport.ns('status').send(self.lastStatus);
-    });
+        this.lastStatus = 'failed';
+        this.transport.ns('status').publish(this.lastStatus);
+    }.bind(this));
 };
 
 module.exports = RemplPlugin;

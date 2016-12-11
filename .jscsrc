@@ -3,7 +3,8 @@
     "./coverage",
     "./docs",
     "./dist",
-    "./node_modules"
+    "./node_modules",
+    "./src/ui/src/modules/table/index.js"
   ],
   "disallowEmptyBlocks": true,
   "disallowImplicitTypeConversion": [
