@@ -1,6 +1,6 @@
 {
   "name": "rempl-webpack-analyzer",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Webpack plugin and UI for analyzing webpack building process through rempl",
   "scripts": {
     "codestyle": "node node_modules/jscs/bin/jscs src && node node_modules/eslint/bin/eslint.js -c ./.eslintrc src",
