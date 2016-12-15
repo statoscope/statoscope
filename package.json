@@ -1,6 +1,6 @@
 {
   "name": "rempl-webpack-analyzer",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Webpack plugin and UI for analyzing webpack building process through rempl",
   "scripts": {
     "prepublish": "npm run codestyle",
