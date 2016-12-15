@@ -1,4 +1,4 @@
-[![npm](https://img.shields.io/npm/v/rempl-webpack-analyzer.svg)](https://github.com/smelukov/rempl-webpack-analyzer)
+[![npm](https://img.shields.io/npm/v/rempl-webpack-analyzer.svg)](https://www.npmjs.com/package/rempl-webpack-analyzer)
 
 # rempl-webpack-analyzer
 
