@@ -10,15 +10,8 @@ module.exports = Node.subclass({
         }
     },
     childNodes: [
-        {
-            id: 'home',
-            selected: true
-        },
-        {
-            id: 'assets'
-        },
-        {
-            id: 'modules'
-        }
+        { id: 'home', selected: true },
+        { id: 'assets' },
+        { id: 'modules' }
     ]
 });

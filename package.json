@@ -3,9 +3,10 @@
   "version": "0.1.6",
   "description": "Webpack plugin and UI for analyzing webpack building process through rempl",
   "scripts": {
+    "prepublish": "npm run codestyle",
     "codestyle": "node node_modules/jscs/bin/jscs src && node node_modules/eslint/bin/eslint.js -c ./.eslintrc src",
     "build:dev": "node node_modules/basisjs-tools/bin/basis build",
-    "build": "node node_modules/basisjs-tools/bin/basis build --pack --css-usage --css-optimize-names --js-cut-dev",
+    "build": "node node_modules/basisjs-tools/bin/basis build --pack --css-usage --css-pack --js-cut-dev",
     "start": "node node_modules/http-server/bin/http-server ."
   },
   "main": "./src/plugin/index.js",

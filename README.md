@@ -1,3 +1,5 @@
+[![npm](https://img.shields.io/npm/v/rempl-webpack-analyzer.svg)](https://github.com/smelukov/rempl-webpack-analyzer)
+
 # rempl-webpack-analyzer
 
 Webpack plugin and UI for analyzing webpack building process through [rempl](https://github.com/rempl/rempl)
@@ -21,7 +23,7 @@ var RemplPlugin = require('rempl-webpack-analyzer');
 plugins.push(new RemplPlugin());
 ```
 
-Start rempl server:
+Start [rempl server](https://github.com/rempl/rempl-cli):
 
 ```bash
 rempl

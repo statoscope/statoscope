@@ -1,1 +1,16498 @@
-(function(){"use strict";var e={"0.js":"app","1.js":"basis.data","2.js":"basis.data.state","3.js":"basis.data.subscription","4.js":"basis.data.resolve","5.js":"basis.event","6.js":"basis.ui","7.js":"basis.template.html","8.js":"basis.l10n","9.js":"basis.template.htmlfgen","a.js":"basis.template.const","b.js":"basis.template.namespace","c.js":"basis.template","d.js":"basis.template.declaration","e.js":"basis.template.store","f.js":"basis.template.theme","g.js":"basis.template.buildDom","h.js":"basis.dom.event","i.js":"basis.dom.wrapper","j.js":"app.type","k.js":"basis.promise","l.js":"basis.entity","m.js":"basis.data.dataset","n.js":"basis.type","o.js":"app.transport","p.js":"basis.app","q.js":"basis.data.index"},t={"0.css":".a{margin-top:30px}","5.tmpl":[[1,0,["element"],"div",[8,1,["content"]]],[9,0]],"1.tmpl":[[1,0,["element"],"div",[1,0,0,"div",[4,0,0,"p l"],[1,0,0,"div",[1,0,0,"b",[3,0,0,"Version:"]],[3,0,0," "],[3,1,["version"]]],[1,0,0,"div",[1,0,0,"b",[3,0,0,"Hash:"]],[3,0,0," "],[3,1,["hash"]]],[1,0,0,"div",[1,0,0,"b",[3,0,0,"Assets:"]],[3,0,0," "],[3,1,["assets"]]],[1,0,0,"div",[1,0,0,"b",[3,0,0,"Modules:"]],[3,0,0," "],[3,1,["modules"]]],[1,0,0,"div",[1,0,0,"b",[3,0,0,"Chunks:"]],[3,0,0," "],[3,1,["chunks"]]],[1,0,0,"div",[1,0,0,"b",[3,0,0,"Errors:"]],[3,0,0," "],[3,1,["errors"]]],[1,0,0,"div",[1,0,0,"b",[3,0,0,"Warnings:"]],[3,0,0," "],[3,1,["warnings"]]]],[1,0,0,"div",[4,0,0,"r"],[1,0,0,"div",[4,0,0,"e"],[1,0,0,"h3",[3,0,0,"Modules"]],[1,0,0,"hr"],[8,1,["modulesTable"]]],[1,0,0,"div",[4,0,0,"e"],[1,0,0,"h3",[3,0,0,"Assets"]],[1,0,0,"hr"],[8,1,["assetsTable"]]]]],[9,0]],"2.tmpl":[[1,0,["element"],"div",[8,1,["content"]]],[9,0]],"3.tmpl":[[1,0,["element"],"div",[1,0,0,"table",[4,0,0,"o g"],[1,0,0,"thead",[1,0,0,"tr",[1,0,0,"th",[3,"l10n:name@0.l10n",0]],[1,0,0,"th",[3,"l10n:size@0.l10n",0]]]],[1,1,["childNodesElement"],"tbody"],[1,0,0,"tfoot",[1,0,0,"tr",[1,0,0,"td",[1,0,0,"b",[3,"l10n:total@0.l10n",0]]],[1,0,0,"td",[1,0,0,"b",[3,1,["totalSize"]],[3,0,0," "],[3,1,["postfix"]]]]]]]],[9,0]],"4.tmpl":[[1,0,["element"],"tr",[1,0,0,"td",[3,1,["name"]]],[1,0,0,"td",[3,1,["size"]],[3,0,0," "],[3,1,["postfix"]]]],[9,0]],"0.tmpl":[[1,0,["element"],"div",[8,1,["menu"]],[1,0,0,"div",[4,0,0,"d a"],[1,0,0,"div",[4,0,0,"i"],[1,0,0,"h1",[3,0,0,"Rempl Webpack Analyzer"]]],[8,1,["progress"]],[8,1,["page"]]]],[9,0]],"6.tmpl":[[1,0,["element"],"nav",[4,0,0,"n f c"],[1,1,["childNodesElement"],"ul",[4,0,0,"q j"]]],[9,0]],"7.tmpl":[[1,0,["element"],"li",[4,[[["m"],"selected",2,0,0]],0],[1,0,0,"a",[2,0,0,"href","#"],[6,"click","select"],[3,"l10n:items.{id}@1.l10n",0]]],[9,0]],"8.tmpl":[[1,0,["element"],"div",[3,"l10n:status@2.l10n",0],[3,0,0,": "],[3,1,["status"]],[1,0,0,"div",[4,0,0,"k"],[1,0,0,"div",[4,0,0,"h b"],[5,[[["progress"],[0,"%"],"width"]],0,"min-width:2em"],[3,1,["progress"]],[3,0,0,"%"]]]],[9,0]],"0.l10n":{"en-US":{name:"Name",size:"Size",total:"Total"}},"1.l10n":{"en-US":{items:{home:"Home",assets:"Assets",modules:"Modules"}}},"2.l10n":{"en-US":{status:"Status"}},"c.js":function(e,t,n,r,i,s,o,u,a){function T(e){var t=x[e];if(!t){var r=l.getElementById(e),i="";r&&r.tagName=="SCRIPT"&&r.type=="text/basis-template"&&(i=r.textContent||r.text),t=x[e]=n.resource.virtual("tmpl",i||"")}return t}function N(e,t){return/^#\d+$/.test(e)?S[e.substr(1)]:/^id:/.test(e)?T(e.substr(3)):/^[a-z0-9\.]+$/i.test(e)&&!/\.tmpl$/.test(e)?E(e):n.resource(n.resource.resolveURI(e,t,'<b:include src="{url}"/>'))}function C(){this.destroyBuilder&&k.call(this);var e=this;while(e=e.attaches_)e.handler.call(e.context)}function k(){var e=m(this.source,this.baseURI,!1,{isolate:this.getIsolatePrefix()}),t=this.destroyBuilder,r={},i=this.builder(e.tokens,r);this.createInstance=i.createInstance,this.clearInstance=i.destroyInstance,this.destroyBuilder=i.destroy,b.add(this.templateId,this,r);var s=e.deps,o=this.deps_;this.deps_=s;if(o)for(var u=0,a;a=o[u];u++)a.bindingBridge.detach(a,C,this);if(s)for(var u=0,a;a=s[u];u++)a.bindingBridge.attach(a,C,this);var f=e.resources,l=this.resources;this.resources=f;if(f)for(var u=0,c;c=f[u];u++){var h=n.resource(c.url).fetch();typeof h.startUse=="function"&&h.startUse()}if(l)for(var u=0,c;c=l[u];u++){var h=n.resource(c.url).fetch();typeof h.stopUse=="function"&&h.stopUse()}t&&t(!0)}function M(e,t){return t||(t=e,e=null),typeof e=="string"&&(e=e.split(/\s+/)),new A({rule:t,events:e})}var f="basis.template",l=r.document,c=n.Class,h=n.cleaner,p=n.path,d=n.require("./a.js"),v=n.require("./d.js").VERSION,m=n.require("./d.js").getDeclFromSource,g=n.require("./d.js").makeDeclaration,y=n.require("./d.js").setIsolatePrefixGenerator,b=n.require("./e.js"),w=n.require("./f.js"),E=w.get,S=[],x={},L=c(null,{className:f+".Template",__extend__:function(e){return e instanceof L?e:e instanceof A?new O(e):new L(e)},source:"",baseURI:"",url:"",attaches_:null,init:function(e){if(S.length==4096)throw"Too many templates (maximum 4096)";this.setSource(e||""),this.templateId=S.push(this)-1},bindingBridge:{attach:function(e,t,n){e.attaches_={handler:t,context:n,attaches_:e.attaches_}},detach:function(e,t,n){var r=e,i;while(i=r,r=r.attaches_)if(r.handler===t&&r.context===n){i.attaches_=r.attaches_;return}},get:function(e){var t=e.source;return t&&t.bindingBridge?t.bindingBridge.get(t):t}},createInstance:function(e,t,n,r,i){return k.call(this),this.createInstance(e,t,n,r,i)},clearInstance:function(){},getIsolatePrefix:function(){return"i"+this.templateId+"__"},setSource:function(e){var t=this.source;if(t!=e){if(typeof e=="string"){var n=e.match(/^([a-z]+):/);if(n){e=e.substr(n[0].length);switch(n[1]){case"id":e=T(e);break;case"path":e=E(e);break;default:}}}t&&t.bindingBridge&&(this.url="",this.baseURI="",t.bindingBridge.detach(t,C,this)),e&&e.bindingBridge&&(e.url&&(this.url=e.url,this.baseURI=p.dirname(e.url)+"/"),e.bindingBridge.attach(e,C,this)),this.source=e,C.call(this)}},destroy:function(){this.destroyBuilder&&(b.remove(this.templateId),this.destroyBuilder()),this.attaches_=null,this.createInstance=null,this.resources=null,this.source=null}}),A=function(e){n.object.extend(this,e)},O=n.Class(null,{className:f+".TemplateSwitcher",ruleRet_:null,templates_:null,templateClass:L,ruleEvents:null,rule:String,init:function(e){this.ruleRet_=[],this.templates_=[],this.rule=e.rule;var t=e.events;if(t&&t.length){this.ruleEvents={};for(var n=0,r;r=t[n];n++)this.ruleEvents[r]=!0}h.add(this)},resolve:function(e){var t=this.rule(e),n=this.ruleRet_.indexOf(t);return n==-1&&(this.ruleRet_.push(t),n=this.templates_.push(new this.templateClass(t))-1),this.templates_[n]},destroy:function(){this.rule=null,this.templates_=null,this.ruleRet_=null}});h.add({destroy:function(){for(var e=0,t;t=S[e];e++)t.destroy();S=null}}),t.exports={DECLARATION_VERSION:v,TYPE_ELEMENT:d.TYPE_ELEMENT,TYPE_ATTRIBUTE:d.TYPE_ATTRIBUTE,TYPE_ATTRIBUTE_CLASS:d.TYPE_ATTRIBUTE_CLASS,TYPE_ATTRIBUTE_STYLE:d.TYPE_ATTRIBUTE_STYLE,TYPE_ATTRIBUTE_EVENT:d.TYPE_ATTRIBUTE_EVENT,TYPE_TEXT:d.TYPE_TEXT,TYPE_COMMENT:d.TYPE_COMMENT,TYPE_CONTENT:d.TYPE_CONTENT,TOKEN_TYPE:d.TOKEN_TYPE,TOKEN_BINDINGS:d.TOKEN_BINDINGS,TOKEN_REFS:d.TOKEN_REFS,ATTR_NAME:d.ATTR_NAME,ATTR_VALUE:d.ATTR_VALUE,ATTR_NAME_BY_TYPE:d.ATTR_NAME_BY_TYPE,CLASS_BINDING_ENUM:d.CLASS_BINDING_ENUM,CLASS_BINDING_BOOL:d.CLASS_BINDING_BOOL,CLASS_BINDING_INVERT:d.CLASS_BINDING_INVERT,ELEMENT_NAME:d.ELEMENT_NAME,ELEMENT_ATTRS:d.ELEMENT_ATTRIBUTES_AND_CHILDREN,ELEMENT_ATTRIBUTES_AND_CHILDREN:d.ELEMENT_ATTRIBUTES_AND_CHILDREN,TEXT_VALUE:d.TEXT_VALUE,COMMENT_VALUE:d.COMMENT_VALUE,CONTENT_CHILDREN:d.CONTENT_CHILDREN,CONTENT_PRIORITY:d.CONTENT_PRIORITY,TemplateSwitchConfig:A,TemplateSwitcher:O,Template:L,switcher:M,getDeclFromSource:m,makeDeclaration:g,resolveResource:N,setIsolatePrefixGenerator:y,resolveTemplateInfoByNode:function(e){while(e){if(e[d.MARKER])return b.resolveInfoById(e[d.MARKER]);e=e.parentNode}return null},resolveInfoById:b.resolveInfoById,resolveTemplateById:b.resolveTemplateById,resolveObjectById:b.resolveObjectById,resolveTmplById:b.resolveTmplById,SourceWrapper:w.SourceWrapper,Theme:w.Theme,theme:w.theme,getThemeList:w.getThemeList,currentTheme:w.currentTheme,setTheme:w.setTheme,onThemeChange:w.onThemeChange,define:w.define,get:w.get,getPathList:w.getPathList}},"d.js":function(e,t,n,r,i,s,o,u,a){function J(e){var t=[];for(var n=0;n<e.length;n++)t.push(Array.isArray(e[n])?J(e[n]):e[n]);return t}function K(e,t,r,i){var s=e,o;e.bindingBridge&&(t="baseURI"in e?e.baseURI:"url"in e?n.path.dirname(e.url):t,o="url"in e?e.url:o,s=e.bindingBridge.get(e)),Array.isArray(s)?(r&&(s=J(s)),s={tokens:s}):s&&(typeof s!="object"||!Array.isArray(s.tokens))&&(s=String(s));if(!s||typeof s=="string")s=$(s,t,i,o,e);return s}var f=Object.prototype.hasOwnProperty,l=n.array.search,c=n.array.add,h=n.require("./s.js"),p=n.require("./t.js"),d=n.require("./a.js"),v=n.require("./u.js"),m=n.require("./v.js"),g=n.require("./x.js"),y=n.require("./y.js"),b=n.require("./w.js").walk,w=d.TYPE_ELEMENT,E=d.TYPE_ATTRIBUTE,S=d.TYPE_ATTRIBUTE_CLASS,x=d.TYPE_TEXT,T=d.TYPE_COMMENT,N=d.TYPE_CONTENT,C=d.TOKEN_TYPE,k=d.TOKEN_BINDINGS,L=d.TOKEN_REFS,A=d.ATTR_VALUE_INDEX,O=d.ELEMENT_ATTRIBUTES_AND_CHILDREN,M=d.TEXT_VALUE,_=d.CONTENT_PRIORITY,D=d.CONTENT_CHILDREN,P=v.resourceHash,H=v.getTokenName,B=v.bindingList,j=m.refList,F=m.addTokenRef,I=m.normalizeRefs,q=y.applyAttrs,R=g.styleNamespaceIsolate,U=g.isolateTokens,z={content:n.require("./z.js"),define:n.require("./10.js"),include:n.require("./11.js"),isolate:n.require("./12.js"),l10n:n.require("./13.js"),style:n.require("./14.js"),svg:n.require("./15.js"),text:n.require("./16.js")},W=function(){},X=function(){},V=function(){return n.genUID()+"__"},$=function(){function r(e,t,n){var i=[];for(var s=0,o,u;o=e[s];s++){var a=j(o),f=B(o);switch(o.type){case w:if(o.prefix=="b"){if(!z.hasOwnProperty(o.name))continue;z[o.name](t,n,o,i);continue}u=[1,f,a,H(o)],q(t,n,u,o.attrs),u.push.apply(u,r(o.children,t,n));break;case x:a&&a.length==2&&l(a,"element")&&(f=a[+!a.lastSearchIndex]),u=[3,f,a],(!a||o.value!="{"+a.join("|")+"}")&&u.push(o.value);break;case T:if(n.optimizeSize&&!f&&!a)continue;u=[8,f,a],n.optimizeSize||(!a||o.value!="{"+a.join("|")+"}")&&u.push(o.value);break;default:continue}i.push(u)}return i}function i(e,t,n){if(typeof e=="string"){var r=e.split(":"),i=r[1];if(i&&r[0]=="l10n"){if(r.length==2&&i.indexOf("@")==-1){if(!t)return!1;i=i+"@"+t,e="l10n:"+i}c(n,i)}}return e}function s(e,t,n){b(e,function(e,r){var o=r[k];switch(e){case w:s(r,t,n,O);break;case x:if(o){var u=i(o,n.dictURI,t.l10n);r[k]=u||0,u===!1&&(r[M]="{"+o+"}")}break;case E:if(o){var a=o[0];for(var l=a.length-1;l>=0;l--){var u=i(a[l],n.dictURI,t.l10n);if(u===!1){var c=o[1];for(var h=0;h<c.length;h++)typeof c[h]=="number"&&(c[h]==l?c[h]="{"+a[l]+"}":c[h]>l&&(c[h]=c[h]-1));a.splice(l,1),a.length||(r[k]=0)}else a[l]=u}}break;case S:if(o){for(var h=0,p;p=o[h];h++){if(p.length>2)continue;var d=p[1].split(":"),v=d.pop(),m=d.pop()||"";if(f.call(n.defines,v)){var g=n.defines[v];p[1]=(m?m+":":"")+g[0],p.push.apply(p,g.slice(1))}else p.push(0)}if(n.optimizeSize){var y=A[e];r[y]||(r.length=y)}}}})}function o(e){function t(e,n){for(var r=n;r<e.length;r++){var i=e[r],s=i[C],o;if(s==w||s==x)return i;if(s==T)if(i[L]||i[k])return i;if(s==N){o=t(i,D);if(o)return o}}return null}return t(e,0)}var e=[],t={};return function u(i,a,f,l,c){f=n.object.slice(f),f.Template=W,f.genIsolateMarker=V,f.resolveResource=X,f.getDeclFromSource=K,f.makeDeclaration=u,f.process=r,f.includeStack=e,f.includeOptions=f.includeOptions||{},f.templates={},f.defines={},f.dictURI=l?n.path.resolve(l):a||"";if(f.dictURI){var d=n.path.extname(f.dictURI);d&&d!=".l10n"&&(f.dictURI=f.dictURI.substr(0,f.dictURI.length-d.length)+".l10n")}var v={sourceUrl:l,baseURI:a||"",tokens:null,includes:[],deps:[],templates:{},isolate:!1,styleNSPrefix:{},resources:[],l10n:[],warns:[]};i||(i=""),Array.isArray(i)||(i=h(String(i||""),{loc:!!f.loc,range:!!f.range})),e.push(c!==!0&&c||{}),v.tokens=r(i,v,f),e.pop(),v.tokens.push([N,0]);var m=I(v.tokens),g=o(v.tokens),y=m[":content"];y.node[_]>1&&(y.node[_]=1),y.overrided.forEach(function(e){var t=e.parent.indexOf(e.node);t!=-1&&e.parent.splice.apply(e.parent,[t,1].concat(e.node.slice(D)))}),g||(g=[x,0,0],v.tokens.unshift(g)),m.element||F(g,"element"),s(v.tokens,v,f);if(e.length==0){U(v.tokens,v.isolate||"",v,f);if(v.isolate)for(var b=0,w;w=v.resources[b];b++)w.type=="style"&&w.isolate!==R&&(w.isolate=v.isolate+w.isolate);v.resources=v.resources.filter(function(e,t,r){return e.url&&!n.array.search(r,P(e),P,t+1)}).map(function(e){if(e.type!="style")return{type:e.type,url:e.url};var r=e.url,i=e.isolate,s=i===R,o;if(s){i=R[r];if(r in t)return{type:"style",url:t[r].url}}if(!i)return{type:"style",url:r};var u=n.resource.virtual("css","").ready(function(e){e.url=r+"?isolate-prefix="+i,e.baseURI=n.path.dirname(r)+"/",e.map=o,a()}),a=n.resource(r).ready(function(e){var t=p(e&&e.cssText||"",i,!0);o=t.map,u.update(t.css)});return s&&(t[r]=u),{type:"style",url:u.url}})}return v.warns.length||(v.warns=!1),v}}();n.resource("./c.js").ready(function(e){X=e.resolveResource,W=e.Template}),t.exports={VERSION:3,makeDeclaration:$,walk:b,getDeclFromSource:K,setIsolatePrefixGenerator:function(e){V=e}}},"s.js":function(e,t,n,r,i,s,o,u,a){function P(e){var t,n=[],r=[],i={};for(var s=0;s<e.length;s++)s%2?(t=e[s],i[t]||(i[t]=n.length,n.push(t)),r.push(i[t])):e[s]&&r.push(D(e[s]));return[n,r]}function H(e,t,n){var r=e.value,i=0,s,o;if(r)switch(t){case"class":var u=e.valueRange.start_,a=/(\s*)(\S+)/g,f=[],l=[],h;i=[];while(y=a.exec(r)){var p=y[2],v={value:p,binding:!1,range:{start_:u+=y[1].length,end_:u+=p.length}};n(v),(o=p.match(L))?(h=[o[1]||"",o[2]],h.info_=v,v.binding=!0,i.push(h)):f.push(p),l.push(v)}r=f.join(" "),e.map_=l;break;case"style":var m=[];i=[];if(s=r.match(A))for(var g=0,y;y=s[g];g++){var o=y.match(O),b=o[1],r=o[2].trim(),w=r.split(M);if(w.length>1){var E=P(w);E.push(b),i.push(E)}else m.push(b+": "+D(r))}r=m.join("; "),r&&(r+=";");break;default:s=r.split(k),s.length>1?i=P(s):r=D(r)}i&&!i.length&&(i=0),e.binding=i,e.value=r,e.type=d[t]||c}function B(e,t,n){function r(e){return(e.prefix?e.prefix+":":"")+e.name}function i(e){return e.attrs.reduce(function(e,t){return e[r(t)]=t.value,e},{})}function s(){var e=1,t=0;c=new Array(n.length),d=new Array(n.length);for(var r=0;r<n.length+1;r++)c[r]=e,d[r]=t,n[r]==="\n"?(e++,t=0):t++}function o(e){return{line:c[e],column:d[e]}}function u(e){return{start:o(e.start_),end:o(e.end_)}}function a(e){t.loc&&(e.loc=u(e.range),e.valueRange&&(e.valueLoc=u(e.valueRange))),t.range?(e.range=[e.range.start_,e.range.end_],e.valueRange&&(e.valueRange=[e.valueRange.start_,e.valueRange.end_])):(delete e.range,delete e.valueRange)}function f(e){var t,n;for(var r=0;t=e[r++];n=t){if(t.type==l){var s=i(t);for(var o=0,u;u=t.attrs[o++];){var c=u.name;if(t.prefix=="b"&&u.name=="value"){var d=t.name.match(_);d&&(c=d[1]=="class"?"class":s.name)}H(u,c,a),a(u)}f(t.children)}t.type==h&&(t.value=D(t.value),!t.refs&&n&&n.type==h&&!n.refs&&(n.value+=t.value,n.end_=t.end_,e.splice(--r,1))),t.type==p&&(t.value=D(t.value)),a(t)}}var c,d;t.loc&&s(),f(e)}function j(e,t){var n=[],r=[],i={children:n},s=!1,o,u=m,a=0,f=0,d,k,L,A;if(!t||t.trim!==!1)a=f=e.match(/^\s*/)[0].length,e=e.trimRight();while(a<e.length||u!=m){u.lastIndex=a,L=a,A=u.exec(e);if(!A||A.index!==a){if(u==E&&o&&o.type==p){u=b;continue}s&&(i=r.pop()),o&&i.children.pop();if(o=i.children.pop())o.type==h&&!o.refs?f-=o.value.length:i.children.push(o);s=!1,u=m;continue}a=u.lastIndex;switch(u){case m:d=L+A[1].length;if(f!=d){var O=f==L?A[1]:e.substring(f,d);O=O.replace(/\s*(\r\n?|\n\r?)\s*/g,""),O&&i.children.push({type:h,value:O,range:{start_:f,end_:d}})}f=d,A[3]?i.children.push({type:h,refs:["l10n:"+A[3]],value:"{l10n:"+A[3]+"}",range:{start_:d,end_:a}}):A[2]=="{"?(k=a-1,i.children.push(o={type:h,range:{start_:d,end_:d}}),u=E):A[4]?A[4]=="/"?(o=null,u=w):(i.children.push(o={type:p,range:{start_:d,end_:d}}),A[5]?(k=a-A[5].length,u=E):(k=a,u=b)):A[2]&&(s=!0,r.push(i),i.children.push(o={type:l,attrs:[],children:[],range:{start_:d,end_:d}}),i=o,u=g);break;case w:A[1]!==(i.prefix?i.prefix+":":"")+i.name?i.children.push({type:h,value:"</"+A[0],range:{start_:L-2,end_:L+A[0].length}}):(i.range.end_=L+A[0].length,i=r.pop()),u=m;break;case g:case y:if(A[2]==":"){o.prefix?u=T:o.prefix=A[1];break}A[1]&&(o.name=A[1],o.range.end_=L+A[1].length,o.type==c&&i.attrs.push(o));if(A[2]=="{"){o.type==l?u=E:u=T;break}if(A[3]){s=!1,i.range.end_=a;if(A[3]=="/>"||!i.prefix&&N.test(i.name))i=r.pop();else if(i.prefix=="b"&&i.name in C){u=C[i.name];break}u=m;break}if(A[2]=="="){u=S;break}o={type:c,range:{start_:a,end_:a}},u=y;break;case b:o.value=e.substring(k,a-3),o.range.end_=a,u=m;break;case E:o.refs?o.refs.push(A[1]):o.refs=[A[1]],A[2]!="|"&&(o.type==h?(a-=A[2].length-1,o.value=e.substring(k,a),o.range.end_=a,u=m):o.type==p?u=b:o.type==c&&e[a]=="="?(a++,u=S):(o={type:c,range:{start_:a,end_:a}},u=y));break;case S:o.value=A[1].replace(x,'"'),o.range.end_=a,o.valueRange={start_:L+1,end_:L+1+A[1].length},o={type:c,range:{start_:a,end_:a}},u=y;break;case C.text:case C.style:i.children.push({type:h,value:A[1],range:{start_:L,end_:L+A[1].length}}),i=r.pop(),u=m;break;default:throw v}u==m&&(f=a)}return f!=a&&i.children.push({type:h,value:e.substring(f,a),range:{start_:f,end_:a}}),B(n,t||{},e),n.templateTokens=!0,n}var f=n.require("./a.js"),l=f.TYPE_ELEMENT,c=f.TYPE_ATTRIBUTE,h=f.TYPE_TEXT,p=f.TYPE_COMMENT,d=f.ATTR_TYPE_BY_NAME,v="Invalid or unsupported syntax",m=/((?:.|[\r\n])*?)(\{(?:l10n:([a-zA-Z_][a-zA-Z0-9_\-]*(?:\.[a-zA-Z_][a-zA-Z0-9_\-]*)*(?:\.\{[a-zA-Z_][a-zA-Z0-9_\-]*\})?)\})?|<(\/|!--(\s*\{)?)?|$)/g,g=/([a-z_][a-z0-9\-_]*)(:|\{|\s*(\/?>)?)/ig,y=/([a-z_][a-z0-9_\-]*)(:|\{|=|\s*)|(\/?>)/ig,b=/(.|[\r\n])*?-->/g,w=/([a-z_][a-z0-9_\-]*(?::[a-z_][a-z0-9_\-]*)?)>/ig,E=/([a-z_][a-z0-9_]*)(\||\}\s*)/ig,S=/"((?:(\\")|[^"])*?)"\s*/g,x=/\\"/g,T=/^/g,N=/^(area|base|br|col|command|embed|hr|img|input|link|meta|param|source)$/i,C={text:/((?:.|[\r\n])*?)(?:<\/b:text>|$)/g,style:/((?:.|[\r\n])*?)(?:<\/b:style>|$)/g},k=/\{([a-z_][a-z0-9_]*|l10n:[a-z_][a-z0-9_]*(?:\.[a-z_][a-z0-9_]*)*(?:\.\{[a-z_][a-z0-9_]*\})?)\}/i,L=/^((?:[a-z_][a-z0-9_\-]*)?(?::(?:[a-z_][a-z0-9_\-]*)?)?)\{((anim:)?[a-z_][a-z0-9_\-]*)\}$/i,A=/\s*[^:]+?\s*:(?:\(.*?\)|".*?"|'.*?'|[^;]+?)+(?:;|$)/gi,O=/\s*([^:]+?)\s*:((?:\(.*?\)|".*?"|'.*?'|[^;]+?)+);?$/i,M=/\{([a-z_][a-z0-9_]*)\}/i,_=/^(?:|append-|set-|remove-)(class|attr)$/,D=function(){function s(n,r){return e[r]||(r.charAt(0)=="#"?e[r]=String.fromCharCode(r.charAt(1)=="x"||r.charAt(1)=="X"?parseInt(r.substr(2),16):r.substr(1)):t&&(t.innerHTML=n,e[r]=t.firstChild?t.firstChild.nodeValue:n)),e[r]||n}var e={},t=n.NODE_ENV?null:r.document.createElement("div"),i=/&([a-z]+\d*|#\d+|#x[0-9a-f]{1,4});?/gi;return function(t){return String(t).replace(i,s)}}();t.exports=j},"t.js":function(e,t,n,r,i,s,o,u,a){function v(){return n.genUID()+"__"}function m(e,t,n){function r(t,n){var r=e.indexOf(t,n);N=r!==-1?r+t.length-1:S.length}function i(){var e=S[N];if(e!=='"'&&e!=="'")return;for(N++;N<x&&S[N]!==e;N++)S[N]==="\\"&&N++;return!0}function s(){var e=S[N];if(e==="(")return r(")",N+1),!0;if(e==="["){for(N++;N<x&&S[N]!=="]";N++)i();return!0}}function o(){if(S[N]!=="/"||S[N+1]!=="*")return;return r("*/",N+2),!0}function u(){for(;N<x&&S[N]!=")";N++)if(o()||s()||a()||y())continue}function a(){if(S[N]!==":")return;var t=e.substr(N+1,d).match(p);return t&&(N+=t[0].length+1,u()),!0}function m(){if(S[N]!=="@")return;var t=e.substr(N+1,h).match(c);return t&&(N+=t[0].length,C=!0),!0}function g(){if(S[N]!=="{")return;if(C){N++,b(!0);return}for(N++;N<x&&S[N]!=="}";N++)o()||i()||s();return!0}function y(){if(S[N]!==".")return;var n=e.substr(N+1,l).match(f);return n&&(N++,w[N+E.length/2*t.length-1]=N,E.push(e.substring(T,N),t),T=N),!0}function b(e){for(C=!1;N<x;N++){if(o()||m()||a()||s()||i()||y())continue;if(e&&S[N]=="}")return;g()}}var w={},E=[],S=e.split(""),x=S.length,T=0,N=0,C;return t||(t=v()),b(!1),E=E.join("")+e.substring(T),n?{css:E,map:w,prefix:t}:E}var f=/^\-?([_a-z]|[^\x00-\xb1]|\\[0-9a-f]{1,6}(\r\n|[ \n\r\t\f])?|\\[^\n\r\f0-9a-f])/i,l=8,c=/^(media|supports|document)\b/i,h=8,p=/^(not|has|matches|nth-child|nth-last-child)\(/i,d=15;t.exports=m},"u.js":function(e,t,n,r,i,s,o,u,a){function l(e){return[e.type,e.url,e.isolate].join(";")}function c(e,t){for(var n=0;n<t.length;n++)f(e,t[n])}function h(e){return(e.prefix?e.prefix+":":"")+e.name}function p(e){var t=e.refs;return t&&t.length?t[0]:0}function d(e){var t={};if(e.attrs)for(var n=0,r;r=e.attrs[n];n++)t[h(r)]=r.value;return t}function v(e){var t={};if(e.attrs)for(var n=0,r;r=e.attrs[n];n++)t[h(r)]=r;return t}function m(e){var t={},n=(e||"").trim().split(/\s*,\s*/);for(var r=0;r<n.length;r++){var i=n[r].split(/\s*:\s*/);if(i.length!=2)return{};t[i[0]]=i[1]}return t}function g(e,t){if(t)return(e.sourceUrl||"")+":"+t.start.line+":"+(t.start.column+1)}function y(e,t,n,r){r&&t.loc&&(n=Object(n),n.loc=typeof r=="string"?r:g(e,r)),e.warns.push(n)}function b(e,t,n,r){t.loc&&r&&r.loc&&!n.loc&&(n.loc=g(e,r.loc))}var f=n.array.add;t.exports={resourceHash:l,addUnique:c,getTokenName:h,bindingList:p,getTokenAttrValues:d,getTokenAttrs:v,parseOptionsValue:m,getLocation:g,addTemplateWarn:y,addTokenLocation:b}},"v.js":function(e,t,n,r,i,s,o,u,a){function g(e){var t=e.refs;return t&&t.length?t:0}function y(e,t){e[m]||(e[m]=[]),f(e[m],t),t!="element"&&!e[v]&&(e[v]=e[m].length==1?t:0)}function b(e,t){var n=e[m].indexOf(t);if(n!=-1){var r=e[v]&&typeof e[v]=="number";e[m].splice(n,1),r&&n==e[v]-1&&(e[v]=t,r=!1),e[m].length?r&&(e[v]-=n<e[v]-1):e[m]=0}}function w(e){var t={};return l(e,function(e,n,r){if(e===p){var i=t[":content"];i?n[d]>=i.node[d]?(i.overrided.push({parent:i.parent,node:i.node}),i.parent=r,i.node=n):i.overrided.push({parent:r,node:n}):t[":content"]={parent:r,node:n,overrided:[]}}else if(e!==h){var s=n[m];if(!s)return;for(var o=s.length-1,u;u=s[o];o--){if(u.indexOf(":")!=-1){b(n,u);continue}t[u]&&b(t[u].node,u),n[v]==u&&(n[v]=o+1),t[u]={parent:r,node:n}}}}),t}var f=n.array.add,l=n.require("./w.js").walk,c=n.require("./a.js"),h=c.TYPE_ATTRIBUTE_EVENT,p=c.TYPE_CONTENT,d=c.CONTENT_PRIORITY,v=c.TOKEN_BINDINGS,m=c.TOKEN_REFS;t.exports={refList:g,addTokenRef:y,removeTokenRef:b,normalizeRefs:w}},"w.js":function(e,t,n,r,i,s,o,u,a){function v(e,t){function n(e,r){for(var i=r,s;s=e[i];i++){var o=s[h];t(o,s,e);switch(o){case l:n(s,p);break;case c:n(s,d)}}}n(e,0)}var f=n.require("./a.js"),l=f.TYPE_ELEMENT,c=f.TYPE_CONTENT,h=f.TOKEN_TYPE,p=f.ELEMENT_ATTRIBUTES_AND_CHILDREN,d=f.CONTENT_CHILDREN;t.exports={walk:v}},"x.js":function(e,t,n,r,i,s,o,u,a){function m(e,t,n){for(var r=0,i;i=e[r];r++)i.type=="style"&&(i.isolate!==v&&(i.isolate=t+i.isolate),i.includeToken||(i.includeToken=n))}function g(e,t,r,i,s){var o=t.children[0],u=r?n.resource.resolveURI(r,e.baseURI,'<b:style src="{url}"/>'):n.resource.virtual("css",o?o.value:"",e.sourceUrl).url;return e.resources.push({type:"style",url:u,isolate:i,token:t,includeToken:null,inline:r?!1:o||!0,namespace:s}),u}function y(e,t){function n(e){return e.indexOf(":")<=0?e:t.prefix+e}l(e,function(e,t){if(e!==h)return;var r=t[p],i=d[e];t[i]&&(t[i]=t[i].replace(/\S+/g,n));if(r)for(var s=0,o;o=r[s];s++)o[0]=n(o[0])})}function b(e,t,n){function r(e){if(e.indexOf(":")==-1)return t+e;if(!n)return e;var r=e.split(":");if(!r[0])return r[1];var i=f.call(n.styleNSPrefix,r[0])?n.styleNSPrefix[r[0]]:!1;return i?i.prefix+r[1]:!1}l(e,function(e,t){if(e!==h)return;var n=t[p],i=d[e];t[i]&&(t[i]=t[i].split(/\s+/).map(function(e){return r(e,e,t.valueLocMap?t.valueLocMap[e]:null)}).filter(Boolean).join(" "));if(n){for(var s=0,o,u,a;o=n[s];s++)u=r(o[0],o[0]+"{"+o[1]+"}",o.loc),u===!1?(a=!0,n[s]=null):o[0]=u;a&&(n=n.filter(Boolean),t[p]=n.length?n:0)}})}var f=Object.prototype.hasOwnProperty,l=n.require("./w.js").walk,c=n.require("./a.js"),h=c.TYPE_ATTRIBUTE_CLASS,p=c.TOKEN_BINDINGS,d=c.ATTR_VALUE_INDEX,v={};t.exports={styleNamespaceIsolate:v,adoptStyles:m,addStyle:g,applyStyleNamespaces:y,isolateTokens:b}},"y.js":function(e,t,n,r,i,s,o,u,a){function M(e,t){var n=typeof e[0]=="number"?L:0;for(var r=n,i,s;i=e[r];r++){i[C]==b?s="event-"+i[1]:s=S[i[C]]||i[E];if(s==t)return i}}function _(e,t){var n=e[k];if(n)for(var r=0,i;i=n[r];r++)if(i[2]==t)return i}function D(e,t,n,r,i,s,o){var u=M(n,"style");u||(u=[w,0,0],n.push(u));var a=r.binding,f=u[k],c=!1,h=r.name==s,p=u[3];f&&l(f,_(u,i)),!a||a[0].length!=a[1].length?c=!(h^r.value===""):(a=a.concat(i,r.name),c=h,f?f.push(a):u[k]=[a]),p&&(p=p.replace(new RegExp(i+"\\s*:\\s*[^;]+(;|$)"),"")),c&&(p=(p?p+" ":"")+o),u[3]=p}function P(e,t,n,r){(r.name=="show"||r.name=="hide")&&D(e,t,n,r,"display","show","display: none;"),(r.name=="visible"||r.name=="hidden")&&D(e,t,n,r,"visibility","visible","visibility: hidden;")}function H(e,t,n,r){if(n[C]!==g)return;if(!/[\/\(\)]/.test(r)){var i=[y,[["$role"],[0,r?"/"+r:""]],0,"role-marker"];n.push(i)}}function B(e,t,n,r){var i,s,o,u;for(var a=0,f;f=r[a];a++){if(f.prefix=="b"){switch(f.name){case"ref":var l=(f.value||"").trim().split(/\s+/);for(var h=0;h<l.length;h++)c(n,l[h]);break;case"show":case"hide":i=f;break;case"visible":case"hidden":s=f;break;case"role":H(e,t,n,f.value||"",f)}continue}(u=f.name.match(O))?o=u[1]==f.value?[b,u[1]]:[b,u[1],f.value]:(o=[f.type,f.binding,0],f.type==y&&o.push(d(f)),f.value&&(!t.optimizeSize||!f.binding||f.type!=y)&&o.push(f.value)),n.push(o)}return i&&P(e,t,n,i),s&&P(e,t,n,s),n}function j(e,t,r,i,s,o,u){var a=v(s),c=m(s);o&&(a.name=o);if(!a.name)return;if(!A.test(a.name))return;if(i&&i[C]==g){var h=i,p=a.name.match(O),d=a.name=="class"||a.name=="style",w=p?b:x[a.name]||y,E=T[w]||N,S=h&&M(h,a.name);S&&u=="set"&&(l(h,S),S=null),!S&&(u=="set"||u=="append")&&(u="set",p?S=[w,p[1]]:(S=[w,0,0,w==y?a.name:""],w==y&&S.push("")),h||(h=[],i.push(h)),h.push(S));switch(u){case"set":if(S[C]==b){a.value==p[1]?S.length=2:S[E]=a.value;return}var L=c.value||{};S[k]=L.binding||0,!t.optimizeSize||!S[k]||d?S[E]=L.value||"":S.length=E;if(d&&!S[k]&&!S[E]){l(h,S);return}break;case"append":var L=c.value||{},D=L.value||"",P=L.binding;if(!p)if(P){var H=S[k];if(H)switch(a.name){case"style":for(var B=0,j;j=P[B];B++)l(H,_(S,j[2])),H.push(j);break;case"class":H.push.apply(H,P);break;default:P[0].forEach(function(e){f(this,e)},H[0]);for(var B=0;B<P[1].length;B++){var F=P[1][B];typeof F=="number"&&(F=H[0].indexOf(P[0][F])),H[1].push(F)}}else S[k]=P,d||S[k][1].unshift(S[E])}else!d&&S[k]&&S[k][1].push(a.value);if(D)if(p||a.name=="class"){var I=(S[E]||"").trim(),q=D.trim();I=I?I.split(/\s+/):[],q=q?q.split(/\s+/):[];for(var B=0;B<q.length;B++){var R=q[B];n.array.remove(I,R),I.push(R)}S[E]=I.join(" ")}else S[E]=(S[E]||"")+(S[E]&&d?" ":"")+D;d&&!S[k]&&!S[E]&&l(h,S);break;case"remove-class":if(S){var L=c.value||{},U=(S[E]||"").split(" "),z=(L.value||"").split(" "),W=S[k];if(L.binding&&W){for(var B=0,X;X=L.binding[B];B++)for(var V=W.length-1,$;$=W[V];V--){var J=$[0],K=$[3]||$[1];J===X[0]&&K===X[1]&&W.splice(V,1)}W.length||(S[k]=0)}for(var B=0;B<z.length;B++)l(U,z[B]);S[E]=U.join(" "),!W.length&&!U.length&&l(h,S)}break;case"remove":S&&l(h,S)}}}var f=n.array.add,l=n.array.remove,c=n.require("./v.js").addTokenRef,h=n.require("./a.js"),p=n.require("./u.js"),d=p.getTokenName,v=p.getTokenAttrValues,m=p.getTokenAttrs,g=h.TYPE_ELEMENT,y=h.TYPE_ATTRIBUTE,b=h.TYPE_ATTRIBUTE_EVENT,w=h.TYPE_ATTRIBUTE_STYLE,E=h.ATTR_NAME,S=h.ATTR_NAME_BY_TYPE,x=h.ATTR_TYPE_BY_NAME,T=h.ATTR_VALUE_INDEX,N=h.ATTR_VALUE,C=h.TOKEN_TYPE,k=h.TOKEN_BINDINGS,L=h.ELEMENT_ATTRIBUTES_AND_CHILDREN,A=/^[a-z_][a-z0-9_\-:]*$/i,O=/^event-(.+)$/;t.exports={getAttrByName:M,applyShowHideAttribute:P,addRoleAttribute:H,applyAttrs:B,modifyAttr:j}},"z.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./a.js"),l=f.TYPE_CONTENT;t.exports=function(e,t,n,r){var i=[l,2];n.children&&i.push.apply(i,t.process(n.children,e,t)),r.push(i)}},"10.js":function(e,t,n,r,i,s,o,u,a){var f=Object.prototype.hasOwnProperty,l=n.require("./a.js"),c=n.require("./u.js"),h=c.getTokenAttrValues,p=l.CLASS_BINDING_BOOL,d=l.CLASS_BINDING_INVERT,v=l.CLASS_BINDING_ENUM;t.exports=function(e,t,n){var r=h(n);if("name"in r&&"type"in r&&!f.call(t.defines,r.name)){var i=r.from||r.name,s=r.name,o=!1,u,a;switch(r.type){case"bool":o=[i,p,s,r["default"]=="true"?1:0];break;case"invert":o=[i,d,s,!r["default"]||r["default"]=="true"?1:0];break;case"enum":if("values"in r==0)break;a=(r.values||"").trim();if(!a)break;a=a.split(/\s+/),u=a.indexOf(r["default"]),o=[i,v,s,u+1,a]}o&&(t.defines[s]=o)}}},"11.js":function(e,t,n,r,i,s,o,u,a){function U(e,t){c(e,function(e,n){n.includeToken||(n.includeToken=t)})}function z(e,t){c(e,function(e,n){if(e!==B||n[H]!="role-marker")return;var r=n[P][1],i=r[1];r[1]="/"+t+i})}function W(e){if(Array.isArray(e))return e.map(W);if(e&&e.constructor===Object){var t={};for(var n in e)t[n]=W(e[n]);return t}return e}function X(e,t){return{type:j,prefix:"b",name:e.instruction,attrs:n.object.iterate(e.attrs||{},function(e,t){return{type:B,name:e,value:t}}).concat(n.object.complete({name:e.valueTo},t))}}var f=n.array.remove,l=n.array.add,c=n.require("./w.js").walk,h=n.require("./u.js"),p=h.addUnique,d=h.getTokenAttrValues,v=h.getTokenAttrs,m=h.parseOptionsValue,g=n.require("./v.js"),y=g.normalizeRefs,b=g.addTokenRef,w=g.removeTokenRef,E=n.require("./x.js"),S=E.styleNamespaceIsolate,x=E.adoptStyles,T=E.addStyle,N=E.isolateTokens,C=E.applyStyleNamespaces,k=n.require("./y.js"),L=k.getAttrByName,A=k.addRoleAttribute,O=k.applyShowHideAttribute,M=k.modifyAttr,_=n.require("./a.js"),D=_.TOKEN_TYPE,P=_.TOKEN_BINDINGS,H=_.ATTR_NAME,B=_.TYPE_ATTRIBUTE,j=_.TYPE_ELEMENT,F=_.ELEMENT_ATTRIBUTES_AND_CHILDREN,I=_.CONTENT_CHILDREN,q=["include","content"],R={"class":{instruction:"append-class",valueTo:"value"},id:{instruction:"set-attr",valueTo:"value",attrs:{name:"id"}},ref:{instruction:"add-ref",valueTo:"name"},show:{instruction:"show",valueTo:"expr"},hide:{instruction:"hide",valueTo:"expr"},visible:{instruction:"visible",valueTo:"expr"},hidden:{instruction:"hidden",valueTo:"expr"}};t.exports=function(e,t,r,i){var s=d(r),o=v(r),u=t.includeStack,a=s.src;if(!a)return;var c;/^#[^\d]/.test(a)?(c=e.templates[a.substr(1)],c&&(c=t.makeDeclaration(W(c.tokens),c.baseURI,c.options,c.sourceUrl))):c=t.resolveResource(a,e.baseURI);if(!c)return;if(u.indexOf(c)!==-1)return;var h=o.isolate?o.isolate.value||t.genIsolateMarker():"",g=s.options?m(s.options):null,E=t.getDeclFromSource(c,"",!0,n.object.merge(t,{includeOptions:g}));U(E.tokens,r),e.includes.push({token:r,resource:c,nested:E.includes}),c.bindingBridge&&l(e.deps,c),E.deps&&p(e.deps,E.deps),E.warns&&e.warns.push.apply(e.warns,E.warns);if(E.resources){var k=E.resources;"no-style"in s?k=k.filter(function(e){return e.type!="style"}):x(k,h,r),e.resources.unshift.apply(e.resources,k)}var _={prefix:t.genIsolateMarker()};C(E.tokens,_);for(var P in E.styleNSPrefix)e.styleNSPrefix[_.prefix+P]=n.object.merge(E.styleNSPrefix[P],{});h&&N(E.tokens,h);var H=!1,B=[],V=y(E.tokens);for(var $ in o)if(R.hasOwnProperty($))B.push(X(R[$],o[$]));else if($==="role"){var J=o.role.value;if(J&&!/[\/\(\)]/.test(J)){var K;z(E.tokens,J,o.role,K)}}B=B.concat(r.children);for(var Q=0,G;G=B[Q];Q++)if(G.type==j&&G.prefix=="b"&&q.indexOf(G.name)===-1){var Y=d(G),Z="ref"in Y?Y.ref:"element",et=Z.charAt(0)===":",tt=Z&&V[Z],nt=tt&&tt.node;switch(G.name){case"style":var Y=d(G),rt=!0;if(Y.options){var it=m(Y.options);for(var st in it)rt=rt&&it[st]==g[st]}if(rt){var ot=Y.namespace?"namespace":"ns",ut=Y[ot],at=ut?S:h,ft=T(e,G,Y.src,at,ut);ut&&(ft in S==0&&(S[ft]=t.genIsolateMarker()),e.styleNSPrefix[_.prefix+ut]={name:ut,prefix:S[ft]})}break;case"replace":case"remove":case"before":case"after":var lt=G.name=="replace"||G.name=="remove",Y=d(G),Z="ref"in Y||!lt?Y.ref:"element",tt=Z&&V[Z];if(tt){var ct=tt.parent,ht=ct.indexOf(tt.node);if(ht!=-1){var pt=[ht+(G.name=="after"),lt];G.name!="remove"&&(pt=pt.concat(t.process(G.children,e,t))),ct.splice.apply(ct,pt)}}break;case"prepend":case"append":if(nt&&nt[D]==j){var dt=t.process(G.children,e,t);G.name=="prepend"?nt.splice.apply(nt,[F,0].concat(dt)):nt.push.apply(nt,dt)}break;case"show":case"hide":case"visible":case"hidden":if(nt&&nt[D]==j){var vt=v(G).expr;if(!vt)break;O(e,t,nt,n.object.complete({name:G.name},v(G).expr))}break;case"attr":case"set-attr":M(e,t,r,nt,G,!1,"set");break;case"append-attr":M(e,t,r,nt,G,!1,"append");break;case"remove-attr":M(e,t,r,nt,G,!1,"remove");break;case"class":case"append-class":M(e,t,r,nt,G,"class","append");break;case"set-class":M(e,t,r,nt,G,"class","set");break;case"remove-class":var mt=v(G).value;mt&&(mt.value=mt.value.split(/\s+/).map(function(e){return e.indexOf(":")>0?_.prefix+e:e}).join(" "),mt.binding&&mt.binding.forEach(function(e){e[0].indexOf(":")>0&&(e[0]=_.prefix+e[0])}),mt.map_&&mt.map_.forEach(function(e){e.value.indexOf(":")>0&&(e.value=_.prefix+e.value)})),M(e,t,r,nt,G,"class","remove-class");break;case"add-ref":var gt=(Y.name||"").trim();if(!nt)break;if(et)break;if(!/^[a-z_][a-z0-9_]*$/i.test(gt))break;b(nt,gt);break;case"remove-ref":var gt=(Y.name||"").trim(),Z="ref"in Y?Y.ref:gt||"element",et=Z.charAt(0)===":",tt=Z&&V[Z],nt=tt&&tt.node;if(!nt)break;if(et)break;if(!/^[a-z_][a-z0-9_]*$/i.test(gt))break;w(nt,gt||Z);break;case"role":case"set-role":var st=Y.name;!st&&"value"in Y&&(st=Y.value);if(!nt)break;f(nt,L(nt,"role-marker")),A(e,t,nt,st||"",G);break;case"remove-role":if(!nt)break;f(nt,L(nt,"role-marker"));break;default:}}else{var tt=V[":content"],yt=t.process([G],e,t);if(tt){var ct=tt.parent,ht=ct.indexOf(tt.node);H||(H=!0,tt.node.splice(I)),tt.node.push.apply(tt.node,yt)}else E.tokens.push.apply(E.tokens,yt)}V.element&&w(V.element.node,"element"),i.push.apply(i,E.tokens)}},"12.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./u.js"),l=f.getTokenAttrValues;t.exports=function(e,t,n){if(e.isolate)return;e.isolate=l(n).prefix||t.isolate||t.genIsolateMarker()}},"13.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./u.js").getTokenAttrValues;t.exports=function(e,t,r){var i=f(r);i.src&&(t.dictURI=n.resource.resolveURI(i.src,e.baseURI,"<b:"+r.name+' src="{url}"/>'))}},"14.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./u.js"),l=n.require("./x.js"),c=l.styleNamespaceIsolate,h=l.addStyle,p=f.parseOptionsValue,d=f.getTokenAttrValues;t.exports=function(e,t,n){var r=!0,i=d(n);if(i.options){var s=p(i.options);for(var o in s)r=r&&s[o]==t.includeOptions[o]}if(r){var u=i.namespace?"namespace":"ns",a=i[u],f=a?c:"",l=h(e,n,i.src,f,a);if(a){l in c==0&&(c[l]=t.genIsolateMarker());if(a in e.styleNSPrefix)return;e.styleNSPrefix[a]={name:a,prefix:c[l]}}}}},"15.js":function(e,t,n,r,i,s,o,u,a){var f=n.array.add,l=n.require("./u.js"),c=l.getTokenName,h=l.getTokenAttrs,p=l.bindingList,d=n.require("./v.js").refList,v=n.require("./y.js").applyAttrs,m=n.require("./a.js").TYPE_ELEMENT;t.exports=function(e,t,r,i){var s=h(r),o=[],u=[m,0,0,"svg:use"],a=[m,p(r),d(r),"svg:svg",u];for(var l in s){var g=s[l];switch(c(g)){case"src":if(!g.value)continue;var y=n.resource.resolveURI(g.value,e.baseURI,"<b:"+r.name+' src="{url}"/>');f(e.deps,n.resource.buildCloak(y)),e.resources.push({type:"svg",url:y});break;case"use":v(e,t,u,[n.object.merge(g,{prefix:"xlink",name:"href"})]);break;default:o.push(g)}}i.push(v(e,t,a,o))}},"16.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./u.js").getTokenAttrValues;t.exports=function(e,t,r,i){var s=f(r),o=(s.ref||"").trim(),u=r.children[0]||{type:3,value:""};u=n.object.merge(u,{refs:o?o.split(/\s+/):[],value:"notrim"in s?u.value:(u.value||"").replace(/^ *(\r\n?|\n)( *$)?|(\r\n?|\n) *$/g,"")}),i.push.apply(i,t.process([u],e,t))}},"e.js":function(e,t,n,r,i,s,o,u,a){function l(e,t,n){f[e]={template:t,instances:n}}function c(e){delete f[e]}function h(e){var t=e&4095,n=e>>12,r=f[t];return r&&r.instances[n]}function p(e){var t=e&4095,n=e>>12,r=f[t],i=r&&r.instances[n];if(i)return{id:e,template:r.template,context:i.context,tmpl:i.tmpl}}function d(e){var t=e&4095,n=f[t];return n&&n.template}function v(e){var t=h(e);return t&&t.context}function m(e){var t=h(e);return t&&t.tmpl}function g(e){var t=h(e);return t&&{context:t.context,action:t.action}}var f={};t.exports={add:l,remove:c,resolveInfoById:p,resolveTemplateById:d,resolveObjectById:v,resolveTmplById:m,resolveActionById:g}},"f.js":function(e,t,n,r,i,s,o,u,a){function g(){var e=n.array(arguments).join("."),t=c[e];return t||(t=new m("",e),c[e]=t),t}function y(e){var t={},n=[];for(var r=0;r<e.length;r++)t[e[r]]||(t[e[r]]=!0,n.push(e[r]));return n}function b(e,t){var n=[];n.source=y(t).join("/");var r={base:!0};for(var i=0;i<t.length;i++){var s=t[i]||"base";if(s==e||r[s])continue;r[s]=!0,n.push(s),T(s),t.splice.apply(t,[i+1,0].concat(l[s].fallback))}return n.unshift(e),e!="base"&&n.push("base"),n.value=n.join("/"),n}function w(e,t){var n=l[e].sourcesList;for(var r=0,i;i=n[r];r++)if(i.hasOwnProperty(t))return i[t];return""}function E(e){return l[p].fallback.indexOf(e)!=-1}function S(e){g(e).set()}function x(){for(var e in c)S(e)}function T(e){e||(e="base");if(l[e])return l[e].theme;if(!/^([a-z0-9\_\-]+)$/.test(e))throw"Bad name for theme - "+e;var t={},r=[t],i=new v;l[e]={theme:i,sources:t,sourcesList:r,fallback:[]};var s=function(n,r){return n in t==0&&(t[n]=r,E(e)&&S(n)),g(n)};return n.object.extend(i,{name:e,fallback:function(t){if(i!==d&&arguments.length>0){var n=typeof t=="string"?t.split("/"):[],r={};n=b(e,n);if(l[e].fallback.source!=n.source){l[e].fallback.source=n.source;for(var s in l){var o=l[s].fallback,n=b(s,(o.source||"").split("/"));if(n.value!=o.value){r[s]=!0,l[s].fallback=n;var u=l[s].sourcesList;u.length=n.length;for(var a=0;a<u.length;a++)u[a]=l[n[a]].sources}}}for(var s in r)if(E(s)){x();break}}var f=l[e].fallback.slice(1);return f.source=l[e].fallback.source,f},define:function(e,t){typeof e=="function"&&(e=e());if(typeof e=="string"){if(typeof t=="object"){var n=e,r=t,o={};for(var u in r)r.hasOwnProperty(u)&&(o[u]=s(n+"."+u,r[u]));return o}return arguments.length==1?g(e):s(e,t)}if(typeof e=="object"){var r=e;for(var a in r)r.hasOwnProperty(a)&&s(a,r[a]);return i}},apply:function(){if(e!=p){p=e,x(),n.Token.prototype.set.call(T,p);for(var t=0,r;r=h[t];t++)r.fn.call(r.context,e)}return i},getSource:function(n,r){return r?w(e,n):t[n]},drop:function(n){t.hasOwnProperty(n)&&(delete t[n],E(e)&&S(n))}}),l[e].fallback=b(e,[]),r.push(l.base.sources),i}function N(e){return T(e).apply()}function C(e,t,n){h.push({fn:e,context:t}),n&&e.call(t,p)}var f="basis.template.theme",l={},c={},h=[],p="base",d,v=n.Class(null,{className:f+".Theme",get:g}),m=n.Class(n.Token,{className:f+".SourceWrapper",path:"",url:"",baseURI:"",init:function(e,t){this.path=t,n.Token.prototype.init.call(this,"")},get:function(){return this.value&&this.value.bindingBridge?this.value.bindingBridge.get(this.value):this.value},set:function(){var e=w(p,this.path);this.value!=e&&(this.value&&this.value.bindingBridge&&this.value.bindingBridge.detach(this.value,m.prototype.apply,this),this.value=e,this.url=e&&e.url||"",this.baseURI=(typeof e=="object"||typeof e=="function")&&"baseURI"in e?e.baseURI:n.path.dirname(this.url)+"/",this.value&&this.value.bindingBridge&&this.value.bindingBridge.attach(this.value,m.prototype.apply,this),this.apply())},destroy:function(){this.url=null,this.baseURI=null,this.value&&this.value.bindingBridge&&this.value.bindingBridge.detach(this.value,this.apply,this),n.Token.prototype.destroy.call(this)}});n.object.extend(T,new n.Token(p)),T.set=N,n.cleaner.add({destroy:function(){for(var e in c)c[e].destroy();l=null,c=null}}),d=T(),t.exports={SourceWrapper:m,Theme:v,theme:T,getThemeList:function(){return n.object.keys(l)},currentTheme:function(){return l[p].theme},setTheme:N,onThemeChange:C,define:d.define,get:g,getPathList:function(){return n.object.keys(c)}},T("base").define({".0":n.resource("./0.tmpl"),".1":n.resource("./1.tmpl"),".2":n.resource("./2.tmpl"),".3":n.resource("./3.tmpl"),".4":n.resource("./4.tmpl"),".5":n.resource("./5.tmpl"),".6":n.resource("./6.tmpl"),".7":n.resource("./7.tmpl"),".8":n.resource("./8.tmpl")})},"g.js":function(e,t,n,r,i,s,o,u,a){function $(e){return function(t){if(t.type=="click"&&t.which==3)return;var n=z[t.type]||t.type!="mouseenter"&&t.type!="mouseleave",r=t.path.slice(0,t.path.length-1),i=r.shift(),s;while(i){s=i.getAttribute&&i.getAttribute(e);if(!n||typeof s=="string")break;i=r.shift()}if(typeof s=="string"){var o=i,u=o,a,f;if(z[t.type]){var l=t.relatedTarget;l&&(o===l||W(o,l))&&(o=null)}while(o){a=o[v];if(typeof a=="number")if(f=h(a))break;o=r.shift()}var c=s.trim().split(/\s+/),p=f&&f.action;for(var d=0,m;m=c[d++];)switch(m){case"prevent-default":t.preventDefault();break;case"stop-propagation":t.stopPropagation();break;case"log-event":break;default:p&&(t.actionTarget=u,p.call(f.context,m,t))}}t.type in U&&U[t.type](t,i)}}function J(e,t){K(t),z[e]=!0,U[t]=function(t){t=new c.Event(t),t.type=e,R[e](t)},U[e]=function(t,n){if(!n||!n.parentNode)return;t=new c.Event(t),t.type=e,t.sender=n.parentNode,R[e](t)}}function K(e){if(l.call(R,e))return;R[e]=$("event-"+e);if(q)return;if(!I){if(e=="mouseenter")return J(e,"mouseover");if(e=="mouseleave")return J(e,"mouseout")}for(var t=0,n=c.browserEvents(e),r;r=n[t];t++)c.addGlobalHandler(r,R[e])}function Y(e,t,n){K(t),X&&V.indexOf(t)!=-1&&e.setAttribute("style","cursor:pointer;"+(e.getAttribute("style")||"")),q&&e.setAttribute("on"+t,q+'("'+t+'",event)'),e.setAttribute("event-"+t,n)}function Z(e,t,n){Q&&t=="class"&&(t="className");if(G&&t=="style")return e.style.cssText=n;var r=d.getNamespace(t,e);r?e.setAttributeNS(r,t,n):e.setAttribute(t,n)}var f=r.Node,l=Object.prototype.hasOwnProperty,c=n.require("./h.js"),h=n.require("./e.js").resolveActionById,p=n.require("./a.js"),d=n.require("./b.js"),v=p.MARKER,m=p.CLONE_NORMALIZATION_TEXT_BUG,g=p.TYPE_ELEMENT,y=p.TYPE_ATTRIBUTE,b=p.TYPE_ATTRIBUTE_CLASS,w=p.TYPE_ATTRIBUTE_STYLE,E=p.TYPE_ATTRIBUTE_EVENT,S=p.TYPE_TEXT,x=p.TYPE_COMMENT,T=p.TYPE_CONTENT,N=p.TOKEN_TYPE,C=p.TOKEN_BINDINGS,k=p.TOKEN_REFS,L=p.ATTR_NAME,A=p.ATTR_VALUE,O=p.ATTR_VALUE_INDEX,M=p.ELEMENT_NAME,_=p.ELEMENT_ATTRIBUTES_AND_CHILDREN,D=p.CONTENT_CHILDREN,P=p.TEXT_VALUE,H=p.COMMENT_VALUE,B=p.CLASS_BINDING_ENUM,j=p.CLASS_BINDING_BOOL,F=p.CLASS_BINDING_INVERT,I="onmouseenter"in document.documentElement,q=!1,R={},U={},z={},W,X="ontouchstart"in document.documentElement,V=["mouseover","mouseup","mousedown","mousemove","click","dblclick"];f&&!f.prototype.contains?W=function(e,t){return e.compareDocumentPosition(t)&16}:W=function(e,t){return e.contains(t)},document.addEventListener||(q=n.publicCallback(function(e,t){c.fireEvent(document,e),t.returnValue=!0;var n=R[e];n&&n(new c.Event(t))},!0));var Q=function(){var e=document.createElement("div");return e.setAttribute("class","a"),!e.className}(),G=function(){var e=document.createElement("div");return e.setAttribute("style","position:absolute"),e.style.position!="absolute"}(),et=function(e,t,n){for(var r=t,i;i=e[r];r++){var s=i[N];switch(s){case g:var o=i[M],u=d.getNamespace(o),a=u?document.createElementNS(u,o):document.createElement(o);et(i,_,a),n.appendChild(a);break;case T:et(i,D,n);break;case y:i[C]||Z(n,i[L],i[A]||"");break;case b:var f=i[O[s]];f=f?[f]:[];if(i[C])for(var l=0,c;c=i[C][l];l++){var h=c[4];if(h){var p=c[0];if(Array.isArray(p))f.push(p[h-1]);else switch(c[2]){case j:case F:f.push(p+c[3]);break;case B:f.push(p+c[5][h-1])}}}f.length&&Z(n,"class",f.join(" "));break;case w:var f=i[O[s]];f&&Z(n,"style",(n.getAttribute("style")||"")+f);break;case E:Y(n,i[1],i[2]||i[1]);break;case x:n.appendChild(document.createComment(i[H]||(i[k]?"{"+i[k].join("|")+"}":"")));break;case S:m&&r&&e[r-1][N]==S&&n.appendChild(document.createComment("")),n.appendChild(document.createTextNode(i[P]||(i[k]?"{"+i[k].join("|")+"}":"")||(i[C]?"{"+i[C]+"}":"")))}}return n};t.exports=function(e){var t=et(e,0,document.createDocumentFragment());return t.childNodes.length===1&&(t=t.removeChild(t.firstChild)),t}},"h.js":function(e,t,n,r,i,s,o,u,a){function L(e){return E[e]||[e]}function A(e){var t=[];do t.push(e);while(e=e.parentNode);return t.push(r),t}function M(e){return e instanceof O?e.event_:e||r.event}function _(e){return typeof e=="string"?l.getElementById(e):e}function D(e){var t=e.target||e.srcElement||l;return t.nodeType==3?t.parentNode:t}function P(e){e.stopPropagation?e.stopPropagation():e.cancelBubble=!0}function H(e){e.preventDefault?e.preventDefault():e.returnValue=!1}function B(e,t){t=_(t),t?it(t,e,B):(H(e),P(e))}function j(e){return e.keyCode||e.which||0}function F(e){return e.charCode||e.keyCode||0}function I(e,t){return typeof e.which=="number"?e.which==t.VALUE:!!(e.button&t.BIT)}function q(e){return"pageX"in e?e.pageX:"clientX"in e?e.clientX+(l.compatMode=="CSS1Compat"?l.documentElement.scrollLeft:l.body.scrollLeft):0}function R(e){return"pageY"in e?e.pageY:"clientY"in e?e.clientY+(l.compatMode=="CSS1Compat"?l.documentElement.scrollTop:l.body.scrollTop):0}function U(e){if(e.changedTouches)return e.changedTouches[0].pageX}function z(e){if(e.changedTouches)return e.changedTouches[0].pageY}function W(e){var t=0;return"deltaY"in e?t=-e.deltaY:"wheelDelta"in e?t=e.wheelDelta:e.type=="DOMMouseScroll"&&(t=-e.detail),t&&t/Math.abs(t)}function G(e){J&&e!==K&&(K=e,n.codeFrame.start())}function Y(e){J&&e!==Q&&(Q=e,n.codeFrame.finish())}function Z(e){var t=p(X[e.type]),n=V[e.type],r=new O(e);G(e);if(n)n.handler.call(n.thisObject,r);else if(t)for(var i=t.length;i-->0;){var s=t[i];s.handler.call(s.thisObject,r)}Y(e)}function et(e,t,r){V[e]&&tt(e),t||(t=n.fn.$undef),nt(e,t,r),V[e]={handler:t,thisObject:r}}function tt(e){var t=V[e];t&&(rt(e,t.handler,t.thisObject),delete V[e])}function nt(e,t,n){var r=X[e];if(r){for(var i=0,s;s=r[i];i++)if(s.handler===t&&s.thisObject===n)return}else $?it(l,e,h):l.addEventListener(e,Z,!0),r=X[e]=[];r.push({handler:t,thisObject:n})}function rt(e,t,n){var r=X[e];if(r)for(var i=0,s;s=r[i];i++)if(s.handler===t&&s.thisObject===n){r.splice(i,1),r.length||(delete X[e],$?ot(l,e,h):l.removeEventListener(e,Z,!0));return}}function it(e,t,n,i){e=_(e);if(!e)throw"basis.event.addHandler: can't attach event listener to undefined";if(typeof n!="function")throw"basis.event.addHandler: handler is not a function";var s=e===r?d:e[v];s||(s=e[v]={});var o=s[t],u={handler:n,thisObject:i};if(!o)o=s[t]=[u],o.fireEvent=function(e){e=M(e);if($&&e&&X[t]&&typeof e.returnValue=="undefined"){Z(e);if(e.cancelBubble===!0)return;typeof e.returnValue=="undefined"&&(e.returnValue=!0)}G(e);for(var n=0,r=new O(e),i;i=o[n++];)i.handler.call(i.thisObject,r);Y(e)},m?e.addEventListener(t,o.fireEvent,!1):e.attachEvent("on"+t,o.fireEvent);else{for(var a=0,f;f=o[a];a++)if(f.handler===n&&f.thisObject===i)return;o.push(u)}}function st(e,t,n){e=_(e);for(var r in t)it(e,r,t[r],n)}function ot(e,t,n,i){e=_(e);var s=e===r?d:e[v];if(s){var o=s[t];if(o)for(var u=0,a;a=o[u];u++)if(a.handler===n&&a.thisObject===i){o.splice(u,1),o.length||ut(e,t);return}}}function ut(e,t){e=_(e);var n=e===r?d:e[v];if(n)if(typeof t!="string")for(t in n)ut(e,t);else{var i=n[t];i&&(e.removeEventListener?e.removeEventListener(t,i.fireEvent,!1):e.detachEvent("on"+t,i.fireEvent),delete n[t])}}function at(e,t,n){e=_(e);var i=e===r?d:e[v];if(i&&i[t])try{J=!1,i[t].fireEvent(n)}finally{J=!0}}function ft(e,t){n.teardown(e,t)}function ct(e,t){t||(t="div");var n=t+"-"+e;if(lt[n])return lt[n];var r=!1,i=!1;if(!m){var s="on"+e,o=l.createElement("div"),u=o.appendChild(l.createElement(t));o[s]=function(){i=!0};try{u.fireEvent(s),r=!0}catch(a){}}return lt[n]={supported:r,bubble:i}}function ht(e){return function(t,n){return e(M(t),n)}}var f="basis.dom.event",l=r.document,c=n.object.extend,h=n.fn.$null,p=n.array.from,d={},v="basisEvents_"+n.genUID(),m=!!l.addEventListener,g={BACKSPACE:8,TAB:9,CTRL_ENTER:10,ENTER:13,SHIFT:16,CTRL:17,ALT:18,ESC:27,ESCAPE:27,SPACE:32,PAGEUP:33,PAGEDOWN:34,END:35,HOME:36,LEFT:37,UP:38,RIGHT:39,DOWN:40,INSERT:45,DELETE:46,F1:112,F2:113,F3:114,F4:115,F5:116,F6:117,F7:118,F8:119,F9:120,F10:121,F11:122,F12:123},y={VALUE:1,BIT:1},b={VALUE:2,BIT:4},w={VALUE:3,BIT:2},E={mousewheel:["wheel","mousewheel","DOMMouseScroll"]},S=["returnValue","keyLocation","layerX","layerY","webkitMovementX","webkitMovementY","keyIdentifier"],x=0,T=1,N=2,C=3,k={keydown:x,keypress:x,keyup:x,click:T,dblclick:T,mousedown:T,mouseup:T,mouseover:T,mousemove:T,mouseout:T,mouseenter:T,mouseleave:T,wheel:T,mousewheel:T,DOMMouseScroll:T,touchstart:N,touchmove:N,touchend:N,touchcancel:N,pointerover:C,pointerenter:C,pointerdown:C,pointermove:C,pointerup:C,pointercancel:C,pointerout:C,pointerleave:C},O=n.Class(null,{className:f+".Event",KEY:g,init:function(e){e=M(e);for(var t in e)S.indexOf(t)==-1&&(e.type!="progress"||t!="totalSize"&&t!="position")&&typeof e[t]!="function"&&t in this==0&&(this[t]=e[t]);var r=D(e);c(this,{event_:e,sender:r,target:r,path:e.path?n.array(e.path):A(r)});switch(k[e.type]){case x:c(this,{key:j(e),charCode:F(e)});break;case T:c(this,{mouseLeft:I(e,y),mouseMiddle:I(e,b),mouseRight:I(e,w),mouseX:q(e),mouseY:R(e),wheelDelta:W(e),pointerX:q(e),pointerY:R(e)});break;case N:c(this,{touchX:U(e),touchY:z(e),mouseX:U(e),mouseY:z(e),pointerX:U(e),pointerY:z(e)});break;case C:c(this,{pointerX:q(e),pointerY:R(e),mouseX:q(e),mouseY:R(e)})}},stopBubble:function(){P(this.event_)},stopPropagation:function(){P(this.event_)},preventDefault:function(){H(this.event_)},die:function(){this.stopBubble(),this.preventDefault()}}),X={},V={},$=!m,J=!0,K,Q,lt={};t.exports={W3CSUPPORT:m,browserEvents:L,getEventInfo:ct,KEY:g,MOUSE_LEFT:y,MOUSE_RIGHT:w,MOUSE_MIDDLE:b,Event:O,sender:ht(D),cancelBubble:ht(P),cancelDefault:ht(H),kill:ht(B),key:ht(j),charCode:ht(F),mouseButton:ht(I),mouseX:ht(q),mouseY:ht(R),wheelDelta:ht(W),touchX:ht(U),touchY:ht(z),addGlobalHandler:nt,removeGlobalHandler:rt,captureEvent:et,releaseEvent:tt,addHandler:it,addHandlers:st,removeHandler:ot,clearHandlers:ut,fireEvent:at,onUnload:ft,wrap:M}},"i.js":function(e,t,n,r,i,s,o,u,a){function R(){}function U(){}function z(){}function W(e){e.setDelegate=n.fn.$undef,e.destroy=R}function X(e){var t=e.constructor.prototype;e.setDelegate=t.setDelegate,e.destroy=t.destroy}function V(e){return e.sortingValue}function $(e,t){return e=e.sortingValue||0,t=t.sortingValue||0,+(e>t)||-(e<t)}function J(e,t){return e=e.sortingValue||0,t=t.sortingValue||0,-(e>t)||+(e<t)}function K(e){return e.childNodes.sort(e.sortingDesc?J:$)}function Q(e,t,n,r){if(!e.length)return 0;r=!!r;var i=0,s=e.length-1,o=typeof t,u,a,f;do{f=i+s>>1,u=n(e[f]),a=typeof u;if(r){if(o>a||t>u){s=f-1;continue}if(o<a||t<u){i=f+1;continue}}else{if(o<a||t<u){s=f-1;continue}if(o>a||t>u){i=f+1;continue}}return t==u?f:0}while(i<=s);return f+((a<o||u<t)^r)}function G(e,t,n,r,i){if(t===n)return;var s,o=e,u=[];r&&(e.contextSelection=n,e.selected&&!e.selectedRA_&&u.push(e));while(o){s=!o.selection||i&&o===e?o.firstChild:null;if(s&&s.contextSelection!==t)throw"Try change wrong context selection";while(!s){if(o===e){if(u.length){t&&t.remove(u);if(n){n.add(u);for(var a=0;a<u.length;a++){var f=u[a];f.selected&&!n.has(f)&&(f.selected=!1,f.emit_unselect())}}}return}s=o.nextSibling,s||(o=o.parentNode)}o=s,o.selected&&!o.selectedRA_&&u.push(o),o.contextSelection=n}}function Y(e,t){if(e.contextDisabled!=t){e.contextDisabled=t;if(e.disabled)return;t?e.emit_disable():e.emit_enable()}}function Z(e){return e.isSubclassOf(st)?e:st}function et(e){if(!e)return null;if(e.isSatelliteConfig)return e;if(e instanceof st)return e;e.constructor!==Object&&(e={instance:e});var t=!1,r="update",i={isSatelliteConfig:!0};for(var s in e){var o=e[s];switch(s){case"instance":o instanceof st?i.instance=o:l.isClass(o)?i.instanceClass=Z(o):(typeof o=="string"&&(o=n.getter(o)),i.getInstance=o);break;case"instanceOf":case"satelliteClass":if(s=="instanceOf"&&"satelliteClass"in e)break;if("instance"in e)break;l.isClass(o)&&(i.instanceClass=Z(o));break;case"existsIf":case"delegate":case"dataSource":o&&(typeof o=="string"&&(o=v(o)),typeof o!="function"?o=n.fn.$const(o):t=!0),i[s]=o;break;case"config":typeof o=="string"&&(o=v(o)),i.config=o;break;case"events":r=e.events;break;default:}}!i.instance&&!i.getInstance&&!i.instanceClass&&(i.instanceClass=Z(st));if(t){Array.isArray(r)&&(r=r.join(" "));if(typeof r=="string"){var u={};r=r.split(/\s+/);for(var a=0,f;f=r[a];a++)u[f]=rt,i.handler=u}}return i}function tt(e,t){for(var n in t)t[n]&&typeof t[n]=="object"&&e.setSatellite(n,t[n])}function ft(e,t){var n=t.length-1;e.childNodes=t,e.firstChild=t[0]||null,e.lastChild=t[n]||null;for(var r,i=n;r=t[i];i--)r.nextSibling=t[i+1]||null,r.previousSibling=t[i-1]||null,e.insertBefore(r,r.nextSibling)}function lt(e,t){for(var n=0,r;r=t[n];n++)r.groupNode.nodes.push(r);var i=[e.grouping.nullGroup].concat(e.grouping.childNodes),s=[];for(var n=0,o;o=i[n];n++){var u=o.nodes;o.first=u[0]||null,o.last=u[u.length-1]||null,s.push.apply(s,u),o.emit_childNodesModified({inserted:u})}return s}function ct(e,t){var n;if(typeof e.childFactory=="function"){n=e.childFactory(t);if(n instanceof e.childClass)return n}throw n?M:_}var f="basis.dom.wrapper",l=n.Class,c=n.object.complete,h=n.array,p=n.array.remove,d=n.fn.$undef,v=n.getter,m=n.fn.nullGetter,g=n.require("./5.js"),y=g.create,b=g.events,w=n.require("./1.js"),E=w.resolveValue,S=w.resolveDataset,x=w.createResolveFunction,T=w.SUBSCRIPTION,N=w.STATE,C=w.Object,k=w.ReadOnlyDataset,L=w.Dataset,A=f+": Node can't be inserted at specified point in hierarchy",O=f+": Node was not found",M=f+": Child node has wrong class",_=f+": Child node is null",D=f+": Operation is not allowed because node is under dataSource control",P=f+": Operation is not allowed because node is under dataSource adapter control",H=f+": Node can't has owner and parentNode",B=f+": Node can't has children and dataSource as childClass isn't specified",j="__auto__",F={ANY:!0,NONE:!1,PARENT:"parent",OWNER:"owner"},I={},q={};T.addProperty("owner"),T.addProperty("dataSource"),T.add("CHILD",{childNodesModified:function(e,t){var n;if(n=t.inserted)for(var r=0,i;i=n[r];r++)T.link("child",e,i);if(n=t.deleted)for(var r=0,i;i=n[r];r++)T.unlink("child",e,i)}},function(e,t){var n=t.childNodes||[];for(var r=0,i;i=n[r];r++)e("child",t,i)}),T.add("SATELLITE",{satelliteChanged:function(e,t,n){n&&T.unlink("satellite",e,n),e.satellite[t]&&T.link("satellite",e,e.satellite[t])}},function(e,t){var n=t.satellite;if(n!==nt)for(var r in n)r!==j&&e("satellite",t,n[r])});var nt=l.customExtendProperty({},function(e,t){for(var n in t)e[n]=et(t[n])}),rt=function(){var e=this.name,t=this.config,r=this.owner,i="existsIf"in t==0||t.existsIf(r);if(E(this,rt,i,"existsRA_")){var s=this.instance||t.instance;if(!s||this.factoryType=="value"){if(!this.factoryType){var o=t.getInstance,u=t.instanceClass;typeof o=="function"&&(o=o.call(r,r),l.isClass(o)&&(u=Z(o))),this.factoryType=u?"class":"value",this.factory=u||o}if(this.factoryType=="class"){var a={destroy:z};t.delegate&&(a.autoDelegate=!1,a.delegate=t.delegate(r)),t.dataSource&&(a.dataSource=t.dataSource(r)),t.config&&n.object.complete(a,typeof t.config=="function"?t.config(r):t.config),this.instance=new this.factory(a),r.setSatellite(e,this.instance,!0);return}s=ot(this,rt,this.factory,"instanceRA_")}this.instance!==s&&(this.instance=s||null,r.setSatellite(e,this.instance,!0)),s&&s.owner===r&&(t.delegate&&s.setDelegate(t.delegate(r)),t.dataSource&&s.setDataSource(t.dataSource(r)))}else{var s=this.instance;s&&(t.instance&&(t.delegate&&s.setDelegate(),t.dataSource&&s.setDataSource()),this.instance=null,r.setSatellite(e,null,!0))}},it={destroy:function(){this.instanceRA_||this.owner.setSatellite(this.name,null)}},st=l(C,{className:f+".AbstractNode",propertyDescriptors:{owner:"ownerChanged",parentNode:"parentChanged",childNodes:{nested:["length"],events:"childNodesModified"},childNodesState:"childNodesStateChanged",dataSource:"dataSourceChanged","getChildNodesDataset()":!0,satellite:{nested:!0,events:"satelliteChanged"},sorting:"sortingChanged",sortingDesc:"sortingChanged",grouping:"groupingChanged",ownerSatelliteName:"ownerSatelliteNameChanged",firstChild:!1,lastChild:!1,previousSibling:!1,nextSibling:!1,groupNode:!1,groupId:!0,autoDelegate:!1,destroyDataSourceMember:!1,name:!0},subscribeTo:C.prototype.subscribeTo+T.DATASOURCE+T.SATELLITE,isSyncRequired:function(){return this.state==N.UNDEFINED||this.state==N.DEPRECATED},syncEvents:{activeChanged:!1},emit_update:function(e){C.prototype.emit_update.call(this,e);var t=this.parentNode;t&&(t.matchFunction&&this.match(t.matchFunction),t.insertBefore(this,this.nextSibling))},listen:{owner:{destroy:function(){this.ownerSatelliteName||this.setOwner()}}},autoDelegate:F.NONE,name:null,childNodes:null,emit_childNodesModified:y("childNodesModified","delta")&&function(e){b.childNodesModified.call(this,e);var t=this.listen.childNode,n;if(t){if(n=e.inserted)for(var r=0,i;i=n[r];r++)i.addHandler(t,this);if(n=e.deleted)for(var r=0,i;i=n[r];r++)i.removeHandler(t,this)}},childNodesState:N.UNDEFINED,emit_childNodesStateChanged:y("childNodesStateChanged","oldState"),childClass:l.SELF,dataSource:null,emit_dataSourceChanged:y("dataSourceChanged","oldDataSource"),dataSourceRA_:null,dataSourceMap_:null,destroyDataSourceMember:!0,parentNode:null,emit_parentChanged:y("parentChanged","oldParentNode"),nextSibling:null,previousSibling:null,firstChild:null,lastChild:null,sorting:m,sortingDesc:!1,emit_sortingChanged:y("sortingChanged","oldSorting","oldSortingDesc"),groupingClass:null,grouping:null,emit_groupingChanged:y("groupingChanged","oldGrouping"),groupNode:null,groupId:NaN,satellite:nt,emit_satelliteChanged:y("satelliteChanged","name","oldSatellite"),ownerSatelliteName:null,emit_ownerSatelliteNameChanged:y("ownerSatelliteNameChanged","name","oldName"),owner:null,emit_ownerChanged:y("ownerChanged","oldOwner"),init:function(){C.prototype.init.call(this);var e=this.childNodes,t=this.dataSource;e&&(this.childNodes=null),t&&(this.dataSource=null);var n=this.grouping;n&&(this.grouping=null,this.setGrouping(n)),this.childClass&&(this.childNodes=[],t?this.setDataSource(t):e&&this.setChildNodes(e));var r=this.satellite;r!==nt&&(this.satellite=nt,tt(this,r));var i=this.owner;i&&(this.owner=null,this.setOwner(i))},setChildNodesState:function(e,t){var n=String(e),r=this.childNodesState;if(!N.values[n])throw new Error("Wrong state value");if(r!=n||r.data!=t)this.childNodesState=Object(n),this.childNodesState.data=t,this.emit_childNodesStateChanged(r)},appendChild:function(e){},insertBefore:function(e,t){},removeChild:function(e){},replaceChild:function(e,t){},clear:function(e){},setChildNodes:function(e){},setGrouping:function(e,t){},setSorting:function(e,t){},setDataSource:function(e){},setOwner:function(e){if(!e||e instanceof st==0)e=null;if(e&&this.parentNode)throw H;var t=this.owner;if(t!==e){var n=this.listen.owner;if(t){if(this.ownerSatelliteName&&t.satellite[j]&&this.ownerSatelliteName in t.satellite[j])return;n&&t.removeHandler(n,this),this.ownerSatelliteName&&(this.owner=null,t.setSatellite(this.ownerSatelliteName,null))}e&&n&&e.addHandler(n,this),this.owner=e,this.emit_ownerChanged(t),(this.autoDelegate==F.OWNER||this.autoDelegate===F.ANY)&&this.setDelegate(e)}},setSatellite:function(e,t,n){var r=this.satellite[e]||null,i=this.satellite[j],s=i&&i[e],o=n&&s;if(o)t=s.instance,t&&s.config.instance&&delete s.config.instance.setOwner;else{t=et(t);if(t&&t.owner===this&&i&&t.ownerSatelliteName&&i[t.ownerSatelliteName])return;s&&(delete i[e],s.config.instance&&s.config.instance.removeHandler(it,s),s.config.handler&&this.removeHandler(s.config.handler,s))}if(r!==t){var u=this.listen.satellite,a=this.listen["satellite:"+e],f;if(r){delete this.satellite[e];var l=r.ownerSatelliteName;l!=null&&(r.ownerSatelliteName=null,r.emit_ownerSatelliteNameChanged(l)),s&&r.destroy===z?f=r:(u&&r.removeHandler(u,this),a&&r.removeHandler(a,this),r.setOwner(null)),o&&!t&&s.config.instance&&(s.config.instance.setOwner=U)}if(t){if(t instanceof st==0){var s={owner:this,name:e,config:t,factoryType:null,factory:null,instance:null,instanceRA_:null,existsRA_:null};t.handler&&this.addHandler(t.handler,s),t.instance&&(t.instance.addHandler(it,s),t.instance.setOwner=U),i||(this.satellite===nt&&(this.satellite={}),i=this.satellite[j]={}),i[e]=s,rt.call(s,this),!s.instance&&r&&this.emit_satelliteChanged(e,r),f&&(delete f.destroy,f.destroy());return}if(t.owner!==this){if(s&&s.config.delegate){var c=t.autoDelegate;t.autoDelegate=!1,t.setOwner(this),t.autoDelegate=c}else t.setOwner(this);if(t.owner!==this){this.setSatellite(e,null);return}u&&t.addHandler(u,this),a&&t.addHandler(a,this)}else t.ownerSatelliteName&&(delete this.satellite[t.ownerSatelliteName],this.emit_satelliteChanged(t.ownerSatelliteName,t));this.satellite==nt&&(this.satellite={}),this.satellite[e]=t;var l=t.ownerSatelliteName;l!=e&&(t.ownerSatelliteName=e,t.emit_ownerSatelliteNameChanged(l))}this.emit_satelliteChanged(e,r),f&&(delete f.destroy,f.destroy())}},getChildNodesDataset:function(){return I[this.basisObjectId]||new gt({sourceNode:this})},getSatellitesDataset:function(){return q[this.basisObjectId]||new yt({sourceNode:this})},destroy:function(){C.prototype.destroy.call(this),this.dataSource||this.dataSourceRA_?this.setDataSource():this.firstChild&&this.clear(),this.parentNode&&this.parentNode.removeChild(this),this.grouping&&(this.grouping.setOwner(),this.grouping=null),this.owner&&this.setOwner();var e=this.satellite;if(e!==nt){var t=e[j];delete e[j];for(var n in t)t[n].config.instance&&!t[n].instance&&t[n].config.instance.destroy(),t[n].existsRA_&&E(t[n],null,null,"existsRA_"),t[n].instanceRA_&&E(t[n],null,null,"instanceRA_");for(var n in e){var r=e[n];r.owner=null,r.ownerSatelliteName=null,r.destroy===z&&delete r.destroy,r.destroy()}this.satellite=null}this.childNodes=null}}),ot=x(st),ut=l(st,{className:f+".PartitionNode",autoDestroyIfEmpty:!1,nodes:null,first:null,last:null,init:function(){this.nodes=[],st.prototype.init.call(this)},insert:function(e,t){var n=this.nodes,r=t?n.indexOf(t):-1;r==-1?(n.push(e),this.last=e):n.splice(r,0,e),this.first=n[0],e.groupNode=this,this.emit_childNodesModified({inserted:[e]})},remove:function(e){var t=this.nodes;p(t,e)&&(this.first=t[0]||null,this.last=t[t.length-1]||null,e.groupNode=null,this.emit_childNodesModified({deleted:[e]})),!this.first&&this.autoDestroyIfEmpty&&this.destroy()},clear:function(){if(!this.first)return;var e=this.nodes;for(var t=e.length;t-->0;)e[t].groupNode=null;this.nodes=[],this.first=null,this.last=null,this.emit_childNodesModified({deleted:e}),this.autoDestroyIfEmpty&&this.destroy()},destroy:function(){st.prototype.destroy.call(this),this.nodes=null,this.first=null,this.last=null}}),at={itemsChanged:function(e,t){var n={},r=[];if(t.deleted){n.deleted=r;if(this.childNodes.length==t.deleted.length){r=h(this.childNodes);for(var i=0,s;s=r[i];i++)X(s);this.dataSourceMap_=null,this.clear(!0),this.dataSourceMap_={}}else for(var i=0,o;o=t.deleted[i];i++){var u=o.basisObjectId,a=this.dataSourceMap_[u];X(a),delete this.dataSourceMap_[u],this.removeChild(a),r.push(a)}}if(t.inserted){n.inserted=[];for(var i=0,o;o=t.inserted[i];i++){var f=ct(this,{delegate:o});W(f),this.dataSourceMap_[o.basisObjectId]=f,n.inserted.push(f),this.firstChild&&this.insertBefore(f)}}this.firstChild?this.emit_childNodesModified(n):this.setChildNodes(n.inserted);if(this.destroyDataSourceMember&&r.length)for(var i=0,o;o=r[i];i++)o.destroy()},stateChanged:function(e){this.setChildNodesState(e.state,e.state.data)},destroy:function(){this.dataSourceRA_||this.setDataSource()}},ht={childClass:st,childFactory:null,listen:{dataSource:at},getChild:function(e,t){return n.array.search(this.childNodes,e,t)},getChildByName:function(e){return this.getChild(e,"name")},appendChild:function(e){return this.insertBefore(e)},insertBefore:function(e,t){if(!this.childClass)throw B;if(e.firstChild){var n=this;while(n=n.parentNode)if(n===e)throw A}var r=e&&e instanceof this.childClass;if(this.dataSource){if(!r||!e.delegate||this.dataSourceMap_[e.delegate.basisObjectId]!==e)throw D}else if(this.dataSourceRA_)throw P;r||(e=ct(this,e instanceof C?{delegate:e}:e));if(e.owner)throw H;var i=e.parentNode===this,s=this.childNodes,o=this.grouping,u,a=e.groupNode,f=null,l=this.sorting,c,h=!1,d,v=-1,g,y;i&&(g=e.nextSibling,y=e.previousSibling);if(l!==m){t=null,c=this.sortingDesc,d=l(e);if(d==null)d=-Infinity;else if(typeof d!="number"||d!==d)d=String(d);i&&(d===e.sortingValue?h=!0:(c?h=(!g||typeof g.sortingValue<=typeof d&&g.sortingValue<=d)&&(!y||typeof y.sortingValue>=typeof d&&y.sortingValue>=d):h=(!g||typeof g.sortingValue>=typeof d&&g.sortingValue>=d)&&(!y||typeof y.sortingValue<=typeof d&&y.sortingValue<=d),h&&(e.sortingValue=d)))}if(o){var n;f=o.getGroupNode(e,!0),u=f.nodes;if(a===f)if(h||l===m&&g===t)return e;l!==m?a===f&&h?g&&g.groupNode===f?v=u.indexOf(g):v=u.length:(v=Q(u,d,V,c),e.sortingValue=d):t&&t.groupNode===f?v=u.indexOf(t):v=u.length;if(v<u.length)t=u[v];else if(f.last)t=f.last.nextSibling;else{n=f,t=null;while(n=n.nextSibling)if(t=n.first)break}if(e===t||i&&g===t)return a!==f&&(a&&a.remove(e),f.insert(e,t)),e;v=-1}else if(l!==m){if(h)return e;v=Q(s,d,V,c,this.lll),t=s[v],e.sortingValue=d;if(e===t||i&&g===t)return e}else{if(t&&t.parentNode!==this)throw O;if(i){if(g===t)return e;if(e===t)throw A}}if(i){g?(g.previousSibling=y,e.nextSibling=null):this.lastChild=y,y?(y.nextSibling=g,e.previousSibling=null):this.firstChild=g;if(v==-1)p(s,e);else{var b=s.indexOf(e);s.splice(b,1),v-=b<v}a&&(a.remove(e),a=null)}else e.parentNode&&e.parentNode.removeChild(e);a!=f&&f.insert(e,t);if(t){v==-1&&(v=s.indexOf(t));if(v==-1)throw O;e.nextSibling=t,s.splice(v,0,e)}else v=s.length,s.push(e),t={previousSibling:this.lastChild},this.lastChild=e;return e.parentNode=this,e.previousSibling=t.previousSibling,v==0?this.firstChild=e:t.previousSibling.nextSibling=e,t.previousSibling=e,i||(G(e,e.contextSelection,this.selection||this.contextSelection,!0),Y(e,this.disabled||this.contextDisabled),(e.underMatch_||this.matchFunction)&&e.match&&e.match(this.matchFunction),(e.autoDelegate==F.PARENT||e.autoDelegate===F.ANY)&&e.setDelegate(this),e.emit_parentChanged(null),this.dataSource||this.emit_childNodesModified({inserted:[e]}),e.listen.parentNode&&this.addHandler(e.listen.parentNode,e)),e},removeChild:function(e){if(!e||e.parentNode!==this)throw O;if(e instanceof this.childClass==0)throw M;if(this.dataSource){if(!e.delegate||this.dataSourceMap_[e.delegate.basisObjectId])throw D}else if(this.dataSourceRA_)throw P;var t=this.childNodes.indexOf(e);if(t==-1)throw O;return this.childNodes.splice(t,1),e.parentNode=null,e.nextSibling?e.nextSibling.previousSibling=e.previousSibling:this.lastChild=e.previousSibling,e.previousSibling?e.previousSibling.nextSibling=e.nextSibling:this.firstChild=e.nextSibling,e.nextSibling=null,e.previousSibling=null,e.listen.parentNode&&this.removeHandler(e.listen.parentNode,e),G(e,e.contextSelection,null,!0),e.groupNode&&e.groupNode.remove(e),e.emit_parentChanged(this),this.dataSource||this.emit_childNodesModified({deleted:[e]}),(e.autoDelegate==F.PARENT||e.autoDelegate===F.ANY)&&e.setDelegate(),e},replaceChild:function(e,t){if(this.dataSource)throw D;if(this.dataSourceRA_)throw P;if(t==null||t.parentNode!==this)throw O;return this.insertBefore(e,t),this.removeChild(t)},clear:function(e){if(this.dataSource&&this.dataSourceMap_&&this.dataSource.itemCount)throw D;if(!this.firstChild)return;e&&G(this,this.selection||this.contextSelection,null,!1,!0);var t=this.childNodes;this.firstChild=null,this.lastChild=null,this.childNodes=[],this.emit_childNodesModified({deleted:t});for(var n=t.length;n-->0;){var r=t[n];r.listen.parentNode&&r.parentNode.removeHandler(r.listen.parentNode,r),r.parentNode=null,r.groupNode=null,e?(r.nextSibling=null,r.previousSibling=null,r.emit_parentChanged(this),(r.autoDelegate==F.PARENT||r.autoDelegate===F.ANY)&&r.setDelegate()):r.destroy()}if(this.grouping)for(var t=this.grouping.childNodes,n=t.length-1,i;i=t[n];n--)i.clear()},setChildNodes:function(e,t){!this.dataSource&&!this.dataSourceRA_&&this.clear(t);if(e){"length"in e==0&&(e=[e]);if(e.length){var n=this.emit_childNodesModified;this.emit_childNodesModified=d;for(var r=0,i=e.length;r<i;r++)this.insertBefore(e[r]);this.emit_childNodesModified=n,this.emit_childNodesModified({inserted:this.childNodes})}}},setDataSource:function(e){if(!this.childClass)throw B;e=S(this,this.setDataSource,e,"dataSourceRA_");if(this.dataSource!==e){var t=this.dataSource,n=this.dataSourceMap_||{},r=this.listen.dataSource,i,s;t?(r&&t.removeHandler(r,this),e?(i=e.getItems().filter(function(e){return!t.has(e)}),s=t.getItems().filter(function(t){return!e.has(t)})):s=t.getItems()):e&&(i=e.getItems());if(!t||!e){if(this.firstChild){if(t)for(var o=0,u;u=this.childNodes[o];o++)X(u);this.dataSource=null,this.clear(t&&!this.destroyDataSourceMember)}}else t&&s.length&&r&&r.itemsChanged.call(this,t,{deleted:s});this.dataSource=e,e?(this.dataSourceMap_=n,this.setChildNodesState(e.state,e.state.data),r&&(e.addHandler(r,this),i.length&&r.itemsChanged.call(this,e,{inserted:i}))):(this.dataSourceMap_=null,this.setChildNodesState(N.UNDEFINED)),this.emit_dataSourceChanged(t)}},setGrouping:function(e,t){if(typeof e=="function"||typeof e=="string")e={rule:e};e instanceof dt==0&&(e=e&&typeof e=="object"?new this.groupingClass(e):null);if(this.grouping!==e){var n=this.grouping,r;if(n){this.grouping=null;if(!e&&this.firstChild){this.sorting!==m?r=K(this):r=this.childNodes,n.nullGroup.clear();var i=n.childNodes.slice(0);for(var s=0;s<i.length;s++)i[s].clear();ft(this,r)}n.setOwner()}if(e){this.grouping=e,e.setOwner(this);if(this.firstChild){this.sorting!==m?r=K(this):r=this.childNodes;for(var s=0,o;o=r[s];s++)o.groupNode=this.grouping.getGroupNode(o,!0);r=lt(this,r),ft(this,r)}}this.emit_groupingChanged(n),n&&!t&&n.destroy()}},setSorting:function(e,t){e=v(e),t=!!t;if(this.sorting!==e||this.sortingDesc!=!!t){var n=this.sorting,r=this.sortingDesc;this.sorting=e,this.sortingDesc=!!t;if(e!==m&&this.firstChild){var i=[],s;for(var o=this.firstChild;o;o=o.nextSibling){var u=e(o);if(u==null)u=-Infinity;else if(typeof u!="number"||u!==u)u=String(u);o.sortingValue=u}if(this.grouping){var a=[this.grouping.nullGroup].concat(this.grouping.childNodes);for(var f=0,l;l=a[f];f++)s=l.nodes=K({childNodes:l.nodes,sortingDesc:this.sortingDesc}),l.first=s[0]||null,l.last=s[s.length-1]||null,i.push.apply(i,s)}else i=K(this);ft(this,i)}this.emit_sortingChanged(n,r)}},setMatchFunction:function(e){if(this.matchFunction!=e){var t=this.matchFunction;this.matchFunction=e;for(var n=this.lastChild;n;n=n.previousSibling)n.match(e);this.emit_matchFunctionChanged(t)}}},pt=l(st,ht,{className:f+".Node",propertyDescriptors:{disabled:"disable enable",contextDisabled:!1,selected:"select unselect",contextSelection:!1,selection:"selectionChanged",matched:"match unmatch",matchFunction:"matchFunctionChanged"},emit_satelliteChanged:function(e,t){st.prototype.emit_satelliteChanged.call(this,e,t),this.satellite[e]instanceof pt&&Y(this.satellite[e],this.disabled||this.contextDisabled)},contextDisabled:!1,disabled:!1,disabledRA_:null,emit_enable:y("enable")&&function(){for(var e=this.firstChild;e;e=e.nextSibling)Y(e,!1);b.enable.call(this)},emit_disable:y("disable")&&function(){for(var e=this.firstChild;e;e=e.nextSibling)Y(e,!0);b.disable.call(this)},selection:null,emit_selectionChanged:y("selectionChanged","oldSelection"),contextSelection:null,selected:!1,selectedRA_:null,emit_select:y("select"),emit_unselect:y("unselect"),matched:!0,emit_match:y("match"),emit_unmatch:y("unmatch"),matchFunction:null,emit_matchFunctionChanged:y("matchFunctionChanged","oldMatchFunction"),listen:{owner:{enable:function(){Y(this,!1)},disable:function(){Y(this,!0)}},selection:{destroy:function(){this.setSelection()}}},init:function(){var e=this.disabled;this.disabled=!1;var t=this.selection;t&&(this.selection=null,this.setSelection(t,!0)),st.prototype.init.call(this);if(e){e=!!E(this,this.setDisabled,e,"disabledRA_");if(e){this.disabled=e;for(var n=this.firstChild;n;n=n.nextSibling)Y(n,!0)}}this.selected&&(this.selected=!!E(this,this.setSelected,this.selected,"selectedRA_"))},setSelection:function(e,t){var n=this.selection;e instanceof bt==0&&(e=e?new bt(e):null);if(n!==e)return G(this,n||this.contextSelection,e||this.contextSelection,!1,!0),this.listen.selection&&(n&&n.removeHandler(this.listen.selection,this),e&&e.addHandler(this.listen.selection,this)),this.selection=e,t||this.emit_selectionChanged(n),!0},setSelected:function(e,t){var n=this.contextSelection;return e=!!E(this,this.setSelected,e,"selectedRA_"),this.selected&&n&&(this.selectedRA_?n.has(this)&&(this.selected=!1,n.remove(this),this.selected=!0):n.has(this)||n.add(this)),e!==this.selected?(this.selectedRA_?(this.selected=e,e?this.emit_select():this.emit_unselect()):e?n?t?n.add(this):n.set(this):(this.selected=!0,this.emit_select()):n?n.remove(this):(this.selected=!1,this.emit_unselect()),!0):(!this.selectedRA_&&e&&n&&(t?n.remove(this):n.set(this)),!1)},select:function(e){return this.selectedRA_?!1:this.setSelected(!0,e)},unselect:function(){return this.selectedRA_?!1:this.setSelected(!1)},setDisabled:function(e){return e=!!E(this,this.setDisabled,e,"disabledRA_"),this.disabled!==e?(this.disabled=e,this.contextDisabled||(e?this.emit_disable():this.emit_enable()),!0):!1},disable:function(){return this.disabledRA_?!1:this.setDisabled(!0)},enable:function(){return this.disabledRA_?!1:this.setDisabled(!1)},isDisabled:function(){return this.disabled||this.contextDisabled},match:function(e){typeof e!="function"&&(e=null),this.underMatch_&&!e&&this.underMatch_(this,!0),this.underMatch_=e;var t=!e||e(this);this.matched!=t&&(this.matched=t,t?this.emit_match():this.emit_unmatch())},destroy:function(){this.disabledRA_&&E(this,null,null,"disabledRA_"),this.selectedRA_&&E(this,null,null,"selectedRA_"),this.contextSelection=null,this.selection&&this.setSelection(),st.prototype.destroy.call(this)}}),dt=l(st,ht,{className:f+".GroupingNode",emit_childNodesModified:function(e){b.childNodesModified.call(this,e);var t;if(t=e.inserted){for(var n=0,r;r=t[n++];)r.groupId_=r.delegate?r.delegate.basisObjectId:r.data.id,this.map_[r.groupId_]=r;if(this.dataSource&&this.nullGroup.first){var i=this.owner,s=h(this.nullGroup.nodes);for(var n=s.length;n-->0;)i.insertBefore(s[n],s[n].nextSibling)}}},emit_ownerChanged:function(e){e&&e.grouping===this&&e.setGrouping(null,!0),this.owner&&this.owner.grouping!==this&&this.owner.setGrouping(this),b.ownerChanged.call(this,e),!this.owner&&this.autoDestroyWithNoOwner&&this.destroy()},map_:null,nullGroup:null,autoDestroyWithNoOwner:!0,autoDestroyEmptyGroups:!0,rule:m,childClass:ut,childFactory:function(e){return new this.childClass(c({autoDestroyIfEmpty:this.dataSource?!1:this.autoDestroyEmptyGroups},e))},init:function(){this.map_={},this.nullGroup=new ut,st.prototype.init.call(this)},getGroupNode:function(e,t){var n=this.rule(e),r=n instanceof C,i=this.map_[r?n.basisObjectId:n];return this.dataSource&&(t=!1),!i&&t&&(i=this.appendChild(r?n:{data:{id:n,title:n}})),i||this.nullGroup},setDataSource:function(e){var t=this.dataSource;ht.setDataSource.call(this,e);var n=this.owner;if(n&&this.dataSource!==t){var r=h(n.childNodes);for(var i=r.length-1;i>=0;i--)n.insertBefore(r[i],r[i+1])}},insertBefore:function(e,t){e=ht.insertBefore.call(this,e,t);var n=e.first;if(n){var r=n.parentNode,i=e.last,s,o,u,a=null,f=e;while(f=f.nextSibling)if(a=f.first)break;u=a?a.previousSibling:r.lastChild,s=n.previousSibling,o=i.nextSibling;if(o!==a){var l=r.childNodes,c=e.nodes,h=c.length;s&&(s.nextSibling=o),o&&(o.previousSibling=s),u&&(u.nextSibling=n),a&&(a.previousSibling=i),n.previousSibling=u,i.nextSibling=a;var p=l.indexOf(n),d=a?l.indexOf(a):l.length;d>p&&(d-=h),l.splice(p,h),l.splice.apply(l,[d,0].concat(c));if(!u||!s)r.firstChild=l[0];if(!a||!o)r.lastChild=l[l.length-1];if(n instanceof ut)for(var v=h,m=a;v-->0;)r.insertBefore(c[v],m),m=c[v]}}return e},removeChild:function(e){if(e=ht.removeChild.call(this,e)){delete this.map_[e.groupId_];for(var t=0,n;n=e.nodes[t];t++)n.parentNode.insertBefore(n)}return e},clear:function(e){var t=[],n=this.getGroupNode,r=this.nullGroup;this.getGroupNode=function(){return r};for(var i=this.firstChild;i;i=i.nextSibling)t.push.apply(t,i.nodes);for(var s=0,o;o=t[s];s++)o.parentNode.insertBefore(o);this.getGroupNode=n,ht.clear.call(this,e),this.map_={}},destroy:function(){this.autoDestroyWithNoOwner=!1,st.prototype.destroy.call(this),this.nullGroup.destroy(),this.nullGroup=null,this.map_=null}});st.prototype.groupingClass=dt;var vt={childNodesModified:function(e,t){var n=this.members_,r={},i,s=0,o=0,u=t.inserted,a=t.deleted;if(u&&u.length){r.inserted=u;while(i=u[s])n[i.basisObjectId]=i,s++}if(a&&a.length){r.deleted=a;while(i=a[o])delete n[i.basisObjectId],o++}(s||o)&&this.emit_itemsChanged(r)},destroy:function(){this.destroy()}},mt={satelliteChanged:function(e,t,n){var r={};e.satellite[t]&&(r.inserted=[e.satellite[t]]),n&&(r.deleted=[n]),this.emit_itemsChanged(r)},destroy:function(){this.destroy()}},gt=l(k,{className:f+".ChildNodesDataset",sourceNode:null,init:function(){k.prototype.init.call(this);var e=this.sourceNode;I[e.basisObjectId]=this,e.firstChild&&vt.childNodesModified.call(this,e,{inserted:e.childNodes}),e.addHandler(vt,this)},destroy:function(){this.sourceNode.removeHandler(vt,this),delete I[this.sourceNode.basisObjectId],k.prototype.destroy.call(this)}}),yt=n.Class(k,{className:".SatellitesDataset",sourceNode:null,init:function(){k.prototype.init.call(this);var e=this.sourceNode;q[e.basisObjectId]=this;var t=[];for(var n in e.satellite)if(e.satellite.hasOwnProperty(n)){var r=e.satellite[n];r instanceof st&&t.push(r)}t.length&&this.emit_itemsChanged({inserted:t}),e.addHandler(mt,this)},destroy:function(){this.sourceNode.removeHandler(mt,this),delete q[this.sourceNode.basisObjectId],k.prototype.destroy.call(this)}}),bt=l(L,{className:f+".Selection",multiple:!1,emit_itemsChanged:function(e){var t;L.prototype.emit_itemsChanged.call(this,e);if(t=e.deleted)for(var n=0,r;r=t[n];n++)r.selected&&r.contextSelection===this&&(r.selected=!1,r.emit_unselect());if(t=e.inserted)for(var n=0,r;r=t[n];n++)!r.selected&&r.contextSelection===this&&(r.selected=!0,r.emit_select())},add:function(e){if(!e)return;if(!this.multiple&&this.itemCount)return this.set(e);Array.isArray(e)||(e=[e]),e=e.filter(this.filter,this),!this.multiple&&e.length>1&&(e=[e[0]]);if(e.length)return L.prototype.add.call(this,e)},set:function(e){return e?(Array.isArray(e)||(e=[e]),e=e.filter(this.filter,this),!this.multiple&&e.length>1&&(e=[e[0]]),e.length?L.prototype.set.call(this,e):this.clear()):this.clear()},filter:function(e){return e instanceof pt&&!e.selectedRA_&&e.contextSelection===this}});t.exports={DELEGATE:F,AbstractNode:st,Node:pt,GroupingNode:dt,PartitionNode:ut,ChildNodesDataset:gt,SatellitesDataset:yt,Selection:bt,nullSelection:new k}},"j.js":function(e,t,n,r,i,s,o,u,a){t.exports={Source:n.require("./17.js"),Profile:n.require("./1r.js")}},"17.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./k.js"),l=n.require("./l.js"),c=n.require("./o.js"),h=n.require("./1r.js"),p=l.createType({name:"Source",singleton:!0,fields:{status:String,progress:Number,online:Boolean,profile:h}}),d=p({});d.setSyncAction(function(){return new f(function(e){c.invoke("getLast",function(){e()})})}),c.ns("progress").subscribe(function(e){d.update({progress:e})}),c.ns("profile").subscribe(function(e){d.update({profile:e})}),c.ns("status").subscribe(function(e){d.update({status:e})}),t.exports=d},"k.js":function(e,t,n,r,i,s,o,u,a){function m(){for(var e=0;e<d.length;e++)d[e][0](d[e][1]);d=[],v=!1}function g(e,t){d.push([e,t]),v||(v=!0,n.nextTick(m,0))}function y(e,t){function n(e){E(t,e)}function r(e){x(t,e)}try{e(n,r)}catch(i){r(i)}}function b(e){var t=e.owner,n=t.state_,r=t.data_,i=e[n],s=e.then;if(typeof i=="function"){n=c;try{r=i(r)}catch(o){x(s,o)}}w(s,r)||(n===c&&E(s,r),n===h&&x(s,r))}function w(e,t){var n;try{if(e===t)throw new TypeError("A promises callback cannot return that same promise.");if(t&&(typeof t=="function"||typeof t=="object")){var r=t.then;if(typeof r=="function")return r.call(t,function(r){n||(n=!0,t!==r?E(e,r):S(e,r))},function(t){n||(n=!0,x(e,t))}),!0}}catch(i){return n||x(e,i),!0}return!1}function E(e,t){(e===t||!w(e,t))&&S(e,t)}function S(e,t){e.state_===f&&(e.state_=l,e.data_=t,g(N,e))}function x(e,t){e.state_===f&&(e.state_=l,e.data_=t,g(C,e))}function T(e){e.then_=e.then_.forEach(b)}function N(e){e.state_=c,T(e)}function C(e){e.state_=h,T(e)}var f="pending",l="sealed",c="fulfilled",h="rejected",p=function(){},d=[],v,k=function(e){if(typeof e!="function")throw new TypeError("Promise constructor takes a function argument");if(this instanceof k==0)throw new TypeError("Failed to construct 'Promise': Please use the 'new' operator, this object constructor cannot be called as a function.");this.then_=[],y(e,this)};k.prototype={constructor:k,state_:f,then_:null,data_:undefined,then:function(e,t){var n={owner:this,then:new this.constructor(p),fulfilled:e,rejected:t};return this.state_===c||this.state_===h?g(b,n):this.then_.push(n),n.then},"catch":function(e){return this.then(null,e)}},k.all=function(e){var t=this;if(!Array.isArray(e))throw new TypeError("You must pass an array to Promise.all().");return new t(function(t,n){function s(e){return i++,function(n){r[e]=n,--i||t(r)}}var r=[],i=0;for(var o=0,u;o<e.length;o++)u=e[o],u&&typeof u.then=="function"?u.then(s(o),n):r[o]=u;i||t(r)})},k.race=function(e){var t=this;if(!Array.isArray(e))throw new TypeError("You must pass an array to Promise.race().");return new t(function(t,n){for(var r=0,i;r<e.length;r++)i=e[r],i&&typeof i.then=="function"?i.then(t,n):t(i)})},k.resolve=function(e){var t=this;return e&&typeof e=="object"&&e.constructor===t?e:new t(function(t){t(e)})},k.reject=function(e){var t=this;return new t(function(t,n){n(e)})},t.exports=k},"l.js":function(e,t,n,r,i,s,o,u,a){function W(e){return z[e]=z[e]||0,e+z[e]++}function $(){var e=v(arguments),t=e.pop(),n=e[0],r=e[1],i=e[2],s;if(typeof t!="function")throw"Last argument for calculate field constructor must be a function";switch(e.length){case 0:s=function(){return t()};break;case 1:s=function(e,r,i){return n in e?t(r[n]):i};break;case 2:s=function(e,i,s){return n in e||r in e?t(i[n],i[r]):s};break;case 3:s=function(e,s,o){return n in e||r in e||i in e?t(s[n],s[r],s[i]):o};break;default:s=function(n,r,i){var s=!1,o=[];for(var u=0,a;a=e[u];u++)s=s||a in n,o.push(r[a]);return s?t.apply(null,o):i}}return s.args=e,s.calc=s,s}function J(e){return arguments.length==1?function(t,n,r){return e in t?n[e]!=null?String(n[e]):null:r}:$.apply(null,v(arguments).concat(function(){for(var e=arguments.length-1;e>=0;e--)if(arguments[e]==null)return null;return Array.prototype.join.call(arguments,"-")}))}function K(e,t){var n={},r;e&&e.length&&(r=n.inserted=e),t&&t.length&&(r=n.deleted=t);if(r)return n}function Q(e){var t=n.object.slice(this.items_),r={},i=[],s=[],o=[],u,a;e=v(e),k(!0);for(var f=0,l;l=e[f];f++)a=this.wrapper(l),a&&(t[a.basisObjectId]?t[a.basisObjectId]=null:r[a.basisObjectId]=a);k(!1);for(var c in r)this.items_[c]?i.push(r[c]):s.push(r[c]);for(var c in t)t[c]&&o.push(t[c]);if(u=K(s,o)){if(this instanceof nt){var h=this.listen.item;if(h){if(u.inserted)for(var f=0,l;l=u.inserted[f];f++)l.addHandler(h,this);if(u.deleted)for(var f=0,l;l=u.deleted[f];f++)l.removeHandler(h,this)}}this.emit_itemsChanged(u)}if(o.length){k(!0);for(var f=0,l;l=o[f];f++)l.destroy();k(!1)}return s=s.concat(i),s.length?s:null}function ct(e,t,n){var r=["has"],i=[c],s=[];for(var o in e)if(c.call(e,o)){var u='"'+o.replace(/"/g,'"')+'"';if(c.call(n,o)){s.push(u+":"+"undefined");continue}var a="v"+s.length,f="f"+s.length,l=e[o];r.push(a,f),i.push(l,t[o]);var h="has.call(data,"+u+")"+"?"+"data["+u+"]"+":"+a+(typeof l=="function"?"(data)":""),p=l!==undefined&&typeof l!="function"?","+a:"";s.push(u+":"+f+"("+h+p+")")}var d=s.sort().join(","),v=ft[d];return v||(v=ft[d]=new Function(r,"return function(data){return {"+d+"};"+"};")),v.apply(null,i)}function ht(e,t,r){typeof r=="string"||Array.isArray(r)||typeof r=="function"&&r.calc!==r?r={type:r}:r=r?n.object.slice(r):{};if("type"in r){typeof r.type=="string"&&(r.type=O(r.type,e.fields,t));if(Array.isArray(r.type)){var i=r.type.slice();r.type=H(i),i.indexOf(r.defValue)==-1&&(r.defValue=r.type.DEFAULT_VALUE)}r.type===Array&&(r.type=D,r.defValue=null),r.type===Date&&(r.type=P,r.defValue=null),typeof r.type!="function"&&(r.type=null)}var s=r.type||d;if(r.id||r.index||[I,q,R,U].indexOf(s)!=-1)e.idFields[t]=r;r.calc?(dt(e,t,r.calc),e.fields[t]=lt):(e.fields[t]=s,e.aliases[t]=t),!("defValue"in r)&&typeof r.type=="function"&&"DEFAULT_VALUE"in r.type&&(r.defValue=r.type.DEFAULT_VALUE),"defValue"in r?e.defaults[t]=r.defValue:"DEFAULT_VALUE"in s?e.defaults[t]=s.DEFAULT_VALUE:e.defaults[t]=s(),at[t]||(at[t]={destroy:function(){this.set(t,null)}})}function pt(e,t,n){if(n in e.fields==0)return;if(n in e.calcMap)return;if(t in e.aliases)return;e.aliases[t]=n}function dt(e,t,r){var i=e.calcs,s=e.deps,o=r.args||[],u={args:o,wrapper:r},a=e.calcs.length,f=0;if(o)for(var l=0,c;c=i[l];l++)o.indexOf(c.key)!=-1&&(f=l+1);if(t){u.key=t,e.calcMap[t]=u;for(var l=0,c;c=i[l];l++)if(c.args.indexOf(t)!=-1){a=l;break}if(f>a)return;s[t]=o.reduce(function(e,t){var r=s[t]||[t];for(var i=0;i<r.length;i++)n.array.add(e,r[i]);return e},[]);for(var h in s){var p=s[h].indexOf(t);p!=-1&&Array.prototype.splice.apply(s[h],[p,1].concat(s[t]))}}else a=f;i.splice(Math.min(a,f),0,u)}function vt(e){return function(t){return t&&this.modified&&e in this.modified?this.modified[e]:this.data[e]}}function mt(e){return function(t,n){return this.set(e,t,n)}}function wt(e){return e&&e instanceof yt}function Et(e,t){var r=e||{};return typeof e=="string"?r={name:r,fields:t||{}}:t&&(r=n.object.merge(r,{fields:t})),new ut(r)}function St(e,t,r){switch(arguments.length){case 0:case 1:e&&e.constructor===Object?(r=n.object.slice(e),t=n.object.splice(r).type,e=n.object.splice(r).name):(t=e,e=undefined);break;case 2:t&&t.constructor===Object&&(r=t,t=e,e=undefined)}return new st(t,e,r)}var f="basis.entity",l=n.Class,c=Object.prototype.hasOwnProperty,h=n.object.keys,p=n.object.extend,d=n.fn.$self,v=n.array.from,m=n.require("./5.js"),g=m.Emitter,y=m.create,b=n.require("./1.js"),w=b.Object,E=b.Slot,S=b.Dataset,x=b.ReadOnlyDataset,T=n.require("./m.js"),N=T.Filter,C=T.Split,k=S.setAccumulateState,L=n.require("./n.js"),A=L.defineType,O=L.getTypeByName,M=L.getTypeByNameIfDefined,_=L.validate,D=L.array.nullable,P=L.date.nullable,H=L["enum"],B={},j=[],F={string:!0,number:!0},I=function(e){return e==null||isNaN(e)?null:Number(e)},q=function(e){return e==null||isNaN(e)?null:Number(e)},R=function(e){return e==null||isNaN(e)?null:parseInt(e,10)},U=function(e){return e==null?null:String(e)},z={},X={},V=l(null,{className:f+".Index",items:null,init:function(){this.items={}},get:function(e,t){var n=c.call(this.items,e)&&this.items[e];if(n&&(!t||n.entityType===t))return n},add:function(e,t){if(t){var n=this.get(e);if(!n)return this.items[e]=t,!0;if(n!==t)throw"basis.entity: Value `"+e+"` for index is already occupied"}},remove:function(e,t){if(this.items[e]===t)return delete this.items[e],!0},destroy:function(){this.items=null}}),G=function(e){return{name:null,wrapper:d,setAndDestroyRemoved:Q,destroy:function(){e.destroy.call(this),this.name=null,this.wrapper=null}}},Y="wrapped"+n.genUID(),Z=function(e,t){return function(n){n&&!Array.isArray(n)&&(n=[n]);var r=n&&!n[Y];if(r){if(this.localId){var i=this.getItems().slice();n=n.map(function(e){for(var t=0;t<i.length;t++)if(this.localId(e,i[t]))return this.wrapper(e,i[t]);return e=this.wrapper(e),i.push(e),e},this)}else n=n.map(this.wrapper);n[Y]=!0}var s=e.prototype[t].call(this,n);if(r){n[Y]=!1;if(this.localId&&s&&s.deleted){k(!0);for(var o=0,u;u=s.deleted[o];o++)u.root&&u.destroy();k(!1)}}return s}},et=function(e,t){return function(){this.name||(this.name=W(t)),e.prototype.init.call(this)}},tt=l(x,G,{className:f+".ReadOnlyEntitySet",init:et(x,"ReadOnlyEntitySet")}),nt=l(S,G,{className:f+".EntitySet",init:et(S,"EntitySet"),add:Z(S,"add"),remove:Z(S,"remove"),set:Z(S,"set"),setAndDestroyRemoved:function(e){return this.localId?this.set(e):this.itemCount?!e||!e.length?this.clear():Q.call(this,e):this.add(e)},clear:function(){var e=S.prototype.clear.call(this);if(this.localId&&e&&e.deleted){k(!0);for(var t=0,n;n=e.deleted[t];t++)n.destroy();k(!1)}return e}}),rt=l(N,G,{className:f+".EntityCollection",init:et(N,"EntityCollection")}),it=l(C,{className:f+".EntityGrouping",name:null,subsetClass:tt,init:et(C,"EntityGrouping"),getSubset:function(e,t){var n=C.prototype.getSubset.call(this,e,t);return n&&n.dataset&&(n.dataset.wrapper=this.wrapper),n}}),st=function(e,t,n){function r(e){if(typeof e=="string")return function(t,n){return t[e]==n.data[e]};if(typeof e=="function")return e}if(this instanceof st){e||(e=d);if(!t||M(t))t=W("UntitledEntitySetType");var i=new ot({entitySetClass:{wrapper:e,localId:r(n&&n.localId)}}),s=i.entitySetClass,o=function(e,t){return e!=null?(t instanceof nt==0&&(t=i.createEntitySet()),t.set(e instanceof S?e.getItems():v(e)),t):null};return typeof e=="string"&&(s.prototype.wrapper=O(e,s.prototype,"wrapper")),A(t,o),p(o,{type:i,typeName:t,toString:function(){return t+"()"},reader:function(e){if(Array.isArray(e)){var t=s.prototype.wrapper;return e.map(t.reader||t)}return e},extendClass:function(e){return s.extend.call(s,e),o},extendReader:function(e){var t=o.reader;return o.reader=function(n){return Array.isArray(n)&&e(n),t(n)},o},entitySetType:i,extend:function(){return s.extend.apply(s,arguments)}}),o}},ot=l(null,{className:f+".EntitySetConstructor",entitySetClass:nt,extendConstructor_:!0,createEntitySet:function(){return new this.entitySetClass}}),ut=function(e){if(this instanceof ut){var t;e.singleton?t=function(e){var t=n.get();return t?e&&t.update(e):t=new r(e||{}),t}:t=function(e,t){if(e!=null){if(!t||t.entityType!==n)t=null;if(e===t||e.entityType===n)return e;var i,s=n.idField;if(F[typeof e]){if(!s)return;if(t=n.index.get(e,n))return t;i=e,e={},e[s]=i}else n.compositeKey&&(i=n.compositeKey(e,e)),i!=null&&(t=n.index.get(i,n));return t&&t.entityType===n?t.update(e):t=new r(e),t}};var n=new gt(e||{},t),r=n.entityClass,i=n.name;return A(i,t),p(t,{all:n.all,type:n,typeName:i,toString:function(){return i+"()"},get:function(e){return n.get(e)},getSlot:function(e,t){return n.getSlot(e,t)},reader:function(e){return n.reader(e)},readList:function(e,n){if(!e)return[];Array.isArray(e)||(e=[e]),typeof n!="function"&&(n=d);for(var r=0;r<e.length;r++)e[r]=t(t.reader(n(e[r],r)));return e},extendClass:function(e){return r.extend.call(r,e),t},extendReader:function(e){var n=t.reader;return t.reader=function(t){return t&&typeof t=="object"&&e(t),n(t)},t},entityType:n,extend:function(){return r.extend.apply(r,arguments)}}),t}},at={},ft={},lt=function(e,t){return t},gt=l(null,{className:f+".EntityType",wrapper:null,all:null,fields:null,idField:null,idFields:null,compositeKey:null,idProperty:null,defaults:null,calcs:null,calcMap:null,aliases:null,slots:null,singleton:!1,index:null,indexes:null,entityClass:null,init:function(e,t){this.name=e.name;if(!this.name||M(this.name))this.name=W("UntitledEntityType");this.fields={},this.calcs=[],this.calcMap={},this.deps={},this.idFields={},this.defaults={},this.aliases={},this.slots={};var n=e.index;n&&n instanceof V&&(this.index=n),this.wrapper=t;if("all"in e==0||e.all||e.singleton)this.all=new tt(e.all),this.all.wrapper=t,this.all.set=function(e){return Array.isArray(e)&&(e=e.map(function(e){return e instanceof v==0?t.reader(e):e})),Q.call(this,e)}.bind(this.all);this.singleton=!!e.singleton;if(this.singleton){var r;this.get=function(){return r},this.all.addHandler({itemsChanged:function(e,t){r=t.inserted?t.inserted[0]:null}},this)}for(var i in e.fields)ht(this,i,e.fields[i]);for(var i in e.aliases)pt(this,i,e.aliases[i]);e.constrains&&e.constrains.forEach(function(e){dt(this,null,e)},this),this.calcs.length||(this.calcs=null);var s=h(this.idFields),o={};if(s.length){for(var u in this.idFields){var a=this.idFields[u],n=a.index,f;if(!n||n instanceof V==0)typeof n=="string"?(n in X==0&&(X[n]=new V),n=X[n]):(this.index||(this.index=new V),n=this.index);f=o[n.basisObjectId],f||(f=o[n.basisObjectId]={index:n,fields:[]}),f.fields.push(u),this.idFields[u]=f}this.index&&this.index.basisObjectId in o==0&&(this.index=null);for(var l in o){var f=o[l];f.property="__id__"+l,f.compositeKey=J.apply(null,f.fields),f.fields.length==1&&(f.idField=f.fields[0])}var c=h(o),p=o[this.index?this.index.basisObjectId:c[0]];this.index=p.index,this.idField=p.idField,this.compositeKey=p.compositeKey,this.idProperty=p.property,this.indexes=o}else this.index&&(this.index=null);var d={};for(var i in this.defaults)d[i]=undefined;var v=bt(this,this.all,this.fields,this.slots);this.entityClass=v,v.extend({entityType:this,type:t,typeName:this.name,generateData:ct(this.defaults,this.fields,this.calcMap),initDelta:d});for(var m in this.fields)v.prototype["get_"+m]=vt(m),this.fields[m]!==lt&&(v.prototype["set_"+m]=mt(m));j.push(this)},reader:function(e){var t={};if(F[typeof e])return this.idField?e:null;if(!e||e==null)return null;for(var n in e){var r=this.aliases[n];if(r){var i=this.fields[r].reader;t[r]=i?i(e[n]):e[n]}}return t},get:function(e){var t=this.getId(e);if(this.index&&t!=null)return this.index.get(t,this)},getId:function(e){if(this.compositeKey&&e!=null){if(F[typeof e])return e;if(e&&e.entityType===this)return e[this.idProperty];e instanceof w&&(e=e.data);if(this.compositeKey)return this.compositeKey(e,e)}},getSlot:function(e){var t=this.getId(e);if(t!=null){var n=c.call(this.slots,t)&&this.slots[t];if(!n){if(F[typeof e]){var r={};this.idField&&(r[this.idField]=e),e=r}n=this.slots[t]=new E({delegate:this.get(t)||null,data:e})}return n}}}),yt=l(w,{className:f+".BaseEntity",target:!0,setDelegate:function(){},extendConstructor_:!1,fieldHandlers_:null,propertyDescriptors:{modified:{nested:!0,events:"rollbackUpdate"}},modified:null,emit_rollbackUpdate:y("rollbackUpdate")}),bt=function(e,t,r,i){function s(t,n,r){var i=e.calcs,s=t.data,u=!1;try{if(i)for(var a=0,f;f=i[a];a++){var l=f.key,c=s[l],h=f.wrapper(n,s,c);l&&h!==c&&(n[l]=c,s[l]=h,u=!0)}for(var p in e.indexes){var d=e.indexes[p],v=t[d.property],m=v;d.compositeKey&&(m=d.compositeKey(n,s,v)),m!==v&&(o(d.index,t,v,m),t[d.property]=m)}return u}catch(g){for(var l in n)t.data[l]=n[l];r&&!t.modified&&(t.modified=r)}}function o(e,t,n,r){r!=null&&(e.add(r,t),c.call(i,r)&&i[r].setDelegate(t)),n!=null&&(e.remove(n,t),c.call(i,n)&&i[n].setDelegate())}return l(yt,{className:e.name,syncEvents:{update:!0,stateChanged:!0,subscribersChanged:!0},isSyncRequired:function(){return w.prototype.isSyncRequired.call(this)&&(!e.idProperty||this[e.idProperty]!=null)},init:function(e){this.delegate=null,this.data=this.generateData(e),yt.prototype.init.call(this);var n;for(var r in this.data)n=this.data[r],n&&n!==this&&n instanceof g&&(n.addHandler(at[r],this),this.fieldHandlers_||(this.fieldHandlers_={}),this.fieldHandlers_[r]=!0);s(this,this.initDelta),t&&t.emit_itemsChanged({inserted:[this]})},toString:function(){return"[object "+this.constructor.className+"("+this.entityType.name+")]"},getId:function(){return this[e.idProperty]},get:function(e,t){return t&&this.modified&&e in this.modified?this.modified[e]:this.data[e]},set:function(t,n,i,o){var u=r[t];if(!u)return!1;var a,f=this.modified;u===D&&f&&t in f&&(n=D(n,f[t]));var l=u(n,this.data[t]),c=this.data[t],p=l!==c&&(!l||!c||l.constructor!==Date||c.constructor!==Date||+l!==+c);if(p)e:{a={};if(!e.idFields[t])if(i)f||(this.modified=f={}),t in f==0?(a.rollback={key:t,value:undefined},f[t]=c):f[t]===l&&(a.rollback={key:t,value:l},delete f[t],h(f).length||(this.modified=null));else if(f&&t in f){if(f[t]!==l){a.rollback={key:t,value:f[t]},f[t]=l;break e}return!1}this.data[t]=l,this.fieldHandlers_&&this.fieldHandlers_[t]&&(c.removeHandler(at[t],this),this.fieldHandlers_[t]=!1),l&&l!==this&&l instanceof g&&(l.addHandler(at[t],this),this.fieldHandlers_||(this.fieldHandlers_={}),this.fieldHandlers_[t]=!0),a.key=t,a.value=c,a.delta={},a.delta[t]=c}else!i&&f&&t in f&&(a={rollback:{key:t,value:f[t]}},delete f[t],h(f).length||(this.modified=null));if(!o&&a){var d=a.key,v=a.delta||{},m;a.rollback&&(m={},m[a.rollback.key]=a.rollback.value),s(this,v,m)&&(d=!0),d&&(this.emit_update(v),a.delta=v),m&&this.emit_rollbackUpdate(m)}return a||!1},update:function(e,t){var n=!1,r={};if(e){var i,o;for(var u in e)if(o=this.set(u,e[u],t,!0))o.key&&(n=!0,r[o.key]=o.value),o.rollback&&(i||(i={}),i[o.rollback.key]=o.rollback.value);s(this,r,i)&&(n=!0),n&&this.emit_update(r),i&&this.emit_rollbackUpdate(i)}return n?r:!1},read:function(e){return this.update(this.type.reader(e))},generateData:function(){return{}},reset:function(){this.update(this.generateData({}))},clear:function(){var e={};for(var t in this.data)e[t]=undefined;return this.update(e)},commit:function(e){var t=this.modified;this.modified=null,e&&this.update(e),t&&this.emit_rollbackUpdate(t)},rollback:function(t){var r=this.modified;r&&t&&(Array.isArray(t)||(t=[t]),r=n.object.slice(r,t.reduce(function(t,n){return t.concat(e.deps[n]||n)},[]))),this.update(r,!0)},destroy:function(){if(this.fieldHandlers_){for(var n in this.fieldHandlers_)this.fieldHandlers_[n]&&this.data[n].removeHandler(at[n],this);this.fieldHandlers_=null}for(var n in e.indexes){var r=e.indexes[n],i=this[r.property];i!=null&&o(r.index,this,i,null)}t&&t.has(this)&&t.emit_itemsChanged({deleted:[this]}),w.prototype.destroy.call(this),this.data=B,this.modified=null}})};t.exports={isEntity:wt,createType:Et,createSetType:St,validate:_,getTypeByName:function(e){return M(e)},getIndexByName:function(e){return X[e]},is:function(e,t){var n;return typeof t=="string"&&(t=M(t)),n=t&&t.type&&t.type.entityClass,e&&n?e instanceof n:!1},get:function(e,t){var n=M(e);if(n)return n.get(t)},resolve:function(e,t){var n=M(e);if(n)return n(t)},getByIndex:function(e,t){if(e in X)return X[e].get(t)},NumericId:I,NumberId:q,IntId:R,StringId:U,Index:V,CalculateField:$,ConcatStringField:J,calc:$,arrayField:D,dateField:P,EntityType:ut,Entity:bt,BaseEntity:yt,EntitySetType:st,EntitySet:nt,ReadOnlyEntitySet:tt,Collection:rt,Grouping:it}},"m.js":function(e,t,n,r,i,s,o,u,a){t.exports={getDelta:n.require("./18.js"),createRuleEvents:n.require("./19.js"),SourceDataset:n.require("./1a.js"),Merge:n.require("./1b.js"),Subtract:n.require("./1c.js"),MapFilter:n.require("./1d.js"),Split:n.require("./1e.js"),Cloud:n.require("./1g.js"),Extract:n.require("./1h.js"),Filter:n.require("./1i.js"),Slice:n.require("./1j.js")}},"18.js":function(e,t,n,r,i,s,o,u,a){t.exports=function(t,n){var r={},i;t&&t.length&&(i=r.inserted=t),n&&n.length&&(i=r.deleted=n);if(i)return r}},"19.js":function(e,t,n,r,i,s,o,u,a){var f=n.object.extend,l=n.require("./5.js").createHandler;t.exports=function(t,n){return function r(e){return e?e.__extend__?e:(typeof e!="string"&&!Array.isArray(e)&&(e=null),f(l(e,t),{__extend__:r})):null}(n)}},"1a.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./5.js").create,l=n.require("./1.js").resolveDataset,c=n.require("./1.js").ReadOnlyDataset,h=n.require("./1.js").Dataset.setAccumulateState,p=n.require("./3.js");p.addProperty("source"),t.exports=c.subclass({className:"basis.data.dataset.SourceDataset",propertyDescriptors:{source:"sourceChanged",subtrahend:"subtrahendChanged"},active:n.PROXY,subscribeTo:p.SOURCE,source:null,emit_sourceChanged:f("sourceChanged","oldSource"),sourceRA_:null,sourceMap_:null,listen:{source:{destroy:function(){this.sourceRA_||this.setSource()}}},init:function(){var e=this.source;this.source=null,this.sourceMap_={},c.prototype.init.call(this),e&&this.setSource(e)},setSource:function(e){e=l(this,this.setSource,e,"sourceRA_");if(this.source!==e){var t=this.source,n=this.listen.source,r=n&&n.itemsChanged;this.source=null,h(!0),t&&(n&&t.removeHandler(n,this),r&&r.call(this,t,{deleted:t.getItems()})),this.source=e,this.emit_sourceChanged(t),e&&(n&&e.addHandler(n,this),r&&r.call(this,e,{inserted:e.getItems()})),h(!1)}},destroy:function(){this.setSource(),c.prototype.destroy.call(this),this.sourceMap_=null}})},"1b.js":function(e,t,n,r,i,s,o,u,a){var f=n.array.add,l=n.array.remove,c=n.require("./5.js").create,h=n.require("./5.js").Emitter,p=n.require("./1.js").resolveDataset,d=n.require("./1.js").ReadOnlyDataset,v=n.require("./18.js"),m=n.require("./3.js");m.add("SOURCES",{sourcesChanged:function(e,t){var n;if(n=t.inserted)for(var r=0,i;i=n[r];r++)m.link("source",e,i);if(n=t.deleted)for(var r=0,i;i=n[r];r++)m.unlink("source",e,i)}},function(e,t){var n=t.sources;for(var r=0,i;i=n[r++];)e("source",t,i)});var g=function(e){return e>0},y=function(e,t){return e==t},b=function(e){return e==1},w=function(e,t){return t==1||e>1},E=function(e,t){return t==1||e<t},S={itemsChanged:function(e,t){var n=this.members_,r={},i,s;if(t.inserted)for(var o=0;i=t.inserted[o];o++)s=i.basisObjectId,n[s]?n[s].count++:n[s]={count:1,isMember:!1,object:i},r[s]=n[s];if(t.deleted)for(var o=0;i=t.deleted[o];o++)s=i.basisObjectId,r[s]=n[s],n[s].count--;this.applyRule(r)}},x=d.subclass({className:"basis.data.dataset.Merge",propertyDescriptors:{rule:"ruleChanged"},active:n.PROXY,subscribeTo:m.SOURCES,emit_sourcesChanged:c("sourcesChanged","delta"),sources:null,sourceValues_:null,sourcesMap_:null,sourceDelta_:null,rule:g,emit_ruleChanged:c("ruleChanged","oldRule"),listen:{source:S,sourceValue:{destroy:function(e){this.removeSource(e)}}},init:function(){d.prototype.init.call(this);var e=this.sources;this.sources=[],this.sourcesMap_={},this.sourceValues_=[],e&&this.setSources(e)},setRule:function(e){e=n.getter(e||g);if(this.rule!==e){var t=this.rule;return this.rule=e,this.emit_ruleChanged(t),this.applyRule()}},applyRule:function(e){var t=this.members_,n=this.rule,r=this.sources.length,i=[],s=[],o,u,a;e||(e=t);for(var f in e)o=t[f],u=r&&o.count&&n(o.count,r),u!=o.isMember&&(u?(o.isMember=!0,i.push(o.object)):(o.isMember=!1,s.push(o.object))),o.count==0&&delete t[f];return(a=v(i,s))&&this.emit_itemsChanged(a),a},addDataset_:function(e){this.sources.push(e),this.listen.source&&e.addHandler(this.listen.source,this);var t=this.members_;for(var n in e.items_)t[n]?t[n].count++:t[n]={count:1,isMember:!1,object:e.items_[n]};return!0},removeDataset_:function(e){l(this.sources,e),this.listen.source&&e.removeHandler(this.listen.source,this);var t=this.members_;for(var n in e.items_)t[n].count--},updateDataset_:function(e){var t=this.owner,n=t.sourcesMap_,r=p(this,t.updateDataset_,e,"adapter",t),i,s,o;if(this.dataset===r)return;if(r){var u=(n[r.basisObjectId]||0)+1;n[r.basisObjectId]=u,u==1&&(t.addDataset_(r),i=[r])}if(this.dataset){var u=(n[this.dataset.basisObjectId]||0)-1;n[this.dataset.basisObjectId]=u,u==0&&(t.removeDataset_(this.dataset),s=[this.dataset])}this.dataset=r,t.applyRule();if(o=v(i,s)){var a=t.sourceDelta_;a?(o.inserted&&o.inserted.forEach(function(e){l(this.deleted,e)||f(this.inserted,e)},a),o.deleted&&o.deleted.forEach(function(e){l(this.inserted,e)||f(this.deleted,e)},a)):t.emit_sourcesChanged(o)}return o},getSourceValues:function(){return this.sourceValues_.map(function(e){return e.source})},addSource:function(e){if(!e||typeof e!="object"&&typeof e!="function")return;if(this.hasSource(e))return;var t={owner:this,source:e,adapter:null,dataset:null};this.sourceValues_.push(t),this.updateDataset_.call(t,e),this.listen.sourceValue&&e instanceof h&&e.addHandler(this.listen.sourceValue,this)},removeSource:function(e){for(var t=0,n;n=this.sourceValues_[t];t++)if(n.source===e){this.listen.sourceValue&&e instanceof h&&e.removeHandler(this.listen.sourceValue,this),this.updateDataset_.call(n,null),this.sourceValues_.splice(t,1);return}},hasSource:function(e){for(var t=0,n;n=this.sourceValues_[t];t++)if(n.source===e)return!0;return!1},setSources:function(e){var t=this.sourceValues_.map(function(e){return e.source}),n=[],r=[],i;e||(e=[]),this.sourceDelta_={inserted:n,deleted:r};for(var s=0;s<e.length;s++){var o=e[s];l(t,o)||this.addSource(o)}return t.forEach(this.removeSource,this),this.sourceDelta_=null,(i=v(n,r))&&this.emit_sourcesChanged(i),i},destroy:function(){this.setSources(),d.prototype.destroy.call(this),this.sourceValues_=null,this.sourcesMap_=null,this.sourceDelta_=null,this.sources=null}});x.UNION=g,x.INTERSECTION=y,x.DIFFERENCE=b,x.MORE_THAN_ONE_INCLUDE=w,x.AT_LEAST_ONE_EXCLUDE=E,t.exports=x},"1c.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./5.js").create,l=n.require("./1.js").resolveDataset,c=n.require("./1.js").ReadOnlyDataset,h=n.require("./18.js"),p=n.require("./3.js"),d=n.require("./1.js").Dataset;p.addProperty("minuend"),p.addProperty("subtrahend");var v=function(e){return!this.has(e)},m={itemsChanged:function(e,t){if(!this.subtrahend)return;d.flushChanges(this);var n=h(t.inserted&&t.inserted.filter(v,this.subtrahend),t.deleted&&t.deleted.filter(this.has,this));n&&this.emit_itemsChanged(n)},destroy:function(){this.minuendRA_||this.setMinuend(null)}},g={itemsChanged:function(e,t){if(!this.minuend)return;d.flushChanges(this);var n=h(t.deleted&&t.deleted.filter(this.minuend.has,this.minuend),t.inserted&&t.inserted.filter(this.has,this));n&&this.emit_itemsChanged(n)},destroy:function(){this.subtrahendRA_||this.setSubtrahend(null)}};t.exports=c.subclass({className:"basis.data.dataset.Subtract",propertyDescriptors:{minuend:"minuendChanged",subtrahend:"subtrahendChanged"},active:n.PROXY,subscribeTo:p.MINUEND+p.SUBTRAHEND,minuend:null,minuendRA_:null,emit_minuendChanged:f("minuendChanged","oldMinuend"),subtrahend:null,subtrahendRA_:null,emit_subtrahendChanged:f("subtrahendChanged","oldSubtrahend"),listen:{minuend:m,subtrahend:g},init:function(){c.prototype.init.call(this);var e=this.minuend,t=this.subtrahend;this.minuend=null,this.subtrahend=null,(e||t)&&this.setOperands(e,t)},setOperands:function(e,t){var n,r=!1,i=this.minuend,s=this.subtrahend;e=l(this,this.setMinuend,e,"minuendRA_"),t=l(this,this.setSubtrahend,t,"subtrahendRA_");if(i!==e){r=!0,this.minuend=e;var o=this.listen.minuend;o&&(i&&i.removeHandler(o,this),e&&e.addHandler(o,this)),this.emit_minuendChanged(i)}if(s!==t){r=!0,this.subtrahend=t;var o=this.listen.subtrahend;o&&(s&&s.removeHandler(o,this),t&&t.addHandler(o,this)),this.emit_subtrahendChanged(s)}if(!r)return!1;if(!e||!t)this.itemCount&&this.emit_itemsChanged(n={deleted:this.getItems()});else{var u=[],a=[];for(var f in this.items_)(!e.items_[f]||t.items_[f])&&u.push(this.items_[f]);for(var f in e.items_)!this.items_[f]&&!t.items_[f]&&a.push(e.items_[f]);(n=h(a,u))&&this.emit_itemsChanged(n)}return n},setMinuend:function(e){return this.setOperands(e,this.subtrahendRA_?this.subtrahendRA_.source:this.subtrahend)},setSubtrahend:function(e){return this.setOperands(this.minuendRA_?this.minuendRA_.source:this.minuend,e)},destroy:function(){this.setOperands(),c.prototype.destroy.call(this)}})},"1d.js":function(e,t,n,r,i,s,o,u,a){var f=n.fn.$self,l=n.fn.$true,c=n.fn.$false,h=n.require("./5.js").create,p=n.require("./19.js"),d=n.require("./18.js"),v=n.require("./1.js").Object,m=n.require("./1.js").Dataset.setAccumulateState,g=n.require("./1a.js"),y=function(e){var t=this.map?this.map(e):e;if(t instanceof v==0||this.filter(t))t=null;var n=this.sourceMap_[e.basisObjectId],r=n.member;if(r!==t){var i=this.members_,s,o,u;n.member=t;if(r){var a=r.basisObjectId;this.removeMemberRef&&this.removeMemberRef(r,e),--i[a]==0&&(delete i[a],u=[r])}if(t){var f=t.basisObjectId;this.addMemberRef&&this.addMemberRef(t,e),i[f]?i[f]++:(i[f]=1,o=[t])}(s=d(o,u))&&this.emit_itemsChanged(s)}},b={itemsChanged:function(e,t){var n=this.sourceMap_,r=this.members_,i=[],s=[],o,u,a,f=this.ruleEvents;m(!0);if(t.inserted)for(var l=0;o=t.inserted[l];l++){a=this.map?this.map(o):o;if(a instanceof v==0||this.filter(a))a=null;f&&o.addHandler(f,this),n[o.basisObjectId]={sourceObject:o,member:a};if(a){var c=a.basisObjectId;r[c]?r[c]++:(r[c]=1,i.push(a)),this.addMemberRef&&this.addMemberRef(a,o)}}if(t.deleted)for(var l=0;o=t.deleted[l];l++){u=o.basisObjectId,a=n[u].member,f&&o.removeHandler(f,this),delete n[u];if(a){var c=a.basisObjectId;--r[c]==0&&(delete r[c],s.push(a)),this.removeMemberRef&&this.removeMemberRef(a,o)}}m(!1),(t=d(i,s))&&this.emit_itemsChanged(t)}};t.exports=g.subclass({className:"basis.data.dataset.MapFilter",propertyDescriptors:{rule:"ruleChanged",addMemberRef:!1,removeMemberRef:!1,ruleEvents:!1},map:f,filter:c,rule:n.getter(l),emit_ruleChanged:h("ruleChanged","oldRule"),ruleEvents:p(y,"update"),addMemberRef:null,removeMemberRef:null,listen:{source:b},setMap:function(e){typeof e!="function"&&(e=f);if(this.map!==e)return this.map=e,this.applyRule()},setFilter:function(e){typeof e!="function"&&(e=c);if(this.filter!==e)return this.filter=e,this.applyRule()},setRule:function(e){e=n.getter(e||l);if(this.rule!==e){var t=this.rule;return this.rule=e,this.emit_ruleChanged(t),this.applyRule()}},applyRule:function(){var e=this.sourceMap_,t=this.members_,n,r,i,s,o,u,a=[],f=[],l;for(var c in e){u=e[c],o=u.sourceObject,n=u.member,r=this.map?this.map(o):o;if(r instanceof v==0||this.filter(r))r=null;n!=r&&(u.member=r,n&&(i=n.basisObjectId,this.removeMemberRef&&this.removeMemberRef(n,o),t[i]--),r&&(s=r.basisObjectId,this.addMemberRef&&this.addMemberRef(r,o),s in t?t[s]++:(t[s]=1,a.push(r))))}for(i in this.items_)t[i]==0&&(delete t[i],f.push(this.items_[i]));return(l=d(a,f))&&this.emit_itemsChanged(l),l}})},"1e.js":function(e,t,n,r,i,s,o,u,a){var f=n.fn.$undef,l=n.require("./1.js").ReadOnlyDataset,c=n.require("./1.js").DatasetWrapper,h=n.require("./1.js").KeyObjectMap,p=n.require("./1d.js"),d=n.require("./1f.js");t.exports=p.subclass({className:"basis.data.dataset.Split",subsetClass:l,subsetWrapperClass:c,keyMap:null,map:function(e){return this.keyMap.resolve(e)},rule:n.getter(f),setRule:function(e){e=n.getter(e||f);if(this.rule!==e){var t=this.rule;return this.rule=e,this.keyMap.keyGetter=e,this.emit_ruleChanged(t),this.applyRule()}},addMemberRef:function(e,t){e.dataset.emit_itemsChanged({inserted:[t]})},removeMemberRef:function(e,t){e.dataset.emit_itemsChanged({deleted:[t]})},init:function(){if(!this.keyMap||this.keyMap instanceof h==0)this.keyMap=d(this.keyMap,this.rule,this.subsetWrapperClass,this.subsetClass);p.prototype.init.call(this)},getSubset:function(e,t){return this.keyMap.get(e,t)},destroy:function(){p.prototype.destroy.call(this),this.keyMap.destroy(),this.keyMap=null}})},"1f.js":function(e,t,n,r,i,s,o,u,a){var f=n.object.extend,l=n.require("./1.js").KeyObjectMap;t.exports=function(t,n,r,i){return new l(f({keyGetter:n,itemClass:r,create:function(e,t){var n=l.prototype.create.call(this,e,t);return n.ruleValue=e,n.setDataset(new i({ruleValue:e})),n}},t))}},"1.js":function(e,t,n,r,i,s,o,u,a){function Y(e,t,r){var i=t[r],s=!1;/^<static>/.test(i)&&(s=!0,i=i.substr(8));var o=e.propertyDescriptors[i],u=o?o.events:null;o&&o.isPrivate&&(s=!0,u=null),o&&o.isStatic&&(s=!0);if(u){if(s)u=null;else if(o&&o.nested&&r<t.length-1){var a=i,f=t[++r],l=a+"."+f;if(Array.isArray(o.nested)&&o.nested.indexOf(f)==-1)return;i=G[l],i||(i=function(e){return e=e&&e[a],e?e[f]:undefined},i=G[l]=n.getter(i))}}else if(!s)return;return{getter:i,rest:t.slice(r+1).join("."),events:u||null}}function Z(e){var t=Q[e];if(!t){var r=function(t){if(t instanceof T)return R.query(t,e)};t=Q[e]=n.getter(r)}return t}function et(e){return e.factory=M,e.deferred=tt,e.compute=nt,e.query=st,e.pipe=it,e.as=rt,e}function tt(){var e=this;return et(function(t){return t=e(t),t?t.deferred():t})}function nt(e,t){var n=this;return et(function(r){var i=n(r);return i?i.compute(e,t)(r):i})}function rt(e){var t=this;return et(function(n){return n=t(n),n?n.as(e):n})}function it(e,t){var n=this;return et(function(r){return r=n(r),r?r.pipe(e,t):r})}function st(e){var t=this;return et(function(n){return n=t(n),n?n.query(e):n})}function ut(e,t){while(t&&t!==e&&t!==t.delegate)t=t.delegate;return t===e}function at(e,t,n){var r=e.delegate;r&&(e.root=r.root,e.target=r.target,e.data=r.data,e.state=r.state);if(!D(e.root,t)){var i=e.listen.root;i&&(t&&!D(t,e)&&t.removeHandler(i,e),e.root&&!D(e.root,e)&&e.root.addHandler(i,e)),e.emit_rootChanged(t)}if(!D(e.target,n)){var s=e.listen.target;s&&(n&&!D(n,e)&&n.removeHandler(s,e),e.target&&!D(e.target,e)&&e.target.addHandler(s,e)),e.emit_targetChanged(n)}var o=e.delegates_;while(o)o.delegate&&at(o.delegate,t,n),o=o.next}function dt(e,t){var n={},r;e&&e.length&&(r=n.inserted=e),t&&t.length&&(r=n.deleted=t);if(r)return n}function vt(e,t){if(!e||!e.itemCount){if(t&&t.itemCount)return{inserted:t.getItems()}}else{if(!!t&&!!t.itemCount){var n=[],r=[];for(var i in e.items_){var s=e.items_[i];s.basisObjectId in t.items_==0&&r.push(s)}for(var i in t.items_){var s=t.items_[i];s.basisObjectId in e.items_==0&&n.push(s)}return dt(n,r)}if(e.itemCount)return{deleted:e.getItems()}}}function wt(){this.fn.call(this.context,this.source)}function Et(e,t,n,r,i){var s=e[r]||null,o=null;t!==wt&&typeof n=="function"&&(n=n.call(i||e,i||e));if(n){var u=o=s&&s.source===n?s:null;n instanceof mt?(o=u||new b(e,t,n,bt),n=n.dataset):n.bindingBridge&&(o=u||new w(e,t,n,E),n=Et(o,wt,n.value,"next"))}n instanceof gt==0&&(n=null);if(r&&s!==o){var a=s;while(a){var u=a;u.detach(),a=u.next,u.next=null}o&&o.attach(S),e[r]=o}return n}function St(e){return Array.isArray(e)?e.map(function(e){return{data:e}}):{data:e}}function xt(e){if(!e||e.constructor!==Object)e={value:e};return new ft({data:e})}function Tt(e,t){var n=t?xt:St;return Array.isArray(e)?e.map(n):n(e)}var f="basis.data",l=n.Class,c=Array.prototype.slice,h=n.object.values,p=n.fn.$self,d=n.require("./2.js"),v=n.require("./3.js"),m=n.require("./4.js"),g=m.createResolveFunction,y=m.resolveValue,b=m.ResolveAdapter,w=m.BBResolveAdapter,E=m.DEFAULT_CHANGE_ADAPTER_HANDLER,S=m.DEFAULT_DESTROY_ADAPTER_HANDLER,x=n.require("./5.js"),T=x.Emitter,N=x.create,C=x.createHandler,k=x.events,L=n.require("./r.js"),A={},O=[],M=n.FACTORY,_=n.PROXY;v.addProperty("delegate"),v.addProperty("target"),v.addProperty("dataset"),v.addProperty("value","change");var D=function(e,t){return e===t},P=n.getter.ID,H={destroy:function(e){this.value.unlink(e,this.fn)}},B={destroy:function(){this.set(null)}},j={},F={},I=function(e){R.prototype.set.call(this,e)},q=function(e,t){t instanceof T?t.removeHandler(this.pipeHandler,this):t=null,e instanceof T?e.addHandler(this.pipeHandler,this):e=null,e!==t&&R.prototype.set.call(this,e)},R=l(L,{className:f+".Value",propertyDescriptors:{value:"change",bindingBridge:!1,initValue:!1,locked:!1,proxy:!1,setNullOnEmitterDestroy:!1},subscribeTo:v.VALUE,emit_change:N("change","oldValue")&&function(e){k.change.call(this,e);var t=this;while(t=t.links_)t.fn.call(t.context,this.value,e)},value:null,initValue:null,proxy:null,locked:0,lockedValue_:null,links_:null,deferred_:null,pipes_:null,setNullOnEmitterDestroy:!0,bindingBridge:{attach:function(e,t,n,r){e.link(n,t,!0,r)},detach:function(e,t,n){e.unlink(n,t)},get:function(e){return e.value}},init:function(){L.prototype.init.call(this),this.proxy&&(this.value=this.proxy(this.value)),this.setNullOnEmitterDestroy&&this.value instanceof T&&this.value.addHandler(B,this),this.initValue=this.value},set:function(e){var t=this.value,n=this.proxy?this.proxy(e):e,r=n!==t;return r&&(this.setNullOnEmitterDestroy&&(t instanceof T&&t.removeHandler(B,this),n instanceof T&&n.addHandler(B,this)),this.value=n,this.locked||this.emit_change(t)),r},reset:function(){this.set(this.initValue)},isLocked:function(){return this.locked>0},lock:function(){this.locked++,this.locked==1&&(this.lockedValue_=this.value)},unlock:function(){if(this.locked){this.locked--;if(!this.locked){var e=this.lockedValue_;this.lockedValue_=null,this.value!==e&&this.emit_change(e)}}},compute:function(e,t){t||(t=e,e=null),t||(t=p);var n=this,r=C(e,function(e){R.prototype.set.call(this,t(e,n.value))}),i=t[P]||String(t),s=r.events.concat(i,this.basisObjectId).join("_"),o=j[s];if(!o){var u={};r.destroy=function(e){delete u[e.basisObjectId],this.destroy()},this.addHandler({change:function(){for(var e in u){var n=u[e];R.prototype.set.call(n.value,t(n.object,this.value))}},destroy:function(){for(var e in u){var t=u[e];t.object.removeHandler(r,t.value),t.value.destroy()}u=null,n=null}}),o=j[s]=function(e){var i=e.basisObjectId,s=u[i],o=t(e,n.value);if(!s){var a=new U({value:o});e.addHandler(r,a),s=u[i]={value:a,object:e}}else R.prototype.set.call(s.value,o);return s.value}}return et(o)},pipe:function(e,t){var r=C(e,J),i=t[P]||String(t),s=r.events.join("_")+"_"+i,o=this.pipes_,u;return o?u=o[s]:o=this.pipes_={},u||(u=new V({source:this,pipeId:s,pipeHandler:r}),u.proxy=n.getter(t),this.value instanceof T&&(u.value=u.proxy(this.value),this.value.addHandler(r,u)),o[s]=u,this.link(u,q,!0,u.destroy)),u},as:function(e){if(!e||e===p)return this;typeof e=="string"&&(e=n.getter(e));if(this.links_){var t=this,r=e[P]||String(e);while(t=t.links_){var i=t.context;if(i instanceof U&&i.proxy&&(i.proxy[P]||String(i.proxy))==r)return i}}var s=new U({proxy:e,value:this.value});return this.link(s,I,!0,s.destroy),s},query:function(e){return R.query(this,"value."+e)},deferred:function(){return this.deferred_||(this.deferred_=new X({source:this,value:this.value})),this.deferred_},link:function(e,t,n,r){if(typeof t!="function"){var i=String(t);t=F[i],t||(t=F[i]=function(e){this[i]=e})}return this.links_={value:this,context:e,fn:t,destroy:r||null,links_:this.links_},e instanceof T&&e.addHandler(H,this.links_),n||t.call(e,this.value),e},unlink:function(e,t){var r=this,i;while(i=r,r=r.links_)r.context===e&&(!t||r.fn===t)&&(r.fn=n.fn.$undef,i.links_=r.links_,r.context instanceof T&&r.context.removeHandler(H,r))},destroy:function(){L.prototype.destroy.call(this),this.setNullOnEmitterDestroy&&this.value instanceof T&&this.value.removeHandler(B,this);var e=this.links_;this.links_=null;while(e)e.context instanceof T&&e.context.removeHandler(H,e),e.destroy&&e.destroy.call(e.context),e=e.links_;this.proxy=null,this.initValue=null,this.value=null,this.lockedValue_=null,this.deferred_=null,this.pipes_=null}}),U=l(R,{className:f+".ReadOnlyValue",setNullOnEmitterDestroy:!1,set:n.fn.$false}),z=n.asap.schedule(function(e){e.unlock()}),W={change:function(e){this.isLocked()||(this.lock(),z.add(this)),R.prototype.set.call(this,e.value)},destroy:function(){this.destroy()}},X=l(U,{className:f+".DeferredValue",source:null,init:function(){U.prototype.init.call(this),this.source.addHandler(W,this)},deferred:function(){return this},destroy:function(){z.remove(this),this.source=null,U.prototype.destroy.call(this)}}),V=l(U,{className:f+".PipeValue",source:null,pipeId:null,pipeHandler:null,destroy:function(){var e=this.source,t=e.value;t instanceof T&&t.removeHandler(this.pipeHandler,this),e.pipes_[this.pipeId]=null,this.source=null,this.pipeHandler=null,U.prototype.destroy.call(this)}}),$={},J=function(e){R.prototype.set.call(this,e)};R.from=function(e,t,r){var i;if(!e)return null;if(e instanceof T){r||(r=t,t=null),r||(r=p);var s=C(t,J),o=r[P]||String(r),u=s.events.concat(o,e.basisObjectId).join("_");i=$[u],i||(i=$[u]=new U({proxy:n.getter(r),value:e,emit_destroy:function(){u in $&&(delete $[u],e.removeHandler(s,this)),U.prototype.emit_destroy.call(this)}}),s.destroy=function(){u in $&&(delete $[u],this.destroy())},e.addHandler(s,i))}if(!i){var u=e.basisObjectId,a=e.bindingBridge;u&&a&&(i=$[u],i||(i=$[u]=new U({value:a.get(e),handler:{destroy:function(){$[u]=null,a.detach(e,R.prototype.set,i)}}}),a.attach(e,R.prototype.set,i,i.destroy)))}if(!i)throw new Error("Bad object type");return i};var K=new U({value:undefined}),Q={},G={};R.query=function(e,t){if(arguments.length==1)return t=e,et(function(e){return R.query(e,t)});if(e instanceof T==0)throw new Error("Bad target type");if(typeof t!="string")throw new Error("Path should be a string");var n=Y(e,t.split("."),0),r;return n?(r=R.from(e,n.events,n.getter),n.rest&&(r=r.as(Z(n.rest)).pipe("change","value")),r):K},R.factory=function(e,t){return et(function(r){return R.from(r,e,t)})},R.state=function(e){return e instanceof L?R.from(e,"stateChanged","state"):d.UNDEFINED},R.stateFactory=function(e,t){return R.factory(e,t).pipe("stateChanged","state").as(function(e){return e||d.UNDEFINED})};var ot={},ft=l(L,{className:f+".Object",propertyDescriptors:{delegate:"delegateChanged",target:"targetChanged",root:"rootChanged",data:{nested:!0,events:"update"}},subscribeTo:v.DELEGATE+v.TARGET,data:null,emit_update:N("update","delta")&&function(e){var t=this.delegates_;k.update.call(this,e);while(t)t.delegate&&t.delegate.emit_update(e),t=t.next},emit_stateChanged:function(e){var t=this.delegates_;L.prototype.emit_stateChanged.call(this,e);while(t)t.delegate&&(t.delegate.state=this.state,t.delegate.emit_stateChanged(e)),t=t.next},delegate:null,delegateRA_:null,delegates_:null,emit_delegateChanged:N("delegateChanged","oldDelegate"),target:null,emit_targetChanged:N("targetChanged","oldTarget"),root:null,emit_rootChanged:N("rootChanged","oldRoot"),init:function(){this.root=this,L.prototype.init.call(this);var e=this.delegate,t=this.data;e?(this.delegate=null,this.target=null,this.data=ot,this.setDelegate(e),this.data===ot&&(this.data=t||{})):(t||(this.data={}),this.target!==null&&(this.target=this))},setDelegate:function(e){e=lt(this,this.setDelegate,e,"delegateRA_");if(e&&e instanceof ft){if(e.delegate&&ut(this,e))return!1}else e=null;if(!D(this.delegate,e)){var t=this.state,n=this.data,r=this.delegate,i=this.target,s=this.root,o=this.listen.delegate,u=!1,a;if(r){o&&r.removeHandler(o,this);var f=r.delegates_,l=r;while(f){if(D(f.delegate,this)){f.delegate=null,D(l,r)?r.delegates_=f.next:l.next=f.next;break}l=f,f=f.next}}if(e){this.delegate=e,o&&e.addHandler(o,this),e.delegates_={delegate:this,next:e.delegates_};if(this.data!==ot){a={};for(var c in e.data)c in n==0&&(u=!0,a[c]=undefined);for(var c in n)n[c]!==e.data[c]&&(u=!0,a[c]=n[c])}}else{this.delegate=null,this.target=null,this.root=this,this.data={};for(var c in n)this.data[c]=n[c]}return at(this,s,i),u&&this.emit_update(a),a&&t!==this.state&&(String(t)!=this.state||t.data!==this.state.data)&&this.emit_stateChanged(t),this.emit_delegateChanged(r),!0}return!1},setState:function(e,t){return this.delegate?this.root.setState(e,t):L.prototype.setState.call(this,e,t)},update:function(e){if(this.delegate)return this.root.update(e);if(e){var t={},n=!1;for(var r in e)this.data[r]!==e[r]&&(n=!0,t[r]=this.data[r],this.data[r]=e[r]);if(n)return this.emit_update(t),t}return!1},destroy:function(){L.prototype.destroy.call(this);var e=this.delegates_;this.delegates_=null;while(e)e.delegate.setDelegate(),e=e.next;this.delegate&&this.setDelegate(),this.delegateRA_&&lt(this,!1,!1,"delegateRA_"),this.data=A,this.root=null,this.target=null}}),lt=g(ft),ct=l(ft,{className:f+".Slot"}),ht={destroy:function(){delete this.map[this.id]}},pt=l(L,{className:f+".KeyObjectMap",itemClass:ft,keyGetter:n.getter(p),autoDestroyMembers:!0,map_:null,extendConstructor_:!0,init:function(){this.map_={},L.prototype.init.call(this)},resolve:function(e){return this.get(this.keyGetter(e),e)},create:function(e){var t;return e instanceof ft?t={delegate:e}:t={data:{id:e,title:e}},new this.itemClass(t)},get:function(e,t){var n=e instanceof ft?e.basisObjectId:e,r=this.map_[n];!r&&t&&(r=this.map_[n]={map:this.map_,id:n,item:this.create(e,t)},r.item.addHandler(ht,r));if(r)return r.item},destroy:function(){L.prototype.destroy.call(this);var e=this.map_;this.map_=null;for(var t in e){var n=e[t];this.autoDestroyMembers?n.item.destroy():n.item.removeHandler(ht,n)}}}),mt=l(ft,{className:f+".DatasetWrapper",propertyDescriptors:{dataset:"datasetChanged",itemCount:"itemsChanged","pick()":"itemsChanged","getItems()":"itemsChanged"},active:_,subscribeTo:ft.prototype.subscribeTo+v.DATASET,listen:{dataset:{itemsChanged:function(e,t){this.itemCount=e.itemCount,this.emit_itemsChanged(t)},destroy:function(){this.setDataset()}}},dataset:null,datasetRA_:null,emit_datasetChanged:N("datasetChanged","oldDataset"),emit_itemsChanged:N("itemsChanged","delta"),init:function(){ft.prototype.init.call(this);var e=this.dataset;e&&(this.dataset=null,this.setDataset(e))},setDataset:function(e){e=Et(this,this.setDataset,e,"datasetRA_");if(this.dataset!==e){var t=this.listen.dataset,n=this.dataset,r;t&&(n&&n.removeHandler(t,this),e&&e.addHandler(t,this)),this.itemCount=e?e.itemCount:0,this.dataset=e,(r=vt(n,e))&&this.emit_itemsChanged(r),this.emit_datasetChanged(n)}},has:function(e){return this.dataset?this.dataset.has(e):null},getItems:function(){return this.dataset?this.dataset.getItems():[]},getValues:function(e){return this.dataset?this.dataset.getValues(e):[]},pick:function(){return this.dataset?this.dataset.pick():null},top:function(e){return this.dataset?this.dataset.top(e):[]},forEach:function(e){if(this.dataset)return this.dataset.forEach(e)},destroy:function(){(this.dataset||this.datasetRA_)&&this.setDataset(),ft.prototype.destroy.call(this)}}),gt=l(L,{className:f+".ReadOnlyDataset",propertyDescriptors:{itemCount:"itemsChanged","pick()":"itemsChanged","getItems()":"itemsChanged"},itemCount:0,items_:null,members_:null,cache_:null,emit_itemsChanged:N("itemsChanged","delta")&&function(e){var t,n=0,r=0,i;if(t=e.inserted)while(i=t[n])this.items_[i.basisObjectId]=i,n++;if(t=e.deleted)while(i=t[r])delete this.items_[i.basisObjectId],r++;this.itemCount+=n-r,this.cache_=n==this.itemCount?e.inserted:null,k.itemsChanged.call(this,e)},init:function(){L.prototype.init.call(this),this.members_={},this.items_={}},has:function(e){return!!e&&!!this.items_[e.basisObjectId]},getItems:function(){return this.cache_||(this.cache_=h(this.items_)),this.cache_},getValues:function(e){return this.getItems().map(n.getter(e||p))},pick:function(){for(var e in this.items_)return this.items_[e];return null},top:function(e){var t=[];if(e)for(var n in this.items_)if(t.push(this.items_[n])>=e)break;return t},forEach:function(e){var t=this.getItems();for(var n=0;n<t.length;n++)e(t[n])},destroy:function(){yt.preventAccumulations(this),L.prototype.destroy.call(this),this.cache_=O,this.itemCount=0,this.members_=null,this.items_=null}}),yt=l(gt,{className:f+".Dataset",listen:{item:{destroy:function(e){this.remove([e])}}},init:function(){gt.prototype.init.call(this);var e=this.items;e&&(this.items=null,this.set(e))},add:function(e){var t=this.members_,n=this.listen.item,r=[],i;e&&!Array.isArray(e)&&(e=[e]);for(var s=0;s<e.length;s++){var o=e[s];if(o instanceof ft){var u=o.basisObjectId;t[u]||(t[u]=o,n&&o.addHandler(n,this),r.push(o))}}return r.length&&this.emit_itemsChanged(i={inserted:r}),i},remove:function(e){var t=this.members_,n=this.listen.item,r=[],i;e&&!Array.isArray(e)&&(e=[e]);for(var s=0;s<e.length;s++){var o=e[s];if(o instanceof ft){var u=o.basisObjectId;t[u]&&(n&&o.removeHandler(n,this),delete t[u],r.push(o))}}return r.length&&this.emit_itemsChanged(i={deleted:r}),i},set:function(e){if(!this.itemCount)return this.add(e);if(!e||!e.length)return this.clear();var t=this.members_,n=this.listen.item,r={},i=[],s=[],o,u,a;for(var f=0;f<e.length;f++)o=e[f],o instanceof ft&&(u=o.basisObjectId,r[u]=o,t[u]||(t[u]=o,n&&o.addHandler(n,this),s.push(o)));for(var u in t)r[u]||(o=t[u],n&&o.removeHandler(n,this),delete t[u],i.push(o));return(a=dt(s,i))&&this.emit_itemsChanged(a),a},sync:function(e){return this.setAndDestroyRemoved(e)},setAndDestroyRemoved:function(e){var t=this.set(e)||{},n=t.deleted;yt.setAccumulateState(!0);if(n)for(var r=0,i;i=n[r];r++)i.destroy();return yt.setAccumulateState(!1),t.inserted},clear:function(){yt.flushChanges(this);var e=this.getItems(),t=this.listen.item,n;if(e.length){if(t)for(var r=0;r<e.length;r++)e[r].removeHandler(t,this);this.emit_itemsChanged(n={deleted:e}),this.members_={}}return n},destroy:function(){this.clear(),gt.prototype.destroy.call(this)}}),bt={datasetChanged:E,destroy:S};(function(){function u(e){o.call(e.dataset,e)}function a(){function n(t){var n=i[t];n&&(i[t]=null,n!==e&&u(n))}var i=r,s=t.emit_itemsChanged;t.emit_itemsChanged=function(e){n(this.basisObjectId),s.call(this,e)},r={};for(var o in i)n(o);t.emit_itemsChanged=s}function f(e){var t=this,n=t.basisObjectId,i=e.inserted,s=e.deleted,a=r[n];if(i&&s||a&&a.mixed){a&&(r[n]=null,u(a)),o.call(t,e);return}if(a){var f=i?"inserted":"deleted",l=a[f];if(!l){var h=i?"deleted":"inserted",p=a[h],d={},v=i||s,m=[],g=0;for(var y=0;y<p.length;y++)d[p[y].basisObjectId]=y;for(var y=0;y<v.length;y++){var b=v[y].basisObjectId;b in d==0?m.push(v[y]):(g||(p=c.call(p)),g++,p[d[b]]=null)}g&&(g<p.length?p=p.filter(Boolean):p=null,a[h]=p),m.length?(a[f]=m,p&&(a.mixed=!0)):(m=null,p||(r[n]=null))}else l.push.apply(l,i||s);return}r[n]={inserted:i,deleted:s,dataset:t,mixed:!1}}function l(){s=null,i&&(i=0,h())}function h(){t.emit_itemsChanged=o,a()}var e={},t=gt.prototype,r={},i=0,s,o;yt.flushChanges=function(e){var t=r[e.basisObjectId];t&&u(t),r[e.basisObjectId]=null},yt.preventAccumulations=function(t){var n=r[t.basisObjectId];n&&n!==e&&o.call(n.dataset,n),r[t.basisObjectId]=e},yt.setAccumulateState=function(e){e?(i==0&&(o=t.emit_itemsChanged,t.emit_itemsChanged=f,s||(s=n.setImmediate(l))),i++):(i-=i>0,i==0&&h())}})(),t.exports={STATE:d,SUBSCRIPTION:v,AbstractData:L,Value:R,ReadOnlyValue:U,DeferredValue:X,PipeValue:V,Object:ft,Slot:ct,KeyObjectMap:pt,ReadOnlyDataset:gt,Dataset:yt,DatasetWrapper:mt,isEqual:D,chainValueFactory:et,isConnected:ut,getDatasetDelta:vt,ResolveAdapter:b,createResolveFunction:g,resolveValue:y,resolveObject:lt,resolveDataset:Et,wrapData:St,wrapObject:xt,wrap:Tt}},"1h.js":function(e,t,n,r,i,s,o,u,a){function E(e,t,n){var r=e.sourceMap_[t.basisObjectId];if(r&&r.visited!==n){for(var i=r;i=i.ref;)if(i.object===e.source)return!0;r.visited=n;for(var i=r;i=i.ref;)if(E(e,i.object,n||{}))return!0}}function S(e,t,n){var r=e.sourceMap_,i=e.members_,s=c(t),o=[];for(var u=0;u<s.length;u++){var a=s[u],f=a.basisObjectId;f||(n=a.ref,a=a.object,f=a.basisObjectId);var l=r[f];if(l)l.ref={object:n,ref:l.ref};else{l=r[f]={source:a,ref:{object:n,ref:null},visited:null,value:null};if(a instanceof p){var h=e.rule(a)||null;if(h instanceof p||h instanceof d)l.value=h,s.push({object:h,ref:a});i[f]=l,o.push(a),e.ruleEvents&&a.addHandler(e.ruleEvents,e)}else{a.addHandler(w,e);for(var v=0,m=a.getItems();v<m.length;v++)s.push({object:m[v],ref:a})}}}return o}function x(e,t,n){var r=e.sourceMap_,i=e.members_,s=c(t),o=[];for(var u=0;u<s.length;u++){var a=s[u],f=a.basisObjectId;f||(n=a.ref,a=a.object,f=a.basisObjectId);var l=r[f],h=l.value;for(var d=l,v=l;d=d.ref;){if(d.object===n){v.ref=d.ref;break}v=d}if(!l.ref){if(a instanceof p)delete i[f],o.push(a),e.ruleEvents&&a.removeHandler(e.ruleEvents,e),h&&s.push({object:h,ref:a});else{a.removeHandler(w,e);for(var m=0,g=a.getItems();m<g.length;m++)s.push({object:g[m],ref:a})}delete r[f]}else h&&!E(e,a)&&(l.value=null,s.push({object:h,ref:a}))}return o}var f=n.object.values,l=n.fn.$undef,c=n.array.from,h=n.require("./5.js").create,p=n.require("./1.js").Object,d=n.require("./1.js").ReadOnlyDataset,v=n.require("./1a.js"),m=n.require("./19.js"),g=n.require("./18.js"),y=function(e){var t=this.sourceMap_[e.basisObjectId],n=this.rule(e)||null,r=t.value,i,s,o;if(n===r)return;if(n instanceof p||n instanceof d)i=S(this,n,e);r&&(s=x(this,r,e)),t.value=n,(o=g(i,s))&&this.emit_itemsChanged(o)},b=function(e,t){var n=t.inserted,r=t.deleted,t;n&&(n=S(this,n,e)),r&&(r=x(this,r,e)),(t=g(n,r))&&this.emit_itemsChanged(t)},w={itemsChanged:b,destroy:function(e){var t=this.sourceMap_;for(var n=t[e.basisObjectId];n=n.ref;)t[n.object.basisObjectId].value=null;delete t[e.basisObjectId]}};t.exports=v.subclass({className:"basis.data.dataset.Extract",propertyDescriptors:{rule:"ruleChanged"},rule:n.getter(l),emit_ruleChanged:h("ruleChanged","oldRule"),ruleEvents:m(y,"update"),listen:{source:{itemsChanged:b}},setRule:function(e){e=n.getter(e||l);if(this.rule!==e){var t=this.rule;return this.rule=e,this.emit_ruleChanged(t),this.applyRule()}},applyRule:function(){var e={},t={},n;for(var r in this.sourceMap_){var i=this.sourceMap_[r],s=i.source;if(s instanceof p){var o=this.rule(s)||null,u=i.value;if(o===u)continue;if(o instanceof p||o instanceof d){var a=S(this,o,s);for(var l=0;l<a.length;l++){var c=a[l],h=c.basisObjectId;t[h]?delete t[h]:e[h]=c}}if(u){var v=x(this,u,s);for(var l=0;l<v.length;l++){var c=v[l],h=c.basisObjectId;e[h]?delete e[h]:t[h]=c}}i.value=o}}return(n=g(f(e),f(t)))&&this.emit_itemsChanged(n),n}})},"1i.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./1d.js");t.exports=f.subclass({className:"basis.data.dataset.Filter",filter:function(e){return!this.rule(e)}})},"1j.js":function(e,t,n,r,i,s,o,u,a){function g(e){return e!==e?undefined:e}function y(e,t){if(!e.length)return 0;var n=t.value,r=t.object.basisObjectId,i,s,o,u,a=0,f=e.length-1;do{o=a+f>>1,u=e[o],i=u.value;if(n<i)f=o-1;else if(n>i)a=o+1;else{s=u.object.basisObjectId;if(r<s)f=o-1;else{if(!(r>s))return o;a=o+1}}}while(a<=f);return o+(i==n?s<r:i<n)}function w(e,t){return+(e.value>t.value)||-(e.value<t.value)||e.object.basisObjectId-t.object.basisObjectId}var f=n.fn.$true,l=n.object.values,c=n.object.slice,h=n.require("./5.js").create,p=n.require("./1.js").Value,d=n.require("./19.js"),v=n.require("./18.js"),m=n.require("./1a.js"),b=function(e){var t=this.sourceMap_[e.basisObjectId],n=g(this.rule(e)),r=this.index_;if(n!==t.value){var i=y(r,t),s=r[i-1],o=r[i+1];t.value=n;if(s&&(s.value>n||s.value==n&&s.object.basisObjectId>t.object.basisObjectId)||o&&(o.value<n||o.value==n&&o.object.basisObjectId<t.object.basisObjectId))r.splice(i,1),r.splice(y(r,t),0,t),this.applyRule()}},E={itemsChanged:function(e,t){var n=this.sourceMap_,r=this.index_,i=this.ruleEvents,s=!1,o=!1,u,a=t.inserted,f=t.deleted;if(f){f.length>r.length-f.length&&(s=!0,o=f.length!=r.length,r.length=0);for(var l=0,c;c=f[l];l++)s||(u=n[c.basisObjectId],r.splice(y(r,u),1)),delete n[c.basisObjectId],i&&c.removeHandler(i,this);if(o)for(var h in n)u=n[h],r.splice(y(r,u),0,u)}if(a){o=!r.length;for(var l=0,c;c=a[l];l++)u={object:c,value:g(this.rule(c))},n[c.basisObjectId]=u,o?r.push(u):r.splice(y(r,u),0,u),i&&c.addHandler(i,this);o&&r.sort(w)}this.applyRule()}};t.exports=m.subclass({className:"basis.data.dataset.Slice",propertyDescriptors:{limit:"rangeChanged",offset:"rangeChanged",orderDesc:"ruleChanged",rule:"ruleChanged"},rule:n.getter(f),emit_ruleChanged:h("ruleChanged","oldRule","oldOrderDesc"),ruleEvents:d(b,"update"),index_:null,left_:null,right_:null,orderDesc:!1,offset:0,limit:10,listen:{source:E},emit_rangeChanged:h("rangeChanged","oldOffset","oldLimit"),init:function(){this.index_=[],m.prototype.init.call(this)},setRange:function(e,t){var n=this.offset,r=this.limit,i=!1;if(n!=e||r!=t)this.offset=e,this.limit=t,i=this.applyRule(),this.emit_rangeChanged(n,r);return i},setOffset:function(e){return this.setRange(e,this.limit)},setLimit:function(e){return this.setRange(this.offset,e)},setRule:function(e,t){e=n.getter(e||f),t=!!t;if(this.rule!=e||this.orderDesc!=t){var r=this.rule,i=this.orderDesc;if(this.rule!=e){var s=this.index_;for(var o=0;o<s.length;o++)s[o].value=g(e(s[o].object));s.sort(w),this.rule=e}return this.orderDesc=t,this.rule=e,this.emit_ruleChanged(r,i),this.applyRule()}},applyRule:function(){var e=this.offset,t=e+this.limit;this.orderDesc&&(e=this.index_.length-t,t=e+this.limit);var n=c(this.members_),r=this.index_.slice(Math.max(0,e),Math.max(0,t)),i=[],s;for(var o=0,u;u=r[o];o++){var a=u.object.basisObjectId;n[a]?delete n[a]:(i.push(u.object),this.members_[a]=u.object)}for(var a in n)delete this.members_[a];if(this.left_)for(var f in this.left_){var u=this.index_[this.orderDesc?t+Number(f)-1:e-Number(f)];this.left_[f].set(u?u.object:null)}if(this.right_)for(var f in this.right_){var u=this.index_[this.orderDesc?e-Number(f):t+Number(f)-1];this.right_[f].set(u?u.object:null)}return(s=v(i,l(n)))&&this.emit_itemsChanged(s),s},left:function(e){e=parseInt(e,10)||0,this.left_||(this.left_={});var t=this.left_[e];if(!t){var n=this.offset,r=n+this.limit;this.orderDesc&&(n=this.index_.length-r,r=n+this.limit);var i=this.index_[this.orderDesc?r+e-1:n-e];t=this.left_[e]=new p({value:i?i.object:null})}return t},right:function(e){e=parseInt(e,10)||0,this.right_||(this.right_={});var t=this.right_[e];if(!t){var n=this.offset,r=n+this.limit;this.orderDesc&&(n=this.index_.length-r,r=n+this.limit);var i=this.index_[this.orderDesc?n-e:r+e-1];t=this.right_[e]=new p({value:i?i.object:null})}return t},destroy:function(){m.prototype.destroy.call(this);if(this.left_){for(var e in this.left_)this.left_[e].destroy();this.left_=null}if(this.right_){for(var e in this.right_)this.right_[e].destroy();this.right_=null}this.index_=null}})},"n.js":function(e,t,n,r,i,s,o,u,a){function p(e,t){var n=c[e];if(n){for(var r=0,i;i=n[r];r++){var s=i[0],o=i[1];s[o]=t}delete c[e]}delete h[e],l[e]=t}function d(e,t,n){if(l.hasOwnProperty(e))return l[e];if(t&&n){var r=c[e];r||(r=c[e]=[]),r.push([t,n])}else h[e]=!0;return function(t,n){var r=l.hasOwnProperty(e)?l[e]:null;if(r)return r(t,n)}}function v(e){if(l.hasOwnProperty(e))return l[e]}function m(){for(var e in h)n.dev.warn(f+": type `"+e+"` is not defined, but used via type.getTypeByName()");for(var e in c)n.dev.warn(f+": type `"+e+"` is not defined, but used by "+c[e].length+" type(s)")}var f="basis.type",l={},c={},h={};t.exports={string:n.require("./1k.js"),number:n.require("./1l.js"),"int":n.require("./1m.js"),"enum":n.require("./1n.js"),array:n.require("./1o.js"),object:n.require("./1p.js"),date:n.require("./1q.js"),validate:m,getTypeByName:d,getTypeByNameIfDefined:v,defineType:p}},"1k.js":function(e,t,n,r,i,s,o,u,a){function f(e,t){if(t){if(e!==null&&typeof e!="string")return l.nullable}else if(typeof e!="string")return l;var n=function(e,n){return typeof e=="string"?e:t&&e===null?null:n};return n.DEFAULT_VALUE=e,n}var l=f("",!1);l["default"]=function(e){return f(e,!1)},l.nullable=f(null,!0),l.nullable["default"]=function(e){return f(e,!0)},t.exports=l},"1l.js":function(e,t,n,r,i,s,o,u,a){function f(e){return e===0||typeof e!="object"&&isFinite(e)}function l(e,t){if(t){if(e!==null&&!f(e))return c.nullable}else if(!f(e))return c;e=e===null?null:Number(e);var n=function(e,n){return f(e)?Number(e):t&&e===null?null:n};return n.DEFAULT_VALUE=e,n}var c=l(0,!1);c["default"]=function(e){return l(e,!1)},c.nullable=l(null,!0),c.nullable["default"]=function(e){return l(e,!0)},t.exports=c},"1m.js":function(e,t,n,r,i,s,o,u,a){function f(e){return e===0||typeof e!="object"&&isFinite(e)}function l(e,t){if(t){if(e!==null&&!f(e))return c.nullable}else if(!f(e))return c;e=e===null?null:parseInt(e,10);var n=function(e,n){return f(e)?parseInt(e,10):t&&e===null?null:n};return n.DEFAULT_VALUE=e,n}var c=l(0,!1);c["default"]=function(e){return l(e,!1)},c.nullable=l(null,!0),c.nullable["default"]=function(e){return l(e,!0)},t.exports=c},"1n.js":function(e,t,n,r,i,s,o,u,a){function f(e){Array.isArray(e)||(e=[e]);if(!e.length)throw new Error("basis.type.enum constructor expected non-empty array but got empty.");var t=function(t,n){return e.indexOf(t)!==-1?t:n};return t.DEFAULT_VALUE=e[0],t["default"]=function(n){if(e.indexOf(n)===-1)return t;var r=function(){return t.apply(this,arguments)};return r.DEFAULT_VALUE=n,r},t}t.exports=f},"1o.js":function(e,t,n,r,i,s,o,u,a){function f(e,t){if(e===t)return!0;if(e.length!=t.length)return!1;for(var n=0;n<e.length;++n)if(e[n]!==t[n])return!1;return!0}function l(e,t){if(t){if(e!==null&&!Array.isArray(e))return h.nullable}else if(!Array.isArray(e))return h;var n=function(e,n){return Array.isArray(e)?n&&f(e,n)?n:e:t&&e===null?null:n};return n.DEFAULT_VALUE=e,n}var c=[],h=l(c,!1);h["default"]=function(e){return l(e,!1)},h.nullable=l(null,!0),h.nullable["default"]=function(e){return l(e,!0)},t.exports=h},"1p.js":function(e,t,n,r,i,s,o,u,a){function f(e){return e?Array.isArray(e)?!1:typeof e=="object":!1}function l(e,t){if(t){if(e!==null&&!f(e))return h.nullable}else if(!f(e))return h;var n=function(e,n){return f(e)?e:t&&e===null?null:n};return n.DEFAULT_VALUE=e,n}var c={},h=l(c,!1);h["default"]=function(e){return l(e,!1)},h.nullable=l(null,!0),h.nullable["default"]=function(e){return l(e,!0)},t.exports=h},"1q.js":function(e,t,n,r,i,s,o,u,a){function h(e){return typeof e=="number"&&isFinite(e)?new Date(e):e&&typeof e=="string"?c(e):e instanceof Date?e:undefined}function p(e,t){var n=h(e);if(t){if(e!==null&&n===undefined)return d.nullable}else if(n===undefined)return d;var r=function(e,n){if(t&&e===null)return null;var r=h(e);return r===undefined?n:r&&n&&r.getTime()===n.getTime()?n:r};return r.DEFAULT_VALUE=n||null,r}var f=/\D/,l=/(.{10,})([\-\+]\d{1,2}):?(\d{1,2})?$/,c=function(){function e(e,n,r,i,s,o,u){var a=new Date(e,n-1,r,i||0,0,o||0,u?u.substr(0,3):0);return a.setMinutes((s||0)-t-a.getTimezoneOffset()),a}var t;return function(n){return t=0,e.apply(null,String(n||"").replace(l,function(e,n,r,i){return t=Number(r||0)*60+Number(i||0),n}).split(f))}}(),d=p(new Date(0),!1);d["default"]=function(e){return p(e,!1)},d.nullable=p(null,!0),d.nullable["default"]=function(e){return p(e,!0)},t.exports=d},"o.js":function(e,t,n,r,i,s,o,u,a){t.exports=rempl},"1r.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./l.js"),l=f.createType({name:"Profile",fields:{version:String,hash:String,chunks:Array,assets:Array,modules:Array,errors:Array,warnings:Array,hasErrors:Boolean,hasWarnings:Boolean}});t.exports=l},"1s.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./6.js").Node,l=n.require("./1.js").Value,c=n.require("./j.js");t.exports=new f({active:n.PROXY,template:n.template.get(".1"),satellite:{modulesTable:{instance:n.resource("./1x.js"),delegate:c.Source},assetsTable:{instance:n.resource("./1y.js"),delegate:c.Source}},binding:{version:l.query("data.profile.data.version").as(function(e){return e||"n/a"}),hash:l.query("data.profile.data.hash").as(function(e){return e||"n/a"}),assets:l.query("data.profile.data.assets").as(n.getter("length").as(Number)),modules:l.query("data.profile.data.modules").as(n.getter("length").as(Number)),chunks:l.query("data.profile.data.chunks").as(n.getter("length").as(Number)),errors:l.query("data.profile.data.errors").as(n.getter("length").as(Number)),warnings:l.query("data.profile.data.warnings").as(n.getter("length").as(Number)),modulesTable:"satellite:",assetsTable:"satellite:"}})},"1t.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./6.js").Node;t.exports=new f({active:n.PROXY,template:n.template.get(".2"),satellite:{content:{instance:n.require("./1y.js"),delegate:"delegate"}},binding:{content:"satellite:"}})},"1u.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./6.js").Node;t.exports=new f({active:n.PROXY,template:n.template.get(".5"),satellite:{content:{instance:n.require("./1x.js"),delegate:"delegate"}},binding:{content:"satellite:"}})},"p.js":function(e,t,n,r,i,s,o,u,a){function v(e){l.title=e}function m(e){return typeof e=="string"?l.getElementById(e):e}function g(e,t){try{return e.parentNode.replaceChild(t,e),t}catch(n){return e}}function y(e,t){try{return e.appendChild(t)}catch(n){return e.appendChild(l.createComment(""))}}var f=n.require("./1.js").resolveValue,l=r.document||{title:"unknown"},c=l.title,h=n.fn.$undef,p,d,b=n.fn.lazyInit(function(e){var t=[],r=!1,i={inited:!1,setTitle:function(e){e!=c&&(c instanceof n.Token&&c.detach(v),e instanceof n.Token?(e.attach(v),v(e.get())):v(e),c=e)},setElement:function(e){e=f(i,i.setElement,e,"elementRA_"),e&&e.element&&(e=e.element);var t=m(e);if(d===t)return;if(d){d=g(d,t);return}p||(p={type:"append",node:l.body});var n=m(p.node);d=t;if(!n)return;p.type=="append"?d=y(n,d):d=g(n,d)},ready:function(e,n){r?e.call(n,i):t.push({fn:e,context:n})}};typeof e=="function"&&!n.fn.isFactory(e)?e={init:e}:e.constructor!==Object&&(e={element:e});for(var s in e){var o=e[s];switch(s){case"title":i.setTitle(o);break;case"container":p={type:"append",node:o};break;case"replace":p={type:"replace",node:o};break;case"element":d=o;break;case"init":h=typeof o=="function"?o:h;break;default:}}return n.doc.body.ready(function(){var e=d,n=h.call(i);n&&(e=n),d=null,i.setElement(e),r=!0,i.inited=!0;var s;while(s=t.shift())s.fn.call(s.context,i)}),i});t.exports={create:b}},"0.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./1.js").Value,l=n.require("./6.js").Node,c=n.require("./j.js"),h={home:n.resource("./1s.js"),assets:n.resource("./1t.js"),modules:n.resource("./1u.js")};t.exports=n.require("./p.js").create({title:"[RemPl] webpack analyzer",init:function(){var e=document.createElement("link");return e.setAttribute("rel","stylesheet"),e.setAttribute("href","https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"),document.head.appendChild(e),new l({active:!0,template:n.template.get(".0"),satellite:{menu:n.resource("./1v.js"),progress:{instance:n.resource("./1w.js"),delegate:c.Source},page:{instance:f.query("satellite.menu.selection.pick()").as(function(e){return e&&h[e.id]||h.home}),delegate:c.Source}},binding:{menu:"satellite:",progress:"satellite:",page:"satellite:"}})}})},"1v.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./6.js").Node;t.exports=f.subclass({template:n.template.get(".6"),selection:!0,childClass:{template:n.template.get(".7"),binding:{id:"id"}},childNodes:[{id:"home",selected:!0},{id:"assets"},{id:"modules"}]})},"1w.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./6.js").Node,l=n.require("./1.js").Value;t.exports=f.subclass({active:n.PROXY,autoDelegate:!0,template:n.template.get(".8"),binding:{status:"data:",progress:l.query("data.progress").as(function(e){return parseInt((e||0)*100)})}})},"2.js":function(e,t,n,r,i,s,o,u,a){var f=Object.prototype.hasOwnProperty,l=n.object.values,c={},h={priority:[],values:{},add:function(e,t){var n=e,r=e.toLowerCase();h[n]=r,c[r]=n,this.values[r]=n,t?t=this.priority.indexOf(t):t=-1,t==-1?this.priority.push(r):this.priority.splice(t,0,r)},getList:function(){return l(c)},isValid:function(e){return f.call(c,e)}};h.add("READY"),h.add("DEPRECATED"),h.add("UNDEFINED"),h.add("ERROR"),h.add("PROCESSING"),t.exports=h},"1x.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./1.js").Value,l=n.require("./1z.js");t.exports=l.subclass({init:function(){l.prototype.init.call(this),f.query(this,"delegate.data.profile").link(this,function(e){e&&this.setChildNodes(e.data.modules)})}})},"1y.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./1.js").Value,l=n.require("./1z.js");t.exports=l.subclass({init:function(){l.prototype.init.call(this),f.query(this,"delegate.data.profile").link(this,function(e){e&&this.setChildNodes(e.data.assets)})}})},"3.js":function(e,t,n,r,i,s,o,u,a){function h(e,t){return function(){e.apply(this,arguments),t.apply(this,arguments)}}var f={},l=1,c={},p={NONE:0,ALL:0,add:function(e,t,n){f[l]={handler:t,action:n},p[e]=l,p.ALL|=l,l<<=1},addProperty:function(e,t){var n={};n[t||e+"Changed"]=function(t,n){n&&p.unlink(e,t,n),t[e]&&p.link(e,t,t[e])},this.add(e.toUpperCase(),n,function(t,n){n[e]&&t(e,n,n[e])})},getMaskConfig:function(e){var t=c[e];if(!t){var n=[],r={},i=1;t=c[e]={actions:n,handler:r};while(e){if(e&1){var s=f[i];n.push(s.action);for(var o in s.handler)r[o]=r[o]?h(r[o],s.handler[o]):s.handler[o]}i<<=1,e>>=1}}return t},link:function(e,t,n){var r=e+t.basisObjectId,i=n.subscribers_;i||(i=n.subscribers_={});if(!i[r]){i[r]=t;var s=n.subscriberCount+=1;s==1&&n.emit_subscribersChanged(1)}},unlink:function(e,t,n){var r=e+t.basisObjectId,i=n.subscribers_;if(i&&i[r]){delete i[r];var s=n.subscriberCount-=1;s==0&&(n.emit_subscribersChanged(-1),n.subscribers_=null)}},subscribe:function(e,t){var n=this.getMaskConfig(t);for(var r=0,i;i=n.actions[r];r++)i(p.link,e);e.addHandler(n.handler)},unsubscribe:function(e,t){var n=this.getMaskConfig(t);for(var r=0,i;i=n.actions[r++];)i(p.unlink,e);e.removeHandler(n.handler)},changeSubscription:function(e,t,n){var r=t^n;if(r){var i=p.getMaskConfig(t),s=p.getMaskConfig(n);e.removeHandler(i.handler),e.addHandler(s.handler);var o=1;while(r){if(r&1){var u=f[o];t&o?u.action(p.unlink,e):u.action(p.link,e)}o<<=1,r>>=1}}}};t.exports=p},"1z.js":function(e,t,n,r,i,s,o,u,a){function h(e){var t=e/1024,n=e/1024/1024;return n>=1?n:t>=1?t:e}function p(e){var t=e/1024,n=e/1024/1024;return n>=1?"MB":t>=1?"KB":"B"}var f=n.require("./6.js").Node,l=n.require("./1.js").Value,c=n.require("./q.js").sum;t.exports=f.subclass({active:!0,template:n.template.get(".3"),binding:{totalSize:l.query("<static>totalSize.value").as(function(e){return n.number.format(h(e),2)}),postfix:l.query("<static>totalSize.value").as(p)},childClass:{template:n.template.get(".4"),binding:{name:"name",size:function(e){return n.number.format(h(e.size),2)},postfix:function(e){return p(e.size)}}},init:function(){f.prototype.init.call(this),this.totalSize=c(this.getChildNodesDataset(),"update","size")},destroy:function(){this.totalSize.destroy(),this.totalSize=null,f.prototype.destroy.call(this)}})},"q.js":function(e,t,n,r,i,s,o,u,a){function k(e,t){var r=p.getId("min"),i=p.getId("max"),s={};return s[r]=T(e,t),s[i]=N(e,t),t=n.getter(t||e),new p(s,function(e,n,s){return(t(s)-n[r])/(n[i]-n[r])})}function L(e,t){var r=p.getId("max"),i={};return i[r]=N(e,t),t=n.getter(t||e),new p(i,function(e,n,i){return t(i)/n[r]})}function A(e,t){var r=p.getId("sum"),i={};return i[r]=S(t,e),e=n.getter(e||t),new p(i,function(t,n,i){return e(i)/n[r]})}var f=n.require("./20.js"),l=n.require("./21.js"),c=n.require("./22.js"),h=n.require("./23.js"),p=n.require("./24.js"),d=n.require("./25.js"),v=n.require("./26.js"),m=n.require("./27.js"),g=n.require("./28.js"),y=n.require("./29.js"),b=n.require("./2a.js"),w=n.require("./2b.js"),E=d(v,n.fn.$true),S=d(m),x=d(g),T=d(y),N=d(b),C=d(w);t.exports={Index:f,VectorIndex:l,IndexWrapper:c,getDatasetIndex:f.getDatasetIndex,removeDatasetIndex:f.removeDatasetIndex,Count:v,Sum:m,Avg:g,Min:y,Max:b,Distinct:w,createIndexConstructor:d,count:E,sum:S,avg:x,max:N,min:T,distinct:C,CalcIndexPreset:p,percentOfRange:k,percentOfMax:L,percentOfSum:A,IndexMap:h}},"20.js":function(e,t,n,r,i,s,o,u,a){function h(e,t,n){var r=e.indexCache_,i;e.lock();if(t)for(var s=0,o;o=t[s++];){var u=e.normalize(e.valueGetter(o));r[o.basisObjectId]=u,e.add_(u)}if(n)for(var s=0,o;o=n[s++];)i=o.basisObjectId,e.remove_(r[i]),delete r[i];e.unlock()}function m(e,t){if(!t||t.prototype instanceof l==0)throw"IndexClass must be an instance of IndexClass";var n=e.basisObjectId,r=c[n];r||(r=c[n]={},e.addHandler(d),d.itemsChanged.call(e,e,{inserted:e.getItems()}));var i=t.indexId,s=r[i];return s||(s=new t,s.addHandler(p,e),r[i]=s,h(s,e.getItems())),s}function g(e,t){var n=c[e.basisObjectId];if(n&&n[t.indexId]){delete n[t.indexId],t.removeHandler(p,e);for(var t in n)return;e.removeHandler(d),d.itemsChanged.call(e,e,{deleted:e.getItems()}),delete c[e.basisObjectId]}}var f=n.require("./1.js").Value,l=f.subclass({className:"basis.data.index.Index",propertyDescriptors:{explicit:!1,wrapperCount:!1,updateEvents:!1},explicit:!1,wrapperCount:0,indexCache_:null,valueGetter:n.fn.$null,updateEvents:{},value:0,setNullOnEmitterDestroy:!1,init:function(){this.indexCache_={},f.prototype.init.call(this)},add_:function(e){},remove_:function(e){},update_:function(e,t){},normalize:function(e){return Number(e)||0},destroy:function(){f.prototype.destroy.call(this),this.indexCache_=null}}),c={},p={destroy:function(e){g(this,e)}},d={itemsChanged:function(e,t){var n;if(n=t.inserted)for(var r=0;r<n.length;r++)n[r].addHandler(v,this);if(n=t.deleted)for(var r=0;r<n.length;r++)n[r].removeHandler(v,this);var i=c[this.basisObjectId];for(var s in i)h(i[s],t.inserted,t.deleted)},destroy:function(){var e=c[this.basisObjectId];for(var t in e){var n=e[t];g(this,n),n.destroy()}}},v={"*":function(e){var t=e.type,n=e.sender,r=n.basisObjectId,i=c[this.basisObjectId],s,o,u;for(var a in i)u=i[a],u.updateEvents[t]&&(s=u.indexCache_[r],o=u.normalize(u.valueGetter(n)),o!==s&&(u.update_(o,s),u.indexCache_[r]=o))}};l.getDatasetIndex=m,l.removeDatasetIndex=g,t.exports=l},"21.js":function(e,t,n,r,i,s,o,u,a){function l(e,t){if(!e.length)return 0;var n,r,i=0,s=e.length-1;do{n=i+s>>1,r=e[n]||0;if(t<r)s=n-1;else{if(!(t>r))return t==r?n:0;i=n+1}}while(i<=s);return n+(r<t)}var f=n.require("./20.js");t.exports=f.subclass({className:"basis.data.index.VectorIndex",vectorGetter:n.fn.$null,vector_:null,value:undefined,init:function(){this.vector_=[],f.prototype.init.call(this)},add_:function(e){e!==null&&(this.vector_.splice(l(this.vector_,e),0,e),this.value=this.vectorGetter(this.vector_))},remove_:function(e){e!==null&&(this.vector_.splice(l(this.vector_,e),1),this.value=this.vectorGetter(this.vector_))},update_:function(e,t){t!==null&&this.vector_.splice(l(this.vector_,t),1),e!==null&&this.vector_.splice(l(this.vector_,e),0,e),this.set(this.vectorGetter(this.vector_))},normalize:function(e){return typeof e=="string"||typeof e=="number"?e:null},destroy:function(){f.prototype.destroy.call(this),this.vector_=null}})},"22.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./1.js").Value,l=n.require("./20.js"),c=n.require("./1.js").resolveDataset,h={destroy:function(){f.prototype.set.call(this,this.initValue),this.index=null}};t.exports=f.subclass({className:"basis.data.index.IndexWrapper",extendConstructor_:!1,source:null,sourceRA_:null,dataset:null,indexConstructor:null,index:null,init:function(e,t){this.source=e,this.indexConstructor=t,this.value=t.prototype.value,f.prototype.init.call(this),e.bindingBridge.attach(e,n.fn.$undef,this,this.destroy),this.setDataset(e)},setDataset:function(e){var t=this.dataset,n=c(this,this.setDataset,e,"sourceRA_");if(n!==t){var r=this.index;r&&(r.removeHandler(h,this),r.wrapperCount-=1,!r.wrapperCount&&!r.explicit?r.destroy():r.unlink(this,f.prototype.set)),n?(r=l.getDatasetIndex(n,this.indexConstructor),r.wrapperCount+=1,r.link(this,f.prototype.set),r.addHandler(h,this)):(r=null,f.prototype.set.call(this,this.initValue)),this.dataset=n,this.index=r}},set:function(){},destroy:function(){this.source.bindingBridge.detach(this.source,n.fn.$undef,this),this.setDataset(),f.prototype.destroy.call(this),this.source=null,this.indexConstructor=null}})},"23.js":function(e,t,n,r,i,s,o,u,a){var f=n.object.iterate,l=n.require("./1.js").Value,c=n.require("./1.js").Object,h=n.require("./m.js").SourceDataset,p=n.require("./m.js").createRuleEvents,d=n.require("./20.js"),v=n.require("./22.js"),m=n.require("./24.js"),g=n.asap.schedule(function(e){e.recalc()}),y={itemsChanged:function(e,t){var n=[],r;if(r=t.inserted)for(var i=0;i<r.length;i++){var s=r[i],o=s.basisObjectId;this.awaitToAdd_[o]=s,this.scheduleRecalc()}if(r=t.deleted)for(var i=0;i<r.length;i++){var s=r[i],o=s.basisObjectId,u=this.sourceMap_[o];if(u){var a=u.member;n.push(a),this.listen.member&&a.removeHandler(this.listen.member,this),this.recalcEvents&&s.removeHandler(this.recalcEvents,this),delete this.sourceMap_[o]}else delete this.awaitToAdd_[o]}if(n.length){this.emit_itemsChanged({deleted:n});for(var i=0;i<n.length;i++){var a=n[i];a.source=null,a.destroy()}}}};t.exports=h.subclass({className:"basis.data.index.IndexMap",calcs:null,copyDataFromSource:!0,indexes:null,indexValues:null,indexUpdated:!1,awaitToAdd_:null,itemClass:c,listen:{source:y},recalcEvents:p(function(e){this.sourceMap_[e.basisObjectId].updated=!0,this.scheduleRecalc()},"update"),init:function(){var e=this.indexes,t=this.calcs;this.calcs={},this.indexes={},this.indexValues={},this.awaitToAdd_={},h.prototype.init.call(this),f(e,this.addIndex,this);for(var n in t){var r=t[n];r instanceof m&&(f(r.indexes,this.addIndex,this),r=r.calc),this.calcs[n]=r}this.recalc()},addIndex:function(e,t){if(!t||t.prototype instanceof d==0)return;if(this.indexes[e])return;var n=new v(l.from(this,"sourceChanged","source"),t);this.indexes[e]=n,this.indexValues[e]=n.value,n.link(this,function(t){this.indexValues[e]=t,this.indexUpdated=!0,this.scheduleRecalc()})},removeIndex:function(e){var t=this.indexes[e];t&&(delete this.indexes[e],delete this.indexValues[e],t.destroy())},lock:function(){for(var e in this.indexes)this.indexes[e].lock()},unlock:function(){for(var e in this.indexes)this.indexes[e].unlock()},scheduleRecalc:function(){g.add(this)},recalc:function(){for(var e in this.sourceMap_)this.calcMember(this.sourceMap_[e]);var t=[],n=this.awaitToAdd_;this.awaitToAdd_={};for(var e in n){var r=n[e],i={},s;for(var o in this.calcs)i[o]=this.calcs[o](r.data,this.indexValues,r);if(this.copyDataFromSource)for(var u in r.data)this.calcs.hasOwnProperty(u)||(i[u]=r.data[u]);s=new this.itemClass({source:r,data:i,update:r.update.bind(r)}),this.listen.member&&s.addHandler(this.listen.member,this),this.recalcEvents&&r.addHandler(this.recalcEvents,this),this.sourceMap_[e]={sourceObject:r,member:s,updated:!1},t.push(s)}t.length&&this.emit_itemsChanged({inserted:t}),this.indexUpdated=!1,g.remove(this)},calcMember:function(e){var t=e.member;if(e.updated||this.indexUpdated){var n=e.sourceObject,r={},i,s,o;for(var u in this.calcs)i=this.calcs[u](n.data,this.indexValues,n),s=t.data[u],s!==i&&(i===i||s===s)&&(r[u]=i,o=!0);if(this.copyDataFromSource){for(var a in n.data)this.calcs.hasOwnProperty(a)||(i=n.data[a],s=t.data[a],s!==i&&(i===i||s===s)&&(r[a]=i,o=!0));for(var a in t.data)!this.calcs.hasOwnProperty(a)&&!n.data.hasOwnProperty(a)&&(r[a]=undefined,o=!0)}o&&this.itemClass.prototype.update.call(t,r),e.updated=!1}},getMember:function(e){var t=e&&this.sourceMap_[e.basisObjectId];return t?t.member:null},destroy:function(){f(this.indexes,this.removeIndex,this),h.prototype.destroy.call(this),g.remove(this),this.awaitToAdd_=null,this.calcs=null,this.indexes=null,this.indexValues=null}})},"24.js":function(e,t,n,r,i,s,o,u,a){var f=1,l=function(e,t){this.indexes=e,this.calc=t};l.getId=function(e){return e+"_calc-index-preset-"+n.number.lead(f++,4)},t.exports=l},"25.js":function(e,t,n,r,i,s,o,u,a){function y(e,t,r){if(!f.isClass(e)||!e.isSubclassOf(p))throw"Wrong class for index constructor";t=n.getter(t),r=r||"update";if(typeof r!="string")throw"Events must be a event names space separated string";r=r.trim().split(" ").sort();var i=v+[e.basisClassId_,t[n.getter.ID],r].join("_"),s=m[i];if(!s){var o={};for(var u=0;u<r.length;u++)o[r[u]]=!0;s=m[i]=e.subclass({indexId:i,updateEvents:o,valueGetter:t}),s.indexId=i}return s}var f=n.Class,l=n.require("./1.js").ReadOnlyDataset,c=n.require("./1.js").DatasetWrapper,h=n.require("./1.js").chainValueFactory,p=n.require("./20.js"),d=n.require("./22.js"),v="basisjsIndexConstructor"+n.genUID(),m={},g={destroy:function(e){e.source[this.indexId]=null}};t.exports=function(t,r){return function i(e,s,o){if(n.fn.isFactory(e)){var u=e;return h(function(e){return i(u(e),s,o,!0)})}if(typeof e=="function"||typeof e=="string")o=s,s=e,e=null;o||(o=s,s="");var a=y(t,o||r,s);if(!e)return a;if(e instanceof l||e instanceof c){var f=p.getDatasetIndex(e,a);return f.explicit=!0,f}if(e.bindingBridge){var v=e[a.indexId];return v||(v=new d(e,a),e[a.indexId]=v,v.addHandler(g,a)),v}return null}}},"26.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./20.js");t.exports=f.subclass({className:"basis.data.index.Count",valueGetter:n.fn.$true,add_:function(e){this.value+=e},remove_:function(e){this.value-=e},normalize:function(e){return Boolean(e)},update_:function(e,t){this.set(this.value-Boolean(t)+Boolean(e))}})},"27.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./20.js");t.exports=f.subclass({className:"basis.data.index.Sum",add_:function(e){this.value+=e},remove_:function(e){this.value-=e},update_:function(e,t){this.set(this.value-t+e)}})},"28.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./20.js");t.exports=f.subclass({className:"basis.data.index.Avg",sum_:0,count_:0,add_:function(e){this.sum_+=e,this.count_+=1,this.value=this.sum_/this.count_},remove_:function(e){this.sum_-=e,this.count_-=1,this.value=this.count_?this.sum_/this.count_:0},update_:function(e,t){this.sum_+=e-t,this.set(this.sum_/this.count_)}})},"29.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./21.js");t.exports=f.subclass({className:"basis.data.index.Min",vectorGetter:function(e){return e[0]}})},"2a.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./21.js");t.exports=f.subclass({className:"basis.data.index.Max",vectorGetter:function(e){return e[e.length-1]}})},"2b.js":function(e,t,n,r,i,s,o,u,a){var f=n.require("./20.js");t.exports=f.subclass({className:"basis.data.index.Distinct",map_:null,init:function(){this.map_={},f.prototype.init.call(this)},add_:function(e){this.map_.hasOwnProperty(e)||(this.map_[e]=0),++this.map_[e]==1&&(this.value+=1)},remove_:function(e){--this.map_[e]==0&&(this.value-=1)},update_:function(e,t){var n=0;this.map_.hasOwnProperty(e)||(this.map_[e]=0),++this.map_[e]==1&&(n+=1),--this.map_[t]==0&&(n-=1),n&&this.set(this.value+n)},normalize:String,destroy:function(){f.prototype.destroy.call(this),this.map_=null}})},"4.js":function(e,t,n,r,i,s,o,u,a){function l(){this.fn.call(this.context,this.source)}function m(e){return function t(n,r,i,s,o){var u=n[s]||null,a=null;r!==l&&typeof i=="function"&&(i=i.call(o||n,o||n)),i&&i.bindingBridge&&(!u||u.source!==i?a=new h(n,r,i,p):a=u,i=t(a,l,i.bindingBridge.get(i),"next")),i instanceof e==0&&(i=null);if(s&&u!==a){var f=u;while(f){var c=f;c.detach(),f=c.next,c.next=null}a&&a.attach(d),n[s]=a}return i}}function g(e,t,r,i,s){var o=e[i]||null,u=null;r&&t!==l&&n.fn.isFactory(r)&&(r=r.call(s||e,s||e)),r&&r.bindingBridge&&(!o||o.source!==r?u=new h(e,t,r,p):u=o,r=g(u,l,r.bindingBridge.get(r),"next"));if(i&&o!==u){var a=o;while(a){var f=a;f.detach(),a=f.next,f.next=null}u&&u.attach(v),e[i]=u}return r}var f={},c=function(e,t,n,r){this.context=e,this.fn=t,this.source=n,this.handler=r};c.prototype={context:null,fn:null,source:null,handler:null,next:null,attach:function(){this.source.addHandler(this.handler,this)},detach:function(){this.source.removeHandler(this.handler,this)}};var h=function(){c.apply(this,arguments)};h.prototype=new c,h.prototype.attach=function(e){this.source.bindingBridge.attach(this.source,this.handler,this,e)},h.prototype.detach=function(){this.source.bindingBridge.detach(this.source,this.handler,this)};var p=function(){this.fn.call(this.context,this.source)},d=function(){this.fn.call(this.context,null)},v=function(){this.fn.call(this.context,g(f,null,this.source.bindingBridge.get(this.source)))};t.exports={DEFAULT_CHANGE_ADAPTER_HANDLER:p,DEFAULT_DESTROY_ADAPTER_HANDLER:d,ResolveAdapter:c,BBResolveAdapter:h,createResolveFunction:m,resolveValue:g}},"5.js":function(e,t,n,r,i,s,o,u,a){function v(e){var t=h[e];return t||(t=function(){var t=this,n,r;while(t=t.handler){r=t.callbacks[e];if(typeof r=="function"){if(!n){n=[this];for(var i=0;i<arguments.length;i++)n.push(arguments[i])}r.apply(t.context||this,n)}r=t.callbacks["*"];if(typeof r=="function"){if(!n){n=[this];for(var i=0;i<arguments.length;i++)n.push(arguments[i])}r.call(t.context||this,{sender:this,type:e,args:n})}}},h[e]=t),t}function m(e,t){var n={events:[]};if(e){e=String(e).trim().split(/\s+|\s*,\s*/).sort(),n={events:e};for(var r=0,i;i=e[r];r++)i!="destroy"&&(n[i]=t)}return n}var f="basis.event",l=n.Class,c={},h={},p=function(){},d=function(){},g=l(null,{className:f+".Emitter",extendConstructor_:!0,propertyDescriptors:l.customExtendProperty({basisObjectId:!0,propertyDescriptors:!1,handler:!1,listen:!1},function(e,t){for(var n in t){var r=t[n];r===!0||r=="<static>"?r={isStatic:!0}:r===!1?r={isPrivate:!0}:typeof r=="string"&&(r={events:r}),e[n]=r}}),handler:null,emit_destroy:v("destroy"),listen:l.nestedExtendProperty(),init:function(){this.handler&&!this.handler.callbacks&&(this.handler={callbacks:this.handler,context:this,handler:null})},addHandler:function(e,t){t=t||this,this.handler={callbacks:e,context:t,handler:this.handler}},removeHandler:function(e,t){if(this.destroy===d)return;var n=this,r;t=t||this;while(r=n,n=n.handler)if(n.callbacks===e&&n.context===t){n.callbacks=c,r.handler=n.handler;return}},destroy:function(){this.destroy=p,this.emit_destroy(),this.handler=null,this.destroy=d}});t.exports={create:v,createHandler:m,events:h,Emitter:g}},"r.js":function(e,t,n,r,i,s,o,u,a){function g(e){var t=e.syncAction();if(t&&typeof t.then=="function"){var n=e.syncAction;e.state!=h.PROCESSING&&e.setState(h.PROCESSING),t.then(function(){e.syncAction===n&&e.state==h.PROCESSING&&e.setState(h.READY)},function(t){e.syncAction===n&&e.state==h.PROCESSING&&e.setState(h.ERROR,t)})}}var f=n.require("./5.js"),l=f.Emitter,c=f.create,h=n.require("./2.js"),p=n.require("./3.js"),d=n.require("./4.js").resolveValue,v=n.PROXY,m={subscribersChanged:function(e){this.set(e.subscriberCount>0)}},y=l.subclass({className:"basis.data.AbstractData",propertyDescriptors:{state:"stateChanged",active:"activeChanged",subscriberCount:"subscribersChanged",subscribeTo:!1,syncAction:!1,syncEvents:!1},state:h.UNDEFINED,stateRA_:null,emit_stateChanged:c("stateChanged","oldState"),active:!1,activeRA_:null,emit_activeChanged:c("activeChanged"),subscribeTo:p.NONE,subscriberCount:0,subscribers_:null,emit_subscribersChanged:c("subscribersChanged","delta"),syncEvents:n.Class.oneFunctionProperty(function(){this.isSyncRequired()&&g(this)},{stateChanged:!0,subscribersChanged:!0}),syncAction:null,init:function(){l.prototype.init.call(this),this.active&&(this.active===v&&(this.active=new n.Token(this.subscriberCount>0),this.addHandler(m,this.active)),this.active=!!d(this,this.setActive,this.active,"activeRA_"),this.active&&this.addHandler(p.getMaskConfig(this.subscribeTo).handler));if(this.state!=h.UNDEFINED){var e=this.state;typeof this.state!="string"&&(e=d(this,this.setState,e,"stateRA_")),e&&!h.isValid(e)&&(e=!1),this.state=e||h.UNDEFINED}var t=this.syncAction;t&&(this.syncAction=null,this.setSyncAction(t))},setState:function(e,t){e=d(this,this.setState,e,"stateRA_")||h.UNDEFINED;var n=String(e);if(!h.isValid(n))return!1;this.stateRA_&&t===undefined&&(t=e.data);if(this.state!=n||this.state.data!=t){var r=this.state;return this.state=Object(n),this.state.data=t,this.emit_stateChanged(r),!0}return!1},deprecate:function(){this.state!=h.PROCESSING&&this.setState(h.DEPRECATED)},setActive:function(e){var t=this.activeRA_&&this.activeRA_.proxyToken;return e===v?(t||(t=new n.Token(this.subscriberCount>0),this.addHandler(m,t)),e=t):t&&e!==t&&(this.removeHandler(m,t),t=null),e=!!d(this,this.setActive,e,"activeRA_"),t&&this.activeRA_&&(this.activeRA_.proxyToken=t),this.active!=e?(this.active=e,this.emit_activeChanged(),e?p.subscribe(this,this.subscribeTo):p.unsubscribe(this,this.subscribeTo),!0):!1},setSubscription:function(e){var t=this.subscribeTo,n=e&p.ALL,r=t^n;return r?(this.subscribeTo=n,this.active&&p.changeSubscription(this,t,n),!0):!1},isSyncRequired:function(){return this.subscriberCount>0&&(this.state==h.UNDEFINED||this.state==h.DEPRECATED)},setSyncAction:function(e){var t=this.syncAction;typeof e!="function"&&(e=null),this.syncAction=e,e?(t||this.addHandler(this.syncEvents),this.isSyncRequired()&&g(this)):t&&this.removeHandler(this.syncEvents)},destroy:function(){l.prototype.destroy.call(this);if(this.active){var e=p.getMaskConfig(this.subscribeTo);for(var t=0,n;n=e.actions[t];t++)n(p.unlink,this)}this.activeRA_&&d(this,!1,!1,"activeRA_"),this.stateRA_&&d(this,!1,!1,"stateRA_"),this.state=h.UNDEFINED}});t.exports=y},"6.js":function(e,t,n,r,i,s,o,u,a){function E(e,t){e.bindingId=w++;for(var r in t){var i=null,s=t[r];B&&s instanceof B||n.resource.isResource(s)?i={events:"satelliteChanged",getter:function(e,t){var n=typeof t=="function"?t:null,r=function(i){r=!1;if(n){t=n();if(t instanceof B==0)return;n=null}i.setSatellite(e,t)};return function(t){return r&&r(t),n||(t.satellite[e]?t.satellite[e].element:null)}}(r,s)}:s&&(typeof s=="string"?s=S.process(r,s):s.bindingBridge&&(s=n.fn.$const(s)),typeof s!="object"?i={getter:typeof s=="function"?s:n.getter(s)}:Array.isArray(s)?i={events:s[0],getter:n.getter(s[1])}:i={events:s.events,getter:n.getter(s.getter)}),e[r]=i}}function A(){return L.pop()||l.createDocumentFragment()}function O(e){var t=e.nodes;if(t)for(var n=t.length-1,r;r=t[n];n--)r.parentNode.insertBefore(r,r.nextSibling)}var f="basis.ui",l=r.document,c=n.Class,h=n.require("./5.js").create,p=n.require("./7.js").Template,d=n.require("./a.js").MARKER,v=n.require("./c.js").TemplateSwitcher,m=n.require("./i.js"),g=m.Node,y=m.PartitionNode,b=m.GroupingNode,w=1,S=function(){var e={},t=/^([a-z_][a-z0-9_]*):(.*)/i;return{add:function(t,n){e[t]||(e[t]=n)},process:function(n,r){var i,s=r.match(t);return s&&(i=e[s[1]],r=s[2]||n),i?i(r):r}}}();S.add("data",function(e){return{events:"update",getter:"data."+e}}),S.add("satellite",function(e){return{events:"satelliteChanged",getter:function(t){return t.satellite[e]?t.satellite[e].element:null}}});var x=c.customExtendProperty({$role:{events:"ownerSatelliteNameChanged",getter:function(e){if(e.role){var t=e.roleId&&e.binding[e.roleId];if(t&&typeof t.getter=="function"){t=t.getter(e);if(t===undefined)return""}return e.role+(t!==undefined?"("+t+")":"")}return e.ownerSatelliteName||""}},active:{events:"activeChanged",getter:function(e){return e.active}},state:{events:"stateChanged",getter:function(e){return String(e.state)}},childNodesState:{events:"childNodesStateChanged",getter:function(e){return String(e.childNodesState)}},childCount:{events:"childNodesModified",getter:function(e){return e.childNodes?e.childNodes.length:0}},hasChildren:{events:"childNodesModified",getter:function(e){return!!e.firstChild}},empty:{events:"childNodesModified",getter:function(e){return!e.firstChild}}},E),T={attach:function(e,t,n){e.addHandler(t,n)},detach:function(e,t,n){e.removeHandler(t,n)}},N=c.extensibleProperty({select:function(e){if(this.isDisabled())return;if(this.selectedRA_)return;this.contextSelection&&this.contextSelection.multiple?this.select(e.ctrlKey||e.metaKey):this.select()}}),C={"*":function(e){var t=this.templateSwitcher_;t&&t.ruleEvents&&t.ruleEvents[e.type]&&this.setTemplate(t.resolve(this))}},k=new p("<div/>"),L=[],M,_=function(e){return{propertyDescriptors:{action:!1,binding:!1,template:"templateChanged",tmpl:"templateChanged",element:!1,childNodesElement:!1},template:k,emit_templateChanged:h("templateChanged"),templateSwitcher_:null,binding:x,action:N,tmpl:null,element:null,childNodesElement:null,init:function(){this.element=this.childNodesElement=A(),e.init.call(this)},postInit:function(){e.postInit.call(this);var t=this.template;if(t){var n=this.childNodesElement;this.template=null,this.setTemplate(t),L.push(n),this.container&&(this.container.appendChild(this.element),this.container=null)}},templateSync:function(){var e=this.element,t=this.template.createInstance(this,this.templateAction,this.templateSync,this.binding,T),n;t.childNodesHere&&(t.childNodesElement=t.childNodesHere.parentNode,t.childNodesElement.insertPoint=t.childNodesHere),this.tmpl=t,this.element=t.element,this.childNodesElement=t.childNodesElement||t.element,n=this.childNodesElement.nodeType!=1,n&&(this.childNodesElement=l.createDocumentFragment());if(this.grouping){this.grouping.syncDomRefs();var r=this;while(r.grouping)r=r.grouping;var i=r;for(var s=i.lastChild;s;s=s.previousSibling)s instanceof P?i.insertBefore(s,s.nextSibling):O(s);O(i.nullGroup)}else for(var o=this.lastChild;o;o=o.previousSibling)this.insertBefore(o,o.nextSibling);this instanceof P&&O(this);if(e&&e!==this.element&&e.nodeType!=11){var u=e&&e.parentNode;u&&(this.owner&&this.owner.tmpl&&this.owner.tmpl.set(e,this.element),this.element.parentNode!==u&&u.replaceChild(this.element,e))}this.emit_templateChanged()},setTemplate:function(e){var t=this.templateSwitcher_,n;e instanceof v&&(n=e,e=n.resolve(this)),e instanceof p==0&&(e=null);if(!e)return;n&&(this.templateSwitcher_=n,t||this.addHandler(C,this)),t&&t.resolve(this)!==e&&(this.templateSwitcher_=null,this.removeHandler(C,this));var r=this.tmpl,i=this.template;i!==e&&(this.template=e,this.templateSync(),i&&i.clearInstance(r))},updateBind:function(e){var t=this.binding[e],n=t&&t.getter;n&&this.tmpl&&this.tmpl.set(e,n(this)),this.roleId==e&&this.updateBind("$roleId")},templateAction:function(e,t){var n=this.action[e];n&&n.call(this,t)},focus:function(e){var t=this.tmpl?this.tmpl.focus||this.element:null;t&&(M&&(M=n.clearImmediate(M)),M=n.setImmediate(function(){try{t.focus(),e&&t.select()}catch(n){}}))},blur:function(){var e=this.tmpl?this.tmpl.focus||this.element:null;if(e)try{e.blur()}catch(t){}},destroy:function(){var t=this.template,n=this.element;this.templateSwitcher_&&(this.templateSwitcher_=null,this.removeHandler(C,this)),t.clearInstance(this.tmpl),e.destroy.call(this),this.tmpl=null,this.element=null,this.childNodesElement=null;var r=n&&n.parentNode;r&&r.nodeType==1&&r.removeChild(n)}}},D=function(e){return{insertBefore:function(t,n){t=e.insertBefore.call(this,t,n);var r=t.groupNode||this,i=r.childNodesElement||this.childNodesElement,s=t.nextSibling,o=s&&s.element.parentNode==i?s.element:null,u=t.element,a=o||i.insertPoint||null;return(u.parentNode!==i||u.nextSibling!==a)&&i.insertBefore(u,a),t},removeChild:function(t){e.removeChild.call(this,t);var n=t.element,r=n.parentNode;return r&&r.removeChild(n),t},clear:function(t){if(t){var n=this.firstChild;while(n){var r=n.element,i=r.parentNode;i&&i.removeChild(r),n=n.nextSibling}}e.clear.call(this,t)},setChildNodes:function(t,n){var r=l.createDocumentFragment(),i=this.grouping||this,s=i.childNodesElement;i.childNodesElement=r,e.setChildNodes.call(this,t,n),s.insertBefore(r,s.insertPoint||null),i.childNodesElement=s}}},P=c(y,_,{className:f+".PartitionNode",binding:{title:"data:"}}),H=c(b,D,{className:f+".GroupingNode",childClass:P,groupingClass:c.SELF,element:null,childNodesElement:null,emit_ownerChanged:function(e){this.syncDomRefs(),b.prototype.emit_ownerChanged.call(this,e)},init:function(){this.element=this.childNodesElement=l.createDocumentFragment(),b.prototype.init.call(this)},syncDomRefs:function(){var e=this,t=this.owner,n=null;t&&(n=t.tmpl&&t.tmpl.groupsElement||t.childNodesElement);do e.element=e.childNodesElement=n;while(e=e.grouping)},destroy:function(){b.prototype.destroy.call(this),this.element=null,this.childNodesElement=null}}),B=c(g,_,D,{className:f+".Node",binding:{selected:{events:"select unselect",getter:function(e){return e.selected}},unselected:{events:"select unselect",getter:function(e){return!e.selected}},disabled:{events:"disable enable",getter:function(e){return e.isDisabled()}},enabled:{events:"disable enable",getter:function(e){return!e.isDisabled()}},tabindex:{events:"enable disable",getter:function(e){return e.isDisabled()?-1:e.tabindex||0}}},childClass:c.SELF,childFactory:function(e){return new this.childClass(e)},groupingClass:H}),j=B.subclass({className:f+".ShadowNodeList",emit_ownerChanged:function(e){B.prototype.emit_ownerChanged.call(this,e),this.setDataSource(this.owner&&this.owner.getChildNodesDataset())},getChildNodesElement:function(e){return e.childNodesElement},listen:{owner:{templateChanged:function(){this.childNodes.forEach(function(e){this.appendChild(e.element)},this.getChildNodesElement(this.owner)||this.owner.element)}}},childClass:{className:f+".ShadowNode",getElement:function(e){return e.element},templateSync:function(){B.prototype.templateSync.call(this);var e=this.getElement(this.delegate);e&&(e[d]=this.delegate.element[d],this.element=e)},listen:{delegate:{templateChanged:function(){var e=this.element,t=e.parentNode,n=this.getElement(this.delegate);n&&(n[d]=this.delegate.element[d]),this.element=n||this.tmpl.element,t&&t.replaceChild(this.element,e)}}}}});t.exports={BINDING_PRESET:S,Node:B,PartitionNode:P,GroupingNode:H,ShadowNodeList:j,ShadowNode:j.prototype.childClass}},"7.js":function(e,t,n,r,i,s,o,u,a){function k(e){var t=e.getDictionary(),n=e.getName(),r=n+"@"+t.id,i=C[r],s;if(!i){var o=t.token(n);i=C[r]=o.as(function(e){return o.getType()=="markup"?(typeof e=="string"&&d(o)&&(e=e.replace(/\{#\}/g,"{__templateContext}")),e!=this.value&&s&&(s.detach(o,o.apply),s=null),e&&String(e).substr(0,5)=="path:"&&(s=E(e.substr(5)),s.attach(o,o.apply)),s?s.bindingBridge.get(s):e):this.value}),i.id="{l10n:"+r+"}",i.url=t.getValueSource(n)+":"+n}return i}function L(e){typeof e=="string"&&(e=v(e));if(!e)return null;var t=k(e),n=t.id,r=N[n];return r||(r=N[n]=new O(t)),r}var f="basis.template.html",l=r.document,c=r.Node,h=n.string.camelize,p=n.require("./8.js").isMarkupToken,d=n.require("./8.js").isTokenHasPlaceholder,v=n.require("./8.js").token,m=n.require("./9.js").getFunctions,g=n.require("./c.js"),y=g.TemplateSwitchConfig,b=g.TemplateSwitcher,w=g.Template,E=g.get,S=n.require("./g.js"),x=n.require("./a.js").CLONE_NORMALIZATION_TEXT_BUG,T=!!function(){try{return l.documentElement.style.color="x"}catch(e){}}(),N={},C={},A=function(){function s(e){var t=e.startMarker,n=e.endMarker,r=t.nextSibling;while(r&&r!==n){var i=r;r=r.nextSibling,e.appendChild(i)}return n.parentNode.removeChild(n),e.startMarker=null,e.endMarker=null,t}function g(e,t,r,i){var s=e.classList;if(!s)return y(e,t,r,i);var o=r||"";return o!=t&&(t&&e.classList.remove(t),o&&(e.classList.add(o),i&&(e.classList.add(o+"-anim"),n.nextTick(function(){e.classList.remove(o+"-anim")})))),o}function y(t,r,i,s){var o=i||"";if(o!=r){var u=t.className,a=typeof u!="string",f;a&&(u=u.baseVal),f=u.split(e),r&&n.array.remove(f,r),o&&(f.push(o),s&&(n.array.add(f,o+"-anim"),n.nextTick(function(){var r=(a?t.className.baseVal:t.className).split(e);n.array.remove(r,o+"-anim"),a?t.className.baseVal=r.join(" "):t.className=r.join(" ")}))),a?t.className.baseVal=f.join(" "):t.className=f.join(" ")}return o}function N(){this.set(this.name,this.value)}function C(e,t,n){var r=t&&t.bindingBridge,i=this.attaches&&this.attaches[e],s=null;if(r||i)if(r){var o=p(t),u;o&&(u=L(t));if(!i||i.value!==t||i.template!==u){i&&(i.tmpl&&i.template.clearInstance(i.tmpl),i.value.bindingBridge.detach(i.value,N,i));if(u){var a=this.context,f=this.bindings,l=this.action,c=this.bindingInterface;s=u.createInstance(a,l,function d(){s=h.tmpl=u.createInstance(a,l,d,f,c),s.parent=s.element.parentNode||s.element,N.call(h)},f,c),s.parent=s.element.parentNode||s.element}this.attaches||(this.attaches=new n);var h=this.attaches[e]={name:e,value:t,template:u,tmpl:s,set:this.tmpl.set};r.attach(t,N,h)}else s=t&&p(t)?i.tmpl:null;if(s)return s.set("__templateContext",t.value),s.parent;t=r.get(t)}else i&&(i.tmpl&&i.template.clearInstance(i.tmpl),i.value.bindingBridge.detach(i.value,N,i),this.attaches[e]=null);return t}function k(e,t){var n=e[0],r=e[1],i=t[n],s=t[r];switch(e.length){case 1:return function(t){this(n,i(t))};case 2:return function(t){this(n,i(t)),this(r,s(t))};default:var o=e.map(function(e){return t[e]});return function(n){for(var r=0;r<e.length;r++)this(e[r],o[r](n))}}}function A(e,t){for(var n in e)e[n]=k(e[n],t);return n?e:null}function O(e){var t={};return function(r,i){var s=r.bindings;if(!s)return{};var o="bindingId"in s?s.bindingId:null,u=t[o];if(!u){var a=[],f={},l={};for(var c=0,h;h=e[c];c++){var p=s[h],d=p&&p.getter;if(d){f[h]=d,a.push(h);if(p.events){var v=String(p.events).trim().split(/\s+|\s*,\s*/);for(var m=0,g;g=v[m];m++)l[g]?l[g].push(h):l[g]=[h]}}}u={names:a,sync:k(a,f),handler:A(l,f)},o&&(t[o]=u)}i&&u.sync.call(i,r.context);if(!r.bindingInterface)return;return u.handler&&r.bindingInterface.attach(r.context,u.handler,i),u.handler}}var e=/\s+/,t=r.DOMTokenList&&l&&l.documentElement.classList instanceof r.DOMTokenList,i=function(){try{return l instanceof c}catch(e){}}()||!1,o=i?function(e,t,n,r){var i=!r&&n&&n instanceof c?n:e;return i!==t&&(i.nodeType===11&&!i.startMarker&&(i.startMarker=l.createTextNode(""),i.endMarker=l.createTextNode(""),i.insertBefore(i.startMarker,i.firstChild),i.appendChild(i.endMarker)),t.nodeType===11&&t.startMarker&&(t=s(t)),t.parentNode.replaceChild(i,t)),i}:function(e,t,n,r){var i=!r&&n&&typeof n=="object"?n:e;if(i!==t)try{t.parentNode.replaceChild(i,t)}catch(s){i=e,t!==i&&t.parentNode.replaceChild(i,t)}return i},u=function(e,t,n,r){var i=o(e,t,n,r);return i===e&&typeof n=="string"&&(e.innerHTML=n),i},a=o,f=function(e,t,n,r){var i=o(e,t,n,r);return i===e&&(e.nodeValue=String(n)),i},d=t?g:y,b=T?function(e,t,n,r){return n!==r&&(e.style[h(t)]=r),r}:function(e,t,n,r){if(n!==r)try{e.style[h(t)]=r}catch(i){}return r},w=function(e,t,n,r){return n!==r&&(r?e.setAttribute(t,r):e.removeAttribute(t)),r},E=function(e,t,n,r,i){return r!==i&&(i?e.setAttributeNS(t,n,i):e.removeAttributeNS(t,n)),i},M={bind_textNode:f,bind_node:o,bind_element:u,bind_comment:a,bind_attr:w,bind_attrNS:E,bind_attrClass:d,bind_attrStyle:b,resolve:C,l10nToken:v};return function(e,t){var r=m(e,!0,this.source.url,e.source_,!x),i=r.createL10nSync,s,o,u={},a=[],f=[],l=0,c={cloneNode:function(){if(l==1)return S(e);c=S(e);if(i){o=r.createL10nSync(c,u,w,x);for(var t=0,n;n=a[t];t++)o(n.path,u[n.path])}return c.cloneNode(!0)}},h=function(){return c.cloneNode(!0)};if(i){var d=function(e){for(var t=0,n;n=a[t];t++)e(n.path,u[n.path])},g=function(e){var r=p(this.token);r?n.array.add(f,this):n.array.remove(f,this),u[this.path]=r?undefined:e==null?"{"+this.path+"}":e,o&&o(this.path,u[this.path]);for(var i in t)t[i].tmpl.set(this.path,r?this.token:e)};a=r.l10nKeys.map(function(e){var t=v(e),n={path:e,token:t,handler:g};return t.attach(g,n),p(t)?f.push(n):u[e]=t.value==null?"{"+e+"}":t.value,n})}return s=r.createInstanceFactory(this.templateId,h,M,u,f,O(r.keys),x),{createInstance:function(e,n,r,i,o){var u=l++,a={context:e,action:n,rebuild:r,handler:null,bindings:i,bindingInterface:o,attaches:null,compute:null,tmpl:null};return s(u,a,u?null:d),t[u]=a,a.tmpl},destroyInstance:function(e){var n=e.templateId_,r=t[n];if(r){r.handler&&r.bindingInterface.detach(r.context,r.handler,r.tmpl.set);if(r.compute){for(var i=0;i<r.compute.length;i++)r.compute[i].destroy();r.compute=null}for(var s in r.attaches)C.call(r,s,null);delete t[n]}},destroy:function(e){for(var n=0,i;i=a[n];n++)i.token.detach(i.handler,i);for(var s in t){var f=t[s];e&&f.rebuild&&f.rebuild.call(f.context);if(!e||s in t){f.handler&&f.bindingInterface.detach(f.context,f.handler,f.tmpl.set);for(var s in f.attaches)C.call(s,null)}}r=null,c=null,u=null,a=null,o=null,t=null}}}}(),O=w.subclass({className:f+".Template",__extend__:function(e){return e instanceof O?e:e instanceof y?new M(e):new O(e)},builder:A}),M=b.subclass({className:f+".TemplateSwitcher",templateClass:O});t.exports={Template:O,TemplateSwitcher:M}},"8.js":function(e,t,n,r,i,s,o,u,a){function y(e,t){return e=d(e,t),e}function b(e){return y(u(e).get(!0),e)||{}}function w(e,t){function n(){F[e].update(E(b(e),t))}return{url:t,activate:function(){u(t).attach(n)},deactivate:function(){u(t).detach(n)}}}function E(e,t){function n(e){return e&&Object.prototype.toString.call(e)=="[object Object]"}function r(e,i,s,o){s&&(s+=".");for(var u in i)n(i[u])?e[u]=r(n(e[u])?e[u]:{},i[u],s+u,o):(o[s+u]=t,e[u]=i[u]);return e}var i=b(t),s;for(var o in i){if(o=="_meta"||o=="_locationMap"){n(e[o])||(e[o]={}),r(e[o],i[o],"",{});continue}v.call(e,o)?e[o]._meta||(e[o]._meta={}):e[o]={_meta:{source:{}}},s={},e[o]._meta.source={},r(e[o],i[o],"",s),e[o]._meta.source=s}return e}function S(e,t){return e=y(e,t),g[t]&&E(e,g[t].url),W(t,!0).update(e)}function _(e){if(e.charAt(0)=="#")return x[parseInt(e.substr(1),36)];var t=e.match(/^(.+?)@(.+)$/);if(t)return X(n.path.resolve(t[2])).token(t[1])}function D(e){return e?e instanceof M||e instanceof O:!1}function P(e){return D(e)&&e.getType()in k}function H(e){return D(e)&&e.descriptor.placeholder}function B(e){return D(e)&&e.getType()=="markup"}function q(e,t,r){var i=t?t+".":"",s=r.types[t]||"default";for(var o in e){if(t==""&&o=="_meta")continue;if(o.indexOf(".")!=-1)continue;if(v.call(e,o)){var u=i+o,a=r.types[u]||L[s]||"default",f=e[o],l=a in k||s in k;r.values[u]={placeholder:l,processName:l?A:n.fn.$self,source:r.source[u]||r.dictionary.id,culture:r.culture,name:u,types:r.types,value:f},u in r.types==0&&(r.types[u]=a),f&&(typeof f=="object"||Array.isArray(f))&&q(f,u,r)}}return r.values}function R(e){var t=e._meta&&e._meta.type||{},n={};for(var r in t)t[r]in C&&(n[r]=t[r]);return n}function U(e){return e._meta&&e._meta.source||{}}function W(e,t){var r;if(typeof e=="string"){var i=e,s=n.path.extname(i);s!=".l10n"&&(i=i.replace(new RegExp(s+"([#?]|$)"),".l10n$1")),e=n.resource(i)}return n.resource.isResource(e)&&(r=F[e.url]),r||new z(e,t)}function X(e){return W(e)}function V(){return j.slice(0)}function et(e,t){return e&&!K[e]&&(K[e]=new Z(e,t)),K[e||J]}function tt(){return J}function nt(e){if(!e)return;if(J!=e){if($.indexOf(e)==-1)return;J=e;for(var t=0,n;n=j[t];t++)n.syncValues();m.call(et,e)}}function rt(){return $.slice(0)}function it(e){typeof e=="string"&&(e=e.trim().split(" "));if(!e.length)return;var t={},r,i;Q={};for(var s=0,o,u;o=e[s];s++)r=o.split("/"),r.length>2&&(r=[r[0],r[1]]),u=r[0],i||(i=u),t[u]=et(u),Q[u]=r;for(var u in Q)Q[u]=n.array.flatten(Q[u].map(function(e){return Q[e]})).concat(i).filter(function(e,t,n){return!t||n.lastIndexOf(e,t-1)==-1});$=n.object.keys(t),J in t==0&&nt(i)}function st(e,t,n){et.attach(e,t),n&&e.call(t,J)}var f="basis.l10n",l=n.object.extend,c=n.object.complete,h=n.Class,p=n.require("./5.js").Emitter,d=n.resource.extensions[".json"],v=Object.prototype.hasOwnProperty,m=n.Token.prototype.set;n.resource.extensions[".l10n"]=S;var g=function(){var e=n.config.l10n||{},t=e&&e.patch,r={},i;e.patch={};if(t){if(typeof t=="string")try{i=n.path.dirname(n.resource.resolveURI(t)),t=n.resource(t).fetch()}catch(s){}for(var o in t){var u=n.resource.resolveURI(o,i),a=n.resource.resolveURI(t[o],i);r[u]=w(u,a)}}return r}(),x=[],T={},N={placeholder:!1,processName:n.fn.$self,value:undefined,types:{}},C={"default":!0,plural:!0,markup:!0,"plural-markup":!0,"enum-markup":!0},k={plural:!0,"plural-markup":!0},L={"default":"default",plural:"default",markup:"default","plural-markup":"markup","enum-markup":"markup"},A=function(e){return this.culture.plural(e)},O=h(n.Token,{className:f+".ComputeToken",token:null,init:function(e){this.token.computeTokens[this.basisObjectId]=this,n.Token.prototype.init.call(this,e)},toString:function(){return this.get()},get:function(){var e=this.token.dictionary.getValue(this.getName());return this.token.descriptor.placeholder&&(e=String(e).replace(/\{#\}/g,this.value)),e},getName:function(){return this.token.name+"."+this.token.descriptor.processName(this.value)},getType:function(){return this.token.descriptor.types[this.getName()]||"default"},getDictionary:function(){return this.token.getDictionary()},destroy:function(){delete this.token.computeTokens[this.basisObjectId],n.Token.prototype.destroy.call(this)}}),M=h(n.Token,{className:f+".Token",index:NaN,dictionary:null,name:"",type:"default",computeTokens:null,computeTokenClass:null,init:function(e,t,r){n.Token.prototype.init.call(this,r.value),this.index=x.push(this)-1,this.name=t,this.dictionary=e,this.descriptor=r,this.computeTokens={}},toString:function(){return this.get()},apply:function(){for(var e in this.computeTokens)this.computeTokens[e].apply();n.Token.prototype.apply.call(this)},set:function(){},getName:function(){return this.name},getType:function(){return this.descriptor.types[this.name]||"default"},setType:function(){},compute:function(e,t){arguments.length==1&&(t=e,e=""),t=n.getter(t),e=String(e).trim().split(/\s+|\s*,\s*/).sort();var r=this.basisObjectId,i=e.concat(r,t[n.getter.ID]).join("_");if(T[i])return T[i];var s=this,o={},u=function(e){m.call(this,t(e))},a={destroy:function(e){delete o[e.basisObjectId],this.destroy()}};for(var f=0,l;l=e[f];f++)l!="destroy"&&(a[l]=u);return T[i]=function(e){if(e instanceof p==0)throw"basis.l10n.Token#compute: object must be an instanceof Emitter";var n=e.basisObjectId,r=o[n];return r||(r=o[n]=s.computeToken(t(e)),e.addHandler(a,r)),r}},computeToken:function(e){var t=this.computeTokenClass;return t||(t=this.computeTokenClass=O.subclass({token:this})),new t(e)},token:function(e){if(this.getType()in k)return this.computeToken(e);if(this.dictionary)return this.dictionary.token(this.name+"."+e)},getDictionary:function(){return this.dictionary},destroy:function(){for(var e in this.computeTokens)this.computeTokens[e].destroy();this.descriptor=null,this.computeTokenClass=null,this.computeTokens=null,this.value=null,this.dictionary=null,x[this.index]=null,n.Token.prototype.destroy.call(this)}}),j=[],F={},I=new n.Token,z=h(null,{className:f+".Dictionary",cultureValues:null,tokens:null,index:NaN,resource:null,id:null,init:function(e,t){this.tokens={},this.cultureValues={},this.index=j.push(this)-1;if(n.resource.isResource(e)){var r=e,i=r.url;this.id=i,this.resource=r,F[i]||(F[i]=this,I.set(i),g[i]&&g[i].activate()),t||r.fetch()}else this.id="dictionary"+this.index,this.update(e||{})},update:function(e){e||(e={}),this.cultureValues={};var t=R(e);for(var n in e)/^_|_$/.test(n)||(this.cultureValues[n]=q(e[n],"",{dictionary:this,culture:et(n),source:U(e[n]),types:c(R(e[n]),t),values:{}}));return this.syncValues(),this},syncValues:function(){for(var e in this.tokens){var t=this.tokens[e],n=this.getDescriptor(e)||N,r=t.getType();t.descriptor=n,t.value!==n.value?m.call(t,n.value):t.getType()!=r&&t.apply()}},getCultureDescriptor:function(e,t){return this.cultureValues[e]&&this.cultureValues[e][t]},getDescriptor:function(e){var t=Q[J]||[];for(var n=0,r;r=t[n];n++){var i=this.getCultureDescriptor(r,e);if(i)return i}},getCultureValue:function(e,t){var n=this.getCultureDescriptor(e,t);if(n)return n.value},getValue:function(e){var t=this.getDescriptor(e);if(t)return t.value},getValueSource:function(e){var t=this.getDescriptor(e);return t?t.source:this.id},token:function(e){var t=this.tokens[e];if(!t){var n=this.getDescriptor(e)||N;t=this.tokens[e]=new M(this,e,n)}return t},destroy:function(){this.tokens=null,this.cultureValues=null,n.array.remove(j,this);if(this.resource){var e=this.resource.url;g[e]&&g[e].deactivate(),delete F[e],this.resource=null}}}),$=[],J=null,K={},Q={},G={},Y=[[1,function(){return 0}],[2,function(e){return e==1||e%10==1?0:1}],[2,function(e){return e==0?0:1}],[2,function(e){return e==1?0:1}],[2,function(e){return e==0||e==1?0:1}],[2,function(e){return e%10!=1||e%100==11?1:0}],[3,function(e){return e==1?0:e%10>=2&&e%10<=4&&(e%100<10||e%100>=20)?1:2}],[3,function(e){return e%10==1&&e%100!=11?0:e!=0?1:2}],[3,function(e){return e%10==1&&e%100!=11?0:e%10>=2&&(e%100<10||e%100>=20)?1:2}],[3,function(e){return e%10==1&&e%100!=11?0:e%10>=2&&e%10<=4&&(e%100<10||e%100>=20)?1:2}],[3,function(e){return e==0?0:e==1?1:2}],[3,function(e){return e==1?0:e==0||e%100>0&&e%100<20?1:2}],[3,function(e){return e==1?0:e%10>=2&&e%10<=4&&(e%100<10||e%100>=20)?1:2}],[3,function(e){return e==1?0:e>=2&&e<=4?1:2}],[4,function(e){return e==1?0:e==2?1:e!=8&&e!=11?2:3}],[4,function(e){return e==1?0:e==2?1:e==3?2:3}],[4,function(e){return e%100==1?1:e%100==2?2:e%100==3||e%100==4?3:0}],[4,function(e){return e==1?0:e==0||e%100>1&&e%100<11?1:e%100>10&&e%100<20?2:3}],[4,function(e){return e==1||e==11?0:e==2||e==12?1:e>2&&e<20?2:3}],[5,function(e){return e==1?0:e==2?1:e<7?2:e<11?3:4}],[6,function(e){return e==0?0:e==1?1:e==2?2:e%100>=3&&e%100<=10?3:e%100>=11?4:5}]];["ay bo cgg dz fa id ja jbo ka kk km ko ky lo ms my sah su th tt ug vi wo zh","mk","jv","af an ast az bg bn brx ca da de doi el en eo es es-AR et eu ff fi fo fur fy gl gu ha he hi hne hu hy ia it kn ku lb mai ml mn mni mr nah nap nb ne nl nn no nso or pa pap pms ps pt rm rw sat sco sd se si so son sq sv sw ta te tk ur yo","ach ak am arn br fil fr gun ln mfe mg mi oc pt-BR tg ti tr uz wa zh","is","csb","lv","lt","be bs hr ru sr uk","mnk","ro","pl","cs sk","cy","kw","sl","mt","gd","ga","ar"].forEach(function(e,t){e.split(" ").forEach(function(e){G[e]=this},Y[t])});var Z=n.Class(null,{className:f+".Culture",name:"",pluralForm:null,init:function(e,t){this.name=e,K[e]||(K[e]=this),this.pluralForm=t||G[e]||G[e.split("-")[0]]||Y[0]},plural:function(e){return Number(this.pluralForm[1](Math.abs(parseInt(e,10))))}});l(et,new n.Token),et.set=nt,it("en-US"),nt("en-US"),t.exports={ComputeToken:O,Token:M,token:_,isToken:D,isPluralToken:P,isMarkupToken:B,isTokenHasPlaceholder:H,Dictionary:z,dictionary:X,getDictionaries:V,addCreateDictionaryHandler:I.attach.bind(I),removeCreateDictionaryHandler:I.detach.bind(I),Culture:Z,culture:et,getCulture:tt,setCulture:nt,getCultureList:rt,setCultureList:it,pluralForms:Y,onCultureChange:st}},"9.js":function(e,t,n,r,i,s,o,u,a){function P(e,t){var n=[];for(var r=0;r<e.length;r++){if(r<t){n.push(e[r]);continue}var i=e[r];switch(i[E]){case p:n.push(P(i,k));break;case w:n.push.apply(n,P(i,L).slice(L));break;default:n.push(i)}}return n}function j(e,t){return new Function(e,t)}var f=Object.prototype.hasOwnProperty,l=n.require("./a.js"),c=n.require("./b.js"),h=l.MARKER,p=l.TYPE_ELEMENT,d=l.TYPE_ATTRIBUTE,v=l.TYPE_ATTRIBUTE_CLASS,m=l.TYPE_ATTRIBUTE_STYLE,g=l.TYPE_ATTRIBUTE_EVENT,y=l.TYPE_TEXT,b=l.TYPE_COMMENT,w=l.TYPE_CONTENT,E=l.TOKEN_TYPE,S=l.TOKEN_BINDINGS,x=l.TOKEN_REFS,T=l.ATTR_NAME,N=l.ATTR_NAME_BY_TYPE,C=l.ELEMENT_NAME,k=l.ELEMENT_ATTRIBUTES_AND_CHILDREN,L=l.CONTENT_CHILDREN,A=l.CLASS_BINDING_ENUM,O=l.CLASS_BINDING_BOOL,M=l.CLASS_BINDING_INVERT,_={},D=function(){try{return r.document.createTextNode("").x=1,!0}catch(e){return!1}}(),H=function(){function u(e,t){for(var r=0,i;i=e[r];r++)i.indexOf(":")==-1&&n.push(i+":"+t)}function a(n){var r=t.length,i=e[r]||"r"+r;return t.push(i+"="+n),i}function f(e){r.push(e)}function l(e,n,r){var c,d,w,L,A;for(var O=0,M=0,_=0,P;P=e[O];O++,M++,L=!1){O?e[O+1]?(P[E]==e[O-1][E]&&P[E]==y&&_++,c=n+".childNodes["+(r?M:M+(_?" + "+_+" * TEXT_BUG":""))+"]"):c=n+".lastChild":c=n+".firstChild";if(d=P[x])L=!0,c=a(c),u(d,c);P[S]&&(P[S]&&typeof P[S]=="number"&&(P[S]=P[x][P[S]-1]),L||(L=!0,c=a(c)),f([P[E],c,P[S],d?d.indexOf("element")!=-1:!1])),n==s&&(D||P[E]==p)&&i.push(c+"."+h);if(P[E]==p){w=-1,L||(c=a(c),w=t.length);var H=[],B=[];for(var j=k,F;F=P[j];j++)F[E]==p||F[E]==y||F[E]==b?B.push(F):H.push(F);for(var j=0,I;I=H[j];j++){var q=I[E];if(q==g)continue;var R=N[q]||I[T];if(d=I[x])L=!0,u(d,a(c+'.getAttributeNode("'+R+'")'));if(A=I[S]){L=!0;switch(q){case v:for(var U=0,z;z=A[U];U++)f([2,c,z[1],R,z[0]].concat(z[2]==-1?[]:z.slice(2)));break;case m:for(var U=0,W;W=A[U];U++){o++;for(var X=0,V;V=W[0][X];X++)f([2,c,V,R,W[0],W[1],W[2],W[3],o])}break;default:o++;for(var U=0,V;V=A[0][U];U++)f([2,c,V,R,A[0],A[1],P[C],o])}}}B.length&&l(B,c,r),!L&&w==t.length&&t.pop()}}}var e="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),t,n,r,i,s,o;return function(e,u,a){return t=[],n=[],r=[],i=[],s=u||"_",o=0,l(e,s,a),{path:t,ref:n,binding:r,markedElementList:i}}}(),B=function(){function u(e){return'"'+e.replace(/"/g,'\\"').replace(/\n/g,"\\n").replace(/\r/g,"\\r")+'"'}function a(t,n,r){var i=[],s=[],o=t[5],a=t[4],f,l;for(var c=0;c<o.length;c++)if(typeof o[c]=="string")i.push(u(o[c]));else{f=a[o[c]],l=f.indexOf(":");if(l==-1)i.push(n=="l10n"?'"{'+f+'}"':n=="bool"?"(__"+f+'||"")':"__"+f),n||s.push("__"+f+"!==UNSET&&__"+f+"!==undefined");else{var h=null,p=f.substr(l+1).replace(e,function(e,t){return h=t,""});if(h){if(r===!1)return!1;i.push(r[f.substr(l+1)]),n||s.push(r[f.substr(l+1)]+"!==undefined")}else i.push('l10n["'+p+'"]')}}return i.length==1&&i.push('""'),i=i.join("+"),!n&&s.length&&(i=s.join("&&")+"?("+i+'):""'),i}var e=/\.\{([a-zA-Z_][a-zA-Z0-9_\-]*)\}/,t={disabled:"*",checked:["input"],indeterminate:["input"],value:["input","textarea","select"],minlength:["input"],maxlength:["input"],readonly:["input"],selected:["option"],multiple:["select"]},r={disabled:!0,checked:!0,selected:!0,readonly:!0,multiple:!0,indeterminate:!0},i={show:'"none"',visible:'"hidden"'},s={hide:'?"none":""',show:'?"":"none"',hidden:'?"hidden":""',visible:'?"":"hidden"'},o={1:"bind_element",3:"bind_textNode",8:"bind_comment"};return function(l){function h(e){P[e]=!0,m.push(g+"="+e+"("+n.array(arguments,1)+");")}var v={},m,g,b=0,w=[],E=[],S=[],x,N,C=[],k={},L=0,_,D={},P={};for(var H=0,B;B=l[H];H++){var j=B[2],F=j.split(":");if(F[0]=="l10n"&&F[1]){var I=F[1],q=null,R=I.replace(e,function(e,t){return q=t,""});if(q){S.push(B),I in k==0&&(x="$l10n_"+L++,k[I]=x,C.push(x),w.push(x+'=tools.l10nToken("'+R+'").computeToken()'),m=v[q],m||(m=v[q]=[],w.push("__"+q+"=UNSET")),m.push(x+".set(__"+q+");"));continue}}E.push(B)}for(var H=0,B;B=S[H];H++){var U=B[0],z=B[1],j=B[2],W=B[3],I=j.split(":")[1];j=k[I],g="_"+b++,x="__"+j,m=v[j],m||(m=v[j]=[],w.push(x));if(U==y)w.push(g+"="+z),h(o[U],z,g,"value",W);else{var X=a(B,!1,k);_=B[7],D[_]||(w.push(g),D[_]=g),g=D[_],J='"'+B[T]+'"',h("bind_attr",z,J,g,X)}}for(var H=0,B;B=E[H];H++){var U=B[0],z=B[1],j=B[2],W=B[3];if(["get","set","templateId_"].indexOf(j)!=-1)continue;var F=j.split(":"),V=F[0]=="anim",$=F[0]=="l10n";V&&(j=F[1]),m=f.call(v,j)?v[j]:null,g="_"+b++,x="__"+j;if($&&F[1]){var I=F[1],q=null,R=I;N||(N={}),v[R]||(v[R]=[],v[R].l10n="$l10n_"+L++,w.push("__"+v[R].l10n+'=l10n["'+R+'"]'),N[R]=[]),m=v[R];if(U==y){N[R].push(z+".nodeValue=value;"),m.nodeBind?m.push(z+".nodeValue=value;"):(w.push(g+"="+z),h(o[U],z,g,"value",W),m.nodeBind=g);continue}var X=a(B,"l10n",!1);X!==!1&&N[R].push("bind_attr("+[z,'"'+B[T]+'"',"NaN",X]+");")}m||(m=v[j]=[],w.push(x+"=UNSET"));if(U!=d)if(!m.nodeBind)w.push(g+"="+z),h(o[U],z,g,"value",W),m.nodeBind=g;else switch(U){case p:h(o[U],z,z,"value!==null?String(value):null");break;case y:m.push(z+".nodeValue=value;")}else{var J=B[T];switch(J){case"role-marker":w.push(g+'=""'),h("bind_attr",z,'"'+J+'"',g,"value?value"+(B[5][1]?"+"+u(B[5][1]):"")+':""');break;case"class":var K="",Q="value",G=B[5],Y=B[7];switch(G){case O:case M:var Z=[B[6]],et=B[4],tt=Array.isArray(et)?et:Z.map(function(e){return et+e});Q=(G==M?"!":"")+'value?"'+tt[0]+'":""',Y&&(K=tt[Y-1]);break;case A:var Z=B[8],et=B[4],tt=Array.isArray(et)?et:Z.map(function(e){return et+e});Q=Z.map(function(e,t){return'value=="'+e+'"?"'+tt[t]+'"'}).join(":")+':""',Y&&(K=tt[Y-1]);break;default:var et=B[4];Q='typeof value=="string"||typeof value=="number"?"'+et+'"+value:(value?"'+et+j+'":"")'}w.push(g+'="'+K+'"'),h("bind_attrClass",z,g,Q,V);break;case"style":var X=a(B,"style",k);_=B[8],D[_]||(D[_]=g,w.push(g+"="+(i[B[7]]||'""'))),B[7]&&(X=X.replace(/\+""$/,"")+(s[B[7]]||"")),g=D[_],h("bind_attrStyle",z,'"'+B[6]+'"',g,X);break;default:var nt=t[J],rt=B[6].toLowerCase(),X=nt&&r[J]?a(B,"bool",k)+'?"'+J+'":""':a(B,!1,k);_=B[7],D[_]||(w.push(g+"=UNSET"),D[_]=g),g=D[_];if(J=="tabindex")h("bind_attr",z,'"'+J+'"',g,X+"==-1?"+(["input","button","textarea"].indexOf(rt)==-1?'""':"-1")+":"+X);else{var it=c.getNamespace(J);it?h("bind_attrNS",z,'"'+it+'"','"'+J+'"',g,X):h("bind_attr",z,'"'+J+'"',g,X)}nt&&(nt=="*"||nt.indexOf(rt)!=-1)&&m.push("if("+z+"."+J+"!="+g+")"+z+"."+J+"="+(r[J]?"!!"+g:g)+";")}}}var st=n.object.keys(v),ot="";if(st.length){P.resolve=!0,ot=[";function set(bindName,value){",'if(typeof bindName!="string")'];for(var j in v)v[j].nodeBind&&ot.push("if(bindName==="+v[j].nodeBind+")"+'bindName="'+j+'";'+"else ");ot.push("return;","value=resolve.call(instance,bindName,value,Attaches);","switch(bindName){");for(var j in v){var ut=v[j].l10n||j;ot.push('case"'+j+'":',"if(__"+ut+"!==value)","{","__"+ut+"=value;",v[j].join(""),"}","break;")}ot=ot.join("")+"}}"}var at=[];for(var ft in P)at.push(ft+"=tools."+ft);return{allKeys:st,keys:st.filter(function(e){return e.indexOf("@")==-1}),tools:at,vars:w,set:ot,l10n:N,l10nCompute:C}}}(),F=function(e,t,r,i,s){var o=_[r&&n.path.relative(r)];if(o)return o;e=P(e,0);var u=H(e,"_",s),a=B(u.binding),f=u.markedElementList.join("="),l={keys:a.keys,l10nKeys:n.object.keys(a.l10n)};e.length==1&&(u.path[0]="a=_");if(a.l10n){var c=[];for(var h in a.l10n)c.push('case"'+h+'":'+a.l10n[h].join("")+"break;");l.createL10nSync=j(["_","l10n","bind_attr","TEXT_BUG"],"var "+u.path+";"+"return function(path, value){"+"switch(path){"+c.join("")+"}"+"}")}return l.createInstanceFactory=j(["tid","createDOM","tools","l10nMap","l10nMarkup","getBindings","TEXT_BUG"],"var UNSET={valueOf:function(){}},"+(a.tools.length?a.tools+",":"")+(a.set?"Attaches=function(){};Attaches.prototype={"+a.keys.map(function(e){return e+":null"})+"};":"set=function(){};")+"return function createTmpl_(id,instance,initL10n){"+"var _=createDOM(),"+(a.l10n?"l10n=initL10n?{}:l10nMap,":"")+u.path.concat(a.vars)+(a.l10nCompute.length?";instance.compute=["+a.l10nCompute+"]":"")+";instance.tmpl={"+[u.ref,"templateId_:id","set:set"]+"}"+(f?";if(instance.context||instance.onAction)"+f+"=(id<<12)|tid":"")+a.set+(a.l10n?";if(initL10n){l10n=l10nMap;initL10n(set)};if(l10nMarkup.length)for(var idx=0,token;token=l10nMarkup[idx];idx++)set(token.path,token.token);":"")+(a.set?";if(instance.bindings)instance.handler=getBindings(instance,set)":"")+";"+a.l10nCompute.map(function(e){return'set("'+e+'",'+e+")"})+"}"),l};t.exports={getFunctions:F}},"a.js":function(e,t,n,r,i,s,o,u,a){var f="basisTemplateId_"+n.genUID(),l=1,c=2,h=4,p=5,d=6,v=3,m=8,g=9,y=0,b=1,w=2,E=3,S=4,x={4:"class",5:"style"},T={"class":h,style:p},N={2:S,4:S-1,5:S-1,6:2},C=1,k=2,L=3,A=4,O=5,M=3,_=4,D=3,P=3,H=2,B=1,j=r.document,F=j?function(){var e=j.createElement("div");return e.appendChild(j.createTextNode("a")),e.appendChild(j.createTextNode("a")),e.cloneNode(true).childNodes.length==1}():!0;t.exports={MARKER:f,TYPE_ELEMENT:l,TYPE_ATTRIBUTE:c,TYPE_ATTRIBUTE_CLASS:h,TYPE_ATTRIBUTE_STYLE:p,TYPE_ATTRIBUTE_EVENT:d,TYPE_TEXT:v,TYPE_COMMENT:m,TYPE_CONTENT:g,TOKEN_TYPE:y,TOKEN_BINDINGS:b,TOKEN_REFS:w,ATTR_NAME:E,ATTR_VALUE:S,ATTR_NAME_BY_TYPE:x,ATTR_TYPE_BY_NAME:T,ATTR_VALUE_INDEX:N,ELEMENT_NAME:M,ELEMENT_ATTRIBUTES_AND_CHILDREN:_,TEXT_VALUE:D,COMMENT_VALUE:P,CONTENT_CHILDREN:H,CONTENT_PRIORITY:B,CLASS_BINDING_ENUM:C,CLASS_BINDING_BOOL:k,CLASS_BINDING_INVERT:L,CLASS_BINDING_EQUAL:A,CLASS_BINDING_NOTEQUAL:O,CLONE_NORMALIZATION_TEXT_BUG:F}},"b.js":function(e,t,n,r,i,s,o,u,a){function l(e,t){if(!e)return;var n=e.indexOf(":");if(n!=-1){var r=e.substr(0,n);return f[r]||t&&t.lookupNamespaceURI(r)}}var f={xlink:"http://www.w3.org/1999/xlink",svg:"http://www.w3.org/2000/svg"};t.exports={namespaceURI:f,getNamespace:l}},"1g.js":function(e,t,n,r,i,s,o,u,a){var f=n.fn.$self,l=n.fn.$undef,c=n.require("./1.js").ReadOnlyDataset,h=n.require("./1.js").DatasetWrapper,p=n.require("./1.js").KeyObjectMap,d=n.require("./1.js").Dataset.setAccumulateState,v=n.require("./1a.js"),m=n.require("./1f.js"),g=n.require("./19.js"),y=n.require("./18.js"),b=function(e){var t=this.sourceMap_,n=this.members_,r=e.basisObjectId,i=t[r].list,s=t[r].list={},o=this.rule(e),u,a=[],f=[],l;if(Array.isArray(o))for(var c=0;c<o.length;c++)l=this.keyMap.get(o[c],!0),l&&!l.has(e)&&(h=l.basisObjectId,s[h]=l,i[h]||(l.dataset.emit_itemsChanged({inserted:[e]}),n[h]?n[h]++:(a.push(l),n[h]=1)));for(var h in i)if(!s[h]){var l=i[h];l.dataset.emit_itemsChanged({deleted:[e]}),--n[h]||(delete n[h],f.push(l))}(u=y(a,f))&&this.emit_itemsChanged(u)},w={itemsChanged:function(e,t){var n=this.sourceMap_,r=this.members_,i=this.ruleEvents,s,o,u,a=[],f=[];d(!0);if(s=t.inserted)for(var l=0,c;c=s[l];l++){var h=this.rule(c),p={object:c,list:{}};n[c.basisObjectId]=p;if(Array.isArray(h))for(var v=0,m={};v<h.length;v++)o=this.keyMap.get(h[v],!0),o&&!m[o.basisObjectId]&&(u=o.basisObjectId,m[u]=!0,p.list[u]=o,o.dataset.emit_itemsChanged({inserted:[c]}),r[u]?r[u]++:(a.push(o),r[u]=1));i&&c.addHandler(i,this)}if(s=t.deleted)for(var l=0,c;c=s[l];l++){var g=c.basisObjectId,h=n[g].list;delete n[g];for(var u in h)o=h[u],o.dataset.emit_itemsChanged({deleted:[c]}),--r[u]||(delete r[u],f.push(o));i&&c.removeHandler(i,this)}d(!1),(t=y(a,f))&&this.emit_itemsChanged(t)}};t.exports=v.subclass({className:"basis.data.dataset.Cloud",subsetClass:c,subsetWrapperClass:h,rule:n.getter(l),ruleEvents:g(b,"update"),keyMap:null,map:f,listen:{source:w},init:function(){if(!this.keyMap||this.keyMap instanceof p==0)this.keyMap=m(this.keyMap,this.rule,this.subsetWrapperClass,this.subsetClass);v.prototype.init.call(this)},getSubset:function(e,t){return this.keyMap.get(e,t)},destroy:function(){v.prototype.destroy.call(this),this.keyMap.destroy(),this.keyMap=null}})}};(function n(r,i,s){function m(e){function t(e){return Math.round(e).toString(36)}var n=t(10+25*Math.random());e||(e=16);while(n.length<e)n+=t(new Date*Math.random());return n.substr(0,e)}function y(e,t){for(var n in t)e[n]=t[n];return e}function b(e,t){for(var n in t)n in e==0&&(e[n]=t[n]);return e}function w(e){var t=[];for(var n in e)t.push(n);return t}function E(e){var t=[];for(var n in e)t.push(e[n]);return t}function S(e,t){var n={};if(!t)return y(n,e);for(var r=0,i;i=t[r++];)i in e&&(n[i]=e[i]);return n}function x(e,t){var n={};if(!t)return y(n,e);for(var r=0,i;i=t[r++];)i in e&&(n[i]=e[i],delete e[i]);return n}function T(){var e={};for(var t=0;t<arguments.length;t++)y(e,arguments[t]);return e}function N(e,t,n){var r=[];for(var i in e)r.push(t.call(n,i,e[i]));return r}function C(e){return e==undefined}function k(e){return e!=undefined}function L(e){return e==null||e==undefined}function A(e){return e!=null&&e!=undefined}function O(e){return e===this}function M(e){return e!==this}function _(e){return e}function D(e){return function(){return e}}function P(){return!1}function H(){return!0}function B(){return null}function j(){}function q(e){return function(t){var n={};return n[e]=t,n}}function R(e,t){var n=0,r,i;return r=function(){return n++||(r.inited=!0,r.data=i=e.apply(t||this,arguments)),i}}function U(e,t,n){var r=0,i,s;return i=function(){return r++||(i.inited=!0,i.data=s=e.call(n||this)),t.apply(s,arguments),s}}function z(e,t){var n=0;return function(){if(!(n++))return e.apply(t||this,arguments)}}function W(e){typeof e!="function"&&(e=F(e));var t=function(t){return e(t)};return t.factory=d,t}function X(e){return typeof e=="function"&&e.factory===d}function V(e,t){var n="basisjsCallback"+m();return u[n]=t?e:function(){try{delete u[n]}catch(t){u[n]=undefined}return e.apply(this,arguments)},n}function tt(){var e=s;if(!e)if(c)Z=a.basisjsFilename;else{var t=f.scripts;for(var n=0,r;r=t[n];n++){var i=r.hasAttribute("basis-config")?r.getAttribute("basis-config"):r.getAttribute("data-basis-config");r.removeAttribute("basis-config"),r.removeAttribute("data-basis-config");if(i!==null){Z=Y.normalize(r.src);try{e=Function("return{"+i+"}")()}catch(o){}break}}Z||(Z=Y.normalize(t[0].src))}return nt(e)}function nt(e){e=S(e),b(e,{implicitExt:c?!0:!1});var t=[],n=T(e.path,e.modules,{basis:Z});e.modules={};if(e.autoload){var r=String(e.autoload).match(/^((?:[^\/]*\/)*)([a-z$_][a-z0-9$_]*)((?:\.[a-z$_][a-z0-9$_]*)*)$/i);r&&(n[r[2]]={autoload:!0,filename:r[1]+r[2]+(r[3]||".js")}),delete e.autoload}for(var i in n){var s=n[i];typeof s=="string"&&(s={filename:s.replace(/\/$/,"/"+i+".js")});var o=s.filename,u=s.path;o&&!u&&(o=Y.resolve(o),u=o.substr(0,o.length-Y.extname(o).length),o="../"+Y.basename(o)),u=Y.resolve(u),!o&&u&&(o=Y.basename(u),u=Y.dirname(u)),Y.extname(o)||(o+=".js"),o=Y.resolve(u,o),e.modules[i]={path:u,filename:o},s.autoload&&(e.autoload=t,t.push(i))}return e}function ht(e){var t=lt[e.url];if(t)for(var n=0;n<t.length;n++)t[n](e.get(),e.url)}function gt(e,t,n){try{return new Function(t,'"use strict";\n'+n)}catch(r){$.error("Compilation error at "+e+("line"in r?":"+(r.line-1):"")+": "+r)}}function Tt(e){if(e in wt==0){var t=e.split("."),n=t.shift(),r=pt(n+":"+t.join("/")+".js").replace(/\/\.js$/,".js");wt[e]=r,Et[r]=e}return wt[e]}function Nt(e){var t=bt[e];return t||(t=bt[e]=new xt(e),t.namespaces_={},t.namespaces_[e]=t,et.noConflict||(u[e]=t)),t}function Ct(e){if(p.call(bt,e))return bt[e];e=e.split(".");var t=Nt(e[0]),n=t;for(var r=1;r<e.length;r++){var i=e[r],s=e.slice(0,r+1).join(".");if(!p.call(t.namespaces_,s)){var o=new xt(s);et.implicitExt&&(n[i]=o),t.namespaces_[s]=o}n=t.namespaces_[s]}return bt[e.join(".")]=n,n}function Lt(e,t){!/[^a-z0-9_\.]/i.test(e)&&Y.extname(e)!=".js"?e=Tt(e):e=pt(e,null,"basis.patch('{url}')"),lt[e]?lt[e].push(t):lt[e]=[t];var n=mt.get(e);n&&n.isResolved()&&t(n.get(),n.url)}function At(e,t){if(e!=null){var n=e.length;if(typeof n=="undefined"||h.call(e)=="[object Function]")return[e];t||(t=0);if(n-t>0){for(var r=[],i=0,s=t;s<n;)r[i++]=e[s++];return r}}return[]}function Ot(e,t,n){var r=[],i=typeof t=="function";for(var s=0;s<e;s++)r[s]=i?t.call(n,s,r):t;return r}var o="1.10.0",u=Function("return this")(),a=u.process,f=u.document,l=u.location,c=u!==r&&a&&a.argv?u:!1,h=Object.prototype.toString,p=Object.prototype.hasOwnProperty,d={},v={},g=function(){return function(){}}(),F=function(){function u(t){var i=this,o,a,c;if(typeof t=="function"||typeof t=="string"){o=f(t,i[n]),c=e+o[n];if(p.call(i,c))return i[c];typeof o[r]=="function"&&(o=o[r]),a=function(e){return o(i(e))}}else{var h=t;if(!h)return I;a=function(e){return h[i(e)]}}return a[n]=s++,a[r]=t,a.__extend__=l,a.as=u,c&&(i[c]=a),a}function a(e){return new Function("object","return object != null ? object."+e+" : object")}function f(e,t){var i=e,f;if(e&&typeof e=="string"){if(p.call(o,e))return o[e];i=o[e]=a(e)}return typeof i!="function"?I:i.__extend__===l?i:p.call(i,t)?i[t]:(f=i[t]=i!==e?i:function(e){return i(e)},f[n]=s++,f[r]=e,f.__extend__=l,f.as=u,f)}function l(e,n){var r=e&&e!==I?f(e,t):I;return n||n===""?(typeof n=="string"&&(n=Bt.formatter(n)),r.as(n)):r}var e="basisGetterId"+m()+"_",t=e+"root",n=e,r=e+"base",i=e+"parent",s=1,o={};return l.ID=n,l.SOURCE=r,l.PARENT=i,l}(),I=function(){var e=function(){};return e[F.ID]=F.ID+"nullGetter",e.__extend__=F,e.as=function(){return e},e}(),$=function(){var e=u.console,t={log:j,info:j,warn:j,error:j};return e&&N(t,function(n){t[n]="bind"in Function.prototype&&typeof e[n]=="function"?Function.prototype.bind.call(e[n],e):function(){Function.prototype.apply.call(e[n],e,arguments)}}),t}(),J=u.setImmediate||u.msSetImmediate,K=u.clearImmediate||u.msSetImmediate;J&&(J=J.bind(u)),K&&(K=K.bind(u)),J||function(){var e=function(){var e={},n=0;return J=function(r){if(typeof r!="function")return;return e[++n]={fn:r,args:At(arguments,1)},t(n),n},K=function(t){delete e[t]},function(t){var n=e[t];n&&(delete e[t],n.fn.apply(undefined,n.args)),Q.process()}}(),t=function(t){setTimeout(function(){e(t)},0)};if(c&&c.process&&typeof a.nextTick=="function")t=function(t){a.nextTick(function(){e(t)})};else{var n=u.postMessage&&!u.importScripts;if(n){var r=u.onmessage;u.onmessage=function(){n=!1},u.postMessage("","*"),u.onmessage=r}if(n){var i={},s=function(t){if(t&&t.source==u){var n=t.data;if(p.call(i,n)){var r=i[n];delete i[n],e(r)}}};u.addEventListener?u.addEventListener("message",s,!0):u.attachEvent("onmessage",s),t=function(e){var t=m(32);i[t]=e,u.postMessage(t,"*")}}else if(u.MessageChannel){var o=new u.MessageChannel;o.port1.onmessage=function(t){e(t.data)},t=function(e){o.port2.postMessage(e)}}else{var l=function(){return f.createElement("script")};if(f&&"onreadystatechange"in l()){var h=t;t=function d(n){typeof Ut!="undefined"&&(t=h,Ut.head.ready(function(){t=function(t){var n=l();n.onreadystatechange=function(){n.onreadystatechange=null,Ut.remove(n),n=null,e(t)},Ut.head.add(n)}})),t===d?h(n):t(n)}}}}}();var Q=function(){function r(){try{t=!0;var r;while(r=e.shift())r.fn.call(r.context)}finally{t=!1,e.length&&(n=J(i))}}function i(){n&&(n=K(n)),e.length&&r()}var e=[],t=!1,n,s=function(t,r){return e.push({fn:t,context:r}),n||(n=J(i)),!0};return s.process=function(){t||i()},s.schedule=function(e){function r(){var i=J(r);n=!1;for(var s in t){var o=t[s];delete t[s],e(o)}K(i),n||(t={})}var t={},n=!1;return{add:function(e){t[e.basisObjectId]=e,n||(n=s(r))},remove:function(e){delete t[e.basisObjectId]}}},s}(),G=function(){var e=0,t={id:e,start:function(){t.id=e++},finish:function(){Q.process(),t.id="unknown"}};return t}(),Y=function(){var e=/^([^\/]+:|\/)/,t=/^[a-zA-Z0-9\-]+:\/?/,n=/^(?:[a-zA-Z0-9\-]+:)?\/\/[^\/]+\/?/,r=/[\?#].*$/,i,s,o;if(c){var u=(a.basisjsBaseURI||"/").replace(/\\/g,"/");i=u.replace(/^[^\/]*/,""),s=u.replace(/\/.*/,"")}else i=l.pathname.replace(/[^\/]+$/,""),s=l.protocol+"//"+l.host;return o={baseURI:i,origin:s,normalize:function(e){e=(e||"").replace(t,"/").replace(n,"/").replace(r,"");var i=[],s=e.split("/");for(var o=0;o<s.length;o++)s[o]==".."?(i.length>1||i[0])&&i.pop():(s[o]||!o)&&s[o]!="."&&i.push(s[o]);return i.join("/")||(e[0]==="/"?"/":"")},dirname:function(e){var t=o.normalize(e);return t.replace(/\/([^\/]*)$|^[^\/]+$/,"")||(t[0]=="/"?"/":".")},extname:function(e){var t=o.normalize(e).match(/[^\/](\.[^\/\.]*)$/);return t?t[1]:""},basename:function(e,t){var n=o.normalize(e).match(/[^\\\/]*$/);return n=n?n[0]:"",t==o.extname(n)&&(n=n.substring(0,n.length-t.length)),n},resolve:function(){var t=At(arguments).reverse(),n=[],r=!1;for(var s=0;!r&&s<t.length;s++)typeof t[s]=="string"&&(n.unshift(t[s]),r=e.test(t[s]));return r?n.length&&n[0]=="/"&&(n[0]=""):n.unshift(i=="/"?"":i),o.normalize(n.join("/"))},relative:function(e,t){typeof t!="string"&&(t=e,e=i),e=o.normalize(e),t=o.normalize(t);if(e[0]=="/"&&t[0]!="/")return e;if(t[0]=="/"&&e[0]!="/")return t;var n=e.replace(/^\/$/,"").split(/\//),r=t.replace(/^\/$/,"").split(/\//),s=[],u=0;while(r[u]==n[u]&&typeof n[u]=="string")u++;for(var a=n.length-u;a>0;a--)s.push("..");return s.concat(r.slice(u).filter(Boolean)).join("/")}},o}(),Z=i||"",et=s||{modules:{},implicitExt:!0,autoload:["./0.js"]},rt=function(){function r(e){return typeof e=="function"&&!!e.basisClassId_}function i(e){var t=this;while(t&&t!==e)t=t.superClass_;return t===e}function o(s){var f=t++;typeof s!="function"&&(s=a);var l=function(){};l.prototype=s.prototype;var c=new l,h={basisClassId_:f,superClass_:s,extendConstructor_:!!s.extendConstructor_,isSubclassOf:i,subclass:function(){return o.apply(null,[v].concat(At(arguments)))},extend:u,factory:function(e){return W(function(t){return new v(T(e,t))})},__extend__:function(e){return e&&e!==n&&(typeof e=="object"||typeof e=="function"&&!r(e))?a.create.call(null,v,e):e},prototype:c};for(var p=1,d;d=arguments[p];p++)h.extend(d);var v=h.extendConstructor_?function(t){this.basisObjectId=e.id++;var n;for(var r in t)n=this[r],this[r]=n&&n.__extend__?n.__extend__(t[r]):t[r];this.init(),this.postInit()}:function(){this.basisObjectId=e.id++,this.init.apply(this,arguments),this.postInit()};c.constructor=v;for(var m in c)c[m]===n&&(c[m]=v);return y(v,h),v}function u(e){var t=this.prototype;typeof e=="function"&&!r(e)&&(e=e(this.superClass_.prototype,S(t))),e.prototype&&(e=e.prototype);for(var n in e){var i=e[n],o=t[n];n=="className"||n=="extendConstructor_"?this[n]=i:o&&o.__extend__?t[n]=o.__extend__(i):t[n]=i}return s&&e[n="toString"]!==h&&(t[n]=e[n]),this}var e={id:1},t=1,n={},s=function(){for(var e in{toString:1})return!1;return!0}(),a=y(o,{className:"basis.Class",extendConstructor_:!1,prototype:{basisObjectId:0,constructor:null,init:function(){},postInit:function(){},destroy:function(){for(var e in this)p.call(this,e)&&(this[e]=null);this.destroy=j}}}),f=function(e,t){return{__extend__:function(e){if(!e)return e;if(e&&e.__extend__)return e;var n=function(){};n.prototype=this;var r=new n;return t(r,e),r}}.__extend__(e||{})},l=function(e){return f(e,y,"extensibleProperty")},c=function(e){return f(e,function(e,t){for(var n in t)if(p.call(t,n)){var r=e[n],i=t[n];i?e[n]=r&&r.__extend__?r.__extend__(i):l(i):e[n]=null}},"nestedExtendProperty")},d=function(e,t){var n=function(t){var r={__extend__:n};if(t){if(t.__extend__)return t;for(var i in t)p.call(t,i)&&t[i]&&(r[i]=e)}return r};return n(t||{})};return y(a,{SELF:n,create:o,isClass:r,customExtendProperty:f,extensibleProperty:l,nestedExtendProperty:c,oneFunctionProperty:d})}(),it=rt(null,{className:"basis.Token",value:null,handler:null,deferredToken:null,bindingBridge:{attach:function(e,t,n,r){e.attach(t,n,r)},detach:function(e,t,n){e.detach(t,n)},get:function(e){return e.get()}},init:function(e){this.value=e},get:function(){return this.value},set:function(e){this.value!==e&&(this.value=e,this.apply())},attach:function(e,t,n){this.handler={fn:e,context:t,destroy:n||null,handler:this.handler}},detach:function(e,t){var n=this,r;while(r=n,n=n.handler)if(n.fn===e&&n.context===t){n.fn=j,n.destroy=n.destroy&&j,r.handler=n.handler;return}},apply:function(){var e=this.get(),t=this;while(t=t.handler)t.fn.call(t.context,e)},deferred:function(){var e=this.deferredToken;return e||(e=this.deferredToken=new ot(this.get()),this.attach(e.set,e)),e},as:function(e){var t=new it,n=function(t){this.set(e.call(this,t))};return typeof e!="function"&&(e=F(e)),n.call(t,this.get()),this.attach(n,t,t.destroy),t.attach(j,this,function(){this.detach(n,t)}),t},destroy:function(){this.deferredToken&&(this.deferredToken.destroy(),this.deferredToken=null),this.attach=j,this.detach=j;var e=this;while(e=e.handler)e.destroy&&e.destroy.call(e.context);this.handler=null,this.value=null}}),st=Q.schedule(function(e){e.apply()}),ot=it.subclass({className:"basis.DeferredToken",set:function(e){this.value!==e&&(this.value=e,st.add(this))},deferred:function(){return this}}),ut={},at={},ft={},lt={},ct=1;(function(){var e=typeof t!="undefined"?t:null;if(e)for(var n in e)ft[Y.resolve(n)]=e[n]})();var pt=function(e,t){var n=e.match(/^([a-zA-Z0-9\_\-]+):/);if(n){var r=n[1];r in St==0&&(St[r]=Y.baseURI+r+"/"),e=St[r]+Y.normalize("./"+e.substr(n[0].length))}else e=Y.resolve(t,e);return e},dt=function(e,t){if(t||!p.call(ft,e)){var n="";if(!c){var r=new u.XMLHttpRequest;r.open("GET",e,!1),r.setRequestHeader("If-Modified-Since",(new Date(0)).toGMTString()),r.setRequestHeader("X-Basis-Resource",1),r.send(""),r.status>=200&&r.status<400&&(n=r.responseText)}else try{n=a.basisjsReadFile?a.basisjsReadFile(e):""}catch(i){}ft[e]=n}return ft[e]},vt=function(e,t){var n=Y.extname(e),r=mt.extensions[n],i=arguments.length>1,s=!1,o=!1,u;i&&(e+="#virtual");var a=function(){if(s)return t;var n=i?t:dt(e);return r?o||(o=!0,t=r(n,e)):t=n,s=!0,ht(a),a.apply(),t};return y(a,y(new it,{url:e,type:n,virtual:i,fetch:function(){return a()},toString:function(){return"[basis.resource "+e+"]"},isResolved:function(){return s},update:function(n){if(!s||i||n!=ft[e])i||(ft[e]=n),r?(!o&&i&&(t=n),o&&!r.permanent&&(t=r(n,e,t),ht(a),a.apply())):(t=n,s=!0,ht(a),a.apply())},reload:function(){if(i)return;var t=ft[e],n=dt(e,!0);n!=t&&(s=!1,a.update(n))},get:function(n){return i&&n?r?u:t:n?dt(e):a()},ready:function(e,t){if(s){e.call(t,a());if(r&&r.permanent)return}return a.attach(e,t),a}})),ut[e]=a,at[e]=a,a},mt=function(e,t){e&&typeof e!="string"&&(e=e.url);var n=t?t+"\0"+e:e,r=at[n];if(!r){var i=pt(e,t,"basis.resource('{url}')");r=ut[i]||vt(i),at[n]=r}return r};y(mt,{resolveURI:pt,buildCloak:mt,isResource:function(e){return e?ut[e.url]===e:!1},isResolved:function(e){var t=mt.get(e);return t?t.isResolved():!1},exists:function(e){return p.call(ut,pt(e,null,"basis.resource.exists('{url}')"))},get:function(e){return e=pt(e,null,"basis.resource.get('{url}')"),mt.exists(e)?mt(e):null},getFiles:function(e){return e?w(ft):w(ut).filter(function(e){return!ut[e].virtual})},virtual:function(e,t,n){return vt((n?n+":":Y.normalize(Y.baseURI=="/"?"":Y.baseURI)+"/")+"virtual-resource"+ct++ +"."+e,t)},extensions:{".js":y(function(t,n){var r=Et[n];if(!r){var i=!0,s=(Y.dirname(n)+"/"+Y.basename(n,Y.extname(n))).replace(/^\/\//,"/");for(var o in St){var u=St[o]+o+"/";if(s.substr(0,u.length)==u){i=!1,s=s.substr(St[o].length);break}}r=s.replace(/\./g,"_").replace(/^\//g,"").replace(/\//g,"."),i&&(r="implicit."+r)}var o=Ct(r);return o.inited||(o.inited=!0,o.exports=yt({path:o.path,exports:o.exports},n,t).exports,o.exports&&o.exports.constructor===Object&&et.implicitExt&&b(o,o.exports)),o.exports},{permanent:!0}),".css":function(t,n,r){return r||(r=new Wt(n)),r.updateCssText(t),r},".svg":function(t,n,r){return r||(r=new Xt(n)),r.updateSvgText(t),r},".json":function(t){if(typeof t=="object")return t;var n;try{t=String(t),n=$t.json.parse(t)}catch(r){}return n||null}}});var yt=function(e,t,n){var r=Y.dirname(t),i=n;return e.exports||(e.exports={}),typeof i!="function"&&(i=gt(t,["exports","module","basis","global","__filename","__dirname","resource","require","asset"],n)),typeof i=="function"&&i.call(e.exports,e.exports,e,$t,u,t,r,function(e){return mt(e,r)},function(e){return kt(e,r)},function(e){return pt(e,r,"asset('{url}')")}),e},bt={},wt={},Et={},St={};N(et.modules,function(e,t){St[e]=t.path+"/",wt[e]=t.filename,Et[t.filename]=e}),function(t){var t=typeof e!="undefined"?e:null;if(t)for(var n in t){var r=Y.resolve(n),i=t[n];Et[r]=i,wt[i]=r}}();var xt=rt(null,{className:"basis.Namespace",init:function(e){this.name=e,this.exports={}},toString:function(){return"[basis.namespace "+this.name+"]"},extend:function(e){return y(this.exports,e),b(this,e)}}),kt=function(e,t){var n=Y.extname(e);return!/[^a-z0-9_\.]/i.test(e)&&n!=".js"?e=Tt(e):/[\?#]/.test(e)||(n||(e+=".js"),e=pt(e,t,"basis.require('{url}')")),mt(e).fetch()};b(Function.prototype,{bind:function(e){var t=this,n=At(arguments,1);return n.length?function(){return t.apply(e,n.concat.apply(n,arguments))}:function(){return t.apply(e,arguments)}}}),b(Array,{isArray:function(e){return h.call(e)==="[object Array]"}}),b(Array.prototype,{indexOf:function(e,t){t=parseInt(t,10)||0;if(t<0)return-1;for(;t<this.length;t++)if(this[t]===e)return t;return-1},lastIndexOf:function(e,t){var n=this.length;t=parseInt(t,10),isNaN(t)||t>=n?t=n-1:t=(t+n)%n;for(;t>=0;t--)if(this[t]===e)return t;return-1},forEach:function(e,t){for(var n=0,r=this.length;n<r;n++)n in this&&e.call(t,this[n],n,this)},every:function(e,t){for(var n=0,r=this.length;n<r;n++)if(n in this&&!e.call(t,this[n],n,this))return!1;return!0},some:function(e,t){for(var n=0,r=this.length;n<r;n++)if(n in this&&e.call(t,this[n],n,this))return!0;return!1},filter:function(e,t){var n=[];for(var r=0,i=this.length;r<i;r++)r in this&&e.call(t,this[r],r,this)&&n.push(this[r]);return n},map:function(e,t){var n=[];for(var r=0,i=this.length;r<i;r++)r in this&&(n[r]=e.call(t,this[r],r,this));return n},reduce:function(e,t){var n=this.length,r=arguments.length;if(n==0&&r==1)throw new TypeError;var i,s=0;r>1&&(i=t,s=1);for(var o=0;o<n;o++)o in this&&(s++?i=e.call(null,i,this[o],o,this):i=this[o]);return i}});var Mt={from:At,create:Ot,flatten:function(e){return e.concat.apply([],e)},repeat:function(e,t){return Mt.flatten(Ot(parseInt(t,10)||0,e))},search:function(e,t,n,r){e.lastSearchIndex=-1,n=F(n||_);for(var i=parseInt(r,10)||0,s=e.length;i<s;i++)if(n(e[i])===t)return e[e.lastSearchIndex=i]},lastSearch:function(e,t,n,r){e.lastSearchIndex=-1,n=F(n||_);var i=e.length,s=isNaN(r)||r==null?i:parseInt(r,10);for(var o=s>i?i:s;o-->0;)if(n(e[o])===t)return e[e.lastSearchIndex=o]},add:function(e,t){return e.indexOf(t)==-1&&!!e.push(t)},remove:function(e,t){var n=e.indexOf(t);return n!=-1&&!!e.splice(n,1)},has:function(e,t){return e.indexOf(t)!=-1},sortAsObject:function(){return Mt.sort.apply(this,arguments)},sort:function(e,t,n,r){return t=F(t),r=r?-1:1,e.map(function(e,n){return{i:n,v:t(e)}}).sort(n||function(e,t){return r*(e.v>t.v||-(e.v<t.v)||(e.i>t.i?1:-1))}).map(function(e){return this[e.i]},e)}};if(![1,2].splice(1).length){var _t=Array.prototype.splice;Array.prototype.splice=function(){var e=At(arguments);return e.length<2&&(e[1]=this.length),_t.apply(this,e)}}var Dt=/([\/\\\(\)\[\]\?\{\}\|\*\+\-\.\^\$])/g,Pt=/\{([a-z\d_]+)(?::([\.0])(\d+)|:(\?))?\}/gi,Ht={};b(String,{toLowerCase:function(e){return String(e).toLowerCase()},toUpperCase:function(e){return String(e).toUpperCase()},trim:function(e){return String(e).trim()},trimLeft:function(e){return String(e).trimLeft()},trimRight:function(e){return String(e).trimRight()}}),b(String.prototype,{trimLeft:function(){return this.replace(/^\s+/,"")},trimRight:function(){return this.replace(/\s+$/,"")},trim:function(){return this.trimLeft().trimRight()}});var Bt={toObject:function(e,t){try{return(new Function("return 0,"+e))()}catch(n){if(t)throw n}},repeat:function(e,t){return(new Array(parseInt(t,10)+1||0)).join(e)},qw:function(e){var t=e.trim();return t?t.split(/\s+/):[]},forRegExp:function(e){return e.replace(Dt,"\\$1")},format:function(e,t){var n=At(arguments,1);return typeof t=="object"&&y(n,t),e.replace(Pt,function(e,t,r,i,s){var o=t in n?n[t]:s?"":e;return r&&!isNaN(o)?(o=Number(o),r=="."?o.toFixed(i):It.lead(o,i)):o})},formatter:function(e){e=String(e);if(p.call(Ht,e))return Ht[e];var t=function(t){return Bt.format(e,t)};return Ht[e]=t,t},capitalize:function(e){return e.charAt(0).toUpperCase()+e.substr(1).toLowerCase()},camelize:function(e){return e.replace(/-(.)/g,function(e,t){return t.toUpperCase()})},dasherize:function(e){return e.replace(/[A-Z]/g,function(e){return"-"+e.toLowerCase()})},isEmpty:function(e){return e==null||String(e)==""},isNotEmpty:function(e){return e!=null&&String(e)!=""}};if("|||".split(/\|/).length+"|||".split(/(\|)/).length!=11){var jt=String.prototype.split;String.prototype.split=function(e,t){if(!e||e instanceof RegExp==0||e.source=="")return jt.call(this,e,t);var n=[],r=0,i;e.global||(e=new RegExp(e.source,/\/([mi]*)$/.exec(e)[1]+"g"));while(i=e.exec(this))i[0]=this.substring(r,i.index),n.push.apply(n,i),r=e.lastIndex;return n.push(this.substr(r)),n}}if("12".substr(-1)!="2"){var Ft=String.prototype.substr;String.prototype.substr=function(e,t){return Ft.call(this,e<0?Math.max(0,this.length+e):e,t)}}var It={fit:function(e,t,n){return!isNaN(t)&&e<t?Number(t):!isNaN(n)&&e>n?Number(n):e},lead:function(e,t,n){return String(e).replace(/\d+/,function(e){return(t-=e.length-1)>1?(new Array(t)).join(n||0)+e:e})},group:function(e,t,n){return String(e).replace(/\d+/,function(e){return e.replace(/\d/g,function(r,i){return!i+(e.length-i)%(t||3)?r:(n||" ")+r})})},format:function(e,t,n,r,i,s){var o=e.toFixed(t);if(n||s)o=o.replace(/(\d+)(\.?)/,function(e,t,r){return(n?$t.number.group(Number(t),3,n):t)+(r?s||r:"")});return r&&(o=o.replace(/^-?/,"$&"+(r||""))),o+(i||"")}};b(Date,{now:function(){return Number(new Date)}});var qt=function(){function r(){var e;n&&(n=K(n)),t.length>1&&(n=J(r));while(e=t.shift())e[0].call(e[1]);n=K(n),Q.process()}function i(){e++||r()}function s(){try{f.documentElement.doScroll("left"),i()}catch(e){setTimeout(s,1)}}var e=!f||f.readyState=="complete",t=[],n;if(!e)if(f.addEventListener)f.addEventListener("DOMContentLoaded",i,!1),u.addEventListener("load",i,!1);else{f.attachEvent("onreadystatechange",i),u.attachEvent("onload",i);try{!u.frameElement&&f.documentElement.doScroll&&s()}catch(o){}}return function(i,s){!t.length&&e&&!n&&(n=J(r)),t.push([i,s])}}(),Rt=function(){return"addEventListener"in u?function(e,t){u.addEventListener("unload",function(n){e.call(t||null,n||u.event)},!1)}:"attachEvent"in u?function(e,t){u.attachEvent("onunload",function(n){e.call(t||null,n||u.event)})}:j}(),Ut=function(){function r(e){if(f&&!t[e]){t[e]=f[e]||f.getElementsByTagName(e)[0];if(t[e]){var r=n[e];delete n[e];for(var i=0,s;s=r[i];i++)s[0].call(s[1],t[e])}}return t[e]}function i(){var e=this[0],t=this[1],s=this[2];o(t);var u=r(e);if(u){s===!0&&(s=u.firstChild);if(!s||s.parentNode!==u)s=null;u.insertBefore(t,s)}else n[e].push([i,[e,t,s]])}function s(e,r,i){n[e]?n[e].push([r,i]):r.call(i,t[e])}function o(e){for(var t in n){var r=Mt.search(n[t],e,function(e){return e[1]&&e[1][1]});r&&Mt.remove(n[t],r)}e&&e.parentNode&&e.parentNode.nodeType==1&&e.parentNode.removeChild(e)}function u(){e&&r("head")&&r("body")&&(e=clearInterval(e))}var e,t={},n={head:[],body:[]};return f&&(!r("head")||!r("body"))&&(e=setInterval(u,5),qt(u)),{head:{ready:function(e,t){s("head",e,t)},add:function(e,t){i.call(["head",e,t])}},body:{ready:function(e,t){s("body",e,t)},add:function(e,t){i.call(["body",e,t])}},remove:o}}(),zt=function(){function t(){n.globalDestroy=!0,n.add=j,n.remove=j;var t;while(t=e.pop())if(typeof t.destroy=="function")try{t.destroy()}catch(r){}else for(var i in t)t[i]=null;e=[]}var e=[];if(Rt===j)return{add:j,remove:j};Rt(t);var n={add:function(t){t!=null&&e.push(t)},remove:function(t){Mt.remove(e,t)}};return n}(),Wt=function(){function n(e){t.setAttribute("href",e),Ut.head.add(t,!0)}function r(){t.setAttribute("href",l.href),Ut.remove(t)}function i(){n(this.baseURI),this.element||(this.element=f.createElement("style"),e||this.element.appendChild(f.createTextNode(""))),Ut.head.add(this.element),this.syncCssText(),r()}var e=function(){try{return!f.createElement("style").appendChild(f.createTextNode(""))}catch(e){return!0}}(),t=f&&f.createElement("base");return rt(null,{className:"basis.CssResource",inUse:0,url:"",baseURI:"",cssText:undefined,element:null,init:function(e){this.url=e,this.baseURI=Y.dirname(e)+"/"},updateCssText:function(e){this.cssText!=e&&(this.cssText=e,this.inUse&&this.element&&(n(this.baseURI),this.syncCssText(),r()))},syncCssText:e?function(){this.element.styleSheet.cssText=this.cssText}:function(){var e=this.cssText;this.element.firstChild.nodeValue=e},startUse:function(){this.inUse||Ut.head.ready(i,this),this.inUse+=1},stopUse:function(){this.inUse&&(this.inUse-=1,!this.inUse&&this.element&&Ut.remove(this.element))},destroy:function(){this.element&&Ut.remove(this.element),this.element=null,this.cssText=null}})}(),Xt=function(){function t(t){e.setAttribute("href",t),Ut.head.add(e,!0)}function n(){e.setAttribute("href",l.href),Ut.remove(e)}function r(){t(this.baseURI),this.element||(this.element=f.createElement("span"),this.element.style.cssText="display:none"),Ut.body.add(this.element),this.syncSvgText(),n()}var e=f&&f.createElement("base");return rt(null,{className:"basis.SvgResource",inUse:0,url:"",baseURI:"",svgText:undefined,element:null,init:function(e){this.url=e,this.baseURI=Y.dirname(e)+"/"},toString:function(){return this.svgText},updateSvgText:function(e){this.svgText!=e&&(this.svgText=e,this.inUse&&this.element&&(t(this.baseURI),this.syncSvgText(),n()))},syncSvgText:function(){this.element.innerHTML=this.svgText},startUse:function(){this.inUse||Ut.body.ready(r,this),this.inUse+=1},stopUse:function(){this.inUse&&(this.inUse-=1,!this.inUse&&this.element&&Ut.remove(this.element))},destroy:function(){this.element&&Ut.remove(this.element),this.element=null,this.svgText=null}})}(),Vt=function(){var e=_,t=function(){},n=function(e,t,n){},r=function(e,t){},i=function(e){};return{fixSourceOffset:e,setInfo:t,patchInfo:n,patchFactory:i,getInfo:r}}(),$t=Ct("basis").extend({version:o,NODE_ENV:c,config:et,createSandbox:function(e){return n(u,Z,b({noConflict:!0,devpanel:!1},e))},dev:$=(new xt("basis.dev")).extend($).extend(Vt).extend({warnPropertyAccess:g}),resolveNSFilename:Tt,patch:Lt,namespace:Ct,require:kt,resource:mt,asset:function(e){return pt(e,null,"basis.asset('{url}')")},setImmediate:J,clearImmediate:K,nextTick:function(){J.apply(null,arguments)},asap:Q,FACTORY:d,PROXY:v,Class:rt,Token:it,DeferredToken:ot,codeFrame:G,ready:qt,teardown:Rt,cleaner:zt,genUID:m,getter:F,console:$,path:Y,doc:Ut,object:{extend:y,complete:b,keys:w,values:E,slice:S,splice:x,merge:T,iterate:N},fn:{$undefined:C,$defined:k,$isNull:L,$isNotNull:A,$isSame:O,$isNotSame:M,$self:_,$const:D,$false:P,$true:H,$null:B,$undef:j,getter:F,nullGetter:I,wrapper:q,factory:W,isFactory:X,lazyInit:R,lazyInitAndRun:U,runOnce:z,publicCallback:V},array:y(At,Mt),string:Bt,number:It,bool:{invert:function(e){return!e}},json:{parse:typeof JSON!="undefined"?JSON.parse:function(e){return Bt.toObject(e,!0)}}});return c||et.autoload&&et.autoload.forEach(function(e){kt(e)}),c&&exports&&(exports.basis=$t),$t.require("./0.css").startUse(),$t})(this)}).call(this)
+// resources(120):
+//   [string] [generated-style#2] -> 0.css
+//   [array] src/ui/table/modules/head/template/head.tmpl -> 9.tmpl
+//   [array] src/ui/table/modules/cell/template/cell.tmpl -> 1.tmpl
+//   [array] src/ui/table/modules/row/template/row.tmpl -> 2.tmpl
+//   [array] src/ui/table/template/table.tmpl -> 3.tmpl
+//   [array] src/ui/menu/template/menu.tmpl -> 4.tmpl
+//   [array] src/ui/menu/template/item.tmpl -> 5.tmpl
+//   [array] src/ui/page/template/page.tmpl -> 6.tmpl
+//   [array] src/ui/progress/template/progress.tmpl -> 7.tmpl
+//   [array] src/pages/home/modules/stat/template/stat.tmpl -> 8.tmpl
+//   [array] src/pages/home/template/page.tmpl -> g.tmpl
+//   [array] src/template/layout.tmpl -> 0.tmpl
+//   [array] src/ui/table/modules/foot/template/foot.tmpl -> a.tmpl
+//   [array] src/ui/cells/fileSize/template/cell.tmpl -> b.tmpl
+//   [array] src/pages/modules/modules/modulesTable/template/row.tmpl -> c.tmpl
+//   [array] src/pages/modules/modules/modulesTable/template/foot.tmpl -> d.tmpl
+//   [array] src/pages/assets/modules/assetsTable/template/foot.tmpl -> f.tmpl
+//   [array] src/pages/assets/modules/assetsTable/template/row.tmpl -> e.tmpl
+//   [object] src/pages/assets/modules/assetsTable/index.l10n -> 3.l10n
+//   [object] src/pages/modules/modules/modulesTable/index.l10n -> 2.l10n
+//   [object] src/ui/menu/template/item.l10n -> 0.l10n
+//   [object] src/ui/progress/template/progress.l10n -> 1.l10n
+//   [function] ../../node_modules/basisjs/src/basis/template/declaration/style.js -> 12.js
+//   [function] ../../node_modules/basisjs/src/basis/template/declaration/attr.js -> 13.js
+//   [function] ../../node_modules/basisjs/src/basis/template/declaration/element/b-content.js -> 14.js
+//   [function] ../../node_modules/basisjs/src/basis/template/declaration/element/b-define.js -> 15.js
+//   [function] ../../node_modules/basisjs/src/basis/template/declaration/element/b-include.js -> 16.js
+//   [function] ../../node_modules/basisjs/src/basis/template/declaration/element/b-isolate.js -> 17.js
+//   [function] ../../node_modules/basisjs/src/basis/template/declaration/element/b-l10n.js -> 18.js
+//   [function] ../../node_modules/basisjs/src/basis/template/declaration/element/b-style.js -> 19.js
+//   [function] ../../node_modules/basisjs/src/basis/template/declaration/element/b-svg.js -> 1a.js
+//   [function] ../../node_modules/basisjs/src/basis/template/declaration/element/b-text.js -> 1b.js
+//   [function] ../../node_modules/basisjs/src/basis/template/store.js -> f.js
+//   [function] ../../node_modules/basisjs/src/basis/template/theme.js -> g.js
+//   [function] ../../node_modules/basisjs/src/basis/template/buildDom.js -> h.js
+//   [function] ../../node_modules/basisjs/src/basis/dom/event.js -> i.js
+//   [function] ../../node_modules/basisjs/src/basis/dom/wrapper.js -> j.js
+//   [function] src/pages/home/index.js -> 1c.js
+//   [function] src/pages/assets/index.js -> 1d.js
+//   [function] src/pages/modules/index.js -> 1e.js
+//   [function] ../../node_modules/basisjs/src/basis/app.js -> k.js
+//   [function] ../../node_modules/basisjs/src/basis/devpanel.js -> 0.js
+//   [function] src/ui/menu/index.js -> 1f.js
+//   [function] src/ui/progress/index.js -> 1g.js
+//   [function] src/ui.js -> l.js
+//   [function] src/ui/table/index.js -> 1h.js
+//   [function] src/ui/table/modules/row/index.js -> 1i.js
+//   [function] src/ui/table/modules/cell/index.js -> 1j.js
+//   [function] ../../node_modules/basisjs/src/basis/data.js -> 2.js
+//   [function] ../../node_modules/basisjs/src/basis/data/state.js -> 3.js
+//   [function] ../../node_modules/basisjs/src/basis/data/subscription.js -> 4.js
+//   [function] ../../node_modules/basisjs/src/basis/data/resolve.js -> 5.js
+//   [function] ../../node_modules/basisjs/src/basis/event.js -> 6.js
+//   [function] src/ui/page/index.js -> 1k.js
+//   [function] ../../node_modules/basisjs/src/basis/data/AbstractData.js -> v.js
+//   [function] src/type.js -> m.js
+//   [function] src/type/source.js -> 1l.js
+//   [function] ../../node_modules/basisjs/src/basis/promise.js -> n.js
+//   [function] ../../node_modules/basisjs/src/basis/entity.js -> o.js
+//   [function] ../../node_modules/basisjs/src/basis/data/dataset.js -> p.js
+//   [function] src/index.js -> 1.js
+//   [function] ../../node_modules/basisjs/src/basis/data/dataset/createRuleEvents.js -> 1n.js
+//   [function] ../../node_modules/basisjs/src/basis/data/dataset/SourceDataset.js -> 1o.js
+//   [function] ../../node_modules/basisjs/src/basis/data/dataset/Merge.js -> 1p.js
+//   [function] ../../node_modules/basisjs/src/basis/data/dataset/Subtract.js -> 1q.js
+//   [function] ../../node_modules/basisjs/src/basis/data/dataset/MapFilter.js -> 1r.js
+//   [function] ../../node_modules/basisjs/src/basis/data/dataset/Split.js -> 1s.js
+//   [function] ../../node_modules/basisjs/src/basis/data/dataset/createKeyMap.js -> 1t.js
+//   [function] ../../node_modules/basisjs/src/basis/data/dataset/Cloud.js -> 1u.js
+//   [function] ../../node_modules/basisjs/src/basis/data/dataset/Extract.js -> 1v.js
+//   [function] ../../node_modules/basisjs/src/basis/data/dataset/Filter.js -> 1w.js
+//   [function] ../../node_modules/basisjs/src/basis/data/dataset/Slice.js -> 1x.js
+//   [function] ../../node_modules/basisjs/src/basis/type.js -> q.js
+//   [function] ../../node_modules/basisjs/src/basis/type/string.js -> 1y.js
+//   [function] ../../node_modules/basisjs/src/basis/type/number.js -> 1z.js
+//   [function] ../../node_modules/basisjs/src/basis/type/int.js -> 20.js
+//   [function] ../../node_modules/basisjs/src/basis/type/enum.js -> 21.js
+//   [function] ../../node_modules/basisjs/src/basis/type/array.js -> 22.js
+//   [function] ../../node_modules/basisjs/src/basis/type/object.js -> 23.js
+//   [function] ../../node_modules/basisjs/src/basis/type/date.js -> 24.js
+//   [function] src/transport.js -> r.js
+//   [function] src/type/profile.js -> 25.js
+//   [function] src/type/asset.js -> 26.js
+//   [function] src/type/module.js -> 27.js
+//   [function] ../../node_modules/basisjs/src/basis/ui.js -> 7.js
+//   [function] src/pages/home/modules/stat/index.js -> 28.js
+//   [function] ../../node_modules/basisjs/src/basis/template/html.js -> 8.js
+//   [function] src/pages/modules/modules/modulesTable/index.js -> 29.js
+//   [function] ../../node_modules/basisjs/src/basis/data/index.js -> s.js
+//   [function] ../../node_modules/basisjs/src/basis/data/index/Index.js -> 2a.js
+//   [function] ../../node_modules/basisjs/src/basis/data/index/VectorIndex.js -> 2b.js
+//   [function] ../../node_modules/basisjs/src/basis/data/index/IndexWrapper.js -> 2c.js
+//   [function] ../../node_modules/basisjs/src/basis/data/index/IndexMap.js -> 2d.js
+//   [function] ../../node_modules/basisjs/src/basis/data/index/IndexedCalc.js -> 2e.js
+//   [function] ../../node_modules/basisjs/src/basis/data/index/constructor.js -> 2f.js
+//   [function] ../../node_modules/basisjs/src/basis/data/index/Count.js -> 2g.js
+//   [function] ../../node_modules/basisjs/src/basis/data/index/Sum.js -> 2h.js
+//   [function] ../../node_modules/basisjs/src/basis/data/index/Avg.js -> 2i.js
+//   [function] ../../node_modules/basisjs/src/basis/data/index/Min.js -> 2j.js
+//   [function] ../../node_modules/basisjs/src/basis/data/index/Max.js -> 2k.js
+//   [function] ../../node_modules/basisjs/src/basis/data/index/Distinct.js -> 2l.js
+//   [function] ../../node_modules/basisjs/src/basis/l10n.js -> 9.js
+//   [function] src/ui/table.js -> t.js
+//   [function] src/ui/table/modules/head/index.js -> 2m.js
+//   [function] ../../node_modules/basisjs/src/basis/utils/json-parser.js -> w.js
+//   [function] src/ui/table/modules/foot/index.js -> 2n.js
+//   [function] ../../node_modules/basisjs/src/basis/template/htmlfgen.js -> a.js
+//   [function] src/ui/cells.js -> u.js
+//   [function] src/ui/cells/fileSize/index.js -> 2o.js
+//   [function] ../../node_modules/basisjs/src/basis/template/const.js -> b.js
+//   [function] ../../node_modules/basisjs/src/basis/template/namespace.js -> c.js
+//   [function] ../../node_modules/basisjs/src/basis/template.js -> d.js
+//   [function] src/pages/assets/modules/assetsTable/index.js -> 2p.js
+//   [function] ../../node_modules/basisjs/src/basis/template/declaration.js -> e.js
+//   [function] ../../node_modules/basisjs/src/basis/template/tokenize.js -> x.js
+//   [function] ../../node_modules/basisjs/src/basis/template/isolateCss.js -> y.js
+//   [function] ../../node_modules/basisjs/src/basis/template/declaration/utils.js -> z.js
+//   [function] ../../node_modules/basisjs/src/basis/template/declaration/refs.js -> 10.js
+//   [function] ../../node_modules/basisjs/src/basis/template/declaration/ast.js -> 11.js
+//   [function] ../../node_modules/basisjs/src/basis/data/dataset/getDelta.js -> 1m.js
+//
+// filelist(1):
+//   /src/ui/src/index.js
+//
+(function(){
+"use strict";
+
+var __namespace_map__ = {"0.js":"basis.devpanel","1.js":"app","2.js":"basis.data","3.js":"basis.data.state","4.js":"basis.data.subscription","5.js":"basis.data.resolve","6.js":"basis.event","7.js":"basis.ui","8.js":"basis.template.html","9.js":"basis.l10n","a.js":"basis.template.htmlfgen","b.js":"basis.template.const","c.js":"basis.template.namespace","d.js":"basis.template","e.js":"basis.template.declaration","f.js":"basis.template.store","g.js":"basis.template.theme","h.js":"basis.template.buildDom","i.js":"basis.dom.event","j.js":"basis.dom.wrapper","k.js":"basis.app","l.js":"app.ui","m.js":"app.type","n.js":"basis.promise","o.js":"basis.entity","p.js":"basis.data.dataset","q.js":"basis.type","r.js":"app.transport","s.js":"basis.data.index","t.js":"app.ui.table","u.js":"app.ui.cells"};
+var __resources__ = {
+  "0.css": "/*@import url(/src/ui/src/template/layout.css);*/\n\n.luqrmqllkgu69l65__main\n{\n  margin-top: 30px;\n}\n\n",
+  "9.tmpl": [ [ 1, 0, [ "element" ], "thead", [ 1, 1, [ "childNodesElement" ], "tr" ] ], [ 9, 0 ] ],
+  "1.tmpl": [ [ 1, 1, [ "cell", "element" ], "td", [ 3, 1, [ "content" ] ] ], [ 9, 0 ] ],
+  "2.tmpl": [ [ 1, 1, [ "childNodesElement", "element" ], "tr" ], [ 9, 0 ] ],
+  "3.tmpl": [ [ 1, 0, [ "element" ], "table", [ 4, 0, 0, "table table-striped" ], [ 2, 0, 0, "data-a", "11" ], [ 8, 1, [ "head" ] ], [ 1, 1, [ "childNodesElement" ], "tbody" ], [ 8, 1, [ "foot" ] ] ], [ 9, 0 ] ],
+  "4.tmpl": [ [ 1, 0, [ "element" ], "nav", [ 4, 0, 0, "navbar navbar-default navbar-fixed-top" ], [ 1, 1, [ "childNodesElement" ], "ul", [ 4, 0, 0, "nav navbar-nav" ] ] ], [ 9, 0 ] ],
+  "5.tmpl": [ [ 1, 0, [ "element" ], "li", [ 4, [ [ "", "selected", 2, "active", 0 ] ], 0 ], [ 1, 0, 0, "a", [ 2, 0, 0, "href", "#" ], [ 6, "click", "select" ], [ 3, "l10n:items.{id}@0.l10n", 0 ] ] ], [ 9, 0 ] ],
+  "6.tmpl": [ [ 1, 0, [ "element" ], "div", [ 8, 1, [ "content" ] ] ], [ 9, 0 ] ],
+  "7.tmpl": [ [ 1, 0, [ "element" ], "div", [ 3, "l10n:status@1.l10n", 0 ], [ 3, 0, 0, ": " ], [ 3, 1, [ "status" ] ], [ 1, 0, 0, "div", [ 4, 0, 0, "progress" ], [ 1, 0, 0, "div", [ 4, 0, 0, "progress-bar progress-bar-success" ], [ 5, [ [ [ "progress" ], [ 0, "%" ], "width" ] ], 0, "min-width: 2em;" ], [ 3, 1, [ "progress" ] ], [ 3, 0, 0, "%" ] ] ] ], [ 9, 0 ] ],
+  "8.tmpl": [ [ 1, 0, [ "element" ], "div", [ 4, 0, 0, "well well-lg" ], [ 1, 0, 0, "div", [ 1, 0, 0, "b", [ 3, 0, 0, "Version:" ] ], [ 3, 0, 0, " " ], [ 3, 1, [ "version" ] ] ], [ 1, 0, 0, "div", [ 1, 0, 0, "b", [ 3, 0, 0, "Hash:" ] ], [ 3, 0, 0, " " ], [ 3, 1, [ "hash" ] ] ], [ 1, 0, 0, "div", [ 1, 0, 0, "b", [ 3, 0, 0, "Assets:" ] ], [ 3, 0, 0, " " ], [ 3, 1, [ "assets" ] ] ], [ 1, 0, 0, "div", [ 1, 0, 0, "b", [ 3, 0, 0, "Modules:" ] ], [ 3, 0, 0, " " ], [ 3, 1, [ "modules" ] ] ], [ 1, 0, 0, "div", [ 1, 0, 0, "b", [ 3, 0, 0, "Chunks:" ] ], [ 3, 0, 0, " " ], [ 3, 1, [ "chunks" ] ] ], [ 1, 0, 0, "div", [ 1, 0, 0, "b", [ 3, 0, 0, "Errors:" ] ], [ 3, 0, 0, " " ], [ 3, 1, [ "errors" ] ] ], [ 1, 0, 0, "div", [ 1, 0, 0, "b", [ 3, 0, 0, "Warnings:" ] ], [ 3, 0, 0, " " ], [ 3, 1, [ "warnings" ] ] ] ], [ 9, 0 ] ],
+  "g.tmpl": [ [ 1, 0, [ "element" ], "div", [ 1, 0, 0, "div", [ 8, 1, [ "stat" ] ] ], [ 1, 0, 0, "div", [ 4, 0, 0, "row" ], [ 1, 0, 0, "div", [ 4, 0, 0, "col-xs-6" ], [ 1, 0, 0, "h3", [ 3, 0, 0, "Modules" ] ], [ 1, 0, 0, "hr" ], [ 8, 1, [ "modulesTable" ] ] ], [ 1, 0, 0, "div", [ 4, 0, 0, "col-xs-6" ], [ 1, 0, 0, "h3", [ 3, 0, 0, "Assets" ] ], [ 1, 0, 0, "hr" ], [ 8, 1, [ "assetsTable" ] ] ] ] ], [ 9, 0 ] ],
+  "0.tmpl": [ [ 1, 0, [ "element" ], "div", [ 8, 1, [ "menu" ] ], [ 1, 0, 0, "div", [ 4, 0, 0, "luqrmqllkgu69l65__main container-fluid" ], [ 1, 0, 0, "div", [ 4, 0, 0, "page-header" ], [ 1, 0, 0, "h1", [ 3, 0, 0, "Rempl Webpack Analyzer" ] ] ], [ 8, 1, [ "progress" ] ], [ 8, 1, [ "page" ] ] ] ], [ 9, 0 ] ],
+  "a.tmpl": [ [ 1, 0, [ "element" ], "tfoot", [ 1, 1, [ "childNodesElement" ], "tr" ] ], [ 9, 0 ] ],
+  "b.tmpl": [ [ 1, 0, [ "element" ], "div", [ 3, 1, [ "size" ] ], [ 3, 0, 0, " " ], [ 3, 1, [ "postfix" ] ] ], [ 9, 0 ] ],
+  "c.tmpl": [ [ 1, 0, [ "element" ], "tr", [ 1, 0, 0, "td", [ 3, 1, [ "id" ] ] ], [ 1, 0, 0, "td", [ 3, 1, [ "name" ] ] ], [ 1, 0, 0, "td", [ 8, 1, [ "fileSizeCell" ] ] ] ], [ 9, 0 ] ],
+  "d.tmpl": [ [ 1, 0, [ "element" ], "tfoot", [ 1, 0, 0, "tr", [ 1, 0, 0, "td" ], [ 1, 0, 0, "td", [ 1, 0, 0, "b", [ 3, "l10n:total@2.l10n", 0 ] ] ], [ 1, 0, 0, "td", [ 1, 0, 0, "b", [ 8, 1, [ "fileSizeCell" ] ] ] ] ] ], [ 9, 0 ] ],
+  "f.tmpl": [ [ 1, 0, [ "element" ], "tfoot", [ 1, 0, 0, "tr", [ 1, 0, 0, "td", [ 1, 0, 0, "b", [ 3, "l10n:total@3.l10n", 0 ] ] ], [ 1, 0, 0, "td", [ 1, 0, 0, "b", [ 8, 1, [ "fileSizeCell" ] ] ] ] ] ], [ 9, 0 ] ],
+  "e.tmpl": [ [ 1, 0, [ "element" ], "tr", [ 1, 0, 0, "td", [ 3, 1, [ "name" ] ] ], [ 1, 0, 0, "td", [ 8, 1, [ "fileSizeCell" ] ] ] ], [ 9, 0 ] ],
+  "3.l10n": {
+    "en-US": {
+      name: "Name",
+      size: "Size",
+      total: "Total"
+    }
+  },
+  "2.l10n": {
+    "en-US": {
+      id: "Id",
+      name: "Name",
+      size: "Size",
+      total: "Total"
+    }
+  },
+  "0.l10n": {
+    "en-US": {
+      items: {
+        home: "Home",
+        assets: "Assets",
+        modules: "Modules"
+      }
+    }
+  },
+  "1.l10n": {
+    "en-US": {
+      status: "Status"
+    }
+  },
+  "12.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var hasOwnProperty = Object.prototype.hasOwnProperty;
+    var utils = basis.require("./z.js");
+    var walk = basis.require("./11.js").walk;
+    var consts = basis.require("./b.js");
+    var TYPE_ATTRIBUTE_CLASS = consts.TYPE_ATTRIBUTE_CLASS;
+    var TOKEN_BINDINGS = consts.TOKEN_BINDINGS;
+    var ATTR_VALUE_INDEX = consts.ATTR_VALUE_INDEX;
+    var styleNamespaceIsolate = {};
+    function adoptStyles(resources, prefix, includeToken) {
+      for (var i = 0, item; item = resources[i]; i++) if (item.type == "style") {
+        if (item.isolate !== styleNamespaceIsolate) item.isolate = prefix + item.isolate;
+        if (!item.includeToken) item.includeToken = includeToken;
+      }
+    }
+    function addStyle(template, token, src, isolatePrefix, namespace) {
+      var text = token.children[0];
+      var url = src ? basis.resource.resolveURI(src, template.baseURI, '<b:style src="{url}"/>') : basis.resource.virtual("css", text ? text.value : "", template.sourceUrl).url;
+      token.sourceUrl = template.sourceUrl;
+      template.resources.push({
+        type: "style",
+        url: url,
+        isolate: isolatePrefix,
+        token: token,
+        includeToken: null,
+        inline: src ? false : text || true,
+        namespace: namespace
+      });
+      return url;
+    }
+    function applyStyleNamespaces(tokens, isolate) {
+      function processName(name) {
+        if (name.indexOf(":") <= 0) return name;
+        var prefix = name.split(":")[0];
+        isolate.map[isolate.prefix + prefix] = prefix;
+        return isolate.prefix + name;
+      }
+      walk(tokens, function(type, node) {
+        if (type !== TYPE_ATTRIBUTE_CLASS) return;
+        var bindings = node[TOKEN_BINDINGS];
+        var valueIndex = ATTR_VALUE_INDEX[type];
+        if (node[valueIndex]) node[valueIndex] = node[valueIndex].replace(/\S+/g, processName);
+        if (node.valueLocMap) {
+          var oldValueLocMap = node.valueLocMap;
+          node.valueLocMap = {};
+          for (var name in oldValueLocMap) node.valueLocMap[processName(name)] = oldValueLocMap[name];
+        }
+        if (bindings) for (var k = 0, bind; bind = bindings[k]; k++) bind[0] = processName(bind[0]);
+      });
+    }
+    function isolateTokens(tokens, isolate, template) {
+      function processName(name) {
+        if (name.indexOf(":") == -1) return isolate + name;
+        if (!template) return name;
+        var parts = name.split(":");
+        if (!parts[0]) return parts[1];
+        var namespace = hasOwnProperty.call(template.styleNSPrefix, parts[0]) ? template.styleNSPrefix[parts[0]] : false;
+        if (!namespace) {
+          var isolatedPrefix = options.styleNSIsolateMap[parts[0]];
+          var oldPrefix = parts[0];
+          var fullName = arguments[1];
+          var loc = arguments[2];
+          if (fullName) {
+            if (isolatedPrefix) fullName = fullName.replace(oldPrefix, isolatedPrefix);
+            utils.addTemplateWarn(template, options, "Namespace `" + (isolatedPrefix || oldPrefix) + "` is not defined: " + fullName, loc);
+          }
+          return false;
+        } else {
+          namespace.used = true;
+          return namespace.prefix + parts[1];
+        }
+      }
+      var options = arguments[3];
+      walk(tokens, function(type, node) {
+        if (type !== TYPE_ATTRIBUTE_CLASS) return;
+        var bindings = node[TOKEN_BINDINGS];
+        var valueIndex = ATTR_VALUE_INDEX[type];
+        if (node[valueIndex]) node[valueIndex] = node[valueIndex].split(/\s+/).map(function(name) {
+          return processName(name, name, node.valueLocMap ? node.valueLocMap[name] : null);
+        }).filter(Boolean).join(" ");
+        if (bindings) {
+          for (var j = 0, bind, prefix, removed; bind = bindings[j]; j++) {
+            prefix = processName(bind[0], bind[0] + "{" + bind[1] + "}", bind.loc);
+            if (prefix === false) {
+              removed = true;
+              bindings[j] = null;
+            } else bind[0] = prefix;
+          }
+          if (removed) {
+            bindings = bindings.filter(Boolean);
+            node[TOKEN_BINDINGS] = bindings.length ? bindings : 0;
+          }
+        }
+        if (node.valueLocMap) {
+          var oldValueLocMap = node.valueLocMap;
+          node.valueLocMap = {};
+          for (var name in oldValueLocMap) {
+            var newKey = processName(name);
+            if (newKey) node.valueLocMap[newKey] = oldValueLocMap[name];
+          }
+        }
+      });
+    }
+    module.exports = {
+      styleNamespaceIsolate: styleNamespaceIsolate,
+      adoptStyles: adoptStyles,
+      addStyle: addStyle,
+      applyStyleNamespaces: applyStyleNamespaces,
+      isolateTokens: isolateTokens
+    };
+  },
+  "13.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var arrayAdd = basis.array.add;
+    var arrayRemove = basis.array.remove;
+    var addTokenRef = basis.require("./10.js").addTokenRef;
+    var consts = basis.require("./b.js");
+    var utils = basis.require("./z.js");
+    var getTokenName = utils.getTokenName;
+    var getTokenAttrValues = utils.getTokenAttrValues;
+    var getTokenAttrs = utils.getTokenAttrs;
+    var TYPE_ELEMENT = consts.TYPE_ELEMENT;
+    var TYPE_ATTRIBUTE = consts.TYPE_ATTRIBUTE;
+    var TYPE_ATTRIBUTE_EVENT = consts.TYPE_ATTRIBUTE_EVENT;
+    var TYPE_ATTRIBUTE_STYLE = consts.TYPE_ATTRIBUTE_STYLE;
+    var ATTR_NAME = consts.ATTR_NAME;
+    var ATTR_NAME_BY_TYPE = consts.ATTR_NAME_BY_TYPE;
+    var ATTR_TYPE_BY_NAME = consts.ATTR_TYPE_BY_NAME;
+    var ATTR_VALUE_INDEX = consts.ATTR_VALUE_INDEX;
+    var ATTR_VALUE = consts.ATTR_VALUE;
+    var TOKEN_TYPE = consts.TOKEN_TYPE;
+    var TOKEN_BINDINGS = consts.TOKEN_BINDINGS;
+    var ELEMENT_ATTRIBUTES_AND_CHILDREN = consts.ELEMENT_ATTRIBUTES_AND_CHILDREN;
+    var ATTR_NAME_RX = /^[a-z_][a-z0-9_\-:]*$/i;
+    var ATTR_EVENT_RX = /^event-(.+)$/;
+    function getAttrByName(token, name) {
+      var offset = typeof token[0] == "number" ? ELEMENT_ATTRIBUTES_AND_CHILDREN : 0;
+      for (var i = offset, attr, attrName; attr = token[i]; i++) {
+        if (attr[TOKEN_TYPE] == TYPE_ATTRIBUTE_EVENT) attrName = "event-" + attr[1]; else attrName = ATTR_NAME_BY_TYPE[attr[TOKEN_TYPE]] || attr[ATTR_NAME];
+        if (attrName == name) return attr;
+      }
+    }
+    function getStyleBindingProperty(attr, name) {
+      var bindings = attr[TOKEN_BINDINGS];
+      if (bindings) for (var i = 0, binding; binding = bindings[i]; i++) if (binding[2] == name) return binding;
+    }
+    function getAttributeValueLocationMap(template, token) {
+      if (!token || !token.map_) return null;
+      return token.map_.reduce(function(res, part) {
+        if (!part.binding) res[part.value] = utils.getLocation(template, part.loc);
+        return res;
+      }, {});
+    }
+    function setStylePropertyBinding(template, options, host, attr, property, showByDefault, defaultValue) {
+      var styleAttr = getAttrByName(host, "style");
+      if (!styleAttr) {
+        styleAttr = [ TYPE_ATTRIBUTE_STYLE, 0, 0 ];
+        utils.addTokenLocation(template, options, styleAttr, attr);
+        host.push(styleAttr);
+      }
+      var binding = attr.binding;
+      var styleBindings = styleAttr[TOKEN_BINDINGS];
+      var addDefault = false;
+      var show = attr.name == showByDefault;
+      var value = styleAttr[3];
+      if (styleBindings) arrayRemove(styleBindings, getStyleBindingProperty(styleAttr, property));
+      if (!binding || binding[0].length != binding[1].length) {
+        addDefault = !(show ^ attr.value === "");
+      } else {
+        binding = binding.concat(property, attr.name);
+        addDefault = show;
+        if (styleBindings) styleBindings.push(binding); else styleAttr[TOKEN_BINDINGS] = [ binding ];
+      }
+      if (value) value = value.replace(new RegExp(property + "\\s*:\\s*[^;]+(;|$)"), "");
+      if (addDefault) value = (value ? value + " " : "") + defaultValue;
+      styleAttr[3] = value;
+    }
+    function applyShowHideAttribute(template, options, host, attr) {
+      if (attr.name == "show" || attr.name == "hide") setStylePropertyBinding(template, options, host, attr, "display", "show", "display: none;");
+      if (attr.name == "visible" || attr.name == "hidden") setStylePropertyBinding(template, options, host, attr, "visibility", "visible", "visibility: hidden;");
+    }
+    function addRoleAttribute(template, options, host, role) {
+      var sourceToken = arguments[4];
+      if (host[TOKEN_TYPE] !== TYPE_ELEMENT) {
+        utils.addTemplateWarn(template, options, "Role can't to be added to non-element node", sourceToken.loc);
+        return;
+      }
+      if (!/[\/\(\)]/.test(role)) {
+        var item = [ TYPE_ATTRIBUTE, [ [ "$role" ], [ 0, role ? "/" + role : "" ] ], 0, "role-marker" ];
+        item.sourceToken = sourceToken;
+        utils.addTokenLocation(template, options, item, sourceToken);
+        host.push(item);
+      } else utils.addTemplateWarn(template, options, 'Value for role was ignored as value can\'t contains ["/", "(", ")"]: ' + role, sourceToken.loc);
+    }
+    function applyAttrs(template, options, host, attrs) {
+      var displayAttr;
+      var visibilityAttr;
+      var item;
+      var m;
+      for (var i = 0, attr; attr = attrs[i]; i++) {
+        if (attr.prefix == "b") {
+          switch (attr.name) {
+            case "ref":
+              var refs = (attr.value || "").trim().split(/\s+/);
+              for (var j = 0; j < refs.length; j++) addTokenRef(host, refs[j]);
+              break;
+            case "show":
+            case "hide":
+              displayAttr = attr;
+              break;
+            case "visible":
+            case "hidden":
+              visibilityAttr = attr;
+              break;
+            case "role":
+              addRoleAttribute(template, options, host, attr.value || "", attr);
+              break;
+          }
+          continue;
+        }
+        if (m = attr.name.match(ATTR_EVENT_RX)) {
+          item = m[1] == attr.value ? [ TYPE_ATTRIBUTE_EVENT, m[1] ] : [ TYPE_ATTRIBUTE_EVENT, m[1], attr.value ];
+        } else {
+          item = [ attr.type, attr.binding, 0 ];
+          if (attr.type == TYPE_ATTRIBUTE) item.push(getTokenName(attr));
+          if (attr.value && (!options.optimizeSize || !attr.binding || attr.type != TYPE_ATTRIBUTE)) item.push(attr.value);
+        }
+        item.valueLocMap = getAttributeValueLocationMap(template, attr);
+        item.sourceToken = attr;
+        utils.addTokenLocation(template, options, item, attr);
+        host.push(item);
+      }
+      if (displayAttr) applyShowHideAttribute(template, options, host, displayAttr);
+      if (visibilityAttr) applyShowHideAttribute(template, options, host, visibilityAttr);
+      return host;
+    }
+    function modifyAttr(template, options, include, target, token, name, action) {
+      var attrs = getTokenAttrValues(token);
+      var attrs_ = getTokenAttrs(token);
+      if (name) attrs.name = name;
+      if (!attrs.name) {
+        utils.addTemplateWarn(template, options, "Instruction <b:" + token.name + "> has no `name` attribute", token.loc);
+        return;
+      }
+      if (!ATTR_NAME_RX.test(attrs.name)) {
+        utils.addTemplateWarn(template, options, "Bad attribute name `" + attrs.name + "`", token.loc);
+        return;
+      }
+      if (target) {
+        if (target[TOKEN_TYPE] == TYPE_ELEMENT) {
+          var itAttrs = target;
+          var isEvent = attrs.name.match(ATTR_EVENT_RX);
+          var isClassOrStyle = attrs.name == "class" || attrs.name == "style";
+          var itType = isEvent ? TYPE_ATTRIBUTE_EVENT : ATTR_TYPE_BY_NAME[attrs.name] || TYPE_ATTRIBUTE;
+          var valueIdx = ATTR_VALUE_INDEX[itType] || ATTR_VALUE;
+          var valueLocMap = getAttributeValueLocationMap(template, attrs_.value);
+          var itAttrToken = itAttrs && getAttrByName(itAttrs, attrs.name);
+          if (itAttrToken && action == "set") {
+            template.removals.push({
+              reason: "<b:" + token.name + ">",
+              removeToken: token,
+              includeToken: include,
+              token: itAttrToken,
+              node: itAttrToken
+            });
+            arrayRemove(itAttrs, itAttrToken);
+            itAttrToken = null;
+          }
+          if (!itAttrToken && (action == "set" || action == "append")) {
+            action = "set";
+            if (isEvent) {
+              itAttrToken = [ itType, isEvent[1] ];
+            } else {
+              itAttrToken = [ itType, 0, 0, itType == TYPE_ATTRIBUTE ? attrs.name : "" ];
+              if (itType == TYPE_ATTRIBUTE) itAttrToken.push("");
+            }
+            if (!itAttrs) {
+              itAttrs = [];
+              target.push(itAttrs);
+            }
+            itAttrs.push(itAttrToken);
+            itAttrToken.valueLocMap = valueLocMap;
+            utils.addTokenLocation(template, options, itAttrToken, token);
+          }
+          switch (action) {
+            case "set":
+              if (itAttrToken[TOKEN_TYPE] == TYPE_ATTRIBUTE_EVENT) {
+                if (attrs.value == isEvent[1]) itAttrToken.length = 2; else itAttrToken[valueIdx] = attrs.value;
+                return;
+              }
+              var valueAttr = attrs_.value || {};
+              itAttrToken[TOKEN_BINDINGS] = valueAttr.binding || 0;
+              itAttrToken.valueLocMap = valueLocMap;
+              if (!options.optimizeSize || !itAttrToken[TOKEN_BINDINGS] || isClassOrStyle) itAttrToken[valueIdx] = valueAttr.value || ""; else itAttrToken.length = valueIdx;
+              if (isClassOrStyle) if (!itAttrToken[TOKEN_BINDINGS] && !itAttrToken[valueIdx]) {
+                arrayRemove(itAttrs, itAttrToken);
+                return;
+              }
+              break;
+            case "append":
+              var valueAttr = attrs_.value || {};
+              var appendValue = valueAttr.value || "";
+              var appendBinding = valueAttr.binding;
+              if (!isEvent) {
+                if (appendBinding) {
+                  var attrBindings = itAttrToken[TOKEN_BINDINGS];
+                  if (attrBindings) {
+                    switch (attrs.name) {
+                      case "style":
+                        for (var i = 0, newBinding; newBinding = appendBinding[i]; i++) {
+                          arrayRemove(attrBindings, getStyleBindingProperty(itAttrToken, newBinding[2]));
+                          attrBindings.push(newBinding);
+                        }
+                        break;
+                      case "class":
+                        attrBindings.push.apply(attrBindings, appendBinding);
+                        break;
+                      default:
+                        appendBinding[0].forEach(function(name) {
+                          arrayAdd(this, name);
+                        }, attrBindings[0]);
+                        for (var i = 0; i < appendBinding[1].length; i++) {
+                          var value = appendBinding[1][i];
+                          if (typeof value == "number") value = attrBindings[0].indexOf(appendBinding[0][value]);
+                          attrBindings[1].push(value);
+                        }
+                    }
+                  } else {
+                    itAttrToken[TOKEN_BINDINGS] = appendBinding;
+                    if (!isClassOrStyle) itAttrToken[TOKEN_BINDINGS][1].unshift(itAttrToken[valueIdx]);
+                  }
+                } else {
+                  if (!isClassOrStyle && itAttrToken[TOKEN_BINDINGS]) itAttrToken[TOKEN_BINDINGS][1].push(attrs.value);
+                }
+              }
+              if (appendValue) {
+                if (isEvent || attrs.name == "class") {
+                  var parts = (itAttrToken[valueIdx] || "").trim();
+                  var appendParts = appendValue.trim();
+                  parts = parts ? parts.split(/\s+/) : [];
+                  appendParts = appendParts ? appendParts.split(/\s+/) : [];
+                  for (var i = 0; i < appendParts.length; i++) {
+                    var part = appendParts[i];
+                    basis.array.remove(parts, part);
+                    parts.push(part);
+                  }
+                  itAttrToken[valueIdx] = parts.join(" ");
+                } else {
+                  itAttrToken[valueIdx] = (itAttrToken[valueIdx] || "") + (itAttrToken[valueIdx] && isClassOrStyle ? " " : "") + appendValue;
+                }
+                if (valueLocMap) {
+                  if (itAttrToken.valueLocMap) for (var name in valueLocMap) itAttrToken.valueLocMap[name] = valueLocMap[name]; else itAttrToken.valueLocMap = valueLocMap;
+                }
+              }
+              if (isClassOrStyle && !itAttrToken[TOKEN_BINDINGS] && !itAttrToken[valueIdx]) arrayRemove(itAttrs, itAttrToken);
+              break;
+            case "remove-class":
+              if (itAttrToken) {
+                var valueAttr = attrs_.value || {};
+                var values = (itAttrToken[valueIdx] || "").split(" ");
+                var removeValues = (valueAttr.value || "").split(" ");
+                var bindings = itAttrToken[TOKEN_BINDINGS];
+                var removedValues = [];
+                var removedBindings = 0;
+                if (valueAttr.binding && bindings) {
+                  for (var i = 0, removeBinding; removeBinding = valueAttr.binding[i]; i++) for (var j = bindings.length - 1, classBinding; classBinding = bindings[j]; j--) {
+                    var prefix = classBinding[0];
+                    var bindingName = classBinding[3] || classBinding[1];
+                    if (prefix === removeBinding[0] && bindingName === removeBinding[1]) {
+                      bindings.splice(j, 1);
+                      if (!removedBindings) removedBindings = [ classBinding ]; else removedBindings.push(classBinding);
+                    }
+                  }
+                  if (!bindings.length) itAttrToken[TOKEN_BINDINGS] = 0;
+                }
+                for (var i = 0; i < removeValues.length; i++) {
+                  if (values.indexOf(removeValues[i]) != -1) removedValues.push(removeValues[i]);
+                  arrayRemove(values, removeValues[i]);
+                  if (itAttrToken.valueLocMap) delete itAttrToken.valueLocMap[removeValues[i]];
+                }
+                itAttrToken[valueIdx] = values.join(" ");
+                if (!bindings.length && !values.length) arrayRemove(itAttrs, itAttrToken);
+                if (removedValues.length || removedBindings.length) {
+                  var removedNode = [ consts.TYPE_ATTRIBUTE_CLASS, removedBindings, 0, removedValues.join(" ") ];
+                  template.removals.push({
+                    reason: "<b:" + token.name + ">",
+                    removeToken: token,
+                    includeToken: include,
+                    token: removedNode,
+                    node: removedNode
+                  });
+                }
+              }
+              break;
+            case "remove":
+              if (itAttrToken) {
+                arrayRemove(itAttrs, itAttrToken);
+                template.removals.push({
+                  reason: "<b:" + token.name + ">",
+                  removeToken: token,
+                  includeToken: include,
+                  token: itAttrToken,
+                  node: itAttrToken
+                });
+              }
+              break;
+          }
+        } else {
+          utils.addTemplateWarn(template, options, "Attribute modificator is not reference to element token (reference name: " + (attrs.ref || "element") + ")", token.loc);
+        }
+      }
+    }
+    module.exports = {
+      getAttrByName: getAttrByName,
+      applyShowHideAttribute: applyShowHideAttribute,
+      addRoleAttribute: addRoleAttribute,
+      applyAttrs: applyAttrs,
+      modifyAttr: modifyAttr
+    };
+  },
+  "14.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var consts = basis.require("./b.js");
+    var TYPE_CONTENT = consts.TYPE_CONTENT;
+    var utils = basis.require("./z.js");
+    module.exports = function(template, options, token, result) {
+      var node = [ TYPE_CONTENT, 2 ];
+      if (token.children) node.push.apply(node, options.process(token.children, template, options));
+      utils.addTokenLocation(template, options, node, token);
+      node.sourceToken = token;
+      result.push(node);
+    };
+  },
+  "15.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var hasOwnProperty = Object.prototype.hasOwnProperty;
+    var consts = basis.require("./b.js");
+    var utils = basis.require("./z.js");
+    var getTokenAttrValues = utils.getTokenAttrValues;
+    var CLASS_BINDING_BOOL = consts.CLASS_BINDING_BOOL;
+    var CLASS_BINDING_INVERT = consts.CLASS_BINDING_INVERT;
+    var CLASS_BINDING_ENUM = consts.CLASS_BINDING_ENUM;
+    function addStateInfo(template, name, type, value) {
+      if (!hasOwnProperty.call(template.states, name)) template.states[name] = {};
+      var info = template.states[name];
+      var isArray = Array.isArray(value);
+      if (!hasOwnProperty.call(info, type) || !isArray) info[type] = isArray ? basis.array(value) : value; else value.forEach(function(item) {
+        basis.array.add(info[type], item);
+      });
+    }
+    module.exports = function(template, options, token) {
+      var elAttrs = getTokenAttrValues(token);
+      var elAttrs_ = utils.getTokenAttrs(token);
+      if ("name" in elAttrs == false) utils.addTemplateWarn(template, options, "<b:define> has no `name` attribute", token.loc);
+      if ("type" in elAttrs == false) utils.addTemplateWarn(template, options, "<b:define> has no `type` attribute", token.loc);
+      if (hasOwnProperty.call(options.defines, elAttrs.name)) utils.addTemplateWarn(template, options, "<b:define> with name `" + elAttrs.name + "` is already defined", token.loc);
+      if ("name" in elAttrs && "type" in elAttrs && !hasOwnProperty.call(options.defines, elAttrs.name)) {
+        var bindingName = elAttrs.from || elAttrs.name;
+        var defineName = elAttrs.name;
+        var define = false;
+        var defaultIndex;
+        var values;
+        switch (elAttrs.type) {
+          case "bool":
+            define = [ bindingName, CLASS_BINDING_BOOL, defineName, elAttrs["default"] == "true" ? 1 : 0 ];
+            addStateInfo(template, bindingName, "bool", true);
+            if ("default" in elAttrs && !elAttrs["default"]) utils.addTemplateWarn(template, options, "Bool <b:define> has no value as default (value ignored)", elAttrs_["default"] && elAttrs_["default"].loc);
+            break;
+          case "invert":
+            define = [ bindingName, CLASS_BINDING_INVERT, defineName, !elAttrs["default"] || elAttrs["default"] == "true" ? 1 : 0 ];
+            addStateInfo(template, bindingName, "invert", false);
+            if ("default" in elAttrs && !elAttrs["default"]) utils.addTemplateWarn(template, options, "Invert <b:define> has no value as default (value ignored)", elAttrs_["default"] && elAttrs_["default"].loc);
+            break;
+          case "enum":
+            if ("values" in elAttrs == false) {
+              utils.addTemplateWarn(template, options, "Enum <b:define> has no `values` attribute", token.loc);
+              break;
+            }
+            values = (elAttrs.values || "").trim();
+            if (!values) {
+              utils.addTemplateWarn(template, options, "Enum <b:define> has no variants (`values` attribute is empty)", elAttrs_.values && elAttrs_.values.loc);
+              break;
+            }
+            values = values.split(/\s+/);
+            defaultIndex = values.indexOf(elAttrs["default"]);
+            if ("default" in elAttrs && defaultIndex == -1) utils.addTemplateWarn(template, options, "Enum <b:define> has bad value as default (value ignored)", elAttrs_["default"] && elAttrs_["default"].loc);
+            define = [ bindingName, CLASS_BINDING_ENUM, defineName, defaultIndex + 1, values ];
+            addStateInfo(template, bindingName, "enum", values);
+            break;
+          default:
+            utils.addTemplateWarn(template, options, "Bad type in <b:define> for `" + defineName + "`: " + elAttrs.type, elAttrs_.type && elAttrs_.type.valueLoc);
+        }
+        if (define) {
+          utils.addTokenLocation(template, options, define, token);
+          options.defines[defineName] = define;
+        }
+      }
+    };
+  },
+  "16.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var arrayRemove = basis.array.remove;
+    var arrayAdd = basis.array.add;
+    var walk = basis.require("./11.js").walk;
+    var utils = basis.require("./z.js");
+    var addUnique = utils.addUnique;
+    var getTokenAttrValues = utils.getTokenAttrValues;
+    var getTokenAttrs = utils.getTokenAttrs;
+    var parseOptionsValue = utils.parseOptionsValue;
+    var refsUtils = basis.require("./10.js");
+    var normalizeRefs = refsUtils.normalizeRefs;
+    var addTokenRef = refsUtils.addTokenRef;
+    var removeTokenRef = refsUtils.removeTokenRef;
+    var styleUtils = basis.require("./12.js");
+    var styleNamespaceIsolate = styleUtils.styleNamespaceIsolate;
+    var adoptStyles = styleUtils.adoptStyles;
+    var addStyle = styleUtils.addStyle;
+    var isolateTokens = styleUtils.isolateTokens;
+    var applyStyleNamespaces = styleUtils.applyStyleNamespaces;
+    var attrUtils = basis.require("./13.js");
+    var getAttrByName = attrUtils.getAttrByName;
+    var addRoleAttribute = attrUtils.addRoleAttribute;
+    var applyShowHideAttribute = attrUtils.applyShowHideAttribute;
+    var modifyAttr = attrUtils.modifyAttr;
+    var consts = basis.require("./b.js");
+    var TOKEN_TYPE = consts.TOKEN_TYPE;
+    var TOKEN_BINDINGS = consts.TOKEN_BINDINGS;
+    var ATTR_NAME = consts.ATTR_NAME;
+    var TYPE_ATTRIBUTE = consts.TYPE_ATTRIBUTE;
+    var TYPE_ELEMENT = consts.TYPE_ELEMENT;
+    var ELEMENT_ATTRIBUTES_AND_CHILDREN = consts.ELEMENT_ATTRIBUTES_AND_CHILDREN;
+    var CONTENT_CHILDREN = consts.CONTENT_CHILDREN;
+    var specialTagsAsRegular = [ "include", "content" ];
+    var attributesWhitelist = [ "src", "no-style", "isolate", "options" ];
+    var attributeToInstructionMap = {
+      "class": {
+        instruction: "append-class",
+        valueTo: "value"
+      },
+      id: {
+        instruction: "set-attr",
+        valueTo: "value",
+        attrs: {
+          name: "id"
+        }
+      },
+      ref: {
+        instruction: "add-ref",
+        valueTo: "name"
+      },
+      show: {
+        instruction: "show",
+        valueTo: "expr"
+      },
+      hide: {
+        instruction: "hide",
+        valueTo: "expr"
+      },
+      visible: {
+        instruction: "visible",
+        valueTo: "expr"
+      },
+      hidden: {
+        instruction: "hidden",
+        valueTo: "expr"
+      }
+    };
+    function adoptNodes(ast, includeToken) {
+      walk(ast, function(type, node) {
+        if (!node.includeToken) node.includeToken = includeToken;
+      });
+    }
+    function applyRole(ast, role) {
+      walk(ast, function(type, node) {
+        if (type !== TYPE_ATTRIBUTE || node[ATTR_NAME] != "role-marker") return;
+        var roleExpression = node[TOKEN_BINDINGS][1];
+        var currentRole = roleExpression[1];
+        roleExpression[1] = "/" + role + currentRole;
+        node.sourceToken = arguments[2];
+        node.loc = arguments[3];
+      });
+    }
+    function clone(value) {
+      if (Array.isArray(value)) return value.map(clone);
+      if (value && value.constructor === Object) {
+        var result = {};
+        for (var key in value) result[key] = clone(value[key]);
+        return result;
+      }
+      return value;
+    }
+    function convertAttributeToInstruction(config, attribute) {
+      return {
+        type: TYPE_ELEMENT,
+        prefix: "b",
+        name: config.instruction,
+        attrs: basis.object.iterate(config.attrs || {}, function(attrName, value) {
+          return {
+            type: TYPE_ATTRIBUTE,
+            name: attrName,
+            value: value
+          };
+        }).concat(basis.object.complete({
+          name: config.valueTo
+        }, attribute))
+      };
+    }
+    module.exports = function(template, options, token, result) {
+      var elAttrs = getTokenAttrValues(token);
+      var elAttrs_ = getTokenAttrs(token);
+      var includeStack = options.includeStack;
+      var templateSrc = elAttrs.src;
+      if ("src" in elAttrs == false) utils.addTemplateWarn(template, options, "<b:include> has no `src` attribute", token.loc);
+      if (!templateSrc) return;
+      var resource;
+      var basisWarn = basis.dev.warn;
+      basis.dev.warn = function() {
+        utils.addTemplateWarn(template, options, basis.array(arguments).join(" "), token.loc);
+        if (!basis.NODE_ENV) basisWarn.apply(this, arguments);
+      };
+      if (/^#[^\d]/.test(templateSrc)) {
+        resource = template.templates[templateSrc.substr(1)];
+        if (resource) resource = options.makeDeclaration(clone(resource.tokens), resource.baseURI, resource.options, resource.sourceUrl);
+      } else {
+        resource = options.resolveResource(templateSrc, template.baseURI);
+      }
+      basis.dev.warn = basisWarn;
+      if (!resource) {
+        utils.addTemplateWarn(template, options, '<b:include src="' + templateSrc + '"> is not resolved, instruction ignored', token.loc);
+        return;
+      }
+      if (includeStack.indexOf(resource) !== -1) {
+        var stack = includeStack.slice(includeStack.indexOf(resource) || 0).concat(resource).map(function(res) {
+          if (res instanceof options.Template) res = res.source;
+          return res.id || res.url || "[inline template]";
+        });
+        template.warns.push("Recursion: ", stack.join(" -> "));
+        return;
+      }
+      var isolatePrefix = elAttrs_.isolate ? elAttrs_.isolate.value || options.genIsolateMarker() : "";
+      var includeOptions = elAttrs.options ? parseOptionsValue(elAttrs.options) : null;
+      var decl = options.getDeclFromSource(resource, "", true, basis.object.merge(options, {
+        includeOptions: includeOptions
+      }));
+      adoptNodes(decl.tokens, token);
+      template.includes.push({
+        token: token,
+        resource: resource,
+        nested: decl.includes
+      });
+      if (resource.bindingBridge) arrayAdd(template.deps, resource);
+      if (decl.deps) addUnique(template.deps, decl.deps);
+      if (decl.warns) {
+        decl.warns.forEach(function(warn) {
+          warn.source = warn.source || token;
+        });
+        template.warns.push.apply(template.warns, decl.warns);
+      }
+      if (decl.removals) {
+        template.removals.push.apply(template.removals, decl.removals);
+        template.removals.forEach(function(item) {
+          if (!item.includeToken) item.includeToken = token;
+        });
+      }
+      if (decl.resources) {
+        var resources = decl.resources;
+        if ("no-style" in elAttrs) resources = resources.filter(function(item) {
+          return item.type != "style";
+        }); else adoptStyles(resources, isolatePrefix, token);
+        template.resources.unshift.apply(template.resources, resources);
+      }
+      var styleNSIsolate = {
+        map: options.styleNSIsolateMap,
+        prefix: options.genIsolateMarker()
+      };
+      applyStyleNamespaces(decl.tokens, styleNSIsolate);
+      for (var key in decl.styleNSPrefix) template.styleNSPrefix[styleNSIsolate.prefix + key] = basis.object.merge(decl.styleNSPrefix[key], {
+        used: Object.prototype.hasOwnProperty.call(options.styleNSIsolateMap, styleNSIsolate.prefix + key)
+      });
+      if (isolatePrefix) {
+        isolateTokens(decl.tokens, isolatePrefix);
+        if (decl.removals) decl.removals.forEach(function(item) {
+          isolateTokens([ item.node ], isolatePrefix);
+        });
+      }
+      var isContentReset = false;
+      var instructions = [];
+      var tokenRefMap = normalizeRefs(decl.tokens);
+      for (var includeAttrName in elAttrs_) {
+        if (attributeToInstructionMap.hasOwnProperty(includeAttrName)) {
+          instructions.push(convertAttributeToInstruction(attributeToInstructionMap[includeAttrName], elAttrs_[includeAttrName]));
+        } else if (includeAttrName === "role") {
+          var role = elAttrs_.role.value;
+          if (role) {
+            if (!/[\/\(\)]/.test(role)) {
+              var loc;
+              loc = utils.getLocation(template, elAttrs_.role.loc);
+              applyRole(decl.tokens, role, elAttrs_.role, loc);
+            } else utils.addTemplateWarn(template, options, 'Value for role was ignored as value can\'t contains ["/", "(", ")"]: ' + role, elAttrs_.role.loc);
+          }
+        } else if (attributesWhitelist.indexOf(includeAttrName) === -1) utils.addTemplateWarn(template, options, "Unknown attribute for <b:include>: " + includeAttrName, elAttrs_[includeAttrName].loc);
+      }
+      instructions = instructions.concat(token.children);
+      for (var j = 0, child; child = instructions[j]; j++) {
+        if (child.type == TYPE_ELEMENT && child.prefix == "b" && specialTagsAsRegular.indexOf(child.name) === -1) {
+          var childAttrs = getTokenAttrValues(child);
+          var ref = "ref" in childAttrs ? childAttrs.ref : "element";
+          var isSpecialRef = ref.charAt(0) === ":";
+          var targetRef = ref && tokenRefMap[ref];
+          var target = targetRef && targetRef.node;
+          switch (child.name) {
+            case "style":
+              var childAttrs = getTokenAttrValues(child);
+              var useStyle = true;
+              if (childAttrs.options) {
+                var filterOptions = parseOptionsValue(childAttrs.options);
+                for (var name in filterOptions) useStyle = useStyle && filterOptions[name] == includeOptions[name];
+              }
+              if (useStyle) {
+                var namespaceAttrName = childAttrs.namespace ? "namespace" : "ns";
+                var styleNamespace = childAttrs[namespaceAttrName];
+                var styleIsolate = styleNamespace ? styleNamespaceIsolate : isolatePrefix;
+                var src = addStyle(template, child, childAttrs.src, styleIsolate, styleNamespace);
+                if (styleNamespace) {
+                  if (src in styleNamespaceIsolate == false) styleNamespaceIsolate[src] = options.genIsolateMarker();
+                  template.styleNSPrefix[styleNSIsolate.prefix + styleNamespace] = {
+                    loc: utils.getLocation(template, getTokenAttrs(child)[namespaceAttrName].loc),
+                    used: false,
+                    name: styleNamespace,
+                    prefix: styleNamespaceIsolate[src]
+                  };
+                }
+              } else {
+                child.sourceUrl = template.sourceUrl;
+                template.resources.push([ null, styleIsolate, child, token, childAttrs.src ? false : child.children[0] || true, styleNamespace ]);
+              }
+              break;
+            case "replace":
+            case "remove":
+            case "before":
+            case "after":
+              var replaceOrRemove = child.name == "replace" || child.name == "remove";
+              var childAttrs = getTokenAttrValues(child);
+              var ref = "ref" in childAttrs || !replaceOrRemove ? childAttrs.ref : "element";
+              var targetRef = ref && tokenRefMap[ref];
+              if (targetRef) {
+                var parent = targetRef.parent;
+                var pos = parent.indexOf(targetRef.node);
+                if (pos != -1) {
+                  var args = [ pos + (child.name == "after"), replaceOrRemove ];
+                  if (child.name != "remove") args = args.concat(options.process(child.children, template, options));
+                  parent.splice.apply(parent, args);
+                  if (replaceOrRemove) template.removals.push({
+                    reason: "<b:" + child.name + ">",
+                    removeToken: child,
+                    includeToken: token,
+                    token: targetRef.node,
+                    node: targetRef.node
+                  });
+                }
+              }
+              break;
+            case "prepend":
+            case "append":
+              if (target && target[TOKEN_TYPE] == TYPE_ELEMENT) {
+                var children = options.process(child.children, template, options);
+                if (child.name == "prepend") target.splice.apply(target, [ ELEMENT_ATTRIBUTES_AND_CHILDREN, 0 ].concat(children)); else target.push.apply(target, children);
+              }
+              break;
+            case "show":
+            case "hide":
+            case "visible":
+            case "hidden":
+              if (target && target[TOKEN_TYPE] == TYPE_ELEMENT) {
+                var expr = getTokenAttrs(child).expr;
+                if (!expr) {
+                  utils.addTemplateWarn(template, options, "Instruction <b:" + child.name + "> has no `expr` attribute", child.loc);
+                  break;
+                }
+                applyShowHideAttribute(template, options, target, basis.object.complete({
+                  name: child.name
+                }, getTokenAttrs(child).expr));
+              }
+              break;
+            case "attr":
+            case "set-attr":
+              modifyAttr(template, options, token, target, child, false, "set");
+              break;
+            case "append-attr":
+              modifyAttr(template, options, token, target, child, false, "append");
+              break;
+            case "remove-attr":
+              modifyAttr(template, options, token, target, child, false, "remove");
+              break;
+            case "class":
+            case "append-class":
+              modifyAttr(template, options, token, target, child, "class", "append");
+              break;
+            case "set-class":
+              modifyAttr(template, options, token, target, child, "class", "set");
+              break;
+            case "remove-class":
+              var valueAttr = getTokenAttrs(child).value;
+              if (valueAttr) {
+                valueAttr.value = valueAttr.value.split(/\s+/).map(function(name) {
+                  return name.indexOf(":") > 0 ? styleNSIsolate.prefix + name : name;
+                }).join(" ");
+                if (valueAttr.binding) valueAttr.binding.forEach(function(bind) {
+                  if (bind[0].indexOf(":") > 0) bind[0] = styleNSIsolate.prefix + bind[0];
+                });
+                if (valueAttr.map_) valueAttr.map_.forEach(function(item) {
+                  if (item.value.indexOf(":") > 0) item.value = styleNSIsolate.prefix + item.value;
+                });
+              }
+              modifyAttr(template, options, token, target, child, "class", "remove-class");
+              break;
+            case "add-ref":
+              var refName = (childAttrs.name || "").trim();
+              if (!target) {
+                utils.addTemplateWarn(template, options, "Target node for <b:" + child.name + "> is not found", child.loc);
+                break;
+              }
+              if (isSpecialRef) {
+                utils.addTemplateWarn(template, options, "<b:" + child.name + "> can't to be applied to special reference `" + ref + "`", child.loc);
+                break;
+              }
+              if (!/^[a-z_][a-z0-9_]*$/i.test(refName)) {
+                utils.addTemplateWarn(template, options, "Bad reference name for <b:" + child.name + ">: " + refName, child.loc);
+                break;
+              }
+              addTokenRef(target, refName);
+              break;
+            case "remove-ref":
+              var refName = (childAttrs.name || "").trim();
+              var ref = "ref" in childAttrs ? childAttrs.ref : refName || "element";
+              var isSpecialRef = ref.charAt(0) === ":";
+              var targetRef = ref && tokenRefMap[ref];
+              var target = targetRef && targetRef.node;
+              if (!target) {
+                utils.addTemplateWarn(template, options, "Target node for <b:" + child.name + "> is not found", child.loc);
+                break;
+              }
+              if (isSpecialRef) {
+                utils.addTemplateWarn(template, options, "<b:" + child.name + "> can't to be applied to special reference `" + ref + "`", child.loc);
+                break;
+              }
+              if (!/^[a-z_][a-z0-9_]*$/i.test(refName)) {
+                utils.addTemplateWarn(template, options, "Bad reference name for <b:" + child.name + ">: " + refName, child.loc);
+                break;
+              }
+              removeTokenRef(target, refName || ref);
+              break;
+            case "role":
+            case "set-role":
+              var name = childAttrs.name;
+              if (!name && "value" in childAttrs) {
+                utils.addTemplateWarn(template, options, "`value` attribute for <b:" + child.name + "> is deprecated, use `name` instead", getTokenAttrs(child).value.loc);
+                name = childAttrs.value;
+              }
+              if (!target) {
+                utils.addTemplateWarn(template, options, "Target node for <b:" + child.name + "> is not found", child.loc);
+                break;
+              }
+              arrayRemove(target, getAttrByName(target, "role-marker"));
+              addRoleAttribute(template, options, target, name || "", child);
+              break;
+            case "remove-role":
+              if (!target) {
+                utils.addTemplateWarn(template, options, "Target node for <b:" + child.name + "> is not found", child.loc);
+                break;
+              }
+              arrayRemove(target, getAttrByName(target, "role-marker"));
+              break;
+            default:
+              utils.addTemplateWarn(template, options, "Unknown instruction tag: <b:" + child.name + ">", child.loc);
+          }
+        } else {
+          var targetRef = tokenRefMap[":content"];
+          var processedChild = options.process([ child ], template, options);
+          if (targetRef) {
+            var parent = targetRef.parent;
+            var pos = parent.indexOf(targetRef.node);
+            if (!isContentReset) {
+              isContentReset = true;
+              for (var i = CONTENT_CHILDREN; i < targetRef.node.length; i++) template.removals.push({
+                reason: "node from including template",
+                removeToken: child,
+                includeToken: token,
+                token: targetRef.node[i],
+                node: targetRef.node[i]
+              });
+              targetRef.node.splice(CONTENT_CHILDREN);
+            }
+            targetRef.node.push.apply(targetRef.node, processedChild);
+          } else {
+            decl.tokens.push.apply(decl.tokens, processedChild);
+          }
+        }
+      }
+      if (tokenRefMap.element) removeTokenRef(tokenRefMap.element.node, "element");
+      result.push.apply(result, decl.tokens);
+    };
+  },
+  "17.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var utils = basis.require("./z.js");
+    var getTokenAttrValues = utils.getTokenAttrValues;
+    module.exports = function(template, options, token) {
+      if (template.isolate) {
+        utils.addTemplateWarn(template, options, "<b:isolate> is already set to `" + template.isolate + "`", token.loc);
+        return;
+      }
+      template.isolate = getTokenAttrValues(token).prefix || options.isolate || options.genIsolateMarker();
+    };
+  },
+  "18.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var getTokenAttrValues = basis.require("./z.js").getTokenAttrValues;
+    module.exports = function(template, options, token) {
+      var elAttrs = getTokenAttrValues(token);
+      if (elAttrs.src) options.dictURI = basis.resource.resolveURI(elAttrs.src, template.baseURI, "<b:" + token.name + ' src="{url}"/>');
+    };
+  },
+  "19.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var utils = basis.require("./z.js");
+    var styleUtils = basis.require("./12.js");
+    var styleNamespaceIsolate = styleUtils.styleNamespaceIsolate;
+    var addStyle = styleUtils.addStyle;
+    var parseOptionsValue = utils.parseOptionsValue;
+    var getTokenAttrValues = utils.getTokenAttrValues;
+    module.exports = function(template, options, token) {
+      var useStyle = true;
+      var elAttrs = getTokenAttrValues(token);
+      if (elAttrs.options) {
+        var filterOptions = parseOptionsValue(elAttrs.options);
+        for (var name in filterOptions) useStyle = useStyle && filterOptions[name] == options.includeOptions[name];
+      }
+      if (useStyle) {
+        var namespaceAttrName = elAttrs.namespace ? "namespace" : "ns";
+        var styleNamespace = elAttrs[namespaceAttrName];
+        var styleIsolate = styleNamespace ? styleNamespaceIsolate : "";
+        var src = addStyle(template, token, elAttrs.src, styleIsolate, styleNamespace);
+        if (styleNamespace) {
+          if (src in styleNamespaceIsolate == false) styleNamespaceIsolate[src] = options.genIsolateMarker();
+          if (styleNamespace in template.styleNSPrefix) {
+            utils.addTemplateWarn(template, options, "Duplicate value for `" + styleNamespace + "` attribute, style ignored", utils.getTokenAttrs(token)[namespaceAttrName].loc);
+            return;
+          }
+          template.styleNSPrefix[styleNamespace] = {
+            loc: utils.getLocation(template, utils.getTokenAttrs(token)[namespaceAttrName].loc),
+            used: false,
+            name: styleNamespace,
+            prefix: styleNamespaceIsolate[src]
+          };
+        }
+      } else {
+        token.sourceUrl = template.sourceUrl;
+        template.resources.push({
+          type: "style",
+          url: null,
+          isolate: styleIsolate,
+          token: token,
+          includeToken: null,
+          inline: elAttrs.src ? false : token.children[0] || true,
+          namespace: styleNamespace
+        });
+      }
+    };
+  },
+  "1a.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var arrayAdd = basis.array.add;
+    var utils = basis.require("./z.js");
+    var getTokenName = utils.getTokenName;
+    var getTokenAttrs = utils.getTokenAttrs;
+    var bindingList = utils.bindingList;
+    var refList = basis.require("./10.js").refList;
+    var applyAttrs = basis.require("./13.js").applyAttrs;
+    var TYPE_ELEMENT = basis.require("./b.js").TYPE_ELEMENT;
+    module.exports = function(template, options, token, result) {
+      var attrs = getTokenAttrs(token);
+      var svgAttributes = [];
+      var svgUse = [ TYPE_ELEMENT, 0, 0, "svg:use" ];
+      var svgElement = [ TYPE_ELEMENT, bindingList(token), refList(token), "svg:svg", svgUse ];
+      for (var key in attrs) {
+        var attrToken = attrs[key];
+        switch (getTokenName(attrToken)) {
+          case "src":
+            if (!attrToken.value) {
+              utils.addTemplateWarn(template, options, "Value for `src` attribute should be specified", attrToken.loc);
+              continue;
+            }
+            var svgUrl = basis.resource.resolveURI(attrToken.value, template.baseURI, "<b:" + token.name + ' src="{url}"/>');
+            arrayAdd(template.deps, basis.resource.buildCloak(svgUrl));
+            template.resources.push({
+              type: "svg",
+              url: svgUrl
+            });
+            break;
+          case "use":
+            applyAttrs(template, options, svgUse, [ basis.object.merge(attrToken, {
+              prefix: "xlink",
+              name: "href"
+            }) ]);
+            break;
+          default:
+            svgAttributes.push(attrToken);
+        }
+      }
+      result.push(applyAttrs(template, options, svgElement, svgAttributes));
+    };
+  },
+  "1b.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var getTokenAttrValues = basis.require("./z.js").getTokenAttrValues;
+    module.exports = function(template, options, token, result) {
+      var elAttrs = getTokenAttrValues(token);
+      var refs = (elAttrs.ref || "").trim();
+      var text = token.children[0] || {
+        type: 3,
+        value: ""
+      };
+      text = basis.object.merge(text, {
+        refs: refs ? refs.split(/\s+/) : [],
+        value: "notrim" in elAttrs ? text.value : (text.value || "").replace(/^ *(\r\n?|\n)( *$)?|(\r\n?|\n) *$/g, "")
+      });
+      result.push.apply(result, options.process([ text ], template, options));
+    };
+  },
+  "f.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var templates = {};
+    function add(id, template, instances) {
+      templates[id] = {
+        template: template,
+        instances: instances
+      };
+    }
+    function remove(id) {
+      delete templates[id];
+    }
+    function resolveInstanceById(refId) {
+      var templateId = refId & 4095;
+      var instanceId = refId >> 12;
+      var templateInfo = templates[templateId];
+      return templateInfo && templateInfo.instances[instanceId];
+    }
+    function resolveInfoById(refId) {
+      var templateId = refId & 4095;
+      var instanceId = refId >> 12;
+      var templateInfo = templates[templateId];
+      var instanceInfo = templateInfo && templateInfo.instances[instanceId];
+      if (instanceInfo) return {
+        debug: instanceInfo.debug ? instanceInfo.debug() : null,
+        id: refId,
+        template: templateInfo.template,
+        context: instanceInfo.context,
+        tmpl: instanceInfo.tmpl
+      };
+    }
+    function resolveTemplateById(refId) {
+      var templateId = refId & 4095;
+      var templateInfo = templates[templateId];
+      return templateInfo && templateInfo.template;
+    }
+    function resolveObjectById(refId) {
+      var instanceInfo = resolveInstanceById(refId);
+      return instanceInfo && instanceInfo.context;
+    }
+    function resolveTmplById(refId) {
+      var instanceInfo = resolveInstanceById(refId);
+      return instanceInfo && instanceInfo.tmpl;
+    }
+    function resolveActionById(refId) {
+      var instanceInfo = resolveInstanceById(refId);
+      return instanceInfo && {
+        context: instanceInfo.context,
+        action: instanceInfo.action
+      };
+    }
+    function getDebugInfoById(refId) {
+      var instanceInfo = resolveInstanceById(refId);
+      return instanceInfo && instanceInfo.debug && instanceInfo.debug();
+    }
+    module.exports = {
+      getDebugInfoById: getDebugInfoById,
+      add: add,
+      remove: remove,
+      resolveInfoById: resolveInfoById,
+      resolveTemplateById: resolveTemplateById,
+      resolveObjectById: resolveObjectById,
+      resolveTmplById: resolveTmplById,
+      resolveActionById: resolveActionById
+    };
+  },
+  "g.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var namespace = "basis.template.theme";
+    var themes = {};
+    var sourceByPath = {};
+    var themeChangeHandlers = [];
+    var currentThemeName = "base";
+    var baseTheme;
+    var Theme = basis.Class(null, {
+      className: namespace + ".Theme",
+      get: getSourceByPath
+    });
+    var SourceWrapper = basis.Class(basis.Token, {
+      className: namespace + ".SourceWrapper",
+      path: "",
+      url: "",
+      baseURI: "",
+      init: function(value, path) {
+        this.path = path;
+        basis.Token.prototype.init.call(this, "");
+      },
+      get: function() {
+        return this.value && this.value.bindingBridge ? this.value.bindingBridge.get(this.value) : this.value;
+      },
+      set: function() {
+        var content = getThemeSource(currentThemeName, this.path);
+        if (this.value != content) {
+          if (this.value && this.value.bindingBridge) this.value.bindingBridge.detach(this.value, SourceWrapper.prototype.apply, this);
+          this.value = content;
+          this.url = content && content.url || "";
+          this.baseURI = (typeof content == "object" || typeof content == "function") && "baseURI" in content ? content.baseURI : basis.path.dirname(this.url) + "/";
+          if (this.value && this.value.bindingBridge) this.value.bindingBridge.attach(this.value, SourceWrapper.prototype.apply, this);
+          this.apply();
+        }
+      },
+      destroy: function() {
+        this.url = null;
+        this.baseURI = null;
+        if (this.value && this.value.bindingBridge) this.value.bindingBridge.detach(this.value, this.apply, this);
+        basis.Token.prototype.destroy.call(this);
+      }
+    });
+    function getSourceByPath() {
+      var path = basis.array(arguments).join(".");
+      var source = sourceByPath[path];
+      if (!source) {
+        source = new SourceWrapper("", path);
+        sourceByPath[path] = source;
+      }
+      return source;
+    }
+    function normalize(list) {
+      var used = {};
+      var result = [];
+      for (var i = 0; i < list.length; i++) if (!used[list[i]]) {
+        used[list[i]] = true;
+        result.push(list[i]);
+      }
+      return result;
+    }
+    function extendFallback(themeName, list) {
+      var result = [];
+      result.source = normalize(list).join("/");
+      var used = {
+        base: true
+      };
+      for (var i = 0; i < list.length; i++) {
+        var name = list[i] || "base";
+        if (name == themeName || used[name]) continue;
+        used[name] = true;
+        result.push(name);
+        getTheme(name);
+        list.splice.apply(list, [ i + 1, 0 ].concat(themes[name].fallback));
+      }
+      result.unshift(themeName);
+      if (themeName != "base") result.push("base");
+      result.value = result.join("/");
+      return result;
+    }
+    function getThemeSource(name, path) {
+      var sourceList = themes[name].sourcesList;
+      for (var i = 0, map; map = sourceList[i]; i++) if (map.hasOwnProperty(path)) return map[path];
+      return "";
+    }
+    function themeHasEffect(themeName) {
+      return themes[currentThemeName].fallback.indexOf(themeName) != -1;
+    }
+    function syncCurrentThemePath(path) {
+      getSourceByPath(path).set();
+    }
+    function syncCurrentTheme() {
+      basis.dev.log("re-apply templates");
+      for (var path in sourceByPath) syncCurrentThemePath(path);
+    }
+    function getTheme(name) {
+      if (!name) name = "base";
+      if (themes[name]) return themes[name].theme;
+      if (!/^([a-z0-9\_\-]+)$/.test(name)) throw "Bad name for theme - " + name;
+      var sources = {};
+      var sourceList = [ sources ];
+      var themeInterface = new Theme;
+      themes[name] = {
+        theme: themeInterface,
+        sources: sources,
+        sourcesList: sourceList,
+        fallback: []
+      };
+      var addSource = function(path, source) {
+        if (path in sources == false) {
+          sources[path] = source;
+          if (themeHasEffect(name)) syncCurrentThemePath(path);
+        } else basis.dev.warn("Template path `" + path + "` is already defined for theme `" + name + "` (definition ignored).");
+        return getSourceByPath(path);
+      };
+      basis.object.extend(themeInterface, {
+        name: name,
+        fallback: function(value) {
+          if (themeInterface !== baseTheme && arguments.length > 0) {
+            var newFallback = typeof value == "string" ? value.split("/") : [];
+            var changed = {};
+            newFallback = extendFallback(name, newFallback);
+            if (themes[name].fallback.source != newFallback.source) {
+              themes[name].fallback.source = newFallback.source;
+              basis.dev.log("fallback changed");
+              for (var themeName in themes) {
+                var curFallback = themes[themeName].fallback;
+                var newFallback = extendFallback(themeName, (curFallback.source || "").split("/"));
+                if (newFallback.value != curFallback.value) {
+                  changed[themeName] = true;
+                  themes[themeName].fallback = newFallback;
+                  var sourceList = themes[themeName].sourcesList;
+                  sourceList.length = newFallback.length;
+                  for (var i = 0; i < sourceList.length; i++) sourceList[i] = themes[newFallback[i]].sources;
+                }
+              }
+            }
+            for (var themeName in changed) if (themeHasEffect(themeName)) {
+              syncCurrentTheme();
+              break;
+            }
+          }
+          var result = themes[name].fallback.slice(1);
+          result.source = themes[name].fallback.source;
+          return result;
+        },
+        define: function(what, wherewith) {
+          if (typeof what == "function") what = what();
+          if (typeof what == "string") {
+            if (typeof wherewith == "object") {
+              var namespace = what;
+              var dictionary = wherewith;
+              var result = {};
+              for (var key in dictionary) if (dictionary.hasOwnProperty(key)) result[key] = addSource(namespace + "." + key, dictionary[key]);
+              return result;
+            } else {
+              if (arguments.length == 1) {
+                return getSourceByPath(what);
+              } else {
+                return addSource(what, wherewith);
+              }
+            }
+          } else {
+            if (typeof what == "object") {
+              var dictionary = what;
+              for (var path in dictionary) if (dictionary.hasOwnProperty(path)) addSource(path, dictionary[path]);
+              return themeInterface;
+            } else {
+              basis.dev.warn("Wrong first argument for basis.template.Theme#define");
+            }
+          }
+        },
+        apply: function() {
+          if (name != currentThemeName) {
+            currentThemeName = name;
+            syncCurrentTheme();
+            basis.Token.prototype.set.call(getTheme, currentThemeName);
+            for (var i = 0, handler; handler = themeChangeHandlers[i]; i++) handler.fn.call(handler.context, name);
+            basis.dev.info("Template theme switched to `" + name + "`");
+          }
+          return themeInterface;
+        },
+        getSource: function(path, withFallback) {
+          return withFallback ? getThemeSource(name, path) : sources[path];
+        },
+        drop: function(path) {
+          if (sources.hasOwnProperty(path)) {
+            delete sources[path];
+            if (themeHasEffect(name)) syncCurrentThemePath(path);
+          }
+        }
+      });
+      themes[name].fallback = extendFallback(name, []);
+      sourceList.push(themes.base.sources);
+      return themeInterface;
+    }
+    function setTheme(name) {
+      return getTheme(name).apply();
+    }
+    basis.object.extend(getTheme, new basis.Token(currentThemeName));
+    getTheme.set = setTheme;
+    function onThemeChange(fn, context, fire) {
+      themeChangeHandlers.push({
+        fn: fn,
+        context: context
+      });
+      if (fire) fn.call(context, currentThemeName);
+    }
+    basis.cleaner.add({
+      destroy: function() {
+        for (var path in sourceByPath) sourceByPath[path].destroy();
+        themes = null;
+        sourceByPath = null;
+      }
+    });
+    baseTheme = getTheme();
+    module.exports = {
+      SourceWrapper: SourceWrapper,
+      Theme: Theme,
+      theme: getTheme,
+      getThemeList: function() {
+        return basis.object.keys(themes);
+      },
+      currentTheme: function() {
+        return themes[currentThemeName].theme;
+      },
+      setTheme: setTheme,
+      onThemeChange: onThemeChange,
+      define: baseTheme.define,
+      get: getSourceByPath,
+      getPathList: function() {
+        return basis.object.keys(sourceByPath);
+      }
+    };
+    getTheme("base").define({
+      ".0": basis.resource("./0.tmpl"),
+      ".1": basis.resource("./1.tmpl"),
+      ".2": basis.resource("./2.tmpl"),
+      ".3": basis.resource("./3.tmpl"),
+      ".4": basis.resource("./4.tmpl"),
+      ".5": basis.resource("./5.tmpl"),
+      ".6": basis.resource("./6.tmpl"),
+      ".7": basis.resource("./7.tmpl"),
+      ".8": basis.resource("./8.tmpl"),
+      ".9": basis.resource("./9.tmpl"),
+      ".a": basis.resource("./a.tmpl"),
+      ".b": basis.resource("./b.tmpl"),
+      ".c": basis.resource("./c.tmpl"),
+      ".d": basis.resource("./d.tmpl"),
+      ".e": basis.resource("./e.tmpl"),
+      ".f": basis.resource("./f.tmpl"),
+      ".g": basis.resource("./g.tmpl")
+    });
+  },
+  "h.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Node = global.Node;
+    var hasOwnProperty = Object.prototype.hasOwnProperty;
+    var eventUtils = basis.require("./i.js");
+    var resolveActionById = basis.require("./f.js").resolveActionById;
+    var consts = basis.require("./b.js");
+    var namespaces = basis.require("./c.js");
+    var MARKER = consts.MARKER;
+    var CLONE_NORMALIZATION_TEXT_BUG = consts.CLONE_NORMALIZATION_TEXT_BUG;
+    var TYPE_ELEMENT = consts.TYPE_ELEMENT;
+    var TYPE_ATTRIBUTE = consts.TYPE_ATTRIBUTE;
+    var TYPE_ATTRIBUTE_CLASS = consts.TYPE_ATTRIBUTE_CLASS;
+    var TYPE_ATTRIBUTE_STYLE = consts.TYPE_ATTRIBUTE_STYLE;
+    var TYPE_ATTRIBUTE_EVENT = consts.TYPE_ATTRIBUTE_EVENT;
+    var TYPE_TEXT = consts.TYPE_TEXT;
+    var TYPE_COMMENT = consts.TYPE_COMMENT;
+    var TYPE_CONTENT = consts.TYPE_CONTENT;
+    var TOKEN_TYPE = consts.TOKEN_TYPE;
+    var TOKEN_BINDINGS = consts.TOKEN_BINDINGS;
+    var TOKEN_REFS = consts.TOKEN_REFS;
+    var ATTR_NAME = consts.ATTR_NAME;
+    var ATTR_VALUE = consts.ATTR_VALUE;
+    var ATTR_VALUE_INDEX = consts.ATTR_VALUE_INDEX;
+    var ELEMENT_NAME = consts.ELEMENT_NAME;
+    var ELEMENT_ATTRIBUTES_AND_CHILDREN = consts.ELEMENT_ATTRIBUTES_AND_CHILDREN;
+    var CONTENT_CHILDREN = consts.CONTENT_CHILDREN;
+    var TEXT_VALUE = consts.TEXT_VALUE;
+    var COMMENT_VALUE = consts.COMMENT_VALUE;
+    var CLASS_BINDING_ENUM = consts.CLASS_BINDING_ENUM;
+    var CLASS_BINDING_BOOL = consts.CLASS_BINDING_BOOL;
+    var CLASS_BINDING_INVERT = consts.CLASS_BINDING_INVERT;
+    var MOUSE_ENTER_LEAVE_SUPPORT = "onmouseenter" in document.documentElement;
+    var USE_CAPTURE_FALLBACK = false;
+    var tmplEventListeners = {};
+    var afterEventAction = {};
+    var insideElementEvent = {};
+    var contains;
+    var IS_TOUCH_DEVICE = "ontouchstart" in document.documentElement;
+    var MOUSE_EVENTS = [ "mouseover", "mouseup", "mousedown", "mousemove", "click", "dblclick" ];
+    if (Node && !Node.prototype.contains) contains = function(parent, child) {
+      return parent.compareDocumentPosition(child) & 16;
+    }; else contains = function(parent, child) {
+      return parent.contains(child);
+    };
+    if (!document.addEventListener) USE_CAPTURE_FALLBACK = basis.publicCallback(function(eventName, event) {
+      eventUtils.fireEvent(document, eventName);
+      event.returnValue = true;
+      var listener = tmplEventListeners[eventName];
+      if (listener) listener(new eventUtils.Event(event));
+    }, true);
+    function createEventHandler(attrName) {
+      return function(event) {
+        if (event.type == "click" && event.which == 3) return;
+        var bubble = insideElementEvent[event.type] || event.type != "mouseenter" && event.type != "mouseleave";
+        var nodePath = event.path.slice(0, event.path.length - 1);
+        var attrCursor = nodePath.shift();
+        var attr;
+        while (attrCursor) {
+          attr = attrCursor.getAttribute && attrCursor.getAttribute(attrName);
+          if (!bubble || typeof attr == "string") break;
+          attrCursor = nodePath.shift();
+        }
+        if (typeof attr == "string") {
+          var cursor = attrCursor;
+          var actionTarget = cursor;
+          var refId;
+          var tmplRef;
+          if (insideElementEvent[event.type]) {
+            var relTarget = event.relatedTarget;
+            if (relTarget && (cursor === relTarget || contains(cursor, relTarget))) cursor = null;
+          }
+          while (cursor) {
+            refId = cursor[MARKER];
+            if (typeof refId == "number") {
+              if (tmplRef = resolveActionById(refId)) break;
+            }
+            cursor = nodePath.shift();
+          }
+          var actions = attr.trim().split(/\s+/);
+          var actionCallback = tmplRef && tmplRef.action;
+          for (var i = 0, actionName; actionName = actions[i++]; ) switch (actionName) {
+            case "prevent-default":
+              event.preventDefault();
+              break;
+            case "stop-propagation":
+              event.stopPropagation();
+              break;
+            case "log-event":
+              basis.dev.log("Template event:", event);
+              break;
+            default:
+              if (actionCallback) {
+                event.actionTarget = actionTarget;
+                actionCallback.call(tmplRef.context, actionName, event);
+              }
+          }
+        }
+        if (event.type in afterEventAction) afterEventAction[event.type](event, attrCursor);
+      };
+    }
+    function emulateEvent(origEventName, emulEventName) {
+      regEventHandler(emulEventName);
+      insideElementEvent[origEventName] = true;
+      afterEventAction[emulEventName] = function(event) {
+        event = new eventUtils.Event(event);
+        event.type = origEventName;
+        tmplEventListeners[origEventName](event);
+      };
+      afterEventAction[origEventName] = function(event, cursor) {
+        if (!cursor || !cursor.parentNode) return;
+        event = new eventUtils.Event(event);
+        event.type = origEventName;
+        event.sender = cursor.parentNode;
+        tmplEventListeners[origEventName](event);
+      };
+    }
+    function regEventHandler(eventName) {
+      if (hasOwnProperty.call(tmplEventListeners, eventName)) return;
+      tmplEventListeners[eventName] = createEventHandler("event-" + eventName);
+      if (USE_CAPTURE_FALLBACK) return;
+      if (!MOUSE_ENTER_LEAVE_SUPPORT) {
+        if (eventName == "mouseenter") return emulateEvent(eventName, "mouseover");
+        if (eventName == "mouseleave") return emulateEvent(eventName, "mouseout");
+      }
+      for (var i = 0, names = eventUtils.browserEvents(eventName), browserEventName; browserEventName = names[i]; i++) eventUtils.addGlobalHandler(browserEventName, tmplEventListeners[eventName]);
+    }
+    var SET_CLASS_ATTRIBUTE_BUG = function() {
+      var element = document.createElement("div");
+      element.setAttribute("class", "a");
+      return !element.className;
+    }();
+    var SET_STYLE_ATTRIBUTE_BUG = function() {
+      var element = document.createElement("div");
+      element.setAttribute("style", "position:absolute");
+      return element.style.position != "absolute";
+    }();
+    function setEventAttribute(node, eventName, actions) {
+      regEventHandler(eventName);
+      if (IS_TOUCH_DEVICE && MOUSE_EVENTS.indexOf(eventName) != -1) node.setAttribute("style", "cursor:pointer;" + (node.getAttribute("style") || ""));
+      if (USE_CAPTURE_FALLBACK) node.setAttribute("on" + eventName, USE_CAPTURE_FALLBACK + '("' + eventName + '",event)');
+      node.setAttribute("event-" + eventName, actions);
+    }
+    function setAttribute(node, name, value) {
+      if (SET_CLASS_ATTRIBUTE_BUG && name == "class") name = "className";
+      if (SET_STYLE_ATTRIBUTE_BUG && name == "style") return node.style.cssText = value;
+      var namespace = namespaces.getNamespace(name, node);
+      if (namespace) node.setAttributeNS(namespace, name, value); else node.setAttribute(name, value);
+    }
+    var buildDOM = function(tokens, offset, result) {
+      for (var i = offset, token; token = tokens[i]; i++) {
+        var tokenType = token[TOKEN_TYPE];
+        switch (tokenType) {
+          case TYPE_ELEMENT:
+            var tagName = token[ELEMENT_NAME];
+            var namespace = namespaces.getNamespace(tagName);
+            var element = namespace ? document.createElementNS(namespace, tagName) : document.createElement(tagName);
+            buildDOM(token, ELEMENT_ATTRIBUTES_AND_CHILDREN, element);
+            result.appendChild(element);
+            break;
+          case TYPE_CONTENT:
+            buildDOM(token, CONTENT_CHILDREN, result);
+            break;
+          case TYPE_ATTRIBUTE:
+            if (!token[TOKEN_BINDINGS]) setAttribute(result, token[ATTR_NAME], token[ATTR_VALUE] || "");
+            break;
+          case TYPE_ATTRIBUTE_CLASS:
+            var attrValue = token[ATTR_VALUE_INDEX[tokenType]];
+            attrValue = attrValue ? [ attrValue ] : [];
+            if (token[TOKEN_BINDINGS]) for (var j = 0, binding; binding = token[TOKEN_BINDINGS][j]; j++) {
+              var defaultValue = binding[4];
+              if (defaultValue) {
+                var prefix = binding[0];
+                if (Array.isArray(prefix)) {
+                  attrValue.push(prefix[defaultValue - 1]);
+                } else {
+                  switch (binding[2]) {
+                    case CLASS_BINDING_BOOL:
+                    case CLASS_BINDING_INVERT:
+                      attrValue.push(prefix + binding[3]);
+                      break;
+                    case CLASS_BINDING_ENUM:
+                      attrValue.push(prefix + binding[5][defaultValue - 1]);
+                      break;
+                  }
+                }
+              }
+            }
+            if (attrValue.length) setAttribute(result, "class", attrValue.join(" "));
+            break;
+          case TYPE_ATTRIBUTE_STYLE:
+            var attrValue = token[ATTR_VALUE_INDEX[tokenType]];
+            if (attrValue) setAttribute(result, "style", (result.getAttribute("style") || "") + attrValue);
+            break;
+          case TYPE_ATTRIBUTE_EVENT:
+            setEventAttribute(result, token[1], token[2] || token[1]);
+            break;
+          case TYPE_COMMENT:
+            result.appendChild(document.createComment(token[COMMENT_VALUE] || (token[TOKEN_REFS] ? "{" + token[TOKEN_REFS].join("|") + "}" : "")));
+            break;
+          case TYPE_TEXT:
+            if (CLONE_NORMALIZATION_TEXT_BUG && i && tokens[i - 1][TOKEN_TYPE] == TYPE_TEXT) result.appendChild(document.createComment(""));
+            result.appendChild(document.createTextNode(token[TEXT_VALUE] || (token[TOKEN_REFS] ? "{" + token[TOKEN_REFS].join("|") + "}" : "") || (token[TOKEN_BINDINGS] ? "{" + token[TOKEN_BINDINGS] + "}" : "")));
+            break;
+        }
+      }
+      return result;
+    };
+    module.exports = function(tokens) {
+      var result = buildDOM(tokens, 0, document.createDocumentFragment());
+      if (result.childNodes.length === 1) result = result.removeChild(result.firstChild);
+      return result;
+    };
+  },
+  "i.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var namespace = "basis.dom.event";
+    var document = global.document;
+    var extend = basis.object.extend;
+    var $null = basis.fn.$null;
+    var arrayFrom = basis.array.from;
+    var globalEvents = {};
+    var EVENT_HOLDER = "basisEvents_" + basis.genUID();
+    var W3CSUPPORT = !!document.addEventListener;
+    var KEY = {
+      BACKSPACE: 8,
+      TAB: 9,
+      CTRL_ENTER: 10,
+      ENTER: 13,
+      SHIFT: 16,
+      CTRL: 17,
+      ALT: 18,
+      ESC: 27,
+      ESCAPE: 27,
+      SPACE: 32,
+      PAGEUP: 33,
+      PAGEDOWN: 34,
+      END: 35,
+      HOME: 36,
+      LEFT: 37,
+      UP: 38,
+      RIGHT: 39,
+      DOWN: 40,
+      INSERT: 45,
+      DELETE: 46,
+      F1: 112,
+      F2: 113,
+      F3: 114,
+      F4: 115,
+      F5: 116,
+      F6: 117,
+      F7: 118,
+      F8: 119,
+      F9: 120,
+      F10: 121,
+      F11: 122,
+      F12: 123
+    };
+    var MOUSE_LEFT = {
+      VALUE: 1,
+      BIT: 1
+    };
+    var MOUSE_MIDDLE = {
+      VALUE: 2,
+      BIT: 4
+    };
+    var MOUSE_RIGHT = {
+      VALUE: 3,
+      BIT: 2
+    };
+    var BROWSER_EVENTS = {
+      mousewheel: [ "wheel", "mousewheel", "DOMMouseScroll" ]
+    };
+    var DEPRECATED_PROPERTIES = [ "returnValue", "keyLocation", "layerX", "layerY", "webkitMovementX", "webkitMovementY", "keyIdentifier" ];
+    var TYPE_KEYBOARD = 0;
+    var TYPE_MOUSE = 1;
+    var TYPE_TOUCH = 2;
+    var TYPE_POINTER = 3;
+    var INPUT_TYPE = {
+      keydown: TYPE_KEYBOARD,
+      keypress: TYPE_KEYBOARD,
+      keyup: TYPE_KEYBOARD,
+      click: TYPE_MOUSE,
+      dblclick: TYPE_MOUSE,
+      mousedown: TYPE_MOUSE,
+      mouseup: TYPE_MOUSE,
+      mouseover: TYPE_MOUSE,
+      mousemove: TYPE_MOUSE,
+      mouseout: TYPE_MOUSE,
+      mouseenter: TYPE_MOUSE,
+      mouseleave: TYPE_MOUSE,
+      wheel: TYPE_MOUSE,
+      mousewheel: TYPE_MOUSE,
+      DOMMouseScroll: TYPE_MOUSE,
+      touchstart: TYPE_TOUCH,
+      touchmove: TYPE_TOUCH,
+      touchend: TYPE_TOUCH,
+      touchcancel: TYPE_TOUCH,
+      pointerover: TYPE_POINTER,
+      pointerenter: TYPE_POINTER,
+      pointerdown: TYPE_POINTER,
+      pointermove: TYPE_POINTER,
+      pointerup: TYPE_POINTER,
+      pointercancel: TYPE_POINTER,
+      pointerout: TYPE_POINTER,
+      pointerleave: TYPE_POINTER
+    };
+    function browserEvents(eventName) {
+      return BROWSER_EVENTS[eventName] || [ eventName ];
+    }
+    function getPath(node) {
+      var path = [];
+      do {
+        path.push(node);
+      } while (node = node.parentNode);
+      path.push(global);
+      return path;
+    }
+    var Event = basis.Class(null, {
+      className: namespace + ".Event",
+      KEY: KEY,
+      init: function(event) {
+        event = wrap(event);
+        for (var name in event) if (DEPRECATED_PROPERTIES.indexOf(name) == -1 && (event.type != "progress" || name != "totalSize" && name != "position")) if (typeof event[name] != "function" && name in this == false) this[name] = event[name];
+        var target = sender(event);
+        extend(this, {
+          event_: event,
+          sender: target,
+          target: target,
+          path: event.path ? basis.array(event.path) : getPath(target)
+        });
+        switch (INPUT_TYPE[event.type]) {
+          case TYPE_KEYBOARD:
+            extend(this, {
+              key: key(event),
+              charCode: charCode(event)
+            });
+            break;
+          case TYPE_MOUSE:
+            extend(this, {
+              mouseLeft: mouseButton(event, MOUSE_LEFT),
+              mouseMiddle: mouseButton(event, MOUSE_MIDDLE),
+              mouseRight: mouseButton(event, MOUSE_RIGHT),
+              mouseX: mouseX(event),
+              mouseY: mouseY(event),
+              wheelDelta: wheelDelta(event),
+              pointerX: mouseX(event),
+              pointerY: mouseY(event)
+            });
+            break;
+          case TYPE_TOUCH:
+            extend(this, {
+              touchX: touchX(event),
+              touchY: touchY(event),
+              mouseX: touchX(event),
+              mouseY: touchY(event),
+              pointerX: touchX(event),
+              pointerY: touchY(event)
+            });
+            break;
+          case TYPE_POINTER:
+            extend(this, {
+              pointerX: mouseX(event),
+              pointerY: mouseY(event),
+              mouseX: mouseX(event),
+              mouseY: mouseY(event)
+            });
+            break;
+        }
+      },
+      stopBubble: function() {
+        cancelBubble(this.event_);
+      },
+      stopPropagation: function() {
+        cancelBubble(this.event_);
+      },
+      preventDefault: function() {
+        cancelDefault(this.event_);
+      },
+      die: function() {
+        this.stopBubble();
+        this.preventDefault();
+      }
+    });
+    function wrap(event) {
+      return event instanceof Event ? event.event_ : event || global.event;
+    }
+    function getNode(ref) {
+      return typeof ref == "string" ? document.getElementById(ref) : ref;
+    }
+    function sender(event) {
+      var target = event.target || event.srcElement || document;
+      return target.nodeType == 3 ? target.parentNode : target;
+    }
+    function cancelBubble(event) {
+      if (event.stopPropagation) event.stopPropagation(); else event.cancelBubble = true;
+    }
+    function cancelDefault(event) {
+      if (event.preventDefault) event.preventDefault(); else event.returnValue = false;
+    }
+    function kill(event, node) {
+      node = getNode(node);
+      if (node) addHandler(node, event, kill); else {
+        cancelDefault(event);
+        cancelBubble(event);
+      }
+    }
+    function key(event) {
+      return event.keyCode || event.which || 0;
+    }
+    function charCode(event) {
+      return event.charCode || event.keyCode || 0;
+    }
+    function mouseButton(event, button) {
+      if (typeof event.which == "number") return event.which == button.VALUE; else return !!(event.button & button.BIT);
+    }
+    function mouseX(event) {
+      if ("pageX" in event) return event.pageX; else return "clientX" in event ? event.clientX + (document.compatMode == "CSS1Compat" ? document.documentElement.scrollLeft : document.body.scrollLeft) : 0;
+    }
+    function mouseY(event) {
+      if ("pageY" in event) return event.pageY; else return "clientY" in event ? event.clientY + (document.compatMode == "CSS1Compat" ? document.documentElement.scrollTop : document.body.scrollTop) : 0;
+    }
+    function touchX(event) {
+      if (event.changedTouches) return event.changedTouches[0].pageX;
+    }
+    function touchY(event) {
+      if (event.changedTouches) return event.changedTouches[0].pageY;
+    }
+    function wheelDelta(event) {
+      var delta = 0;
+      if ("deltaY" in event) delta = -event.deltaY; else if ("wheelDelta" in event) delta = event.wheelDelta; else if (event.type == "DOMMouseScroll") delta = -event.detail;
+      return delta && delta / Math.abs(delta);
+    }
+    var globalHandlers = {};
+    var captureHandlers = {};
+    var noCaptureScheme = !W3CSUPPORT;
+    var flushAsap = true;
+    var lastFrameStartEvent;
+    var lastFrameFinishEvent;
+    function startFrame(event) {
+      if (flushAsap && event !== lastFrameStartEvent) {
+        lastFrameStartEvent = event;
+        basis.codeFrame.start();
+      }
+    }
+    function finishFrame(event) {
+      if (flushAsap && event !== lastFrameFinishEvent) {
+        lastFrameFinishEvent = event;
+        basis.codeFrame.finish();
+      }
+    }
+    function observeGlobalEvents(event) {
+      var handlers = arrayFrom(globalHandlers[event.type]);
+      var captureHandler = captureHandlers[event.type];
+      var wrappedEvent = new Event(event);
+      startFrame(event);
+      if (captureHandler) {
+        captureHandler.handler.call(captureHandler.thisObject, wrappedEvent);
+      } else {
+        if (handlers) {
+          for (var i = handlers.length; i-- > 0; ) {
+            var handlerObject = handlers[i];
+            handlerObject.handler.call(handlerObject.thisObject, wrappedEvent);
+          }
+        }
+      }
+      finishFrame(event);
+    }
+    function captureEvent(eventType, handler, thisObject) {
+      if (captureHandlers[eventType]) releaseEvent(eventType);
+      if (!handler) handler = basis.fn.$undef;
+      addGlobalHandler(eventType, handler, thisObject);
+      captureHandlers[eventType] = {
+        handler: handler,
+        thisObject: thisObject
+      };
+    }
+    function releaseEvent(eventType) {
+      var handlerObject = captureHandlers[eventType];
+      if (handlerObject) {
+        removeGlobalHandler(eventType, handlerObject.handler, handlerObject.thisObject);
+        delete captureHandlers[eventType];
+      }
+    }
+    function addGlobalHandler(eventType, handler, thisObject) {
+      var handlers = globalHandlers[eventType];
+      if (handlers) {
+        for (var i = 0, item; item = handlers[i]; i++) if (item.handler === handler && item.thisObject === thisObject) return;
+      } else {
+        if (noCaptureScheme) addHandler(document, eventType, $null); else document.addEventListener(eventType, observeGlobalEvents, true);
+        handlers = globalHandlers[eventType] = [];
+      }
+      handlers.push({
+        handler: handler,
+        thisObject: thisObject
+      });
+    }
+    function removeGlobalHandler(eventType, handler, thisObject) {
+      var handlers = globalHandlers[eventType];
+      if (handlers) {
+        for (var i = 0, item; item = handlers[i]; i++) {
+          if (item.handler === handler && item.thisObject === thisObject) {
+            handlers.splice(i, 1);
+            if (!handlers.length) {
+              delete globalHandlers[eventType];
+              if (noCaptureScheme) removeHandler(document, eventType, $null); else document.removeEventListener(eventType, observeGlobalEvents, true);
+            }
+            return;
+          }
+        }
+      }
+    }
+    function addHandler(node, eventType, handler, thisObject) {
+      node = getNode(node);
+      if (!node) throw "basis.event.addHandler: can't attach event listener to undefined";
+      if (typeof handler != "function") throw "basis.event.addHandler: handler is not a function";
+      var handlers = node === global ? globalEvents : node[EVENT_HOLDER];
+      if (!handlers) handlers = node[EVENT_HOLDER] = {};
+      var eventTypeHandlers = handlers[eventType];
+      var handlerObject = {
+        handler: handler,
+        thisObject: thisObject
+      };
+      if (!eventTypeHandlers) {
+        eventTypeHandlers = handlers[eventType] = [ handlerObject ];
+        eventTypeHandlers.fireEvent = function(event) {
+          event = wrap(event);
+          if (noCaptureScheme && event && globalHandlers[eventType]) {
+            if (typeof event.returnValue == "undefined") {
+              observeGlobalEvents(event);
+              if (event.cancelBubble === true) return;
+              if (typeof event.returnValue == "undefined") event.returnValue = true;
+            }
+          }
+          startFrame(event);
+          for (var i = 0, wrappedEvent = new Event(event), item; item = eventTypeHandlers[i++]; ) item.handler.call(item.thisObject, wrappedEvent);
+          finishFrame(event);
+        };
+        if (W3CSUPPORT) node.addEventListener(eventType, eventTypeHandlers.fireEvent, false); else node.attachEvent("on" + eventType, eventTypeHandlers.fireEvent);
+      } else {
+        for (var i = 0, item; item = eventTypeHandlers[i]; i++) if (item.handler === handler && item.thisObject === thisObject) return;
+        eventTypeHandlers.push(handlerObject);
+      }
+    }
+    function addHandlers(node, handlers, thisObject) {
+      node = getNode(node);
+      for (var eventType in handlers) addHandler(node, eventType, handlers[eventType], thisObject);
+    }
+    function removeHandler(node, eventType, handler, thisObject) {
+      node = getNode(node);
+      var handlers = node === global ? globalEvents : node[EVENT_HOLDER];
+      if (handlers) {
+        var eventTypeHandlers = handlers[eventType];
+        if (eventTypeHandlers) {
+          for (var i = 0, item; item = eventTypeHandlers[i]; i++) {
+            if (item.handler === handler && item.thisObject === thisObject) {
+              eventTypeHandlers.splice(i, 1);
+              if (!eventTypeHandlers.length) clearHandlers(node, eventType);
+              return;
+            }
+          }
+        }
+      }
+    }
+    function clearHandlers(node, eventType) {
+      node = getNode(node);
+      var handlers = node === global ? globalEvents : node[EVENT_HOLDER];
+      if (handlers) {
+        if (typeof eventType != "string") {
+          for (eventType in handlers) clearHandlers(node, eventType);
+        } else {
+          var eventTypeHandlers = handlers[eventType];
+          if (eventTypeHandlers) {
+            if (node.removeEventListener) node.removeEventListener(eventType, eventTypeHandlers.fireEvent, false); else node.detachEvent("on" + eventType, eventTypeHandlers.fireEvent);
+            delete handlers[eventType];
+          }
+        }
+      }
+    }
+    function fireEvent(node, eventType, event) {
+      node = getNode(node);
+      var handlers = node === global ? globalEvents : node[EVENT_HOLDER];
+      if (handlers && handlers[eventType]) {
+        try {
+          flushAsap = false;
+          handlers[eventType].fireEvent(event);
+        } finally {
+          flushAsap = true;
+        }
+      }
+    }
+    function onUnload(handler, thisObject) {
+      basis.dev.warn("basis.dom.event.onUnload() is deprecated, use basis.teardown() instead");
+      basis.teardown(handler, thisObject);
+    }
+    var tagNameEventMap = {};
+    function getEventInfo(eventName, tagName) {
+      if (!tagName) tagName = "div";
+      var id = tagName + "-" + eventName;
+      if (tagNameEventMap[id]) return tagNameEventMap[id]; else {
+        var supported = false;
+        var bubble = false;
+        if (!W3CSUPPORT) {
+          var onevent = "on" + eventName;
+          var host = document.createElement("div");
+          var target = host.appendChild(document.createElement(tagName));
+          host[onevent] = function() {
+            bubble = true;
+          };
+          try {
+            target.fireEvent(onevent);
+            supported = true;
+          } catch (e) {}
+        }
+        return tagNameEventMap[id] = {
+          supported: supported,
+          bubble: bubble
+        };
+      }
+    }
+    function wrapEventFunction(fn) {
+      return function(event, arg) {
+        return fn(wrap(event), arg);
+      };
+    }
+    module.exports = {
+      W3CSUPPORT: W3CSUPPORT,
+      browserEvents: browserEvents,
+      getEventInfo: getEventInfo,
+      KEY: KEY,
+      MOUSE_LEFT: MOUSE_LEFT,
+      MOUSE_RIGHT: MOUSE_RIGHT,
+      MOUSE_MIDDLE: MOUSE_MIDDLE,
+      Event: Event,
+      sender: wrapEventFunction(sender),
+      cancelBubble: wrapEventFunction(cancelBubble),
+      cancelDefault: wrapEventFunction(cancelDefault),
+      kill: wrapEventFunction(kill),
+      key: wrapEventFunction(key),
+      charCode: wrapEventFunction(charCode),
+      mouseButton: wrapEventFunction(mouseButton),
+      mouseX: wrapEventFunction(mouseX),
+      mouseY: wrapEventFunction(mouseY),
+      wheelDelta: wrapEventFunction(wheelDelta),
+      touchX: wrapEventFunction(touchX),
+      touchY: wrapEventFunction(touchY),
+      addGlobalHandler: addGlobalHandler,
+      removeGlobalHandler: removeGlobalHandler,
+      captureEvent: captureEvent,
+      releaseEvent: releaseEvent,
+      addHandler: addHandler,
+      addHandlers: addHandlers,
+      removeHandler: removeHandler,
+      clearHandlers: clearHandlers,
+      fireEvent: fireEvent,
+      onUnload: onUnload,
+      wrap: wrap
+    };
+  },
+  "j.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var namespace = "basis.dom.wrapper";
+    var hasOwnProperty = Object.prototype.hasOwnProperty;
+    var Class = basis.Class;
+    var complete = basis.object.complete;
+    var arrayFrom = basis.array;
+    var arrayRemove = basis.array.remove;
+    var $undef = basis.fn.$undef;
+    var getter = basis.getter;
+    var nullGetter = basis.fn.nullGetter;
+    var basisEvent = basis.require("./6.js");
+    var createEvent = basisEvent.create;
+    var events = basisEvent.events;
+    var basisData = basis.require("./2.js");
+    var resolveValue = basisData.resolveValue;
+    var resolveDataset = basisData.resolveDataset;
+    var createResolveFunction = basisData.createResolveFunction;
+    var SUBSCRIPTION = basisData.SUBSCRIPTION;
+    var STATE = basisData.STATE;
+    var DataObject = basisData.Object;
+    var ReadOnlyDataset = basisData.ReadOnlyDataset;
+    var Dataset = basisData.Dataset;
+    var EXCEPTION_CANT_INSERT = namespace + ": Node can't be inserted at specified point in hierarchy";
+    var EXCEPTION_NODE_NOT_FOUND = namespace + ": Node was not found";
+    var EXCEPTION_BAD_CHILD_CLASS = namespace + ": Child node has wrong class";
+    var EXCEPTION_NULL_CHILD = namespace + ": Child node is null";
+    var EXCEPTION_DATASOURCE_CONFLICT = namespace + ": Operation is not allowed because node is under dataSource control";
+    var EXCEPTION_DATASOURCEADAPTER_CONFLICT = namespace + ": Operation is not allowed because node is under dataSource adapter control";
+    var EXCEPTION_PARENTNODE_OWNER_CONFLICT = namespace + ": Node can't has owner and parentNode";
+    var EXCEPTION_NO_CHILDCLASS = namespace + ": Node can't has children and dataSource as childClass isn't specified";
+    var AUTO = "__auto__";
+    var DELEGATE = {
+      ANY: true,
+      NONE: false,
+      PARENT: "parent",
+      OWNER: "owner"
+    };
+    var childNodesDatasetMap = {};
+    var satellitesDatasetMap = {};
+    function warnOnDataSourceItemNodeDestoy() {
+      basis.dev.warn(namespace + ": node can't be destroyed as representing dataSource item, destroy delegate item or remove it from dataSource first");
+    }
+    function warnOnAutoSatelliteOwnerChange() {
+      basis.dev.warn(namespace + ": satellite can't change owner as it auto-satellite");
+    }
+    function warnOnAutoSatelliteDestoy() {
+      basis.dev.warn(namespace + ": satellite can't be destroyed as it auto-create satellite, and could be destroyed on owner destroy");
+    }
+    function lockDataSourceItemNode(node) {
+      node.setDelegate = basis.fn.$undef;
+      node.destroy = warnOnDataSourceItemNodeDestoy;
+    }
+    function unlockDataSourceItemNode(node) {
+      var proto = node.constructor.prototype;
+      node.setDelegate = proto.setDelegate;
+      node.destroy = proto.destroy;
+    }
+    function getSortingValue(node) {
+      return node.sortingValue;
+    }
+    function sortAsc(a, b) {
+      a = a.sortingValue || 0;
+      b = b.sortingValue || 0;
+      return +(a > b) || -(a < b);
+    }
+    function sortDesc(a, b) {
+      a = a.sortingValue || 0;
+      b = b.sortingValue || 0;
+      return -(a > b) || +(a < b);
+    }
+    function sortChildNodes(obj) {
+      return obj.childNodes.sort(obj.sortingDesc ? sortDesc : sortAsc);
+    }
+    function binarySearchPos(array, value, valueGetter, desc) {
+      if (!array.length) return 0;
+      desc = !!desc;
+      var l = 0;
+      var r = array.length - 1;
+      var valueType = typeof value;
+      var compareValue;
+      var compareValueType;
+      var pos;
+      do {
+        pos = l + r >> 1;
+        compareValue = valueGetter(array[pos]);
+        compareValueType = typeof compareValue;
+        if (desc) {
+          if (valueType > compareValueType || value > compareValue) {
+            r = pos - 1;
+            continue;
+          }
+          if (valueType < compareValueType || value < compareValue) {
+            l = pos + 1;
+            continue;
+          }
+        } else {
+          if (valueType < compareValueType || value < compareValue) {
+            r = pos - 1;
+            continue;
+          }
+          if (valueType > compareValueType || value > compareValue) {
+            l = pos + 1;
+            continue;
+          }
+        }
+        return value == compareValue ? pos : 0;
+      } while (l <= r);
+      return pos + ((compareValueType < valueType || compareValue < value) ^ desc);
+    }
+    function updateNodeContextSelection(root, oldSelection, newSelection, rootUpdate, ignoreRootSelection) {
+      if (oldSelection === newSelection) return;
+      var nextNode;
+      var cursor = root;
+      var selected = [];
+      if (rootUpdate) {
+        root.contextSelection = newSelection;
+        if (root.selected && !root.selectedRA_) selected.push(root);
+      }
+      while (cursor) {
+        nextNode = !cursor.selection || ignoreRootSelection && cursor === root ? cursor.firstChild : null;
+        if (nextNode && nextNode.contextSelection !== oldSelection) throw "Try change wrong context selection";
+        while (!nextNode) {
+          if (cursor === root) {
+            if (selected.length) {
+              if (oldSelection) oldSelection.remove(selected);
+              if (newSelection) {
+                newSelection.add(selected);
+                for (var i = 0; i < selected.length; i++) {
+                  var node = selected[i];
+                  if (node.selected && !newSelection.has(node)) {
+                    node.selected = false;
+                    node.emit_unselect();
+                  }
+                }
+              }
+            }
+            return;
+          }
+          nextNode = cursor.nextSibling;
+          if (!nextNode) cursor = cursor.parentNode;
+        }
+        cursor = nextNode;
+        if (cursor.selected && !cursor.selectedRA_) selected.push(cursor);
+        cursor.contextSelection = newSelection;
+      }
+    }
+    function updateNodeDisableContext(node, disabled) {
+      if (node.contextDisabled != disabled) {
+        node.contextDisabled = disabled;
+        if (node.disabled) return;
+        if (disabled) node.emit_disable(); else node.emit_enable();
+      }
+    }
+    SUBSCRIPTION.addProperty("owner");
+    SUBSCRIPTION.addProperty("dataSource");
+    SUBSCRIPTION.add("CHILD", {
+      childNodesModified: function(object, delta) {
+        var array;
+        if (array = delta.inserted) for (var i = 0, child; child = array[i]; i++) SUBSCRIPTION.link("child", object, child);
+        if (array = delta.deleted) for (var i = 0, child; child = array[i]; i++) SUBSCRIPTION.unlink("child", object, child);
+      }
+    }, function(action, object) {
+      var childNodes = object.childNodes || [];
+      for (var i = 0, child; child = childNodes[i]; i++) action("child", object, child);
+    });
+    SUBSCRIPTION.add("SATELLITE", {
+      satelliteChanged: function(object, name, oldSatellite) {
+        if (oldSatellite) SUBSCRIPTION.unlink("satellite", object, oldSatellite);
+        if (object.satellite[name]) SUBSCRIPTION.link("satellite", object, object.satellite[name]);
+      }
+    }, function(action, object) {
+      var satellites = object.satellite;
+      if (satellites !== NULL_SATELLITE) for (var name in satellites) if (name !== AUTO) action("satellite", object, satellites[name]);
+    });
+    function processInstanceClass(InstanceClass) {
+      if (!InstanceClass.isSubclassOf(AbstractNode)) {
+        basis.dev.warn(namespace + ": Bad class for instance, should be subclass of basis.dom.wrapper.AbstractNode");
+        return AbstractNode;
+      }
+      return InstanceClass;
+    }
+    function processSatelliteConfig(satelliteConfig) {
+      var loc;
+      if (!satelliteConfig) return null;
+      if (satelliteConfig.isSatelliteConfig) return satelliteConfig;
+      if (satelliteConfig instanceof AbstractNode) return satelliteConfig;
+      if (satelliteConfig.constructor !== Object) satelliteConfig = {
+        instance: satelliteConfig
+      }; else loc = basis.dev.getInfo(satelliteConfig, "loc");
+      var handlerRequired = false;
+      var events = "update";
+      var config = {
+        isSatelliteConfig: true
+      };
+      for (var key in satelliteConfig) {
+        var value = satelliteConfig[key];
+        switch (key) {
+          case "instance":
+            if (value instanceof AbstractNode) {
+              config.instance = value;
+            } else {
+              if (Class.isClass(value)) config.instanceClass = processInstanceClass(value); else {
+                if (typeof value == "string") value = basis.getter(value);
+                config.getInstance = value;
+              }
+            }
+            break;
+          case "instanceOf":
+          case "satelliteClass":
+            if (key == "instanceOf") {
+              basis.dev.warn(namespace + ": `instanceOf` in satellite config is deprecated, use `instance` instead");
+              if ("satelliteClass" in satelliteConfig) {
+                basis.dev.warn(namespace + ": `instanceOf` in satellite config has been ignored, as `satelliteClass` is specified");
+                break;
+              }
+            }
+            if ("instance" in satelliteConfig) {
+              basis.dev.warn(namespace + ": `" + key + "` in satellite config has been ignored, as `instance` is specified");
+              break;
+            }
+            if (Class.isClass(value)) {
+              basis.dev.warn(namespace + ": `" + key + "` in satellite config is deprecated, use `instance` instead");
+              config.instanceClass = processInstanceClass(value);
+            } else basis.dev.warn(namespace + ": bad value for `" + key + "` in satellite config, value should be a subclass of basis.dom.wrapper.AbstractNode");
+            break;
+          case "existsIf":
+          case "delegate":
+          case "dataSource":
+            if (value) {
+              if (typeof value == "string") value = getter(value);
+              if (typeof value != "function") value = basis.fn.$const(value); else handlerRequired = true;
+            }
+            config[key] = value;
+            break;
+          case "config":
+            if (typeof value == "string") value = getter(value);
+            config.config = value;
+            break;
+          case "events":
+            events = satelliteConfig.events;
+            break;
+          default:
+            basis.dev.warn("Unknown satellite config option – " + key);
+        }
+      }
+      if (!config.instance && !config.getInstance && !config.instanceClass) config.instanceClass = processInstanceClass(AbstractNode);
+      if (handlerRequired) {
+        if (Array.isArray(events)) events = events.join(" ");
+        if (typeof events == "string") {
+          var handler = {};
+          events = events.split(/\s+/);
+          for (var i = 0, eventName; eventName = events[i]; i++) {
+            handler[eventName] = SATELLITE_UPDATE;
+            config.handler = handler;
+          }
+        }
+      }
+      if (loc) basis.dev.setInfo(config, "loc", loc);
+      return config;
+    }
+    function applySatellites(node, satellites) {
+      for (var name in satellites) if (satellites[name] && typeof satellites[name] == "object") node.setSatellite(name, satellites[name]);
+    }
+    var NULL_SATELLITE = Class.customExtendProperty({}, function(result, extend) {
+      var map = basis.dev.getInfo(extend, "map");
+      for (var name in extend) {
+        result[name] = processSatelliteConfig(extend[name]);
+        if (map && !basis.dev.getInfo(result[name]) && hasOwnProperty.call(map, name)) basis.dev.setInfo(result[name], "loc", map[name]);
+      }
+    });
+    var SATELLITE_UPDATE = function() {
+      var name = this.name;
+      var config = this.config;
+      var owner = this.owner;
+      var exists = "existsIf" in config == false || config.existsIf(owner);
+      if (resolveValue(this, SATELLITE_UPDATE, exists, "existsRA_")) {
+        var satellite = this.instance || config.instance;
+        if (!satellite || this.factoryType == "value") {
+          if (!this.factoryType) {
+            var instanceValue = config.getInstance;
+            var instanceClass = config.instanceClass;
+            if (typeof instanceValue == "function") {
+              instanceValue = instanceValue.call(owner, owner);
+              if (Class.isClass(instanceValue)) instanceClass = processInstanceClass(instanceValue);
+            }
+            this.factoryType = instanceClass ? "class" : "value";
+            this.factory = instanceClass || instanceValue;
+          }
+          if (this.factoryType == "class") {
+            var satelliteConfig = {
+              destroy: warnOnAutoSatelliteDestoy
+            };
+            if (config.delegate) {
+              satelliteConfig.autoDelegate = false;
+              satelliteConfig.delegate = config.delegate(owner);
+            }
+            if (config.dataSource) satelliteConfig.dataSource = config.dataSource(owner);
+            if (config.config) basis.object.complete(satelliteConfig, typeof config.config == "function" ? config.config(owner) : config.config);
+            this.instance = new this.factory(satelliteConfig);
+            owner.setSatellite(name, this.instance, true);
+            var loc = basis.dev.getInfo(config, "loc");
+            if (loc) basis.dev.setInfo(this.instance, "loc", loc);
+            return;
+          }
+          satellite = resolveAbstractNode(this, SATELLITE_UPDATE, this.factory, "instanceRA_");
+        }
+        if (this.instance !== satellite) {
+          this.instance = satellite || null;
+          owner.setSatellite(name, this.instance, true);
+        }
+        if (satellite && satellite.owner === owner) {
+          if (config.delegate) satellite.setDelegate(config.delegate(owner));
+          if (config.dataSource) satellite.setDataSource(config.dataSource(owner));
+        }
+      } else {
+        var satellite = this.instance;
+        if (satellite) {
+          if (config.instance) {
+            if (config.delegate) satellite.setDelegate();
+            if (config.dataSource) satellite.setDataSource();
+          }
+          this.instance = null;
+          owner.setSatellite(name, null, true);
+        }
+      }
+    };
+    var AUTO_SATELLITE_INSTANCE_HANDLER = {
+      destroy: function() {
+        if (!this.instanceRA_) this.owner.setSatellite(this.name, null);
+      }
+    };
+    var AbstractNode = Class(DataObject, {
+      className: namespace + ".AbstractNode",
+      propertyDescriptors: {
+        owner: "ownerChanged",
+        parentNode: "parentChanged",
+        childNodes: {
+          nested: [ "length" ],
+          events: "childNodesModified"
+        },
+        childNodesState: "childNodesStateChanged",
+        dataSource: "dataSourceChanged",
+        "getChildNodesDataset()": true,
+        satellite: {
+          nested: true,
+          events: "satelliteChanged"
+        },
+        sorting: "sortingChanged",
+        sortingDesc: "sortingChanged",
+        grouping: "groupingChanged",
+        ownerSatelliteName: "ownerSatelliteNameChanged",
+        firstChild: false,
+        lastChild: false,
+        previousSibling: false,
+        nextSibling: false,
+        groupNode: false,
+        groupId: true,
+        autoDelegate: false,
+        destroyDataSourceMember: false,
+        name: true
+      },
+      subscribeTo: DataObject.prototype.subscribeTo + SUBSCRIPTION.DATASOURCE + SUBSCRIPTION.SATELLITE,
+      isSyncRequired: function() {
+        return this.state == STATE.UNDEFINED || this.state == STATE.DEPRECATED;
+      },
+      syncEvents: {
+        activeChanged: false
+      },
+      emit_update: function(delta) {
+        DataObject.prototype.emit_update.call(this, delta);
+        var parentNode = this.parentNode;
+        if (parentNode) {
+          if (parentNode.matchFunction) this.match(parentNode.matchFunction);
+          parentNode.insertBefore(this, this.nextSibling);
+        }
+      },
+      listen: {
+        owner: {
+          destroy: function() {
+            if (!this.ownerSatelliteName) this.setOwner();
+          }
+        }
+      },
+      autoDelegate: DELEGATE.NONE,
+      name: null,
+      childNodes: null,
+      emit_childNodesModified: createEvent("childNodesModified", "delta") && function(delta) {
+        events.childNodesModified.call(this, delta);
+        var listen = this.listen.childNode;
+        var array;
+        if (listen) {
+          if (array = delta.inserted) for (var i = 0, child; child = array[i]; i++) child.addHandler(listen, this);
+          if (array = delta.deleted) for (var i = 0, child; child = array[i]; i++) child.removeHandler(listen, this);
+        }
+      },
+      childNodesState: STATE.UNDEFINED,
+      emit_childNodesStateChanged: createEvent("childNodesStateChanged", "oldState"),
+      childClass: Class.SELF,
+      dataSource: null,
+      emit_dataSourceChanged: createEvent("dataSourceChanged", "oldDataSource"),
+      dataSourceRA_: null,
+      dataSourceMap_: null,
+      destroyDataSourceMember: true,
+      parentNode: null,
+      emit_parentChanged: createEvent("parentChanged", "oldParentNode"),
+      nextSibling: null,
+      previousSibling: null,
+      firstChild: null,
+      lastChild: null,
+      sorting: nullGetter,
+      sortingDesc: false,
+      emit_sortingChanged: createEvent("sortingChanged", "oldSorting", "oldSortingDesc"),
+      groupingClass: null,
+      grouping: null,
+      emit_groupingChanged: createEvent("groupingChanged", "oldGrouping"),
+      groupNode: null,
+      groupId: NaN,
+      satellite: NULL_SATELLITE,
+      emit_satelliteChanged: createEvent("satelliteChanged", "name", "oldSatellite"),
+      ownerSatelliteName: null,
+      emit_ownerSatelliteNameChanged: createEvent("ownerSatelliteNameChanged", "name", "oldName"),
+      owner: null,
+      emit_ownerChanged: createEvent("ownerChanged", "oldOwner"),
+      init: function() {
+        DataObject.prototype.init.call(this);
+        var childNodes = this.childNodes;
+        var dataSource = this.dataSource;
+        if (childNodes) this.childNodes = null;
+        if (dataSource) this.dataSource = null;
+        var grouping = this.grouping;
+        if (grouping) {
+          this.grouping = null;
+          this.setGrouping(grouping);
+        }
+        if (this.childClass) {
+          this.childNodes = [];
+          if (dataSource) {
+            this.setDataSource(dataSource);
+          } else {
+            if (childNodes) this.setChildNodes(childNodes);
+          }
+        }
+        var satellites = this.satellite;
+        if (satellites !== NULL_SATELLITE) {
+          this.satellite = NULL_SATELLITE;
+          applySatellites(this, satellites);
+        }
+        var owner = this.owner;
+        if (owner) {
+          this.owner = null;
+          this.setOwner(owner);
+        }
+      },
+      setChildNodesState: function(state, data) {
+        var stateCode = String(state);
+        var oldState = this.childNodesState;
+        if (!STATE.values[stateCode]) throw new Error("Wrong state value");
+        if (oldState != stateCode || oldState.data != data) {
+          this.childNodesState = Object(stateCode);
+          this.childNodesState.data = data;
+          this.emit_childNodesStateChanged(oldState);
+        }
+      },
+      appendChild: function(newChild) {},
+      insertBefore: function(newChild, refChild) {},
+      removeChild: function(oldChild) {},
+      replaceChild: function(newChild, oldChild) {},
+      clear: function(alive) {},
+      setChildNodes: function(nodes) {},
+      setGrouping: function(grouping, alive) {},
+      setSorting: function(sorting, desc) {},
+      setDataSource: function(dataSource) {},
+      setOwner: function(owner) {
+        if (!owner || owner instanceof AbstractNode == false) owner = null;
+        if (owner && this.parentNode) throw EXCEPTION_PARENTNODE_OWNER_CONFLICT;
+        var oldOwner = this.owner;
+        if (oldOwner !== owner) {
+          var listenHandler = this.listen.owner;
+          if (oldOwner) {
+            if (this.ownerSatelliteName && oldOwner.satellite[AUTO] && this.ownerSatelliteName in oldOwner.satellite[AUTO]) {
+              basis.dev.warn(namespace + ": auto-satellite can't change it's owner");
+              return;
+            }
+            if (listenHandler) oldOwner.removeHandler(listenHandler, this);
+            if (this.ownerSatelliteName) {
+              this.owner = null;
+              oldOwner.setSatellite(this.ownerSatelliteName, null);
+            }
+          }
+          if (owner && listenHandler) owner.addHandler(listenHandler, this);
+          this.owner = owner;
+          this.emit_ownerChanged(oldOwner);
+          if (this.autoDelegate == DELEGATE.OWNER || this.autoDelegate === DELEGATE.ANY) this.setDelegate(owner);
+        }
+      },
+      setSatellite: function(name, satellite, autoSet) {
+        var oldSatellite = this.satellite[name] || null;
+        var auto = this.satellite[AUTO];
+        var autoConfig = auto && auto[name];
+        var preserveAuto = autoSet && autoConfig;
+        if (preserveAuto) {
+          satellite = autoConfig.instance;
+          if (satellite && autoConfig.config.instance) delete autoConfig.config.instance.setOwner;
+        } else {
+          satellite = processSatelliteConfig(satellite);
+          if (satellite && satellite.owner === this && auto && satellite.ownerSatelliteName && auto[satellite.ownerSatelliteName]) {
+            basis.dev.warn(namespace + ": auto-create satellite can't change name inside owner");
+            return;
+          }
+          if (autoConfig) {
+            delete auto[name];
+            if (autoConfig.config.instance) autoConfig.config.instance.removeHandler(AUTO_SATELLITE_INSTANCE_HANDLER, autoConfig);
+            if (autoConfig.config.handler) this.removeHandler(autoConfig.config.handler, autoConfig);
+          }
+        }
+        if (oldSatellite !== satellite) {
+          var satelliteListen = this.listen.satellite;
+          var satellitePersonalListen = this.listen["satellite:" + name];
+          var destroySatellite;
+          if (oldSatellite) {
+            delete this.satellite[name];
+            var oldSatelliteName = oldSatellite.ownerSatelliteName;
+            if (oldSatelliteName != null) {
+              oldSatellite.ownerSatelliteName = null;
+              oldSatellite.emit_ownerSatelliteNameChanged(oldSatelliteName);
+            }
+            if (autoConfig && oldSatellite.destroy === warnOnAutoSatelliteDestoy) {
+              destroySatellite = oldSatellite;
+            } else {
+              if (satelliteListen) oldSatellite.removeHandler(satelliteListen, this);
+              if (satellitePersonalListen) oldSatellite.removeHandler(satellitePersonalListen, this);
+              oldSatellite.setOwner(null);
+            }
+            if (preserveAuto && !satellite && autoConfig.config.instance) autoConfig.config.instance.setOwner = warnOnAutoSatelliteOwnerChange;
+          }
+          if (satellite) {
+            if (satellite instanceof AbstractNode == false) {
+              var autoConfig = {
+                owner: this,
+                name: name,
+                config: satellite,
+                factoryType: null,
+                factory: null,
+                instance: null,
+                instanceRA_: null,
+                existsRA_: null
+              };
+              if (satellite.handler) this.addHandler(satellite.handler, autoConfig);
+              if (satellite.instance) {
+                satellite.instance.addHandler(AUTO_SATELLITE_INSTANCE_HANDLER, autoConfig);
+                satellite.instance.setOwner = warnOnAutoSatelliteOwnerChange;
+              }
+              if (!auto) {
+                if (this.satellite === NULL_SATELLITE) this.satellite = {};
+                auto = this.satellite[AUTO] = {};
+              }
+              auto[name] = autoConfig;
+              SATELLITE_UPDATE.call(autoConfig, this);
+              if (!autoConfig.instance && oldSatellite) this.emit_satelliteChanged(name, oldSatellite);
+              if (destroySatellite) {
+                delete destroySatellite.destroy;
+                destroySatellite.destroy();
+              }
+              return;
+            }
+            if (satellite.owner !== this) {
+              if (autoConfig && autoConfig.config.delegate) {
+                var autoDelegate = satellite.autoDelegate;
+                satellite.autoDelegate = false;
+                satellite.setOwner(this);
+                satellite.autoDelegate = autoDelegate;
+              } else satellite.setOwner(this);
+              if (satellite.owner !== this) {
+                this.setSatellite(name, null);
+                return;
+              }
+              if (satelliteListen) satellite.addHandler(satelliteListen, this);
+              if (satellitePersonalListen) satellite.addHandler(satellitePersonalListen, this);
+            } else {
+              if (satellite.ownerSatelliteName) {
+                delete this.satellite[satellite.ownerSatelliteName];
+                this.emit_satelliteChanged(satellite.ownerSatelliteName, satellite);
+              }
+            }
+            if (this.satellite == NULL_SATELLITE) this.satellite = {};
+            this.satellite[name] = satellite;
+            var oldSatelliteName = satellite.ownerSatelliteName;
+            if (oldSatelliteName != name) {
+              satellite.ownerSatelliteName = name;
+              satellite.emit_ownerSatelliteNameChanged(oldSatelliteName);
+            }
+          }
+          this.emit_satelliteChanged(name, oldSatellite);
+          if (destroySatellite) {
+            delete destroySatellite.destroy;
+            destroySatellite.destroy();
+          }
+        }
+      },
+      getChildNodesDataset: function() {
+        return childNodesDatasetMap[this.basisObjectId] || new ChildNodesDataset({
+          sourceNode: this
+        });
+      },
+      getSatellitesDataset: function() {
+        return satellitesDatasetMap[this.basisObjectId] || new SatellitesDataset({
+          sourceNode: this
+        });
+      },
+      destroy: function() {
+        DataObject.prototype.destroy.call(this);
+        if (this.dataSource || this.dataSourceRA_) {
+          this.setDataSource();
+        } else {
+          if (this.firstChild) this.clear();
+        }
+        if (this.parentNode) this.parentNode.removeChild(this);
+        if (this.grouping) {
+          this.grouping.setOwner();
+          this.grouping = null;
+        }
+        if (this.owner) this.setOwner();
+        var satellites = this.satellite;
+        if (satellites !== NULL_SATELLITE) {
+          var auto = satellites[AUTO];
+          delete satellites[AUTO];
+          for (var name in auto) {
+            if (auto[name].config.instance && !auto[name].instance) auto[name].config.instance.destroy();
+            if (auto[name].existsRA_) resolveValue(auto[name], null, null, "existsRA_");
+            if (auto[name].instanceRA_) resolveValue(auto[name], null, null, "instanceRA_");
+          }
+          for (var name in satellites) {
+            var satellite = satellites[name];
+            satellite.owner = null;
+            satellite.ownerSatelliteName = null;
+            if (satellite.destroy === warnOnAutoSatelliteDestoy) delete satellite.destroy;
+            satellite.destroy();
+          }
+          this.satellite = null;
+        }
+        this.childNodes = null;
+      }
+    });
+    var resolveAbstractNode = createResolveFunction(AbstractNode);
+    var PartitionNode = Class(AbstractNode, {
+      className: namespace + ".PartitionNode",
+      autoDestroyIfEmpty: false,
+      nodes: null,
+      first: null,
+      last: null,
+      init: function() {
+        this.nodes = [];
+        AbstractNode.prototype.init.call(this);
+      },
+      insert: function(newNode, refNode) {
+        var nodes = this.nodes;
+        var pos = refNode ? nodes.indexOf(refNode) : -1;
+        if (pos == -1) {
+          nodes.push(newNode);
+          this.last = newNode;
+        } else nodes.splice(pos, 0, newNode);
+        this.first = nodes[0];
+        newNode.groupNode = this;
+        this.emit_childNodesModified({
+          inserted: [ newNode ]
+        });
+      },
+      remove: function(oldNode) {
+        var nodes = this.nodes;
+        if (arrayRemove(nodes, oldNode)) {
+          this.first = nodes[0] || null;
+          this.last = nodes[nodes.length - 1] || null;
+          oldNode.groupNode = null;
+          this.emit_childNodesModified({
+            deleted: [ oldNode ]
+          });
+        }
+        if (!this.first && this.autoDestroyIfEmpty) this.destroy();
+      },
+      clear: function() {
+        if (!this.first) return;
+        var nodes = this.nodes;
+        for (var i = nodes.length; i-- > 0; ) nodes[i].groupNode = null;
+        this.nodes = [];
+        this.first = null;
+        this.last = null;
+        this.emit_childNodesModified({
+          deleted: nodes
+        });
+        if (this.autoDestroyIfEmpty) this.destroy();
+      },
+      destroy: function() {
+        AbstractNode.prototype.destroy.call(this);
+        this.nodes = null;
+        this.first = null;
+        this.last = null;
+      }
+    });
+    var DOMMIXIN_DATASOURCE_HANDLER = {
+      itemsChanged: function(dataSource, delta) {
+        var newDelta = {};
+        var deleted = [];
+        if (delta.deleted) {
+          newDelta.deleted = deleted;
+          if (this.childNodes.length == delta.deleted.length) {
+            deleted = arrayFrom(this.childNodes);
+            for (var i = 0, child; child = deleted[i]; i++) unlockDataSourceItemNode(child);
+            this.dataSourceMap_ = null;
+            this.clear(true);
+            this.dataSourceMap_ = {};
+          } else {
+            for (var i = 0, item; item = delta.deleted[i]; i++) {
+              var delegateId = item.basisObjectId;
+              var oldChild = this.dataSourceMap_[delegateId];
+              unlockDataSourceItemNode(oldChild);
+              delete this.dataSourceMap_[delegateId];
+              this.removeChild(oldChild);
+              deleted.push(oldChild);
+            }
+          }
+        }
+        if (delta.inserted) {
+          newDelta.inserted = [];
+          for (var i = 0, item; item = delta.inserted[i]; i++) {
+            var newChild = createChildByFactory(this, {
+              delegate: item
+            });
+            lockDataSourceItemNode(newChild);
+            this.dataSourceMap_[item.basisObjectId] = newChild;
+            newDelta.inserted.push(newChild);
+            if (this.firstChild) this.insertBefore(newChild);
+          }
+        }
+        if (!this.firstChild) this.setChildNodes(newDelta.inserted); else this.emit_childNodesModified(newDelta);
+        if (this.destroyDataSourceMember && deleted.length) for (var i = 0, item; item = deleted[i]; i++) item.destroy();
+      },
+      stateChanged: function(dataSource) {
+        this.setChildNodesState(dataSource.state, dataSource.state.data);
+      },
+      destroy: function() {
+        if (!this.dataSourceRA_) this.setDataSource();
+      }
+    };
+    function fastChildNodesOrder(node, order) {
+      var lastIndex = order.length - 1;
+      node.childNodes = order;
+      node.firstChild = order[0] || null;
+      node.lastChild = order[lastIndex] || null;
+      for (var orderNode, i = lastIndex; orderNode = order[i]; i--) {
+        orderNode.nextSibling = order[i + 1] || null;
+        orderNode.previousSibling = order[i - 1] || null;
+        node.insertBefore(orderNode, orderNode.nextSibling);
+      }
+    }
+    function fastChildNodesGroupOrder(node, order) {
+      for (var i = 0, child; child = order[i]; i++) child.groupNode.nodes.push(child);
+      var groups = [ node.grouping.nullGroup ].concat(node.grouping.childNodes);
+      var result = [];
+      for (var i = 0, group; group = groups[i]; i++) {
+        var nodes = group.nodes;
+        group.first = nodes[0] || null;
+        group.last = nodes[nodes.length - 1] || null;
+        result.push.apply(result, nodes);
+        group.emit_childNodesModified({
+          inserted: nodes
+        });
+      }
+      return result;
+    }
+    function createChildByFactory(node, config) {
+      var child;
+      if (typeof node.childFactory == "function") {
+        child = node.childFactory(config);
+        if (child instanceof node.childClass) {
+          var info = basis.dev.getInfo(config);
+          if (info) for (var key in info) basis.dev.setInfo(child, key, info[key]);
+          return child;
+        }
+      }
+      if (!child) throw EXCEPTION_NULL_CHILD;
+      basis.dev.warn(EXCEPTION_BAD_CHILD_CLASS + " (expected " + (node.childClass && node.childClass.className) + " but " + (child && child.constructor && child.constructor.className) + ")");
+      throw EXCEPTION_BAD_CHILD_CLASS;
+    }
+    var DomMixin = {
+      childClass: AbstractNode,
+      childFactory: null,
+      listen: {
+        dataSource: DOMMIXIN_DATASOURCE_HANDLER
+      },
+      getChild: function(value, getter) {
+        return basis.array.search(this.childNodes, value, getter);
+      },
+      getChildByName: function(name) {
+        return this.getChild(name, "name");
+      },
+      appendChild: function(newChild) {
+        return this.insertBefore(newChild);
+      },
+      insertBefore: function(newChild, refChild) {
+        if (!this.childClass) throw EXCEPTION_NO_CHILDCLASS;
+        if (newChild.firstChild) {
+          var cursor = this;
+          while (cursor = cursor.parentNode) {
+            if (cursor === newChild) throw EXCEPTION_CANT_INSERT;
+          }
+        }
+        var isChildClassInstance = newChild && newChild instanceof this.childClass;
+        if (this.dataSource) {
+          if (!isChildClassInstance || !newChild.delegate || this.dataSourceMap_[newChild.delegate.basisObjectId] !== newChild) throw EXCEPTION_DATASOURCE_CONFLICT;
+        } else {
+          if (this.dataSourceRA_) throw EXCEPTION_DATASOURCEADAPTER_CONFLICT;
+        }
+        if (!isChildClassInstance) newChild = createChildByFactory(this, newChild instanceof DataObject ? {
+          delegate: newChild
+        } : newChild);
+        if (newChild.owner) throw EXCEPTION_PARENTNODE_OWNER_CONFLICT;
+        var isInside = newChild.parentNode === this;
+        var childNodes = this.childNodes;
+        var grouping = this.grouping;
+        var groupNodes;
+        var currentNewChildGroup = newChild.groupNode;
+        var group = null;
+        var sorting = this.sorting;
+        var sortingDesc;
+        var correctSortPos = false;
+        var newChildValue;
+        var pos = -1;
+        var nextSibling;
+        var prevSibling;
+        if (isInside) {
+          nextSibling = newChild.nextSibling;
+          prevSibling = newChild.previousSibling;
+        }
+        if (sorting !== nullGetter) {
+          refChild = null;
+          sortingDesc = this.sortingDesc;
+          newChildValue = sorting(newChild);
+          if (newChildValue == null) newChildValue = -Infinity; else if (typeof newChildValue != "number" || newChildValue !== newChildValue) newChildValue = String(newChildValue);
+          if (isInside) {
+            if (newChildValue === newChild.sortingValue) {
+              correctSortPos = true;
+            } else {
+              if (sortingDesc) {
+                correctSortPos = (!nextSibling || typeof nextSibling.sortingValue <= typeof newChildValue && nextSibling.sortingValue <= newChildValue) && (!prevSibling || typeof prevSibling.sortingValue >= typeof newChildValue && prevSibling.sortingValue >= newChildValue);
+              } else {
+                correctSortPos = (!nextSibling || typeof nextSibling.sortingValue >= typeof newChildValue && nextSibling.sortingValue >= newChildValue) && (!prevSibling || typeof prevSibling.sortingValue <= typeof newChildValue && prevSibling.sortingValue <= newChildValue);
+              }
+              if (correctSortPos) newChild.sortingValue = newChildValue;
+            }
+          }
+        }
+        if (grouping) {
+          var cursor;
+          group = grouping.getGroupNode(newChild, true);
+          groupNodes = group.nodes;
+          if (currentNewChildGroup === group) if (correctSortPos || sorting === nullGetter && nextSibling === refChild) return newChild;
+          if (sorting !== nullGetter) {
+            if (currentNewChildGroup === group && correctSortPos) {
+              if (nextSibling && nextSibling.groupNode === group) pos = groupNodes.indexOf(nextSibling); else pos = groupNodes.length;
+            } else {
+              pos = binarySearchPos(groupNodes, newChildValue, getSortingValue, sortingDesc);
+              newChild.sortingValue = newChildValue;
+            }
+          } else {
+            if (refChild && refChild.groupNode === group) pos = groupNodes.indexOf(refChild); else pos = groupNodes.length;
+          }
+          if (pos < groupNodes.length) {
+            refChild = groupNodes[pos];
+          } else {
+            if (group.last) {
+              refChild = group.last.nextSibling;
+            } else {
+              cursor = group;
+              refChild = null;
+              while (cursor = cursor.nextSibling) if (refChild = cursor.first) break;
+            }
+          }
+          if (newChild === refChild || isInside && nextSibling === refChild) {
+            if (currentNewChildGroup !== group) {
+              if (currentNewChildGroup) currentNewChildGroup.remove(newChild);
+              group.insert(newChild, refChild);
+            }
+            return newChild;
+          }
+          pos = -1;
+        } else {
+          if (sorting !== nullGetter) {
+            if (correctSortPos) return newChild;
+            pos = binarySearchPos(childNodes, newChildValue, getSortingValue, sortingDesc, this.lll);
+            refChild = childNodes[pos];
+            newChild.sortingValue = newChildValue;
+            if (newChild === refChild || isInside && nextSibling === refChild) return newChild;
+          } else {
+            if (refChild && refChild.parentNode !== this) throw EXCEPTION_NODE_NOT_FOUND;
+            if (isInside) {
+              if (nextSibling === refChild) return newChild;
+              if (newChild === refChild) throw EXCEPTION_CANT_INSERT;
+            }
+          }
+        }
+        if (isInside) {
+          if (nextSibling) {
+            nextSibling.previousSibling = prevSibling;
+            newChild.nextSibling = null;
+          } else this.lastChild = prevSibling;
+          if (prevSibling) {
+            prevSibling.nextSibling = nextSibling;
+            newChild.previousSibling = null;
+          } else this.firstChild = nextSibling;
+          if (pos == -1) arrayRemove(childNodes, newChild); else {
+            var oldPos = childNodes.indexOf(newChild);
+            childNodes.splice(oldPos, 1);
+            pos -= oldPos < pos;
+          }
+          if (currentNewChildGroup) {
+            currentNewChildGroup.remove(newChild);
+            currentNewChildGroup = null;
+          }
+        } else {
+          if (newChild.parentNode) newChild.parentNode.removeChild(newChild);
+        }
+        if (currentNewChildGroup != group) group.insert(newChild, refChild);
+        if (refChild) {
+          if (pos == -1) pos = childNodes.indexOf(refChild);
+          if (pos == -1) throw EXCEPTION_NODE_NOT_FOUND;
+          newChild.nextSibling = refChild;
+          childNodes.splice(pos, 0, newChild);
+        } else {
+          pos = childNodes.length;
+          childNodes.push(newChild);
+          refChild = {
+            previousSibling: this.lastChild
+          };
+          this.lastChild = newChild;
+        }
+        newChild.parentNode = this;
+        newChild.previousSibling = refChild.previousSibling;
+        if (pos == 0) this.firstChild = newChild; else refChild.previousSibling.nextSibling = newChild;
+        refChild.previousSibling = newChild;
+        if (!isInside) {
+          updateNodeContextSelection(newChild, newChild.contextSelection, this.selection || this.contextSelection, true);
+          updateNodeDisableContext(newChild, this.disabled || this.contextDisabled);
+          if ((newChild.underMatch_ || this.matchFunction) && newChild.match) newChild.match(this.matchFunction);
+          if (newChild.autoDelegate == DELEGATE.PARENT || newChild.autoDelegate === DELEGATE.ANY) newChild.setDelegate(this);
+          newChild.emit_parentChanged(null);
+          if (!this.dataSource) this.emit_childNodesModified({
+            inserted: [ newChild ]
+          });
+          if (newChild.listen.parentNode) this.addHandler(newChild.listen.parentNode, newChild);
+        }
+        return newChild;
+      },
+      removeChild: function(oldChild) {
+        if (!oldChild || oldChild.parentNode !== this) throw EXCEPTION_NODE_NOT_FOUND;
+        if (oldChild instanceof this.childClass == false) throw EXCEPTION_BAD_CHILD_CLASS;
+        if (this.dataSource) {
+          if (!oldChild.delegate || this.dataSourceMap_[oldChild.delegate.basisObjectId]) throw EXCEPTION_DATASOURCE_CONFLICT;
+        } else {
+          if (this.dataSourceRA_) throw EXCEPTION_DATASOURCEADAPTER_CONFLICT;
+        }
+        var pos = this.childNodes.indexOf(oldChild);
+        if (pos == -1) throw EXCEPTION_NODE_NOT_FOUND;
+        this.childNodes.splice(pos, 1);
+        oldChild.parentNode = null;
+        if (oldChild.nextSibling) oldChild.nextSibling.previousSibling = oldChild.previousSibling; else this.lastChild = oldChild.previousSibling;
+        if (oldChild.previousSibling) oldChild.previousSibling.nextSibling = oldChild.nextSibling; else this.firstChild = oldChild.nextSibling;
+        oldChild.nextSibling = null;
+        oldChild.previousSibling = null;
+        if (oldChild.listen.parentNode) this.removeHandler(oldChild.listen.parentNode, oldChild);
+        updateNodeContextSelection(oldChild, oldChild.contextSelection, null, true);
+        if (oldChild.groupNode) oldChild.groupNode.remove(oldChild);
+        oldChild.emit_parentChanged(this);
+        if (!this.dataSource) this.emit_childNodesModified({
+          deleted: [ oldChild ]
+        });
+        if (oldChild.autoDelegate == DELEGATE.PARENT || oldChild.autoDelegate === DELEGATE.ANY) oldChild.setDelegate();
+        return oldChild;
+      },
+      replaceChild: function(newChild, oldChild) {
+        if (this.dataSource) throw EXCEPTION_DATASOURCE_CONFLICT;
+        if (this.dataSourceRA_) throw EXCEPTION_DATASOURCEADAPTER_CONFLICT;
+        if (oldChild == null || oldChild.parentNode !== this) throw EXCEPTION_NODE_NOT_FOUND;
+        this.insertBefore(newChild, oldChild);
+        return this.removeChild(oldChild);
+      },
+      clear: function(alive) {
+        if (this.dataSource && this.dataSourceMap_ && this.dataSource.itemCount) throw EXCEPTION_DATASOURCE_CONFLICT;
+        if (!this.firstChild) return;
+        if (alive) updateNodeContextSelection(this, this.selection || this.contextSelection, null, false, true);
+        var childNodes = this.childNodes;
+        this.firstChild = null;
+        this.lastChild = null;
+        this.childNodes = [];
+        this.emit_childNodesModified({
+          deleted: childNodes
+        });
+        for (var i = childNodes.length; i-- > 0; ) {
+          var child = childNodes[i];
+          if (child.listen.parentNode) child.parentNode.removeHandler(child.listen.parentNode, child);
+          child.parentNode = null;
+          child.groupNode = null;
+          if (alive) {
+            child.nextSibling = null;
+            child.previousSibling = null;
+            child.emit_parentChanged(this);
+            if (child.autoDelegate == DELEGATE.PARENT || child.autoDelegate === DELEGATE.ANY) child.setDelegate();
+          } else child.destroy();
+        }
+        if (this.grouping) {
+          for (var childNodes = this.grouping.childNodes, i = childNodes.length - 1, group; group = childNodes[i]; i--) group.clear();
+        }
+      },
+      setChildNodes: function(newChildNodes, keepAlive) {
+        if (!this.dataSource && !this.dataSourceRA_) this.clear(keepAlive);
+        if (newChildNodes) {
+          if ("length" in newChildNodes == false) newChildNodes = [ newChildNodes ];
+          if (newChildNodes.length) {
+            var tmp = this.emit_childNodesModified;
+            this.emit_childNodesModified = $undef;
+            for (var i = 0, len = newChildNodes.length; i < len; i++) this.insertBefore(newChildNodes[i]);
+            this.emit_childNodesModified = tmp;
+            this.emit_childNodesModified({
+              inserted: this.childNodes
+            });
+          }
+        }
+      },
+      setDataSource: function(dataSource) {
+        if (!this.childClass) throw EXCEPTION_NO_CHILDCLASS;
+        dataSource = resolveDataset(this, this.setDataSource, dataSource, "dataSourceRA_");
+        if (this.dataSource !== dataSource) {
+          var oldDataSource = this.dataSource;
+          var dataSourceMap = this.dataSourceMap_ || {};
+          var listenHandler = this.listen.dataSource;
+          var inserted;
+          var deleted;
+          if (oldDataSource) {
+            if (listenHandler) oldDataSource.removeHandler(listenHandler, this);
+            if (dataSource) {
+              inserted = dataSource.getItems().filter(function(item) {
+                return !oldDataSource.has(item);
+              });
+              deleted = oldDataSource.getItems().filter(function(item) {
+                return !dataSource.has(item);
+              });
+            } else {
+              deleted = oldDataSource.getItems();
+            }
+          } else {
+            if (dataSource) inserted = dataSource.getItems();
+          }
+          if (!oldDataSource || !dataSource) {
+            if (this.firstChild) {
+              if (oldDataSource) for (var i = 0, child; child = this.childNodes[i]; i++) unlockDataSourceItemNode(child);
+              this.dataSource = null;
+              this.clear(oldDataSource && !this.destroyDataSourceMember);
+            }
+          } else {
+            if (oldDataSource && deleted.length && listenHandler) listenHandler.itemsChanged.call(this, oldDataSource, {
+              deleted: deleted
+            });
+          }
+          this.dataSource = dataSource;
+          if (dataSource) {
+            this.dataSourceMap_ = dataSourceMap;
+            this.setChildNodesState(dataSource.state, dataSource.state.data);
+            if (listenHandler) {
+              dataSource.addHandler(listenHandler, this);
+              if (inserted.length) listenHandler.itemsChanged.call(this, dataSource, {
+                inserted: inserted
+              });
+            }
+          } else {
+            this.dataSourceMap_ = null;
+            this.setChildNodesState(STATE.UNDEFINED);
+          }
+          this.emit_dataSourceChanged(oldDataSource);
+        }
+      },
+      setGrouping: function(grouping, alive) {
+        if (typeof grouping == "function" || typeof grouping == "string") grouping = {
+          rule: grouping
+        };
+        if (grouping instanceof GroupingNode == false) {
+          grouping = grouping && typeof grouping == "object" ? new this.groupingClass(grouping) : null;
+        }
+        if (this.grouping !== grouping) {
+          var oldGrouping = this.grouping;
+          var order;
+          if (oldGrouping) {
+            this.grouping = null;
+            if (!grouping) {
+              if (this.firstChild) {
+                if (this.sorting !== nullGetter) order = sortChildNodes(this); else order = this.childNodes;
+                oldGrouping.nullGroup.clear();
+                var groups = oldGrouping.childNodes.slice(0);
+                for (var i = 0; i < groups.length; i++) groups[i].clear();
+                fastChildNodesOrder(this, order);
+              }
+            }
+            oldGrouping.setOwner();
+          }
+          if (grouping) {
+            this.grouping = grouping;
+            grouping.setOwner(this);
+            if (this.firstChild) {
+              if (this.sorting !== nullGetter) order = sortChildNodes(this); else order = this.childNodes;
+              for (var i = 0, child; child = order[i]; i++) child.groupNode = this.grouping.getGroupNode(child, true);
+              order = fastChildNodesGroupOrder(this, order);
+              fastChildNodesOrder(this, order);
+            }
+          }
+          this.emit_groupingChanged(oldGrouping);
+          if (oldGrouping && !alive) oldGrouping.destroy();
+        }
+      },
+      setSorting: function(sorting, sortingDesc) {
+        sorting = getter(sorting);
+        sortingDesc = !!sortingDesc;
+        if (this.sorting !== sorting || this.sortingDesc != !!sortingDesc) {
+          var oldSorting = this.sorting;
+          var oldSortingDesc = this.sortingDesc;
+          this.sorting = sorting;
+          this.sortingDesc = !!sortingDesc;
+          if (sorting !== nullGetter && this.firstChild) {
+            var order = [];
+            var nodes;
+            for (var node = this.firstChild; node; node = node.nextSibling) {
+              var newChildValue = sorting(node);
+              if (newChildValue == null) newChildValue = -Infinity; else if (typeof newChildValue != "number" || newChildValue !== newChildValue) newChildValue = String(newChildValue);
+              node.sortingValue = newChildValue;
+            }
+            if (this.grouping) {
+              var groups = [ this.grouping.nullGroup ].concat(this.grouping.childNodes);
+              for (var i = 0, group; group = groups[i]; i++) {
+                nodes = group.nodes = sortChildNodes({
+                  childNodes: group.nodes,
+                  sortingDesc: this.sortingDesc
+                });
+                group.first = nodes[0] || null;
+                group.last = nodes[nodes.length - 1] || null;
+                order.push.apply(order, nodes);
+              }
+            } else {
+              order = sortChildNodes(this);
+            }
+            fastChildNodesOrder(this, order);
+          }
+          this.emit_sortingChanged(oldSorting, oldSortingDesc);
+        }
+      },
+      setMatchFunction: function(matchFunction) {
+        if (this.matchFunction != matchFunction) {
+          var oldMatchFunction = this.matchFunction;
+          this.matchFunction = matchFunction;
+          for (var node = this.lastChild; node; node = node.previousSibling) node.match(matchFunction);
+          this.emit_matchFunctionChanged(oldMatchFunction);
+        }
+      }
+    };
+    var Node = Class(AbstractNode, DomMixin, {
+      className: namespace + ".Node",
+      propertyDescriptors: {
+        disabled: "disable enable",
+        contextDisabled: false,
+        selected: "select unselect",
+        contextSelection: false,
+        selection: "selectionChanged",
+        matched: "match unmatch",
+        matchFunction: "matchFunctionChanged"
+      },
+      emit_satelliteChanged: function(name, oldSatellite) {
+        AbstractNode.prototype.emit_satelliteChanged.call(this, name, oldSatellite);
+        if (this.satellite[name] instanceof Node) updateNodeDisableContext(this.satellite[name], this.disabled || this.contextDisabled);
+      },
+      contextDisabled: false,
+      disabled: false,
+      disabledRA_: null,
+      emit_enable: createEvent("enable") && function() {
+        for (var child = this.firstChild; child; child = child.nextSibling) updateNodeDisableContext(child, false);
+        events.enable.call(this);
+      },
+      emit_disable: createEvent("disable") && function() {
+        for (var child = this.firstChild; child; child = child.nextSibling) updateNodeDisableContext(child, true);
+        events.disable.call(this);
+      },
+      selection: null,
+      emit_selectionChanged: createEvent("selectionChanged", "oldSelection"),
+      contextSelection: null,
+      selected: false,
+      selectedRA_: null,
+      emit_select: createEvent("select"),
+      emit_unselect: createEvent("unselect"),
+      matched: true,
+      emit_match: createEvent("match"),
+      emit_unmatch: createEvent("unmatch"),
+      matchFunction: null,
+      emit_matchFunctionChanged: createEvent("matchFunctionChanged", "oldMatchFunction"),
+      listen: {
+        owner: {
+          enable: function() {
+            updateNodeDisableContext(this, false);
+          },
+          disable: function() {
+            updateNodeDisableContext(this, true);
+          }
+        },
+        selection: {
+          destroy: function() {
+            this.setSelection();
+          }
+        }
+      },
+      init: function() {
+        var disabled = this.disabled;
+        this.disabled = false;
+        var selection = this.selection;
+        if (selection) {
+          this.selection = null;
+          this.setSelection(selection, true);
+        }
+        AbstractNode.prototype.init.call(this);
+        if (disabled) {
+          disabled = !!resolveValue(this, this.setDisabled, disabled, "disabledRA_");
+          if (disabled) {
+            this.disabled = disabled;
+            for (var child = this.firstChild; child; child = child.nextSibling) updateNodeDisableContext(child, true);
+          }
+        }
+        if (this.selected) this.selected = !!resolveValue(this, this.setSelected, this.selected, "selectedRA_");
+      },
+      setSelection: function(selection, silent) {
+        var oldSelection = this.selection;
+        if (selection instanceof Selection === false) selection = selection ? new Selection(selection) : null;
+        if (oldSelection !== selection) {
+          updateNodeContextSelection(this, oldSelection || this.contextSelection, selection || this.contextSelection, false, true);
+          if (this.listen.selection) {
+            if (oldSelection) oldSelection.removeHandler(this.listen.selection, this);
+            if (selection) selection.addHandler(this.listen.selection, this);
+          }
+          this.selection = selection;
+          if (!silent) this.emit_selectionChanged(oldSelection);
+          return true;
+        }
+      },
+      setSelected: function(selected, multiple) {
+        var selection = this.contextSelection;
+        selected = !!resolveValue(this, this.setSelected, selected, "selectedRA_");
+        if (this.selected && selection) {
+          if (this.selectedRA_) {
+            if (selection.has(this)) {
+              this.selected = false;
+              selection.remove(this);
+              this.selected = true;
+            }
+          } else {
+            if (!selection.has(this)) selection.add(this);
+          }
+        }
+        if (selected !== this.selected) {
+          if (this.selectedRA_) {
+            this.selected = selected;
+            if (selected) this.emit_select(); else this.emit_unselect();
+          } else {
+            if (selected) {
+              if (selection) {
+                if (multiple) selection.add(this); else selection.set(this);
+              } else {
+                this.selected = true;
+                this.emit_select();
+              }
+            } else {
+              if (selection) {
+                selection.remove(this);
+              } else {
+                this.selected = false;
+                this.emit_unselect();
+              }
+            }
+          }
+          return true;
+        } else {
+          if (!this.selectedRA_ && selected && selection) {
+            if (multiple) selection.remove(this); else selection.set(this);
+          }
+        }
+        return false;
+      },
+      select: function(multiple) {
+        if (this.selectedRA_) {
+          basis.dev.warn("`selected` property is under bb-value and can't be changed by `select()` method. Use `setSelected()` instead.");
+          return false;
+        }
+        return this.setSelected(true, multiple);
+      },
+      unselect: function() {
+        if (this.selectedRA_) {
+          basis.dev.warn("`selected` property is under bb-value and can't be changed by `unselect()` method. Use `setSelected()` instead.");
+          return false;
+        }
+        return this.setSelected(false);
+      },
+      setDisabled: function(disabled) {
+        disabled = !!resolveValue(this, this.setDisabled, disabled, "disabledRA_");
+        if (this.disabled !== disabled) {
+          this.disabled = disabled;
+          if (!this.contextDisabled) if (disabled) this.emit_disable(); else this.emit_enable();
+          return true;
+        }
+        return false;
+      },
+      disable: function() {
+        if (this.disabledRA_) {
+          basis.dev.warn("`disabled` property is under bb-value and can't be changed by `disable()` method. Use `setDisabled()` instead.");
+          return false;
+        }
+        return this.setDisabled(true);
+      },
+      enable: function() {
+        if (this.disabledRA_) {
+          basis.dev.warn("`disabled` property is under bb-value and can't be changed by `enable()` method. Use `setDisabled()` instead.");
+          return false;
+        }
+        return this.setDisabled(false);
+      },
+      isDisabled: function() {
+        return this.disabled || this.contextDisabled;
+      },
+      match: function(func) {
+        if (typeof func != "function") func = null;
+        if (this.underMatch_ && !func) this.underMatch_(this, true);
+        this.underMatch_ = func;
+        var matched = !func || func(this);
+        if (this.matched != matched) {
+          this.matched = matched;
+          if (matched) this.emit_match(); else this.emit_unmatch();
+        }
+      },
+      destroy: function() {
+        if (this.disabledRA_) resolveValue(this, null, null, "disabledRA_");
+        if (this.selectedRA_) resolveValue(this, null, null, "selectedRA_");
+        this.contextSelection = null;
+        if (this.selection) this.setSelection();
+        AbstractNode.prototype.destroy.call(this);
+      }
+    });
+    var GroupingNode = Class(AbstractNode, DomMixin, {
+      className: namespace + ".GroupingNode",
+      emit_childNodesModified: function(delta) {
+        events.childNodesModified.call(this, delta);
+        var array;
+        if (array = delta.inserted) {
+          for (var i = 0, child; child = array[i++]; ) {
+            child.groupId_ = child.delegate ? child.delegate.basisObjectId : child.data.id;
+            this.map_[child.groupId_] = child;
+          }
+          if (this.dataSource && this.nullGroup.first) {
+            var parentNode = this.owner;
+            var nodes = arrayFrom(this.nullGroup.nodes);
+            for (var i = nodes.length; i-- > 0; ) parentNode.insertBefore(nodes[i], nodes[i].nextSibling);
+          }
+        }
+      },
+      emit_ownerChanged: function(oldOwner) {
+        if (oldOwner && oldOwner.grouping === this) oldOwner.setGrouping(null, true);
+        if (this.owner && this.owner.grouping !== this) this.owner.setGrouping(this);
+        events.ownerChanged.call(this, oldOwner);
+        if (!this.owner && this.autoDestroyWithNoOwner) this.destroy();
+      },
+      map_: null,
+      nullGroup: null,
+      autoDestroyWithNoOwner: true,
+      autoDestroyEmptyGroups: true,
+      rule: nullGetter,
+      childClass: PartitionNode,
+      childFactory: function(config) {
+        return new this.childClass(complete({
+          autoDestroyIfEmpty: this.dataSource ? false : this.autoDestroyEmptyGroups
+        }, config));
+      },
+      init: function() {
+        this.map_ = {};
+        this.nullGroup = new PartitionNode;
+        AbstractNode.prototype.init.call(this);
+      },
+      getGroupNode: function(node, autocreate) {
+        var groupRef = this.rule(node);
+        var isDelegate = groupRef instanceof DataObject;
+        var group = this.map_[isDelegate ? groupRef.basisObjectId : groupRef];
+        if (this.dataSource) autocreate = false;
+        if (!group && autocreate) {
+          group = this.appendChild(isDelegate ? groupRef : {
+            data: {
+              id: groupRef,
+              title: groupRef
+            }
+          });
+        }
+        return group || this.nullGroup;
+      },
+      setDataSource: function(dataSource) {
+        var curDataSource = this.dataSource;
+        DomMixin.setDataSource.call(this, dataSource);
+        var owner = this.owner;
+        if (owner && this.dataSource !== curDataSource) {
+          var nodes = arrayFrom(owner.childNodes);
+          for (var i = nodes.length - 1; i >= 0; i--) owner.insertBefore(nodes[i], nodes[i + 1]);
+        }
+      },
+      insertBefore: function(newChild, refChild) {
+        newChild = DomMixin.insertBefore.call(this, newChild, refChild);
+        var firstNode = newChild.first;
+        if (firstNode) {
+          var parent = firstNode.parentNode;
+          var lastNode = newChild.last;
+          var beforePrev;
+          var beforeNext;
+          var afterPrev;
+          var afterNext = null;
+          var cursor = newChild;
+          while (cursor = cursor.nextSibling) {
+            if (afterNext = cursor.first) break;
+          }
+          afterPrev = afterNext ? afterNext.previousSibling : parent.lastChild;
+          beforePrev = firstNode.previousSibling;
+          beforeNext = lastNode.nextSibling;
+          if (beforeNext !== afterNext) {
+            var parentChildNodes = parent.childNodes;
+            var nodes = newChild.nodes;
+            var nodesCount = nodes.length;
+            if (beforePrev) beforePrev.nextSibling = beforeNext;
+            if (beforeNext) beforeNext.previousSibling = beforePrev;
+            if (afterPrev) afterPrev.nextSibling = firstNode;
+            if (afterNext) afterNext.previousSibling = lastNode;
+            firstNode.previousSibling = afterPrev;
+            lastNode.nextSibling = afterNext;
+            var firstPos = parentChildNodes.indexOf(firstNode);
+            var afterNextPos = afterNext ? parentChildNodes.indexOf(afterNext) : parentChildNodes.length;
+            if (afterNextPos > firstPos) afterNextPos -= nodesCount;
+            parentChildNodes.splice(firstPos, nodesCount);
+            parentChildNodes.splice.apply(parentChildNodes, [ afterNextPos, 0 ].concat(nodes));
+            if (!afterPrev || !beforePrev) parent.firstChild = parentChildNodes[0];
+            if (!afterNext || !beforeNext) parent.lastChild = parentChildNodes[parentChildNodes.length - 1];
+            if (firstNode instanceof PartitionNode) for (var i = nodesCount, insertBefore = afterNext; i-- > 0; ) {
+              parent.insertBefore(nodes[i], insertBefore);
+              insertBefore = nodes[i];
+            }
+          }
+        }
+        return newChild;
+      },
+      removeChild: function(oldChild) {
+        if (oldChild = DomMixin.removeChild.call(this, oldChild)) {
+          delete this.map_[oldChild.groupId_];
+          for (var i = 0, node; node = oldChild.nodes[i]; i++) node.parentNode.insertBefore(node);
+        }
+        return oldChild;
+      },
+      clear: function(alive) {
+        var nodes = [];
+        var getGroupNode = this.getGroupNode;
+        var nullGroup = this.nullGroup;
+        this.getGroupNode = function() {
+          return nullGroup;
+        };
+        for (var group = this.firstChild; group; group = group.nextSibling) nodes.push.apply(nodes, group.nodes);
+        for (var i = 0, child; child = nodes[i]; i++) child.parentNode.insertBefore(child);
+        this.getGroupNode = getGroupNode;
+        DomMixin.clear.call(this, alive);
+        this.map_ = {};
+      },
+      destroy: function() {
+        this.autoDestroyWithNoOwner = false;
+        AbstractNode.prototype.destroy.call(this);
+        this.nullGroup.destroy();
+        this.nullGroup = null;
+        this.map_ = null;
+      }
+    });
+    AbstractNode.prototype.groupingClass = GroupingNode;
+    var CHILDNODESDATASET_HANDLER = {
+      childNodesModified: function(sender, delta) {
+        var memberMap = this.members_;
+        var newDelta = {};
+        var node;
+        var insertCount = 0;
+        var deleteCount = 0;
+        var inserted = delta.inserted;
+        var deleted = delta.deleted;
+        if (inserted && inserted.length) {
+          newDelta.inserted = inserted;
+          while (node = inserted[insertCount]) {
+            memberMap[node.basisObjectId] = node;
+            insertCount++;
+          }
+        }
+        if (deleted && deleted.length) {
+          newDelta.deleted = deleted;
+          while (node = deleted[deleteCount]) {
+            delete memberMap[node.basisObjectId];
+            deleteCount++;
+          }
+        }
+        if (insertCount || deleteCount) this.emit_itemsChanged(newDelta);
+      },
+      destroy: function() {
+        this.destroy();
+      }
+    };
+    var SATELLITEDATASET_HANDLER = {
+      satelliteChanged: function(sender, name, oldSatellite) {
+        var delta = {};
+        if (sender.satellite[name]) {
+          delta.inserted = [ sender.satellite[name] ];
+        }
+        if (oldSatellite) {
+          delta.deleted = [ oldSatellite ];
+        }
+        this.emit_itemsChanged(delta);
+      },
+      destroy: function() {
+        this.destroy();
+      }
+    };
+    var ChildNodesDataset = Class(ReadOnlyDataset, {
+      className: namespace + ".ChildNodesDataset",
+      sourceNode: null,
+      init: function() {
+        ReadOnlyDataset.prototype.init.call(this);
+        var sourceNode = this.sourceNode;
+        childNodesDatasetMap[sourceNode.basisObjectId] = this;
+        if (sourceNode.firstChild) CHILDNODESDATASET_HANDLER.childNodesModified.call(this, sourceNode, {
+          inserted: sourceNode.childNodes
+        });
+        sourceNode.addHandler(CHILDNODESDATASET_HANDLER, this);
+      },
+      destroy: function() {
+        this.sourceNode.removeHandler(CHILDNODESDATASET_HANDLER, this);
+        delete childNodesDatasetMap[this.sourceNode.basisObjectId];
+        ReadOnlyDataset.prototype.destroy.call(this);
+      }
+    });
+    var SatellitesDataset = basis.Class(ReadOnlyDataset, {
+      className: ".SatellitesDataset",
+      sourceNode: null,
+      init: function() {
+        ReadOnlyDataset.prototype.init.call(this);
+        var sourceNode = this.sourceNode;
+        satellitesDatasetMap[sourceNode.basisObjectId] = this;
+        var satellites = [];
+        for (var satelliteName in sourceNode.satellite) if (sourceNode.satellite.hasOwnProperty(satelliteName)) {
+          var node = sourceNode.satellite[satelliteName];
+          if (node instanceof AbstractNode) satellites.push(node);
+        }
+        if (satellites.length) this.emit_itemsChanged({
+          inserted: satellites
+        });
+        sourceNode.addHandler(SATELLITEDATASET_HANDLER, this);
+      },
+      destroy: function() {
+        this.sourceNode.removeHandler(SATELLITEDATASET_HANDLER, this);
+        delete satellitesDatasetMap[this.sourceNode.basisObjectId];
+        ReadOnlyDataset.prototype.destroy.call(this);
+      }
+    });
+    var Selection = Class(Dataset, {
+      className: namespace + ".Selection",
+      multiple: false,
+      emit_itemsChanged: function(delta) {
+        var array;
+        Dataset.prototype.emit_itemsChanged.call(this, delta);
+        if (array = delta.deleted) for (var i = 0, node; node = array[i]; i++) {
+          if (node.selected && node.contextSelection === this) {
+            node.selected = false;
+            node.emit_unselect();
+          }
+        }
+        if (array = delta.inserted) for (var i = 0, node; node = array[i]; i++) {
+          if (!node.selected && node.contextSelection === this) {
+            node.selected = true;
+            node.emit_select();
+          }
+        }
+      },
+      add: function(nodes) {
+        if (!nodes) return;
+        if (!this.multiple && this.itemCount) return this.set(nodes);
+        if (!Array.isArray(nodes)) nodes = [ nodes ];
+        nodes = nodes.filter(this.filter, this);
+        if (!this.multiple && nodes.length > 1) {
+          basis.dev.warn(namespace + ".Selection#add() can't accept more than one node as not in multiple mode");
+          nodes = [ nodes[0] ];
+        }
+        if (nodes.length) return Dataset.prototype.add.call(this, nodes);
+      },
+      set: function(nodes) {
+        if (!nodes) return this.clear();
+        if (!Array.isArray(nodes)) nodes = [ nodes ];
+        nodes = nodes.filter(this.filter, this);
+        if (!this.multiple && nodes.length > 1) {
+          basis.dev.warn(namespace + ".Selection#set() can't accept more than one node as not in multiple mode");
+          nodes = [ nodes[0] ];
+        }
+        if (nodes.length) return Dataset.prototype.set.call(this, nodes); else return this.clear();
+      },
+      filter: function(node) {
+        return node instanceof Node && !node.selectedRA_ && node.contextSelection === this;
+      }
+    });
+    module.exports = {
+      DELEGATE: DELEGATE,
+      AbstractNode: AbstractNode,
+      Node: Node,
+      GroupingNode: GroupingNode,
+      PartitionNode: PartitionNode,
+      ChildNodesDataset: ChildNodesDataset,
+      SatellitesDataset: SatellitesDataset,
+      Selection: Selection,
+      nullSelection: new ReadOnlyDataset
+    };
+  },
+  "1c.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Node = basis.require("./7.js").Node;
+    var Page = basis.require("./l.js").Page;
+    var type = basis.require("./m.js");
+    var Stat = basis.require("./28.js");
+    var ModulesTable = basis.require("./29.js");
+    var AssetsTable = basis.require("./2p.js");
+    module.exports = new Page({
+      active: basis.PROXY,
+      delegate: type.Source,
+      satellite: {
+        content: new Node({
+          active: basis.PROXY,
+          autoDelegate: true,
+          template: basis.template.get(".g"),
+          satellite: {
+            stat: Stat,
+            modulesTable: ModulesTable,
+            assetsTable: AssetsTable
+          },
+          binding: {
+            stat: "satellite:",
+            modulesTable: "satellite:",
+            assetsTable: "satellite:"
+          }
+        })
+      }
+    });
+  },
+  "1d.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Page = basis.require("./l.js").Page;
+    var AssetsTable = basis.require("./2p.js");
+    var type = basis.require("./m.js");
+    module.exports = new Page({
+      delegate: type.Source,
+      satellite: {
+        content: AssetsTable
+      }
+    });
+  },
+  "1e.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Page = basis.require("./l.js").Page;
+    var ModulesTable = basis.require("./29.js");
+    var type = basis.require("./m.js");
+    module.exports = new Page({
+      delegate: type.Source,
+      satellite: {
+        content: ModulesTable
+      }
+    });
+  },
+  "k.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var resolveValue = basis.require("./2.js").resolveValue;
+    var document = global.document || {
+      title: "unknown"
+    };
+    var appTitle = document.title;
+    var appInit = basis.fn.$undef;
+    var appInjectPoint;
+    var appEl;
+    function updateTitle(value) {
+      document.title = value;
+    }
+    function resolveNode(ref) {
+      return typeof ref == "string" ? document.getElementById(ref) : ref;
+    }
+    function replaceNode(oldChild, newChild) {
+      try {
+        oldChild.parentNode.replaceChild(newChild, oldChild);
+        return newChild;
+      } catch (e) {
+        return oldChild;
+      }
+    }
+    function appendNode(container, newChild) {
+      try {
+        return container.appendChild(newChild);
+      } catch (e) {
+        return container.appendChild(document.createComment(""));
+      }
+    }
+    var createApp = basis.fn.lazyInit(function(config) {
+      var readyHandlers = [];
+      var inited = false;
+      var app = {
+        inited: false,
+        setTitle: function(title) {
+          if (title != appTitle) {
+            if (appTitle instanceof basis.Token) appTitle.detach(updateTitle);
+            if (title instanceof basis.Token) {
+              title.attach(updateTitle);
+              updateTitle(title.get());
+            } else updateTitle(title);
+            appTitle = title;
+          }
+        },
+        setElement: function(el) {
+          el = resolveValue(app, app.setElement, el, "elementRA_");
+          if (el && el.element) el = el.element;
+          var newAppEl = resolveNode(el);
+          if (appEl === newAppEl) return;
+          if (appEl) {
+            appEl = replaceNode(appEl, newAppEl);
+            return;
+          }
+          if (!appInjectPoint) appInjectPoint = {
+            type: "append",
+            node: document.body
+          };
+          var node = resolveNode(appInjectPoint.node);
+          appEl = newAppEl;
+          if (!node) return;
+          if (appInjectPoint.type == "append") appEl = appendNode(node, appEl); else appEl = replaceNode(node, appEl);
+        },
+        ready: function(fn, context) {
+          if (inited) fn.call(context, app); else readyHandlers.push({
+            fn: fn,
+            context: context
+          });
+        }
+      };
+      if (typeof config === "function" && !basis.fn.isFactory(config)) config = {
+        init: config
+      }; else if (config.constructor !== Object) config = {
+        element: config
+      };
+      for (var key in config) {
+        var value = config[key];
+        switch (key) {
+          case "title":
+            app.setTitle(value);
+            break;
+          case "container":
+            appInjectPoint = {
+              type: "append",
+              node: value
+            };
+            break;
+          case "replace":
+            appInjectPoint = {
+              type: "replace",
+              node: value
+            };
+            break;
+          case "element":
+            appEl = value;
+            break;
+          case "init":
+            appInit = typeof value == "function" ? value : appInit;
+            break;
+          default:
+            basis.dev.warn("Unknown config property `" + key + "` for app, value:", value);
+        }
+      }
+      basis.doc.body.ready(function() {
+        var insertEl = appEl;
+        var initResult = appInit.call(app);
+        if (initResult) insertEl = initResult;
+        appEl = null;
+        app.setElement(insertEl);
+        inited = true;
+        app.inited = true;
+        var handler;
+        while (handler = readyHandlers.shift()) handler.fn.call(handler.context, app);
+      });
+      return app;
+    });
+    module.exports = {
+      create: createApp
+    };
+  },
+  "0.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    if (basis.filename_) {
+      basis.createSandbox({
+        inspect: basis,
+        devInfoResolver: basis.config.devInfoResolver,
+        modules: {
+          api: {
+            path: basis.path.resolve(__dirname, "../devpanel/api/index.js")
+          },
+          type: {
+            path: basis.path.resolve(__dirname, "../devpanel/type/"),
+            filename: "index.js"
+          },
+          devpanel: {
+            autoload: true,
+            path: basis.path.resolve(__dirname, "../devpanel/"),
+            filename: "index.js"
+          }
+        }
+      });
+    }
+  },
+  "1f.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Node = basis.require("./7.js").Node;
+    module.exports = Node.subclass({
+      template: basis.template.get(".4"),
+      selection: true,
+      childClass: {
+        template: basis.template.get(".5"),
+        binding: {
+          id: "id"
+        }
+      },
+      childNodes: [ {
+        id: "home",
+        selected: true
+      }, {
+        id: "assets"
+      }, {
+        id: "modules"
+      } ]
+    });
+  },
+  "1g.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Node = basis.require("./7.js").Node;
+    var Value = basis.require("./2.js").Value;
+    var type = basis.require("./m.js");
+    module.exports = Node.subclass({
+      active: basis.PROXY,
+      delegate: type.Source,
+      template: basis.template.get(".7"),
+      binding: {
+        status: "data:",
+        progress: Value.query("data.progress").as(function(progress) {
+          return parseInt(Number(progress) * 100);
+        })
+      }
+    });
+  },
+  "l.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    module.exports = {
+      Table: basis.require("./1h.js"),
+      Menu: basis.require("./1f.js"),
+      Page: basis.require("./1k.js"),
+      Progress: basis.require("./1g.js")
+    };
+  },
+  "1h.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Node = basis.require("./7.js").Node;
+    var Row = basis.require("./1i.js");
+    module.exports = Node.subclass({
+      active: basis.PROXY,
+      autoDelegate: true,
+      template: basis.template.get(".3"),
+      childClass: Row,
+      binding: {
+        head: "satellite:",
+        foot: "satellite:"
+      }
+    });
+  },
+  "1i.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Node = basis.require("./7.js").Node;
+    var Cell = basis.require("./1j.js");
+    module.exports = Node.subclass({
+      template: basis.template.get(".2"),
+      childClass: Cell
+    });
+  },
+  "1j.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Node = basis.require("./7.js").Node;
+    module.exports = Node.subclass({
+      template: basis.template.get(".1"),
+      data: {
+        content: ""
+      },
+      binding: {
+        content: "data:"
+      }
+    });
+  },
+  "2.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var namespace = "basis.data";
+    var Class = basis.Class;
+    var sliceArray = Array.prototype.slice;
+    var values = basis.object.values;
+    var $self = basis.fn.$self;
+    var STATE = basis.require("./3.js");
+    var SUBSCRIPTION = basis.require("./4.js");
+    var resolvers = basis.require("./5.js");
+    var createResolveFunction = resolvers.createResolveFunction;
+    var resolveValue = resolvers.resolveValue;
+    var ResolveAdapter = resolvers.ResolveAdapter;
+    var BBResolveAdapter = resolvers.BBResolveAdapter;
+    var DEFAULT_CHANGE_ADAPTER_HANDLER = resolvers.DEFAULT_CHANGE_ADAPTER_HANDLER;
+    var DEFAULT_DESTROY_ADAPTER_HANDLER = resolvers.DEFAULT_DESTROY_ADAPTER_HANDLER;
+    var basisEvent = basis.require("./6.js");
+    var Emitter = basisEvent.Emitter;
+    var createEvent = basisEvent.create;
+    var createEventHandler = basisEvent.createHandler;
+    var events = basisEvent.events;
+    var AbstractData = basis.require("./v.js");
+    var NULL_OBJECT = {};
+    var EMPTY_ARRAY = [];
+    var FACTORY = basis.FACTORY;
+    var PROXY = basis.PROXY;
+    SUBSCRIPTION.addProperty("delegate");
+    SUBSCRIPTION.addProperty("target");
+    SUBSCRIPTION.addProperty("dataset");
+    SUBSCRIPTION.addProperty("value", "change");
+    var isEqual = function(a, b) {
+      return a === b;
+    };
+    var PROXY_SUPPORT = typeof Proxy == "function" && typeof WeakMap == "function";
+    var devWrap = function(value) {
+      return value;
+    };
+    var devUnwrap = function(value) {
+      return value;
+    };
+    if (PROXY_SUPPORT) {
+      var devWrapMap = new WeakMap;
+      var devWrap = function(value) {
+        value = devWrapMap.has(value) ? devWrapMap.get(value) : value;
+        var result = new Proxy(value, {});
+        devWrapMap.set(result, value);
+        return result;
+      };
+      devUnwrap = function(value) {
+        return value && devWrapMap.has(value) ? devWrapMap.get(value) : value;
+      };
+      isEqual = function(a, b) {
+        return devUnwrap(a) === devUnwrap(b);
+      };
+    }
+    var GETTER_ID = basis.getter.ID;
+    var VALUE_EMMITER_HANDLER = {
+      destroy: function(object) {
+        this.value.unlink(object, this.fn);
+      }
+    };
+    var VALUE_EMMITER_DESTROY_HANDLER = {
+      destroy: function() {
+        this.set(null);
+      }
+    };
+    var computeFunctions = {};
+    var valueSetters = {};
+    var valueSyncAs = function(value) {
+      Value.prototype.set.call(this, value);
+    };
+    var valueSyncPipe = function(newValue, oldValue) {
+      if (oldValue instanceof Emitter) oldValue.removeHandler(this.pipeHandler, this); else oldValue = null;
+      if (newValue instanceof Emitter) newValue.addHandler(this.pipeHandler, this); else newValue = null;
+      if (newValue !== oldValue) Value.prototype.set.call(this, newValue);
+    };
+    var Value = Class(AbstractData, {
+      className: namespace + ".Value",
+      propertyDescriptors: {
+        value: "change",
+        bindingBridge: false,
+        initValue: false,
+        locked: false,
+        proxy: false,
+        setNullOnEmitterDestroy: false
+      },
+      subscribeTo: SUBSCRIPTION.VALUE,
+      emit_change: createEvent("change", "oldValue") && function(oldValue) {
+        events.change.call(this, oldValue);
+        var cursor = this;
+        while (cursor = cursor.links_) cursor.fn.call(cursor.context, this.value, oldValue);
+      },
+      value: null,
+      initValue: null,
+      proxy: null,
+      locked: 0,
+      lockedValue_: null,
+      links_: null,
+      deferred_: null,
+      pipes_: null,
+      setNullOnEmitterDestroy: true,
+      bindingBridge: {
+        attach: function(host, callback, context, onDestroy) {
+          host.link(context, callback, true, onDestroy);
+        },
+        detach: function(host, callback, context) {
+          host.unlink(context, callback);
+        },
+        get: function(host) {
+          return host.value;
+        }
+      },
+      init: function() {
+        AbstractData.prototype.init.call(this);
+        if (this.proxy) this.value = this.proxy(this.value);
+        if (this.setNullOnEmitterDestroy && this.value instanceof Emitter) this.value.addHandler(VALUE_EMMITER_DESTROY_HANDLER, this);
+        this.initValue = this.value;
+      },
+      set: function(value) {
+        var oldValue = this.value;
+        var newValue = this.proxy ? this.proxy(value) : value;
+        var changed = newValue !== oldValue;
+        if (changed) {
+          if (this.setNullOnEmitterDestroy) {
+            if (oldValue instanceof Emitter) oldValue.removeHandler(VALUE_EMMITER_DESTROY_HANDLER, this);
+            if (newValue instanceof Emitter) newValue.addHandler(VALUE_EMMITER_DESTROY_HANDLER, this);
+          }
+          this.value = newValue;
+          if (!this.locked) this.emit_change(oldValue);
+        }
+        return changed;
+      },
+      reset: function() {
+        this.set(this.initValue);
+      },
+      isLocked: function() {
+        return this.locked > 0;
+      },
+      lock: function() {
+        this.locked++;
+        if (this.locked == 1) this.lockedValue_ = this.value;
+      },
+      unlock: function() {
+        if (this.locked) {
+          this.locked--;
+          if (!this.locked) {
+            var lockedValue = this.lockedValue_;
+            this.lockedValue_ = null;
+            if (this.value !== lockedValue) this.emit_change(lockedValue);
+          }
+        }
+      },
+      compute: function(events, fn) {
+        if (!fn) {
+          fn = events;
+          events = null;
+        }
+        if (!fn) fn = $self;
+        var hostValue = this;
+        var handler = createEventHandler(events, function(object) {
+          Value.prototype.set.call(this, fn(object, hostValue.value));
+        });
+        var fnId = fn[GETTER_ID] || String(fn);
+        var getComputeValueId = handler.events.concat(fnId, this.basisObjectId).join("_");
+        var getComputeValue = computeFunctions[getComputeValueId];
+        if (!getComputeValue) {
+          var computeMap = {};
+          handler.destroy = function(object) {
+            delete computeMap[object.basisObjectId];
+            this.destroy();
+          };
+          this.addHandler({
+            change: function() {
+              for (var key in computeMap) {
+                var pair = computeMap[key];
+                Value.prototype.set.call(pair.value, fn(pair.object, this.value));
+              }
+            },
+            destroy: function() {
+              for (var key in computeMap) {
+                var pair = computeMap[key];
+                pair.object.removeHandler(handler, pair.value);
+                pair.value.destroy();
+              }
+              computeMap = null;
+              hostValue = null;
+            }
+          });
+          getComputeValue = computeFunctions[getComputeValueId] = function(object) {
+            if (object instanceof Emitter == false) basis.dev.warn("basis.data.Value#compute: object should be an instanceof basis.event.Emitter");
+            var objectId = object.basisObjectId;
+            var pair = computeMap[objectId];
+            var value = fn(object, hostValue.value);
+            if (!pair) {
+              var computeValue = new ReadOnlyValue({
+                value: value
+              });
+              basis.dev.setInfo(computeValue, "sourceInfo", {
+                type: "Value#compute",
+                source: [ object, hostValue ],
+                events: events,
+                transform: fn
+              });
+              object.addHandler(handler, computeValue);
+              pair = computeMap[objectId] = {
+                value: computeValue,
+                object: object
+              };
+            } else {
+              Value.prototype.set.call(pair.value, value);
+            }
+            return pair.value;
+          };
+        }
+        return chainValueFactory(getComputeValue);
+      },
+      pipe: function(events, getter) {
+        var pipeHandler = createEventHandler(events, valueFromSetProxy);
+        var getterId = getter[GETTER_ID] || String(getter);
+        var id = pipeHandler.events.join("_") + "_" + getterId;
+        var pipes = this.pipes_;
+        var pipeValue;
+        if (!pipes) pipes = this.pipes_ = {}; else pipeValue = pipes[id];
+        if (!pipeValue) {
+          pipeValue = new PipeValue({
+            source: this,
+            pipeId: id,
+            pipeHandler: pipeHandler
+          });
+          pipeValue.proxy = basis.getter(getter);
+          if (this.value instanceof Emitter) {
+            pipeValue.value = pipeValue.proxy(this.value);
+            this.value.addHandler(pipeHandler, pipeValue);
+          }
+          pipes[id] = pipeValue;
+          this.link(pipeValue, valueSyncPipe, true, pipeValue.destroy);
+          basis.dev.setInfo(pipeValue, "sourceInfo", {
+            type: "Value#pipe",
+            source: this,
+            events: events,
+            transform: pipeValue.proxy
+          });
+        } else pipeValue = devWrap(pipeValue);
+        return pipeValue;
+      },
+      as: function(fn) {
+        if (arguments.length > 1) basis.dev.warn("basis.data.Value#as() doesn't accept deferred flag as second parameter anymore. Use value.as(fn).deferred() instead.");
+        if (!fn || fn === $self) return this;
+        if (typeof fn == "string") fn = basis.getter(fn);
+        if (this.links_) {
+          var cursor = this;
+          var fnId = fn[GETTER_ID] || String(fn);
+          while (cursor = cursor.links_) {
+            var context = cursor.context;
+            if (context instanceof ReadOnlyValue && context.proxy && (context.proxy[GETTER_ID] || String(context.proxy)) == fnId) {
+              context = devWrap(context);
+              return context;
+            }
+          }
+        }
+        var result = new ReadOnlyValue({
+          proxy: fn,
+          value: this.value
+        });
+        basis.dev.setInfo(result, "sourceInfo", {
+          type: "Value#as",
+          source: this,
+          sourceTarget: this.value,
+          transform: fn
+        });
+        if (fn.retarget) {
+          result.proxy = function(value) {
+            value = fn(value);
+            basis.dev.patchInfo(result, "sourceInfo", {
+              sourceTarget: value
+            });
+            return value;
+          };
+          result.proxy[GETTER_ID] = fn[GETTER_ID];
+        }
+        this.link(result, valueSyncAs, true, result.destroy);
+        return result;
+      },
+      query: function(path) {
+        return Value.query(this, "value." + path);
+      },
+      deferred: function() {
+        if (arguments.length > 0) basis.dev.warn("basis.data.Value#deferred() doesn't accept parameters anymore. Use value.as(fn).deferred() instead.");
+        if (!this.deferred_) {
+          this.deferred_ = new DeferredValue({
+            source: this,
+            value: this.value
+          });
+          basis.dev.setInfo(this.deferred_, "sourceInfo", {
+            type: "Value#deferred",
+            source: this
+          });
+        }
+        return this.deferred_;
+      },
+      link: function(context, fn, noApply, onDestroy) {
+        if (typeof fn != "function") {
+          var property = String(fn);
+          fn = valueSetters[property];
+          if (!fn) fn = valueSetters[property] = function(value) {
+            this[property] = value;
+          };
+        }
+        var cursor = this;
+        while (cursor = cursor.links_) if (cursor.context === context && cursor.fn === fn) {
+          basis.dev.warn(this.constructor.className + "#link: Duplicate link pair context-fn");
+          break;
+        }
+        this.links_ = {
+          value: this,
+          context: context,
+          fn: fn,
+          destroy: onDestroy || null,
+          links_: this.links_
+        };
+        if (context instanceof Emitter) context.addHandler(VALUE_EMMITER_HANDLER, this.links_);
+        if (!noApply) fn.call(context, this.value);
+        return context;
+      },
+      unlink: function(context, fn) {
+        var cursor = this;
+        var prev;
+        while (prev = cursor, cursor = cursor.links_) if (cursor.context === context && (!fn || cursor.fn === fn)) {
+          cursor.fn = basis.fn.$undef;
+          prev.links_ = cursor.links_;
+          if (cursor.context instanceof Emitter) cursor.context.removeHandler(VALUE_EMMITER_HANDLER, cursor);
+        }
+      },
+      destroy: function() {
+        AbstractData.prototype.destroy.call(this);
+        if (this.setNullOnEmitterDestroy && this.value instanceof Emitter) this.value.removeHandler(VALUE_EMMITER_DESTROY_HANDLER, this);
+        var cursor = this.links_;
+        this.links_ = null;
+        while (cursor) {
+          if (cursor.context instanceof Emitter) cursor.context.removeHandler(VALUE_EMMITER_HANDLER, cursor);
+          if (cursor.destroy) cursor.destroy.call(cursor.context);
+          cursor = cursor.links_;
+        }
+        this.proxy = null;
+        this.initValue = null;
+        this.value = null;
+        this.lockedValue_ = null;
+        this.deferred_ = null;
+        this.pipes_ = null;
+      }
+    });
+    var ReadOnlyValue = Class(Value, {
+      className: namespace + ".ReadOnlyValue",
+      setNullOnEmitterDestroy: false,
+      set: basis.fn.$false
+    });
+    var deferredSchedule = basis.asap.schedule(function(value) {
+      value.unlock();
+    });
+    var DEFERRED_HANDLER = {
+      change: function(source) {
+        if (!this.isLocked()) {
+          this.lock();
+          deferredSchedule.add(this);
+        }
+        Value.prototype.set.call(this, source.value);
+      },
+      destroy: function() {
+        this.destroy();
+      }
+    };
+    var DeferredValue = Class(ReadOnlyValue, {
+      className: namespace + ".DeferredValue",
+      source: null,
+      init: function() {
+        ReadOnlyValue.prototype.init.call(this);
+        this.source.addHandler(DEFERRED_HANDLER, this);
+      },
+      deferred: function() {
+        return this;
+      },
+      destroy: function() {
+        deferredSchedule.remove(this);
+        this.source = null;
+        ReadOnlyValue.prototype.destroy.call(this);
+      }
+    });
+    var PipeValue = Class(ReadOnlyValue, {
+      className: namespace + ".PipeValue",
+      source: null,
+      pipeId: null,
+      pipeHandler: null,
+      destroy: function() {
+        var source = this.source;
+        var sourceValue = source.value;
+        if (sourceValue instanceof Emitter) sourceValue.removeHandler(this.pipeHandler, this);
+        source.pipes_[this.pipeId] = null;
+        this.source = null;
+        this.pipeHandler = null;
+        ReadOnlyValue.prototype.destroy.call(this);
+      }
+    });
+    var valueFromMap = {};
+    var valueFromSetProxy = function(sender) {
+      Value.prototype.set.call(this, sender);
+    };
+    Value.from = function(obj, events, getter) {
+      var result;
+      if (!obj) return null;
+      if (obj instanceof Emitter) {
+        if (!getter) {
+          getter = events;
+          events = null;
+        }
+        if (!getter) getter = $self;
+        var handler = createEventHandler(events, valueFromSetProxy);
+        var getterId = getter[GETTER_ID] || String(getter);
+        var id = handler.events.concat(getterId, obj.basisObjectId).join("_");
+        result = valueFromMap[id];
+        if (!result) {
+          result = valueFromMap[id] = new ReadOnlyValue({
+            proxy: basis.getter(getter),
+            value: obj,
+            emit_destroy: function() {
+              if (id in valueFromMap) {
+                delete valueFromMap[id];
+                obj.removeHandler(handler, this);
+              }
+              ReadOnlyValue.prototype.emit_destroy.call(this);
+            }
+          });
+          basis.dev.setInfo(result, "sourceInfo", {
+            type: "Value.from",
+            source: obj,
+            events: events,
+            transform: result.proxy
+          });
+          handler.destroy = function() {
+            if (id in valueFromMap) {
+              delete valueFromMap[id];
+              this.destroy();
+            }
+          };
+          obj.addHandler(handler, result);
+        } else result = devWrap(result);
+      }
+      if (!result) {
+        var id = obj.basisObjectId;
+        var bindingBridge = obj.bindingBridge;
+        if (id && bindingBridge) {
+          result = valueFromMap[id];
+          if (!result) {
+            result = valueFromMap[id] = new ReadOnlyValue({
+              value: bindingBridge.get(obj),
+              handler: {
+                destroy: function() {
+                  valueFromMap[id] = null;
+                  bindingBridge.detach(obj, Value.prototype.set, result);
+                }
+              }
+            });
+            bindingBridge.attach(obj, Value.prototype.set, result, result.destroy);
+          } else result = devWrap(result);
+        }
+      }
+      if (!result) throw new Error("Bad object type");
+      return result;
+    };
+    var UNDEFINED_VALUE = new ReadOnlyValue({
+      value: undefined
+    });
+    var queryAsFunctionCache = {};
+    var queryNestedFunctionCache = {};
+    function getQueryPathFragment(target, path, index) {
+      var pathFragment = path[index];
+      var isStatic = false;
+      if (/^<static>/.test(pathFragment)) {
+        isStatic = true;
+        pathFragment = pathFragment.substr(8);
+      }
+      var descriptor = target.propertyDescriptors[pathFragment];
+      var events = descriptor ? descriptor.events : null;
+      if (descriptor && descriptor.isPrivate) {
+        isStatic = true;
+        events = null;
+        var warnMessage = "Property can't be accessed via query: ";
+        basis.dev.warn(warnMessage + path.join(".") + "\n" + basis.string.repeat(" ", warnMessage.length + path.slice(0, index).join(".").length) + basis.string.repeat("^", pathFragment.length));
+      }
+      if (descriptor && descriptor.isStatic) isStatic = true;
+      if (events) {
+        if (isStatic) {
+          events = null;
+          var warnMessage = "<static> was applied for property that has events: ";
+          basis.dev.warn(warnMessage + path.join(".") + "\n" + basis.string.repeat(" ", warnMessage.length + path.slice(0, index).join(".").length) + basis.string.repeat("^", "<static>".length) + "\n" + "Propably is't a bug and <static> should be removed from path");
+        } else {
+          if (descriptor && descriptor.nested && index < path.length - 1) {
+            var path0 = pathFragment;
+            var path1 = path[++index];
+            var fullPath = path0 + "." + path1;
+            if (Array.isArray(descriptor.nested) && descriptor.nested.indexOf(path1) == -1) {
+              var warnMessage = "Property can't to be observable: ";
+              basis.dev.warn(warnMessage + path.join(".") + "\n" + basis.string.repeat(" ", warnMessage.length + path.slice(0, index).join(".").length + 1) + basis.string.repeat("^", path1.length) + "\n" + "Owner has a limited set of observable properties: " + descriptor.nested.join(", "));
+              return;
+            }
+            pathFragment = queryNestedFunctionCache[fullPath];
+            if (!pathFragment) {
+              pathFragment = function(object) {
+                object = object && object[path0];
+                return object ? object[path1] : undefined;
+              };
+              pathFragment.getDevSource = function() {
+                return basis.getter(fullPath);
+              };
+              pathFragment = queryNestedFunctionCache[fullPath] = basis.getter(pathFragment);
+            }
+          }
+        }
+      } else {
+        if (!isStatic) {
+          var warnMessage = "No events found for property: ";
+          basis.dev.warn(warnMessage + path.join(".") + "\n" + basis.string.repeat(" ", warnMessage.length + path.slice(0, index).join(".").length) + basis.string.repeat("^", pathFragment.length) + "\n" + "If a property never changes use `<static>` before property name, i.e. " + path.slice(0, index).join(".") + (index ? "." : "") + "<static>" + path.slice(index).join("."));
+          return;
+        }
+      }
+      return {
+        getter: pathFragment,
+        rest: path.slice(index + 1).join("."),
+        events: events || null
+      };
+    }
+    function getQueryPathFunction(path) {
+      var result = queryAsFunctionCache[path];
+      if (!result) {
+        var fn = function(target) {
+          if (target instanceof Emitter) return Value.query(target, path);
+        };
+        fn.getDevSource = Function("return function(target){\n" + "  if (target instanceof Emitter)\n" + '    return Value.query(target, "' + path + '");\n' + "};");
+        basis.dev.setInfo(fn, "loc", null);
+        result = queryAsFunctionCache[path] = basis.getter(fn);
+        result.retarget = true;
+      }
+      return result;
+    }
+    Value.query = function(target, path) {
+      if (arguments.length == 1) {
+        path = target;
+        return chainValueFactory(function(target) {
+          return Value.query(target, path);
+        });
+      }
+      if (target instanceof Emitter == false) throw new Error("Bad target type");
+      if (typeof path != "string") throw new Error("Path should be a string");
+      var pathFragment = getQueryPathFragment(target, path.split("."), 0);
+      var result;
+      if (!pathFragment) return UNDEFINED_VALUE;
+      result = Value.from(target, pathFragment.events, pathFragment.getter);
+      if (pathFragment.rest) result = result.as(getQueryPathFunction(pathFragment.rest)).pipe("change", "value");
+      return result;
+    };
+    function chainValueFactory(fn) {
+      fn = basis.dev.patchFactory(fn);
+      fn.factory = FACTORY;
+      fn.deferred = valueDeferredFactory;
+      fn.compute = valueComputeFactory;
+      fn.query = valueQueryFactory;
+      fn.pipe = valuePipeFactory;
+      fn.as = valueAsFactory;
+      return fn;
+    }
+    function valueDeferredFactory() {
+      var factory = this;
+      return chainValueFactory(function(value) {
+        value = factory(value);
+        return value ? value.deferred() : value;
+      });
+    }
+    function valueComputeFactory(events, getter) {
+      var factory = this;
+      return chainValueFactory(function(sourceValue) {
+        var value = factory(sourceValue);
+        return value ? value.compute(events, getter)(sourceValue) : value;
+      });
+    }
+    function valueAsFactory(getter) {
+      var factory = this;
+      return chainValueFactory(function(value) {
+        value = factory(value);
+        return value ? value.as(getter) : value;
+      });
+    }
+    function valuePipeFactory(events, getter) {
+      var factory = this;
+      return chainValueFactory(function(value) {
+        value = factory(value);
+        return value ? value.pipe(events, getter) : value;
+      });
+    }
+    function valueQueryFactory(path) {
+      var factory = this;
+      return chainValueFactory(function(value) {
+        value = factory(value);
+        return value ? value.query(path) : value;
+      });
+    }
+    Value.factory = function(events, getter) {
+      return chainValueFactory(function factory(object) {
+        return Value.from(object, events, getter);
+      });
+    };
+    Value.state = function(source) {
+      return source instanceof AbstractData ? Value.from(source, "stateChanged", "state") : STATE.UNDEFINED;
+    };
+    Value.stateFactory = function(events, getter) {
+      return Value.factory(events, getter).pipe("stateChanged", "state").as(function(state) {
+        return state || STATE.UNDEFINED;
+      });
+    };
+    var INIT_DATA = {};
+    function isConnected(a, b) {
+      while (b && b !== a && b !== b.delegate) b = b.delegate;
+      return b === a;
+    }
+    function applyDelegateChanges(object, oldRoot, oldTarget) {
+      var delegate = object.delegate;
+      if (delegate) {
+        object.root = delegate.root;
+        object.target = delegate.target;
+        object.data = delegate.data;
+        object.state = delegate.state;
+      }
+      if (!isEqual(object.root, oldRoot)) {
+        var rootListenHandler = object.listen.root;
+        if (rootListenHandler) {
+          if (oldRoot && !isEqual(oldRoot, object)) oldRoot.removeHandler(rootListenHandler, object);
+          if (object.root && !isEqual(object.root, object)) object.root.addHandler(rootListenHandler, object);
+        }
+        object.emit_rootChanged(oldRoot);
+      }
+      if (!isEqual(object.target, oldTarget)) {
+        var targetListenHandler = object.listen.target;
+        if (targetListenHandler) {
+          if (oldTarget && !isEqual(oldTarget, object)) oldTarget.removeHandler(targetListenHandler, object);
+          if (object.target && !isEqual(object.target, object)) object.target.addHandler(targetListenHandler, object);
+        }
+        object.emit_targetChanged(oldTarget);
+      }
+      var cursor = object.delegates_;
+      while (cursor) {
+        if (cursor.delegate) applyDelegateChanges(cursor.delegate, oldRoot, oldTarget);
+        cursor = cursor.next;
+      }
+    }
+    var DataObject = Class(AbstractData, {
+      className: namespace + ".Object",
+      propertyDescriptors: {
+        delegate: "delegateChanged",
+        target: "targetChanged",
+        root: "rootChanged",
+        data: {
+          nested: true,
+          events: "update"
+        }
+      },
+      subscribeTo: SUBSCRIPTION.DELEGATE + SUBSCRIPTION.TARGET,
+      data: null,
+      emit_update: createEvent("update", "delta") && function(delta) {
+        var cursor = this.delegates_;
+        events.update.call(this, delta);
+        while (cursor) {
+          if (cursor.delegate) cursor.delegate.emit_update(delta);
+          cursor = cursor.next;
+        }
+      },
+      emit_stateChanged: function(oldState) {
+        var cursor = this.delegates_;
+        AbstractData.prototype.emit_stateChanged.call(this, oldState);
+        while (cursor) {
+          if (cursor.delegate) {
+            cursor.delegate.state = this.state;
+            cursor.delegate.emit_stateChanged(oldState);
+          }
+          cursor = cursor.next;
+        }
+      },
+      delegate: null,
+      delegateRA_: null,
+      delegates_: null,
+      debug_delegates: function() {
+        var cursor = this.delegates_;
+        var result = [];
+        while (cursor) {
+          result.push(cursor.delegate);
+          cursor = cursor.next;
+        }
+        return result;
+      },
+      emit_delegateChanged: createEvent("delegateChanged", "oldDelegate"),
+      target: null,
+      emit_targetChanged: createEvent("targetChanged", "oldTarget"),
+      root: null,
+      emit_rootChanged: createEvent("rootChanged", "oldRoot"),
+      init: function() {
+        this.root = this;
+        AbstractData.prototype.init.call(this);
+        var delegate = this.delegate;
+        var data = this.data;
+        if (delegate) {
+          this.delegate = null;
+          this.target = null;
+          this.data = INIT_DATA;
+          this.setDelegate(delegate);
+          if (this.data === INIT_DATA) this.data = data || {};
+        } else {
+          if (!data) this.data = {};
+          if (this.target !== null) this.target = this;
+        }
+      },
+      setSyncAction: function(syncAction) {
+        if (syncAction && this.delegate) basis.dev.warn(this.constructor.syncAction + " instance has a delegate and syncAction - it may produce conflics with data & state");
+        AbstractData.prototype.setSyncAction.call(this, syncAction);
+      },
+      setDelegate: function(newDelegate) {
+        newDelegate = resolveObject(this, this.setDelegate, newDelegate, "delegateRA_");
+        if (newDelegate && newDelegate instanceof DataObject) {
+          if (newDelegate.delegate && isConnected(this, newDelegate)) {
+            basis.dev.warn("New delegate has already connected to object. Delegate assignment has been ignored.", this, newDelegate);
+            return false;
+          }
+        } else {
+          newDelegate = null;
+        }
+        if (!isEqual(this.delegate, newDelegate)) {
+          var oldState = this.state;
+          var oldData = this.data;
+          var oldDelegate = this.delegate;
+          var oldTarget = this.target;
+          var oldRoot = this.root;
+          var delegateListenHandler = this.listen.delegate;
+          var dataChanged = false;
+          var delta;
+          if (oldDelegate) {
+            if (delegateListenHandler) oldDelegate.removeHandler(delegateListenHandler, this);
+            var cursor = oldDelegate.delegates_;
+            var prev = oldDelegate;
+            while (cursor) {
+              if (isEqual(cursor.delegate, this)) {
+                cursor.delegate = null;
+                if (isEqual(prev, oldDelegate)) oldDelegate.delegates_ = cursor.next; else prev.next = cursor.next;
+                break;
+              }
+              prev = cursor;
+              cursor = cursor.next;
+            }
+          }
+          if (newDelegate) {
+            this.delegate = newDelegate;
+            if (delegateListenHandler) newDelegate.addHandler(delegateListenHandler, this);
+            newDelegate.delegates_ = {
+              delegate: this,
+              next: newDelegate.delegates_
+            };
+            if (this.data !== INIT_DATA) {
+              delta = {};
+              for (var key in newDelegate.data) if (key in oldData === false) {
+                dataChanged = true;
+                delta[key] = undefined;
+              }
+              for (var key in oldData) if (oldData[key] !== newDelegate.data[key]) {
+                dataChanged = true;
+                delta[key] = oldData[key];
+              }
+            }
+          } else {
+            this.delegate = null;
+            this.target = null;
+            this.root = this;
+            this.data = {};
+            for (var key in oldData) this.data[key] = oldData[key];
+          }
+          applyDelegateChanges(this, oldRoot, oldTarget);
+          if (dataChanged) this.emit_update(delta);
+          if (delta && oldState !== this.state && (String(oldState) != this.state || oldState.data !== this.state.data)) this.emit_stateChanged(oldState);
+          this.emit_delegateChanged(oldDelegate);
+          return true;
+        }
+        return false;
+      },
+      setState: function(state, data) {
+        if (this.delegate) return this.root.setState(state, data); else return AbstractData.prototype.setState.call(this, state, data);
+      },
+      update: function(data) {
+        if (this.delegate) return this.root.update(data);
+        if (data) {
+          var delta = {};
+          var changed = false;
+          for (var prop in data) if (this.data[prop] !== data[prop]) {
+            changed = true;
+            delta[prop] = this.data[prop];
+            this.data[prop] = data[prop];
+          }
+          if (changed) {
+            this.emit_update(delta);
+            return delta;
+          }
+        }
+        return false;
+      },
+      destroy: function() {
+        AbstractData.prototype.destroy.call(this);
+        var cursor = this.delegates_;
+        this.delegates_ = null;
+        while (cursor) {
+          cursor.delegate.setDelegate();
+          cursor = cursor.next;
+        }
+        if (this.delegate) this.setDelegate();
+        if (this.delegateRA_) resolveObject(this, false, false, "delegateRA_");
+        this.data = NULL_OBJECT;
+        this.root = null;
+        this.target = null;
+      }
+    });
+    var resolveObject = createResolveFunction(DataObject);
+    var Slot = Class(DataObject, {
+      className: namespace + ".Slot"
+    });
+    var KEYOBJECTMAP_MEMBER_HANDLER = {
+      destroy: function() {
+        delete this.map[this.id];
+      }
+    };
+    var KeyObjectMap = Class(AbstractData, {
+      className: namespace + ".KeyObjectMap",
+      itemClass: DataObject,
+      keyGetter: basis.getter($self),
+      autoDestroyMembers: true,
+      map_: null,
+      extendConstructor_: true,
+      init: function() {
+        this.map_ = {};
+        AbstractData.prototype.init.call(this);
+      },
+      resolve: function(object) {
+        return this.get(this.keyGetter(object), object);
+      },
+      create: function(key) {
+        var itemConfig;
+        if (key instanceof DataObject) itemConfig = {
+          delegate: key
+        }; else itemConfig = {
+          data: {
+            id: key,
+            title: key
+          }
+        };
+        return new this.itemClass(itemConfig);
+      },
+      get: function(key, autocreate) {
+        var itemId = key instanceof DataObject ? key.basisObjectId : key;
+        var itemInfo = this.map_[itemId];
+        if (!itemInfo && autocreate) {
+          itemInfo = this.map_[itemId] = {
+            map: this.map_,
+            id: itemId,
+            item: this.create(key, autocreate)
+          };
+          itemInfo.item.addHandler(KEYOBJECTMAP_MEMBER_HANDLER, itemInfo);
+        }
+        if (itemInfo) return itemInfo.item;
+      },
+      destroy: function() {
+        AbstractData.prototype.destroy.call(this);
+        var map = this.map_;
+        this.map_ = null;
+        for (var itemId in map) {
+          var itemInfo = map[itemId];
+          if (this.autoDestroyMembers) itemInfo.item.destroy(); else itemInfo.item.removeHandler(KEYOBJECTMAP_MEMBER_HANDLER, itemInfo);
+        }
+      }
+    });
+    function getDelta(inserted, deleted) {
+      var delta = {};
+      var result;
+      if (inserted && inserted.length) result = delta.inserted = inserted;
+      if (deleted && deleted.length) result = delta.deleted = deleted;
+      if (result) return delta;
+    }
+    function getDatasetDelta(a, b) {
+      if (!a || !a.itemCount) {
+        if (b && b.itemCount) return {
+          inserted: b.getItems()
+        };
+      } else {
+        if (!b || !b.itemCount) {
+          if (a.itemCount) return {
+            deleted: a.getItems()
+          };
+        } else {
+          var inserted = [];
+          var deleted = [];
+          for (var key in a.items_) {
+            var item = a.items_[key];
+            if (item.basisObjectId in b.items_ == false) deleted.push(item);
+          }
+          for (var key in b.items_) {
+            var item = b.items_[key];
+            if (item.basisObjectId in a.items_ == false) inserted.push(item);
+          }
+          return getDelta(inserted, deleted);
+        }
+      }
+    }
+    var DatasetWrapper = Class(DataObject, {
+      className: namespace + ".DatasetWrapper",
+      propertyDescriptors: {
+        dataset: "datasetChanged",
+        itemCount: "itemsChanged",
+        "pick()": "itemsChanged",
+        "getItems()": "itemsChanged"
+      },
+      active: PROXY,
+      subscribeTo: DataObject.prototype.subscribeTo + SUBSCRIPTION.DATASET,
+      listen: {
+        dataset: {
+          itemsChanged: function(dataset, delta) {
+            this.itemCount = dataset.itemCount;
+            this.emit_itemsChanged(delta);
+          },
+          destroy: function() {
+            this.setDataset();
+          }
+        }
+      },
+      dataset: null,
+      datasetRA_: null,
+      emit_datasetChanged: createEvent("datasetChanged", "oldDataset"),
+      emit_itemsChanged: createEvent("itemsChanged", "delta"),
+      init: function() {
+        DataObject.prototype.init.call(this);
+        var dataset = this.dataset;
+        if (dataset) {
+          this.dataset = null;
+          this.setDataset(dataset);
+        }
+      },
+      setDataset: function(dataset) {
+        dataset = resolveDataset(this, this.setDataset, dataset, "datasetRA_");
+        if (this.dataset !== dataset) {
+          var listenHandler = this.listen.dataset;
+          var oldDataset = this.dataset;
+          var delta;
+          if (listenHandler) {
+            if (oldDataset) oldDataset.removeHandler(listenHandler, this);
+            if (dataset) dataset.addHandler(listenHandler, this);
+          }
+          this.itemCount = dataset ? dataset.itemCount : 0;
+          this.dataset = dataset;
+          if (delta = getDatasetDelta(oldDataset, dataset)) this.emit_itemsChanged(delta);
+          this.emit_datasetChanged(oldDataset);
+        }
+      },
+      has: function(object) {
+        return this.dataset ? this.dataset.has(object) : null;
+      },
+      getItems: function() {
+        return this.dataset ? this.dataset.getItems() : [];
+      },
+      getValues: function(getter) {
+        return this.dataset ? this.dataset.getValues(getter) : [];
+      },
+      pick: function() {
+        return this.dataset ? this.dataset.pick() : null;
+      },
+      top: function(count) {
+        return this.dataset ? this.dataset.top(count) : [];
+      },
+      forEach: function(fn) {
+        if (this.dataset) return this.dataset.forEach(fn);
+      },
+      destroy: function() {
+        if (this.dataset || this.datasetRA_) this.setDataset();
+        DataObject.prototype.destroy.call(this);
+      }
+    });
+    var ReadOnlyDataset = Class(AbstractData, {
+      className: namespace + ".ReadOnlyDataset",
+      propertyDescriptors: {
+        itemCount: "itemsChanged",
+        "pick()": "itemsChanged",
+        "getItems()": "itemsChanged"
+      },
+      itemCount: 0,
+      items_: null,
+      members_: null,
+      cache_: null,
+      emit_itemsChanged: createEvent("itemsChanged", "delta") && function(delta) {
+        var items;
+        var insertCount = 0;
+        var deleteCount = 0;
+        var object;
+        if (items = delta.inserted) {
+          while (object = items[insertCount]) {
+            this.items_[object.basisObjectId] = object;
+            insertCount++;
+          }
+        }
+        if (items = delta.deleted) {
+          while (object = items[deleteCount]) {
+            delete this.items_[object.basisObjectId];
+            deleteCount++;
+          }
+        }
+        this.itemCount += insertCount - deleteCount;
+        this.cache_ = insertCount == this.itemCount ? delta.inserted : null;
+        events.itemsChanged.call(this, delta);
+      },
+      init: function() {
+        AbstractData.prototype.init.call(this);
+        this.members_ = {};
+        this.items_ = {};
+      },
+      has: function(object) {
+        return !!(object && this.items_[object.basisObjectId]);
+      },
+      getItems: function() {
+        if (!this.cache_) this.cache_ = values(this.items_);
+        return this.cache_;
+      },
+      getValues: function(getter) {
+        return this.getItems().map(basis.getter(getter || $self));
+      },
+      pick: function() {
+        for (var objectId in this.items_) return this.items_[objectId];
+        return null;
+      },
+      top: function(count) {
+        var result = [];
+        if (count) for (var objectId in this.items_) if (result.push(this.items_[objectId]) >= count) break;
+        return result;
+      },
+      forEach: function(fn) {
+        var items = this.getItems();
+        for (var i = 0; i < items.length; i++) fn(items[i]);
+      },
+      destroy: function() {
+        Dataset.preventAccumulations(this);
+        AbstractData.prototype.destroy.call(this);
+        this.cache_ = EMPTY_ARRAY;
+        this.itemCount = 0;
+        this.members_ = null;
+        this.items_ = null;
+      }
+    });
+    var Dataset = Class(ReadOnlyDataset, {
+      className: namespace + ".Dataset",
+      listen: {
+        item: {
+          destroy: function(object) {
+            this.remove([ object ]);
+          }
+        }
+      },
+      init: function() {
+        ReadOnlyDataset.prototype.init.call(this);
+        var items = this.items;
+        if (items) {
+          this.items = null;
+          this.set(items);
+        }
+      },
+      add: function(items) {
+        var memberMap = this.members_;
+        var listenHandler = this.listen.item;
+        var inserted = [];
+        var delta;
+        if (items && !Array.isArray(items)) items = [ items ];
+        for (var i = 0; i < items.length; i++) {
+          var object = items[i];
+          if (object instanceof DataObject) {
+            var objectId = object.basisObjectId;
+            if (!memberMap[objectId]) {
+              memberMap[objectId] = object;
+              if (listenHandler) object.addHandler(listenHandler, this);
+              inserted.push(object);
+            }
+          } else {
+            basis.dev.warn("Wrong data type: value should be an instance of basis.data.Object");
+          }
+        }
+        if (inserted.length) {
+          this.emit_itemsChanged(delta = {
+            inserted: inserted
+          });
+        }
+        return delta;
+      },
+      remove: function(items) {
+        var memberMap = this.members_;
+        var listenHandler = this.listen.item;
+        var deleted = [];
+        var delta;
+        if (items && !Array.isArray(items)) items = [ items ];
+        for (var i = 0; i < items.length; i++) {
+          var object = items[i];
+          if (object instanceof DataObject) {
+            var objectId = object.basisObjectId;
+            if (memberMap[objectId]) {
+              if (listenHandler) object.removeHandler(listenHandler, this);
+              delete memberMap[objectId];
+              deleted.push(object);
+            }
+          } else {
+            basis.dev.warn("Wrong data type: value should be an instance of basis.data.Object");
+          }
+        }
+        if (deleted.length) {
+          this.emit_itemsChanged(delta = {
+            deleted: deleted
+          });
+        }
+        return delta;
+      },
+      set: function(items) {
+        if (!this.itemCount) return this.add(items);
+        if (!items || !items.length) return this.clear();
+        var memberMap = this.members_;
+        var listenHandler = this.listen.item;
+        var exists = {};
+        var deleted = [];
+        var inserted = [];
+        var object;
+        var objectId;
+        var delta;
+        for (var i = 0; i < items.length; i++) {
+          object = items[i];
+          if (object instanceof DataObject) {
+            objectId = object.basisObjectId;
+            exists[objectId] = object;
+            if (!memberMap[objectId]) {
+              memberMap[objectId] = object;
+              if (listenHandler) object.addHandler(listenHandler, this);
+              inserted.push(object);
+            }
+          } else {
+            basis.dev.warn("Wrong data type: value should be an instance of basis.data.Object");
+          }
+        }
+        for (var objectId in memberMap) {
+          if (!exists[objectId]) {
+            object = memberMap[objectId];
+            if (listenHandler) object.removeHandler(listenHandler, this);
+            delete memberMap[objectId];
+            deleted.push(object);
+          }
+        }
+        if (delta = getDelta(inserted, deleted)) this.emit_itemsChanged(delta);
+        return delta;
+      },
+      sync: function(items) {
+        basis.dev.warn("basis.data.Dataset#sync() method is deprecated, use basis.data.Dataset#setAndDestroyRemoved() instead.");
+        return this.setAndDestroyRemoved(items);
+      },
+      setAndDestroyRemoved: function(items) {
+        var delta = this.set(items) || {};
+        var deleted = delta.deleted;
+        Dataset.setAccumulateState(true);
+        if (deleted) for (var i = 0, object; object = deleted[i]; i++) object.destroy();
+        Dataset.setAccumulateState(false);
+        return delta.inserted;
+      },
+      clear: function() {
+        Dataset.flushChanges(this);
+        var deleted = this.getItems();
+        var listenHandler = this.listen.item;
+        var delta;
+        if (deleted.length) {
+          if (listenHandler) for (var i = 0; i < deleted.length; i++) deleted[i].removeHandler(listenHandler, this);
+          this.emit_itemsChanged(delta = {
+            deleted: deleted
+          });
+          this.members_ = {};
+        }
+        return delta;
+      },
+      destroy: function() {
+        this.clear();
+        ReadOnlyDataset.prototype.destroy.call(this);
+      }
+    });
+    var DATASETWRAPPER_ADAPTER_HANDLER = {
+      datasetChanged: DEFAULT_CHANGE_ADAPTER_HANDLER,
+      destroy: DEFAULT_DESTROY_ADAPTER_HANDLER
+    };
+    function resolveAdapterProxy() {
+      this.fn.call(this.context, this.source);
+    }
+    function resolveDataset(context, fn, source, property, factoryContext) {
+      var oldAdapter = context[property] || null;
+      var newAdapter = null;
+      if (fn !== resolveAdapterProxy && typeof source == "function") source = source.call(factoryContext || context, factoryContext || context);
+      if (source) {
+        var adapter = newAdapter = oldAdapter && oldAdapter.source === source ? oldAdapter : null;
+        if (source instanceof DatasetWrapper) {
+          newAdapter = adapter || new ResolveAdapter(context, fn, source, DATASETWRAPPER_ADAPTER_HANDLER);
+          source = source.dataset;
+        } else if (source.bindingBridge) {
+          newAdapter = adapter || new BBResolveAdapter(context, fn, source, DEFAULT_CHANGE_ADAPTER_HANDLER);
+          source = resolveDataset(newAdapter, resolveAdapterProxy, source.value, "next");
+        }
+      }
+      if (source instanceof ReadOnlyDataset == false) source = null;
+      if (property && oldAdapter !== newAdapter) {
+        var cursor = oldAdapter;
+        while (cursor) {
+          var adapter = cursor;
+          adapter.detach();
+          cursor = adapter.next;
+          adapter.next = null;
+        }
+        if (newAdapter) newAdapter.attach(DEFAULT_DESTROY_ADAPTER_HANDLER);
+        context[property] = newAdapter;
+      }
+      return source;
+    }
+    (function() {
+      var PREVENT_ACCUMULATIONS = {};
+      var proto = ReadOnlyDataset.prototype;
+      var eventCache = {};
+      var setStateCount = 0;
+      var urgentTimer;
+      var realEvent;
+      function flushCache(cache) {
+        realEvent.call(cache.dataset, cache);
+      }
+      function flushAllDataset() {
+        function processEntry(datasetId) {
+          var entry = eventCacheCopy[datasetId];
+          if (entry) {
+            eventCacheCopy[datasetId] = null;
+            if (entry !== PREVENT_ACCUMULATIONS) flushCache(entry);
+          }
+        }
+        var eventCacheCopy = eventCache;
+        var realEvent = proto.emit_itemsChanged;
+        proto.emit_itemsChanged = function(delta) {
+          processEntry(this.basisObjectId);
+          realEvent.call(this, delta);
+        };
+        eventCache = {};
+        for (var datasetId in eventCacheCopy) processEntry(datasetId);
+        proto.emit_itemsChanged = realEvent;
+      }
+      function storeDatasetDelta(delta) {
+        var dataset = this;
+        var datasetId = dataset.basisObjectId;
+        var inserted = delta.inserted;
+        var deleted = delta.deleted;
+        var cache = eventCache[datasetId];
+        if (inserted && deleted || cache && cache.mixed) {
+          if (cache) {
+            eventCache[datasetId] = null;
+            flushCache(cache);
+          }
+          realEvent.call(dataset, delta);
+          return;
+        }
+        if (cache) {
+          var mode = inserted ? "inserted" : "deleted";
+          var array = cache[mode];
+          if (!array) {
+            var inCacheMode = inserted ? "deleted" : "inserted";
+            var inCache = cache[inCacheMode];
+            var inCacheMap = {};
+            var deltaItems = inserted || deleted;
+            var newInCacheItems = [];
+            var inCacheRemoves = 0;
+            for (var i = 0; i < inCache.length; i++) inCacheMap[inCache[i].basisObjectId] = i;
+            for (var i = 0; i < deltaItems.length; i++) {
+              var id = deltaItems[i].basisObjectId;
+              if (id in inCacheMap == false) {
+                newInCacheItems.push(deltaItems[i]);
+              } else {
+                if (!inCacheRemoves) inCache = sliceArray.call(inCache);
+                inCacheRemoves++;
+                inCache[inCacheMap[id]] = null;
+              }
+            }
+            if (inCacheRemoves) {
+              if (inCacheRemoves < inCache.length) {
+                inCache = inCache.filter(Boolean);
+              } else {
+                inCache = null;
+              }
+              cache[inCacheMode] = inCache;
+            }
+            if (!newInCacheItems.length) {
+              newInCacheItems = null;
+              if (!inCache) eventCache[datasetId] = null;
+            } else {
+              cache[mode] = newInCacheItems;
+              if (inCache) cache.mixed = true;
+            }
+          } else array.push.apply(array, inserted || deleted);
+          return;
+        }
+        eventCache[datasetId] = {
+          inserted: inserted,
+          deleted: deleted,
+          dataset: dataset,
+          mixed: false
+        };
+      }
+      function urgentFlush() {
+        urgentTimer = null;
+        if (setStateCount) {
+          basis.dev.warn("(debug) Urgent flush dataset changes");
+          setStateCount = 0;
+          setAccumulateStateOff();
+        }
+      }
+      function setAccumulateStateOff() {
+        proto.emit_itemsChanged = realEvent;
+        flushAllDataset();
+      }
+      Dataset.flushChanges = function(dataset) {
+        var cache = eventCache[dataset.basisObjectId];
+        if (cache) flushCache(cache);
+        eventCache[dataset.basisObjectId] = null;
+      };
+      Dataset.preventAccumulations = function(dataset) {
+        var cache = eventCache[dataset.basisObjectId];
+        if (cache && cache !== PREVENT_ACCUMULATIONS) realEvent.call(cache.dataset, cache);
+        eventCache[dataset.basisObjectId] = PREVENT_ACCUMULATIONS;
+      };
+      Dataset.setAccumulateState = function(state) {
+        if (state) {
+          if (setStateCount == 0) {
+            realEvent = proto.emit_itemsChanged;
+            proto.emit_itemsChanged = storeDatasetDelta;
+            if (!urgentTimer) urgentTimer = basis.setImmediate(urgentFlush);
+          }
+          setStateCount++;
+        } else {
+          setStateCount -= setStateCount > 0;
+          if (setStateCount == 0) setAccumulateStateOff();
+        }
+      };
+    })();
+    function wrapData(data) {
+      if (Array.isArray(data)) return data.map(function(item) {
+        return {
+          data: item
+        };
+      }); else return {
+        data: data
+      };
+    }
+    function wrapObject(data) {
+      if (!data || data.constructor !== Object) data = {
+        value: data
+      };
+      return new DataObject({
+        data: data
+      });
+    }
+    function wrap(value, retObject) {
+      var wrapper = retObject ? wrapObject : wrapData;
+      return Array.isArray(value) ? value.map(wrapper) : wrapper(value);
+    }
+    module.exports = {
+      STATE: STATE,
+      SUBSCRIPTION: SUBSCRIPTION,
+      AbstractData: AbstractData,
+      Value: Value,
+      ReadOnlyValue: ReadOnlyValue,
+      DeferredValue: DeferredValue,
+      PipeValue: PipeValue,
+      Object: DataObject,
+      Slot: Slot,
+      KeyObjectMap: KeyObjectMap,
+      ReadOnlyDataset: ReadOnlyDataset,
+      Dataset: Dataset,
+      DatasetWrapper: DatasetWrapper,
+      devWrap: devWrap,
+      devUnwrap: devUnwrap,
+      isEqual: isEqual,
+      chainValueFactory: chainValueFactory,
+      isConnected: isConnected,
+      getDatasetDelta: getDatasetDelta,
+      ResolveAdapter: ResolveAdapter,
+      createResolveFunction: createResolveFunction,
+      resolveValue: resolveValue,
+      resolveObject: resolveObject,
+      resolveDataset: resolveDataset,
+      wrapData: wrapData,
+      wrapObject: wrapObject,
+      wrap: wrap
+    };
+  },
+  "3.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var hasOwnProperty = Object.prototype.hasOwnProperty;
+    var values = basis.object.values;
+    var STATE_EXISTS = {};
+    var STATE = {
+      priority: [],
+      values: {},
+      add: function(state, order) {
+        var name = state;
+        var value = state.toLowerCase();
+        STATE[name] = value;
+        STATE_EXISTS[value] = name;
+        this.values[value] = name;
+        if (order) order = this.priority.indexOf(order); else order = -1;
+        if (order == -1) this.priority.push(value); else this.priority.splice(order, 0, value);
+      },
+      getList: function() {
+        return values(STATE_EXISTS);
+      },
+      isValid: function(value) {
+        return hasOwnProperty.call(STATE_EXISTS, value);
+      }
+    };
+    STATE.add("READY");
+    STATE.add("DEPRECATED");
+    STATE.add("UNDEFINED");
+    STATE.add("ERROR");
+    STATE.add("PROCESSING");
+    module.exports = STATE;
+  },
+  "4.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var subscriptionConfig = {};
+    var subscriptionSeed = 1;
+    var maskConfig = {};
+    function mixFunctions(fnA, fnB) {
+      return function() {
+        fnA.apply(this, arguments);
+        fnB.apply(this, arguments);
+      };
+    }
+    var SUBSCRIPTION = {
+      NONE: 0,
+      ALL: 0,
+      add: function(name, handler, action) {
+        subscriptionConfig[subscriptionSeed] = {
+          handler: handler,
+          action: action
+        };
+        SUBSCRIPTION[name] = subscriptionSeed;
+        SUBSCRIPTION.ALL |= subscriptionSeed;
+        subscriptionSeed <<= 1;
+      },
+      addProperty: function(propertyName, eventName) {
+        var handler = {};
+        handler[eventName || propertyName + "Changed"] = function(object, oldValue) {
+          if (oldValue) SUBSCRIPTION.unlink(propertyName, object, oldValue);
+          if (object[propertyName]) SUBSCRIPTION.link(propertyName, object, object[propertyName]);
+        };
+        this.add(propertyName.toUpperCase(), handler, function(fn, object) {
+          if (object[propertyName]) fn(propertyName, object, object[propertyName]);
+        });
+      },
+      getMaskConfig: function(mask) {
+        var config = maskConfig[mask];
+        if (!config) {
+          var actions = [];
+          var handler = {};
+          var idx = 1;
+          config = maskConfig[mask] = {
+            actions: actions,
+            handler: handler
+          };
+          while (mask) {
+            if (mask & 1) {
+              var cfg = subscriptionConfig[idx];
+              actions.push(cfg.action);
+              for (var key in cfg.handler) handler[key] = handler[key] ? mixFunctions(handler[key], cfg.handler[key]) : cfg.handler[key];
+            }
+            idx <<= 1;
+            mask >>= 1;
+          }
+        }
+        return config;
+      },
+      link: function(type, from, to) {
+        var subscriberId = type + from.basisObjectId;
+        var subscribers = to.subscribers_;
+        if (!subscribers) subscribers = to.subscribers_ = {};
+        if (!subscribers[subscriberId]) {
+          subscribers[subscriberId] = from;
+          var count = to.subscriberCount += 1;
+          if (count == 1) to.emit_subscribersChanged(+1);
+        } else {
+          basis.dev.warn("Attempt to add duplicate subscription");
+        }
+      },
+      unlink: function(type, from, to) {
+        var subscriberId = type + from.basisObjectId;
+        var subscribers = to.subscribers_;
+        if (subscribers && subscribers[subscriberId]) {
+          delete subscribers[subscriberId];
+          var count = to.subscriberCount -= 1;
+          if (count == 0) {
+            to.emit_subscribersChanged(-1);
+            to.subscribers_ = null;
+          }
+        } else {
+          basis.dev.warn("Trying remove non-exists subscription");
+        }
+      },
+      subscribe: function(object, mask) {
+        var config = this.getMaskConfig(mask);
+        for (var i = 0, action; action = config.actions[i]; i++) action(SUBSCRIPTION.link, object);
+        object.addHandler(config.handler);
+      },
+      unsubscribe: function(object, mask) {
+        var config = this.getMaskConfig(mask);
+        for (var i = 0, action; action = config.actions[i++]; ) action(SUBSCRIPTION.unlink, object);
+        object.removeHandler(config.handler);
+      },
+      changeSubscription: function(object, oldSubscriptionType, newSubscriptionType) {
+        var delta = oldSubscriptionType ^ newSubscriptionType;
+        if (delta) {
+          var curConfig = SUBSCRIPTION.getMaskConfig(oldSubscriptionType);
+          var newConfig = SUBSCRIPTION.getMaskConfig(newSubscriptionType);
+          object.removeHandler(curConfig.handler);
+          object.addHandler(newConfig.handler);
+          var idx = 1;
+          while (delta) {
+            if (delta & 1) {
+              var cfg = subscriptionConfig[idx];
+              if (oldSubscriptionType & idx) cfg.action(SUBSCRIPTION.unlink, object); else cfg.action(SUBSCRIPTION.link, object);
+            }
+            idx <<= 1;
+            delta >>= 1;
+          }
+        }
+      }
+    };
+    module.exports = SUBSCRIPTION;
+  },
+  "5.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var NULL_OBJECT = {};
+    function resolveAdapterProxy() {
+      this.fn.call(this.context, this.source);
+    }
+    var ResolveAdapter = function(context, fn, source, handler) {
+      this.context = context;
+      this.fn = fn;
+      this.source = source;
+      this.handler = handler;
+    };
+    ResolveAdapter.prototype = {
+      context: null,
+      fn: null,
+      source: null,
+      handler: null,
+      next: null,
+      attach: function() {
+        this.source.addHandler(this.handler, this);
+      },
+      detach: function() {
+        this.source.removeHandler(this.handler, this);
+      }
+    };
+    var BBResolveAdapter = function() {
+      ResolveAdapter.apply(this, arguments);
+    };
+    BBResolveAdapter.prototype = new ResolveAdapter;
+    BBResolveAdapter.prototype.attach = function(destroyCallback) {
+      this.source.bindingBridge.attach(this.source, this.handler, this, destroyCallback);
+    };
+    BBResolveAdapter.prototype.detach = function() {
+      this.source.bindingBridge.detach(this.source, this.handler, this);
+    };
+    var DEFAULT_CHANGE_ADAPTER_HANDLER = function() {
+      this.fn.call(this.context, this.source);
+    };
+    var DEFAULT_DESTROY_ADAPTER_HANDLER = function() {
+      this.fn.call(this.context, null);
+    };
+    var RESOLVEVALUE_DESTROY_ADAPTER_HANDLER = function() {
+      this.fn.call(this.context, resolveValue(NULL_OBJECT, null, this.source.bindingBridge.get(this.source)));
+    };
+    function createResolveFunction(Class) {
+      return function resolve(context, fn, source, property, factoryContext) {
+        var oldAdapter = context[property] || null;
+        var newAdapter = null;
+        if (fn !== resolveAdapterProxy && typeof source == "function") source = source.call(factoryContext || context, factoryContext || context);
+        if (source && source.bindingBridge) {
+          if (!oldAdapter || oldAdapter.source !== source) newAdapter = new BBResolveAdapter(context, fn, source, DEFAULT_CHANGE_ADAPTER_HANDLER); else newAdapter = oldAdapter;
+          source = resolve(newAdapter, resolveAdapterProxy, source.bindingBridge.get(source), "next");
+        }
+        if (source instanceof Class == false) source = null;
+        if (property && oldAdapter !== newAdapter) {
+          var cursor = oldAdapter;
+          while (cursor) {
+            var adapter = cursor;
+            adapter.detach();
+            cursor = adapter.next;
+            adapter.next = null;
+          }
+          if (newAdapter) newAdapter.attach(DEFAULT_DESTROY_ADAPTER_HANDLER);
+          context[property] = newAdapter;
+        }
+        return source;
+      };
+    }
+    function resolveValue(context, fn, source, property, factoryContext) {
+      var oldAdapter = context[property] || null;
+      var newAdapter = null;
+      if (source && fn !== resolveAdapterProxy && basis.fn.isFactory(source)) source = source.call(factoryContext || context, factoryContext || context);
+      if (source && source.bindingBridge) {
+        if (!oldAdapter || oldAdapter.source !== source) newAdapter = new BBResolveAdapter(context, fn, source, DEFAULT_CHANGE_ADAPTER_HANDLER); else newAdapter = oldAdapter;
+        source = resolveValue(newAdapter, resolveAdapterProxy, source.bindingBridge.get(source), "next");
+      }
+      if (property && oldAdapter !== newAdapter) {
+        var cursor = oldAdapter;
+        while (cursor) {
+          var adapter = cursor;
+          adapter.detach();
+          cursor = adapter.next;
+          adapter.next = null;
+        }
+        if (newAdapter) newAdapter.attach(RESOLVEVALUE_DESTROY_ADAPTER_HANDLER);
+        context[property] = newAdapter;
+      }
+      return source;
+    }
+    module.exports = {
+      DEFAULT_CHANGE_ADAPTER_HANDLER: DEFAULT_CHANGE_ADAPTER_HANDLER,
+      DEFAULT_DESTROY_ADAPTER_HANDLER: DEFAULT_DESTROY_ADAPTER_HANDLER,
+      ResolveAdapter: ResolveAdapter,
+      BBResolveAdapter: BBResolveAdapter,
+      createResolveFunction: createResolveFunction,
+      resolveValue: resolveValue
+    };
+  },
+  "6.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var namespace = "basis.event";
+    var Class = basis.Class;
+    var NULL_HANDLER = {};
+    var events = {};
+    var warnOnDestroyWhileDestroing = function() {
+      basis.dev.warn("Invoke `destroy` method is prohibited during object destroy.");
+    };
+    var warnOnDestroy = function() {
+      basis.dev.warn("Object had been destroyed before. Destroy method must not be called more than once.");
+    };
+    function createDispatcher(eventName) {
+      var eventFunction = events[eventName];
+      if (!eventFunction) {
+        eventFunction = function() {
+          var cursor = this;
+          var args;
+          var fn;
+          while (cursor = cursor.handler) {
+            fn = cursor.callbacks[eventName];
+            if (typeof fn == "function") {
+              if (!args) {
+                args = [ this ];
+                for (var i = 0; i < arguments.length; i++) args.push(arguments[i]);
+              }
+              fn.apply(cursor.context || this, args);
+            }
+            fn = cursor.callbacks["*"];
+            if (typeof fn == "function") {
+              if (!args) {
+                args = [ this ];
+                for (var i = 0; i < arguments.length; i++) args.push(arguments[i]);
+              }
+              fn.call(cursor.context || this, {
+                sender: this,
+                type: eventName,
+                args: args
+              });
+            }
+          }
+          if (this.debug_emit) {
+            args = [];
+            for (var i = 0; i < arguments.length; i++) args.push(arguments[i]);
+            this.debug_emit({
+              sender: this,
+              type: eventName,
+              args: args
+            });
+          }
+        };
+        eventFunction = (new Function('return {"' + namespace + ".events." + eventName + '":\n\n      ' + "function(" + basis.array(arguments, 1).join(", ") + "){" + eventFunction.toString().replace(/\beventName\b/g, '"' + eventName + '"').replace(/^function[^(]*\(\)[^{]*\{|\}$/g, "") + "}" + '\n\n}["' + namespace + ".events." + eventName + '"];'))();
+        events[eventName] = eventFunction;
+      }
+      return eventFunction;
+    }
+    function createHandler(events, eventCallback) {
+      var handler = {
+        events: []
+      };
+      if (events) {
+        events = String(events).trim().split(/\s+|\s*,\s*/).sort();
+        handler = {
+          events: events
+        };
+        for (var i = 0, eventName; eventName = events[i]; i++) if (eventName != "destroy") handler[eventName] = eventCallback;
+      }
+      return handler;
+    }
+    var Emitter = Class(null, {
+      className: namespace + ".Emitter",
+      extendConstructor_: true,
+      propertyDescriptors: Class.customExtendProperty({
+        basisObjectId: true,
+        propertyDescriptors: false,
+        handler: false,
+        listen: false
+      }, function(result, extension) {
+        for (var property in extension) {
+          var value = extension[property];
+          if (value === true || value == "<static>") value = {
+            isStatic: true
+          }; else if (value === false) value = {
+            isPrivate: true
+          }; else if (typeof value == "string") value = {
+            events: value
+          };
+          result[property] = value;
+        }
+      }),
+      handler: null,
+      emit_destroy: createDispatcher("destroy"),
+      listen: Class.nestedExtendProperty(),
+      debug_handlers: function() {
+        var result = [];
+        var cursor = this;
+        while (cursor = cursor.handler) result.push([ cursor.callbacks, cursor.context ]);
+        return result;
+      },
+      debug_emit: null,
+      init: function() {
+        if (this.handler && !this.handler.callbacks) this.handler = {
+          callbacks: this.handler,
+          context: this,
+          handler: null
+        };
+      },
+      addHandler: function(callbacks, context) {
+        if (!callbacks) basis.dev.warn(namespace + ".Emitter#addHandler: callbacks is not an object (", callbacks, ")");
+        context = context || this;
+        var cursor = this;
+        while (cursor = cursor.handler) {
+          if (cursor.callbacks === callbacks && cursor.context === context) {
+            basis.dev.warn(namespace + ".Emitter#addHandler: add duplicate event callbacks", callbacks, "to Emitter instance:", this);
+            break;
+          }
+        }
+        this.handler = {
+          callbacks: callbacks,
+          context: context,
+          handler: this.handler
+        };
+      },
+      removeHandler: function(callbacks, context) {
+        if (this.destroy === warnOnDestroy) return;
+        var cursor = this;
+        var prev;
+        context = context || this;
+        while (prev = cursor, cursor = cursor.handler) if (cursor.callbacks === callbacks && cursor.context === context) {
+          cursor.callbacks = NULL_HANDLER;
+          prev.handler = cursor.handler;
+          return;
+        }
+        basis.dev.warn(namespace + ".Emitter#removeHandler: no handler removed");
+      },
+      destroy: function() {
+        this.destroy = warnOnDestroyWhileDestroing;
+        this.emit_destroy();
+        this.handler = null;
+        this.destroy = warnOnDestroy;
+      }
+    });
+    module.exports = {
+      create: createDispatcher,
+      createHandler: createHandler,
+      events: events,
+      Emitter: Emitter
+    };
+  },
+  "1k.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Node = basis.require("./7.js").Node;
+    module.exports = Node.subclass({
+      active: basis.PROXY,
+      template: basis.template.get(".6"),
+      binding: {
+        content: "satellite:"
+      }
+    });
+  },
+  "v.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var basisEvent = basis.require("./6.js");
+    var Emitter = basisEvent.Emitter;
+    var createEvent = basisEvent.create;
+    var STATE = basis.require("./3.js");
+    var SUBSCRIPTION = basis.require("./4.js");
+    var resolveValue = basis.require("./5.js").resolveValue;
+    var PROXY = basis.PROXY;
+    var ABSTRACTDATA_ACTIVE_SYNC_HANDLER = {
+      subscribersChanged: function(host) {
+        this.set(host.subscriberCount > 0);
+      }
+    };
+    function callSyncAction(object) {
+      var syncResult = object.syncAction();
+      if (syncResult && typeof syncResult.then == "function") {
+        var syncAction = object.syncAction;
+        if (object.state != STATE.PROCESSING) object.setState(STATE.PROCESSING);
+        syncResult.then(function() {
+          if (object.syncAction === syncAction && object.state == STATE.PROCESSING) object.setState(STATE.READY);
+        }, function(e) {
+          if (object.syncAction === syncAction && object.state == STATE.PROCESSING) object.setState(STATE.ERROR, e);
+        });
+      }
+    }
+    var AbstractData = Emitter.subclass({
+      className: "basis.data.AbstractData",
+      propertyDescriptors: {
+        state: "stateChanged",
+        active: "activeChanged",
+        subscriberCount: "subscribersChanged",
+        subscribeTo: false,
+        syncAction: false,
+        syncEvents: false
+      },
+      state: STATE.UNDEFINED,
+      stateRA_: null,
+      emit_stateChanged: createEvent("stateChanged", "oldState"),
+      active: false,
+      activeRA_: null,
+      emit_activeChanged: createEvent("activeChanged"),
+      subscribeTo: SUBSCRIPTION.NONE,
+      subscriberCount: 0,
+      subscribers_: null,
+      emit_subscribersChanged: createEvent("subscribersChanged", "delta"),
+      syncEvents: basis.Class.oneFunctionProperty(function() {
+        if (this.isSyncRequired()) callSyncAction(this);
+      }, {
+        stateChanged: true,
+        subscribersChanged: true
+      }),
+      syncAction: null,
+      init: function() {
+        Emitter.prototype.init.call(this);
+        if (this.active) {
+          if (this.active === PROXY) {
+            this.active = new basis.Token(this.subscriberCount > 0);
+            this.addHandler(ABSTRACTDATA_ACTIVE_SYNC_HANDLER, this.active);
+          }
+          this.active = !!resolveValue(this, this.setActive, this.active, "activeRA_");
+          if (this.active) this.addHandler(SUBSCRIPTION.getMaskConfig(this.subscribeTo).handler);
+        }
+        if (this.state != STATE.UNDEFINED) {
+          var state = this.state;
+          if (typeof this.state != "string") state = resolveValue(this, this.setState, state, "stateRA_");
+          if (state && !STATE.isValid(state)) {
+            basis.dev.error("Wrong value for state (value has been ignored and state set to STATE.UNDEFINED)", state);
+            state = false;
+          }
+          this.state = state || STATE.UNDEFINED;
+        }
+        var syncAction = this.syncAction;
+        if (syncAction) {
+          this.syncAction = null;
+          this.setSyncAction(syncAction);
+        }
+      },
+      setState: function(state, data) {
+        state = resolveValue(this, this.setState, state, "stateRA_") || STATE.UNDEFINED;
+        var stateCode = String(state);
+        if (!STATE.isValid(stateCode)) {
+          basis.dev.error("Wrong value for state (value has been ignored)", stateCode);
+          return false;
+        }
+        if (this.stateRA_ && data === undefined) data = state.data;
+        if (this.state != stateCode || this.state.data != data) {
+          var oldState = this.state;
+          this.state = Object(stateCode);
+          this.state.data = data;
+          this.emit_stateChanged(oldState);
+          return true;
+        }
+        return false;
+      },
+      deprecate: function() {
+        if (this.state != STATE.PROCESSING) this.setState(STATE.DEPRECATED);
+      },
+      setActive: function(isActive) {
+        var proxyToken = this.activeRA_ && this.activeRA_.proxyToken;
+        if (isActive === PROXY) {
+          if (!proxyToken) {
+            proxyToken = new basis.Token(this.subscriberCount > 0);
+            this.addHandler(ABSTRACTDATA_ACTIVE_SYNC_HANDLER, proxyToken);
+          }
+          isActive = proxyToken;
+        } else {
+          if (proxyToken && isActive !== proxyToken) {
+            this.removeHandler(ABSTRACTDATA_ACTIVE_SYNC_HANDLER, proxyToken);
+            proxyToken = null;
+          }
+        }
+        isActive = !!resolveValue(this, this.setActive, isActive, "activeRA_");
+        if (proxyToken && this.activeRA_) this.activeRA_.proxyToken = proxyToken;
+        if (this.active != isActive) {
+          this.active = isActive;
+          this.emit_activeChanged();
+          if (isActive) SUBSCRIPTION.subscribe(this, this.subscribeTo); else SUBSCRIPTION.unsubscribe(this, this.subscribeTo);
+          return true;
+        }
+        return false;
+      },
+      setSubscription: function(subscriptionType) {
+        var curSubscriptionType = this.subscribeTo;
+        var newSubscriptionType = subscriptionType & SUBSCRIPTION.ALL;
+        var delta = curSubscriptionType ^ newSubscriptionType;
+        if (delta) {
+          this.subscribeTo = newSubscriptionType;
+          if (this.active) SUBSCRIPTION.changeSubscription(this, curSubscriptionType, newSubscriptionType);
+          return true;
+        }
+        return false;
+      },
+      isSyncRequired: function() {
+        return this.subscriberCount > 0 && (this.state == STATE.UNDEFINED || this.state == STATE.DEPRECATED);
+      },
+      setSyncAction: function(syncAction) {
+        var oldAction = this.syncAction;
+        if (typeof syncAction != "function") syncAction = null;
+        this.syncAction = syncAction;
+        if (syncAction) {
+          if (!oldAction) this.addHandler(this.syncEvents);
+          if (this.isSyncRequired()) callSyncAction(this);
+        } else {
+          if (oldAction) this.removeHandler(this.syncEvents);
+        }
+      },
+      destroy: function() {
+        Emitter.prototype.destroy.call(this);
+        if (this.active) {
+          var config = SUBSCRIPTION.getMaskConfig(this.subscribeTo);
+          for (var i = 0, action; action = config.actions[i]; i++) action(SUBSCRIPTION.unlink, this);
+        }
+        if (this.activeRA_) resolveValue(this, false, false, "activeRA_");
+        if (this.stateRA_) resolveValue(this, false, false, "stateRA_");
+        this.state = STATE.UNDEFINED;
+      }
+    });
+    module.exports = AbstractData;
+  },
+  "m.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    module.exports = {
+      Source: basis.require("./1l.js"),
+      Profile: basis.require("./25.js"),
+      Asset: basis.require("./26.js"),
+      Module: basis.require("./27.js")
+    };
+  },
+  "1l.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Promise = basis.require("./n.js");
+    var entity = basis.require("./o.js");
+    var transport = basis.require("./r.js");
+    var Profile = basis.require("./25.js");
+    var Source = entity.createType({
+      name: "Source",
+      singleton: true,
+      fields: {
+        status: String,
+        progress: Number,
+        online: Boolean,
+        profile: Profile
+      }
+    });
+    var source = Source({});
+    source.setSyncAction(function() {
+      return new Promise(function(resolve) {
+        transport.invoke("getLast", function() {
+          resolve();
+        });
+      });
+    });
+    transport.ns("progress").subscribe(function(data) {
+      basis.dev.log(data);
+      source.update({
+        progress: data
+      });
+    });
+    transport.ns("profile").subscribe(function(data) {
+      basis.dev.log(data);
+      source.update({
+        profile: data
+      });
+    });
+    transport.ns("status").subscribe(function(data) {
+      basis.dev.log(data);
+      source.update({
+        status: data
+      });
+    });
+    module.exports = source;
+  },
+  "n.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var PENDING = "pending";
+    var SEALED = "sealed";
+    var FULFILLED = "fulfilled";
+    var REJECTED = "rejected";
+    var NOOP = function() {};
+    var asyncQueue = [];
+    var asyncTimer;
+    function asyncFlush() {
+      for (var i = 0; i < asyncQueue.length; i++) asyncQueue[i][0](asyncQueue[i][1]);
+      asyncQueue = [];
+      asyncTimer = false;
+    }
+    function asyncCall(callback, arg) {
+      asyncQueue.push([ callback, arg ]);
+      if (!asyncTimer) {
+        asyncTimer = true;
+        basis.nextTick(asyncFlush, 0);
+      }
+    }
+    function invokeResolver(resolver, promise) {
+      function resolvePromise(value) {
+        resolve(promise, value);
+      }
+      function rejectPromise(reason) {
+        reject(promise, reason);
+      }
+      try {
+        resolver(resolvePromise, rejectPromise);
+      } catch (e) {
+        rejectPromise(e);
+      }
+    }
+    function invokeCallback(subscriber) {
+      var owner = subscriber.owner;
+      var settled = owner.state_;
+      var value = owner.data_;
+      var callback = subscriber[settled];
+      var promise = subscriber.then;
+      if (typeof callback === "function") {
+        settled = FULFILLED;
+        try {
+          value = callback(value);
+        } catch (e) {
+          reject(promise, e);
+        }
+      }
+      if (!handleThenable(promise, value)) {
+        if (settled === FULFILLED) resolve(promise, value);
+        if (settled === REJECTED) reject(promise, value);
+      }
+    }
+    function handleThenable(promise, value) {
+      var resolved;
+      try {
+        if (promise === value) throw new TypeError("A promises callback cannot return that same promise.");
+        if (value && (typeof value === "function" || typeof value === "object")) {
+          var then = value.then;
+          if (typeof then === "function") {
+            then.call(value, function(val) {
+              if (!resolved) {
+                resolved = true;
+                if (value !== val) resolve(promise, val); else fulfill(promise, val);
+              }
+            }, function(reason) {
+              if (!resolved) {
+                resolved = true;
+                reject(promise, reason);
+              }
+            });
+            return true;
+          }
+        }
+      } catch (e) {
+        if (!resolved) reject(promise, e);
+        return true;
+      }
+      return false;
+    }
+    function resolve(promise, value) {
+      if (promise === value || !handleThenable(promise, value)) fulfill(promise, value);
+    }
+    function fulfill(promise, value) {
+      if (promise.state_ === PENDING) {
+        promise.state_ = SEALED;
+        promise.data_ = value;
+        asyncCall(publishFulfillment, promise);
+      }
+    }
+    function reject(promise, reason) {
+      if (promise.state_ === PENDING) {
+        promise.state_ = SEALED;
+        promise.data_ = reason;
+        asyncCall(publishRejection, promise);
+      }
+    }
+    function publish(promise) {
+      promise.then_ = promise.then_.forEach(invokeCallback);
+    }
+    function publishFulfillment(promise) {
+      promise.state_ = FULFILLED;
+      publish(promise);
+    }
+    function publishRejection(promise) {
+      promise.state_ = REJECTED;
+      publish(promise);
+    }
+    var Promise = function(resolver) {
+      if (typeof resolver !== "function") throw new TypeError("Promise constructor takes a function argument");
+      if (this instanceof Promise === false) throw new TypeError("Failed to construct 'Promise': Please use the 'new' operator, this object constructor cannot be called as a function.");
+      this.then_ = [];
+      invokeResolver(resolver, this);
+    };
+    Promise.prototype = {
+      constructor: Promise,
+      state_: PENDING,
+      then_: null,
+      data_: undefined,
+      then: function(onFulfillment, onRejection) {
+        var subscriber = {
+          owner: this,
+          then: new this.constructor(NOOP),
+          fulfilled: onFulfillment,
+          rejected: onRejection
+        };
+        if (this.state_ === FULFILLED || this.state_ === REJECTED) {
+          asyncCall(invokeCallback, subscriber);
+        } else {
+          this.then_.push(subscriber);
+        }
+        return subscriber.then;
+      },
+      "catch": function(onRejection) {
+        return this.then(null, onRejection);
+      }
+    };
+    Promise.all = function(promises) {
+      var Class = this;
+      if (!Array.isArray(promises)) throw new TypeError("You must pass an array to Promise.all().");
+      return new Class(function(resolve, reject) {
+        var results = [];
+        var remaining = 0;
+        function resolver(index) {
+          remaining++;
+          return function(value) {
+            results[index] = value;
+            if (!--remaining) resolve(results);
+          };
+        }
+        for (var i = 0, promise; i < promises.length; i++) {
+          promise = promises[i];
+          if (promise && typeof promise.then === "function") promise.then(resolver(i), reject); else results[i] = promise;
+        }
+        if (!remaining) resolve(results);
+      });
+    };
+    Promise.race = function(promises) {
+      var Class = this;
+      if (!Array.isArray(promises)) throw new TypeError("You must pass an array to Promise.race().");
+      return new Class(function(resolve, reject) {
+        for (var i = 0, promise; i < promises.length; i++) {
+          promise = promises[i];
+          if (promise && typeof promise.then === "function") promise.then(resolve, reject); else resolve(promise);
+        }
+      });
+    };
+    Promise.resolve = function(value) {
+      var Class = this;
+      if (value && typeof value === "object" && value.constructor === Class) return value;
+      return new Class(function(resolve) {
+        resolve(value);
+      });
+    };
+    Promise.reject = function(reason) {
+      var Class = this;
+      return new Class(function(resolve, reject) {
+        reject(reason);
+      });
+    };
+    module.exports = Promise;
+  },
+  "o.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var namespace = "basis.entity";
+    var Class = basis.Class;
+    var hasOwnProperty = Object.prototype.hasOwnProperty;
+    var keys = basis.object.keys;
+    var extend = basis.object.extend;
+    var $self = basis.fn.$self;
+    var arrayFrom = basis.array.from;
+    var basisEvent = basis.require("./6.js");
+    var Emitter = basisEvent.Emitter;
+    var createEvent = basisEvent.create;
+    var basisData = basis.require("./2.js");
+    var DataObject = basisData.Object;
+    var Slot = basisData.Slot;
+    var Dataset = basisData.Dataset;
+    var ReadOnlyDataset = basisData.ReadOnlyDataset;
+    var basisDataset = basis.require("./p.js");
+    var Filter = basisDataset.Filter;
+    var Split = basisDataset.Split;
+    var setAccumulateState = Dataset.setAccumulateState;
+    var basisType = basis.require("./q.js");
+    var defineType = basisType.defineType;
+    var getTypeByName = basisType.getTypeByName;
+    var getTypeByNameIfDefined = basisType.getTypeByNameIfDefined;
+    var validateScheme = basisType.validate;
+    var nullableArray = basisType.array.nullable;
+    var nullableDate = basisType.date.nullable;
+    var typeEnum = basisType["enum"];
+    var NULL_INFO = {};
+    var entityTypes = [];
+    var isKeyType = {
+      string: true,
+      number: true
+    };
+    var NumericId = function(value) {
+      return value == null || isNaN(value) ? null : Number(value);
+    };
+    var NumberId = function(value) {
+      return value == null || isNaN(value) ? null : Number(value);
+    };
+    var IntId = function(value) {
+      return value == null || isNaN(value) ? null : parseInt(value, 10);
+    };
+    var StringId = function(value) {
+      return value == null ? null : String(value);
+    };
+    var untitledNames = {};
+    function getUntitledName(name) {
+      untitledNames[name] = untitledNames[name] || 0;
+      return name + untitledNames[name]++;
+    }
+    var namedIndexes = {};
+    var Index = Class(null, {
+      className: namespace + ".Index",
+      items: null,
+      init: function() {
+        this.items = {};
+      },
+      get: function(value, checkType) {
+        var item = hasOwnProperty.call(this.items, value) && this.items[value];
+        if (item && (!checkType || item.entityType === checkType)) return item;
+      },
+      add: function(value, newItem) {
+        if (newItem) {
+          var curItem = this.get(value);
+          if (!curItem) {
+            this.items[value] = newItem;
+            return true;
+          }
+          if (curItem !== newItem) throw "basis.entity: Value `" + value + "` for index is already occupied";
+        }
+      },
+      remove: function(value, item) {
+        if (this.items[value] === item) {
+          delete this.items[value];
+          return true;
+        }
+      },
+      destroy: function() {
+        this.items = null;
+      }
+    });
+    function CalculateField() {
+      var names = arrayFrom(arguments);
+      var calcFn = names.pop();
+      var foo = names[0];
+      var bar = names[1];
+      var baz = names[2];
+      var result;
+      if (typeof calcFn != "function") throw "Last argument for calculate field constructor must be a function";
+      switch (names.length) {
+        case 0:
+          result = function() {
+            return calcFn();
+          };
+          break;
+        case 1:
+          result = function(delta, data, oldValue) {
+            if (foo in delta) return calcFn(data[foo]);
+            return oldValue;
+          };
+          break;
+        case 2:
+          result = function(delta, data, oldValue) {
+            if (foo in delta || bar in delta) return calcFn(data[foo], data[bar]);
+            return oldValue;
+          };
+          break;
+        case 3:
+          result = function(delta, data, oldValue) {
+            if (foo in delta || bar in delta || baz in delta) return calcFn(data[foo], data[bar], data[baz]);
+            return oldValue;
+          };
+          break;
+        default:
+          result = function(delta, data, oldValue) {
+            var changed = false;
+            var args = [];
+            for (var i = 0, name; name = names[i]; i++) {
+              changed = changed || name in delta;
+              args.push(data[name]);
+            }
+            if (changed) return calcFn.apply(null, args);
+            return oldValue;
+          };
+      }
+      result = Function("calcFn", "names", "return " + result.toString().replace(/(foo|bar|baz)/g, function(m, w) {
+        return '"' + names[w == "foo" ? 0 : w == "bar" ? 1 : 2] + '"';
+      }).replace(/\[\"([^"]+)\"\]/g, ".$1"))(calcFn, names);
+      result.args = names;
+      result.calc = result;
+      return result;
+    }
+    function ConcatStringField(name) {
+      if (arguments.length == 1) return function(delta, data, oldValue) {
+        if (name in delta) return data[name] != null ? String(data[name]) : null;
+        return oldValue;
+      };
+      return CalculateField.apply(null, arrayFrom(arguments).concat(function() {
+        for (var i = arguments.length - 1; i >= 0; i--) if (arguments[i] == null) return null;
+        return Array.prototype.join.call(arguments, "-");
+      }));
+    }
+    function getDelta(inserted, deleted) {
+      var delta = {};
+      var result;
+      if (inserted && inserted.length) result = delta.inserted = inserted;
+      if (deleted && deleted.length) result = delta.deleted = deleted;
+      if (result) return delta;
+    }
+    function setAndDestroyRemoved(data) {
+      var itemsToDelete = basis.object.slice(this.items_);
+      var itemsToInsert = {};
+      var autoInserted = [];
+      var inserted = [];
+      var deleted = [];
+      var delta;
+      var entity;
+      data = arrayFrom(data);
+      setAccumulateState(true);
+      for (var i = 0, item; item = data[i]; i++) {
+        entity = this.wrapper(item);
+        if (entity) {
+          if (itemsToDelete[entity.basisObjectId]) itemsToDelete[entity.basisObjectId] = null; else itemsToInsert[entity.basisObjectId] = entity;
+        }
+      }
+      setAccumulateState(false);
+      for (var basisObjectId in itemsToInsert) if (this.items_[basisObjectId]) autoInserted.push(itemsToInsert[basisObjectId]); else inserted.push(itemsToInsert[basisObjectId]);
+      for (var basisObjectId in itemsToDelete) if (itemsToDelete[basisObjectId]) deleted.push(itemsToDelete[basisObjectId]);
+      if (delta = getDelta(inserted, deleted)) {
+        if (this instanceof EntitySet) {
+          var listenHandler = this.listen.item;
+          if (listenHandler) {
+            if (delta.inserted) for (var i = 0, item; item = delta.inserted[i]; i++) item.addHandler(listenHandler, this);
+            if (delta.deleted) for (var i = 0, item; item = delta.deleted[i]; i++) item.removeHandler(listenHandler, this);
+          }
+        }
+        this.emit_itemsChanged(delta);
+      }
+      if (deleted.length) {
+        setAccumulateState(true);
+        for (var i = 0, item; item = deleted[i]; i++) item.destroy();
+        setAccumulateState(false);
+      }
+      inserted = inserted.concat(autoInserted);
+      return inserted.length ? inserted : null;
+    }
+    var EntitySetMixin = function(super_) {
+      return {
+        name: null,
+        wrapper: $self,
+        setAndDestroyRemoved: setAndDestroyRemoved,
+        destroy: function() {
+          super_.destroy.call(this);
+          this.name = null;
+          this.wrapper = null;
+        }
+      };
+    };
+    var WRAPPED_MARKER = "wrapped" + basis.genUID();
+    var ENTITYSET_WRAP_METHOD = function(superClass, method) {
+      return function(data) {
+        if (data && !Array.isArray(data)) data = [ data ];
+        var needToWrap = data && !data[WRAPPED_MARKER];
+        if (needToWrap) {
+          if (this.localId) {
+            var items = this.getItems().slice();
+            data = data.map(function(newItem) {
+              for (var i = 0; i < items.length; i++) if (this.localId(newItem, items[i])) return this.wrapper(newItem, items[i]);
+              newItem = this.wrapper(newItem);
+              items.push(newItem);
+              return newItem;
+            }, this);
+          } else {
+            data = data.map(this.wrapper);
+          }
+          data[WRAPPED_MARKER] = true;
+        }
+        var delta = superClass.prototype[method].call(this, data);
+        if (needToWrap) {
+          data[WRAPPED_MARKER] = false;
+          if (this.localId && delta && delta.deleted) {
+            setAccumulateState(true);
+            for (var i = 0, item; item = delta.deleted[i]; i++) if (item.root) item.destroy();
+            setAccumulateState(false);
+          }
+        }
+        return delta;
+      };
+    };
+    var ENTITYSET_INIT_METHOD = function(superClass, name) {
+      return function() {
+        if (!this.name) this.name = getUntitledName(name);
+        superClass.prototype.init.call(this);
+      };
+    };
+    var ReadOnlyEntitySet = Class(ReadOnlyDataset, EntitySetMixin, {
+      className: namespace + ".ReadOnlyEntitySet",
+      init: ENTITYSET_INIT_METHOD(ReadOnlyDataset, "ReadOnlyEntitySet")
+    });
+    var EntitySet = Class(Dataset, EntitySetMixin, {
+      className: namespace + ".EntitySet",
+      init: ENTITYSET_INIT_METHOD(Dataset, "EntitySet"),
+      add: ENTITYSET_WRAP_METHOD(Dataset, "add"),
+      remove: ENTITYSET_WRAP_METHOD(Dataset, "remove"),
+      set: ENTITYSET_WRAP_METHOD(Dataset, "set"),
+      setAndDestroyRemoved: function(data) {
+        if (this.localId) return this.set(data);
+        if (!this.itemCount) return this.add(data);
+        if (!data || !data.length) return this.clear();
+        return setAndDestroyRemoved.call(this, data);
+      },
+      clear: function() {
+        var delta = Dataset.prototype.clear.call(this);
+        if (this.localId && delta && delta.deleted) {
+          setAccumulateState(true);
+          for (var i = 0, item; item = delta.deleted[i]; i++) item.destroy();
+          setAccumulateState(false);
+        }
+        return delta;
+      }
+    });
+    var EntityCollection = Class(Filter, EntitySetMixin, {
+      className: namespace + ".EntityCollection",
+      init: ENTITYSET_INIT_METHOD(Filter, "EntityCollection")
+    });
+    var EntityGrouping = Class(Split, {
+      className: namespace + ".EntityGrouping",
+      name: null,
+      subsetClass: ReadOnlyEntitySet,
+      init: ENTITYSET_INIT_METHOD(Split, "EntityGrouping"),
+      getSubset: function(object, autocreate) {
+        var group = Split.prototype.getSubset.call(this, object, autocreate);
+        if (group && group.dataset) group.dataset.wrapper = this.wrapper;
+        return group;
+      }
+    });
+    var EntitySetWrapper = function(wrapper, name, options) {
+      function createLocalId(id) {
+        if (typeof id == "string") return function(data, item) {
+          return data[id] == item.data[id];
+        };
+        if (typeof id == "function") return id;
+      }
+      if (this instanceof EntitySetWrapper) {
+        if (!wrapper) wrapper = $self;
+        if (!name || getTypeByNameIfDefined(name)) {
+          if (getTypeByNameIfDefined(name)) basis.dev.warn(namespace + ": Duplicate entity set type name `" + this.name + "`, name ignored");
+          name = getUntitledName("UntitledEntitySetType");
+        }
+        var entitySetType = new EntitySetConstructor({
+          entitySetClass: {
+            className: namespace + ".EntitySet(" + (typeof wrapper == "string" ? wrapper : (wrapper.type || wrapper).name || "UnknownType") + ")",
+            name: "Set of {" + (typeof wrapper == "string" ? wrapper : (wrapper.type || wrapper).name || "UnknownType") + "}",
+            wrapper: wrapper,
+            localId: createLocalId(options && options.localId)
+          }
+        });
+        var EntitySetClass = entitySetType.entitySetClass;
+        var result = function(data, entitySet) {
+          if (data != null) {
+            if (entitySet instanceof EntitySet == false) entitySet = entitySetType.createEntitySet();
+            entitySet.set(data instanceof Dataset ? data.getItems() : arrayFrom(data));
+            return entitySet;
+          } else return null;
+        };
+        if (typeof wrapper == "string") EntitySetClass.prototype.wrapper = getTypeByName(wrapper, EntitySetClass.prototype, "wrapper");
+        defineType(name, result);
+        extend(result, {
+          type: entitySetType,
+          typeName: name,
+          toString: function() {
+            return name + "()";
+          },
+          reader: function(data) {
+            if (Array.isArray(data)) {
+              var wrapper = EntitySetClass.prototype.wrapper;
+              return data.map(wrapper.reader || wrapper);
+            }
+            return data;
+          },
+          extendClass: function(source) {
+            EntitySetClass.extend.call(EntitySetClass, source);
+            return result;
+          },
+          extendReader: function(extReader) {
+            var reader = result.reader;
+            result.reader = function(data) {
+              if (Array.isArray(data)) extReader(data);
+              return reader(data);
+            };
+            return result;
+          },
+          entitySetType: entitySetType,
+          extend: function() {
+            basis.dev.warn("basis.entity: EntitySetType.extend() is deprecated, use EntitySetType.extendClass() instead.");
+            return EntitySetClass.extend.apply(EntitySetClass, arguments);
+          }
+        });
+        basis.dev.warnPropertyAccess(result, "entitySetType", entitySetType, "basis.entity: EntitySetType.entitySetType is deprecated, use EntitySetType.type instead.");
+        return result;
+      }
+    };
+    EntitySetWrapper.className = namespace + ".EntitySetWrapper";
+    var EntitySetConstructor = Class(null, {
+      className: namespace + ".EntitySetConstructor",
+      entitySetClass: EntitySet,
+      extendConstructor_: true,
+      createEntitySet: function() {
+        return new this.entitySetClass;
+      }
+    });
+    var EntityTypeWrapper = function(config) {
+      if (this instanceof EntityTypeWrapper) {
+        var result;
+        if (config.singleton) result = function(data) {
+          var entity = entityType.get();
+          if (entity) {
+            if (data) entity.update(data);
+            entity = basisData.devWrap(entity);
+          } else entity = new EntityClass(data || {});
+          return entity;
+        }; else result = function(data, entity) {
+          if (data != null) {
+            if (!entity || entity.entityType !== entityType) entity = null;
+            if (data === entity || data.entityType === entityType) return data;
+            var idValue;
+            var idField = entityType.idField;
+            if (isKeyType[typeof data]) {
+              if (!idField) {
+                if (entityType.compositeKey) basis.dev.warn("basis.entity: Entity type `" + entityType.name + "` wrapper was invoked with " + typeof data + " value as index, but entity type index is composite and consists of [" + keys(entityType.idFields).join(", ") + "] fields"); else basis.dev.warn("basis.entity: Entity type `" + entityType.name + "` wrapper was invoked with " + typeof data + " value as index, but entity type has no index");
+                return;
+              }
+              if (entity = entityType.index.get(data, entityType)) return entity;
+              idValue = data;
+              data = {};
+              data[idField] = idValue;
+            } else {
+              if (entityType.compositeKey) idValue = entityType.compositeKey(data, data);
+              if (idValue != null) entity = entityType.index.get(idValue, entityType);
+            }
+            if (entity && entity.entityType === entityType) {
+              entity.update(data);
+              entity = basisData.devWrap(entity);
+            } else entity = new EntityClass(data);
+            return entity;
+          }
+        };
+        var entityType = new EntityTypeConstructor(config || {}, result);
+        var EntityClass = entityType.entityClass;
+        var name = entityType.name;
+        defineType(name, result);
+        extend(result, {
+          all: entityType.all,
+          type: entityType,
+          typeName: name,
+          toString: function() {
+            return name + "()";
+          },
+          get: function(data) {
+            return entityType.get(data);
+          },
+          getSlot: function(id, defaults) {
+            return entityType.getSlot(id, defaults);
+          },
+          reader: function(data) {
+            return entityType.reader(data);
+          },
+          readList: function(value, map) {
+            if (!value) return [];
+            if (!Array.isArray(value)) value = [ value ];
+            if (typeof map != "function") map = $self;
+            for (var i = 0; i < value.length; i++) value[i] = result(result.reader(map(value[i], i)));
+            return value;
+          },
+          extendClass: function(source) {
+            EntityClass.extend.call(EntityClass, source);
+            return result;
+          },
+          extendReader: function(extReader) {
+            var reader = result.reader;
+            result.reader = function(data) {
+              if (data && typeof data == "object") extReader(data);
+              return reader(data);
+            };
+            return result;
+          },
+          entityType: entityType,
+          extend: function() {
+            basis.dev.warn("basis.entity: EntityType.extend() is deprecated, use EntityType.extendClass() instead.");
+            return EntityClass.extend.apply(EntityClass, arguments);
+          }
+        });
+        basis.dev.warnPropertyAccess(result, "entityType", entityType, "basis.entity: EntityType.entityType is deprecated, use EntityType.type instead.");
+        return result;
+      }
+    };
+    EntityTypeWrapper.className = namespace + ".EntityTypeWrapper";
+    var fieldDestroyHandlers = {};
+    var dataBuilderFactory = {};
+    var calcFieldWrapper = function(value, oldValue) {
+      basis.dev.warn("Calculate fields are readonly");
+      return oldValue;
+    };
+    var warnCalcReadOnly = function(name) {
+      basis.dev.warn("basis.entity: Attempt to set value for `" + name + "` field was ignored as field is calc (read only)");
+    };
+    function getDataBuilder(defaults, fields, calcs) {
+      var args = [ "has" ];
+      var values = [ hasOwnProperty ];
+      var obj = [];
+      args.push("warnCalcReadOnly");
+      values.push(warnCalcReadOnly);
+      for (var key in defaults) if (hasOwnProperty.call(defaults, key)) {
+        var escapedKey = '"' + key.replace(/"/g, '"') + '"';
+        if (hasOwnProperty.call(calcs, key)) {
+          obj.push(escapedKey + ":" + "has.call(data," + escapedKey + ")" + "?" + "warnCalcReadOnly(" + escapedKey + ")" + ":" + "undefined");
+          continue;
+        }
+        var name = "v" + obj.length;
+        var fname = "f" + obj.length;
+        var defValue = defaults[key];
+        args.push(name, fname);
+        values.push(defValue, fields[key]);
+        var newValueArgument = "has.call(data," + escapedKey + ")" + "?" + "data[" + escapedKey + "]" + ":" + name + (typeof defValue == "function" ? "(data)" : "");
+        var oldValueArgument = defValue !== undefined && typeof defValue !== "function" ? "," + name : "";
+        obj.push(escapedKey + ":" + fname + "(" + newValueArgument + oldValueArgument + ")");
+      }
+      var code = obj.sort().join(",");
+      var fn = dataBuilderFactory[code];
+      if (!fn) fn = dataBuilderFactory[code] = new Function(args, "return function(data){" + "return {" + code + "};" + "};");
+      return fn.apply(null, values);
+    }
+    function addField(entityType, name, config) {
+      if (typeof config == "string" || Array.isArray(config) || typeof config == "function" && config.calc !== config) {
+        config = {
+          type: config
+        };
+      } else {
+        config = config ? basis.object.slice(config) : {};
+      }
+      if ("type" in config) {
+        if (typeof config.type == "string") config.type = getTypeByName(config.type, entityType.fields, name);
+        if (Array.isArray(config.type)) {
+          var values = config.type.slice();
+          config.type = typeEnum(values);
+          if (values.indexOf(config.defValue) == -1) config.defValue = config.type.DEFAULT_VALUE;
+        }
+        if (config.type === Array) {
+          config.type = nullableArray;
+          config.defValue = null;
+        }
+        if (config.type === Date) {
+          config.type = nullableDate;
+          config.defValue = null;
+        }
+        if (typeof config.type != "function") {
+          basis.dev.warn("EntityType " + entityType.name + ": Field wrapper for `" + name + "` field is not a function. Field wrapper has been ignored. Wrapper: ", config.type);
+          config.type = null;
+        }
+      }
+      var wrapper = config.type || $self;
+      if (config.id || config.index || [ NumericId, NumberId, IntId, StringId ].indexOf(wrapper) != -1) entityType.idFields[name] = config;
+      if (config.calc) {
+        addCalcField(entityType, name, config.calc);
+        entityType.fields[name] = calcFieldWrapper;
+      } else {
+        entityType.fields[name] = wrapper;
+        entityType.aliases[name] = name;
+      }
+      if (!("defValue" in config) && typeof config.type === "function" && "DEFAULT_VALUE" in config.type) config.defValue = config.type.DEFAULT_VALUE;
+      if ("defValue" in config) entityType.defaults[name] = config.defValue; else if ("DEFAULT_VALUE" in wrapper) entityType.defaults[name] = wrapper.DEFAULT_VALUE; else entityType.defaults[name] = wrapper();
+      if (!fieldDestroyHandlers[name]) fieldDestroyHandlers[name] = {
+        destroy: function() {
+          this.set(name, null);
+        }
+      };
+    }
+    function addFieldAlias(entityType, alias, name) {
+      if (name in entityType.fields == false) {
+        basis.dev.warn("basis.entity: Can't add alias `" + alias + "` for non-exists field `" + name + "`");
+        return;
+      }
+      if (name in entityType.calcMap) {
+        basis.dev.warn("basis.entity: Can't add alias `" + alias + "` for calc field `" + name + "`");
+        return;
+      }
+      if (alias in entityType.aliases) {
+        basis.dev.warn("basis.entity: Alias `" + alias + "` already exists");
+        return;
+      }
+      entityType.aliases[alias] = name;
+    }
+    function addCalcField(entityType, name, wrapper) {
+      var calcs = entityType.calcs;
+      var deps = entityType.deps;
+      var calcArgs = wrapper.args || [];
+      var calcConfig = {
+        args: calcArgs,
+        wrapper: wrapper
+      };
+      var before = entityType.calcs.length;
+      var after = 0;
+      if (calcArgs) for (var i = 0, calc; calc = calcs[i]; i++) if (calcArgs.indexOf(calc.key) != -1) after = i + 1;
+      if (name) {
+        calcConfig.key = name;
+        entityType.calcMap[name] = calcConfig;
+        for (var i = 0, calc; calc = calcs[i]; i++) if (calc.args.indexOf(name) != -1) {
+          before = i;
+          break;
+        }
+        if (after > before) {
+          basis.dev.warn("Can't add calculate field `" + name + "`, because recursion");
+          return;
+        }
+        deps[name] = calcArgs.reduce(function(res, ref) {
+          var items = deps[ref] || [ ref ];
+          for (var i = 0; i < items.length; i++) basis.array.add(res, items[i]);
+          return res;
+        }, []);
+        for (var ref in deps) {
+          var idx = deps[ref].indexOf(name);
+          if (idx != -1) Array.prototype.splice.apply(deps[ref], [ idx, 1 ].concat(deps[name]));
+        }
+      } else {
+        before = after;
+      }
+      calcs.splice(Math.min(before, after), 0, calcConfig);
+    }
+    function getFieldGetter(name) {
+      return function(real) {
+        if (real && this.modified && name in this.modified) return this.modified[name];
+        return this.data[name];
+      };
+    }
+    function getFieldSetter(name) {
+      return function(value, rollback) {
+        return this.set(name, value, rollback);
+      };
+    }
+    var EntityTypeConstructor = Class(null, {
+      className: namespace + ".EntityType",
+      wrapper: null,
+      all: null,
+      fields: null,
+      idField: null,
+      idFields: null,
+      compositeKey: null,
+      idProperty: null,
+      defaults: null,
+      calcs: null,
+      calcMap: null,
+      aliases: null,
+      slots: null,
+      singleton: false,
+      index: null,
+      indexes: null,
+      entityClass: null,
+      init: function(config, wrapper) {
+        this.name = config.name;
+        if (!this.name || getTypeByNameIfDefined(this.name)) {
+          if (getTypeByNameIfDefined(this.name)) basis.dev.warn(namespace + ": Duplicate type name `" + this.name + "`, name ignored");
+          this.name = getUntitledName("UntitledEntityType");
+        }
+        this.fields = {};
+        this.calcs = [];
+        this.calcMap = {};
+        this.deps = {};
+        this.idFields = {};
+        this.defaults = {};
+        this.aliases = {};
+        this.slots = {};
+        var index = config.index;
+        if (index) {
+          if (index instanceof Index) this.index = index; else basis.dev.warn("index must be instanceof basis.entity.Index");
+        }
+        this.wrapper = wrapper;
+        if ("all" in config == false || config.all || config.singleton) {
+          this.all = new ReadOnlyEntitySet(config.all);
+          this.all.wrapper = wrapper;
+          this.all.set = function(data) {
+            if (Array.isArray(data)) data = data.map(function(item) {
+              return item instanceof EntityClass === false ? wrapper.reader(item) : item;
+            });
+            return setAndDestroyRemoved.call(this, data);
+          }.bind(this.all);
+        }
+        this.singleton = !!config.singleton;
+        if (this.singleton) {
+          var singletonInstance;
+          this.get = function() {
+            return singletonInstance;
+          };
+          this.all.addHandler({
+            itemsChanged: function(sender, delta) {
+              singletonInstance = delta.inserted ? delta.inserted[0] : null;
+            }
+          }, this);
+        }
+        for (var key in config.fields) addField(this, key, config.fields[key]);
+        for (var key in config.aliases) addFieldAlias(this, key, config.aliases[key]);
+        if (config.constrains) config.constrains.forEach(function(item) {
+          addCalcField(this, null, item);
+        }, this);
+        if (!this.calcs.length) this.calcs = null;
+        var idFields = keys(this.idFields);
+        var indexes = {};
+        if (idFields.length) {
+          for (var field in this.idFields) {
+            var fieldCfg = this.idFields[field];
+            var index = fieldCfg.index;
+            var indexDescriptor;
+            if (!index || index instanceof Index == false) {
+              if (typeof index == "string") {
+                if (index in namedIndexes == false) namedIndexes[index] = new Index;
+                index = namedIndexes[index];
+              } else {
+                if (!this.index) this.index = new Index;
+                index = this.index;
+              }
+            }
+            indexDescriptor = indexes[index.basisObjectId];
+            if (!indexDescriptor) indexDescriptor = indexes[index.basisObjectId] = {
+              index: index,
+              fields: []
+            };
+            indexDescriptor.fields.push(field);
+            this.idFields[field] = indexDescriptor;
+          }
+          if (this.index && this.index.basisObjectId in indexes == false) {
+            basis.dev.warn("basis.entity: entity index is not used for any field, index ignored");
+            this.index = null;
+          }
+          for (var id in indexes) {
+            var indexDescriptor = indexes[id];
+            indexDescriptor.property = "__id__" + id;
+            indexDescriptor.compositeKey = ConcatStringField.apply(null, indexDescriptor.fields);
+            if (indexDescriptor.fields.length == 1) indexDescriptor.idField = indexDescriptor.fields[0];
+          }
+          var indexesKeys = keys(indexes);
+          var primaryIndex = indexes[this.index ? this.index.basisObjectId : indexesKeys[0]];
+          this.index = primaryIndex.index;
+          this.idField = primaryIndex.idField;
+          this.compositeKey = primaryIndex.compositeKey;
+          this.idProperty = primaryIndex.property;
+          this.indexes = indexes;
+        } else {
+          if (this.index) {
+            basis.dev.warn("basis.entity: entity has no any id field, index ignored");
+            this.index = null;
+          }
+        }
+        var initDelta = {};
+        for (var key in this.defaults) initDelta[key] = undefined;
+        if (hasOwnProperty.call(config, "state")) basis.dev.warn("basis.entity: default instance state can't be defined via type config anymore, use Type.extendClass({ state: .. }) instead");
+        var EntityClass = createEntityClass(this, this.all, this.fields, this.slots);
+        this.entityClass = EntityClass;
+        EntityClass.extend({
+          entityType: this,
+          type: wrapper,
+          typeName: this.name,
+          generateData: getDataBuilder(this.defaults, this.fields, this.calcMap),
+          initDelta: initDelta
+        });
+        for (var name in this.fields) {
+          EntityClass.prototype["get_" + name] = getFieldGetter(name);
+          if (this.fields[name] !== calcFieldWrapper) EntityClass.prototype["set_" + name] = getFieldSetter(name);
+        }
+        entityTypes.push(this);
+      },
+      reader: function(data) {
+        var result = {};
+        if (isKeyType[typeof data]) return this.idField ? data : null;
+        if (!data || data == null) return null;
+        for (var key in data) {
+          var fieldKey = this.aliases[key];
+          if (fieldKey) {
+            var reader = this.fields[fieldKey].reader;
+            result[fieldKey] = reader ? reader(data[key]) : data[key];
+          }
+        }
+        return result;
+      },
+      get: function(entityOrData) {
+        var id = this.getId(entityOrData);
+        if (this.index && id != null) return this.index.get(id, this);
+      },
+      getId: function(entityOrData) {
+        if (this.compositeKey && entityOrData != null) {
+          if (isKeyType[typeof entityOrData]) return entityOrData;
+          if (entityOrData && entityOrData.entityType === this) return entityOrData[this.idProperty];
+          if (entityOrData instanceof DataObject) entityOrData = entityOrData.data;
+          if (this.compositeKey) return this.compositeKey(entityOrData, entityOrData);
+        }
+      },
+      getSlot: function(data) {
+        var id = this.getId(data);
+        if (id != null) {
+          var slot = hasOwnProperty.call(this.slots, id) && this.slots[id];
+          if (!slot) {
+            if (isKeyType[typeof data]) {
+              var tmp = {};
+              if (this.idField) tmp[this.idField] = data;
+              data = tmp;
+            }
+            slot = this.slots[id] = new Slot({
+              delegate: this.get(id) || null,
+              data: data
+            });
+          }
+          return slot;
+        }
+      }
+    });
+    function entityWarn(entity, message) {
+      basis.dev.warn("[basis.entity " + entity.entityType.name + "#" + entity.basisObjectId + "] " + message, entity);
+    }
+    var BaseEntity = Class(DataObject, {
+      className: namespace + ".BaseEntity",
+      target: true,
+      setDelegate: function() {},
+      extendConstructor_: false,
+      fieldHandlers_: null,
+      propertyDescriptors: {
+        modified: {
+          nested: true,
+          events: "rollbackUpdate"
+        }
+      },
+      modified: null,
+      emit_rollbackUpdate: createEvent("rollbackUpdate")
+    });
+    var createEntityClass = function(entityType, all, fields, slots) {
+      function calc(entity, delta, rollbackDelta) {
+        var calcs = entityType.calcs;
+        var data = entity.data;
+        var updated = false;
+        try {
+          if (calcs) {
+            for (var i = 0, calc; calc = calcs[i]; i++) {
+              var key = calc.key;
+              var oldValue = data[key];
+              var newValue = calc.wrapper(delta, data, oldValue);
+              if (key && newValue !== oldValue) {
+                delta[key] = oldValue;
+                data[key] = newValue;
+                updated = true;
+              }
+            }
+          }
+          for (var id in entityType.indexes) {
+            var indexDescriptor = entityType.indexes[id];
+            var curId = entity[indexDescriptor.property];
+            var newId = curId;
+            if (indexDescriptor.compositeKey) newId = indexDescriptor.compositeKey(delta, data, curId);
+            if (newId !== curId) {
+              updateIndex(indexDescriptor.index, entity, curId, newId);
+              entity[indexDescriptor.property] = newId;
+            }
+          }
+          return updated;
+        } catch (e) {
+          entityWarn(entity, "(rollback changes) Exception on field calcs: " + (e && e.message || e));
+          for (var key in delta) entity.data[key] = delta[key];
+          if (rollbackDelta && !entity.modified) entity.modified = rollbackDelta;
+        }
+      }
+      function updateIndex(index, entity, curValue, newValue) {
+        if (newValue != null) {
+          index.add(newValue, entity);
+          if (hasOwnProperty.call(slots, newValue)) slots[newValue].setDelegate(entity);
+        }
+        if (curValue != null) {
+          index.remove(curValue, entity);
+          if (hasOwnProperty.call(slots, curValue)) slots[curValue].setDelegate();
+        }
+      }
+      return Class(BaseEntity, {
+        className: entityType.name,
+        syncEvents: {
+          update: true,
+          stateChanged: true,
+          subscribersChanged: true
+        },
+        isSyncRequired: function() {
+          return DataObject.prototype.isSyncRequired.call(this) && (!entityType.idProperty || this[entityType.idProperty] != null);
+        },
+        init: function(data) {
+          this.delegate = null;
+          this.data = this.generateData(data);
+          BaseEntity.prototype.init.call(this);
+          for (var key in data) if (key in fields == false) entityWarn(this, 'Field "' + key + '" is not defined, value has been ignored.');
+          var value;
+          for (var key in this.data) {
+            value = this.data[key];
+            if (value && value !== this && value instanceof Emitter) {
+              value.addHandler(fieldDestroyHandlers[key], this);
+              if (!this.fieldHandlers_) this.fieldHandlers_ = {};
+              this.fieldHandlers_[key] = true;
+            }
+          }
+          calc(this, this.initDelta);
+          if (all) all.emit_itemsChanged({
+            inserted: [ this ]
+          });
+        },
+        toString: function() {
+          return "[object " + this.constructor.className + "(" + this.entityType.name + ")]";
+        },
+        getId: function() {
+          return this[entityType.idProperty];
+        },
+        get: function(key, real) {
+          if (real && this.modified && key in this.modified) return this.modified[key];
+          return this.data[key];
+        },
+        set: function(key, value, rollback, silent_) {
+          var valueWrapper = fields[key];
+          if (!valueWrapper) {
+            entityWarn(this, 'Field "' + key + '" is not defined, value has been ignored.');
+            return false;
+          }
+          var result;
+          var rollbackData = this.modified;
+          if (valueWrapper === nullableArray && rollbackData && key in rollbackData) value = nullableArray(value, rollbackData[key]);
+          var newValue = valueWrapper(value, this.data[key]);
+          var curValue = this.data[key];
+          var valueChanged = newValue !== curValue && (!newValue || !curValue || newValue.constructor !== Date || curValue.constructor !== Date || +newValue !== +curValue);
+          if (valueChanged) updateField : {
+            result = {};
+            if (!entityType.idFields[key]) {
+              if (rollback) {
+                if (!rollbackData) this.modified = rollbackData = {};
+                if (key in rollbackData === false) {
+                  result.rollback = {
+                    key: key,
+                    value: undefined
+                  };
+                  rollbackData[key] = curValue;
+                } else {
+                  if (rollbackData[key] === newValue) {
+                    result.rollback = {
+                      key: key,
+                      value: newValue
+                    };
+                    delete rollbackData[key];
+                    if (!keys(rollbackData).length) this.modified = null;
+                  }
+                }
+              } else {
+                if (rollbackData && key in rollbackData) {
+                  if (rollbackData[key] !== newValue) {
+                    result.rollback = {
+                      key: key,
+                      value: rollbackData[key]
+                    };
+                    rollbackData[key] = newValue;
+                    break updateField;
+                  } else return false;
+                }
+              }
+            }
+            this.data[key] = newValue;
+            if (this.fieldHandlers_ && this.fieldHandlers_[key]) {
+              curValue.removeHandler(fieldDestroyHandlers[key], this);
+              this.fieldHandlers_[key] = false;
+            }
+            if (newValue && newValue !== this && newValue instanceof Emitter) {
+              newValue.addHandler(fieldDestroyHandlers[key], this);
+              if (!this.fieldHandlers_) this.fieldHandlers_ = {};
+              this.fieldHandlers_[key] = true;
+            }
+            result.key = key;
+            result.value = curValue;
+            result.delta = {};
+            result.delta[key] = curValue;
+          } else {
+            if (!rollback && rollbackData && key in rollbackData) {
+              result = {
+                rollback: {
+                  key: key,
+                  value: rollbackData[key]
+                }
+              };
+              delete rollbackData[key];
+              if (!keys(rollbackData).length) this.modified = null;
+            }
+          }
+          if (!silent_ && result) {
+            var update = result.key;
+            var delta = result.delta || {};
+            var rollbackDelta;
+            if (result.rollback) {
+              rollbackDelta = {};
+              rollbackDelta[result.rollback.key] = result.rollback.value;
+            }
+            if (calc(this, delta, rollbackDelta)) update = true;
+            if (update) {
+              this.emit_update(delta);
+              result.delta = delta;
+            }
+            if (rollbackDelta) this.emit_rollbackUpdate(rollbackDelta);
+          }
+          return result || false;
+        },
+        update: function(data, rollback) {
+          var update = false;
+          var delta = {};
+          if (data) {
+            var rollbackDelta;
+            var setResult;
+            for (var key in data) {
+              if (setResult = this.set(key, data[key], rollback, true)) {
+                if (setResult.key) {
+                  update = true;
+                  delta[setResult.key] = setResult.value;
+                }
+                if (setResult.rollback) {
+                  if (!rollbackDelta) rollbackDelta = {};
+                  rollbackDelta[setResult.rollback.key] = setResult.rollback.value;
+                }
+              }
+            }
+            if (calc(this, delta, rollbackDelta)) update = true;
+            if (update) this.emit_update(delta);
+            if (rollbackDelta) this.emit_rollbackUpdate(rollbackDelta);
+          }
+          return update ? delta : false;
+        },
+        read: function(data) {
+          return this.update(this.type.reader(data));
+        },
+        generateData: function() {
+          return {};
+        },
+        reset: function() {
+          this.update(this.generateData({}));
+        },
+        clear: function() {
+          var data = {};
+          for (var key in this.data) data[key] = undefined;
+          return this.update(data);
+        },
+        commit: function(data) {
+          var rollbackData = this.modified;
+          this.modified = null;
+          if (data) this.update(data);
+          if (rollbackData) this.emit_rollbackUpdate(rollbackData);
+        },
+        rollback: function(keys) {
+          var rollbackData = this.modified;
+          if (rollbackData && keys) {
+            if (!Array.isArray(keys)) keys = [ keys ];
+            rollbackData = basis.object.slice(rollbackData, keys.reduce(function(res, item) {
+              return res.concat(entityType.deps[item] || item);
+            }, []));
+          }
+          this.update(rollbackData, true);
+        },
+        destroy: function() {
+          if (this.fieldHandlers_) {
+            for (var key in this.fieldHandlers_) if (this.fieldHandlers_[key]) this.data[key].removeHandler(fieldDestroyHandlers[key], this);
+            this.fieldHandlers_ = null;
+          }
+          for (var key in entityType.indexes) {
+            var indexDescriptor = entityType.indexes[key];
+            var id = this[indexDescriptor.property];
+            if (id != null) updateIndex(indexDescriptor.index, this, id, null);
+          }
+          if (all && all.has(this)) all.emit_itemsChanged({
+            deleted: [ this ]
+          });
+          DataObject.prototype.destroy.call(this);
+          this.data = NULL_INFO;
+          this.modified = null;
+        }
+      });
+    };
+    function isEntity(value) {
+      return value && value instanceof BaseEntity;
+    }
+    function createType(configOrName, fields) {
+      if (this instanceof createType) basis.dev.warn("`new` operator was used with basis.entity.createType, it's a mistake");
+      var config = configOrName || {};
+      if (typeof configOrName == "string") {
+        config = {
+          name: config,
+          fields: fields || {}
+        };
+      } else {
+        if (fields) config = basis.object.merge(config, {
+          fields: fields
+        });
+      }
+      return new EntityTypeWrapper(config);
+    }
+    function createSetType(name, type, options) {
+      if (this instanceof createSetType) basis.dev.warn("`new` operator was used with basis.entity.createSetType, it's a mistake");
+      switch (arguments.length) {
+        case 0:
+        case 1:
+          if (name && name.constructor === Object) {
+            options = basis.object.slice(name);
+            type = basis.object.splice(options).type;
+            name = basis.object.splice(options).name;
+          } else {
+            type = name;
+            name = undefined;
+          }
+          break;
+        case 2:
+          if (type && type.constructor === Object) {
+            options = type;
+            type = name;
+            name = undefined;
+          }
+          break;
+      }
+      return new EntitySetWrapper(type, name, options);
+    }
+    module.exports = {
+      isEntity: isEntity,
+      createType: createType,
+      createSetType: createSetType,
+      validate: validateScheme,
+      getTypeByName: function(typeName) {
+        return getTypeByNameIfDefined(typeName);
+      },
+      getIndexByName: function(name) {
+        return namedIndexes[name];
+      },
+      is: function(value, type) {
+        var EntityClass;
+        if (typeof type == "string") type = getTypeByNameIfDefined(type);
+        EntityClass = type && type.type && type.type.entityClass;
+        return value && EntityClass ? value instanceof EntityClass : false;
+      },
+      get: function(typeName, value) {
+        var Type = getTypeByNameIfDefined(typeName);
+        if (Type) return Type.get(value);
+      },
+      resolve: function(typeName, value) {
+        var Type = getTypeByNameIfDefined(typeName);
+        if (Type) return Type(value);
+      },
+      getByIndex: function(indexName, id) {
+        if (indexName in namedIndexes) return namedIndexes[indexName].get(id); else basis.dev.warn("basis.entity: index with name `" + indexName + "` doesn't exists");
+      },
+      NumericId: NumericId,
+      NumberId: NumberId,
+      IntId: IntId,
+      StringId: StringId,
+      Index: Index,
+      CalculateField: CalculateField,
+      ConcatStringField: ConcatStringField,
+      calc: CalculateField,
+      arrayField: nullableArray,
+      dateField: nullableDate,
+      EntityType: EntityTypeWrapper,
+      Entity: createEntityClass,
+      BaseEntity: BaseEntity,
+      EntitySetType: EntitySetWrapper,
+      EntitySet: EntitySet,
+      ReadOnlyEntitySet: ReadOnlyEntitySet,
+      Collection: EntityCollection,
+      Grouping: EntityGrouping
+    };
+    basis.resource("./o.js").ready(function() {
+      basis.dev.warnPropertyAccess(module.exports, "Collection", EntityCollection, "basis.entity: Collection class is deprecated, use basis.data.dataset.Filter instead.");
+      basis.dev.warnPropertyAccess(module.exports, "Grouping", EntityGrouping, "basis.entity: Grouping class is deprecated, use basis.data.dataset.Split instead.");
+    });
+  },
+  "p.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    module.exports = {
+      getDelta: basis.require("./1m.js"),
+      createRuleEvents: basis.require("./1n.js"),
+      SourceDataset: basis.require("./1o.js"),
+      Merge: basis.require("./1p.js"),
+      Subtract: basis.require("./1q.js"),
+      MapFilter: basis.require("./1r.js"),
+      Split: basis.require("./1s.js"),
+      Cloud: basis.require("./1u.js"),
+      Extract: basis.require("./1v.js"),
+      Filter: basis.require("./1w.js"),
+      Slice: basis.require("./1x.js")
+    };
+  },
+  "1.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Value = basis.require("./2.js").Value;
+    var Node = basis.require("./7.js").Node;
+    var routes = {
+      home: basis.resource("./1c.js"),
+      assets: basis.resource("./1d.js"),
+      modules: basis.resource("./1e.js")
+    };
+    module.exports = basis.require("./k.js").create({
+      title: "[RemPl] webpack analyzer",
+      init: function() {
+        var bootsrapCss = document.createElement("link");
+        bootsrapCss.setAttribute("rel", "stylesheet");
+        bootsrapCss.setAttribute("href", "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
+        document.head.appendChild(bootsrapCss);
+        return new Node({
+          active: true,
+          template: basis.template.get(".0"),
+          satellite: {
+            menu: basis.resource("./1f.js"),
+            progress: basis.resource("./1g.js"),
+            page: {
+              instance: Value.query("satellite.menu.selection.pick()").as(function(node) {
+                return node && routes[node.id] || routes.home;
+              })
+            }
+          },
+          binding: {
+            menu: "satellite:",
+            progress: "satellite:",
+            page: "satellite:"
+          }
+        });
+      }
+    });
+  },
+  "1n.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var extend = basis.object.extend;
+    var createEventHandler = basis.require("./6.js").createHandler;
+    module.exports = function createRuleEvents(fn, events) {
+      return function createRuleEventsExtend(events) {
+        if (!events) return null;
+        if (events.__extend__) return events;
+        if (typeof events != "string" && !Array.isArray(events)) events = null;
+        return extend(createEventHandler(events, fn), {
+          __extend__: createRuleEventsExtend
+        });
+      }(events);
+    };
+  },
+  "1o.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var createEvent = basis.require("./6.js").create;
+    var resolveDataset = basis.require("./2.js").resolveDataset;
+    var ReadOnlyDataset = basis.require("./2.js").ReadOnlyDataset;
+    var setAccumulateState = basis.require("./2.js").Dataset.setAccumulateState;
+    var SUBSCRIPTION = basis.require("./4.js");
+    SUBSCRIPTION.addProperty("source");
+    module.exports = ReadOnlyDataset.subclass({
+      className: "basis.data.dataset.SourceDataset",
+      propertyDescriptors: {
+        source: "sourceChanged",
+        subtrahend: "subtrahendChanged"
+      },
+      active: basis.PROXY,
+      subscribeTo: SUBSCRIPTION.SOURCE,
+      source: null,
+      emit_sourceChanged: createEvent("sourceChanged", "oldSource"),
+      sourceRA_: null,
+      sourceMap_: null,
+      listen: {
+        source: {
+          destroy: function() {
+            if (!this.sourceRA_) this.setSource();
+          }
+        }
+      },
+      init: function() {
+        var source = this.source;
+        this.source = null;
+        this.sourceMap_ = {};
+        ReadOnlyDataset.prototype.init.call(this);
+        if (source) this.setSource(source);
+      },
+      setSource: function(source) {
+        source = resolveDataset(this, this.setSource, source, "sourceRA_");
+        if (this.source !== source) {
+          var oldSource = this.source;
+          var listenHandler = this.listen.source;
+          var itemsChangedHandler = listenHandler && listenHandler.itemsChanged;
+          this.source = null;
+          setAccumulateState(true);
+          if (oldSource) {
+            if (listenHandler) oldSource.removeHandler(listenHandler, this);
+            if (itemsChangedHandler) itemsChangedHandler.call(this, oldSource, {
+              deleted: oldSource.getItems()
+            });
+          }
+          this.source = source;
+          this.emit_sourceChanged(oldSource);
+          basis.dev.patchInfo(this, "sourceInfo", {
+            source: source
+          });
+          if (source) {
+            if (listenHandler) source.addHandler(listenHandler, this);
+            if (itemsChangedHandler) itemsChangedHandler.call(this, source, {
+              inserted: source.getItems()
+            });
+          }
+          setAccumulateState(false);
+        }
+      },
+      destroy: function() {
+        this.setSource();
+        ReadOnlyDataset.prototype.destroy.call(this);
+        this.sourceMap_ = null;
+      }
+    });
+  },
+  "1p.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var arrayAdd = basis.array.add;
+    var arrayRemove = basis.array.remove;
+    var createEvent = basis.require("./6.js").create;
+    var Emitter = basis.require("./6.js").Emitter;
+    var resolveDataset = basis.require("./2.js").resolveDataset;
+    var ReadOnlyDataset = basis.require("./2.js").ReadOnlyDataset;
+    var getDelta = basis.require("./1m.js");
+    var SUBSCRIPTION = basis.require("./4.js");
+    SUBSCRIPTION.add("SOURCES", {
+      sourcesChanged: function(object, delta) {
+        var array;
+        if (array = delta.inserted) for (var i = 0, item; item = array[i]; i++) SUBSCRIPTION.link("source", object, item);
+        if (array = delta.deleted) for (var i = 0, item; item = array[i]; i++) SUBSCRIPTION.unlink("source", object, item);
+      }
+    }, function(action, object) {
+      var sources = object.sources;
+      for (var i = 0, source; source = sources[i++]; ) action("source", object, source);
+    });
+    var UNION = function(count) {
+      return count > 0;
+    };
+    var INTERSECTION = function(count, sourceCount) {
+      return count == sourceCount;
+    };
+    var DIFFERENCE = function(count) {
+      return count == 1;
+    };
+    var MORE_THAN_ONE_INCLUDE = function(count, sourceCount) {
+      return sourceCount == 1 || count > 1;
+    };
+    var AT_LEAST_ONE_EXCLUDE = function(count, sourceCount) {
+      return sourceCount == 1 || count < sourceCount;
+    };
+    var MERGE_DATASET_HANDLER = {
+      itemsChanged: function(source, delta) {
+        var memberMap = this.members_;
+        var updated = {};
+        var object;
+        var objectId;
+        if (delta.inserted) {
+          for (var i = 0; object = delta.inserted[i]; i++) {
+            objectId = object.basisObjectId;
+            if (memberMap[objectId]) {
+              memberMap[objectId].count++;
+            } else {
+              memberMap[objectId] = {
+                count: 1,
+                isMember: false,
+                object: object
+              };
+            }
+            updated[objectId] = memberMap[objectId];
+          }
+        }
+        if (delta.deleted) {
+          for (var i = 0; object = delta.deleted[i]; i++) {
+            objectId = object.basisObjectId;
+            updated[objectId] = memberMap[objectId];
+            memberMap[objectId].count--;
+          }
+        }
+        this.applyRule(updated);
+      }
+    };
+    var Merge = ReadOnlyDataset.subclass({
+      className: "basis.data.dataset.Merge",
+      propertyDescriptors: {
+        rule: "ruleChanged"
+      },
+      active: basis.PROXY,
+      subscribeTo: SUBSCRIPTION.SOURCES,
+      emit_sourcesChanged: createEvent("sourcesChanged", "delta"),
+      sources: null,
+      sourceValues_: null,
+      sourcesMap_: null,
+      sourceDelta_: null,
+      rule: UNION,
+      emit_ruleChanged: createEvent("ruleChanged", "oldRule"),
+      listen: {
+        source: MERGE_DATASET_HANDLER,
+        sourceValue: {
+          destroy: function(sender) {
+            this.removeSource(sender);
+          }
+        }
+      },
+      init: function() {
+        ReadOnlyDataset.prototype.init.call(this);
+        var sources = this.sources;
+        this.sources = [];
+        this.sourcesMap_ = {};
+        this.sourceValues_ = [];
+        if (sources) this.setSources(sources);
+      },
+      setRule: function(rule) {
+        rule = basis.getter(rule || UNION);
+        if (this.rule !== rule) {
+          var oldRule = this.rule;
+          this.rule = rule;
+          this.emit_ruleChanged(oldRule);
+          return this.applyRule();
+        }
+      },
+      applyRule: function(scope) {
+        var memberMap = this.members_;
+        var rule = this.rule;
+        var sourceCount = this.sources.length;
+        var inserted = [];
+        var deleted = [];
+        var memberCounter;
+        var isMember;
+        var delta;
+        if (!scope) scope = memberMap;
+        for (var objectId in scope) {
+          memberCounter = memberMap[objectId];
+          isMember = sourceCount && memberCounter.count && rule(memberCounter.count, sourceCount);
+          if (isMember != memberCounter.isMember) {
+            if (isMember) {
+              memberCounter.isMember = true;
+              inserted.push(memberCounter.object);
+            } else {
+              memberCounter.isMember = false;
+              deleted.push(memberCounter.object);
+            }
+          }
+          if (memberCounter.count == 0) delete memberMap[objectId];
+        }
+        if (delta = getDelta(inserted, deleted)) this.emit_itemsChanged(delta);
+        return delta;
+      },
+      addDataset_: function(dataset) {
+        this.sources.push(dataset);
+        if (this.listen.source) dataset.addHandler(this.listen.source, this);
+        var memberMap = this.members_;
+        for (var objectId in dataset.items_) {
+          if (memberMap[objectId]) {
+            memberMap[objectId].count++;
+          } else {
+            memberMap[objectId] = {
+              count: 1,
+              isMember: false,
+              object: dataset.items_[objectId]
+            };
+          }
+        }
+        return true;
+      },
+      removeDataset_: function(dataset) {
+        arrayRemove(this.sources, dataset);
+        if (this.listen.source) dataset.removeHandler(this.listen.source, this);
+        var memberMap = this.members_;
+        for (var objectId in dataset.items_) memberMap[objectId].count--;
+      },
+      updateDataset_: function(source) {
+        var merge = this.owner;
+        var sourcesMap_ = merge.sourcesMap_;
+        var dataset = resolveDataset(this, merge.updateDataset_, source, "adapter", merge);
+        var inserted;
+        var deleted;
+        var delta;
+        if (this.dataset === dataset) return;
+        if (dataset) {
+          var count = (sourcesMap_[dataset.basisObjectId] || 0) + 1;
+          sourcesMap_[dataset.basisObjectId] = count;
+          if (count == 1) {
+            merge.addDataset_(dataset);
+            inserted = [ dataset ];
+          }
+        }
+        if (this.dataset) {
+          var count = (sourcesMap_[this.dataset.basisObjectId] || 0) - 1;
+          sourcesMap_[this.dataset.basisObjectId] = count;
+          if (count == 0) {
+            merge.removeDataset_(this.dataset);
+            deleted = [ this.dataset ];
+          }
+        }
+        this.dataset = dataset;
+        merge.applyRule();
+        if (delta = getDelta(inserted, deleted)) {
+          var setSourcesTransaction = merge.sourceDelta_;
+          if (setSourcesTransaction) {
+            if (delta.inserted) delta.inserted.forEach(function(item) {
+              if (!arrayRemove(this.deleted, item)) arrayAdd(this.inserted, item);
+            }, setSourcesTransaction);
+            if (delta.deleted) delta.deleted.forEach(function(item) {
+              if (!arrayRemove(this.inserted, item)) arrayAdd(this.deleted, item);
+            }, setSourcesTransaction);
+          } else {
+            merge.emit_sourcesChanged(delta);
+          }
+        }
+        return delta;
+      },
+      getSourceValues: function() {
+        return this.sourceValues_.map(function(item) {
+          return item.source;
+        });
+      },
+      addSource: function(source) {
+        if (!source || typeof source != "object" && typeof source != "function") {
+          basis.dev.warn(this.constructor.className + ".addSource: value should be a dataset instance or to be able to resolve in dataset");
+          return;
+        }
+        if (this.hasSource(source)) {
+          basis.dev.warn(this.constructor.className + ".addSource: value is already in source list");
+          return;
+        }
+        var sourceInfo = {
+          owner: this,
+          source: source,
+          adapter: null,
+          dataset: null
+        };
+        this.sourceValues_.push(sourceInfo);
+        this.updateDataset_.call(sourceInfo, source);
+        if (this.listen.sourceValue && source instanceof Emitter) source.addHandler(this.listen.sourceValue, this);
+      },
+      removeSource: function(source) {
+        for (var i = 0, sourceInfo; sourceInfo = this.sourceValues_[i]; i++) if (sourceInfo.source === source) {
+          if (this.listen.sourceValue && source instanceof Emitter) source.removeHandler(this.listen.sourceValue, this);
+          this.updateDataset_.call(sourceInfo, null);
+          this.sourceValues_.splice(i, 1);
+          return;
+        }
+        basis.dev.warn(this.constructor.className + ".removeSource: source value isn't found in source list");
+      },
+      hasSource: function(source) {
+        for (var i = 0, sourceInfo; sourceInfo = this.sourceValues_[i]; i++) if (sourceInfo.source === source) return true;
+        return false;
+      },
+      setSources: function(sources) {
+        var exists = this.sourceValues_.map(function(sourceInfo) {
+          return sourceInfo.source;
+        });
+        var inserted = [];
+        var deleted = [];
+        var delta;
+        if (!sources) sources = [];
+        this.sourceDelta_ = {
+          inserted: inserted,
+          deleted: deleted
+        };
+        for (var i = 0; i < sources.length; i++) {
+          var source = sources[i];
+          if (!arrayRemove(exists, source)) this.addSource(source);
+        }
+        exists.forEach(this.removeSource, this);
+        this.sourceDelta_ = null;
+        if (delta = getDelta(inserted, deleted)) this.emit_sourcesChanged(delta);
+        return delta;
+      },
+      destroy: function() {
+        this.setSources();
+        ReadOnlyDataset.prototype.destroy.call(this);
+        this.sourceValues_ = null;
+        this.sourcesMap_ = null;
+        this.sourceDelta_ = null;
+        this.sources = null;
+      }
+    });
+    Merge.UNION = UNION;
+    Merge.INTERSECTION = INTERSECTION;
+    Merge.DIFFERENCE = DIFFERENCE;
+    Merge.MORE_THAN_ONE_INCLUDE = MORE_THAN_ONE_INCLUDE;
+    Merge.AT_LEAST_ONE_EXCLUDE = AT_LEAST_ONE_EXCLUDE;
+    module.exports = Merge;
+  },
+  "1q.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var createEvent = basis.require("./6.js").create;
+    var resolveDataset = basis.require("./2.js").resolveDataset;
+    var ReadOnlyDataset = basis.require("./2.js").ReadOnlyDataset;
+    var getDelta = basis.require("./1m.js");
+    var SUBSCRIPTION = basis.require("./4.js");
+    var Dataset = basis.require("./2.js").Dataset;
+    SUBSCRIPTION.addProperty("minuend");
+    SUBSCRIPTION.addProperty("subtrahend");
+    var datasetAbsentFilter = function(item) {
+      return !this.has(item);
+    };
+    var SUBTRACTDATASET_MINUEND_HANDLER = {
+      itemsChanged: function(dataset, delta) {
+        if (!this.subtrahend) return;
+        Dataset.flushChanges(this);
+        var newDelta = getDelta(delta.inserted && delta.inserted.filter(datasetAbsentFilter, this.subtrahend), delta.deleted && delta.deleted.filter(this.has, this));
+        if (newDelta) this.emit_itemsChanged(newDelta);
+      },
+      destroy: function() {
+        if (!this.minuendRA_) this.setMinuend(null);
+      }
+    };
+    var SUBTRACTDATASET_SUBTRAHEND_HANDLER = {
+      itemsChanged: function(dataset, delta) {
+        if (!this.minuend) return;
+        Dataset.flushChanges(this);
+        var newDelta = getDelta(delta.deleted && delta.deleted.filter(this.minuend.has, this.minuend), delta.inserted && delta.inserted.filter(this.has, this));
+        if (newDelta) this.emit_itemsChanged(newDelta);
+      },
+      destroy: function() {
+        if (!this.subtrahendRA_) this.setSubtrahend(null);
+      }
+    };
+    module.exports = ReadOnlyDataset.subclass({
+      className: "basis.data.dataset.Subtract",
+      propertyDescriptors: {
+        minuend: "minuendChanged",
+        subtrahend: "subtrahendChanged"
+      },
+      active: basis.PROXY,
+      subscribeTo: SUBSCRIPTION.MINUEND + SUBSCRIPTION.SUBTRAHEND,
+      minuend: null,
+      minuendRA_: null,
+      emit_minuendChanged: createEvent("minuendChanged", "oldMinuend"),
+      subtrahend: null,
+      subtrahendRA_: null,
+      emit_subtrahendChanged: createEvent("subtrahendChanged", "oldSubtrahend"),
+      listen: {
+        minuend: SUBTRACTDATASET_MINUEND_HANDLER,
+        subtrahend: SUBTRACTDATASET_SUBTRAHEND_HANDLER
+      },
+      init: function() {
+        ReadOnlyDataset.prototype.init.call(this);
+        var minuend = this.minuend;
+        var subtrahend = this.subtrahend;
+        this.minuend = null;
+        this.subtrahend = null;
+        if (minuend || subtrahend) this.setOperands(minuend, subtrahend);
+      },
+      setOperands: function(minuend, subtrahend) {
+        var delta;
+        var operandsChanged = false;
+        var oldMinuend = this.minuend;
+        var oldSubtrahend = this.subtrahend;
+        minuend = resolveDataset(this, this.setMinuend, minuend, "minuendRA_");
+        subtrahend = resolveDataset(this, this.setSubtrahend, subtrahend, "subtrahendRA_");
+        if (oldMinuend !== minuend) {
+          operandsChanged = true;
+          this.minuend = minuend;
+          var listenHandler = this.listen.minuend;
+          if (listenHandler) {
+            if (oldMinuend) oldMinuend.removeHandler(listenHandler, this);
+            if (minuend) minuend.addHandler(listenHandler, this);
+          }
+          this.emit_minuendChanged(oldMinuend);
+        }
+        if (oldSubtrahend !== subtrahend) {
+          operandsChanged = true;
+          this.subtrahend = subtrahend;
+          var listenHandler = this.listen.subtrahend;
+          if (listenHandler) {
+            if (oldSubtrahend) oldSubtrahend.removeHandler(listenHandler, this);
+            if (subtrahend) subtrahend.addHandler(listenHandler, this);
+          }
+          this.emit_subtrahendChanged(oldSubtrahend);
+        }
+        if (!operandsChanged) return false;
+        basis.dev.setInfo(this, "sourceInfo", {
+          type: "Subtract",
+          source: [ minuend, subtrahend ]
+        });
+        if (!minuend || !subtrahend) {
+          if (this.itemCount) this.emit_itemsChanged(delta = {
+            deleted: this.getItems()
+          });
+        } else {
+          var deleted = [];
+          var inserted = [];
+          for (var key in this.items_) if (!minuend.items_[key] || subtrahend.items_[key]) deleted.push(this.items_[key]);
+          for (var key in minuend.items_) if (!this.items_[key] && !subtrahend.items_[key]) inserted.push(minuend.items_[key]);
+          if (delta = getDelta(inserted, deleted)) this.emit_itemsChanged(delta);
+        }
+        return delta;
+      },
+      setMinuend: function(minuend) {
+        return this.setOperands(minuend, this.subtrahendRA_ ? this.subtrahendRA_.source : this.subtrahend);
+      },
+      setSubtrahend: function(subtrahend) {
+        return this.setOperands(this.minuendRA_ ? this.minuendRA_.source : this.minuend, subtrahend);
+      },
+      destroy: function() {
+        this.setOperands();
+        ReadOnlyDataset.prototype.destroy.call(this);
+      }
+    });
+  },
+  "1r.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var $self = basis.fn.$self;
+    var $true = basis.fn.$true;
+    var $false = basis.fn.$false;
+    var createEvent = basis.require("./6.js").create;
+    var createRuleEvents = basis.require("./1n.js");
+    var getDelta = basis.require("./1m.js");
+    var DataObject = basis.require("./2.js").Object;
+    var setAccumulateState = basis.require("./2.js").Dataset.setAccumulateState;
+    var SourceDataset = basis.require("./1o.js");
+    var MAPFILTER_SOURCEOBJECT_UPDATE = function(sourceObject) {
+      var newMember = this.map ? this.map(sourceObject) : sourceObject;
+      if (newMember instanceof DataObject == false || this.filter(newMember)) newMember = null;
+      var sourceMap = this.sourceMap_[sourceObject.basisObjectId];
+      var curMember = sourceMap.member;
+      if (curMember !== newMember) {
+        var memberMap = this.members_;
+        var delta;
+        var inserted;
+        var deleted;
+        sourceMap.member = newMember;
+        if (curMember) {
+          var curMemberId = curMember.basisObjectId;
+          if (this.removeMemberRef) this.removeMemberRef(curMember, sourceObject);
+          if (--memberMap[curMemberId] == 0) {
+            delete memberMap[curMemberId];
+            deleted = [ curMember ];
+          }
+        }
+        if (newMember) {
+          var newMemberId = newMember.basisObjectId;
+          if (this.addMemberRef) this.addMemberRef(newMember, sourceObject);
+          if (memberMap[newMemberId]) {
+            memberMap[newMemberId]++;
+          } else {
+            memberMap[newMemberId] = 1;
+            inserted = [ newMember ];
+          }
+        }
+        if (delta = getDelta(inserted, deleted)) this.emit_itemsChanged(delta);
+      }
+    };
+    var MAPFILTER_SOURCE_HANDLER = {
+      itemsChanged: function(source, delta) {
+        var sourceMap = this.sourceMap_;
+        var memberMap = this.members_;
+        var inserted = [];
+        var deleted = [];
+        var sourceObject;
+        var sourceObjectId;
+        var member;
+        var updateHandler = this.ruleEvents;
+        setAccumulateState(true);
+        if (delta.inserted) {
+          for (var i = 0; sourceObject = delta.inserted[i]; i++) {
+            member = this.map ? this.map(sourceObject) : sourceObject;
+            if (member instanceof DataObject == false || this.filter(member)) member = null;
+            if (updateHandler) sourceObject.addHandler(updateHandler, this);
+            sourceMap[sourceObject.basisObjectId] = {
+              sourceObject: sourceObject,
+              member: member
+            };
+            if (member) {
+              var memberId = member.basisObjectId;
+              if (memberMap[memberId]) {
+                memberMap[memberId]++;
+              } else {
+                memberMap[memberId] = 1;
+                inserted.push(member);
+              }
+              if (this.addMemberRef) this.addMemberRef(member, sourceObject);
+            }
+          }
+        }
+        if (delta.deleted) {
+          for (var i = 0; sourceObject = delta.deleted[i]; i++) {
+            sourceObjectId = sourceObject.basisObjectId;
+            member = sourceMap[sourceObjectId].member;
+            if (updateHandler) sourceObject.removeHandler(updateHandler, this);
+            delete sourceMap[sourceObjectId];
+            if (member) {
+              var memberId = member.basisObjectId;
+              if (--memberMap[memberId] == 0) {
+                delete memberMap[memberId];
+                deleted.push(member);
+              }
+              if (this.removeMemberRef) this.removeMemberRef(member, sourceObject);
+            }
+          }
+        }
+        setAccumulateState(false);
+        if (delta = getDelta(inserted, deleted)) this.emit_itemsChanged(delta);
+      }
+    };
+    module.exports = SourceDataset.subclass({
+      className: "basis.data.dataset.MapFilter",
+      propertyDescriptors: {
+        rule: "ruleChanged",
+        addMemberRef: false,
+        removeMemberRef: false,
+        ruleEvents: false
+      },
+      map: $self,
+      filter: $false,
+      rule: basis.getter($true),
+      emit_ruleChanged: createEvent("ruleChanged", "oldRule"),
+      ruleEvents: createRuleEvents(MAPFILTER_SOURCEOBJECT_UPDATE, "update"),
+      addMemberRef: null,
+      removeMemberRef: null,
+      listen: {
+        source: MAPFILTER_SOURCE_HANDLER
+      },
+      init: function() {
+        SourceDataset.prototype.init.call(this);
+        basis.dev.patchInfo(this, "sourceInfo", {
+          type: this.constructor.className.split(".").pop(),
+          transform: this.rule
+        });
+      },
+      setMap: function(map) {
+        if (typeof map != "function") map = $self;
+        if (this.map !== map) {
+          this.map = map;
+          return this.applyRule();
+        }
+      },
+      setFilter: function(filter) {
+        if (typeof filter != "function") filter = $false;
+        if (this.filter !== filter) {
+          this.filter = filter;
+          return this.applyRule();
+        }
+      },
+      setRule: function(rule) {
+        rule = basis.getter(rule || $true);
+        if (this.rule !== rule) {
+          var oldRule = this.rule;
+          this.rule = rule;
+          this.emit_ruleChanged(oldRule);
+          basis.dev.patchInfo(this, "sourceInfo", {
+            transform: this.rule
+          });
+          return this.applyRule();
+        }
+      },
+      applyRule: function() {
+        var sourceMap = this.sourceMap_;
+        var memberMap = this.members_;
+        var curMember;
+        var newMember;
+        var curMemberId;
+        var newMemberId;
+        var sourceObject;
+        var sourceObjectInfo;
+        var inserted = [];
+        var deleted = [];
+        var delta;
+        for (var sourceObjectId in sourceMap) {
+          sourceObjectInfo = sourceMap[sourceObjectId];
+          sourceObject = sourceObjectInfo.sourceObject;
+          curMember = sourceObjectInfo.member;
+          newMember = this.map ? this.map(sourceObject) : sourceObject;
+          if (newMember instanceof DataObject == false || this.filter(newMember)) newMember = null;
+          if (curMember != newMember) {
+            sourceObjectInfo.member = newMember;
+            if (curMember) {
+              curMemberId = curMember.basisObjectId;
+              if (this.removeMemberRef) this.removeMemberRef(curMember, sourceObject);
+              memberMap[curMemberId]--;
+            }
+            if (newMember) {
+              newMemberId = newMember.basisObjectId;
+              if (this.addMemberRef) this.addMemberRef(newMember, sourceObject);
+              if (newMemberId in memberMap) {
+                memberMap[newMemberId]++;
+              } else {
+                memberMap[newMemberId] = 1;
+                inserted.push(newMember);
+              }
+            }
+          }
+        }
+        for (curMemberId in this.items_) if (memberMap[curMemberId] == 0) {
+          delete memberMap[curMemberId];
+          deleted.push(this.items_[curMemberId]);
+        }
+        if (delta = getDelta(inserted, deleted)) this.emit_itemsChanged(delta);
+        return delta;
+      }
+    });
+  },
+  "1s.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var $undef = basis.fn.$undef;
+    var ReadOnlyDataset = basis.require("./2.js").ReadOnlyDataset;
+    var DatasetWrapper = basis.require("./2.js").DatasetWrapper;
+    var KeyObjectMap = basis.require("./2.js").KeyObjectMap;
+    var MapFilter = basis.require("./1r.js");
+    var createKeyMap = basis.require("./1t.js");
+    module.exports = MapFilter.subclass({
+      className: "basis.data.dataset.Split",
+      subsetClass: ReadOnlyDataset,
+      subsetWrapperClass: DatasetWrapper,
+      keyMap: null,
+      map: function(sourceObject) {
+        return this.keyMap.resolve(sourceObject);
+      },
+      rule: basis.getter($undef),
+      setRule: function(rule) {
+        rule = basis.getter(rule || $undef);
+        if (this.rule !== rule) {
+          var oldRule = this.rule;
+          this.rule = rule;
+          this.keyMap.keyGetter = rule;
+          this.emit_ruleChanged(oldRule);
+          return this.applyRule();
+        }
+      },
+      addMemberRef: function(wrapper, sourceObject) {
+        wrapper.dataset.emit_itemsChanged({
+          inserted: [ sourceObject ]
+        });
+      },
+      removeMemberRef: function(wrapper, sourceObject) {
+        wrapper.dataset.emit_itemsChanged({
+          deleted: [ sourceObject ]
+        });
+      },
+      init: function() {
+        if (!this.keyMap || this.keyMap instanceof KeyObjectMap == false) this.keyMap = createKeyMap(this.keyMap, this.rule, this.subsetWrapperClass, this.subsetClass);
+        MapFilter.prototype.init.call(this);
+      },
+      getSubset: function(data, autocreate) {
+        return this.keyMap.get(data, autocreate);
+      },
+      destroy: function() {
+        MapFilter.prototype.destroy.call(this);
+        this.keyMap.destroy();
+        this.keyMap = null;
+      }
+    });
+  },
+  "1t.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var extend = basis.object.extend;
+    var KeyObjectMap = basis.require("./2.js").KeyObjectMap;
+    module.exports = function createKeyMap(config, keyGetter, ItemClass, SubsetClass) {
+      return new KeyObjectMap(extend({
+        keyGetter: keyGetter,
+        itemClass: ItemClass,
+        create: function(key, object) {
+          var datasetWrapper = KeyObjectMap.prototype.create.call(this, key, object);
+          datasetWrapper.ruleValue = key;
+          datasetWrapper.setDataset(new SubsetClass({
+            ruleValue: key
+          }));
+          return datasetWrapper;
+        }
+      }, config));
+    };
+  },
+  "1u.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var $self = basis.fn.$self;
+    var $undef = basis.fn.$undef;
+    var ReadOnlyDataset = basis.require("./2.js").ReadOnlyDataset;
+    var DatasetWrapper = basis.require("./2.js").DatasetWrapper;
+    var KeyObjectMap = basis.require("./2.js").KeyObjectMap;
+    var setAccumulateState = basis.require("./2.js").Dataset.setAccumulateState;
+    var SourceDataset = basis.require("./1o.js");
+    var createKeyMap = basis.require("./1t.js");
+    var createRuleEvents = basis.require("./1n.js");
+    var getDelta = basis.require("./1m.js");
+    var CLOUD_SOURCEOBJECT_UPDATE = function(sourceObject) {
+      var sourceMap = this.sourceMap_;
+      var memberMap = this.members_;
+      var sourceObjectId = sourceObject.basisObjectId;
+      var oldList = sourceMap[sourceObjectId].list;
+      var newList = sourceMap[sourceObjectId].list = {};
+      var list = this.rule(sourceObject);
+      var delta;
+      var inserted = [];
+      var deleted = [];
+      var subset;
+      if (Array.isArray(list)) for (var j = 0; j < list.length; j++) {
+        subset = this.keyMap.get(list[j], true);
+        if (subset && !subset.has(sourceObject)) {
+          subsetId = subset.basisObjectId;
+          newList[subsetId] = subset;
+          if (!oldList[subsetId]) {
+            subset.dataset.emit_itemsChanged({
+              inserted: [ sourceObject ]
+            });
+            if (!memberMap[subsetId]) {
+              inserted.push(subset);
+              memberMap[subsetId] = 1;
+            } else memberMap[subsetId]++;
+          }
+        }
+      }
+      for (var subsetId in oldList) if (!newList[subsetId]) {
+        var subset = oldList[subsetId];
+        subset.dataset.emit_itemsChanged({
+          deleted: [ sourceObject ]
+        });
+        if (!--memberMap[subsetId]) {
+          delete memberMap[subsetId];
+          deleted.push(subset);
+        }
+      }
+      if (delta = getDelta(inserted, deleted)) this.emit_itemsChanged(delta);
+    };
+    var CLOUD_SOURCE_HANDLER = {
+      itemsChanged: function(dataset, delta) {
+        var sourceMap = this.sourceMap_;
+        var memberMap = this.members_;
+        var updateHandler = this.ruleEvents;
+        var array;
+        var subset;
+        var subsetId;
+        var inserted = [];
+        var deleted = [];
+        setAccumulateState(true);
+        if (array = delta.inserted) for (var i = 0, sourceObject; sourceObject = array[i]; i++) {
+          var list = this.rule(sourceObject);
+          var sourceObjectInfo = {
+            object: sourceObject,
+            list: {}
+          };
+          sourceMap[sourceObject.basisObjectId] = sourceObjectInfo;
+          if (Array.isArray(list)) for (var j = 0, dupFilter = {}; j < list.length; j++) {
+            subset = this.keyMap.get(list[j], true);
+            if (subset && !dupFilter[subset.basisObjectId]) {
+              subsetId = subset.basisObjectId;
+              dupFilter[subsetId] = true;
+              sourceObjectInfo.list[subsetId] = subset;
+              subset.dataset.emit_itemsChanged({
+                inserted: [ sourceObject ]
+              });
+              if (!memberMap[subsetId]) {
+                inserted.push(subset);
+                memberMap[subsetId] = 1;
+              } else memberMap[subsetId]++;
+            }
+          }
+          if (updateHandler) sourceObject.addHandler(updateHandler, this);
+        }
+        if (array = delta.deleted) for (var i = 0, sourceObject; sourceObject = array[i]; i++) {
+          var sourceObjectId = sourceObject.basisObjectId;
+          var list = sourceMap[sourceObjectId].list;
+          delete sourceMap[sourceObjectId];
+          for (var subsetId in list) {
+            subset = list[subsetId];
+            subset.dataset.emit_itemsChanged({
+              deleted: [ sourceObject ]
+            });
+            if (!--memberMap[subsetId]) {
+              delete memberMap[subsetId];
+              deleted.push(subset);
+            }
+          }
+          if (updateHandler) sourceObject.removeHandler(updateHandler, this);
+        }
+        setAccumulateState(false);
+        if (delta = getDelta(inserted, deleted)) this.emit_itemsChanged(delta);
+      }
+    };
+    module.exports = SourceDataset.subclass({
+      className: "basis.data.dataset.Cloud",
+      subsetClass: ReadOnlyDataset,
+      subsetWrapperClass: DatasetWrapper,
+      rule: basis.getter($undef),
+      ruleEvents: createRuleEvents(CLOUD_SOURCEOBJECT_UPDATE, "update"),
+      keyMap: null,
+      map: $self,
+      listen: {
+        source: CLOUD_SOURCE_HANDLER
+      },
+      init: function() {
+        if (!this.keyMap || this.keyMap instanceof KeyObjectMap == false) this.keyMap = createKeyMap(this.keyMap, this.rule, this.subsetWrapperClass, this.subsetClass);
+        SourceDataset.prototype.init.call(this);
+      },
+      getSubset: function(data, autocreate) {
+        return this.keyMap.get(data, autocreate);
+      },
+      destroy: function() {
+        SourceDataset.prototype.destroy.call(this);
+        this.keyMap.destroy();
+        this.keyMap = null;
+      }
+    });
+  },
+  "1v.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var values = basis.object.values;
+    var $undef = basis.fn.$undef;
+    var arrayFrom = basis.array.from;
+    var createEvent = basis.require("./6.js").create;
+    var DataObject = basis.require("./2.js").Object;
+    var ReadOnlyDataset = basis.require("./2.js").ReadOnlyDataset;
+    var SourceDataset = basis.require("./1o.js");
+    var createRuleEvents = basis.require("./1n.js");
+    var getDelta = basis.require("./1m.js");
+    var EXTRACT_SOURCEOBJECT_UPDATE = function(sourceObject) {
+      var sourceObjectInfo = this.sourceMap_[sourceObject.basisObjectId];
+      var newValue = this.rule(sourceObject) || null;
+      var oldValue = sourceObjectInfo.value;
+      var inserted;
+      var deleted;
+      var delta;
+      if (newValue === oldValue) return;
+      if (newValue instanceof DataObject || newValue instanceof ReadOnlyDataset) inserted = addToExtract(this, newValue, sourceObject);
+      if (oldValue) deleted = removeFromExtract(this, oldValue, sourceObject);
+      sourceObjectInfo.value = newValue;
+      if (delta = getDelta(inserted, deleted)) this.emit_itemsChanged(delta);
+    };
+    var EXTRACT_DATASET_ITEMSCHANGED = function(dataset, delta) {
+      var inserted = delta.inserted;
+      var deleted = delta.deleted;
+      var delta;
+      if (inserted) inserted = addToExtract(this, inserted, dataset);
+      if (deleted) deleted = removeFromExtract(this, deleted, dataset);
+      if (delta = getDelta(inserted, deleted)) this.emit_itemsChanged(delta);
+    };
+    var EXTRACT_DATASET_HANDLER = {
+      itemsChanged: EXTRACT_DATASET_ITEMSCHANGED,
+      destroy: function(dataset) {
+        var sourceMap = this.sourceMap_;
+        for (var cursor = sourceMap[dataset.basisObjectId]; cursor = cursor.ref; ) sourceMap[cursor.object.basisObjectId].value = null;
+        delete sourceMap[dataset.basisObjectId];
+      }
+    };
+    function hasExtractSourceRef(extract, object, marker) {
+      var sourceObjectInfo = extract.sourceMap_[object.basisObjectId];
+      if (sourceObjectInfo && sourceObjectInfo.visited !== marker) {
+        for (var cursor = sourceObjectInfo; cursor = cursor.ref; ) if (cursor.object === extract.source) return true;
+        sourceObjectInfo.visited = marker;
+        for (var cursor = sourceObjectInfo; cursor = cursor.ref; ) if (hasExtractSourceRef(extract, cursor.object, marker || {})) return true;
+      }
+    }
+    function addToExtract(extract, items, ref) {
+      var sourceMap = extract.sourceMap_;
+      var members = extract.members_;
+      var queue = arrayFrom(items);
+      var inserted = [];
+      for (var i = 0; i < queue.length; i++) {
+        var item = queue[i];
+        var sourceObjectId = item.basisObjectId;
+        if (!sourceObjectId) {
+          ref = item.ref;
+          item = item.object;
+          sourceObjectId = item.basisObjectId;
+        }
+        var sourceObjectInfo = sourceMap[sourceObjectId];
+        if (sourceObjectInfo) {
+          sourceObjectInfo.ref = {
+            object: ref,
+            ref: sourceObjectInfo.ref
+          };
+        } else {
+          sourceObjectInfo = sourceMap[sourceObjectId] = {
+            source: item,
+            ref: {
+              object: ref,
+              ref: null
+            },
+            visited: null,
+            value: null
+          };
+          if (item instanceof DataObject) {
+            var value = extract.rule(item) || null;
+            if (value instanceof DataObject || value instanceof ReadOnlyDataset) {
+              sourceObjectInfo.value = value;
+              queue.push({
+                object: value,
+                ref: item
+              });
+            }
+            members[sourceObjectId] = sourceObjectInfo;
+            inserted.push(item);
+            if (extract.ruleEvents) item.addHandler(extract.ruleEvents, extract);
+          } else {
+            item.addHandler(EXTRACT_DATASET_HANDLER, extract);
+            for (var j = 0, datasetItems = item.getItems(); j < datasetItems.length; j++) queue.push({
+              object: datasetItems[j],
+              ref: item
+            });
+          }
+        }
+      }
+      return inserted;
+    }
+    function removeFromExtract(extract, items, ref) {
+      var sourceMap = extract.sourceMap_;
+      var members = extract.members_;
+      var queue = arrayFrom(items);
+      var deleted = [];
+      for (var i = 0; i < queue.length; i++) {
+        var item = queue[i];
+        var sourceObjectId = item.basisObjectId;
+        if (!sourceObjectId) {
+          ref = item.ref;
+          item = item.object;
+          sourceObjectId = item.basisObjectId;
+        }
+        var sourceObjectInfo = sourceMap[sourceObjectId];
+        var sourceObjectValue = sourceObjectInfo.value;
+        for (var cursor = sourceObjectInfo, prevCursor = sourceObjectInfo; cursor = cursor.ref; ) {
+          if (cursor.object === ref) {
+            prevCursor.ref = cursor.ref;
+            break;
+          }
+          prevCursor = cursor;
+        }
+        if (!sourceObjectInfo.ref) {
+          if (item instanceof DataObject) {
+            delete members[sourceObjectId];
+            deleted.push(item);
+            if (extract.ruleEvents) item.removeHandler(extract.ruleEvents, extract);
+            if (sourceObjectValue) queue.push({
+              object: sourceObjectValue,
+              ref: item
+            });
+          } else {
+            item.removeHandler(EXTRACT_DATASET_HANDLER, extract);
+            for (var j = 0, datasetItems = item.getItems(); j < datasetItems.length; j++) queue.push({
+              object: datasetItems[j],
+              ref: item
+            });
+          }
+          delete sourceMap[sourceObjectId];
+        } else {
+          if (sourceObjectValue && !hasExtractSourceRef(extract, item)) {
+            sourceObjectInfo.value = null;
+            queue.push({
+              object: sourceObjectValue,
+              ref: item
+            });
+          }
+        }
+      }
+      return deleted;
+    }
+    module.exports = SourceDataset.subclass({
+      className: "basis.data.dataset.Extract",
+      propertyDescriptors: {
+        rule: "ruleChanged"
+      },
+      rule: basis.getter($undef),
+      emit_ruleChanged: createEvent("ruleChanged", "oldRule"),
+      ruleEvents: createRuleEvents(EXTRACT_SOURCEOBJECT_UPDATE, "update"),
+      listen: {
+        source: {
+          itemsChanged: EXTRACT_DATASET_ITEMSCHANGED
+        }
+      },
+      setRule: function(rule) {
+        rule = basis.getter(rule || $undef);
+        if (this.rule !== rule) {
+          var oldRule = this.rule;
+          this.rule = rule;
+          this.emit_ruleChanged(oldRule);
+          return this.applyRule();
+        }
+      },
+      applyRule: function() {
+        var insertedMap = {};
+        var deletedMap = {};
+        var delta;
+        for (var key in this.sourceMap_) {
+          var sourceObjectInfo = this.sourceMap_[key];
+          var sourceObject = sourceObjectInfo.source;
+          if (sourceObject instanceof DataObject) {
+            var newValue = this.rule(sourceObject) || null;
+            var oldValue = sourceObjectInfo.value;
+            if (newValue === oldValue) continue;
+            if (newValue instanceof DataObject || newValue instanceof ReadOnlyDataset) {
+              var inserted = addToExtract(this, newValue, sourceObject);
+              for (var i = 0; i < inserted.length; i++) {
+                var item = inserted[i];
+                var id = item.basisObjectId;
+                if (deletedMap[id]) delete deletedMap[id]; else insertedMap[id] = item;
+              }
+            }
+            if (oldValue) {
+              var deleted = removeFromExtract(this, oldValue, sourceObject);
+              for (var i = 0; i < deleted.length; i++) {
+                var item = deleted[i];
+                var id = item.basisObjectId;
+                if (insertedMap[id]) delete insertedMap[id]; else deletedMap[id] = item;
+              }
+            }
+            sourceObjectInfo.value = newValue;
+          }
+        }
+        if (delta = getDelta(values(insertedMap), values(deletedMap))) this.emit_itemsChanged(delta);
+        return delta;
+      }
+    });
+  },
+  "1w.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var MapFilter = basis.require("./1r.js");
+    module.exports = MapFilter.subclass({
+      className: "basis.data.dataset.Filter",
+      filter: function(object) {
+        return !this.rule(object);
+      }
+    });
+  },
+  "1x.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var $true = basis.fn.$true;
+    var values = basis.object.values;
+    var objectSlice = basis.object.slice;
+    var createEvent = basis.require("./6.js").create;
+    var Value = basis.require("./2.js").Value;
+    var createRuleEvents = basis.require("./1n.js");
+    var getDelta = basis.require("./1m.js");
+    var SourceDataset = basis.require("./1o.js");
+    function nanToUndefined(value) {
+      return value !== value ? undefined : value;
+    }
+    function binarySearchPos(array, map) {
+      if (!array.length) return 0;
+      var value = map.value;
+      var id = map.object.basisObjectId;
+      var cmpValue;
+      var cmpId;
+      var pos;
+      var item;
+      var l = 0;
+      var r = array.length - 1;
+      do {
+        pos = l + r >> 1;
+        item = array[pos];
+        cmpValue = item.value;
+        if (value < cmpValue) r = pos - 1; else if (value > cmpValue) l = pos + 1; else {
+          cmpId = item.object.basisObjectId;
+          if (id < cmpId) r = pos - 1; else if (id > cmpId) l = pos + 1; else return pos;
+        }
+      } while (l <= r);
+      return pos + (cmpValue == value ? cmpId < id : cmpValue < value);
+    }
+    var SLICE_SOURCEOBJECT_UPDATE = function(sourceObject) {
+      var sourceObjectInfo = this.sourceMap_[sourceObject.basisObjectId];
+      var newValue = nanToUndefined(this.rule(sourceObject));
+      var index = this.index_;
+      if (newValue !== sourceObjectInfo.value) {
+        var pos = binarySearchPos(index, sourceObjectInfo);
+        var prev = index[pos - 1];
+        var next = index[pos + 1];
+        sourceObjectInfo.value = newValue;
+        if (prev && (prev.value > newValue || prev.value == newValue && prev.object.basisObjectId > sourceObjectInfo.object.basisObjectId) || next && (next.value < newValue || next.value == newValue && next.object.basisObjectId < sourceObjectInfo.object.basisObjectId)) {
+          index.splice(pos, 1);
+          index.splice(binarySearchPos(index, sourceObjectInfo), 0, sourceObjectInfo);
+          this.applyRule();
+        }
+      }
+    };
+    function sliceIndexSort(a, b) {
+      return +(a.value > b.value) || -(a.value < b.value) || a.object.basisObjectId - b.object.basisObjectId;
+    }
+    var SLICE_SOURCE_HANDLER = {
+      itemsChanged: function(source, delta) {
+        var sourceMap = this.sourceMap_;
+        var index = this.index_;
+        var updateHandler = this.ruleEvents;
+        var dropIndex = false;
+        var buildIndex = false;
+        var sourceObjectInfo;
+        var inserted = delta.inserted;
+        var deleted = delta.deleted;
+        if (deleted) {
+          if (deleted.length > index.length - deleted.length) {
+            dropIndex = true;
+            buildIndex = deleted.length != index.length;
+            index.length = 0;
+          }
+          for (var i = 0, sourceObject; sourceObject = deleted[i]; i++) {
+            if (!dropIndex) {
+              sourceObjectInfo = sourceMap[sourceObject.basisObjectId];
+              index.splice(binarySearchPos(index, sourceObjectInfo), 1);
+            }
+            delete sourceMap[sourceObject.basisObjectId];
+            if (updateHandler) sourceObject.removeHandler(updateHandler, this);
+          }
+          if (buildIndex) for (var key in sourceMap) {
+            sourceObjectInfo = sourceMap[key];
+            index.splice(binarySearchPos(index, sourceObjectInfo), 0, sourceObjectInfo);
+          }
+        }
+        if (inserted) {
+          buildIndex = !index.length;
+          for (var i = 0, sourceObject; sourceObject = inserted[i]; i++) {
+            sourceObjectInfo = {
+              object: sourceObject,
+              value: nanToUndefined(this.rule(sourceObject))
+            };
+            sourceMap[sourceObject.basisObjectId] = sourceObjectInfo;
+            if (!buildIndex) index.splice(binarySearchPos(index, sourceObjectInfo), 0, sourceObjectInfo); else index.push(sourceObjectInfo);
+            if (updateHandler) sourceObject.addHandler(updateHandler, this);
+          }
+          if (buildIndex) index.sort(sliceIndexSort);
+        }
+        this.applyRule();
+      }
+    };
+    module.exports = SourceDataset.subclass({
+      className: "basis.data.dataset.Slice",
+      propertyDescriptors: {
+        limit: "rangeChanged",
+        offset: "rangeChanged",
+        orderDesc: "ruleChanged",
+        rule: "ruleChanged"
+      },
+      rule: basis.getter($true),
+      emit_ruleChanged: createEvent("ruleChanged", "oldRule", "oldOrderDesc"),
+      ruleEvents: createRuleEvents(SLICE_SOURCEOBJECT_UPDATE, "update"),
+      index_: null,
+      left_: null,
+      right_: null,
+      orderDesc: false,
+      offset: 0,
+      limit: 10,
+      listen: {
+        source: SLICE_SOURCE_HANDLER
+      },
+      emit_rangeChanged: createEvent("rangeChanged", "oldOffset", "oldLimit"),
+      init: function() {
+        this.index_ = [];
+        SourceDataset.prototype.init.call(this);
+      },
+      setRange: function(offset, limit) {
+        var oldOffset = this.offset;
+        var oldLimit = this.limit;
+        var delta = false;
+        if (oldOffset != offset || oldLimit != limit) {
+          this.offset = offset;
+          this.limit = limit;
+          delta = this.applyRule();
+          this.emit_rangeChanged(oldOffset, oldLimit);
+        }
+        return delta;
+      },
+      setOffset: function(offset) {
+        return this.setRange(offset, this.limit);
+      },
+      setLimit: function(limit) {
+        return this.setRange(this.offset, limit);
+      },
+      setRule: function(rule, orderDesc) {
+        rule = basis.getter(rule || $true);
+        orderDesc = !!orderDesc;
+        if (this.rule != rule || this.orderDesc != orderDesc) {
+          var oldRule = this.rule;
+          var oldOrderDesc = this.orderDesc;
+          if (this.rule != rule) {
+            var index = this.index_;
+            for (var i = 0; i < index.length; i++) index[i].value = nanToUndefined(rule(index[i].object));
+            index.sort(sliceIndexSort);
+            this.rule = rule;
+          }
+          this.orderDesc = orderDesc;
+          this.rule = rule;
+          this.emit_ruleChanged(oldRule, oldOrderDesc);
+          return this.applyRule();
+        }
+      },
+      applyRule: function() {
+        var start = this.offset;
+        var end = start + this.limit;
+        if (this.orderDesc) {
+          start = this.index_.length - end;
+          end = start + this.limit;
+        }
+        var curSet = objectSlice(this.members_);
+        var newSet = this.index_.slice(Math.max(0, start), Math.max(0, end));
+        var inserted = [];
+        var delta;
+        for (var i = 0, item; item = newSet[i]; i++) {
+          var objectId = item.object.basisObjectId;
+          if (curSet[objectId]) delete curSet[objectId]; else {
+            inserted.push(item.object);
+            this.members_[objectId] = item.object;
+          }
+        }
+        for (var objectId in curSet) delete this.members_[objectId];
+        if (this.left_) for (var offset in this.left_) {
+          var item = this.index_[this.orderDesc ? end + Number(offset) - 1 : start - Number(offset)];
+          this.left_[offset].set(item ? item.object : null);
+        }
+        if (this.right_) for (var offset in this.right_) {
+          var item = this.index_[this.orderDesc ? start - Number(offset) : end + Number(offset) - 1];
+          this.right_[offset].set(item ? item.object : null);
+        }
+        if (delta = getDelta(inserted, values(curSet))) this.emit_itemsChanged(delta);
+        return delta;
+      },
+      left: function(offset) {
+        offset = parseInt(offset, 10) || 0;
+        if (!this.left_) this.left_ = {};
+        var value = this.left_[offset];
+        if (!value) {
+          var start = this.offset;
+          var end = start + this.limit;
+          if (this.orderDesc) {
+            start = this.index_.length - end;
+            end = start + this.limit;
+          }
+          var item = this.index_[this.orderDesc ? end + offset - 1 : start - offset];
+          value = this.left_[offset] = new Value({
+            value: item ? item.object : null
+          });
+        }
+        return value;
+      },
+      right: function(offset) {
+        offset = parseInt(offset, 10) || 0;
+        if (!this.right_) this.right_ = {};
+        var value = this.right_[offset];
+        if (!value) {
+          var start = this.offset;
+          var end = start + this.limit;
+          if (this.orderDesc) {
+            start = this.index_.length - end;
+            end = start + this.limit;
+          }
+          var item = this.index_[this.orderDesc ? start - offset : end + offset - 1];
+          value = this.right_[offset] = new Value({
+            value: item ? item.object : null
+          });
+        }
+        return value;
+      },
+      destroy: function() {
+        SourceDataset.prototype.destroy.call(this);
+        if (this.left_) {
+          for (var offset in this.left_) this.left_[offset].destroy();
+          this.left_ = null;
+        }
+        if (this.right_) {
+          for (var offset in this.right_) this.right_[offset].destroy();
+          this.right_ = null;
+        }
+        this.index_ = null;
+      }
+    });
+  },
+  "q.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var namespace = "basis.type";
+    var namedTypes = {};
+    var deferredTypeDef = {};
+    var pendingTypeNames = {};
+    function defineType(typeName, type) {
+      if (typeof typeName !== "string") basis.dev.warn(namespace + ": defineType expects a string as a type name. `" + typeName + "` is not a string");
+      var list = deferredTypeDef[typeName];
+      if (list) {
+        for (var i = 0, def; def = list[i]; i++) {
+          var typeHost = def[0];
+          var fieldName = def[1];
+          typeHost[fieldName] = type;
+        }
+        delete deferredTypeDef[typeName];
+      }
+      delete pendingTypeNames[typeName];
+      if (namedTypes[typeName]) basis.dev.warn(namespace + ": type `" + typeName + "` is already defined. Redefined with new version");
+      namedTypes[typeName] = type;
+    }
+    function getTypeByName(typeName, typeHost, field) {
+      if (namedTypes.hasOwnProperty(typeName)) return namedTypes[typeName];
+      if (typeHost && field) {
+        var list = deferredTypeDef[typeName];
+        if (!list) list = deferredTypeDef[typeName] = [];
+        list.push([ typeHost, field ]);
+      } else pendingTypeNames[typeName] = true;
+      return function(value, oldValue) {
+        var Type = namedTypes.hasOwnProperty(typeName) ? namedTypes[typeName] : null;
+        if (Type) return Type(value, oldValue);
+        if (arguments.length && value != null) basis.dev.warn(namespace + ": type `" + typeName + "` is not defined for `" + field + "`, but function called");
+      };
+    }
+    function getTypeByNameIfDefined(typeName) {
+      if (namedTypes.hasOwnProperty(typeName)) return namedTypes[typeName];
+    }
+    function validateScheme() {
+      for (var typeName in pendingTypeNames) basis.dev.warn(namespace + ": type `" + typeName + "` is not defined, but used via type.getTypeByName()");
+      for (var typeName in deferredTypeDef) basis.dev.warn(namespace + ": type `" + typeName + "` is not defined, but used by " + deferredTypeDef[typeName].length + " type(s)");
+    }
+    module.exports = {
+      string: basis.require("./1y.js"),
+      number: basis.require("./1z.js"),
+      "int": basis.require("./20.js"),
+      "enum": basis.require("./21.js"),
+      array: basis.require("./22.js"),
+      object: basis.require("./23.js"),
+      date: basis.require("./24.js"),
+      validate: validateScheme,
+      getTypeByName: getTypeByName,
+      getTypeByNameIfDefined: getTypeByNameIfDefined,
+      defineType: defineType
+    };
+  },
+  "1y.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    function stringTransform(defaultValue, nullable) {
+      var transformName = nullable ? "basis.type.string.nullable" : "basis.type.string";
+      if (nullable) {
+        if (defaultValue !== null && typeof defaultValue !== "string") {
+          basis.dev.warn(transformName + ".default expected string or null as default value but got ", defaultValue, ". Falling back to " + transformName);
+          return string.nullable;
+        }
+      } else {
+        if (typeof defaultValue !== "string") {
+          basis.dev.warn(transformName + ".default expected string as default value but got ", defaultValue, ". Falling back to " + transformName);
+          return string;
+        }
+      }
+      var transform = function(value, oldValue) {
+        if (typeof value === "string") return value;
+        if (nullable && value === null) return null;
+        basis.dev.warn(transformName + " expected string or null but got ", value);
+        return oldValue;
+      };
+      transform.DEFAULT_VALUE = defaultValue;
+      return transform;
+    }
+    var string = stringTransform("", false);
+    string["default"] = function(defaultValue) {
+      return stringTransform(defaultValue, false);
+    };
+    string.nullable = stringTransform(null, true);
+    string.nullable["default"] = function(defaultValue) {
+      return stringTransform(defaultValue, true);
+    };
+    module.exports = string;
+  },
+  "1z.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    function isNumber(value) {
+      return value === 0 || typeof value !== "object" && isFinite(value);
+    }
+    function numberTransform(defaultValue, nullable) {
+      var transformName = nullable ? "basis.type.number.nullable" : "basis.type.number";
+      if (nullable) {
+        if (defaultValue !== null && !isNumber(defaultValue)) {
+          basis.dev.warn(transformName + ".default expected number or null as default value but got ", defaultValue, ". Falling back to " + transformName);
+          return number.nullable;
+        }
+      } else {
+        if (!isNumber(defaultValue)) {
+          basis.dev.warn(transformName + ".default expected number as default value but got ", defaultValue, ". Falling back to " + transformName);
+          return number;
+        }
+      }
+      defaultValue = defaultValue === null ? null : Number(defaultValue);
+      var transform = function(value, oldValue) {
+        if (isNumber(value)) return Number(value);
+        if (nullable && value === null) return null;
+        basis.dev.warn(transformName + " expected number but got ", value);
+        return oldValue;
+      };
+      transform.DEFAULT_VALUE = defaultValue;
+      return transform;
+    }
+    var number = numberTransform(0, false);
+    number["default"] = function(defaultValue) {
+      return numberTransform(defaultValue, false);
+    };
+    number.nullable = numberTransform(null, true);
+    number.nullable["default"] = function(defaultValue) {
+      return numberTransform(defaultValue, true);
+    };
+    module.exports = number;
+  },
+  "20.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    function isNumber(value) {
+      return value === 0 || typeof value !== "object" && isFinite(value);
+    }
+    function intTransform(defaultValue, nullable) {
+      var transformName = nullable ? "basis.type.int.nullable" : "basis.type.int";
+      if (nullable) {
+        if (defaultValue !== null && !isNumber(defaultValue)) {
+          basis.dev.warn(transformName + ".default expected number or null as default value but got ", defaultValue, ". Falling back to " + transformName);
+          return int.nullable;
+        }
+      } else {
+        if (!isNumber(defaultValue)) {
+          basis.dev.warn(transformName + ".default expected number as default value but got ", defaultValue, ". Falling back to " + transformName);
+          return int;
+        }
+      }
+      defaultValue = defaultValue === null ? null : parseInt(defaultValue, 10);
+      var transform = function(value, oldValue) {
+        if (isNumber(value)) return parseInt(value, 10);
+        if (nullable && value === null) return null;
+        basis.dev.warn(transformName + " expected number but got ", value);
+        return oldValue;
+      };
+      transform.DEFAULT_VALUE = defaultValue;
+      return transform;
+    }
+    var int = intTransform(0, false);
+    int["default"] = function(defaultValue) {
+      return intTransform(defaultValue, false);
+    };
+    int.nullable = intTransform(null, true);
+    int.nullable["default"] = function(defaultValue) {
+      return intTransform(defaultValue, true);
+    };
+    module.exports = int;
+  },
+  "21.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    function enumeration(values) {
+      if (!Array.isArray(values)) {
+        basis.dev.warn("basis.type.enum constructor expected array but got ", values, ". Wrapping into array");
+        values = [ values ];
+      }
+      if (!values.length) throw new Error("basis.type.enum constructor expected non-empty array but got empty.");
+      var transform = function(value, oldValue) {
+        if (values.indexOf(value) !== -1) return value;
+        basis.dev.warn("basis.type.enum expected one of values from the list ", values, " but got ", value);
+        return oldValue;
+      };
+      transform.DEFAULT_VALUE = values[0];
+      transform["default"] = function(defaultValue) {
+        if (values.indexOf(defaultValue) === -1) {
+          basis.dev.warn("basis.type.enum.default expected one of values from the list ", values, " but got ", defaultValue, ". Ignoring default value");
+          return transform;
+        }
+        var transformWithDefaultValue = function() {
+          return transform.apply(this, arguments);
+        };
+        transformWithDefaultValue.DEFAULT_VALUE = defaultValue;
+        return transformWithDefaultValue;
+      };
+      return transform;
+    }
+    module.exports = enumeration;
+  },
+  "22.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    function equalArrays(a, b) {
+      if (a === b) return true;
+      if (a.length != b.length) return false;
+      for (var i = 0; i < a.length; ++i) if (a[i] !== b[i]) return false;
+      return true;
+    }
+    function arrayTransform(defaultValue, nullable) {
+      var transformName = nullable ? "basis.type.array.nullable" : "basis.type.array";
+      if (nullable) {
+        if (defaultValue !== null && !Array.isArray(defaultValue)) {
+          basis.dev.warn(transformName + ".default expected array or null as default value but got ", defaultValue, ". Falling back to ", defaultValue);
+          return array.nullable;
+        }
+      } else {
+        if (!Array.isArray(defaultValue)) {
+          basis.dev.warn(transformName + ".default expected array as default value but got ", defaultValue, ". Falling back to ", defaultValue);
+          return array;
+        }
+      }
+      var transform = function(value, oldValue) {
+        if (Array.isArray(value)) return oldValue && equalArrays(value, oldValue) ? oldValue : value;
+        if (nullable && value === null) return null;
+        basis.dev.warn("basis.type.array.nullable expected array or null but got ", value);
+        return oldValue;
+      };
+      transform.DEFAULT_VALUE = defaultValue;
+      return transform;
+    }
+    var defValue = [];
+    if (typeof Object.freeze === "function") Object.freeze(defValue);
+    if (typeof Proxy === "function") defValue = new Proxy(defValue, {
+      set: function() {
+        basis.dev.warn("Ignored attempt to modify basis.type.array read-only default value");
+      }
+    });
+    var array = arrayTransform(defValue, false);
+    array["default"] = function(defaultValue) {
+      return arrayTransform(defaultValue, false);
+    };
+    array.nullable = arrayTransform(null, true);
+    array.nullable["default"] = function(defaultValue) {
+      return arrayTransform(defaultValue, true);
+    };
+    module.exports = array;
+  },
+  "23.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    function isObject(value) {
+      if (!value) return false;
+      if (Array.isArray(value)) return false;
+      return typeof value === "object";
+    }
+    function objectTransform(defaultValue, nullable) {
+      var transformName = nullable ? "basis.type.object.nullable" : "basis.type.object";
+      if (nullable) {
+        if (defaultValue !== null && !isObject(defaultValue)) {
+          basis.dev.warn(transformName + ".default expected object or null as default value but got ", defaultValue, ". Falling back to " + transformName);
+          return object.nullable;
+        }
+      } else {
+        if (!isObject(defaultValue)) {
+          basis.dev.warn(transformName + ".default expected object as default value but got ", defaultValue, ". Falling back to " + transformName);
+          return object;
+        }
+      }
+      var transform = function(value, oldValue) {
+        if (isObject(value)) return value;
+        if (nullable && value === null) return null;
+        basis.dev.warn(transformName + " expected object but got ", value);
+        return oldValue;
+      };
+      transform.DEFAULT_VALUE = defaultValue;
+      return transform;
+    }
+    var defValue = {};
+    if (typeof Object.freeze === "function") Object.freeze(defValue);
+    if (typeof Proxy === "function") defValue = new Proxy(defValue, {
+      set: function() {
+        basis.dev.warn("Ignored attempt to modify basis.type.object read-only default value");
+      }
+    });
+    var object = objectTransform(defValue, false);
+    object["default"] = function(defaultValue) {
+      return objectTransform(defaultValue, false);
+    };
+    object.nullable = objectTransform(null, true);
+    object.nullable["default"] = function(defaultValue) {
+      return objectTransform(defaultValue, true);
+    };
+    module.exports = object;
+  },
+  "24.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var reIsoStringSplit = /\D/;
+    var reIsoTimezoneDesignator = /(.{10,})([\-\+]\d{1,2}):?(\d{1,2})?$/;
+    var fromISOString = function() {
+      function fastDateParse(y, m, d, h, i, s, ms) {
+        var date = new Date(y, m - 1, d, h || 0, 0, s || 0, ms ? ms.substr(0, 3) : 0);
+        date.setMinutes((i || 0) - tz - date.getTimezoneOffset());
+        return date;
+      }
+      var tz;
+      return function(isoDateString) {
+        tz = 0;
+        return fastDateParse.apply(null, String(isoDateString || "").replace(reIsoTimezoneDesignator, function(m, pre, h, i) {
+          tz = Number(h || 0) * 60 + Number(i || 0);
+          return pre;
+        }).split(reIsoStringSplit));
+      };
+    }();
+    var ISO_REGEXP = /^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}(\.\d+)?(([+-]\d{2}(:\d{2})?)|Z)?$/;
+    var PARTIAL_ISO_REGEXP = /^\d{4}-\d{2}-\d{2}$/;
+    function toDate(value) {
+      if (typeof value === "number" && isFinite(value)) return new Date(value);
+      if (value && typeof value === "string") {
+        if (!ISO_REGEXP.test(value) && !PARTIAL_ISO_REGEXP.test(value)) basis.dev.warn("basis.type.date expected ISO string but got ", value, ". Try to parse as ISO string anyway");
+        return fromISOString(value);
+      }
+      if (value instanceof Date) return value;
+      return undefined;
+    }
+    function dateTransform(defaultValue, nullable) {
+      var transformName = nullable ? "basis.type.date.nullable" : "basis.type.date";
+      var defaultValueAsDate = toDate(defaultValue);
+      if (nullable) {
+        if (defaultValue !== null && defaultValueAsDate === undefined) {
+          basis.dev.warn(transformName + ".default ISO string, number or date object as default value but got ", defaultValue, ". Falling back to " + transformName);
+          return date.nullable;
+        }
+      } else {
+        if (defaultValueAsDate === undefined) {
+          basis.dev.warn(transformName + ".default ISO string, number, date object or null as default value but got ", defaultValue, ". Falling back to " + transformName);
+          return date;
+        }
+      }
+      var transform = function(value, oldValue) {
+        if (nullable && value === null) return null;
+        var dateObject = toDate(value);
+        if (dateObject === undefined) {
+          basis.dev.warn("basis.type.date expected ISO string, number, date or null but got ", value);
+          return oldValue;
+        }
+        if (dateObject && oldValue && dateObject.getTime() === oldValue.getTime()) return oldValue;
+        return dateObject;
+      };
+      transform.DEFAULT_VALUE = defaultValueAsDate || null;
+      return transform;
+    }
+    var date = dateTransform(new Date(0), false);
+    date["default"] = function(defaultValue) {
+      return dateTransform(defaultValue, false);
+    };
+    date.nullable = dateTransform(null, true);
+    date.nullable["default"] = function(defaultValue) {
+      return dateTransform(defaultValue, true);
+    };
+    module.exports = date;
+  },
+  "r.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    module.exports = rempl;
+    basis.dev.log(rempl);
+  },
+  "25.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var entity = basis.require("./o.js");
+    var Asset = basis.require("./26.js");
+    var Module = basis.require("./27.js");
+    var Profile = entity.createType({
+      name: "Profile",
+      fields: {
+        version: String,
+        hash: String,
+        chunks: Array,
+        assets: entity.createSetType(Asset),
+        modules: entity.createSetType(Module),
+        errors: Array,
+        warnings: Array,
+        hasErrors: Boolean,
+        hasWarnings: Boolean
+      }
+    });
+    module.exports = Profile;
+  },
+  "26.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var entity = basis.require("./o.js");
+    var Asset = entity.createType({
+      name: "Asset",
+      fields: {
+        name: String,
+        size: Number
+      }
+    });
+    module.exports = Asset;
+  },
+  "27.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var entity = basis.require("./o.js");
+    var Module = entity.createType({
+      name: "Module",
+      fields: {
+        id: String,
+        name: String,
+        size: Number
+      }
+    });
+    module.exports = Module;
+  },
+  "7.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var namespace = "basis.ui";
+    var document = global.document;
+    var Class = basis.Class;
+    var createEvent = basis.require("./6.js").create;
+    var HtmlTemplate = basis.require("./8.js").Template;
+    var htmlTemplateIdMarker = basis.require("./b.js").MARKER;
+    var TemplateSwitcher = basis.require("./d.js").TemplateSwitcher;
+    var basisDomWrapper = basis.require("./j.js");
+    var DWNode = basisDomWrapper.Node;
+    var DWPartitionNode = basisDomWrapper.PartitionNode;
+    var DWGroupingNode = basisDomWrapper.GroupingNode;
+    var instances = {};
+    var notifier = new basis.Token;
+    var notifyCreateSchedule = basis.asap.schedule(function(instance) {
+      instances[instance.basisObjectId] = instance;
+      notifier.set({
+        action: "create",
+        instance: instance
+      });
+    });
+    var notifyDestroySchedule = basis.asap.schedule(function(instance) {
+      delete instances[instance.basisObjectId];
+      notifier.set({
+        action: "destroy",
+        instance: instance
+      });
+    });
+    var bindingSeed = 1;
+    var unknownEventBindingCheck = {};
+    function extendBinding(binding, extension) {
+      var info = basis.dev.getInfo(extension, "map");
+      binding.bindingId = bindingSeed++;
+      for (var key in extension) {
+        var def = null;
+        var value = extension[key];
+        if (Node && value instanceof Node || basis.resource.isResource(value)) {
+          def = {
+            events: "satelliteChanged",
+            getter: function(key, satellite) {
+              var resource = typeof satellite == "function" ? satellite : null;
+              var init = function(node) {
+                init = false;
+                if (resource) {
+                  satellite = resource();
+                  if (satellite instanceof Node == false) return;
+                  resource = null;
+                }
+                node.setSatellite(key, satellite);
+                if (node.satellite[key] !== satellite) basis.dev.warn("basis.ui.binding: implicit satellite `" + key + "` attach to owner failed");
+              };
+              return function(node) {
+                if (init) init(node);
+                return resource || (node.satellite[key] ? node.satellite[key].element : null);
+              };
+            }(key, value)
+          };
+        } else {
+          if (value) {
+            if (typeof value == "string") value = BINDING_PRESET.process(key, value); else if (value.bindingBridge) value = basis.fn.$const(value);
+            if (typeof value != "object") {
+              def = {
+                getter: typeof value == "function" ? value : basis.getter(value)
+              };
+            } else if (Array.isArray(value)) {
+              def = {
+                events: value[0],
+                getter: basis.getter(value[1])
+              };
+            } else {
+              def = {
+                events: value.events,
+                getter: basis.getter(value.getter)
+              };
+            }
+          }
+        }
+        if (def && info && info.hasOwnProperty(key)) def.loc = info[key];
+        binding[key] = def;
+      }
+    }
+    var BINDING_PRESET = function() {
+      var presets = {};
+      var prefixRegExp = /^([a-z_][a-z0-9_]*):(.*)/i;
+      return {
+        add: function(prefix, func) {
+          if (!presets[prefix]) {
+            presets[prefix] = func;
+          } else {
+            basis.dev.warn("Preset `" + prefix + "` already exists, new definition ignored");
+          }
+        },
+        process: function(key, value) {
+          var preset;
+          var m = value.match(prefixRegExp);
+          if (m) {
+            preset = presets[m[1]];
+            value = m[2] || key;
+          }
+          return preset ? preset(value) : value;
+        }
+      };
+    }();
+    BINDING_PRESET.add("data", function(path) {
+      return {
+        events: "update",
+        getter: "data." + path
+      };
+    });
+    BINDING_PRESET.add("satellite", function(satelliteName) {
+      return {
+        events: "satelliteChanged",
+        getter: function(node) {
+          return node.satellite[satelliteName] ? node.satellite[satelliteName].element : null;
+        }
+      };
+    });
+    var TEMPLATE_BINDING = Class.customExtendProperty({
+      $role: {
+        events: "ownerSatelliteNameChanged",
+        getter: function(node) {
+          if (node.role) {
+            var roleId = node.roleId && node.binding[node.roleId];
+            if (roleId && typeof roleId.getter == "function") {
+              roleId = roleId.getter(node);
+              if (roleId === undefined) return "";
+            }
+            return node.role + (roleId !== undefined ? "(" + roleId + ")" : "");
+          }
+          return node.ownerSatelliteName || "";
+        }
+      },
+      active: {
+        events: "activeChanged",
+        getter: function(node) {
+          return node.active;
+        }
+      },
+      state: {
+        events: "stateChanged",
+        getter: function(node) {
+          return String(node.state);
+        }
+      },
+      childNodesState: {
+        events: "childNodesStateChanged",
+        getter: function(node) {
+          return String(node.childNodesState);
+        }
+      },
+      childCount: {
+        events: "childNodesModified",
+        getter: function(node) {
+          return node.childNodes ? node.childNodes.length : 0;
+        }
+      },
+      hasChildren: {
+        events: "childNodesModified",
+        getter: function(node) {
+          return !!node.firstChild;
+        }
+      },
+      empty: {
+        events: "childNodesModified",
+        getter: function(node) {
+          return !node.firstChild;
+        }
+      }
+    }, extendBinding);
+    var BINDING_TEMPLATE_INTERFACE = {
+      attach: function(object, handler, context) {
+        object.addHandler(handler, context);
+      },
+      detach: function(object, handler, context) {
+        object.removeHandler(handler, context);
+      }
+    };
+    var TEMPLATE_ACTION = Class.extensibleProperty({
+      select: function(event) {
+        if (this.isDisabled()) return;
+        if (this.selectedRA_) {
+          basis.dev.warn("`selected` property is under bb-value and can't be changed by user action. Override `select` action to make your logic working.");
+          return;
+        }
+        if (this.contextSelection && this.contextSelection.multiple) this.select(event.ctrlKey || event.metaKey); else this.select();
+      }
+    });
+    var TEMPLATE_SWITCHER_HANDLER = {
+      "*": function(event) {
+        var switcher = this.templateSwitcher_;
+        if (switcher && switcher.ruleEvents && switcher.ruleEvents[event.type]) this.setTemplate(switcher.resolve(this));
+      }
+    };
+    var TEMPLATE = new HtmlTemplate("<div/>");
+    var fragments = [];
+    function getDocumentFragment() {
+      return fragments.pop() || document.createDocumentFragment();
+    }
+    function reinsertPartitionNodes(partition) {
+      var nodes = partition.nodes;
+      if (nodes) for (var i = nodes.length - 1, child; child = nodes[i]; i--) child.parentNode.insertBefore(child, child.nextSibling);
+    }
+    var focusTimer;
+    var TemplateMixin = function(super_) {
+      return {
+        propertyDescriptors: {
+          action: false,
+          binding: false,
+          template: "templateChanged",
+          tmpl: "templateChanged",
+          element: false,
+          childNodesElement: false
+        },
+        template: TEMPLATE,
+        emit_templateChanged: createEvent("templateChanged"),
+        templateSwitcher_: null,
+        binding: TEMPLATE_BINDING,
+        action: TEMPLATE_ACTION,
+        tmpl: null,
+        element: null,
+        childNodesElement: null,
+        init: function() {
+          this.element = this.childNodesElement = getDocumentFragment();
+          super_.init.call(this);
+        },
+        postInit: function() {
+          super_.postInit.call(this);
+          var template = this.template;
+          if (template) {
+            var nodeDocumentFragment = this.childNodesElement;
+            var bindingId = this.constructor.basisClassId_ + "_" + this.binding.bindingId;
+            if (bindingId in unknownEventBindingCheck == false) {
+              unknownEventBindingCheck[bindingId] = true;
+              for (var bindName in this.binding) {
+                var events = this.binding[bindName] && this.binding[bindName].events;
+                if (events) {
+                  events = String(events).trim().split(/\s+|\s*,\s*/);
+                  for (var i = 0, eventName; eventName = events[i]; i++) if ("emit_" + eventName in this == false) basis.dev.warn("basis.ui: binding `" + bindName + "` has unknown event `" + eventName + "` for " + this.constructor.className);
+                }
+              }
+            }
+            this.template = null;
+            this.setTemplate(template);
+            fragments.push(nodeDocumentFragment);
+            if (this.container) {
+              this.container.appendChild(this.element);
+              this.container = null;
+            }
+          }
+          notifyCreateSchedule.add(this);
+        },
+        templateSync: function() {
+          var oldElement = this.element;
+          var tmpl = this.template.createInstance(this, this.templateAction, this.templateSync, this.binding, BINDING_TEMPLATE_INTERFACE);
+          var noChildNodesElement;
+          if (tmpl.childNodesHere) {
+            tmpl.childNodesElement = tmpl.childNodesHere.parentNode;
+            tmpl.childNodesElement.insertPoint = tmpl.childNodesHere;
+          }
+          this.tmpl = tmpl;
+          this.element = tmpl.element;
+          this.childNodesElement = tmpl.childNodesElement || tmpl.element;
+          noChildNodesElement = this.childNodesElement.nodeType != 1;
+          if (noChildNodesElement) this.childNodesElement = document.createDocumentFragment();
+          if (noChildNodesElement) this.noChildNodesElement_ = true; else delete this.noChildNodesElement_;
+          if (this.grouping) {
+            this.grouping.syncDomRefs();
+            var cursor = this;
+            while (cursor.grouping) cursor = cursor.grouping;
+            var topGrouping = cursor;
+            for (var groupNode = topGrouping.lastChild; groupNode; groupNode = groupNode.previousSibling) {
+              if (groupNode instanceof PartitionNode) topGrouping.insertBefore(groupNode, groupNode.nextSibling); else reinsertPartitionNodes(groupNode);
+            }
+            reinsertPartitionNodes(topGrouping.nullGroup);
+          } else {
+            for (var child = this.lastChild; child; child = child.previousSibling) this.insertBefore(child, child.nextSibling);
+          }
+          if (this instanceof PartitionNode) reinsertPartitionNodes(this);
+          if (oldElement && oldElement !== this.element && oldElement.nodeType != 11) {
+            var parentNode = oldElement && oldElement.parentNode;
+            if (parentNode) {
+              if (this.owner && this.owner.tmpl) this.owner.tmpl.set(oldElement, this.element);
+              if (this.element.parentNode !== parentNode) parentNode.replaceChild(this.element, oldElement);
+            }
+          }
+          this.emit_templateChanged();
+        },
+        setTemplate: function(template) {
+          var curSwitcher = this.templateSwitcher_;
+          var switcher;
+          if (template instanceof TemplateSwitcher) {
+            switcher = template;
+            template = switcher.resolve(this);
+          }
+          if (template instanceof HtmlTemplate == false) template = null;
+          if (!template) {
+            basis.dev.warn("basis.ui.Node#setTemplate: set null to template possible only on node destroy");
+            return;
+          }
+          if (switcher) {
+            this.templateSwitcher_ = switcher;
+            if (!curSwitcher) this.addHandler(TEMPLATE_SWITCHER_HANDLER, this);
+          }
+          if (curSwitcher && curSwitcher.resolve(this) !== template) {
+            this.templateSwitcher_ = null;
+            this.removeHandler(TEMPLATE_SWITCHER_HANDLER, this);
+          }
+          var oldTmpl = this.tmpl;
+          var oldTemplate = this.template;
+          if (oldTemplate !== template) {
+            this.template = template;
+            this.templateSync();
+            if (oldTemplate) oldTemplate.clearInstance(oldTmpl);
+          }
+        },
+        updateBind: function(bindName) {
+          var binding = this.binding[bindName];
+          var getter = binding && binding.getter;
+          if (getter && this.tmpl) this.tmpl.set(bindName, getter(this));
+          if (this.roleId == bindName) this.updateBind("$roleId");
+        },
+        templateAction: function(actionName, event) {
+          var action = this.action[actionName];
+          if (action) action.call(this, event);
+          if (!action) basis.dev.warn("template call `" + actionName + "` action, but it isn't defined in action list");
+        },
+        focus: function(select) {
+          var focusElement = this.tmpl ? this.tmpl.focus || this.element : null;
+          if (focusElement) {
+            if (focusTimer) focusTimer = basis.clearImmediate(focusTimer);
+            focusTimer = basis.setImmediate(function() {
+              try {
+                focusElement.focus();
+                if (select) focusElement.select();
+              } catch (e) {}
+            });
+          }
+        },
+        blur: function() {
+          var focusElement = this.tmpl ? this.tmpl.focus || this.element : null;
+          if (focusElement) try {
+            focusElement.blur();
+          } catch (e) {}
+        },
+        destroy: function() {
+          if (instances[this.basisObjectId]) notifyDestroySchedule.add(this); else notifyCreateSchedule.remove(this);
+          var template = this.template;
+          var element = this.element;
+          if (this.templateSwitcher_) {
+            this.templateSwitcher_ = null;
+            this.removeHandler(TEMPLATE_SWITCHER_HANDLER, this);
+          }
+          template.clearInstance(this.tmpl);
+          super_.destroy.call(this);
+          this.tmpl = null;
+          this.element = null;
+          this.childNodesElement = null;
+          var parentNode = element && element.parentNode;
+          if (parentNode && parentNode.nodeType == 1) parentNode.removeChild(element);
+        }
+      };
+    };
+    var ContainerTemplateMixin = function(super_) {
+      return {
+        insertBefore: function(newChild, refChild) {
+          if (this.noChildNodesElement_) {
+            delete this.noChildNodesElement_;
+            basis.dev.warn("basis.ui: Template has no childNodesElement container, but insertBefore method called; probably it's a bug");
+          }
+          newChild = super_.insertBefore.call(this, newChild, refChild);
+          var target = newChild.groupNode || this;
+          var container = target.childNodesElement || this.childNodesElement;
+          var nextSibling = newChild.nextSibling;
+          var insertPoint = nextSibling && nextSibling.element.parentNode == container ? nextSibling.element : null;
+          var childElement = newChild.element;
+          var refNode = insertPoint || container.insertPoint || null;
+          if (childElement.parentNode !== container || childElement.nextSibling !== refNode) container.insertBefore(childElement, refNode);
+          return newChild;
+        },
+        removeChild: function(oldChild) {
+          super_.removeChild.call(this, oldChild);
+          var element = oldChild.element;
+          var parent = element.parentNode;
+          if (parent) parent.removeChild(element);
+          return oldChild;
+        },
+        clear: function(alive) {
+          if (alive) {
+            var node = this.firstChild;
+            while (node) {
+              var element = node.element;
+              var parent = element.parentNode;
+              if (parent) parent.removeChild(element);
+              node = node.nextSibling;
+            }
+          }
+          super_.clear.call(this, alive);
+        },
+        setChildNodes: function(childNodes, keepAlive) {
+          if (this.noChildNodesElement_) {
+            delete this.noChildNodesElement_;
+            basis.dev.warn("basis.ui: Template has no childNodesElement container, but setChildNodes method called; probably it's a bug");
+          }
+          var domFragment = document.createDocumentFragment();
+          var target = this.grouping || this;
+          var container = target.childNodesElement;
+          target.childNodesElement = domFragment;
+          super_.setChildNodes.call(this, childNodes, keepAlive);
+          container.insertBefore(domFragment, container.insertPoint || null);
+          target.childNodesElement = container;
+        }
+      };
+    };
+    var PartitionNode = Class(DWPartitionNode, TemplateMixin, {
+      className: namespace + ".PartitionNode",
+      binding: {
+        title: "data:"
+      }
+    });
+    var GroupingNode = Class(DWGroupingNode, ContainerTemplateMixin, {
+      className: namespace + ".GroupingNode",
+      childClass: PartitionNode,
+      groupingClass: Class.SELF,
+      element: null,
+      childNodesElement: null,
+      emit_ownerChanged: function(oldOwner) {
+        this.syncDomRefs();
+        DWGroupingNode.prototype.emit_ownerChanged.call(this, oldOwner);
+      },
+      init: function() {
+        this.element = this.childNodesElement = document.createDocumentFragment();
+        DWGroupingNode.prototype.init.call(this);
+        instances[this.basisObjectId] = this;
+        notifier.set({
+          action: "create",
+          instance: this
+        });
+      },
+      syncDomRefs: function() {
+        var cursor = this;
+        var owner = this.owner;
+        var element = null;
+        if (owner) element = owner.tmpl && owner.tmpl.groupsElement || owner.childNodesElement;
+        do {
+          cursor.element = cursor.childNodesElement = element;
+        } while (cursor = cursor.grouping);
+      },
+      destroy: function() {
+        delete instances[this.basisObjectId];
+        notifier.set({
+          action: "destroy",
+          instance: this
+        });
+        DWGroupingNode.prototype.destroy.call(this);
+        this.element = null;
+        this.childNodesElement = null;
+      }
+    });
+    var Node = Class(DWNode, TemplateMixin, ContainerTemplateMixin, {
+      className: namespace + ".Node",
+      binding: {
+        selected: {
+          events: "select unselect",
+          getter: function(node) {
+            return node.selected;
+          }
+        },
+        unselected: {
+          events: "select unselect",
+          getter: function(node) {
+            return !node.selected;
+          }
+        },
+        disabled: {
+          events: "disable enable",
+          getter: function(node) {
+            return node.isDisabled();
+          }
+        },
+        enabled: {
+          events: "disable enable",
+          getter: function(node) {
+            return !node.isDisabled();
+          }
+        },
+        tabindex: {
+          events: "enable disable",
+          getter: function(node) {
+            return node.isDisabled() ? -1 : node.tabindex || 0;
+          }
+        }
+      },
+      childClass: Class.SELF,
+      childFactory: function(config) {
+        return new this.childClass(config);
+      },
+      groupingClass: GroupingNode
+    });
+    var ShadowNodeList = Node.subclass({
+      className: namespace + ".ShadowNodeList",
+      emit_ownerChanged: function(oldOwner) {
+        Node.prototype.emit_ownerChanged.call(this, oldOwner);
+        this.setDataSource(this.owner && this.owner.getChildNodesDataset());
+      },
+      getChildNodesElement: function(owner) {
+        return owner.childNodesElement;
+      },
+      listen: {
+        owner: {
+          templateChanged: function() {
+            this.childNodes.forEach(function(child) {
+              this.appendChild(child.element);
+            }, this.getChildNodesElement(this.owner) || this.owner.element);
+          }
+        }
+      },
+      childClass: {
+        className: namespace + ".ShadowNode",
+        getElement: function(node) {
+          return node.element;
+        },
+        templateSync: function() {
+          Node.prototype.templateSync.call(this);
+          var newElement = this.getElement(this.delegate);
+          if (newElement) {
+            newElement[htmlTemplateIdMarker] = this.delegate.element[htmlTemplateIdMarker];
+            this.element = newElement;
+          }
+        },
+        listen: {
+          delegate: {
+            templateChanged: function() {
+              var oldElement = this.element;
+              var oldElementParent = oldElement.parentNode;
+              var newElement = this.getElement(this.delegate);
+              if (newElement) newElement[htmlTemplateIdMarker] = this.delegate.element[htmlTemplateIdMarker];
+              this.element = newElement || this.tmpl.element;
+              if (oldElementParent) oldElementParent.replaceChild(this.element, oldElement);
+            }
+          }
+        }
+      }
+    });
+    module.exports = {
+      debug_notifier: notifier,
+      debug_getInstances: function() {
+        return basis.object.values(instances);
+      },
+      BINDING_PRESET: BINDING_PRESET,
+      Node: Node,
+      PartitionNode: PartitionNode,
+      GroupingNode: GroupingNode,
+      ShadowNodeList: ShadowNodeList,
+      ShadowNode: ShadowNodeList.prototype.childClass
+    };
+  },
+  "28.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Node = basis.require("./7.js").Node;
+    var Value = basis.require("./2.js").Value;
+    module.exports = new Node({
+      active: basis.PROXY,
+      autoDelegate: true,
+      template: basis.template.get(".8"),
+      binding: {
+        version: Value.query("data.profile.data.version").as(function(version) {
+          return version || "n/a";
+        }),
+        hash: Value.query("data.profile.data.hash").as(function(hash) {
+          return hash || "n/a";
+        }),
+        assets: Value.query("data.profile.data.assets.itemCount").as(Number),
+        modules: Value.query("data.profile.data.modules").as(Number),
+        chunks: Value.query("data.profile.data.chunks").as(basis.getter("length").as(Number)),
+        errors: Value.query("data.profile.data.errors").as(basis.getter("length").as(Number)),
+        warnings: Value.query("data.profile.data.warnings").as(basis.getter("length").as(Number)),
+        modulesTable: "satellite:",
+        assetsTable: "satellite:"
+      }
+    });
+  },
+  "8.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var namespace = "basis.template.html";
+    var document = global.document;
+    var Node = global.Node;
+    var camelize = basis.string.camelize;
+    var isMarkupToken = basis.require("./9.js").isMarkupToken;
+    var isTokenHasPlaceholder = basis.require("./9.js").isTokenHasPlaceholder;
+    var getL10nToken = basis.require("./9.js").token;
+    var getFunctions = basis.require("./a.js").getFunctions;
+    var basisTemplate = basis.require("./d.js");
+    var TemplateSwitchConfig = basisTemplate.TemplateSwitchConfig;
+    var TemplateSwitcher = basisTemplate.TemplateSwitcher;
+    var Template = basisTemplate.Template;
+    var getSourceByPath = basisTemplate.get;
+    var buildDOM = basis.require("./h.js");
+    var CLONE_NORMALIZATION_TEXT_BUG = basis.require("./b.js").CLONE_NORMALIZATION_TEXT_BUG;
+    var IS_SET_STYLE_SAFE = !!function() {
+      try {
+        return document.documentElement.style.color = "x";
+      } catch (e) {}
+    }();
+    var l10nTemplate = {};
+    var l10nTemplateSource = {};
+    function getSourceFromL10nToken(token) {
+      var dict = token.getDictionary();
+      var name = token.getName();
+      var id = name + "@" + dict.id;
+      var result = l10nTemplateSource[id];
+      var sourceWrapper;
+      if (!result) {
+        var sourceToken = dict.token(name);
+        result = l10nTemplateSource[id] = sourceToken.as(function(value) {
+          if (sourceToken.getType() == "markup") {
+            if (typeof value == "string" && isTokenHasPlaceholder(sourceToken)) value = value.replace(/\{#\}/g, "{__templateContext}");
+            if (value != this.value) if (sourceWrapper) {
+              sourceWrapper.detach(sourceToken, sourceToken.apply);
+              sourceWrapper = null;
+            }
+            if (value && String(value).substr(0, 5) == "path:") {
+              sourceWrapper = getSourceByPath(value.substr(5));
+              sourceWrapper.attach(sourceToken, sourceToken.apply);
+            }
+            return sourceWrapper ? sourceWrapper.bindingBridge.get(sourceWrapper) : value;
+          }
+          return this.value;
+        });
+        result.id = "{l10n:" + id + "}";
+        result.url = dict.getValueSource(name) + ":" + name;
+      }
+      return result;
+    }
+    function getL10nHtmlTemplate(token) {
+      if (typeof token == "string") token = getL10nToken(token);
+      if (!token) return null;
+      var templateSource = getSourceFromL10nToken(token);
+      var id = templateSource.id;
+      var htmlTemplate = l10nTemplate[id];
+      if (!htmlTemplate) htmlTemplate = l10nTemplate[id] = new HtmlTemplate(templateSource);
+      return htmlTemplate;
+    }
+    var builder = function() {
+      var WHITESPACE = /\s+/;
+      var CLASSLIST_SUPPORTED = global.DOMTokenList && document && document.documentElement.classList instanceof global.DOMTokenList;
+      var W3C_DOM_NODE_SUPPORTED = function() {
+        try {
+          return document instanceof Node;
+        } catch (e) {}
+      }() || false;
+      function collapseDomFragment(fragment) {
+        var startMarker = fragment.startMarker;
+        var endMarker = fragment.endMarker;
+        var cursor = startMarker.nextSibling;
+        while (cursor && cursor !== endMarker) {
+          var tmp = cursor;
+          cursor = cursor.nextSibling;
+          fragment.appendChild(tmp);
+        }
+        endMarker.parentNode.removeChild(endMarker);
+        fragment.startMarker = null;
+        fragment.endMarker = null;
+        return startMarker;
+      }
+      var bind_node = W3C_DOM_NODE_SUPPORTED ? function(domRef, oldNode, newValue, domNodeBindingProhibited) {
+        var newNode = !domNodeBindingProhibited && newValue && newValue instanceof Node ? newValue : domRef;
+        if (newNode !== oldNode) {
+          if (newNode.nodeType === 11 && !newNode.startMarker) {
+            newNode.startMarker = document.createTextNode("");
+            newNode.endMarker = document.createTextNode("");
+            newNode.insertBefore(newNode.startMarker, newNode.firstChild);
+            newNode.appendChild(newNode.endMarker);
+          }
+          if (oldNode.nodeType === 11 && oldNode.startMarker) oldNode = collapseDomFragment(oldNode);
+          oldNode.parentNode.replaceChild(newNode, oldNode);
+        }
+        return newNode;
+      } : function(domRef, oldNode, newValue, domNodeBindingProhibited) {
+        var newNode = !domNodeBindingProhibited && newValue && typeof newValue == "object" ? newValue : domRef;
+        if (newNode !== oldNode) {
+          try {
+            oldNode.parentNode.replaceChild(newNode, oldNode);
+          } catch (e) {
+            newNode = domRef;
+            if (oldNode !== newNode) oldNode.parentNode.replaceChild(newNode, oldNode);
+          }
+        }
+        return newNode;
+      };
+      var bind_element = function(domRef, oldNode, newValue, domNodeBindingProhibited) {
+        var newNode = bind_node(domRef, oldNode, newValue, domNodeBindingProhibited);
+        if (newNode === domRef && typeof newValue == "string") domRef.innerHTML = newValue;
+        return newNode;
+      };
+      var bind_comment = bind_node;
+      var bind_textNode = function(domRef, oldNode, newValue, domNodeBindingProhibited) {
+        var newNode = bind_node(domRef, oldNode, newValue, domNodeBindingProhibited);
+        if (newNode === domRef) domRef.nodeValue = String(newValue);
+        return newNode;
+      };
+      var bind_attrClass = CLASSLIST_SUPPORTED ? normalAttrClass : legacyAttrClass;
+      function normalAttrClass(domRef, oldClass, newValue, anim) {
+        var classList = domRef.classList;
+        if (!classList) return legacyAttrClass(domRef, oldClass, newValue, anim);
+        var newClass = newValue || "";
+        if (newClass != oldClass) {
+          if (oldClass) domRef.classList.remove(oldClass);
+          if (newClass) {
+            domRef.classList.add(newClass);
+            if (anim) {
+              domRef.classList.add(newClass + "-anim");
+              basis.nextTick(function() {
+                domRef.classList.remove(newClass + "-anim");
+              });
+            }
+          }
+        }
+        return newClass;
+      }
+      function legacyAttrClass(domRef, oldClass, newValue, anim) {
+        var newClass = newValue || "";
+        if (newClass != oldClass) {
+          var className = domRef.className;
+          var classNameIsObject = typeof className != "string";
+          var classList;
+          if (classNameIsObject) className = className.baseVal;
+          classList = className.split(WHITESPACE);
+          if (oldClass) basis.array.remove(classList, oldClass);
+          if (newClass) {
+            classList.push(newClass);
+            if (anim) {
+              basis.array.add(classList, newClass + "-anim");
+              basis.nextTick(function() {
+                var classList = (classNameIsObject ? domRef.className.baseVal : domRef.className).split(WHITESPACE);
+                basis.array.remove(classList, newClass + "-anim");
+                if (classNameIsObject) domRef.className.baseVal = classList.join(" "); else domRef.className = classList.join(" ");
+              });
+            }
+          }
+          if (classNameIsObject) domRef.className.baseVal = classList.join(" "); else domRef.className = classList.join(" ");
+        }
+        return newClass;
+      }
+      var bind_attrStyle = IS_SET_STYLE_SAFE ? function(domRef, propertyName, oldValue, newValue) {
+        if (oldValue !== newValue) domRef.style[camelize(propertyName)] = newValue;
+        return newValue;
+      } : function(domRef, propertyName, oldValue, newValue) {
+        if (oldValue !== newValue) {
+          try {
+            domRef.style[camelize(propertyName)] = newValue;
+          } catch (e) {}
+        }
+        return newValue;
+      };
+      var bind_attr = function(domRef, attrName, oldValue, newValue) {
+        if (oldValue !== newValue) {
+          if (newValue) domRef.setAttribute(attrName, newValue); else domRef.removeAttribute(attrName);
+        }
+        return newValue;
+      };
+      var bind_attrNS = function(domRef, namespace, attrName, oldValue, newValue) {
+        if (oldValue !== newValue) {
+          if (newValue) domRef.setAttributeNS(namespace, attrName, newValue); else domRef.removeAttributeNS(namespace, attrName);
+        }
+        return newValue;
+      };
+      function updateAttach() {
+        this.set(this.name, this.value);
+      }
+      function resolveValue(bindingName, value, Attaches) {
+        var bridge = value && value.bindingBridge;
+        var oldAttach = this.attaches && this.attaches[bindingName];
+        var tmpl = null;
+        if (bridge || oldAttach) {
+          if (bridge) {
+            var isMarkup = isMarkupToken(value);
+            var template;
+            if (isMarkup) template = getL10nHtmlTemplate(value);
+            if (!oldAttach || oldAttach.value !== value || oldAttach.template !== template) {
+              if (oldAttach) {
+                if (oldAttach.tmpl) oldAttach.template.clearInstance(oldAttach.tmpl);
+                oldAttach.value.bindingBridge.detach(oldAttach.value, updateAttach, oldAttach);
+              }
+              if (template) {
+                var context = this.context;
+                var bindings = this.bindings;
+                var onAction = this.action;
+                var bindingInterface = this.bindingInterface;
+                tmpl = template.createInstance(context, onAction, function onRebuild() {
+                  tmpl = newAttach.tmpl = template.createInstance(context, onAction, onRebuild, bindings, bindingInterface);
+                  tmpl.parent = tmpl.element.parentNode || tmpl.element;
+                  updateAttach.call(newAttach);
+                }, bindings, bindingInterface);
+                tmpl.parent = tmpl.element.parentNode || tmpl.element;
+              }
+              if (!this.attaches) this.attaches = new Attaches;
+              var newAttach = this.attaches[bindingName] = {
+                name: bindingName,
+                value: value,
+                template: template,
+                tmpl: tmpl,
+                set: this.tmpl.set
+              };
+              bridge.attach(value, updateAttach, newAttach);
+            } else tmpl = value && isMarkupToken(value) ? oldAttach.tmpl : null;
+            if (tmpl) {
+              tmpl.set("__templateContext", value.value);
+              return tmpl.parent;
+            }
+            value = bridge.get(value);
+          } else {
+            if (oldAttach) {
+              if (oldAttach.tmpl) oldAttach.template.clearInstance(oldAttach.tmpl);
+              oldAttach.value.bindingBridge.detach(oldAttach.value, updateAttach, oldAttach);
+              this.attaches[bindingName] = null;
+            }
+          }
+        }
+        return value;
+      }
+      function createBindingUpdater(names, getters) {
+        var name1 = names[0];
+        var name2 = names[1];
+        var getter1 = getters[name1];
+        var getter2 = getters[name2];
+        switch (names.length) {
+          case 1:
+            return function bindingUpdater1(object) {
+              this(name1, getter1(object));
+            };
+          case 2:
+            return function bindingUpdater2(object) {
+              this(name1, getter1(object));
+              this(name2, getter2(object));
+            };
+          default:
+            var getters_ = names.map(function(name) {
+              return getters[name];
+            });
+            return function bindingUpdaterN(object) {
+              for (var i = 0; i < names.length; i++) this(names[i], getters_[i](object));
+            };
+        }
+      }
+      function makeHandler(events, getters) {
+        for (var name in events) events[name] = createBindingUpdater(events[name], getters);
+        return name ? events : null;
+      }
+      function createBindingFunction(keys) {
+        var bindingCache = {};
+        return function getBinding(instance, set) {
+          var bindings = instance.bindings;
+          if (!bindings) return {};
+          var cacheId = "bindingId" in bindings ? bindings.bindingId : null;
+          if (!cacheId) basis.dev.warn("basis.template.Template.getBinding: bindings has no bindingId property, cache is not used");
+          var result = bindingCache[cacheId];
+          if (!result) {
+            var names = [];
+            var getters = {};
+            var events = {};
+            for (var i = 0, bindingName; bindingName = keys[i]; i++) {
+              var binding = bindings[bindingName];
+              var getter = binding && binding.getter;
+              if (getter) {
+                getters[bindingName] = getter;
+                names.push(bindingName);
+                if (binding.events) {
+                  var eventList = String(binding.events).trim().split(/\s+|\s*,\s*/);
+                  for (var j = 0, eventName; eventName = eventList[j]; j++) {
+                    if (events[eventName]) events[eventName].push(bindingName); else events[eventName] = [ bindingName ];
+                  }
+                }
+              }
+            }
+            result = {
+              names: names,
+              sync: createBindingUpdater(names, getters),
+              handler: makeHandler(events, getters)
+            };
+            if (cacheId) bindingCache[cacheId] = result;
+          }
+          if (set) result.sync.call(set, instance.context);
+          if (!instance.bindingInterface) return;
+          if (result.handler) instance.bindingInterface.attach(instance.context, result.handler, set);
+          return result.handler;
+        };
+      }
+      var tools = {
+        bind_textNode: bind_textNode,
+        bind_node: bind_node,
+        bind_element: bind_element,
+        bind_comment: bind_comment,
+        bind_attr: bind_attr,
+        bind_attrNS: bind_attrNS,
+        bind_attrClass: bind_attrClass,
+        bind_attrStyle: bind_attrStyle,
+        resolve: resolveValue,
+        l10nToken: getL10nToken
+      };
+      return function(tokens, instances) {
+        var fn = getFunctions(tokens, true, this.source.url, tokens.source_, !CLONE_NORMALIZATION_TEXT_BUG);
+        var hasL10n = fn.createL10nSync;
+        var initInstance;
+        var l10nProtoSync;
+        var l10nMap = {};
+        var l10nLinks = [];
+        var l10nMarkupTokens = [];
+        var seed = 0;
+        var proto = {
+          cloneNode: function() {
+            if (seed == 1) return buildDOM(tokens);
+            proto = buildDOM(tokens);
+            if (hasL10n) {
+              l10nProtoSync = fn.createL10nSync(proto, l10nMap, bind_attr, CLONE_NORMALIZATION_TEXT_BUG);
+              for (var i = 0, l10nToken; l10nToken = l10nLinks[i]; i++) l10nProtoSync(l10nToken.path, l10nMap[l10nToken.path]);
+            }
+            return proto.cloneNode(true);
+          }
+        };
+        var createDOM = function() {
+          return proto.cloneNode(true);
+        };
+        if (hasL10n) {
+          var initL10n = function(set) {
+            for (var i = 0, token; token = l10nLinks[i]; i++) set(token.path, l10nMap[token.path]);
+          };
+          var linkHandler = function(value) {
+            var isMarkup = isMarkupToken(this.token);
+            if (isMarkup) basis.array.add(l10nMarkupTokens, this); else basis.array.remove(l10nMarkupTokens, this);
+            l10nMap[this.path] = isMarkup ? undefined : value == null ? "{" + this.path + "}" : value;
+            if (l10nProtoSync) l10nProtoSync(this.path, l10nMap[this.path]);
+            for (var key in instances) instances[key].tmpl.set(this.path, isMarkup ? this.token : value);
+          };
+          l10nLinks = fn.l10nKeys.map(function(key) {
+            var token = getL10nToken(key);
+            var link = {
+              path: key,
+              token: token,
+              handler: linkHandler
+            };
+            token.attach(linkHandler, link);
+            if (isMarkupToken(token)) l10nMarkupTokens.push(link); else l10nMap[key] = token.value == null ? "{" + key + "}" : token.value;
+            return link;
+          });
+        }
+        initInstance = fn.createInstanceFactory(this.templateId, createDOM, tools, l10nMap, l10nMarkupTokens, createBindingFunction(fn.keys), CLONE_NORMALIZATION_TEXT_BUG);
+        return {
+          createInstance: function(obj, onAction, onRebuild, bindings, bindingInterface) {
+            var instanceId = seed++;
+            var instance = {
+              context: obj,
+              action: onAction,
+              rebuild: onRebuild,
+              handler: null,
+              bindings: bindings,
+              bindingInterface: bindingInterface,
+              attaches: null,
+              compute: null,
+              tmpl: null
+            };
+            initInstance(instanceId, instance, !instanceId ? initL10n : null);
+            instances[instanceId] = instance;
+            return instance.tmpl;
+          },
+          destroyInstance: function(tmpl) {
+            var instanceId = tmpl.templateId_;
+            var instance = instances[instanceId];
+            if (instance) {
+              if (instance.handler) instance.bindingInterface.detach(instance.context, instance.handler, instance.tmpl.set);
+              if (instance.compute) {
+                for (var i = 0; i < instance.compute.length; i++) instance.compute[i].destroy();
+                instance.compute = null;
+              }
+              for (var key in instance.attaches) resolveValue.call(instance, key, null);
+              delete instances[instanceId];
+            }
+          },
+          destroy: function(rebuild) {
+            for (var i = 0, link; link = l10nLinks[i]; i++) link.token.detach(link.handler, link);
+            for (var key in instances) {
+              var instance = instances[key];
+              if (rebuild && instance.rebuild) instance.rebuild.call(instance.context);
+              if (!rebuild || key in instances) {
+                if (instance.handler) instance.bindingInterface.detach(instance.context, instance.handler, instance.tmpl.set);
+                for (var key in instance.attaches) resolveValue.call(key, null);
+              }
+            }
+            fn = null;
+            proto = null;
+            l10nMap = null;
+            l10nLinks = null;
+            l10nProtoSync = null;
+            instances = null;
+          }
+        };
+      };
+    }();
+    var HtmlTemplate = Template.subclass({
+      className: namespace + ".Template",
+      __extend__: function(value) {
+        if (value instanceof HtmlTemplate) return value;
+        if (value instanceof TemplateSwitchConfig) return new HtmlTemplateSwitcher(value);
+        return new HtmlTemplate(value);
+      },
+      builder: builder
+    });
+    var HtmlTemplateSwitcher = TemplateSwitcher.subclass({
+      className: namespace + ".TemplateSwitcher",
+      templateClass: HtmlTemplate
+    });
+    module.exports = {
+      Template: HtmlTemplate,
+      TemplateSwitcher: HtmlTemplateSwitcher
+    };
+  },
+  "29.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Node = basis.require("./7.js").Node;
+    var Value = basis.require("./2.js").Value;
+    var sum = basis.require("./s.js").sum;
+    var dict = basis.require("./9.js").dictionary("./2.l10n");
+    var Table = basis.require("./l.js").Table;
+    var TableHead = basis.require("./t.js").Head;
+    var TableRow = basis.require("./t.js").Row;
+    var FileSizeCell = basis.require("./u.js").FileSize;
+    module.exports = Table.subclass({
+      dataSource: Value.query("data.profile.data.modules"),
+      childClass: TableRow.subclass({
+        template: basis.template.get(".c"),
+        binding: {
+          id: "data:",
+          name: "data:",
+          fileSizeCell: "satellite:"
+        },
+        satellite: {
+          fileSizeCell: FileSizeCell.subclass({
+            size: Value.query("owner.data.size")
+          })
+        }
+      }),
+      satellite: {
+        head: TableHead.subclass({
+          childNodes: [ {
+            content: dict.token("id")
+          }, {
+            content: dict.token("name")
+          }, {
+            content: dict.token("size")
+          } ]
+        }),
+        foot: Node.subclass({
+          template: basis.template.get(".d"),
+          binding: {
+            fileSizeCell: "satellite:"
+          },
+          satellite: {
+            fileSizeCell: FileSizeCell.subclass({
+              size: sum(Value.query("owner.owner.dataSource"), "update", "data.size")
+            })
+          }
+        })
+      }
+    });
+  },
+  "s.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Index = basis.require("./2a.js");
+    var VectorIndex = basis.require("./2b.js");
+    var IndexWrapper = basis.require("./2c.js");
+    var IndexMap = basis.require("./2d.js");
+    var IndexedCalc = basis.require("./2e.js");
+    var createIndexConstructor = basis.require("./2f.js");
+    var Count = basis.require("./2g.js");
+    var Sum = basis.require("./2h.js");
+    var Avg = basis.require("./2i.js");
+    var Min = basis.require("./2j.js");
+    var Max = basis.require("./2k.js");
+    var Distinct = basis.require("./2l.js");
+    var count = createIndexConstructor(Count, basis.fn.$true);
+    var sum = createIndexConstructor(Sum);
+    var avg = createIndexConstructor(Avg);
+    var min = createIndexConstructor(Min);
+    var max = createIndexConstructor(Max);
+    var distinct = createIndexConstructor(Distinct);
+    function percentOfRange(events, getter) {
+      var minIndex = IndexedCalc.getId("min");
+      var maxIndex = IndexedCalc.getId("max");
+      var indexes = {};
+      indexes[minIndex] = min(events, getter);
+      indexes[maxIndex] = max(events, getter);
+      getter = basis.getter(getter || events);
+      return new IndexedCalc(indexes, function(data, indexes, object) {
+        return (getter(object) - indexes[minIndex]) / (indexes[maxIndex] - indexes[minIndex]);
+      });
+    }
+    function percentOfMax(events, getter) {
+      var maxIndex = IndexedCalc.getId("max");
+      var indexes = {};
+      indexes[maxIndex] = max(events, getter);
+      getter = basis.getter(getter || events);
+      return new IndexedCalc(indexes, function(data, indexes, object) {
+        return getter(object) / indexes[maxIndex];
+      });
+    }
+    function percentOfSum(getter, events) {
+      var sumIndex = IndexedCalc.getId("sum");
+      var indexes = {};
+      indexes[sumIndex] = sum(events, getter);
+      getter = basis.getter(getter || events);
+      return new IndexedCalc(indexes, function(data, indexes, object) {
+        return getter(object) / indexes[sumIndex];
+      });
+    }
+    module.exports = {
+      Index: Index,
+      VectorIndex: VectorIndex,
+      IndexWrapper: IndexWrapper,
+      getDatasetIndex: Index.getDatasetIndex,
+      removeDatasetIndex: Index.removeDatasetIndex,
+      Count: Count,
+      Sum: Sum,
+      Avg: Avg,
+      Min: Min,
+      Max: Max,
+      Distinct: Distinct,
+      createIndexConstructor: createIndexConstructor,
+      count: count,
+      sum: sum,
+      avg: avg,
+      max: max,
+      min: min,
+      distinct: distinct,
+      CalcIndexPreset: IndexedCalc,
+      percentOfRange: percentOfRange,
+      percentOfMax: percentOfMax,
+      percentOfSum: percentOfSum,
+      IndexMap: IndexMap
+    };
+  },
+  "2a.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var devWrap = basis.require("./2.js").devWrap;
+    var Value = basis.require("./2.js").Value;
+    var Index = Value.subclass({
+      className: "basis.data.index.Index",
+      propertyDescriptors: {
+        explicit: false,
+        wrapperCount: false,
+        updateEvents: false
+      },
+      explicit: false,
+      wrapperCount: 0,
+      indexCache_: null,
+      valueGetter: basis.fn.$null,
+      updateEvents: {},
+      value: 0,
+      setNullOnEmitterDestroy: false,
+      init: function() {
+        this.indexCache_ = {};
+        Value.prototype.init.call(this);
+      },
+      add_: function(value) {},
+      remove_: function(value) {},
+      update_: function(newValue, oldValue) {},
+      normalize: function(value) {
+        return Number(value) || 0;
+      },
+      destroy: function() {
+        Value.prototype.destroy.call(this);
+        this.indexCache_ = null;
+      }
+    });
+    var datasetIndexes = {};
+    function applyIndexDelta(index, inserted, deleted) {
+      var indexCache = index.indexCache_;
+      var objectId;
+      index.lock();
+      if (inserted) for (var i = 0, object; object = inserted[i++]; ) {
+        var newValue = index.normalize(index.valueGetter(object));
+        indexCache[object.basisObjectId] = newValue;
+        index.add_(newValue);
+      }
+      if (deleted) for (var i = 0, object; object = deleted[i++]; ) {
+        objectId = object.basisObjectId;
+        index.remove_(indexCache[objectId]);
+        delete indexCache[objectId];
+      }
+      index.unlock();
+    }
+    var DATASET_INDEX_HANDLER = {
+      destroy: function(object) {
+        removeDatasetIndex(this, object);
+      }
+    };
+    var DATASET_WITH_INDEX_HANDLER = {
+      itemsChanged: function(object, delta) {
+        var array;
+        if (array = delta.inserted) for (var i = 0; i < array.length; i++) array[i].addHandler(ITEM_INDEX_HANDLER, this);
+        if (array = delta.deleted) for (var i = 0; i < array.length; i++) array[i].removeHandler(ITEM_INDEX_HANDLER, this);
+        var indexes = datasetIndexes[this.basisObjectId];
+        for (var indexId in indexes) applyIndexDelta(indexes[indexId], delta.inserted, delta.deleted);
+      },
+      destroy: function() {
+        var indexes = datasetIndexes[this.basisObjectId];
+        for (var indexId in indexes) {
+          var index = indexes[indexId];
+          removeDatasetIndex(this, index);
+          index.destroy();
+        }
+      }
+    };
+    var ITEM_INDEX_HANDLER = {
+      "*": function(event) {
+        var eventType = event.type;
+        var object = event.sender;
+        var objectId = object.basisObjectId;
+        var indexes = datasetIndexes[this.basisObjectId];
+        var oldValue;
+        var newValue;
+        var index;
+        for (var indexId in indexes) {
+          index = indexes[indexId];
+          if (index.updateEvents[eventType]) {
+            oldValue = index.indexCache_[objectId];
+            newValue = index.normalize(index.valueGetter(object));
+            if (newValue !== oldValue) {
+              index.update_(newValue, oldValue);
+              index.indexCache_[objectId] = newValue;
+            }
+          }
+        }
+      }
+    };
+    function getDatasetIndex(dataset, IndexClass) {
+      if (!IndexClass || IndexClass.prototype instanceof Index === false) throw "IndexClass must be an instance of IndexClass";
+      var datasetId = dataset.basisObjectId;
+      var indexes = datasetIndexes[datasetId];
+      if (!indexes) {
+        indexes = datasetIndexes[datasetId] = {};
+        dataset.addHandler(DATASET_WITH_INDEX_HANDLER);
+        DATASET_WITH_INDEX_HANDLER.itemsChanged.call(dataset, dataset, {
+          inserted: dataset.getItems()
+        });
+      }
+      var indexId = IndexClass.indexId;
+      var index = indexes[indexId];
+      if (!index) {
+        index = new IndexClass;
+        index.addHandler(DATASET_INDEX_HANDLER, dataset);
+        basis.dev.setInfo(index, "sourceInfo", {
+          type: index.indexName,
+          source: dataset,
+          events: Object.keys(index.updateEvents),
+          transform: index.valueGetter
+        });
+        indexes[indexId] = index;
+        applyIndexDelta(index, dataset.getItems());
+      } else index = devWrap(index);
+      return index;
+    }
+    function removeDatasetIndex(dataset, index) {
+      var indexes = datasetIndexes[dataset.basisObjectId];
+      if (indexes && indexes[index.indexId]) {
+        delete indexes[index.indexId];
+        index.removeHandler(DATASET_INDEX_HANDLER, dataset);
+        for (var index in indexes) return;
+        dataset.removeHandler(DATASET_WITH_INDEX_HANDLER);
+        DATASET_WITH_INDEX_HANDLER.itemsChanged.call(dataset, dataset, {
+          deleted: dataset.getItems()
+        });
+        delete datasetIndexes[dataset.basisObjectId];
+      }
+    }
+    Index.getDatasetIndex = getDatasetIndex;
+    Index.removeDatasetIndex = removeDatasetIndex;
+    module.exports = Index;
+  },
+  "2b.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Index = basis.require("./2a.js");
+    function binarySearchPos(array, value) {
+      if (!array.length) return 0;
+      var pos;
+      var cmpValue;
+      var l = 0;
+      var r = array.length - 1;
+      do {
+        pos = l + r >> 1;
+        cmpValue = array[pos] || 0;
+        if (value < cmpValue) r = pos - 1; else if (value > cmpValue) l = pos + 1; else return value == cmpValue ? pos : 0;
+      } while (l <= r);
+      return pos + (cmpValue < value);
+    }
+    module.exports = Index.subclass({
+      className: "basis.data.index.VectorIndex",
+      vectorGetter: basis.fn.$null,
+      vector_: null,
+      value: undefined,
+      init: function() {
+        this.vector_ = [];
+        Index.prototype.init.call(this);
+      },
+      add_: function(value) {
+        if (value !== null) {
+          this.vector_.splice(binarySearchPos(this.vector_, value), 0, value);
+          this.value = this.vectorGetter(this.vector_);
+        }
+      },
+      remove_: function(value) {
+        if (value !== null) {
+          this.vector_.splice(binarySearchPos(this.vector_, value), 1);
+          this.value = this.vectorGetter(this.vector_);
+        }
+      },
+      update_: function(newValue, oldValue) {
+        if (oldValue !== null) this.vector_.splice(binarySearchPos(this.vector_, oldValue), 1);
+        if (newValue !== null) this.vector_.splice(binarySearchPos(this.vector_, newValue), 0, newValue);
+        this.set(this.vectorGetter(this.vector_));
+      },
+      normalize: function(value) {
+        return typeof value == "string" || typeof value == "number" ? value : null;
+      },
+      destroy: function() {
+        Index.prototype.destroy.call(this);
+        this.vector_ = null;
+      }
+    });
+  },
+  "2c.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Value = basis.require("./2.js").Value;
+    var Index = basis.require("./2a.js");
+    var resolveDataset = basis.require("./2.js").resolveDataset;
+    var INDEXWRAPPER_HANDLER = {
+      destroy: function() {
+        Value.prototype.set.call(this, this.initValue);
+        this.index = null;
+      }
+    };
+    module.exports = Value.subclass({
+      className: "basis.data.index.IndexWrapper",
+      extendConstructor_: false,
+      source: null,
+      sourceRA_: null,
+      dataset: null,
+      indexConstructor: null,
+      index: null,
+      init: function(source, indexConstructor) {
+        this.source = source;
+        this.indexConstructor = indexConstructor;
+        this.value = indexConstructor.prototype.value;
+        Value.prototype.init.call(this);
+        source.bindingBridge.attach(source, basis.fn.$undef, this, this.destroy);
+        this.setDataset(source);
+      },
+      setDataset: function(source) {
+        var oldDataset = this.dataset;
+        var newDataset = resolveDataset(this, this.setDataset, source, "sourceRA_");
+        if (newDataset !== oldDataset) {
+          var index = this.index;
+          if (index) {
+            index.removeHandler(INDEXWRAPPER_HANDLER, this);
+            index.wrapperCount -= 1;
+            if (!index.wrapperCount && !index.explicit) index.destroy(); else index.unlink(this, Value.prototype.set);
+          }
+          if (newDataset) {
+            index = Index.getDatasetIndex(newDataset, this.indexConstructor);
+            index.wrapperCount += 1;
+            index.link(this, Value.prototype.set);
+            index.addHandler(INDEXWRAPPER_HANDLER, this);
+          } else {
+            index = null;
+            Value.prototype.set.call(this, this.initValue);
+          }
+          basis.dev.patchInfo(this, "sourceInfo", {
+            type: "IndexWrapper",
+            source: index,
+            sourceTarget: source
+          });
+          this.dataset = newDataset;
+          this.index = index;
+        }
+      },
+      set: function() {
+        basis.dev.warn(this.className + ": value can't be set as IndexWrapper is read only");
+      },
+      destroy: function() {
+        this.source.bindingBridge.detach(this.source, basis.fn.$undef, this);
+        this.setDataset();
+        Value.prototype.destroy.call(this);
+        this.source = null;
+        this.indexConstructor = null;
+      }
+    });
+  },
+  "2d.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var iterate = basis.object.iterate;
+    var Value = basis.require("./2.js").Value;
+    var DataObject = basis.require("./2.js").Object;
+    var SourceDataset = basis.require("./p.js").SourceDataset;
+    var createRuleEvents = basis.require("./p.js").createRuleEvents;
+    var Index = basis.require("./2a.js");
+    var IndexWrapper = basis.require("./2c.js");
+    var IndexedCalc = basis.require("./2e.js");
+    var indexMapRecalcShedule = basis.asap.schedule(function(indexMap) {
+      indexMap.recalc();
+    });
+    var INDEXMAP_SOURCE_HANDLER = {
+      itemsChanged: function(sender, delta) {
+        var deleted = [];
+        var array;
+        if (array = delta.inserted) for (var i = 0; i < array.length; i++) {
+          var sourceObject = array[i];
+          var sourceObjectId = sourceObject.basisObjectId;
+          this.awaitToAdd_[sourceObjectId] = sourceObject;
+          this.scheduleRecalc();
+        }
+        if (array = delta.deleted) for (var i = 0; i < array.length; i++) {
+          var sourceObject = array[i];
+          var sourceObjectId = sourceObject.basisObjectId;
+          var memberInfo = this.sourceMap_[sourceObjectId];
+          if (memberInfo) {
+            var member = memberInfo.member;
+            deleted.push(member);
+            if (this.listen.member) member.removeHandler(this.listen.member, this);
+            if (this.recalcEvents) sourceObject.removeHandler(this.recalcEvents, this);
+            delete this.sourceMap_[sourceObjectId];
+          } else {
+            delete this.awaitToAdd_[sourceObjectId];
+          }
+        }
+        if (deleted.length) {
+          this.emit_itemsChanged({
+            deleted: deleted
+          });
+          for (var i = 0; i < deleted.length; i++) {
+            var member = deleted[i];
+            member.source = null;
+            member.destroy();
+          }
+        }
+      }
+    };
+    module.exports = SourceDataset.subclass({
+      className: "basis.data.index.IndexMap",
+      calcs: null,
+      copyDataFromSource: true,
+      indexes: null,
+      indexValues: null,
+      indexUpdated: false,
+      awaitToAdd_: null,
+      itemClass: DataObject,
+      listen: {
+        source: INDEXMAP_SOURCE_HANDLER
+      },
+      recalcEvents: createRuleEvents(function(sender) {
+        this.sourceMap_[sender.basisObjectId].updated = true;
+        this.scheduleRecalc();
+      }, "update"),
+      init: function() {
+        var indexes = this.indexes;
+        var calcs = this.calcs;
+        this.calcs = {};
+        this.indexes = {};
+        this.indexValues = {};
+        this.awaitToAdd_ = {};
+        SourceDataset.prototype.init.call(this);
+        iterate(indexes, this.addIndex, this);
+        for (var name in calcs) {
+          var calcCfg = calcs[name];
+          if (calcCfg instanceof IndexedCalc) {
+            iterate(calcCfg.indexes, this.addIndex, this);
+            calcCfg = calcCfg.calc;
+          }
+          this.calcs[name] = calcCfg;
+        }
+        this.recalc();
+      },
+      addIndex: function(key, IndexClass) {
+        if (!IndexClass || IndexClass.prototype instanceof Index === false) {
+          basis.dev.warn("basis.data.IndexMap#addIndex(): `IndexClass` should be subclass of `basis.data.index.Index`");
+          return;
+        }
+        if (this.indexes[key]) {
+          basis.dev.warn("basis.data.IndexMap#addIndex(): Index `" + key + "` already exists");
+          return;
+        }
+        var index = new IndexWrapper(Value.from(this, "sourceChanged", "source"), IndexClass);
+        this.indexes[key] = index;
+        this.indexValues[key] = index.value;
+        index.link(this, function(value) {
+          this.indexValues[key] = value;
+          this.indexUpdated = true;
+          this.scheduleRecalc();
+        });
+      },
+      removeIndex: function(key) {
+        var index = this.indexes[key];
+        if (index) {
+          delete this.indexes[key];
+          delete this.indexValues[key];
+          index.destroy();
+        }
+      },
+      lock: function() {
+        for (var indexId in this.indexes) this.indexes[indexId].lock();
+      },
+      unlock: function() {
+        for (var indexId in this.indexes) this.indexes[indexId].unlock();
+      },
+      scheduleRecalc: function() {
+        indexMapRecalcShedule.add(this);
+      },
+      recalc: function() {
+        for (var id in this.sourceMap_) this.calcMember(this.sourceMap_[id]);
+        var inserted = [];
+        var items = this.awaitToAdd_;
+        this.awaitToAdd_ = {};
+        for (var id in items) {
+          var sourceObject = items[id];
+          var data = {};
+          var member;
+          for (var calcName in this.calcs) data[calcName] = this.calcs[calcName](sourceObject.data, this.indexValues, sourceObject);
+          if (this.copyDataFromSource) for (var key in sourceObject.data) if (!this.calcs.hasOwnProperty(key)) data[key] = sourceObject.data[key];
+          member = new this.itemClass({
+            source: sourceObject,
+            data: data,
+            update: sourceObject.update.bind(sourceObject)
+          });
+          if (this.listen.member) member.addHandler(this.listen.member, this);
+          if (this.recalcEvents) sourceObject.addHandler(this.recalcEvents, this);
+          this.sourceMap_[id] = {
+            sourceObject: sourceObject,
+            member: member,
+            updated: false
+          };
+          inserted.push(member);
+        }
+        if (inserted.length) this.emit_itemsChanged({
+          inserted: inserted
+        });
+        this.indexUpdated = false;
+        indexMapRecalcShedule.remove(this);
+      },
+      calcMember: function(memberInfo) {
+        var member = memberInfo.member;
+        if (memberInfo.updated || this.indexUpdated) {
+          var sourceObject = memberInfo.sourceObject;
+          var delta = {};
+          var newValue;
+          var oldValue;
+          var update;
+          for (var calcName in this.calcs) {
+            newValue = this.calcs[calcName](sourceObject.data, this.indexValues, sourceObject);
+            oldValue = member.data[calcName];
+            if (oldValue !== newValue && (newValue === newValue || oldValue === oldValue)) {
+              delta[calcName] = newValue;
+              update = true;
+            }
+          }
+          if (this.copyDataFromSource) {
+            for (var key in sourceObject.data) if (!this.calcs.hasOwnProperty(key)) {
+              newValue = sourceObject.data[key];
+              oldValue = member.data[key];
+              if (oldValue !== newValue && (newValue === newValue || oldValue === oldValue)) {
+                delta[key] = newValue;
+                update = true;
+              }
+            }
+            for (var key in member.data) if (!this.calcs.hasOwnProperty(key) && !sourceObject.data.hasOwnProperty(key)) {
+              delta[key] = undefined;
+              update = true;
+            }
+          }
+          if (update) this.itemClass.prototype.update.call(member, delta);
+          memberInfo.updated = false;
+        }
+      },
+      getMember: function(sourceObject) {
+        var memberInfo = sourceObject && this.sourceMap_[sourceObject.basisObjectId];
+        return memberInfo ? memberInfo.member : null;
+      },
+      destroy: function() {
+        iterate(this.indexes, this.removeIndex, this);
+        SourceDataset.prototype.destroy.call(this);
+        indexMapRecalcShedule.remove(this);
+        this.awaitToAdd_ = null;
+        this.calcs = null;
+        this.indexes = null;
+        this.indexValues = null;
+      }
+    });
+  },
+  "2e.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var calcIndexPresetSeed = 1;
+    var IndexedCalc = function(indexes, calc) {
+      this.indexes = indexes;
+      this.calc = calc;
+    };
+    IndexedCalc.getId = function(prefix) {
+      return prefix + "_calc-index-preset-" + basis.number.lead(calcIndexPresetSeed++, 4);
+    };
+    module.exports = IndexedCalc;
+  },
+  "2f.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Class = basis.Class;
+    var ReadOnlyDataset = basis.require("./2.js").ReadOnlyDataset;
+    var DatasetWrapper = basis.require("./2.js").DatasetWrapper;
+    var chainValueFactory = basis.require("./2.js").chainValueFactory;
+    var Index = basis.require("./2a.js");
+    var IndexWrapper = basis.require("./2c.js");
+    var PREFIX = "basisjsIndexConstructor" + basis.genUID();
+    var constructors = {};
+    var SOURCE_INDEXWRAPPER_HANDLER = {
+      destroy: function(indexWrapper) {
+        indexWrapper.source[this.indexId] = null;
+      }
+    };
+    function getIndexConstructor(BaseClass, getter, events) {
+      if (!Class.isClass(BaseClass) || !BaseClass.isSubclassOf(Index)) throw "Wrong class for index constructor";
+      getter = basis.getter(getter);
+      events = events || "update";
+      if (typeof events != "string") throw "Events must be a event names space separated string";
+      events = events.trim().split(" ").sort();
+      var indexId = PREFIX + [ BaseClass.basisClassId_, getter[basis.getter.ID], events ].join("_");
+      var indexConstructor = constructors[indexId];
+      if (!indexConstructor) {
+        var events_ = {};
+        for (var i = 0; i < events.length; i++) events_[events[i]] = true;
+        indexConstructor = constructors[indexId] = BaseClass.subclass({
+          indexName: BaseClass.className.split(".").pop(),
+          indexId: indexId,
+          updateEvents: events_,
+          valueGetter: getter
+        });
+        indexConstructor.indexId = indexId;
+      }
+      return indexConstructor;
+    }
+    module.exports = function createIndexConstructor(IndexClass, defGetter) {
+      return function create(source, events, getter) {
+        if (basis.fn.isFactory(source)) {
+          var factory = source;
+          return chainValueFactory(function(target) {
+            return create(factory(target), events, getter, true);
+          });
+        }
+        if (typeof source == "function" || typeof source == "string") {
+          getter = events;
+          events = source;
+          source = null;
+        }
+        if (!getter) {
+          getter = events;
+          events = "";
+        }
+        var indexConstructor = getIndexConstructor(IndexClass, getter || defGetter, events);
+        if (!source) return indexConstructor;
+        if (source instanceof ReadOnlyDataset || source instanceof DatasetWrapper) {
+          var index = Index.getDatasetIndex(source, indexConstructor);
+          index.explicit = true;
+          return index;
+        }
+        if (source.bindingBridge) {
+          var indexWrapper = source[indexConstructor.indexId];
+          if (!indexWrapper) {
+            indexWrapper = new IndexWrapper(source, indexConstructor);
+            source[indexConstructor.indexId] = indexWrapper;
+            indexWrapper.addHandler(SOURCE_INDEXWRAPPER_HANDLER, indexConstructor);
+          }
+          return indexWrapper;
+        }
+        basis.dev.warn(IndexClass.className + ": wrong source value for index (should be instance of basis.data.ReadOnlyDataset, basis.data.DatasetWrapper or bb-value)");
+        return null;
+      };
+    };
+  },
+  "2g.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Index = basis.require("./2a.js");
+    module.exports = Index.subclass({
+      className: "basis.data.index.Count",
+      valueGetter: basis.fn.$true,
+      add_: function(value) {
+        this.value += value;
+      },
+      remove_: function(value) {
+        this.value -= value;
+      },
+      normalize: function(value) {
+        return Boolean(value);
+      },
+      update_: function(newValue, oldValue) {
+        this.set(this.value - Boolean(oldValue) + Boolean(newValue));
+      }
+    });
+  },
+  "2h.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Index = basis.require("./2a.js");
+    module.exports = Index.subclass({
+      className: "basis.data.index.Sum",
+      add_: function(value) {
+        this.value += value;
+      },
+      remove_: function(value) {
+        this.value -= value;
+      },
+      update_: function(newValue, oldValue) {
+        this.set(this.value - oldValue + newValue);
+      }
+    });
+  },
+  "2i.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Index = basis.require("./2a.js");
+    module.exports = Index.subclass({
+      className: "basis.data.index.Avg",
+      sum_: 0,
+      count_: 0,
+      add_: function(value) {
+        this.sum_ += value;
+        this.count_ += 1;
+        this.value = this.sum_ / this.count_;
+      },
+      remove_: function(value) {
+        this.sum_ -= value;
+        this.count_ -= 1;
+        this.value = this.count_ ? this.sum_ / this.count_ : 0;
+      },
+      update_: function(newValue, oldValue) {
+        this.sum_ += newValue - oldValue;
+        this.set(this.sum_ / this.count_);
+      }
+    });
+  },
+  "2j.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var VectorIndex = basis.require("./2b.js");
+    module.exports = VectorIndex.subclass({
+      className: "basis.data.index.Min",
+      vectorGetter: function(vector) {
+        return vector[0];
+      }
+    });
+  },
+  "2k.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var VectorIndex = basis.require("./2b.js");
+    module.exports = VectorIndex.subclass({
+      className: "basis.data.index.Max",
+      vectorGetter: function(vector) {
+        return vector[vector.length - 1];
+      }
+    });
+  },
+  "2l.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Index = basis.require("./2a.js");
+    module.exports = Index.subclass({
+      className: "basis.data.index.Distinct",
+      map_: null,
+      init: function() {
+        this.map_ = {};
+        Index.prototype.init.call(this);
+      },
+      add_: function(value) {
+        if (!this.map_.hasOwnProperty(value)) this.map_[value] = 0;
+        if (++this.map_[value] == 1) this.value += 1;
+      },
+      remove_: function(value) {
+        if (--this.map_[value] == 0) this.value -= 1;
+      },
+      update_: function(newValue, oldValue) {
+        var delta = 0;
+        if (!this.map_.hasOwnProperty(newValue)) this.map_[newValue] = 0;
+        if (++this.map_[newValue] == 1) delta += 1;
+        if (--this.map_[oldValue] == 0) delta -= 1;
+        if (delta) this.set(this.value + delta);
+      },
+      normalize: String,
+      destroy: function() {
+        Index.prototype.destroy.call(this);
+        this.map_ = null;
+      }
+    });
+  },
+  "9.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var namespace = "basis.l10n";
+    var extend = basis.object.extend;
+    var complete = basis.object.complete;
+    var Class = basis.Class;
+    var Emitter = basis.require("./6.js").Emitter;
+    var extensionJSON = basis.resource.extensions[".json"];
+    var hasOwnProperty = Object.prototype.hasOwnProperty;
+    var basisTokenPrototypeSet = basis.Token.prototype.set;
+    var buildJsonMap = basis.require("./w.js").buildMap;
+    basis.resource.extensions[".l10n"] = processDictionaryContent;
+    var patches = function() {
+      var config = basis.config.l10n || {};
+      var patches = config && config.patch;
+      var result = {};
+      var baseURI;
+      config.patch = {};
+      if (patches) {
+        if (typeof patches == "string") {
+          try {
+            baseURI = basis.path.dirname(basis.resource.resolveURI(patches));
+            patches = basis.resource(patches).fetch();
+          } catch (e) {
+            basis.dev.error("basis.l10n: dictionary patch file load failed:", patches);
+          }
+        }
+        for (var path in patches) {
+          var dictUrl = basis.resource.resolveURI(path, baseURI);
+          var patchUrl = basis.resource.resolveURI(patches[path], baseURI);
+          result[dictUrl] = createDictionaryMerge(dictUrl, patchUrl);
+          config.patch[dictUrl] = patchUrl;
+        }
+      }
+      return result;
+    }();
+    function processJSON(content, url) {
+      var locationMap;
+      if (typeof content == "string") locationMap = buildJsonMap(content, url);
+      content = extensionJSON(content, url);
+      if (content) content._locationMap = locationMap;
+      return content;
+    }
+    function getJSON(url) {
+      return processJSON(resource(url).get(true), url) || {};
+    }
+    function createDictionaryMerge(dictUrl, patchUrl) {
+      function sync() {
+        dictionaryByUrl[dictUrl].update(mergeDictionaries(getJSON(dictUrl), patchUrl));
+      }
+      return {
+        url: patchUrl,
+        activate: function() {
+          resource(patchUrl).attach(sync);
+        },
+        deactivate: function() {
+          resource(patchUrl).detach(sync);
+        }
+      };
+    }
+    function mergeDictionaries(dest, patchSource) {
+      function isObject(value) {
+        return value && Object.prototype.toString.call(value) == "[object Object]";
+      }
+      function deepMerge(dest, patch, path, sourceMap) {
+        if (path) path += ".";
+        for (var key in patch) if (!isObject(patch[key])) {
+          sourceMap[path + key] = patchSource;
+          dest[key] = patch[key];
+        } else {
+          dest[key] = deepMerge(isObject(dest[key]) ? dest[key] : {}, patch[key], path + key, sourceMap);
+        }
+        return dest;
+      }
+      var patch = getJSON(patchSource);
+      var sources;
+      for (var key in patch) {
+        if (key == "_meta" || key == "_locationMap") {
+          if (!isObject(dest[key])) dest[key] = {};
+          deepMerge(dest[key], patch[key], "", {});
+          continue;
+        }
+        if (!hasOwnProperty.call(dest, key)) {
+          dest[key] = {
+            _meta: {
+              source: {}
+            }
+          };
+        } else {
+          if (!dest[key]._meta) dest[key]._meta = {};
+        }
+        sources = {};
+        dest[key]._meta.source = {};
+        deepMerge(dest[key], patch[key], "", sources);
+        dest[key]._meta.source = sources;
+      }
+      if (!Array.isArray(dest._patches)) dest._patches = [];
+      basis.array.add(dest._patches, patchSource);
+      return dest;
+    }
+    function processDictionaryContent(content, url) {
+      content = processJSON(content, url);
+      if (patches[url]) mergeDictionaries(content, patches[url].url);
+      return internalResolveDictionary(url, true).update(content);
+    }
+    var tokenIndex = [];
+    var tokenComputeFn = {};
+    var NULL_DESCRIPTOR = {
+      placeholder: false,
+      processName: basis.fn.$self,
+      value: undefined,
+      types: {}
+    };
+    var TOKEN_TYPES = {
+      "default": true,
+      plural: true,
+      markup: true,
+      "plural-markup": true,
+      "enum-markup": true
+    };
+    var PLURAL_TYPES = {
+      plural: true,
+      "plural-markup": true
+    };
+    var NESTED_TYPE = {
+      "default": "default",
+      plural: "default",
+      markup: "default",
+      "plural-markup": "markup",
+      "enum-markup": "markup"
+    };
+    var pluralName = function(value) {
+      return this.culture.plural(value);
+    };
+    var ComputeToken = Class(basis.Token, {
+      className: namespace + ".ComputeToken",
+      token: null,
+      init: function(value) {
+        this.token.computeTokens[this.basisObjectId] = this;
+        basis.Token.prototype.init.call(this, value);
+      },
+      toString: function() {
+        return this.get();
+      },
+      get: function() {
+        var value = this.token.dictionary.getValue(this.getName());
+        if (this.token.descriptor.placeholder) value = String(value).replace(/\{#\}/g, this.value);
+        return value;
+      },
+      getName: function() {
+        return this.token.name + "." + this.token.descriptor.processName(this.value);
+      },
+      getType: function() {
+        return this.token.descriptor.types[this.getName()] || "default";
+      },
+      getDictionary: function() {
+        return this.token.getDictionary();
+      },
+      destroy: function() {
+        delete this.token.computeTokens[this.basisObjectId];
+        basis.Token.prototype.destroy.call(this);
+      }
+    });
+    var Token = Class(basis.Token, {
+      className: namespace + ".Token",
+      index: NaN,
+      dictionary: null,
+      name: "",
+      type: "default",
+      computeTokens: null,
+      computeTokenClass: null,
+      init: function(dictionary, tokenName, descriptor) {
+        basis.Token.prototype.init.call(this, descriptor.value);
+        this.index = tokenIndex.push(this) - 1;
+        this.name = tokenName;
+        this.dictionary = dictionary;
+        this.descriptor = descriptor;
+        this.computeTokens = {};
+      },
+      toString: function() {
+        return this.get();
+      },
+      apply: function() {
+        for (var key in this.computeTokens) this.computeTokens[key].apply();
+        basis.Token.prototype.apply.call(this);
+      },
+      set: function() {
+        basis.dev.warn("basis.l10n: Value for l10n token can't be set directly, but through dictionary update only");
+      },
+      getName: function() {
+        return this.name;
+      },
+      getType: function() {
+        return this.descriptor.types[this.name] || "default";
+      },
+      setType: function() {
+        basis.dev.warn("basis.l10n: Token#setType() is deprecated");
+      },
+      compute: function(events, getter) {
+        if (arguments.length == 1) {
+          getter = events;
+          events = "";
+        }
+        getter = basis.getter(getter);
+        events = String(events).trim().split(/\s+|\s*,\s*/).sort();
+        var tokenId = this.basisObjectId;
+        var enumId = events.concat(tokenId, getter[basis.getter.ID]).join("_");
+        if (tokenComputeFn[enumId]) return tokenComputeFn[enumId];
+        var token = this;
+        var objectTokenMap = {};
+        var updateValue = function(object) {
+          basisTokenPrototypeSet.call(this, getter(object));
+        };
+        var handler = {
+          destroy: function(object) {
+            delete objectTokenMap[object.basisObjectId];
+            this.destroy();
+          }
+        };
+        for (var i = 0, eventName; eventName = events[i]; i++) if (eventName != "destroy") handler[eventName] = updateValue;
+        return tokenComputeFn[enumId] = function(object) {
+          if (object instanceof Emitter == false) throw "basis.l10n.Token#compute: object must be an instanceof Emitter";
+          var objectId = object.basisObjectId;
+          var computeToken = objectTokenMap[objectId];
+          if (!computeToken) {
+            computeToken = objectTokenMap[objectId] = token.computeToken(getter(object));
+            object.addHandler(handler, computeToken);
+          }
+          return computeToken;
+        };
+      },
+      computeToken: function(value) {
+        var ComputeTokenClass = this.computeTokenClass;
+        if (!ComputeTokenClass) ComputeTokenClass = this.computeTokenClass = ComputeToken.subclass({
+          token: this
+        });
+        return new ComputeTokenClass(value);
+      },
+      token: function(name) {
+        if (this.getType() in PLURAL_TYPES) return this.computeToken(name);
+        if (this.dictionary) return this.dictionary.token(this.name + "." + name);
+      },
+      getDictionary: function() {
+        return this.dictionary;
+      },
+      destroy: function() {
+        for (var key in this.computeTokens) this.computeTokens[key].destroy();
+        this.descriptor = null;
+        this.computeTokenClass = null;
+        this.computeTokens = null;
+        this.value = null;
+        this.dictionary = null;
+        tokenIndex[this.index] = null;
+        basis.Token.prototype.destroy.call(this);
+      }
+    });
+    function resolveToken(path) {
+      if (path.charAt(0) == "#") {
+        return tokenIndex[parseInt(path.substr(1), 36)];
+      } else {
+        var parts = path.match(/^(.+?)@(.+)$/);
+        if (parts) return resolveDictionary(basis.path.resolve(parts[2])).token(parts[1]);
+        basis.dev.warn("basis.l10n.token accepts token references in format `token.path@path/to/dict.l10n` only");
+      }
+    }
+    function isToken(value) {
+      return value ? value instanceof Token || value instanceof ComputeToken : false;
+    }
+    function isPluralToken(value) {
+      return isToken(value) && value.getType() in PLURAL_TYPES;
+    }
+    function isTokenHasPlaceholder(value) {
+      return isToken(value) && value.descriptor.placeholder;
+    }
+    function isMarkupToken(value) {
+      return isToken(value) && value.getType() == "markup";
+    }
+    var dictionaries = [];
+    var dictionaryByUrl = {};
+    var createDictionaryNotifier = new basis.Token;
+    function walkTokens(tokens, parentName, context) {
+      var path = parentName ? parentName + "." : "";
+      var parentType = context.types[parentName] || "default";
+      for (var name in tokens) {
+        if (parentName == "" && name == "_meta") continue;
+        if (name.indexOf(".") != -1) {
+          basis.dev.warn(context.name + ": wrong token name `" + name + "`, token ignored.");
+          continue;
+        }
+        if (hasOwnProperty.call(tokens, name)) {
+          var tokenName = path + name;
+          var tokenType = context.types[tokenName] || NESTED_TYPE[parentType] || "default";
+          var tokenValue = tokens[name];
+          var isPlural = tokenType in PLURAL_TYPES || parentType in PLURAL_TYPES;
+          context.values[tokenName] = {
+            _sourceBranch: tokens,
+            _sourceKey: name,
+            loc: context.locationMap ? context.locationMap[context.culture.name + "." + tokenName] || null : null,
+            placeholder: isPlural,
+            processName: isPlural ? pluralName : basis.fn.$self,
+            source: context.source[tokenName] || context.dictionary.id,
+            culture: context.culture,
+            name: tokenName,
+            types: context.types,
+            value: tokenValue
+          };
+          if (tokenName in context.types == false) context.types[tokenName] = tokenType;
+          if (tokenValue && (typeof tokenValue == "object" || Array.isArray(tokenValue))) walkTokens(tokenValue, tokenName, context);
+        }
+      }
+      return context.values;
+    }
+    function fetchTypes(data) {
+      var dirtyTypes = data._meta && data._meta.type || {};
+      var types = {};
+      for (var path in dirtyTypes) if (dirtyTypes[path] in TOKEN_TYPES) types[path] = dirtyTypes[path];
+      return types;
+    }
+    function fetchSource(data) {
+      return data._meta && data._meta.source || {};
+    }
+    var Dictionary = Class(null, {
+      className: namespace + ".Dictionary",
+      cultureValues: null,
+      tokens: null,
+      index: NaN,
+      resource: null,
+      id: null,
+      init: function(content, noResourceFetch) {
+        this.tokens = {};
+        this.cultureValues = {};
+        this.index = dictionaries.push(this) - 1;
+        if (basis.resource.isResource(content)) {
+          var resource = content;
+          var resourceUrl = resource.url;
+          this.id = resourceUrl;
+          this.resource = resource;
+          if (!dictionaryByUrl[resourceUrl]) {
+            dictionaryByUrl[resourceUrl] = this;
+            createDictionaryNotifier.set(resourceUrl);
+            if (patches[resourceUrl]) patches[resourceUrl].activate();
+          }
+          if (!noResourceFetch) resource.fetch();
+        } else {
+          this.id = "dictionary" + this.index;
+          this.update(content || {});
+        }
+      },
+      update: function(data) {
+        if (!data) data = {};
+        this.cultureValues = {};
+        var types = fetchTypes(data);
+        for (var culture in data) if (!/^_|_$/.test(culture)) this.cultureValues[culture] = walkTokens(data[culture], "", {
+          name: this.resource ? this.resource.url : "[anonymous dictionary]",
+          locationMap: data._locationMap,
+          dictionary: this,
+          culture: resolveCulture(culture),
+          source: fetchSource(data[culture]),
+          types: complete(fetchTypes(data[culture]), types),
+          values: {}
+        });
+        delete data._locationMap;
+        this._data = data;
+        this.syncValues();
+        return this;
+      },
+      syncValues: function() {
+        for (var tokenName in this.tokens) {
+          var token = this.tokens[tokenName];
+          var descriptor = this.getDescriptor(tokenName) || NULL_DESCRIPTOR;
+          var savedType = token.getType();
+          token.descriptor = descriptor;
+          if (token.value !== descriptor.value) {
+            basisTokenPrototypeSet.call(token, descriptor.value);
+          } else {
+            if (token.getType() != savedType) token.apply();
+          }
+        }
+      },
+      getCultureDescriptor: function(culture, tokenName) {
+        return this.cultureValues[culture] && this.cultureValues[culture][tokenName];
+      },
+      getDescriptor: function(tokenName) {
+        var fallback = cultureFallback[currentCulture] || [];
+        for (var i = 0, cultureName; cultureName = fallback[i]; i++) {
+          var descriptor = this.getCultureDescriptor(cultureName, tokenName);
+          if (descriptor) return descriptor;
+        }
+      },
+      getCultureValue: function(culture, tokenName) {
+        var descriptor = this.getCultureDescriptor(culture, tokenName);
+        if (descriptor) return descriptor.value;
+      },
+      getValue: function(tokenName) {
+        var descriptor = this.getDescriptor(tokenName);
+        if (descriptor) return descriptor.value;
+      },
+      getValueSource: function(tokenName) {
+        var descriptor = this.getDescriptor(tokenName);
+        if (descriptor) return descriptor.source;
+        return this.id;
+      },
+      token: function(tokenName) {
+        var token = this.tokens[tokenName];
+        if (!token) {
+          var descriptor = this.getDescriptor(tokenName) || NULL_DESCRIPTOR;
+          token = this.tokens[tokenName] = new Token(this, tokenName, descriptor);
+        }
+        return token;
+      },
+      destroy: function() {
+        this.tokens = null;
+        this.cultureValues = null;
+        basis.array.remove(dictionaries, this);
+        if (this.resource) {
+          var resourceUrl = this.resource.url;
+          if (patches[resourceUrl]) patches[resourceUrl].deactivate();
+          delete dictionaryByUrl[resourceUrl];
+          this.resource = null;
+        }
+      }
+    });
+    function internalResolveDictionary(source, noFetch) {
+      var dictionary;
+      if (typeof source == "string") {
+        var location = source;
+        var extname = basis.path.extname(location);
+        if (extname != ".l10n") location = location.replace(new RegExp(extname + "([#?]|$)"), ".l10n$1");
+        source = basis.resource(location);
+      }
+      if (basis.resource.isResource(source)) dictionary = dictionaryByUrl[source.url];
+      return dictionary || new Dictionary(source, noFetch);
+    }
+    function resolveDictionary(source) {
+      return internalResolveDictionary(source);
+    }
+    function getDictionaries() {
+      return dictionaries.slice(0);
+    }
+    var cultureList = [];
+    var currentCulture = null;
+    var cultures = {};
+    var cultureFallback = {};
+    var pluralFormsMap = {};
+    var pluralForms = [ [ 1, function() {
+      return 0;
+    } ], [ 2, function(n) {
+      return n == 1 || n % 10 == 1 ? 0 : 1;
+    } ], [ 2, function(n) {
+      return n == 0 ? 0 : 1;
+    } ], [ 2, function(n) {
+      return n == 1 ? 0 : 1;
+    } ], [ 2, function(n) {
+      return n == 0 || n == 1 ? 0 : 1;
+    } ], [ 2, function(n) {
+      return n % 10 != 1 || n % 100 == 11 ? 1 : 0;
+    } ], [ 3, function(n) {
+      return n == 1 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2;
+    } ], [ 3, function(n) {
+      return n % 10 == 1 && n % 100 != 11 ? 0 : n != 0 ? 1 : 2;
+    } ], [ 3, function(n) {
+      return n % 10 == 1 && n % 100 != 11 ? 0 : n % 10 >= 2 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2;
+    } ], [ 3, function(n) {
+      return n % 10 == 1 && n % 100 != 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2;
+    } ], [ 3, function(n) {
+      return n == 0 ? 0 : n == 1 ? 1 : 2;
+    } ], [ 3, function(n) {
+      return n == 1 ? 0 : n == 0 || n % 100 > 0 && n % 100 < 20 ? 1 : 2;
+    } ], [ 3, function(n) {
+      return n == 1 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2;
+    } ], [ 3, function(n) {
+      return n == 1 ? 0 : n >= 2 && n <= 4 ? 1 : 2;
+    } ], [ 4, function(n) {
+      return n == 1 ? 0 : n == 2 ? 1 : n != 8 && n != 11 ? 2 : 3;
+    } ], [ 4, function(n) {
+      return n == 1 ? 0 : n == 2 ? 1 : n == 3 ? 2 : 3;
+    } ], [ 4, function(n) {
+      return n % 100 == 1 ? 1 : n % 100 == 2 ? 2 : n % 100 == 3 || n % 100 == 4 ? 3 : 0;
+    } ], [ 4, function(n) {
+      return n == 1 ? 0 : n == 0 || n % 100 > 1 && n % 100 < 11 ? 1 : n % 100 > 10 && n % 100 < 20 ? 2 : 3;
+    } ], [ 4, function(n) {
+      return n == 1 || n == 11 ? 0 : n == 2 || n == 12 ? 1 : n > 2 && n < 20 ? 2 : 3;
+    } ], [ 5, function(n) {
+      return n == 1 ? 0 : n == 2 ? 1 : n < 7 ? 2 : n < 11 ? 3 : 4;
+    } ], [ 6, function(n) {
+      return n == 0 ? 0 : n == 1 ? 1 : n == 2 ? 2 : n % 100 >= 3 && n % 100 <= 10 ? 3 : n % 100 >= 11 ? 4 : 5;
+    } ] ];
+    [ "ay bo cgg dz fa id ja jbo ka kk km ko ky lo ms my sah su th tt ug vi wo zh", "mk", "jv", "af an ast az bg bn brx ca da de doi el en eo es es-AR et eu ff fi fo fur fy gl gu ha he hi hne hu hy ia it kn ku lb mai ml mn mni mr nah nap nb ne nl nn no nso or pa pap pms ps pt rm rw sat sco sd se si so son sq sv sw ta te tk ur yo", "ach ak am arn br fil fr gun ln mfe mg mi oc pt-BR tg ti tr uz wa zh", "is", "csb", "lv", "lt", "be bs hr ru sr uk", "mnk", "ro", "pl", "cs sk", "cy", "kw", "sl", "mt", "gd", "ga", "ar" ].forEach(function(langs, idx) {
+      langs.split(" ").forEach(function(lang) {
+        pluralFormsMap[lang] = this;
+      }, pluralForms[idx]);
+    });
+    var Culture = basis.Class(null, {
+      className: namespace + ".Culture",
+      name: "",
+      pluralForm: null,
+      init: function(name, pluralForm) {
+        this.name = name;
+        if (!cultures[name]) cultures[name] = this;
+        this.pluralForm = pluralForm || pluralFormsMap[name] || pluralFormsMap[name.split("-")[0]] || pluralForms[0];
+      },
+      plural: function(value) {
+        return Number(this.pluralForm[1](Math.abs(parseInt(value, 10))));
+      }
+    });
+    function resolveCulture(name, pluralForm) {
+      if (name && !cultures[name]) cultures[name] = new Culture(name, pluralForm);
+      return cultures[name || currentCulture];
+    }
+    extend(resolveCulture, new basis.Token);
+    resolveCulture.set = setCulture;
+    function getCulture() {
+      return currentCulture;
+    }
+    function setCulture(culture) {
+      if (!culture) return;
+      if (currentCulture != culture) {
+        if (cultureList.indexOf(culture) == -1) {
+          basis.dev.warn("basis.l10n.setCulture: culture `" + culture + "` not in the list, the culture doesn't changed");
+          return;
+        }
+        currentCulture = culture;
+        for (var i = 0, dictionary; dictionary = dictionaries[i]; i++) dictionary.syncValues();
+        basisTokenPrototypeSet.call(resolveCulture, culture);
+      }
+    }
+    function getCultureList() {
+      return cultureList.slice(0);
+    }
+    function setCultureList(list) {
+      if (typeof list == "string") list = list.trim().split(" ");
+      if (!list.length) {
+        basis.dev.warn("basis.l10n.setCultureList: culture list can't be empty, the culture list isn't changed");
+        return;
+      }
+      var cultures = {};
+      var cultureRow;
+      var baseCulture;
+      cultureFallback = {};
+      for (var i = 0, culture, cultureName; culture = list[i]; i++) {
+        cultureRow = culture.split("/");
+        if (cultureRow.length > 2) {
+          basis.dev.warn("basis.l10n.setCultureList: only one fallback culture can be set for certain culture, try to set `" + culture + "`; other cultures except first one was ignored");
+          cultureRow = [ cultureRow[0], cultureRow[1] ];
+        }
+        cultureName = cultureRow[0];
+        if (!baseCulture) baseCulture = cultureName;
+        cultures[cultureName] = resolveCulture(cultureName);
+        cultureFallback[cultureName] = cultureRow;
+      }
+      for (var cultureName in cultureFallback) cultureFallback[cultureName] = basis.array.flatten(cultureFallback[cultureName].map(function(name) {
+        return cultureFallback[name];
+      })).concat(baseCulture).filter(function(item, idx, array) {
+        return !idx || array.lastIndexOf(item, idx - 1) == -1;
+      });
+      cultureList = basis.object.keys(cultures);
+      if (currentCulture in cultures == false) setCulture(baseCulture);
+    }
+    function onCultureChange(fn, context, fire) {
+      resolveCulture.attach(fn, context);
+      if (fire) fn.call(context, currentCulture);
+    }
+    setCultureList("en-US");
+    setCulture("en-US");
+    module.exports = {
+      ComputeToken: ComputeToken,
+      Token: Token,
+      token: resolveToken,
+      isToken: isToken,
+      isPluralToken: isPluralToken,
+      isMarkupToken: isMarkupToken,
+      isTokenHasPlaceholder: isTokenHasPlaceholder,
+      Dictionary: Dictionary,
+      dictionary: resolveDictionary,
+      getDictionaries: getDictionaries,
+      addCreateDictionaryHandler: createDictionaryNotifier.attach.bind(createDictionaryNotifier),
+      removeCreateDictionaryHandler: createDictionaryNotifier.detach.bind(createDictionaryNotifier),
+      Culture: Culture,
+      culture: resolveCulture,
+      getCulture: getCulture,
+      setCulture: setCulture,
+      getCultureList: getCultureList,
+      setCultureList: setCultureList,
+      pluralForms: pluralForms,
+      onCultureChange: onCultureChange
+    };
+    (function() {
+      var value = false;
+      try {
+        Object.defineProperty(module.exports, "enableMarkup", {
+          get: function() {
+            return value;
+          },
+          set: function(newValue) {
+            basis.dev.warn("basis.l10n: enableMarkup option is deprecated, just remove it from your source code as markup l10n tokens enabled by default now");
+            value = newValue;
+          }
+        });
+      } catch (e) {}
+    })();
+  },
+  "t.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    module.exports = {
+      Row: basis.require("./1i.js"),
+      Cell: basis.require("./1j.js"),
+      Head: basis.require("./2m.js"),
+      Foot: basis.require("./2n.js")
+    };
+  },
+  "2m.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Node = basis.require("./7.js").Node;
+    var Cell = basis.require("./1j.js");
+    module.exports = Node.subclass({
+      template: basis.template.get(".9"),
+      childClass: Cell
+    });
+  },
+  "w.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    "use strict";
+    var _createClass = function() {
+      function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+          var descriptor = props[i];
+          descriptor.enumerable = descriptor.enumerable || false;
+          descriptor.configurable = true;
+          if ("value" in descriptor) descriptor.writable = true;
+          Object.defineProperty(target, descriptor.key, descriptor);
+        }
+      }
+      return function(Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);
+        if (staticProps) defineProperties(Constructor, staticProps);
+        return Constructor;
+      };
+    }();
+    function _classCallCheck(instance, Constructor) {
+      if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+      }
+    }
+    var JsonParser = function() {
+      "use strict";
+      if (!Object.assign) {
+        Object.defineProperty(Object, "assign", {
+          enumerable: false,
+          configurable: true,
+          writable: true,
+          value: function value(target) {
+            "use strict";
+            if (target === undefined || target === null) {
+              throw new TypeError("Cannot convert first argument to object");
+            }
+            var to = Object(target);
+            for (var i = 1; i < arguments.length; i++) {
+              var nextSource = arguments[i];
+              if (nextSource === undefined || nextSource === null) {
+                continue;
+              }
+              var keysArray = Object.keys(Object(nextSource));
+              for (var nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex++) {
+                var nextKey = keysArray[nextIndex];
+                var desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
+                if (desc !== undefined && desc.enumerable) {
+                  to[nextKey] = nextSource[nextKey];
+                }
+              }
+            }
+            return to;
+          }
+        });
+      }
+      var exceptionsDict = {
+        tokenizeSymbolError: "Cannot tokenize symbol <{char}> at {line}:{column}",
+        emptyString: "JSON is empty"
+      };
+      function position(startLine, startColumn, startChar, endLine, endColumn, endChar) {
+        return {
+          start: {
+            line: startLine,
+            column: startColumn,
+            "char": startChar
+          },
+          end: {
+            line: endLine,
+            column: endColumn,
+            "char": endChar
+          },
+          human: startLine + ":" + startColumn + " - " + endLine + ":" + endColumn + " [" + startChar + ":" + endChar + "]"
+        };
+      }
+      var tokenTypes = {
+        LEFT_BRACE: "LEFT_BRACE",
+        RIGHT_BRACE: "RIGHT_BRACE",
+        LEFT_BRACKET: "LEFT_BRACKET",
+        RIGHT_BRACKET: "RIGHT_BRACKET",
+        COLON: "COLON",
+        COMMA: "COMMA",
+        STRING: "STRING",
+        NUMBER: "NUMBER",
+        TRUE: "TRUE",
+        FALSE: "FALSE",
+        NULL: "NULL"
+      };
+      var charTokens = {
+        "{": tokenTypes.LEFT_BRACE,
+        "}": tokenTypes.RIGHT_BRACE,
+        "[": tokenTypes.LEFT_BRACKET,
+        "]": tokenTypes.RIGHT_BRACKET,
+        ":": tokenTypes.COLON,
+        ",": tokenTypes.COMMA
+      };
+      var keywordsTokens = {
+        "true": tokenTypes.TRUE,
+        "false": tokenTypes.FALSE,
+        "null": tokenTypes.NULL
+      };
+      var stringStates = {
+        _START_: 0,
+        START_QUOTE_OR_CHAR: 1,
+        ESCAPE: 2
+      };
+      var escapes = {
+        '"': 0,
+        "\\": 1,
+        "/": 2,
+        b: 3,
+        f: 4,
+        n: 5,
+        r: 6,
+        t: 7,
+        u: 8
+      };
+      var numberStates = {
+        _START_: 0,
+        MINUS: 1,
+        ZERO: 2,
+        DIGIT_1TO9: 3,
+        DIGIT_CEIL: 4,
+        POINT: 5,
+        DIGIT_FRACTION: 6,
+        EXP: 7,
+        EXP_PLUS: 8,
+        EXP_MINUS: 9,
+        EXP_DIGIT: 10
+      };
+      var isDigit1to9 = function isDigit1to9(char) {
+        return char >= "1" && char <= "9";
+      };
+      var isDigit = function isDigit(char) {
+        return char >= "0" && char <= "9";
+      };
+      var isHex = function isHex(char) {
+        return char >= "0" && char <= "9" || char >= "a" && char <= "f" || char >= "A" && char <= "F";
+      };
+      var isExp = function isExp(char) {
+        return char === "e" || char === "E";
+      };
+      var isUnicode = function isUnicode(char) {
+        return char === "u" || char === "U";
+      };
+      var Tokenizer = function() {
+        function Tokenizer(source) {
+          _classCallCheck(this, Tokenizer);
+          this.source = source;
+          this.line = 1;
+          this.column = 1;
+          this.index = 0;
+          this.currentToken = null;
+          this.currentValue = null;
+          var tokens = [];
+          while (this.index < this.source.length) {
+            var line = this.line;
+            var column = this.column;
+            var index = this.index;
+            if (this._testWhitespace()) {
+              continue;
+            }
+            var matched = this._testChar() || this._testKeyword() || this._testString() || this._testNumber();
+            if (matched) {
+              tokens.push({
+                type: this.currentToken,
+                value: this.currentValue,
+                position: position(line, column, index, this.line, this.column, this.index)
+              });
+              this.currentValue = null;
+            } else {
+              throw new SyntaxError(exceptionsDict.tokenizeSymbolError.replace("{char}", this.source.charAt(this.index)).replace("{line}", this.line.toString()).replace("{column}", this.column.toString()));
+            }
+          }
+          return tokens;
+        }
+        _createClass(Tokenizer, [ {
+          key: "_testWhitespace",
+          value: function _testWhitespace() {
+            var char = this.source.charAt(this.index);
+            if (this.source.charAt(this.index) === "\r" && this.source.charAt(this.index + 1) === "\n") {
+              this.index += 2;
+              this.line++;
+              this.column = 1;
+              return true;
+            } else if (char === "\r" || char === "\n") {
+              this.index++;
+              this.line++;
+              this.column = 1;
+              return true;
+            } else if (char === "	" || char === " ") {
+              this.index++;
+              this.column++;
+              return true;
+            } else {
+              return false;
+            }
+          }
+        }, {
+          key: "_testChar",
+          value: function _testChar() {
+            var char = this.source.charAt(this.index);
+            if (char in charTokens) {
+              this.index++;
+              this.column++;
+              this.currentToken = charTokens[char];
+              return true;
+            } else {
+              return false;
+            }
+          }
+        }, {
+          key: "_testKeyword",
+          value: function _testKeyword() {
+            var _this = this;
+            var matched = Object.keys(keywordsTokens).filter(function(name) {
+              return name === _this.source.substr(_this.index, name.length);
+            });
+            if (matched.length) {
+              var _length = matched.length;
+              this.index += _length;
+              this.column += _length;
+              this.currentToken = keywordsTokens[matched[0]];
+              return true;
+            } else {
+              return false;
+            }
+          }
+        }, {
+          key: "_testString",
+          value: function _testString() {
+            var index = this.index;
+            var buffer = "";
+            var state = stringStates._START_;
+            while (true) {
+              var char = this.source.charAt(this.index);
+              switch (state) {
+                case stringStates._START_:
+                  if (char === '"') {
+                    state = stringStates.START_QUOTE_OR_CHAR;
+                    this.index++;
+                  } else {
+                    return false;
+                  }
+                  break;
+                case stringStates.START_QUOTE_OR_CHAR:
+                  if (char === "\\") {
+                    state = stringStates.ESCAPE;
+                    buffer += char;
+                    this.index++;
+                  } else if (char === '"') {
+                    this.index++;
+                    this.column += this.index - index;
+                    this.currentToken = tokenTypes.STRING;
+                    this.currentValue = buffer;
+                    return true;
+                  } else {
+                    buffer += char;
+                    this.index++;
+                  }
+                  break;
+                case stringStates.ESCAPE:
+                  if (char in escapes) {
+                    buffer += char;
+                    this.index++;
+                    if (isUnicode(char)) {
+                      for (var i = 0; i < 4; i++) {
+                        var curChar = this.source.charAt(this.index);
+                        if (curChar && isHex(curChar)) {
+                          buffer += curChar;
+                          this.index++;
+                        } else {
+                          return false;
+                        }
+                      }
+                    }
+                    state = stringStates.START_QUOTE_OR_CHAR;
+                  } else {
+                    return false;
+                  }
+                  break;
+              }
+            }
+          }
+        }, {
+          key: "_testNumber",
+          value: function _testNumber() {
+            var index = this.index;
+            var buffer = "";
+            var passedValue = undefined;
+            var state = numberStates._START_;
+            iterator : while (true) {
+              var char = this.source.charAt(index);
+              switch (state) {
+                case numberStates._START_:
+                  if (char === "-") {
+                    state = numberStates.MINUS;
+                    buffer += char;
+                    index++;
+                  } else if (char === "0") {
+                    state = numberStates.ZERO;
+                    buffer += char;
+                    index++;
+                    passedValue = buffer;
+                  } else if (isDigit1to9(char)) {
+                    state = numberStates.DIGIT_1TO9;
+                    buffer += char;
+                    index++;
+                    passedValue = buffer;
+                  } else {
+                    break iterator;
+                  }
+                  break;
+                case numberStates.MINUS:
+                  if (char === "0") {
+                    state = numberStates.ZERO;
+                    buffer += char;
+                    index++;
+                    passedValue = buffer;
+                  } else if (isDigit1to9(char)) {
+                    state = numberStates.DIGIT_1TO9;
+                    buffer += char;
+                    index++;
+                    passedValue = buffer;
+                  } else {
+                    break iterator;
+                  }
+                  break;
+                case numberStates.ZERO:
+                  if (char === ".") {
+                    state = numberStates.POINT;
+                    buffer += char;
+                    index++;
+                  } else if (isExp(char)) {
+                    state = numberStates.EXP;
+                    buffer += char;
+                    index++;
+                  } else {
+                    break iterator;
+                  }
+                  break;
+                case numberStates.DIGIT_1TO9:
+                case numberStates.DIGIT_CEIL:
+                  if (isDigit(char)) {
+                    state = numberStates.DIGIT_CEIL;
+                    buffer += char;
+                    index++;
+                    passedValue = buffer;
+                  } else if (char === ".") {
+                    state = numberStates.POINT;
+                    buffer += char;
+                    index++;
+                  } else if (isExp(char)) {
+                    state = numberStates.EXP;
+                    buffer += char;
+                    index++;
+                  } else {
+                    break iterator;
+                  }
+                  break;
+                case numberStates.POINT:
+                  if (isDigit(char)) {
+                    state = numberStates.DIGIT_FRACTION;
+                    buffer += char;
+                    index++;
+                    passedValue = buffer;
+                  } else {
+                    break iterator;
+                  }
+                  break;
+                case numberStates.DIGIT_FRACTION:
+                  if (isDigit(char)) {
+                    buffer += char;
+                    index++;
+                    passedValue = buffer;
+                  } else if (isExp(char)) {
+                    state = numberStates.EXP;
+                    buffer += char;
+                    index++;
+                  } else {
+                    break iterator;
+                  }
+                  break;
+                case numberStates.EXP:
+                  if (char === "+") {
+                    state = numberStates.EXP_PLUS;
+                    buffer += char;
+                    index++;
+                  } else if (char === "-") {
+                    state = numberStates.EXP_MINUS;
+                    buffer += char;
+                    index++;
+                  } else if (isDigit(char)) {
+                    state = numberStates.EXP_DIGIT;
+                    buffer += char;
+                    index++;
+                    passedValue = buffer;
+                  } else {
+                    break iterator;
+                  }
+                  break;
+                case numberStates.EXP_PLUS:
+                case numberStates.EXP_MINUS:
+                case numberStates.EXP_DIGIT:
+                  if (isDigit(char)) {
+                    state = numberStates.EXP_DIGIT;
+                    buffer += char;
+                    index++;
+                    passedValue = buffer;
+                  } else {
+                    break iterator;
+                  }
+                  break;
+              }
+            }
+            if (passedValue) {
+              this.index += passedValue.length;
+              this.column += passedValue.length;
+              this.currentToken = tokenTypes.NUMBER;
+              this.currentValue = passedValue;
+              return true;
+            } else {
+              return false;
+            }
+          }
+        } ]);
+        return Tokenizer;
+      }();
+      Tokenizer.LEFT_BRACE = tokenTypes.LEFT_BRACE;
+      Tokenizer.RIGHT_BRACE = tokenTypes.RIGHT_BRACE;
+      Tokenizer.LEFT_BRACKET = tokenTypes.LEFT_BRACKET;
+      Tokenizer.RIGHT_BRACKET = tokenTypes.RIGHT_BRACKET;
+      Tokenizer.COLON = tokenTypes.COLON;
+      Tokenizer.COMMA = tokenTypes.COMMA;
+      Tokenizer.STRING = tokenTypes.STRING;
+      Tokenizer.NUMBER = tokenTypes.NUMBER;
+      Tokenizer.TRUE = tokenTypes.TRUE;
+      Tokenizer.FALSE = tokenTypes.FALSE;
+      Tokenizer.NULL = tokenTypes.NULL;
+      var objectStates = {
+        _START_: 0,
+        OPEN_OBJECT: 1,
+        KEY: 2,
+        COLON: 3,
+        VALUE: 4,
+        COMMA: 5,
+        CLOSE_OBJECT: 6
+      };
+      var arrayStates = {
+        _START_: 0,
+        OPEN_ARRAY: 1,
+        VALUE: 2,
+        COMMA: 3,
+        CLOSE_ARRAY: 4
+      };
+      var defaultSettings = {
+        verbose: true
+      };
+      var JsonParser = function() {
+        function JsonParser(source, settings) {
+          _classCallCheck(this, JsonParser);
+          this.settings = Object.assign(defaultSettings, settings);
+          this.tokenList = new Tokenizer(source);
+          this.index = 0;
+          var json = this._parseValue();
+          if (json) {
+            return json;
+          } else {
+            throw new SyntaxError(exceptionsDict.emptyString);
+          }
+        }
+        _createClass(JsonParser, [ {
+          key: "_parseObject",
+          value: function _parseObject() {
+            var startToken = undefined;
+            var property = undefined;
+            var object = {
+              type: "object",
+              properties: []
+            };
+            var state = objectStates._START_;
+            while (true) {
+              var token = this.tokenList[this.index];
+              switch (state) {
+                case objectStates._START_:
+                  if (token.type === Tokenizer.LEFT_BRACE) {
+                    startToken = token;
+                    state = objectStates.OPEN_OBJECT;
+                    this.index++;
+                  } else {
+                    return null;
+                  }
+                  break;
+                case objectStates.OPEN_OBJECT:
+                  if (token.type === Tokenizer.STRING) {
+                    property = {
+                      type: "property"
+                    };
+                    if (this.settings.verbose) {
+                      property.key = {
+                        type: "key",
+                        position: token.position,
+                        value: token.value
+                      };
+                    } else {
+                      property.key = {
+                        type: "key",
+                        value: token.value
+                      };
+                    }
+                    state = objectStates.KEY;
+                    this.index++;
+                  } else if (token.type === Tokenizer.RIGHT_BRACE) {
+                    if (this.settings.verbose) {
+                      object.position = position(startToken.position.start.line, startToken.position.start.column, startToken.position.start.char, token.position.end.line, token.position.end.column, token.position.end.char);
+                    }
+                    this.index++;
+                    return object;
+                  } else {
+                    return null;
+                  }
+                  break;
+                case objectStates.KEY:
+                  if (token.type == Tokenizer.COLON) {
+                    state = objectStates.COLON;
+                    this.index++;
+                  } else {
+                    return null;
+                  }
+                  break;
+                case objectStates.COLON:
+                  var value = this._parseValue();
+                  if (value !== null) {
+                    property.value = value;
+                    object.properties.push(property);
+                    state = objectStates.VALUE;
+                  } else {
+                    return null;
+                  }
+                  break;
+                case objectStates.VALUE:
+                  if (token.type === Tokenizer.RIGHT_BRACE) {
+                    if (this.settings.verbose) {
+                      object.position = position(startToken.position.start.line, startToken.position.start.column, startToken.position.start.char, token.position.end.line, token.position.end.column, token.position.end.char);
+                    }
+                    this.index++;
+                    return object;
+                  } else if (token.type === Tokenizer.COMMA) {
+                    state = objectStates.COMMA;
+                    this.index++;
+                  } else {
+                    return null;
+                  }
+                  break;
+                case objectStates.COMMA:
+                  if (token.type === Tokenizer.STRING) {
+                    property = {
+                      type: "property"
+                    };
+                    if (this.settings.verbose) {
+                      property.key = {
+                        type: "key",
+                        position: token.position,
+                        value: token.value
+                      };
+                    } else {
+                      property.key = {
+                        type: "key",
+                        value: token.value
+                      };
+                    }
+                    state = objectStates.KEY;
+                    this.index++;
+                  } else {
+                    return null;
+                  }
+              }
+            }
+          }
+        }, {
+          key: "_parseArray",
+          value: function _parseArray() {
+            var startToken = undefined;
+            var value = undefined;
+            var array = {
+              type: "array",
+              items: []
+            };
+            var state = arrayStates._START_;
+            while (true) {
+              var token = this.tokenList[this.index];
+              switch (state) {
+                case arrayStates._START_:
+                  if (token.type === Tokenizer.LEFT_BRACKET) {
+                    startToken = token;
+                    state = arrayStates.OPEN_ARRAY;
+                    this.index++;
+                  } else {
+                    return null;
+                  }
+                  break;
+                case arrayStates.OPEN_ARRAY:
+                  value = this._parseValue();
+                  if (value !== null) {
+                    array.items.push(value);
+                    state = arrayStates.VALUE;
+                  } else if (token.type === Tokenizer.RIGHT_BRACKET) {
+                    if (this.settings.verbose) {
+                      array.position = position(startToken.position.start.line, startToken.position.start.column, startToken.position.start.char, token.position.end.line, token.position.end.column, token.position.end.char);
+                    }
+                    this.index++;
+                    return array;
+                  } else {
+                    return null;
+                  }
+                  break;
+                case arrayStates.VALUE:
+                  if (token.type === Tokenizer.RIGHT_BRACKET) {
+                    if (this.settings.verbose) {
+                      array.position = position(startToken.position.start.line, startToken.position.start.column, startToken.position.start.char, token.position.end.line, token.position.end.column, token.position.end.char);
+                    }
+                    this.index++;
+                    return array;
+                  } else if (token.type === Tokenizer.COMMA) {
+                    state = arrayStates.COMMA;
+                    this.index++;
+                  } else {
+                    return null;
+                  }
+                  break;
+                case arrayStates.COMMA:
+                  value = this._parseValue();
+                  if (value !== null) {
+                    array.items.push(value);
+                    state = arrayStates.VALUE;
+                  } else {
+                    return null;
+                  }
+                  break;
+              }
+            }
+          }
+        }, {
+          key: "_parseValue",
+          value: function _parseValue() {
+            var token = this.tokenList[this.index];
+            var tokenType = undefined;
+            switch (token.type) {
+              case Tokenizer.STRING:
+                tokenType = "string";
+                break;
+              case Tokenizer.NUMBER:
+                tokenType = "number";
+                break;
+              case Tokenizer.TRUE:
+                tokenType = "true";
+                break;
+              case Tokenizer.FALSE:
+                tokenType = "false";
+                break;
+              case Tokenizer.NULL:
+                tokenType = "null";
+            }
+            var objectOrArray = this._parseObject() || this._parseArray();
+            if (tokenType !== undefined) {
+              this.index++;
+              if (this.settings.verbose) {
+                return {
+                  type: tokenType,
+                  value: token.value,
+                  position: token.position
+                };
+              } else {
+                return {
+                  type: tokenType,
+                  value: token.value
+                };
+              }
+            } else if (objectOrArray !== null) {
+              return objectOrArray;
+            } else {
+              throw new Error("!!!!!");
+            }
+          }
+        } ]);
+        return JsonParser;
+      }();
+      return JsonParser;
+    }();
+    module.exports = JsonParser;
+    module.exports.buildMap = function(str, filename) {
+      function loc(node) {
+        return [ filename, node.position.start.line, node.position.start.column ].join(":");
+      }
+      function walk(node, map, path) {
+        path = path ? path + "." : "";
+        switch (node.type) {
+          case "object":
+            node.properties.forEach(function(property) {
+              map[path + property.key.value] = loc(property.value);
+              walk(property.value, map, path + property.key.value);
+            });
+            break;
+          case "array":
+            node.items.forEach(function(item, idx) {
+              map[path + idx] = loc(item);
+              walk(item, map, path + idx);
+            });
+            break;
+        }
+        return map;
+      }
+      var result = {};
+      try {
+        result = walk(new JsonParser(str), {});
+      } catch (e) {
+        console.error("JSON parse error:", e);
+      }
+      return result;
+    };
+  },
+  "2n.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Node = basis.require("./7.js").Node;
+    var Cell = basis.require("./1j.js");
+    module.exports = Node.subclass({
+      template: basis.template.get(".a"),
+      childClass: Cell
+    });
+  },
+  "a.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var hasOwnProperty = Object.prototype.hasOwnProperty;
+    var consts = basis.require("./b.js");
+    var namespaces = basis.require("./c.js");
+    var MARKER = consts.MARKER;
+    var TYPE_ELEMENT = consts.TYPE_ELEMENT;
+    var TYPE_ATTRIBUTE = consts.TYPE_ATTRIBUTE;
+    var TYPE_ATTRIBUTE_CLASS = consts.TYPE_ATTRIBUTE_CLASS;
+    var TYPE_ATTRIBUTE_STYLE = consts.TYPE_ATTRIBUTE_STYLE;
+    var TYPE_ATTRIBUTE_EVENT = consts.TYPE_ATTRIBUTE_EVENT;
+    var TYPE_TEXT = consts.TYPE_TEXT;
+    var TYPE_COMMENT = consts.TYPE_COMMENT;
+    var TYPE_CONTENT = consts.TYPE_CONTENT;
+    var TOKEN_TYPE = consts.TOKEN_TYPE;
+    var TOKEN_BINDINGS = consts.TOKEN_BINDINGS;
+    var TOKEN_REFS = consts.TOKEN_REFS;
+    var ATTR_NAME = consts.ATTR_NAME;
+    var ATTR_NAME_BY_TYPE = consts.ATTR_NAME_BY_TYPE;
+    var ELEMENT_NAME = consts.ELEMENT_NAME;
+    var ELEMENT_ATTRIBUTES_AND_CHILDREN = consts.ELEMENT_ATTRIBUTES_AND_CHILDREN;
+    var CONTENT_CHILDREN = consts.CONTENT_CHILDREN;
+    var CLASS_BINDING_ENUM = consts.CLASS_BINDING_ENUM;
+    var CLASS_BINDING_BOOL = consts.CLASS_BINDING_BOOL;
+    var CLASS_BINDING_INVERT = consts.CLASS_BINDING_INVERT;
+    var inlineSeed = 1;
+    var tmplFunctions = {};
+    var SET_NONELEMENT_PROPERTY_SUPPORT = function() {
+      try {
+        global.document.createTextNode("").x = 1;
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }();
+    function cleanSpecial(tokens, offset) {
+      var result = [];
+      for (var i = 0; i < tokens.length; i++) {
+        if (i < offset) {
+          result.push(tokens[i]);
+          continue;
+        }
+        var token = tokens[i];
+        switch (token[TOKEN_TYPE]) {
+          case TYPE_ELEMENT:
+            result.push(cleanSpecial(token, ELEMENT_ATTRIBUTES_AND_CHILDREN));
+            break;
+          case TYPE_CONTENT:
+            result.push.apply(result, cleanSpecial(token, CONTENT_CHILDREN).slice(CONTENT_CHILDREN));
+            break;
+          default:
+            result.push(token);
+        }
+      }
+      return result;
+    }
+    var buildPathes = function() {
+      var PATH_REF_NAME = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+      var pathList;
+      var refList;
+      var bindingList;
+      var markedElementList;
+      var rootPath;
+      var attrExprId;
+      function putRefs(refs, pathIdx) {
+        for (var i = 0, refName; refName = refs[i]; i++) if (refName.indexOf(":") == -1) refList.push(refName + ":" + pathIdx);
+      }
+      function putPath(path) {
+        var len = pathList.length;
+        var pathRef = PATH_REF_NAME[len] || "r" + len;
+        pathList.push(pathRef + "=" + path);
+        return pathRef;
+      }
+      function putBinding(binding) {
+        bindingList.push(binding);
+      }
+      function processTokens(tokens, path, noTextBug) {
+        var localPath;
+        var refs;
+        var myRef;
+        var explicitRef;
+        var bindings;
+        for (var i = 0, cp = 0, closeText = 0, token; token = tokens[i]; i++, cp++, explicitRef = false) {
+          if (!i) localPath = path + ".firstChild"; else {
+            if (!tokens[i + 1]) localPath = path + ".lastChild"; else {
+              if (token[TOKEN_TYPE] == tokens[i - 1][TOKEN_TYPE] && token[TOKEN_TYPE] == TYPE_TEXT) closeText++;
+              localPath = path + ".childNodes[" + (noTextBug ? cp : cp + (closeText ? " + " + closeText + " * TEXT_BUG" : "")) + "]";
+            }
+          }
+          if (refs = token[TOKEN_REFS]) {
+            explicitRef = true;
+            localPath = putPath(localPath);
+            putRefs(refs, localPath);
+          }
+          if (token[TOKEN_BINDINGS]) {
+            if (token[TOKEN_BINDINGS] && typeof token[TOKEN_BINDINGS] == "number") token[TOKEN_BINDINGS] = token[TOKEN_REFS][token[TOKEN_BINDINGS] - 1];
+            if (!explicitRef) {
+              explicitRef = true;
+              localPath = putPath(localPath);
+            }
+            putBinding([ token[TOKEN_TYPE], localPath, token[TOKEN_BINDINGS], refs ? refs.indexOf("element") != -1 : false ]);
+          }
+          if (path == rootPath && (SET_NONELEMENT_PROPERTY_SUPPORT || token[TOKEN_TYPE] == TYPE_ELEMENT)) markedElementList.push(localPath + "." + MARKER);
+          if (token[TOKEN_TYPE] == TYPE_ELEMENT) {
+            myRef = -1;
+            if (!explicitRef) {
+              localPath = putPath(localPath);
+              myRef = pathList.length;
+            }
+            var attrs = [];
+            var children = [];
+            for (var j = ELEMENT_ATTRIBUTES_AND_CHILDREN, t; t = token[j]; j++) if (t[TOKEN_TYPE] == TYPE_ELEMENT || t[TOKEN_TYPE] == TYPE_TEXT || t[TOKEN_TYPE] == TYPE_COMMENT) children.push(t); else attrs.push(t);
+            for (var j = 0, attr; attr = attrs[j]; j++) {
+              var attrTokenType = attr[TOKEN_TYPE];
+              if (attrTokenType == TYPE_ATTRIBUTE_EVENT) continue;
+              var attrName = ATTR_NAME_BY_TYPE[attrTokenType] || attr[ATTR_NAME];
+              if (refs = attr[TOKEN_REFS]) {
+                explicitRef = true;
+                putRefs(refs, putPath(localPath + '.getAttributeNode("' + attrName + '")'));
+              }
+              if (bindings = attr[TOKEN_BINDINGS]) {
+                explicitRef = true;
+                switch (attrTokenType) {
+                  case TYPE_ATTRIBUTE_CLASS:
+                    for (var k = 0, binding; binding = bindings[k]; k++) putBinding([ 2, localPath, binding[1], attrName, binding[0] ].concat(binding[2] == -1 ? [] : binding.slice(2)));
+                    break;
+                  case TYPE_ATTRIBUTE_STYLE:
+                    for (var k = 0, property; property = bindings[k]; k++) {
+                      attrExprId++;
+                      for (var m = 0, bindName; bindName = property[0][m]; m++) putBinding([ 2, localPath, bindName, attrName, property[0], property[1], property[2], property[3], attrExprId ]);
+                    }
+                    break;
+                  default:
+                    attrExprId++;
+                    for (var k = 0, bindName; bindName = bindings[0][k]; k++) putBinding([ 2, localPath, bindName, attrName, bindings[0], bindings[1], token[ELEMENT_NAME], attrExprId ]);
+                }
+              }
+            }
+            if (children.length) processTokens(children, localPath, noTextBug);
+            if (!explicitRef && myRef == pathList.length) pathList.pop();
+          }
+        }
+      }
+      return function(tokens, path, noTextBug) {
+        pathList = [];
+        refList = [];
+        bindingList = [];
+        markedElementList = [];
+        rootPath = path || "_";
+        attrExprId = 0;
+        processTokens(tokens, rootPath, noTextBug);
+        return {
+          path: pathList,
+          ref: refList,
+          binding: bindingList,
+          markedElementList: markedElementList
+        };
+      };
+    }();
+    var buildBindings = function() {
+      var L10N_BINDING = /\.\{([a-zA-Z_][a-zA-Z0-9_\-]*)\}/;
+      var SPECIAL_ATTR_MAP = {
+        disabled: "*",
+        checked: [ "input" ],
+        indeterminate: [ "input" ],
+        value: [ "input", "textarea", "select" ],
+        minlength: [ "input" ],
+        maxlength: [ "input" ],
+        readonly: [ "input" ],
+        selected: [ "option" ],
+        multiple: [ "select" ]
+      };
+      var SPECIAL_ATTR_SINGLE = {
+        disabled: true,
+        checked: true,
+        selected: true,
+        readonly: true,
+        multiple: true,
+        indeterminate: true
+      };
+      var STYLE_EXPR_VALUE = {
+        show: '"none"',
+        visible: '"hidden"'
+      };
+      var STYLE_EXPR_TOGGLE = {
+        hide: '?"none":""',
+        show: '?"":"none"',
+        hidden: '?"hidden":""',
+        visible: '?"":"hidden"'
+      };
+      var bindFunctions = {
+        1: "bind_element",
+        3: "bind_textNode",
+        8: "bind_comment"
+      };
+      function quoteString(value) {
+        return '"' + value.replace(/"/g, '\\"').replace(/\n/g, "\\n").replace(/\r/g, "\\r") + '"';
+      }
+      function simpleStringify(val) {
+        return typeof val == "string" ? quoteString(val) : val;
+      }
+      function stringifyBindingNames(val) {
+        if (val.indexOf("l10n:") == 0) val = this[val.substr(5)] || val;
+        return quoteString(val);
+      }
+      function buildAttrExpression(binding, special, l10n) {
+        var expression = [];
+        var cond = [];
+        var symbols = binding[5];
+        var dictionary = binding[4];
+        var exprVar;
+        var colonPos;
+        for (var j = 0; j < symbols.length; j++) {
+          if (typeof symbols[j] == "string") expression.push(quoteString(symbols[j])); else {
+            exprVar = dictionary[symbols[j]];
+            colonPos = exprVar.indexOf(":");
+            if (colonPos == -1) {
+              expression.push(special == "l10n" ? '"{' + exprVar + '}"' : special == "bool" ? "(__" + exprVar + '||"")' : "__" + exprVar);
+              if (!special) cond.push("__" + exprVar + "!==UNSET&&__" + exprVar + "!==undefined");
+            } else {
+              var bindingName = null;
+              var l10nPath = exprVar.substr(colonPos + 1).replace(L10N_BINDING, function(m, name) {
+                bindingName = name;
+                return "";
+              });
+              if (bindingName) {
+                if (l10n === false) return false;
+                expression.push(l10n[exprVar.substr(colonPos + 1)]);
+                if (!special) cond.push(l10n[exprVar.substr(colonPos + 1)] + "!==undefined");
+              } else expression.push('l10n["' + l10nPath + '"]');
+            }
+          }
+        }
+        if (expression.length == 1) expression.push('""');
+        expression = expression.join("+");
+        if (!special && cond.length) expression = cond.join("&&") + "?(" + expression + '):""';
+        return expression;
+      }
+      return function(bindings) {
+        function putBindCode(type) {
+          toolsUsed[type] = true;
+          bindCode.push(bindVar + "=" + type + "(" + basis.array(arguments, 1) + ");");
+        }
+        var bindMap = {};
+        var bindCode;
+        var bindVar;
+        var bindVarSeed = 0;
+        var varList = [];
+        var bindingsWoL10nCompute = [];
+        var l10nComputeBindings = [];
+        var varName;
+        var l10nMap;
+        var l10nCompute = [];
+        var l10nBindings = {};
+        var l10nBindSeed = 0;
+        var attrExprId;
+        var attrExprMap = {};
+        var debugList = [];
+        var toolsUsed = {};
+        for (var i = 0, binding; binding = bindings[i]; i++) {
+          var bindName = binding[2];
+          var namePart = bindName.split(":");
+          if (namePart[0] == "l10n" && namePart[1]) {
+            var l10nFullPath = namePart[1];
+            var l10nBinding = null;
+            var l10nName = l10nFullPath.replace(L10N_BINDING, function(m, name) {
+              l10nBinding = name;
+              return "";
+            });
+            if (l10nBinding) {
+              l10nComputeBindings.push(binding);
+              if (l10nFullPath in l10nBindings == false) {
+                varName = "$l10n_" + l10nBindSeed++;
+                l10nBindings[l10nFullPath] = varName;
+                l10nCompute.push(varName);
+                varList.push(varName + '=tools.l10nToken("' + l10nName + '").computeToken()');
+                bindCode = bindMap[l10nBinding];
+                if (!bindCode) {
+                  bindCode = bindMap[l10nBinding] = [];
+                  varList.push("__" + l10nBinding + "=UNSET");
+                }
+                bindCode.push(varName + ".set(__" + l10nBinding + ");");
+              }
+              continue;
+            }
+          }
+          bindingsWoL10nCompute.push(binding);
+        }
+        for (var i = 0, binding; binding = l10nComputeBindings[i]; i++) {
+          var bindType = binding[0];
+          var domRef = binding[1];
+          var bindName = binding[2];
+          var nodeBindingProhibited = binding[3];
+          var l10nFullPath = bindName.split(":")[1];
+          bindName = l10nBindings[l10nFullPath];
+          bindVar = "_" + bindVarSeed++;
+          varName = "__" + bindName;
+          bindCode = bindMap[bindName];
+          if (!bindCode) {
+            bindCode = bindMap[bindName] = [];
+            varList.push(varName);
+          }
+          if (bindType == TYPE_TEXT) {
+            debugList.push("{" + [ 'binding:"' + bindName + '"', "dom:" + domRef, "val:" + bindVar, "l10n:true", "attachment:" + bindName ] + "}");
+            varList.push(bindVar + "=" + domRef);
+            putBindCode(bindFunctions[bindType], domRef, bindVar, "value", nodeBindingProhibited);
+          } else {
+            var expr = buildAttrExpression(binding, false, l10nBindings);
+            attrExprId = binding[7];
+            if (!attrExprMap[attrExprId]) {
+              varList.push(bindVar);
+              attrExprMap[attrExprId] = bindVar;
+            }
+            bindVar = attrExprMap[attrExprId];
+            attrName = '"' + binding[ATTR_NAME] + '"';
+            debugList.push("{" + [ 'binding:"' + bindName + '"', "raw:" + bindName + ".get()", "l10n:true", 'type:"l10n"', "expr:[[" + binding[5].map(simpleStringify) + "],[" + binding[4].map(simpleStringify) + "],[" + binding[4].map(stringifyBindingNames, l10nBindings) + "]]", "dom:" + domRef, "attr:" + attrName, "val:" + bindVar, "attachment:" + bindName ] + "}");
+            putBindCode("bind_attr", domRef, attrName, bindVar, expr);
+          }
+        }
+        for (var i = 0, binding; binding = bindingsWoL10nCompute[i]; i++) {
+          var bindType = binding[0];
+          var domRef = binding[1];
+          var bindName = binding[2];
+          var nodeBindingProhibited = binding[3];
+          if ([ "get", "set", "templateId_" ].indexOf(bindName) != -1) {
+            basis.dev.warn("binding name `" + bindName + "` is prohibited, binding ignored");
+            continue;
+          }
+          var namePart = bindName.split(":");
+          var anim = namePart[0] == "anim";
+          var l10n = namePart[0] == "l10n";
+          if (anim) bindName = namePart[1];
+          bindCode = hasOwnProperty.call(bindMap, bindName) ? bindMap[bindName] : null;
+          bindVar = "_" + bindVarSeed++;
+          varName = "__" + bindName;
+          if (l10n && namePart[1]) {
+            var l10nFullPath = namePart[1];
+            var l10nBinding = null;
+            var l10nName = l10nFullPath;
+            if (!l10nMap) l10nMap = {};
+            if (!bindMap[l10nName]) {
+              bindMap[l10nName] = [];
+              bindMap[l10nName].l10n = "$l10n_" + l10nBindSeed++;
+              varList.push("__" + bindMap[l10nName].l10n + '=l10n["' + l10nName + '"]');
+              l10nMap[l10nName] = [];
+            }
+            bindCode = bindMap[l10nName];
+            if (bindType == TYPE_TEXT) {
+              debugList.push("{" + [ 'binding:"' + l10nFullPath + '"', "dom:" + domRef, 'val:l10n["' + l10nName + '"]', "l10n:true", 'attachment:l10nToken("' + l10nName + '")' ] + "}");
+              toolsUsed.l10nToken = true;
+              l10nMap[l10nName].push(domRef + ".nodeValue=value;");
+              if (!bindCode.nodeBind) {
+                varList.push(bindVar + "=" + domRef);
+                putBindCode(bindFunctions[bindType], domRef, bindVar, "value", nodeBindingProhibited);
+                bindCode.nodeBind = bindVar;
+              } else {
+                bindCode.push(domRef + ".nodeValue=value;");
+              }
+              continue;
+            } else {
+              var expr = buildAttrExpression(binding, "l10n", false);
+              if (expr !== false) {
+                l10nMap[l10nName].push("bind_attr(" + [ domRef, '"' + binding[ATTR_NAME] + '"', "NaN", expr ] + ");");
+              }
+            }
+          }
+          if (!bindCode) {
+            bindCode = bindMap[bindName] = [];
+            varList.push(varName + "=UNSET");
+          }
+          if (bindType != TYPE_ATTRIBUTE) {
+            debugList.push("{" + [ 'binding:"' + bindName + '"', "dom:" + domRef, "val:" + (bindCode.nodeBind ? varName : bindVar), "updates:$$" + bindName, 'attachment:instance.attaches&&instance.attaches["' + bindName + '"]&&instance.attaches["' + bindName + '"].value' ] + "}");
+            if (!bindCode.nodeBind) {
+              varList.push(bindVar + "=" + domRef);
+              putBindCode(bindFunctions[bindType], domRef, bindVar, "value", nodeBindingProhibited);
+              bindCode.nodeBind = bindVar;
+            } else {
+              switch (bindType) {
+                case TYPE_ELEMENT:
+                  putBindCode(bindFunctions[bindType], domRef, domRef, "value!==null?String(value):null");
+                  break;
+                case TYPE_TEXT:
+                  bindCode.push(domRef + ".nodeValue=value;");
+                  break;
+              }
+            }
+          } else {
+            var attrName = binding[ATTR_NAME];
+            switch (attrName) {
+              case "role-marker":
+                varList.push(bindVar + '=""');
+                putBindCode("bind_attr", domRef, '"' + attrName + '"', bindVar, "value?value" + (binding[5][1] ? "+" + quoteString(binding[5][1]) : "") + ':""');
+                break;
+              case "class":
+                var defaultExpr = "";
+                var valueExpr = "value";
+                var bindingType = binding[5];
+                var defaultValue = binding[7];
+                switch (bindingType) {
+                  case CLASS_BINDING_BOOL:
+                  case CLASS_BINDING_INVERT:
+                    var values = [ binding[6] ];
+                    var prefix = binding[4];
+                    var classes = Array.isArray(prefix) ? prefix : values.map(function(val) {
+                      return prefix + val;
+                    });
+                    valueExpr = (bindingType == CLASS_BINDING_INVERT ? "!" : "") + 'value?"' + classes[0] + '":""';
+                    if (defaultValue) defaultExpr = classes[defaultValue - 1];
+                    break;
+                  case CLASS_BINDING_ENUM:
+                    var values = binding[8];
+                    var prefix = binding[4];
+                    var classes = Array.isArray(prefix) ? prefix : values.map(function(val) {
+                      return prefix + val;
+                    });
+                    valueExpr = values.map(function(val, idx) {
+                      return 'value=="' + val + '"?"' + classes[idx] + '"';
+                    }).join(":") + ':""';
+                    if (defaultValue) defaultExpr = classes[defaultValue - 1];
+                    break;
+                  default:
+                    var prefix = binding[4];
+                    valueExpr = 'typeof value=="string"||typeof value=="number"?"' + prefix + '"+value:(value?"' + prefix + bindName + '":"")';
+                }
+                varList.push(bindVar + '="' + defaultExpr + '"');
+                putBindCode("bind_attrClass", domRef, bindVar, valueExpr, anim);
+                debugList.push("{" + [ 'binding:"' + bindName + '"', "raw:__" + bindName, 'prefix:"' + prefix + '"', "anim:" + anim, "dom:" + domRef, 'attr:"' + attrName + '"', "val:" + bindVar, 'attachment:instance.attaches&&instance.attaches["' + bindName + '"]&&instance.attaches["' + bindName + '"].value' ] + "}");
+                break;
+              case "style":
+                var expr = buildAttrExpression(binding, "style", l10nBindings);
+                attrExprId = binding[8];
+                if (!attrExprMap[attrExprId]) {
+                  attrExprMap[attrExprId] = bindVar;
+                  varList.push(bindVar + "=" + (STYLE_EXPR_VALUE[binding[7]] || '""'));
+                }
+                if (binding[7]) expr = expr.replace(/\+""$/, "") + (STYLE_EXPR_TOGGLE[binding[7]] || "");
+                bindVar = attrExprMap[attrExprId];
+                putBindCode("bind_attrStyle", domRef, '"' + binding[6] + '"', bindVar, expr);
+                debugList.push("{" + [ 'binding:"' + bindName + '"', "raw:__" + bindName, 'property:"' + binding[6] + '"', "expr:[[" + binding[5].map(simpleStringify) + "],[" + binding[4].map(simpleStringify) + "]]", "dom:" + domRef, 'attr:"' + attrName + '"', "val:" + bindVar, 'attachment:instance.attaches&&instance.attaches["' + bindName + '"]&&instance.attaches["' + bindName + '"].value' ] + "}");
+                break;
+              default:
+                var specialAttr = SPECIAL_ATTR_MAP[attrName];
+                var tagName = binding[6].toLowerCase();
+                var expr = specialAttr && SPECIAL_ATTR_SINGLE[attrName] ? buildAttrExpression(binding, "bool", l10nBindings) + '?"' + attrName + '":""' : buildAttrExpression(binding, false, l10nBindings);
+                attrExprId = binding[7];
+                if (!attrExprMap[attrExprId]) {
+                  varList.push(bindVar + "=UNSET");
+                  attrExprMap[attrExprId] = bindVar;
+                }
+                bindVar = attrExprMap[attrExprId];
+                if (attrName == "tabindex") putBindCode("bind_attr", domRef, '"' + attrName + '"', bindVar, expr + "==-1?" + ([ "input", "button", "textarea" ].indexOf(tagName) == -1 ? '""' : "-1") + ":" + expr); else {
+                  var namespace = namespaces.getNamespace(attrName);
+                  if (namespace) putBindCode("bind_attrNS", domRef, '"' + namespace + '"', '"' + attrName + '"', bindVar, expr); else putBindCode("bind_attr", domRef, '"' + attrName + '"', bindVar, expr);
+                }
+                if (specialAttr && (specialAttr == "*" || specialAttr.indexOf(tagName) != -1)) bindCode.push("if(" + domRef + "." + attrName + "!=" + bindVar + ")" + domRef + "." + attrName + "=" + (SPECIAL_ATTR_SINGLE[attrName] ? "!!" + bindVar : bindVar) + ";");
+                debugList.push("{" + [ 'binding:"' + bindName + '"', "raw:" + (l10n ? 'l10n["' + l10nFullPath + '"]' : "__" + bindName), 'type:"' + (specialAttr && SPECIAL_ATTR_SINGLE[attrName] ? "bool" : "string") + '"', "expr:[[" + binding[5].map(simpleStringify) + "],[" + binding[4].map(simpleStringify) + "],[" + binding[4].map(stringifyBindingNames, l10nBindings) + "]]", "dom:" + domRef, 'attr:"' + attrName + '"', "val:" + bindVar, 'attachment:instance.attaches&&instance.attaches["' + bindName + '"]&&instance.attaches["' + bindName + '"].value' ] + "}");
+            }
+          }
+        }
+        var bindMapKeys = basis.object.keys(bindMap);
+        var setFunction = "";
+        if (bindMapKeys.length) {
+          toolsUsed.resolve = true;
+          setFunction = [ ";function set(bindName,value){", 'if(typeof bindName!="string")' ];
+          for (var bindName in bindMap) if (bindMap[bindName].nodeBind) {
+            setFunction.push("if(bindName===" + bindMap[bindName].nodeBind + ")" + 'bindName="' + bindName + '";' + "else ");
+          }
+          setFunction.push("return;", "rawValues[bindName]=value;", "value=resolve.call(instance,bindName,value,Attaches);", "switch(bindName){");
+          for (var bindName in bindMap) {
+            var stateVar = bindMap[bindName].l10n || bindName;
+            varList.push("$$" + stateVar + "=0");
+            setFunction.push('case"' + bindName + '":', "if(__" + stateVar + "!==value)", "{", "$$" + stateVar + "++;", "__" + stateVar + "=value;", bindMap[bindName].join(""), "}", "break;");
+          }
+          setFunction = setFunction.join("") + "}}";
+        }
+        var toolsVarList = [];
+        for (var key in toolsUsed) toolsVarList.push(key + "=tools." + key);
+        return {
+          debugList: debugList,
+          allKeys: bindMapKeys,
+          keys: bindMapKeys.filter(function(key) {
+            return key.indexOf("@") == -1;
+          }),
+          tools: toolsVarList,
+          vars: varList,
+          set: setFunction,
+          l10n: l10nMap,
+          l10nCompute: l10nCompute
+        };
+      };
+    }();
+    function compileFunction(args, body) {
+      try {
+        return new Function(args, body);
+      } catch (e) {
+        basis.dev.error("Can't build template function: " + e + "\n", "function(" + args + "){\n" + body + "\n}");
+      }
+    }
+    var getFunctions = function(tokens, debug, uri, source, noTextBug) {
+      var fn = tmplFunctions[uri && basis.path.relative(uri)];
+      if (fn) return fn;
+      tokens = cleanSpecial(tokens, 0);
+      var paths = buildPathes(tokens, "_", noTextBug);
+      var bindings = buildBindings(paths.binding);
+      var objectRefs = paths.markedElementList.join("=");
+      var result = {
+        keys: bindings.keys,
+        l10nKeys: basis.object.keys(bindings.l10n)
+      };
+      if (tokens.length == 1) paths.path[0] = "a=_";
+      if (!uri) uri = basis.path.baseURI + "inline_template" + inlineSeed++ + ".tmpl";
+      if (bindings.l10n) {
+        var code = [];
+        for (var key in bindings.l10n) code.push('case"' + key + '":' + bindings.l10n[key].join("") + "break;");
+        result.createL10nSync = compileFunction([ "_", "l10n", "bind_attr", "TEXT_BUG" ], (source ? "\n// " + source.split(/\r\n?|\n\r?/).join("\n// ") + "\n\n" : "") + "var " + paths.path + ";" + "return function(path, value){" + "switch(path){" + code.join("") + "}" + "}" + "\n\n//# sourceURL=" + basis.path.origin + uri + "_l10n");
+      }
+      result.createInstanceFactory = compileFunction([ "tid", "createDOM", "tools", "l10nMap", "l10nMarkup", "getBindings", "TEXT_BUG" ], (source ? "\n// " + source.split(/\r\n?|\n\r?/).join("\n// ") + "\n\n" : "") + "var UNSET={valueOf:function(){}}," + (bindings.tools.length ? bindings.tools + "," : "") + (bindings.set ? "Attaches=function(){};" + "Attaches.prototype={" + bindings.keys.map(function(key) {
+        return key + ":null";
+      }) + "};" : "set=function(){};") + "return function createTmpl_(id,instance,initL10n){" + "var _=createDOM()," + (bindings.l10n ? "l10n=initL10n?{}:l10nMap," : "") + paths.path.concat(bindings.vars) + ",rawValues={}" + (debug ? ";instance.debug=function debug(){" + "return {" + "bindings:[" + bindings.debugList + "]," + "values:{" + bindings.keys.map(function(key) {
+        return '"' + key + '":__' + key;
+      }) + "}," + "rawValues:rawValues," + (bindings.l10nCompute.length ? "compute:Array.prototype.slice.call(instance.compute)" : "compute:[]") + "}" + "}" : "") + (bindings.l10nCompute.length ? ";instance.compute=[" + bindings.l10nCompute + "]" : "") + ";instance.tmpl={" + [ paths.ref, "templateId_:id", "set:set" ] + "}" + (objectRefs ? ";if(instance.context||instance.onAction)" + objectRefs + "=(id<<12)|tid" : "") + bindings.set + (bindings.l10n ? ";if(initL10n){l10n=l10nMap;initL10n(set)}" + ";if(l10nMarkup.length)for(var idx=0,token;token=l10nMarkup[idx];idx++)set(token.path,token.token);" : "") + (bindings.set ? ";if(instance.bindings)instance.handler=getBindings(instance,set)" : "") + ";" + bindings.l10nCompute.map(function(varName) {
+        return 'set("' + varName + '",' + varName + ")";
+      }) + "}" + "\n\n//# sourceURL=" + basis.path.origin + uri);
+      return result;
+    };
+    module.exports = {
+      getFunctions: getFunctions
+    };
+  },
+  "u.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    module.exports = {
+      FileSize: basis.require("./2o.js")
+    };
+  },
+  "2o.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Node = basis.require("./7.js").Node;
+    var Value = basis.require("./2.js").Value;
+    var events = basis.require("./6.js");
+    var resolveValue = basis.require("./2.js").resolveValue;
+    function getSize(bytes) {
+      var kBytes = bytes / 1024;
+      var mBytes = bytes / 1024 / 1024;
+      if (mBytes >= 1) {
+        return mBytes;
+      } else if (kBytes >= 1) {
+        return kBytes;
+      }
+      return bytes;
+    }
+    function getPostfix(bytes) {
+      var kBytes = bytes / 1024;
+      var mBytes = bytes / 1024 / 1024;
+      if (mBytes >= 1) {
+        return "MB";
+      } else if (kBytes >= 1) {
+        return "KB";
+      }
+      return "B";
+    }
+    module.exports = Node.subclass({
+      template: basis.template.get(".b"),
+      propertyDescriptors: {
+        size: "sizeChanged"
+      },
+      size: 0,
+      sizeRA_: null,
+      emit_sizeChanged: events.create("sizeChanged"),
+      setSize: function(value) {
+        value = resolveValue(this, this.setSize, value, "sizeRA_");
+        if (this.size !== value) {
+          this.size = value;
+          this.emit_sizeChanged();
+        }
+      },
+      binding: {
+        size: Value.query("size").as(function(size) {
+          if (!isNaN(size)) {
+            return basis.number.format(getSize(size || 0), 2);
+          }
+        }),
+        postfix: Value.query("size").as(getPostfix)
+      },
+      init: function() {
+        Node.prototype.init.call(this);
+        this.setSize(this.size);
+      }
+    });
+  },
+  "b.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var MARKER = "basisTemplateId_" + basis.genUID();
+    var TYPE_ELEMENT = 1;
+    var TYPE_ATTRIBUTE = 2;
+    var TYPE_ATTRIBUTE_CLASS = 4;
+    var TYPE_ATTRIBUTE_STYLE = 5;
+    var TYPE_ATTRIBUTE_EVENT = 6;
+    var TYPE_TEXT = 3;
+    var TYPE_COMMENT = 8;
+    var TYPE_CONTENT = 9;
+    var TOKEN_TYPE = 0;
+    var TOKEN_BINDINGS = 1;
+    var TOKEN_REFS = 2;
+    var ATTR_NAME = 3;
+    var ATTR_VALUE = 4;
+    var ATTR_NAME_BY_TYPE = {
+      4: "class",
+      5: "style"
+    };
+    var ATTR_TYPE_BY_NAME = {
+      "class": TYPE_ATTRIBUTE_CLASS,
+      style: TYPE_ATTRIBUTE_STYLE
+    };
+    var ATTR_VALUE_INDEX = {
+      2: ATTR_VALUE,
+      4: ATTR_VALUE - 1,
+      5: ATTR_VALUE - 1,
+      6: 2
+    };
+    var CLASS_BINDING_ENUM = 1;
+    var CLASS_BINDING_BOOL = 2;
+    var CLASS_BINDING_INVERT = 3;
+    var CLASS_BINDING_EQUAL = 4;
+    var CLASS_BINDING_NOTEQUAL = 5;
+    var ELEMENT_NAME = 3;
+    var ELEMENT_ATTRIBUTES_AND_CHILDREN = 4;
+    var TEXT_VALUE = 3;
+    var COMMENT_VALUE = 3;
+    var CONTENT_CHILDREN = 2;
+    var CONTENT_PRIORITY = 1;
+    var document = global.document;
+    var CLONE_NORMALIZATION_TEXT_BUG = !document ? true : function() {
+      var element = document.createElement("div");
+      element.appendChild(document.createTextNode("a"));
+      element.appendChild(document.createTextNode("a"));
+      return element.cloneNode(true).childNodes.length == 1;
+    }();
+    module.exports = {
+      MARKER: MARKER,
+      TYPE_ELEMENT: TYPE_ELEMENT,
+      TYPE_ATTRIBUTE: TYPE_ATTRIBUTE,
+      TYPE_ATTRIBUTE_CLASS: TYPE_ATTRIBUTE_CLASS,
+      TYPE_ATTRIBUTE_STYLE: TYPE_ATTRIBUTE_STYLE,
+      TYPE_ATTRIBUTE_EVENT: TYPE_ATTRIBUTE_EVENT,
+      TYPE_TEXT: TYPE_TEXT,
+      TYPE_COMMENT: TYPE_COMMENT,
+      TYPE_CONTENT: TYPE_CONTENT,
+      TOKEN_TYPE: TOKEN_TYPE,
+      TOKEN_BINDINGS: TOKEN_BINDINGS,
+      TOKEN_REFS: TOKEN_REFS,
+      ATTR_NAME: ATTR_NAME,
+      ATTR_VALUE: ATTR_VALUE,
+      ATTR_NAME_BY_TYPE: ATTR_NAME_BY_TYPE,
+      ATTR_TYPE_BY_NAME: ATTR_TYPE_BY_NAME,
+      ATTR_VALUE_INDEX: ATTR_VALUE_INDEX,
+      ELEMENT_NAME: ELEMENT_NAME,
+      ELEMENT_ATTRIBUTES_AND_CHILDREN: ELEMENT_ATTRIBUTES_AND_CHILDREN,
+      TEXT_VALUE: TEXT_VALUE,
+      COMMENT_VALUE: COMMENT_VALUE,
+      CONTENT_CHILDREN: CONTENT_CHILDREN,
+      CONTENT_PRIORITY: CONTENT_PRIORITY,
+      CLASS_BINDING_ENUM: CLASS_BINDING_ENUM,
+      CLASS_BINDING_BOOL: CLASS_BINDING_BOOL,
+      CLASS_BINDING_INVERT: CLASS_BINDING_INVERT,
+      CLASS_BINDING_EQUAL: CLASS_BINDING_EQUAL,
+      CLASS_BINDING_NOTEQUAL: CLASS_BINDING_NOTEQUAL,
+      CLONE_NORMALIZATION_TEXT_BUG: CLONE_NORMALIZATION_TEXT_BUG
+    };
+  },
+  "c.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var namespaceURI = {
+      xlink: "http://www.w3.org/1999/xlink",
+      svg: "http://www.w3.org/2000/svg"
+    };
+    function getNamespace(name, node) {
+      if (!name) return;
+      var colonIndex = name.indexOf(":");
+      if (colonIndex != -1) {
+        var prefix = name.substr(0, colonIndex);
+        return namespaceURI[prefix] || node && node.lookupNamespaceURI(prefix);
+      }
+    }
+    module.exports = {
+      namespaceURI: namespaceURI,
+      getNamespace: getNamespace
+    };
+  },
+  "d.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var namespace = "basis.template";
+    var document = global.document;
+    var Class = basis.Class;
+    var cleaner = basis.cleaner;
+    var path = basis.path;
+    var consts = basis.require("./b.js");
+    var DECLARATION_VERSION = basis.require("./e.js").VERSION;
+    var getDeclFromSource = basis.require("./e.js").getDeclFromSource;
+    var makeDeclaration = basis.require("./e.js").makeDeclaration;
+    var setIsolatePrefixGenerator = basis.require("./e.js").setIsolatePrefixGenerator;
+    var store = basis.require("./f.js");
+    var theme = basis.require("./g.js");
+    var getSourceByPath = theme.get;
+    var templateList = [];
+    var sourceByDocumentId = {};
+    function resolveSourceByDocumentId(sourceId) {
+      var resource = sourceByDocumentId[sourceId];
+      if (!resource) {
+        var host = document.getElementById(sourceId);
+        var source = "";
+        if (host && host.tagName == "SCRIPT" && host.type == "text/basis-template") source = host.textContent || host.text; else if (!host) basis.dev.warn("Template script element with id `" + sourceId + "` not found"); else basis.dev.warn('Template should be declared in <script type="text/basis-template"> element (id `' + sourceId + "`)");
+        resource = sourceByDocumentId[sourceId] = basis.resource.virtual("tmpl", source || "");
+        resource.id = sourceId;
+        resource.url = '<script id="' + sourceId + '"/>';
+      }
+      return resource;
+    }
+    function resolveResource(ref, baseURI) {
+      if (/^#\d+$/.test(ref)) return templateList[ref.substr(1)];
+      if (/^id:/.test(ref)) return resolveSourceByDocumentId(ref.substr(3));
+      if (/^[a-z0-9\.]+$/i.test(ref) && !/\.tmpl$/.test(ref)) return getSourceByPath(ref);
+      return basis.resource(basis.resource.resolveURI(ref, baseURI, '<b:include src="{url}"/>'));
+    }
+    function templateSourceUpdate() {
+      if (this.destroyBuilder) buildTemplate.call(this);
+      var cursor = this;
+      while (cursor = cursor.attaches_) cursor.handler.call(cursor.context);
+    }
+    function buildTemplate() {
+      var declaration = getDeclFromSource(this.source, this.baseURI, false, {
+        isolate: this.getIsolatePrefix()
+      });
+      var destroyBuilder = this.destroyBuilder;
+      var instances = {};
+      var funcs = this.builder(declaration.tokens, instances);
+      this.createInstance = funcs.createInstance;
+      this.clearInstance = funcs.destroyInstance;
+      this.destroyBuilder = funcs.destroy;
+      store.add(this.templateId, this, instances);
+      this.instances_ = instances;
+      this.decl_ = declaration;
+      var newDeps = declaration.deps;
+      var oldDeps = this.deps_;
+      this.deps_ = newDeps;
+      if (oldDeps) for (var i = 0, dep; dep = oldDeps[i]; i++) dep.bindingBridge.detach(dep, templateSourceUpdate, this);
+      if (newDeps) for (var i = 0, dep; dep = newDeps[i]; i++) dep.bindingBridge.attach(dep, templateSourceUpdate, this);
+      var newResources = declaration.resources;
+      var oldResources = this.resources;
+      this.resources = newResources;
+      if (newResources) for (var i = 0, item; item = newResources[i]; i++) {
+        var resource = basis.resource(item.url).fetch();
+        if (typeof resource.startUse == "function") resource.startUse();
+      }
+      if (oldResources) for (var i = 0, item; item = oldResources[i]; i++) {
+        var resource = basis.resource(item.url).fetch();
+        if (typeof resource.stopUse == "function") resource.stopUse();
+      }
+      if (destroyBuilder) destroyBuilder(true);
+    }
+    var Template = Class(null, {
+      className: namespace + ".Template",
+      __extend__: function(value) {
+        if (value instanceof Template) return value;
+        if (value instanceof TemplateSwitchConfig) return new TemplateSwitcher(value);
+        return new Template(value);
+      },
+      source: "",
+      baseURI: "",
+      url: "",
+      attaches_: null,
+      init: function(source) {
+        if (templateList.length == 4096) throw "Too many templates (maximum 4096)";
+        this.setSource(source || "");
+        this.templateId = templateList.push(this) - 1;
+      },
+      bindingBridge: {
+        attach: function(template, handler, context) {
+          var cursor = template;
+          while (cursor = cursor.attaches_) if (cursor.handler === handler && cursor.context === context) basis.dev.warn("basis.template.Template#bindingBridge.attach: duplicate handler & context pair");
+          template.attaches_ = {
+            handler: handler,
+            context: context,
+            attaches_: template.attaches_
+          };
+        },
+        detach: function(template, handler, context) {
+          var cursor = template;
+          var prev;
+          while (prev = cursor, cursor = cursor.attaches_) if (cursor.handler === handler && cursor.context === context) {
+            prev.attaches_ = cursor.attaches_;
+            return;
+          }
+          basis.dev.warn("basis.template.Template#bindingBridge.detach: handler & context pair not found, nothing was removed");
+        },
+        get: function(template) {
+          var source = template.source;
+          return source && source.bindingBridge ? source.bindingBridge.get(source) : source;
+        }
+      },
+      createInstance: function(object, actionCallback, updateCallback, bindings, bindingInterface) {
+        buildTemplate.call(this);
+        return this.createInstance(object, actionCallback, updateCallback, bindings, bindingInterface);
+      },
+      clearInstance: function() {},
+      getIsolatePrefix: function() {
+        return "i" + this.templateId + "__";
+      },
+      setSource: function(source) {
+        var oldSource = this.source;
+        if (oldSource != source) {
+          if (typeof source == "string") {
+            var m = source.match(/^([a-z]+):/);
+            if (m) {
+              source = source.substr(m[0].length);
+              switch (m[1]) {
+                case "id":
+                  source = resolveSourceByDocumentId(source);
+                  break;
+                case "path":
+                  source = getSourceByPath(source);
+                  break;
+                default:
+                  basis.dev.warn(namespace + ".Template.setSource: Unknown prefix " + m[1] + " for template source was ingnored.");
+              }
+            }
+          }
+          if (oldSource && oldSource.bindingBridge) {
+            this.url = "";
+            this.baseURI = "";
+            oldSource.bindingBridge.detach(oldSource, templateSourceUpdate, this);
+          }
+          if (source && source.bindingBridge) {
+            if (source.url) {
+              this.url = source.url;
+              this.baseURI = path.dirname(source.url) + "/";
+            }
+            source.bindingBridge.attach(source, templateSourceUpdate, this);
+          }
+          this.source = source;
+          templateSourceUpdate.call(this);
+        }
+      },
+      destroy: function() {
+        if (this.destroyBuilder) {
+          store.remove(this.templateId);
+          this.destroyBuilder();
+        }
+        this.attaches_ = null;
+        this.createInstance = null;
+        this.resources = null;
+        this.source = null;
+        this.instances_ = null;
+        this.decl_ = null;
+      }
+    });
+    var TemplateSwitchConfig = function(config) {
+      basis.object.extend(this, config);
+    };
+    var TemplateSwitcher = basis.Class(null, {
+      className: namespace + ".TemplateSwitcher",
+      ruleRet_: null,
+      templates_: null,
+      templateClass: Template,
+      ruleEvents: null,
+      rule: String,
+      init: function(config) {
+        this.ruleRet_ = [];
+        this.templates_ = [];
+        this.rule = config.rule;
+        var events = config.events;
+        if (events && events.length) {
+          this.ruleEvents = {};
+          for (var i = 0, eventName; eventName = events[i]; i++) this.ruleEvents[eventName] = true;
+        }
+        cleaner.add(this);
+      },
+      resolve: function(object) {
+        var ret = this.rule(object);
+        var idx = this.ruleRet_.indexOf(ret);
+        if (idx == -1) {
+          this.ruleRet_.push(ret);
+          idx = this.templates_.push(new this.templateClass(ret)) - 1;
+        }
+        return this.templates_[idx];
+      },
+      destroy: function() {
+        this.rule = null;
+        this.templates_ = null;
+        this.ruleRet_ = null;
+      }
+    });
+    function switcher(events, rule) {
+      if (!rule) {
+        rule = events;
+        events = null;
+      }
+      if (typeof events == "string") events = events.split(/\s+/);
+      return new TemplateSwitchConfig({
+        rule: rule,
+        events: events
+      });
+    }
+    cleaner.add({
+      destroy: function() {
+        for (var i = 0, template; template = templateList[i]; i++) template.destroy();
+        templateList = null;
+      }
+    });
+    module.exports = {
+      DECLARATION_VERSION: DECLARATION_VERSION,
+      TYPE_ELEMENT: consts.TYPE_ELEMENT,
+      TYPE_ATTRIBUTE: consts.TYPE_ATTRIBUTE,
+      TYPE_ATTRIBUTE_CLASS: consts.TYPE_ATTRIBUTE_CLASS,
+      TYPE_ATTRIBUTE_STYLE: consts.TYPE_ATTRIBUTE_STYLE,
+      TYPE_ATTRIBUTE_EVENT: consts.TYPE_ATTRIBUTE_EVENT,
+      TYPE_TEXT: consts.TYPE_TEXT,
+      TYPE_COMMENT: consts.TYPE_COMMENT,
+      TYPE_CONTENT: consts.TYPE_CONTENT,
+      TOKEN_TYPE: consts.TOKEN_TYPE,
+      TOKEN_BINDINGS: consts.TOKEN_BINDINGS,
+      TOKEN_REFS: consts.TOKEN_REFS,
+      ATTR_NAME: consts.ATTR_NAME,
+      ATTR_VALUE: consts.ATTR_VALUE,
+      ATTR_NAME_BY_TYPE: consts.ATTR_NAME_BY_TYPE,
+      CLASS_BINDING_ENUM: consts.CLASS_BINDING_ENUM,
+      CLASS_BINDING_BOOL: consts.CLASS_BINDING_BOOL,
+      CLASS_BINDING_INVERT: consts.CLASS_BINDING_INVERT,
+      ELEMENT_NAME: consts.ELEMENT_NAME,
+      ELEMENT_ATTRS: consts.ELEMENT_ATTRIBUTES_AND_CHILDREN,
+      ELEMENT_ATTRIBUTES_AND_CHILDREN: consts.ELEMENT_ATTRIBUTES_AND_CHILDREN,
+      TEXT_VALUE: consts.TEXT_VALUE,
+      COMMENT_VALUE: consts.COMMENT_VALUE,
+      CONTENT_CHILDREN: consts.CONTENT_CHILDREN,
+      CONTENT_PRIORITY: consts.CONTENT_PRIORITY,
+      TemplateSwitchConfig: TemplateSwitchConfig,
+      TemplateSwitcher: TemplateSwitcher,
+      Template: Template,
+      switcher: switcher,
+      getDeclFromSource: getDeclFromSource,
+      makeDeclaration: makeDeclaration,
+      resolveResource: resolveResource,
+      setIsolatePrefixGenerator: setIsolatePrefixGenerator,
+      getDebugInfoById: store.getDebugInfoById,
+      getTemplateCount: function() {
+        return templateList.length;
+      },
+      resolveTemplateInfoByNode: function(node) {
+        while (node) {
+          if (node[consts.MARKER]) return store.resolveInfoById(node[consts.MARKER]);
+          node = node.parentNode;
+        }
+        return null;
+      },
+      resolveInfoById: store.resolveInfoById,
+      resolveTemplateById: store.resolveTemplateById,
+      resolveObjectById: store.resolveObjectById,
+      resolveTmplById: store.resolveTmplById,
+      SourceWrapper: theme.SourceWrapper,
+      Theme: theme.Theme,
+      theme: theme.theme,
+      getThemeList: theme.getThemeList,
+      currentTheme: theme.currentTheme,
+      setTheme: theme.setTheme,
+      onThemeChange: theme.onThemeChange,
+      define: theme.define,
+      get: theme.get,
+      getPathList: theme.getPathList
+    };
+  },
+  "2p.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var Node = basis.require("./7.js").Node;
+    var Value = basis.require("./2.js").Value;
+    var sum = basis.require("./s.js").sum;
+    var dict = basis.require("./9.js").dictionary("./3.l10n");
+    var Table = basis.require("./l.js").Table;
+    var TableHead = basis.require("./t.js").Head;
+    var TableRow = basis.require("./t.js").Row;
+    var FileSizeCell = basis.require("./u.js").FileSize;
+    module.exports = Table.subclass({
+      dataSource: Value.query("data.profile.data.assets"),
+      childClass: TableRow.subclass({
+        template: basis.template.get(".e"),
+        binding: {
+          name: "data:",
+          fileSizeCell: "satellite:"
+        },
+        satellite: {
+          fileSizeCell: FileSizeCell.subclass({
+            size: Value.query("owner.data.size")
+          })
+        }
+      }),
+      satellite: {
+        head: TableHead.subclass({
+          childNodes: [ {
+            content: dict.token("name")
+          }, {
+            content: dict.token("size")
+          } ]
+        }),
+        foot: Node.subclass({
+          template: basis.template.get(".f"),
+          binding: {
+            fileSizeCell: "satellite:"
+          },
+          satellite: {
+            fileSizeCell: FileSizeCell.subclass({
+              size: sum(Value.query("owner.owner.dataSource"), "update", "data.size")
+            })
+          }
+        })
+      }
+    });
+  },
+  "e.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var hasOwnProperty = Object.prototype.hasOwnProperty;
+    var arraySearch = basis.array.search;
+    var arrayAdd = basis.array.add;
+    var tokenize = basis.require("./x.js");
+    var isolateCss = basis.require("./y.js");
+    var consts = basis.require("./b.js");
+    var utils = basis.require("./z.js");
+    var refUtils = basis.require("./10.js");
+    var styleUtils = basis.require("./12.js");
+    var attrUtils = basis.require("./13.js");
+    var walk = basis.require("./11.js").walk;
+    var TYPE_ELEMENT = consts.TYPE_ELEMENT;
+    var TYPE_ATTRIBUTE = consts.TYPE_ATTRIBUTE;
+    var TYPE_ATTRIBUTE_CLASS = consts.TYPE_ATTRIBUTE_CLASS;
+    var TYPE_TEXT = consts.TYPE_TEXT;
+    var TYPE_COMMENT = consts.TYPE_COMMENT;
+    var TYPE_CONTENT = consts.TYPE_CONTENT;
+    var TOKEN_TYPE = consts.TOKEN_TYPE;
+    var TOKEN_BINDINGS = consts.TOKEN_BINDINGS;
+    var TOKEN_REFS = consts.TOKEN_REFS;
+    var ATTR_VALUE_INDEX = consts.ATTR_VALUE_INDEX;
+    var ELEMENT_ATTRIBUTES_AND_CHILDREN = consts.ELEMENT_ATTRIBUTES_AND_CHILDREN;
+    var TEXT_VALUE = consts.TEXT_VALUE;
+    var CONTENT_PRIORITY = consts.CONTENT_PRIORITY;
+    var CONTENT_CHILDREN = consts.CONTENT_CHILDREN;
+    var resourceHash = utils.resourceHash;
+    var getTokenName = utils.getTokenName;
+    var bindingList = utils.bindingList;
+    var refList = refUtils.refList;
+    var addTokenRef = refUtils.addTokenRef;
+    var normalizeRefs = refUtils.normalizeRefs;
+    var applyAttrs = attrUtils.applyAttrs;
+    var styleNamespaceIsolate = styleUtils.styleNamespaceIsolate;
+    var isolateTokens = styleUtils.isolateTokens;
+    var topLevelInstructions = [ "define", "isolate", "l10n", "style" ];
+    var humanTopLevelInstrcutionList = topLevelInstructions.map(function(name) {
+      return "<b:" + name + ">";
+    }).join(", ").replace(/, (<b:[a-z]+>)$/, " and $1");
+    var elementHandlers = {
+      content: basis.require("./14.js"),
+      define: basis.require("./15.js"),
+      include: basis.require("./16.js"),
+      isolate: basis.require("./17.js"),
+      l10n: basis.require("./18.js"),
+      style: basis.require("./19.js"),
+      svg: basis.require("./1a.js"),
+      text: basis.require("./1b.js")
+    };
+    var Template = function() {};
+    var resolveResource = function() {};
+    var genIsolateMarker = function() {
+      return basis.genUID() + "__";
+    };
+    var makeDeclaration = function() {
+      var includeStack = [];
+      var styleNamespaceResource = {};
+      function process(tokens, template, options) {
+        var result = [];
+        for (var i = 0, token, item; token = tokens[i]; i++) {
+          var refs = refList(token);
+          var bindings = bindingList(token);
+          switch (token.type) {
+            case TYPE_ELEMENT:
+              if (token.prefix == "b") {
+                if (topLevelInstructions.indexOf(token.name) === -1) options.allowTopInstruction = false; else if (!options.allowTopInstruction) utils.addTemplateWarn(template, options, "Instruction tag <b:" + token.name + "> should be placed in the beginning of template before any markup or instructions other than " + humanTopLevelInstrcutionList + ". Currently it may works but will be ignored in future.", token.loc);
+                if (!elementHandlers.hasOwnProperty(token.name)) {
+                  utils.addTemplateWarn(template, options, "Unknown instruction tag: <b:" + token.name + ">", token.loc);
+                  continue;
+                }
+                elementHandlers[token.name](template, options, token, result);
+                continue;
+              }
+              options.allowTopInstruction = false;
+              item = [ 1, bindings, refs, getTokenName(token) ];
+              applyAttrs(template, options, item, token.attrs);
+              item.push.apply(item, process(token.children, template, options));
+              break;
+            case TYPE_TEXT:
+              if (refs && refs.length == 2 && arraySearch(refs, "element")) bindings = refs[+!refs.lastSearchIndex];
+              item = [ 3, bindings, refs ];
+              if (!refs || token.value != "{" + refs.join("|") + "}") item.push(token.value);
+              break;
+            case TYPE_COMMENT:
+              if (options.optimizeSize && !bindings && !refs) continue;
+              item = [ 8, bindings, refs ];
+              if (!options.optimizeSize) if (!refs || token.value != "{" + refs.join("|") + "}") item.push(token.value);
+              break;
+            default:
+              utils.addTemplateWarn(template, options, "Unknown token type: " + token.type, token);
+              continue;
+          }
+          options.allowTopInstruction = false;
+          utils.addTokenLocation(template, options, item, token);
+          item.sourceToken = token;
+          result.push(item);
+        }
+        return result;
+      }
+      function absl10n(value, dictURI, l10nMap) {
+        if (typeof value == "string") {
+          var parts = value.split(":");
+          var key = parts[1];
+          if (key && parts[0] == "l10n") {
+            if (parts.length == 2 && key.indexOf("@") == -1) {
+              if (!dictURI) return false;
+              key = key + "@" + dictURI;
+              value = "l10n:" + key;
+            }
+            arrayAdd(l10nMap, key);
+          }
+        }
+        return value;
+      }
+      function applyDefines(ast, template, options) {
+        walk(ast, function(nodeType, node) {
+          var bindings = node[TOKEN_BINDINGS];
+          switch (nodeType) {
+            case TYPE_ELEMENT:
+              applyDefines(node, template, options, ELEMENT_ATTRIBUTES_AND_CHILDREN);
+              break;
+            case TYPE_TEXT:
+              if (bindings) {
+                var binding = absl10n(bindings, options.dictURI, template.l10n);
+                node[TOKEN_BINDINGS] = binding || 0;
+                if (binding === false) {
+                  utils.addTemplateWarn(template, options, "Dictionary for l10n binding on text node can't be resolved: {" + bindings + "}", node.loc);
+                  node[TEXT_VALUE] = "{" + bindings + "}";
+                }
+              }
+              break;
+            case TYPE_ATTRIBUTE:
+              if (bindings) {
+                var array = bindings[0];
+                for (var j = array.length - 1; j >= 0; j--) {
+                  var binding = absl10n(array[j], options.dictURI, template.l10n);
+                  if (binding === false) {
+                    utils.addTemplateWarn(template, options, "Dictionary for l10n binding on attribute can't be resolved: {" + array[j] + "}", node.loc);
+                    var expr = bindings[1];
+                    for (var k = 0; k < expr.length; k++) if (typeof expr[k] == "number") {
+                      if (expr[k] == j) expr[k] = "{" + array[j] + "}"; else if (expr[k] > j) expr[k] = expr[k] - 1;
+                    }
+                    array.splice(j, 1);
+                    if (!array.length) node[TOKEN_BINDINGS] = 0;
+                  } else array[j] = binding;
+                }
+              }
+              break;
+            case TYPE_ATTRIBUTE_CLASS:
+              if (bindings) {
+                for (var k = 0, bind; bind = bindings[k]; k++) {
+                  if (bind.length > 2) continue;
+                  utils.addTokenLocation(template, options, bind, bind.info_);
+                  var bindNameParts = bind[1].split(":");
+                  var bindName = bindNameParts.pop();
+                  var bindPrefix = bindNameParts.pop() || "";
+                  if (hasOwnProperty.call(options.defines, bindName)) {
+                    var define = options.defines[bindName];
+                    bind[1] = (bindPrefix ? bindPrefix + ":" : "") + define[0];
+                    bind.push.apply(bind, define.slice(1));
+                    define.used = true;
+                  } else {
+                    bind.push(0);
+                    utils.addTemplateWarn(template, options, "Unpredictable class binding: " + bind[0] + "{" + bind[1] + "}", bind.loc);
+                  }
+                }
+                if (options.optimizeSize) {
+                  var valueIdx = ATTR_VALUE_INDEX[nodeType];
+                  if (!node[valueIdx]) node.length = valueIdx;
+                }
+              }
+              break;
+          }
+        });
+      }
+      function findElementCandidateNode(ast) {
+        function find(node, offset) {
+          for (var i = offset; i < node.length; i++) {
+            var child = node[i];
+            var type = child[TOKEN_TYPE];
+            var result;
+            if (type == TYPE_ELEMENT || type == TYPE_TEXT) return child;
+            if (type == TYPE_COMMENT) if (child[TOKEN_REFS] || child[TOKEN_BINDINGS]) return child;
+            if (type == TYPE_CONTENT) {
+              result = find(child, CONTENT_CHILDREN);
+              if (result) return result;
+            }
+          }
+          return null;
+        }
+        return find(ast, 0);
+      }
+      return function makeDeclaration(source, baseURI, options, sourceUrl, sourceOrigin) {
+        var source_ = source;
+        options = basis.object.slice(options);
+        options.Template = Template;
+        options.genIsolateMarker = genIsolateMarker;
+        options.resolveResource = resolveResource;
+        options.getDeclFromSource = getDeclFromSource;
+        options.makeDeclaration = makeDeclaration;
+        options.process = process;
+        options.includeStack = includeStack;
+        options.includeOptions = options.includeOptions || {};
+        options.templates = {};
+        options.defines = {};
+        options.dictURI = sourceUrl ? basis.path.resolve(sourceUrl) : baseURI || "";
+        options.allowTopInstruction = true;
+        options.styleNSIsolateMap = {};
+        options.loc = true;
+        options.range = true;
+        if (options.dictURI) {
+          var extname = basis.path.extname(options.dictURI);
+          if (extname && extname != ".l10n") options.dictURI = options.dictURI.substr(0, options.dictURI.length - extname.length) + ".l10n";
+        }
+        var result = {
+          sourceUrl: sourceUrl,
+          baseURI: baseURI || "",
+          tokens: null,
+          includes: [],
+          deps: [],
+          templates: {},
+          isolate: false,
+          styleNSPrefix: {},
+          resources: [],
+          l10n: [],
+          warns: []
+        };
+        result.removals = [];
+        result.states = {};
+        if (!source) source = "";
+        if (!Array.isArray(source)) source = tokenize(String(source || ""), {
+          loc: !!options.loc,
+          range: !!options.range
+        });
+        if (source.warns) source.warns.forEach(function(warn) {
+          utils.addTemplateWarn(result, options, warn[0], warn[1].loc);
+        });
+        includeStack.push(sourceOrigin !== true && sourceOrigin || {});
+        result.tokens = process(source, result, options);
+        includeStack.pop();
+        result.tokens.source_ = source_ !== undefined ? source_ : source && source.source_;
+        result.tokens.push([ TYPE_CONTENT, 0 ]);
+        var tokenRefMap = normalizeRefs(result.tokens);
+        var elementCandidateNode = findElementCandidateNode(result.tokens);
+        var contentNodeRef = tokenRefMap[":content"];
+        if (contentNodeRef.node[CONTENT_PRIORITY] > 1) contentNodeRef.node[CONTENT_PRIORITY] = 1;
+        contentNodeRef.overrided.forEach(function(overridedContentNodeRef) {
+          var nodeIndex = overridedContentNodeRef.parent.indexOf(overridedContentNodeRef.node);
+          if (nodeIndex != -1) overridedContentNodeRef.parent.splice.apply(overridedContentNodeRef.parent, [ nodeIndex, 1 ].concat(overridedContentNodeRef.node.slice(CONTENT_CHILDREN)));
+          if (overridedContentNodeRef.node[consts.CONTENT_PRIORITY] > 0) result.removals.push({
+            reason: "<b:content/>",
+            removeToken: contentNodeRef.node,
+            includeToken: overridedContentNodeRef.node.includeToken,
+            token: overridedContentNodeRef.node,
+            node: overridedContentNodeRef.node
+          });
+        });
+        if (!elementCandidateNode) {
+          elementCandidateNode = [ TYPE_TEXT, 0, 0 ];
+          result.tokens.unshift(elementCandidateNode);
+        }
+        if (!tokenRefMap.element) addTokenRef(elementCandidateNode, "element");
+        applyDefines(result.tokens, result, options);
+        if (/^[^a-z_-]/i.test(result.isolate)) basis.dev.error("basis.template: isolation prefix `" + result.isolate + "` should not starts with symbol other than letter, underscore or dash, otherwise it leads to incorrect css class names and broken styles");
+        if (includeStack.length == 0) {
+          isolateTokens(result.tokens, result.isolate || "", result, options);
+          if (result.removals) {
+            var warns = result.warns;
+            result.warns = [];
+            result.removals.forEach(function(item) {
+              isolateTokens([ item.token ], result.isolate || "", result, options);
+            });
+            result.warns = warns;
+          }
+          for (var key in result.styleNSPrefix) {
+            var styleNSPrefix = result.styleNSPrefix[key];
+            if (!styleNSPrefix.used) utils.addTemplateWarn(result, options, "Unused namespace: " + styleNSPrefix.name, styleNSPrefix.loc);
+          }
+          if (result.isolate) for (var i = 0, item; item = result.resources[i]; i++) if (item.type == "style" && item.isolate !== styleNamespaceIsolate) item.isolate = result.isolate + item.isolate;
+          var originalResources = result.resources;
+          result.resources = result.resources.filter(function(item, idx, array) {
+            return item.url && !basis.array.search(array, resourceHash(item), resourceHash, idx + 1);
+          }).map(function(item) {
+            if (item.type != "style") {
+              return {
+                type: item.type,
+                url: item.url
+              };
+            }
+            var url = item.url;
+            var isolate = item.isolate;
+            var namespaceIsolate = isolate === styleNamespaceIsolate;
+            var cssMap;
+            if (namespaceIsolate) {
+              isolate = styleNamespaceIsolate[url];
+              if (url in styleNamespaceResource) {
+                item.url = styleNamespaceResource[url].url;
+                return {
+                  type: "style",
+                  url: styleNamespaceResource[url].url
+                };
+              }
+            }
+            if (!isolate) {
+              item.url = url;
+              return {
+                type: "style",
+                url: url
+              };
+            }
+            var resource = basis.resource.virtual("css", "").ready(function(cssResource) {
+              cssResource.url = url + "?isolate-prefix=" + isolate;
+              cssResource.baseURI = basis.path.dirname(url) + "/";
+              cssResource.map = cssMap;
+              sourceResource();
+            });
+            var sourceResource = basis.resource(url).ready(function(cssResource) {
+              var isolated = isolateCss(cssResource && cssResource.cssText || "", isolate, true);
+              if (typeof global.btoa == "function") isolated.css += "\n/*# sourceMappingURL=data:application/json;base64," + global.btoa('{"version":3,"sources":["' + basis.path.origin + url + '"],' + '"mappings":"AAAA' + basis.string.repeat(";AACA", isolated.css.split("\n").length) + '"}') + " */";
+              cssMap = isolated.map;
+              resource.update(isolated.css);
+            });
+            if (namespaceIsolate) styleNamespaceResource[url] = resource;
+            item.url = resource.url;
+            return {
+              type: "style",
+              url: resource.url
+            };
+          });
+          result.styles = originalResources.map(function(item) {
+            var sourceUrl = item.url || utils.getTokenAttrValues(item.token).src;
+            return {
+              resource: item.url || false,
+              sourceUrl: sourceUrl ? basis.resource.resolveURI(sourceUrl) : null,
+              isolate: item.isolate === styleNamespaceIsolate ? styleNamespaceIsolate[item.url] : item.isolate || false,
+              namespace: item.namespace || false,
+              inline: item.inline,
+              styleToken: item.token,
+              includeToken: item.includeToken
+            };
+          });
+        }
+        for (var key in options.defines) {
+          var define = options.defines[key];
+          if (!define.used) utils.addTemplateWarn(result, options, "Unused define: " + key, define.loc);
+        }
+        if (!result.warns.length) result.warns = false;
+        return result;
+      };
+    }();
+    function cloneDecl(array) {
+      var result = [];
+      if (array.source_) result.source_ = array.source_;
+      for (var i = 0; i < array.length; i++) result.push(Array.isArray(array[i]) ? cloneDecl(array[i]) : array[i]);
+      return result;
+    }
+    function getDeclFromSource(source, baseURI, clone, options) {
+      var result = source;
+      var sourceUrl;
+      if (source.bindingBridge) {
+        baseURI = "baseURI" in source ? source.baseURI : "url" in source ? basis.path.dirname(source.url) : baseURI;
+        sourceUrl = "url" in source ? source.url : sourceUrl;
+        result = source.bindingBridge.get(source);
+      }
+      if (Array.isArray(result)) {
+        if (clone) result = cloneDecl(result);
+        result = {
+          tokens: result
+        };
+      } else {
+        if (result && (typeof result != "object" || !Array.isArray(result.tokens))) result = String(result);
+      }
+      if (!result || typeof result == "string") result = makeDeclaration(result, baseURI, options, sourceUrl, source);
+      return result;
+    }
+    basis.resource("./d.js").ready(function(exports) {
+      resolveResource = exports.resolveResource;
+      Template = exports.Template;
+    });
+    module.exports = {
+      VERSION: 3,
+      makeDeclaration: makeDeclaration,
+      walk: walk,
+      getDeclFromSource: getDeclFromSource,
+      setIsolatePrefixGenerator: function(fn) {
+        genIsolateMarker = fn;
+      }
+    };
+  },
+  "x.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var consts = basis.require("./b.js");
+    var TYPE_ELEMENT = consts.TYPE_ELEMENT;
+    var TYPE_ATTRIBUTE = consts.TYPE_ATTRIBUTE;
+    var TYPE_TEXT = consts.TYPE_TEXT;
+    var TYPE_COMMENT = consts.TYPE_COMMENT;
+    var ATTR_TYPE_BY_NAME = consts.ATTR_TYPE_BY_NAME;
+    var SYNTAX_ERROR = "Invalid or unsupported syntax";
+    var TEXT = /((?:.|[\r\n])*?)(\{(?:l10n:([a-zA-Z_][a-zA-Z0-9_\-]*(?:\.[a-zA-Z_][a-zA-Z0-9_\-]*)*(?:\.\{[a-zA-Z_][a-zA-Z0-9_\-]*\})?)\})?|<(\/|!--(\s*\{)?)?|$)/g;
+    var TAG_NAME = /([a-z_][a-z0-9\-_]*)(:|\{|\s*(\/?>)?)/ig;
+    var ATTRIBUTE_NAME_OR_END = /([a-z_][a-z0-9_\-]*)(:|\{|=|\s*)|(\/?>)/ig;
+    var COMMENT = /(.|[\r\n])*?-->/g;
+    var CLOSE_TAG = /([a-z_][a-z0-9_\-]*(?::[a-z_][a-z0-9_\-]*)?)>/ig;
+    var REFERENCE = /([a-z_][a-z0-9_]*)(\||\}\s*)/ig;
+    var ATTRIBUTE_VALUE = /"((?:(\\")|[^"])*?)"\s*/g;
+    var QUOTE_UNESCAPE = /\\"/g;
+    var BREAK_TAG_PARSE = /^/g;
+    var SINGLETON_TAG = /^(area|base|br|col|command|embed|hr|img|input|link|meta|param|source)$/i;
+    var TAG_IGNORE_CONTENT = {
+      text: /((?:.|[\r\n])*?)(?:<\/b:text>|$)/g,
+      style: /((?:.|[\r\n])*?)(?:<\/b:style>|$)/g
+    };
+    var ATTR_BINDING = /\{([a-z_][a-z0-9_]*|l10n:[a-z_][a-z0-9_]*(?:\.[a-z_][a-z0-9_]*)*(?:\.\{[a-z_][a-z0-9_]*\})?)\}/i;
+    var CLASS_ATTR_BINDING = /^((?:[a-z_][a-z0-9_\-]*)?(?::(?:[a-z_][a-z0-9_\-]*)?)?)\{((anim:)?[a-z_][a-z0-9_\-]*)\}$/i;
+    var STYLE_ATTR_PARTS = /\s*[^:]+?\s*:(?:\(.*?\)|".*?"|'.*?'|[^;]+?)+(?:;|$)/gi;
+    var STYLE_PROPERTY = /\s*([^:]+?)\s*:((?:\(.*?\)|".*?"|'.*?'|[^;]+?)+);?$/i;
+    var STYLE_ATTR_BINDING = /\{([a-z_][a-z0-9_]*)\}/i;
+    var ATTRIBUTE_MODE = /^(?:|append-|set-|remove-)(class|attr)$/;
+    var decodeHTMLTokens = function() {
+      var tokenMap = {};
+      var tokenElement = !basis.NODE_ENV ? global.document.createElement("div") : null;
+      var NAMED_CHARACTER_REF = /&([a-z]+\d*|#\d+|#x[0-9a-f]{1,4});?/gi;
+      if (basis.NODE_ENV) tokenMap = __nodejsRequire("./htmlentity.json");
+      function namedCharReplace(m, token) {
+        if (!tokenMap[token]) {
+          if (token.charAt(0) == "#") {
+            tokenMap[token] = String.fromCharCode(token.charAt(1) == "x" || token.charAt(1) == "X" ? parseInt(token.substr(2), 16) : token.substr(1));
+          } else {
+            if (tokenElement) {
+              tokenElement.innerHTML = m;
+              tokenMap[token] = tokenElement.firstChild ? tokenElement.firstChild.nodeValue : m;
+            }
+          }
+        }
+        return tokenMap[token] || m;
+      }
+      return function decodeHTMLTokens(string) {
+        return String(string).replace(NAMED_CHARACTER_REF, namedCharReplace);
+      };
+    }();
+    function buildAttrExpression(parts) {
+      var bindName;
+      var names = [];
+      var expression = [];
+      var map = {};
+      for (var j = 0; j < parts.length; j++) if (j % 2) {
+        bindName = parts[j];
+        if (!map[bindName]) {
+          map[bindName] = names.length;
+          names.push(bindName);
+        }
+        expression.push(map[bindName]);
+      } else {
+        if (parts[j]) expression.push(decodeHTMLTokens(parts[j]));
+      }
+      return [ names, expression ];
+    }
+    function processAttr(token, mode, convertRange) {
+      var value = token.value;
+      var bindings = 0;
+      var parts;
+      var m;
+      if (value) {
+        switch (mode) {
+          case "class":
+            var pos = token.valueRange.start_;
+            var rx = /(\s*)(\S+)/g;
+            var newValue = [];
+            var partMap = [];
+            var binding;
+            bindings = [];
+            while (part = rx.exec(value)) {
+              var val = part[2];
+              var valInfo = {
+                value: val,
+                binding: false,
+                range: {
+                  start_: pos += part[1].length,
+                  end_: pos += val.length
+                }
+              };
+              convertRange(valInfo);
+              if (m = val.match(CLASS_ATTR_BINDING)) {
+                binding = [ m[1] || "", m[2] ];
+                binding.info_ = valInfo;
+                valInfo.binding = true;
+                bindings.push(binding);
+              } else newValue.push(val);
+              partMap.push(valInfo);
+            }
+            value = newValue.join(" ");
+            token.map_ = partMap;
+            break;
+          case "style":
+            var props = [];
+            bindings = [];
+            if (parts = value.match(STYLE_ATTR_PARTS)) {
+              for (var j = 0, part; part = parts[j]; j++) {
+                var m = part.match(STYLE_PROPERTY);
+                var propertyName = m[1];
+                var value = m[2].trim();
+                var valueParts = value.split(STYLE_ATTR_BINDING);
+                if (valueParts.length > 1) {
+                  var expr = buildAttrExpression(valueParts);
+                  expr.push(propertyName);
+                  bindings.push(expr);
+                } else props.push(propertyName + ": " + decodeHTMLTokens(value));
+              }
+            } else {
+              if (/\S/.test(value)) basis.dev.warn("Bad value for style attribute (value ignored):", value);
+            }
+            value = props.join("; ");
+            if (value) value += ";";
+            break;
+          default:
+            parts = value.split(ATTR_BINDING);
+            if (parts.length > 1) bindings = buildAttrExpression(parts); else value = decodeHTMLTokens(value);
+        }
+      }
+      if (bindings && !bindings.length) bindings = 0;
+      token.binding = bindings;
+      token.value = value;
+      token.type = ATTR_TYPE_BY_NAME[mode] || TYPE_ATTRIBUTE;
+    }
+    function postProcessing(tokens, options, source) {
+      function tokenName(token) {
+        return (token.prefix ? token.prefix + ":" : "") + token.name;
+      }
+      function getTokenAttrs(token) {
+        return token.attrs.reduce(function(res, attr) {
+          res[tokenName(attr)] = attr.value;
+          return res;
+        }, {});
+      }
+      function buildLocationIndex() {
+        var line = 1;
+        var column = 0;
+        lineIdx = new Array(source.length);
+        columnIdx = new Array(source.length);
+        for (var i = 0; i < source.length + 1; i++) {
+          lineIdx[i] = line;
+          columnIdx[i] = column;
+          if (source[i] === "\n") {
+            line++;
+            column = 0;
+          } else column++;
+        }
+      }
+      function findLocationByOffset(offset) {
+        return {
+          line: lineIdx[offset],
+          column: columnIdx[offset]
+        };
+      }
+      function getLocationFromRange(range) {
+        return {
+          start: findLocationByOffset(range.start_),
+          end: findLocationByOffset(range.end_)
+        };
+      }
+      function convertRange(token) {
+        if (options.loc) {
+          token.loc = getLocationFromRange(token.range);
+          if (token.valueRange) token.valueLoc = getLocationFromRange(token.valueRange);
+        }
+        if (options.range) {
+          token.range = [ token.range.start_, token.range.end_ ];
+          if (token.valueRange) token.valueRange = [ token.valueRange.start_, token.valueRange.end_ ];
+        } else {
+          delete token.range;
+          delete token.valueRange;
+        }
+      }
+      function walk(tokens) {
+        var token;
+        var prev;
+        for (var i = 0; token = tokens[i++]; prev = token) {
+          if (token.type == TYPE_ELEMENT) {
+            var attrs = getTokenAttrs(token);
+            for (var j = 0, attr; attr = token.attrs[j++]; ) {
+              var mode = attr.name;
+              if (token.prefix == "b" && attr.name == "value") {
+                var m = token.name.match(ATTRIBUTE_MODE);
+                if (m) mode = m[1] == "class" ? "class" : attrs.name;
+              }
+              processAttr(attr, mode, convertRange);
+              convertRange(attr);
+            }
+            walk(token.children);
+          }
+          if (token.type == TYPE_TEXT) {
+            token.value = decodeHTMLTokens(token.value);
+            if (!token.refs && prev && prev.type == TYPE_TEXT && !prev.refs) {
+              prev.value += token.value;
+              prev.end_ = token.end_;
+              tokens.splice(--i, 1);
+            }
+          }
+          if (token.type == TYPE_COMMENT) {
+            token.value = decodeHTMLTokens(token.value);
+          }
+          convertRange(token);
+        }
+      }
+      var lineIdx;
+      var columnIdx;
+      if (options.loc) buildLocationIndex();
+      walk(tokens);
+    }
+    function tokenize(source, options) {
+      var result = [];
+      var tagStack = [];
+      var lastTag = {
+        children: result
+      };
+      var parseTag = false;
+      var token;
+      var state = TEXT;
+      var pos = 0;
+      var textStateEndPos = 0;
+      var textEndPos;
+      var bufferPos;
+      var startPos;
+      var m;
+      var attrMap;
+      result.source_ = source;
+      result.warns = [];
+      if (!options || options.trim !== false) {
+        pos = textStateEndPos = source.match(/^\s*/)[0].length;
+        source = source.trimRight();
+      }
+      while (pos < source.length || state != TEXT) {
+        state.lastIndex = pos;
+        startPos = pos;
+        m = state.exec(source);
+        if (!m || m.index !== pos) {
+          if (state == REFERENCE && token && token.type == TYPE_COMMENT) {
+            state = COMMENT;
+            continue;
+          }
+          if (parseTag) lastTag = tagStack.pop();
+          if (token) lastTag.children.pop();
+          if (token = lastTag.children.pop()) {
+            if (token.type == TYPE_TEXT && !token.refs) textStateEndPos -= token.value.length; else lastTag.children.push(token);
+          }
+          parseTag = false;
+          state = TEXT;
+          continue;
+        }
+        pos = state.lastIndex;
+        switch (state) {
+          case TEXT:
+            textEndPos = startPos + m[1].length;
+            if (textStateEndPos != textEndPos) {
+              var sourceText = textStateEndPos == startPos ? m[1] : source.substring(textStateEndPos, textEndPos);
+              sourceText = sourceText.replace(/\s*(\r\n?|\n\r?)\s*/g, "");
+              if (sourceText) lastTag.children.push({
+                type: TYPE_TEXT,
+                value: sourceText,
+                range: {
+                  start_: textStateEndPos,
+                  end_: textEndPos
+                }
+              });
+            }
+            textStateEndPos = textEndPos;
+            if (m[3]) {
+              lastTag.children.push({
+                type: TYPE_TEXT,
+                refs: [ "l10n:" + m[3] ],
+                value: "{l10n:" + m[3] + "}",
+                range: {
+                  start_: textEndPos,
+                  end_: pos
+                }
+              });
+            } else if (m[2] == "{") {
+              bufferPos = pos - 1;
+              lastTag.children.push(token = {
+                type: TYPE_TEXT,
+                range: {
+                  start_: textEndPos,
+                  end_: textEndPos
+                }
+              });
+              state = REFERENCE;
+            } else if (m[4]) {
+              if (m[4] == "/") {
+                token = null;
+                state = CLOSE_TAG;
+              } else {
+                lastTag.children.push(token = {
+                  type: TYPE_COMMENT,
+                  range: {
+                    start_: textEndPos,
+                    end_: textEndPos
+                  }
+                });
+                if (m[5]) {
+                  bufferPos = pos - m[5].length;
+                  state = REFERENCE;
+                } else {
+                  bufferPos = pos;
+                  state = COMMENT;
+                }
+              }
+            } else if (m[2]) {
+              parseTag = true;
+              tagStack.push(lastTag);
+              lastTag.children.push(token = {
+                type: TYPE_ELEMENT,
+                attrs: [],
+                children: [],
+                range: {
+                  start_: textEndPos,
+                  end_: textEndPos
+                }
+              });
+              lastTag = token;
+              state = TAG_NAME;
+              attrMap = {};
+            }
+            break;
+          case CLOSE_TAG:
+            if (m[1] !== (lastTag.prefix ? lastTag.prefix + ":" : "") + lastTag.name) {
+              lastTag.children.push({
+                type: TYPE_TEXT,
+                value: "</" + m[0],
+                range: {
+                  start_: startPos - 2,
+                  end_: startPos + m[0].length
+                }
+              });
+              result.warns.push([ "Wrong close tag: " + source.substr(startPos - 2, m[0].length + 2), lastTag.children[lastTag.children.length - 1] ]);
+            } else {
+              lastTag.range.end_ = startPos + m[0].length;
+              lastTag = tagStack.pop();
+            }
+            state = TEXT;
+            break;
+          case TAG_NAME:
+          case ATTRIBUTE_NAME_OR_END:
+            if (m[2] == ":") {
+              if (token.prefix) state = BREAK_TAG_PARSE; else token.prefix = m[1];
+              break;
+            }
+            if (m[1]) {
+              token.name = m[1];
+              token.range.end_ = startPos + m[1].length;
+              if (token.type == TYPE_ATTRIBUTE) {
+                var fullName = (token.prefix ? token.prefix + ":" : "") + token.name;
+                if (Object.prototype.hasOwnProperty.call(attrMap, fullName)) result.warns.push([ "Duplicate attribute: " + fullName, token ]);
+                attrMap[fullName] = true;
+                lastTag.attrs.push(token);
+              }
+            }
+            if (m[2] == "{") {
+              if (token.type == TYPE_ELEMENT) state = REFERENCE; else state = BREAK_TAG_PARSE;
+              break;
+            }
+            if (m[3]) {
+              parseTag = false;
+              lastTag.range.end_ = pos;
+              if (m[3] == "/>" || !lastTag.prefix && SINGLETON_TAG.test(lastTag.name)) {
+                if (m[3] != "/>") result.warns.push([ "Tag <" + lastTag.name + "> doesn't closed explicit (use `/>` as tag ending)", lastTag ]);
+                lastTag = tagStack.pop();
+              } else {
+                if (lastTag.prefix == "b" && lastTag.name in TAG_IGNORE_CONTENT) {
+                  state = TAG_IGNORE_CONTENT[lastTag.name];
+                  break;
+                }
+              }
+              state = TEXT;
+              break;
+            }
+            if (m[2] == "=") {
+              state = ATTRIBUTE_VALUE;
+              break;
+            }
+            token = {
+              type: TYPE_ATTRIBUTE,
+              range: {
+                start_: pos,
+                end_: pos
+              }
+            };
+            state = ATTRIBUTE_NAME_OR_END;
+            break;
+          case COMMENT:
+            token.value = source.substring(bufferPos, pos - 3);
+            token.range.end_ = pos;
+            state = TEXT;
+            break;
+          case REFERENCE:
+            if (token.refs) token.refs.push(m[1]); else token.refs = [ m[1] ];
+            if (m[2] != "|") {
+              if (token.type == TYPE_TEXT) {
+                pos -= m[2].length - 1;
+                token.value = source.substring(bufferPos, pos);
+                token.range.end_ = pos;
+                state = TEXT;
+              } else if (token.type == TYPE_COMMENT) {
+                state = COMMENT;
+              } else if (token.type == TYPE_ATTRIBUTE && source[pos] == "=") {
+                pos++;
+                state = ATTRIBUTE_VALUE;
+              } else {
+                token = {
+                  type: TYPE_ATTRIBUTE,
+                  range: {
+                    start_: pos,
+                    end_: pos
+                  }
+                };
+                state = ATTRIBUTE_NAME_OR_END;
+              }
+            }
+            break;
+          case ATTRIBUTE_VALUE:
+            token.value = m[1].replace(QUOTE_UNESCAPE, '"');
+            token.range.end_ = pos;
+            token.valueRange = {
+              start_: startPos + 1,
+              end_: startPos + 1 + m[1].length
+            };
+            token = {
+              type: TYPE_ATTRIBUTE,
+              range: {
+                start_: pos,
+                end_: pos
+              }
+            };
+            state = ATTRIBUTE_NAME_OR_END;
+            break;
+          case TAG_IGNORE_CONTENT.text:
+          case TAG_IGNORE_CONTENT.style:
+            lastTag.children.push({
+              type: TYPE_TEXT,
+              value: m[1],
+              range: {
+                start_: startPos,
+                end_: startPos + m[1].length
+              }
+            });
+            lastTag = tagStack.pop();
+            state = TEXT;
+            break;
+          default:
+            throw SYNTAX_ERROR;
+        }
+        if (state == TEXT) textStateEndPos = pos;
+      }
+      if (textStateEndPos != pos) lastTag.children.push({
+        type: TYPE_TEXT,
+        value: source.substring(textStateEndPos, pos),
+        range: {
+          start_: textStateEndPos,
+          end_: pos
+        }
+      });
+      postProcessing(result, options || {}, source);
+      if (lastTag.name) result.warns.push([ "No close tag for <" + (lastTag.prefix ? lastTag.prefix + ":" : "") + lastTag.name + ">", lastTag ]);
+      if (!result.warns.length) result.warns = false;
+      result.templateTokens = true;
+      return result;
+    }
+    module.exports = tokenize;
+  },
+  "y.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var CSS_CLASSNAME_START = /^\-?([_a-z]|[^\x00-\xb1]|\\[0-9a-f]{1,6}(\r\n|[ \n\r\t\f])?|\\[^\n\r\f0-9a-f])/i;
+    var CSS_CLASSNAME_START_MAXLEN = 8;
+    var CSS_NESTED_ATRULE = /^(media|supports|document)\b/i;
+    var CSS_NESTED_ATRULE_MAXLEN = 8;
+    var CSS_FNSELECTOR = /^(not|has|matches|nth-child|nth-last-child)\(/i;
+    var CSS_FNSELECTOR_MAXLEN = 15;
+    function genIsolateMarker() {
+      return basis.genUID() + "__";
+    }
+    function isolateCss(css, prefix, info) {
+      function jumpTo(str, offset) {
+        var index = css.indexOf(str, offset);
+        i = index !== -1 ? index + str.length - 1 : sym.length;
+      }
+      function parseString() {
+        var quote = sym[i];
+        if (quote !== '"' && quote !== "'") return;
+        for (i++; i < len && sym[i] !== quote; i++) if (sym[i] === "\\") i++;
+        return true;
+      }
+      function parseBraces() {
+        var bracket = sym[i];
+        if (bracket === "(") {
+          jumpTo(")", i + 1);
+          return true;
+        }
+        if (bracket === "[") {
+          for (i++; i < len && sym[i] !== "]"; i++) parseString();
+          return true;
+        }
+      }
+      function parseComment() {
+        if (sym[i] !== "/" || sym[i + 1] !== "*") return;
+        jumpTo("*/", i + 2);
+        return true;
+      }
+      function parsePseudoContent() {
+        for (; i < len && sym[i] != ")"; i++) if (parseComment() || parseBraces() || parsePseudo() || parseClassName()) continue;
+      }
+      function parsePseudo() {
+        if (sym[i] !== ":") return;
+        var m = css.substr(i + 1, CSS_FNSELECTOR_MAXLEN).match(CSS_FNSELECTOR);
+        if (m) {
+          i += m[0].length + 1;
+          parsePseudoContent();
+        }
+        return true;
+      }
+      function parseAtRule() {
+        if (sym[i] !== "@") return;
+        var m = css.substr(i + 1, CSS_NESTED_ATRULE_MAXLEN).match(CSS_NESTED_ATRULE);
+        if (m) {
+          i += m[0].length;
+          nestedStyleSheet = true;
+        }
+        return true;
+      }
+      function parseBlock() {
+        if (sym[i] !== "{") return;
+        if (nestedStyleSheet) {
+          i++;
+          parseStyleSheet(true);
+          return;
+        }
+        for (i++; i < len && sym[i] !== "}"; i++) parseComment() || parseString() || parseBraces();
+        return true;
+      }
+      function parseClassName() {
+        if (sym[i] !== ".") return;
+        var m = css.substr(i + 1, CSS_CLASSNAME_START_MAXLEN).match(CSS_CLASSNAME_START);
+        if (m) {
+          i++;
+          map[i + result.length / 2 * prefix.length - 1] = i;
+          result.push(css.substring(lastMatchPos, i), prefix);
+          lastMatchPos = i;
+        }
+        return true;
+      }
+      function parseStyleSheet(nested) {
+        for (nestedStyleSheet = false; i < len; i++) {
+          if (parseComment() || parseAtRule() || parsePseudo() || parseBraces() || parseString() || parseClassName()) continue;
+          if (nested && sym[i] == "}") return;
+          parseBlock();
+        }
+      }
+      var map = {};
+      var result = [];
+      var sym = css.split("");
+      var len = sym.length;
+      var lastMatchPos = 0;
+      var i = 0;
+      var nestedStyleSheet;
+      if (!prefix) prefix = genIsolateMarker();
+      parseStyleSheet(false);
+      result = result.join("") + css.substring(lastMatchPos);
+      return info ? {
+        css: result,
+        map: map,
+        prefix: prefix
+      } : result;
+    }
+    module.exports = isolateCss;
+  },
+  "z.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var arrayAdd = basis.array.add;
+    function resourceHash(resource) {
+      return [ resource.type, resource.url, resource.isolate ].join(";");
+    }
+    function addUnique(array, items) {
+      for (var i = 0; i < items.length; i++) arrayAdd(array, items[i]);
+    }
+    function getTokenName(token) {
+      return (token.prefix ? token.prefix + ":" : "") + token.name;
+    }
+    function bindingList(token) {
+      var refs = token.refs;
+      return refs && refs.length ? refs[0] : 0;
+    }
+    function getTokenAttrValues(token) {
+      var result = {};
+      if (token.attrs) for (var i = 0, attr; attr = token.attrs[i]; i++) result[getTokenName(attr)] = attr.value;
+      return result;
+    }
+    function getTokenAttrs(token) {
+      var result = {};
+      if (token.attrs) for (var i = 0, attr; attr = token.attrs[i]; i++) result[getTokenName(attr)] = attr;
+      return result;
+    }
+    function parseOptionsValue(str) {
+      var result = {};
+      var pairs = (str || "").trim().split(/\s*,\s*/);
+      for (var i = 0; i < pairs.length; i++) {
+        var pair = pairs[i].split(/\s*:\s*/);
+        if (pair.length != 2) {
+          return {};
+        }
+        result[pair[0]] = pair[1];
+      }
+      return result;
+    }
+    function getLocation(template, loc) {
+      if (loc) return (template.sourceUrl || "") + ":" + loc.start.line + ":" + (loc.start.column + 1);
+    }
+    function addTemplateWarn(template, options, message, loc) {
+      if (loc && options.loc) {
+        message = Object(message);
+        message.loc = typeof loc == "string" ? loc : getLocation(template, loc);
+      }
+      template.warns.push(message);
+    }
+    function addTokenLocation(template, options, dest, source) {
+      if (options.loc && source && source.loc && !dest.loc) dest.loc = getLocation(template, source.loc);
+    }
+    module.exports = {
+      resourceHash: resourceHash,
+      addUnique: addUnique,
+      getTokenName: getTokenName,
+      bindingList: bindingList,
+      getTokenAttrValues: getTokenAttrValues,
+      getTokenAttrs: getTokenAttrs,
+      parseOptionsValue: parseOptionsValue,
+      getLocation: getLocation,
+      addTemplateWarn: addTemplateWarn,
+      addTokenLocation: addTokenLocation
+    };
+  },
+  "10.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var arrayAdd = basis.array.add;
+    var walk = basis.require("./11.js").walk;
+    var consts = basis.require("./b.js");
+    var TYPE_ATTRIBUTE_EVENT = consts.TYPE_ATTRIBUTE_EVENT;
+    var TYPE_CONTENT = consts.TYPE_CONTENT;
+    var CONTENT_PRIORITY = consts.CONTENT_PRIORITY;
+    var TOKEN_BINDINGS = consts.TOKEN_BINDINGS;
+    var TOKEN_REFS = consts.TOKEN_REFS;
+    function refList(token) {
+      var array = token.refs;
+      if (array && array.length) return array;
+      return 0;
+    }
+    function addTokenRef(token, refName) {
+      if (!token[TOKEN_REFS]) token[TOKEN_REFS] = [];
+      arrayAdd(token[TOKEN_REFS], refName);
+      if (refName != "element" && !token[TOKEN_BINDINGS]) token[TOKEN_BINDINGS] = token[TOKEN_REFS].length == 1 ? refName : 0;
+    }
+    function removeTokenRef(token, refName) {
+      var idx = token[TOKEN_REFS].indexOf(refName);
+      if (idx != -1) {
+        var indexBinding = token[TOKEN_BINDINGS] && typeof token[TOKEN_BINDINGS] == "number";
+        token[TOKEN_REFS].splice(idx, 1);
+        if (indexBinding) if (idx == token[TOKEN_BINDINGS] - 1) {
+          token[TOKEN_BINDINGS] = refName;
+          indexBinding = false;
+        }
+        if (!token[TOKEN_REFS].length) token[TOKEN_REFS] = 0; else {
+          if (indexBinding) token[TOKEN_BINDINGS] -= idx < token[TOKEN_BINDINGS] - 1;
+        }
+      }
+    }
+    function normalizeRefs(nodes) {
+      var map = {};
+      walk(nodes, function(type, node, parent) {
+        if (type === TYPE_CONTENT) {
+          var contentNodeRef = map[":content"];
+          if (!contentNodeRef) {
+            map[":content"] = {
+              parent: parent,
+              node: node,
+              overrided: []
+            };
+          } else {
+            if (node[CONTENT_PRIORITY] >= contentNodeRef.node[CONTENT_PRIORITY]) {
+              contentNodeRef.overrided.push({
+                parent: contentNodeRef.parent,
+                node: contentNodeRef.node
+              });
+              contentNodeRef.parent = parent;
+              contentNodeRef.node = node;
+            } else {
+              contentNodeRef.overrided.push({
+                parent: parent,
+                node: node
+              });
+            }
+          }
+        } else if (type !== TYPE_ATTRIBUTE_EVENT) {
+          var refs = node[TOKEN_REFS];
+          if (!refs) return;
+          for (var j = refs.length - 1, refName; refName = refs[j]; j--) {
+            if (refName.indexOf(":") != -1) {
+              removeTokenRef(node, refName);
+              continue;
+            }
+            if (map[refName]) removeTokenRef(map[refName].node, refName);
+            if (node[TOKEN_BINDINGS] == refName) node[TOKEN_BINDINGS] = j + 1;
+            map[refName] = {
+              parent: parent,
+              node: node
+            };
+          }
+        }
+      });
+      return map;
+    }
+    module.exports = {
+      refList: refList,
+      addTokenRef: addTokenRef,
+      removeTokenRef: removeTokenRef,
+      normalizeRefs: normalizeRefs
+    };
+  },
+  "11.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    var consts = basis.require("./b.js");
+    var TYPE_ELEMENT = consts.TYPE_ELEMENT;
+    var TYPE_CONTENT = consts.TYPE_CONTENT;
+    var TOKEN_TYPE = consts.TOKEN_TYPE;
+    var ELEMENT_ATTRIBUTES_AND_CHILDREN = consts.ELEMENT_ATTRIBUTES_AND_CHILDREN;
+    var CONTENT_CHILDREN = consts.CONTENT_CHILDREN;
+    function walker(nodes, fn) {
+      function walk(nodes, offset) {
+        for (var i = offset, node; node = nodes[i]; i++) {
+          var type = node[TOKEN_TYPE];
+          fn(type, node, nodes);
+          switch (type) {
+            case TYPE_ELEMENT:
+              walk(node, ELEMENT_ATTRIBUTES_AND_CHILDREN);
+              break;
+            case TYPE_CONTENT:
+              walk(node, CONTENT_CHILDREN);
+              break;
+          }
+        }
+      }
+      walk(nodes, 0);
+    }
+    module.exports = {
+      walk: walker
+    };
+  },
+  "1m.js": function(exports, module, basis, global, __filename, __dirname, require, resource, asset) {
+    module.exports = function getDelta(inserted, deleted) {
+      var delta = {};
+      var result;
+      if (inserted && inserted.length) result = delta.inserted = inserted;
+      if (deleted && deleted.length) result = delta.deleted = deleted;
+      if (result) return delta;
+    };
+  }
+};
+
+(function createBasisInstance(context, __basisFilename, __config) {
+  "use strict";
+  var VERSION = "1.10.0";
+  var global = Function("return this")();
+  var process = global.process;
+  var document = global.document;
+  var location = global.location;
+  var NODE_ENV = global !== context && process && process.argv ? global : false;
+  var toString = Object.prototype.toString;
+  var hasOwnProperty = Object.prototype.hasOwnProperty;
+  var FACTORY = {};
+  var PROXY = {};
+  FACTORY = new (devVerboseName("basis.FACTORY", {}, function() {}));
+  PROXY = new (devVerboseName("basis.PROXY", {}, function() {}));
+  function genUID(len) {
+    function base36(val) {
+      return Math.round(val).toString(36);
+    }
+    var result = base36(10 + 25 * Math.random());
+    if (!len) len = 16;
+    while (result.length < len) result += base36(new Date * Math.random());
+    return result.substr(0, len);
+  }
+  var warnPropertyAccess = function() {
+    try {
+      if (Object.defineProperty) {
+        var obj = {};
+        Object.defineProperty(obj, "foo", {
+          get: function() {
+            return true;
+          }
+        });
+        if (obj.foo === true) {
+          return function(object, name, value, warning) {
+            Object.defineProperty(object, name, {
+              get: function() {
+                consoleMethods.warn(warning);
+                return value;
+              },
+              set: function(newValue) {
+                value = newValue;
+              }
+            });
+          };
+        }
+      }
+    } catch (e) {}
+    return function() {};
+  }();
+  function extend(dest, source) {
+    for (var key in source) dest[key] = source[key];
+    return dest;
+  }
+  function complete(dest, source) {
+    for (var key in source) if (key in dest == false) dest[key] = source[key];
+    return dest;
+  }
+  function keys(object) {
+    var result = [];
+    for (var key in object) result.push(key);
+    return result;
+  }
+  function values(object) {
+    var result = [];
+    for (var key in object) result.push(object[key]);
+    return result;
+  }
+  function slice(source, keys) {
+    var result = {};
+    if (!keys) return extend(result, source);
+    for (var i = 0, key; key = keys[i++]; ) if (key in source) result[key] = source[key];
+    return result;
+  }
+  function splice(source, keys) {
+    var result = {};
+    if (!keys) return extend(result, source);
+    for (var i = 0, key; key = keys[i++]; ) if (key in source) {
+      result[key] = source[key];
+      delete source[key];
+    }
+    return result;
+  }
+  function merge() {
+    var result = {};
+    for (var i = 0; i < arguments.length; i++) extend(result, arguments[i]);
+    return result;
+  }
+  function iterate(object, callback, thisObject) {
+    var result = [];
+    for (var key in object) result.push(callback.call(thisObject, key, object[key]));
+    return result;
+  }
+  function $undefined(value) {
+    return value == undefined;
+  }
+  function $defined(value) {
+    return value != undefined;
+  }
+  function $isNull(value) {
+    return value == null || value == undefined;
+  }
+  function $isNotNull(value) {
+    return value != null && value != undefined;
+  }
+  function $isSame(value) {
+    return value === this;
+  }
+  function $isNotSame(value) {
+    return value !== this;
+  }
+  function $self(value) {
+    return value;
+  }
+  function $const(value) {
+    return function() {
+      return value;
+    };
+  }
+  function $false() {
+    return false;
+  }
+  function $true() {
+    return true;
+  }
+  function $null() {
+    return null;
+  }
+  function $undef() {}
+  var getter = function() {
+    var GETTER_ID_PREFIX = "basisGetterId" + genUID() + "_";
+    var GETTER_ID = GETTER_ID_PREFIX + "root";
+    var ID = GETTER_ID_PREFIX;
+    var SOURCE = GETTER_ID_PREFIX + "base";
+    var PARENT = GETTER_ID_PREFIX + "parent";
+    var getterSeed = 1;
+    var pathCache = {};
+    function as(path) {
+      var self = this;
+      var wrapper;
+      var result;
+      var id;
+      if (typeof path == "function" || typeof path == "string") {
+        wrapper = resolveFunction(path, self[ID]);
+        id = GETTER_ID_PREFIX + wrapper[ID];
+        if (hasOwnProperty.call(self, id)) return self[id];
+        if (typeof wrapper[SOURCE] == "function") wrapper = wrapper[SOURCE];
+        result = function(value) {
+          return wrapper(self(value));
+        };
+      } else {
+        var map = path;
+        if (!map) return nullGetter;
+        result = function(value) {
+          return map[self(value)];
+        };
+      }
+      result[PARENT] = self;
+      result[ID] = getterSeed++;
+      result[SOURCE] = path;
+      result.__extend__ = getter;
+      result.as = as;
+      if (id) self[id] = result;
+      return result;
+    }
+    function buildFunction(path) {
+      return new Function("object", "return object != null ? object." + path + " : object");
+    }
+    function resolveFunction(value, id) {
+      var fn = value;
+      var result;
+      if (value && typeof value == "string") {
+        if (hasOwnProperty.call(pathCache, value)) return pathCache[value];
+        fn = pathCache[value] = buildFunction(value);
+      }
+      if (typeof fn != "function") {
+        basis.dev.warn("path for root getter should be function or non-empty string");
+        return nullGetter;
+      }
+      if (fn.__extend__ === getter) return fn;
+      if (hasOwnProperty.call(fn, id)) return fn[id];
+      result = fn[id] = fn !== value ? fn : function(value) {
+        return fn(value);
+      };
+      result[ID] = getterSeed++;
+      result[SOURCE] = value;
+      result.__extend__ = getter;
+      result.as = as;
+      return result;
+    }
+    function getter(path, value) {
+      var result = path && path !== nullGetter ? resolveFunction(path, GETTER_ID) : nullGetter;
+      if (value || value === "") {
+        basis.dev.warn("second argument for getter is deprecated, use `as` method of getter instead");
+        if (typeof value == "string") value = stringFunctions.formatter(value);
+        return result.as(value);
+      }
+      return result;
+    }
+    getter.ID = ID;
+    getter.SOURCE = SOURCE;
+    getter.PARENT = PARENT;
+    return getter;
+  }();
+  var nullGetter = function() {
+    var nullGetter = function() {};
+    nullGetter[getter.ID] = getter.ID + "nullGetter";
+    nullGetter.__extend__ = getter, nullGetter.as = function() {
+      return nullGetter;
+    };
+    return nullGetter;
+  }();
+  function wrapper(key) {
+    return function(value) {
+      var result = {};
+      result[key] = value;
+      return result;
+    };
+  }
+  function lazyInit(init, thisObject) {
+    var inited = 0;
+    var self;
+    var data;
+    return self = function() {
+      if (!(inited++)) {
+        self.inited = true;
+        self.data = data = init.apply(thisObject || this, arguments);
+        if (typeof data == "undefined") consoleMethods.warn("lazyInit function returns nothing:\n" + init);
+      }
+      return data;
+    };
+  }
+  function lazyInitAndRun(init, run, thisObject) {
+    var inited = 0;
+    var self;
+    var data;
+    return self = function() {
+      if (!(inited++)) {
+        self.inited = true;
+        self.data = data = init.call(thisObject || this);
+        if (typeof data == "undefined") consoleMethods.warn("lazyInitAndRun function returns nothing:\n" + init);
+      }
+      run.apply(data, arguments);
+      return data;
+    };
+  }
+  function runOnce(run, thisObject) {
+    var fired = 0;
+    return function() {
+      if (!(fired++)) return run.apply(thisObject || this, arguments);
+    };
+  }
+  function factory(fn) {
+    if (typeof fn != "function") fn = getter(fn);
+    var result = function(value) {
+      return fn(value);
+    };
+    result = devInfoResolver.patchFactory(result);
+    result.factory = FACTORY;
+    return result;
+  }
+  function isFactory(value) {
+    return typeof value === "function" && value.factory === FACTORY;
+  }
+  function publicCallback(fn, permanent) {
+    var name = "basisjsCallback" + genUID();
+    global[name] = permanent ? fn : function() {
+      try {
+        delete global[name];
+      } catch (e) {
+        global[name] = undefined;
+      }
+      return fn.apply(this, arguments);
+    };
+    return name;
+  }
+  function devVerboseName(name, args, fn) {
+    return (new Function(keys(args), 'return {"' + name + '": ' + fn + '\n}["' + name + '"]')).apply(null, values(args));
+  }
+  var consoleMethods = function() {
+    var console = global.console;
+    var methods = {
+      log: $undef,
+      info: $undef,
+      warn: $undef,
+      error: $undef
+    };
+    if (console) iterate(methods, function(methodName) {
+      methods[methodName] = "bind" in Function.prototype && typeof console[methodName] == "function" ? Function.prototype.bind.call(console[methodName], console) : function() {
+        Function.prototype.apply.call(console[methodName], console, arguments);
+      };
+    });
+    return methods;
+  }();
+  var setImmediate = global.setImmediate || global.msSetImmediate;
+  var clearImmediate = global.clearImmediate || global.msSetImmediate;
+  if (setImmediate) setImmediate = setImmediate.bind(global);
+  if (clearImmediate) clearImmediate = clearImmediate.bind(global);
+  if (!setImmediate) {
+    (function() {
+      var runTask = function() {
+        var taskById = {};
+        var taskId = 0;
+        setImmediate = function(fn) {
+          if (typeof fn != "function") {
+            consoleMethods.warn("basis.setImmediate() and basis.nextTick() accept functions only (call ignored)");
+            return;
+          }
+          taskById[++taskId] = {
+            fn: fn,
+            args: arrayFrom(arguments, 1)
+          };
+          addToQueue(taskId);
+          return taskId;
+        };
+        clearImmediate = function(taskId) {
+          delete taskById[taskId];
+        };
+        return function(taskId) {
+          var task = taskById[taskId];
+          if (task) {
+            delete taskById[taskId];
+            task.fn.apply(undefined, task.args);
+          }
+          asap.process();
+        };
+      }();
+      var addToQueue = function(taskId) {
+        setTimeout(function() {
+          runTask(taskId);
+        }, 0);
+      };
+      if (NODE_ENV && NODE_ENV.process && typeof process.nextTick == "function") {
+        addToQueue = function(taskId) {
+          process.nextTick(function() {
+            runTask(taskId);
+          });
+        };
+      } else {
+        var postMessageSupported = global.postMessage && !global.importScripts;
+        if (postMessageSupported) {
+          var oldOnMessage = global.onmessage;
+          global.onmessage = function() {
+            postMessageSupported = false;
+          };
+          global.postMessage("", "*");
+          global.onmessage = oldOnMessage;
+        }
+        if (postMessageSupported) {
+          var taskIdByMessage = {};
+          var setImmediateHandler = function(event) {
+            if (event && event.source == global) {
+              var data = event.data;
+              if (hasOwnProperty.call(taskIdByMessage, data)) {
+                var taskId = taskIdByMessage[data];
+                delete taskIdByMessage[data];
+                runTask(taskId);
+              }
+            }
+          };
+          if (global.addEventListener) global.addEventListener("message", setImmediateHandler, true); else global.attachEvent("onmessage", setImmediateHandler);
+          addToQueue = function(taskId) {
+            var message = genUID(32);
+            taskIdByMessage[message] = taskId;
+            global.postMessage(message, "*");
+          };
+        } else {
+          if (global.MessageChannel) {
+            var channel = new global.MessageChannel;
+            channel.port1.onmessage = function(event) {
+              runTask(event.data);
+            };
+            addToQueue = function(taskId) {
+              channel.port2.postMessage(taskId);
+            };
+          } else {
+            var createScript = function() {
+              return document.createElement("script");
+            };
+            if (document && "onreadystatechange" in createScript()) {
+              var defaultAddToQueue = addToQueue;
+              addToQueue = function beforeHeadReady(taskId) {
+                if (typeof documentInterface != "undefined") {
+                  addToQueue = defaultAddToQueue;
+                  documentInterface.head.ready(function() {
+                    addToQueue = function(taskId) {
+                      var scriptEl = createScript();
+                      scriptEl.onreadystatechange = function() {
+                        scriptEl.onreadystatechange = null;
+                        documentInterface.remove(scriptEl);
+                        scriptEl = null;
+                        runTask(taskId);
+                      };
+                      documentInterface.head.add(scriptEl);
+                    };
+                  });
+                }
+                if (addToQueue === beforeHeadReady) defaultAddToQueue(taskId); else addToQueue(taskId);
+              };
+            }
+          }
+        }
+      }
+    })();
+  }
+  var asap = function() {
+    var queue = [];
+    var processing = false;
+    var timer;
+    function processQueue() {
+      try {
+        processing = true;
+        var item;
+        while (item = queue.shift()) item.fn.call(item.context);
+      } finally {
+        processing = false;
+        if (queue.length) timer = setImmediate(process);
+      }
+    }
+    function process() {
+      if (timer) timer = clearImmediate(timer);
+      if (queue.length) processQueue();
+    }
+    var asap = function(fn, context) {
+      queue.push({
+        fn: fn,
+        context: context
+      });
+      if (!timer) timer = setImmediate(process);
+      return true;
+    };
+    asap.process = function() {
+      if (!processing) process();
+    };
+    asap.schedule = function(scheduleFn) {
+      var queue = {};
+      var scheduled = false;
+      function process() {
+        var etimer = setImmediate(process);
+        scheduled = false;
+        for (var id in queue) {
+          var object = queue[id];
+          delete queue[id];
+          scheduleFn(object);
+        }
+        clearImmediate(etimer);
+        if (!scheduled) queue = {};
+      }
+      return {
+        add: function(object) {
+          queue[object.basisObjectId] = object;
+          if (!scheduled) scheduled = asap(process);
+        },
+        remove: function(object) {
+          delete queue[object.basisObjectId];
+        }
+      };
+    };
+    return asap;
+  }();
+  var codeFrame = function() {
+    var count = 0;
+    var info = {
+      id: count,
+      start: function() {
+        info.id = count++;
+      },
+      finish: function() {
+        asap.process();
+        info.id = "unknown";
+      }
+    };
+    return info;
+  }();
+  var pathUtils = function() {
+    var ABSOLUTE_RX = /^([^\/]+:|\/)/;
+    var PROTOCOL_RX = /^[a-zA-Z0-9\-]+:\/?/;
+    var ORIGIN_RX = /^(?:[a-zA-Z0-9\-]+:)?\/\/[^\/]+\/?/;
+    var SEARCH_HASH_RX = /[\?#].*$/;
+    var baseURI;
+    var origin;
+    var utils;
+    if (NODE_ENV) {
+      var path = (process.basisjsBaseURI || "/").replace(/\\/g, "/");
+      baseURI = path.replace(/^[^\/]*/, "");
+      origin = path.replace(/\/.*/, "");
+    } else {
+      baseURI = location.pathname.replace(/[^\/]+$/, "");
+      origin = location.protocol + "//" + location.host;
+    }
+    utils = {
+      baseURI: baseURI,
+      origin: origin,
+      normalize: function(path) {
+        path = (path || "").replace(PROTOCOL_RX, "/").replace(ORIGIN_RX, "/").replace(SEARCH_HASH_RX, "");
+        var result = [];
+        var parts = path.split("/");
+        for (var i = 0; i < parts.length; i++) {
+          if (parts[i] == "..") {
+            if (result.length > 1 || result[0]) result.pop();
+          } else {
+            if ((parts[i] || !i) && parts[i] != ".") result.push(parts[i]);
+          }
+        }
+        return result.join("/") || (path[0] === "/" ? "/" : "");
+      },
+      dirname: function(path) {
+        var result = utils.normalize(path);
+        return result.replace(/\/([^\/]*)$|^[^\/]+$/, "") || (result[0] == "/" ? "/" : ".");
+      },
+      extname: function(path) {
+        var ext = utils.normalize(path).match(/[^\/](\.[^\/\.]*)$/);
+        return ext ? ext[1] : "";
+      },
+      basename: function(path, ext) {
+        var filename = utils.normalize(path).match(/[^\\\/]*$/);
+        filename = filename ? filename[0] : "";
+        if (ext == utils.extname(filename)) filename = filename.substring(0, filename.length - ext.length);
+        return filename;
+      },
+      resolve: function() {
+        var args = arrayFrom(arguments).reverse();
+        var path = [];
+        var absoluteFound = false;
+        for (var i = 0; !absoluteFound && i < args.length; i++) if (typeof args[i] == "string") {
+          path.unshift(args[i]);
+          absoluteFound = ABSOLUTE_RX.test(args[i]);
+        }
+        if (!absoluteFound) path.unshift(baseURI == "/" ? "" : baseURI); else if (path.length && path[0] == "/") path[0] = "";
+        return utils.normalize(path.join("/"));
+      },
+      relative: function(from, to) {
+        if (typeof to != "string") {
+          to = from;
+          from = baseURI;
+        }
+        from = utils.normalize(from);
+        to = utils.normalize(to);
+        if (from[0] == "/" && to[0] != "/") return from;
+        if (to[0] == "/" && from[0] != "/") return to;
+        var base = from.replace(/^\/$/, "").split(/\//);
+        var path = to.replace(/^\/$/, "").split(/\//);
+        var result = [];
+        var i = 0;
+        while (path[i] == base[i] && typeof base[i] == "string") i++;
+        for (var j = base.length - i; j > 0; j--) result.push("..");
+        return result.concat(path.slice(i).filter(Boolean)).join("/");
+      }
+    };
+    return utils;
+  }();
+  var basisFilename = __basisFilename || "";
+  var config = __config || {
+    modules: {},
+    implicitExt: true,
+    autoload: [ "./1.js" ]
+  };
+  function fetchConfig() {
+    var config = __config;
+    if (!config) {
+      if (NODE_ENV) {
+        basisFilename = process.basisjsFilename;
+        if (process.basisjsConfig) {
+          config = process.basisjsConfig;
+          if (typeof config == "string") {
+            try {
+              config = Function("return{" + config + "}")();
+            } catch (e) {
+              consoleMethods.error("basis-config: basis.js config parse fault: " + e);
+            }
+          }
+        }
+      } else {
+        var scripts = document.scripts;
+        for (var i = 0, scriptEl; scriptEl = scripts[i]; i++) {
+          var configAttrValue = scriptEl.hasAttribute("basis-config") ? scriptEl.getAttribute("basis-config") : scriptEl.getAttribute("data-basis-config");
+          scriptEl.removeAttribute("basis-config");
+          scriptEl.removeAttribute("data-basis-config");
+          if (configAttrValue !== null) {
+            basisFilename = pathUtils.normalize(scriptEl.src);
+            try {
+              config = Function("return{" + configAttrValue + "}")();
+            } catch (e) {
+              consoleMethods.error("basis-config: basis.js config parse fault: " + e);
+            }
+            break;
+          }
+        }
+        if (!basisFilename) {
+          basisFilename = pathUtils.normalize(scripts[0].src);
+          consoleMethods.warn("basis-config: no `basis-config` marker on any script tag is found. All paths will be resolved relative to `src` from the first `script` tag.");
+        }
+      }
+    }
+    return processConfig(config);
+  }
+  function processConfig(config) {
+    config = slice(config);
+    complete(config, {
+      implicitExt: NODE_ENV ? true : false
+    });
+    if ("extProto" in config) consoleMethods.warn("basis-config: `extProto` option in basis-config is not support anymore");
+    if ("path" in config) consoleMethods.warn("basis-config: `path` option in basis-config is deprecated, use `modules` instead");
+    var autoload = [];
+    var modules = merge(config.path, config.modules, {
+      basis: basisFilename
+    });
+    config.modules = {};
+    if (config.autoload) {
+      var m = String(config.autoload).match(/^((?:[^\/]*\/)*)([a-z$_][a-z0-9$_]*)((?:\.[a-z$_][a-z0-9$_]*)*)$/i);
+      if (m) {
+        modules[m[2]] = {
+          autoload: true,
+          filename: m[1] + m[2] + (m[3] || ".js")
+        };
+      } else {
+        consoleMethods.warn("basis-config: wrong `autoload` value (setting ignored): " + config.autoload);
+      }
+      delete config.autoload;
+    }
+    for (var name in modules) {
+      var module = modules[name];
+      if (typeof module == "string") module = {
+        filename: module.replace(/\/$/, "/" + name + ".js")
+      };
+      var filename = module.filename;
+      var path = module.path;
+      if (filename && !path) {
+        filename = pathUtils.resolve(filename);
+        path = filename.substr(0, filename.length - pathUtils.extname(filename).length);
+        filename = "../" + pathUtils.basename(filename);
+      }
+      path = pathUtils.resolve(path);
+      if (!filename && path) {
+        filename = pathUtils.basename(path);
+        path = pathUtils.dirname(path);
+      }
+      if (!pathUtils.extname(filename)) filename += ".js";
+      filename = pathUtils.resolve(path, filename);
+      config.modules[name] = {
+        path: path,
+        filename: filename
+      };
+      if (module.autoload) {
+        config.autoload = autoload;
+        autoload.push(name);
+      }
+    }
+    return config;
+  }
+  var Class = function() {
+    var instanceSeed = {
+      id: 1
+    };
+    var classSeed = 1;
+    var classes = [];
+    var SELF = {};
+    function isClass(object) {
+      return typeof object == "function" && !!object.basisClassId_;
+    }
+    function isSubclassOf(superClass) {
+      var cursor = this;
+      while (cursor && cursor !== superClass) cursor = cursor.superClass_;
+      return cursor === superClass;
+    }
+    var TOSTRING_BUG = function() {
+      for (var key in {
+        toString: 1
+      }) return false;
+      return true;
+    }();
+    function createClass(SuperClass) {
+      var classId = classSeed++;
+      if (typeof SuperClass != "function") SuperClass = BaseClass;
+      var className = "";
+      for (var i = 1, extension; extension = arguments[i]; i++) if (typeof extension != "function" && extension.className) className = extension.className;
+      if (!className) className = SuperClass.className + "._Class" + classId;
+      var NewClassProto = function() {};
+      NewClassProto = devVerboseName(className, {}, NewClassProto);
+      NewClassProto.prototype = SuperClass.prototype;
+      var newProto = new NewClassProto;
+      var newClassProps = {
+        className: className,
+        basisClassId_: classId,
+        superClass_: SuperClass,
+        extendConstructor_: !!SuperClass.extendConstructor_,
+        isSubclassOf: isSubclassOf,
+        subclass: function() {
+          return createClass.apply(null, [ NewClass ].concat(arrayFrom(arguments)));
+        },
+        extend: extendClass,
+        factory: function(config) {
+          return factory(function(extra) {
+            return new NewClass(merge(config, extra));
+          });
+        },
+        __extend__: function(value) {
+          if (value && value !== SELF && (typeof value == "object" || typeof value == "function" && !isClass(value))) return BaseClass.create.call(null, NewClass, value); else return value;
+        },
+        prototype: newProto
+      };
+      for (var i = 1, extension; extension = arguments[i]; i++) newClassProps.extend(extension);
+      if (newProto.init !== BaseClass.prototype.init && !/^function[^(]*\(\)/.test(newProto.init) && newClassProps.extendConstructor_) consoleMethods.warn("probably wrong extendConstructor_ value for " + newClassProps.className);
+      var NewClass = newClassProps.extendConstructor_ ? function(extend) {
+        this.basisObjectId = instanceSeed.id++;
+        var prop;
+        for (var key in extend) {
+          prop = this[key];
+          this[key] = prop && prop.__extend__ ? prop.__extend__(extend[key]) : extend[key];
+        }
+        this.init();
+        this.postInit();
+      } : function() {
+        this.basisObjectId = instanceSeed.id++;
+        this.init.apply(this, arguments);
+        this.postInit();
+      };
+      NewClass = devVerboseName(className, {
+        instanceSeed: instanceSeed
+      }, NewClass);
+      newProto.constructor = NewClass;
+      for (var key in newProto) if (newProto[key] === SELF) newProto[key] = NewClass;
+      extend(NewClass, newClassProps);
+      classes.push(NewClass);
+      return NewClass;
+    }
+    function extendClass(source) {
+      var proto = this.prototype;
+      if (typeof source == "function" && !isClass(source)) source = source(this.superClass_.prototype, slice(proto));
+      if (source.prototype) source = source.prototype;
+      for (var key in source) {
+        var value = source[key];
+        var protoValue = proto[key];
+        if (key == "className" || key == "extendConstructor_") this[key] = value; else {
+          if (protoValue && protoValue.__extend__) proto[key] = protoValue.__extend__(value); else {
+            proto[key] = value;
+          }
+        }
+      }
+      if (TOSTRING_BUG && source[key = "toString"] !== toString) proto[key] = source[key];
+      return this;
+    }
+    var BaseClass = extend(createClass, {
+      className: "basis.Class",
+      extendConstructor_: false,
+      prototype: {
+        basisObjectId: 0,
+        constructor: null,
+        init: function() {},
+        postInit: function() {},
+        toString: function() {
+          return "[object " + (this.constructor || this).className + "]";
+        },
+        destroy: function() {
+          for (var prop in this) if (hasOwnProperty.call(this, prop)) this[prop] = null;
+          this.destroy = $undef;
+        }
+      }
+    });
+    var customExtendProperty = function(extension, fn) {
+      return {
+        __extend__: function(extension) {
+          if (!extension) return extension;
+          if (extension && extension.__extend__) return extension;
+          var Base = function() {};
+          Base = devVerboseName(arguments[2] || "customExtendProperty", {}, Base);
+          Base.prototype = this;
+          var result = new Base;
+          fn(result, extension);
+          return result;
+        }
+      }.__extend__(extension || {});
+    };
+    var extensibleProperty = function(extension) {
+      return customExtendProperty(extension, extend, "extensibleProperty");
+    };
+    var nestedExtendProperty = function(extension) {
+      return customExtendProperty(extension, function(result, extension) {
+        for (var key in extension) if (hasOwnProperty.call(extension, key)) {
+          var value = result[key];
+          var newValue = extension[key];
+          if (newValue) result[key] = value && value.__extend__ ? value.__extend__(newValue) : extensibleProperty(newValue); else result[key] = null;
+        }
+      }, "nestedExtendProperty");
+    };
+    var oneFunctionProperty = function(fn, keys) {
+      var create = function(keys) {
+        var result = {
+          __extend__: create
+        };
+        if (keys) {
+          if (keys.__extend__) return keys;
+          var Cls = devVerboseName("oneFunctionProperty", {}, function() {});
+          result = new Cls;
+          result.__extend__ = create;
+          for (var key in keys) if (hasOwnProperty.call(keys, key) && keys[key]) result[key] = fn;
+        }
+        return result;
+      };
+      return create(keys || {});
+    };
+    return extend(BaseClass, {
+      all_: classes,
+      SELF: SELF,
+      create: createClass,
+      isClass: isClass,
+      customExtendProperty: customExtendProperty,
+      extensibleProperty: extensibleProperty,
+      nestedExtendProperty: nestedExtendProperty,
+      oneFunctionProperty: oneFunctionProperty
+    });
+  }();
+  var Token = Class(null, {
+    className: "basis.Token",
+    value: null,
+    handler: null,
+    deferredToken: null,
+    bindingBridge: {
+      attach: function(host, fn, context, onDestroy) {
+        host.attach(fn, context, onDestroy);
+      },
+      detach: function(host, fn, context) {
+        host.detach(fn, context);
+      },
+      get: function(host) {
+        return host.get();
+      }
+    },
+    init: function(value) {
+      this.value = value;
+    },
+    get: function() {
+      return this.value;
+    },
+    set: function(value) {
+      if (this.value !== value) {
+        this.value = value;
+        this.apply();
+      }
+    },
+    attach: function(fn, context, onDestroy) {
+      var cursor = this;
+      while (cursor = cursor.handler) if (cursor.fn === fn && cursor.context === context) consoleMethods.warn("basis.Token#attach: duplicate fn & context pair");
+      this.handler = {
+        fn: fn,
+        context: context,
+        destroy: onDestroy || null,
+        handler: this.handler
+      };
+    },
+    detach: function(fn, context) {
+      var cursor = this;
+      var prev;
+      while (prev = cursor, cursor = cursor.handler) if (cursor.fn === fn && cursor.context === context) {
+        cursor.fn = $undef;
+        cursor.destroy = cursor.destroy && $undef;
+        prev.handler = cursor.handler;
+        return;
+      }
+      consoleMethods.warn("basis.Token#detach: fn & context pair not found, nothing was removed");
+    },
+    apply: function() {
+      var value = this.get();
+      var cursor = this;
+      while (cursor = cursor.handler) cursor.fn.call(cursor.context, value);
+    },
+    deferred: function() {
+      var token = this.deferredToken;
+      if (!token) {
+        token = this.deferredToken = new DeferredToken(this.get());
+        this.attach(token.set, token);
+      }
+      return token;
+    },
+    as: function(fn) {
+      var token = new Token;
+      var setter = function(value) {
+        this.set(fn.call(this, value));
+      };
+      if (typeof fn != "function") fn = getter(fn);
+      setter.call(token, this.get());
+      this.attach(setter, token, token.destroy);
+      token.attach($undef, this, function() {
+        this.detach(setter, token);
+      });
+      devInfoResolver.setInfo(token, "sourceInfo", {
+        type: "Token#as",
+        source: this,
+        transform: fn
+      });
+      return token;
+    },
+    destroy: function() {
+      if (this.deferredToken) {
+        this.deferredToken.destroy();
+        this.deferredToken = null;
+      }
+      this.attach = $undef;
+      this.detach = $undef;
+      var cursor = this;
+      while (cursor = cursor.handler) if (cursor.destroy) cursor.destroy.call(cursor.context);
+      this.handler = null;
+      this.value = null;
+    }
+  });
+  var deferredTokenApplyQueue = asap.schedule(function(token) {
+    token.apply();
+  });
+  var DeferredToken = Token.subclass({
+    className: "basis.DeferredToken",
+    set: function(value) {
+      if (this.value !== value) {
+        this.value = value;
+        deferredTokenApplyQueue.add(this);
+      }
+    },
+    deferred: function() {
+      return this;
+    }
+  });
+  var resources = {};
+  var resourceRequestCache = {};
+  var resourceContentCache = {};
+  var resourcePatch = {};
+  var virtualResourceSeed = 1;
+  var resourceSubscribers = [];
+  var resourceResolvingStack = [];
+  var requires;
+  (function() {
+    var map = typeof __resources__ != "undefined" ? __resources__ : null;
+    if (map) {
+      for (var key in map) resourceContentCache[pathUtils.resolve(key)] = map[key];
+    }
+  })();
+  function applyResourcePatches(resource) {
+    var patches = resourcePatch[resource.url];
+    if (patches) for (var i = 0; i < patches.length; i++) {
+      consoleMethods.info("Apply patch for " + resource.url);
+      patches[i](resource.get(), resource.url);
+    }
+  }
+  var resolveResourceFilename = function(url, baseURI) {
+    var rootNS = url.match(/^([a-zA-Z0-9\_\-]+):/);
+    if (rootNS) {
+      var namespaceRoot = rootNS[1];
+      if (namespaceRoot in nsRootPath == false) nsRootPath[namespaceRoot] = pathUtils.baseURI + namespaceRoot + "/";
+      url = nsRootPath[namespaceRoot] + pathUtils.normalize("./" + url.substr(rootNS[0].length));
+    } else {
+      if (!/^(\.\/|\.\.|\/)/.test(url)) {
+        var clr = arguments[2];
+        consoleMethods.warn("Bad usage: " + (clr ? clr.replace("{url}", url) : url) + "\nFilenames should starts with `./`, `..` or `/`. Otherwise it may treats as special reference in next releases.");
+      }
+      url = pathUtils.resolve(baseURI, url);
+    }
+    return url;
+  };
+  var getResourceContent = function(url, ignoreCache) {
+    if (ignoreCache || !hasOwnProperty.call(resourceContentCache, url)) {
+      var resourceContent = "";
+      if (!NODE_ENV) {
+        var req = new global.XMLHttpRequest;
+        req.open("GET", url, false);
+        req.setRequestHeader("If-Modified-Since", (new Date(0)).toGMTString());
+        req.setRequestHeader("X-Basis-Resource", 1);
+        req.send("");
+        if (req.status >= 200 && req.status < 400) resourceContent = req.responseText; else {
+          consoleMethods.error("basis.resource: Unable to load " + url + " (status code " + req.status + ")");
+        }
+      } else {
+        try {
+          if (!process.basisjsReadFile) consoleMethods.warn("basis.resource: basisjsReadFile not found, file content couldn't to be read");
+          resourceContent = process.basisjsReadFile ? process.basisjsReadFile(url) : "";
+        } catch (e) {
+          consoleMethods.error("basis.resource: Unable to load " + url, e);
+        }
+      }
+      resourceContentCache[url] = resourceContent;
+    }
+    return resourceContentCache[url];
+  };
+  var createResource = function(resourceUrl, content) {
+    var contentType = pathUtils.extname(resourceUrl);
+    var contentWrapper = getResource.extensions[contentType];
+    var isVirtual = arguments.length > 1;
+    var resolved = false;
+    var wrapped = false;
+    var wrappedContent;
+    if (isVirtual) resourceUrl += "#virtual";
+    var resource = function() {
+      if (resolved) return content;
+      var urlContent = isVirtual ? content : getResourceContent(resourceUrl);
+      var idx = resourceResolvingStack.indexOf(resourceUrl);
+      if (idx != -1) consoleMethods.warn("basis.resource recursion: " + resourceResolvingStack.slice(idx).concat(resourceUrl).map(pathUtils.relative, pathUtils).join(" -> "));
+      resourceResolvingStack.push(resourceUrl);
+      if (contentWrapper) {
+        if (!wrapped) {
+          wrapped = true;
+          content = contentWrapper(urlContent, resourceUrl);
+          wrappedContent = urlContent;
+        }
+      } else {
+        content = urlContent;
+      }
+      resolved = true;
+      applyResourcePatches(resource);
+      resource.apply();
+      if (!isVirtual) resourceSubscribers.forEach(function(fn) {
+        fn({
+          type: "resolve",
+          resource: resource
+        });
+      });
+      resourceResolvingStack.pop();
+      return content;
+    };
+    extend(resource, extend(new Token, {
+      url: resourceUrl,
+      type: contentType,
+      virtual: isVirtual,
+      fetch: function() {
+        return resource();
+      },
+      toString: function() {
+        return "[basis.resource " + resourceUrl + "]";
+      },
+      isResolved: function() {
+        return resolved;
+      },
+      hasChanges: function() {
+        return contentWrapper ? resourceContentCache[resourceUrl] !== wrappedContent : false;
+      },
+      update: function(newContent) {
+        if (!resolved || isVirtual || newContent != resourceContentCache[resourceUrl]) {
+          if (!isVirtual) resourceContentCache[resourceUrl] = newContent;
+          if (contentWrapper) {
+            if (!wrapped && isVirtual) content = newContent;
+            if (wrapped && !contentWrapper.permanent) {
+              content = contentWrapper(newContent, resourceUrl, content);
+              applyResourcePatches(resource);
+              resource.apply();
+            }
+          } else {
+            content = newContent;
+            resolved = true;
+            applyResourcePatches(resource);
+            resource.apply();
+          }
+        }
+      },
+      reload: function() {
+        if (isVirtual) return;
+        var oldContent = resourceContentCache[resourceUrl];
+        var newContent = getResourceContent(resourceUrl, true);
+        if (newContent != oldContent) {
+          resolved = false;
+          resource.update(newContent);
+        }
+      },
+      get: function(source) {
+        if (isVirtual) if (source) return contentWrapper ? wrappedContent : content;
+        return source ? getResourceContent(resourceUrl) : resource();
+      },
+      ready: function(fn, context) {
+        if (resolved) {
+          fn.call(context, resource());
+          if (contentWrapper && contentWrapper.permanent) return;
+        }
+        resource.attach(fn, context);
+        return resource;
+      }
+    }));
+    resources[resourceUrl] = resource;
+    resourceRequestCache[resourceUrl] = resource;
+    if (!isVirtual) resourceSubscribers.forEach(function(fn) {
+      fn({
+        type: "create",
+        resource: resource
+      });
+    });
+    return resource;
+  };
+  var getResource = function(url, baseURI) {
+    if (url && typeof url != "string") url = url.url;
+    var reference = baseURI ? baseURI + "\0" + url : url;
+    var resource = resourceRequestCache[reference];
+    if (!resource) {
+      var resolvedUrl = resolveResourceFilename(url, baseURI, "basis.resource('{url}')");
+      resource = resources[resolvedUrl] || createResource(resolvedUrl);
+      resourceRequestCache[reference] = resource;
+    }
+    return resource;
+  };
+  extend(getResource, {
+    resolveURI: resolveResourceFilename,
+    buildCloak: getResource,
+    isResource: function(value) {
+      return value ? resources[value.url] === value : false;
+    },
+    isResolved: function(resourceUrl) {
+      var resource = getResource.get(resourceUrl);
+      return resource ? resource.isResolved() : false;
+    },
+    exists: function(resourceUrl) {
+      return hasOwnProperty.call(resources, resolveResourceFilename(resourceUrl, null, "basis.resource.exists('{url}')"));
+    },
+    get: function(resourceUrl) {
+      resourceUrl = resolveResourceFilename(resourceUrl, null, "basis.resource.get('{url}')");
+      if (!getResource.exists(resourceUrl)) return null;
+      return getResource(resourceUrl);
+    },
+    getFiles: function(cache) {
+      return cache ? keys(resourceContentCache) : keys(resources).filter(function(filename) {
+        return !resources[filename].virtual;
+      });
+    },
+    subscribe: function(fn) {
+      resourceSubscribers.push(fn);
+    },
+    virtual: function(type, content, ownerUrl) {
+      return createResource((ownerUrl ? ownerUrl + ":" : pathUtils.normalize(pathUtils.baseURI == "/" ? "" : pathUtils.baseURI) + "/") + "virtual-resource" + virtualResourceSeed++ + "." + type, content);
+    },
+    extensions: {
+      ".js": extend(function processJsResourceContent(content, filename) {
+        var namespace = filename2namespace[filename];
+        if (!namespace) {
+          var implicitNamespace = true;
+          var resolvedFilename = (pathUtils.dirname(filename) + "/" + pathUtils.basename(filename, pathUtils.extname(filename))).replace(/^\/\//, "/");
+          for (var ns in nsRootPath) {
+            var path = nsRootPath[ns] + ns + "/";
+            if (resolvedFilename.substr(0, path.length) == path) {
+              implicitNamespace = false;
+              resolvedFilename = resolvedFilename.substr(nsRootPath[ns].length);
+              break;
+            }
+          }
+          namespace = resolvedFilename.replace(/\./g, "_").replace(/^\//g, "").replace(/\//g, ".");
+          if (implicitNamespace) namespace = "implicit." + namespace;
+        }
+        if (requires) arrayFunctions.add(requires, namespace);
+        var ns = getNamespace(namespace);
+        if (!ns.inited) {
+          var savedRequires = requires;
+          requires = [];
+          ns.inited = true;
+          ns.exports = runScriptInContext({
+            path: ns.path,
+            exports: ns.exports
+          }, filename, content).exports;
+          if (ns.exports && ns.exports.constructor === Object) {
+            if (config.implicitExt) {
+              if (config.implicitExt == "warn") {
+                for (var key in ns.exports) if (key in ns == false && key != "path") {
+                  ns[key] = ns.exports[key];
+                  warnPropertyAccess(ns, key, ns.exports[key], "basis.js: Access to implicit namespace property `" + namespace + "." + key + "`");
+                }
+              } else complete(ns, ns.exports);
+            }
+          }
+          ns.filename_ = filename;
+          ns.source_ = content;
+          ns.requires_ = requires;
+          requires = savedRequires;
+        }
+        return ns.exports;
+      }, {
+        permanent: true
+      }),
+      ".css": function processCssResourceContent(content, url, cssResource) {
+        if (!cssResource) cssResource = new CssResource(url);
+        cssResource.updateCssText(content);
+        return cssResource;
+      },
+      ".svg": function processCssResourceContent(content, url, svgResource) {
+        if (!svgResource) svgResource = new SvgResource(url);
+        svgResource.updateSvgText(content);
+        return svgResource;
+      },
+      ".json": function processJsonResourceContent(content) {
+        if (typeof content == "object") return content;
+        var result;
+        try {
+          content = String(content);
+          result = basis.json.parse(content);
+        } catch (e) {
+          var url = arguments[1];
+          consoleMethods.warn("basis.resource: Can't parse JSON from " + url, {
+            url: url,
+            content: content
+          });
+        }
+        return result || null;
+      }
+    }
+  });
+  var SOURCE_OFFSET;
+  function compileFunction(sourceURL, args, body) {
+    if (isNaN(SOURCE_OFFSET)) {
+      var marker = basis.genUID();
+      SOURCE_OFFSET = (new Function(args, marker)).toString().split(marker)[0].split(/\n/).length - 1;
+    }
+    body = devInfoResolver.fixSourceOffset(body, SOURCE_OFFSET + 1) + "\n//# sourceURL=" + pathUtils.origin + sourceURL;
+    try {
+      return new Function(args, '"use strict";\n' + (NODE_ENV ? "var __nodejsRequire = require;\n" : "") + body);
+    } catch (e) {
+      if (document && "line" in e == false && "addEventListener" in global) {
+        global.addEventListener("error", function onerror(event) {
+          if (event.filename == pathUtils.origin + sourceURL) {
+            global.removeEventListener("error", onerror);
+            consoleMethods.error("Compilation error at " + event.filename + ":" + event.lineno + ": " + e);
+            event.preventDefault();
+          }
+        });
+        var script = document.createElement("script");
+        script.src = sourceURL;
+        script.async = false;
+        document.head.appendChild(script);
+        document.head.removeChild(script);
+      }
+      consoleMethods.error("Compilation error at " + sourceURL + ("line" in e ? ":" + (e.line - 1) : "") + ": " + e);
+    }
+  }
+  var runScriptInContext = function(context, sourceURL, sourceCode) {
+    var baseURL = pathUtils.dirname(sourceURL);
+    var compiledSourceCode = sourceCode;
+    if (!context.exports) context.exports = {};
+    if (typeof compiledSourceCode != "function") compiledSourceCode = compileFunction(sourceURL, [ "exports", "module", "basis", "global", "__filename", "__dirname", "resource", "require", "asset" ], sourceCode);
+    if (typeof compiledSourceCode == "function") {
+      compiledSourceCode.displayName = "[module] " + (filename2namespace[sourceURL] || sourceURL);
+      compiledSourceCode.call(context.exports, context.exports, context, basis, global, sourceURL, baseURL, function(path) {
+        return getResource(path, baseURL);
+      }, function(path) {
+        return requireNamespace(path, baseURL);
+      }, function(path) {
+        return resolveResourceFilename(path, baseURL, "asset('{url}')");
+      });
+    }
+    return context;
+  };
+  var namespaces = {};
+  var namespace2filename = {};
+  var filename2namespace = {};
+  var nsRootPath = {};
+  iterate(config.modules, function(name, module) {
+    nsRootPath[name] = module.path + "/";
+    namespace2filename[name] = module.filename;
+    filename2namespace[module.filename] = name;
+  });
+  (function(map) {
+    var map = typeof __namespace_map__ != "undefined" ? __namespace_map__ : null;
+    if (map) {
+      for (var key in map) {
+        var filename = pathUtils.resolve(key);
+        var namespace = map[key];
+        filename2namespace[filename] = namespace;
+        namespace2filename[namespace] = filename;
+      }
+    }
+  })();
+  var Namespace = Class(null, {
+    className: "basis.Namespace",
+    init: function(name) {
+      this.name = name;
+      this.exports = {};
+    },
+    toString: function() {
+      return "[basis.namespace " + this.name + "]";
+    },
+    extend: function(names) {
+      extend(this.exports, names);
+      return complete(this, names);
+    }
+  });
+  function resolveNSFilename(namespace) {
+    if (namespace in namespace2filename == false) {
+      var parts = namespace.split(".");
+      var namespaceRoot = parts.shift();
+      var filename = resolveResourceFilename(namespaceRoot + ":" + parts.join("/") + ".js").replace(/\/\.js$/, ".js");
+      namespace2filename[namespace] = filename;
+      filename2namespace[filename] = namespace;
+    }
+    return namespace2filename[namespace];
+  }
+  function getRootNamespace(name) {
+    var namespace = namespaces[name];
+    if (!namespace) {
+      namespace = namespaces[name] = new Namespace(name);
+      namespace.namespaces_ = {};
+      namespace.namespaces_[name] = namespace;
+      if (!config.noConflict) global[name] = namespace;
+    }
+    return namespace;
+  }
+  function getNamespace(path) {
+    if (hasOwnProperty.call(namespaces, path)) return namespaces[path];
+    path = path.split(".");
+    var rootNs = getRootNamespace(path[0]);
+    var cursor = rootNs;
+    for (var i = 1; i < path.length; i++) {
+      var name = path[i];
+      var nspath = path.slice(0, i + 1).join(".");
+      if (!hasOwnProperty.call(rootNs.namespaces_, nspath)) {
+        var namespace = new Namespace(nspath);
+        if (config.implicitExt) {
+          cursor[name] = namespace;
+          if (config.implicitExt == "warn") {
+            cursor[name] = namespace;
+            warnPropertyAccess(cursor, name, namespace, "basis.js: Access to implicit namespace `" + nspath + "`");
+          }
+        }
+        rootNs.namespaces_[nspath] = namespace;
+      }
+      cursor = rootNs.namespaces_[nspath];
+    }
+    namespaces[path.join(".")] = cursor;
+    return cursor;
+  }
+  var requireNamespace = function(path, baseURI) {
+    var extname = pathUtils.extname(path);
+    if (!/[^a-z0-9_\.]/i.test(path) && extname != ".js") {
+      path = resolveNSFilename(path);
+    } else {
+      if (!/[\?#]/.test(path)) {
+        if (!extname) path += ".js";
+        path = resolveResourceFilename(path, baseURI, "basis.require('{url}')");
+      }
+    }
+    return getResource(path).fetch();
+  };
+  requireNamespace.displayName = "basis.require";
+  function patch(filename, patchFn) {
+    if (!/[^a-z0-9_\.]/i.test(filename) && pathUtils.extname(filename) != ".js") {
+      filename = resolveNSFilename(filename);
+    } else {
+      filename = resolveResourceFilename(filename, null, "basis.patch('{url}')");
+    }
+    if (!resourcePatch[filename]) resourcePatch[filename] = [ patchFn ]; else resourcePatch[filename].push(patchFn);
+    var resource = getResource.get(filename);
+    if (resource && resource.isResolved()) {
+      consoleMethods.info("Apply patch for " + resource.url);
+      patchFn(resource.get(), resource.url);
+    }
+  }
+  complete(Function.prototype, {
+    bind: function(thisObject) {
+      var fn = this;
+      var params = arrayFrom(arguments, 1);
+      return params.length ? function() {
+        return fn.apply(thisObject, params.concat.apply(params, arguments));
+      } : function() {
+        return fn.apply(thisObject, arguments);
+      };
+    }
+  });
+  complete(Array, {
+    isArray: function(value) {
+      return toString.call(value) === "[object Array]";
+    }
+  });
+  function arrayFrom(object, offset) {
+    if (object != null) {
+      var len = object.length;
+      if (typeof len == "undefined" || toString.call(object) == "[object Function]") return [ object ];
+      if (!offset) offset = 0;
+      if (len - offset > 0) {
+        for (var result = [], k = 0, i = offset; i < len; ) result[k++] = object[i++];
+        return result;
+      }
+    }
+    return [];
+  }
+  function createArray(length, fillValue, thisObject) {
+    var result = [];
+    var isFunc = typeof fillValue == "function";
+    for (var i = 0; i < length; i++) result[i] = isFunc ? fillValue.call(thisObject, i, result) : fillValue;
+    return result;
+  }
+  complete(Array.prototype, {
+    indexOf: function(searchElement, offset) {
+      offset = parseInt(offset, 10) || 0;
+      if (offset < 0) return -1;
+      for (; offset < this.length; offset++) if (this[offset] === searchElement) return offset;
+      return -1;
+    },
+    lastIndexOf: function(searchElement, offset) {
+      var len = this.length;
+      offset = parseInt(offset, 10);
+      if (isNaN(offset) || offset >= len) offset = len - 1; else offset = (offset + len) % len;
+      for (; offset >= 0; offset--) if (this[offset] === searchElement) return offset;
+      return -1;
+    },
+    forEach: function(callback, thisObject) {
+      for (var i = 0, len = this.length; i < len; i++) if (i in this) callback.call(thisObject, this[i], i, this);
+    },
+    every: function(callback, thisObject) {
+      for (var i = 0, len = this.length; i < len; i++) if (i in this && !callback.call(thisObject, this[i], i, this)) return false;
+      return true;
+    },
+    some: function(callback, thisObject) {
+      for (var i = 0, len = this.length; i < len; i++) if (i in this && callback.call(thisObject, this[i], i, this)) return true;
+      return false;
+    },
+    filter: function(callback, thisObject) {
+      var result = [];
+      for (var i = 0, len = this.length; i < len; i++) if (i in this && callback.call(thisObject, this[i], i, this)) result.push(this[i]);
+      return result;
+    },
+    map: function(callback, thisObject) {
+      var result = [];
+      for (var i = 0, len = this.length; i < len; i++) if (i in this) result[i] = callback.call(thisObject, this[i], i, this);
+      return result;
+    },
+    reduce: function(callback, initialValue) {
+      var len = this.length;
+      var argsLen = arguments.length;
+      if (len == 0 && argsLen == 1) throw new TypeError;
+      var result;
+      var inited = 0;
+      if (argsLen > 1) {
+        result = initialValue;
+        inited = 1;
+      }
+      for (var i = 0; i < len; i++) if (i in this) if (inited++) result = callback.call(null, result, this[i], i, this); else result = this[i];
+      return result;
+    }
+  });
+  var arrayFunctions = {
+    from: arrayFrom,
+    create: createArray,
+    flatten: function(this_) {
+      return this_.concat.apply([], this_);
+    },
+    repeat: function(this_, count) {
+      return arrayFunctions.flatten(createArray(parseInt(count, 10) || 0, this_));
+    },
+    search: function(this_, value, getter_, offset) {
+      this_.lastSearchIndex = -1;
+      getter_ = getter(getter_ || $self);
+      for (var index = parseInt(offset, 10) || 0, len = this_.length; index < len; index++) if (getter_(this_[index]) === value) return this_[this_.lastSearchIndex = index];
+    },
+    lastSearch: function(this_, value, getter_, offset) {
+      this_.lastSearchIndex = -1;
+      getter_ = getter(getter_ || $self);
+      var len = this_.length;
+      var index = isNaN(offset) || offset == null ? len : parseInt(offset, 10);
+      for (var i = index > len ? len : index; i-- > 0; ) if (getter_(this_[i]) === value) return this_[this_.lastSearchIndex = i];
+    },
+    add: function(this_, value) {
+      return this_.indexOf(value) == -1 && !!this_.push(value);
+    },
+    remove: function(this_, value) {
+      var index = this_.indexOf(value);
+      return index != -1 && !!this_.splice(index, 1);
+    },
+    has: function(this_, value) {
+      return this_.indexOf(value) != -1;
+    },
+    sortAsObject: function() {
+      consoleMethods.warn("basis.array.sortAsObject is deprecated, use basis.array.sort instead");
+      return arrayFunctions.sort.apply(this, arguments);
+    },
+    sort: function(this_, getter_, comparator, desc) {
+      getter_ = getter(getter_);
+      desc = desc ? -1 : 1;
+      return this_.map(function(item, index) {
+        return {
+          i: index,
+          v: getter_(item)
+        };
+      }).sort(comparator || function(a, b) {
+        return desc * (a.v > b.v || -(a.v < b.v) || (a.i > b.i ? 1 : -1));
+      }).map(function(item) {
+        return this[item.i];
+      }, this_);
+    }
+  };
+  if (![ 1, 2 ].splice(1).length) {
+    var nativeArraySplice = Array.prototype.splice;
+    Array.prototype.splice = function() {
+      var params = arrayFrom(arguments);
+      if (params.length < 2) params[1] = this.length;
+      return nativeArraySplice.apply(this, params);
+    };
+  }
+  var ESCAPE_FOR_REGEXP = /([\/\\\(\)\[\]\?\{\}\|\*\+\-\.\^\$])/g;
+  var FORMAT_REGEXP = /\{([a-z\d_]+)(?::([\.0])(\d+)|:(\?))?\}/gi;
+  var stringFormatCache = {};
+  complete(String, {
+    toLowerCase: function(value) {
+      return String(value).toLowerCase();
+    },
+    toUpperCase: function(value) {
+      return String(value).toUpperCase();
+    },
+    trim: function(value) {
+      return String(value).trim();
+    },
+    trimLeft: function(value) {
+      return String(value).trimLeft();
+    },
+    trimRight: function(value) {
+      return String(value).trimRight();
+    }
+  });
+  complete(String.prototype, {
+    trimLeft: function() {
+      return this.replace(/^\s+/, "");
+    },
+    trimRight: function() {
+      return this.replace(/\s+$/, "");
+    },
+    trim: function() {
+      return this.trimLeft().trimRight();
+    }
+  });
+  var stringFunctions = {
+    toObject: function(this_, rethrow) {
+      try {
+        return (new Function("return 0," + this_))();
+      } catch (e) {
+        if (rethrow) throw e;
+      }
+    },
+    repeat: function(this_, count) {
+      return (new Array(parseInt(count, 10) + 1 || 0)).join(this_);
+    },
+    qw: function(this_) {
+      var trimmed = this_.trim();
+      return trimmed ? trimmed.split(/\s+/) : [];
+    },
+    forRegExp: function(this_) {
+      return this_.replace(ESCAPE_FOR_REGEXP, "\\$1");
+    },
+    format: function(this_, first) {
+      var data = arrayFrom(arguments, 1);
+      if (typeof first == "object") extend(data, first);
+      return this_.replace(FORMAT_REGEXP, function(m, key, numFormat, num, noNull) {
+        var value = key in data ? data[key] : noNull ? "" : m;
+        if (numFormat && !isNaN(value)) {
+          value = Number(value);
+          return numFormat == "." ? value.toFixed(num) : numberFunctions.lead(value, num);
+        }
+        return value;
+      });
+    },
+    formatter: function(formatString) {
+      formatString = String(formatString);
+      if (hasOwnProperty.call(stringFormatCache, formatString)) return stringFormatCache[formatString];
+      var formatter = function(value) {
+        return stringFunctions.format(formatString, value);
+      };
+      var escapsedFormatString = '"' + formatString.replace(/"/g, '\\"') + '"';
+      formatter = (new Function("stringFunctions", "return " + formatter.toString().replace("formatString", escapsedFormatString)))(stringFunctions);
+      formatter.toString = function() {
+        return "basis.string.formatter(" + escapsedFormatString + ")";
+      };
+      stringFormatCache[formatString] = formatter;
+      return formatter;
+    },
+    capitalize: function(this_) {
+      return this_.charAt(0).toUpperCase() + this_.substr(1).toLowerCase();
+    },
+    camelize: function(this_) {
+      return this_.replace(/-(.)/g, function(m, chr) {
+        return chr.toUpperCase();
+      });
+    },
+    dasherize: function(this_) {
+      return this_.replace(/[A-Z]/g, function(m) {
+        return "-" + m.toLowerCase();
+      });
+    },
+    isEmpty: function(value) {
+      return value == null || String(value) == "";
+    },
+    isNotEmpty: function(value) {
+      return value != null && String(value) != "";
+    }
+  };
+  if ("|||".split(/\|/).length + "|||".split(/(\|)/).length != 11) {
+    var nativeStringSplit = String.prototype.split;
+    String.prototype.split = function(pattern, count) {
+      if (!pattern || pattern instanceof RegExp == false || pattern.source == "") return nativeStringSplit.call(this, pattern, count);
+      var result = [];
+      var pos = 0;
+      var match;
+      if (!pattern.global) pattern = new RegExp(pattern.source, /\/([mi]*)$/.exec(pattern)[1] + "g");
+      while (match = pattern.exec(this)) {
+        match[0] = this.substring(pos, match.index);
+        result.push.apply(result, match);
+        pos = pattern.lastIndex;
+      }
+      result.push(this.substr(pos));
+      return result;
+    };
+  }
+  if ("12".substr(-1) != "2") {
+    var nativeStringSubstr = String.prototype.substr;
+    String.prototype.substr = function(start, end) {
+      return nativeStringSubstr.call(this, start < 0 ? Math.max(0, this.length + start) : start, end);
+    };
+  }
+  var numberFunctions = {
+    fit: function(this_, min, max) {
+      if (!isNaN(min) && this_ < min) return Number(min);
+      if (!isNaN(max) && this_ > max) return Number(max);
+      return this_;
+    },
+    lead: function(this_, len, leadChar) {
+      return String(this_).replace(/\d+/, function(number) {
+        return (len -= number.length - 1) > 1 ? (new Array(len)).join(leadChar || 0) + number : number;
+      });
+    },
+    group: function(this_, len, splitter) {
+      return String(this_).replace(/\d+/, function(number) {
+        return number.replace(/\d/g, function(m, pos) {
+          return !pos + (number.length - pos) % (len || 3) ? m : (splitter || " ") + m;
+        });
+      });
+    },
+    format: function(this_, prec, gs, prefix, postfix, comma) {
+      var res = this_.toFixed(prec);
+      if (gs || comma) res = res.replace(/(\d+)(\.?)/, function(m, number, c) {
+        return (gs ? basis.number.group(Number(number), 3, gs) : number) + (c ? comma || c : "");
+      });
+      if (prefix) res = res.replace(/^-?/, "$&" + (prefix || ""));
+      return res + (postfix || "");
+    }
+  };
+  complete(Date, {
+    now: function() {
+      return Number(new Date);
+    }
+  });
+  var ready = function() {
+    var eventFired = !document || document.readyState == "complete";
+    var readyHandlers = [];
+    var timer;
+    function processReadyHandler() {
+      var handler;
+      if (timer) timer = clearImmediate(timer);
+      if (readyHandlers.length > 1) timer = setImmediate(processReadyHandler);
+      while (handler = readyHandlers.shift()) handler[0].call(handler[1]);
+      timer = clearImmediate(timer);
+      asap.process();
+    }
+    function fireHandlers() {
+      if (!(eventFired++)) processReadyHandler();
+    }
+    function doScrollCheck() {
+      try {
+        document.documentElement.doScroll("left");
+        fireHandlers();
+      } catch (e) {
+        setTimeout(doScrollCheck, 1);
+      }
+    }
+    if (!eventFired) {
+      if (document.addEventListener) {
+        document.addEventListener("DOMContentLoaded", fireHandlers, false);
+        global.addEventListener("load", fireHandlers, false);
+      } else {
+        document.attachEvent("onreadystatechange", fireHandlers);
+        global.attachEvent("onload", fireHandlers);
+        try {
+          if (!global.frameElement && document.documentElement.doScroll) doScrollCheck();
+        } catch (e) {}
+      }
+    }
+    return function(callback, context) {
+      if (!readyHandlers.length && eventFired && !timer) timer = setImmediate(processReadyHandler);
+      readyHandlers.push([ callback, context ]);
+    };
+  }();
+  var teardown = function() {
+    if ("addEventListener" in global) return function(callback, context) {
+      global.addEventListener("unload", function(event) {
+        callback.call(context || null, event || global.event);
+      }, false);
+    };
+    if ("attachEvent" in global) return function(callback, context) {
+      global.attachEvent("onunload", function(event) {
+        callback.call(context || null, event || global.event);
+      });
+    };
+    return $undef;
+  }();
+  var documentInterface = function() {
+    var timer;
+    var reference = {};
+    var callbacks = {
+      head: [],
+      body: []
+    };
+    function getParent(name) {
+      if (document && !reference[name]) {
+        reference[name] = document[name] || document.getElementsByTagName(name)[0];
+        if (reference[name]) {
+          var items = callbacks[name];
+          delete callbacks[name];
+          for (var i = 0, cb; cb = items[i]; i++) cb[0].call(cb[1], reference[name]);
+        }
+      }
+      return reference[name];
+    }
+    function add() {
+      var name = this[0];
+      var node = this[1];
+      var ref = this[2];
+      remove(node);
+      var parent = getParent(name);
+      if (parent) {
+        if (ref === true) ref = parent.firstChild;
+        if (!ref || ref.parentNode !== parent) ref = null;
+        parent.insertBefore(node, ref);
+      } else callbacks[name].push([ add, [ name, node, ref ] ]);
+    }
+    function docReady(name, fn, context) {
+      if (callbacks[name]) callbacks[name].push([ fn, context ]); else fn.call(context, reference[name]);
+    }
+    function remove(node) {
+      for (var key in callbacks) {
+        var entry = arrayFunctions.search(callbacks[key], node, function(item) {
+          return item[1] && item[1][1];
+        });
+        if (entry) arrayFunctions.remove(callbacks[key], entry);
+      }
+      if (node && node.parentNode && node.parentNode.nodeType == 1) node.parentNode.removeChild(node);
+    }
+    function checkParents() {
+      if (timer && getParent("head") && getParent("body")) timer = clearInterval(timer);
+    }
+    if (document && (!getParent("head") || !getParent("body"))) {
+      timer = setInterval(checkParents, 5);
+      ready(checkParents);
+    }
+    return {
+      head: {
+        ready: function(fn, context) {
+          docReady("head", fn, context);
+        },
+        add: function(node, ref) {
+          add.call([ "head", node, ref ]);
+        }
+      },
+      body: {
+        ready: function(fn, context) {
+          docReady("body", fn, context);
+        },
+        add: function(node, ref) {
+          add.call([ "body", node, ref ]);
+        }
+      },
+      remove: remove
+    };
+  }();
+  var cleaner = function() {
+    var objects = [];
+    function destroy() {
+      var logDestroy = arguments[0] === true;
+      result.globalDestroy = true;
+      result.add = $undef;
+      result.remove = $undef;
+      var object;
+      while (object = objects.pop()) {
+        if (typeof object.destroy == "function") {
+          try {
+            if (logDestroy) consoleMethods.log("destroy", "[" + String(object.className) + "]", object);
+            object.destroy();
+          } catch (e) {
+            consoleMethods.warn(String(object), e);
+          }
+        } else {
+          for (var prop in object) object[prop] = null;
+        }
+      }
+      objects = [];
+    }
+    if (teardown === $undef) return {
+      add: $undef,
+      remove: $undef
+    };
+    teardown(destroy);
+    var result = {
+      add: function(object) {
+        if (object != null) objects.push(object);
+      },
+      remove: function(object) {
+        arrayFunctions.remove(objects, object);
+      }
+    };
+    result.destroy_ = destroy;
+    result.objects_ = objects;
+    return result;
+  }();
+  var CssResource = function() {
+    var STYLE_APPEND_BUGGY = function() {
+      try {
+        return !document.createElement("style").appendChild(document.createTextNode(""));
+      } catch (e) {
+        return true;
+      }
+    }();
+    var baseEl = document && document.createElement("base");
+    function setBase(baseURI) {
+      baseEl.setAttribute("href", baseURI);
+      documentInterface.head.add(baseEl, true);
+    }
+    function restoreBase() {
+      baseEl.setAttribute("href", location.href);
+      documentInterface.remove(baseEl);
+    }
+    function injectStyleToHead() {
+      setBase(this.baseURI);
+      if (!this.element) {
+        this.element = document.createElement("style");
+        if (!STYLE_APPEND_BUGGY) this.element.appendChild(document.createTextNode(""));
+        this.element.setAttribute("src", this.url);
+      }
+      documentInterface.head.add(this.element);
+      this.syncCssText();
+      restoreBase();
+    }
+    return Class(null, {
+      className: "basis.CssResource",
+      inUse: 0,
+      url: "",
+      baseURI: "",
+      cssText: undefined,
+      element: null,
+      init: function(url) {
+        this.url = url;
+        this.baseURI = pathUtils.dirname(url) + "/";
+      },
+      updateCssText: function(cssText) {
+        if (this.cssText != cssText) {
+          this.cssText = cssText;
+          if (this.inUse && this.element) {
+            setBase(this.baseURI);
+            this.syncCssText();
+            restoreBase();
+          }
+        }
+      },
+      syncCssText: STYLE_APPEND_BUGGY ? function() {
+        this.element.styleSheet.cssText = this.cssText;
+      } : function() {
+        var cssText = this.cssText;
+        cssText += "\n/*# sourceURL=" + pathUtils.origin + this.url + " */";
+        this.element.firstChild.nodeValue = cssText;
+      },
+      startUse: function() {
+        if (!this.inUse) documentInterface.head.ready(injectStyleToHead, this);
+        this.inUse += 1;
+      },
+      stopUse: function() {
+        if (this.inUse) {
+          this.inUse -= 1;
+          if (!this.inUse && this.element) documentInterface.remove(this.element);
+        }
+      },
+      destroy: function() {
+        if (this.element) documentInterface.remove(this.element);
+        this.element = null;
+        this.cssText = null;
+      }
+    });
+  }();
+  var SvgResource = function() {
+    var baseEl = document && document.createElement("base");
+    function setBase(baseURI) {
+      baseEl.setAttribute("href", baseURI);
+      documentInterface.head.add(baseEl, true);
+    }
+    function restoreBase() {
+      baseEl.setAttribute("href", location.href);
+      documentInterface.remove(baseEl);
+    }
+    function injectSvg() {
+      setBase(this.baseURI);
+      if (!this.element) {
+        this.element = document.createElement("span");
+        this.element.style.cssText = "display:none";
+        this.element.setAttribute("src", this.url);
+      }
+      documentInterface.body.add(this.element);
+      this.syncSvgText();
+      restoreBase();
+    }
+    return Class(null, {
+      className: "basis.SvgResource",
+      inUse: 0,
+      url: "",
+      baseURI: "",
+      svgText: undefined,
+      element: null,
+      init: function(url) {
+        this.url = url;
+        this.baseURI = pathUtils.dirname(url) + "/";
+      },
+      toString: function() {
+        return this.svgText;
+      },
+      updateSvgText: function(svgText) {
+        if (this.svgText != svgText) {
+          this.svgText = svgText;
+          if (this.inUse && this.element) {
+            setBase(this.baseURI);
+            this.syncSvgText();
+            restoreBase();
+          }
+        }
+      },
+      syncSvgText: function() {
+        this.element.innerHTML = this.svgText;
+      },
+      startUse: function() {
+        if (!this.inUse) documentInterface.body.ready(injectSvg, this);
+        this.inUse += 1;
+      },
+      stopUse: function() {
+        if (this.inUse) {
+          this.inUse -= 1;
+          if (!this.inUse && this.element) documentInterface.remove(this.element);
+        }
+      },
+      destroy: function() {
+        if (this.element) documentInterface.remove(this.element);
+        this.element = null;
+        this.svgText = null;
+      }
+    });
+  }();
+  var devInfoResolver = function() {
+    var getExternalInfo = $undef;
+    var fixSourceOffset = $self;
+    var set = function() {};
+    var patch = function(target, key, patch) {
+      var oldInfo = get(target, key);
+      if (oldInfo) extend(oldInfo, patch); else set(target, key, patch);
+    };
+    var get = function(target, key) {
+      var externalInfo = getExternalInfo(target);
+      var ownInfo = map.get(target);
+      if (externalInfo || ownInfo) {
+        var info = merge(externalInfo, ownInfo);
+        return key ? info[key] : info;
+      }
+    };
+    var patchFactory = function(factory) {
+      return function locationAnchor(target) {
+        var value = factory(target);
+        if (value) set(value, "loc", get(locationAnchor, "loc"));
+        return value;
+      };
+    };
+    try {
+      (new WeakMap).get(1);
+    } catch (e) {
+      get = function() {};
+    }
+    var map = typeof WeakMap == "function" ? new WeakMap : false;
+    if (map) set = function(target, key, value) {
+      if (!target || typeof target != "object" && typeof target != "function") {
+        consoleMethods.warn("Set dev info for non-object or non-function was ignored");
+        return;
+      }
+      var info = map.get(target);
+      if (!info) map.set(target, info = {});
+      info[key] = value;
+    };
+    var resolver = config.devInfoResolver || global.$devinfo || {};
+    if (typeof resolver.fixSourceOffset == "function") fixSourceOffset = resolver.fixSourceOffset;
+    if (typeof resolver.get == "function") getExternalInfo = resolver.get;
+    return {
+      fixSourceOffset: fixSourceOffset,
+      setInfo: set,
+      patchInfo: patch,
+      patchFactory: patchFactory,
+      getInfo: get
+    };
+  }();
+  var attachFileSyncRetry = 50;
+  ready(function attachFileSync() {
+    var basisjsTools = global.basisjsToolsFileSync;
+    if (!basisjsTools) {
+      if (attachFileSyncRetry < 500) setTimeout(attachFileSync, attachFileSyncRetry);
+      attachFileSyncRetry += 100;
+      return;
+    }
+    basisjsTools.notifications.attach(function(action, filename, content) {
+      if (action == "update") {
+        if (filename in resources) resources[filename].update(content);
+        if (filename in resourceContentCache) resourceContentCache[filename] = content;
+      }
+    });
+  });
+  var basis = getNamespace("basis").extend({
+    filename_: basisFilename,
+    processConfig: processConfig,
+    selfFileSync: true,
+    version: VERSION,
+    NODE_ENV: NODE_ENV,
+    config: config,
+    createSandbox: function(config) {
+      return createBasisInstance(global, basisFilename, complete({
+        noConflict: true,
+        devpanel: false
+      }, config));
+    },
+    dev: consoleMethods = (new Namespace("basis.dev")).extend(consoleMethods).extend(devInfoResolver).extend({
+      warnPropertyAccess: warnPropertyAccess
+    }),
+    resolveNSFilename: resolveNSFilename,
+    patch: patch,
+    namespace: getNamespace,
+    require: requireNamespace,
+    resource: getResource,
+    asset: function(path) {
+      return resolveResourceFilename(path, null, "basis.asset('{url}')");
+    },
+    setImmediate: setImmediate,
+    clearImmediate: clearImmediate,
+    nextTick: function() {
+      setImmediate.apply(null, arguments);
+    },
+    asap: asap,
+    FACTORY: FACTORY,
+    PROXY: PROXY,
+    Class: Class,
+    Token: Token,
+    DeferredToken: DeferredToken,
+    codeFrame: codeFrame,
+    ready: ready,
+    teardown: teardown,
+    cleaner: cleaner,
+    genUID: genUID,
+    getter: getter,
+    console: consoleMethods,
+    path: pathUtils,
+    doc: documentInterface,
+    object: {
+      extend: extend,
+      complete: complete,
+      keys: keys,
+      values: values,
+      slice: slice,
+      splice: splice,
+      merge: merge,
+      iterate: iterate
+    },
+    fn: {
+      $undefined: $undefined,
+      $defined: $defined,
+      $isNull: $isNull,
+      $isNotNull: $isNotNull,
+      $isSame: $isSame,
+      $isNotSame: $isNotSame,
+      $self: $self,
+      $const: $const,
+      $false: $false,
+      $true: $true,
+      $null: $null,
+      $undef: $undef,
+      getter: getter,
+      nullGetter: nullGetter,
+      wrapper: wrapper,
+      factory: factory,
+      isFactory: isFactory,
+      lazyInit: lazyInit,
+      lazyInitAndRun: lazyInitAndRun,
+      runOnce: runOnce,
+      publicCallback: publicCallback
+    },
+    array: extend(arrayFrom, arrayFunctions),
+    string: stringFunctions,
+    number: numberFunctions,
+    bool: {
+      invert: function(value) {
+        return !value;
+      }
+    },
+    json: {
+      parse: typeof JSON != "undefined" ? JSON.parse : function(str) {
+        return stringFunctions.toObject(str, true);
+      }
+    }
+  });
+  if (!NODE_ENV) {
+    if (config.autoload) config.autoload.forEach(function(name) {
+      requireNamespace(name);
+    });
+    if ("devpanel" in config == false || config.devpanel) basis.require("./0.js");
+  }
+  if (NODE_ENV && exports) exports.basis = basis;
+  basis.require("./0.css").startUse();
+  return basis;
+})(this);
+}).call(this);

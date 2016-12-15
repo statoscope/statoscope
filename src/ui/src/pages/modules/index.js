@@ -1,15 +1,10 @@
-var Node = require('basis.ui').Node;
+var Page = require('app.ui').Page;
+var ModulesTable = require('./modules/modulesTable/index');
+var type = require('app.type');
 
-module.exports = new Node({
-    active: basis.PROXY,
-    template: resource('./template/page.tmpl'),
+module.exports = new Page({
+    delegate: type.Source,
     satellite: {
-        content: {
-            instance: require('../../modules/modules/index'),
-            delegate: 'delegate'
-        }
-    },
-    binding: {
-        content: 'satellite:'
+        content: ModulesTable
     }
 });

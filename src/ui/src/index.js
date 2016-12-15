@@ -1,6 +1,5 @@
 var Value = require('basis.data').Value;
 var Node = require('basis.ui').Node;
-var type = require('app.type');
 
 var routes = {
     home: resource('./pages/home/index.js'),
@@ -22,16 +21,12 @@ module.exports = require('basis.app').create({
             active: true,
             template: resource('./template/layout.tmpl'),
             satellite: {
-                menu: resource('./modules/menu/index.js'),
-                progress: {
-                    instance: resource('./modules/progress/index.js'),
-                    delegate: type.Source
-                },
+                menu: resource('./ui/menu/index.js'),
+                progress: resource('./ui/progress/index.js'),
                 page: {
                     instance: Value.query('satellite.menu.selection.pick()').as(function(node) {
                         return node && routes[node.id] || routes.home;
-                    }),
-                    delegate: type.Source
+                    })
                 }
             },
             binding: {
