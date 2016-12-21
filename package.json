@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/smelukov/rempl-webpack-analyzer#readme",
   "dependencies": {
-    "rempl": "^1.0.0-alpha3",
+    "rempl": "1.0.0-alpha4",
     "webpack": "^1.14.0"
   },
   "devDependencies": {

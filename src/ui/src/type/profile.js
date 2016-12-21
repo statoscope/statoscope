@@ -8,6 +8,7 @@ var Profile = entity.createType({
     fields: {
         version: String,
         hash: String,
+        context: String,
         chunks: Array,
         assets: entity.createSetType(Asset),
         modules: entity.createSetType(Module),

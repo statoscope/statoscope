@@ -16,6 +16,7 @@
         "eslint:recommended"
     ],
     "rules": {
+        "no-cond-assign": "off",
         "no-duplicate-case": "error",
         "no-undef": "error",
         "no-unused-vars": [

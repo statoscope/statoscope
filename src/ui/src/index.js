@@ -4,18 +4,24 @@ var Node = require('basis.ui').Node;
 var routes = {
     home: resource('./pages/home/index.js'),
     assets: resource('./pages/assets/index.js'),
-    modules: resource('./pages/modules/index.js')
+    modules: resource('./pages/modules/index.js'),
+    fileMap: resource('./pages/fileMap/index.js')
 };
 
 module.exports = require('basis.app').create({
     title: '[RemPl] webpack analyzer',
     init: function() {
         var bootsrapCss = document.createElement('link');
+        var webtreeCss = document.createElement('link');
 
         bootsrapCss.setAttribute('rel', 'stylesheet');
         bootsrapCss.setAttribute('href', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
 
+        webtreeCss.setAttribute('rel', 'stylesheet');
+        webtreeCss.setAttribute('href', 'https://cdn.rawgit.com/danvk/source-map-explorer/master/vendor/webtreemap.css');
+
         document.head.appendChild(bootsrapCss);
+        document.head.appendChild(webtreeCss);
 
         return new Node({
             active: true,

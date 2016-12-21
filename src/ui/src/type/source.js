@@ -1,6 +1,5 @@
 var Promise = require('basis.promise');
 var entity = require('basis.entity');
-var transport = require('app.transport');
 var Profile = require('./profile');
 
 var Source = entity.createType({
@@ -16,27 +15,30 @@ var Source = entity.createType({
 
 var source = Source({});
 
-source.setSyncAction(function() {
-    return new Promise(function(resolve) {
-        transport.invoke('getLast', function() {
-            resolve();
+rempl.getSubscriber(function(api) {
+    source.setSyncAction(function() {
+        return new Promise(function(resolve) {
+            api.invoke('getLast', function(data) {
+                source.update(data);
+                resolve();
+            });
         });
     });
-});
 
-transport.ns('progress').subscribe(function(data) {
-    /** @cut */ basis.dev.log(data);
-    source.update({ progress: data });
-});
+    api.ns('progress').subscribe(function(data) {
+        /** @cut */ basis.dev.log(data);
+        source.update({ progress: data });
+    });
 
-transport.ns('profile').subscribe(function(data) {
-    /** @cut */ basis.dev.log(data);
-    source.update({ profile: data });
-});
+    api.ns('profile').subscribe(function(data) {
+        /** @cut */ basis.dev.log(data);
+        source.update({ profile: data });
+    });
 
-transport.ns('status').subscribe(function(data) {
-    /** @cut */ basis.dev.log(data);
-    source.update({ status: data });
+    api.ns('status').subscribe(function(data) {
+        /** @cut */ basis.dev.log(data);
+        source.update({ status: data });
+    });
 });
 
 module.exports = source;

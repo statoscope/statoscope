@@ -2,32 +2,7 @@ var Node = require('basis.ui').Node;
 var Value = require('basis.data').Value;
 var events = require('basis.event');
 var resolveValue = require('basis.data').resolveValue;
-
-function getSize(bytes) {
-    var kBytes = bytes / 1024;
-    var mBytes = bytes / 1024 / 1024;
-
-    if (mBytes >= 1) {
-        return mBytes;
-    } else if (kBytes >= 1) {
-        return kBytes;
-    }
-
-    return bytes;
-}
-
-function getPostfix(bytes) {
-    var kBytes = bytes / 1024;
-    var mBytes = bytes / 1024 / 1024;
-
-    if (mBytes >= 1) {
-        return 'MB';
-    } else if (kBytes >= 1) {
-        return 'KB';
-    }
-
-    return 'B';
-}
+var utils = require('app.utils');
 
 module.exports = Node.subclass({
     template: resource('./template/cell.tmpl'),
@@ -48,10 +23,14 @@ module.exports = Node.subclass({
     binding: {
         size: Value.query('size').as(function(size) {
             if (!isNaN(size)) {
-                return basis.number.format(getSize(size || 0), 2);
+                if (utils.getPostfix(size) == 'B') {
+                    return size;
+                }
+
+                return utils.getSize(size).toFixed(2);
             }
         }),
-        postfix: Value.query('size').as(getPostfix)
+        postfix: Value.query('size').as(utils.getPostfix)
     },
     init: function() {
         Node.prototype.init.call(this);

@@ -3,7 +3,8 @@
     "items": {
       "home": "Home",
       "assets": "Assets",
-      "modules": "Modules"
+      "modules": "Modules",
+      "fileMap": "File Map"
     }
   }
 }

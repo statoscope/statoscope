@@ -61,11 +61,17 @@ function RemplPlugin(options) {
     }, options.url);
 
     this.transport.define({
+        init: function() {
+            // ???
+        },
         getLast: function(cb) {
-            this.transport.ns('status').publish(this.lastStatus);
-            this.transport.ns('progress').publish(this.lastProgress);
-            this.transport.ns('profile').publish(this.lastProfile);
-            cb();
+            // console.log('get last');
+
+            cb({
+                status: this.lastStatus,
+                progress: this.lastProgress,
+                profile: this.lastProfile
+            });
         }.bind(this)
     });
 }
@@ -80,10 +86,39 @@ RemplPlugin.prototype.apply = function(compiler) {
 
     compiler.plugin('emit', function(compilation, done) {
         var stats = compilation.getStats();
+        var buildFiles = {};
 
         this.lastProfile = stats.toJson();
         this.lastProfile.hasErrors = stats.hasErrors();
         this.lastProfile.hasWarnings = stats.hasWarnings();
+        this.lastProfile.context = compiler.context;
+
+        compilation.chunks.forEach(function(chunk) {
+            chunk.modules.forEach(function(module) {
+                var loaders = module.loaders || [];
+                var fileDependencies = module.fileDependencies || [];
+                var origin = [];
+
+                if (module.resource) {
+                    origin.push(module.resource);
+                }
+
+                origin.concat(loaders, fileDependencies).map(function(filePath) {
+                    return filePath.replace(/([^?]+).*!/, '$1');
+                }).filter(function(filePath) {
+                    return fs.existsSync(filePath) && fs.statSync(filePath).isFile();
+                }).reduce(function(prev, current) {
+                    if (!prev[current]) {
+                        prev[current] = fs.statSync(current).size;
+                    }
+
+                    return prev;
+                }, buildFiles);
+
+                this.lastProfile.modules[module.index].files = buildFiles;
+            }, this);
+        }, this);
+
         this.transport.ns('profile').publish(this.lastProfile);
         done();
     }.bind(this));

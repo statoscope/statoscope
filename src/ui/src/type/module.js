@@ -5,7 +5,8 @@ var Module = entity.createType({
     fields: {
         id: String,
         name: String,
-        size: Number
+        size: Number,
+        files: Object
     }
 });
 

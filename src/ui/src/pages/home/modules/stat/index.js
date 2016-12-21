@@ -13,7 +13,7 @@ module.exports = new Node({
             return hash || 'n/a';
         }),
         assets: Value.query('data.profile.data.assets.itemCount').as(Number),
-        modules: Value.query('data.profile.data.modules').as(Number),
+        modules: Value.query('data.profile.data.modules.itemCount').as(Number),
         chunks: Value.query('data.profile.data.chunks').as(basis.getter('length').as(Number)),
         errors: Value.query('data.profile.data.errors').as(basis.getter('length').as(Number)),
         warnings: Value.query('data.profile.data.warnings').as(basis.getter('length').as(Number)),
