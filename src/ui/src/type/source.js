@@ -1,4 +1,3 @@
-var Promise = require('basis.promise');
 var entity = require('basis.entity');
 var Profile = require('./profile');
 
@@ -16,27 +15,18 @@ var Source = entity.createType({
 var source = Source({});
 
 rempl.getSubscriber(function(api) {
-    source.setSyncAction(function() {
-        return new Promise(function(resolve) {
-            api.invoke('getLast', function(data) {
-                source.update(data);
-                resolve();
-            });
-        });
-    });
-
     api.ns('progress').subscribe(function(data) {
-        /** @cut */ basis.dev.log(data);
+        /** @cut */ basis.dev.log('channel(progress)', data);
         source.update({ progress: data });
     });
 
     api.ns('profile').subscribe(function(data) {
-        /** @cut */ basis.dev.log(data);
-        source.update({ profile: data });
+        /** @cut */ basis.dev.log('channel(profile)', data);
+        source.update({ profile: Profile.reader(data) });
     });
 
     api.ns('status').subscribe(function(data) {
-        /** @cut */ basis.dev.log(data);
+        /** @cut */ basis.dev.log('channel(status)', data);
         source.update({ status: data });
     });
 });
