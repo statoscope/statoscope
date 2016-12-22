@@ -2,7 +2,7 @@
 
 # rempl-webpack-analyzer
 
-Webpack plugin and UI for analyzing webpack building process through [rempl](https://github.com/rempl/rempl)
+[Webpack](https://github.com/webpack/webpack) plugin for analyzing internal processes, state and structure of bundles. Built on [rempl](https://github.com/rempl/rempl)
 
 ![Rempl Webpack Analyzer](https://cloud.githubusercontent.com/assets/6654581/21410682/a691eaca-c7f3-11e6-84c1-cbc43fd40dd2.png)
 
@@ -15,6 +15,7 @@ npm install rempl-webpack-analyzer --save-dev
 ## Usage
 
 Add plugin to your webpack config:
+
 ```js
 var RemplPlugin = require('rempl-webpack-analyzer');
 
@@ -31,7 +32,7 @@ rempl
 
 > Also, you can use the [GUI](https://github.com/rempl/menubar-server) to control rempl server.
 
-You can use the [example](example) to see how it works:
+Try the [example](example) to see how it works:
 
 ```bash
 cd example
@@ -56,13 +57,17 @@ new RemplPlugin({
 });
 ```
 
-> if ui.url and ui.script is specified then ui.url will used
+> In case `ui.url` and `ui.script` are specified then `ui.url` will be used.
 
 ## UI customization
 
-The UI was made with [basis.js framework](http://basisjs.com/)
+The UI built [basis.js framework](http://basisjs.com/)
 
 * Make changes in [src/ui](src/ui)
 * Run `npm run build` to build the UI bundle
 
 > In the future you will may host and customize the UI at web server without building a bundle, but rempl does not support this feature at this moment
+
+## License
+
+MIT
