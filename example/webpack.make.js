@@ -6,7 +6,7 @@ var webpack = require('webpack');
 var autoprefixer = require('autoprefixer-core');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var RuntimeAnalyzerPlugin = require('../src/plugin');
+var RuntimeAnalyzerPlugin = require('webpack-runtime-analyzer');
 
 module.exports = function makeWebpackConfig (options) {
   /**
