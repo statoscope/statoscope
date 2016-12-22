@@ -2,7 +2,7 @@
 
 # webpack-runtime-analyzer
 
-[Webpack](https://github.com/webpack/webpack) plugin for analyzing internal processes, state and structure of bundles. Built on [rempl](https://github.com/rempl/rempl)
+[Webpack](https://github.com/webpack/webpack) plugin for analyzing internal processes, state and structure of bundles. Built on [rempl](https://github.com/rempl/rempl).
 
 ![Webpack Runtime Analyzer](https://cloud.githubusercontent.com/assets/6654581/21431477/79ac5150-c878-11e6-8f35-b29e2f1845a7.png)
 
@@ -61,12 +61,12 @@ new RuntimeAnalyzerPlugin({
 
 ## UI customization
 
-The UI built [basis.js framework](http://basisjs.com/)
+The UI built on [basis.js framework](http://basisjs.com/).
 
 * Make changes in [src/ui](src/ui)
 * Run `npm run build` to build the UI bundle
 
-> In the future you will may host and customize the UI at web server without building a bundle, but rempl does not support this feature at this moment
+> In the future you will may host and customize the UI at web server without building a bundle, but rempl does not support this feature at this moment.
 
 ## License
 
