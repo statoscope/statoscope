@@ -1,5 +1,5 @@
 {
-  "name": "rempl-webpack-analyzer",
+  "name": "webpack-runtime-analyzer",
   "version": "0.1.7",
   "description": "Webpack plugin and UI for analyzing webpack building process through rempl",
   "scripts": {
@@ -12,16 +12,24 @@
   "main": "./src/plugin/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/smelukov/rempl-webpack-analyzer.git"
+    "url": "git+https://github.com/smelukov/webpack-runtime-analyzer.git"
   },
   "contributors": [
     "Sergey Melyukov <s.melukov@gmail.com>"
   ],
+  "keywords": [
+    "webpack",
+    "runtime",
+    "building",
+    "rempl",
+    "remote",
+    "devtool"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/smelukov/rempl-webpack-analyzer/issues"
+    "url": "https://github.com/smelukov/webpack-runtime-analyzer/issues"
   },
-  "homepage": "https://github.com/smelukov/rempl-webpack-analyzer#readme",
+  "homepage": "https://github.com/smelukov/webpack-runtime-analyzer#readme",
   "dependencies": {
     "rempl": "1.0.0-alpha5",
     "webpack": "^1.14.0"

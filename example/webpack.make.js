@@ -6,7 +6,7 @@ var webpack = require('webpack');
 var autoprefixer = require('autoprefixer-core');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var RemplPlugin = require('../src/plugin');
+var RuntimeAnalyzerPlugin = require('../src/plugin');
 
 module.exports = function makeWebpackConfig (options) {
   /**
@@ -180,7 +180,7 @@ module.exports = function makeWebpackConfig (options) {
     })
   ];
 
-  config.plugins.push(new RemplPlugin());
+  config.plugins.push(new RuntimeAnalyzerPlugin());
 
   // Skip rendering index.html in test mode
   if (!TEST) {

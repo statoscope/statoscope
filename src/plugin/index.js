@@ -31,7 +31,7 @@ function deepExtend(target) {
     return target;
 }
 
-function RemplPlugin(options) {
+function RuntimeAnalyzerPlugin(options) {
     var defaultOptions = {
         ui: {
             script: path.resolve(__dirname, '../../dist/script.js')
@@ -49,7 +49,7 @@ function RemplPlugin(options) {
     });
 }
 
-RemplPlugin.prototype.apply = function(compiler) {
+RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
     compiler.apply(new webpack.ProgressPlugin(function(percent) {
         this.transport.ns('status').publish('compiling');
         this.transport.ns('progress').publish(percent);
@@ -117,4 +117,4 @@ RemplPlugin.prototype.apply = function(compiler) {
     }.bind(this));
 };
 
-module.exports = RemplPlugin;
+module.exports = RuntimeAnalyzerPlugin;

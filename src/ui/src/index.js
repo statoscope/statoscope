@@ -11,7 +11,7 @@ var routes = {
 };
 
 module.exports = require('basis.app').create({
-    title: '[RemPl] webpack analyzer',
+    title: 'Webpack Runtime Analyzer',
     init: function() {
         var bootsrapCss = document.createElement('link');
         var webtreeCss = document.createElement('link');
