@@ -1,7 +1,7 @@
 {
   "name": "webpack-runtime-analyzer",
-  "version": "1.0.0-alpha1",
-  "description": "Webpack plugin and UI for analyzing webpack building process through rempl",
+  "version": "1.0.0-alpha2",
+  "description": "Webpack plugin for analyzing internal processes, state and structure of bundles",
   "scripts": {
     "prepublish": "npm run codestyle && npm run build",
     "codestyle": "jscs src && eslint -c ./.eslintrc src",
