@@ -4,7 +4,7 @@
 
 Webpack plugin and UI for analyzing webpack building process through [rempl](https://github.com/rempl/rempl)
 
-![Rempl Webpack Analyzer](https://cloud.githubusercontent.com/assets/6654581/21083103/f22cd33e-bff9-11e6-8f8e-103ff1248656.png)
+![Rempl Webpack Analyzer](https://cloud.githubusercontent.com/assets/6654581/21410682/a691eaca-c7f3-11e6-84c1-cbc43fd40dd2.png)
 
 ## Install
 
@@ -49,7 +49,6 @@ If you don't want to use default plugin config, then you can specify your own co
 
 ```js
 new RemplPlugin({
-    url: 'http://localhost:8177', // rempl server URL
     ui: {
         script: fs.readFileSync('/path/to/ui/bundle.js', 'utf-8'), // packed UI bundle (js + html + css + etc...)
         url: 'http://localhost:8080' // or URL to UI

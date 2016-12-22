@@ -3,11 +3,11 @@
   "version": "0.1.7",
   "description": "Webpack plugin and UI for analyzing webpack building process through rempl",
   "scripts": {
-    "prepublish": "npm run codestyle",
-    "codestyle": "node node_modules/jscs/bin/jscs src && node node_modules/eslint/bin/eslint.js -c ./.eslintrc src",
-    "build:dev": "node node_modules/basisjs-tools/bin/basis build",
-    "build": "node node_modules/basisjs-tools/bin/basis build --pack --css-usage --css-pack --js-cut-dev",
-    "start": "node node_modules/http-server/bin/http-server ."
+    "prepublish": "npm run build",
+    "codestyle": "jscs src && eslint -c ./.eslintrc src",
+    "build:dev": "basis build",
+    "build": "basis build --pack --css-usage --css-pack --js-cut-dev",
+    "start": "http-server ."
   },
   "main": "./src/plugin/index.js",
   "repository": {
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/smelukov/rempl-webpack-analyzer#readme",
   "dependencies": {
-    "rempl": "1.0.0-alpha4",
+    "rempl": "1.0.0-alpha5",
     "webpack": "^1.14.0"
   },
   "devDependencies": {
@@ -32,5 +32,12 @@
     "eslint": "^3.11.1",
     "http-server": "^0.9.0",
     "jscs": "^3.0.7"
-  }
+  },
+  "files": [
+    "dist",
+    "src",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md"
+  ]
 }

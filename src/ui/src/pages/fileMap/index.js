@@ -56,6 +56,7 @@ function applyPath(tree, info) {
 }
 
 /*
+ TODO
  function calcPecentsAndUpdateNames(tree) {
  var totalSize = tree.data.$area;
 
@@ -81,6 +82,10 @@ function applyPath(tree, info) {
  }*/
 
 Value.query(type.Source, 'data.profile').link(content, function(profile) {
+    if (!profile) {
+        return;
+    }
+
     var tree = makeNode('/', 0);
     var allFiles = {};
 
@@ -100,7 +105,10 @@ Value.query(type.Source, 'data.profile').link(content, function(profile) {
     });
 
     // calcPecentsAndUpdateNames(tree);
-    webtreemap(content.element, tree);
+    basis.asap(function() {
+        content.element.innerHTML = '';
+        webtreemap(content.element, tree);
+    });
 });
 
 module.exports = new Page({
