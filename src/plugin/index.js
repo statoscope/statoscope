@@ -34,14 +34,7 @@ function deepExtend(target) {
 function RemplPlugin(options) {
     var defaultOptions = {
         ui: {
-            // lazy fetching the UI
-            get script() {
-                if (!this.__bundleCache) {
-                    this.__bundleCache = fs.readFileSync(path.resolve(__dirname, '../../dist/script.js'), 'utf-8');
-                }
-
-                return this.__bundleCache;
-            }
+            script: path.resolve(__dirname, '../../dist/script.js')
         }
     };
 
@@ -51,7 +44,7 @@ function RemplPlugin(options) {
         if (options.ui.url) {
             callback(null, 'url', options.ui.url);
         } else {
-            callback(null, 'script', options.ui.script);
+            rempl.scriptFromFile(options.ui.script)(settings, callback);
         }
     });
 }

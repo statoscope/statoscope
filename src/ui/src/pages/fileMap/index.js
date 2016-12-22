@@ -1,14 +1,10 @@
 var Node = require('basis.ui').Node;
 var Value = require('basis.data').Value;
+var addHandler = require('basis.dom.event').addHandler;
 var Page = require('app.ui').Page;
 var type = require('app.type');
 var webtreemap = require('app.vendor.webtree');
-// var utils = require('app.utils');
-
-var content = new Node({
-    autoDelegate: true,
-    template: resource('./template/page.tmpl')
-});
+var utils = require('app.utils');
 
 function makeNode(name, size) {
     return {
@@ -55,39 +51,54 @@ function applyPath(tree, info) {
     tree._resolved[info.path] = true;
 }
 
-/*
- TODO
- function calcPecentsAndUpdateNames(tree) {
- var totalSize = tree.data.$area;
+function calcPercentsAndUpdateNames(tree) {
+    var totalSize = tree.data.$area;
 
- function walk(root) {
- for (var i = 0; i < root.children.length; i++) {
- var item = root.children[i];
- var percent = 100 / totalSize * item.data.$area;
- var size = utils.getSize(item.data.$area);
- var postfix = utils.getPostfix(item.data.$area);
+    function walk(root) {
+        var percent = 100 / totalSize * root.data.$area;
+        var size = utils.getSize(root.data.$area);
+        var postfix = utils.getPostfix(root.data.$area);
 
- item.name = basis.string.format('{name} • {size} {postfix} • {percent}%', {
- name: item.name,
- size: postfix == 'B' ? size : size.toFixed(2),
- postfix: utils.getPostfix(item.data.$area),
- percent: percent.toFixed(2)
- });
+        root.originalName = root.name;
+        root.name = basis.string.format('{name} • {size} {postfix} • {percent}%', {
+            name: root.originalName,
+            size: postfix == 'B' ? size : size.toFixed(2),
+            postfix: utils.getPostfix(root.data.$area),
+            percent: percent.toFixed(2)
+        });
+        root.children.forEach(walk);
+    }
 
- walk(item);
- }
- }
+    walk(tree);
+}
 
- walk(tree);
- }*/
+var content = new Node({
+    autoDelegate: true,
+    template: resource('./template/page.tmpl'),
+    tree: null,
+    marginBottom: 15,
+    updateMap: function() {
+        basis.asap(function() {
+            this.element.style.height = window.innerHeight - this.element.getBoundingClientRect().top - this.marginBottom + 'px';
+            webtreemap(this.element, this.tree);
+        }.bind(this));
+    }
+});
+
+addHandler(window, 'resize', function() {
+    this.updateMap();
+}, content);
 
 Value.query(type.Source, 'data.profile').link(content, function(profile) {
     if (!profile) {
         return;
     }
 
-    var tree = makeNode('/', 0);
     var allFiles = {};
+    var dom = this.tree && this.tree.dom;
+
+    this.tree = makeNode('/', 0);
+    this.tree.dom = dom;
 
     profile.data.modules.forEach(function(module) {
         var files = module.data.files;
@@ -100,15 +111,12 @@ Value.query(type.Source, 'data.profile').link(content, function(profile) {
             var path = fileName.slice(profile.data.context.length + 1);
 
             allFiles[fileName] = files[fileName];
-            applyPath(tree, { path: path, size: files[fileName] });
+            applyPath(this.tree, { path: path, size: files[fileName] });
         }
-    });
+    }.bind(this));
 
-    // calcPecentsAndUpdateNames(tree);
-    basis.asap(function() {
-        content.element.innerHTML = '';
-        webtreemap(content.element, tree);
-    });
+    calcPercentsAndUpdateNames(this.tree);
+    this.updateMap();
 });
 
 module.exports = new Page({

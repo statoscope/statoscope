@@ -1,49 +1,34 @@
-## 0.1.7 - 2016-12-16
-
-### Fixed
+## 0.1.7 (December 16, 2016)
 
 - UI refactoring
 
-## 0.1.5(6) - 2016-12-12
+## 0.1.5 (December 12, 2016)
 
-### Fixed
+- fix installation logic
+- include bundle to package
 
-- installation logic
-- included bundle to package
+## 0.1.4 (December 11, 2016)
 
-## 0.1.4 - 2016-12-11
+- fix readme
+- fix installation logic
 
-### Updated
+## 0.1.3 (December 11, 2016)
 
-- readme
-- installation logic
+- bump rempl version
+- improve eslint config and fix warnings
+- simplify plugin usage
+- fix readme
 
-## 0.1.3 - 2016-12-11
+## 0.1.2 (December 09, 2016)
 
-### Updated
+- improve example webpack config
 
-- rempl version
-- readme
+## 0.1.1 (December 09, 2016)
 
-### Fixed
+- fix remp require
 
-- eslint config and warnings
-- some refactoring (simplified plugin usage)
-
-## 0.1.2 - 2016-12-09
-
-### Fixed
-
-- webpack config
-
-## 0.1.1 - 2016-12-09
-
-### Fixed
-
-- remp require
-
-## 0.1.0 - 2016-12-09
+## 0.1.0 (December 09, 2016)
 
 ### Added
 
-- Initial release
+- initial release
