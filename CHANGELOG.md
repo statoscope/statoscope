@@ -1,3 +1,10 @@
+## 1.0.0-alpha1 (December 22, 2016)
+
+- rename package and repo to `webpack-runtime-analyzer`
+- add file map page to render file structure
+- add error and warning pages
+- exclude UI bundle from package (build on publish)
+
 ## 0.1.7 (December 16, 2016)
 
 - UI refactoring

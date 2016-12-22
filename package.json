@@ -1,6 +1,6 @@
 {
   "name": "webpack-runtime-analyzer",
-  "version": "0.1.7",
+  "version": "1.0.0-alpha1",
   "description": "Webpack plugin and UI for analyzing webpack building process through rempl",
   "scripts": {
     "prepublish": "npm run codestyle && npm run build",
