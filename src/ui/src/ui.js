@@ -1,4 +1,5 @@
 module.exports = {
+    IssueList: require('./ui/issueList/index'),
     Table: require('./ui/table/index'),
     Menu: require('./ui/menu/index'),
     Page: require('./ui/page/index'),

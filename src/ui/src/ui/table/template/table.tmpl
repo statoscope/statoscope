@@ -1,5 +1,10 @@
-<table class=":table :table-striped" data-a="11">
-  <!--{head}-->
-  <tbody b:ref="childNodesElement"/>
-  <!--{foot}-->
-</table>
+<div>
+  <div b:hide="{hasChildren}" class=":alert :alert-info">
+    The list is empty...
+  </div>
+  <table b:show="{hasChildren}" class=":table :table-striped">
+    <!--{head}-->
+    <tbody b:ref="childNodesElement"/>
+    <!--{foot}-->
+  </table>
+</div>

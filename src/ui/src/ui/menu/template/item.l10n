@@ -1,9 +1,17 @@
 {
+  "_meta": {
+    "type": {
+      "items.errors": "markup",
+      "items.warnings": "markup"
+    }
+  },
   "en-US": {
     "items": {
       "home": "Home",
       "assets": "Assets",
       "modules": "Modules",
+      "errors": "Errors <span b:show=\"{errors}\"> ({errors})</span>",
+      "warnings": "Warnings <span b:show=\"{warnings}\"> ({warnings})</span>",
       "fileMap": "File Map"
     }
   }

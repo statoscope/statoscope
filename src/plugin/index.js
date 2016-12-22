@@ -60,9 +60,15 @@ RemplPlugin.prototype.apply = function(compiler) {
         var buildFiles = {};
         var profile = stats.toJson();
 
-        profile.hasErrors = stats.hasErrors();
-        profile.hasWarnings = stats.hasWarnings();
         profile.context = compiler.context;
+
+        profile.errors = profile.errors.map(function(error) {
+            return { text: error };
+        });
+
+        profile.warnings = profile.warnings.map(function(warning) {
+            return { text: warning };
+        });
 
         compilation.chunks.forEach(function(chunk) {
             chunk.modules.forEach(function(module) {
