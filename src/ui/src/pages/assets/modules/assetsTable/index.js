@@ -25,8 +25,8 @@ module.exports = Table.subclass({
     satellite: {
         head: TableHead.subclass({
             childNodes: [
-                { content: dict.token('name') },
-                { content: dict.token('size') }
+                { data: { content: dict.token('name') } },
+                { data: { content: dict.token('size') } }
             ]
         }),
         foot: Node.subclass({
