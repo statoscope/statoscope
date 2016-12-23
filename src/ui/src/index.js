@@ -3,8 +3,6 @@ var Node = require('basis.ui').Node;
 
 var routes = {
     home: resource('./pages/home/index.js'),
-    assets: resource('./pages/assets/index.js'),
-    modules: resource('./pages/modules/index.js'),
     errors: resource('./pages/errors/index.js'),
     warnings: resource('./pages/warnings/index.js'),
     fileMap: resource('./pages/fileMap/index.js')
