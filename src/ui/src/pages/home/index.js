@@ -1,10 +1,7 @@
+var Value = require('basis.data').Value;
 var Node = require('basis.ui').Node;
 var Page = require('app.ui').Page;
 var type = require('app.type');
-
-var Stat = require('./modules/stat/index');
-var ModulesTable = require('../modules/modules/modulesTable/index');
-var AssetsTable = require('../assets/modules/assetsTable/index');
 
 module.exports = new Page({
     delegate: type.Source,
@@ -12,15 +9,12 @@ module.exports = new Page({
         content: new Node({
             autoDelegate: true,
             template: resource('./template/page.tmpl'),
-            satellite: {
-                stat: Stat,
-                modulesTable: ModulesTable,
-                assetsTable: AssetsTable
-            },
             binding: {
-                stat: 'satellite:',
-                modulesTable: 'satellite:',
-                assetsTable: 'satellite:'
+                stat: resource('./modules/stat/index.js'),
+                modules: resource('./modules/modules/index.js'),
+                modulesCount: Value.query('data.profile.data.modules.itemCount').as(Number),
+                assets: resource('./modules/assets/index.js'),
+                assetsCount: Value.query('data.profile.data.assets.itemCount').as(Number)
             }
         })
     }

@@ -13,8 +13,6 @@ module.exports = Node.subclass({
     },
     childNodes: [
         { id: 'home', selected: true },
-        { id: 'assets' },
-        { id: 'modules' },
         { id: 'errors', binding: { errors: Value.query(type.Source, 'data.profile.data.errors.itemCount') } },
         { id: 'warnings', binding: { errors: Value.query(type.Source, 'data.profile.data.warnings.itemCount') } },
         { id: 'fileMap' }
