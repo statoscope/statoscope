@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha2",
   "description": "Webpack plugin for analyzing internal processes, state and structure of bundles",
   "scripts": {
-    "prepublish": "npm run codestyle && npm run build",
+    "prepublish": "npm run build",
     "codestyle": "jscs src && eslint -c ./.eslintrc src",
     "build:dev": "basis build",
     "build": "basis build --pack --css-usage --css-pack --js-cut-dev",
