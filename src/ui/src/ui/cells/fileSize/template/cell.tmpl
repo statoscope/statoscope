@@ -1,3 +1,15 @@
-<div>
-  {size} {postfix}
+<b:style>
+  .size {
+    white-space: nowrap;
+    text-align: right;
+  }
+  .unit {
+    display: inline-block;
+    width: 3.5ex;
+    text-align: left;
+    padding-left: 5px;
+  }
+</b:style>
+<div class="size">
+  {size}<span class="unit">{postfix}</span>
 </div>
