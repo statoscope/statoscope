@@ -7,11 +7,9 @@ var ModulesTable = require('../modules/modules/modulesTable/index');
 var AssetsTable = require('../assets/modules/assetsTable/index');
 
 module.exports = new Page({
-    active: basis.PROXY,
     delegate: type.Source,
     satellite: {
         content: new Node({
-            active: basis.PROXY,
             autoDelegate: true,
             template: resource('./template/page.tmpl'),
             satellite: {

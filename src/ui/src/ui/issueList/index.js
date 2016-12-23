@@ -7,7 +7,6 @@ var templates = template.define('app.ui.issueList', {
 });
 
 module.exports = Node.subclass({
-    active: basis.PROXY,
     autoDelegate: true,
     template: templates.list,
     childClass: {

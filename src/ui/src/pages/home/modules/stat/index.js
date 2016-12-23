@@ -2,7 +2,6 @@ var Node = require('basis.ui').Node;
 var Value = require('basis.data').Value;
 
 module.exports = new Node({
-    active: basis.PROXY,
     autoDelegate: true,
     template: resource('./template/stat.tmpl'),
     binding: {

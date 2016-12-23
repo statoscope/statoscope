@@ -57,7 +57,6 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
 
     compiler.plugin('emit', function(compilation, done) {
         var stats = compilation.getStats();
-        var buildFiles = {};
         var profile = stats.toJson();
 
         profile.context = compiler.context;
@@ -75,6 +74,7 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
                 var loaders = module.loaders || [];
                 var fileDependencies = module.fileDependencies || [];
                 var origin = [];
+                var files = {};
 
                 if (module.resource) {
                     origin.push(module.resource);
@@ -90,9 +90,9 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
                     }
 
                     return prev;
-                }, buildFiles);
+                }, files);
 
-                profile.modules[module.index].files = buildFiles;
+                profile.modules[module.index].files = files;
             }, this);
         }, this);
 

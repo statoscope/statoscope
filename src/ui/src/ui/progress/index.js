@@ -3,7 +3,6 @@ var Value = require('basis.data').Value;
 var type = require('app.type');
 
 module.exports = Node.subclass({
-    active: basis.PROXY,
     delegate: type.Source,
     template: resource('./template/progress.tmpl'),
     binding: {
