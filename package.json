@@ -6,7 +6,7 @@
     "prepublish": "npm run build",
     "codestyle": "jscs src && eslint -c ./.eslintrc src",
     "build": "basis build --pack --css-usage --css-pack --js-cut-dev",
-    "start": "http-server ."
+    "start": "basis server"
   },
   "main": "./src/plugin/index.js",
   "repository": {
@@ -37,7 +37,6 @@
     "basisjs": "^1.10.0",
     "basisjs-tools": "^1.10.2",
     "eslint": "^3.11.1",
-    "http-server": "^0.9.0",
     "jscs": "^3.0.7"
   },
   "files": [

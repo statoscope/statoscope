@@ -41,6 +41,10 @@ function RuntimeAnalyzerPlugin(options) {
     options = deepExtend({}, defaultOptions, options);
 
     this.transport = rempl.createPublisher('webpack analyzer', function(settings, callback) {
+        if (settings.dev) {
+            return callback(null, 'url', 'http://localhost:8001/src/ui/');
+        }
+
         if (options.ui.url) {
             callback(null, 'url', options.ui.url);
         } else {
