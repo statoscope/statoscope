@@ -1,0 +1,26 @@
+.item
+{
+  display: inline-block;
+  padding: 8px 10px 6px;
+  color: #666;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+}
+.item:hover
+{
+  background: #EEE;
+}
+.item_selected
+{
+  color: #444;
+  border-bottom: 2px solid rgba(62, 130, 247, .6);
+  margin-bottom: -1px;
+}
+.item_disabled,
+.item_disabled:hover
+{
+  color: #AAA;
+  background: transparent;
+  cursor: default;
+  transition: all .25s;
+}

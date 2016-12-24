@@ -1,0 +1,10 @@
+{
+    "en-US": {
+        "status": {
+            "invalidated": "Invalidated",
+            "compiling": "Compiling...",
+            "success": "Compiling...",
+            "failed": ""
+        }
+    }
+}

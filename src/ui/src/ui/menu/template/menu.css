@@ -1,0 +1,20 @@
+.menu {
+    display: -webkit-flex;
+    display: flex;
+    padding: 0;
+    background: #F8F8F8;
+    border-bottom: 1px solid #DDD;
+    font-size: 12px;
+    line-height: 1;
+}
+.label {
+    flex: 1;
+    display: block;
+    text-align: right;
+    padding: 8px 8px 0 8px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: #8AD;
+    text-shadow: 0 0 2px white;
+}

@@ -4,11 +4,13 @@ var type = require('app.type');
 
 module.exports = Node.subclass({
     delegate: type.Source,
-    template: resource('./template/progress.tmpl'),
+    template: resource('./template/view.tmpl'),
     binding: {
-        status: 'data:',
+        processing: Value.query('data.status').as(function(status) {
+            return status === 'compiling';
+        }),
         progress: Value.query('data.progress').as(function(progress) {
-            return parseInt(Number(progress) * 100);
+            return progress * 100;
         })
     }
 });

@@ -11,33 +11,27 @@ var routes = {
 module.exports = require('basis.app').create({
     title: 'Webpack Runtime Analyzer',
     init: function() {
-        var bootsrapCss = document.createElement('link');
-        var webtreeCss = document.createElement('link');
+        // var webtreeCss = document.createElement('link');
 
-        bootsrapCss.setAttribute('rel', 'stylesheet');
-        bootsrapCss.setAttribute('href', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
+        // webtreeCss.setAttribute('rel', 'stylesheet');
+        // webtreeCss.setAttribute('href', 'https://cdn.rawgit.com/danvk/source-map-explorer/master/vendor/webtreemap.css');
 
-        webtreeCss.setAttribute('rel', 'stylesheet');
-        webtreeCss.setAttribute('href', 'https://cdn.rawgit.com/danvk/source-map-explorer/master/vendor/webtreemap.css');
-
-        document.head.appendChild(bootsrapCss);
-        document.head.appendChild(webtreeCss);
+        // document.head.appendChild(webtreeCss);
 
         return new Node({
             template: resource('./template/layout.tmpl'),
+            binding: {
+                menu: 'satellite:',
+                status: resource('./ui/status/index.js'),
+                progress: 'satellite:',
+                page: 'satellite:'
+            },
             satellite: {
                 menu: resource('./ui/menu/index.js'),
                 progress: resource('./ui/progress/index.js'),
-                page: {
-                    instance: Value.query('satellite.menu.selection.pick()').as(function(node) {
-                        return node && routes[node.id] || routes.home;
-                    })
-                }
-            },
-            binding: {
-                menu: 'satellite:',
-                progress: 'satellite:',
-                page: 'satellite:'
+                page: Value.query('satellite.menu.selection.pick()').as(function(node) {
+                    return node && routes[node.id] || routes.home;
+                })
             }
         });
     }

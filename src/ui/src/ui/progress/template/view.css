@@ -1,0 +1,47 @@
+.spinner {
+    position: relative;
+    overflow: hidden;
+    top: 0;
+    height: 2px;
+    margin-bottom: -2px;
+    opacity: 0;
+    transition: opacity .5s .1s ease-out;
+    z-index: 11;
+}
+.spinner_processing {
+    opacity: 1;
+    transition: opacity 1s .2s ease-out;
+}
+.spinner_processing-anim {
+    opacity: 0;
+    transition: none;
+}
+
+.intro {
+    background: #ffce54;
+    height: 100%;
+    float: left;
+    width: 20px;
+    transition: width .3s .3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.intro_processing-anim {
+    width: 0;
+    transition: none;
+}
+
+.bar {
+    overflow: hidden;
+    height: 100%;
+}
+.bar__fill {
+    background: #ffce54;
+    height: 100%;
+    transition: width .2s ease-out;
+}
+.bar__fill_processing {
+    transition: width .1s;
+}
+.bar__fill_processing-anim {
+    transition: none;
+}

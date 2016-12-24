@@ -1,3 +1,8 @@
-<b:define name="active" from="selected" type="bool"/>
+<b:isolate/>
+<b:style src="./item.css"/>
+<b:define name="selected" type="bool"/>
+<b:define name="disabled" type="bool"/>
 
-<li class=":{active}"><a href="#" event-click="select">{l10n:items.{id}}</a></li>
+<span class="item item_{selected} item_{disabled}" event-click="select">
+  {l10n:items.{id}}
+</span>

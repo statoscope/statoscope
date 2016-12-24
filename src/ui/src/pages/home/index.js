@@ -10,7 +10,6 @@ module.exports = new Page({
             autoDelegate: true,
             template: resource('./template/page.tmpl'),
             binding: {
-                stat: resource('./modules/stat/index.js'),
                 modules: resource('./modules/modules/index.js'),
                 modulesCount: Value.query('data.profile.data.modules.itemCount').as(Number),
                 assets: resource('./modules/assets/index.js'),

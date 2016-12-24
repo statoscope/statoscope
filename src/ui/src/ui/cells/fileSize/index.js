@@ -23,11 +23,14 @@ module.exports = Node.subclass({
     binding: {
         size: Value.query('size').as(function(size) {
             if (!isNaN(size)) {
-                if (utils.getPostfix(size) == 'B') {
-                    return size;
+                switch (utils.getPostfix(size)) {
+                    case 'bytes':
+                        return size;
+                    case 'KB':
+                        return Math.round(utils.getSize(size));
+                    case 'MB':
+                        return utils.getSize(size).toFixed(2);
                 }
-
-                return utils.getSize(size).toFixed(2);
             }
         }),
         postfix: Value.query('size').as(utils.getPostfix)
