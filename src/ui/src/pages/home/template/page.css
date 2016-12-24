@@ -1,24 +1,8 @@
-.layout {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    max-height: 100%;
-    overflow: hidden;
-}
-.stat-wrapper {
-    max-height: 50%;
-    overflow: auto;
-}
 .content-wrapper {
-    flex: 1;
-    overflow: auto;
     display: flex;
+    margin-top: -15px;
 }
+
 .content-column {
-    flex: 1;
-    max-height: 100%;
+    flex-basis: 50%;
 }

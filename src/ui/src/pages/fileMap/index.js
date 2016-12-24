@@ -76,7 +76,7 @@ var content = new Node({
     autoDelegate: true,
     template: resource('./template/page.tmpl'),
     tree: null,
-    marginBottom: 15,
+    marginBottom: 10,
     updateMap: function() {
         basis.asap(function() {
             this.element.style.height = window.innerHeight - this.element.getBoundingClientRect().top - this.marginBottom + 'px';
@@ -111,7 +111,7 @@ Value.query(type.Source, 'data.profile').link(content, function(profile) {
             var path = fileName.slice(profile.data.context.length + 1);
 
             allFiles[fileName] = files[fileName];
-            applyPath(this.tree, { path: path, size: files[fileName] });
+            applyPath(this.tree, {path: path, size: files[fileName]});
         }
     }.bind(this));
 

@@ -14,7 +14,8 @@
     "url": "git+https://github.com/smelukov/webpack-runtime-analyzer.git"
   },
   "contributors": [
-    "Sergey Melyukov <s.melukov@gmail.com>"
+    "Sergey Melyukov <s.melukov@gmail.com>",
+    "Roman Dvornov <rdvornov@gmail.com>"
   ],
   "keywords": [
     "webpack",

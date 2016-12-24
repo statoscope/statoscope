@@ -11,12 +11,12 @@ var routes = {
 module.exports = require('basis.app').create({
     title: 'Webpack Runtime Analyzer',
     init: function() {
-        // var webtreeCss = document.createElement('link');
+        var webtreeCss = document.createElement('link');
 
-        // webtreeCss.setAttribute('rel', 'stylesheet');
-        // webtreeCss.setAttribute('href', 'https://cdn.rawgit.com/danvk/source-map-explorer/master/vendor/webtreemap.css');
+        webtreeCss.setAttribute('rel', 'stylesheet');
+        webtreeCss.setAttribute('href', 'https://cdn.rawgit.com/danvk/source-map-explorer/master/vendor/webtreemap.css');
 
-        // document.head.appendChild(webtreeCss);
+        document.head.appendChild(webtreeCss);
 
         return new Node({
             template: resource('./template/layout.tmpl'),

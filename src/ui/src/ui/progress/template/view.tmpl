@@ -1,9 +1,10 @@
 <b:style src="./view.css"/>
 <b:isolate/>
+<b:define name="processing" type="bool"/>
 
-<div class="spinner spinner_{anim:processing}">
-  <div class="intro intro_{anim:processing}"/>
-  <div class="bar">
-    <div class="bar__fill bar__fill_{anim:processing}" style="width: {progress}%"/>
-  </div>
+<div class="spinner spinner_{processing}">
+    <div class="intro intro_{processing}"/>
+    <div class="bar">
+        <div class="bar__fill bar__fill_{processing}" style="width: {progress}%"/>
+    </div>
 </div>

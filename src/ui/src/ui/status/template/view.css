@@ -1,19 +1,22 @@
 .view {
     padding: 6px 10px;
-    .background: linear-gradient(to bottom, transparent 60%, rgba(255,255,255,.65));
+    background: linear-gradient(to bottom, transparent 60%, rgba(255, 255, 255, .65));
     border-bottom: 1px solid #e3e3e3;
     border-radius: 4px;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
     transition: all .2s;
 }
+
 .view-success {
     background-color: #dff0d8;
     color: #3c763d;
 }
+
 .view-failed {
     background-color: #f2dede;
     color: #a94442;
 }
+
 .view-compiling,
 .view-invalidated {
     background-color: #f7ecb5;
@@ -23,6 +26,7 @@
 .status-wrapper {
     position: relative;
 }
+
 .status {
     position: absolute;
     background: rgba(0, 0, 0, .1);
@@ -33,6 +37,7 @@
     margin-left: 12px;
     visibility: hidden;
 }
+
 .status-invalidated,
 .status-compiling {
     opacity: 1;
@@ -45,6 +50,7 @@
     transition: all .2s;
     padding-left: 14px;
 }
+
 .results-success {
     opacity: 1;
     transition: all .5s;

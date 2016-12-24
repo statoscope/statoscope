@@ -8,10 +8,7 @@
   ],
   "disallowEmptyBlocks": true,
   "disallowImplicitTypeConversion": [
-    "numeric",
-    "boolean",
-    "binary",
-    "string"
+    "binary"
   ],
   "disallowKeywords": [
     "with"

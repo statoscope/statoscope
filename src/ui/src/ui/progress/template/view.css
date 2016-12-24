@@ -8,10 +8,12 @@
     transition: opacity .5s .1s ease-out;
     z-index: 11;
 }
+
 .spinner_processing {
     opacity: 1;
     transition: opacity 1s .2s ease-out;
 }
+
 .spinner_processing-anim {
     opacity: 0;
     transition: none;
@@ -34,14 +36,17 @@
     overflow: hidden;
     height: 100%;
 }
+
 .bar__fill {
     background: #ffce54;
     height: 100%;
     transition: width .2s ease-out;
 }
+
 .bar__fill_processing {
     transition: width .1s;
 }
+
 .bar__fill_processing-anim {
     transition: none;
 }
