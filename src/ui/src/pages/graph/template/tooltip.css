@@ -3,7 +3,7 @@
     visibility: hidden;
     opacity: 0;
     transition: opacity .2s ease-out;
-    max-width: 200px;
+    max-width: 300px;
     padding: 3px 8px;
     color: #fff;
     text-align: center;
