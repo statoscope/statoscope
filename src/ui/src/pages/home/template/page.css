@@ -4,5 +4,10 @@
 }
 
 .content-column {
-    flex-basis: 50%;
+    flex-grow: 1;
+}
+
+.splitter {
+    flex-basis: 10px;
+    flex-shrink: 0;
 }

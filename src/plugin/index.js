@@ -54,6 +54,8 @@ function RuntimeAnalyzerPlugin(options) {
 }
 
 RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
+    this.lastProfile = null;
+
     compiler.apply(new webpack.ProgressPlugin(function(percent) {
         this.transport.ns('status').publish('compiling');
         this.transport.ns('progress').publish(percent);
@@ -61,7 +63,9 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
 
     compiler.plugin('emit', function(compilation, done) {
         var stats = compilation.getStats();
-        var profile = stats.toJson();
+        var profile;
+
+        this.lastProfile = profile = stats.toJson();
 
         profile.context = compiler.context;
 
@@ -113,7 +117,7 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
     }.bind(this));
 
     compiler.plugin('done', function() {
-        this.transport.ns('status').publish('success');
+        this.transport.ns('status').publish(this.lastProfile && this.lastProfile.errors.length ? 'failed' : 'success');
     }.bind(this));
 
     compiler.plugin('failed', function() {

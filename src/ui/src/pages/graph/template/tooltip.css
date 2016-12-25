@@ -1,0 +1,18 @@
+.tooltip {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .2s ease-out;
+    max-width: 200px;
+    padding: 3px 8px;
+    color: #fff;
+    text-align: center;
+    background-color: #000;
+    border-radius: 4px;
+}
+
+.tooltip_visible {
+    opacity: 0.8;
+    visibility: visible;
+}
+

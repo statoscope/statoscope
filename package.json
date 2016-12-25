@@ -37,6 +37,7 @@
   "devDependencies": {
     "basisjs": "^1.10.0",
     "basisjs-tools": "^1.10.2",
+    "d3": "^4.4.0",
     "eslint": "^3.11.1",
     "jscs": "^3.0.7"
   },

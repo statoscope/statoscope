@@ -16,6 +16,10 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    color: #8AD;
+    color: #3bafda;
     text-shadow: 0 0 2px white;
+}
+
+.label a {
+    color: #3bafda;
 }

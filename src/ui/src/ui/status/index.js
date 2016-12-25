@@ -12,7 +12,7 @@ module.exports = new Node({
         hash: Value.query('data.profile.data.hash').as(function(hash) {
             return hash || 'n/a';
         }),
-        status: 'data:status',
+        status: 'data:',
         assets: Value.query('data.profile.data.assets.itemCount').as(Number),
         modules: Value.query('data.profile.data.modules.itemCount').as(Number),
         chunks: Value.query('data.profile.data.chunks').as(basis.getter('length').as(Number)),

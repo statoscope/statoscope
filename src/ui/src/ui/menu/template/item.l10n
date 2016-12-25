@@ -12,7 +12,8 @@
       "modules": "Modules",
       "errors": "Errors <span b:show=\"{errors}\"> ({errors})</span>",
       "warnings": "Warnings <span b:show=\"{warnings}\"> ({warnings})</span>",
-      "fileMap": "File Map"
+      "fileMap": "File Map",
+      "graph": "Graph"
     }
   }
 }

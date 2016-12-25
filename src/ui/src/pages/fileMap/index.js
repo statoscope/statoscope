@@ -111,7 +111,7 @@ Value.query(type.Source, 'data.profile').link(content, function(profile) {
             var path = fileName.slice(profile.data.context.length + 1);
 
             allFiles[fileName] = files[fileName];
-            applyPath(this.tree, {path: path, size: files[fileName]});
+            applyPath(this.tree, { path: path, size: files[fileName] });
         }
     }.bind(this));
 

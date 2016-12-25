@@ -5,6 +5,7 @@ var routes = {
     home: resource('./pages/home/index.js'),
     errors: resource('./pages/errors/index.js'),
     warnings: resource('./pages/warnings/index.js'),
+    graph: resource('./pages/graph/index.js'),
     fileMap: resource('./pages/fileMap/index.js')
 };
 

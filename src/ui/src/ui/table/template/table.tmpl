@@ -1,8 +1,11 @@
+<b:style src="table.css"/>
+<b:isolate/>
+
 <div>
-    <div b:hide="{hasChildren}" class=":alert :alert-info">
+    <div b:hide="{hasChildren}" class="empty">
         The list is empty...
     </div>
-    <table b:show="{hasChildren}" class=":table :table-striped">
+    <table b:show="{hasChildren}" class="table">
         <!--{head}-->
         <tbody b:ref="childNodesElement"/>
         <!--{foot}-->
