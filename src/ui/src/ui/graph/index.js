@@ -52,7 +52,7 @@ module.exports = Node.subclass({
                     .force('link', d3.forceLink().id(function(d) {
                         return d.id;
                     }))
-                    .force('charge', d3.forceManyBody())
+                    .force('charge', d3.forceManyBody().distanceMax(400))
                     .force('center', d3.forceCenter(width / 2, height / 2));
 
                 var link = this.svg.append('g')
@@ -79,6 +79,8 @@ module.exports = Node.subclass({
                         return groupsColor.hasOwnProperty(d.group) ? groupsColor[d.group] : groupsColor.unknown;
                     })
                     .on('mouseover', function(sender) {
+                        // todo highlight links
+
                         if (!dragging) {
                             tooltip.content.set(sender.name);
                             tooltip.visible.set(true);

@@ -38,6 +38,10 @@
     visibility: hidden;
 }
 
+.status-success,
+.status-failed {
+}
+
 .status-invalidated,
 .status-compiling {
     opacity: 1;
@@ -49,6 +53,11 @@
     opacity: 0;
     transition: all .2s;
     padding-left: 14px;
+}
+
+.results-compiling,
+.results-invalidated,
+.results-failed {
 }
 
 .results-success {

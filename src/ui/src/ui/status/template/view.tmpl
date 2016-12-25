@@ -1,7 +1,6 @@
 <b:style src="./view.css"/>
 <b:isolate/>
 <b:define name="status" type="enum" values="compiling invalidated success failed"/>
-<b:define name="processing" from="status" type="enum" values="compiling invalidated"/>
 
 <div class="view view-{status}">
     Webpack <b>{version}</b>

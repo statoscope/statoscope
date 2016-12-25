@@ -4,7 +4,7 @@
 
 [Webpack](https://github.com/webpack/webpack) plugin for analyzing internal processes, state and structure of bundles. Built on [rempl](https://github.com/rempl/rempl).
 
-![Webpack Runtime Analyzer](https://cloud.githubusercontent.com/assets/6654581/21431477/79ac5150-c878-11e6-8f35-b29e2f1845a7.png)
+[Watch a video-demo](https://youtu.be/Y3RVDJRi-Gc)
 
 ## Install
 
@@ -58,6 +58,32 @@ new RuntimeAnalyzerPlugin({
 ```
 
 > In case `ui.url` and `ui.script` are specified then `ui.url` will be used.
+
+## Key features
+
+### Dashboard
+
+The list of the modules and the assets is always at hand.
+
+![Dashboad](https://cloud.githubusercontent.com/assets/6654581/21473114/cb2bfa72-cb0b-11e6-8096-3e05f6c967f9.png)
+
+### Dependency graph
+
+Take a look at the dependencies of the modules.
+
+![Dependency graph](https://cloud.githubusercontent.com/assets/6654581/21473113/cb156dac-cb0b-11e6-82ab-990d60a798dd.png)
+
+### File size map
+
+Look at the file map and find out why your bundle is so big.
+
+![File size map](https://cloud.githubusercontent.com/assets/6654581/21473112/cb13ffa8-cb0b-11e6-9cb3-0935a788ffce.png)
+
+## Realtime analyzing
+
+Analyzing process is performing in **realtime**.
+
+![Realtime analyzing](https://cloud.githubusercontent.com/assets/6654581/21473129/850a287e-cb0c-11e6-8f7f-9c55aea96e3f.png)
 
 ## UI customization
 

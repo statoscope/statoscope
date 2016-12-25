@@ -73,7 +73,6 @@ function calcPercentsAndUpdateNames(tree) {
 }
 
 var content = new Node({
-    active: basis.PROXY,
     autoDelegate: true,
     template: resource('./template/page.tmpl'),
     tree: null,
@@ -86,12 +85,20 @@ var content = new Node({
     }
 });
 
-addHandler(window, 'resize', function() {
-    this.updateMap();
-}, content);
+var page = new Page({
+    delegate: Value.query('owner').as(function(owner) {
+        return owner ? type.Source : null;
+    }),
+    satellite: {
+        content: content
+    }
+});
 
-// FIXME open file map, open something else, change example source, open file map - got wrong sizes
-Value.query(content, 'data.profile.data.modules').pipe('itemsChanged', function(modules) {
+Value.query(page, 'target.data.profile.data.modules').pipe('itemsChanged', function(modules) {
+    if (!modules) {
+        return;
+    }
+
     var allFiles = {};
 
     this.element.innerHTML = '';
@@ -116,9 +123,8 @@ Value.query(content, 'data.profile.data.modules').pipe('itemsChanged', function(
     this.updateMap();
 }.bind(content));
 
-module.exports = new Page({
-    delegate: type.Source,
-    satellite: {
-        content: content
-    }
-});
+addHandler(window, 'resize', function() {
+    this.updateMap();
+}, content);
+
+module.exports = page;
