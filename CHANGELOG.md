@@ -1,3 +1,13 @@
+## 1.0.0-alpha3 (December 26, 2016)
+
+- layout rework
+- remove css bootstrap
+- add dependency graph
+- add modules type statistics
+- fix file map size recalc
+- remove useless css
+- components refactoring
+
 ## 1.0.0-alpha2 (December 22, 2016)
 
 - fix example building on windows
