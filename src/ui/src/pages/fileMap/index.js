@@ -73,6 +73,7 @@ function calcPercentsAndUpdateNames(tree) {
 }
 
 var content = new Node({
+    active: basis.PROXY,
     autoDelegate: true,
     template: resource('./template/page.tmpl'),
     tree: null,
@@ -89,18 +90,14 @@ addHandler(window, 'resize', function() {
     this.updateMap();
 }, content);
 
-Value.query(type.Source, 'data.profile').link(content, function(profile) {
-    if (!profile) {
-        return;
-    }
-
+// FIXME open file map, open something else, change example source, open file map - got wrong sizes
+Value.query(content, 'data.profile.data.modules').pipe('itemsChanged', function(modules) {
     var allFiles = {};
-    var dom = this.tree && this.tree.dom;
 
+    this.element.innerHTML = '';
     this.tree = makeNode('/', 0);
-    this.tree.dom = dom;
 
-    profile.data.modules.forEach(function(module) {
+    modules.forEach(function(module) {
         var files = module.data.files;
 
         for (var fileName in files) {
@@ -108,7 +105,7 @@ Value.query(type.Source, 'data.profile').link(content, function(profile) {
                 return;
             }
 
-            var path = fileName.slice(profile.data.context.length + 1);
+            var path = fileName.slice(type.Source.data.profile.data.context.length + 1);
 
             allFiles[fileName] = files[fileName];
             applyPath(this.tree, { path: path, size: files[fileName] });
@@ -117,7 +114,7 @@ Value.query(type.Source, 'data.profile').link(content, function(profile) {
 
     calcPercentsAndUpdateNames(this.tree);
     this.updateMap();
-});
+}.bind(content));
 
 module.exports = new Page({
     delegate: type.Source,

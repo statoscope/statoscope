@@ -1,164 +1,119 @@
 var Node = require('basis.ui').Node;
-var DataObject = require('basis.data').DataObject;
+var DataObject = require('basis.data').Object;
+var Dataset = require('basis.data').Dataset;
+var wrap = require('basis.data').wrap;
 var Value = require('basis.data').Value;
-var addHandler = require('basis.dom.event').addHandler;
+var ColorBar = require('app.ui').ColorBar;
+var Graph = require('app.ui').Graph;
 var d3 = require('d3');
 
+var colors = d3.schemeCategory10;
+var groupsColor = new DataObject({
+    data: {
+        'unknown': colors[0],
+        'js': colors[1],
+        'coffee': colors[1],
+        'ts': colors[1],
+        'dart': colors[1],
+        'json': colors[1],
+        'css': colors[2],
+        'html': colors[3],
+        'eot': colors[4],
+        'ttf': colors[4],
+        'woff': colors[4],
+        'woff2': colors[4],
+        'svg': colors[5],
+        'jpg': colors[5],
+        'jpeg': colors[5],
+        'png': colors[5],
+        'gif': colors[5]
+    }
+});
+
 module.exports = Node.subclass({
-    template: resource('./template/graph.tmpl'),
     autoDelegate: true,
-    marginBottom: 10,
-    updateGraphSize: function() {
-        if (this.svg) {
-            this.svg.attr('height', window.innerHeight - this.element.getBoundingClientRect().top - this.marginBottom);
+    template: resource('./template/page.tmpl'),
+    satellite: {
+        colorBar: {
+            instance: ColorBar.subclass({
+                sorting: function(item) {
+                    return (item.data.group == 'UNKNOWN') + item.data.group;
+                },
+                init: function() {
+                    ColorBar.prototype.init.call(this);
+
+                    this.setDataSource(new Dataset());
+                    Value.query(this, 'data.profile.data.modules').pipe('itemsChanged', function(modules) {
+                        var items = {};
+
+                        modules.forEach(function(module) {
+                            var group = module.data.name.split('.').pop();
+
+                            group = groupsColor.data.hasOwnProperty(group) ? group : 'unknown';
+
+                            if (!items[group]) {
+                                items[group] = {
+                                    count: 0,
+                                    width: 0,
+                                    group: group.toUpperCase(),
+                                    color: groupsColor.data[group]
+                                };
+                            }
+
+                            items[group].count++;
+                        });
+
+                        for (var group in items) {
+                            items[group].width = (100 / modules.itemCount * items[group].count).toFixed(2);
+                        }
+
+                        this.dataSource.set(wrap(basis.object.values(items), true));
+                    }.bind(this));
+                }
+            })
+        },
+        graph: {
+            instance: Graph,
+            config: function() {
+                return {
+                    groupsColor: groupsColor
+                };
+            },
+            delegate: 'graph'
         }
+    },
+    binding: {
+        colorBar: 'satellite:',
+        graph: 'satellite:'
     },
     init: function() {
         Node.prototype.init.call(this);
 
-        addHandler(window, 'resize', function() {
-            this.updateGraphSize();
-        }, this);
+        this.graph = Value.query(this, 'data.profile.data.modules').pipe('itemsChanged', function(modules) {
+            var nodes = [];
+            var links = [];
 
-        this.svg = null;
+            modules.forEach(function(module) {
+                var group = module.data.name.split('.').pop();
 
-        if (!this.groupsColor) {
-            this.groupsColor = new DataObject();
-        }
+                nodes.push({ id: module.data.id, name: module.data.name, group: group, main: !module.data.id });
+                module.data.reasons.forEach(function(reason) {
+                    links.push({ source: reason.data.id, target: module.data.id });
+                });
+            });
 
-        var tooltip = new Node({
-            container: document.body,
-            template: resource('./template/tooltip.tmpl'),
-            bottom: new Value({value: 0}),
-            left: new Value({value: 0}),
-            visible: new Value({value: false}),
-            content: new Value({value: ''}),
-            binding: {
-                bottom: 'bottom',
-                left: 'left',
-                visible: 'visible',
-                content: 'content'
-            }
+            return new DataObject({
+                data: {
+                    nodes: nodes,
+                    links: links
+                }
+            });
         });
+    },
+    destroy: function() {
+        this.graph.destroy();
+        this.graph = null;
 
-        Value.query(this, 'data').link(this, function(graph) {
-            basis.asap(function() {
-                if (this.svg) {
-                    this.svg.remove();
-                }
-
-                this.svg = d3.select(this.element).append('svg').attr('width', '100%');
-                this.updateGraphSize();
-                var width = this.svg.node().clientWidth;
-                var height = parseInt(this.svg.attr('height'));
-                var groupsColor = this.groupsColor.data;
-                var dragging = false;
-
-                var simulation = d3.forceSimulation()
-                    .force('link', d3.forceLink().id(function(d) {
-                        return d.id;
-                    }))
-                    .force('charge', d3.forceManyBody())
-                    .force('center', d3.forceCenter(width / 2, height / 2));
-
-                var color = d3.scaleOrdinal(d3.schemeCategory10);
-                var link = this.svg.append('g')
-                    .attr('class', 'links')
-                    .selectAll('line')
-                    .data(graph.links)
-                    .enter().append('line')
-                    .attr('stroke', '#999')
-                    .attr('stroke-opacity', '0.6');
-
-                var node = this.svg.append('g')
-                    .attr('class', 'nodes')
-                    .selectAll('circle')
-                    .data(graph.nodes)
-                    .enter().append('circle')
-                    .attr('r', 5)
-                    .attr('stroke-width', function(d) {
-                        return d.main ? '2.5px' : '1.5px';
-                    })
-                    .attr('stroke', function(d) {
-                        return d.main ? '#d62728' : '#fff';
-                    })
-                    .attr('fill', function(d) {
-                        return color(groupsColor[d.group] || groupsColor.all);
-                    })
-                    .on('mouseover', function(sender) {
-                        if (!dragging) {
-                            tooltip.content.set(sender.name);
-                            tooltip.visible.set(true);
-                        }
-                    })
-                    .on('mousemove', function() {
-                        if (!dragging) {
-                            tooltip.bottom.set(window.innerHeight - event.pageY + 10);
-                            tooltip.left.set(event.pageX - 10);
-                        }
-                    })
-                    .on('mouseout', function() {
-                        tooltip.visible.set(false);
-                    })
-                    .call(d3.drag()
-                        .on('start', dragstarted)
-                        .on('drag', dragged)
-                        .on('end', dragended));
-
-                simulation
-                    .nodes(graph.nodes)
-                    .on('tick', ticked);
-
-                simulation.force('link')
-                    .links(graph.links);
-
-                function ticked() {
-                    link
-                        .attr('x1', function(d) {
-                            return d.source.x;
-                        })
-                        .attr('y1', function(d) {
-                            return d.source.y;
-                        })
-                        .attr('x2', function(d) {
-                            return d.target.x;
-                        })
-                        .attr('y2', function(d) {
-                            return d.target.y;
-                        });
-
-                    node
-                        .attr('cx', function(d) {
-                            return d.x;
-                        })
-                        .attr('cy', function(d) {
-                            return d.y;
-                        });
-                }
-
-                function dragstarted(d) {
-                    if (!d3.event.active) {
-                        simulation.alphaTarget(0.3).restart();
-                    }
-                    d.fx = d.x;
-                    d.fy = d.y;
-                    dragging = true;
-                }
-
-                function dragged(d) {
-                    d.fx = d3.event.x;
-                    d.fy = d3.event.y;
-                }
-
-                function dragended(d) {
-                    if (!d3.event.active) {
-                        simulation.alphaTarget(0);
-                    }
-                    d.fx = null;
-                    d.fy = null;
-                    dragging = false;
-                }
-            }, this);
-        }.bind(this));
+        Node.prototype.destroy.call(this);
     }
 });

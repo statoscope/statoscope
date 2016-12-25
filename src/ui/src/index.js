@@ -20,6 +20,7 @@ module.exports = require('basis.app').create({
         document.head.appendChild(webtreeCss);
 
         return new Node({
+            active: true,
             template: resource('./template/layout.tmpl'),
             binding: {
                 menu: 'satellite:',
