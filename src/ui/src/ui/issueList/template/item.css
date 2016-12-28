@@ -1,14 +1,22 @@
-.item {
-    background: #d9edf7;
-    padding: 10px;
-    border-radius: 5px;
+.item
+{
+  background: #d9edf7;
+  padding: 10px;
+  border-radius: 5px;
 }
 
-.header, .footer {
-    font-weight: bold;
+.item ~ .item
+{
+  margin-top: 10px;
 }
 
-.text {
-    font-size: 0.7em;
-    margin: 5px 0;
+.header
+{
+  font-weight: bold;
+}
+
+.text
+{
+  font-size: 0.7em;
+  margin: 5px 0;
 }

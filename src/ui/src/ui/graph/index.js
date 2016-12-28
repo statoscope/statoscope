@@ -79,7 +79,7 @@ module.exports = Node.subclass({
                         return groupsColor.hasOwnProperty(d.group) ? groupsColor[d.group] : groupsColor.unknown;
                     })
                     .on('mouseover', function(sender) {
-                        // todo highlight links
+                        // todo highlight links, draw arrows
 
                         if (!dragging) {
                             tooltip.content.set(sender.name);

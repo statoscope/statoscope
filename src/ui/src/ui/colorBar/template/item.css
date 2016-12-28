@@ -1,12 +1,15 @@
-.item {
-    height: 100%;
-    transition: box-shadow .2s ease-out;
+.item
+{
+  height: 100%;
+  transition: box-shadow .2s ease-out;
 }
 
-.item:hover {
-    box-shadow: #333 0 0 5px 1px;
+.item:hover
+{
+  box-shadow: #333 0 0 5px 1px;
 }
 
-.item ~ .item {
-    margin-left: 1px;
+.item ~ .item
+{
+  margin-left: 1px;
 }

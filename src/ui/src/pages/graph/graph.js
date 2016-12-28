@@ -103,7 +103,8 @@ module.exports = Node.subclass({
             modules.forEach(function(module) {
                 var group = module.data.name.split('.').pop();
 
-                nodes.push({ id: module.data.id, name: module.data.name, group: group, main: !module.data.id });
+                // todo add error/warning count
+                nodes.push({ id: module.data.id, name: module.data.name, group: group, main: !module.data.reasons.itemCount });
                 module.data.reasons.forEach(function(reason) {
                     links.push({ source: reason.data.id, target: module.data.id });
                 });

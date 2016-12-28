@@ -1,13 +1,16 @@
-.content-wrapper {
-    display: flex;
-    margin-top: -15px;
+.content-wrapper
+{
+  display: flex;
+  margin-top: -15px;
 }
 
-.content-column {
-    flex-basis: 50%;
+.content-column
+{
+  flex-basis: 50%;
 }
 
-.splitter {
-    flex-basis: 10px;
-    flex-shrink: 0;
+.splitter
+{
+  flex-basis: 10px;
+  flex-shrink: 0;
 }

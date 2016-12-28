@@ -1,0 +1,26 @@
+.matcher.string .content
+{
+  color: #2274a5;
+}
+
+.matcher.string .flags
+{
+  display: none;
+}
+
+.matcher.regexp .content
+{
+  color: #77567a;
+}
+
+.matcher.regexp .content:before,
+.matcher.regexp .content:after
+{
+  color: #d84727;
+  content: '/';
+}
+
+.matcher.regexp .flags
+{
+  color: #d84727;
+}

@@ -1,5 +1,6 @@
-.page {
-    margin: 10px;
-    position: relative;
-    overflow: auto;
+.page
+{
+  margin: 10px;
+  position: relative;
+  overflow: auto;
 }

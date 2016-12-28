@@ -99,7 +99,7 @@ Value.query(page, 'target.data.profile.data.modules').pipe('itemsChanged', funct
         return;
     }
 
-    var allFiles = {};
+    var appliedFiles = {};
 
     this.element.innerHTML = '';
     this.tree = makeNode('/', 0);
@@ -107,16 +107,14 @@ Value.query(page, 'target.data.profile.data.modules').pipe('itemsChanged', funct
     modules.forEach(function(module) {
         var files = module.data.files;
 
-        for (var fileName in files) {
-            if (!files.hasOwnProperty(fileName)) {
-                return;
+        files.forEach(function(file) {
+            if (!appliedFiles[file.data.name]) {
+                var path = file.data.name.slice(type.Source.data.profile.data.context.length + 1);
+
+                appliedFiles[file.data.name] = true;
+                applyPath(this.tree, { path: path, size: file.data.size });
             }
-
-            var path = fileName.slice(type.Source.data.profile.data.context.length + 1);
-
-            allFiles[fileName] = files[fileName];
-            applyPath(this.tree, { path: path, size: files[fileName] });
-        }
+        }.bind(this));
     }.bind(this));
 
     calcPercentsAndUpdateNames(this.tree);
