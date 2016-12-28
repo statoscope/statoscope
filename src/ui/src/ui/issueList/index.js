@@ -1,3 +1,4 @@
+var Value = require('basis.data').Value;
 var Node = require('basis.ui').Node;
 var template = require('basis.template');
 
@@ -12,9 +13,10 @@ module.exports = Node.subclass({
     childClass: {
         template: templates.item,
         binding: {
-            header: 'data:',
-            text: 'data:',
-            footer: 'data:'
+            header: Value.query('data.module.data.name').as(function(name) {
+                return name || 'unknown';
+            }),
+            message: 'data:'
         }
     }
 });

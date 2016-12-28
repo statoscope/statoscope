@@ -7,12 +7,13 @@ var Source = entity.createType({
     fields: {
         status: String,
         progress: Number,
-        online: Boolean,
         profile: Profile
     }
 });
 
 var source = Source({});
+
+/** @cut */ basis.dev.log('source', source);
 
 rempl.getSubscriber(function(api) {
     api.ns('progress').subscribe(function(data) {

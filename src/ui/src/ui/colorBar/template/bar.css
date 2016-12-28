@@ -1,5 +1,6 @@
-.bar {
-    display: flex;
-    height: 7px;
-    margin: 4px;
+.bar
+{
+  display: flex;
+  height: 7px;
+  margin: 4px;
 }

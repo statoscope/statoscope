@@ -1,0 +1,9 @@
+{
+  "en-US": {
+    "loaders": {
+      "pre": "Pre loaders",
+      "loader": "Loaders",
+      "post": "Post loaders"
+    }
+  }
+}

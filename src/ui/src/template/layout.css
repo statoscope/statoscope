@@ -1,33 +1,37 @@
 html,
-body {
-    height: 100%;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #333;
-    background-color: #fff;
-    margin: 0;
-    padding: 0;
+body
+{
+  height: 100%;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
 }
 
-hr {
-    height: 0;
-    -webkit-box-sizing: content-box;
-    -moz-box-sizing: content-box;
-    box-sizing: content-box;
-    margin: 10px 0;
-    border: 0;
-    border-top: 1px solid #ccc;
+hr
+{
+  height: 0;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  margin: 10px 0;
+  border: 0;
+  border-top: 1px solid #ccc;
 }
 
-.layout {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+.layout
+{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.page-container {
-    flex-grow: 1;
-    position: relative;
-    overflow: auto;
+.page-container
+{
+  flex-grow: 1;
+  position: relative;
+  overflow: auto;
 }

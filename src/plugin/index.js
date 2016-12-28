@@ -1,7 +1,15 @@
+var loaderUtils = require('loader-utils');
 var webpack = require('webpack');
+var NormalModule = require('webpack/lib/NormalModule');
+var splitQuery = NormalModule.prototype.splitQuery;
+var RequestShortener = require('webpack/lib/RequestShortener');
 var rempl = require('rempl');
 var path = require('path');
 var fs = require('fs');
+var async = require('async');
+
+var handledFiles;
+var requestShortener;
 
 function deepExtend(target) {
     var sources = Array.prototype.slice.call(arguments, 1);
@@ -31,6 +39,135 @@ function deepExtend(target) {
     return target;
 }
 
+function handleFile(file) {
+    if (handledFiles[file]) {
+        return handledFiles[file];
+    }
+
+    var size = 0;
+
+    try {
+        size = fs.statSync(file).size;
+    } catch (e) {
+        // dummy
+    }
+
+    handledFiles[file] = {
+        name: file,
+        size: size
+    };
+
+    return handledFiles[file];
+}
+
+function getModuleFiles(module, loaders) {
+    var fileDependencies = module.fileDependencies || [];
+    var resolvedFiles = {};
+    var files = [];
+    var loaderFiles = loaders.map(function(loader) {
+        return loader.path;
+    });
+
+    fileDependencies
+        .concat(loaderFiles)
+        .filter(function(filePath) {
+            return fs.existsSync(filePath) && fs.statSync(filePath).isFile();
+        })
+        .reduce(function(prev, current) {
+            prev[current] = handleFile(current);
+
+            return prev;
+        }, resolvedFiles);
+
+    for (var file in resolvedFiles) {
+        if (resolvedFiles.hasOwnProperty(file)) {
+            files.push(resolvedFiles[file]);
+        }
+    }
+
+    return files;
+}
+
+function getModuleLoaders(module) {
+    return (module.loaders || []).map(function(loader) {
+        return handleLoader(loader, requestShortener);
+    });
+}
+
+function handleLoader(loader, shortener) {
+    var loaderSplitted = splitQuery(loader);
+    var loaderPath = loaderSplitted[0];
+    var loaderQuery = loaderUtils.parseQuery(loaderSplitted[1]) || {};
+
+    return {
+        full: loader,
+        fullShorten: shortener.shorten(loader),
+        path: loaderPath,
+        pathShorten: shortener.shorten(loaderPath),
+        query: loaderQuery
+    };
+}
+
+function resolveLoaders(compilation, nmf, callback) {
+    var loaderDescriptorsList = nmf.loaders.list.concat(nmf.preLoaders.list, nmf.postLoaders.list);
+
+    loaderDescriptorsList.forEach(function(descriptor) {
+        if (nmf.loaders.list.indexOf(descriptor) > -1) {
+            descriptor.type = 'loader';
+        } else if (nmf.preLoaders.list.indexOf(descriptor) > -1) {
+            descriptor.type = 'pre';
+        } else if (nmf.postLoaders.list.indexOf(descriptor) > -1) {
+            descriptor.type = 'post';
+        }
+
+        descriptor.test = normalizeDescriptorMatchers(descriptor.test);
+        descriptor.include = normalizeDescriptorMatchers(descriptor.include);
+        descriptor.exclude = normalizeDescriptorMatchers(descriptor.exclude);
+        descriptor.loaders = descriptor.loaders || descriptor.loader || [];
+
+        if (descriptor.loaders && !Array.isArray(descriptor.loaders)) {
+            descriptor.loaders = descriptor.loaders.split('!');
+        }
+    });
+
+    async.map(loaderDescriptorsList, resolveDescriptorLoaders, function(error, results) {
+        results = results || [];
+        results.forEach(function(loaderDescriptor) {
+            loaderDescriptor.loaders = loaderDescriptor.loaders.map(function(loader) {
+                return handleLoader(loader, requestShortener);
+            });
+        });
+
+        callback(error, results);
+    });
+
+    function resolveDescriptorLoaders(descriptor, callback) {
+        async.map(descriptor.loaders, nmf.resolvers.loader.resolve.bind(nmf.resolvers.loader, compilation.compiler.context), function(error, results) {
+            descriptor.loaders = results;
+
+            callback(error, descriptor);
+        });
+    }
+
+    function normalizeDescriptorMatchers(matchers) {
+        if (!matchers) {
+            return;
+        }
+
+        if (!Array.isArray(matchers)) {
+            matchers = [matchers];
+        }
+
+        return matchers.map(function(matcher) {
+            return {
+                type: matcher instanceof RegExp ? 'regexp' : 'string',
+                content: matcher instanceof RegExp ? matcher.source : matcher.toString(),
+                flags: matcher instanceof RegExp ? matcher.flags : ''
+            };
+        });
+    }
+}
+
 function RuntimeAnalyzerPlugin(options) {
     var defaultOptions = {
         ui: {
@@ -54,7 +191,16 @@ function RuntimeAnalyzerPlugin(options) {
 }
 
 RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
-    this.lastProfile = null;
+    var COMPILATION;
+    var NMF;
+    // var CMF;
+
+    compiler.plugin('compilation', function(compilation, factories) {
+        COMPILATION = compilation;
+        NMF = factories.normalModuleFactory;
+        // CMF = factories.contextModuleFactory;
+        requestShortener = new RequestShortener(compilation.options.context || process.cwd());
+    });
 
     compiler.apply(new webpack.ProgressPlugin(function(percent) {
         this.transport.ns('status').publish('compiling');
@@ -62,50 +208,97 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
     }.bind(this)));
 
     compiler.plugin('emit', function(compilation, done) {
-        var stats = compilation.getStats();
+        var modules = [];
+        var assets = [];
         var profile;
 
-        this.lastProfile = profile = stats.toJson();
+        handledFiles = {};
 
-        profile.context = compiler.context;
+        for (var assetName in compilation.assets) {
+            if (compilation.assets.hasOwnProperty(assetName)) {
+                assets.push({
+                    name: assetName,
+                    size: compilation.assets[assetName].size()
+                });
+            }
+        }
 
-        profile.errors = profile.errors.map(function(error) {
-            return { text: error };
-        });
+        compilation.modules.forEach(function(module) {
+            var moduleInfo = {
+                id: module.index2,
+                name: module.readableIdentifier(requestShortener),
+                size: module.size(),
+                files: [],
+                reasons: module.reasons.filter(function(reason) {
+                    return reason.dependency && reason.module;
+                }).map(function(reason) {
+                    return reason.module.index2;
+                }),
+                loaders: getModuleLoaders(module)
+            };
 
-        profile.warnings = profile.warnings.map(function(warning) {
-            return { text: warning };
-        });
+            moduleInfo.files = getModuleFiles(module, moduleInfo.loaders);
 
-        compilation.chunks.forEach(function(chunk) {
-            chunk.modules.forEach(function(module) {
-                var loaders = module.loaders || [];
-                var fileDependencies = module.fileDependencies || [];
-                var origin = [];
-                var files = {};
-
-                if (module.resource) {
-                    origin.push(module.resource);
-                }
-
-                origin.concat(loaders, fileDependencies).map(function(filePath) {
-                    return filePath.replace(/([^?]+).*!/, '$1');
-                }).filter(function(filePath) {
-                    return fs.existsSync(filePath) && fs.statSync(filePath).isFile();
-                }).reduce(function(prev, current) {
-                    if (!prev[current]) {
-                        prev[current] = fs.statSync(current).size;
-                    }
-
-                    return prev;
-                }, files);
-
-                profile.modules[module.index].files = files;
-            }, this);
+            modules.push(moduleInfo);
         }, this);
 
-        this.transport.ns('profile').publish(profile);
-        done();
+        profile = {
+            version: require('webpack/package.json').version,
+            hash: compilation.hash,
+            context: compilation.compiler.context,
+            assets: assets,
+            chunks: compilation.chunks.map(function(chunk) {
+                return {
+                    id: chunk.id,
+                    name: chunk.name,
+                    size: chunk.size({}),
+                    hash: chunk.renderedHash,
+                    files: chunk.files,
+                    modules: chunk.modules.map(function(module) {
+                        return module.index2;
+                    }),
+                    rendered: chunk.rendered,
+                    initial: chunk.initial,
+                    entry: chunk.entry
+                };
+            }),
+            modules: compilation.modules.map(function(module) {
+                var moduleInfo = {
+                    id: module.index2,
+                    name: module.readableIdentifier(requestShortener),
+                    size: module.size(),
+                    files: [],
+                    reasons: module.reasons.filter(function(reason) {
+                        return reason.dependency && reason.module;
+                    }).map(function(reason) {
+                        return reason.module.index2;
+                    }),
+                    loaders: getModuleLoaders(module)
+                };
+
+                moduleInfo.files = getModuleFiles(module, moduleInfo.loaders);
+
+                return moduleInfo;
+            }),
+            errors: compilation.errors.map(function(error) {
+                return {
+                    message: error.message,
+                    module: error.module && error.module.index2
+                };
+            }),
+            warnings: compilation.warnings.map(function(warning) {
+                return {
+                    message: warning.message,
+                    module: warning.module && warning.module.index2
+                };
+            })
+        };
+
+        resolveLoaders(COMPILATION, NMF, function(error, result) {
+            profile.loaderDescriptors = result;
+            this.transport.ns('profile').publish(profile);
+            done();
+        }.bind(this));
     }.bind(this));
 
     compiler.plugin('compile', function() {
@@ -117,7 +310,7 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
     }.bind(this));
 
     compiler.plugin('done', function() {
-        this.transport.ns('status').publish(this.lastProfile && this.lastProfile.errors.length ? 'failed' : 'success');
+        this.transport.ns('status').publish(COMPILATION.errors.length ? 'failed' : 'success');
     }.bind(this));
 
     compiler.plugin('failed', function() {
