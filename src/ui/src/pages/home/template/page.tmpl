@@ -3,14 +3,18 @@
 
 <div class="content-wrapper">
     <div class="content-column">
-        <h3>Modules<span b:show="{modulesCount}"> ({modulesCount})</span></h3>
-        <hr/>
+        <div class="header">
+            <span class="caption">Input</span>
+            <span class="stat" b:show="{modulesCount}"> ({modulesCount} {l10n:module.{modulesCount}} in {modulesSize})</span>
+        </div>
         <!--{modules}-->
     </div>
     <div class="splitter"/>
     <div class="content-column">
-        <h3>Assets<span b:show="{assetsCount}"> ({assetsCount})</span></h3>
-        <hr/>
+        <div class="header">
+            <span class="caption">Output</span>
+            <span class="stat" b:show="{assetsCount}"> ({assetsCount} {l10n:asset.{assetsCount}} in {assetsSize})</span>
+        </div>
         <!--{assets}-->
     </div>
 </div>

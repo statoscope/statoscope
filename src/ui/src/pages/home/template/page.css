@@ -1,6 +1,5 @@
 .content-wrapper {
     display: flex;
-    margin-top: -15px;
 }
 
 .content-column {
@@ -10,4 +9,19 @@
 .splitter {
     flex-basis: 10px;
     flex-shrink: 0;
+}
+
+.header {
+    font-weight2: bold;
+    font-size: 20px;
+    line-height: 1;
+    margin: 0 0 10px;
+}
+.caption {
+    color: #8A8;
+    padding: 3px 3px 0;
+}
+.stat {
+    font-size: 14px;
+    color: #888;
 }
