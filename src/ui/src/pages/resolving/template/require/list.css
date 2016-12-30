@@ -1,0 +1,51 @@
+.require
+{
+	border: 1px solid #3BAFDA;
+	box-sizing: border-box;
+	position: relative;
+}
+
+.require ~ .require
+{
+	border-top: none;
+}
+
+.require:first-child
+{
+	border-radius: 3px 3px 0 0;
+}
+
+.require:last-child
+{
+	border-radius: 0 0 3px 3px;
+}
+
+.module
+{
+	padding: 6px;
+	font-size: 16px;
+	cursor: pointer;
+	user-select: none;
+}
+
+.module:hover .module-name
+{
+	border-bottom: 1px solid #3BAFDA;
+}
+
+.module-name
+{
+	color: #3BAFDA;
+	padding-bottom: 2px;
+}
+
+.resolving
+{
+	display: none;
+	padding: 6px;
+}
+
+.resolving_visible
+{
+	display: block;
+}

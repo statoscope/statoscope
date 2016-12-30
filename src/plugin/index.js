@@ -8,7 +8,10 @@ var path = require('path');
 var fs = require('fs');
 var async = require('async');
 
+var COMPILATION;
+var NMF;
 var handledFiles;
+var resolvingStackMap = {};
 var requestShortener;
 
 function deepExtend(target) {
@@ -111,23 +114,27 @@ function handleLoader(loader, shortener) {
 function resolveLoaders(compilation, nmf, callback) {
     var loaderDescriptorsList = nmf.loaders.list.concat(nmf.preLoaders.list, nmf.postLoaders.list);
 
-    loaderDescriptorsList.forEach(function(descriptor) {
+    loaderDescriptorsList = loaderDescriptorsList.map(function(descriptor) {
+        var newDescriptor = {};
+
         if (nmf.loaders.list.indexOf(descriptor) > -1) {
-            descriptor.type = 'loader';
+            newDescriptor.type = 'loader';
         } else if (nmf.preLoaders.list.indexOf(descriptor) > -1) {
-            descriptor.type = 'pre';
+            newDescriptor.type = 'pre';
         } else if (nmf.postLoaders.list.indexOf(descriptor) > -1) {
-            descriptor.type = 'post';
+            newDescriptor.type = 'post';
         }
 
-        descriptor.test = normalizeDescriptorMatchers(descriptor.test);
-        descriptor.include = normalizeDescriptorMatchers(descriptor.include);
-        descriptor.exclude = normalizeDescriptorMatchers(descriptor.exclude);
-        descriptor.loaders = descriptor.loaders || descriptor.loader || [];
+        newDescriptor.test = normalizeDescriptorMatchers(descriptor.test);
+        newDescriptor.include = normalizeDescriptorMatchers(descriptor.include);
+        newDescriptor.exclude = normalizeDescriptorMatchers(descriptor.exclude);
+        newDescriptor.loaders = descriptor.loaders || descriptor.loader || [];
 
-        if (descriptor.loaders && !Array.isArray(descriptor.loaders)) {
-            descriptor.loaders = descriptor.loaders.split('!');
+        if (newDescriptor.loaders && !Array.isArray(newDescriptor.loaders)) {
+            newDescriptor.loaders = newDescriptor.loaders.split('!');
         }
+
+        return newDescriptor;
     });
 
     async.map(loaderDescriptorsList, resolveDescriptorLoaders, function(error, results) {
@@ -168,6 +175,38 @@ function resolveLoaders(compilation, nmf, callback) {
     }
 }
 
+function collectStackCallback(result, callback) {
+    if (callback.stack && callback.stack.length) {
+        var mapKey;
+        var stack = callback.stack
+            .map(function(item) {
+                var data = item.match(/(.+?): \((.+)\) (.*)/) || [];
+                var result = {
+                    full: item,
+                    type: data[1],
+                    context: data[2],
+                    target: data[3]
+                };
+
+                if (result.type && result.context) {
+                    return result;
+                }
+            })
+            .filter(Boolean);
+
+        if (stack.length) {
+            mapKey = stack[0].target + ' : ' + stack[stack.length - 1].context;
+            resolvingStackMap[mapKey] = {
+                context: stack[0].context,
+                target: stack[0].target,
+                resolvedTarget: stack[stack.length - 1].context,
+                stack: stack
+            };
+        }
+    }
+    callback();
+}
+
 function RuntimeAnalyzerPlugin(options) {
     var defaultOptions = {
         ui: {
@@ -191,15 +230,13 @@ function RuntimeAnalyzerPlugin(options) {
 }
 
 RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
-    var COMPILATION;
-    var NMF;
-    // var CMF;
-
     compiler.plugin('compilation', function(compilation, factories) {
         COMPILATION = compilation;
         NMF = factories.normalModuleFactory;
-        // CMF = factories.contextModuleFactory;
         requestShortener = new RequestShortener(compilation.options.context || process.cwd());
+
+        NMF.resolvers.normal.plugin('result', collectStackCallback);
+        NMF.resolvers.loader.plugin('result', collectStackCallback);
     });
 
     compiler.apply(new webpack.ProgressPlugin(function(percent) {
@@ -208,8 +245,8 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
     }.bind(this)));
 
     compiler.plugin('emit', function(compilation, done) {
-        var modules = [];
         var assets = [];
+        var modules;
         var profile;
 
         handledFiles = {};
@@ -223,24 +260,37 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
             }
         }
 
-        compilation.modules.forEach(function(module) {
+        modules = compilation.modules.map(function(module) {
             var moduleInfo = {
-                id: module.index2,
+                index: module.index2,
                 name: module.readableIdentifier(requestShortener),
                 size: module.size(),
-                files: [],
+                rawRequest: module.rawRequest,
+                context: module.context,
                 reasons: module.reasons.filter(function(reason) {
                     return reason.dependency && reason.module;
                 }).map(function(reason) {
-                    return reason.module.index2;
+                    return reason.module.readableIdentifier(requestShortener);
                 }),
                 loaders: getModuleLoaders(module)
             };
+            var resolvingRawParts = (moduleInfo.rawRequest || '').replace(/^!+/, '');
+            var resolvingFullParts = (module.userRequest || '').replace(/^!+/, '');
+
+            resolvingRawParts = resolvingRawParts ? resolvingRawParts.split('!') : [];
+            resolvingFullParts = resolvingFullParts ? resolvingFullParts.split('!') : [];
 
             moduleInfo.files = getModuleFiles(module, moduleInfo.loaders);
+            moduleInfo.resolving = resolvingRawParts
+                .map(function(part, index) {
+                    var splitted = splitQuery(resolvingFullParts[index]);
+                    var mapKey = part + ' : ' + splitted[0] || splitted[1];
 
-            modules.push(moduleInfo);
-        }, this);
+                    return resolvingStackMap[mapKey];
+                });
+
+            return moduleInfo;
+        });
 
         profile = {
             version: require('webpack/package.json').version,
@@ -255,41 +305,24 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
                     hash: chunk.renderedHash,
                     files: chunk.files,
                     modules: chunk.modules.map(function(module) {
-                        return module.index2;
+                        return module.readableIdentifier(requestShortener);
                     }),
                     rendered: chunk.rendered,
                     initial: chunk.initial,
                     entry: chunk.entry
                 };
             }),
-            modules: compilation.modules.map(function(module) {
-                var moduleInfo = {
-                    id: module.index2,
-                    name: module.readableIdentifier(requestShortener),
-                    size: module.size(),
-                    files: [],
-                    reasons: module.reasons.filter(function(reason) {
-                        return reason.dependency && reason.module;
-                    }).map(function(reason) {
-                        return reason.module.index2;
-                    }),
-                    loaders: getModuleLoaders(module)
-                };
-
-                moduleInfo.files = getModuleFiles(module, moduleInfo.loaders);
-
-                return moduleInfo;
-            }),
+            modules: modules,
             errors: compilation.errors.map(function(error) {
                 return {
                     message: error.message,
-                    module: error.module && error.module.index2
+                    module: error.module && error.module.readableIdentifier(requestShortener)
                 };
             }),
             warnings: compilation.warnings.map(function(warning) {
                 return {
                     message: warning.message,
-                    module: warning.module && warning.module.index2
+                    module: warning.module && warning.module.readableIdentifier(requestShortener)
                 };
             })
         };

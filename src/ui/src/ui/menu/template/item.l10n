@@ -13,6 +13,7 @@
       "errors": "Errors <span b:show=\"{errors}\"> ({errors})</span>",
       "warnings": "Warnings <span b:show=\"{warnings}\"> ({warnings})</span>",
       "loaders": "Loaders",
+      "resolving": "Resolving",
       "graph": "Graph",
       "fileMap": "File Map"
     }

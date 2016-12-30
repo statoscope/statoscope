@@ -1,32 +1,32 @@
 .table
 {
-  width: 100%;
-  border-collapse: collapse;
+	width: 100%;
+	border-collapse: collapse;
 }
 
 .table tr
 {
-  line-height: 1.7em;
+	line-height: 1.7em;
 }
 
 .table tbody tr:nth-child(odd) td
 {
-  background: #f5f5f5;
+	background: #f5f5f5;
 }
 
 .table td
 {
-  padding: 4px;
+	padding: 4px;
 }
 
 .table tfoot td, tbody td
 {
-  border-top: 1px solid #ccc;
+	border-top: 1px solid #ccc;
 }
 
 .empty
 {
-  background: #d9edf7;
-  padding: 10px;
-  border-radius: 5px;
+	background: #d9edf7;
+	padding: 10px;
+	border-radius: 5px;
 }

@@ -1,159 +1,130 @@
 var Node = require('basis.ui').Node;
-var DataObject = require('basis.data').DataObject;
+var event = require('basis.event');
 var Value = require('basis.data').Value;
-var addHandler = require('basis.dom.event').addHandler;
-var Tooltip = require('app.ui.tooltip.index');
+var Expression = require('basis.data.value').Expression;
+var resolveValue = require('basis.data').resolveValue;
 var d3 = require('d3');
 
+// todo correct center on resize, zoom, drag field
 module.exports = Node.subclass({
     template: resource('./template/graph.tmpl'),
-    autoDelegate: true,
-    marginBottom: 10,
-    tooltipClass: Tooltip,
-    updateGraphSize: function() {
-        if (this.svg) {
-            this.svg.attr('height', window.innerHeight - this.element.getBoundingClientRect().top - this.marginBottom);
+    width: 0,
+    height: 0,
+    widthRA_: null,
+    heightRA_: null,
+    graphRA_: null,
+    emit_widthChanged: event.create('widthChanged'),
+    emit_heightChanged: event.create('heightChanged'),
+    emit_graphChanged: event.create('graphChanged'),
+    propertyDescriptors: {
+        width: 'widthChanged',
+        height: 'heightChanged',
+        graph: 'graphChanged'
+    },
+    extendNodes: basis.fn.$undef,
+    applySimulation: basis.fn.$undef,
+    setWidth: function(value) {
+        value = resolveValue(this, this.setWidth, value, 'widthRA_');
+
+        if (this.width !== value) {
+            this.width = value;
+            this.emit_widthChanged();
         }
     },
-    init: function() {
-        Node.prototype.init.call(this);
+    setHeight: function(value) {
+        value = resolveValue(this, this.setHeight, value, 'heightRA_');
 
-        addHandler(window, 'resize', function() {
-            this.updateGraphSize();
-        }, this);
+        if (this.height !== value) {
+            this.height = value;
+            this.emit_heightChanged();
+        }
+    },
+    setGraph: function(value) {
+        value = resolveValue(this, this.setGraph, value, 'graphRA_');
 
-        this.svg = null;
-        this.tooltip = new this.tooltipClass();
-
-        if (!this.groupsColor) {
-            this.groupsColor = new DataObject();
+        if (this.graph !== value) {
+            this.graph = value;
+            this.applyGraph(value);
+            this.emit_graphChanged();
+        }
+    },
+    applyGraph: function(graph) {
+        if (!graph || !graph.nodes) {
+            return;
         }
 
-        Value.query(this, 'data').link(this, function(graph) {
-            if (!graph.nodes || !graph.links) {
-                return;
+        basis.asap(function() {
+            var linksExist;
+            var nodesExist;
+            var nodesNew;
+            var linksNew;
+
+            linksExist = this.svg
+                .select('g.links')
+                .selectAll('line')
+                .data(graph.links || []);
+
+            nodesExist = this.svg
+                .select('g.nodes')
+                .selectAll('circle')
+                .data(graph.nodes);
+
+            linksExist.exit().remove();
+            nodesExist.exit().remove();
+
+            nodesNew = nodesExist.enter().append('circle');
+            linksNew = linksExist.enter().append('line');
+
+            this.extendNodes(this.svg, this.simulation, nodesNew, linksNew);
+            this.applySimulation(this.svg, this.simulation, graph);
+        }, this);
+    },
+    init: function() {
+        var width = this.width;
+        var height = this.height;
+        var graph = this.graph;
+
+        Node.prototype.init.call(this);
+
+        this.width = null;
+        this.height = null;
+        this.graph = null;
+
+        this.svg = d3.select(document.createElementNS(d3.namespaces.svg, 'svg'));
+        this.svg.append('g').attr('class', 'links');
+        this.svg.append('g').attr('class', 'nodes');
+        this.simulation = d3.forceSimulation();
+        this.setWidth(width);
+        this.setHeight(height);
+        this.setGraph(graph);
+        this.sizeExpression = new Expression(
+            Value.query(this, 'width'),
+            Value.query(this, 'height'),
+            function(width, height) {
+                return {
+                    width: width,
+                    height: height
+                };
             }
-
-            basis.asap(function() {
-                if (this.svg) {
-                    this.svg.remove();
-                }
-
-                this.svg = d3.select(this.element).append('svg').attr('width', '100%');
-                this.updateGraphSize();
-
-                var width = this.svg.node().clientWidth;
-                var height = parseInt(this.svg.attr('height'));
-                var groupsColor = this.groupsColor.data;
-                var dragging = false;
-                var tooltip = this.tooltip;
-
-                var simulation = d3.forceSimulation()
-                    .force('link', d3.forceLink().id(function(d) {
-                        return d.id;
-                    }))
-                    .force('charge', d3.forceManyBody().distanceMax(400))
-                    .force('center', d3.forceCenter(width / 2, height / 2));
-
-                var link = this.svg.append('g')
-                    .attr('class', 'links')
-                    .selectAll('line')
-                    .data(graph.links)
-                    .enter().append('line')
-                    .attr('stroke', '#999')
-                    .attr('stroke-opacity', '0.6');
-
-                var node = this.svg.append('g')
-                    .attr('class', 'nodes')
-                    .selectAll('circle')
-                    .data(graph.nodes)
-                    .enter().append('circle')
-                    .attr('r', 5)
-                    .attr('stroke-width', function(d) {
-                        return d.main ? '2.5px' : '1.5px';
-                    })
-                    .attr('stroke', function(d) {
-                        return d.main ? '#d62728' : '#fff';
-                    })
-                    .attr('fill', function(d) {
-                        return groupsColor.hasOwnProperty(d.group) ? groupsColor[d.group] : groupsColor.unknown;
-                    })
-                    .on('mouseover', function(sender) {
-                        // todo highlight links, draw arrows
-
-                        if (!dragging) {
-                            tooltip.content.set(sender.name);
-                            tooltip.visible.set(true);
-                        }
-                    })
-                    .on('mousemove', function() {
-                        if (!dragging) {
-                            tooltip.bottom.set(window.innerHeight - event.pageY + 10);
-                            tooltip.left.set(event.pageX - 10);
-                        }
-                    })
-                    .on('mouseout', function() {
-                        tooltip.visible.set(false);
-                    })
-                    .call(d3.drag()
-                        .on('start', dragstarted)
-                        .on('drag', dragged)
-                        .on('end', dragended));
-
-                simulation
-                    .nodes(graph.nodes)
-                    .on('tick', ticked);
-
-                simulation.force('link')
-                    .links(graph.links);
-
-                function ticked() {
-                    link
-                        .attr('x1', function(d) {
-                            return d.source.x;
-                        })
-                        .attr('y1', function(d) {
-                            return d.source.y;
-                        })
-                        .attr('x2', function(d) {
-                            return d.target.x;
-                        })
-                        .attr('y2', function(d) {
-                            return d.target.y;
-                        });
-
-                    node
-                        .attr('cx', function(d) {
-                            return d.x;
-                        })
-                        .attr('cy', function(d) {
-                            return d.y;
-                        });
-                }
-
-                function dragstarted(d) {
-                    if (!d3.event.active) {
-                        simulation.alphaTarget(0.5).restart();
-                    }
-                    d.fx = d.x;
-                    d.fy = d.y;
-                    dragging = true;
-                }
-
-                function dragged(d) {
-                    d.fx = d3.event.x;
-                    d.fy = d3.event.y;
-                }
-
-                function dragended(d) {
-                    if (!d3.event.active) {
-                        simulation.alphaTarget(0);
-                    }
-                    d.fx = null;
-                    d.fy = null;
-                    dragging = false;
-                }
-            }, this);
+        );
+        this.sizeExpression.link(this, function(size) {
+            this.svg.attr('width', size.width).attr('height', size.height);
         });
+    },
+    postInit: function() {
+        Node.prototype.postInit.call(this);
+
+        this.element.appendChild(this.svg.node());
+    },
+    destroy: function() {
+        this.svg.remove();
+        this.svg = null;
+        this.widthRA_ && resolveValue(this, null, null, 'widthRA_');
+        this.heightRA_ && resolveValue(this, null, null, 'heightRA_');
+        this.graphRA_ && resolveValue(this, null, null, 'graphRA_');
+        this.sizeExpression.destroy();
+        this.sizeExpression = null;
+
+        Node.prototype.destroy.call(this);
     }
 });

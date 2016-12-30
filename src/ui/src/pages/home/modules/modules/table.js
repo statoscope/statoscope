@@ -13,7 +13,7 @@ module.exports = Table.subclass({
     childClass: TableRow.subclass({
         template: resource('./template/row.tmpl'),
         binding: {
-            id: 'data:',
+            id: 'data:index',
             name: 'data:',
             fileSizeCell: 'satellite:'
         },

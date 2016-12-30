@@ -1,0 +1,12 @@
+<b:style src="./list.css"/>
+<b:isolate/>
+<b:define name="visible" type="bool"/>
+
+<div class="require">
+  <div class="module" event-click="click">
+    <span class="module-name">
+      {rawRequest}
+    </span>
+  </div>
+  <div b:ref="childNodesElement" class="resolving resolving_{visible}"/>
+</div>

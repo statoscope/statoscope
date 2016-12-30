@@ -1,6 +1,8 @@
 .bar
 {
-  display: flex;
-  height: 7px;
-  margin: 4px;
+	display: flex;
+	height: 10px;
+	margin: 4px;
+	border-radius: 5px;
+	overflow: hidden;
 }
