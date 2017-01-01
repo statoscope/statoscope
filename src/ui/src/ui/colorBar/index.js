@@ -16,16 +16,21 @@ module.exports = Node.subclass({
         template: templates.tooltip,
         binding: {
             color: 'data:',
-            group: 'data:',
+            caption: 'data:',
             count: 'data:',
-            width: 'data:'
+            percentage: {
+                events: 'update',
+                getter: function(node) {
+                    return Number(node.data.percentage).toFixed(2);
+                }
+            }
         }
     }),
     childClass: {
         template: templates.item,
         binding: {
             color: 'data:',
-            width: 'data:'
+            percentage: 'data:'
         },
         action: {
             mouseMove: function(event) {
