@@ -1,7 +1,9 @@
 var Node = require('basis.ui').Node;
-var Dataset = require('basis.data').Dataset;
-var wrap = require('basis.data').wrap;
 var Value = require('basis.data').Value;
+var Vector = require('basis.data.vector').Vector;
+var vectorCount = require('basis.data.vector').count;
+var IndexMap = require('basis.data.index').IndexMap;
+var sum = require('basis.data.index').sum;
 var addHandler = require('basis.dom.event').addHandler;
 var removeHandler = require('basis.dom.event').removeHandler;
 var Module = require('app.type').Module;
@@ -10,28 +12,57 @@ var ColorBar = require('app.ui').ColorBar;
 var Graph = require('app.ui').Graph;
 var d3 = require('d3');
 
-var colors = d3.schemeCategory10;
-var groupsColor = {
-    'unknown': colors[0],
-    'js': colors[1],
-    'jsx': colors[1],
-    'json': colors[1],
-    'ts': colors[2],
-    'tsx': colors[2],
-    'coffee': colors[3],
-    'dart': colors[3],
-    'css': colors[4],
-    'html': colors[5],
-    'eot': colors[6],
-    'ttf': colors[6],
-    'woff': colors[6],
-    'woff2': colors[6],
-    'svg': colors[7],
-    'jpg': colors[7],
-    'jpeg': colors[7],
-    'png': colors[7],
-    'gif': colors[7]
+var typeByExt = {
+    '.js': 'script',
+    '.jsx': 'script',
+    '.es6': 'script',
+    '.ts': 'script',
+    '.tsx': 'script',
+    '.coffee': 'script',
+    '.dart': 'script',
+    '.json': 'json',
+    '.css': 'style',
+    '.html': 'html',
+    '.eot': 'font',
+    '.ttf': 'font',
+    '.woff': 'font',
+    '.woff2': 'font',
+    '.svg': 'image',
+    '.jpg': 'image',
+    '.jpeg': 'image',
+    '.png': 'image',
+    '.gif': 'image',
+    '.tmpl': 'template',
+    '.l10n': 'l10n'
 };
+var typeColor = {
+    unknown: 'black',
+    html: '#FF0000',
+    script: '#99BBCC',
+    style: '#FF69B4',
+    template: '8CC88',
+    l10n: 'orange',
+    image: '#87CEEB',
+    json: 'gray',
+    font: '#4169E1'
+};
+var typeOrder = [
+    'html',
+    'script',
+    'style',
+    'template',
+    'l10n',
+    'image',
+    'json',
+    'font',
+    'unknown'
+];
+
+function getTypeByExt(path) {
+    var ext = basis.path.extname(String(path).split('!').pop());
+
+    return typeByExt.hasOwnProperty(ext) ? typeByExt[ext] : 'unknown';
+}
 
 function onResizeHandler() {
     var sizes = this.element.getBoundingClientRect();
@@ -48,42 +79,38 @@ module.exports = Node.subclass({
             instance: ColorBar.subclass({
                 autoDelegate: true,
                 sorting: function(item) {
-                    return (item.data.group == 'UNKNOWN') + item.data.group + item.data.count;
+                    var index = typeOrder.indexOf(item.data.type);
+                    return index !== -1 ? index : Infinity;
                 },
-                init: function() {
-                    ColorBar.prototype.init.call(this);
-
-                    this.setDataSource(new Dataset());
-                    Value.query(this, 'data.profile.data.modules').pipe('itemsChanged', function(modules) {
-                        if (!modules) {
-                            return;
-                        }
-
-                        var items = {};
-
-                        modules.forEach(function(module) {
-                            var group = module.data.name.split('.').pop();
-
-                            group = groupsColor.hasOwnProperty(group) ? group : 'unknown';
-
-                            if (!items[group]) {
-                                items[group] = {
-                                    count: 0,
-                                    width: 0,
-                                    group: group.toUpperCase(),
-                                    color: groupsColor[group]
-                                };
+                dataSource: function() {
+                    return new IndexMap({
+                        source: new Vector({
+                            source: Value.query(this, 'data.profile.data.modules'),
+                            rule: function(module) {
+                                return getTypeByExt(module.data.name);
+                            },
+                            calcs: {
+                                count: vectorCount()
                             }
-
-                            items[group].count++;
-                        });
-
-                        for (var group in items) {
-                            items[group].width = (100 / modules.itemCount * items[group].count).toFixed(2);
+                        }),
+                        indexes: {
+                            totalCount: sum('data.count')
+                        },
+                        calcs: {
+                            percentage: function(data, indexes) {
+                                return 100 * data.count / indexes.totalCount;
+                            },
+                            type: function(data, indexes, sourceObject) {
+                                return sourceObject.key;
+                            },
+                            caption: function(data, indexes, sourceObject) {
+                                return sourceObject.key;
+                            },
+                            color: function(data, indexes, sourceObject) {
+                                return typeColor[sourceObject.key];
+                            }
                         }
-
-                        this.dataSource.set(wrap(basis.object.values(items), true));
-                    }.bind(this));
+                    });
                 }
             })
         },
@@ -126,7 +153,7 @@ module.exports = Node.subclass({
                             return d.main ? '#d62728' : '#fff';
                         })
                         .attr('fill', function(d) {
-                            return groupsColor.hasOwnProperty(d.group) ? groupsColor[d.group] : groupsColor.unknown;
+                            return typeColor[d.group];
                         });
 
                     function dragStart(d) {
@@ -195,9 +222,7 @@ module.exports = Node.subclass({
                         template: resource('./template/graph-tooltip.tmpl'),
                         binding: {
                             color: Value.query('data.name').as(function(name) {
-                                var group = (name || '').split('.').pop();
-
-                                return groupsColor.hasOwnProperty(group) ? groupsColor[group] : groupsColor.unknown;
+                                return typeColor[getTypeByExt(name)];
                             }),
                             isEntry: Value.query('data.reasons.itemCount').as(basis.bool.invert),
                             name: 'data:'
@@ -238,16 +263,17 @@ module.exports = Node.subclass({
             var links = [];
 
             modules.forEach(function(module) {
-                var group = module.data.name.split('.').pop();
-
                 // todo add error/warning count
                 nodes.push({
                     id: module.data.name,
-                    group: group,
+                    group: getTypeByExt(module.data.name),
                     main: !module.data.reasons.itemCount
                 });
                 module.data.reasons.forEach(function(reason) {
-                    links.push({ source: reason.data.name, target: module.data.name });
+                    links.push({
+                        source: reason.data.name,
+                        target: module.data.name
+                    });
                 });
             });
 

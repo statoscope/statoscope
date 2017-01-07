@@ -10,6 +10,7 @@ var FileSizeCell = require('app.ui.cells').FileSize;
 
 module.exports = Table.subclass({
     dataSource: Value.query('data.profile.data.modules'),
+    sorting: 'data.index',
     childClass: TableRow.subclass({
         template: resource('./template/row.tmpl'),
         binding: {
