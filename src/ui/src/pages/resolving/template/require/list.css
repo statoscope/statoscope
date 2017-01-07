@@ -38,14 +38,3 @@
 	color: #3BAFDA;
 	padding-bottom: 2px;
 }
-
-.resolving
-{
-	display: none;
-	padding: 6px;
-}
-
-.resolving_visible
-{
-	display: block;
-}

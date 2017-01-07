@@ -1,0 +1,11 @@
+.content
+{
+	padding: 0 15px 15px 15px;
+}
+
+.header
+{
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}

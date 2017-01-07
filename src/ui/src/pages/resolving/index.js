@@ -2,6 +2,7 @@ var Node = require('basis.ui').Node;
 var Value = require('basis.data').Value;
 var Page = require('app.ui').Page;
 var Tooltip = require('app.ui').Tooltip;
+var Overlay = require('app.ui').Overlay;
 var type = require('app.type');
 var utils = require('app.utils');
 
@@ -18,6 +19,38 @@ var tooltip = new Tooltip({
     }
 });
 
+var overlay = new Overlay({
+    template: resource('./template/require/overlay.tmpl'),
+    dataSource: Value.query('data.resolving'),
+    binding: {
+        rawRequest: 'data:'
+    },
+    childClass: {
+        template: resource('./template/resolving/list.tmpl'),
+        dataSource: Value.query('data.stack'),
+        binding: {
+            target: function(node) {
+                return utils.trimContextExpression(Value.query(node, 'data.target'));
+            }
+        },
+        childClass: {
+            template: resource('./template/resolving/item.tmpl'),
+            action: {
+                mouseOver: function() {
+                    tooltip.setDelegate(this);
+                },
+                mouseMove: function(event) {
+                    tooltip.setBottom(window.innerHeight - event.pageY + 10);
+                    tooltip.setLeft(event.pageX - 10);
+                },
+                mouseOut: function() {
+                    tooltip.setDelegate(null);
+                }
+            }
+        }
+    }
+});
+
 module.exports = new Page({
     delegate: Value.query('owner').as(function(owner) {
         return owner ? type.Source : null;
@@ -30,48 +63,13 @@ module.exports = new Page({
                 dataSource: Value.query('data.profile.data.modules'),
                 childClass: {
                     template: resource('./template/require/list.tmpl'),
-                    dataSource: Value.query('data.resolving'),
                     binding: {
-                        rawRequest: 'data:',
-                        visible: 'visible'
+                        rawRequest: 'data:'
                     },
                     action: {
                         click: function() {
-                            this.visible.set(!this.visible.value);
+                            overlay.setDelegate(this);
                         }
-                    },
-                    childClass: {
-                        template: resource('./template/resolving/list.tmpl'),
-                        dataSource: Value.query('data.stack'),
-                        binding: {
-                            target: function(node) {
-                                return utils.trimContextExpression(Value.query(node, 'data.target'));
-                            }
-                        },
-                        childClass: {
-                            template: resource('./template/resolving/item.tmpl'),
-                            action: {
-                                mouseOver: function() {
-                                    tooltip.setDelegate(this);
-                                },
-                                mouseMove: function(event) {
-                                    tooltip.setBottom(window.innerHeight - event.pageY + 10);
-                                    tooltip.setLeft(event.pageX - 10);
-                                },
-                                mouseOut: function() {
-                                    tooltip.setDelegate(null);
-                                }
-                            }
-                        }
-                    },
-                    init: function() {
-                        this.visible = new Value({ value: false });
-                        Node.prototype.init.call(this);
-                    },
-                    destroy: function() {
-                        this.visible.destroy();
-                        this.visible = null;
-                        Node.prototype.destroy.call(this);
                     }
                 }
             })

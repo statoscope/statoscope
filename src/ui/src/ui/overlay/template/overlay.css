@@ -1,0 +1,39 @@
+.overlay
+{
+	position: fixed;
+	visibility: hidden;
+	opacity: 0;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 8000;
+	transition: opacity .3s ease-out;
+}
+
+.overlay_visible
+{
+	opacity: 1;
+	visibility: visible;
+}
+
+.background
+{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.7);
+}
+
+.content
+{
+	background: #fff;
+	top: 15%;
+	bottom: 15%;
+	left: 20%;
+	right: 20%;
+	position: absolute;
+	border-radius: 5px;
+	padding: 15px;
+}
+

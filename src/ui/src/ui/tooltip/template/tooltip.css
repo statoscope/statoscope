@@ -11,6 +11,7 @@
 	text-align: center;
 	background-color: #000;
 	border-radius: 4px;
+	z-index: 9000;
 }
 
 .tooltip_visible
