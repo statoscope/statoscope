@@ -4,7 +4,7 @@
   "description": "Webpack plugin for analyzing internal processes, state and structure of bundles",
   "scripts": {
     "prepublish": "npm run build",
-    "codestyle": "jscs src && eslint -c ./.eslintrc src",
+    "codestyle": "eslint -c ./.eslintrc src",
     "build": "basis build --pack --css-usage --css-pack --js-cut-dev",
     "start": "basis server"
   },
@@ -40,8 +40,7 @@
     "basisjs-tools": "^1.10.2",
     "basisjs-tools-instrumenter": "^2.1.0",
     "d3": "^4.4.0",
-    "eslint": "^3.11.1",
-    "jscs": "^3.0.7"
+    "eslint": "^3.11.1"
   },
   "files": [
     "dist",

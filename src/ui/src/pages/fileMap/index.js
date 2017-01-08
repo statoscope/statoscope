@@ -79,7 +79,9 @@ var content = new Node({
     marginBottom: 10,
     updateMap: function() {
         basis.asap(function() {
-            this.element.style.height = window.innerHeight - this.element.getBoundingClientRect().top - this.marginBottom + 'px';
+            var height = window.innerHeight - this.element.getBoundingClientRect().top - this.marginBottom;
+
+            this.element.style.height = height + 'px';
             webtreemap(this.element, this.tree);
         }.bind(this));
     }

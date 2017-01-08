@@ -149,7 +149,9 @@ function resolveLoaders(compilation, nmf, callback) {
     });
 
     function resolveDescriptorLoaders(descriptor, callback) {
-        async.map(descriptor.loaders, nmf.resolvers.loader.resolve.bind(nmf.resolvers.loader, compilation.compiler.context), function(error, results) {
+        var handler = nmf.resolvers.loader.resolve.bind(nmf.resolvers.loader, compilation.compiler.context);
+
+        async.map(descriptor.loaders, handler, function(error, results) {
             descriptor.loaders = results;
 
             callback(error, descriptor);

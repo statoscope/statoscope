@@ -35,6 +35,7 @@ function focus(tree) {
     // Hide all visible siblings of all our ancestors by lowering them.
     var level = 0;
     var root = tree;
+
     while (root.parent) {
         root = root.parent;
         level += 1;
@@ -46,6 +47,7 @@ function focus(tree) {
     }
     var width = root.dom.offsetWidth;
     var height = root.dom.offsetHeight;
+
     // Unhide (raise) and maximize us and our ancestors.
     for (var t = tree; t.parent; t = t.parent) {
         // Shift off by border so we don't get nested borders.
@@ -59,6 +61,7 @@ function focus(tree) {
 
 function makeDom(tree, level) {
     var dom = document.createElement('div');
+
     dom.style.zIndex = 1;
     dom.className = 'webtreemap-node webtreemap-level' + Math.min(level, 4);
     if (tree.data.$symbol) {
@@ -80,16 +83,19 @@ function makeDom(tree, level) {
             }
         }
         e.stopPropagation();
+        
         return true;
     };
 
     var caption = document.createElement('div');
+
     caption.className = 'webtreemap-caption';
     caption.innerHTML = tree.name;
     dom.appendChild(caption);
     dom.title = tree.name;
 
     tree.dom = dom;
+    
     return dom;
 }
 
@@ -118,9 +124,11 @@ function selectSpan(nodes, space, start) {
     var rmin = node.data.$area;     // Smallest seen child so far.
     var rmax = rmin;                // Largest child.
     var rsum = 0;                   // Sum of children in this span.
-    var last_score = 0;             // Best score yet found.
+    var lastScore = 0;             // Best score yet found.
+
     for (var end = start; node = nodes[end]; ++end) {
         var size = node.data.$area;
+
         if (size < rmin) {
             rmin = size;
         }
@@ -135,12 +143,15 @@ function selectSpan(nodes, space, start) {
         // lets us prefer wider rectangles to taller ones.
         var score = Math.max(space * space * rmax / (rsum * rsum),
             kAspectRatio * rsum * rsum / (space * space * rmin));
-        if (last_score && score > last_score) {
+
+        if (lastScore && score > lastScore) {
             rsum -= size;  // Undo size addition from just above.
             break;
         }
-        last_score = score;
+
+        lastScore = score;
     }
+    
     return [end, rsum];
 }
 
@@ -163,7 +174,7 @@ function layout(tree, level, width, height) {
     y2 -= kPadding;
     y1 += 14;  // XXX get first child height for caption spacing
 
-    var pixels_to_units = Math.sqrt(total / ((x2 - x1) * (y2 - y1)));
+    var pixelsToUnits = Math.sqrt(total / ((x2 - x1) * (y2 - y1)));
 
     // The algorithm does best at laying out items from largest to smallest.
     // Sort them to ensure this.
@@ -187,10 +198,11 @@ function layout(tree, level, width, height) {
         var ysplit = ((y2 - y1) / (x2 - x1)) > kAspectRatio;
 
         var space;  // Space available along layout axis.
+
         if (ysplit) {
-            space = (y2 - y1) * pixels_to_units;
+            space = (y2 - y1) * pixelsToUnits;
         } else {
-            space = (x2 - x1) * pixels_to_units;
+            space = (x2 - x1) * pixelsToUnits;
         }
 
         var span = selectSpan(tree.children, space, start);
@@ -220,8 +232,8 @@ function layout(tree, level, width, height) {
                 height = rsum / space;
                 width = size / height;
             }
-            width /= pixels_to_units;
-            height /= pixels_to_units;
+            width /= pixelsToUnits;
+            height /= pixelsToUnits;
             width = Math.round(width);
             height = Math.round(height);
             position(child.dom, x, y, width, height);
@@ -237,9 +249,9 @@ function layout(tree, level, width, height) {
 
         // Shrink our available space based on the amount we used.
         if (ysplit) {
-            x1 += Math.round((rsum / space) / pixels_to_units);
+            x1 += Math.round((rsum / space) / pixelsToUnits);
         } else {
-            y1 += Math.round((rsum / space) / pixels_to_units);
+            y1 += Math.round((rsum / space) / pixelsToUnits);
         }
 
         // end points one past where we ended, which is where we want to
@@ -253,6 +265,7 @@ module.exports = function appendTreemap(dom, data) {
     var style = getComputedStyle(dom, null);
     var width = parseInt(style.width);
     var height = parseInt(style.height);
+
     if (!data.dom) {
         makeDom(data, 0);
     }

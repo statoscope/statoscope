@@ -80,6 +80,7 @@ module.exports = Node.subclass({
                 autoDelegate: true,
                 sorting: function(item) {
                     var index = typeOrder.indexOf(item.data.type);
+
                     return index !== -1 ? index : Infinity;
                 },
                 dataSource: function() {
