@@ -1,5 +1,6 @@
 var Node = require('basis.ui').Node;
 var Value = require('basis.data').Value;
+var Filter = require('basis.data.dataset').Filter;
 var Page = require('app.ui').Page;
 var Tooltip = require('app.ui').Tooltip;
 var Overlay = require('app.ui').Overlay;
@@ -29,11 +30,15 @@ var overlay = new Overlay({
         template: resource('./template/resolving/list.tmpl'),
         dataSource: Value.query('data.stack'),
         binding: {
+            source: function(node) {
+                return utils.trimContextExpression(
+                    Value
+                        .query(node, 'data.source')
+                        .as(type.Module)
+                        .pipe('update', 'data.resource'));
+            },
             target: function(node) {
                 return utils.trimContextExpression(Value.query(node, 'data.target'));
-            },
-            context: function(node) {
-                return utils.trimContextExpression(Value.query(node, 'data.context'));
             }
         },
         childClass: {
@@ -63,17 +68,25 @@ module.exports = new Page({
             instance: Node.subclass({
                 autoDelegate: true,
                 template: resource('./template/list.tmpl'),
-                dataSource: Value.query('data.profile.data.modules'),
                 childClass: {
                     template: resource('./template/require/list.tmpl'),
                     binding: {
-                        rawRequest: 'data:'
+                        rawRequest: 'data:',
+                        name: 'data:'
                     },
                     action: {
                         click: function() {
                             overlay.setDelegate(this);
                         }
                     }
+                },
+                init: function() {
+                    Node.prototype.init.call(this);
+
+                    this.setDataSource(new Filter({
+                        source: Value.query(this, 'data.profile.data.modules'),
+                        rule: 'data.resolving.itemCount'
+                    }));
                 }
             })
         }

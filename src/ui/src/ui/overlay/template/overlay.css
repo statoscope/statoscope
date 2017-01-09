@@ -35,5 +35,6 @@
 	position: absolute;
 	border-radius: 5px;
 	padding: 15px;
+	overflow: auto;
 }
 

@@ -11,7 +11,7 @@ var async = require('async');
 var COMPILATION;
 var NMF;
 var handledFiles;
-var resolvingStackMap = {};
+var resolvingMap = {};
 var requestShortener;
 
 function deepExtend(target) {
@@ -29,7 +29,9 @@ function deepExtend(target) {
                 if (source.hasOwnProperty(sourceKey)) {
                     var value = source[sourceKey];
 
-                    if (typeof value == 'object' && value) {
+                    if (Array.isArray(value)) {
+                        target[sourceKey] = value.slice();
+                    } else if (typeof value == 'object' && value) {
                         target[sourceKey] = deepExtend({}, value);
                     } else {
                         target[sourceKey] = value;
@@ -198,8 +200,7 @@ function collectStackCallback(result, callback) {
         if (stack.length) {
             var mapKey = result.path + ':' + stack[0].context;
 
-            resolvingStackMap[mapKey] = {
-                context: stack[0].context,
+            resolvingMap[mapKey] = {
                 target: result.path,
                 query: result.query,
                 stack: stack
@@ -270,6 +271,7 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
                 size: module.size(),
                 rawRequest: module.rawRequest,
                 context: module.context,
+                resource: module.resource,
                 reasons: module.reasons.filter(function(reason) {
                     return reason.dependency && reason.module;
                 }).map(function(reason) {
@@ -283,12 +285,16 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
 
             moduleInfo.files = getModuleFiles(module, moduleInfo.loaders);
             moduleInfo.resolving = module.reasons
+                .filter(function(reason) {
+                    return reason.dependency && reason.module;
+                })
                 .reduce(function(prev, current) {
                     var resoling = resolvingFullParts.map(function(part) {
                         var splitted = splitQuery(part);
                         var mapKey = (splitted[0] || splitted[1]) + ':' + current.module.context;
+                        var sourceName = current.module.readableIdentifier(requestShortener);
 
-                        return resolvingStackMap[mapKey];
+                        return deepExtend({ source: sourceName }, resolvingMap[mapKey]);
                     });
 
                     return prev.concat(resoling);

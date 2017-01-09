@@ -9,6 +9,7 @@ var Module = entity.createType('Module', {
     size: Number,
     rawRequest: String,
     context: String,
+    resource: String,
     files: entity.createSetType(File),
     reasons: entity.createSetType('Module'),
     loaders: entity.createSetType(Loader),
