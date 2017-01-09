@@ -12,7 +12,6 @@ var COMPILATION;
 var NMF;
 var handledFiles;
 var resolvingStackMap = {};
-var handledResolvingStackItem = {};
 var requestShortener;
 
 function deepExtend(target) {
