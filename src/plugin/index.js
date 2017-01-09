@@ -12,6 +12,7 @@ var COMPILATION;
 var NMF;
 var handledFiles;
 var resolvingStackMap = {};
+var handledResolvingStackItem = {};
 var requestShortener;
 
 function deepExtend(target) {
@@ -179,7 +180,6 @@ function resolveLoaders(compilation, nmf, callback) {
 
 function collectStackCallback(result, callback) {
     if (callback.stack && callback.stack.length) {
-        var mapKey;
         var stack = callback.stack
             .map(function(item) {
                 var data = item.match(/(.+?): \((.+)\) (.*)/) || [];
@@ -197,15 +197,17 @@ function collectStackCallback(result, callback) {
             .filter(Boolean);
 
         if (stack.length) {
-            mapKey = stack[0].target + ' : ' + stack[stack.length - 1].context;
+            var mapKey = result.path + ':' + stack[0].context;
+
             resolvingStackMap[mapKey] = {
                 context: stack[0].context,
-                target: stack[0].target,
-                resolvedTarget: stack[stack.length - 1].context,
+                target: result.path,
+                query: result.query,
                 stack: stack
             };
         }
     }
+
     callback();
 }
 
@@ -276,20 +278,22 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
                 }),
                 loaders: getModuleLoaders(module)
             };
-            var resolvingRawParts = (moduleInfo.rawRequest || '').replace(/^!+/, '');
             var resolvingFullParts = (module.userRequest || '').replace(/^!+/, '');
 
-            resolvingRawParts = resolvingRawParts ? resolvingRawParts.split('!') : [];
             resolvingFullParts = resolvingFullParts ? resolvingFullParts.split('!') : [];
 
             moduleInfo.files = getModuleFiles(module, moduleInfo.loaders);
-            moduleInfo.resolving = resolvingRawParts
-                .map(function(part, index) {
-                    var splitted = splitQuery(resolvingFullParts[index]);
-                    var mapKey = part + ' : ' + splitted[0] || splitted[1];
+            moduleInfo.resolving = module.reasons
+                .reduce(function(prev, current) {
+                    var resoling = resolvingFullParts.map(function(part) {
+                        var splitted = splitQuery(part);
+                        var mapKey = (splitted[0] || splitted[1]) + ':' + current.module.context;
 
-                    return resolvingStackMap[mapKey];
-                });
+                        return resolvingStackMap[mapKey];
+                    });
+
+                    return prev.concat(resoling);
+                }, []);
 
             return moduleInfo;
         });

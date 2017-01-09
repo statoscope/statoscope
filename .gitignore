@@ -4,4 +4,5 @@ node_modules/
 example/dist/
 .rempl_client_id
 *.log
+*.lock
 .DS_store

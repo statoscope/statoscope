@@ -4,7 +4,7 @@ var ResolvingItem = require('./resolvingItem');
 var Resolving = entity.createType('Resolving', {
     context: String,
     target: String,
-    resolvedTarget: String,
+    query: String,
     stack: entity.createSetType(ResolvingItem)
 });
 

@@ -31,6 +31,9 @@ var overlay = new Overlay({
         binding: {
             target: function(node) {
                 return utils.trimContextExpression(Value.query(node, 'data.target'));
+            },
+            context: function(node) {
+                return utils.trimContextExpression(Value.query(node, 'data.context'));
             }
         },
         childClass: {
