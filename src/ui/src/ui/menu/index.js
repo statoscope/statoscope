@@ -17,8 +17,6 @@ module.exports = Node.subclass({
         { id: 'home', selected: true },
         { id: 'errors', binding: { errors: Value.query(type.Source, 'data.profile.data.errors.itemCount') } },
         { id: 'warnings', binding: { errors: Value.query(type.Source, 'data.profile.data.warnings.itemCount') } },
-        { id: 'loaders' },
-        { id: 'resolving' },
         { id: 'graph' },
         { id: 'fileMap' }
     ],

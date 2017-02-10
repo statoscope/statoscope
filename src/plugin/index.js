@@ -95,7 +95,7 @@ function getModuleFiles(module, loaders) {
 
 function getModuleLoaders(module) {
     return (module.loaders || []).map(function(loader) {
-        return handleLoader(loader, requestShortener);
+        return handleLoader(loader.loader || loader, requestShortener);
     });
 }
 

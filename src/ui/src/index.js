@@ -5,8 +5,6 @@ var routes = {
     home: resource('./pages/home/index.js'),
     errors: resource('./pages/errors/index.js'),
     warnings: resource('./pages/warnings/index.js'),
-    loaders: resource('./pages/loaders/index.js'),
-    resolving: resource('./pages/resolving/index.js'),
     graph: resource('./pages/graph/index.js'),
     fileMap: resource('./pages/fileMap/index.js')
 };
