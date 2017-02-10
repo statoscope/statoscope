@@ -65,25 +65,25 @@ new RuntimeAnalyzerPlugin({
 
 The list of the modules and the assets is always at hand.
 
-![Dashboad](https://cloud.githubusercontent.com/assets/6654581/21473114/cb2bfa72-cb0b-11e6-8096-3e05f6c967f9.png)
+![Dashboad](https://cloud.githubusercontent.com/assets/6654581/22832348/b88ade06-efbe-11e6-9315-5dd93335335e.png)
 
 ### Dependency graph
 
 Take a look at the dependencies of the modules.
 
-![Dependency graph](https://cloud.githubusercontent.com/assets/6654581/21473113/cb156dac-cb0b-11e6-82ab-990d60a798dd.png)
+![Dependency graph](https://cloud.githubusercontent.com/assets/6654581/22832421/04a25a1c-efbf-11e6-9623-924da91b3118.png)
 
 ### File size map
 
 Look at the file map and find out why your bundle is so big.
 
-![File size map](https://cloud.githubusercontent.com/assets/6654581/21473112/cb13ffa8-cb0b-11e6-9cb3-0935a788ffce.png)
+![File size map](https://cloud.githubusercontent.com/assets/6654581/22832446/1b50d7d4-efbf-11e6-8db6-26575781b595.png)
 
 ## Realtime analyzing
 
 Analyzing process is performing in **realtime**.
 
-![Realtime analyzing](https://cloud.githubusercontent.com/assets/6654581/21473129/850a287e-cb0c-11e6-8f7f-9c55aea96e3f.png)
+![Realtime analyzing](https://cloud.githubusercontent.com/assets/6654581/22832474/35c64e96-efbf-11e6-90b3-59af1c2ea603.png)
 
 ## UI customization
 

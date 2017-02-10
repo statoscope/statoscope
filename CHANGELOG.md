@@ -1,3 +1,9 @@
+## 1.0.0-alpha4 (february 10, 2017)
+
+- layout rework
+- bump rempl version
+- fix loaders normalization bug
+
 ## 1.0.0-alpha3 (December 26, 2016)
 
 - layout rework
