@@ -1,4 +1,10 @@
-## 1.0.0-alpha4 (february 10, 2017)
+## 1.0.0-alpha5 (February 18, 2017)
+
+- add webpack2 support!
+- fix webpack version info
+- some cleanup in code
+
+## 1.0.0-alpha4 (February 10, 2017)
 
 - layout rework
 - bump rempl version

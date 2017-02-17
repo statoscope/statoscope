@@ -2,7 +2,7 @@
 
 # webpack-runtime-analyzer
 
-[Webpack](https://github.com/webpack/webpack) plugin for analyzing internal processes, state and structure of bundles. Built on [rempl](https://github.com/rempl/rempl).
+[Webpack](https://github.com/webpack/webpack) 1.x/2.x plugin for analyzing internal processes, state and structure of bundles. Built on [rempl](https://github.com/rempl/rempl).
 
 [Watch a video-demo](https://youtu.be/Y3RVDJRi-Gc)
 
