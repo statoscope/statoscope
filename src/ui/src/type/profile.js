@@ -4,7 +4,6 @@ var Asset = require('./asset');
 var Module = require('./module');
 var Chunks = require('./chunk');
 var Issue = require('./issue');
-var LoaderDescriptor = require('./loaderDescriptor');
 
 var Profile = entity.createType('Profile', {
     version: String,
@@ -14,8 +13,7 @@ var Profile = entity.createType('Profile', {
     assets: entity.createSetType(Asset),
     modules: entity.createSetType(Module),
     errors: entity.createSetType(Issue),
-    warnings: entity.createSetType(Issue),
-    loaderDescriptors: entity.createSetType(LoaderDescriptor)
+    warnings: entity.createSetType(Issue)
 });
 
 module.exports = Profile;

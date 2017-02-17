@@ -1,18 +1,33 @@
+'use strict';
+
 var loaderUtils = require('loader-utils');
 var webpack = require('webpack');
-var NormalModule = require('webpack/lib/NormalModule');
-var splitQuery = NormalModule.prototype.splitQuery;
 var RequestShortener = require('webpack/lib/RequestShortener');
 var rempl = require('rempl');
 var path = require('path');
 var fs = require('fs');
-var async = require('async');
 
 var COMPILATION;
-var NMF;
 var handledFiles;
-var resolvingMap = {};
 var requestShortener;
+
+function isObject(obj) {
+    return typeof obj == 'object' && obj;
+}
+
+function cloneArray(array) {
+    return array.map(el => {
+        if (Array.isArray(el)) {
+            return cloneArray(el);
+        }
+
+        if (isObject(el) && el.constructor == Object) {
+            return deepExtend({}, el);
+        }
+
+        return el;
+    });
+}
 
 function deepExtend(target) {
     var sources = Array.prototype.slice.call(arguments, 1);
@@ -24,14 +39,14 @@ function deepExtend(target) {
     for (var i = 0; i < sources.length; i++) {
         var source = sources[i];
 
-        if (typeof source == 'object' && source) {
+        if (isObject(source)) {
             for (var sourceKey in source) {
                 if (source.hasOwnProperty(sourceKey)) {
                     var value = source[sourceKey];
 
                     if (Array.isArray(value)) {
-                        target[sourceKey] = value.slice();
-                    } else if (typeof value == 'object' && value) {
+                        target[sourceKey] = cloneArray(value);
+                    } else if (isObject(value) && value.constructor == Object) {
                         target[sourceKey] = deepExtend({}, value);
                     } else {
                         target[sourceKey] = value;
@@ -93,6 +108,12 @@ function getModuleFiles(module, loaders) {
     return files;
 }
 
+function splitQuery(query) {
+    var parts = (query || '').split('?');
+
+    return [parts[0], '?' + parts.slice(1).join('')];
+}
+
 function getModuleLoaders(module) {
     return (module.loaders || []).map(function(loader) {
         return handleLoader(loader.loader || loader, requestShortener);
@@ -111,104 +132,6 @@ function handleLoader(loader, shortener) {
         pathShorten: shortener.shorten(loaderPath),
         query: loaderQuery
     };
-}
-
-function resolveLoaders(compilation, nmf, callback) {
-    var loaderDescriptorsList = nmf.loaders.list.concat(nmf.preLoaders.list, nmf.postLoaders.list);
-
-    loaderDescriptorsList = loaderDescriptorsList.map(function(descriptor) {
-        var newDescriptor = {};
-
-        if (nmf.loaders.list.indexOf(descriptor) > -1) {
-            newDescriptor.type = 'loader';
-        } else if (nmf.preLoaders.list.indexOf(descriptor) > -1) {
-            newDescriptor.type = 'pre';
-        } else if (nmf.postLoaders.list.indexOf(descriptor) > -1) {
-            newDescriptor.type = 'post';
-        }
-
-        newDescriptor.test = normalizeDescriptorMatchers(descriptor.test);
-        newDescriptor.include = normalizeDescriptorMatchers(descriptor.include);
-        newDescriptor.exclude = normalizeDescriptorMatchers(descriptor.exclude);
-        newDescriptor.loaders = descriptor.loaders || descriptor.loader || [];
-
-        if (newDescriptor.loaders && !Array.isArray(newDescriptor.loaders)) {
-            newDescriptor.loaders = newDescriptor.loaders.split('!');
-        }
-
-        return newDescriptor;
-    });
-
-    async.map(loaderDescriptorsList, resolveDescriptorLoaders, function(error, results) {
-        results = results || [];
-        results.forEach(function(loaderDescriptor) {
-            loaderDescriptor.loaders = loaderDescriptor.loaders.map(function(loader) {
-                return handleLoader(loader, requestShortener);
-            });
-        });
-
-        callback(error, results);
-    });
-
-    function resolveDescriptorLoaders(descriptor, callback) {
-        var handler = nmf.resolvers.loader.resolve.bind(nmf.resolvers.loader, compilation.compiler.context);
-
-        async.map(descriptor.loaders, handler, function(error, results) {
-            descriptor.loaders = results;
-
-            callback(error, descriptor);
-        });
-    }
-
-    function normalizeDescriptorMatchers(matchers) {
-        if (!matchers) {
-            return;
-        }
-
-        if (!Array.isArray(matchers)) {
-            matchers = [matchers];
-        }
-
-        return matchers.map(function(matcher) {
-            return {
-                type: matcher instanceof RegExp ? 'regexp' : 'string',
-                content: matcher instanceof RegExp ? matcher.source : matcher.toString(),
-                flags: matcher instanceof RegExp ? matcher.flags : ''
-            };
-        });
-    }
-}
-
-function collectStackCallback(result, callback) {
-    if (callback.stack && callback.stack.length) {
-        var stack = callback.stack
-            .map(function(item) {
-                var data = item.match(/(.+?): \((.+)\) (.*)/) || [];
-                var result = {
-                    full: item,
-                    type: data[1],
-                    context: data[2],
-                    target: data[3]
-                };
-
-                if (result.type && result.context) {
-                    return result;
-                }
-            })
-            .filter(Boolean);
-
-        if (stack.length) {
-            var mapKey = result.path + ':' + stack[0].context;
-
-            resolvingMap[mapKey] = {
-                target: result.path,
-                query: result.query,
-                stack: stack
-            };
-        }
-    }
-
-    callback();
 }
 
 function RuntimeAnalyzerPlugin(options) {
@@ -234,13 +157,9 @@ function RuntimeAnalyzerPlugin(options) {
 }
 
 RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
-    compiler.plugin('compilation', function(compilation, factories) {
+    compiler.plugin('compilation', function(compilation) {
         COMPILATION = compilation;
-        NMF = factories.normalModuleFactory;
         requestShortener = new RequestShortener(compilation.options.context || process.cwd());
-
-        NMF.resolvers.normal.plugin('result', collectStackCallback);
-        NMF.resolvers.loader.plugin('result', collectStackCallback);
     });
 
     compiler.apply(new webpack.ProgressPlugin(function(percent) {
@@ -279,32 +198,14 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
                 }),
                 loaders: getModuleLoaders(module)
             };
-            var resolvingFullParts = (module.userRequest || '').replace(/^!+/, '');
-
-            resolvingFullParts = resolvingFullParts ? resolvingFullParts.split('!') : [];
 
             moduleInfo.files = getModuleFiles(module, moduleInfo.loaders);
-            moduleInfo.resolving = module.reasons
-                .filter(function(reason) {
-                    return reason.dependency && reason.module;
-                })
-                .reduce(function(prev, current) {
-                    var resoling = resolvingFullParts.map(function(part) {
-                        var splitted = splitQuery(part);
-                        var mapKey = (splitted[0] || splitted[1]) + ':' + current.module.context;
-                        var sourceName = current.module.readableIdentifier(requestShortener);
-
-                        return deepExtend({ source: sourceName }, resolvingMap[mapKey]);
-                    });
-
-                    return prev.concat(resoling);
-                }, []);
 
             return moduleInfo;
         });
 
         profile = {
-            version: require('webpack/package.json').version,
+            version: require.main.require('webpack/package.json').version,
             hash: compilation.hash,
             context: compilation.compiler.context,
             assets: assets,
@@ -319,8 +220,10 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
                         return module.readableIdentifier(requestShortener);
                     }),
                     rendered: chunk.rendered,
-                    initial: chunk.initial,
-                    entry: chunk.entry
+                    // webpack 1.x capability
+                    initial: typeof chunk.isInitial == 'function' ? chunk.isInitial() : chunk.initial,
+                    // webpack 1.x capability
+                    entry: typeof chunk.hasRuntime == 'function' ? chunk.hasRuntime() : chunk.entry,
                 };
             }),
             modules: modules,
@@ -338,11 +241,8 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
             })
         };
 
-        resolveLoaders(COMPILATION, NMF, function(error, result) {
-            profile.loaderDescriptors = result;
-            this.transport.ns('profile').publish(profile);
-            done();
-        }.bind(this));
+        this.transport.ns('profile').publish(profile);
+        done();
     }.bind(this));
 
     compiler.plugin('compile', function() {
