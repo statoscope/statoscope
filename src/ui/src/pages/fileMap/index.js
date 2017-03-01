@@ -73,7 +73,6 @@ function calcPercentsAndUpdateNames(tree) {
 }
 
 var content = new Node({
-    autoDelegate: true,
     template: resource('./template/page.tmpl'),
     tree: null,
     marginBottom: 10,
@@ -88,36 +87,70 @@ var content = new Node({
 });
 
 var page = new Page({
-    delegate: Value.query('owner').as(function(owner) {
-        return owner ? type.Source : null;
-    }),
+    className: 'Page.FileMap',
     satellite: {
         content: content
+    },
+    handler: {
+        open: function() {
+            this.satellite.content.updateMap();
+        }
     }
 });
 
-Value.query(page, 'target.data.profile.data.modules').pipe('itemsChanged', function(modules) {
-    if (!modules) {
+Value.from(type.Module.files, 'itemsChanged', function(files) {
+    if (!files) {
         return;
     }
 
+    files = files.getValues('data');
+
     var appliedFiles = {};
+    var partsCount = [];
+    var sharePart;
+
+    files.forEach(function(file) {
+        var parts = file.name.split('/');
+
+        for (var i = 0; i < parts.length; i++) {
+            if (partsCount[i]) {
+                if (partsCount[i].name == parts[i]) {
+                    partsCount[i].count++;
+                } else {
+                    break;
+                }
+            } else {
+                partsCount[i] = {
+                    name: parts[i], count: 1
+                };
+            }
+        }
+    });
+
+    sharePart = partsCount
+        .filter(function(part) {
+            return part.count == files.length;
+        })
+        .map(function(part) {
+            return part.name;
+        });
+
+    files = files.map(function(file) {
+        return {
+            name: file.name.slice(sharePart.join('/').length + 1),
+            size: file.size
+        };
+    });
 
     this.element.innerHTML = '';
     this.tree = makeNode('/', 0);
 
-    modules.forEach(function(module) {
-        var files = module.data.files;
-
-        files.forEach(function(file) {
-            if (!appliedFiles[file.data.name]) {
-                var path = file.data.name.slice(type.Source.data.profile.data.context.length + 1);
-
-                appliedFiles[file.data.name] = true;
-                applyPath(this.tree, { path: path, size: file.data.size });
-            }
-        }.bind(this));
-    }.bind(this));
+    files.forEach(function(file) {
+        if (!appliedFiles[file.name]) {
+            appliedFiles[file.name] = true;
+            applyPath(this.tree, { path: file.name, size: file.size });
+        }
+    }, this);
 
     calcPercentsAndUpdateNames(this.tree);
     this.updateMap();

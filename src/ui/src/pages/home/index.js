@@ -9,9 +9,6 @@ function formatSize(size) {
     var unit = utils.getPostfix(size);
 
     switch (unit) {
-        case 'bytes':
-            // nothing to do
-            break;
         case 'KB':
             size = Math.round(utils.getSize(size));
             break;
@@ -24,18 +21,17 @@ function formatSize(size) {
 }
 
 module.exports = new Page({
-    delegate: type.Source,
+    className: 'Page.Home',
     satellite: {
         content: new Node({
-            autoDelegate: true,
             template: resource('./template/page.tmpl'),
             binding: {
                 modules: resource('./modules/modules/index.js'),
-                modulesCount: Value.query('data.profile.data.modules.itemCount').as(Number),
-                modulesSize: sum(Value.query('data.profile.data.modules'), 'update', 'data.size').as(formatSize),
+                modulesCount: Value.query(type.Module.all, 'itemCount'),
+                modulesSize: sum(type.Module.all, 'update', 'data.size').as(formatSize),
                 assets: resource('./modules/assets/index.js'),
-                assetsCount: Value.query('data.profile.data.assets.itemCount').as(Number),
-                assetsSize: sum(Value.query('data.profile.data.assets'), 'update', 'data.size').as(formatSize)
+                assetsCount: Value.query(type.Asset.all, 'itemCount'),
+                assetsSize: sum(type.Asset.all, 'update', 'data.size').as(formatSize)
             }
         })
     }

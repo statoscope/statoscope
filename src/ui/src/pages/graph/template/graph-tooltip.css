@@ -1,10 +1,31 @@
+.tooltip
+{
+	text-align: left;
+}
+
+.tooltip hr
+{
+	border-color: white;
+}
+
 .marker
 {
+	position: relative;
+	top: 1px;
 	display: inline-block;
 	width: 0.8em;
 	height: 0.8em;
-	border-radius: 10px;
-	margin-right: 5px;
+	margin: 0 5px;
+	border-radius: 50%;
+}
+
+.marker_type_context,
+.marker_type_external,
+.marker_type_delegated,
+.marker_type_multi
+{
+	border: 2px solid #d6712c;
+	box-sizing: border-box;
 }
 
 .marker_isEntry
