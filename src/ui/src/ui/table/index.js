@@ -7,7 +7,6 @@ var templates = template.define('app.ui.table', {
 });
 
 module.exports = Node.subclass({
-    autoDelegate: true,
     template: templates.table,
     childClass: Row,
     binding: {

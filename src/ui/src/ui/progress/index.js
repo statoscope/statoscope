@@ -3,7 +3,7 @@ var Value = require('basis.data').Value;
 var type = require('app.type');
 
 module.exports = Node.subclass({
-    delegate: type.Source,
+    delegate: type.Profile(),
     template: resource('./template/view.tmpl'),
     binding: {
         processing: Value.query('data.status').as(function(status) {

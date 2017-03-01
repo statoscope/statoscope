@@ -27,3 +27,8 @@
 	cursor: default;
 	transition: all .25s;
 }
+
+.counter
+{
+	color: #999;
+}
