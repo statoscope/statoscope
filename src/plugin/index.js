@@ -16,7 +16,7 @@ function isObject(obj) {
 }
 
 function cloneArray(array) {
-    return array.map(el => {
+    return array.map(function(el) {
         if (Array.isArray(el)) {
             return cloneArray(el);
         }
@@ -59,79 +59,51 @@ function deepExtend(target) {
     return target;
 }
 
+function getModuleId(module) {
+    return module.index + '_' + module.readableIdentifier(requestShortener);
+}
+
 function handleFile(file) {
-    if (handledFiles[file]) {
+    if (handledFiles.hasOwnProperty(file)) {
         return handledFiles[file];
     }
 
-    var size = 0;
+    if (fs.existsSync(file)) {
+        var stats = fs.statSync(file);
 
-    try {
-        size = fs.statSync(file).size;
-    } catch (e) {
-        // dummy
-    }
-
-    handledFiles[file] = {
-        name: file,
-        size: size
-    };
-
-    return handledFiles[file];
-}
-
-function getModuleFiles(module, loaders) {
-    var fileDependencies = module.fileDependencies || [];
-    var resolvedFiles = {};
-    var files = [];
-    var loaderFiles = loaders.map(function(loader) {
-        return loader.path;
-    });
-
-    fileDependencies
-        .concat(loaderFiles)
-        .filter(function(filePath) {
-            return fs.existsSync(filePath) && fs.statSync(filePath).isFile();
-        })
-        .reduce(function(prev, current) {
-            prev[current] = handleFile(current);
-
-            return prev;
-        }, resolvedFiles);
-
-    for (var file in resolvedFiles) {
-        if (resolvedFiles.hasOwnProperty(file)) {
-            files.push(resolvedFiles[file]);
+        if (!stats.isFile) {
+            return null;
         }
+
+        handledFiles[file] = {
+            name: file,
+            short: requestShortener.shorten(file),
+            size: stats.size
+        };
+
+        return handledFiles[file];
     }
 
-    return files;
-}
-
-function splitQuery(query) {
-    var parts = (query || '').split('?');
-
-    return [parts[0], '?' + parts.slice(1).join('')];
+    return null;
 }
 
 function getModuleLoaders(module) {
-    return (module.loaders || []).map(function(loader) {
-        return handleLoader(loader.loader || loader, requestShortener);
+    return (module.loaders || []).map(function(loaderInfo) {
+        var options = loaderInfo.options;
+
+        if (typeof loaderInfo.options == 'string') {
+            if (loaderInfo.options[0] != '?') {
+                loaderInfo.options = '?' + loaderInfo.options;
+            }
+
+            options = loaderUtils.parseQuery(loaderInfo.options);
+        }
+
+        return {
+            file: handleFile(loaderInfo.loader),
+            options: options
+        };
     });
-}
-
-function handleLoader(loader, shortener) {
-    var loaderSplitted = splitQuery(loader);
-    var loaderPath = loaderSplitted[0];
-    var loaderQuery = loaderUtils.parseQuery(loaderSplitted[1]) || {};
-
-    return {
-        full: loader,
-        fullShorten: shortener.shorten(loader),
-        path: loaderPath,
-        pathShorten: shortener.shorten(loaderPath),
-        query: loaderQuery
-    };
 }
 
 function RuntimeAnalyzerPlugin(options) {
@@ -184,22 +156,30 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
         }
 
         modules = compilation.modules.map(function(module) {
+            var modulesTypeMap = {
+                NormalModule: 'normal',
+                MultiModule: 'multi',
+                ContextModule: 'context',
+                DelegatedModule: 'delegated',
+                ExternalModule: 'external'
+            };
+
             var moduleInfo = {
-                index: module.index2,
+                id: getModuleId(module),
+                index: module.index,
+                type: modulesTypeMap[module.constructor.name] || 'unknown',
                 name: module.readableIdentifier(requestShortener),
                 size: module.size(),
                 rawRequest: module.rawRequest,
                 context: module.context,
-                resource: module.resource,
+                resource: module.resource ? handleFile(module.resource) : null,
                 reasons: module.reasons.filter(function(reason) {
                     return reason.dependency && reason.module;
                 }).map(function(reason) {
-                    return reason.module.readableIdentifier(requestShortener);
+                    return getModuleId(reason.module);
                 }),
                 loaders: getModuleLoaders(module)
             };
-
-            moduleInfo.files = getModuleFiles(module, moduleInfo.loaders);
 
             return moduleInfo;
         });
@@ -217,7 +197,7 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
                     hash: chunk.renderedHash,
                     files: chunk.files,
                     modules: chunk.modules.map(function(module) {
-                        return module.readableIdentifier(requestShortener);
+                        return getModuleId(module);
                     }),
                     rendered: chunk.rendered,
                     // webpack 1.x capability
@@ -230,13 +210,13 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
             errors: compilation.errors.map(function(error) {
                 return {
                     message: error.message,
-                    module: error.module && error.module.readableIdentifier(requestShortener)
+                    module: error.module && getModuleId(error.module)
                 };
             }),
             warnings: compilation.warnings.map(function(warning) {
                 return {
                     message: warning.message,
-                    module: warning.module && warning.module.readableIdentifier(requestShortener)
+                    module: warning.module && getModuleId(warning.module)
                 };
             })
         };
