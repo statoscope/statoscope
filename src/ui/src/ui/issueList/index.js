@@ -8,7 +8,6 @@ var templates = template.define('app.ui.issueList', {
 });
 
 module.exports = Node.subclass({
-    autoDelegate: true,
     template: templates.list,
     childClass: {
         template: templates.item,

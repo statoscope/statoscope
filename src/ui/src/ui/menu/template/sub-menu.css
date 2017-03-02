@@ -1,0 +1,6 @@
+.menu
+{
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}

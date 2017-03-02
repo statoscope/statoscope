@@ -1,17 +1,22 @@
 .content-wrapper
 {
+	display: -webkit-flex;
+	display: -ms-flexbox;
 	display: flex;
 }
 
 .content-column
 {
-	flex-basis: 50%;
+	-ms-flex: 0 1 50%;
+	-webkit-flex: 0 1 50%;
+	flex: 0 1 50%;
 }
 
 .splitter
 {
-	flex-basis: 10px;
-	flex-shrink: 0;
+    -ms-flex: 0 0 10px;
+    -webkit-flex: 0 0 10px;
+    flex: 0 0 10px;
 }
 
 .header

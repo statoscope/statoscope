@@ -1,19 +1,54 @@
 var entity = require('basis.entity');
-
-var Asset = require('./asset');
 var Module = require('./module');
-var Chunks = require('./chunk');
-var Issue = require('./issue');
+var Asset = require('./asset');
+var Chunk = require('./chunk');
+var Error = require('./error');
+var Warning = require('./warning');
 
-var Profile = entity.createType('Profile', {
-    version: String,
-    hash: String,
-    context: String,
-    chunks: entity.createSetType(Chunks),
-    assets: entity.createSetType(Asset),
-    modules: entity.createSetType(Module),
-    errors: entity.createSetType(Issue),
-    warnings: entity.createSetType(Issue)
+var Profile = entity.createType({
+    name: 'Profile',
+    singleton: true,
+    fields: {
+        status: String,
+        progress: Number,
+        version: String,
+        hash: String,
+        context: String
+    }
+});
+
+var profile = Profile();
+
+/** @cut */ basis.dev.log('profile', profile);
+
+rempl.getSubscriber(function(api) {
+    api.ns('progress').subscribe(function(data) {
+        /** @cut */ basis.dev.log('channel(progress)', data);
+        profile.update({ progress: data });
+    });
+
+    api.ns('profile').subscribe(function(data) {
+        if (!data) {
+            return;
+        }
+
+        /** @cut */ basis.dev.log('channel(profile)', data);
+        profile.update({
+            version: data.version,
+            hash: data.hash,
+            context: data.context
+        });
+        Module.all.setAndDestroyRemoved(data.modules);
+        Asset.all.setAndDestroyRemoved(data.assets);
+        Chunk.all.setAndDestroyRemoved(data.chunks);
+        Error.all.setAndDestroyRemoved(data.errors);
+        Warning.all.setAndDestroyRemoved(data.warnings);
+    });
+
+    api.ns('status').subscribe(function(data) {
+        /** @cut */ basis.dev.log('channel(status)', data);
+        profile.update({ status: data });
+    });
 });
 
 module.exports = Profile;

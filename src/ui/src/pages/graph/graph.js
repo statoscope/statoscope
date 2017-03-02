@@ -10,6 +10,7 @@ var Module = require('app.type').Module;
 var Tooltip = require('app.ui').Tooltip;
 var ColorBar = require('app.ui').ColorBar;
 var Graph = require('app.ui').Graph;
+var type = require('app.type');
 var d3 = require('d3');
 
 var typeByExt = {
@@ -58,9 +59,7 @@ var typeOrder = [
     'unknown'
 ];
 
-function getTypeByExt(path) {
-    var ext = basis.path.extname(String(path).split('!').pop());
-
+function getTypeByExt(ext) {
     return typeByExt.hasOwnProperty(ext) ? typeByExt[ext] : 'unknown';
 }
 
@@ -72,12 +71,10 @@ function onResizeHandler() {
 }
 
 module.exports = Node.subclass({
-    autoDelegate: true,
     template: resource('./template/page.tmpl'),
     satellite: {
         colorBar: {
             instance: ColorBar.subclass({
-                autoDelegate: true,
                 sorting: function(item) {
                     var index = typeOrder.indexOf(item.data.type);
 
@@ -86,9 +83,9 @@ module.exports = Node.subclass({
                 dataSource: function() {
                     return new IndexMap({
                         source: new Vector({
-                            source: Value.query(this, 'data.profile.data.modules'),
-                            rule: function(module) {
-                                return getTypeByExt(module.data.name);
+                            source: type.Module.files,
+                            rule: function(file) {
+                                return getTypeByExt(file.data.extname);
                             },
                             calcs: {
                                 count: vectorCount()
@@ -148,10 +145,18 @@ module.exports = Node.subclass({
                         .selectAll('circle')
                         .attr('r', 5)
                         .attr('stroke-width', function(d) {
-                            return d.main ? '2.5px' : '1.5px';
+                            return d.isMain || d.isContext ? '2.5px' : '1.5px';
                         })
                         .attr('stroke', function(d) {
-                            return d.main ? '#d62728' : '#fff';
+                            if (d.isMain) {
+                                return '#d62728';
+                            }
+
+                            if (d.isContext) {
+                                return '#d6712c';
+                            }
+
+                            return '#fff';
                         })
                         .attr('fill', function(d) {
                             return typeColor[d.group];
@@ -222,11 +227,15 @@ module.exports = Node.subclass({
                     this.tooltip = new Tooltip({
                         template: resource('./template/graph-tooltip.tmpl'),
                         binding: {
-                            color: Value.query('data.name').as(function(name) {
-                                return typeColor[getTypeByExt(name)];
+                            color: Value.query('data.resource.data.extname').as(function(extname) {
+                                return typeColor[getTypeByExt(extname)];
                             }),
                             isEntry: Value.query('data.reasons.itemCount').as(basis.bool.invert),
-                            name: 'data:'
+                            moduleType: Value.query('data.type'),
+                            fileType: Value.query('data.resource.data.extname').as(function(extName) {
+                                return extName && getTypeByExt(extName);
+                            }),
+                            name: Value.query('data.name')
                         }
                     });
 
@@ -255,7 +264,7 @@ module.exports = Node.subclass({
     init: function() {
         Node.prototype.init.call(this);
 
-        this.graph = Value.query(this, 'target.data.profile.data.modules').pipe('itemsChanged', function(modules) {
+        this.graph = Value.from(type.Module.allWrapper, 'itemsChanged', function(modules) {
             if (!modules) {
                 return;
             }
@@ -266,14 +275,15 @@ module.exports = Node.subclass({
             modules.forEach(function(module) {
                 // todo add error/warning count
                 nodes.push({
-                    id: module.data.name,
-                    group: getTypeByExt(module.data.name),
-                    main: !module.data.reasons.itemCount
+                    id: module.getId(),
+                    group: !module.data.resource ? 'unknown' : getTypeByExt(module.data.resource.data.extname),
+                    isMain: !module.data.reasons.itemCount,
+                    isContext: module.data.type == 'context'
                 });
                 module.data.reasons.forEach(function(reason) {
                     links.push({
-                        source: reason.data.name,
-                        target: module.data.name
+                        source: reason.getId(),
+                        target: module.getId()
                     });
                 });
             });

@@ -16,7 +16,7 @@ function isObject(obj) {
 }
 
 function cloneArray(array) {
-    return array.map(el => {
+    return array.map(function(el) {
         if (Array.isArray(el)) {
             return cloneArray(el);
         }
@@ -59,79 +59,51 @@ function deepExtend(target) {
     return target;
 }
 
+function getModuleId(module) {
+    return module.index + '_' + module.readableIdentifier(requestShortener);
+}
+
 function handleFile(file) {
-    if (handledFiles[file]) {
+    if (handledFiles.hasOwnProperty(file)) {
         return handledFiles[file];
     }
 
-    var size = 0;
+    if (fs.existsSync(file)) {
+        var stats = fs.statSync(file);
 
-    try {
-        size = fs.statSync(file).size;
-    } catch (e) {
-        // dummy
-    }
-
-    handledFiles[file] = {
-        name: file,
-        size: size
-    };
-
-    return handledFiles[file];
-}
-
-function getModuleFiles(module, loaders) {
-    var fileDependencies = module.fileDependencies || [];
-    var resolvedFiles = {};
-    var files = [];
-    var loaderFiles = loaders.map(function(loader) {
-        return loader.path;
-    });
-
-    fileDependencies
-        .concat(loaderFiles)
-        .filter(function(filePath) {
-            return fs.existsSync(filePath) && fs.statSync(filePath).isFile();
-        })
-        .reduce(function(prev, current) {
-            prev[current] = handleFile(current);
-
-            return prev;
-        }, resolvedFiles);
-
-    for (var file in resolvedFiles) {
-        if (resolvedFiles.hasOwnProperty(file)) {
-            files.push(resolvedFiles[file]);
+        if (!stats.isFile) {
+            return null;
         }
+
+        handledFiles[file] = {
+            name: file,
+            short: requestShortener.shorten(file),
+            size: stats.size
+        };
+
+        return handledFiles[file];
     }
 
-    return files;
-}
-
-function splitQuery(query) {
-    var parts = (query || '').split('?');
-
-    return [parts[0], '?' + parts.slice(1).join('')];
+    return null;
 }
 
 function getModuleLoaders(module) {
-    return (module.loaders || []).map(function(loader) {
-        return handleLoader(loader.loader || loader, requestShortener);
+    return (module.loaders || []).map(function(loaderInfo) {
+        var options = loaderInfo.options;
+
+        if (typeof loaderInfo.options == 'string') {
+            if (loaderInfo.options[0] != '?') {
+                loaderInfo.options = '?' + loaderInfo.options;
+            }
+
+            options = loaderUtils.parseQuery(loaderInfo.options);
+        }
+
+        return {
+            file: handleFile(loaderInfo.loader),
+            options: options
+        };
     });
-}
-
-function handleLoader(loader, shortener) {
-    var loaderSplitted = splitQuery(loader);
-    var loaderPath = loaderSplitted[0];
-    var loaderQuery = loaderUtils.parseQuery(loaderSplitted[1]) || {};
-
-    return {
-        full: loader,
-        fullShorten: shortener.shorten(loader),
-        path: loaderPath,
-        pathShorten: shortener.shorten(loaderPath),
-        query: loaderQuery
-    };
 }
 
 function RuntimeAnalyzerPlugin(options) {
@@ -141,124 +113,159 @@ function RuntimeAnalyzerPlugin(options) {
         }
     };
 
-    options = deepExtend({}, defaultOptions, options);
-
-    this.transport = rempl.createPublisher('webpack analyzer', function(settings, callback) {
-        if (settings.dev) {
-            return callback(null, 'url', 'http://localhost:8001/src/ui/');
-        }
-
-        if (options.ui.url) {
-            callback(null, 'url', options.ui.url);
-        } else {
-            rempl.scriptFromFile(options.ui.script)(settings, callback);
-        }
-    });
+    this.options = deepExtend({}, defaultOptions, options);
 }
 
 RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
-    compiler.plugin('compilation', function(compilation) {
-        COMPILATION = compilation;
-        requestShortener = new RequestShortener(compilation.options.context || process.cwd());
-    });
+    compiler.plugin('watch-run', function(watching, done) {
+        var options = this.options;
 
-    compiler.apply(new webpack.ProgressPlugin(function(percent) {
-        this.transport.ns('status').publish('compiling');
-        this.transport.ns('progress').publish(percent);
-    }.bind(this)));
-
-    compiler.plugin('emit', function(compilation, done) {
-        var assets = [];
-        var modules;
-        var profile;
-
-        handledFiles = {};
-
-        for (var assetName in compilation.assets) {
-            if (compilation.assets.hasOwnProperty(assetName)) {
-                assets.push({
-                    name: assetName,
-                    size: compilation.assets[assetName].size()
-                });
+        this.transport = rempl.createPublisher('webpack analyzer', function(settings, callback) {
+            if (settings.dev) {
+                return callback(null, 'url', 'http://localhost:8001/src/ui/');
             }
-        }
 
-        modules = compilation.modules.map(function(module) {
-            var moduleInfo = {
-                index: module.index2,
-                name: module.readableIdentifier(requestShortener),
-                size: module.size(),
-                rawRequest: module.rawRequest,
-                context: module.context,
-                resource: module.resource,
-                reasons: module.reasons.filter(function(reason) {
-                    return reason.dependency && reason.module;
-                }).map(function(reason) {
-                    return reason.module.readableIdentifier(requestShortener);
-                }),
-                loaders: getModuleLoaders(module)
-            };
-
-            moduleInfo.files = getModuleFiles(module, moduleInfo.loaders);
-
-            return moduleInfo;
+            if (options.ui.url) {
+                callback(null, 'url', options.ui.url);
+            } else {
+                rempl.scriptFromFile(options.ui.script)(settings, callback);
+            }
         });
 
-        profile = {
-            version: require.main.require('webpack/package.json').version,
-            hash: compilation.hash,
-            context: compilation.compiler.context,
-            assets: assets,
-            chunks: compilation.chunks.map(function(chunk) {
-                return {
-                    id: chunk.id,
-                    name: chunk.name,
-                    size: chunk.size({}),
-                    hash: chunk.renderedHash,
-                    files: chunk.files,
-                    modules: chunk.modules.map(function(module) {
-                        return module.readableIdentifier(requestShortener);
+        compiler.plugin('compilation', function(compilation) {
+            COMPILATION = compilation;
+            requestShortener = new RequestShortener(compilation.options.context || process.cwd());
+        });
+
+        compiler.apply(new webpack.ProgressPlugin(function(percent) {
+            this.transport.ns('status').publish('compiling');
+            this.transport.ns('progress').publish(percent);
+        }.bind(this)));
+
+        compiler.plugin('emit', function(compilation, done) {
+            var assets = [];
+            var modules;
+            var profile;
+            var webpackVersion = require.main.require('webpack/package.json').version;
+
+            handledFiles = {};
+
+            for (var assetName in compilation.assets) {
+                if (compilation.assets.hasOwnProperty(assetName)) {
+                    assets.push({
+                        name: assetName,
+                        size: compilation.assets[assetName].size()
+                    });
+                }
+            }
+
+            modules = compilation.modules.map(function(module) {
+                var modulesTypeMap = {
+                    NormalModule: 'normal',
+                    MultiModule: 'multi',
+                    ContextModule: 'context',
+                    DelegatedModule: 'delegated',
+                    ExternalModule: 'external'
+                };
+                var moduleType = modulesTypeMap[module.constructor.name] || 'unknown';
+                var resource = module.resource ? handleFile(module.resource) : null;
+
+                // webpack 1.x capability
+                if (webpackVersion[0] == 1) {
+                    var identifier = module.identifier();
+
+                    if (!identifier.indexOf('multi')) {
+                        moduleType = 'multi';
+                    } else if (module.regExp) {
+                        moduleType = 'context';
+                    } else if (!identifier.indexOf('delegated')) {
+                        moduleType = 'delegated';
+                    } else if (!identifier.indexOf('external')) {
+                        moduleType = 'external';
+                    } else if (resource) {
+                        moduleType = 'normal';
+                    } else {
+                        moduleType = 'unknown';
+                    }
+                }
+
+                var moduleInfo = {
+                    id: getModuleId(module),
+                    index: module.index,
+                    type: moduleType,
+                    name: module.readableIdentifier(requestShortener),
+                    size: module.size(),
+                    rawRequest: module.rawRequest,
+                    context: module.context,
+                    resource: resource,
+                    reasons: module.reasons.filter(function(reason) {
+                        return reason.dependency && reason.module;
+                    }).map(function(reason) {
+                        return getModuleId(reason.module);
                     }),
-                    rendered: chunk.rendered,
-                    // webpack 1.x capability
-                    initial: typeof chunk.isInitial == 'function' ? chunk.isInitial() : chunk.initial,
-                    // webpack 1.x capability
-                    entry: typeof chunk.hasRuntime == 'function' ? chunk.hasRuntime() : chunk.entry,
+                    loaders: getModuleLoaders(module)
                 };
-            }),
-            modules: modules,
-            errors: compilation.errors.map(function(error) {
-                return {
-                    message: error.message,
-                    module: error.module && error.module.readableIdentifier(requestShortener)
-                };
-            }),
-            warnings: compilation.warnings.map(function(warning) {
-                return {
-                    message: warning.message,
-                    module: warning.module && warning.module.readableIdentifier(requestShortener)
-                };
-            })
-        };
 
-        this.transport.ns('profile').publish(profile);
+                return moduleInfo;
+            });
+
+            profile = {
+                version: webpackVersion,
+                hash: compilation.hash,
+                context: compilation.compiler.context,
+                assets: assets,
+                chunks: compilation.chunks.map(function(chunk) {
+                    return {
+                        id: chunk.id,
+                        name: chunk.name,
+                        size: chunk.size({}),
+                        hash: chunk.renderedHash,
+                        files: chunk.files,
+                        modules: chunk.modules.map(function(module) {
+                            return getModuleId(module);
+                        }),
+                        rendered: chunk.rendered,
+                        // webpack 1.x capability
+                        initial: typeof chunk.isInitial == 'function' ? chunk.isInitial() : chunk.initial,
+                        // webpack 1.x capability
+                        entry: typeof chunk.hasRuntime == 'function' ? chunk.hasRuntime() : chunk.entry,
+                    };
+                }),
+                modules: modules,
+                errors: compilation.errors.map(function(error) {
+                    return {
+                        message: error.message,
+                        module: error.module && getModuleId(error.module)
+                    };
+                }),
+                warnings: compilation.warnings.map(function(warning) {
+                    return {
+                        message: warning.message,
+                        module: warning.module && getModuleId(warning.module)
+                    };
+                })
+            };
+
+            this.transport.ns('profile').publish(profile);
+            done();
+        }.bind(this));
+
+        compiler.plugin('compile', function() {
+            this.transport.ns('status').publish('compiling');
+        }.bind(this));
+
+        compiler.plugin('invalid', function() {
+            this.transport.ns('status').publish('invalidated');
+        }.bind(this));
+
+        compiler.plugin('done', function() {
+            this.transport.ns('status').publish(COMPILATION.errors.length ? 'failed' : 'success');
+        }.bind(this));
+
+        compiler.plugin('failed', function() {
+            this.transport.ns('status').publish('failed');
+        }.bind(this));
         done();
-    }.bind(this));
-
-    compiler.plugin('compile', function() {
-        this.transport.ns('status').publish('compiling');
-    }.bind(this));
-
-    compiler.plugin('invalid', function() {
-        this.transport.ns('status').publish('invalidated');
-    }.bind(this));
-
-    compiler.plugin('done', function() {
-        this.transport.ns('status').publish(COMPILATION.errors.length ? 'failed' : 'success');
-    }.bind(this));
-
-    compiler.plugin('failed', function() {
-        this.transport.ns('status').publish('failed');
     }.bind(this));
 };
 

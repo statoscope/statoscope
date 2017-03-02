@@ -5,10 +5,11 @@
 	visibility: hidden;
 	opacity: 0;
 	transition: opacity .2s ease-out;
-	max-width: 300px;
+	max-width: 500px;
 	padding: 3px 8px;
 	color: #fff;
 	text-align: center;
+	word-wrap: break-word;
 	background-color: #000;
 	border-radius: 4px;
 	z-index: 9000;

@@ -3,13 +3,14 @@ var Value = require('basis.data').Value;
 var sum = require('basis.data.index').sum;
 var dict = require('basis.l10n').dictionary(__filename);
 
+var type = require('app.type');
 var Table = require('app.ui').Table;
 var TableHead = require('app.ui.table').Head;
 var TableRow = require('app.ui.table').Row;
 var FileSizeCell = require('app.ui.cells').FileSize;
 
 module.exports = Table.subclass({
-    dataSource: Value.query('data.profile.data.assets'),
+    dataSource: type.Asset.all,
     childClass: TableRow.subclass({
         template: resource('./template/row.tmpl'),
         binding: {

@@ -1,5 +1,7 @@
 .bar
 {
+	display: -ms-flexbox;
+	display: -webkit-flex;
 	display: flex;
 	height: 10px;
 	margin: 4px;

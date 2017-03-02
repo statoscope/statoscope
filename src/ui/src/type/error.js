@@ -1,9 +1,9 @@
 var entity = require('basis.entity');
 var Module = require('./module');
 
-var Issue = entity.createType('Issue', {
+var Error = entity.createType('Error', {
     module: Module,
     message: String
 });
 
-module.exports = Issue;
+module.exports = Error;

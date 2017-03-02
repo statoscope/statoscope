@@ -1,10 +1,22 @@
 <b:style src="./graph-tooltip.css"/>
 <b:isolate/>
 <b:define name="isEntry" type="bool"/>
+<b:define name="type" type="enum" values="context external delegated multi"/>
 
 <b:include src="app.ui.tooltip">
     <b:replace ref="content">
-        <div class="marker marker_{isEntry}" style="background-color: {color}"/>
         {name}
+        <hr/>
+        <div>
+            <div>
+                Module: {moduleType}
+                <span b:show="{isEntry}"> (entry)</span>
+            </div>
+            <div b:show="{fileType}">
+                Type:
+                <div class="marker marker_{isEntry} marker_type_{type}" style="background-color: {color}"/>
+                {fileType}
+            </div>
+        </div>
     </b:replace>
 </b:include>
