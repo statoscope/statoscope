@@ -7,5 +7,6 @@ module.exports = {
     ColorBar: require('./ui/colorBar/index'),
     Overlay: require('./ui/overlay/index'),
     Page: require('./ui/page/index'),
-    Progress: require('./ui/progress/index')
+    Progress: require('./ui/progress/index'),
+    Status: require('./ui/status/index')
 };

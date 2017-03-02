@@ -4,6 +4,7 @@ var DatasetWrapper = require('basis.data').DatasetWrapper;
 var Extract = require('basis.data.dataset').Extract;
 var Filter = require('basis.data.dataset').Filter;
 var MapFilter = require('basis.data.dataset').MapFilter;
+var Split = require('basis.data.dataset').Split;
 var type = require('basis.type');
 var File = require('./file');
 var ModuleLoader = require('./module-loader');
@@ -11,7 +12,7 @@ var LS_KEY_HIDE_NON_PROJECT_MODULES = 'wraHideNonProjectModules';
 var hideNonProjectModulesSaved = localStorage.getItem(LS_KEY_HIDE_NON_PROJECT_MODULES);
 var hideNonProjectModules = true;
 
-if (hideNonProjectModulesSaved && hideNonProjectModulesSaved == 'false') {
+if (hideNonProjectModulesSaved == 'false') {
     hideNonProjectModules = false;
 }
 
@@ -28,7 +29,15 @@ var Module = entity.createType('Module', {
     loaders: entity.createSetType(ModuleLoader)
 });
 
-Module.projectFiles = new Extract({
+var moduleTypeSplit = new Split({
+    rule: 'data.type'
+});
+
+Module.byType = function(type) {
+    return moduleTypeSplit.getSubset(type, true);
+};
+
+Module.projectModules = new Extract({
     source: new Filter({
         source: Module.all,
         rule: function(module) {
@@ -53,19 +62,14 @@ Module.hideNonProjectModules.set(hideNonProjectModules);
 
 Module.allWrapper = new DatasetWrapper({
     dataset: Module.hideNonProjectModules.as(function(hide) {
-        return hide ? Module.projectFiles : Module.all;
+        return hide ? Module.projectModules : Module.all;
     })
 });
 
-Module.normalModules = new Filter({
-    source: Module.allWrapper,
-    rule: function(module) {
-        return module.data.type == 'normal'
-    }
-});
+moduleTypeSplit.setSource(Module.allWrapper);
 
 Module.files = new MapFilter({
-    source: Module.normalModules,
+    source: Module.byType('normal'),
     map: function(module) {
         return module.data.resource;
     }

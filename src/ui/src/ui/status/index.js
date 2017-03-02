@@ -2,7 +2,7 @@ var Node = require('basis.ui').Node;
 var Value = require('basis.data').Value;
 var type = require('app.type');
 
-module.exports = new Node({
+module.exports = Node.subclass({
     delegate: type.Profile(),
     template: resource('./template/view.tmpl'),
     binding: {

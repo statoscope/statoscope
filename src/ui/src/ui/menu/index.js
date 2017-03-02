@@ -21,11 +21,15 @@ var MenuItem = Node.subclass({
     typeRA_: null,
     checked: false,
     checkedRA_: null,
+    counter: 0,
+    counterRA_: null,
     emit_typeChanged: event.create('typeChanged'),
     emit_checkedChanged: event.create('checkedChanged'),
+    emit_counterChanged: event.create('counterChanged'),
     propertyDescriptors: {
         type: 'typeChanged',
-        checked: 'checkedChanged'
+        checked: 'checkedChanged',
+        counter: 'counterChanged'
     },
     action: {
         click: function(e) {
@@ -51,10 +55,11 @@ var MenuItem = Node.subclass({
                 hideOnKey: basis.fn.$true,
                 satellite: {
                     menu: {
-                        instance: Menu,
+                        instance: Menu.subclass({
+                            template: resource('./template/sub-menu.tmpl')
+                        }),
                         config: function(owner) {
                             return {
-                                template: resource('./template/sub-menu.tmpl'),
                                 childNodes: owner.items
                             };
                         }
@@ -87,16 +92,18 @@ var MenuItem = Node.subclass({
             events: 'checkedChanged',
             getter: basis.getter('checked')
         },
+        counter: {
+            events: 'counterChanged',
+            getter: basis.getter('counter')
+        },
         subMenuOpened: Value.query('satellite.dropdown.visible')
     },
     init: function() {
-        var type = this.type;
-        var checked = this.checked;
-
         Node.prototype.init.call(this);
 
-        this.setType(type);
-        this.setChecked(checked);
+        this.setType(this.type);
+        this.setChecked(this.checked);
+        this.setCounter(this.counter);
     },
     toggle: basis.fn.$undef,
     setType: function(value) {
@@ -115,9 +122,18 @@ var MenuItem = Node.subclass({
             this.emit_checkedChanged();
         }
     },
+    setCounter: function(value) {
+        value = resolveValue(this, this.setCounter, value, 'counterRA_');
+
+        if (this.counter !== value) {
+            this.counter = value;
+            this.emit_counterChanged();
+        }
+    },
     destroy: function() {
         this.typeRA_ && resolveValue(this, null, null, 'typeRA_');
         this.checkedRA_ && resolveValue(this, null, null, 'checkedRA_');
+        this.counterRA_ && resolveValue(this, null, null, 'counterRA_');
         Node.prototype.destroy.call(this);
     }
 });

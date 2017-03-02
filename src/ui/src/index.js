@@ -1,5 +1,7 @@
 var Value = require('basis.data').Value;
 var Node = require('basis.ui').Node;
+var Progress = require('app.ui').Progress;
+var Status = require('app.ui').Status;
 var Menu = require('app.ui.menu').Menu;
 var type = require('app.type');
 
@@ -28,16 +30,16 @@ module.exports = require('basis.app').create({
             template: resource('./template/layout.tmpl'),
             binding: {
                 menu: 'satellite:',
-                status: resource('./ui/status/index.js'),
+                status: new Status(),
                 progress: 'satellite:',
                 page: 'satellite:'
             },
             satellite: {
-                menu: Menu.subclass({
+                menu: new Menu({
                     childNodes: [
                         { id: 'home', selected: true },
-                        { id: 'errors', binding: { counter: Value.query(type.Error.all, 'itemCount') } },
-                        { id: 'warnings', binding: { counter: Value.query(type.Warning.all, 'itemCount') } },
+                        { id: 'errors', counter: Value.query(type.Error.all, 'itemCount') },
+                        { id: 'warnings', counter: Value.query(type.Warning.all, 'itemCount') },
                         { id: 'graph' },
                         { id: 'fileMap' },
                         {
@@ -56,7 +58,7 @@ module.exports = require('basis.app').create({
                         }
                     ],
                     satellite: {
-                        footer: Node.subclass({
+                        footer: new Node({
                             template: resource('./template/menu-footer.tmpl'),
                             binding: {
                                 homepage: homepage,
@@ -65,7 +67,7 @@ module.exports = require('basis.app').create({
                         })
                     }
                 }),
-                progress: resource('./ui/progress/index.js'),
+                progress: new Progress(),
                 page: Value.query('satellite.menu.selection.pick()').as(function(node) {
                     return node && routes[node.id] || routes.home;
                 })
