@@ -42,7 +42,20 @@ Module.projectFiles = new Extract({
     rule: 'data.reasons'
 });
 
-Module.allWrapper = new DatasetWrapper();
+Module.hideNonProjectModules = new Value({
+    handler: {
+        change: function() {
+            localStorage.setItem(LS_KEY_HIDE_NON_PROJECT_MODULES, this.value);
+        }
+    }
+});
+Module.hideNonProjectModules.set(hideNonProjectModules);
+
+Module.allWrapper = new DatasetWrapper({
+    dataset: Module.hideNonProjectModules.as(function(hide) {
+        return hide ? Module.projectFiles : Module.all;
+    })
+});
 
 Module.normalModules = new Filter({
     source: Module.allWrapper,
@@ -57,21 +70,5 @@ Module.files = new MapFilter({
         return module.data.resource;
     }
 });
-
-Module.hideNonProjectModules = new Value({
-    handler: {
-        change: function() {
-            if (this.value) {
-                Module.allWrapper.setDataset(Module.projectFiles);
-            } else {
-                Module.allWrapper.setDataset(Module.all);
-            }
-
-            localStorage.setItem(LS_KEY_HIDE_NON_PROJECT_MODULES, this.value);
-        }
-    }
-});
-
-Module.hideNonProjectModules.set(hideNonProjectModules);
 
 module.exports = Module;

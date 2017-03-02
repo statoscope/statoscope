@@ -2,7 +2,7 @@ var Value = require('basis.data').Value;
 var resolveValue = require('basis.data').resolveValue;
 var event = require('basis.event');
 var Node = require('basis.ui').Node;
-var Popup = basis.require('basis.ui.popup').Popup;
+var Popup = require('basis.ui.popup').Popup;
 
 var Menu = Node.subclass({
     template: resource('./template/menu.tmpl'),
