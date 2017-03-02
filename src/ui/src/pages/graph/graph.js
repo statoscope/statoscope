@@ -235,8 +235,7 @@ module.exports = Node.subclass({
                             fileType: Value.query('data.resource.data.extname').as(function(extName) {
                                 return extName && getTypeByExt(extName);
                             }),
-                            name: Value.query('data.name'),
-                            fullName: Value.query('data.resource.data.name')
+                            name: Value.query('data.name')
                         }
                     });
 
