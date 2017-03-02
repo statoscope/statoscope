@@ -5,9 +5,14 @@
 	color: #666;
 	cursor: pointer;
 	border-bottom: 1px solid transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-.item:hover
+.item:hover,
+.item_subMenuOpened
 {
 	background: #EEE;
 }
@@ -31,4 +36,19 @@
 .counter
 {
 	color: #999;
+}
+
+.checkbox
+{
+	display: inline-block;
+}
+.checkbox:before
+{
+	width: 13px;
+	display: inline-block;
+	content: ''
+}
+.checkbox_checked:before
+{
+	content: 'x'
 }

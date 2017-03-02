@@ -235,7 +235,8 @@ module.exports = Node.subclass({
                             fileType: Value.query('data.resource.data.extname').as(function(extName) {
                                 return extName && getTypeByExt(extName);
                             }),
-                            name: Value.query('data.name')
+                            name: Value.query('data.name'),
+                            fullName: Value.query('data.resource.data.name')
                         }
                     });
 
@@ -264,7 +265,7 @@ module.exports = Node.subclass({
     init: function() {
         Node.prototype.init.call(this);
 
-        this.graph = Value.from(type.Module.all, 'itemsChanged', function(modules) {
+        this.graph = Value.from(type.Module.allWrapper, 'itemsChanged', function(modules) {
             if (!modules) {
                 return;
             }

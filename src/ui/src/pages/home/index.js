@@ -27,8 +27,8 @@ module.exports = new Page({
             template: resource('./template/page.tmpl'),
             binding: {
                 modules: resource('./modules/modules/index.js'),
-                modulesCount: Value.query(type.Module.all, 'itemCount'),
-                modulesSize: sum(type.Module.all, 'update', 'data.size').as(formatSize),
+                modulesCount: Value.query(type.Module.allWrapper, 'itemCount'),
+                modulesSize: sum(type.Module.allWrapper, 'update', 'data.size').as(formatSize),
                 assets: resource('./modules/assets/index.js'),
                 assetsCount: Value.query(type.Asset.all, 'itemCount'),
                 assetsSize: sum(type.Asset.all, 'update', 'data.size').as(formatSize)

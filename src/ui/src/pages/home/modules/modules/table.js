@@ -10,7 +10,7 @@ var TableRow = require('app.ui.table').Row;
 var FileSizeCell = require('app.ui.cells').FileSize;
 
 module.exports = Table.subclass({
-    dataSource: type.Module.all,
+    dataSource: type.Module.allWrapper,
     sorting: 'data.index',
     childClass: TableRow.subclass({
         template: resource('./template/row.tmpl'),

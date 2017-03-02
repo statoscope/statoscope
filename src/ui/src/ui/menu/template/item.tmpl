@@ -3,7 +3,8 @@
 <b:define name="selected" type="bool"/>
 <b:define name="disabled" type="bool"/>
 
-<span class="item item_{selected} item_{disabled}" event-click="select">
-  {l10n:items.{id}}
+<span class="item item_{selected} item_{disabled} item_{subMenuOpened}" event-click="click">
+   <div class="checkbox checkbox_{checked}" b:show="{isCheckbox}"/>
+   {l10n:items.{id}}
    <span b:show="{counter}" class="counter"> ({counter})</span>
 </span>

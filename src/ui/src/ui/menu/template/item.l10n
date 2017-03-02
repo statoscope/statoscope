@@ -7,7 +7,9 @@
       "errors": "Errors",
       "warnings": "Warnings",
       "graph": "Graph",
-      "fileMap": "File Map"
+      "fileMap": "File Map",
+      "options": "Options",
+      "hide-non-project": "Hide non-project modules"
     }
   }
 }

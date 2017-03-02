@@ -5,6 +5,9 @@
 
 <b:include src="app.ui.tooltip">
     <b:replace ref="content">
+        {name}<br><br>
+        {fullName}
+        <hr/>
         <div class="type">
             <div>
                 Module: {moduleType}
@@ -16,7 +19,5 @@
                 {fileType}
             </div>
         </div>
-        <hr>
-        {name}
     </b:replace>
 </b:include>

@@ -14,7 +14,7 @@ module.exports = new Node({
         }),
         status: 'data:',
         assets: Value.query(type.Asset.all, 'itemCount'),
-        modules: Value.query(type.Module.all, 'itemCount'),
+        modules: Value.query(type.Module.allWrapper, 'itemCount'),
         chunks: Value.query(type.Chunk.all, 'itemCount'),
         errors: Value.query(type.Error.all, 'itemCount'),
         warnings: Value.query(type.Warning.all, 'itemCount'),
