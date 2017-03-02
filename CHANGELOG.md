@@ -1,3 +1,51 @@
+## 1.0.0 (March 2, 2017)
+
+### Plugin
+
+- new module id
+- improved file handling
+- improved loader handling
+- supported different module types
+- now works only in watch-mode
+- added more webpack 1.x capability
+
+### UI
+
+#### Core
+- replaced `Source` by `Profile` entity
+- improved entity loading: `Module`, `Chunk`, `Asset`
+- added `ModuleLoader` entity
+- improved `File` entity
+- all files now is `File` entity
+- split `Issue` entity to `Warning` and `Error` entities
+- removed useless code form `utils`
+- added `open` and `close` events to ui.Page class
+- added `Hide 3rd party modules` button (closes #5)
+- added some css prefixes for cross-browsing
+- many other simplifies and removing useless code
+
+#### ui.Menu
+
+- universalize counter
+- added sub-menu
+- added dropdown-item
+- added checkbox-item
+
+#### ui.Tooltip
+
+- markup improvements
+
+### Pages
+
+#### Graph
+
+- supported and highlighted different module types
+- added module type to tooltip
+
+#### File map
+
+- reworked path-building algorithm (fixed some bugs)
+
 ## 1.0.0-alpha5 (February 18, 2017)
 
 - add webpack2 support!

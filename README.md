@@ -58,7 +58,7 @@ Take a look at the dependencies of the modules and at the modules stats.
 
 ![Dependency graph](https://cloud.githubusercontent.com/assets/6654581/23513322/a65d0860-ff74-11e6-8a3e-9a5cb7068950.png)
 
-There is a few basic module types:
+There are a few basic module types:
 - **normal** - module that you are requiring with `require(...)`
 - **context** - complex module that unites other modules when you are using `require.context(...)`
 
