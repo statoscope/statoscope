@@ -8,12 +8,12 @@ var Split = require('basis.data.dataset').Split;
 var type = require('basis.type');
 var File = require('./file');
 var ModuleLoader = require('./module-loader');
-var LS_KEY_HIDE_NON_PROJECT_MODULES = 'wraHideNonProjectModules';
-var hideNonProjectModulesSaved = localStorage.getItem(LS_KEY_HIDE_NON_PROJECT_MODULES);
-var hideNonProjectModules = true;
+var LS_KEY_HIDE_3RD_PARTY_MODULES = 'wraHide3rdPartyModules';
+var hide3rdPartyModulesSaved = localStorage.getItem(LS_KEY_HIDE_3RD_PARTY_MODULES);
+var hide3rdPartyModules = true;
 
-if (hideNonProjectModulesSaved == 'false') {
-    hideNonProjectModules = false;
+if (hide3rdPartyModulesSaved == 'false') {
+    hide3rdPartyModules = false;
 }
 
 var Module = entity.createType('Module', {
@@ -51,17 +51,17 @@ Module.projectModules = new Extract({
     rule: 'data.reasons'
 });
 
-Module.hideNonProjectModules = new Value({
+Module.hide3rdPartyModules = new Value({
     handler: {
         change: function() {
-            localStorage.setItem(LS_KEY_HIDE_NON_PROJECT_MODULES, this.value);
+            localStorage.setItem(LS_KEY_HIDE_3RD_PARTY_MODULES, this.value);
         }
     }
 });
-Module.hideNonProjectModules.set(hideNonProjectModules);
+Module.hide3rdPartyModules.set(hide3rdPartyModules);
 
 Module.allWrapper = new DatasetWrapper({
-    dataset: Module.hideNonProjectModules.as(function(hide) {
+    dataset: Module.hide3rdPartyModules.as(function(hide) {
         return hide ? Module.projectModules : Module.all;
     })
 });

@@ -113,132 +113,159 @@ function RuntimeAnalyzerPlugin(options) {
         }
     };
 
-    options = deepExtend({}, defaultOptions, options);
-
-    this.transport = rempl.createPublisher('webpack analyzer', function(settings, callback) {
-        if (settings.dev) {
-            return callback(null, 'url', 'http://localhost:8001/src/ui/');
-        }
-
-        if (options.ui.url) {
-            callback(null, 'url', options.ui.url);
-        } else {
-            rempl.scriptFromFile(options.ui.script)(settings, callback);
-        }
-    });
+    this.options = deepExtend({}, defaultOptions, options);
 }
 
 RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
-    compiler.plugin('compilation', function(compilation) {
-        COMPILATION = compilation;
-        requestShortener = new RequestShortener(compilation.options.context || process.cwd());
-    });
+    compiler.plugin('watch-run', function(watching, done) {
+        var options = this.options;
 
-    compiler.apply(new webpack.ProgressPlugin(function(percent) {
-        this.transport.ns('status').publish('compiling');
-        this.transport.ns('progress').publish(percent);
-    }.bind(this)));
-
-    compiler.plugin('emit', function(compilation, done) {
-        var assets = [];
-        var modules;
-        var profile;
-
-        handledFiles = {};
-
-        for (var assetName in compilation.assets) {
-            if (compilation.assets.hasOwnProperty(assetName)) {
-                assets.push({
-                    name: assetName,
-                    size: compilation.assets[assetName].size()
-                });
+        this.transport = rempl.createPublisher('webpack analyzer', function(settings, callback) {
+            if (settings.dev) {
+                return callback(null, 'url', 'http://localhost:8001/src/ui/');
             }
-        }
 
-        modules = compilation.modules.map(function(module) {
-            var modulesTypeMap = {
-                NormalModule: 'normal',
-                MultiModule: 'multi',
-                ContextModule: 'context',
-                DelegatedModule: 'delegated',
-                ExternalModule: 'external'
-            };
-
-            var moduleInfo = {
-                id: getModuleId(module),
-                index: module.index,
-                type: modulesTypeMap[module.constructor.name] || 'unknown',
-                name: module.readableIdentifier(requestShortener),
-                size: module.size(),
-                rawRequest: module.rawRequest,
-                context: module.context,
-                resource: module.resource ? handleFile(module.resource) : null,
-                reasons: module.reasons.filter(function(reason) {
-                    return reason.dependency && reason.module;
-                }).map(function(reason) {
-                    return getModuleId(reason.module);
-                }),
-                loaders: getModuleLoaders(module)
-            };
-
-            return moduleInfo;
+            if (options.ui.url) {
+                callback(null, 'url', options.ui.url);
+            } else {
+                rempl.scriptFromFile(options.ui.script)(settings, callback);
+            }
         });
 
-        profile = {
-            version: require.main.require('webpack/package.json').version,
-            hash: compilation.hash,
-            context: compilation.compiler.context,
-            assets: assets,
-            chunks: compilation.chunks.map(function(chunk) {
-                return {
-                    id: chunk.id,
-                    name: chunk.name,
-                    size: chunk.size({}),
-                    hash: chunk.renderedHash,
-                    files: chunk.files,
-                    modules: chunk.modules.map(function(module) {
-                        return getModuleId(module);
+        compiler.plugin('compilation', function(compilation) {
+            COMPILATION = compilation;
+            requestShortener = new RequestShortener(compilation.options.context || process.cwd());
+        });
+
+        compiler.apply(new webpack.ProgressPlugin(function(percent) {
+            this.transport.ns('status').publish('compiling');
+            this.transport.ns('progress').publish(percent);
+        }.bind(this)));
+
+        compiler.plugin('emit', function(compilation, done) {
+            var assets = [];
+            var modules;
+            var profile;
+            var webpackVersion = require.main.require('webpack/package.json').version;
+
+            handledFiles = {};
+
+            for (var assetName in compilation.assets) {
+                if (compilation.assets.hasOwnProperty(assetName)) {
+                    assets.push({
+                        name: assetName,
+                        size: compilation.assets[assetName].size()
+                    });
+                }
+            }
+
+            modules = compilation.modules.map(function(module) {
+                var modulesTypeMap = {
+                    NormalModule: 'normal',
+                    MultiModule: 'multi',
+                    ContextModule: 'context',
+                    DelegatedModule: 'delegated',
+                    ExternalModule: 'external'
+                };
+                var moduleType = modulesTypeMap[module.constructor.name] || 'unknown';
+                var resource = module.resource ? handleFile(module.resource) : null;
+
+                // webpack 1.x capability
+                if (webpackVersion[0] == 1) {
+                    var identifier = module.identifier();
+
+                    if (!identifier.indexOf('multi')) {
+                        moduleType = 'multi';
+                    } else if (module.regExp) {
+                        moduleType = 'context';
+                    } else if (!identifier.indexOf('delegated')) {
+                        moduleType = 'delegated';
+                    } else if (!identifier.indexOf('external')) {
+                        moduleType = 'external';
+                    } else if (resource) {
+                        moduleType = 'normal';
+                    } else {
+                        moduleType = 'unknown';
+                    }
+                }
+
+                var moduleInfo = {
+                    id: getModuleId(module),
+                    index: module.index,
+                    type: moduleType,
+                    name: module.readableIdentifier(requestShortener),
+                    size: module.size(),
+                    rawRequest: module.rawRequest,
+                    context: module.context,
+                    resource: resource,
+                    reasons: module.reasons.filter(function(reason) {
+                        return reason.dependency && reason.module;
+                    }).map(function(reason) {
+                        return getModuleId(reason.module);
                     }),
-                    rendered: chunk.rendered,
-                    // webpack 1.x capability
-                    initial: typeof chunk.isInitial == 'function' ? chunk.isInitial() : chunk.initial,
-                    // webpack 1.x capability
-                    entry: typeof chunk.hasRuntime == 'function' ? chunk.hasRuntime() : chunk.entry,
+                    loaders: getModuleLoaders(module)
                 };
-            }),
-            modules: modules,
-            errors: compilation.errors.map(function(error) {
-                return {
-                    message: error.message,
-                    module: error.module && getModuleId(error.module)
-                };
-            }),
-            warnings: compilation.warnings.map(function(warning) {
-                return {
-                    message: warning.message,
-                    module: warning.module && getModuleId(warning.module)
-                };
-            })
-        };
 
-        this.transport.ns('profile').publish(profile);
+                return moduleInfo;
+            });
+
+            profile = {
+                version: webpackVersion,
+                hash: compilation.hash,
+                context: compilation.compiler.context,
+                assets: assets,
+                chunks: compilation.chunks.map(function(chunk) {
+                    return {
+                        id: chunk.id,
+                        name: chunk.name,
+                        size: chunk.size({}),
+                        hash: chunk.renderedHash,
+                        files: chunk.files,
+                        modules: chunk.modules.map(function(module) {
+                            return getModuleId(module);
+                        }),
+                        rendered: chunk.rendered,
+                        // webpack 1.x capability
+                        initial: typeof chunk.isInitial == 'function' ? chunk.isInitial() : chunk.initial,
+                        // webpack 1.x capability
+                        entry: typeof chunk.hasRuntime == 'function' ? chunk.hasRuntime() : chunk.entry,
+                    };
+                }),
+                modules: modules,
+                errors: compilation.errors.map(function(error) {
+                    return {
+                        message: error.message,
+                        module: error.module && getModuleId(error.module)
+                    };
+                }),
+                warnings: compilation.warnings.map(function(warning) {
+                    return {
+                        message: warning.message,
+                        module: warning.module && getModuleId(warning.module)
+                    };
+                })
+            };
+
+            this.transport.ns('profile').publish(profile);
+            done();
+        }.bind(this));
+
+        compiler.plugin('compile', function() {
+            this.transport.ns('status').publish('compiling');
+        }.bind(this));
+
+        compiler.plugin('invalid', function() {
+            this.transport.ns('status').publish('invalidated');
+        }.bind(this));
+
+        compiler.plugin('done', function() {
+            this.transport.ns('status').publish(COMPILATION.errors.length ? 'failed' : 'success');
+        }.bind(this));
+
+        compiler.plugin('failed', function() {
+            this.transport.ns('status').publish('failed');
+        }.bind(this));
         done();
-    }.bind(this));
-
-    compiler.plugin('compile', function() {
-        this.transport.ns('status').publish('compiling');
-    }.bind(this));
-
-    compiler.plugin('invalid', function() {
-        this.transport.ns('status').publish('invalidated');
-    }.bind(this));
-
-    compiler.plugin('done', function() {
-        this.transport.ns('status').publish(COMPILATION.errors.length ? 'failed' : 'success');
-    }.bind(this));
-
-    compiler.plugin('failed', function() {
-        this.transport.ns('status').publish('failed');
     }.bind(this));
 };
 

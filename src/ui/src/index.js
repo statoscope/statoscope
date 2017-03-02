@@ -47,11 +47,11 @@ module.exports = require('basis.app').create({
                             type: 'dropdown',
                             items: [
                                 {
-                                    id: 'hide-non-project',
+                                    id: 'hide-3rd-party',
                                     type: 'checkbox',
-                                    checked: type.Module.hideNonProjectModules,
+                                    checked: type.Module.hide3rdPartyModules,
                                     toggle: function() {
-                                        type.Module.hideNonProjectModules.set(this.checked);
+                                        type.Module.hide3rdPartyModules.set(this.checked);
                                     }
                                 }
                             ]

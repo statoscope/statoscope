@@ -8,7 +8,7 @@ module.exports = Node.subclass({
     binding: {
         content: 'satellite:'
     },
-    handler: basis.Class.nestedExtendProperty({
+    handler: basis.Class.extensibleProperty({
         ownerChanged: function() {
             if (this.owner) {
                 this.emit_open();

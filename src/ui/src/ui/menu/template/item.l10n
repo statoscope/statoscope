@@ -9,7 +9,7 @@
       "graph": "Graph",
       "fileMap": "File Map",
       "options": "Options",
-      "hide-non-project": "Hide non-project modules"
+      "hide-3rd-party": "Hide 3rd party modules"
     }
   }
 }
