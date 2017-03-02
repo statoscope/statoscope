@@ -1,5 +1,7 @@
 .spinner
 {
+	display: -ms-flexbox;
+	display: -webkit-flex;
 	display: flex;
 	height: 2px;
 	opacity: 0;
@@ -20,13 +22,16 @@
 
 .intro
 {
-	height: 100%;
-	flex-basis: 20px;
+    -ms-flex: 0 1 20px;
+    -webkit-flex: 0 1 20px;
+    flex: 0 1 20px;
 }
 
 .bar-wrapper
 {
-	flex-grow: 1;
+    -ms-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
 }
 
 .bar

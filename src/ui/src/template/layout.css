@@ -18,20 +18,28 @@ hr
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
 	margin: 10px 0;
-	border: 0;
 	border-top: 1px solid #ccc;
+	border-right: 0;
+	border-bottom: 0;
+	border-left: 0;
 }
 
 .layout
 {
+	display: -ms-flexbox;
+	display: -webkit-flex;
 	display: flex;
+	-ms-flex-direction: column;
+	-webkit-flex-direction: column;
 	flex-direction: column;
 	height: 100%;
 }
 
 .page-container
 {
-	flex-grow: 1;
+	-ms-flex: 1;
+	-webkit-flex: 1;
+	flex: 1;
 	position: relative;
 	overflow: auto;
 }

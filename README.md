@@ -4,8 +4,6 @@
 
 [Webpack](https://github.com/webpack/webpack) 1.x/2.x plugin for analyzing internal processes, state and structure of bundles. Built on [rempl](https://github.com/rempl/rempl).
 
-[Watch a video-demo](https://youtu.be/Y3RVDJRi-Gc)
-
 ## Install
 
 ```bash
@@ -42,21 +40,6 @@ npm i
 npm run dev
 ```
 
-## Plugin config
-
-If you don't want to use default plugin config, then you can specify your own config:
-
-```js
-new RuntimeAnalyzerPlugin({
-    ui: {
-        script: fs.readFileSync('/path/to/ui/bundle.js', 'utf-8'), // packed UI bundle (js + html + css + etc...)
-        url: 'http://localhost:8080' // or URL to UI
-    }
-});
-```
-
-> In case `ui.url` and `ui.script` are specified then `ui.url` will be used.
-
 ## Key features
 
 ### Dashboard
@@ -77,9 +60,9 @@ Take a look at the dependencies of the modules and at the modules stats.
 
 There is a few basic module types:
 - **normal** - module that you are requiring with `require(...)`
-- **context** - complex module that unites other modules when you using `require.context(...)`
+- **context** - complex module that unites other modules when you are using `require.context(...)`
 
-Some modules can be `entry`. It means that this module is declared in entry-section in you webpack-config.
+Some modules can be marked as `entry`. It means that this module is declared in entry-section in you webpack-config.
 
 Module is separated by file types (scripts, templates, styles, etc). Every file type has a different color. You can see these colors at the nodes of graph or at the color-bar above the graph.
 
@@ -118,6 +101,21 @@ So, `modules list`, `graph` and `file map` will be contain only modules that req
 ### Webpack 1.x support
 
 All features is working correctly with webpack 2.x and 1.x
+
+## Plugin config
+
+If you don't want to use default plugin config, then you can specify your own config:
+
+```js
+new RuntimeAnalyzerPlugin({
+    ui: {
+        script: fs.readFileSync('/path/to/ui/bundle.js', 'utf-8'), // packed UI bundle (js + html + css + etc...)
+        url: 'http://localhost:8080' // or URL to UI
+    }
+});
+```
+
+> In case `ui.url` and `ui.script` are specified then `ui.url` will be used.
 
 ## UI customization
 

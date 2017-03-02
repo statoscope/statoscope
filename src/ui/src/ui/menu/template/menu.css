@@ -1,5 +1,6 @@
 .menu
 {
+	display: -ms-flexbox;
 	display: -webkit-flex;
 	display: flex;
 	padding: 0;
