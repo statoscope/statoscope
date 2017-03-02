@@ -1,13 +1,13 @@
 <b:style src="./graph-tooltip.css"/>
 <b:isolate/>
 <b:define name="isEntry" type="bool"/>
-<b:define name="isContext" type="bool"/>
+<b:define name="type" type="enum" values="context external delegated multi"/>
 
 <b:include src="app.ui.tooltip">
     <b:replace ref="content">
         {name}
         <hr/>
-        <div class="type">
+        <div>
             <div>
                 Module: {moduleType}
                 <span b:show="{isEntry}"> (entry)</span>

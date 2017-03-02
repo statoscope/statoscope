@@ -81,12 +81,12 @@ var MenuItem = Node.subclass({
     },
     binding: {
         id: 'id',
-        isCheckbox: function(node) {
-            return node.type == 'checkbox';
-        },
         type: {
             events: 'typeChanged',
             getter: basis.getter('type')
+        },
+        isCheckbox: function(node) {
+            return node.type == 'checkbox';
         },
         checked: {
             events: 'checkedChanged',

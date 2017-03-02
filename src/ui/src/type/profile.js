@@ -28,6 +28,10 @@ rempl.getSubscriber(function(api) {
     });
 
     api.ns('profile').subscribe(function(data) {
+        if (!data) {
+            return;
+        }
+
         /** @cut */ basis.dev.log('channel(profile)', data);
         profile.update({
             version: data.version,
