@@ -120,7 +120,7 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
     compiler.plugin('watch-run', function(watching, done) {
         var options = this.options;
 
-        this.transport = rempl.createPublisher('webpack analyzer', function(settings, callback) {
+        this.transport = rempl.createPublisher('webpack-analyzer', function(settings, callback) {
             if (settings.dev) {
                 return callback(null, 'url', 'http://localhost:8001/src/ui/');
             }
