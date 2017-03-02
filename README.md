@@ -14,7 +14,7 @@ npm install webpack-runtime-analyzer --save-dev
 
 ## Usage
 
-Add plugin to your webpack config:
+1) Add plugin to your webpack config:
 
 ```js
 var RuntimeAnalyzerPlugin = require('webpack-runtime-analyzer');
@@ -24,13 +24,15 @@ var RuntimeAnalyzerPlugin = require('webpack-runtime-analyzer');
 plugins.push(new RuntimeAnalyzerPlugin());
 ```
 
-Start [rempl server](https://github.com/rempl/rempl-cli):
+2) Start [rempl server](https://github.com/rempl/rempl-cli):
 
 ```bash
 rempl
 ```
 
 > Also, you can use the [GUI](https://github.com/rempl/menubar-server) to control rempl server.
+
+3) Start building in watch-mode (`wabpack --watch` or `webpack-dev-server`) then open [http://localhost:8177/](http://localhost:8177/) in your browser to see UI.
 
 Try the [example](example) to see how it works:
 
@@ -39,10 +41,6 @@ cd example
 npm i
 npm run dev
 ```
-
-Then open rempl server URL in your browser ([http://localhost:8177](http://localhost:8177) by default)
-
-> Make sure that your rempl server is up.
 
 ## Plugin config
 
