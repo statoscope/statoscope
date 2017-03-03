@@ -1,3 +1,10 @@
+## 1.0.1 (March 3, 2017)
+
+### Plugin
+
+- added `onlyWatchMode` option (#8)
+- bumped rempl version
+
 ## 1.0.0 (March 2, 2017)
 
 ### Plugin
