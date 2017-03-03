@@ -30,7 +30,7 @@ rempl
 
 > Also, you can use the [GUI](https://github.com/rempl/menubar-server) to control rempl server.
 
-3) Start building in watch-mode (`wabpack --watch` or `webpack-dev-server`) then open [http://localhost:8177/](http://localhost:8177/) in your browser to see UI.
+3) Start building in a watch mode (`> wabpack --watch` or `> webpack-dev-server`) then open [http://localhost:8177/](http://localhost:8177/) in your browser to see UI.
 
 Try the [example](example) to see how it works:
 
@@ -108,23 +108,27 @@ If you don't want to use default plugin config, then you can specify your own co
 
 ```js
 new RuntimeAnalyzerPlugin({
-    ui: {
-        script: fs.readFileSync('/path/to/ui/bundle.js', 'utf-8'), // packed UI bundle (js + html + css + etc...)
-        url: 'http://localhost:8080' // or URL to UI
-    }
+    onlyWatchMode: true,
+    ui: fs.readFileSync('/path/to/ui/bundle.js', 'utf-8'), // packed UI bundle (js + html + css + etc...)
 });
 ```
 
-> In case `ui.url` and `ui.script` are specified then `ui.url` will be used.
+### onlyWatchMode: Boolean
+
+Activate plugin only in a watch mode (`> webpack --watch` or `> webpack-dev-server`)
+
+If `onlyWatchMode` is `false` then the plugin will be activated in a normal (`> webpack`) and in a watch mode (`> webpack --watch` or `> webpack-dev-server`). It means that normal building process will not be terminated after finish because the plugin is holding a permanent connection to the rempl server. The only way to terminate building process is `ctrl+c` like in a watch mode.
+
+`true` by default.
 
 ## UI customization
 
 The UI built on [basis.js framework](http://basisjs.com/).
 
-* Make changes in [src/ui](src/ui)
-* Run `npm run build` to build the UI bundle
-
-> In the future you will may host and customize the UI at web server without building a bundle, but rempl does not support this feature at this moment.
+* Clone this repo
+* Make the changes in [src/ui](src/ui)
+* Run `npm run build` to build the UI bundle to the `dist` directory
+* Set an absolute path to built UI bundle in the `ui` plugin option 
 
 ## License
 

@@ -108,28 +108,24 @@ function getModuleLoaders(module) {
 
 function RuntimeAnalyzerPlugin(options) {
     var defaultOptions = {
-        ui: {
-            script: path.resolve(__dirname, '../../dist/script.js')
-        }
+        onlyWatchMode: true,
+        ui: path.resolve(__dirname, '../../dist/script.js')
     };
 
     this.options = deepExtend({}, defaultOptions, options);
 }
 
 RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
-    compiler.plugin('watch-run', function(watching, done) {
-        var options = this.options;
+    var options = this.options;
+    var pluginMode = options.onlyWatchMode ? 'watch-run' : 'run';
 
+    compiler.plugin(pluginMode, function(watching, done) {
         this.transport = rempl.createPublisher('webpack-analyzer', function(settings, callback) {
             if (settings.dev) {
                 return callback(null, 'url', 'http://localhost:8001/src/ui/');
             }
 
-            if (options.ui.url) {
-                callback(null, 'url', options.ui.url);
-            } else {
-                rempl.scriptFromFile(options.ui.script)(settings, callback);
-            }
+            rempl.scriptFromFile(options.ui)(settings, callback);
         });
 
         compiler.plugin('compilation', function(compilation) {
