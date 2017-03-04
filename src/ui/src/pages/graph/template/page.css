@@ -1,0 +1,24 @@
+.page-container {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    height: 100%;
+}
+
+.color-bar
+{
+    -ms-flex: 0 0 auto;
+    -webkit-flex: 0 0 auto;
+    flex: 0 0 auto;
+}
+
+.graph
+{
+    -ms-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    position: relative;
+}

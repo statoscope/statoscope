@@ -1,0 +1,32 @@
+.marker_html
+{
+    background: #FF0000;
+}
+.marker_script
+{
+    background: #99BBCC;
+}
+.marker_style
+{
+    background: #FF69B4;
+}
+.marker_template
+{
+    background: #88CC88;
+}
+.marker_l10n
+{
+    background: orange;
+}
+.marker_image
+{
+    background: #87CEEB;
+}
+.marker_json
+{
+    background: gray;
+}
+.marker_font
+{
+    background: #4169E1;
+}

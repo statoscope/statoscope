@@ -6,7 +6,8 @@ module.exports = Node.subclass({
     emit_open: createEvent('open'),
     emit_close: createEvent('close'),
     binding: {
-        content: 'satellite:'
+        content: 'satellite:',
+        type: 'type'
     },
     handler: basis.Class.extensibleProperty({
         ownerChanged: function() {

@@ -1,0 +1,12 @@
+.slider,
+.slider:hover,
+.slider:focus
+{
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  width: 250px;
+  background: rgba(0, 0, 0, .6);
+  border-radius: 3px;
+  color: white;
+}

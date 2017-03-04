@@ -15,7 +15,7 @@ module.exports = Node.subclass({
     tooltipClass: Tooltip.subclass({
         template: templates.tooltip,
         binding: {
-            color: 'data:',
+            type: 'data:',
             caption: 'data:',
             count: 'data:',
             percentage: {
@@ -29,7 +29,7 @@ module.exports = Node.subclass({
     childClass: {
         template: templates.item,
         binding: {
-            color: 'data:',
+            type: 'data:',
             percentage: 'data:'
         },
         action: {
