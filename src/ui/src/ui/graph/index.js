@@ -324,62 +324,70 @@ var speedSlider = new Slider({
     value: 30
 });
 
-// sync links & nodes with graph
-(function() {
-    var links = ModuleLink.allWrapper.getValues();
-
-    Module.allWrapper.addHandler({
-        itemsChanged: function(dataset, delta) {
-            if (delta.deleted) {
-                delta.deleted.forEach(function(file) {
-                    graph.removeNode(file.getId());
-                });
-            }
-        }
-    });
-
-    ModuleLink.allWrapper.addHandler({
-        itemsChanged: function(dataset, delta) {
-            if (delta.inserted) {
-                delta.inserted.forEach(function(link) {
-                    links.push(link);
-                });
-            }
-
-            if (delta.deleted) {
-                delta.deleted.forEach(function(link) {
-                    basis.array.remove(links, link);
-                    graph.removeLink(link.data.from, link.data.to);
-                });
-            }
-        }
-    });
-
-    (function popNode() {
-        if (links.length) {
-            var link;
-
-            while (link = links.shift()) {
-                var fileLink = ModuleLink.get({
-                    from: link.data.from,
-                    to: link.data.to
-                });
-
-                if (fileLink) {
-                    graph.addLink.apply(graph, [link.data.from, link.data.to]);
-                    break;
-                }
-            }
-        }
-
-        setTimeout(popNode, speedSlider.value);
-    })();
-})();
-
 module.exports = Node.subclass({
     template: resource('./template/view.tmpl'),
     binding: {
         graph: svgGraphics,
         speedSlider: speedSlider
+    },
+    init: function() {
+        Node.prototype.init.call(this);
+
+        var links = ModuleLink.allWrapper.getValues();
+
+        this.links = links;
+
+        Module.allWrapper.addHandler({
+            itemsChanged: function(dataset, delta) {
+                if (delta.deleted) {
+                    delta.deleted.forEach(function(file) {
+                        graph.removeNode(file.getId());
+                    });
+                }
+            }
+        });
+
+        ModuleLink.allWrapper.addHandler({
+            itemsChanged: function(dataset, delta) {
+                if (delta.inserted) {
+                    delta.inserted.forEach(function(link) {
+                        links.push(link);
+                    });
+                }
+
+                if (delta.deleted) {
+                    delta.deleted.forEach(function(link) {
+                        basis.array.remove(links, link);
+                        graph.removeLink(link.data.from, link.data.to);
+                    });
+                }
+            }
+        });
+    },
+    start: function() {
+        (function popNode() {
+            if (this.links.length) {
+                var link;
+
+                while (link = this.links.shift()) {
+                    var fileLink = ModuleLink.get({
+                        from: link.data.from,
+                        to: link.data.to
+                    });
+
+                    if (fileLink) {
+                        graph.addLink.apply(graph, [link.data.from, link.data.to]);
+                        break;
+                    }
+                }
+            }
+
+            this.timer = setTimeout(popNode.bind(this), speedSlider.value);
+        }.bind(this))();
+    },
+    stop: function() {
+        if (this.timer) {
+            clearTimeout(this.timer);
+        }
     }
 });

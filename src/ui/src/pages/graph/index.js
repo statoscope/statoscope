@@ -1,12 +1,6 @@
 var Page = require('app.ui').Page;
-var Graph = require('app.ui.newGraph.index');
-var ColorBar = require('app.ui').ColorBar;
-var Node = require('basis.ui').Node;
-var Vector = require('basis.data.vector').Vector;
-var vectorCount = require('basis.data.vector').count;
-var IndexMap = require('basis.data.index').IndexMap;
-var sum = require('basis.data.index').sum;
-var type = require('app.type');
+var Graph = require('app.ui').Graph;
+var ColorBar = require('app.ui').FileColorBar.Bar;
 
 var typeByExt = {
     '.js': 'script',
@@ -50,59 +44,31 @@ function getTypeByExt(ext) {
 
 module.exports = new Page({
     className: 'Page.Graph',
+    template: resource('./template/page.tmpl'),
     type: 'fit',
+    handler: {
+        open: function() {
+            this.satellite.graph.start();
+        },
+        close: function() {
+            this.satellite.graph.stop();
+        }
+    },
     satellite: {
-        content: new Node({
-            template: resource('./template/page.tmpl'),
-            satellite: {
-                colorBar: {
-                    instance: ColorBar.subclass({
-                        sorting: function(item) {
-                            var index = typeOrder.indexOf(item.data.type);
+        colorBar: {
+            instance: new ColorBar({
+                getTypeByExt: getTypeByExt,
+                sorting: function(item) {
+                    var index = typeOrder.indexOf(item.data.type);
 
-                            return index !== -1 ? index : Infinity;
-                        },
-                        dataSource: function() {
-                            return new IndexMap({
-                                source: new Vector({
-                                    source: type.Module.files,
-                                    rule: function(file) {
-                                        return getTypeByExt(file.data.extname);
-                                    },
-                                    calcs: {
-                                        count: vectorCount()
-                                    }
-                                }),
-                                indexes: {
-                                    totalCount: sum('data.count')
-                                },
-                                calcs: {
-                                    percentage: function(data, indexes) {
-                                        return 100 * data.count / indexes.totalCount;
-                                    },
-                                    type: function(data, indexes, sourceObject) {
-                                        return sourceObject.key;
-                                    },
-                                    caption: function(data, indexes, sourceObject) {
-                                        return sourceObject.key;
-                                    }
-                                }
-                            });
-                        },
-                        childClass: {
-                            template: resource('./template/color-bar-item.tmpl')
-                        },
-                        tooltipClass: ColorBar.prototype.tooltipClass.subclass({
-                            template: resource('./template/color-bar-tooltip.tmpl')
-                        })
-                    })
-                },
-                graph: new Graph()
-            },
-            binding: {
-                colorBar: 'satellite:',
-                graph: 'satellite:'
-            }
-        })
+                    return index !== -1 ? index : Infinity;
+                }
+            })
+        },
+        graph: Graph
+    },
+    binding: {
+        colorBar: 'satellite:',
+        graph: 'satellite:'
     }
 });

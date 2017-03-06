@@ -1,32 +1,36 @@
-.marker_html
+.type-color-html
 {
     background: #FF0000;
 }
-.marker_script
+.type-color-script
 {
     background: #99BBCC;
 }
-.marker_style
+.type-color-style
 {
     background: #FF69B4;
 }
-.marker_template
+.type-color-template
 {
     background: #88CC88;
 }
-.marker_l10n
+.type-color-l10n
 {
     background: orange;
 }
-.marker_image
+.type-color-image
 {
     background: #87CEEB;
 }
-.marker_json
+.type-color-json
 {
     background: gray;
 }
-.marker_font
+.type-color-font
 {
     background: #4169E1;
+}
+.type-color-unknown
+{
+    background: black;
 }

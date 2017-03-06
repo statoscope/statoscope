@@ -1,5 +1,6 @@
 <b:isolate/>
 <b:style src="./popup.css"/>
+<b:style src="app:template/colors.css"/>
 <b:define name="isEntry" type="bool"/>
 <b:define name="moduleType" type="enum" values="context external delegated multi"/>
 <b:define name="fileType" type="enum" values="script style html template l10n image font json"/>
@@ -15,7 +16,7 @@
       </div>
       <div b:show="{fileType}">
         Type:
-        <div class="marker marker_{isEntry} marker_module_{moduleType} marker_file_{fileType}"/>
+        <div class="marker marker_{isEntry} marker_module_{moduleType} type-color-{fileType}"/>
         {fileType}
       </div>
     </div>

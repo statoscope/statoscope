@@ -1,11 +1,15 @@
 <b:style src="./page.css"/>
 <b:isolate/>
 
-<div class="page-container">
-    <div class="color-bar">
-        <!--{colorBar}-->
-    </div>
-    <div class="graph">
-        <!--{graph}-->
-    </div>
-</div>
+<b:include src="app.ui.page">
+    <b:append>
+        <div class="page-container">
+            <div class="color-bar">
+                <!--{colorBar}-->
+            </div>
+            <div class="graph">
+                <!--{graph}-->
+            </div>
+        </div>
+    </b:append>
+</b:include>
