@@ -11,7 +11,6 @@ var type = require('app.type');
 var template = require('basis.template');
 
 var templates = template.define('app.ui.fileColorBar', {
-    bar: template.get('app.ui.colorBar.bar'),
     item: resource('./template/item.tmpl'),
     tooltip: resource('./template/tooltip.tmpl')
 });
