@@ -3,6 +3,7 @@
 node_modules/
 example/dist/
 .rempl_client_id
+.rempl_endpoint_id
 *.log
 *.lock
 .DS_store

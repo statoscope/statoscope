@@ -365,6 +365,8 @@ module.exports = Node.subclass({
         });
     },
     start: function() {
+        renderer.resume();
+
         (function popNode() {
             if (this.links.length) {
                 var link;
@@ -386,6 +388,8 @@ module.exports = Node.subclass({
         }.bind(this))();
     },
     stop: function() {
+        renderer.pause();
+
         if (this.timer) {
             clearTimeout(this.timer);
         }
