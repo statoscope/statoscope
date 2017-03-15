@@ -1,6 +1,6 @@
 'use strict';
 
-var loaderUtils = require('loader-utils');
+var parseQuery = require('loader-utils/lib/parseQuery.js');
 var webpack = require('webpack');
 var RequestShortener = require('webpack/lib/RequestShortener');
 var rempl = require('rempl');
@@ -96,7 +96,7 @@ function getModuleLoaders(module) {
                 loaderInfo.options = '?' + loaderInfo.options;
             }
 
-            options = loaderUtils.parseQuery(loaderInfo.options);
+            options = parseQuery(loaderInfo.options);
         }
 
         return {
