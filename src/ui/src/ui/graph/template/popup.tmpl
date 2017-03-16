@@ -1,0 +1,24 @@
+<b:isolate/>
+<b:style src="./popup.css"/>
+<b:style src="app:template/colors.css"/>
+<b:define name="isEntry" type="bool"/>
+<b:define name="moduleType" type="enum" values="context external delegated multi"/>
+<b:define name="fileType" type="enum" values="script style html template l10n image font json"/>
+
+<b:include src="basis.ui.popup.Popup" class="popup">
+  <b:append ref="content">
+    {name}
+    <hr/>
+    <div>
+      <div>
+        Module: {moduleType}
+        <span b:show="{isEntry}"> (entry)</span>
+      </div>
+      <div b:show="{fileType}">
+        Type:
+        <div class="marker marker_{isEntry} marker_module_{moduleType} type-color-{fileType}"/>
+        {fileType}
+      </div>
+    </div>
+  </b:append>
+</b:include>

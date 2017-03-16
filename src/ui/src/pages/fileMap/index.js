@@ -1,4 +1,3 @@
-var Node = require('basis.ui').Node;
 var Value = require('basis.data').Value;
 var addHandler = require('basis.dom.event').addHandler;
 var Page = require('app.ui').Page;
@@ -72,92 +71,92 @@ function calcPercentsAndUpdateNames(tree) {
     walk(tree);
 }
 
-var content = new Node({
-    template: resource('./template/page.tmpl'),
-    tree: null,
-    marginBottom: 10,
-    updateMap: function() {
-        basis.asap(function() {
-            var height = window.innerHeight - this.element.getBoundingClientRect().top - this.marginBottom;
-
-            this.element.style.height = height + 'px';
-            webtreemap(this.element, this.tree);
-        }.bind(this));
-    }
-});
-
 var page = new Page({
     className: 'Page.FileMap',
-    satellite: {
-        content: content
-    },
+    type: 'fit',
+    tree: null,
     handler: {
         open: function() {
-            this.satellite.content.updateMap();
+            this.start();
+        },
+        close: function() {
+            this.stop();
         }
+    },
+    updateMap: function() {
+        basis.asap(function() {
+            webtreemap(this.element, this.tree);
+            this.element.firstElementChild.style.width = '100%';
+            this.element.firstElementChild.style.height = '100%';
+        }, this);
+    },
+    start: function() {
+        this.watcher = Value.from(type.Module.files, 'itemsChanged', function(files) {
+            if (!files) {
+                return;
+            }
+
+            files = files.getValues('data');
+
+            var appliedFiles = {};
+            var partsCount = [];
+            var sharePart;
+
+            files.forEach(function(file) {
+                var parts = file.name.split('/');
+
+                for (var i = 0; i < parts.length; i++) {
+                    if (partsCount[i]) {
+                        if (partsCount[i].name == parts[i]) {
+                            partsCount[i].count++;
+                        } else {
+                            break;
+                        }
+                    } else {
+                        partsCount[i] = {
+                            name: parts[i], count: 1
+                        };
+                    }
+                }
+            });
+
+            sharePart = partsCount
+                .filter(function(part) {
+                    return part.count == files.length;
+                })
+                .map(function(part) {
+                    return part.name;
+                });
+
+            files = files.map(function(file) {
+                return {
+                    name: file.name.slice(sharePart.join('/').length + 1),
+                    size: file.size
+                };
+            });
+
+            this.element.innerHTML = '';
+            this.tree = makeNode('/', 0);
+
+            files.forEach(function(file) {
+                if (!appliedFiles[file.name]) {
+                    appliedFiles[file.name] = true;
+                    applyPath(this.tree, { path: file.name, size: file.size });
+                }
+            }, this);
+
+            calcPercentsAndUpdateNames(this.tree);
+            this.updateMap();
+        }.bind(this));
+    },
+    stop: function() {
+        this.watcher.destroy();
+        this.watcher = null;
     }
 });
-
-Value.from(type.Module.files, 'itemsChanged', function(files) {
-    if (!files) {
-        return;
-    }
-
-    files = files.getValues('data');
-
-    var appliedFiles = {};
-    var partsCount = [];
-    var sharePart;
-
-    files.forEach(function(file) {
-        var parts = file.name.split('/');
-
-        for (var i = 0; i < parts.length; i++) {
-            if (partsCount[i]) {
-                if (partsCount[i].name == parts[i]) {
-                    partsCount[i].count++;
-                } else {
-                    break;
-                }
-            } else {
-                partsCount[i] = {
-                    name: parts[i], count: 1
-                };
-            }
-        }
-    });
-
-    sharePart = partsCount
-        .filter(function(part) {
-            return part.count == files.length;
-        })
-        .map(function(part) {
-            return part.name;
-        });
-
-    files = files.map(function(file) {
-        return {
-            name: file.name.slice(sharePart.join('/').length + 1),
-            size: file.size
-        };
-    });
-
-    this.element.innerHTML = '';
-    this.tree = makeNode('/', 0);
-
-    files.forEach(function(file) {
-        if (!appliedFiles[file.name]) {
-            appliedFiles[file.name] = true;
-            applyPath(this.tree, { path: file.name, size: file.size });
-        }
-    }, this);
-
-    calcPercentsAndUpdateNames(this.tree);
-    this.updateMap();
-}.bind(content));
 
 addHandler(window, 'resize', function() {
     this.updateMap();
-}, content);
+}, page);
 
 module.exports = page;

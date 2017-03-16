@@ -1,0 +1,10 @@
+.control
+{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0, 0, 0, .6);
+  border-radius: 3px;
+  color: white;
+  padding: 4px 8px;
+}

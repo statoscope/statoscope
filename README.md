@@ -56,7 +56,9 @@ Right list contains building output (bundles, chunks, static, etc).
 
 Take a look at the dependencies of the modules and at the modules stats.
 
-![Dependency graph](https://cloud.githubusercontent.com/assets/6654581/23513322/a65d0860-ff74-11e6-8a3e-9a5cb7068950.png)
+![Dependency graph](https://cloud.githubusercontent.com/assets/6654581/23990737/0770cff0-0a48-11e7-9730-4da8c6452893.png)
+
+#### Module types
 
 There are a few basic module types:
 - **normal** - module that you are requiring with `require(...)`
@@ -66,7 +68,14 @@ Some modules can be marked as `entry`. It means that this module is declared in 
 
 Module is separated by file types (scripts, templates, styles, etc). Every file type has a different color. You can see these colors at the nodes of graph or at the color-bar above the graph.
 
-As well you can hover mouse cursor at the node of graph or at the color bar section and see additional module-info or file type statistic.
+You can hover mouse cursor at the nodes of graph or at the color bar sections and see an additional module-info or a file type statistic.
+
+#### Controls
+
+- zooming graph with mouse/touchpad scrolling
+- changing graph position with drag and drop on the white field.
+- changing rendering speed by sliding speed slider
+- pause/resume graph rendering with `space`-key
 
 ### File size map
 
@@ -86,7 +95,7 @@ In a huge bundles there are many modules that are useless for analyzing.
 
 For example, look at the [AST Explorer](https://github.com/fkling/astexplorer) bundle:
 
-![AST Explorer modules graph](https://cloud.githubusercontent.com/assets/6654581/23513842/8cc35ba0-ff76-11e6-805c-24e06d5393ae.png)
+![AST Explorer modules graph](https://cloud.githubusercontent.com/assets/6654581/23990644/c87a947a-0a47-11e7-948d-681289f54c59.png)
 
 In this case graph is not usable, moreover overloaded graph decreases rendering performance.
 
@@ -94,7 +103,7 @@ You can enable `Hide 3rd party modules` in the `Options` menu to hide modules th
 
 So, `modules list`, `graph` and `file map` will be contain only modules that requiring your project-modules.
 
-![AST Explorer modules graph with hidden 3rd party modules](https://cloud.githubusercontent.com/assets/6654581/23514270/e6b8d440-ff77-11e6-9390-66202aef1f2f.png)
+![AST Explorer modules graph with hidden 3rd party modules](https://cloud.githubusercontent.com/assets/6654581/23990815/3cabb1d0-0a48-11e7-9f84-177cad1f70d2.png)
 
 `Hide 3rd party modules` is enabled by default.
 

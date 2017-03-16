@@ -1,0 +1,32 @@
+.type-color-html
+{
+    background: #FF0000;
+}
+.type-color-script
+{
+    background: #99BBCC;
+}
+.type-color-style
+{
+    background: #FF69B4;
+}
+.type-color-template
+{
+    background: #88CC88;
+}
+.type-color-l10n
+{
+    background: orange;
+}
+.type-color-image
+{
+    background: #87CEEB;
+}
+.type-color-json
+{
+    background: gray;
+}
+.type-color-font
+{
+    background: #4169E1;
+}
