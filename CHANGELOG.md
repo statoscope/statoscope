@@ -1,3 +1,19 @@
+## 1.1.0 (March 16, 2017)
+
+### Plugin
+
+- fixed loader-utils version (fixes #9)
+
+### UI
+
+#### Graph
+
+- replaces d3-graph by vivagraph
+- zooming graph with mouse/touchpad scrolling
+- changing graph position with drag and drop on the white field.
+- changing rendering speed by sliding speed slider
+- pause/resume graph rendering with `space`-key
+
 ## 1.0.1 (March 3, 2017)
 
 ### Plugin
