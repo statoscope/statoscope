@@ -317,21 +317,67 @@ var renderer = Viva.Graph.View.renderer(graph, {
 
 renderer.run();
 
-var speedSlider = new Slider({
+var isPaused = new Value({ value: true });
+
+var SpeedSlider = Slider.subclass({
     template: resource('./template/slider.tmpl'),
     max: 100,
     step: 10,
     value: 30
 });
 
+var LinksCounter = Node.subclass({
+    template: resource('./template/counters.tmpl'),
+    binding: {
+        totalLinks: Value.query('owner.<static>totalLinks.value'),
+        renderedLinks: Value.query('owner.<static>renderedLinks.value'),
+        totalNodes: Value.query('owner.<static>totalNodes.value'),
+        renderedNodes: Value.query('owner.<static>renderedNodes.value')
+    }
+});
+
+var Control = Node.subclass({
+    template: resource('./template/control.tmpl'),
+    binding: {
+        isPaused: isPaused
+    },
+    action: {
+        toggle: function() {
+            isPaused.set(!isPaused.value);
+        }
+    }
+});
+
 module.exports = Node.subclass({
     template: resource('./template/view.tmpl'),
-    binding: {
+    satellite: {
         graph: svgGraphics,
-        speedSlider: speedSlider
+        speedSlider: SpeedSlider,
+        linksCounter: LinksCounter,
+        control: Control
     },
+    binding: {
+        graph: 'satellite:',
+        speedSlider: 'satellite:',
+        linksCounter: 'satellite:',
+        control: 'satellite:'
+    },
+    isPaused: isPaused,
     init: function() {
+        this.totalNodes = Value.query(Module.allWrapper, 'itemCount');
+        this.renderedNodes = new Value({ value: 0 });
+        this.totalLinks = Value.query(ModuleLink.allWrapper, 'itemCount');
+        this.renderedLinks = new Value({ value: 0 });
+
         Node.prototype.init.call(this);
+
+        isPaused.link(this, function(value) {
+            if (value) {
+                this.stop();
+            } else {
+                this.start();
+            }
+        });
 
         var links = ModuleLink.allWrapper.getValues();
 
@@ -343,9 +389,12 @@ module.exports = Node.subclass({
                     delta.deleted.forEach(function(file) {
                         graph.removeNode(file.getId());
                     });
+
+                    this.renderedLinks.set(graph.getLinksCount());
+                    this.renderedNodes.set(graph.getNodesCount());
                 }
             }
-        });
+        }, this);
 
         ModuleLink.allWrapper.addHandler({
             itemsChanged: function(dataset, delta) {
@@ -364,6 +413,18 @@ module.exports = Node.subclass({
             }
         });
     },
+    destroy: function() {
+        this.totalNodes.destroy();
+        this.totalNodes = null;
+        this.renderedNodes.destroy();
+        this.renderedNodes = null;
+        this.totalLinks.destroy();
+        this.totalLinks = null;
+        this.renderedLinks.destroy();
+        this.renderedLinks = null;
+
+        Node.prototype.destroy.call(this);
+    },
     start: function() {
         renderer.resume();
 
@@ -379,12 +440,15 @@ module.exports = Node.subclass({
 
                     if (fileLink) {
                         graph.addLink.apply(graph, [link.data.from, link.data.to]);
+
+                        this.renderedLinks.set(graph.getLinksCount());
+                        this.renderedNodes.set(graph.getNodesCount());
                         break;
                     }
                 }
             }
 
-            this.timer = setTimeout(popNode.bind(this), speedSlider.value);
+            this.timer = setTimeout(popNode.bind(this), this.satellite.speedSlider.value);
         }.bind(this))();
     },
     stop: function() {
