@@ -8,6 +8,7 @@
       "warnings": "Warnings",
       "graph": "Graph",
       "fileMap": "File Map",
+      "env": "Environment",
       "options": "Options",
       "hide-3rd-party": "Hide 3rd party modules"
     }

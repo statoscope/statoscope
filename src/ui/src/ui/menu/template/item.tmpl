@@ -1,11 +1,12 @@
 <b:style src="./item.css"/>
 <b:isolate/>
+<b:define name="visible" type="bool"/>
 <b:define name="selected" type="bool"/>
 <b:define name="disabled" type="bool"/>
 <b:define name="subMenuOpened" type="bool"/>
 <b:define name="checked" type="bool"/>
 
-<span class="item item_{selected} item_{disabled} item_{subMenuOpened}" event-click="click">
+<span b:show="{visible}" class="item item_{selected} item_{disabled} item_{subMenuOpened}" event-click="click">
    <div class="checkbox checkbox_{checked}" b:show="{isCheckbox}"/>
    {l10n:items.{id}}
    <span b:show="{counter}" class="counter"> ({counter})</span>

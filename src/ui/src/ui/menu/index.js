@@ -23,13 +23,17 @@ var MenuItem = Node.subclass({
     checkedRA_: null,
     counter: 0,
     counterRA_: null,
+    visible: true,
+    visibleRA_: null,
     emit_typeChanged: event.create('typeChanged'),
     emit_checkedChanged: event.create('checkedChanged'),
     emit_counterChanged: event.create('counterChanged'),
+    emit_visibleChanged: event.create('visibleChanged'),
     propertyDescriptors: {
         type: 'typeChanged',
         checked: 'checkedChanged',
-        counter: 'counterChanged'
+        counter: 'counterChanged',
+        visible: 'visibleChanged'
     },
     action: {
         click: function(e) {
@@ -96,6 +100,10 @@ var MenuItem = Node.subclass({
             events: 'counterChanged',
             getter: basis.getter('counter')
         },
+        visible: {
+            events: 'visibleChanged',
+            getter: basis.getter('visible')
+        },
         subMenuOpened: Value.query('satellite.dropdown.visible')
     },
     init: function() {
@@ -104,6 +112,7 @@ var MenuItem = Node.subclass({
         this.setType(this.type);
         this.setChecked(this.checked);
         this.setCounter(this.counter);
+        this.setVisible(this.visible);
     },
     toggle: basis.fn.$undef,
     setType: function(value) {
@@ -130,10 +139,19 @@ var MenuItem = Node.subclass({
             this.emit_counterChanged();
         }
     },
+    setVisible: function(value) {
+        value = resolveValue(this, this.setVisible, value, 'visibleRA_');
+
+        if (this.visible !== value) {
+            this.visible = value;
+            this.emit_visibleChanged();
+        }
+    },
     destroy: function() {
         this.typeRA_ && resolveValue(this, null, null, 'typeRA_');
         this.checkedRA_ && resolveValue(this, null, null, 'checkedRA_');
         this.counterRA_ && resolveValue(this, null, null, 'counterRA_');
+        this.visibleRA_ && resolveValue(this, null, null, 'visibleRA_');
         Node.prototype.destroy.call(this);
     }
 });

@@ -40,6 +40,7 @@
     "basisjs": "^1.10.1",
     "basisjs-tools": "^1.10.2",
     "basisjs-tools-instrumenter": "^2.1.0",
+    "basisjs-tools-server": "github:basisjs/basisjs-tools-server",
     "d3": "^4.4.0",
     "eslint": "^3.11.1"
   },

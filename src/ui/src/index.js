@@ -10,7 +10,8 @@ var routes = {
     errors: resource('./pages/errors/index.js'),
     warnings: resource('./pages/warnings/index.js'),
     graph: resource('./pages/graph/index.js'),
-    fileMap: resource('./pages/fileMap/index.js')
+    fileMap: resource('./pages/fileMap/index.js'),
+    env: resource('./pages/env/index.js')
 };
 
 var version = new basis.Token(require('../../../package.json').version);
@@ -42,6 +43,7 @@ module.exports = require('basis.app').create({
                         { id: 'warnings', counter: Value.query(type.Warning.all, 'itemCount') },
                         { id: 'graph' },
                         { id: 'fileMap' },
+                        { id: 'env', visible: Value.query(type.Env, 'data.name') },
                         {
                             id: 'options',
                             type: 'dropdown',
