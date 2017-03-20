@@ -24,6 +24,7 @@ var Module = entity.createType('Module', {
     index: Number,
     size: Number,
     rawRequest: String,
+    userRequest: String,
     context: String,
     resource: File,
     reasons: entity.createSetType(Reason),

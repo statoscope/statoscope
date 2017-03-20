@@ -192,6 +192,7 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
                     name: module.readableIdentifier(requestShortener),
                     size: module.size(),
                     rawRequest: module.rawRequest,
+                    userRequest: module.userRequest,
                     context: module.context,
                     resource: resource,
                     reasons: module.reasons.filter(function(reason) {
@@ -199,15 +200,18 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
                     }).map(function(reason) {
                         var reasonInfo = {
                             module: getModuleId(reason.module),
-                            loc: reason.dependency.loc
+                            // todo handle string value
+                            loc: typeof reason.dependency.loc == 'string' ? null : reason.dependency.loc
                         };
 
-                        if (reasonInfo.loc.start && isFinite(reasonInfo.loc.start.column)) {
-                            reasonInfo.loc.start.column++
-                        }
+                        if (reasonInfo.loc) {
+                            if (reasonInfo.loc.start && isFinite(reasonInfo.loc.start.column)) {
+                                reasonInfo.loc.start.column++
+                            }
 
-                        if (reasonInfo.loc.end && isFinite(reasonInfo.loc.end.column)) {
-                            reasonInfo.loc.end.column++
+                            if (reasonInfo.loc.end && isFinite(reasonInfo.loc.end.column)) {
+                                reasonInfo.loc.end.column++
+                            }
                         }
 
                         return reasonInfo;
@@ -237,7 +241,7 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
                         // webpack 1.x capability
                         initial: typeof chunk.isInitial == 'function' ? chunk.isInitial() : chunk.initial,
                         // webpack 1.x capability
-                        entry: typeof chunk.hasRuntime == 'function' ? chunk.hasRuntime() : chunk.entry,
+                        entry: typeof chunk.hasRuntime == 'function' ? chunk.hasRuntime() : chunk.entry
                     };
                 }),
                 modules: modules,
