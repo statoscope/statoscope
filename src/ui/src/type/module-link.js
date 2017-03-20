@@ -10,18 +10,18 @@ var ModuleLink = entity.createType('ModuleLink', {
 var HANDLER_REASONS = {
     itemsChanged: function(sender, delta) {
         if (delta.inserted) {
-            delta.inserted.forEach(function(module) {
+            delta.inserted.forEach(function(reason) {
                 ModuleLink({
-                    from: module.getId(),
+                    from: reason.data.module.getId(),
                     to: this.getId()
                 });
             }.bind(this));
         }
 
         if (delta.deleted) {
-            delta.deleted.forEach(function(module) {
+            delta.deleted.forEach(function(reason) {
                 ModuleLink({
-                    from: module.getId(),
+                    from: reason.data.module.getId(),
                     to: this.getId()
                 }).destroy();
             }.bind(this));
@@ -34,8 +34,8 @@ var HANDLER_MODULE = {
         if (delta.hasOwnProperty('reasons') && module.data.reasons) {
             module.data.reasons.forEach(function(reason) {
                 ModuleLink({
-                    from: reason.getId(),
-                    to: module.getId()
+                    from: reason.data.module.getId(),
+                    to: module.data.module.getId()
                 });
             });
             module.data.reasons.addHandler(HANDLER_REASONS, module);

@@ -1,20 +1,9 @@
 var entity = require('basis.entity');
 var Promise = require('basis.promise');
 var File = require('./file');
+var Range = require('./range');
+var Module = require('./module');
 var envApi = rempl.createEnv(parent);
-
-var Point = entity.createType('Point', {
-    line: Number,
-    column: {
-        type: Number,
-        defValue: 1
-    }
-});
-
-var Range = entity.createType('Range', {
-    start: Point,
-    end: Point
-});
 
 var Env = entity.createType({
     name: 'Env',
@@ -23,6 +12,17 @@ var Env = entity.createType({
         name: String,
         version: String,
         file: File,
+        module: entity.calc('file', function(file) {
+            var matchedModule;
+
+            Module.allWrapper.forEach(function(module) {
+                if (module.data.resource == file) {
+                    matchedModule = module;
+                }
+            });
+
+            return matchedModule;
+        }),
         syntax: String,
         selections: entity.createSetType(Range)
     }
@@ -33,7 +33,7 @@ var env = Env();
 env.openFile = function(filePath, selections) {
     return new Promise(function(resolve, reject) {
         if (!filePath) {
-            reject();
+            reject('no file specified');
         }
 
         var payload = {
@@ -43,26 +43,27 @@ env.openFile = function(filePath, selections) {
         };
 
         envApi.send(payload, function(response) {
-            if (response.status) {
+            if (response.ok) {
                 resolve();
             } else {
-                reject();
+                reject(response.error.code);
             }
         });
     });
 };
 
-env.getContent = function() {
+env.getContent = function(selections) {
     return new Promise(function(resolve, reject) {
         var payload = {
-            type: 'getContent'
+            type: 'getContent',
+            selections: selections // todo not supported yet
         };
 
         envApi.send(payload, function(response) {
-            if (response.status) {
+            if (response.ok) {
                 resolve(response.content);
             } else {
-                reject();
+                reject(response.error.code);
             }
         });
     });
@@ -74,44 +75,28 @@ envApi.subscribe(function(data) {
             env.update(data.host);
             break;
         case 'activeTabChanged':
-            env.update({ file: null });
-
-            if (env.data.selections) {
-                env.data.selections.clear();
-            }
-
             if (data.tab.isEditor) {
-                var file = File.get(data.file.path);
+                env.update({
+                    file: data.file.path,
+                    syntax: data.file.syntax,
+                    selections: data.selections
+                });
+            } else {
+                env.set('file', null);
 
-                if (file) {
-                    env.update({
-                        file: file,
-                        syntax: data.file.syntax,
-                        selections: data.selections
-                    });
+                if (env.data.selections) {
+                    env.data.selections.clear();
                 }
             }
             break;
         case 'selectionChanged':
-            env.update({
-                selections: data.selections
-            });
+            env.set('selections', data.selections);
             break;
         case 'patchChanged':
-            env.update({ file: null });
-
-            if (env.data.selections) {
-                env.data.selections.clear();
-            }
-
-            file = File(data.path);
-
-            if (file) {
-                env.update({ file: file });
-            }
+            env.set('file', data.path);
             break;
         case 'syntaxChanged':
-            env.update({ syntax: data.syntax });
+            env.set('syntax', data.syntax);
             break;
     }
 });

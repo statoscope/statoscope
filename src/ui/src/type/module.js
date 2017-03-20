@@ -7,6 +7,7 @@ var MapFilter = require('basis.data.dataset').MapFilter;
 var Split = require('basis.data.dataset').Split;
 var type = require('basis.type');
 var File = require('./file');
+var Reason = require('./module-reason');
 var ModuleLoader = require('./module-loader');
 var LS_KEY_HIDE_3RD_PARTY_MODULES = 'wraHide3rdPartyModules';
 var hide3rdPartyModulesSaved = localStorage.getItem(LS_KEY_HIDE_3RD_PARTY_MODULES);
@@ -25,7 +26,7 @@ var Module = entity.createType('Module', {
     rawRequest: String,
     context: String,
     resource: File,
-    reasons: entity.createSetType('Module'),
+    reasons: entity.createSetType(Reason),
     loaders: entity.createSetType(ModuleLoader)
 });
 
@@ -39,7 +40,12 @@ Module.byType = function(type) {
 
 Module.projectModules = new Extract({
     source: new Filter({
-        source: Module.all,
+        source: new MapFilter({
+            source: Module.all,
+            rule: function(module) {
+                return module.data.reason;
+            }
+        }),
         rule: function(module) {
             if (module.data.resource) {
                 return module.data.resource.data.name.indexOf('/node_modules/') == -1;
@@ -48,7 +54,7 @@ Module.projectModules = new Extract({
             return true;
         }
     }),
-    rule: 'data.reasons'
+    rule: 'data.module'
 });
 
 Module.hide3rdPartyModules = new Value({

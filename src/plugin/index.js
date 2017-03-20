@@ -197,7 +197,20 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
                     reasons: module.reasons.filter(function(reason) {
                         return reason.dependency && reason.module;
                     }).map(function(reason) {
-                        return getModuleId(reason.module);
+                        var reasonInfo = {
+                            module: getModuleId(reason.module),
+                            loc: reason.dependency.loc
+                        };
+
+                        if (reasonInfo.loc.start && isFinite(reasonInfo.loc.start.column)) {
+                            reasonInfo.loc.start.column++
+                        }
+
+                        if (reasonInfo.loc.end && isFinite(reasonInfo.loc.end.column)) {
+                            reasonInfo.loc.end.column++
+                        }
+
+                        return reasonInfo;
                     }),
                     loaders: getModuleLoaders(module)
                 };

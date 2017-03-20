@@ -5,7 +5,10 @@ module.exports = {
     Error: require('./type/error'),
     Warning: require('./type/warning'),
     Module: require('./type/module'),
-    ModuleLink: require('./type/moduleLink'),
+    ModuleReason: require('./type/module-reason'),
+    ModuleLink: require('./type/module-link'),
     Profile: require('./type/profile'),
-    Env: require('./type/env')
+    Env: require('./type/env'),
+    Range: require('./type/range'),
+    Point: require('./type/point')
 };
