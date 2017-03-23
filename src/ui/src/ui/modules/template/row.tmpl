@@ -1,0 +1,19 @@
+<b:l10n src="../index.l10n"/>
+
+<tr>
+    <td>{id}</td>
+    <td>{name}</td>
+    <td>{size} {postfix}</td>
+    <td>
+        <span b:hide="{occurrences}">-</span>
+        <span b:show="{occurrences}">in {occurrences} {l10n:module.{occurrences}}</span>
+    </td>
+    <td>
+        <span b:hide="{retainedAmount}">-</span>
+        <span b:show="{retainedAmount}">{retainedSize} {retainedPostfix} ({retainedAmount} {l10n:module.{retainedAmount}})</span>
+    </td>
+    <td>
+        <span b:hide="{exclusiveAmount}">-</span>
+        <span b:show="{exclusiveAmount}">{exclusiveSize} {exclusivePostfix} ({exclusiveAmount} {l10n:module.{exclusiveAmount}})</span>
+    </td>
+</tr>
