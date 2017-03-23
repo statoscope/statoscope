@@ -2,7 +2,6 @@ var entity = require('basis.entity');
 var Promise = require('basis.promise');
 var File = require('./file');
 var Range = require('./range');
-var Module = require('./module');
 var envApi = rempl.createEnv(parent);
 
 var Env = entity.createType({
@@ -12,17 +11,6 @@ var Env = entity.createType({
         name: String,
         version: String,
         file: File,
-        module: entity.calc('file', function(file) {
-            var matchedModule;
-
-            Module.allWrapper.forEach(function(module) {
-                if (module.data.resource == file) {
-                    matchedModule = module;
-                }
-            });
-
-            return matchedModule;
-        }),
         syntax: String,
         selections: entity.createSetType(Range)
     }

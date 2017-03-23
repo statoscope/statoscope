@@ -5,7 +5,6 @@ module.exports = {
     Error: require('./type/error'),
     Warning: require('./type/warning'),
     Module: require('./type/module'),
-    ModuleReason: require('./type/module-reason'),
     ModuleLink: require('./type/module-link'),
     Profile: require('./type/profile'),
     Env: require('./type/env'),
