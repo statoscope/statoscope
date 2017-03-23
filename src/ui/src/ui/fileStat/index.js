@@ -29,7 +29,7 @@ var Stat = Node.subclass({
                 }
             },
             binding: {
-                relatedAmount: Value.query('<static>related.itemCount'),
+                relatedAmount: Value.query('<static>related.value.itemCount'),
                 relatedSize: sum(Value.query('<static>related'), 'update', 'data.size').as(utils.roundSize),
                 relatedPostfix: sum(Value.query('<static>related'), 'update', 'data.size').as(utils.getPostfix),
 

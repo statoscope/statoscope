@@ -1,6 +1,7 @@
 var entity = require('basis.entity');
 var Promise = require('basis.promise');
 var File = require('./file');
+var Module = require('./module');
 var Range = require('./range');
 var envApi = rempl.createEnv(parent);
 
@@ -11,6 +12,9 @@ var Env = entity.createType({
         name: String,
         version: String,
         file: File,
+        modules: entity.calc('file', function(file) {
+            return Module.byFile(file, true);
+        }),
         syntax: String,
         selections: entity.createSetType(Range)
     }
