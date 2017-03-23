@@ -24,7 +24,21 @@ function getPostfix(size) {
     return 'bytes';
 }
 
+function roundSize(size) {
+    if (!isNaN(size)) {
+        switch (getPostfix(size)) {
+            case 'bytes':
+                return size;
+            case 'KB':
+                return Math.round(getSize(size));
+            case 'MB':
+                return getSize(size).toFixed(2);
+        }
+    }
+}
+
 module.exports = {
     getSize: getSize,
-    getPostfix: getPostfix
+    getPostfix: getPostfix,
+    roundSize: roundSize
 };

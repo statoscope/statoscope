@@ -9,5 +9,9 @@ module.exports = {
     Overlay: require('./ui/overlay/index'),
     Page: require('./ui/page/index'),
     Progress: require('./ui/progress/index'),
-    Status: require('./ui/status/index')
+    Status: require('./ui/status/index'),
+    Assets: require('./ui/assets/index'),
+    Modules: require('./ui/modules/index'),
+    FileStat: require('./ui/fileStat/index'),
+    SplitView: require('./ui/splitView/index')
 };
