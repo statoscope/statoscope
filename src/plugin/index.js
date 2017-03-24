@@ -1,14 +1,14 @@
 'use strict';
 
+var NAME = 'webpack-runtime-analyzer';
 var parseQuery = require('loader-utils/lib/parseQuery.js');
 var webpack = require('webpack');
-var webpackVersion = require.main.require('webpack/package.json').version;
 var RequestShortener = require('webpack/lib/RequestShortener');
+var fork = require('child_process').fork;
 var rempl = require('rempl');
 var path = require('path');
 var fs = require('fs');
 
-var handledFiles;
 var requestShortener;
 
 function isObject(obj) {
@@ -86,7 +86,7 @@ function getModuleId(module) {
     return module.index + '_' + module.readableIdentifier(requestShortener);
 }
 
-function handleFile(file) {
+function handleFile(file, handledFiles) {
     if (handledFiles.hasOwnProperty(file)) {
         return handledFiles[file];
     }
@@ -110,7 +110,7 @@ function handleFile(file) {
     return null;
 }
 
-function getModuleLoaders(module) {
+function getModuleLoaders(module, handledFiles) {
     return (module.loaders || []).map(function(loaderInfo) {
         var options = loaderInfo.options;
 
@@ -123,44 +123,68 @@ function getModuleLoaders(module) {
         }
 
         return {
-            file: handleFile(loaderInfo.loader),
+            file: handleFile(loaderInfo.loader, handledFiles),
             options: options
         };
     });
 }
 
-function RuntimeAnalyzerPlugin(options) {
-    var defaultOptions = {
-        watchModeOnly: true,
-        ui: path.resolve(__dirname, '../../dist/script.js')
-    };
+function startRemplServer(plugin) {
+    console.info('Starting rempl server...');
 
-    this.options = deepExtend({}, defaultOptions, options);
+    fork(path.resolve(__dirname, 'server.js'), { silent: true })
+        .once('exit', function(code) {
+            console.error('\n[ERROR] RuntimeAnalyzerPlugin exited with code', code);
+            process.exit(code);
+        })
+        .on('message', function(data) {
+            if (data && data.event === 'server-started') {
+                plugin.publisher.wsendpoint = data.endpoint;
+                plugin.publisher.sync();
+            }
+        })
+        .send({
+            name: NAME,
+            port: plugin.options.port
+        });
 }
 
 function createPublisher(compiler, options) {
+    // use require.main.require to get version of inspecting webpack
+    // but not a webpack version uses as dependency
+    var webpackVersion = require.main.require('webpack/package.json').version;
+    var modulesTypeMap = {
+        NormalModule: 'normal',
+        MultiModule: 'multi',
+        ContextModule: 'context',
+        DelegatedModule: 'delegated',
+        ExternalModule: 'external'
+    };
+
     var getWebUI = rempl.scriptFromFile(options.ui);
-    var publisher = rempl.createPublisher('webpack-analyzer', function(settings, callback) {
+    var publisher = rempl.createPublisher(NAME, function(settings, callback) {
         if (settings.dev) {
             return callback(null, 'url', 'http://localhost:8001/src/ui/');
         }
 
         getWebUI(settings, callback);
+    }, {
+        manualSync: options.mode === 'standalone'
     });
 
-    var statusChannel = publisher.ns('status');
-    var progressChannel = publisher.ns('progress');
-    var profileChannel = publisher.ns('profile');
-    var COMPILATION;
+    var status = publisher.ns('status');
+    var progress = publisher.ns('progress');
+    var profile = publisher.ns('profile');
+    var stats;
 
     compiler.plugin('compilation', function(compilation) {
-        COMPILATION = compilation;
+        stats = compilation;
         requestShortener = new RequestShortener(compilation.options.context || process.cwd());
     });
 
     compiler.apply(new webpack.ProgressPlugin(function(percent) {
-        statusChannel.publish('compiling');
-        progressChannel.publish(percent);
+        status.publish('compiling');
+        progress.publish(percent);
     }));
 
     compiler.plugin('emit', function(compilation, done) {
@@ -168,9 +192,7 @@ function createPublisher(compiler, options) {
         var modulesMap = {};
         var entryPoints = {};
         var modules;
-        var profile;
-
-        handledFiles = {};
+        var handledFiles = {};
 
         for (var assetName in compilation.assets) {
             if (compilation.assets.hasOwnProperty(assetName)) {
@@ -182,18 +204,11 @@ function createPublisher(compiler, options) {
         }
 
         modules = compilation.modules.map(function(module) {
-            var modulesTypeMap = {
-                NormalModule: 'normal',
-                MultiModule: 'multi',
-                ContextModule: 'context',
-                DelegatedModule: 'delegated',
-                ExternalModule: 'external'
-            };
             var moduleType = modulesTypeMap[module.constructor.name] || 'unknown';
-            var resource = module.resource ? handleFile(module.resource) : null;
+            var resource = module.resource ? handleFile(module.resource, handledFiles) : null;
 
             // webpack 1.x capability
-            if (webpackVersion[0] == 1) {
+            if (/^1\./.test(webpackVersion)) {
                 var identifier = module.identifier();
 
                 if (!identifier.indexOf('multi')) {
@@ -221,17 +236,21 @@ function createPublisher(compiler, options) {
                 userRequest: module.userRequest,
                 context: module.context,
                 resource: resource,
-                dependencies: module.dependencies.filter(function(dependency) {
-                    return dependency.module;
-                }).map(function(dependency) {
-                    return getModuleId(dependency.module);
-                }),
-                reasons: module.reasons.filter(function(reason) {
-                    return reason.dependency && reason.module;
-                }).map(function(reason) {
-                    return getModuleId(reason.module);
-                }),
-                loaders: getModuleLoaders(module)
+                loaders: getModuleLoaders(module, handledFiles),
+                dependencies: module.dependencies
+                    .filter(function(dependency) {
+                        return dependency.module;
+                    })
+                    .map(function(dependency) {
+                        return getModuleId(dependency.module);
+                    }),
+                reasons: module.reasons
+                    .filter(function(reason) {
+                        return reason.dependency && reason.module;
+                    })
+                    .map(function(reason) {
+                        return getModuleId(reason.module);
+                    })
             };
 
             modulesMap[moduleInfo.id] = moduleInfo;
@@ -278,7 +297,7 @@ function createPublisher(compiler, options) {
 
         // console.timeEnd('Retained + Exclusive');
 
-        profile = {
+        profile.publish({
             version: webpackVersion,
             hash: compilation.hash,
             context: compilation.compiler.context,
@@ -323,42 +342,64 @@ function createPublisher(compiler, options) {
                     module: warning.module && getModuleId(warning.module)
                 };
             })
-        };
+        });
 
-        profileChannel.publish(profile);
         done();
+
+        if (publisher.wsendpoint) {
+            // use timer to output link after all the stats is shown
+            setTimeout(function() {
+                console.log('\nWebpack Runtime Analyzer web interface:', publisher.wsendpoint);
+            });
+        }
     });
 
     compiler.plugin('compile', function() {
-        statusChannel.publish('compiling');
+        status.publish('compiling');
     });
 
     compiler.plugin('invalid', function() {
-        statusChannel.publish('invalidated');
+        status.publish('invalidated');
     });
 
     compiler.plugin('done', function() {
-        statusChannel.publish(COMPILATION.errors.length ? 'failed' : 'success');
+        status.publish(stats.errors.length ? 'failed' : 'success');
     });
 
     compiler.plugin('failed', function() {
-        statusChannel.publish('failed');
+        status.publish('failed');
     });
+
+    return publisher;
+}
+
+function RuntimeAnalyzerPlugin(options) {
+    this.publisher = null;
+
+    // mix with default options
+    this.options = deepExtend({
+        mode: 'publisher',
+        port: 0,
+        watchModeOnly: true,
+        ui: path.resolve(__dirname, '../../dist/script.js')
+    }, options);
+
+    if (this.options.mode === 'standalone') {
+        startRemplServer(this);
+    }
 }
 
 RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
     var options = this.options;
     var pluginMode = options.watchModeOnly ? 'watch-run' : 'run';
-    var inited = false;
 
     compiler.plugin(pluginMode, function(watching, done) {
-        if (!inited) {
-            createPublisher(compiler, options);
-            inited = true;
+        if (!this.publisher) {
+            this.publisher = createPublisher(compiler, options);
         }
 
         done();
-    });
+    }.bind(this));
 };
 
 module.exports = RuntimeAnalyzerPlugin;

@@ -17,6 +17,7 @@
     "eslint:recommended"
   ],
   "rules": {
+    "no-console": "off",
     "no-cond-assign": "off",
     "space-before-blocks": "error",
     "spaced-comment": "error",
