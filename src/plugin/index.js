@@ -2,14 +2,15 @@
 
 var parseQuery = require('loader-utils/lib/parseQuery.js');
 var webpack = require('webpack');
-var webpackVersion = require.main.require('webpack/package.json').version;
 var RequestShortener = require('webpack/lib/RequestShortener');
+var fork = require('child_process').fork;
 var rempl = require('rempl');
 var path = require('path');
 var fs = require('fs');
 
-var handledFiles;
 var requestShortener;
+var handledFiles;
+var remplServerEndpoint;
 
 function isObject(obj) {
     return typeof obj == 'object' && obj;
@@ -129,16 +130,26 @@ function getModuleLoaders(module) {
     });
 }
 
-function RuntimeAnalyzerPlugin(options) {
-    var defaultOptions = {
-        watchModeOnly: true,
-        ui: path.resolve(__dirname, '../../dist/script.js')
-    };
-
-    this.options = deepExtend({}, defaultOptions, options);
+function startRemplServer(options) {
+    console.log('Starting rempl server...');
+    fork(path.resolve(__dirname, 'server.js'), { silent: true })
+        .once('exit', function(code) {
+            console.error('\n[ERROR] RuntimeAnalyzerPlugin exited with code', code);
+            process.exit(code);
+        })
+        .on('message', function(data) {
+            if (data && data.event === 'server-started') {
+                remplServerEndpoint = data.endpoint;
+            }
+        })
+        .send(options);
 }
 
 function createPublisher(compiler, options) {
+    // use require.main.require to get version of inspecting webpack
+    // but not a webpack version uses as dependency
+    var webpackVersion = require.main.require('webpack/package.json').version;
+
     var getWebUI = rempl.scriptFromFile(options.ui);
     var publisher = rempl.createPublisher('webpack-analyzer', function(settings, callback) {
         if (settings.dev) {
@@ -151,10 +162,10 @@ function createPublisher(compiler, options) {
     var statusChannel = publisher.ns('status');
     var progressChannel = publisher.ns('progress');
     var profileChannel = publisher.ns('profile');
-    var COMPILATION;
+    var stats;
 
     compiler.plugin('compilation', function(compilation) {
-        COMPILATION = compilation;
+        stats = compilation;
         requestShortener = new RequestShortener(compilation.options.context || process.cwd());
     });
 
@@ -193,7 +204,7 @@ function createPublisher(compiler, options) {
             var resource = module.resource ? handleFile(module.resource) : null;
 
             // webpack 1.x capability
-            if (webpackVersion[0] == 1) {
+            if (/^1\./.test(webpackVersion)) {
                 var identifier = module.identifier();
 
                 if (!identifier.indexOf('multi')) {
@@ -327,6 +338,13 @@ function createPublisher(compiler, options) {
 
         profileChannel.publish(profile);
         done();
+
+        if (remplServerEndpoint) {
+            // use timer to output link after all the stats is shown
+            setTimeout(function() {
+                console.log('\nWeb interface of Webpack Runtime Analyzer:', remplServerEndpoint);
+            });
+        }
     });
 
     compiler.plugin('compile', function() {
@@ -338,12 +356,30 @@ function createPublisher(compiler, options) {
     });
 
     compiler.plugin('done', function() {
-        statusChannel.publish(COMPILATION.errors.length ? 'failed' : 'success');
+        statusChannel.publish(stats.errors.length ? 'failed' : 'success');
     });
 
     compiler.plugin('failed', function() {
         statusChannel.publish('failed');
     });
+}
+
+function RuntimeAnalyzerPlugin(options) {
+    // mix with default options
+    options = deepExtend({
+        mode: 'publisher',
+        port: 0,
+        watchModeOnly: true,
+        ui: path.resolve(__dirname, '../../dist/script.js')
+    }, options);
+
+    this.options = options;
+
+    if (options.mode === 'standalone') {
+        startRemplServer({
+            port: options.port
+        });
+    }
 }
 
 RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
