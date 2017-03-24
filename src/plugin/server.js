@@ -20,6 +20,7 @@ process.once('message', function startServer(options) {
 
     serverOptions.rempl = rempl;
     serverOptions.remplStandalone = true;
+    serverOptions.remplExclusivePublisher = options.name;
 
     server.launch(serverOptions);
 });

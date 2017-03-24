@@ -1,5 +1,6 @@
 'use strict';
 
+var NAME = 'webpack-runtime-analyzer';
 var parseQuery = require('loader-utils/lib/parseQuery.js');
 var webpack = require('webpack');
 var RequestShortener = require('webpack/lib/RequestShortener');
@@ -143,6 +144,7 @@ function startRemplServer(plugin) {
             }
         })
         .send({
+            name: NAME,
             port: plugin.options.port
         });
 }
@@ -160,7 +162,7 @@ function createPublisher(compiler, options) {
     };
 
     var getWebUI = rempl.scriptFromFile(options.ui);
-    var publisher = rempl.createPublisher('webpack-analyzer', function(settings, callback) {
+    var publisher = rempl.createPublisher(NAME, function(settings, callback) {
         if (settings.dev) {
             return callback(null, 'url', 'http://localhost:8001/src/ui/');
         }
