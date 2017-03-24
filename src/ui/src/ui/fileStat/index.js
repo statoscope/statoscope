@@ -6,7 +6,6 @@ var template = require('basis.template');
 var type = require('app.type');
 var utils = require('app.utils');
 var ModulesTable = require('../modules/index');
-var SplitView = require('../splitView/index');
 
 var templates = template.define('app.ui.fileStat', {
     stat: resource('./template/template.tmpl')
@@ -15,52 +14,19 @@ var templates = template.define('app.ui.fileStat', {
 var Stat = Node.subclass({
     template: templates.stat,
     satellite: {
-        modules: SplitView.subclass({
-            autoDelegate: true,
-            template: resource('./template/split.tmpl'),
-            satellite: {
-                left: {
-                    dataSource: Value.query('<static>related'),
-                    instance: ModulesTable
-                },
-                right: {
-                    dataSource: Value.query('<static>retained'),
-                    instance: ModulesTable
-                }
-            },
-            binding: {
-                relatedAmount: Value.query('<static>related.value.itemCount'),
-                relatedSize: sum(Value.query('<static>related'), 'update', 'data.size').as(utils.roundSize),
-                relatedPostfix: sum(Value.query('<static>related'), 'update', 'data.size').as(utils.getPostfix),
-
-                retainedAmount: Value.query('<static>retained.itemCount'),
-                retainedSize: sum(Value.query('<static>retained'), 'update', 'data.size').as(utils.roundSize),
-                retainedPostfix: sum(Value.query('<static>retained'), 'update', 'data.size').as(utils.getPostfix)
-            },
-            init: function() {
-                this.related = Value.query(this, 'target').as(type.Module.byFile);
-                this.retained = new Extract({
-                    source: this.related,
-                    rule: 'data.retained'
-                });
-
-                SplitView.prototype.init.call(this);
-            },
-            destroy: function() {
-                this.retained.destroy();
-                this.retained = null;
-                this.related.destroy();
-                this.related = null;
-
-                SplitView.prototype.destroy.call(this);
-            }
-        })
+        modules: {
+            dataSource: type.Env.retained,
+            instance: ModulesTable
+        }
     },
     binding: {
         name: 'data:',
         size: Value.query('data.size').as(utils.roundSize),
         postfix: Value.query('data.size').as(utils.getPostfix),
         modules: 'satellite:',
+        retainedAmount: type.Env.retainedAmount,
+        retainedSize: type.Env.retainedSize,
+        retainedPostfix: type.Env.retainedPostfix
     }
 });
 
