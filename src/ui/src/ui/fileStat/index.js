@@ -1,7 +1,5 @@
 var Node = require('basis.ui').Node;
 var Value = require('basis.data').Value;
-var Extract = require('basis.data.dataset').Extract;
-var sum = require('basis.data.index').sum;
 var template = require('basis.template');
 var type = require('app.type');
 var utils = require('app.utils');

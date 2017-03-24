@@ -114,7 +114,7 @@ var page = new Page({
             files.forEach(function(file) {
                 if (!appliedFiles[file.name]) {
                     appliedFiles[file.name] = true;
-                    applyPath(this.tree, {path: file.name, size: file.size});
+                    applyPath(this.tree, { path: file.name, size: file.size });
                 }
             }, this);
 

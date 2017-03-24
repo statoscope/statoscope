@@ -1,5 +1,4 @@
 var Node = require('basis.ui').Node;
-var Value = require('basis.data').Value;
 var event = require('basis.event');
 var resolveValue = require('basis.data').resolveValue;
 var template = require('basis.template');

@@ -5,7 +5,6 @@ var Status = require('app.ui').Status;
 var BottomBar = require('app.ui').BottomBar;
 var Menu = require('app.ui.menu').Menu;
 var type = require('app.type');
-var utils = require('app.utils');
 
 var routes = {
     home: resource('./pages/home/index.js'),
@@ -41,12 +40,12 @@ module.exports = require('basis.app').create({
             satellite: {
                 menu: new Menu({
                     childNodes: [
-                        {id: 'home', selected: true},
-                        {id: 'errors', counter: Value.query(type.Error.all, 'itemCount')},
-                        {id: 'warnings', counter: Value.query(type.Warning.all, 'itemCount')},
-                        {id: 'graph'},
-                        {id: 'fileMap'},
-                        {id: 'env', visible: Value.query(type.Env, 'data.name')},
+                        { id: 'home', selected: true },
+                        { id: 'errors', counter: Value.query(type.Error.all, 'itemCount') },
+                        { id: 'warnings', counter: Value.query(type.Warning.all, 'itemCount') },
+                        { id: 'graph' },
+                        { id: 'fileMap' },
+                        { id: 'env', visible: Value.query(type.Env, 'data.name') },
                         {
                             id: 'options',
                             type: 'dropdown',
