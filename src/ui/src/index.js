@@ -21,13 +21,6 @@ var homepage = new basis.Token(require('../../../package.json').homepage);
 module.exports = require('basis.app').create({
     title: 'Webpack Runtime Analyzer',
     init: function() {
-        var wTreeCss = document.createElement('link');
-
-        wTreeCss.setAttribute('rel', 'stylesheet');
-        wTreeCss.setAttribute('href', 'https://cdn.rawgit.com/danvk/source-map-explorer/master/vendor/webtreemap.css');
-
-        document.head.appendChild(wTreeCss);
-
         return new Node({
             template: resource('./template/layout.tmpl'),
             binding: {
