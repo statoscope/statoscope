@@ -37,8 +37,40 @@ function roundSize(size) {
     }
 }
 
+function sharePartOfPaths(paths) {
+    var partsCount = [];
+
+    paths.forEach(function(path) {
+        var parts = path.split('/');
+
+        for (var i = 0; i < parts.length; i++) {
+            if (partsCount[i]) {
+                if (partsCount[i].name == parts[i]) {
+                    partsCount[i].count++;
+                } else {
+                    break;
+                }
+            } else {
+                partsCount[i] = {
+                    name: parts[i], count: 1
+                };
+            }
+        }
+    });
+
+    return partsCount
+        .filter(function(part) {
+            return part.count == paths.length;
+        })
+        .map(function(part) {
+            return part.name;
+        })
+        .join('/');
+}
+
 module.exports = {
     getSize: getSize,
     getPostfix: getPostfix,
-    roundSize: roundSize
+    roundSize: roundSize,
+    sharePartOfPaths: sharePartOfPaths
 };

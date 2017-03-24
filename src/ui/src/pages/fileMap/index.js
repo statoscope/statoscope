@@ -99,38 +99,11 @@ var page = new Page({
             files = files.getValues('data');
 
             var appliedFiles = {};
-            var partsCount = [];
-            var sharePart;
-
-            files.forEach(function(file) {
-                var parts = file.name.split('/');
-
-                for (var i = 0; i < parts.length; i++) {
-                    if (partsCount[i]) {
-                        if (partsCount[i].name == parts[i]) {
-                            partsCount[i].count++;
-                        } else {
-                            break;
-                        }
-                    } else {
-                        partsCount[i] = {
-                            name: parts[i], count: 1
-                        };
-                    }
-                }
-            });
-
-            sharePart = partsCount
-                .filter(function(part) {
-                    return part.count == files.length;
-                })
-                .map(function(part) {
-                    return part.name;
-                });
+            var sharePart = utils.sharePartOfPaths(files.map(basis.getter('name')));
 
             files = files.map(function(file) {
                 return {
-                    name: file.name.slice(sharePart.join('/').length + 1),
+                    name: file.name.slice(sharePart.length + 1),
                     size: file.size
                 };
             });
@@ -141,7 +114,7 @@ var page = new Page({
             files.forEach(function(file) {
                 if (!appliedFiles[file.name]) {
                     appliedFiles[file.name] = true;
-                    applyPath(this.tree, { path: file.name, size: file.size });
+                    applyPath(this.tree, {path: file.name, size: file.size});
                 }
             }, this);
 
