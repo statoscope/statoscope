@@ -1,8 +1,13 @@
 var entity = require('basis.entity');
 var Promise = require('basis.promise');
+var Value = require('basis.data').Value;
+var Expression = require('basis.data.value').Expression;
+var Extract = require('basis.data.dataset').Extract;
+var sum = require('basis.data.index').sum;
 var File = require('./file');
 var Module = require('./module');
 var Range = require('./range');
+var utils = require('app.utils');
 var envApi = rempl.createEnv(parent);
 
 var Env = entity.createType({
@@ -61,6 +66,15 @@ env.getContent = function(selections) {
     });
 };
 
+env.setStatusBarContent = function(content) {
+    var payload = {
+        type: 'setStatusBarContent',
+        content: content || ''
+    };
+
+    envApi.send(payload);
+};
+
 envApi.subscribe(function(data) {
     switch (data.type) {
         case 'hostInfo':
@@ -91,6 +105,59 @@ envApi.subscribe(function(data) {
             env.set('syntax', data.syntax);
             break;
     }
+});
+
+env.related = Value.query(env, 'data.modules');
+env.retained = new Extract({
+    source: env.related,
+    rule: 'data.retained'
+});
+
+env.relatedAmount = Value.query(env.related, 'value.itemCount');
+env.fileSize = Value.query(env, 'data.file.data.size').as(utils.roundSize);
+env.fileSizePostfix = Value.query(env, 'data.file.data.size').as(utils.getPostfix);
+
+env.retainedAmount = Value.query(env.retained, 'itemCount');
+env.retainedSize = sum(env.retained, 'update', 'data.size').as(utils.roundSize);
+env.retainedPostfix = sum(env.retained, 'update', 'data.size').as(utils.getPostfix);
+
+var statusText = new Expression(
+    env.relatedAmount,
+    env.fileSize,
+    env.fileSizePostfix,
+    env.retainedAmount,
+    env.retainedSize,
+    env.retainedPostfix,
+    function(relatedAmount, fileSize, fileSizePostfix, retainedAmount, retainedSize, retainedPostfix) {
+        if (!relatedAmount) {
+            return '';
+        }
+
+        var data = {
+            relatedAmount: relatedAmount,
+            fileSize: fileSize,
+            fileSizePostfix: fileSizePostfix,
+            retainedAmount: retainedAmount,
+            retainedSize: retainedSize,
+            retainedPostfix: retainedPostfix
+        };
+        var file = '-';
+        var retained = '-';
+
+        if (relatedAmount) {
+            file = basis.string.format('{fileSize} {fileSizePostfix}', data);
+        }
+
+        if (retainedAmount) {
+            retained = basis.string.format('{retainedAmount} modules in {retainedSize} {retainedPostfix}', data);
+        }
+
+        return basis.string.format('Original size: {0}; Retained: {1}', [file, retained]);
+    }
+);
+
+statusText.link(env, function(text) {
+    this.setStatusBarContent(text);
 });
 
 /** @cut */ basis.dev.log('env', env);
