@@ -1,3 +1,4 @@
+var Value = require('basis.data').Value;
 var Node = require('basis.ui').Node;
 var createEvent = require('basis.event').create;
 var template = require('basis.template');
@@ -18,9 +19,20 @@ module.exports = Node.subclass({
         ownerChanged: function() {
             if (this.owner) {
                 this.emit_open();
+                this.opened.set(true);
             } else {
                 this.emit_close();
+                this.opened.set(false);
             }
         }
-    })
+    }),
+    init: function() {
+        this.opened = new Value({ value: !!this.owner });
+        Node.prototype.init.call(this)
+    },
+    destroy: function() {
+        this.destroy();
+        this.opened = null;
+        Node.prototype.destroy.call(this)
+    }
 });

@@ -1,18 +1,20 @@
 var Value = require('basis.data').Value;
+var DataObject = require('basis.data').Object;
 var addHandler = require('basis.dom.event').addHandler;
 var Page = require('app.ui').Page;
 var type = require('app.type');
-var webtreemap = require('app.vendor.webtree');
 var utils = require('app.utils');
+var Tooltip = require('app.ui').Tooltip;
+
+require('app.vendor.foamtree');
+
+var TreeMap = global.CarrotSearchFoamTree;
 
 function makeNode(name, size) {
     return {
-        name: name,
-        originalName: name,
-        data: {
-            $area: size
-        },
-        children: []
+        label: name,
+        weight: size,
+        groups: []
     };
 }
 
@@ -32,11 +34,11 @@ function applyPath(tree, info) {
     }
 
     while (current = parts.shift()) {
-        var target = basis.array.search(cursor.children, current, 'name');
+        var target = basis.array.search(cursor.groups, current, 'label');
 
         if (!target) {
             target = makeNode(current, 0);
-            cursor.children.push(target);
+            cursor.groups.push(target);
         }
 
         stack.push(target);
@@ -44,37 +46,66 @@ function applyPath(tree, info) {
     }
 
     stack.forEach(function(item) {
-        item.data.$area += size;
+        item.weight += size;
     });
 
     tree._resolved[info.path] = true;
 }
 
 function calcPercentsAndUpdateNames(tree) {
-    var totalSize = tree.data.$area;
+    var totalSize = tree.weight;
 
+    // todo make non recursive
     function walk(root) {
-        var percent = 100 / totalSize * root.data.$area;
-        var size = utils.getSize(root.data.$area);
-        var postfix = utils.getPostfix(root.data.$area);
+        var percent = 100 / totalSize * root.weight;
 
-        root.originalName = root.name;
-        root.name = basis.string.format('{name} • {size} {postfix} • {percent}%', {
-            name: root.originalName,
-            size: postfix == 'B' ? size : size.toFixed(2),
-            postfix: utils.getPostfix(root.data.$area),
-            percent: percent.toFixed(2)
-        });
-        root.children.forEach(walk);
+        root.formattedSize = utils.roundSize(root.weight);
+        root.postfix = utils.getPostfix(root.weight);
+        root.percent = percent.toFixed(2);
+        root.groups.forEach(walk);
     }
 
     walk(tree);
 }
 
+var watcher = Value.from(type.Module.files, 'itemsChanged', function(files) {
+    if (!files) {
+        return;
+    }
+
+    files = files.getValues('data');
+
+    var tree = makeNode('/', 0);
+    var appliedFiles = {};
+    var sharePart = utils.sharePartOfPaths(files.map(basis.getter('name')));
+
+    files = files.map(function(file) {
+        return {
+            name: file.name.slice(sharePart.length + 1),
+            size: file.size
+        };
+    });
+
+    files.forEach(function(file) {
+        if (!appliedFiles[file.name]) {
+            appliedFiles[file.name] = true;
+            applyPath(tree, {path: file.name, size: file.size});
+        }
+    });
+
+    calcPercentsAndUpdateNames(tree);
+
+    console.log(tree);
+
+    return tree;
+});
+
 var page = new Page({
+    template: resource('./template/page.tmpl'),
     className: 'Page.FileMap',
     type: 'fit',
     tree: null,
+    tooltip: new Tooltip(),
     handler: {
         open: function() {
             this.start();
@@ -83,53 +114,87 @@ var page = new Page({
             this.stop();
         }
     },
-    updateMap: function() {
+    action: {
+        mousemove: function(e) {
+            var pageX = e.pageX;
+            var pageY = e.pageY;
+
+            this.tooltip.setLeft(pageX - 10);
+            this.tooltip.setBottom(window.innerHeight - pageY + 10);
+        },
+        mouseout: function() {
+            this.removeTooltip();
+        }
+    },
+    resizeMap: function() {
         basis.asap(function() {
-            webtreemap(this.element, this.tree);
-            this.element.firstElementChild.style.width = '100%';
-            this.element.firstElementChild.style.height = '100%';
+            if (this.treemap) {
+                this.treemap.resize();
+            }
         }, this);
     },
+    removeTooltip: function() {
+        this.tooltip.setDelegate(null);
+    },
     start: function() {
-        this.watcher = Value.from(type.Module.files, 'itemsChanged', function(files) {
-            if (!files) {
-                return;
+        basis.asap(function() {
+            if (!this.treemap) {
+                this.treemap = new TreeMap({
+                    element: this.tmpl.element,
+
+                    layout: 'squarified',
+                    stacking: 'flattened',
+
+                    pixelRatio: window.devicePixelRatio || 1,
+
+                    maxGroupLevelsDrawn: Number.MAX_VALUE,
+                    maxGroupLabelLevelsDrawn: Number.MAX_VALUE,
+
+                    pullbackDuration: 0,
+                    rolloutDuration: 0,
+                    fadeDuration: 0,
+
+                    zoomMouseWheelDuration: 400,
+
+                    onGroupHover: function(event) {
+                        if (event.group && event.group.attribution) {
+                            event.preventDefault();
+
+                            return false;
+                        }
+
+                        if (event.group) {
+                            this.tooltip.setDelegate(new DataObject({data: event.group}));
+                        } else {
+                            this.tooltip.setDelegate();
+                        }
+                    }.bind(this),
+
+                    // Hide the tooltip on zoom, open/close and expose
+                    onGroupMouseWheel: this.removeTooltip.bind(this),
+                    onGroupExposureChanging: this.removeTooltip.bind(this),
+                    onGroupOpenOrCloseChanging: this.removeTooltip.bind(this),
+                });
             }
 
-            files = files.getValues('data');
-
-            var appliedFiles = {};
-            var sharePart = utils.sharePartOfPaths(files.map(basis.getter('name')));
-
-            files = files.map(function(file) {
-                return {
-                    name: file.name.slice(sharePart.length + 1),
-                    size: file.size
-                };
-            });
-
-            this.element.innerHTML = '';
-            this.tree = makeNode('/', 0);
-
-            files.forEach(function(file) {
-                if (!appliedFiles[file.name]) {
-                    appliedFiles[file.name] = true;
-                    applyPath(this.tree, { path: file.name, size: file.size });
-                }
-            }, this);
-
-            calcPercentsAndUpdateNames(this.tree);
-            this.updateMap();
-        }.bind(this));
+            this.treemap.set('dataObject', watcher.value);
+        }, this);
     },
     stop: function() {
-        this.watcher.destroy();
-        this.watcher = null;
+
     }
 });
 
+watcher.link(page, function(dataObject) {
+    if (this.treemap && this.opened.value) {
+        this.treemap.set('dataObject', dataObject);
+    }
+});
+
+var resizeTimeout;
 addHandler(window, 'resize', function() {
-    this.updateMap();
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(this.resizeMap.bind(this), 300);
 }, page);
 
 module.exports = page;
