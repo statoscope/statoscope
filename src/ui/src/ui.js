@@ -13,5 +13,6 @@ module.exports = {
     Assets: require('./ui/assets/index'),
     Modules: require('./ui/modules/index'),
     FileStat: require('./ui/fileStat/index'),
-    SplitView: require('./ui/splitView/index')
+    SplitView: require('./ui/splitView/index'),
+    BottomBar: require('./ui/bottomBar/index')
 };

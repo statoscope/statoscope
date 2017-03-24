@@ -1,0 +1,13 @@
+{
+  "_meta": {
+    "type": {
+      "module": "plural"
+    }
+  },
+  "en-US": {
+    "module": [
+      "module",
+      "modules"
+    ]
+  }
+}

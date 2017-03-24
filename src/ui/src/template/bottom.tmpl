@@ -1,0 +1,21 @@
+<b:style src="./bottom.css"/>
+<b:isolate/>
+
+<b:include src="app.ui.bottomBar">
+  <b:append b:ref="content">
+    <div b:hide="{fileName}">
+      No file from the bundle is editing
+    </div>
+    <div b:show="{fileName}">
+      <div>
+        <b>File:</b> {fileName}
+      </div>
+      <div b:show="{fileSize}">
+        <b>Size:</b> {fileSize} {fileSizePostfix}
+      </div>
+      <div b:show="{retainedSize}">
+        <b>Retain:</b> {retainedAmount} {l10n:module.{retainedAmount}} in {retainedSize} {retainedPostfix}
+      </div>
+    </div>
+  </b:append>
+</b:include>

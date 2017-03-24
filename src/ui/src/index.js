@@ -2,8 +2,10 @@ var Value = require('basis.data').Value;
 var Node = require('basis.ui').Node;
 var Progress = require('app.ui').Progress;
 var Status = require('app.ui').Status;
+var BottomBar = require('app.ui').BottomBar;
 var Menu = require('app.ui.menu').Menu;
 var type = require('app.type');
+var utils = require('app.utils');
 
 var routes = {
     home: resource('./pages/home/index.js'),
@@ -33,17 +35,18 @@ module.exports = require('basis.app').create({
                 menu: 'satellite:',
                 status: new Status(),
                 progress: 'satellite:',
-                page: 'satellite:'
+                page: 'satellite:',
+                bottom: 'satellite:'
             },
             satellite: {
                 menu: new Menu({
                     childNodes: [
-                        { id: 'home', selected: true },
-                        { id: 'errors', counter: Value.query(type.Error.all, 'itemCount') },
-                        { id: 'warnings', counter: Value.query(type.Warning.all, 'itemCount') },
-                        { id: 'graph' },
-                        { id: 'fileMap' },
-                        { id: 'env', visible: Value.query(type.Env, 'data.name') },
+                        {id: 'home', selected: true},
+                        {id: 'errors', counter: Value.query(type.Error.all, 'itemCount')},
+                        {id: 'warnings', counter: Value.query(type.Warning.all, 'itemCount')},
+                        {id: 'graph'},
+                        {id: 'fileMap'},
+                        {id: 'env', visible: Value.query(type.Env, 'data.name')},
                         {
                             id: 'options',
                             type: 'dropdown',
@@ -72,7 +75,22 @@ module.exports = require('basis.app').create({
                 progress: new Progress(),
                 page: Value.query('satellite.menu.selection.pick()').as(function(node) {
                     return node && routes[node.id] || routes.home;
-                })
+                }),
+                bottom: {
+                    existsIf: Value.query(type.Env, 'data.name'),
+                    instance: BottomBar.subclass({
+                        template: resource('./template/bottom.tmpl'),
+                        binding: {
+                            fileName: Value.query(type.Env, 'data.file.data.name'),
+                            fileSize: type.Env.fileSize,
+                            fileSizePostfix: type.Env.fileSizePostfix,
+
+                            retainedAmount: type.Env.retainedAmount,
+                            retainedSize: type.Env.retainedSize,
+                            retainedPostfix: type.Env.retainedPostfix
+                        }
+                    })
+                }
             }
         });
     }
