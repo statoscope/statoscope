@@ -8,6 +8,7 @@ var fork = require('child_process').fork;
 var rempl = require('rempl');
 var path = require('path');
 var fs = require('fs');
+var opn = require('opn');
 
 var requestShortener;
 
@@ -141,6 +142,10 @@ function startRemplServer(plugin) {
             if (data && data.event === 'server-started') {
                 plugin.publisher.wsendpoint = data.endpoint;
                 plugin.publisher.sync();
+
+                if (plugin.options.open) {
+                    opn(data.endpoint);
+                }
             }
         })
         .send({
@@ -383,10 +388,6 @@ function RuntimeAnalyzerPlugin(options) {
         watchModeOnly: true,
         ui: path.resolve(__dirname, '../../dist/script.js')
     }, options);
-
-    if (this.options.mode === 'standalone') {
-        startRemplServer(this);
-    }
 }
 
 RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
@@ -396,6 +397,12 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
     compiler.plugin(pluginMode, function(watching, done) {
         if (!this.publisher) {
             this.publisher = createPublisher(compiler, options);
+
+            // run server after publisher is created
+            // since server uses publisher when started
+            if (options.mode === 'standalone') {
+                startRemplServer(this);
+            }
         }
 
         done();
