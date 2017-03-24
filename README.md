@@ -30,7 +30,7 @@ rempl
 
 > Also, you can use the [GUI](https://github.com/rempl/menubar-server) to control rempl server.
 
-3) Start building in a watch mode (`> wabpack --watch` or `> webpack-dev-server`) then open [http://localhost:8177/](http://localhost:8177/) in your browser to see UI.
+3) Start building in a watch mode (`> webpack --watch` or `> webpack-dev-server`) then open [http://localhost:8177/](http://localhost:8177/) in your browser to see UI.
 
 Try the [example](example) to see how it works:
 
@@ -46,17 +46,45 @@ npm run dev
 
 The list of the modules and the assets is always at hand.
 
-![Dashboad](https://cloud.githubusercontent.com/assets/6654581/23513209/4ef24f2c-ff74-11e6-9a75-cc254a4783e1.png)
+<img src="https://cloud.githubusercontent.com/assets/6654581/24293210/a8d77e7a-10a1-11e7-8b86-29f753bbc516.png" width="500px"/>
 
-Left list contains all modules that included in your bundle.
+#### The left list
 
-Right list contains building output (bundles, chunks, static, etc).
+The left list contains all modules that included in your bundle.
+
+- `Id` - module ID
+- `Name` - short module name 
+- `Size` - module size
+- `Occurrences` - amount and size of the modules that dependent from this module
+- `Retain` - amount and size of the modules that this module is required (recursive) 
+- `Exclusive` - see bellow
+
+#### The right list
+
+The right list contains building output (chunks, static, etc).
+
+#### Exclusive column
+
+`Exclusive` column contains amount and size of the modules that **only** this module is required (recursive).
+
+For example, we have three modules: `foo`, `bar` and `baz`
+
+**Case 1**: If `foo` requires `bar` then `foo` exclusive is `1` because no more modules that require `bar`.
+
+**Case 2**: If `foo` and `bar` requires `baz` then:
+ - `foo` exclusive is `0` because `bar` also requires `baz`.
+ - `bar` exclusive is `0` because `foo` also requires `baz`.
+
+**Case 2**: If `foo` requires `bar` and `bar` requires `baz` then:
+
+ - `foo` exclusive is `2` because no more modules that require `bar` and `baz`
+ - `bar` exclusive is `1` because no more modules that require `baz`
 
 ### Dependency graph
 
 Take a look at the dependencies of the modules and at the modules stats.
 
-![Dependency graph](https://cloud.githubusercontent.com/assets/6654581/23990737/0770cff0-0a48-11e7-9730-4da8c6452893.png)
+<img src="https://cloud.githubusercontent.com/assets/6654581/23990737/0770cff0-0a48-11e7-9730-4da8c6452893.png" width="500px"/>
 
 #### Module types
 
@@ -64,9 +92,9 @@ There are a few basic module types:
 - **normal** - module that you are requiring with `require(...)`
 - **context** - complex module that unites other modules when you are using `require.context(...)`
 
-Some modules can be marked as `entry`. It means that this module is declared in entry-section in you webpack-config.
+Some modules can be marked as `entry`. It means that this module is declared in `entry` section in you webpack-config.
 
-Module is separated by file types (scripts, templates, styles, etc). Every file type has a different color. You can see these colors at the nodes of graph or at the color-bar above the graph.
+The modules is separated by file types (scripts, templates, styles, etc). Every file type has a different color. You can see these colors at the nodes of graph or at the color bar above the graph.
 
 You can hover mouse cursor at the nodes of graph or at the color bar sections and see an additional module-info or a file type statistic.
 
@@ -81,31 +109,62 @@ You can hover mouse cursor at the nodes of graph or at the color bar sections an
 
 Look at the file map and find out why your bundle is so big.
 
-![File size map](https://cloud.githubusercontent.com/assets/6654581/23513627/b610976c-ff75-11e6-8f6a-447a634a6074.png)
+<img src="https://cloud.githubusercontent.com/assets/6654581/23513627/b610976c-ff75-11e6-8f6a-447a634a6074.png" width="500px"/>
 
 ### Realtime analyzing
 
 Analyzing process is performing in **realtime**.
 
-![Realtime analyzing](https://cloud.githubusercontent.com/assets/6654581/23513658/ddb32154-ff75-11e6-93a9-29579d7c9bee.png)
+<img src="https://cloud.githubusercontent.com/assets/6654581/23513658/ddb32154-ff75-11e6-93a9-29579d7c9bee.png" width="500px"/>
 
-### Working with a huge bundles
+### Working with huge bundles
 
-In a huge bundles there are many modules that are useless for analyzing.
+In huge bundles, there are many modules that are useless for analyzing.
 
 For example, look at the [AST Explorer](https://github.com/fkling/astexplorer) bundle:
 
-![AST Explorer modules graph](https://cloud.githubusercontent.com/assets/6654581/23990644/c87a947a-0a47-11e7-948d-681289f54c59.png)
+<img src="https://cloud.githubusercontent.com/assets/6654581/23990644/c87a947a-0a47-11e7-948d-681289f54c59.png" width="500px"/>
 
 In this case graph is not usable, moreover overloaded graph decreases rendering performance.
 
-You can enable `Hide 3rd party modules` in the `Options` menu to hide modules that isn't requiring your project-modules.
+You can enable `Hide 3rd party modules` in the `Options` menu to hide modules that aren't requiring your project modules.
 
-So, `modules list`, `graph` and `file map` will be contain only modules that requiring your project-modules.
+So, `modules list`, `graph` and `file map` will contain only modules that requiring your project modules.
 
-![AST Explorer modules graph with hidden 3rd party modules](https://cloud.githubusercontent.com/assets/6654581/23990815/3cabb1d0-0a48-11e7-9f84-177cad1f70d2.png)
+<img src="https://cloud.githubusercontent.com/assets/6654581/23990815/3cabb1d0-0a48-11e7-9f84-177cad1f70d2.png" width="500px"/>
 
 `Hide 3rd party modules` is enabled by default.
+
+### Integration
+
+You can use Webpack Runtime Analyzer everywhere when having an access to a web-view (e.g. browser pages, browser plugins, mobile browsers and applications).
+
+#### Atom Editor
+
+Some code editors have an access to a web view (e.g. `iframe`) and there is a great opportunity to integrate Webpack Runtime Analyzer in these editors and use **unique editor features**.
+
+You can use Webpack Runtime Analyzer in [Atom Editor](https://atom.io/) by installed [the plugin](https://atom.io/packages/rempl-host).
+
+This plugin creates a `bridge` between the editor and Webpack Runtime Analyzer. It allows you to open the UI **directly in an editor tab** and observing current editing file.
+
+##### Open UI in editor
+
+Just type `Rempl` in command palette and enter rempl-server url (http://localhost:8177 by default).
+
+##### Info about editing file
+
+If the editing file is part of the bundle, then you can see some info about it in several places:
+- Environment page of the UI (contains all modules that retained by the editing file)
+- the status bar of the UI 
+- the status bar of the Editor (two-way communication)
+ 
+<img src="https://cloud.githubusercontent.com/assets/6654581/24292331/f384beb4-109d-11e7-9a46-4eff5f4b53b9.gif" width="500px"/>
+
+> Environment page and status bar exist only when the UI is running within editor
+
+#### How about other editors?
+
+[VS Code](https://code.visualstudio.com/) support is in plans...
 
 ### Webpack 1.x support
 
@@ -122,11 +181,11 @@ new RuntimeAnalyzerPlugin({
 });
 ```
 
-### onlyWatchMode: Boolean
+### watchModeOnly: Boolean
 
 Activate plugin only in a watch mode (`> webpack --watch` or `> webpack-dev-server`)
 
-If `onlyWatchMode` is `false` then the plugin will be activated in a normal (`> webpack`) and in a watch mode (`> webpack --watch` or `> webpack-dev-server`). It means that normal building process will not be terminated after finish because the plugin is holding a permanent connection to the rempl server. The only way to terminate building process is `ctrl+c` like in a watch mode.
+If `watchModeOnly` is `false` then the plugin will be activated in a normal (`> webpack`) and in a watch mode (`> webpack --watch` or `> webpack-dev-server`). It means that normal building process will not be terminated after finish because the plugin is holding a permanent connection to the rempl server. The only way to terminate building process is `ctrl+c` like in a watch mode.
 
 `true` by default.
 
