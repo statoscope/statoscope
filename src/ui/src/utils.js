@@ -68,9 +68,34 @@ function sharePartOfPaths(paths) {
         .join('/');
 }
 
+var typeByExt = {
+    '.js': 'script',
+    '.jsx': 'script',
+    '.es6': 'script',
+    '.ts': 'script',
+    '.tsx': 'script',
+    '.coffee': 'script',
+    '.dart': 'script',
+    '.json': 'json',
+    '.css': 'style',
+    '.html': 'html',
+    '.eot': 'font',
+    '.ttf': 'font',
+    '.woff': 'font',
+    '.woff2': 'font',
+    '.svg': 'image',
+    '.jpg': 'image',
+    '.jpeg': 'image',
+    '.png': 'image',
+    '.gif': 'image',
+    '.tmpl': 'template',
+    '.l10n': 'l10n'
+};
+
 module.exports = {
     getSize: getSize,
     getPostfix: getPostfix,
     roundSize: roundSize,
-    sharePartOfPaths: sharePartOfPaths
+    sharePartOfPaths: sharePartOfPaths,
+    typeByExt: typeByExt
 };

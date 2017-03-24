@@ -1,0 +1,15 @@
+<b:style src="./tooltip.css"/>
+<b:style src="app:template/colors.css"/>
+<b:isolate/>
+<b:define name="type" type="enum" values="script style html template l10n image font json"/>
+
+<b:include src="app.ui.tooltip">
+    <b:replace ref="content">
+        <div b:show="{type}">
+            <div class="marker type-color-{type}"/>
+            {type}
+        </div>
+        <div>Size: {size} {postfix} ({percent}%)</div>
+        {path}
+    </b:replace>
+</b:include>

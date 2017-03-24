@@ -5,30 +5,7 @@ var Balloon = require('basis.ui.popup').Balloon;
 var Module = require('app.type').Module;
 var ModuleLink = require('app.type').ModuleLink;
 var Viva = require('./vivagraph.js');
-
-var typeByExt = {
-    '.js': 'script',
-    '.jsx': 'script',
-    '.es6': 'script',
-    '.ts': 'script',
-    '.tsx': 'script',
-    '.coffee': 'script',
-    '.dart': 'script',
-    '.json': 'json',
-    '.css': 'style',
-    '.html': 'html',
-    '.eot': 'font',
-    '.ttf': 'font',
-    '.woff': 'font',
-    '.woff2': 'font',
-    '.svg': 'image',
-    '.jpg': 'image',
-    '.jpeg': 'image',
-    '.png': 'image',
-    '.gif': 'image',
-    '.tmpl': 'template',
-    '.l10n': 'l10n'
-};
+var typeByExt = require('app.utils').typeByExt;
 
 function getTypeByExt(ext) {
     return typeByExt.hasOwnProperty(ext) ? typeByExt[ext] : null;

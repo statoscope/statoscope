@@ -5,10 +5,15 @@ var Page = require('app.ui').Page;
 var type = require('app.type');
 var utils = require('app.utils');
 var Tooltip = require('app.ui').Tooltip;
+var typeByExt = utils.typeByExt;
 
 require('app.vendor.foamtree');
 
 var TreeMap = global.CarrotSearchFoamTree;
+
+function getTypeByExt(ext) {
+    return typeByExt.hasOwnProperty(ext) ? typeByExt[ext] : null;
+}
 
 function makeNode(name, size) {
     return {
@@ -43,6 +48,10 @@ function applyPath(tree, info) {
 
         stack.push(target);
         cursor = target;
+        target.path = stack
+            .slice(1)
+            .map(basis.getter('label'))
+            .join('/');
     }
 
     stack.forEach(function(item) {
@@ -59,7 +68,7 @@ function calcPercentsAndUpdateNames(tree) {
     function walk(root) {
         var percent = 100 / totalSize * root.weight;
 
-        root.formattedSize = utils.roundSize(root.weight);
+        root.size = utils.roundSize(root.weight);
         root.postfix = utils.getPostfix(root.weight);
         root.percent = percent.toFixed(2);
         root.groups.forEach(walk);
@@ -89,13 +98,13 @@ var watcher = Value.from(type.Module.files, 'itemsChanged', function(files) {
     files.forEach(function(file) {
         if (!appliedFiles[file.name]) {
             appliedFiles[file.name] = true;
-            applyPath(tree, {path: file.name, size: file.size});
+            applyPath(tree, { path: file.name, size: file.size });
         }
     });
 
     calcPercentsAndUpdateNames(tree);
 
-    console.log(tree);
+    /** @cut */ basis.dev.log('tree map', tree);
 
     return tree;
 });
@@ -105,7 +114,17 @@ var page = new Page({
     className: 'Page.FileMap',
     type: 'fit',
     tree: null,
-    tooltip: new Tooltip(),
+    tooltip: new Tooltip({
+        template: resource('./template/tooltip.tmpl'),
+        binding: {
+            path: 'data:',
+            size: 'data:',
+            postfix: 'data:',
+            percent: 'data:',
+            groups: 'data:',
+            type: Value.query('data.path').as(type.File).pipe('update', 'data.extname').as(getTypeByExt)
+        }
+    }),
     handler: {
         open: function() {
             this.start();
@@ -156,6 +175,9 @@ var page = new Page({
 
                     zoomMouseWheelDuration: 400,
 
+                    onGroupClick: function(event) {
+                        event.preventDefault();
+                    },
                     onGroupHover: function(event) {
                         if (event.group && event.group.attribution) {
                             event.preventDefault();
@@ -164,13 +186,11 @@ var page = new Page({
                         }
 
                         if (event.group) {
-                            this.tooltip.setDelegate(new DataObject({data: event.group}));
+                            this.tooltip.setDelegate(new DataObject({ data: event.group }));
                         } else {
                             this.tooltip.setDelegate();
                         }
                     }.bind(this),
-
-                    // Hide the tooltip on zoom, open/close and expose
                     onGroupMouseWheel: this.removeTooltip.bind(this),
                     onGroupExposureChanging: this.removeTooltip.bind(this),
                     onGroupOpenOrCloseChanging: this.removeTooltip.bind(this),
@@ -181,7 +201,7 @@ var page = new Page({
         }, this);
     },
     stop: function() {
-
+        // dummy
     }
 });
 
@@ -192,6 +212,7 @@ watcher.link(page, function(dataObject) {
 });
 
 var resizeTimeout;
+
 addHandler(window, 'resize', function() {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(this.resizeMap.bind(this), 300);
