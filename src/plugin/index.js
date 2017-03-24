@@ -383,7 +383,7 @@ function RuntimeAnalyzerPlugin(options) {
 
     // mix with default options
     this.options = deepExtend({
-        mode: 'publisher',
+        mode: 'standalone',
         port: 0,
         watchModeOnly: true,
         ui: path.resolve(__dirname, '../../dist/script.js')
