@@ -55,19 +55,30 @@ The left list contains all modules that included in your bundle.
 - `Id` - module ID
 - `Name` - short module name 
 - `Size` - module size
-- `Occurrences` - amount and size of the modules that dependent from this module
-- `Retain` - amount and size of the modules that this module is required (recursive) 
+- `Occurrences` - how many modules require this module.
+- `Retain` - see bellow 
 - `Exclusive` - see bellow
 
 #### The right list
 
 The right list contains building output (chunks, static, etc).
 
-#### Exclusive column
+#### Retained
 
-`Exclusive` column contains amount and size of the modules that **only** this module is required (recursive).
+Displays how many modules are **required by** this module and by all its dependencies (recursive).
 
-For example, we have three modules: `foo`, `bar` and `baz`
+For example, we have three modules: `foo`, `bar` and `baz`.
+
+If `foo` requires `bar` and `bar` requires `baz` then:
+- retained of `foo` is 2 (`bar` and `baz`)
+- retained of `bar` is 1 (`baz`)
+- retained of `baz` is 0
+
+#### Exclusive
+
+Displays how many modules are required **only** by this module and by all its dependencies (recursive).
+
+For example, we have three modules: `foo`, `bar` and `baz`.
 
 **Case 1**: If `foo` requires `bar` then `foo` exclusive is `1` because no more modules that require `bar`.
 
@@ -75,11 +86,11 @@ For example, we have three modules: `foo`, `bar` and `baz`
  - `foo` exclusive is `0` because `bar` also requires `baz`.
  - `bar` exclusive is `0` because `foo` also requires `baz`.
 
-**Case 2**: If `foo` requires `bar` and `bar` requires `baz` then:
+**Case 3**: If `foo` requires `bar` and `bar` requires `baz` then:
 
  - `foo` exclusive is `2` because no more modules that require `bar` and `baz`
  - `bar` exclusive is `1` because no more modules that require `baz`
-
+ 
 ### Dependency graph
 
 Take a look at the dependencies of the modules and at the modules stats.
@@ -109,7 +120,7 @@ You can hover mouse cursor at the nodes of graph or at the color bar sections an
 
 Look at the file map and find out why your bundle is so big.
 
-<img src="https://cloud.githubusercontent.com/assets/6654581/23513627/b610976c-ff75-11e6-8f6a-447a634a6074.png" width="500px"/>
+<img src="https://cloud.githubusercontent.com/assets/6654581/24315369/a88e3c6e-10f7-11e7-91ba-9b7f7025c4e5.png" width="500px"/>
 
 ### Realtime analyzing
 
@@ -137,7 +148,7 @@ So, `modules list`, `graph` and `file map` will contain only modules that requir
 
 ### Integration
 
-You can use Webpack Runtime Analyzer everywhere when having an access to a web-view (e.g. browser pages, browser plugins, mobile browsers and applications).
+You can use Webpack Runtime Analyzer everywhere when having an access to a web-view (e.g. web pages, browser plugins, mobile browsers and applications).
 
 #### Atom Editor
 
@@ -188,15 +199,6 @@ Activate plugin only in a watch mode (`> webpack --watch` or `> webpack-dev-serv
 If `watchModeOnly` is `false` then the plugin will be activated in a normal (`> webpack`) and in a watch mode (`> webpack --watch` or `> webpack-dev-server`). It means that normal building process will not be terminated after finish because the plugin is holding a permanent connection to the rempl server. The only way to terminate building process is `ctrl+c` like in a watch mode.
 
 `true` by default.
-
-## UI customization
-
-The UI built on [basis.js framework](http://basisjs.com/).
-
-* Clone this repo
-* Make the changes in [src/ui](src/ui)
-* Run `npm run build` to build the UI bundle to the `dist` directory
-* Set an absolute path to built UI bundle in the `ui` plugin option 
 
 ## License
 
