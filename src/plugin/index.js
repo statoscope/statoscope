@@ -9,7 +9,6 @@ var path = require('path');
 var fs = require('fs');
 
 var requestShortener;
-var remplServerEndpoint;
 
 function isObject(obj) {
     return typeof obj == 'object' && obj;
@@ -129,7 +128,7 @@ function getModuleLoaders(module, handledFiles) {
     });
 }
 
-function startRemplServer(options) {
+function startRemplServer(plugin) {
     console.info('Starting rempl server...');
 
     fork(path.resolve(__dirname, 'server.js'), { silent: true })
@@ -139,10 +138,13 @@ function startRemplServer(options) {
         })
         .on('message', function(data) {
             if (data && data.event === 'server-started') {
-                remplServerEndpoint = data.endpoint;
+                plugin.publisher.wsendpoint = data.endpoint;
+                plugin.publisher.sync();
             }
         })
-        .send(options);
+        .send({
+            port: plugin.options.port
+        });
 }
 
 function createPublisher(compiler, options) {
@@ -164,6 +166,8 @@ function createPublisher(compiler, options) {
         }
 
         getWebUI(settings, callback);
+    }, {
+        manualSync: options.mode === 'standalone'
     });
 
     var status = publisher.ns('status');
@@ -340,10 +344,10 @@ function createPublisher(compiler, options) {
 
         done();
 
-        if (remplServerEndpoint) {
+        if (publisher.wsendpoint) {
             // use timer to output link after all the stats is shown
             setTimeout(function() {
-                console.log('\nWebpack Runtime Analyzer web interface:', remplServerEndpoint);
+                console.log('\nWebpack Runtime Analyzer web interface:', publisher.wsendpoint);
             });
         }
     });
@@ -363,6 +367,8 @@ function createPublisher(compiler, options) {
     compiler.plugin('failed', function() {
         status.publish('failed');
     });
+
+    return publisher;
 }
 
 function RuntimeAnalyzerPlugin(options) {
@@ -377,25 +383,21 @@ function RuntimeAnalyzerPlugin(options) {
     }, options);
 
     if (this.options.mode === 'standalone') {
-        startRemplServer({
-            port: this.options.port
-        });
+        startRemplServer(this);
     }
 }
 
 RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
     var options = this.options;
     var pluginMode = options.watchModeOnly ? 'watch-run' : 'run';
-    var inited = false;
 
     compiler.plugin(pluginMode, function(watching, done) {
-        if (!inited) {
-            createPublisher(compiler, options);
-            inited = true;
+        if (!this.publisher) {
+            this.publisher = createPublisher(compiler, options);
         }
 
         done();
-    });
+    }.bind(this));
 };
 
 module.exports = RuntimeAnalyzerPlugin;
