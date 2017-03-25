@@ -22,7 +22,7 @@ var RuntimeAnalyzerPlugin = require('webpack-runtime-analyzer');
 plugins: [new RuntimeAnalyzerPlugin()]
 ```
 
-You can set optional configuration for `RuntimeAnalyzerPlugin` constructor:
+You can set optional configuration for `RuntimeAnalyzerPlugin` constructor with this defaults:
 
 ```js
 new RuntimeAnalyzerPlugin({
@@ -52,7 +52,10 @@ rempl
 
 > Also, you can use the [GUI](https://github.com/rempl/menubar-server) to control rempl server.
 
-3) Start building in a watch mode (`> webpack --watch` or `> webpack-dev-server`) then open [http://localhost:8177/](http://localhost:8177/) in your browser to see UI.
+After you run Webpack you can open web interface of analyzer.
+
+- In `standalone` mode the link to the web interface will be printed after build is done. With `open` option set to `true`, the web interface will be opened in default browser automatically.
+- In `publisher` mode your should open url of rempl server, usually it's [http://localhost:8177/](http://localhost:8177/). You can set custom rempl server url via `REMPL_SERVER` env variable.
 
 Try the [example](example) to see how it works:
 
