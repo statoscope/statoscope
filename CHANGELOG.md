@@ -1,3 +1,26 @@
+## 1.2.0 (March 25, 2017)
+
+### Plugin
+
+- bumped rempl version
+- fixed a bug with multiple subscribing on compilation events after every building
+- rempl server was integrated into the plugin (closes #4)
+- open UI automatically
+- generate modules links
+- generate retained module info
+- generate exclusive module info
+
+### UI
+
+- old webtree replaces by FoamTree (closes #11)
+- added split view
+- some cleanup
+- support rempl env
+- added env page
+- added bottom bar
+- receiving editing file path from the env
+- sending editing file modules info to the env
+
 ## 1.1.0 (March 16, 2017)
 
 ### Plugin
