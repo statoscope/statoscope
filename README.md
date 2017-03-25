@@ -12,19 +12,41 @@ npm install webpack-runtime-analyzer --save-dev
 
 ## Usage
 
-1) Add plugin to your webpack config:
+Add plugin to your webpack config:
 
 ```js
 var RuntimeAnalyzerPlugin = require('webpack-runtime-analyzer');
 
 // ...
 
-plugins.push(new RuntimeAnalyzerPlugin());
+plugins: [new RuntimeAnalyzerPlugin()]
 ```
 
-2) Start [rempl server](https://github.com/rempl/rempl-cli):
+You can set optional configuration for `RuntimeAnalyzerPlugin` constructor:
+
+```js
+new RuntimeAnalyzerPlugin({
+    // Can be `standalone` or `publisher`.
+    // In `standalone` mode analyzer will start rempl server in exclusive publisher mode.
+    // In `publisher` mode you should start rempl on your own.
+    mode: 'standalone',
+    // Port that will be used in `standalone` mode to start rempl server.
+    // When set to `0` a random port will be choosen.
+    port: 0,
+    // Automatically open analyzer in default browser. Works for `standalone` mode only.
+    open: false,
+    // Use analyzer only when Webpack run in a watch mode. Set it to `false` to use plugin
+    // in any Webpack mode. Take in account that building process will not be terminated
+    // when done since the plugin holds a connection to the rempl server. The only way
+    // to terminate building process is using `ctrl+c` like in a watch mode.
+    watchModeOnly: true
+})
+```
+
+For `publisher` mode you should start [rempl server](https://github.com/rempl/rempl-cli) on your own:
 
 ```bash
+npm install -g rempl-cli
 rempl
 ```
 
@@ -180,25 +202,6 @@ If the editing file is part of the bundle, then you can see some info about it i
 ### Webpack 1.x support
 
 All features is working correctly with webpack 2.x and 1.x
-
-## Plugin config
-
-If you don't want to use default plugin config, then you can specify your own config:
-
-```js
-new RuntimeAnalyzerPlugin({
-    onlyWatchMode: true,
-    ui: fs.readFileSync('/path/to/ui/bundle.js', 'utf-8'), // packed UI bundle (js + html + css + etc...)
-});
-```
-
-### watchModeOnly: Boolean
-
-Activate plugin only in a watch mode (`> webpack --watch` or `> webpack-dev-server`)
-
-If `watchModeOnly` is `false` then the plugin will be activated in a normal (`> webpack`) and in a watch mode (`> webpack --watch` or `> webpack-dev-server`). It means that normal building process will not be terminated after finish because the plugin is holding a permanent connection to the rempl server. The only way to terminate building process is `ctrl+c` like in a watch mode.
-
-`true` by default.
 
 ## License
 
