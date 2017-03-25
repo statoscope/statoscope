@@ -36,7 +36,7 @@ new RuntimeAnalyzerPlugin({
     // Automatically open analyzer in default browser. Works for `standalone` mode only.
     open: false,
     // Use analyzer only when Webpack run in a watch mode. Set it to `false` to use plugin
-    // in any Webpack mode. Take in account that building process will not be terminated
+    // in any Webpack mode. Take into account that a building process will not be terminated
     // when done since the plugin holds a connection to the rempl server. The only way
     // to terminate building process is using `ctrl+c` like in a watch mode.
     watchModeOnly: true
