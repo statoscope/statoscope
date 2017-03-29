@@ -18,6 +18,59 @@ var TableRow = require('app.ui.modulesTable').Row;
 var TableFoot = require('app.ui.modulesTable').Foot;
 var sum = require('basis.data.index').sum;
 var dict = require('basis.l10n').dictionary(__filename);
+var domEvent = require('basis.dom.event');
+
+var KEY_ENTER = 13;
+var KEY_ESCAPE = 27;
+var KEY_UP = 38;
+var KEY_DOWN = 40;
+var handleKeyEvent = function(event) {
+    if (!currentSuggestion) {
+        return;
+    }
+
+    if ([KEY_ENTER, KEY_ESCAPE, KEY_UP, KEY_DOWN].indexOf(event.keyCode) == -1) {
+        return;
+    }
+
+    var selection = currentSuggestion.selection.pick();
+
+    switch (event.keyCode) {
+        case KEY_ESCAPE:
+            return currentSuggestion.hide();
+        case KEY_UP:
+            if (!selection) {
+                if (currentSuggestion.lastChild) {
+                    currentSuggestion.lastChild.select();
+                }
+            } else if (selection.previousSibling) {
+                selection.previousSibling.select()
+            } else if (selection.previousSibling != currentSuggestion.lastChild) {
+                currentSuggestion.lastChild.select();
+            }
+            break;
+        case KEY_DOWN:
+            if (!selection) {
+                if (currentSuggestion.firstChild) {
+                    currentSuggestion.firstChild.select();
+                }
+            } else if (selection.nextSibling) {
+                selection.nextSibling.select()
+            } else if (selection.nextSibling != currentSuggestion.firstChild) {
+                currentSuggestion.firstChild.select();
+            }
+            break;
+        case KEY_ENTER:
+            if (selection) {
+                selection.action.click.call(selection);
+            }
+            break;
+    }
+
+    event.stopPropagation();
+    event.die();
+};
+var currentSuggestion;
 
 // require, occurrences, retained, exclusive
 var mode = new Value({ value: 'require' });
@@ -92,6 +145,15 @@ var tableSourceWrapper = new Merge({
 
 module.exports = new Page({
     className: 'Page.Env',
+    handler: {
+        open: function() {
+            domEvent.addGlobalHandler('keydown', handleKeyEvent);
+            this.satellite.content.satellite.filterInput.focus();
+        },
+        close: function() {
+            domEvent.removeGlobalHandler('keydown', handleKeyEvent);
+        }
+    },
     satellite: {
         content: {
             instance: Node.subclass({
@@ -113,7 +175,11 @@ module.exports = new Page({
                             })
                         },
                         action: {
-                            keyup: function() {
+                            keyup: function(event) {
+                                if ([KEY_ENTER, KEY_ESCAPE, KEY_UP, KEY_DOWN].indexOf(event.keyCode) > -1) {
+                                    return;
+                                }
+
                                 if (this.value.trim() && this.value.length >= 3) {
                                     this.satellite.suggestion.show(this.tmpl.element);
                                     suggestSource.applyRule();
@@ -151,8 +217,13 @@ module.exports = new Page({
                                         }
                                     },
                                     handler: {
+                                        show: function(sender) {
+                                            currentSuggestion = sender;
+                                        },
                                         hide: function() {
                                             var target = suggestionChoice.target;
+
+                                            currentSuggestion = null;
 
                                             if (target) {
                                                 this.owner.setValue(target.data.short || target.data.name);
