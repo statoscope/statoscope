@@ -14,5 +14,7 @@ module.exports = {
     Modules: require('./ui/modules/index'),
     FileStat: require('./ui/fileStat/index'),
     SplitView: require('./ui/splitView/index'),
-    BottomBar: require('./ui/bottomBar/index')
+    BottomBar: require('./ui/bottomBar/index'),
+    TextInput: require('./ui/textInput/index'),
+    Switcher: require('./ui/switcher/index')
 };

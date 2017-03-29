@@ -5,7 +5,7 @@ var Page = require('app.ui').Page;
 var type = require('app.type');
 var utils = require('app.utils');
 var AssetsTable = require('app.ui').Assets;
-var ModulesTable = require('app.ui').Modules;
+var ModulesTable = require('app.ui.modulesTable').Table;
 var SplitView = require('app.ui').SplitView;
 
 function formatSize(size) {

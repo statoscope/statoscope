@@ -174,10 +174,13 @@ var page = new Page({
                     fadeDuration: 0,
 
                     zoomMouseWheelDuration: 400,
-
-                    onGroupClick: function(event) {
+                    onGroupDoubleClick: function(event) {
                         event.preventDefault();
                     },
+                    onGroupClick: function (event) {
+                        event.preventDefault();
+                        this.treemap.expose(event.group);
+                    }.bind(this),
                     onGroupHover: function(event) {
                         if (event.group && event.group.attribution) {
                             event.preventDefault();

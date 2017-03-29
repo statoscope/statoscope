@@ -5,6 +5,7 @@ var Status = require('app.ui').Status;
 var BottomBar = require('app.ui').BottomBar;
 var Menu = require('app.ui.menu').Menu;
 var type = require('app.type');
+var pageSwitcher = require('./pageSwitcher');
 
 var routes = {
     home: resource('./pages/home/index.js'),
@@ -12,7 +13,7 @@ var routes = {
     warnings: resource('./pages/warnings/index.js'),
     graph: resource('./pages/graph/index.js'),
     fileMap: resource('./pages/fileMap/index.js'),
-    env: resource('./pages/env/index.js')
+    details: resource('./pages/details/index.js')
 };
 
 var version = new basis.Token(require('../../../package.json').version);
@@ -38,7 +39,7 @@ module.exports = require('basis.app').create({
                         { id: 'warnings', counter: Value.query(type.Warning.all, 'itemCount') },
                         { id: 'graph' },
                         { id: 'fileMap' },
-                        { id: 'env', visible: Value.query(type.Env, 'data.name') },
+                        { id: 'details' },
                         {
                             id: 'options',
                             type: 'dropdown',
@@ -62,6 +63,20 @@ module.exports = require('basis.app').create({
                                 version: version
                             }
                         })
+                    },
+                    init: function() {
+                        Menu.prototype.init.call(this);
+                        pageSwitcher.link(this, function(page) {
+                            if (page) {
+                                var find = basis.array.search(this.childNodes, page, 'id');
+
+                                if (find) {
+                                    find.action.click.call(find);
+                                }
+
+                                pageSwitcher.set(null);
+                            }
+                        });
                     }
                 }),
                 progress: new Progress(),
@@ -74,12 +89,16 @@ module.exports = require('basis.app').create({
                         template: resource('./template/bottom.tmpl'),
                         binding: {
                             fileName: Value.query(type.Env, 'data.file.data.name'),
-                            fileSize: type.Env.fileSize,
-                            fileSizePostfix: type.Env.fileSizePostfix,
+                            fileSize: Value.query(type.Env, 'data.file.data.formattedSize'),
+                            moduleName: Value.query(type.Env, 'data.module.data.name'),
+                            moduleSize: Value.query(type.Env, 'data.module.data.formattedSize'),
 
+                            requiredAmount: type.Env.requiredAmount,
+                            requiredSize: type.Env.requiredFormattedSize,
                             retainedAmount: type.Env.retainedAmount,
-                            retainedSize: type.Env.retainedSize,
-                            retainedPostfix: type.Env.retainedPostfix
+                            retainedSize: type.Env.retainedFormattedSize,
+                            exclusiveAmount: type.Env.exclusiveAmount,
+                            exclusiveSize: type.Env.exclusiveFormattedSize
                         }
                     })
                 }

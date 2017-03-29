@@ -44,6 +44,7 @@ var MenuItem = Node.subclass({
                 case 'checkbox':
                     this.setChecked(!this.checked);
                     this.toggle(e);
+                    this.parentNode.owner.hide();
                     break;
                 default:
                     this.select();
