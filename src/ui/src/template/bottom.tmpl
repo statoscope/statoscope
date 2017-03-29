@@ -8,13 +8,19 @@
     </div>
     <div b:show="{fileName}">
       <div>
-        <b>File:</b> {fileName}
+        <b>File:</b> {fileName} ({fileSize})
       </div>
-      <div b:show="{fileSize}">
-        <b>Size:</b> {fileSize} {fileSizePostfix}
+      <div b:show="{moduleName}">
+        <b>Module:</b> {moduleName} ({moduleSize})
       </div>
-      <div b:show="{retainedSize}">
-        <b>Retain:</b> {retainedAmount} {l10n:module.{retainedAmount}} in {retainedSize} {retainedPostfix}
+      <div b:show="{requiredAmount}">
+        <b>Require:</b> {requiredAmount} {l10n:module.{requiredAmount}} in {requiredSize}
+      </div>
+      <div b:show="{retainedAmount}">
+        <b>Retained:</b> {retainedAmount} {l10n:module.{retainedAmount}} in {retainedSize}
+      </div>
+      <div b:show="{exclusiveAmount}">
+        <b>Exclusive:</b> {exclusiveAmount} {l10n:module.{exclusiveAmount}} in {exclusiveSize}
       </div>
     </div>
   </b:append>

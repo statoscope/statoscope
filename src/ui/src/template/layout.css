@@ -24,6 +24,10 @@ hr
 	border-left: 0;
 }
 
+a {
+	color: #3bafda;
+}
+
 .layout
 {
 	display: -ms-flexbox;
