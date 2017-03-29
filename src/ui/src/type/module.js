@@ -89,4 +89,16 @@ Module.files = new MapFilter({
     }
 });
 
+Module.allFiles = new MapFilter({
+    source: new Filter({
+        source: Module.all,
+        rule: function(module) {
+            return module.data.type == 'normal';
+        }
+    }),
+    map: function(module) {
+        return module.data.resource;
+    }
+});
+
 module.exports = Module;

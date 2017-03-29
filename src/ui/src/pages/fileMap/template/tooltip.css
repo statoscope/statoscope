@@ -1,6 +1,10 @@
 .tooltip {
-	text-align: left;
+    text-align: left;
     pointer-events: none;
+}
+
+.header {
+    margin-bottom: 5px;
 }
 
 .marker {
@@ -10,4 +14,8 @@
     border-radius: 10px;
     margin-right: 5px;
     background: #777;
+}
+
+.size {
+    font-size: 10px;
 }

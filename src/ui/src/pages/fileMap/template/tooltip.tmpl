@@ -5,11 +5,14 @@
 
 <b:include src="app.ui.tooltip">
     <b:replace ref="content">
-        <div b:show="{type}">
-            <div class="marker type-color-{type}"/>
-            {type}
+        <div class="header">
+            <span b:show="{type}">
+                <div class="marker type-color-{type}"/>
+                {type}:&#32;
+            </span>
+            {basename}
         </div>
-        <div>Size: {size} {postfix} ({percent}%)</div>
-        {path}
+        <div>Path: {path}</div>
+        <div>Size: {size} ({percent}%)</div>
     </b:replace>
 </b:include>

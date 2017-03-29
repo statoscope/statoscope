@@ -77,7 +77,7 @@ function calcPercentsAndUpdateNames(tree) {
     walk(tree);
 }
 
-var watcher = Value.from(type.Module.files, 'itemsChanged', function(files) {
+var watcher = Value.from(type.Module.allFiles, 'itemsChanged', function(files) {
     if (!files) {
         return;
     }
@@ -98,7 +98,7 @@ var watcher = Value.from(type.Module.files, 'itemsChanged', function(files) {
     files.forEach(function(file) {
         if (!appliedFiles[file.name]) {
             appliedFiles[file.name] = true;
-            applyPath(tree, { path: file.name, size: file.size });
+            applyPath(tree, {path: file.name, size: file.size});
         }
     });
 
@@ -118,7 +118,10 @@ var page = new Page({
         template: resource('./template/tooltip.tmpl'),
         binding: {
             path: 'data:',
-            size: 'data:',
+            basename: Value.query('data.path').as(basis.path.basename),
+            size: Value.query('data.size').as(function(size) {
+                return utils.roundSize(size) + ' ' + utils.getPostfix(size);
+            }),
             postfix: 'data:',
             percent: 'data:',
             groups: 'data:',
@@ -177,7 +180,7 @@ var page = new Page({
                     onGroupDoubleClick: function(event) {
                         event.preventDefault();
                     },
-                    onGroupClick: function (event) {
+                    onGroupClick: function(event) {
                         event.preventDefault();
                         this.treemap.expose(event.group);
                     }.bind(this),
@@ -189,7 +192,7 @@ var page = new Page({
                         }
 
                         if (event.group) {
-                            this.tooltip.setDelegate(new DataObject({ data: event.group }));
+                            this.tooltip.setDelegate(new DataObject({data: event.group}));
                         } else {
                             this.tooltip.setDelegate();
                         }
@@ -197,6 +200,10 @@ var page = new Page({
                     onGroupMouseWheel: this.removeTooltip.bind(this),
                     onGroupExposureChanging: this.removeTooltip.bind(this),
                     onGroupOpenOrCloseChanging: this.removeTooltip.bind(this),
+
+                    titleBarDecorator(options, properties, variables) {
+                        variables.titleBarShown = false;
+                    }
                 });
             }
 

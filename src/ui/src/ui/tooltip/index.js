@@ -45,12 +45,13 @@ module.exports = Node.subclass({
         value = resolveValue(this, this.setVisible, value, 'visibleRA_');
 
         if (this.visible !== value) {
-            if (value) {
-                this.sizes = this.element.getBoundingClientRect();
-            }
 
             this.visible = value;
             this.emit_visibleChanged();
+
+            if (value) {
+                this.sizes = this.element.getBoundingClientRect();
+            }
         }
     },
     setLeft: function(value) {
