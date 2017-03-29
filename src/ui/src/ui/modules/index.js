@@ -42,9 +42,9 @@ var Row = TableRow.subclass({
 
 var Head = TableHead.subclass({
     childNodes: [
-        {data: {content: dict.token('id')}},
-        {data: {content: dict.token('name')}},
-        {data: {content: dict.token('size')}}
+        { data: { content: dict.token('id') } },
+        { data: { content: dict.token('name') } },
+        { data: { content: dict.token('size') } }
     ]
 });
 

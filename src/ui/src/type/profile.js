@@ -26,7 +26,7 @@ var profile = Profile();
 
 transport.ns('progress').subscribe(function(data) {
     /** @cut */ basis.dev.log('channel(progress)', data);
-    profile.update({progress: data});
+    profile.update({ progress: data });
 });
 
 transport.ns('profile').subscribe(function(data) {
@@ -51,7 +51,7 @@ transport.ns('profile').subscribe(function(data) {
 
 transport.ns('status').subscribe(function(data) {
     /** @cut */ basis.dev.log('channel(status)', data);
-    profile.update({status: data});
+    profile.update({ status: data });
 });
 
 module.exports = Profile;

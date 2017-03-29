@@ -98,7 +98,7 @@ var watcher = Value.from(type.Module.allFiles, 'itemsChanged', function(files) {
     files.forEach(function(file) {
         if (!appliedFiles[file.name]) {
             appliedFiles[file.name] = true;
-            applyPath(tree, {path: file.name, size: file.size});
+            applyPath(tree, { path: file.name, size: file.size });
         }
     });
 
@@ -192,7 +192,7 @@ var page = new Page({
                         }
 
                         if (event.group) {
-                            this.tooltip.setDelegate(new DataObject({data: event.group}));
+                            this.tooltip.setDelegate(new DataObject({ data: event.group }));
                         } else {
                             this.tooltip.setDelegate();
                         }
