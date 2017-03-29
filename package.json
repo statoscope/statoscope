@@ -32,10 +32,10 @@
   "homepage": "https://github.com/smelukov/webpack-runtime-analyzer#readme",
   "dependencies": {
     "async": "^2.1.4",
-    "basisjs-tools-server": "basisjs/basisjs-tools-server#80fc8ec",
+    "basisjs-tools-server": "basisjs/basisjs-tools-server",
     "loader-utils": "^1.0.4",
     "opn": "^4.0.0",
-    "rempl": "^1.0.0-alpha11",
+    "rempl": "^1.0.0-alpha12",
     "webpack": "^2.2.0"
   },
   "devDependencies": {
