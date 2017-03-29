@@ -41,23 +41,11 @@ var moduleTypeSplit = new Split({
     rule: 'data.type'
 });
 
-var moduleFileSplit = new Split({
-    rule: 'data.resource'
-});
-
 Module.byType = function(type, ifExists) {
     ifExists = ifExists === undefined ? false : ifExists;
 
     if (type) {
         return moduleTypeSplit.getSubset(type, !ifExists);
-    }
-};
-
-Module.byFile = function(file, ifExists) {
-    ifExists = ifExists === undefined ? false : ifExists;
-
-    if (file) {
-        return moduleFileSplit.getSubset(file, !ifExists);
     }
 };
 
@@ -93,7 +81,6 @@ Module.allWrapper = new DatasetWrapper({
 });
 
 moduleTypeSplit.setSource(Module.allWrapper);
-moduleFileSplit.setSource(Module.allWrapper);
 
 Module.files = new MapFilter({
     source: Module.byType('normal'),
