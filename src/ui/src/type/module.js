@@ -1,5 +1,4 @@
 var entity = require('basis.entity');
-var Value = require('basis.data').Value;
 var DatasetWrapper = require('basis.data').DatasetWrapper;
 var Filter = require('basis.data.dataset').Filter;
 var MapFilter = require('basis.data.dataset').MapFilter;
@@ -8,13 +7,7 @@ var type = require('basis.type');
 var File = require('./file');
 var utils = require('app.utils');
 var ModuleLoader = require('./module-loader');
-var LS_KEY_HIDE_3RD_PARTY_MODULES = 'wraHide3rdPartyModules';
-var hide3rdPartyModulesSaved = localStorage.getItem(LS_KEY_HIDE_3RD_PARTY_MODULES);
-var hide3rdPartyModules = true;
-
-if (hide3rdPartyModulesSaved == 'false') {
-    hide3rdPartyModules = false;
-}
+var options = require('app.options');
 
 var Module = entity.createType('Module', {
     id: entity.StringId,
@@ -65,17 +58,8 @@ Module.projectModules = new Filter({
     }
 });
 
-Module.hide3rdPartyModules = new Value({
-    handler: {
-        change: function() {
-            localStorage.setItem(LS_KEY_HIDE_3RD_PARTY_MODULES, this.value);
-        }
-    }
-});
-Module.hide3rdPartyModules.set(hide3rdPartyModules);
-
 Module.allWrapper = new DatasetWrapper({
-    dataset: Module.hide3rdPartyModules.as(function(hide) {
+    dataset: options.hide3rdPartyModules.as(function(hide) {
         return hide ? Module.projectModules : Module.all;
     })
 });

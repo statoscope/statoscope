@@ -46,6 +46,13 @@ var MenuItem = Node.subclass({
                     this.toggle(e);
                     this.parentNode.owner.hide();
                     break;
+                case 'radio':
+                    if (this.checked) {
+                        this.setChecked(true);
+                        this.toggle(e);
+                        this.parentNode.owner.hide();
+                    }
+                    break;
                 default:
                     this.select();
             }
@@ -79,7 +86,8 @@ var MenuItem = Node.subclass({
             },
             config: function(owner) {
                 return {
-                    items: owner.items
+                    items: owner.items,
+                    dir: owner.dir || 'left bottom left top'
                 };
             }
         }
@@ -91,7 +99,7 @@ var MenuItem = Node.subclass({
             getter: basis.getter('type')
         },
         isCheckbox: function(node) {
-            return node.type == 'checkbox';
+            return node.type == 'checkbox' || node.type == 'radio';
         },
         checked: {
             events: 'checkedChanged',

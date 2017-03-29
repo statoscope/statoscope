@@ -10,9 +10,11 @@ rempl.getSubscriber(function(api) {
     var BottomBar = require('app.ui').BottomBar;
     var Menu = require('app.ui.menu').Menu;
     var type = require('app.type');
-    var pageSwitcher = require('./pageSwitcher');
+    var pageSwitcher = require('app.pageSwitcher');
+    var detailTarget = require('app.pages.details.target');
     var sum = require('basis.data.index').sum;
     var utils = require('app.utils');
+    var options = require('./options');
 
     var routes = {
         home: resource('./pages/home/index.js'),
@@ -54,9 +56,9 @@ rempl.getSubscriber(function(api) {
                                     {
                                         id: 'hide-3rd-party',
                                         type: 'checkbox',
-                                        checked: type.Module.hide3rdPartyModules,
+                                        checked: options.hide3rdPartyModules,
                                         toggle: function() {
-                                            type.Module.hide3rdPartyModules.set(this.checked);
+                                            options.hide3rdPartyModules.set(this.checked);
                                         }
                                     }
                                 ]
@@ -91,16 +93,17 @@ rempl.getSubscriber(function(api) {
                         return node && routes[node.id] || routes.home;
                     }),
                     bottom: {
-                        existsIf: Value.query(type.Env, 'data.name'),
+                        existsIf: Value.query(type.Env, 'data.connected'),
+                        delegate: Value.query(type.Env, 'data.file'),
                         instance: BottomBar.subclass({
                             template: resource('./template/bottom.tmpl'),
                             binding: {
-                                fileName: Value.query(type.Env, 'data.file.data.name'),
+                                fileName: Value.query(type.Env, 'data.file.data.short'),
                                 fileSize: Value.query(type.Env, 'data.file.data.formattedSize'),
                                 outputAmount: Value.query(type.Env, 'data.modules.itemCount'),
                                 outputSize: sum(Value.query(type.Env, 'data.modules'), 'update', 'data.size')
                                     .as(function(size) {
-                                        return utils.roundSize(size) + utils.getPostfix(size);
+                                        return utils.roundSize(size) + ' ' + utils.getPostfix(size);
                                     }),
                                 requiredAmount: type.Env.requiredAmount,
                                 requiredSize: type.Env.requiredFormattedSize,
@@ -108,6 +111,12 @@ rempl.getSubscriber(function(api) {
                                 retainedSize: type.Env.retainedFormattedSize,
                                 exclusiveAmount: type.Env.exclusiveAmount,
                                 exclusiveSize: type.Env.exclusiveFormattedSize
+                            },
+                            action: {
+                                fileStat: function() {
+                                    detailTarget.setDelegate(this.target);
+                                    pageSwitcher.set('details');
+                                }
                             }
                         })
                     }

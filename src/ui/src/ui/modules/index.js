@@ -8,6 +8,8 @@ var TableRow = require('app.ui.table').Row;
 var utils = require('app.utils');
 var pageSwitcher = require('app.pageSwitcher');
 var detailTarget = require('app.pages.details.target');
+var type = require('app.type');
+var transport = require('app.transport');
 
 var Row = TableRow.subclass({
     template: resource('./template/row.tmpl'),
@@ -20,18 +22,29 @@ var Row = TableRow.subclass({
     },
     action: {
         gotoModule: function(e) {
+            var resource = this.data.resource;
+
             e.die();
-            detailTarget.setDelegate(this.target);
-            pageSwitcher.set('details');
+
+            if (e.shiftKey && resource) {
+                if (type.Env.data.connected) {
+                    type.Env.openFile(resource.data.name);
+                } else {
+                    transport.api.callRemote('openInEditor', resource.data.name);
+                }
+            } else {
+                detailTarget.setDelegate(this.target);
+                pageSwitcher.set('details');
+            }
         }
     }
 });
 
 var Head = TableHead.subclass({
     childNodes: [
-        { data: { content: dict.token('id') } },
-        { data: { content: dict.token('name') } },
-        { data: { content: dict.token('size') } }
+        {data: {content: dict.token('id')}},
+        {data: {content: dict.token('name')}},
+        {data: {content: dict.token('size')}}
     ]
 });
 

@@ -16,6 +16,9 @@ var Env = entity.createType({
     fields: {
         name: String,
         version: String,
+        connected: entity.calc('name', function(name) {
+            return !!name;
+        }),
         file: File,
         modules: entity.createSetType(Module),
         syntax: String,
@@ -145,25 +148,25 @@ var exclusive = modules.as(function(dataSource) {
 env.requiredAmount = Value.query(required, 'value.itemCount');
 env.requiredSize = sum(required, 'update', 'data.size');
 env.requiredFormattedSize = env.requiredSize.as(function(size) {
-    return utils.roundSize(size) + utils.getPostfix(size);
+    return utils.roundSize(size) + ' ' + utils.getPostfix(size);
 });
 
 env.occurrencesAmount = Value.query(occurrences, 'value.itemCount');
 env.occurrencesSize = sum(occurrences, 'update', 'data.size');
 env.occurrencesFormattedSize = env.occurrencesSize.as(function(size) {
-    return utils.roundSize(size) + utils.getPostfix(size);
+    return utils.roundSize(size) + ' ' + utils.getPostfix(size);
 });
 
 env.retainedAmount = Value.query(retained, 'value.itemCount');
 env.retainedSize = sum(retained, 'update', 'data.size');
 env.retainedFormattedSize = env.retainedSize.as(function(size) {
-    return utils.roundSize(size) + utils.getPostfix(size);
+    return utils.roundSize(size) + ' ' + utils.getPostfix(size);
 });
 
 env.exclusiveAmount = Value.query(exclusive, 'value.itemCount');
 env.exclusiveSize = sum(exclusive, 'update', 'data.size');
 env.exclusiveFormattedSize = env.exclusiveSize.as(function(size) {
-    return utils.roundSize(size) + utils.getPostfix(size);
+    return utils.roundSize(size) + ' ' + utils.getPostfix(size);
 });
 
 var statusText = new Expression(
@@ -171,7 +174,7 @@ var statusText = new Expression(
     modules,
     Value.query(file, 'value.data.formattedSize'),
     sum(modules, 'update', 'data.size').as(function(size) {
-        return utils.roundSize(size) + utils.getPostfix(size);
+        return utils.roundSize(size) + ' ' + utils.getPostfix(size);
     }),
 
     env.requiredAmount,

@@ -8,20 +8,32 @@
     </div>
     <div b:show="{fileName}">
       <div>
-        <b>File:</b> {fileName} ({fileSize})
+        <b>File:</b> <a href="#" event-click="fileStat">{fileName}</a>
       </div>
       <div b:show="{outputAmount}">
-        <b>Output size:</b> {outputAmount} {l10n:module.{outputAmount}} in {outputSize}
+          <b>Transform:</b> 1 file in {fileSize} <b>to</b> {outputAmount} {l10n:module.{outputAmount}} in {outputSize}
       </div>
-      <div b:show="{requiredAmount}">
-        <b>Require:</b> {requiredAmount} {l10n:module.{requiredAmount}} in {requiredSize}
-      </div>
-      <div b:show="{retainedAmount}">
-        <b>Retained:</b> {retainedAmount} {l10n:module.{retainedAmount}} in {retainedSize}
-      </div>
-      <div b:show="{exclusiveAmount}">
-        <b>Exclusive:</b> {exclusiveAmount} {l10n:module.{exclusiveAmount}} in {exclusiveSize}
-      </div>
+      <table class="stat-table">
+        <tr>
+          <th>Require</th>
+          <th>Retained</th>
+          <th>Exclusive</th>
+        </tr>
+        <tr>
+          <td>
+            <span b:show="{requiredAmount}">{requiredAmount} {l10n:module.{requiredAmount}} in {requiredSize}</span>
+            <span b:hide="{requiredAmount}">-</span>
+          </td>
+          <td>
+            <span b:show="{retainedAmount}">{retainedAmount} {l10n:module.{retainedAmount}} in {retainedSize}</span>
+            <span b:hide="{retainedAmount}">-</span>
+          </td>
+          <td>
+            <span b:show="{exclusiveAmount}">{exclusiveAmount} {l10n:module.{exclusiveAmount}} in {exclusiveSize}</span>
+            <span b:hide="{exclusiveAmount}">-</span>
+          </td>
+        </tr>
+      </table>
     </div>
   </b:append>
 </b:include>

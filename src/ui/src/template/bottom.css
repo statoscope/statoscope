@@ -1,0 +1,10 @@
+.stat-table th ~ th,
+.stat-table td ~ td {
+    border-left: 1px solid #ccc;
+}
+
+.stat-table th,
+.stat-table td {
+    padding: 0 7px;
+    text-align: center;
+}
