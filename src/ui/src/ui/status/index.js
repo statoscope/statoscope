@@ -11,7 +11,7 @@ module.exports = Node.subclass({
         }),
         status: 'data:',
         assets: Value.query(type.Asset.all, 'itemCount'),
-        modules: Value.query(type.Module.allWrapper, 'itemCount'),
+        modules: Value.query(type.Module.all, 'itemCount'),
         chunks: Value.query(type.Chunk.all, 'itemCount'),
         modulesTable: 'satellite:',
         assetsTable: 'satellite:',
