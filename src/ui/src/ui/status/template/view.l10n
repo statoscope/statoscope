@@ -4,7 +4,7 @@
       "invalidated": "Invalidated",
       "compiling": "Compiling...",
       "success": "Compiling...",
-      "failed": ""
+      "failed": "failed"
     }
   }
 }

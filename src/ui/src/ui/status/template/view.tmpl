@@ -3,16 +3,13 @@
 <b:define name="status" type="enum" values="compiling invalidated success failed"/>
 
 <div class="view view-{status}">
-  Webpack <b>{version}</b>
+  Webpack <b>{version}</b>&#32;
   <span class="status-wrapper">
-        <span class="status status-{status}">{l10n:status.{status}}</span>
-    </span>
+     <span class="status status-{status}">{l10n:status.{status}}</span>
+  </span>
   <span class="results results-{status}">
-        Hash: {hash} /&#32;
-        Modules: <b>{modules}</b> /&#32;
-        Chunks: <b>{chunks}</b> /&#32;
-        Errors: <b>{errors}</b> /&#32;
-        Warnings: <b>{warnings}</b>
-        <span b:show="{envName}"> /&#32; Env: <b>{envName} {envVersion}</b></span>
-    </span>
+        / Modules: <b>{modules}</b>&#32;
+        / Chunks: <b>{chunks}</b>&#32;
+        <span b:show="{envName}"> / Env: <b>{envName} {envVersion}</b></span>
+  </span>
 </div>
