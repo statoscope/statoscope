@@ -195,8 +195,11 @@ function createPublisher(compiler, options) {
     compiler.plugin('emit', function(compilation, done) {
         var assets = [];
         var modulesMap = {};
-        var entryPoints = {};
+        var chunksMap = {};
         var modules;
+        var chunks;
+        var fileModulesMap = {};
+        var entryPoints = {};
         var handledFiles = {};
 
         for (var assetName in compilation.assets) {
@@ -207,6 +210,31 @@ function createPublisher(compiler, options) {
                 });
             }
         }
+
+        chunks = compilation.chunks.map(function(chunk) {
+            var chunkInfo = {
+                id: chunk.id,
+                name: chunk.name,
+                size: chunk.size({}),
+                hash: chunk.renderedHash,
+                files: chunk.files,
+                reasons: chunk.parents.map(function(chunk) {
+                    return chunk.id;
+                }),
+                dependencies: chunk.modules.map(function(module) {
+                    return getModuleId(module);
+                }),
+                rendered: chunk.rendered,
+                // webpack 1.x capability
+                initial: typeof chunk.isInitial == 'function' ? chunk.isInitial() : chunk.initial,
+                // webpack 1.x capability
+                entry: typeof chunk.hasRuntime == 'function' ? chunk.hasRuntime() : chunk.entry
+            };
+
+            chunksMap[chunkInfo.id] = chunksMap;
+
+            return chunkInfo
+        });
 
         modules = compilation.modules.map(function(module) {
             var moduleType = modulesTypeMap[module.constructor.name] || 'unknown';
@@ -258,6 +286,16 @@ function createPublisher(compiler, options) {
                     })
             };
 
+            if (resource) {
+                var mapItem = fileModulesMap[resource.name];
+
+                if (mapItem) {
+                    mapItem.push(moduleInfo.id);
+                } else {
+                    fileModulesMap[resource.name] = [moduleInfo.id];
+                }
+            }
+
             modulesMap[moduleInfo.id] = moduleInfo;
             moduleInfo.isEntry = !moduleInfo.reasons.length;
 
@@ -302,30 +340,14 @@ function createPublisher(compiler, options) {
 
         // console.timeEnd('Retained + Exclusive');
 
-        profile.publish({
+        var profileData = {
             version: webpackVersion,
             hash: compilation.hash,
             context: compilation.compiler.context,
             assets: assets,
-            chunks: compilation.chunks.map(function(chunk) {
-                return {
-                    id: chunk.id,
-                    name: chunk.name,
-                    size: chunk.size({}),
-                    hash: chunk.renderedHash,
-                    files: chunk.files,
-                    modules: chunk.modules.map(function(module) {
-                        return getModuleId(module);
-                    }),
-                    rendered: chunk.rendered,
-                    // webpack 1.x capability
-                    initial: typeof chunk.isInitial == 'function' ? chunk.isInitial() : chunk.initial,
-                    // webpack 1.x capability
-                    entry: typeof chunk.hasRuntime == 'function' ? chunk.hasRuntime() : chunk.entry
-                };
-            }),
+            chunks: chunks,
             modules: modules,
-            links: modules.reduce(function(prev, current) {
+            moduleLinks: modules.reduce(function(prev, current) {
                 var links = current.dependencies.map(function(dependency) {
                     return {
                         from: current.id,
@@ -335,6 +357,13 @@ function createPublisher(compiler, options) {
 
                 return prev.concat(links);
             }, []),
+            fileLinks: Object.keys(fileModulesMap).map(function(fileName) {
+                return {
+                    id: fileName,
+                    file: fileName,
+                    modules: fileModulesMap[fileName]
+                };
+            }),
             errors: compilation.errors.map(function(error) {
                 return {
                     message: error.message,
@@ -347,7 +376,9 @@ function createPublisher(compiler, options) {
                     module: warning.module && getModuleId(warning.module)
                 };
             })
-        });
+        };
+
+        profile.publish(profileData);
 
         done();
 
