@@ -8,7 +8,7 @@ var Module = require('./module');
 var FileLink = require('./file-link');
 var Range = require('./range');
 var utils = require('app.utils');
-var envApi = rempl.createEnv(parent);
+var envApi = require('app.transport').api.env;
 
 var Env = entity.createType({
     name: 'Env',

@@ -10,8 +10,8 @@
       <div>
         <b>File:</b> {fileName} ({fileSize})
       </div>
-      <div b:show="{moduleName}">
-        <b>Module:</b> {moduleName} ({moduleSize})
+      <div b:show="{outputAmount}">
+        <b>Output size:</b> {outputAmount} {l10n:module.{outputAmount}} in {outputSize}
       </div>
       <div b:show="{requiredAmount}">
         <b>Require:</b> {requiredAmount} {l10n:module.{requiredAmount}} in {requiredSize}

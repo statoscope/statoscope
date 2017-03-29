@@ -6,6 +6,7 @@ var Error = require('./error');
 var Warning = require('./warning');
 var ModuleLink = require('./module-link');
 var FileLink = require('./file-link');
+var transport = require('app.transport').api;
 
 var Profile = entity.createType({
     name: 'Profile',
@@ -23,36 +24,34 @@ var profile = Profile();
 
 /** @cut */ basis.dev.log('profile', profile);
 
-rempl.getSubscriber(function(api) {
-    api.ns('progress').subscribe(function(data) {
-        /** @cut */ basis.dev.log('channel(progress)', data);
-        profile.update({ progress: data });
-    });
+transport.ns('progress').subscribe(function(data) {
+    /** @cut */ basis.dev.log('channel(progress)', data);
+    profile.update({progress: data});
+});
 
-    api.ns('profile').subscribe(function(data) {
-        if (!data) {
-            return;
-        }
+transport.ns('profile').subscribe(function(data) {
+    if (!data) {
+        return;
+    }
 
-        /** @cut */ basis.dev.log('channel(profile)', data);
-        profile.update({
-            version: data.version,
-            hash: data.hash,
-            context: data.context
-        });
-        Module.all.setAndDestroyRemoved(data.modules);
-        Asset.all.setAndDestroyRemoved(data.assets);
-        Chunk.all.setAndDestroyRemoved(data.chunks);
-        Error.all.setAndDestroyRemoved(data.errors);
-        Warning.all.setAndDestroyRemoved(data.warnings);
-        ModuleLink.all.setAndDestroyRemoved(data.moduleLinks);
-        FileLink.all.setAndDestroyRemoved(data.fileLinks);
+    /** @cut */ basis.dev.log('channel(profile)', data);
+    profile.update({
+        version: data.version,
+        hash: data.hash,
+        context: data.context
     });
+    Module.all.setAndDestroyRemoved(data.modules);
+    Asset.all.setAndDestroyRemoved(data.assets);
+    Chunk.all.setAndDestroyRemoved(data.chunks);
+    Error.all.setAndDestroyRemoved(data.errors);
+    Warning.all.setAndDestroyRemoved(data.warnings);
+    ModuleLink.all.setAndDestroyRemoved(data.moduleLinks);
+    FileLink.all.setAndDestroyRemoved(data.fileLinks);
+});
 
-    api.ns('status').subscribe(function(data) {
-        /** @cut */ basis.dev.log('channel(status)', data);
-        profile.update({ status: data });
-    });
+transport.ns('status').subscribe(function(data) {
+    /** @cut */ basis.dev.log('channel(status)', data);
+    profile.update({status: data});
 });
 
 module.exports = Profile;
