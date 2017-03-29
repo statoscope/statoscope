@@ -1,0 +1,9 @@
+<b:style src="./item.css"/>
+<b:isolate/>
+<b:define name="type" type="enum" values="file module"/>
+<b:define name="selected" type="bool"/>
+
+<div class="item item_{selected}" event-mouseenter="select" event-click="click">
+    <div class="type type_{type}">{type}</div>
+    <div class="name">{name}</div>
+</div>

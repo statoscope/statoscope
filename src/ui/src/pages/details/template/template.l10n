@@ -1,0 +1,18 @@
+{
+    "_meta": {
+        "type": {
+            "module": "plural",
+            "asset": "plural"
+        }
+    },
+    "en-US": {
+        "module": [
+            "module",
+            "modules"
+        ],
+        "asset": [
+            "asset",
+            "assets"
+        ]
+    }
+}

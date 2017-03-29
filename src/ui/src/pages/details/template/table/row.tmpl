@@ -1,0 +1,18 @@
+<b:l10n src="../../index.l10n"/>
+
+<b:include src="../../../../ui/modules/template/row.tmpl">
+    <b:append ref="tr">
+        <td b:ref="moduleOccurrences">
+            <span b:hide="{occurrences}">-</span>
+            <span b:show="{occurrences}">in {occurrences} {l10n:module.{occurrences}}</span>
+        </td>
+        <td b:ref="moduleRetained">
+            <span b:hide="{retainedAmount}">-</span>
+            <span b:show="{retainedAmount}">{retainedSize} ({retainedAmount} {l10n:module.{retainedAmount}})</span>
+        </td>
+        <td b:ref="moduleExclusive">
+            <span b:hide="{exclusiveAmount}">-</span>
+            <span b:show="{exclusiveAmount}">{exclusiveSize} ({exclusiveAmount} {l10n:module.{exclusiveAmount}})</span>
+        </td>
+    </b:append>
+</b:include>
