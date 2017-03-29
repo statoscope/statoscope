@@ -1,7 +1,7 @@
 var entity = require('basis.entity');
 
 var Asset = entity.createType('Asset', {
-    name: String,
+    name: entity.StringId,
     size: Number
 });
 

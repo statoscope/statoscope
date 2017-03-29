@@ -4,7 +4,8 @@ var Asset = require('./asset');
 var Chunk = require('./chunk');
 var Error = require('./error');
 var Warning = require('./warning');
-var Link = require('./module-link');
+var ModuleLink = require('./module-link');
+var FileLink = require('./file-link');
 
 var Profile = entity.createType({
     name: 'Profile',
@@ -44,7 +45,8 @@ rempl.getSubscriber(function(api) {
         Chunk.all.setAndDestroyRemoved(data.chunks);
         Error.all.setAndDestroyRemoved(data.errors);
         Warning.all.setAndDestroyRemoved(data.warnings);
-        Link.all.setAndDestroyRemoved(data.links);
+        ModuleLink.all.setAndDestroyRemoved(data.moduleLinks);
+        FileLink.all.setAndDestroyRemoved(data.fileLinks);
     });
 
     api.ns('status').subscribe(function(data) {

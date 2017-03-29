@@ -10,7 +10,7 @@ var ModuleLink = entity.createType('ModuleLink', {
 ModuleLink.allWrapper = new Filter({
     source: ModuleLink.all,
     rule: function(link) {
-        return Module.allWrapper.has(Module(link.data.from)) && Module.allWrapper.has(Module(link.data.to))
+        return Module.allWrapper.has(Module(link.data.from)) && Module.allWrapper.has(Module(link.data.to));
     }
 });
 Module.allWrapper.addHandler({

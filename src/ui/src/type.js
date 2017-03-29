@@ -6,6 +6,7 @@ module.exports = {
     Warning: require('./type/warning'),
     Module: require('./type/module'),
     ModuleLink: require('./type/module-link'),
+    FileLink: require('./type/file-link'),
     Profile: require('./type/profile'),
     Env: require('./type/env'),
     Range: require('./type/range'),

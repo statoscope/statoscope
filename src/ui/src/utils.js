@@ -1,3 +1,5 @@
+var Merge = require('basis.data.dataset').Merge;
+
 function getSize(size) {
     if (size >= 1024) {
         size /= 1024;
@@ -68,6 +70,32 @@ function sharePartOfPaths(paths) {
         .join('/');
 }
 
+var mergeFromDataSource = (function() {
+    var HANDLER_DATASOURCE = {
+        itemsChanged: function(sender) {
+            this.setSources(sender.getValues(this.getter).filter(Boolean))
+        },
+        destroy: function() {
+            this.destroy();
+        }
+    };
+
+    return function(dataSource, getter) {
+        if (!dataSource) {
+            return null;
+        }
+
+        var merge = new Merge({
+            getter: getter
+        });
+
+        dataSource.addHandler(HANDLER_DATASOURCE, merge);
+        merge.setSources(dataSource.getValues(getter).filter(Boolean));
+
+        return merge;
+    }
+})();
+
 var typeByExt = {
     '.js': 'script',
     '.jsx': 'script',
@@ -97,5 +125,6 @@ module.exports = {
     getPostfix: getPostfix,
     roundSize: roundSize,
     sharePartOfPaths: sharePartOfPaths,
-    typeByExt: typeByExt
+    typeByExt: typeByExt,
+    mergeFromDataSource: mergeFromDataSource
 };

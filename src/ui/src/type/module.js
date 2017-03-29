@@ -6,6 +6,7 @@ var MapFilter = require('basis.data.dataset').MapFilter;
 var Split = require('basis.data.dataset').Split;
 var type = require('basis.type');
 var File = require('./file');
+var utils = require('app.utils');
 var ModuleLoader = require('./module-loader');
 var LS_KEY_HIDE_3RD_PARTY_MODULES = 'wraHide3rdPartyModules';
 var hide3rdPartyModulesSaved = localStorage.getItem(LS_KEY_HIDE_3RD_PARTY_MODULES);
@@ -21,6 +22,9 @@ var Module = entity.createType('Module', {
     name: String,
     index: Number,
     size: Number,
+    formattedSize: entity.calc('size', function(size) {
+        return utils.roundSize(size) + ' ' + utils.getPostfix(size);
+    }),
     rawRequest: String,
     userRequest: String,
     context: String,

@@ -7,7 +7,8 @@ var Chunk = entity.createType('Chunk', {
     size: Number,
     hash: String,
     files: Array,
-    modules: entity.createSetType(Module),
+    reasons: entity.createSetType('Chunk'),
+    dependencies: entity.createSetType(Module),
     rendered: Boolean,
     initial: Boolean,
     entry: Boolean

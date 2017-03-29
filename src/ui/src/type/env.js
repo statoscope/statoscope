@@ -2,10 +2,10 @@ var entity = require('basis.entity');
 var Promise = require('basis.promise');
 var Value = require('basis.data').Value;
 var Expression = require('basis.data.value').Expression;
-var Extract = require('basis.data.dataset').Extract;
 var sum = require('basis.data.index').sum;
 var File = require('./file');
 var Module = require('./module');
+var FileLink = require('./file-link');
 var Range = require('./range');
 var utils = require('app.utils');
 var envApi = rempl.createEnv(parent);
@@ -17,15 +17,21 @@ var Env = entity.createType({
         name: String,
         version: String,
         file: File,
-        modules: entity.calc('file', function(file) {
-            return Module.byFile(file, true);
-        }),
+        modules: entity.createSetType(Module),
         syntax: String,
         selections: entity.createSetType(Range)
     }
 });
 
 var env = Env();
+
+Value.query(env, 'data.file').as(function(file) {
+    if (file) {
+        return FileLink.get(file.data.name);
+    }
+}).pipe('update', 'data.modules').as(function(modules) {
+    env.set('modules', modules)
+});
 
 env.openFile = function(filePath, selections) {
     return new Promise(function(resolve, reject) {
@@ -82,24 +88,38 @@ envApi.subscribe(function(data) {
             break;
         case 'activeTabChanged':
             if (data.tab.isEditor) {
-                env.update({
-                    file: data.file.path,
-                    syntax: data.file.syntax,
-                    selections: data.selections
-                });
-            } else {
-                env.set('file', null);
+                if (data.file.path && File.get(data.file.path)) {
+                    env.update({
+                        file: data.file.path,
+                        syntax: data.file.syntax,
+                        selections: data.selections
+                    });
 
-                if (env.data.selections) {
-                    env.data.selections.clear();
+                    return null;
                 }
+            }
+
+            env.set('file', null);
+
+            if (env.data.selections) {
+                env.data.selections.clear();
             }
             break;
         case 'selectionChanged':
             env.set('selections', data.selections);
             break;
         case 'patchChanged':
-            env.set('file', data.path);
+            if (data.path && File.get(data.path)) {
+                env.set('file', data.path);
+
+                return null;
+            }
+
+            env.set('file', null);
+
+            if (env.data.selections) {
+                env.data.selections.clear();
+            }
             break;
         case 'syntaxChanged':
             env.set('syntax', data.syntax);
@@ -107,52 +127,113 @@ envApi.subscribe(function(data) {
     }
 });
 
-env.related = Value.query(env, 'data.modules');
-env.retained = new Extract({
-    source: env.related,
-    rule: 'data.retained'
+var file = Value.query(env, 'data.file');
+var modules = Value.query(env, 'data.modules');
+var required = modules.as(function(dataSource) {
+    return utils.mergeFromDataSource(dataSource, 'data.dependencies');
+});
+var occurrences = modules.as(function(dataSource) {
+    return utils.mergeFromDataSource(dataSource, 'data.reasons');
+});
+var retained = modules.as(function(dataSource) {
+    return utils.mergeFromDataSource(dataSource, 'data.retained');
+});
+var exclusive = modules.as(function(dataSource) {
+    return utils.mergeFromDataSource(dataSource, 'data.exclusive');
 });
 
-env.relatedAmount = Value.query(env.related, 'value.itemCount');
-env.fileSize = Value.query(env, 'data.file.data.size').as(utils.roundSize);
-env.fileSizePostfix = Value.query(env, 'data.file.data.size').as(utils.getPostfix);
+env.requiredAmount = Value.query(required, 'value.itemCount');
+env.requiredSize = sum(required, 'update', 'data.size');
+env.requiredFormattedSize = env.requiredSize.as(function(size) {
+    return utils.roundSize(size) + utils.getPostfix(size);
+});
 
-env.retainedAmount = Value.query(env.retained, 'itemCount');
-env.retainedSize = sum(env.retained, 'update', 'data.size').as(utils.roundSize);
-env.retainedPostfix = sum(env.retained, 'update', 'data.size').as(utils.getPostfix);
+env.occurrencesAmount = Value.query(occurrences, 'value.itemCount');
+env.occurrencesSize = sum(occurrences, 'update', 'data.size');
+env.occurrencesFormattedSize = env.occurrencesSize.as(function(size) {
+    return utils.roundSize(size) + utils.getPostfix(size);
+});
+
+env.retainedAmount = Value.query(retained, 'value.itemCount');
+env.retainedSize = sum(retained, 'update', 'data.size');
+env.retainedFormattedSize = env.retainedSize.as(function(size) {
+    return utils.roundSize(size) + utils.getPostfix(size);
+});
+
+env.exclusiveAmount = Value.query(exclusive, 'value.itemCount');
+env.exclusiveSize = sum(exclusive, 'update', 'data.size');
+env.exclusiveFormattedSize = env.exclusiveSize.as(function(size) {
+    return utils.roundSize(size) + utils.getPostfix(size);
+});
 
 var statusText = new Expression(
-    env.relatedAmount,
-    env.fileSize,
-    env.fileSizePostfix,
+    file,
+    modules,
+    Value.query(file, 'value.data.formattedSize'),
+    sum(modules, 'update', 'data.size').as(function(size) {
+        return utils.roundSize(size) + utils.getPostfix(size);
+    }),
+
+    env.requiredAmount,
+    env.requiredFormattedSize,
+
+    env.occurrencesAmount,
+    env.occurrencesFormattedSize,
+
     env.retainedAmount,
-    env.retainedSize,
-    env.retainedPostfix,
-    function(relatedAmount, fileSize, fileSizePostfix, retainedAmount, retainedSize, retainedPostfix) {
-        if (!relatedAmount) {
+    env.retainedFormattedSize,
+
+    env.exclusiveAmount,
+    env.exclusiveFormattedSize,
+    function(file, modules, fileSize, modulesSize, requiredAmount, requiredSize, occurrencesAmount, occurrencesSize,
+             retainedAmount, retainedSize, exclusiveAmount, exclusiveSize) {
+        if (!file || !modules) {
             return '';
         }
 
         var data = {
-            relatedAmount: relatedAmount,
             fileSize: fileSize,
-            fileSizePostfix: fileSizePostfix,
+            modulesSize: modulesSize,
+            requiredAmount: requiredAmount,
+            requiredSize: requiredSize,
+            occurrencesAmount: occurrencesAmount,
+            occurrencesSize: occurrencesSize,
             retainedAmount: retainedAmount,
             retainedSize: retainedSize,
-            retainedPostfix: retainedPostfix
+            exclusiveAmount: exclusiveAmount,
+            exclusiveSize: exclusiveSize
         };
-        var file = '-';
-        var retained = '-';
 
-        if (relatedAmount) {
-            file = basis.string.format('{fileSize} {fileSizePostfix}', data);
+        var required;
+        var occurrences;
+        var retained;
+        var exclusive;
+
+        if (requiredAmount) {
+            required = basis.string.format('Require: {requiredAmount} in {requiredSize}', data);
+        }
+
+        if (occurrencesAmount) {
+            occurrences = basis.string.format('Occurrences: {occurrencesAmount} in {occurrencesSize}', data);
         }
 
         if (retainedAmount) {
-            retained = basis.string.format('{retainedAmount} modules in {retainedSize} {retainedPostfix}', data);
+            retained = basis.string.format('Retained: {retainedAmount} in {retainedSize}', data);
         }
 
-        return basis.string.format('Original size: {0}; Retained: {1}', [file, retained]);
+        if (exclusiveAmount) {
+            exclusive = basis.string.format('Exclusive: {exclusiveAmount} in {exclusiveSize}', data);
+        }
+
+        var parts = [
+            'Modules size: ' + modulesSize,
+            required,
+            occurrences,
+            retained,
+            exclusive
+        ];
+
+        return parts.filter(Boolean).join('; ');
     }
 );
 
