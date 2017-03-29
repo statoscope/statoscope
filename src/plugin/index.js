@@ -9,6 +9,8 @@ var rempl = require('rempl');
 var path = require('path');
 var fs = require('fs');
 var opn = require('opn');
+var openInEditor = require('open-in-editor');
+var editor;
 
 var requestShortener;
 
@@ -177,10 +179,30 @@ function createPublisher(compiler, options) {
         manualSync: options.mode === 'standalone'
     });
 
+    publisher.provide('openInEditor', function(path, cb) {
+        console.log('openInEditor', editor, arguments)
+        if (editor) {
+            editor.open(path)
+                .then(function() {
+                    cb({ ok: true });
+                }, function(err) {
+                    cb({ ok: false, error: err })
+                });
+        } else {
+            cb({ ok: false, error: 'Editor is not specified' })
+        }
+    });
+
     var status = publisher.ns('status');
     var progress = publisher.ns('progress');
     var profile = publisher.ns('profile');
     var stats;
+
+    if (options.editor) {
+        editor = openInEditor.configure({
+            editor: options.editor
+        });
+    }
 
     compiler.plugin('compilation', function(compilation) {
         stats = compilation;
