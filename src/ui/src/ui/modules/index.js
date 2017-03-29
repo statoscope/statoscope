@@ -6,44 +6,57 @@ var Table = require('../table/index');
 var TableHead = require('app.ui.table').Head;
 var TableRow = require('app.ui.table').Row;
 var utils = require('app.utils');
+var pageSwitcher = require('app.pageSwitcher');
+var detailTarget = require('app.pages.details.target');
 
-module.exports = Table.subclass({
-    sorting: 'data.index',
-    childClass: TableRow.subclass({
-        template: resource('./template/row.tmpl'),
-        binding: {
-            id: 'data:index',
-            name: 'data:',
-            size: Value.query('data.size').as(utils.roundSize),
-            postfix: Value.query('data.size').as(utils.getPostfix),
-            occurrences: Value.query('data.reasons.itemCount'),
-
-            retainedAmount: Value.query('data.retained.itemCount'),
-            retainedSize: sum(Value.query('data.retained'), 'update', 'data.size').as(utils.roundSize),
-            retainedPostfix: sum(Value.query('data.retained'), 'update', 'data.size').as(utils.getPostfix),
-
-            exclusiveAmount: Value.query('data.exclusive.itemCount'),
-            exclusiveSize: sum(Value.query('data.exclusive'), 'update', 'data.size').as(utils.roundSize),
-            exclusivePostfix: sum(Value.query('data.exclusive'), 'update', 'data.size').as(utils.getPostfix),
-        }
-    }),
-    satellite: {
-        head: TableHead.subclass({
-            childNodes: [
-                { data: { content: dict.token('id') } },
-                { data: { content: dict.token('name') } },
-                { data: { content: dict.token('size') } },
-                { data: { content: dict.token('occurrences') } },
-                { data: { content: dict.token('retained') } },
-                { data: { content: dict.token('exclusive') } }
-            ]
-        }),
-        foot: Node.subclass({
-            template: resource('./template/foot.tmpl'),
-            binding: {
-                size: sum(Value.query('owner.dataSource'), 'update', 'data.size').as(utils.roundSize),
-                postfix: sum(Value.query('owner.dataSource'), 'update', 'data.size').as(utils.getPostfix),
-            }
+var Row = TableRow.subclass({
+    template: resource('./template/row.tmpl'),
+    binding: {
+        id: 'data:index',
+        name: 'data:',
+        size: Value.query('data.size').as(function(size) {
+            return utils.roundSize(size) + ' ' + utils.getPostfix(size);
         })
+    },
+    action: {
+        gotoModule: function(e) {
+            e.die();
+            detailTarget.setDelegate(this.target);
+            pageSwitcher.set('details');
+        }
     }
 });
+
+var Head = TableHead.subclass({
+    childNodes: [
+        { data: { content: dict.token('id') } },
+        { data: { content: dict.token('name') } },
+        { data: { content: dict.token('size') } }
+    ]
+});
+
+var Foot = Node.subclass({
+    template: resource('./template/foot.tmpl'),
+    binding: {
+        count: Value.query('owner.dataSource.itemCount'),
+        size: sum(Value.query('owner.dataSource'), 'update', 'data.size').as(function(size) {
+            return utils.roundSize(size) + ' ' + utils.getPostfix(size);
+        }),
+    }
+});
+
+var ModuleTable = Table.subclass({
+    sorting: 'data.index',
+    childClass: Row,
+    satellite: {
+        head: Head,
+        foot: Foot
+    }
+});
+
+module.exports = {
+    Table: ModuleTable,
+    Head: Head,
+    Row: Row,
+    Foot: Foot
+};

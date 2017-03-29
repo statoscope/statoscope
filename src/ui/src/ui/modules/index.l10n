@@ -8,10 +8,7 @@
     "id": "Id",
     "name": "Name",
     "size": "Size",
-    "retained": "Retain",
     "total": "Total",
-    "occurrences": "Occurrences",
-    "exclusive": "Exclusive",
     "module": [
       "module",
       "modules"
