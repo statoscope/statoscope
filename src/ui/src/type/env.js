@@ -9,6 +9,7 @@ var FileLink = require('./file-link');
 var Range = require('./range');
 var utils = require('app.utils');
 var envApi = require('app.transport').api.env;
+var detailTarget = require('app.pages.details.target');
 
 var Env = entity.createType({
     name: 'Env',
@@ -30,6 +31,8 @@ var env = Env();
 
 Value.query(env, 'data.file').as(function(file) {
     if (file) {
+        detailTarget.setDelegate(file);
+
         return FileLink.get(file.data.name);
     }
 }).pipe('update', 'data.modules').as(function(modules) {

@@ -1,10 +1,14 @@
-.stat-table th ~ th,
-.stat-table td ~ td {
+.line {
+    display: -webkit-flex;
+    display: flex;
+}
+
+.line > div ~ div {
+    padding: 0 5px;
     border-left: 1px solid #ccc;
 }
 
-.stat-table th,
-.stat-table td {
-    padding: 0 7px;
-    text-align: center;
+.file-name {
+    -webkit-flex: 1;
+    flex: 1;
 }

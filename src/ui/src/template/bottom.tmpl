@@ -2,38 +2,34 @@
 <b:isolate/>
 
 <b:include src="app.ui.bottomBar">
-  <b:append b:ref="content">
-    <div b:hide="{fileName}">
-      No file from the bundle is editing
-    </div>
-    <div b:show="{fileName}">
-      <div>
-        <b>File:</b> <a href="#" event-click="fileStat">{fileName}</a>
-      </div>
-      <div b:show="{outputAmount}">
-          <b>Transform:</b> 1 file in {fileSize} <b>to</b> {outputAmount} {l10n:module.{outputAmount}} in {outputSize}
-      </div>
-      <table class="stat-table">
-        <tr>
-          <th>Require</th>
-          <th>Retained</th>
-          <th>Exclusive</th>
-        </tr>
-        <tr>
-          <td>
-            <span b:show="{requiredAmount}">{requiredAmount} {l10n:module.{requiredAmount}} in {requiredSize}</span>
-            <span b:hide="{requiredAmount}">-</span>
-          </td>
-          <td>
-            <span b:show="{retainedAmount}">{retainedAmount} {l10n:module.{retainedAmount}} in {retainedSize}</span>
-            <span b:hide="{retainedAmount}">-</span>
-          </td>
-          <td>
-            <span b:show="{exclusiveAmount}">{exclusiveAmount} {l10n:module.{exclusiveAmount}} in {exclusiveSize}</span>
-            <span b:hide="{exclusiveAmount}">-</span>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </b:append>
+    <b:append b:ref="content">
+        <div b:hide="{fileName}">
+            No file from the bundle is editing
+        </div>
+        <div b:show="{fileName}">
+            <div class="line">
+                <div class="file-name">
+                    <b>File:</b> <a href="#" event-click="fileStat">{fileName}</a>
+                </div>
+                <div>
+                    <b>Require: </b>
+                    <span b:show="{requiredAmount}">{requiredAmount} {l10n:module.{requiredAmount}} in {requiredSize}</span>
+                    <span b:hide="{requiredAmount}">-</span>
+                </div>
+                <div>
+                    <b>Retained: </b>
+                    <span b:show="{retainedAmount}">{retainedAmount} {l10n:module.{retainedAmount}} in {retainedSize}</span>
+                    <span b:hide="{retainedAmount}">-</span></div>
+                <div>
+                    <b>Exclusive: </b>
+                    <span b:show="{exclusiveAmount}">{exclusiveAmount} {l10n:module.{exclusiveAmount}} in {exclusiveSize}</span>
+                    <span b:hide="{exclusiveAmount}">-</span>
+                </div>
+            </div>
+            <div b:show="{outputAmount}">
+                <b>Transform:</b> 1 file in {fileSize} <b>to</b> {outputAmount} {l10n:module.{outputAmount}} in
+                {outputSize}
+            </div>
+        </div>
+    </b:append>
 </b:include>

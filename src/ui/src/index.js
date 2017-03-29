@@ -11,7 +11,6 @@ rempl.getSubscriber(function(api) {
     var Menu = require('app.ui.menu').Menu;
     var type = require('app.type');
     var pageSwitcher = require('app.pageSwitcher');
-    var detailTarget = require('app.pages.details.target');
     var sum = require('basis.data.index').sum;
     var utils = require('app.utils');
     var options = require('./options');
@@ -114,7 +113,6 @@ rempl.getSubscriber(function(api) {
                             },
                             action: {
                                 fileStat: function() {
-                                    detailTarget.setDelegate(this.target);
                                     pageSwitcher.set('details');
                                 }
                             }

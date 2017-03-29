@@ -34,8 +34,9 @@
     "async": "^2.1.4",
     "basisjs-tools-server": "basisjs/basisjs-tools-server",
     "loader-utils": "^1.0.4",
+    "open-in-editor": "^2.2.0",
     "opn": "^4.0.0",
-    "rempl": "^1.0.0-alpha12",
+    "rempl": "rempl/rempl",
     "webpack": "^2.2.0"
   },
   "devDependencies": {
