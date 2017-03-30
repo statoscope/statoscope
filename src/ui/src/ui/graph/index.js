@@ -4,7 +4,7 @@ var Slider = require('basis.ui.slider').Slider;
 var Balloon = require('basis.ui.popup').Balloon;
 var Module = require('app.type').Module;
 var ModuleLink = require('app.type').ModuleLink;
-var Viva = require('./vivagraph.js');
+var Viva = require('app.vendor.vivagraph');
 var typeByExt = require('app.utils').typeByExt;
 
 function getTypeByExt(ext) {

@@ -180,7 +180,6 @@ function createPublisher(compiler, options) {
     });
 
     publisher.provide('openInEditor', function(path, cb) {
-        console.log('openInEditor', editor, arguments)
         if (editor) {
             editor.open(path)
                 .then(function() {
