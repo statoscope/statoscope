@@ -31,9 +31,9 @@ new RuntimeAnalyzerPlugin({
     // In `publisher` mode you should start rempl on your own.
     mode: 'standalone',
     // Port that will be used in `standalone` mode to start rempl server.
-    // When set to `0` a random port will be choosen.
+    // When set to `0` a random port will be chosen.
     port: 0,
-    // Automatically open analyzer in default browser. Works for `standalone` mode only.
+    // Automatically open analyzer in the default browser. Works for `standalone` mode only.
     open: false,
     // Use analyzer only when Webpack run in a watch mode. Set it to `false` to use plugin
     // in any Webpack mode. Take into account that a building process will not be terminated
@@ -58,7 +58,7 @@ rempl
 After you run Webpack you can open web interface of analyzer.
 
 - In `standalone` mode the link to the web interface will be printed after build is done. With `open` option set to `true`, the web interface will be opened in default browser automatically.
-- In `publisher` mode your should open url of rempl server, usually it's [http://localhost:8177/](http://localhost:8177/). You can set custom rempl server url via `REMPL_SERVER` env variable.
+- In `publisher` mode your should open URL of the rempl server, usually, it's [http://localhost:8177/](http://localhost:8177/). You can set custom rempl server url via `REMPL_SERVER` environment variable.
 
 Try the [example](example) to see how it works:
 
@@ -82,7 +82,7 @@ The left list contains all modules in your bundle.
 
 Click on a module name to view detail info about the module.
 
-Click on a module name withholding `shift`-key to open a file that related with this module in your editor.
+Click on a module name withholding `shift` key to open a file that related with this module in your editor.
 
 #### The right list
 
@@ -130,7 +130,7 @@ Displays more useful details about the modules.
 
 <img src="https://cloud.githubusercontent.com/assets/6654581/24500842/cdcfe6ec-154f-11e7-9935-da7564db6765.png" width="500px"/>
 
-In the text input you can choose a module or a file which info you want to see. Just start typing module/file name and choose it from suggestion list.
+In the text input, you can choose a module or a file which info you want to see. Just start typing module/file name and choose it from the suggestion list.
 
 In the table you can see some modules statistic:
 
@@ -201,7 +201,7 @@ So, `modules list`, `graph` and `file map` will contain only modules that requir
 
 ### Open in editor
 
-You can open any bundle file in you favorite editor. Just set the `editor` option with one of the supported editor ID and click to any file path withholding `shift`-key to open the file in a chosen editor.
+You can open any bundle file in you favorite editor. Just set the `editor` option with one of the supported editor ID and click on any file path withholding `shift` key to open the file in a chosen editor.
 
 #### Supported editors:
 
@@ -240,7 +240,7 @@ If the editing file is a part of the bundle, you can see the info about it in th
 - the bottom bar of the UI 
 - the status bar of the Editor (two-way communication)
  
-<img src="https://cloud.githubusercontent.com/assets/6654581/24501273/75170e70-1551-11e7-85b0-729646529b29.gif" width="500px"/>
+<img src="https://cloud.githubusercontent.com/assets/6654581/24503653/ad159e40-155b-11e7-8ae6-6ad8346cac56.gif" width="500px"/>
 
 > The bottom bar exists only when the UI is running within editor
 
