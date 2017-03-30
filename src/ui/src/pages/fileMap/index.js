@@ -201,7 +201,7 @@ var page = new Page({
                     onGroupExposureChanging: this.removeTooltip.bind(this),
                     onGroupOpenOrCloseChanging: this.removeTooltip.bind(this),
 
-                    titleBarDecorator(options, properties, variables) {
+                    titleBarDecorator: function(options, properties, variables) {
                         variables.titleBarShown = false;
                     }
                 });
