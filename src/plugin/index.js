@@ -3,6 +3,7 @@
 var NAME = 'webpack-runtime-analyzer';
 var parseQuery = require('loader-utils/lib/parseQuery.js');
 var webpack = require('webpack');
+var ConcatSource = require('webpack-sources').ConcatSource;
 var RequestShortener = require('webpack/lib/RequestShortener');
 var fork = require('child_process').fork;
 var rempl = require('rempl');
@@ -145,6 +146,11 @@ function startRemplServer(plugin) {
                 plugin.publisher.wsendpoint = data.endpoint;
                 plugin.publisher.sync();
 
+                // useful in the cases when rempl-server starts later than bundle is built
+                if (!plugin.allowToInject && plugin.watching) {
+                    plugin.watching.invalidate();
+                }
+
                 if (plugin.options.open) {
                     opn(data.endpoint);
                 }
@@ -156,7 +162,7 @@ function startRemplServer(plugin) {
         });
 }
 
-function createPublisher(compiler, options) {
+function createPublisher(plugin, compiler, options) {
     // use require.main.require to get version of inspecting webpack
     // but not a webpack version uses as dependency
     var webpackVersion = require.main.require('webpack/package.json').version;
@@ -206,6 +212,55 @@ function createPublisher(compiler, options) {
     compiler.plugin('compilation', function(compilation) {
         stats = compilation;
         requestShortener = new RequestShortener(compilation.options.context || process.cwd());
+
+        if (options.mode === 'standalone') {
+            // run server after publisher is created
+            // since server uses publisher when started
+            this.allowToInject = true;
+
+            compilation.plugin('optimize-chunk-assets', function(chunks, callback) {
+                plugin.allowToInject = false;
+
+                if (publisher.wsendpoint) {
+                    chunks.forEach(function(chunk) {
+                        var isInitial = chunk.isInitial ? chunk.isInitial() : chunk.initial;
+
+                        if (!isInitial) {
+                            return;
+                        }
+
+                        /* eslint-disable */
+                        chunk.files
+                            .forEach(function(file) {
+                                compilation.assets[file] = new ConcatSource(
+                                    '/** REMPL RUNTIME INJECTION **/\
+                                    ;(function(){\
+                                        if (typeof rempl == \'undefined\') {\
+                                            \n' + rempl.source + '\n\
+                                            rempl.createPublisher(\'' + NAME + '\', function(settings, callback) {\
+                                                callback(null, \'script\', \'(\' + function() {\
+                                                    var iframe = document.createElement(\'iframe\');\
+                                                    iframe.setAttribute(\'style\', \'position:fixed;top:0;left:0;width:100%;height:100%;border:0;z-index:1000000\');\
+                                                    iframe.src = \'' + publisher.wsendpoint + '\';\
+                                                    document.documentElement.appendChild(iframe);\
+                                                } + \').call(this)\');\
+                                            });\
+                                        }\
+                                    })();\
+                                    /** REMPL RUNTIME INJECTION **/', '\n', compilation.assets[file]
+                                );
+                            });
+
+                        if (!compiler.options.watch) {
+                            compilation.warnings.push('Webpack Runtime Analyzer: Rempl runtime was injected into the bundle. Don\'t use this bundle in production.');
+                        }
+                        /* eslint-enable */
+                    });
+                }
+
+                callback();
+            });
+        }
     });
 
     compiler.apply(new webpack.ProgressPlugin(function(percent) {
@@ -406,8 +461,8 @@ function createPublisher(compiler, options) {
         if (publisher.wsendpoint) {
             // use timer to output link after all the stats is shown
             setTimeout(function() {
-                console.log('\nWebpack Runtime Analyzer web interface:', publisher.wsendpoint);
-            });
+                console.log('\nWebpack Runtime Analyzer is available on', publisher.wsendpoint);
+            }, 0);
         }
     });
 
@@ -444,11 +499,14 @@ function RuntimeAnalyzerPlugin(options) {
 
 RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
     var options = this.options;
-    var pluginMode = options.watchModeOnly ? 'watch-run' : 'run';
+    var pluginModes = ['watch-run'];
+    var pluginFn = function(watchingOrCompiler, done) {
+        if (compiler.options.watch) {
+            this.watching = watchingOrCompiler;
+        }
 
-    compiler.plugin(pluginMode, function(watching, done) {
         if (!this.publisher) {
-            this.publisher = createPublisher(compiler, options);
+            this.publisher = createPublisher(this, compiler, options);
 
             // run server after publisher is created
             // since server uses publisher when started
@@ -458,7 +516,15 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
         }
 
         done();
-    }.bind(this));
+    }.bind(this);
+
+    if (!this.options.watchModeOnly) {
+        pluginModes.push('run')
+    }
+
+    pluginModes.forEach(function(mode) {
+        compiler.plugin(mode, pluginFn);
+    });
 };
 
 module.exports = RuntimeAnalyzerPlugin;
