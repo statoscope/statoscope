@@ -39,7 +39,10 @@ new RuntimeAnalyzerPlugin({
     // in any Webpack mode. Take into account that a building process will not be terminated
     // when done since the plugin holds a connection to the rempl server. The only way
     // to terminate building process is using `ctrl+c` like in a watch mode.
-    watchModeOnly: true
+    watchModeOnly: true,
+    // Which editor should open the files 
+    // Possible editors IDs see bellow
+    editor: 'EDITOR_ID'
 })
 ```
 
@@ -71,50 +74,19 @@ npm run dev
 
 The list of the modules and the assets is always at hand.
 
-<img src="https://cloud.githubusercontent.com/assets/6654581/24293210/a8d77e7a-10a1-11e7-8b86-29f753bbc516.png" width="500px"/>
+<img src="https://cloud.githubusercontent.com/assets/6654581/24501455/418b2220-1552-11e7-9e2d-bf5cbb6774ae.gif" width="500px"/>
 
 #### The left list
 
-The left list contains all modules that included in your bundle.
+The left list contains all modules in your bundle.
 
-- `Id` - module ID
-- `Name` - short module name 
-- `Size` - module size
-- `Occurrences` - how many modules require this module.
-- `Retain` - see bellow 
-- `Exclusive` - see bellow
+Click on a module name to view detail info about the module.
+
+Click on a module name withholding `shift`-key to open a file that related with this module in your editor.
 
 #### The right list
 
 The right list contains building output (chunks, static, etc).
-
-#### Retained
-
-Displays how many modules are **required by** this module and by all its dependencies (recursive).
-
-For example, we have three modules: `foo`, `bar` and `baz`.
-
-If `foo` requires `bar` and `bar` requires `baz` then:
-- retained of `foo` is 2 (`bar` and `baz`)
-- retained of `bar` is 1 (`baz`)
-- retained of `baz` is 0
-
-#### Exclusive
-
-Displays how many modules are required **only** by this module and by all its dependencies (recursive).
-
-For example, we have three modules: `foo`, `bar` and `baz`.
-
-**Case 1**: If `foo` requires `bar` then `foo` exclusive is `1` because no more modules that require `bar`.
-
-**Case 2**: If `foo` and `bar` requires `baz` then:
- - `foo` exclusive is `0` because `bar` also requires `baz`.
- - `bar` exclusive is `0` because `foo` also requires `baz`.
-
-**Case 3**: If `foo` requires `bar` and `bar` requires `baz` then:
-
- - `foo` exclusive is `2` because no more modules that require `bar` and `baz`
- - `bar` exclusive is `1` because no more modules that require `baz`
  
 ### Dependency graph
 
@@ -147,6 +119,62 @@ Look at the file map and find out why your bundle is so big.
 
 <img src="https://cloud.githubusercontent.com/assets/6654581/24315369/a88e3c6e-10f7-11e7-91ba-9b7f7025c4e5.png" width="500px"/>
 
+#### Controls
+
+- click to some block to expose it
+- press `escape` to return to the root
+
+### Module details
+
+Displays more useful details about the modules.
+
+<img src="https://cloud.githubusercontent.com/assets/6654581/24500842/cdcfe6ec-154f-11e7-9935-da7564db6765.png" width="500px"/>
+
+In the text input you can choose a module or a file which info you want to see. Just start typing module/file name and choose it from suggestion list.
+
+In the table you can see some modules statistic:
+
+#### Require
+
+Displays modules are required by chosen module/file.
+
+#### Occurrences
+
+Displays modules are requiring chosen module/file.
+
+#### Retained
+
+Displays modules that required by chosen module/file **recursively**.
+
+For example, we have three modules: `foo`, `bar` and `baz`.
+
+If `foo` requires `bar` and `bar` requires `baz` then:
+- retained of `foo` is 2 (`bar` and `baz`)
+- retained of `bar` is 1 (`baz`)
+- retained of `baz` is 0
+
+#### Exclusive
+
+Displays modules are required **only** by this module/file and by all its dependencies **recursively**.
+
+For example, we have three modules: `foo`, `bar` and `baz`.
+
+**Case 1**: If `foo` requires `bar` then `foo` exclusive is `1` because no more modules that require `bar`.
+
+**Case 2**: If `foo` and `bar` requires `baz` then:
+ - `foo` exclusive is `0` because `bar` also requires `baz`.
+ - `bar` exclusive is `0` because `foo` also requires `baz`.
+
+**Case 3**: If `foo` requires `bar` and `bar` requires `baz` then:
+
+ - `foo` exclusive is `2` because no more modules that require `bar` and `baz`
+ - `bar` exclusive is `1` because no more modules that require `baz`
+
+#### Controls
+
+- click on a module name to view detail info about the module
+- click on a module name withholding `shift`-key to open a file that related with this module in your editor
+
 ### Realtime analyzing
 
 Analyzing process is performing in **realtime**.
@@ -171,13 +199,31 @@ So, `modules list`, `graph` and `file map` will contain only modules that requir
 
 `Hide 3rd party modules` is enabled by default.
 
+### Open in editor
+
+You can open any bundle file in you favorite editor. Just set the `editor` option with one of the supported editor ID and click to any file path withholding `shift`-key to open the file in a chosen editor.
+
+#### Supported editors:
+
+- `sublime` – Sublime Text
+- `atom` – Atom Editor
+- `code` – Visual Studio Code
+- `webstorm` – WebStorm
+- `phpstorm` - PhpStorm
+- `idea14ce` – IDEA 14 CE
+- `vim` – Vim (via Terminal, Mac OS only)
+- `emacs` – Emacs (via Terminal, Mac OS only)
+- `visualstudio` – Visual Studio
+
+> Chosen editor must be installed in your system
+
 ### Integration
 
 You can use Webpack Runtime Analyzer everywhere when having an access to a web-view (e.g. web pages, browser plugins, mobile browsers and applications).
 
 #### Atom Editor
 
-Some code editors have an access to a web view (e.g. `iframe`) and there is a great opportunity to integrate Webpack Runtime Analyzer in these editors and use **unique editor features**.
+Some code editors have access to a web view (e.g. iframe) and this is a great opportunity to integrate Webpack Runtime Analyzer in these editors to use unique editor features.
 
 You can use Webpack Runtime Analyzer in [Atom Editor](https://atom.io/) by installed [the plugin](https://atom.io/packages/rempl-host).
 
@@ -189,18 +235,18 @@ Just type `Rempl` in command palette and enter rempl-server url (http://localhos
 
 ##### Info about editing file
 
-If the editing file is part of the bundle, then you can see some info about it in several places:
-- Environment page of the UI (contains all modules that retained by the editing file)
-- the status bar of the UI 
+If the editing file is a part of the bundle, you can see the info about it in the following places:
+- `details` page in the UI
+- the bottom bar of the UI 
 - the status bar of the Editor (two-way communication)
  
-<img src="https://cloud.githubusercontent.com/assets/6654581/24292331/f384beb4-109d-11e7-9a46-4eff5f4b53b9.gif" width="500px"/>
+<img src="https://cloud.githubusercontent.com/assets/6654581/24501273/75170e70-1551-11e7-85b0-729646529b29.gif" width="500px"/>
 
-> Environment page and status bar exist only when the UI is running within editor
+> The bottom bar exists only when the UI is running within editor
 
 #### How about other editors?
 
-[VS Code](https://code.visualstudio.com/) support is in plans...
+[VS Code](https://code.visualstudio.com/) support is in plans... But if you want it faster, then like [this comment](https://github.com/Microsoft/vscode/issues/22068#issuecomment-287776122) ;)
 
 ### Webpack 1.x support
 

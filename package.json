@@ -36,7 +36,7 @@
     "loader-utils": "^1.0.4",
     "open-in-editor": "^2.2.0",
     "opn": "^4.0.0",
-    "rempl": "rempl/rempl",
+    "rempl": "^1.0.0-alpha13",
     "webpack": "^2.2.0"
   },
   "devDependencies": {
