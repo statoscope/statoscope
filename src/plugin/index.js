@@ -3,7 +3,6 @@
 var NAME = 'webpack-runtime-analyzer';
 var parseQuery = require('loader-utils/lib/parseQuery.js');
 var webpack = require('webpack');
-var ConcatSource = require('webpack-sources').ConcatSource;
 var RequestShortener = require('webpack/lib/RequestShortener');
 var fork = require('child_process').fork;
 var rempl = require('rempl');
