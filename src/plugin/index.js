@@ -146,11 +146,6 @@ function startRemplServer(plugin) {
                 plugin.publisher.wsendpoint = data.endpoint;
                 plugin.publisher.sync();
 
-                // useful in the cases when rempl-server starts later than bundle is built
-                if (!plugin.allowToInject && plugin.watching) {
-                    plugin.watching.invalidate();
-                }
-
                 if (plugin.options.open) {
                     opn(data.endpoint);
                 }
@@ -212,55 +207,6 @@ function createPublisher(plugin, compiler, options) {
     compiler.plugin('compilation', function(compilation) {
         stats = compilation;
         requestShortener = new RequestShortener(compilation.options.context || process.cwd());
-
-        if (options.mode === 'standalone') {
-            // run server after publisher is created
-            // since server uses publisher when started
-            this.allowToInject = true;
-
-            compilation.plugin('optimize-chunk-assets', function(chunks, callback) {
-                plugin.allowToInject = false;
-
-                if (publisher.wsendpoint) {
-                    chunks.forEach(function(chunk) {
-                        var isInitial = chunk.isInitial ? chunk.isInitial() : chunk.initial;
-
-                        if (!isInitial) {
-                            return;
-                        }
-
-                        /* eslint-disable */
-                        chunk.files
-                            .forEach(function(file) {
-                                compilation.assets[file] = new ConcatSource(
-                                    '/** REMPL RUNTIME INJECTION **/\
-                                    ;(function(){\
-                                        if (typeof rempl == \'undefined\') {\
-                                            \n' + rempl.source + '\n\
-                                            rempl.createPublisher(\'' + NAME + '\', function(settings, callback) {\
-                                                callback(null, \'script\', \'(\' + function() {\
-                                                    var iframe = document.createElement(\'iframe\');\
-                                                    iframe.setAttribute(\'style\', \'position:fixed;top:0;left:0;width:100%;height:100%;border:0;z-index:1000000\');\
-                                                    iframe.src = \'' + publisher.wsendpoint + '\';\
-                                                    document.documentElement.appendChild(iframe);\
-                                                } + \').call(this)\');\
-                                            });\
-                                        }\
-                                    })();\
-                                    /** REMPL RUNTIME INJECTION **/', '\n', compilation.assets[file]
-                                );
-                            });
-
-                        if (!compiler.options.watch) {
-                            compilation.warnings.push('Webpack Runtime Analyzer: Rempl runtime was injected into the bundle. Don\'t use this bundle in production.');
-                        }
-                        /* eslint-enable */
-                    });
-                }
-
-                callback();
-            });
-        }
     });
 
     compiler.apply(new webpack.ProgressPlugin(function(percent) {
@@ -499,9 +445,15 @@ function RuntimeAnalyzerPlugin(options) {
 
 RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
     var options = this.options;
-    var pluginModes = ['watch-run'];
-    var pluginFn = function(watchingOrCompiler, done) {
-        if (compiler.options.watch) {
+
+    compiler.plugin('watch-run', pluginFn.bind(this, true));
+
+    if (!this.options.watchModeOnly) {
+        compiler.plugin('run', pluginFn.bind(this, false));
+    }
+
+    function pluginFn(isWatchMode, watchingOrCompiler, done) {
+        if (isWatchMode) {
             this.watching = watchingOrCompiler;
         }
 
@@ -516,15 +468,7 @@ RuntimeAnalyzerPlugin.prototype.apply = function(compiler) {
         }
 
         done();
-    }.bind(this);
-
-    if (!this.options.watchModeOnly) {
-        pluginModes.push('run')
     }
-
-    pluginModes.forEach(function(mode) {
-        compiler.plugin(mode, pluginFn);
-    });
 };
 
 module.exports = RuntimeAnalyzerPlugin;
