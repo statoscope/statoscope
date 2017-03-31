@@ -1,3 +1,22 @@
+## 1.3.0 (March 31, 2017)
+
+### Plugin
+
+- bump rempl version
+- generate file/module links
+- integration with [open-in-editor](https://github.com/lahmatiy/open-in-editor/)
+- fix bug when the plugin is working only in NON-watch mode when watchModeOnly is false
+
+### UI
+
+- rename `env` page to `details`
+- add filter text input to details page
+- add table mode switcher to details page
+- rework status bar
+- rework bottom bar
+- file map now display all module files (ignore `hide 3rd party` option)
+- rework tooltip on file map
+
 ## 1.2.0 (March 25, 2017)
 
 ### Plugin
