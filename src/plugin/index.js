@@ -11,8 +11,6 @@ var path = require('path');
 var fs = require('fs');
 var opn = require('opn');
 var openInEditor = require('open-in-editor');
-var editor;
-
 var requestShortener;
 
 function isObject(obj) {
@@ -168,7 +166,7 @@ function createPublisher(plugin, compiler, options) {
         DelegatedModule: 'delegated',
         ExternalModule: 'external'
     };
-
+    var editor = openInEditor.configure({});
     var getWebUI = rempl.scriptFromFile(options.ui);
     var publisher = rempl.createPublisher(NAME, function(settings, callback) {
         if (settings.dev) {
@@ -197,12 +195,6 @@ function createPublisher(plugin, compiler, options) {
     var progress = publisher.ns('progress');
     var profile = publisher.ns('profile');
     var stats;
-
-    if (options.editor) {
-        editor = openInEditor.configure({
-            editor: options.editor
-        });
-    }
 
     compiler.plugin('compilation', function(compilation) {
         stats = compilation;
