@@ -1,3 +1,9 @@
+## 1.3.1 (March 31, 2017)
+
+### Plugin
+
+- fix possible crash
+
 ## 1.3.0 (March 31, 2017)
 
 ### Plugin
