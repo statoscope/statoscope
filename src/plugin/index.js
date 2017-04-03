@@ -2,8 +2,8 @@
 
 var NAME = 'webpack-runtime-analyzer';
 var parseQuery = require('loader-utils/lib/parseQuery.js');
-var webpack = require('webpack');
-var RequestShortener = require('webpack/lib/RequestShortener');
+var webpack = require.main.require('webpack');
+var RequestShortener = require.main.require('webpack/lib/RequestShortener');
 var fork = require('child_process').fork;
 var rempl = require('rempl');
 var path = require('path');
@@ -11,6 +11,7 @@ var fs = require('fs');
 var opn = require('opn');
 var openInEditor = require('open-in-editor');
 var requestShortener;
+var SourceMapConsumer = require('source-map').SourceMapConsumer;
 
 function isObject(obj) {
     return typeof obj == 'object' && obj;
@@ -83,8 +84,29 @@ function getRetained(module, modulesMap, exclude) {
     return Object.keys(visited);
 }
 
-function getModuleId(module) {
-    return module.index + '_' + module.readableIdentifier(requestShortener);
+function getModuleId(module, compiler) {
+    // webpack 1.x capability
+    function makeRelative(compiler, identifier) {
+        var context = compiler.context;
+
+        return identifier
+            .split('|')
+            .map(function(str) {
+                return str
+                    .split('!')
+                    .map(function(str) {
+                        return path.relative(context, str);
+                    })
+                    .join('!');
+            })
+            .join('|');
+    }
+
+    if (!module.portableId) {
+        module.portableId = makeRelative(compiler, module.identifier())
+    }
+
+    return module.portableId;
 }
 
 function handleFile(file, handledFiles) {
@@ -235,7 +257,7 @@ function createPublisher(plugin, compiler, options) {
                     return chunk.id;
                 }),
                 dependencies: chunk.modules.map(function(module) {
-                    return getModuleId(module);
+                    return getModuleId(module, compiler);
                 }),
                 rendered: chunk.rendered,
                 // webpack 1.x capability
@@ -273,7 +295,7 @@ function createPublisher(plugin, compiler, options) {
             }
 
             var moduleInfo = {
-                id: getModuleId(module),
+                id: getModuleId(module, compiler),
                 index: module.index,
                 type: moduleType,
                 name: module.readableIdentifier(requestShortener),
@@ -288,7 +310,7 @@ function createPublisher(plugin, compiler, options) {
                         return dependency.module;
                     })
                     .map(function(dependency) {
-                        return getModuleId(dependency.module);
+                        return getModuleId(dependency.module, compiler);
                     }),
                 reasons: module.reasons
                     .filter(function(reason) {
@@ -360,13 +382,61 @@ function createPublisher(plugin, compiler, options) {
             assets: assets,
             chunks: chunks,
             modules: modules,
-            moduleLinks: modules.reduce(function(prev, current) {
-                var links = current.dependencies.map(function(dependency) {
-                    return {
-                        from: current.id,
-                        to: dependency
-                    };
-                });
+            moduleLinks: compilation.modules.reduce(function(prev, current) {
+                var links = current.reasons
+                    .filter(function(reason) {
+                        return reason.dependency && reason.module;
+                    }).map(function(reason) {
+                        var reasonInfo = {
+                            from: getModuleId(reason.module, compiler),
+                            to: getModuleId(current, compiler)
+                        };
+
+                        if (!reason.module.useSourceMap) {
+                            return reasonInfo;
+                        }
+
+                        // todo handle string value
+                        var location = isObject(reason.dependency.loc) ? deepExtend({}, reason.dependency.loc) : null;
+
+                        if (!location || !location.start) {
+                            return reasonInfo;
+                        }
+
+                        var variable = reason.module.variables
+                            .filter(function(variable) {
+                                return variable.dependencies.some(function(dependency) {
+                                    return dependency.module == current;
+                                });
+                            })[0];
+
+                        if (variable) {
+                            reasonInfo.position = null;
+                            reasonInfo.variable = {
+                                name: variable.name,
+                                expression: variable.expression
+                            }
+                        } else {
+                            var originalSource = reason.module.originalSource ?
+                                reason.module.originalSource() :
+                                reason.module._source;
+                            var sourceMapConsumer = new SourceMapConsumer(originalSource.map());
+                            var originalPosition = sourceMapConsumer.originalPositionFor(location.start);
+
+                            if (isFinite(originalPosition.line)) {
+                                reasonInfo.position = {
+                                    line: originalPosition.line,
+                                    column: originalPosition.column,
+                                };
+
+                                if (isFinite(originalPosition.column)) {
+                                    reasonInfo.position.column++
+                                }
+                            }
+                        }
+
+                        return reasonInfo;
+                    });
 
                 return prev.concat(links);
             }, []),
@@ -380,13 +450,13 @@ function createPublisher(plugin, compiler, options) {
             errors: compilation.errors.map(function(error) {
                 return {
                     message: error.message,
-                    module: error.module && getModuleId(error.module)
+                    module: error.module && getModuleId(error.module, compiler)
                 };
             }),
             warnings: compilation.warnings.map(function(warning) {
                 return {
                     message: warning.message,
-                    module: warning.module && getModuleId(warning.module)
+                    module: warning.module && getModuleId(warning.module, compiler)
                 };
             })
         };
