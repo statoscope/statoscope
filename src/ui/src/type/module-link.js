@@ -1,10 +1,14 @@
 var entity = require('basis.entity');
 var Filter = require('basis.data.dataset').Filter;
 var Module = require('./module');
+var Point = require('./point');
+var Variable = require('./variable');
 
 var ModuleLink = entity.createType('ModuleLink', {
     from: entity.StringId,
-    to: entity.StringId
+    to: entity.StringId,
+    position: Point,
+    variable: Variable
 });
 
 ModuleLink.allWrapper = new Filter({

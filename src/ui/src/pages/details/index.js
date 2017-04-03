@@ -19,6 +19,7 @@ var TableFoot = require('app.ui.modulesTable').Foot;
 var sum = require('basis.data.index').sum;
 var dict = require('basis.l10n').dictionary(__filename);
 var domEvent = require('basis.dom.event');
+var transport = require('app.transport');
 
 var KEY_ENTER = 13;
 var KEY_ESCAPE = 27;
@@ -286,6 +287,51 @@ module.exports = new Page({
                                         .as(function(size) {
                                             return utils.roundSize(size) + ' ' + utils.getPostfix(size);
                                         }),
+                                },
+                                action: {
+                                    gotoModule: function(e) {
+                                        var resource = this.data.resource;
+                                        var moduleLink;
+                                        var position = { line: 1, column: 1 };
+
+                                        e.die();
+
+                                        switch (mode.value) {
+                                            case 'require': {
+                                                var from = sourceByChoice.value.pick();
+
+                                                resource = from.data.resource;
+                                                moduleLink = type.ModuleLink.get({
+                                                    from: from.getId(),
+                                                    to: this.target.getId()
+                                                });
+                                                break;
+                                            }
+                                            case 'occurrences': {
+                                                moduleLink = type.ModuleLink.get({
+                                                    from: this.target.getId(),
+                                                    to: sourceByChoice.value.pick().getId()
+                                                });
+                                                break;
+                                            }
+                                        }
+
+                                        if (moduleLink && moduleLink.data.position) {
+                                            position = moduleLink.data.position.data
+                                        }
+
+                                        if (e.shiftKey && resource) {
+                                            if (type.Env.data.connected) {
+                                                type.Env.openFile(resource.data.name, { start: position });
+                                            } else {
+                                                var positionString = ':' + position.line + ':' + position.column;
+
+                                                transport.openInEditor(resource.data.name + positionString);
+                                            }
+                                        } else {
+                                            TableRow.prototype.action.gotoModule.call(this, e);
+                                        }
+                                    }
                                 }
                             }),
                             satellite: {

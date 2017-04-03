@@ -30,15 +30,7 @@ var Row = TableRow.subclass({
                 if (type.Env.data.connected) {
                     type.Env.openFile(resource.data.name);
                 } else {
-                    transport.api.callRemote('openInEditor', resource.data.name, function(result) {
-                        if (!result.ok) {
-                            if (result.error) {
-                                alert(result.error);
-                            } else {
-                                alert('Unknown error while opening in editor');
-                            }
-                        }
-                    });
+                    transport.openInEditor(resource.data.name);
                 }
             } else {
                 detailTarget.setDelegate(this.target);
