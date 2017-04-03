@@ -6,7 +6,7 @@ var webpack = require('webpack');
 var autoprefixer = require('autoprefixer-core');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var RuntimeAnalyzerPlugin = require('webpack-runtime-analyzer');
+var RuntimeAnalyzerPlugin = require('../src/plugin');
 
 module.exports = function makeWebpackConfig (options) {
   /**
@@ -68,17 +68,10 @@ module.exports = function makeWebpackConfig (options) {
   /**
    * Devtool
    * Reference: http://webpack.github.io/docs/configuration.html#devtool
-   * Type of sourcemap to use per build type
    */
-  if (TEST) {
-    config.devtool = 'inline-source-map';
-  } else if (BUILD) {
-    config.devtool = 'source-map';
-  } else {
-    config.devtool = 'eval';
-  }
+   config.devtool = 'source-map';
 
-  /**
+    /**
    * Loaders
    * Reference: http://webpack.github.io/docs/configuration.html#module-loaders
    * List: http://webpack.github.io/docs/list-of-loaders.html
