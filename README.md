@@ -195,6 +195,13 @@ For example: `export EDITOR=sublime && webpack -w`
 
 For more information about supported editors see [open-in-editor documentation](https://github.com/lahmatiy/open-in-editor/#editor).
 
+
+### Source map support
+
+- enable source-map in your webpack config (e.g. `devtool: 'source-map'`)
+- click on some `Required` module in details page and your editor will open the place (file, line and column) where clicked module was required by a filtered module
+- click on some `Occurrences` module in details page and your editor will open the place (file, line and column) where clicked module are requiring filtered module
+
 ## Integration
 
 You can use Webpack Runtime Analyzer everywhere when having an access to a web-view (e.g. web pages, browser plugins, mobile browsers and applications).

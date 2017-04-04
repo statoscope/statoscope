@@ -1,3 +1,15 @@
+## 1.4.0 (April 4, 2017)
+
+### Plugin
+
+- get original position of module require
+- remove webpack from dependencies
+
+### UI
+
+- move openInEditor to transport
+- support original position of module require
+
 ## 1.3.1 (March 31, 2017)
 
 ### Plugin
