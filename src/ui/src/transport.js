@@ -1,4 +1,6 @@
 module.exports = {
+    api: rempl.getSubscriber(),
+    editorEnv: rempl.getEnv('editor'),
     openInEditor: function(path) {
         if (!this.api) {
             return;

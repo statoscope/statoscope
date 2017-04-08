@@ -8,7 +8,7 @@ var Module = require('./module');
 var FileLink = require('./file-link');
 var Range = require('./range');
 var utils = require('app.utils');
-var envApi = require('app.transport').api.env;
+var editorEnv = require('app.transport').editorEnv;
 var detailTarget = require('app.pages.details.target');
 
 var Env = entity.createType({
@@ -45,91 +45,53 @@ env.openFile = function(filePath, selections) {
             reject('no file specified');
         }
 
-        var payload = {
-            type: 'openFile',
-            path: filePath,
-            selections: selections
-        };
-
-        envApi.send(payload, function(response) {
-            if (response.ok) {
-                resolve();
+        editorEnv.callRemote('openFile', filePath, selections, function(error) {
+            if (error) {
+                reject(error.code);
             } else {
-                reject(response.error.code);
+                resolve();
             }
         });
     });
 };
 
-env.getContent = function(selections) {
+env.getContent = function() {
     return new Promise(function(resolve, reject) {
-        var payload = {
-            type: 'getContent',
-            selections: selections // todo not supported yet
-        };
-
-        envApi.send(payload, function(response) {
-            if (response.ok) {
-                resolve(response.content);
+        editorEnv.callRemote('getContent', function(error, content) {
+            if (error) {
+                reject(error.code);
             } else {
-                reject(response.error.code);
+                resolve(content);
             }
         });
     });
 };
 
 env.setStatusBarContent = function(content) {
-    var payload = {
-        type: 'setStatusBarContent',
-        content: content || ''
-    };
-
-    envApi.send(payload);
+    editorEnv.callRemote('setStatusBarContent', content);
 };
 
-envApi.subscribe(function(data) {
-    switch (data.type) {
-        case 'hostInfo':
-            env.update(data.host);
-            break;
-        case 'activeTabChanged':
-            if (data.tab.isEditor) {
-                if (data.file.path && File.get(data.file.path)) {
-                    env.update({
-                        file: data.file.path,
-                        syntax: data.file.syntax,
-                        selections: data.selections
-                    });
+editorEnv.subscribe(function(data) {
+    env.update(data);
+});
 
-                    return null;
-                }
-            }
+editorEnv.ns('activeTab').subscribe(function(data) {
+    if (data.isEditor) {
+        if (data.file.path && File.get(data.file.path)) {
+            env.update({
+                file: data.file.path,
+                syntax: data.file.syntax,
+                selections: data.selections
+            });
 
-            env.set('file', null);
+            return null;
+        }
+    }
 
-            if (env.data.selections) {
-                env.data.selections.clear();
-            }
-            break;
-        case 'selectionChanged':
-            env.set('selections', data.selections);
-            break;
-        case 'patchChanged':
-            if (data.path && File.get(data.path)) {
-                env.set('file', data.path);
+    env.set('file', null);
 
-                return null;
-            }
-
-            env.set('file', null);
-
-            if (env.data.selections) {
-                env.data.selections.clear();
-            }
-            break;
-        case 'syntaxChanged':
-            env.set('syntax', data.syntax);
-            break;
+    if (env.data.selections) {
+        env.data.selections.clear();
     }
 });
 
