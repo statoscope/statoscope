@@ -1,6 +1,6 @@
 {
   "name": "webpack-runtime-analyzer",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Webpack plugin for analyzing internal processes, state and structure of bundles",
   "scripts": {
     "prepublish": "npm run build",

@@ -1,3 +1,8 @@
+## 1.4.1 (April 8, 2017)
+
+- bump rempl version
+- support new rempl environment implementation
+
 ## 1.4.0 (April 4, 2017)
 
 ### Plugin
