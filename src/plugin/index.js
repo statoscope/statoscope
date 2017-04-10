@@ -163,7 +163,7 @@ function startRemplServer(plugin) {
         .on('message', function(data) {
             if (data && data.event === 'server-started') {
                 plugin.publisher.wsendpoint = data.endpoint;
-                plugin.publisher.sync();
+                plugin.publisher.connectWs(data.endpoint);
 
                 if (plugin.options.open) {
                     opn(data.endpoint);
@@ -196,7 +196,7 @@ function createPublisher(plugin, compiler, options) {
 
         getWebUI(settings, callback);
     }, {
-        manualSync: options.mode === 'standalone'
+        ws: options.mode !== 'standalone'
     });
 
     publisher.provide('openInEditor', function(path, cb) {
