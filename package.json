@@ -37,7 +37,7 @@
     "loader-utils": "^1.0.4",
     "open-in-editor": "^2.2.0",
     "opn": "^4.0.0",
-    "rempl": "^1.0.0-alpha14",
+    "rempl": "1.0.0-alpha15",
     "source-map": "^0.5.6"
   },
   "devDependencies": {
