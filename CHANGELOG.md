@@ -1,3 +1,7 @@
+## 1.4.2 (April 12, 2017)
+
+- bump rempl version
+
 ## 1.4.1 (April 8, 2017)
 
 - bump rempl version
