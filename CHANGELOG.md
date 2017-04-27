@@ -1,3 +1,8 @@
+## 1.4.3 (April 27, 2017)
+
+- normalize file path on windows (fixed #14, thanks to @lahmatiy)
+- fix issue with scrollbars on body on windows (@lahmatiy)
+
 ## 1.4.2 (April 12, 2017)
 
 - bump rempl version
