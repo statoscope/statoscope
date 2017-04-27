@@ -84,6 +84,16 @@ function getRetained(module, modulesMap, exclude) {
     return Object.keys(visited);
 }
 
+function unixpath(value) {
+    if (typeof value === 'string' && process.platform === 'win32') {
+        return value
+            .replace(/(^|!)[a-z]+\:/gi, '$1')
+            .replace(/\\/g, '/');
+    }
+
+    return value;
+}
+
 function getModuleId(module, compiler) {
     // webpack 1.x capability
     function makeRelative(compiler, identifier) {
@@ -95,7 +105,7 @@ function getModuleId(module, compiler) {
                 return str
                     .split('!')
                     .map(function(str) {
-                        return path.relative(context, str);
+                        return unixpath(path.relative(context, str));
                     })
                     .join('!');
             })
@@ -122,7 +132,7 @@ function handleFile(file, handledFiles) {
         }
 
         handledFiles[file] = {
-            name: file,
+            name: unixpath(file),
             short: requestShortener.shorten(file),
             size: stats.size
         };
@@ -300,9 +310,9 @@ function createPublisher(plugin, compiler, options) {
                 type: moduleType,
                 name: module.readableIdentifier(requestShortener),
                 size: module.size(),
-                rawRequest: module.rawRequest,
-                userRequest: module.userRequest,
-                context: module.context,
+                rawRequest: unixpath(module.rawRequest),
+                userRequest: unixpath(module.userRequest),
+                context: unixpath(module.context),
                 resource: resource,
                 loaders: getModuleLoaders(module, handledFiles),
                 dependencies: module.dependencies
@@ -378,7 +388,7 @@ function createPublisher(plugin, compiler, options) {
         var profileData = {
             version: webpackVersion,
             hash: compilation.hash,
-            context: compilation.compiler.context,
+            context: unixpath(compilation.compiler.context),
             assets: assets,
             chunks: chunks,
             modules: modules,
