@@ -39,6 +39,21 @@ function roundSize(size) {
     }
 }
 
+function formatSize(size) {
+    var unit = getPostfix(size);
+
+    switch (unit) {
+        case 'KB':
+            size = Math.round(getSize(size));
+            break;
+        case 'MB':
+            size = getSize(size).toFixed(2);
+            break;
+    }
+
+    return size + '\xA0' + unit;
+}
+
 function sharePartOfPaths(paths) {
     var partsCount = [];
 
@@ -124,6 +139,7 @@ module.exports = {
     getSize: getSize,
     getPostfix: getPostfix,
     roundSize: roundSize,
+    formatSize: formatSize,
     sharePartOfPaths: sharePartOfPaths,
     typeByExt: typeByExt,
     mergeFromDataSource: mergeFromDataSource
