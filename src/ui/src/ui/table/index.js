@@ -7,6 +7,7 @@ var templates = template.define('app.ui.table', {
 });
 
 module.exports = Node.subclass({
+    tableId: 'AbstractTable',
     template: templates.table,
     childClass: Row,
     binding: {

@@ -1,4 +1,13 @@
 <b:style src="./cell.css"/>
 <b:isolate/>
+<b:define name="allowSorting" type="bool"/>
 
-<b:include src="app.ui.table.cell" class="head-cell"/>
+<td b:ref="cell">
+  <div class="content" event-click="click">
+    {content}
+    <div class="sorting sorting_{allowSorting}">
+      <div class="arrow-up" b:show="{sortingAsc}"></div>
+      <div class="arrow-down" b:show="{sortingDesc}"></div>
+    </div>
+  </div>
+</td>

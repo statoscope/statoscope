@@ -1,3 +1,4 @@
+var Value = require('basis.ui').Value;
 var Node = require('basis.ui').Node;
 var template = require('basis.template');
 
@@ -12,5 +13,26 @@ module.exports = Node.subclass({
     },
     binding: {
         content: 'data:'
+    },
+    init: function() {
+        if (this.columnId == undefined) {
+            this.addHandler({
+                parentChanged: function() {
+                    if (this.parentNode) {
+                        var id = 0;
+                        var cursor = this.previousSibling;
+
+                        while (cursor) {
+                            cursor = cursor.previousSibling;
+                            id++;
+                        }
+
+                        this.columnId = id;
+                    }
+                }
+            });
+        }
+
+        Node.prototype.init.call(this);
     }
 });
