@@ -1,3 +1,21 @@
-.row ~ .row {
+.row ~ .row
+{
     margin-top: 15px;
+}
+
+.switcher,
+.stat
+{
+    display: inline-block;
+}
+
+.switcher
+{
+    margin-right: 15px;
+}
+
+.stat
+{
+    font-size: 14px;
+    color: #888;
 }

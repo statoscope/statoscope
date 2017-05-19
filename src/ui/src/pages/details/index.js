@@ -163,7 +163,9 @@ module.exports = new Page({
                     filterInput: 'satellite:',
                     modules: 'satellite:',
                     modeSwitcher: 'satellite:',
-                    suggestionChoice: Value.query(suggestionChoice, 'target')
+                    suggestionChoice: Value.query(suggestionChoice, 'target'),
+                    modulesCount: Value.query(tableSourceWrapper, 'itemCount'),
+                    modulesSize: sum(tableSourceWrapper, 'update', 'data.size').as(utils.formatSize),
                 },
                 satellite: {
                     filterInput: TextInput.subclass({
@@ -271,6 +273,8 @@ module.exports = new Page({
                     modules: {
                         dataSource: tableSourceWrapper,
                         instance: ModulesTable.subclass({
+                            tableId: 'DetailedModuleTable',
+                            sorting: 'data.index',
                             childClass: TableRow.subclass({
                                 template: resource('./template/table/row.tmpl'),
                                 binding: {
@@ -278,15 +282,11 @@ module.exports = new Page({
 
                                     retainedAmount: Value.query('data.retained.itemCount'),
                                     retainedSize: sum(Value.query('data.retained'), 'update', 'data.size')
-                                        .as(function(size) {
-                                            return utils.roundSize(size) + ' ' + utils.getPostfix(size);
-                                        }),
+                                        .as(utils.formatSize),
 
                                     exclusiveAmount: Value.query('data.exclusive.itemCount'),
                                     exclusiveSize: sum(Value.query('data.exclusive'), 'update', 'data.size')
-                                        .as(function(size) {
-                                            return utils.roundSize(size) + ' ' + utils.getPostfix(size);
-                                        }),
+                                        .as(utils.formatSize),
                                 },
                                 action: {
                                     gotoModule: function(e) {
@@ -337,12 +337,36 @@ module.exports = new Page({
                             satellite: {
                                 head: TableHead.subclass({
                                     childNodes: [
-                                        { data: { content: dict.token('id') } },
-                                        { data: { content: dict.token('name') } },
-                                        { data: { content: dict.token('size') } },
-                                        { data: { content: dict.token('occurrences') } },
-                                        { data: { content: dict.token('retained') } },
-                                        { data: { content: dict.token('exclusive') } }
+                                        {
+                                            data: { content: dict.token('id') },
+                                            columnId: 'id',
+                                            sortingRule: 'data.index'
+                                        },
+                                        {
+                                            data: { content: dict.token('name') },
+                                            columnId: 'name',
+                                            sortingRule: 'data.name'
+                                        },
+                                        {
+                                            data: { content: dict.token('size') },
+                                            columnId: 'size',
+                                            sortingRule: 'data.size'
+                                        },
+                                        {
+                                            data: { content: dict.token('occurrences') },
+                                            columnId: 'occurrences',
+                                            sortingRule: 'data.reasons.itemCount'
+                                        },
+                                        {
+                                            data: { content: dict.token('retained') },
+                                            columnId: 'retained',
+                                            sortingRule: 'data.retained.itemCount'
+                                        },
+                                        {
+                                            data: { content: dict.token('exclusive') },
+                                            columnId: 'exclusive',
+                                            sortingRule: 'data.exclusive.itemCount'
+                                        }
                                     ]
                                 }),
                                 foot: TableFoot.subclass({
@@ -351,9 +375,6 @@ module.exports = new Page({
                             }
                         })
                     }
-                },
-                init: function() {
-                    Node.prototype.init.call(this);
                 }
             })
         }
