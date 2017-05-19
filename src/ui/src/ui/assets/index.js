@@ -10,6 +10,8 @@ var TableRow = require('app.ui.table').Row;
 var FileSizeCell = require('app.ui.cells').FileSize;
 
 module.exports = Table.subclass({
+    tableId: 'AssetTable',
+    sorting: 'data.name',
     dataSource: type.Asset.all,
     childClass: TableRow.subclass({
         template: resource('./template/row.tmpl'),
@@ -26,8 +28,8 @@ module.exports = Table.subclass({
     satellite: {
         head: TableHead.subclass({
             childNodes: [
-                { data: { content: dict.token('name') } },
-                { data: { content: dict.token('size') } }
+                { data: { content: dict.token('name') }, columnId: 'name', sortingRule: 'data.name' },
+                { data: { content: dict.token('size') }, columnId: 'size', sortingRule: 'data.size' }
             ]
         }),
         foot: Node.subclass({
