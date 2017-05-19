@@ -16,9 +16,7 @@ var Row = TableRow.subclass({
     binding: {
         id: 'data:index',
         name: 'data:',
-        size: Value.query('data.size').as(function(size) {
-            return utils.roundSize(size) + ' ' + utils.getPostfix(size);
-        })
+        size: Value.query('data.size').as(utils.formatSize)
     },
     action: {
         gotoModule: function(e) {
@@ -42,9 +40,9 @@ var Row = TableRow.subclass({
 
 var Head = TableHead.subclass({
     childNodes: [
-        { data: { content: dict.token('id') } },
-        { data: { content: dict.token('name') } },
-        { data: { content: dict.token('size') } }
+        { data: { content: dict.token('id') }, columnId: 'id', sortingRule: 'data.index' },
+        { data: { content: dict.token('name') }, columnId: 'name', sortingRule: 'data.name' },
+        { data: { content: dict.token('size') }, columnId: 'size', sortingRule: 'data.size' }
     ]
 });
 
@@ -52,13 +50,12 @@ var Foot = Node.subclass({
     template: resource('./template/foot.tmpl'),
     binding: {
         count: Value.query('owner.dataSource.itemCount'),
-        size: sum(Value.query('owner.dataSource'), 'update', 'data.size').as(function(size) {
-            return utils.roundSize(size) + ' ' + utils.getPostfix(size);
-        }),
+        size: sum(Value.query('owner.dataSource'), 'update', 'data.size').as(utils.formatSize),
     }
 });
 
 var ModuleTable = Table.subclass({
+    tableId: 'ModuleTable',
     sorting: 'data.index',
     childClass: Row,
     satellite: {
