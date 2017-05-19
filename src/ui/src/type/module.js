@@ -15,9 +15,7 @@ var Module = entity.createType('Module', {
     name: String,
     index: Number,
     size: Number,
-    formattedSize: entity.calc('size', function(size) {
-        return utils.roundSize(size) + ' ' + utils.getPostfix(size);
-    }),
+    formattedSize: entity.calc('size', utils.formatSize),
     rawRequest: String,
     userRequest: String,
     context: String,

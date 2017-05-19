@@ -1,4 +1,3 @@
-var Value = require('basis.ui').Value;
 var Node = require('basis.ui').Node;
 var template = require('basis.template');
 

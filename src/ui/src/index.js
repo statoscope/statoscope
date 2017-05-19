@@ -96,9 +96,7 @@ module.exports = require('basis.app').create({
                             fileSize: Value.query(type.Env, 'data.file.data.formattedSize'),
                             outputAmount: Value.query(type.Env, 'data.modules.itemCount'),
                             outputSize: sum(Value.query(type.Env, 'data.modules'), 'update', 'data.size')
-                                .as(function(size) {
-                                    return utils.roundSize(size) + ' ' + utils.getPostfix(size);
-                                }),
+                                .as(utils.formatSize),
                             requiredAmount: type.Env.requiredAmount,
                             requiredSize: type.Env.requiredFormattedSize,
                             retainedAmount: type.Env.retainedAmount,

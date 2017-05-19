@@ -5,9 +5,7 @@ var File = entity.createType('File', {
     name: entity.StringId,
     short: String,
     size: Number,
-    formattedSize: entity.calc('size', function(size) {
-        return utils.roundSize(size) + ' ' + utils.getPostfix(size);
-    }),
+    formattedSize: entity.calc('size', utils.formatSize),
     basename: entity.calc('name', basis.path.basename),
     extname: entity.calc('name', basis.path.extname)
 });

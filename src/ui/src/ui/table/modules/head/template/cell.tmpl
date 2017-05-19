@@ -3,7 +3,7 @@
 <b:define name="allowSorting" type="bool"/>
 
 <td b:ref="cell">
-  <div class="content" event-click="click">
+  <div class="content content_{allowSorting}" event-click="click">
     {content}
     <div class="sorting sorting_{allowSorting}">
       <div class="arrow-up" b:show="{sortingAsc}"></div>

@@ -112,35 +112,25 @@ var exclusive = modules.as(function(dataSource) {
 
 env.requiredAmount = Value.query(required, 'value.itemCount');
 env.requiredSize = sum(required, 'update', 'data.size');
-env.requiredFormattedSize = env.requiredSize.as(function(size) {
-    return utils.roundSize(size) + ' ' + utils.getPostfix(size);
-});
+env.requiredFormattedSize = env.requiredSize.as(utils.formatSize);
 
 env.occurrencesAmount = Value.query(occurrences, 'value.itemCount');
 env.occurrencesSize = sum(occurrences, 'update', 'data.size');
-env.occurrencesFormattedSize = env.occurrencesSize.as(function(size) {
-    return utils.roundSize(size) + ' ' + utils.getPostfix(size);
-});
+env.occurrencesFormattedSize = env.occurrencesSize.as(utils.formatSize);
 
 env.retainedAmount = Value.query(retained, 'value.itemCount');
 env.retainedSize = sum(retained, 'update', 'data.size');
-env.retainedFormattedSize = env.retainedSize.as(function(size) {
-    return utils.roundSize(size) + ' ' + utils.getPostfix(size);
-});
+env.retainedFormattedSize = env.retainedSize.as(utils.formatSize);
 
 env.exclusiveAmount = Value.query(exclusive, 'value.itemCount');
 env.exclusiveSize = sum(exclusive, 'update', 'data.size');
-env.exclusiveFormattedSize = env.exclusiveSize.as(function(size) {
-    return utils.roundSize(size) + ' ' + utils.getPostfix(size);
-});
+env.exclusiveFormattedSize = env.exclusiveSize.as(utils.formatSize);
 
 var statusText = new Expression(
     file,
     modules,
     Value.query(file, 'value.data.formattedSize'),
-    sum(modules, 'update', 'data.size').as(function(size) {
-        return utils.roundSize(size) + ' ' + utils.getPostfix(size);
-    }),
+    sum(modules, 'update', 'data.size').as(utils.formatSize),
 
     env.requiredAmount,
     env.requiredFormattedSize,

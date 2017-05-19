@@ -119,9 +119,7 @@ var page = new Page({
         binding: {
             path: 'data:',
             basename: Value.query('data.path').as(basis.path.basename),
-            size: Value.query('data.size').as(function(size) {
-                return utils.roundSize(size) + ' ' + utils.getPostfix(size);
-            }),
+            size: Value.query('data.size').as(utils.formatSize),
             postfix: 'data:',
             percent: 'data:',
             groups: 'data:',

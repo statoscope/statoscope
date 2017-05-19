@@ -3,7 +3,7 @@
     display: inline;
     font-weight: bold;
 }
-.content.sortable
+.content_allowSorting
 {
     cursor: pointer;
 }
