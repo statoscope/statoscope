@@ -1,3 +1,10 @@
+## 1.5.0 (May 20, 2017)
+
+### UI
+
+- supported sorting for the tables (#16)
+- added modules stat at the top of the table in detail page (#16)
+
 ## 1.4.3 (April 27, 2017)
 
 - normalize file path on windows (fixed #14, thanks to @lahmatiy)
