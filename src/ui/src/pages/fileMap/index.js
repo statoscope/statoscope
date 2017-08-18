@@ -119,7 +119,7 @@ var page = new Page({
         binding: {
             path: 'data:',
             basename: Value.query('data.path').as(basis.path.basename),
-            size: Value.query('data.size').as(utils.formatSize),
+            size: Value.query('data.size'),
             postfix: 'data:',
             percent: 'data:',
             groups: 'data:',
