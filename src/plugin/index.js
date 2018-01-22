@@ -327,7 +327,7 @@ function createPublisher(plugin, compiler, options) {
                         return reason.dependency && reason.module;
                     })
                     .map(function(reason) {
-                        return getModuleId(reason.module);
+                        return getModuleId(reason.module, compiler);
                     })
             };
 
