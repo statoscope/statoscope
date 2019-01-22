@@ -1,11 +1,12 @@
 {
   "parserOptions": {
     "sourceType": "module",
-    "ecmaVersion": 5
+    "ecmaVersion": 2018
   },
   "env": {
     "node": true,
-    "browser": true
+    "browser": true,
+    "es6": true
   },
   "globals": {
     "basis": true,
@@ -35,7 +36,7 @@
     ],
     "indent": [
       "error",
-      4,
+      2,
       {
         "SwitchCase": 1
       }

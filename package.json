@@ -1,22 +1,23 @@
 {
   "name": "webpack-runtime-analyzer",
-  "version": "1.5.0",
+  "version": "2.0.0-alpha.1",
   "description": "Webpack plugin for analyzing internal processes, state and structure of bundles",
   "scripts": {
-    "prepublish": "npm run build",
+    "prepublish": "npm run build:prod",
     "codestyle": "eslint src",
-    "build": "basis build --pack --css-usage --css-pack --js-cut-dev",
-    "start": "basis server"
+    "build": "webpack",
+    "watch": "webpack-dev-server",
+    "build:prod": "NODE_ENV=production webpack"
   },
   "main": "./src/plugin/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/smelukov/webpack-runtime-analyzer.git"
+  "repository": "https://github.com/smelukov/webpack-runtime-analyzer.git",
+  "author": {
+    "name": "Sergey Melyukov",
+    "url": "@smelukov"
   },
-  "contributors": [
-    "Sergey Melyukov <s.melukov@gmail.com>",
-    "Roman Dvornov <rdvornov@gmail.com>"
-  ],
+  "engines": {
+    "node": ">=6.11.5"
+  },
   "keywords": [
     "webpack",
     "runtime",
@@ -32,19 +33,24 @@
   },
   "homepage": "https://github.com/smelukov/webpack-runtime-analyzer#readme",
   "dependencies": {
-    "async": "^2.1.4",
-    "basisjs-tools-server": "basisjs/basisjs-tools-server#rempl",
-    "loader-utils": "^1.0.4",
+    "@discoveryjs/discovery": "^1.0.0-beta.6",
+    "basisjs-tools-server": "~1.0.1",
+    "loader-utils": "^1.2.3",
     "open-in-editor": "^2.2.0",
-    "opn": "^4.0.0",
-    "rempl": "1.0.0-alpha15",
-    "source-map": "^0.5.6"
+    "opn": "^5.4.0",
+    "rempl": "1.0.0-alpha15"
+  },
+  "peerDependencies": {
+    "webpack": "^4.0.0"
   },
   "devDependencies": {
-    "basisjs": "^1.10.1",
-    "basisjs-tools": "^1.10.2",
-    "basisjs-tools-instrumenter": "^2.1.0",
-    "eslint": "^3.11.1"
+    "css-loader": "^2.1.0",
+    "eslint": "^5.12.1",
+    "html-webpack-plugin": "^4.0.0-beta.5",
+    "mini-css-extract-plugin": "^0.5.0",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
   },
   "files": [
     "dist",

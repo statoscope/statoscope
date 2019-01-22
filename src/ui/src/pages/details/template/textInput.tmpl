@@ -1,9 +1,0 @@
-<b:style src="./textInput.css"/>
-<b:isolate/>
-<b:define name="type" type="enum" values="file module"/>
-
-<b:include src="app.ui.textInput">
-  <b:prepend ref="fieldContainer">
-    <div b:show="{type}" class="target-type target-type_{type}">{type}</div>
-  </b:prepend>
-</b:include>

@@ -1,8 +1,0 @@
-.item {
-    height: 100%;
-    background: #777;
-}
-
-.item ~ .item {
-    margin-left: 1px;
-}
