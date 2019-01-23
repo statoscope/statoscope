@@ -74,6 +74,9 @@ export default function (discovery) {
                   when: 'from="module"',
                   data: 'source',
                   content: 'module-item-inline:{ module: $, match: #.filter }'
+                },
+                {
+                  content: []
                 }
               ]
             }

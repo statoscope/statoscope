@@ -4,3 +4,4 @@ export { default as chunk } from './chunk';
 export { default as chunkGroup } from './chunkGroup';
 export { default as asset } from './asset';
 export { default as deopts } from './deopts';
+export { default as defaultPage } from './default';

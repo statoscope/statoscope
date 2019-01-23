@@ -1,8 +1,8 @@
 import transport from './transport';
 import * as discoveryLib from '@discoveryjs/discovery/dist/lib.umd';
 import prepare from './prepare';
-import * as definePage from './pages/';
-import * as defineView from './views/';
+import * as pages from './pages/';
+import * as views from './views/';
 
 const discovery = new discoveryLib.App(document.body, {});
 const globalData = {};
@@ -87,24 +87,26 @@ discovery.addQueryHelpers({
     return 'n/a';
   },
   color: value => colorMap[value] ? colorMap[value].color : generateColor(value),
-  fileType: value => fileTypeMap[value] || value
+  fileType: value => fileTypeMap[value] || value,
+  reportLink: function(current) {
+    return '#report';
+    // if (Array.isArray(current)) {
+    //   return discovery.reportLink(current[0]);
+    // }
+    //
+    // return discovery.reportLink(current);
+  }
 });
 
-defineView.messagesTable(discovery);
-defineView.moduleItem(discovery);
+discovery.apply(views);
 
-discovery.definePage('default', []);
-definePage.module(discovery);
-definePage.messages(discovery);
-definePage.chunk(discovery);
-definePage.chunkGroup(discovery);
-definePage.asset(discovery);
-definePage.deopts(discovery);
+// discovery.pages('default', []);
+discovery.apply(pages);
 
 transport.ns('data').subscribe(data => {
   console.log('channel(data)', data);
   globalData.data = data;
-  discovery.setData(globalData, context);
+  discovery.setData(globalData, { ...context, data });
 });
 
 transport.ns('status').subscribe(data => {
