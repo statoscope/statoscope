@@ -53,9 +53,6 @@ export default function (discovery) {
                 }
               ]
             }
-          },
-          {
-            content: ['text:"11"']
           }
         ]
       }

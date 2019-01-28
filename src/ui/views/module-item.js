@@ -11,7 +11,7 @@ export default function (discovery) {
       el.classList.add('view-module-item-inline');
     }
 
-    const { showType = true, showFileSize = false, showBundlesSize = false } = data;
+    const { showType = true, showFileSize = false, showBundledSize = false } = data;
 
     discovery.view.render(el, [
       {
@@ -27,7 +27,7 @@ export default function (discovery) {
       {
         view: 'badge',
         data: '{ text: module.file and module.file.size.formatSize() or module.size.formatSize() }',
-        when: showBundlesSize
+        when: showBundledSize
       },
       {
         view: 'badge',
