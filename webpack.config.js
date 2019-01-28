@@ -21,16 +21,34 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
+        include: /node_modules\/@discoveryjs/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              // you can specify a publicPath here
-              // by default it use publicPath in webpackOptions.output
+              filename: 'discovery.css',
               publicPath: '../'
             }
           },
           'css-loader'
+        ]
+      },
+      {
+        test: /\.css$/,
+        include: path.resolve('src'),
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../'
+            }
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true
+            }
+          }
         ]
       }
     ]

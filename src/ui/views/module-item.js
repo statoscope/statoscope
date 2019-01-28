@@ -11,8 +11,24 @@ export default function (discovery) {
       el.classList.add('view-module-item-inline');
     }
 
+    const { showType = true, showFileSize = false, showBundlesSize = false } = data;
+
     discovery.view.render(el, [
-      'badge:{ text: module.type, color: module.type.color() }',
+      {
+        view: 'badge',
+        data: '{ text: module.type, color: module.type.color() }',
+        when: showType
+      },
+      {
+        view: 'badge',
+        data: '{ text: module.file and module.file.size.formatSize() or module.size.formatSize() }',
+        when: showFileSize && data.module.file
+      },
+      {
+        view: 'badge',
+        data: '{ text: module.file and module.file.size.formatSize() or module.size.formatSize() }',
+        when: showBundlesSize
+      },
       {
         view: 'badge',
         when: 'module.file',

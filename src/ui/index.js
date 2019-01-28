@@ -7,7 +7,7 @@ import * as views from './views/';
 const discovery = new discoveryLib.App(document.body, {});
 const globalData = {};
 const context = {
-  name: 'Webpack build data',
+  name: 'Webpack Runtime Analyzer',
   // raw: data.raw,
   createdAt: new Date().toISOString(),
 };
