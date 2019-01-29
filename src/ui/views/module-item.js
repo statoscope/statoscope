@@ -1,4 +1,4 @@
-import './module-item.css';
+import styles from './module-item.css';
 
 export default function (discovery) {
   discovery.view.define('module-item', render);
@@ -8,7 +8,7 @@ export default function (discovery) {
     const { inline } = config;
 
     if (inline) {
-      el.classList.add('view-module-item-inline');
+      el.classList.add(styles.inline);
     }
 
     const { showType = true, showFileSize = false, showBundledSize = false } = data;

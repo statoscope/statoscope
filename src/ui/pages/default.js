@@ -7,40 +7,46 @@ export default function (discovery) {
     'h1:#.name',
     {
       view: 'block',
-      className: 'totals',
-      data: [
-        { title: 'Modules', query: 'input.modules' },
-        { title: 'Files', query: 'input.files' },
-        { title: 'Entries', query: 'input.entries' },
-        { title: 'Messages', query: 'errors + warnings + input.modules.deopt' }
-      ],
-      content: {
-        view: 'inline-list',
-        item: 'indicator',
-        data: `.({
+      className: styles.root,
+      content: [
+        {
+          view: 'section',
+          header: 'text:"Input"',
+          data: [
+            { title: 'Modules', query: 'input.modules', pageRef: 'modules' },
+            { title: 'Files', query: 'input.files', pageRef: 'files' },
+            { title: 'Entries', query: 'input.entries', pageRef: 'entries' },
+          ],
+          content: {
+            view: 'inline-list',
+            item: 'indicator',
+            data: `.({
+              label: title,
+              value: query.query(#.data, #).size(),
+              href: "#" + pageRef
+            })`
+          }
+        },
+        {
+          view: 'section',
+          header: 'text:"Output"',
+          data: [
+            { title: 'Chunks', query: 'output.chunks', pageRef: 'chunks' },
+            { title: 'Chunk groups', query: 'output.chunkGroups', pageRef: 'chunkGroups' },
+            { title: 'Assets', query: 'output.files', pageRef: 'assets' },
+            { title: 'Messages', query: 'errors + warnings + input.modules.deopt', pageRef: 'messages' }
+          ],
+          content: {
+            view: 'inline-list',
+            item: 'indicator',
+            data: `.({
             label: title,
-            value: query.query(#.data, #).size()
-            // href: { query, title }.reportLink()
+            value: query.query(#.data, #).size(),
+            href: "#" + pageRef
         })`
-      }
-    },
-    {
-      view: 'block',
-      className: 'totals',
-      data: [
-        { title: 'Chunks', query: 'output.chunks' },
-        { title: 'Chunk groups', query: 'output.chunkGroups' },
-        { title: 'Assets', query: 'output.files' },
-      ],
-      content: {
-        view: 'inline-list',
-        item: 'indicator',
-        data: `.({
-            label: title,
-            value: query.query(#.data, #).size()
-            // href: { query, title }.reportLink()
-        })`
-      }
+          }
+        },
+      ]
     },
     {
       view: 'block',
@@ -48,10 +54,10 @@ export default function (discovery) {
       content: [
         {
           view: 'section',
-          header: 'text:"Biggest modules"',
+          header: 'text:"Heaviest modules"',
           content: {
             view: 'tabs',
-            name: 'biggestModulesTabs',
+            name: 'heaviestModulesTabs',
             tabs: [
               { value: 'file', text: 'By file size' },
               { value: 'bundled', text: 'By bundled size' }
@@ -62,15 +68,16 @@ export default function (discovery) {
                 view: 'switch',
                 content: [
                   {
-                    when: '#.biggestModulesTabs="file"',
+                    when: '#.heaviestModulesTabs="file"',
                     data: `
                     data.input.modules.[file and (no #.filter or file.path~=#.filter)].sort(<file.size>).reverse()
                     `,
                     content: {
                       view: 'list',
+                      limit: 10,
                       item: {
                         view: 'module-item',
-                        className: styles['biggest-modules-item'],
+                        className: styles['heaviest-item'],
                         data: `{
                           module: $, 
                           showType: false, 
@@ -81,7 +88,7 @@ export default function (discovery) {
                     }
                   },
                   {
-                    when: '#.biggestModulesTabs="bundled"',
+                    when: '#.heaviestModulesTabs="bundled"',
                     data: `
                     data.input.modules.[
                       no #.filter or 
@@ -90,9 +97,10 @@ export default function (discovery) {
                     `,
                     content: {
                       view: 'list',
+                      limit: 10,
                       item: {
                         view: 'module-item',
-                        className: styles['biggest-modules-item'],
+                        className: styles['heaviest-item'],
                         data: `{
                           module: $, 
                           showType: false, 
@@ -109,12 +117,12 @@ export default function (discovery) {
         },
         {
           view: 'section',
-          header: 'text:"Biggest Chunks"',
+          header: 'text:"Heaviest chunks"',
           content: {
             view: 'tabs',
-            name: 'biggestChunksTabs',
+            name: 'heaviestChunksTabs',
             tabs: [
-              { value: 'size', text: 'By size' },
+              { value: 'assets', text: 'By assets size' },
               { value: 'modules', text: 'By modules amount' }
             ],
             content: {
@@ -123,36 +131,54 @@ export default function (discovery) {
                 view: 'switch',
                 content: [
                   {
-                    when: '#.biggestChunksTabs="size"',
+                    when: '#.heaviestChunksTabs="assets"',
                     data: `
-                    data.output.chunks.sort(<size>).reverse()
+                    data.output.chunks.[
+                      no #.filter or 
+                      (
+                        name and
+                        name~=#.filter or
+                        not name and
+                        id~=#.filter
+                      )
+                    ].sort(<$.getTotalFilesSize()>).reverse()
                     `,
                     content: {
                       view: 'list',
+                      limit: 10,
                       item: {
-                        view: 'text',
-                        className: styles['biggest-modules-item'],
-                        data: `(name or (id + (reason and (" [" + reason + "]") or "")))`
+                        view: 'chunk-item',
+                        className: styles['heaviest-item'],
+                        data: `{
+                          chunk: $, 
+                          showSize: true,
+                          match: #.filter
+                        }`
                       }
                     }
                   },
                   {
-                    when: '#.biggestChunksTabs="modules"',
+                    when: '#.heaviestChunksTabs="modules"',
                     data: `
-                    data.input.modules.[
+                    data.output.chunks.[
                       no #.filter or 
-                      file and file.path~=#.filter or id~=#.filter
-                    ].sort(<size>).reverse()
+                      (
+                        name and
+                        name~=#.filter or
+                        not name and
+                        id~=#.filter
+                      )
+                    ].sort(<modules.size()>).reverse()
                     `,
                     content: {
                       view: 'list',
+                      limit: 10,
                       item: {
-                        view: 'module-item',
-                        className: styles['biggest-modules-item'],
+                        view: 'chunk-item',
+                        className: styles['heaviest-item'],
                         data: `{
-                          module: $, 
-                          showType: false, 
-                          showBundledSize: true,
+                          chunk: $, 
+                          showModulesAmount: true,
                           match: #.filter
                         }`
                       }

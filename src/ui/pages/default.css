@@ -7,8 +7,17 @@
   flex-grow: 1;
   flex-basis: 50%;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
-.biggest-modules-item {
+.root > :nth-child(1) {
+  padding-right: 7px;
+}
+
+.root > :nth-child(2) {
+  padding-left: 7px;
+}
+
+.heaviest-item {
   white-space: nowrap;
 }

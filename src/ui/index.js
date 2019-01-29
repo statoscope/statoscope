@@ -88,14 +88,7 @@ discovery.addQueryHelpers({
   },
   color: value => colorMap[value] ? colorMap[value].color : generateColor(value),
   fileType: value => fileTypeMap[value] || value,
-  reportLink: function(current) {
-    return '#report';
-    // if (Array.isArray(current)) {
-    //   return discovery.reportLink(current[0]);
-    // }
-    //
-    // return discovery.reportLink(current);
-  }
+  getTotalFilesSize: value => (value.files || []).reduce((sum, file) => sum + file.size, 0)
 });
 
 discovery.apply(views);

@@ -10,6 +10,7 @@ export default function (discovery) {
         },
         {
           content: [
+            'h1:"Module"',
             { view: 'badge', when: 'isEntry', data: '{ text: "entry", color: "#ffc107" }' },
             'badge:{ text: type, color: type.color() }',
             {
@@ -20,8 +21,8 @@ export default function (discovery) {
             { view: 'badge', when: 'file', data: '{ text: "resource size: " + file.size.formatSize() }' },
             'badge:{ text: "bundled size: " + size.formatSize() }',
             {
-              view: 'h1',
-              content: 'text: "Module: " + (file.path or id)'
+              view: 'h2',
+              content: 'text: "ID: " + file.path or id'
             },
             /* {
               view: 'section',
