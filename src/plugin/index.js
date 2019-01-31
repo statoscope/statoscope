@@ -207,7 +207,7 @@ class RuntimeAnalyzerPlugin {
         }
 
         const detailData = {
-          input: { entries: [], modules: [], files: [] },
+          input: { entries: [], modules: [], files: [], nodeModules: {} },
           output: { bundles: [], chunks: [], files: [] }
         };
 
@@ -216,6 +216,7 @@ class RuntimeAnalyzerPlugin {
         });
 
         const modules = [...compilation.modules];
+        const handledModules = new Set();
         let module;
 
         while (module = modules.pop()) { // eslint-disable-line no-cond-assign
@@ -232,12 +233,29 @@ class RuntimeAnalyzerPlugin {
 
           if (resource && !detailData.input.files.find(({ path }) => path === resource)) {
             const stats = compiler.inputFileSystem.statSync(resource);
-
-            detailData.input.files.push({
+            const fileInfo = {
               path: resource,
               ext: path.extname(resource),
               size: stats.size
-            });
+            };
+
+            const [pathToPackageJson] = resource.match(/.*node_modules\/(?:@[^/]+\/[^/]+|[^/]+)\//) || [];
+
+            if (pathToPackageJson) {
+              const {
+                name: packageName,
+                version: packageVersion
+              } = compiler.inputFileSystem.readJsonSync(pathToPackageJson + 'package.json');
+
+              fileInfo.nodeModule = { name: packageName, version: packageVersion };
+              detailData.input.nodeModules[packageName] = detailData.input.nodeModules[packageName] || [];
+
+              if (!detailData.input.nodeModules[packageName].includes(packageVersion)) {
+                detailData.input.nodeModules[packageName].push(packageVersion);
+              }
+            }
+
+            detailData.input.files.push(fileInfo);
           }
 
           if (module.constructor.name === 'ConcatenatedModule') {
@@ -266,6 +284,17 @@ class RuntimeAnalyzerPlugin {
               }
             }
           }
+
+          module.dependencies.forEach(dep => {
+            if (
+              dep.module && !compilation.modules.includes(dep.module) &&
+              !modules.includes(dep.module) && !handledModules.has(dep.module)
+            ) {
+              modules.push(dep.module);
+            }
+          });
+
+          handledModules.add(module);
 
           const moduleInfo = {
             id: moduleId,

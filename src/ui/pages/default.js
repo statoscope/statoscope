@@ -3,7 +3,7 @@ import styles from './default.css';
 console.log(styles);
 
 export default function (discovery) {
-  discovery.definePage('default', [
+  discovery.page.define('default', [
     'h1:#.name',
     {
       view: 'block',
@@ -40,10 +40,10 @@ export default function (discovery) {
             view: 'inline-list',
             item: 'indicator',
             data: `.({
-            label: title,
-            value: query.query(#.data, #).size(),
-            href: "#" + pageRef
-        })`
+              label: title,
+              value: query.query(#.data, #).size(),
+              href: "#" + pageRef
+            })`
           }
         },
       ]
@@ -70,7 +70,12 @@ export default function (discovery) {
                   {
                     when: '#.heaviestModulesTabs="file"',
                     data: `
-                    data.input.modules.[file and (no #.filter or file.path~=#.filter)].sort(<file.size>).reverse()
+                    data.input.modules.[
+                      file and 
+                      (no #.filter or file.path~=#.filter)
+                    ]
+                    .sort(<file.size>)
+                    .reverse()
                     `,
                     content: {
                       view: 'list',
@@ -92,8 +97,11 @@ export default function (discovery) {
                     data: `
                     data.input.modules.[
                       no #.filter or 
-                      file and file.path~=#.filter or id~=#.filter
-                    ].sort(<size>).reverse()
+                      file and 
+                      file.path~=#.filter or id~=#.filter
+                    ]
+                    .sort(<size>)
+                    .reverse()
                     `,
                     content: {
                       view: 'list',

@@ -73,9 +73,9 @@ discovery.addQueryHelpers({
   },
   formatSize(value) {
     if (isFinite(value)) {
-      if (value < 1024) {
-        return value.toFixed(2) + ' bytes';
-      }
+      /* if (value <= 512) {
+        return value.toFixed(2) + ' b';
+      }*/
 
       if (value < 1024 * 1024) {
         return (value / 1024).toFixed(2) + ' kb';

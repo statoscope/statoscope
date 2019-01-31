@@ -1,5 +1,5 @@
 export default function (discovery) {
-  discovery.definePage('chunk', [
+  discovery.page.define('chunk', [
     {
       view: 'switch',
       data: 'data.output.chunks.[id=#.id.decodeURIComponent().toNumber()].pick()',

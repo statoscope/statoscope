@@ -1,5 +1,5 @@
 export default function (discovery) {
-  discovery.definePage('asset', [
+  discovery.page.define('asset', [
     {
       view: 'switch',
       data: 'data.output.files.[hash=#.id.decodeURIComponent()].pick()',

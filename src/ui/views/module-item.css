@@ -1,3 +1,7 @@
 .inline {
     display: inline-block;
 }
+
+.expand > :last-child {
+    padding: 0 0 7px 26px;
+}

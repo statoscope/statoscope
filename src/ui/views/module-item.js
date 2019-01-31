@@ -17,7 +17,7 @@ export default function (discovery) {
       {
         view: 'badge',
         data: '{ text: module.type, color: module.type.color() }',
-        when: showType
+        when: showType && data.module.type != 'MultiModule'
       },
       {
         view: 'badge',
@@ -26,8 +26,8 @@ export default function (discovery) {
       },
       {
         view: 'badge',
-        data: '{ text: module.file and module.file.size.formatSize() or module.size.formatSize() }',
-        when: showBundledSize
+        data: '{ text: module.size.formatSize() }',
+        when: showBundledSize && data.module.type != 'MultiModule'
       },
       {
         view: 'badge',
@@ -36,8 +36,36 @@ export default function (discovery) {
       },
       {
         view: 'link',
+        when: 'module.type != "MultiModule"',
         data: '{ href:"#module:" + module.id.encodeURIComponent(), text: module.file.path or module.id, match: match }',
         content: 'text-match'
+      },
+      {
+        view: 'expand',
+        className: styles.expand,
+        when: 'module.type = "MultiModule"',
+        title: 'text: "Multi-module with " + module.deps.size() + " dependencies"',
+        content: [
+          {
+            view: 'link',
+            data: '{ href:"#module:" + module.id.encodeURIComponent(), text: "View details" }',
+            content: 'text-match'
+          },
+          {
+            view: 'list',
+            limit: 5,
+            data: 'module.deps.module',
+            item: {
+              view: 'module-item',
+              data: `{
+                module: $, 
+                showType: false, 
+                showFileSize: true,
+                match: #.filter
+              }`
+            }
+          }
+        ]
       }
     ], data, context);
   }

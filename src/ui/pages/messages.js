@@ -1,5 +1,5 @@
 export default function (discovery) {
-  discovery.definePage('messages', {
+  discovery.page.define('messages', {
     view: 'tabs',
     name: 'messagesTabs',
     tabs: [

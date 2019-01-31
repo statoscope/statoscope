@@ -1,5 +1,5 @@
 export default function (discovery) {
-  discovery.definePage('deopts', [
+  discovery.page.define('deopts', [
     {
       view: 'content-filter',
       name: 'filter',
