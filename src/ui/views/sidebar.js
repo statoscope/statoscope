@@ -7,7 +7,7 @@ export default function (discovery) {
         data.input.files.[no #.filter or path~=#.filter]
         .({
             caption: path,
-            href: "#module:" + id.encodeURIComponent(),
+            href: "#file:" + path.encodeURIComponent(),
             match: #.filter
         })
       `,
