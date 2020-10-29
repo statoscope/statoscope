@@ -1,62 +1,49 @@
 {
-  "name": "webpack-runtime-analyzer",
-  "version": "2.0.0-alpha.1",
-  "description": "Webpack plugin for analyzing internal processes, state and structure of bundles",
-  "scripts": {
-    "prepublish": "npm run build:prod",
-    "codestyle": "eslint src",
-    "build": "webpack",
-    "watch": "webpack-dev-server",
-    "build:prod": "NODE_ENV=production webpack"
-  },
-  "main": "./src/plugin/index.js",
-  "repository": "https://github.com/smelukov/webpack-runtime-analyzer.git",
-  "author": {
-    "name": "Sergey Melyukov",
-    "url": "@smelukov"
-  },
-  "engines": {
-    "node": ">=6.11.5"
-  },
-  "keywords": [
-    "webpack",
-    "runtime",
-    "building",
-    "analyzer",
-    "rempl",
-    "remote",
-    "devtool"
-  ],
+  "name": "statoscope",
+  "private": true,
+  "description": "A tool for analyzing the stats of the bundles",
   "license": "MIT",
+  "scripts": {
+    "lerna": "lerna",
+    "bootstrap": "lerna bootstrap",
+    "postinstall": "npm run bootstrap",
+    "code-lint": "eslint . --ext '.js' --cache",
+    "fix": "npm run code-lint -- --fix"
+  },
+  "repository": "https://github.com/smelukov/statoscope",
+  "author": {
+    "name": "Serget Melyukov",
+    "url": "https://twitter.com/smelukov"
+  },
   "bugs": {
-    "url": "https://github.com/smelukov/webpack-runtime-analyzer/issues"
+    "url": "https://github.com/smelukov/statoscope/issues"
   },
-  "homepage": "https://github.com/smelukov/webpack-runtime-analyzer#readme",
-  "dependencies": {
-    "@discoveryjs/discovery": "^1.0.0-beta.8",
-    "basisjs-tools-server": "~1.0.1",
-    "loader-utils": "^1.2.3",
-    "open-in-editor": "^2.2.0",
-    "opn": "^5.4.0",
-    "rempl": "1.0.0-alpha15"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
-  "peerDependencies": {
-    "webpack": "^4.0.0"
+  "lint-staged": {
+    "*.[jt]s": [
+      "eslint --cache --fix"
+    ]
   },
+  "homepage": "https://github.com/smelukov/statoscope",
+  "dependencies": {},
   "devDependencies": {
-    "css-loader": "^2.1.0",
-    "eslint": "^5.12.1",
-    "html-webpack-plugin": "^4.0.0-beta.5",
-    "mini-css-extract-plugin": "^0.5.0",
-    "webpack": "^4.29.0",
-    "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14"
-  },
-  "files": [
-    "dist",
-    "src",
-    "CHANGELOG.md",
-    "LICENSE",
-    "README.md"
-  ]
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "eslint": "^7.9.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsdoc": "^29.2.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "glob": "^7.1.6",
+    "husky": "^4.3.0",
+    "lerna": "^3.22.1",
+    "lint-staged": "^10.4.0",
+    "prettier": "^2.1.2"
+  }
 }

@@ -1,0 +1,16 @@
+:global(.hack-badge-margin-left) {
+    margin-left: 0.5em;
+}
+
+:global(#popupContent) {
+    touch-action: none;
+    background: var(--discovery-background-color, white);
+    padding: 10px;
+    z-index: 100;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px -2px;
+}
+
+:global(.bold) {
+    font-weight: bold;
+}

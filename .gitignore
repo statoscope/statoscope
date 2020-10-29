@@ -1,9 +1,12 @@
 .idea/
 .vscode/
 node_modules/
-example/dist/
-.rempl_client_id
-.rempl_endpoint_id
+dist/
+dist-test/
 *.log
 *.lock
 .DS_store
+.eslintcache
+*.tsbuildinfo
+*.js.map
+*.ts.map

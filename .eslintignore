@@ -1,1 +1,9 @@
-src/ui/src/vendor
+# Ignore node_modules
+node_modules
+dist
+**/node_modules
+**/dist
+**/dist-test
+
+# Ignore not support files
+carrotsearch.foamtree.js
