@@ -1,31 +1,38 @@
 {
-	"name": "@statoscope/ui-webpack",
-	"version": "2.0.0",
-	"description": "UI for analyzing webpack bundle with Statoscope",
-	"main": "dist/main.js",
-	"repository": "https://github.com/smelukov/statoscope.git",
-	"author": {
-		"name": "Sergey Melyukov",
-		"url": "https://twitter.com/smelukov"
-	},
-	"files": [
-		"dist/main.js"
-	],
-	"license": "MIT",
-	"homepage": "https://github.com/smelukov/statoscope/",
-	"devDependencies": {
-		"@discoveryjs/discovery": "^1.0.0-beta.46",
-		"@popperjs/core": "^2.5.3",
-		"@wdxlab/events": "^1.1.0",
-		"babel-loader": "^8.1.0",
-		"clsx": "^1.1.1",
-		"css-loader": "^5.0.0",
-		"html-webpack-plugin": "^4.5.0",
-		"mini-css-extract-plugin": "^1.0.0",
-		"path-browserify": "^1.0.1",
-		"style-loader": "^2.0.0",
-		"webpack": "^4.44.2",
-		"webpack-cli": "^3.3.12",
-		"webpack-dev-server": "^3.11.0"
-	}
+  "name": "@statoscope/ui-webpack",
+  "version": "2.0.1",
+  "description": "UI for analyzing webpack bundle with Statoscope",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "build:prod": "NODE_ENV=production webpack",
+    "prepublish": "npm run build:prod"
+  },
+  "repository": "https://github.com/smelukov/statoscope.git",
+  "author": {
+    "name": "Sergey Melyukov",
+    "url": "https://twitter.com/smelukov"
+  },
+  "files": [
+    "dist/main.js"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/smelukov/statoscope/",
+  "devDependencies": {
+    "@discoveryjs/discovery": "^1.0.0-beta.46",
+    "@popperjs/core": "^2.5.3",
+    "@wdxlab/events": "^1.1.0",
+    "babel-loader": "^8.1.0",
+    "clsx": "^1.1.1",
+    "css-loader": "^5.0.0",
+    "html-webpack-plugin": "^4.5.0",
+    "mini-css-extract-plugin": "^1.0.0",
+    "path-browserify": "^1.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {}
 }
