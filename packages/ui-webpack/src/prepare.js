@@ -161,6 +161,11 @@ function moduleNameResource(name) {
       extractFileRx,
       name.replace('(webpack)', './node_modules/webpack')
     );
+
+    if (!normalized) {
+      return name;
+    }
+
     return (
       matchRxValue(concatenatedIdRx, normalized) ||
       matchRxValue(contextIdRx, normalized) ||
