@@ -24,8 +24,10 @@ export default function (discovery) {
 
   function render(element, config, data, context) {
     element.addEventListener('mouseleave', () => {
-      thePopup.destroy();
-      thePopup = null;
+      if (thePopup) {
+        thePopup.destroy();
+        thePopup = null;
+      }
     });
     element.classList.add(styles.root);
 
