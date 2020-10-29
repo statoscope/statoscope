@@ -10,7 +10,7 @@ export default function (discovery) {
       [
         {
           view: 'switch',
-          data: `#.data.(..modules).[identifier=#.id.decodeURIComponent() or id=#.id.decodeURIComponent()][0]`,
+          data: `#.data.(..modules).[identifier=#.id.decodeURIComponent() or (''+id)=#.id.decodeURIComponent()][0]`,
           content: [
             {
               when: 'not $',
