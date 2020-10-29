@@ -70,6 +70,10 @@ export function packageInstanceItemConfig() {
                 children: $reasonsWithModule.reason.moduleIdentifier.(resolveModule()).[not shouldHideModule()].chunks.(resolveChunk()).sort(initial desc, entry desc, size desc),
                 type: 'chunk'
               }, {
+                title: "Modules",
+                children: $reasonsWithModule.reason.moduleIdentifier.(resolveModule()).[not shouldHideModule()].sort(moduleSize() desc),
+                type: 'module'
+              }, {
                 title: "Packages",
                 reasons: $reasonsWithModule,
                 children: $reasonsWithModule.reason.moduleName.(nodeModule()).name.[$],
@@ -102,6 +106,26 @@ export function packageInstanceItemConfig() {
                       get itemConfig() {
                         return moduleItemConfig('value');
                       },
+                    },
+                  },
+                },
+                {
+                  when: 'type="module"',
+                  content: {
+                    view: 'tree-leaf',
+                    content: [
+                      'text:title',
+                      {
+                        when: 'children',
+                        view: 'badge',
+                        className: 'hack-badge-margin-left',
+                        data: `{text: children.size()}`,
+                      },
+                    ],
+                    children: `children`,
+                    limit: '= settingListItemsLimit()',
+                    get itemConfig() {
+                      return moduleItemConfig();
                     },
                   },
                 },
