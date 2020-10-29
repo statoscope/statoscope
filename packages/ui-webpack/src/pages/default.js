@@ -22,7 +22,7 @@ const indicatorList = (data) => ({
 
 export default function (discovery) {
   discovery.page.define('default', [
-    'h1:#.name + " [Webpack "+#.data.version+"]"',
+    'h1:#.name + " [webpack "+#.data.version+"]"',
     {
       view: 'block',
       className: styles.root,

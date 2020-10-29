@@ -18,7 +18,7 @@ export default (data) => {
     setup: {},
   });
   const context = {
-    name: '🩺📦 Statoscope',
+    name: '📦 Statoscope',
     createdAt: new Date().toISOString(),
     data,
   };
