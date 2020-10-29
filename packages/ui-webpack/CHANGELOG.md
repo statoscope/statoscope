@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.2: (29 October 2020)
+
+### Bugfix
+
+- correct parsing modules name with absolute path
+
 ## 2.1.1: (29 October 2020)
 
 ### Bugfix
