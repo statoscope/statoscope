@@ -1,6 +1,6 @@
 # Statoscope for webpack
 
-![npm](https://badge.fury.io/js/%40statoscope%ui-webpack.svg)
+[![npm version](https://badge.fury.io/js/%40statoscope%2Fui-webpack.svg)](https://badge.fury.io/js/%40statoscope%2Fui-webpack)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-brightgreen)](https://www.paypal.com/paypalme/smelukov)
 
 Statoscope analyzes webpack stats and shows detailed info about it on the screen.
