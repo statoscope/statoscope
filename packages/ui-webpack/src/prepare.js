@@ -220,8 +220,28 @@ export default (rawData, { addQueryHelpers }) => {
 
   rawData.nodeModules = [];
 
+  const modulesMap = new Map();
+
+  for (const chunk of rawData.chunks) {
+    for (const module of chunk.modules) {
+      modulesMap.set(module.identifier, module);
+    }
+  }
+
+  rawData.modules = [...modulesMap.values()];
+
+  for (const [, module] of modulesMap) {
+    if (!module.modules) {
+      continue;
+    }
+
+    for (const innerModule of module.modules) {
+      modulesMap.set(innerModule.identifier, innerModule);
+    }
+  }
+
   const resolveModule = makeEntityResolver(
-    rawData.modules.concat(...rawData.modules.map((m) => m.modules).filter(Boolean)),
+    [...modulesMap.values()],
     ({ identifier }) => identifier
   );
   const resolveChunk = makeEntityResolver(rawData.chunks, ({ id }) => id);
