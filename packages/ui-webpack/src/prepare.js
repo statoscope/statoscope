@@ -146,7 +146,7 @@ function makeEntityResolver(entities, getId) {
   };
 }
 
-const extractFileRx = /.*?\.[/\\](?:.+!\.[/\\])?(.+)/;
+const extractFileRx = /.*(?:(?:^|!|\s+)\.?[\\/])(.+)/;
 const contextIdRx = /(.+) (?:sync|eager|weak|async-weak|lazy|lazy-once) /;
 const concatenatedIdRx = /(.+) \+ \d+ modules$/;
 
@@ -159,7 +159,7 @@ function moduleNameResource(name) {
   if (name && !name.includes('(ignored)') && !name.startsWith('multi')) {
     const normalized = matchRxValue(
       extractFileRx,
-      name.replace('(webpack)', './node_modules/webpack')
+      name.replace('(webpack)', '/node_modules/webpack')
     );
 
     if (!normalized) {
