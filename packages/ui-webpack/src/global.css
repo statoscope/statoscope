@@ -14,3 +14,7 @@
 :global(.bold) {
     font-weight: bold;
 }
+
+:global(.inline-layout) {
+    display: flex;
+}

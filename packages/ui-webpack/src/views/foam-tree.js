@@ -7,9 +7,44 @@ let thePopup;
 function getPopup(discovery, data) {
   if (!thePopup) {
     thePopup = popup(discovery, [
-      { view: 'block', content: 'text:label' },
-      { view: 'block', content: 'text:"Size: " + weight.formatSize()' },
-      { view: 'block', content: 'text:"Path: " + path' },
+      {
+        view: 'block',
+        className: 'inline-layout',
+        content: [
+          {
+            view: 'block',
+            content: 'html:"<b>"+(link.page or "directory") + ":&nbsp;</b>"',
+          },
+          `text:link.page = 'package' ? link.id : label`,
+        ],
+      },
+      {
+        view: 'block',
+        className: 'inline-layout',
+        content: [
+          {
+            view: 'block',
+            content: 'html:"<b>size:&nbsp;</b>"',
+          },
+          'text:weight.formatSize()',
+        ],
+      },
+      {
+        view: 'block',
+        className: 'inline-layout',
+        content: [
+          {
+            view: 'block',
+            content: 'html:"<b>path:&nbsp;</b>"',
+          },
+          'text:path',
+        ],
+      },
+      {
+        view: 'block',
+        when: 'link',
+        content: 'badge:{text:"ctrl + click", postfix:"for details"}',
+      },
     ]);
     thePopup.create(data);
   } else {
@@ -19,16 +54,18 @@ function getPopup(discovery, data) {
   return thePopup;
 }
 
+function destroyPopup() {
+  if (thePopup) {
+    thePopup.destroy();
+    thePopup = null;
+  }
+}
+
 export default function (discovery) {
   discovery.view.define('foam-tree', render);
 
   function render(element, config, data, context) {
-    element.addEventListener('mouseleave', () => {
-      if (thePopup) {
-        thePopup.destroy();
-        thePopup = null;
-      }
-    });
+    element.addEventListener('mouseleave', destroyPopup);
     element.classList.add(styles.root);
 
     setTimeout(() => {
@@ -38,7 +75,22 @@ export default function (discovery) {
         onGroupHover(event) {
           getPopup(discovery, event.group);
         },
-        onGroupSecondaryClick(group) {},
+        onGroupSecondaryClick(event) {
+          const group = event.group;
+
+          if (event.group.link) {
+            const link = discovery.encodePageHash(
+              group.link.page,
+              group.link.id,
+              group.link.params
+            );
+
+            if (link) {
+              destroyPopup();
+              location.assign(link);
+            }
+          }
+        },
       });
     }, 0);
   }

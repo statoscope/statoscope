@@ -312,11 +312,12 @@ export default (rawData, { addQueryHelpers }) => {
       return pluralRus.pluralWithValue(value, words);
     },
     modulesToFoamTree(modules) {
-      function makeNode(name, size, path) {
+      function makeNode(data, size, path) {
         return {
-          label: name,
+          label: data.label,
           weight: size,
           groups: [],
+          link: data.link,
           path,
         };
       }
@@ -328,7 +329,39 @@ export default (rawData, { addQueryHelpers }) => {
           return;
         }
 
-        const parts = resource.split(/[/\\]/);
+        const parts = resource.split(/[/\\]/).map((label) => ({ label }));
+        let currentPackage = null;
+
+        for (const [i, part] of parts.entries()) {
+          if (part.label === 'node_modules') {
+            currentPackage = { name: '' };
+          } else if (currentPackage) {
+            if (part.label[0] === '@') {
+              currentPackage = { name: part.label };
+            } else {
+              currentPackage.name += (currentPackage.name ? '/' : '') + part.label;
+              part.link = {
+                page: 'package',
+                id: currentPackage.name,
+                params: {
+                  instance: parts
+                    .map((part) => part.label)
+                    .slice(0, i + 1)
+                    .join('/'),
+                },
+              };
+              currentPackage = null;
+            }
+          }
+        }
+
+        if (parts.length) {
+          const last = parts[parts.length - 1];
+          last.link = {
+            page: 'module',
+            id: module.id || module.identifier,
+          };
+        }
 
         apply(parts, module.modules ? 0 : module.size);
       }
@@ -344,13 +377,13 @@ export default (rawData, { addQueryHelpers }) => {
         }
 
         for (const part of parts) {
-          let node = cursor.groups.find((node) => node.label === part);
+          let node = cursor.groups.find((node) => node.label === part.label);
 
           if (!node) {
             node = makeNode(
               part,
               0,
-              [...stack, { label: part }]
+              [...stack, part]
                 .map((item) => item.label)
                 .filter(Boolean)
                 .join('/')
