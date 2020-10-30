@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.2.0: (30 October 2020)
+
+### Features
+
+- ctrl + click on foam-tree opens a package or module detail page,
+- improved popup markup
+- allow passing custom root element to init the UI
+- add style-less dist
+
 ## 2.1.2: (29 October 2020)
 
 ### Bugfix

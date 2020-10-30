@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/ui-webpack",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "UI for analyzing webpack bundle with Statoscope",
   "main": "dist/main.js",
   "scripts": {

@@ -21,6 +21,19 @@ import init from '@statoscope/ui-webpack';
 init(stats);
 ```
 
+### Importing styles
+
+`import init from '@statoscope/ui-webpack'` imports a bundle with builtin scripts and styles.
+
+To import scripts and styles separately, use:
+
+```js
+import '@statoscope/ui-webpack/dist/split/main.css';
+import init from '@statoscope/ui-webpack/dist/split/main.js';
+
+init(stats);
+```
+
 ## Key-features list
 
 ### Entry points
