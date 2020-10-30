@@ -12,11 +12,12 @@ import * as pages from './pages';
 import * as views from './views';
 import settingsStyles from './settings-styles.css';
 
-export default (data) => {
-  const discovery = new discoveryLib.App(document.body, {
+export default (data, element = document.body) => {
+  const discovery = new discoveryLib.App(element, {
     darkmode: 'disabled',
     setup: {},
   });
+
   const context = {
     name: '📦 Statoscope',
     createdAt: new Date().toISOString(),
