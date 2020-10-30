@@ -15,7 +15,7 @@
     "url": "https://twitter.com/smelukov"
   },
   "files": [
-    "dist/main.js"
+    "dist/*"
   ],
   "license": "MIT",
   "homepage": "https://github.com/smelukov/statoscope/",
@@ -27,7 +27,7 @@
     "clsx": "^1.1.1",
     "css-loader": "^5.0.0",
     "html-webpack-plugin": "^4.5.0",
-    "mini-css-extract-plugin": "^1.0.0",
+    "mini-css-extract-plugin": "^1.2.1",
     "path-browserify": "^1.0.1",
     "style-loader": "^2.0.0",
     "webpack": "^4.44.2",
