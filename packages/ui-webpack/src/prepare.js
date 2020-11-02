@@ -1,10 +1,24 @@
 import path from 'path';
+import { validate } from 'schema-utils';
+import schema from '../schema/stats.json';
+
 import settings, {
   SETTING_HIDE_NODE_MODULES,
   SETTING_HIDE_NODE_MODULES_DEFAULT,
   SETTING_LIST_ITEMS_LIMIT,
   SETTING_LIST_ITEMS_LIMIT_DEFAULT,
 } from './settings';
+
+function validateStats(stats) {
+  const configuration = { name: 'Stats' };
+
+  try {
+    validate(schema, stats, configuration);
+    return { result: true };
+  } catch (e) {
+    return { result: false, message: e.message };
+  }
+}
 
 function generateColor(str) {
   let hash = 0;
@@ -219,9 +233,13 @@ function nodeModule(path) {
 }
 
 export default (rawData, { addQueryHelpers }) => {
-  if (!rawData.entrypoints) {
-    return;
-  }
+  rawData = rawData || {};
+
+  rawData.entrypoints = rawData.entrypoints || {};
+  rawData.chunks = rawData.chunks || [];
+  rawData.assets = rawData.assets || [];
+
+  rawData.__validation = validateStats(rawData);
 
   rawData.nodeModules = [];
 

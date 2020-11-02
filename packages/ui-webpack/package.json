@@ -29,6 +29,7 @@
     "html-webpack-plugin": "^4.5.0",
     "mini-css-extract-plugin": "^1.2.1",
     "path-browserify": "^1.0.1",
+    "schema-utils": "^3.0.0",
     "style-loader": "^2.0.0",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",

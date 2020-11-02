@@ -22,6 +22,11 @@ const indicatorList = (data) => ({
 
 export default function (discovery) {
   discovery.page.define('default', [
+    {
+      when: 'not __validation.result',
+      view: 'alert-danger',
+      data: `__validation.message`,
+    },
     'h1:#.name + " [webpack "+#.data.version+"]"',
     {
       view: 'block',
@@ -129,7 +134,7 @@ export default function (discovery) {
                   {
                     when: '#.instantLists="chunks"',
                     data: `
-                    chunks.sort(initial desc, entry desc, sxize desc).[
+                    chunks.sort(initial desc, entry desc, size desc).[
                       (no #.filter or names.[$~=#.filter] or reason~=#.filter or id~=#.filter)
                     ]
                     `,

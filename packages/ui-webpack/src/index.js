@@ -110,6 +110,13 @@ export default (data, element = document.body) => {
       }
     },
   });
+  discovery.nav.append({
+    name: 'reload',
+    onClick() {
+      location.reload();
+    },
+    data: `{ text: "Reload" }`,
+  });
 
   discovery.nav.primary.append({
     name: 'github',

@@ -1,0 +1,167 @@
+{
+  "definitions": {
+    "Entrypoints": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "assets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "chunks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Chunks": {
+      "type": "array",
+      "minLength": 1,
+      "items": {
+        "$ref": "#/definitions/Chunk"
+      }
+    },
+    "Chunk": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "size": {
+          "type": "number"
+        },
+        "modules": {
+          "$ref": "#/definitions/Modules"
+        },
+        "names": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Assets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Asset"
+      }
+    },
+    "Asset": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "size": {
+          "type": "number"
+        },
+        "chunks": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "Modules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Module"
+      }
+    },
+    "Module": {
+      "minLength": 1,
+      "type": "object",
+      "properties": {
+        "id": {
+          "oneOf": [
+            {
+              "enum": [
+                null
+              ]
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "identifier": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "size": {
+          "type": "number"
+        },
+        "reasons": {
+          "type": "array"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "entrypoints": {
+      "$ref": "#/definitions/Entrypoints"
+    },
+    "chunks": {
+      "$ref": "#/definitions/Chunks"
+    },
+    "assets": {
+      "$ref": "#/definitions/Assets"
+    }
+  }
+}
