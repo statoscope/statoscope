@@ -21,19 +21,19 @@ export function assetItemConfig(getter = '$') {
       }`,
     },
     children: `
-    $entrypoints:#.data.entrypoints.entries().(
-      $chunks:value.chunks.(resolveChunk());
+    $entrypoints:#.params.hash.resolveStats().entrypoints.entries().(
+      $chunks:value.chunks.(resolveChunk(#.params.hash));
       {
         name: key,
         data: value, 
-        chunks: $chunks + $chunks..(children.(resolveChunk()))
+        chunks: $chunks + $chunks..(children.(resolveChunk(#.params.hash)))
       }
     );
-    $topLevelAssetChunks:chunks.(resolveChunk()).[files has @.name];
-    $assetChunks: ($topLevelAssetChunks + $topLevelAssetChunks..(children.(resolveChunk()))).[files has @.name];
+    $topLevelAssetChunks:chunks.(resolveChunk(#.params.hash)).[files has @.name];
+    $assetChunks: ($topLevelAssetChunks + $topLevelAssetChunks..(children.(resolveChunk(#.params.hash)))).[files has @.name];
     $assetEntrypoints:$entrypoints.[chunks[id in $assetChunks.id]];
-    $chunksModules:$assetChunks.(..modules).identifier.(resolveModule()).[not shouldHideModule()];
-    $chunksModulesPackages:$chunksModules.(moduleResource().nodeModule().name.resolvePackage()).[$];
+    $chunksModules:$assetChunks.(..modules).identifier.(resolveModule(#.params.hash)).[not shouldHideModule()];
+    $chunksModulesPackages:$chunksModules.(moduleResource().nodeModule()).[].(name.resolvePackage(#.params.hash)).[$];
     $chunksPackages:$chunksModulesPackages.({name: name, instances: instances.[modules.[$ in $chunksModules]]});
     [{
       title: "Entrypoints",

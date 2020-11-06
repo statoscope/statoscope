@@ -1,6 +1,4 @@
 import path from 'path';
-import { validate } from 'schema-utils';
-import schema from '../schema/stats.json';
 
 import settings, {
   SETTING_HIDE_NODE_MODULES,
@@ -8,17 +6,6 @@ import settings, {
   SETTING_LIST_ITEMS_LIMIT,
   SETTING_LIST_ITEMS_LIMIT_DEFAULT,
 } from './settings';
-
-function validateStats(stats) {
-  const configuration = { name: 'Stats' };
-
-  try {
-    validate(schema, stats, configuration);
-    return { result: true };
-  } catch (e) {
-    return { result: false, message: e.message };
-  }
-}
 
 function generateColor(str) {
   let hash = 0;
@@ -134,8 +121,15 @@ function makeEntityResolver(entities, getId) {
 
     let result = null;
 
-    if (Array.isArray(entities)) {
+    if (Array.isArray(entities) || entities instanceof Set) {
       for (const entity of entities) {
+        if (getId(entity) === id) {
+          result = entity;
+          break;
+        }
+      }
+    } else if (entities instanceof Map) {
+      for (const [, entity] of entities) {
         if (getId(entity) === id) {
           result = entity;
           break;
@@ -233,43 +227,15 @@ function nodeModule(path) {
 }
 
 export default (rawData, { addQueryHelpers }) => {
-  rawData = rawData || {};
+  const statsMap = new Map();
 
-  rawData.entrypoints = rawData.entrypoints || {};
-  rawData.chunks = rawData.chunks || [];
-  rawData.assets = rawData.assets || [];
-
-  rawData.__validation = validateStats(rawData);
-
-  rawData.nodeModules = [];
-
-  const modulesMap = new Map();
-
-  for (const chunk of rawData.chunks) {
-    for (const module of chunk.modules) {
-      modulesMap.set(module.identifier, module);
-    }
+  for (const [hash, item] of Object.entries(rawData)) {
+    const preparedData = prepareStat(item);
+    statsMap.set(hash, preparedData);
+    rawData[hash] = preparedData.stats;
   }
 
-  rawData.modules = [...modulesMap.values()];
-
-  for (const [, module] of modulesMap) {
-    if (!module.modules) {
-      continue;
-    }
-
-    for (const innerModule of module.modules) {
-      modulesMap.set(innerModule.identifier, innerModule);
-    }
-  }
-
-  const resolveModule = makeEntityResolver(
-    [...modulesMap.values()],
-    ({ identifier }) => identifier
-  );
-  const resolveChunk = makeEntityResolver(rawData.chunks, ({ id }) => id);
-  const resolveAsset = makeEntityResolver(rawData.assets, ({ name }) => name);
-  const resolvePackage = makeEntityResolver(rawData.nodeModules, ({ name }) => name);
+  const resolveStatsFromMap = makeEntityResolver(statsMap, (data) => data?.stats?.hash);
 
   addQueryHelpers({
     encodeURIComponent: encodeURIComponent,
@@ -308,10 +274,21 @@ export default (rawData, { addQueryHelpers }) => {
     getTotalFilesSize: (value) =>
       (value.files || []).reduce((sum, file) => sum + file.size, 0),
     toMatchRegexp: (value) => new RegExp(`(${value})`),
-    resolveChunk,
-    resolveAsset,
-    resolveModule,
-    resolvePackage,
+    resolveChunk(id, statsHash) {
+      return resolveStatsFromMap(statsHash)?.resolveChunk(id);
+    },
+    resolveAsset(id, statsHash) {
+      return resolveStatsFromMap(statsHash)?.resolveAsset(id);
+    },
+    resolveModule(id, statsHash) {
+      return resolveStatsFromMap(statsHash)?.resolveModule(id);
+    },
+    resolvePackage(id, statsHash) {
+      return resolveStatsFromMap(statsHash)?.resolvePackage(id);
+    },
+    resolveStats(id) {
+      return resolveStatsFromMap(id)?.stats;
+    },
     moduleResource,
     moduleReasonResource,
     moduleNameResource,
@@ -452,7 +429,41 @@ export default (rawData, { addQueryHelpers }) => {
     },
   });
 
-  for (const chunk of rawData.chunks) {
+  return rawData;
+};
+
+function prepareStat(statObject) {
+  statObject.nodeModules = [];
+
+  const modulesMap = new Map();
+
+  for (const chunk of statObject.chunks) {
+    for (const module of chunk.modules) {
+      modulesMap.set(module.identifier, module);
+    }
+  }
+
+  statObject.modules = [...modulesMap.values()];
+
+  for (const [, module] of modulesMap) {
+    if (!module.modules) {
+      continue;
+    }
+
+    for (const innerModule of module.modules) {
+      modulesMap.set(innerModule.identifier, innerModule);
+    }
+  }
+
+  const resolveModule = makeEntityResolver(
+    [...modulesMap.values()],
+    ({ identifier }) => identifier
+  );
+  const resolveChunk = makeEntityResolver(statObject.chunks, ({ id }) => id);
+  const resolveAsset = makeEntityResolver(statObject.assets, ({ name }) => name);
+  const resolvePackage = makeEntityResolver(statObject.nodeModules, ({ name }) => name);
+
+  for (const chunk of statObject.chunks) {
     const extractModulePackages = (module) => {
       const resolvedModule = resolveModule(module.identifier);
       const resource = moduleResource(resolvedModule);
@@ -468,7 +479,7 @@ export default (rawData, { addQueryHelpers }) => {
 
         if (!resolvedPackage) {
           resolvedPackage = { name: modulePackage.name, instances: [] };
-          rawData.nodeModules.push(resolvedPackage);
+          statObject.nodeModules.push(resolvedPackage);
         }
 
         let instance = resolvedPackage.instances.find(
@@ -516,5 +527,5 @@ export default (rawData, { addQueryHelpers }) => {
     }
   }
 
-  return rawData;
-};
+  return { stats: statObject, resolveChunk, resolveAsset, resolveModule, resolvePackage };
+}

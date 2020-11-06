@@ -1,16 +1,7 @@
-import styles from './chunk-item.css';
-
 export default function (discovery) {
   discovery.view.define('asset-item', render);
-  discovery.view.define('asset-item-inline', render);
 
   function render(el, config, data, context) {
-    const { inline } = config;
-
-    if (inline) {
-      el.classList.add(styles.inline);
-    }
-
     const { showSize = true } = data;
 
     discovery.view.render(
@@ -28,7 +19,7 @@ export default function (discovery) {
         {
           view: 'link',
           data: `{
-            href:"#asset:" + asset.name.encodeURIComponent(),
+            href:asset.name.pageLink("asset", {hash:#.params.hash}),
             text: asset.name,
             match: match
           }`,

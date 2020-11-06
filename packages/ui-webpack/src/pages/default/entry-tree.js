@@ -20,10 +20,10 @@ export function entryItemConfig(getter = '$') {
     },
     children: `
     $entry:$;
-    $topLevelChunks:$entry.data.chunks.(resolveChunk());
-    $chunks:($topLevelChunks + $topLevelChunks..(children.(resolveChunk())));
-    $chunksModules:$chunks.(..modules).identifier.(resolveModule()).[not shouldHideModule()];
-    $chunksModulesPackages:$chunksModules.(moduleResource().nodeModule().name.resolvePackage()).[$];
+    $topLevelChunks:$entry.data.chunks.(resolveChunk(#.params.hash));
+    $chunks:($topLevelChunks + $topLevelChunks..(children.(resolveChunk(#.params.hash))));
+    $chunksModules:$chunks.(..modules).identifier.(resolveModule(#.params.hash)).[not shouldHideModule()];
+    $chunksModulesPackages:$chunksModules.(moduleResource().nodeModule()).[].(name.resolvePackage(#.params.hash)).[$];
     $chunksPackages:$chunksModulesPackages.({name: name, instances: instances.[modules.[$ in $chunksModules]]});
     [{
       title: "Chunks",
@@ -32,7 +32,7 @@ export function entryItemConfig(getter = '$') {
       type: 'chunks'
     },{
       title: "Modules",
-      data: $chunks.modules.identifier.(resolveModule()).[not shouldHideModule()].sort(moduleSize() desc),
+      data: $chunks.modules.identifier.(resolveModule(#.params.hash)).[not shouldHideModule()].sort(moduleSize() desc),
       visible: true,
       type: 'modules'
     },{
@@ -135,8 +135,8 @@ export function entryItemConfig(getter = '$') {
             children: `
             $initialChunks:chunks.[initial];
             $asyncChunks:chunks.[not initial];
-            $initialAssets:$initialChunks.files.(resolveAsset()).[$];
-            $asyncAssets:$asyncChunks.files.(resolveAsset()).[$];
+            $initialAssets:$initialChunks.files.(resolveAsset(#.params.hash)).[$];
+            $asyncAssets:$asyncChunks.files.(resolveAsset(#.params.hash)).[$];
             [{
               title: "Initial",
               data: $initialAssets.sort(isOverSizeLimit asc, size desc),

@@ -1,5 +1,16 @@
 # Changelog
 
+## Next
+
+### Features
+
+- support multiple stats
+- stats validation
+
+### Bugfix
+
+- error in chunk packages list
+
 ## 2.2.0: (30 October 2020)
 
 ### Features

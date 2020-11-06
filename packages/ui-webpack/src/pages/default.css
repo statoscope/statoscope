@@ -18,6 +18,10 @@
   padding-left: 7px;
 }
 
+.stats-info {
+  margin-bottom: 15px;
+}
+
 .heaviest-item {
   white-space: nowrap;
 }

@@ -17,20 +17,7 @@ export function packageInstanceTree() {
 export function packageItemConfig() {
   return {
     children: 'instances.sort(size() asc, $ asc).({instance: $, package: @.name})',
-    content: [
-      {
-        view: 'link',
-        data: `{text: name, href: "#package:" + name.encodeURIComponent(), match: #.filter}`,
-        content: 'text-match',
-      },
-      {
-        when: 'instances.size() > 1',
-        view: 'badge',
-        className: 'hack-badge-margin-left',
-        data:
-          "{text: \"+\" + (instances.size() - 1), postfix: (instances.size()-1).plural(['copy', 'copies'])}",
-      },
-    ],
+    content: 'package-item:{package:$}',
     get itemConfig() {
       return packageInstanceItemConfig();
     },
@@ -42,7 +29,11 @@ export function packageInstanceItemConfig() {
     // content: 'text-match:{text: instance.path, match: package}',
     content: {
       view: 'link',
-      data: `{text: instance.path, href: "#package:" + package.encodeURIComponent()+"&instance="+instance.path.encodeURIComponent(), match: package}`,
+      data: `{
+        text: instance.path,
+        href: package.pageLink("package", {instance: instance.path, hash:#.params.hash}),
+        match: package
+      }`,
       content: 'text-match',
     },
     children: `[{
@@ -63,15 +54,15 @@ export function packageInstanceItemConfig() {
             view: 'tree-leaf',
             content: 'text:title',
             children: `
-              $reasonsWithModule:data.[type='module'].data.({reason: $, module: moduleIdentifier.resolveModule()});
+              $reasonsWithModule:data.[type='module'].data.({reason: $, module: moduleIdentifier.resolveModule(#.params.hash)});
               [{
                 title: "Chunks",
                 reasons: $reasonsWithModule,
-                children: $reasonsWithModule.reason.moduleIdentifier.(resolveModule()).[not shouldHideModule()].chunks.(resolveChunk()).sort(initial desc, entry desc, size desc),
+                children: $reasonsWithModule.reason.moduleIdentifier.(resolveModule(#.params.hash)).[not shouldHideModule()].chunks.(resolveChunk(#.params.hash)).sort(initial desc, entry desc, size desc),
                 type: 'chunk'
               }, {
                 title: "Modules",
-                children: $reasonsWithModule.reason.moduleIdentifier.(resolveModule()).[not shouldHideModule()].sort(moduleSize() desc),
+                children: $reasonsWithModule.reason.moduleIdentifier.(resolveModule(#.params.hash)).[not shouldHideModule()].sort(moduleSize() desc),
                 type: 'module'
               }, {
                 title: "Packages",
@@ -148,7 +139,7 @@ export function packageInstanceItemConfig() {
                         {
                         value: $child,
                         reasons: @.reasons,
-                        instances: $.resolvePackage().instances.({value: $, reasons: @.reasons, package: $child})
+                        instances: resolvePackage(#.params.hash).instances.({value: $, reasons: @.reasons, package: $child})
                           .[
                             $foo:value.path;
                             reasons.reason.(moduleReasonResource().nodeModule()).path has $foo
@@ -157,7 +148,10 @@ export function packageInstanceItemConfig() {
                       `,
                     itemConfig: {
                       content: [
-                        `link:{text: value, href: "#package:" + value.encodeURIComponent()}`,
+                        `link:{
+                          text: value,
+                          href: value.pageLink("package", {hash:#.params.hash}),
+                        }`,
                         {
                           when: 'reasons',
                           view: 'badge',

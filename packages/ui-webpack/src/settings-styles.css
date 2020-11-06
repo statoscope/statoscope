@@ -1,6 +1,7 @@
-.toggle {
+.item {
     padding: 4px 6px 4px 12px;
 }
+
 .toggle  :global(.view-toggle) {
     font-size: 11px;
 }

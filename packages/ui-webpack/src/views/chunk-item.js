@@ -1,16 +1,7 @@
-import styles from './chunk-item.css';
-
 export default function (discovery) {
   discovery.view.define('chunk-item', render);
-  discovery.view.define('chunk-item-inline', render);
 
   function render(el, config, data, context) {
-    const { inline } = config;
-
-    if (inline) {
-      el.classList.add(styles.inline);
-    }
-
     const { showSize = true, showType = true } = data;
 
     discovery.view.render(
@@ -27,7 +18,7 @@ export default function (discovery) {
         {
           view: 'link',
           data: `{
-            href:"#chunk:" + chunk.id.encodeURIComponent(),
+            href:chunk.id.pageLink("chunk", {hash:#.params.hash}),
             text: chunk.chunkName(),
             match: match
           }`,

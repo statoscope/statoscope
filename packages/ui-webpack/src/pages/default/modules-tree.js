@@ -10,7 +10,7 @@ export function moduleItemConfig(getter = '$') {
   return {
     content: `module-item:{module: ${getter}, match: #.filter}`,
     children: `
-    $reasonsModule:${getter}.reasons.[moduleIdentifier].moduleIdentifier.(resolveModule()).[not shouldHideModule()];
+    $reasonsModule:${getter}.reasons.[moduleIdentifier].moduleIdentifier.(resolveModule(#.params.hash)).[not shouldHideModule()];
     [{
       title: "Reasons",
       data: $reasonsModule,
@@ -38,7 +38,7 @@ export function moduleItemConfig(getter = '$') {
             }, {
               title: "Chunks",
               reasons: data,
-              data: data.chunks.(resolveChunk()).sort(initial desc, entry desc, size desc),
+              data: data.chunks.(resolveChunk(#.params.hash)).sort(initial desc, entry desc, size desc),
               visible: data,
               type: 'chunks'
             }].[visible]`,

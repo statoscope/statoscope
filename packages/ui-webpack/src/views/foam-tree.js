@@ -79,11 +79,10 @@ export default function (discovery) {
           const group = event.group;
 
           if (event.group.link) {
-            const link = discovery.encodePageHash(
-              group.link.page,
-              group.link.id,
-              group.link.params
-            );
+            const link = discovery.encodePageHash(group.link.page, group.link.id, {
+              ...group.link.params,
+              hash: discovery.getRenderContext().params.hash,
+            });
 
             if (link) {
               destroyPopup();

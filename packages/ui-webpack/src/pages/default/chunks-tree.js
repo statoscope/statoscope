@@ -20,15 +20,15 @@ export function chunkItemConfig(getter = '$') {
       }`,
     },
     children: `
-    $reasonModules:origins.[moduleIdentifier].moduleIdentifier.(resolveModule()).[not shouldHideModule()];
-    $chunkModules:(..modules).identifier.(resolveModule()).[not shouldHideModule()];
-    $chunkModulesPackages:$chunkModules.(moduleResource().nodeModule().name.resolvePackage());
+    $reasonModules:origins.[moduleIdentifier].moduleIdentifier.(resolveModule(#.params.hash)).[not shouldHideModule()];
+    $chunkModules:(..modules).identifier.(resolveModule(#.params.hash)).[not shouldHideModule()];
+    $chunkModulesPackages:$chunkModules.(moduleResource().nodeModule()).[].(name.resolvePackage(#.params.hash));
     $chunkPackages:$chunkModulesPackages.({name: name, instances: instances.[modules.[$ in $chunkModules]]});
-    $modules:modules.identifier.(resolveModule()).[not shouldHideModule()];
+    $modules:modules.identifier.(resolveModule(#.params.hash)).[not shouldHideModule()];
     [{
       title: "Reasons",
       reasons: $reasonModules,
-      data: $reasonModules.chunks.(resolveChunk()).sort(initial desc, entry desc, size desc),
+      data: $reasonModules.chunks.(resolveChunk(#.params.hash)).sort(initial desc, entry desc, size desc),
       visible: $reasonModules,
       type: 'reasons'
     }, {
@@ -44,7 +44,7 @@ export function chunkItemConfig(getter = '$') {
       type: 'packages'
     }, {
       title: "Assets",
-      data: files.(resolveAsset()).[$].sort(isOverSizeLimit asc, size desc),
+      data: files.(resolveAsset(#.params.hash)).[$].sort(isOverSizeLimit asc, size desc),
       visible: files,
       type: 'assets'
     }].[visible]`,
@@ -77,7 +77,7 @@ export function chunkItemConfig(getter = '$') {
             view: 'tree-leaf',
             content: 'text:title',
             children: `
-            $reasonChunks:reasons.chunks.(resolveChunk());
+            $reasonChunks:reasons.chunks.(resolveChunk(#.params.hash));
             [{
               title: "Chunks",
               reasons: reasons,

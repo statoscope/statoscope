@@ -3,80 +3,82 @@ import packagesTree, { packageInstanceTree } from './default/packages-tree';
 export default function (discovery) {
   discovery.page.define('package', [
     {
-      when: 'not __validation.result',
-      view: 'alert-danger',
-      data: `__validation.message`,
-    },
-    {
+      data: '#.params.hash.resolveStats()',
       view: 'switch',
-      data: `
-      $package:#.data.nodeModules.[name=#.id.decodeURIComponent()][0];
-      {
-        package: $package,
-        instance: #.params.instance ? $package.instances.[path=#.params.instance][0] : false
-      }`,
       content: [
         {
-          when: 'not package',
-          content:
-            'alert-warning:"Package `" + #.id.decodeURIComponent() + "` not found"',
+          when: 'not $',
+          content: 'stats-list',
         },
         {
-          when: 'instance=undefined',
-          content: 'alert-warning:"Instance `" + #.params.instance + "` not found"',
-        },
-        {
-          when: 'instance=false',
+          when: '$',
           content: [
             {
-              view: 'h1',
-              //className: styles.header,
+              when: 'not __validation.result',
+              view: 'alert-danger',
+              data: `__validation.message`,
+            },
+            {
+              view: 'switch',
+              data: `
+              $package:nodeModules.[name=#.id.decodeURIComponent()][0];
+              {
+                package: $package,
+                instance: #.params.instance ? $package.instances.[path=#.params.instance][0] : false
+              }`,
               content: [
-                'text:"Package"',
                 {
-                  view: 'badge',
-                  className: 'hack-badge-margin-left',
-                  data: '{ text: package.name }',
+                  when: 'not package',
+                  content:
+                    'alert-warning:"Package `" + #.id.decodeURIComponent() + "` not found"',
+                },
+                {
+                  when: 'instance=undefined',
+                  content:
+                    'alert-warning:"Instance `" + #.params.instance + "` not found"',
+                },
+                {
+                  when: 'instance=false',
+                  content: [
+                    {
+                      view: 'page-header',
+                      prelude: 'badge:{ text: "Package" }',
+                      content: 'h1:package.name',
+                    },
+                    {
+                      data: 'package',
+                      ...packagesTree(),
+                    },
+                    {
+                      view: 'foam-tree',
+                      data: `
+                      $packageModules:package.instances.modules.identifier.(resolveModule(#.params.hash));
+                      $packageModules.[not shouldHideModule()].modulesToFoamTree()
+                      `,
+                    },
+                  ],
+                },
+                {
+                  when: 'instance!=false',
+                  content: [
+                    {
+                      view: 'page-header',
+                      prelude: 'badge:{ text: "Instance of", postfix: package.name }',
+                      content: 'h1:instance.path',
+                    },
+                    {
+                      ...packageInstanceTree(),
+                    },
+                    {
+                      view: 'foam-tree',
+                      data: `
+                      $packageModules:instance.modules.identifier.(resolveModule(#.params.hash));
+                      $packageModules.[not shouldHideModule()].modulesToFoamTree()
+                      `,
+                    },
+                  ],
                 },
               ],
-            },
-            {
-              data: 'package',
-              ...packagesTree(),
-            },
-            {
-              view: 'foam-tree',
-              data: `
-              $packageModules:package.instances.modules.identifier.(resolveModule());
-              $packageModules.[not shouldHideModule()].modulesToFoamTree()
-              `,
-            },
-          ],
-        },
-        {
-          when: 'instance!=false',
-          content: [
-            {
-              view: 'h1',
-              //className: styles.header,
-              content: [
-                'text:"Instance"',
-                {
-                  view: 'badge',
-                  className: 'hack-badge-margin-left',
-                  data: '{ text: instance.path, prefix: package.name }',
-                },
-              ],
-            },
-            {
-              ...packageInstanceTree(),
-            },
-            {
-              view: 'foam-tree',
-              data: `
-              $packageModules:instance.modules.identifier.(resolveModule());
-              $packageModules.[not shouldHideModule()].modulesToFoamTree()
-              `,
             },
           ],
         },
