@@ -3,37 +3,38 @@ import { chunkItemConfig } from './chunks-tree';
 import { entryItemConfig } from './entry-tree';
 import { packageItemConfig } from './packages-tree';
 
-export default () => {
+export default (hash) => {
   return {
     view: 'tree',
     expanded: false,
-    itemConfig: assetItemConfig(),
+    itemConfig: assetItemConfig(void 0, hash),
   };
 };
 
-export function assetItemConfig(getter = '$') {
+export function assetItemConfig(getter = '$', hash = '#.params.hash') {
   return {
     content: {
       view: 'asset-item',
       data: `{
         asset: ${getter}, 
+        hash: ${hash},
         match: #.filter
       }`,
     },
     children: `
-    $entrypoints:#.params.hash.resolveStats().entrypoints.entries().(
-      $chunks:value.chunks.(resolveChunk(#.params.hash));
+    $entrypoints:${hash}.resolveStats().entrypoints.entries().(
+      $chunks:value.chunks.(resolveChunk(${hash}));
       {
         name: key,
         data: value, 
-        chunks: $chunks + $chunks..(children.(resolveChunk(#.params.hash)))
+        chunks: $chunks + $chunks..(children.(resolveChunk(${hash})))
       }
     );
-    $topLevelAssetChunks:chunks.(resolveChunk(#.params.hash)).[files has @.name];
-    $assetChunks: ($topLevelAssetChunks + $topLevelAssetChunks..(children.(resolveChunk(#.params.hash)))).[files has @.name];
+    $topLevelAssetChunks:chunks.(resolveChunk(${hash})).[files has @.name];
+    $assetChunks: ($topLevelAssetChunks + $topLevelAssetChunks..(children.(resolveChunk(${hash})))).[files has @.name];
     $assetEntrypoints:$entrypoints.[chunks[id in $assetChunks.id]];
-    $chunksModules:$assetChunks.(..modules).identifier.(resolveModule(#.params.hash)).[not shouldHideModule()];
-    $chunksModulesPackages:$chunksModules.(moduleResource().nodeModule()).[].(name.resolvePackage(#.params.hash)).[$];
+    $chunksModules:$assetChunks.(..modules).identifier.(resolveModule(${hash})).[not shouldHideModule()];
+    $chunksModulesPackages:$chunksModules.(moduleResource().nodeModule()).[].(name.resolvePackage(${hash})).[$];
     $chunksPackages:$chunksModulesPackages.({name: name, instances: instances.[modules.[$ in $chunksModules]]});
     [{
       title: "Entrypoints",
@@ -75,7 +76,7 @@ export function assetItemConfig(getter = '$') {
             children: 'data',
             limit: '= settingListItemsLimit()',
             get itemConfig() {
-              return entryItemConfig();
+              return entryItemConfig(void 0, hash);
             },
           },
         },
@@ -95,7 +96,7 @@ export function assetItemConfig(getter = '$') {
             children: 'data',
             limit: '= settingListItemsLimit()',
             get itemConfig() {
-              return chunkItemConfig();
+              return chunkItemConfig(void 0, hash);
             },
           },
         },
@@ -115,7 +116,7 @@ export function assetItemConfig(getter = '$') {
             children: 'data',
             limit: '= settingListItemsLimit()',
             get itemConfig() {
-              return moduleItemConfig();
+              return moduleItemConfig(void 0, hash);
             },
           },
         },
@@ -135,7 +136,7 @@ export function assetItemConfig(getter = '$') {
             children: 'data',
             limit: '= settingListItemsLimit()',
             get itemConfig() {
-              return packageItemConfig();
+              return packageItemConfig(hash);
             },
           },
         },

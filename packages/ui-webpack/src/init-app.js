@@ -46,6 +46,8 @@ export default ({ element = document.body, data, name, prepare, views, pages }) 
     setup: {},
   });
 
+  console.log(discovery);
+
   data = normalizeData(data);
 
   const context = { name, data };

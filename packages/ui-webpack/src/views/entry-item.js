@@ -10,7 +10,7 @@ export default function (discovery) {
         {
           view: 'link',
           data: `{
-            href: entrypoint.name.pageLink("entrypoint", {hash:#.params.hash}),
+            href: entrypoint.name.pageLink("entrypoint", {hash:hash or #.params.hash}),
             text: entrypoint.name,
             match: match
           }`,
@@ -19,9 +19,10 @@ export default function (discovery) {
         {
           view: 'badge',
           className: 'hack-badge-margin-left',
-          data: `{
+          data: `$hash:hash or #.params.hash;
+          {
             prefix: "initial size",
-            text: entrypoint.data.chunks.(resolveChunk(#.params.hash)).[initial].files.(resolveAsset(#.params.hash)).[$].size.reduce(=> $ + $$, 0).formatSize(),
+            text: entrypoint.data.chunks.(resolveChunk($hash)).[initial].files.(resolveAsset($hash)).[$].size.reduce(=> $ + $$, 0).formatSize(),
             color: entrypoint.data.isOverSizeLimit and 0.colorFromH(),
             hint: entrypoint.data.isOverSizeLimit and "oversized"
           }`,

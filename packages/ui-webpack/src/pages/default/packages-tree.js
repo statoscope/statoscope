@@ -1,37 +1,36 @@
 import { moduleItemConfig } from './modules-tree';
 
-export default () => ({
+export default (hash) => ({
   view: 'tree',
   expanded: false,
-  itemConfig: packageItemConfig(),
+  itemConfig: packageItemConfig(hash),
 });
 
-export function packageInstanceTree() {
+export function packageInstanceTree(hash) {
   return {
     view: 'tree',
     expanded: false,
-    itemConfig: packageInstanceItemConfig(),
+    itemConfig: packageInstanceItemConfig(void 0, hash),
   };
 }
 
-export function packageItemConfig() {
+export function packageItemConfig(hash) {
   return {
     children: 'instances.sort(size() asc, $ asc).({instance: $, package: @.name})',
-    content: 'package-item:{package:$}',
+    content: `package-item:{package:$, hash: ${hash}}`,
     get itemConfig() {
-      return packageInstanceItemConfig();
+      return packageInstanceItemConfig(void 0, hash);
     },
   };
 }
 
-export function packageInstanceItemConfig() {
+export function packageInstanceItemConfig(hash = '#.params.hash') {
   return {
-    // content: 'text-match:{text: instance.path, match: package}',
     content: {
       view: 'link',
       data: `{
         text: instance.path,
-        href: package.pageLink("package", {instance: instance.path, hash:#.params.hash}),
+        href: package.pageLink("package", {instance: instance.path, hash:${hash}}),
         match: package
       }`,
       content: 'text-match',
@@ -54,15 +53,15 @@ export function packageInstanceItemConfig() {
             view: 'tree-leaf',
             content: 'text:title',
             children: `
-              $reasonsWithModule:data.[type='module'].data.({reason: $, module: moduleIdentifier.resolveModule(#.params.hash)});
+              $reasonsWithModule:data.[type='module'].data.({reason: $, module: moduleIdentifier.resolveModule(${hash})});
               [{
                 title: "Chunks",
                 reasons: $reasonsWithModule,
-                children: $reasonsWithModule.reason.moduleIdentifier.(resolveModule(#.params.hash)).[not shouldHideModule()].chunks.(resolveChunk(#.params.hash)).sort(initial desc, entry desc, size desc),
+                children: $reasonsWithModule.reason.moduleIdentifier.(resolveModule(${hash})).[not shouldHideModule()].chunks.(resolveChunk(${hash})).sort(initial desc, entry desc, size desc),
                 type: 'chunk'
               }, {
                 title: "Modules",
-                children: $reasonsWithModule.reason.moduleIdentifier.(resolveModule(#.params.hash)).[not shouldHideModule()].sort(moduleSize() desc),
+                children: $reasonsWithModule.reason.moduleIdentifier.(resolveModule(${hash})).[not shouldHideModule()].sort(moduleSize() desc),
                 type: 'module'
               }, {
                 title: "Packages",
@@ -88,14 +87,14 @@ export function packageInstanceItemConfig() {
                     ],
                     children: `children.({value: $, reasons: @.reasons})`,
                     itemConfig: {
-                      content: 'chunk-item:{chunk: value}',
+                      content: `chunk-item:{chunk: value, hash: ${hash}}`,
                       children: `
                         $chunks:reasons.[module.chunks has @.value.id];
                         $chunks.module.({value: $, reasons: $chunks.reason}).sort(value.moduleSize() desc)
                         `,
                       limit: '= settingListItemsLimit()',
                       get itemConfig() {
-                        return moduleItemConfig('value');
+                        return moduleItemConfig('value', hash);
                       },
                     },
                   },
@@ -116,7 +115,7 @@ export function packageInstanceItemConfig() {
                     children: `children`,
                     limit: '= settingListItemsLimit()',
                     get itemConfig() {
-                      return moduleItemConfig();
+                      return moduleItemConfig(void 0, hash);
                     },
                   },
                 },
@@ -139,7 +138,7 @@ export function packageInstanceItemConfig() {
                         {
                         value: $child,
                         reasons: @.reasons,
-                        instances: resolvePackage(#.params.hash).instances.({value: $, reasons: @.reasons, package: $child})
+                        instances: resolvePackage(${hash}).instances.({value: $, reasons: @.reasons, package: $child})
                           .[
                             $foo:value.path;
                             reasons.reason.(moduleReasonResource().nodeModule()).path has $foo
@@ -150,7 +149,7 @@ export function packageInstanceItemConfig() {
                       content: [
                         `link:{
                           text: value,
-                          href: value.pageLink("package", {hash:#.params.hash}),
+                          href: value.pageLink("package", {hash:${hash}}),
                         }`,
                         {
                           when: 'reasons',
@@ -185,7 +184,7 @@ export function packageInstanceItemConfig() {
                         children: `reasonModules`,
                         limit: '= settingListItemsLimit()',
                         get itemConfig() {
-                          return moduleItemConfig('module');
+                          return moduleItemConfig('module', hash);
                         },
                       },
                     },
@@ -211,7 +210,7 @@ export function packageInstanceItemConfig() {
             children: 'data',
             limit: '= settingListItemsLimit()',
             get itemConfig() {
-              return moduleItemConfig();
+              return moduleItemConfig(void 0, hash);
             },
           },
         },

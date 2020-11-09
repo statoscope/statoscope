@@ -2,33 +2,34 @@ import { moduleItemConfig } from './modules-tree';
 import { assetItemConfig } from './assets-tree';
 import { packageItemConfig } from './packages-tree';
 
-export default () => {
+export default (hash) => {
   return {
     view: 'tree',
     expanded: false,
-    itemConfig: chunkItemConfig(),
+    itemConfig: chunkItemConfig(void 0, hash),
   };
 };
 
-export function chunkItemConfig(getter = '$') {
+export function chunkItemConfig(getter = '$', hash = '#.params.hash') {
   return {
     content: {
       view: 'chunk-item',
       data: `{
-        chunk: ${getter}, 
+        chunk: ${getter},
+        hash: ${hash}, 
         match: #.filter
       }`,
     },
     children: `
-    $reasonModules:origins.[moduleIdentifier].moduleIdentifier.(resolveModule(#.params.hash)).[not shouldHideModule()];
-    $chunkModules:(..modules).identifier.(resolveModule(#.params.hash)).[not shouldHideModule()];
-    $chunkModulesPackages:$chunkModules.(moduleResource().nodeModule()).[].(name.resolvePackage(#.params.hash));
+    $reasonModules:origins.[moduleIdentifier].moduleIdentifier.(resolveModule(${hash})).[not shouldHideModule()];
+    $chunkModules:(..modules).identifier.(resolveModule(${hash})).[not shouldHideModule()];
+    $chunkModulesPackages:$chunkModules.(moduleResource().nodeModule()).[].(name.resolvePackage(${hash}));
     $chunkPackages:$chunkModulesPackages.({name: name, instances: instances.[modules.[$ in $chunkModules]]});
-    $modules:modules.identifier.(resolveModule(#.params.hash)).[not shouldHideModule()];
+    $modules:modules.identifier.(resolveModule(${hash})).[not shouldHideModule()];
     [{
       title: "Reasons",
       reasons: $reasonModules,
-      data: $reasonModules.chunks.(resolveChunk(#.params.hash)).sort(initial desc, entry desc, size desc),
+      data: $reasonModules.chunks.(resolveChunk(${hash})).sort(initial desc, entry desc, size desc),
       visible: $reasonModules,
       type: 'reasons'
     }, {
@@ -44,7 +45,7 @@ export function chunkItemConfig(getter = '$') {
       type: 'packages'
     }, {
       title: "Assets",
-      data: files.(resolveAsset(#.params.hash)).[$].sort(isOverSizeLimit asc, size desc),
+      data: files.(resolveAsset(${hash})).[$].sort(isOverSizeLimit asc, size desc),
       visible: files,
       type: 'assets'
     }].[visible]`,
@@ -67,7 +68,7 @@ export function chunkItemConfig(getter = '$') {
             children: 'data',
             limit: '= settingListItemsLimit()',
             get itemConfig() {
-              return moduleItemConfig();
+              return moduleItemConfig(void 0, hash);
             },
           },
         },
@@ -77,7 +78,7 @@ export function chunkItemConfig(getter = '$') {
             view: 'tree-leaf',
             content: 'text:title',
             children: `
-            $reasonChunks:reasons.chunks.(resolveChunk(#.params.hash));
+            $reasonChunks:reasons.chunks.(resolveChunk(${hash}));
             [{
               title: "Chunks",
               reasons: reasons,
@@ -129,7 +130,7 @@ export function chunkItemConfig(getter = '$') {
                     children: 'data',
                     limit: '= settingListItemsLimit()',
                     get itemConfig() {
-                      return moduleItemConfig();
+                      return moduleItemConfig(void 0, hash);
                     },
                   },
                 },
@@ -153,7 +154,7 @@ export function chunkItemConfig(getter = '$') {
             children: 'data',
             limit: '= settingListItemsLimit()',
             get itemConfig() {
-              return packageItemConfig();
+              return packageItemConfig(hash);
             },
           },
         },
@@ -176,7 +177,7 @@ export function chunkItemConfig(getter = '$') {
             children: 'data',
             limit: '= settingListItemsLimit()',
             get itemConfig() {
-              return assetItemConfig();
+              return assetItemConfig(void 0, hash);
             },
           },
         },

@@ -18,7 +18,7 @@ export default function (discovery) {
         {
           view: 'link',
           data: `{
-            href:chunk.id.pageLink("chunk", {hash:#.params.hash}),
+            href:chunk.id.pageLink("chunk", {hash:hash or #.params.hash}),
             text: chunk.chunkName(),
             match: match
           }`,

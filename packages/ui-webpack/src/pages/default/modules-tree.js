@@ -1,16 +1,16 @@
-export default () => {
+export default (hash) => {
   return {
     view: 'tree',
     expanded: false,
-    itemConfig: moduleItemConfig(),
+    itemConfig: moduleItemConfig(void 0, hash),
   };
 };
 
-export function moduleItemConfig(getter = '$') {
+export function moduleItemConfig(getter = '$', hash = '#.params.hash') {
   return {
-    content: `module-item:{module: ${getter}, match: #.filter}`,
+    content: `module-item:{module: ${getter}, hash: ${hash}, match: #.filter}`,
     children: `
-    $reasonsModule:${getter}.reasons.[moduleIdentifier].moduleIdentifier.(resolveModule(#.params.hash)).[not shouldHideModule()];
+    $reasonsModule:${getter}.reasons.[moduleIdentifier].moduleIdentifier.(resolveModule(${hash})).[not shouldHideModule()];
     [{
       title: "Reasons",
       data: $reasonsModule,
@@ -38,7 +38,7 @@ export function moduleItemConfig(getter = '$') {
             }, {
               title: "Chunks",
               reasons: data,
-              data: data.chunks.(resolveChunk(#.params.hash)).sort(initial desc, entry desc, size desc),
+              data: data.chunks.(resolveChunk(${hash})).sort(initial desc, entry desc, size desc),
               visible: data,
               type: 'chunks'
             }].[visible]`,
@@ -80,7 +80,7 @@ export function moduleItemConfig(getter = '$') {
                     ],
                     children: `data.({value: $, reasons: @.reasons})`,
                     itemConfig: {
-                      content: 'chunk-item:{chunk: value}',
+                      content: `chunk-item:{chunk: value, hash: ${hash}}`,
                       children: `reasons.[chunks has @.value.id]`,
                       limit: '= settingListItemsLimit()',
                       get itemConfig() {

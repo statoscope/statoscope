@@ -19,7 +19,7 @@ export default function (discovery) {
         {
           view: 'link',
           data: `{
-            href:asset.name.pageLink("asset", {hash:#.params.hash}),
+            href:asset.name.pageLink("asset", {hash:hash or #.params.hash}),
             text: asset.name,
             match: match
           }`,

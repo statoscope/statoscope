@@ -3,27 +3,31 @@ import { chunkItemConfig } from './chunks-tree';
 import { moduleItemConfig } from './modules-tree';
 import { packageItemConfig } from './packages-tree';
 
-export default () => {
+export default (hash) => {
   return {
     view: 'tree',
     expanded: false,
-    itemConfig: entryItemConfig(),
+    itemConfig: entryItemConfig(void 0, hash),
   };
 };
 
-export function entryItemConfig(getter = '$') {
+export function entryItemConfig(getter = '$', hash = '#.params.hash') {
   return {
     limit: '= settingListItemsLimit()',
     content: {
       view: 'entry-item',
-      data: `{entrypoint: ${getter}, match: #.filter}`,
+      data: `{
+        entrypoint: ${getter},
+        hash: ${hash},
+        match: #.filter
+      }`,
     },
     children: `
     $entry:$;
-    $topLevelChunks:$entry.data.chunks.(resolveChunk(#.params.hash));
-    $chunks:($topLevelChunks + $topLevelChunks..(children.(resolveChunk(#.params.hash))));
-    $chunksModules:$chunks.(..modules).identifier.(resolveModule(#.params.hash)).[not shouldHideModule()];
-    $chunksModulesPackages:$chunksModules.(moduleResource().nodeModule()).[].(name.resolvePackage(#.params.hash)).[$];
+    $topLevelChunks:$entry.data.chunks.(resolveChunk(${hash}));
+    $chunks:($topLevelChunks + $topLevelChunks..(children.(resolveChunk(${hash}))));
+    $chunksModules:$chunks.(..modules).identifier.(resolveModule(${hash})).[not shouldHideModule()];
+    $chunksModulesPackages:$chunksModules.(moduleResource().nodeModule()).[].(name.resolvePackage(${hash})).[$];
     $chunksPackages:$chunksModulesPackages.({name: name, instances: instances.[modules.[$ in $chunksModules]]});
     [{
       title: "Chunks",
@@ -32,7 +36,7 @@ export function entryItemConfig(getter = '$') {
       type: 'chunks'
     },{
       title: "Modules",
-      data: $chunks.modules.identifier.(resolveModule(#.params.hash)).[not shouldHideModule()].sort(moduleSize() desc),
+      data: $chunks.modules.identifier.(resolveModule(${hash})).[not shouldHideModule()].sort(moduleSize() desc),
       visible: true,
       type: 'modules'
     },{
@@ -82,7 +86,7 @@ export function entryItemConfig(getter = '$') {
               children: `data`,
               limit: '= settingListItemsLimit()',
               get itemConfig() {
-                return chunkItemConfig();
+                return chunkItemConfig(void 0, hash);
               },
             },
           },
@@ -103,7 +107,7 @@ export function entryItemConfig(getter = '$') {
             children: `data`,
             limit: '= settingListItemsLimit()',
             get itemConfig() {
-              return moduleItemConfig();
+              return moduleItemConfig(void 0, hash);
             },
           },
         },
@@ -123,7 +127,7 @@ export function entryItemConfig(getter = '$') {
             children: 'data',
             limit: '= settingListItemsLimit()',
             get itemConfig() {
-              return packageItemConfig();
+              return packageItemConfig(hash);
             },
           },
         },
@@ -135,8 +139,8 @@ export function entryItemConfig(getter = '$') {
             children: `
             $initialChunks:chunks.[initial];
             $asyncChunks:chunks.[not initial];
-            $initialAssets:$initialChunks.files.(resolveAsset(#.params.hash)).[$];
-            $asyncAssets:$asyncChunks.files.(resolveAsset(#.params.hash)).[$];
+            $initialAssets:$initialChunks.files.(resolveAsset(${hash})).[$];
+            $asyncAssets:$asyncChunks.files.(resolveAsset(${hash})).[$];
             [{
               title: "Initial",
               data: $initialAssets.sort(isOverSizeLimit asc, size desc),
@@ -162,7 +166,7 @@ export function entryItemConfig(getter = '$') {
               children: `data`,
               limit: '= settingListItemsLimit()',
               get itemConfig() {
-                return assetItemConfig();
+                return assetItemConfig(void 0, hash);
               },
             },
           },

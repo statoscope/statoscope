@@ -31,6 +31,12 @@ function addCustomIndex(discovery) {
 }
 
 function addLinks(discovery) {
+  discovery.nav.append({
+    name: 'diff',
+    when: `#.widget | pageId != 'diff' and #.data.keys().size()>1`,
+    data: `{ text: "Diff", href: pageLink('diff', {hash:#.params.hash}) }`,
+  });
+
   discovery.nav.primary.append({
     name: 'github',
     data: `{ text: "Github", href: 'https://github.com/smelukov/statoscope' }`,

@@ -9,7 +9,7 @@ export default function (discovery) {
           view: 'link',
           data: `{
             text: package.name,
-            href: package.name.pageLink("package", {hash:#.params.hash}),
+            href: package.name.pageLink("package", {hash:hash or #.params.hash}),
             match: #.filter
           }`,
           content: 'text-match',
