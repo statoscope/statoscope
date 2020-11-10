@@ -226,7 +226,7 @@ function nodeModule(path) {
   return name ? { path: input, name } : null;
 }
 
-export default (rawData, { addQueryHelpers }) => {
+export default (discovery) => (rawData, { addQueryHelpers }) => {
   const statsMap = new Map();
 
   for (const [hash, item] of Object.entries(rawData)) {
@@ -427,17 +427,8 @@ export default (rawData, { addQueryHelpers }) => {
         .get(SETTING_LIST_ITEMS_LIMIT, SETTING_LIST_ITEMS_LIMIT_DEFAULT)
         .get();
     },
-    diff(diffSource, diffTarget) {
-      diffSource = resolveStatsFromMap(diffSource);
-      diffTarget = resolveStatsFromMap(diffTarget);
-
-      return {
-        entrypoints: {},
-        chunks: {},
-        modules: {},
-        assets: {},
-        packages: {},
-      };
+    diffModule(a, b) {
+      return { a, b };
     },
   });
 

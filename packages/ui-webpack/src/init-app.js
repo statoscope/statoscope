@@ -53,7 +53,7 @@ export default ({ element = document.body, data, name, prepare, views, pages }) 
   const context = { name, data };
 
   discovery.apply(discoveryLib.router);
-  discovery.setPrepare(prepare);
+  discovery.setPrepare(prepare(discovery));
   discovery.setData(data, context);
 
   discovery.apply(views);
