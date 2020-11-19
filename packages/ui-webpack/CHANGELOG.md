@@ -5,6 +5,7 @@
 ### Features
 
 - support multiple stats
+- stats diff
 - stats validation
 
 ### Bugfix

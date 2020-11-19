@@ -2,6 +2,12 @@ export default function (discovery) {
   discovery.view.define('package-item', render);
 
   function render(el, config, data, context) {
+    const { inline = false } = data;
+
+    if (inline) {
+      el.classList.add('inline-block');
+    }
+
     discovery.view.render(
       el,
       [
@@ -10,12 +16,12 @@ export default function (discovery) {
           data: `{
             text: package.name,
             href: package.name.pageLink("package", {hash:hash or #.params.hash}),
-            match: #.filter
+            match
           }`,
           content: 'text-match',
         },
         {
-          when: 'package.instances.size() > 1',
+          when: 'showInstancesTotal!=false and package.instances.size() > 1',
           view: 'badge',
           className: 'hack-badge-margin-left',
           data:

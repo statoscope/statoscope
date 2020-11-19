@@ -18,3 +18,7 @@
 :global(.inline-layout) {
     display: flex;
 }
+
+:global(.inline-block) {
+    display: inline-block;
+}

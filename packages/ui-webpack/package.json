@@ -20,7 +20,7 @@
   "license": "MIT",
   "homepage": "https://github.com/smelukov/statoscope/",
   "devDependencies": {
-    "@discoveryjs/discovery": "^1.0.0-beta.48",
+    "@discoveryjs/discovery": "^1.0.0-beta.51",
     "@popperjs/core": "^2.5.3",
     "@wdxlab/events": "^1.1.0",
     "babel-loader": "^8.1.0",

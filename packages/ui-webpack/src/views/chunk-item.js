@@ -2,7 +2,11 @@ export default function (discovery) {
   discovery.view.define('chunk-item', render);
 
   function render(el, config, data, context) {
-    const { showSize = true, showType = true } = data;
+    const { showSize = true, showType = true, inline = false } = data;
+
+    if (inline) {
+      el.classList.add('inline-block');
+    }
 
     discovery.view.render(
       el,

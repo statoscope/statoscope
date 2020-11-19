@@ -42,6 +42,11 @@ export default function (discovery) {
               view: 'page-header',
               prelude: [
                 {
+                  when: 'name',
+                  view: 'badge',
+                  data: `{ prefix: 'name', text: name }`,
+                },
+                {
                   when: 'version',
                   view: 'badge',
                   data: `{prefix:'webpack version',text:version}`,

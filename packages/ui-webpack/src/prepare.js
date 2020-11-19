@@ -245,14 +245,27 @@ export default (discovery) => (rawData, { addQueryHelpers }) => {
       return parseInt(str, 10);
     },
     formatSize(value) {
+      const sign = Math.sign(value);
+      value = Math.abs(value);
+
       if (isFinite(value)) {
         if (value < 1000 * 1000) {
-          return (value / 1024).toFixed(2) + ' kb';
+          return (sign * (value / 1024)).toFixed(2) + ' kb';
         }
 
-        return (value / 1024 / 1024).toFixed(2) + ' mb';
+        return (sign * (value / 1024 / 1024)).toFixed(2) + ' mb';
       }
       return 'n/a';
+    },
+    percentFrom(a, b) {
+      if (!b) {
+        return 100;
+      }
+
+      return (a / b - 1) * 100;
+    },
+    toFixed(value, digits = 2) {
+      return value.toFixed(2);
     },
     color: (value) => (colorMap[value] ? colorMap[value].color : generateColor(value)),
     fileExt: (value = '') => {
@@ -427,8 +440,8 @@ export default (discovery) => (rawData, { addQueryHelpers }) => {
         .get(SETTING_LIST_ITEMS_LIMIT, SETTING_LIST_ITEMS_LIMIT_DEFAULT)
         .get();
     },
-    diffModule(a, b) {
-      return { a, b };
+    statName(stat) {
+      return stat.name ? `${stat.name} (${stat.hash})` : stat.hash;
     },
   });
 

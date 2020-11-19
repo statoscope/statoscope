@@ -13,13 +13,16 @@ export default function (discovery) {
           data: '"Choose a stats to view:"',
         },
         {
-          data: '#.data.values().[hash!=#.params.hash].({hash,version})',
+          data: '#.data.values().[hash!=#.params.hash].({hash,version,name})',
           view: 'list',
           itemConfig: {
             content: [
               {
                 view: 'link',
-                data: `{text:hash,href:#.id.pageLink(#.page, {...#.params,hash})}`,
+                data: `{
+                  text: statName(),
+                  href: #.id.pageLink(#.page, { ...#.params,hash })
+                }`,
                 onClick(el, data, context) {
                   if (typeof onClick === 'function') {
                     onClick(el, data, context);

@@ -12,7 +12,6 @@ module.exports = (api) => {
           modules: false,
         },
       ],
-      '@babel/react',
     ],
   };
 };

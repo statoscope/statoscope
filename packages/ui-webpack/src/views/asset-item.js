@@ -2,7 +2,11 @@ export default function (discovery) {
   discovery.view.define('asset-item', render);
 
   function render(el, config, data, context) {
-    const { showSize = true } = data;
+    const { showSize = true, inline = false } = data;
+
+    if (inline) {
+      el.classList.add('inline-block');
+    }
 
     discovery.view.render(
       el,
