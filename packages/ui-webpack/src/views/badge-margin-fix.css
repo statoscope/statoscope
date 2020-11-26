@@ -1,0 +1,7 @@
+.root > :global(:not(.view-badge)) + :global(.view-badge) {
+    margin-left: 0.5em;
+}
+
+.root > :global(.view-badge:last-child) {
+    margin-right: 0;
+}

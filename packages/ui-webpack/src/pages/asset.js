@@ -3,7 +3,7 @@ import assetsTree from './default/assets-tree';
 export default function (discovery) {
   discovery.page.define('asset', [
     {
-      data: '#.params.hash.resolveStats()',
+      data: '#.params.hash.resolveCompilation()',
       view: 'switch',
       content: [
         {
@@ -14,9 +14,9 @@ export default function (discovery) {
           when: '$',
           content: [
             {
-              when: 'not __validation.result',
+              when: 'not validation.result',
               view: 'alert-danger',
-              data: `__validation.message`,
+              data: `validation.message`,
             },
             {
               view: 'switch',
@@ -40,8 +40,8 @@ export default function (discovery) {
                     {
                       view: 'foam-tree',
                       data: `
-                      $topLevelAssetChunks:chunks.(resolveChunk(#.params.hash)).[files has @.name];
-                      $assetChunks: ($topLevelAssetChunks + $topLevelAssetChunks..(children.(resolveChunk(#.params.hash)))).[files has @.name];
+                      $topLevelAssetChunks:chunks.[files has @];
+                      $assetChunks: ($topLevelAssetChunks + $topLevelAssetChunks..children).[files has @];
                       $assetChunks.modules.[not shouldHideModule()].modulesToFoamTree()
                       `,
                     },

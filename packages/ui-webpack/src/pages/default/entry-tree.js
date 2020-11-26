@@ -7,6 +7,7 @@ export default (hash) => {
   return {
     view: 'tree',
     expanded: false,
+    limitLines: '= settingListItemsLimit()',
     itemConfig: entryItemConfig(void 0, hash),
   };
 };
@@ -24,10 +25,10 @@ export function entryItemConfig(getter = '$', hash = '#.params.hash') {
     },
     children: `
     $entry:$;
-    $topLevelChunks:$entry.data.chunks.(resolveChunk(${hash}));
-    $chunks:($topLevelChunks + $topLevelChunks..(children.(resolveChunk(${hash}))));
-    $chunksModules:$chunks.(..modules).identifier.(resolveModule(${hash})).[not shouldHideModule()];
-    $chunksModulesPackages:$chunksModules.(moduleResource().nodeModule()).[].(name.resolvePackage(${hash})).[$];
+    $topLevelChunks:$entry.data.chunks;
+    $chunks:$topLevelChunks + $topLevelChunks..children;
+    $chunksModules:$chunks..modules.[not shouldHideModule()];
+    $chunksModulesPackages:$chunksModules.(resolvedResource.nodeModule()).[].(name.resolvePackage(${hash})).[];
     $chunksPackages:$chunksModulesPackages.({name: name, instances: instances.[modules.[$ in $chunksModules]]});
     [{
       title: "Chunks",
@@ -36,7 +37,7 @@ export function entryItemConfig(getter = '$', hash = '#.params.hash') {
       type: 'chunks'
     },{
       title: "Modules",
-      data: $chunks.modules.identifier.(resolveModule(${hash})).[not shouldHideModule()].sort(moduleSize() desc),
+      data: $chunks.modules.[not shouldHideModule()].sort(moduleSize() desc),
       visible: true,
       type: 'modules'
     },{
@@ -48,6 +49,7 @@ export function entryItemConfig(getter = '$', hash = '#.params.hash') {
       title: "Assets",
       visible: true,
       chunks: $chunks,
+      visible: $chunks,
       type: 'assets'
     }].[visible]`,
     itemConfig: {
@@ -139,8 +141,8 @@ export function entryItemConfig(getter = '$', hash = '#.params.hash') {
             children: `
             $initialChunks:chunks.[initial];
             $asyncChunks:chunks.[not initial];
-            $initialAssets:$initialChunks.files.(resolveAsset(${hash})).[$];
-            $asyncAssets:$asyncChunks.files.(resolveAsset(${hash})).[$];
+            $initialAssets:$initialChunks.files;
+            $asyncAssets:$asyncChunks.files;
             [{
               title: "Initial",
               data: $initialAssets.sort(isOverSizeLimit asc, size desc),

@@ -3,7 +3,7 @@ import entryTree from './default/entry-tree';
 export default function (discovery) {
   discovery.page.define('entrypoint', [
     {
-      data: '#.params.hash.resolveStats()',
+      data: '#.params.hash.resolveCompilation()',
       view: 'switch',
       content: [
         {
@@ -14,13 +14,13 @@ export default function (discovery) {
           when: '$',
           content: [
             {
-              when: 'not __validation.result',
+              when: 'not validation.result',
               view: 'alert-danger',
-              data: `__validation.message`,
+              data: `validation.message`,
             },
             {
               view: 'switch',
-              data: `entrypoints.entries().({name:key,data:value}).[name=#.id.decodeURIComponent()][0]`,
+              data: `entrypoints.[name=#.id.decodeURIComponent()][0]`,
               content: [
                 {
                   when: 'not $',
@@ -53,9 +53,9 @@ export default function (discovery) {
                             content: {
                               view: 'foam-tree',
                               data: `
-                              $topLevelChunks:data.chunks.(resolveChunk(#.params.hash));
-                              $chunks:($topLevelChunks + $topLevelChunks..(children.(resolveChunk(#.params.hash))));
-                              $chunkModules:$chunks.modules.identifier.(resolveModule(#.params.hash)).[not shouldHideModule()];
+                              $topLevelChunks: data.chunks;
+                              $chunks: $topLevelChunks + $topLevelChunks..children;
+                              $chunkModules: $chunks.modules.[not shouldHideModule()];
                               $chunkModules.modulesToFoamTree()
                               `,
                             },
@@ -65,9 +65,9 @@ export default function (discovery) {
                             content: {
                               view: 'foam-tree',
                               data: `
-                              $topLevelChunks:data.chunks.(resolveChunk(#.params.hash));
-                              $chunks:($topLevelChunks + $topLevelChunks..(children.(resolveChunk(#.params.hash))));
-                              $chunkModules:$chunks.[initial].modules.identifier.(resolveModule(#.params.hash)).[not shouldHideModule()];
+                              $topLevelChunks: data.chunks;
+                              $chunks: $topLevelChunks + $topLevelChunks..children;
+                              $chunkModules: $chunks.[initial].modules.[not shouldHideModule()];
                               $chunkModules.modulesToFoamTree()
                               `,
                             },
@@ -77,9 +77,9 @@ export default function (discovery) {
                             content: {
                               view: 'foam-tree',
                               data: `
-                              $topLevelChunks:data.chunks.(resolveChunk(#.params.hash));
-                              $chunks:($topLevelChunks + $topLevelChunks..(children.(resolveChunk(#.params.hash))));
-                              $chunkModules:$chunks.[not initial].modules.identifier.(resolveModule(#.params.hash)).[not shouldHideModule()];
+                              $topLevelChunks: data.chunks;
+                              $chunks: $topLevelChunks + $topLevelChunks..children;
+                              $chunkModules: $chunks.[not initial].modules.[not shouldHideModule()];
                               $chunkModules.modulesToFoamTree()
                               `,
                             },

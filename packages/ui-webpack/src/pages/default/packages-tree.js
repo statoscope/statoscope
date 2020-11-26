@@ -3,6 +3,7 @@ import { moduleItemConfig } from './modules-tree';
 export default (hash) => ({
   view: 'tree',
   expanded: false,
+  limitLines: '= settingListItemsLimit()',
   itemConfig: packageItemConfig(hash),
 });
 
@@ -10,14 +11,16 @@ export function packageInstanceTree(hash) {
   return {
     view: 'tree',
     expanded: false,
+    limitLines: '= settingListItemsLimit()',
     itemConfig: packageInstanceItemConfig(void 0, hash),
   };
 }
 
 export function packageItemConfig(hash) {
   return {
+    limit: '= settingListItemsLimit()',
     children: 'instances.sort(size() asc, $ asc).({instance: $, package: @.name})',
-    content: `package-item:{package:$, hash: ${hash}}`,
+    content: `package-item:{package:$, hash: ${hash}, match: #.filter}`,
     get itemConfig() {
       return packageInstanceItemConfig(void 0, hash);
     },
@@ -53,20 +56,20 @@ export function packageInstanceItemConfig(hash = '#.params.hash') {
             view: 'tree-leaf',
             content: 'text:title',
             children: `
-              $reasonsWithModule:data.[type='module'].data.({reason: $, module: moduleIdentifier.resolveModule(${hash})});
+              $reasonsWithModule:data.[type='module'].data.({reason: $, module: resolvedModule});
               [{
                 title: "Chunks",
                 reasons: $reasonsWithModule,
-                children: $reasonsWithModule.reason.moduleIdentifier.(resolveModule(${hash})).[not shouldHideModule()].chunks.(resolveChunk(${hash})).sort(initial desc, entry desc, size desc),
+                children: $reasonsWithModule.module.[not shouldHideModule()].chunks.sort(initial desc, entry desc, size desc),
                 type: 'chunk'
               }, {
                 title: "Modules",
-                children: $reasonsWithModule.reason.moduleIdentifier.(resolveModule(${hash})).[not shouldHideModule()].sort(moduleSize() desc),
+                children: $reasonsWithModule.module.[not shouldHideModule()].sort(moduleSize() desc),
                 type: 'module'
               }, {
                 title: "Packages",
                 reasons: $reasonsWithModule,
-                children: $reasonsWithModule.reason.moduleName.(nodeModule()).name.[$],
+                children: $reasonsWithModule.module.(resolvedResource.nodeModule()).name.[],
                 type: 'package'
               }].[children]`,
             itemConfig: {

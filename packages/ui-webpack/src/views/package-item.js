@@ -1,8 +1,12 @@
+import style from './badge-margin-fix.css';
+
 export default function (discovery) {
   discovery.view.define('package-item', render);
 
   function render(el, config, data, context) {
     const { inline = false } = data;
+
+    el.classList.add(style.root);
 
     if (inline) {
       el.classList.add('inline-block');
@@ -23,7 +27,6 @@ export default function (discovery) {
         {
           when: 'showInstancesTotal!=false and package.instances.size() > 1',
           view: 'badge',
-          className: 'hack-badge-margin-left',
           data:
             "{text: \"+\" + (package.instances.size() - 1), postfix: (package.instances.size()-1).plural(['copy', 'copies'])}",
         },

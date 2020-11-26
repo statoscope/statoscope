@@ -1,5 +1,80 @@
 {
   "definitions": {
+    "SingleStat": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "time": {
+          "type": "number"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "builtAt": {
+          "type": "number"
+        },
+        "entrypoints": {
+          "$ref": "#/definitions/Entrypoints"
+        },
+        "chunks": {
+          "$ref": "#/definitions/Chunks"
+        },
+        "assets": {
+          "$ref": "#/definitions/Assets"
+        }
+      }
+    },
+    "MultipleStat": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "hash": {
+                "type": "string"
+              },
+              "time": {
+                "type": "number"
+              },
+              "name": {
+                "type": "string"
+              },
+              "builtAt": {
+                "type": "number"
+              },
+              "entrypoints": {
+                "$ref": "#/definitions/Entrypoints"
+              },
+              "chunks": {
+                "$ref": "#/definitions/Chunks"
+              },
+              "assets": {
+                "$ref": "#/definitions/Assets"
+              }
+            }
+          }
+        },
+        "entrypoints": {
+          "$ref": "#/definitions/Entrypoints"
+        },
+        "chunks": {
+          "$ref": "#/definitions/Chunks"
+        },
+        "assets": {
+          "$ref": "#/definitions/Assets"
+        }
+      }
+    },
     "Entrypoints": {
       "type": "object",
       "minProperties": 1,
@@ -149,22 +224,12 @@
       }
     }
   },
-  "type": "object",
-  "properties": {
-    "version": {
-      "type": "string"
+  "anyOf": [
+    {
+      "$ref": "#/definitions/SingleStat"
     },
-    "hash": {
-      "type": "string"
-    },
-    "entrypoints": {
-      "$ref": "#/definitions/Entrypoints"
-    },
-    "chunks": {
-      "$ref": "#/definitions/Chunks"
-    },
-    "assets": {
-      "$ref": "#/definitions/Assets"
+    {
+      "$ref": "#/definitions/MultipleStat"
     }
-  }
+  ]
 }

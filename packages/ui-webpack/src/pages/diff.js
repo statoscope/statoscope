@@ -5,7 +5,10 @@ function statsSelect(value, onChange) {
     view: 'select',
     placeholder: 'choose a stat',
     value: value,
-    text: 'resolveStats().statName()',
+    text: `
+    $compilation: resolveCompilation();
+    $compilation.compilationName() + ' ' + $compilation.builtAt.formatDate()
+    `,
     data: 'values().hash',
     onChange,
   };
@@ -16,15 +19,16 @@ function sizeDiff() {
     view: 'badge',
     className: 'hack-badge-margin-left',
     data: `
-    $diff: sizeA - sizeB;
-    $diffPerc: sizeA.percentFrom(sizeB).toFixed();
+    $diff: valueA - valueB;
+    $diffPerc: valueA.percentFrom(valueB).toFixed();
     $inc: $diff > 0;
     $prefix: $inc ? '+' : '';
     {
+      prefix: label,
       text: $prefix + $diff.formatSize(),
       postfix: $prefix + $diffPerc + '%',
-      color: $inc ? 0.colorFromH() : undefined,
-      hint: sizeA.formatSize()
+      color: $inc ? 0.colorFromH() : 100.colorFromH(),
+      hint: valueA.formatSize()
     }`,
   };
 }
@@ -56,32 +60,26 @@ function entriesTab() {
         data: $removed
       }].[visible]`,
       itemConfig: {
-        view: 'switch',
-        content: [
-          {
-            when: 'true',
-            content: {
-              view: 'tree-leaf',
-              expanded: true,
-              content: [
-                'text:title',
-                {
-                  view: 'badge',
-                  className: 'hack-badge-margin-left',
-                  data: `{text: data.size()}`,
-                },
-              ],
-              children: 'data',
-              itemConfig: {
-                children: false,
-                content: [
-                  'entry-item:{entrypoint: entry, hash, showSize: false, inline: true, match: #.filter}',
-                  sizeDiff(),
-                ],
-              },
+        view: 'tree',
+        limitLines: '= settingListItemsLimit()',
+        itemConfig: {
+          content: [
+            'text:title',
+            {
+              view: 'badge',
+              className: 'hack-badge-margin-left',
+              data: `{text: data.size()}`,
             },
+          ],
+          children: 'data',
+          itemConfig: {
+            children: false,
+            content: [
+              'entry-item:{entrypoint: entry, hash, showSize: false, inline: true, match: #.filter}',
+              sizeDiff(),
+            ],
           },
-        ],
+        },
       },
     },
   ];
@@ -114,32 +112,26 @@ function chunksTab() {
         data: $removed
       }].[visible]`,
       itemConfig: {
-        view: 'switch',
-        content: [
-          {
-            when: 'true',
-            content: {
-              view: 'tree-leaf',
-              expanded: true,
-              content: [
-                'text:title',
-                {
-                  view: 'badge',
-                  className: 'hack-badge-margin-left',
-                  data: `{text: data.size()}`,
-                },
-              ],
-              children: 'data',
-              itemConfig: {
-                children: false,
-                content: [
-                  'chunk-item:{chunk, hash, showSize: false, inline: true, match: #.filter}',
-                  sizeDiff(),
-                ],
-              },
+        view: 'tree',
+        limitLines: '= settingListItemsLimit()',
+        itemConfig: {
+          content: [
+            'text:title',
+            {
+              view: 'badge',
+              className: 'hack-badge-margin-left',
+              data: `{text: data.size()}`,
             },
+          ],
+          children: 'data',
+          itemConfig: {
+            children: false,
+            content: [
+              'chunk-item:{chunk, hash, showSize: false, inline: true, match: #.filter}',
+              sizeDiff(),
+            ],
           },
-        ],
+        },
       },
     },
   ];
@@ -172,32 +164,26 @@ function assetsTab() {
         data: $removed
       }].[visible]`,
       itemConfig: {
-        view: 'switch',
-        content: [
-          {
-            when: 'true',
-            content: {
-              view: 'tree-leaf',
-              expanded: true,
-              content: [
-                'text:title',
-                {
-                  view: 'badge',
-                  className: 'hack-badge-margin-left',
-                  data: `{text: data.size()}`,
-                },
-              ],
-              children: 'data',
-              itemConfig: {
-                children: false,
-                content: [
-                  'asset-item:{asset, hash, showSize: false, inline: true, match: #.filter}',
-                  sizeDiff(),
-                ],
-              },
+        view: 'tree',
+        limitLines: '= settingListItemsLimit()',
+        itemConfig: {
+          content: [
+            'text:title',
+            {
+              view: 'badge',
+              className: 'hack-badge-margin-left',
+              data: `{text: data.size()}`,
             },
+          ],
+          children: 'data',
+          itemConfig: {
+            children: false,
+            content: [
+              'asset-item:{asset, hash, showSize: false, inline: true, match: #.filter}',
+              sizeDiff(),
+            ],
           },
-        ],
+        },
       },
     },
   ];
@@ -208,9 +194,9 @@ function modulesTab() {
     {
       view: 'tree',
       data: `
-      $changed: modules.changed.[module.moduleResource()~=#.filter];
-      $added: modules.added.[module.moduleResource()~=#.filter];
-      $removed: modules.removed.[module.moduleResource()~=#.filter];
+      $changed: modules.changed.[module.resolvedResource~=#.filter];
+      $added: modules.added.[module.resolvedResource~=#.filter];
+      $removed: modules.removed.[module.resolvedResource~=#.filter];
       [{
         type: "changed",
         title: "Changed",
@@ -230,32 +216,72 @@ function modulesTab() {
         data: $removed
       }].[visible]`,
       itemConfig: {
-        view: 'switch',
-        content: [
-          {
-            when: 'true',
-            content: {
-              view: 'tree-leaf',
-              expanded: true,
-              content: [
-                'text:title',
-                {
-                  view: 'badge',
-                  className: 'hack-badge-margin-left',
-                  data: `{text: data.size()}`,
-                },
-              ],
-              children: 'data',
-              itemConfig: {
-                children: false,
-                content: [
-                  'module-item:{module, hash, showSize: false, inline: true, match: #.filter}',
-                  sizeDiff(),
-                ],
-              },
+        view: 'tree',
+        limitLines: '= settingListItemsLimit()',
+        itemConfig: {
+          content: [
+            'text:title',
+            {
+              view: 'badge',
+              className: 'hack-badge-margin-left',
+              data: `{text: data.size()}`,
+            },
+          ],
+          children: 'data',
+          itemConfig: {
+            children: false,
+            content: [
+              'module-item:{module, hash, showSize: false, inline: true, match: #.filter}',
+              sizeDiff(),
+            ],
+          },
+        },
+      },
+    },
+  ];
+}
+
+function modulesDupsTab() {
+  return [
+    {
+      view: 'tree',
+      data: `
+      $added: moduleDups.added.[module.resolvedResource~=#.filter];
+      $removed: moduleDups.removed.[module.resolvedResource~=#.filter];
+      [{
+        type: "added",
+        title: "Added",
+        visible: $added,
+        data: $added
+      },
+      {
+        type: "removed",
+        title: "Removed",
+        visible: $removed,
+        data: $removed
+      }].[visible]`,
+      itemConfig: {
+        view: 'tree',
+        limitLines: '= settingListItemsLimit()',
+        itemConfig: {
+          content: [
+            'text:title',
+            {
+              view: 'badge',
+              className: 'hack-badge-margin-left',
+              data: `{text: data.size()}`,
+            },
+          ],
+          children: 'data',
+          itemConfig: {
+            children: 'dupModules.({module: $, hash: @.hash})',
+            content: ['module-item:{module, hash, showSize: true, match: #.filter}'],
+            itemConfig: {
+              children: false,
+              content: ['module-item:{module, hash, showSize: true}'],
             },
           },
-        ],
+        },
       },
     },
   ];
@@ -264,11 +290,11 @@ function modulesTab() {
 function packagesTab() {
   return [
     {
-      view: 'tree',
+      view: 'list',
       data: `
       $changed: packages.changed.[(package.a or package).name~=#.filter];
-      $added: packages.added.[(package.a or package).name~=#.filter];
-      $removed: packages.removed.[(package.a or package).name~=#.filter];
+      $added: packages.added.[package.name~=#.filter];
+      $removed: packages.removed.[package.name~=#.filter];
       [{
         type: "changed",
         title: "Changed",
@@ -288,70 +314,74 @@ function packagesTab() {
         data: $removed
       }].[visible]`,
       itemConfig: {
-        content: [
-          'text:title',
-          {
-            view: 'badge',
-            className: 'hack-badge-margin-left',
-            data: `{text: data.size()}`,
-          },
-        ],
-        children: 'data',
+        view: 'tree',
+        limitLines: '= settingListItemsLimit()',
         itemConfig: {
-          children: `
-          $packageA:package.a or package;
-          $packageB:package.b;
-          $hashA: hashA or hash;
-          $hashB: hashB;
-          [{
-            type: "added",
-            title: "Added",
-            visible: instances.added,
-            data: instances.added
-          },
-          {
-            type: "removed",
-            title: "Removed",
-            visible: instances.removed,
-            data: instances.removed
-          }].[visible]`,
           content: [
-            'package-item:{package: package.a or package, hash, showInstancesTotal: false, inline: true, match: #.filter}',
+            'text:title',
             {
               view: 'badge',
               className: 'hack-badge-margin-left',
-              data: `
-              $added: instances.added.size() ? "+" + instances.added.size() : '';
-              $removed: instances.removed.size() ? "-" + instances.removed.size() : '';
-              {
-                text: $added + ($added and $removed ? '/' : '') + $removed,
-                postfix: 'instances'
-              }`,
+              data: `{text: data.size()}`,
             },
           ],
+          children: 'data',
           itemConfig: {
-            children: 'data',
+            children: `
+            $packageA:package.a or package;
+            $packageB:package.b;
+            $hashA: hashA or hash;
+            $hashB: hashB;
+            [{
+              type: "added",
+              title: "Added",
+              visible: instances.added,
+              data: instances.added
+            },
+            {
+              type: "removed",
+              title: "Removed",
+              visible: instances.removed,
+              data: instances.removed
+            }].[visible]`,
             content: [
-              'text:title',
+              'package-item:{package: package.a or package, hash, showInstancesTotal: false, inline: true, match: #.filter}',
               {
                 view: 'badge',
                 className: 'hack-badge-margin-left',
-                data: `{text: data.size()}`,
+                data: `
+                $added: instances.added.size() ? "+" + instances.added.size() : '';
+                $removed: instances.removed.size() ? "-" + instances.removed.size() : '';
+                {
+                  text: $added + ($added and $removed ? '/' : '') + $removed,
+                  postfix: 'instances'
+                }`,
               },
             ],
             itemConfig: {
+              children: 'data',
               content: [
+                'text:title',
                 {
-                  view: 'link',
-                  data: `{
-                    text: instance.path,
-                    href: package.name.pageLink("package", {instance: instance.path, hash}),
-                    match: package.name
-                  }`,
-                  content: 'text-match',
+                  view: 'badge',
+                  className: 'hack-badge-margin-left',
+                  data: `{text: data.size()}`,
                 },
               ],
-              children: false,
+              itemConfig: {
+                content: [
+                  {
+                    view: 'link',
+                    data: `{
+                      text: instance.path,
+                      href: package.name.pageLink("package", {instance: instance.path, hash}),
+                      match: package.name
+                    }`,
+                    content: 'text-match',
+                  },
+                ],
+                children: false,
+              },
             },
           },
         },
@@ -418,14 +448,172 @@ export default function (discovery) {
       ],
     },
     {
+      view: 'context',
+      modifiers: {
+        view: 'toggle-group',
+        name: 'toggleShowValue',
+        data: [
+          {
+            value: 'percent',
+            text: '%',
+          },
+          {
+            value: 'value',
+            text: 'V',
+          },
+        ],
+      },
+      content: {
+        view: 'block',
+        className: styles['indicators-block'],
+        data: `
+        $statA: #.params.hash.resolveCompilation();
+        $statB: #.params.diffWith.resolveCompilation();
+        
+        $getSize: => (
+          $chunks: data.chunks + data.chunks..children;
+          $assets: $chunks.files;
+          $assets.size.reduce(=> $ + $$, 0)
+        );
+        $getInitialSize: => (
+          $chunks: data.chunks.[initial];
+          $assets: $chunks.files;
+          $assets.size.reduce(=> $ + $$, 0)
+        );
+        
+        [
+          {
+            $totalSizeA: $statA.entrypoints.($getSize()).reduce(=> $ + $$, 0);
+            $totalSizeB: $statB.entrypoints.($getSize()).reduce(=> $ + $$, 0);
+            $value: $totalSizeA - $totalSizeB;
+            $valueP: $totalSizeA.percentFrom($totalSizeB);
+            value: #.toggleShowValue='percent' ? $valueP : $value,
+            valueText:  #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value.formatSize(),
+            label: "Total size"
+          },
+          {
+            $initialSizeA: $statA.entrypoints.($getInitialSize()).reduce(=> $ + $$, 0);
+            $initialSizeB: $statB.entrypoints.($getInitialSize()).reduce(=> $ + $$, 0);
+            $value: $initialSizeA - $initialSizeB;
+            $valueP: $initialSizeA.percentFrom($initialSizeB);
+            value: #.toggleShowValue='percent' ? $valueP : $value,
+            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value.formatSize(),
+            label: 'Initial size'
+          },
+          {
+            $packagesSizeA: $statA.nodeModules.instances.modules.size.reduce(=> $ + $$, 0);
+            $packagesSizeB: $statB.nodeModules.instances.modules.size.reduce(=> $ + $$, 0);
+            $value: $packagesSizeA - $packagesSizeB;
+            $valueP: $packagesSizeA.percentFrom($packagesSizeB);
+            value: #.toggleShowValue='percent' ? $valueP : $value,
+            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value.formatSize(),
+            label: 'Packages size'
+          },
+          {
+            $value: $statA.time - $statB.time;
+            $valueP: $statA.time.percentFrom($statB.time);
+            value: #.toggleShowValue='percent' ? $valueP : $value,
+            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value.formatDuration(),
+            label: 'Build Time'
+          },
+          {
+            $a: $statA.entrypoints.size();
+            $b: $statB.entrypoints.size();
+            $value: $a - $b;
+            $valueP: $a.percentFrom($b);
+            value: #.toggleShowValue='percent' ? $valueP : $value,
+            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value,
+            label: 'Entrypoints'
+          },
+          {
+            $a: ($statA..modules).size();
+            $b: ($statB..modules).size();
+            $value: $a - $b;
+            $valueP: $a.percentFrom($b);
+            value: #.toggleShowValue='percent' ? $valueP : $value,
+            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value,
+            label: 'Modules'
+          },
+          {
+            $getDuplicateModules: => (
+              $duplicates: (..modules).[source].group(<source>)
+                .({source: key, duplicates: value})
+                .[duplicates.size() > 1].(
+                  $module: duplicates[0];
+                  $dups: duplicates - [duplicates[0]];
+                  {
+                    module: $module,
+                    duplicates: $dups
+                  }
+                );
+              $duplicates.module.size()
+            );
+            $a: $statA.$getDuplicateModules();
+            $b: $statB.$getDuplicateModules();
+            $value: $a - $b;
+            $valueP: $a.percentFrom($b);
+            value: #.toggleShowValue='percent' ? $valueP : $value,
+            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value,
+            label: 'Duplicate modules'
+          },
+          {
+            $a: ($statA.chunks + $statA.chunks..children).size();
+            $b: ($statB.chunks + $statB.chunks..children).size();
+            $value: $a - $b;
+            $valueP: $a.percentFrom($b);
+            value: #.toggleShowValue='percent' ? $valueP : $value,
+            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value,
+            label: 'Chunks'
+          },
+          {
+            $a: $statA.assets.size();
+            $b: $statB.assets.size();
+            $value: $a - $b;
+            $valueP: $a.percentFrom($b);
+            value: #.toggleShowValue='percent' ? $valueP : $value,
+            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value,
+            label: 'Assets'
+          },
+          {
+            $a: $statA.nodeModules.size();
+            $b: $statB.nodeModules.size();
+            $value: $a - $b;
+            $valueP: $a.percentFrom($b);
+            value: #.toggleShowValue='percent' ? $valueP : $value,
+            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value,
+            label: 'Packages'
+          },
+          {
+            $packagesWithMultipleInstancesA: $statA.nodeModules.[instances.size() > 1];
+            $packagesWithMultipleInstancesB: $statB.nodeModules.[instances.size() > 1];
+            $a: $packagesWithMultipleInstancesA.instances.size() - $packagesWithMultipleInstancesA.size();
+            $b: $packagesWithMultipleInstancesB.instances.size() - $packagesWithMultipleInstancesB.size();
+            $value: $a - $b;
+            $valueP: $a.percentFrom($b);
+            value: #.toggleShowValue='percent' ? $valueP : $value,
+            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value,
+            label: 'Package copies'
+          },
+        ]
+        `,
+        content: {
+          view: 'inline-list',
+          item: {
+            when: 'value',
+            view: 'diff-indicator',
+          },
+        },
+      },
+    },
+    {
       data: `
-      $statA: #.params.hash.resolveStats();
-      $statB: #.params.diffWith.resolveStats();
+      $statA: #.params.hash.resolveCompilation();
+      $statB: #.params.diffWith.resolveCompilation();
       $aModules: $statA..modules.[not shouldHideModule()];
       $bModules: $statB..modules.[not shouldHideModule()];
       
-      $addedModules: $aModules.identifier - $bModules.identifier;
-      $removedModules: $bModules.identifier - $aModules.identifier; 
+      $addedModules: $aModules.[identifier not in $bModules.identifier];
+      $removedModules: $bModules.[identifier not in $aModules.identifier]; 
       $changedModules: $aModules.(
         $moduleA: $;
         $moduleB: $bModules.[identifier=$moduleA.identifier].pick();
@@ -436,13 +624,50 @@ export default function (discovery) {
       ).[b and (a.size != b.size or a.source != b.source)];
       
       $modulesDiff: {
-        added: $addedModules.(resolveModule($statA.hash)).({module: $, sizeA: size, sizeB: 0, hash: $statA.hash}),
-        removed: $removedModules.(resolveModule($statB.hash)).({module: $, sizeA: 0, sizeB: size, hash: $statB.hash}),
-        changed: $changedModules.({module: a, sizeA: a.size, sizeB: b.size, hash: $statA.hash}),
+        added: $addedModules.sort(moduleSize() desc).({module: $, valueA: size, valueB: 0, hash: $statA.hash}),
+        removed: $removedModules.sort(moduleSize() desc).({module: $, valueA: 0, valueB: size, hash: $statB.hash}),
+        changed: $changedModules.sort(a.moduleSize() desc).({module: a, valueA: a.size, valueB: b.size, hash: $statA.hash}),
       };
       
-      $addedChunks: $statA.chunks.id - $statB.chunks.id; 
-      $removedChunks: $statB.chunks.id - $statA.chunks.id; 
+      $getDuplicateModules: => (
+        $compilation: $;
+        (..modules).[
+          source and not shouldHideModule() and name~=#.filter
+        ].group(<source>)
+        .({source: key, duplicates: value})
+        .[duplicates.size() > 1].(
+          $module: duplicates[0];
+          $instance: $module.resolvedResource.nodeModule();
+          $package: $instance.name.resolvePackage($compilation.hash);
+          $dups: duplicates - [duplicates[0]];
+          $dupModules: $dups;
+          $dupPackages: $dups.(resolvedResource.nodeModule()).[].({
+            $path: path;
+            $resolvedPackage: name.resolvePackage($compilation.hash);
+            package: $resolvedPackage,
+            name: $resolvedPackage.name,
+            instances: $resolvedPackage.instances.[path = $path]
+          }).group(<name>).({name: key, instances: value.instances});
+          {
+            module: $module,
+            hash: $compilation.hash,
+            instance: $instance,
+            isLocal: not $module.resolvedResource.nodeModule(),
+            dupModules: $dupModules
+          }
+        )
+        .sort(isLocal desc, instance.isRoot desc, dupModules.size() desc)
+      );
+      $dupModulesA: $statA.$getDuplicateModules();
+      $dupModulesB: $statB.$getDuplicateModules();
+      
+      $dupModulesDiff: {
+        added: $dupModulesA.[module.identifier not in $dupModulesB.module.identifier],
+        removed: $dupModulesB.[module.identifier not in $dupModulesA.module.identifier],
+      };
+      
+      $addedChunks: $statA.chunks.[id not in $statB.chunks.id]; 
+      $removedChunks: $statB.chunks.[id not in $statA.chunks.id]; 
       $changedChunks: $statA.chunks.(
         $chunk: $;
         {
@@ -464,66 +689,66 @@ export default function (discovery) {
       ];
       
       $chunksDiff: {
-        added: $addedChunks.(resolveChunk($statA.hash)).sort(<initial>).({
+        added: $addedChunks.sort(initial desc, entry desc, size desc).({
           chunk: $,
-          sizeA: size,
-          sizeB: 0,
+          valueA: size,
+          valueB: 0,
           hash: $statA.hash
         }),
-        removed: $removedChunks.(resolveChunk($statB.hash)).sort(<initial>).({
+        removed: $removedChunks.sort(initial desc, entry desc, size desc).({
           chunk: $,
-          sizeA: 0,
-          sizeB: size,
+          valueA: 0,
+          valueB: size,
           hash: $statB.hash
         }),
-        changed: $changedChunks.sort(<a.initial>).({
+        changed: $changedChunks.sort(a.initial desc, a.entry desc, a.size desc).({
           chunk: a,
-          sizeA: a.size,
-          sizeB: b.size,
+          valueA: a.size,
+          valueB: b.size,
           hash: $statA.hash
         })
       };
       
       $getInitialSize: => (
-        $initialChunks: $.data.chunks.(resolveChunk($$));
-        $initialAssets: $initialChunks.files.(resolveAsset($$)).[];
-        $initialAssets.size.reduce(=> $ + $$, 0)
+        $chunks: data.chunks.[initial];
+        $assets: $chunks.files;
+        $assets.size.reduce(=> $ + $$, 0)
       );
 
-      $added: ($statA.entrypoints.keys() - $statB.entrypoints.keys()).(
-        $initialChunks: $statA.entrypoints[$].chunks.(resolveChunk($statA.hash));
-        $initialAssets: $initialChunks.files.(resolveAsset($statA.hash)).[];
+      $added: $statA.entrypoints.[name not in $statB.entrypoints.name].(
+        $initialChunks: data.chunks.[initial];
+        $initialAssets: $initialChunks.files;
         {
-          name: $,
-          data: $statA.entrypoints[$],
+          name: name,
+          data: data,
           size: $initialAssets.size.reduce(=> $ + $$, 0)
         }
       );
-      $removed: ($statB.entrypoints.keys() - $statA.entrypoints.keys()).(
-        $initialChunks: $statB.entrypoints[$].chunks.(resolveChunk($statA.hash));
-        $initialAssets: $initialChunks.files.(resolveAsset($statA.hash)).[];
+      $removed: $statB.entrypoints.[name not in $statA.entrypoints.name].(
+        $initialChunks: data.chunks.[initial];
+        $initialAssets: $initialChunks.files;
         {
-          name: $,
-          data: $statB.entrypoints[$],
+          name: name,
+          data: data,
           size: $initialAssets.size.reduce(=> $ + $$, 0)
         }
       );
-      $changed: $statA.entrypoints.keys().(
-        $name: $;
-        $a: $statA.entrypoints[$];
-        $b: $statB.entrypoints[$];
+      $changed: $statA.entrypoints.(
+        $name: name;
+        $a: $;
+        $b: $statB.entrypoints.[name=$name].pick();
         {
-          a: {name: $name, data: $a},
-          b: $b and {name: $name, data: $b}
+          a: $a,
+          b: $b
         } | {
-          a: {...a, hash: $statA.hash, size: a.$getInitialSize($statA.hash)},
-          b: b and {...b, hash: $statB.hash, size: b.$getInitialSize($statB.hash)}
+          a: {...a, hash: $statA.hash, size: a.$getInitialSize()},
+          b: b and {...b, hash: $statB.hash, size: b.$getInitialSize()}
         }
       ).[
-        $aChunksTop: a.chunks.(resolveChunk($statA.hash));
-        $aChunks: $aChunksTop + $aChunksTop..(children.(resolveChunk($statA.hash)));
-        $bChunksTop: b.chunks.(resolveChunk($statB.hash));
-        $bChunks: $bChunksTop + $bChunksTop..(children.(resolveChunk($statB.hash)));
+        $aChunksTop: a.chunks;
+        $aChunks: $aChunksTop + $aChunksTop..children;
+        $bChunksTop: b.chunks;
+        $bChunks: $bChunksTop + $bChunksTop..children;
         $changedChunksIds: $changedChunks.a.id;
         b and (
           a.size != b.size or
@@ -536,13 +761,13 @@ export default function (discovery) {
       ];
       
       $entryDiff: {
-        changed: $changed.({entry:a, hash: $statA.hash, sizeA: a.size, sizeB: b.size}),
-        added: $added.({entry:$, hash: $statA.hash, sizeA: size, sizeB: 0}),
-        removed: $removed.({entry:$, hash: $statB.hash, sizeA: 0, sizeB: size})
+        changed: $changed.sort(a.data.isOverSizeLimit asc, a.size desc).({entry:a, hash: $statA.hash, valueA: a.size, valueB: b.size}),
+        added: $added.sort(data.isOverSizeLimit asc, size desc).({entry:$, hash: $statA.hash, valueA: size, valueB: 0}),
+        removed: $removed.sort(data.isOverSizeLimit asc, size desc).({entry:$, hash: $statB.hash, valueA: 0, valueB: size})
       };
       
-      $addedAssets: $statA.assets.name - $statB.assets.name; 
-      $removedAssets: $statB.assets.name - $statA.assets.name; 
+      $addedAssets: $statA.assets.[name not in $statB.assets.name]; 
+      $removedAssets: $statB.assets.[name not in $statA.assets.name];
       $changedAssets: $statA.assets.(
         $asset: $;
         {
@@ -552,9 +777,9 @@ export default function (discovery) {
       ).[b and a.size != b.size or chunks.[$ in $changedChunks.a.id]];
       
       $assetsDiff: {
-        changed: $changedAssets.({asset: a, sizeA: a.size, sizeB: b.size}),
-        added: $addedAssets.(resolveAsset($statA.hash)).({asset: $, sizeA: size, sizeB: 0, hash: $statA.hash}),
-        removed: $removedAssets.(resolveAsset($statB.hash)).({asset: $, sizeA: 0, sizeB: size, hash: $statB.hash})
+        changed: $changedAssets.sort(a.isOverSizeLimit asc, a.size desc).({asset: a, valueA: a.size, valueB: b.size}),
+        added: $addedAssets.sort(isOverSizeLimit asc, size desc).({asset: $, valueA: size, valueB: 0, hash: $statA.hash}),
+        removed: $removedAssets.sort(isOverSizeLimit asc, size desc).({asset: $, valueA: 0, valueB: size, hash: $statB.hash})
       };
       
       $addedPackages: $statA.nodeModules.name - $statB.nodeModules.name;
@@ -587,7 +812,7 @@ export default function (discovery) {
       ).[b and (instances.added or instances.removed)];
       
       $packagesDiff: {
-        added: $addedPackages.(resolvePackage($statA.hash)).({
+        added: $addedPackages.(resolvePackage($statA.hash)).sort(instances.size() desc, name asc).({
           package: $,
           hash: $statA.hash,
           instances: {
@@ -595,7 +820,7 @@ export default function (discovery) {
             removed: []
           }
         }),
-        removed: $removedPackages.(resolvePackage($statB.hash)).({
+        removed: $removedPackages.(resolvePackage($statB.hash)).sort(instances.size() desc, name asc).({
           package: $,
           hash: $statB.hash,
           instances: {
@@ -603,7 +828,7 @@ export default function (discovery) {
             removed: $.instances
           }
         }),
-        changed: $changedPackages.({
+        changed: $changedPackages.sort(instances.added.size() desc, instances.removed.size() desc, name asc).({
           package: $,
           hash: $statA.hash,
           instances
@@ -615,6 +840,7 @@ export default function (discovery) {
         assets: $assetsDiff,
         chunks: $chunksDiff,
         modules: $modulesDiff,
+        moduleDups: $dupModulesDiff,
         packages: $packagesDiff
       }
       `,
@@ -624,6 +850,7 @@ export default function (discovery) {
         { value: 'assets', text: 'Assets' },
         { value: 'chunks', text: 'Chunks' },
         { value: 'modules', text: 'Modules' },
+        { value: 'modules-dups', text: 'Duplicate modules' },
         { value: 'entrypoints', text: 'Entrypoints' },
         { value: 'packages', text: 'Packages' },
       ],
@@ -647,6 +874,10 @@ export default function (discovery) {
             {
               when: '#.diffTabs="modules"',
               content: modulesTab(),
+            },
+            {
+              when: '#.diffTabs="modules-dups"',
+              content: modulesDupsTab(),
             },
             {
               when: '#.diffTabs="packages"',

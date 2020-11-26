@@ -1,10 +1,10 @@
-import settingsStyles from './settings-styles.css';
+import settingsStyles from '../settings-styles.css';
 import settings, {
   SETTING_HIDE_NODE_MODULES,
   SETTING_HIDE_NODE_MODULES_DEFAULT,
   SETTING_LIST_ITEMS_LIMIT,
   SETTING_LIST_ITEMS_LIMIT_DEFAULT,
-} from './settings';
+} from '../settings';
 
 export default (discovery) => {
   hideUseless(discovery);
@@ -33,7 +33,7 @@ function addCustomIndex(discovery) {
 function addLinks(discovery) {
   discovery.nav.append({
     name: 'diff',
-    when: `#.widget | pageId != 'diff' and #.data.keys().size()>1`,
+    when: `#.widget | pageId != 'diff' and #.data.compilations.size()>1`,
     data: `{ text: "Diff", href: pageLink('diff', {hash:#.params.hash}) }`,
   });
 
@@ -44,16 +44,15 @@ function addLinks(discovery) {
 
   discovery.nav.primary.append({
     name: 'donate',
-    data: `{ text: "Donate", href: 'https://www.paypal.com/paypalme/smelukov' }`,
+    data: `{ text: "Donate", href: 'https://opencollective.com/statoscope' }`,
   });
 }
 
 function addStatsList(discovery) {
-  const popup = new discovery.view.Popup({
-    className: settingsStyles.item,
-  });
+  const popup = new discovery.view.Popup({});
   discovery.nav.append({
     name: 'stats-list',
+    when: `#.widget and #.data.compilations.size()>1`,
     content: 'html:"Choose stats &#9660"',
     onClick: (el) => {
       popup.toggle(el, (popupEl) =>

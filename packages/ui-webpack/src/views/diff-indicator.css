@@ -1,0 +1,21 @@
+.root {
+    padding: 10px !important;
+    width: auto !important;
+    min-width: 150px;
+}
+
+.danger {
+    background: #fcc !important;
+}
+
+.green {
+    background: #e1ffcc !important;
+}
+
+.danger > *, .green > * {
+    color: black !important;
+}
+
+.root :global(.value) {
+    font-size: 25px !important;
+}

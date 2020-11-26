@@ -1,13 +1,15 @@
-import prepare from './prepare';
-import * as pages from './pages';
-import * as views from './views';
-import initApp from './init-app';
+/* global require */
+import prepare from './init/prepare/';
+import initApp from './init/init-app';
 
 export default (data, element = document.body) => {
+  const viewsContext = require.context('./views', false, /\.js$/);
+  const pagesContext = require.context('./pages', false, /\.js$/);
+
   return initApp({
     data,
-    pages,
-    views,
+    pages: pagesContext.keys().map(pagesContext),
+    views: viewsContext.keys().map(viewsContext),
     prepare,
     name: '📦 Statoscope',
   });

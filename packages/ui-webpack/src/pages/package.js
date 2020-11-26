@@ -3,7 +3,7 @@ import packagesTree, { packageInstanceTree } from './default/packages-tree';
 export default function (discovery) {
   discovery.page.define('package', [
     {
-      data: '#.params.hash.resolveStats()',
+      data: '#.params.hash.resolveCompilation()',
       view: 'switch',
       content: [
         {
@@ -14,9 +14,9 @@ export default function (discovery) {
           when: '$',
           content: [
             {
-              when: 'not __validation.result',
+              when: 'not validation.result',
               view: 'alert-danger',
-              data: `__validation.message`,
+              data: `validation.message`,
             },
             {
               view: 'switch',
@@ -52,7 +52,7 @@ export default function (discovery) {
                     {
                       view: 'foam-tree',
                       data: `
-                      $packageModules:package.instances.modules.identifier.(resolveModule(#.params.hash));
+                      $packageModules:package.instances.modules;
                       $packageModules.[not shouldHideModule()].modulesToFoamTree()
                       `,
                     },
@@ -72,7 +72,7 @@ export default function (discovery) {
                     {
                       view: 'foam-tree',
                       data: `
-                      $packageModules:instance.modules.identifier.(resolveModule(#.params.hash));
+                      $packageModules:instance.modules;
                       $packageModules.[not shouldHideModule()].modulesToFoamTree()
                       `,
                     },

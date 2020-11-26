@@ -10,3 +10,4 @@ dist-test/
 *.tsbuildinfo
 *.js.map
 *.ts.map
+**/test

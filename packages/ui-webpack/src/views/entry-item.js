@@ -1,8 +1,12 @@
+import style from './badge-margin-fix.css';
+
 export default function (discovery) {
   discovery.view.define('entry-item', render);
 
   function render(el, config, data, context) {
     const { showSize = true, inline = false } = data;
+
+    el.classList.add(style.root);
 
     if (inline) {
       el.classList.add('inline-block');
@@ -22,11 +26,10 @@ export default function (discovery) {
         },
         {
           view: 'badge',
-          className: 'hack-badge-margin-left',
           data: `$hash:hash or #.params.hash;
           {
             prefix: "initial size",
-            text: entrypoint.data.chunks.(resolveChunk($hash)).[initial].files.(resolveAsset($hash)).[$].size.reduce(=> $ + $$, 0).formatSize(),
+            text: entrypoint.data.chunks.[initial].files.[].size.reduce(=> $ + $$, 0).formatSize(),
             color: entrypoint.data.isOverSizeLimit and 0.colorFromH(),
             hint: entrypoint.data.isOverSizeLimit and "oversized"
           }`,

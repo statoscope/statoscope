@@ -4,13 +4,25 @@
 
 ### Features
 
-- support multiple stats
+- **[Breaking]** change data structure
+- support multiple stat files
+- support multi-config projects
+- normalize modules/assets/etc
 - stats diff
 - stats validation
+- add deopt block to a module page
+- add module issuer path
+- add build time block
+- add module duplicates
+- improve filtration speed
+- remove chunk groups block
 
 ### Bugfix
 
 - error in chunk packages list
+- fix incorrect chunks and modules filtration
+- fix packages list items limit
+- tiny UI fixes
 
 ## 2.2.0: (30 October 2020)
 

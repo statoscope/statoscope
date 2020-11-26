@@ -6,12 +6,14 @@ export default (hash) => {
   return {
     view: 'tree',
     expanded: false,
+    limitLines: '= settingListItemsLimit()',
     itemConfig: chunkItemConfig(void 0, hash),
   };
 };
 
 export function chunkItemConfig(getter = '$', hash = '#.params.hash') {
   return {
+    limit: '= settingListItemsLimit()',
     content: {
       view: 'chunk-item',
       data: `{
@@ -21,15 +23,15 @@ export function chunkItemConfig(getter = '$', hash = '#.params.hash') {
       }`,
     },
     children: `
-    $reasonModules:origins.[moduleIdentifier].moduleIdentifier.(resolveModule(${hash})).[not shouldHideModule()];
-    $chunkModules:(..modules).identifier.(resolveModule(${hash})).[not shouldHideModule()];
-    $chunkModulesPackages:$chunkModules.(moduleResource().nodeModule()).[].(name.resolvePackage(${hash}));
+    $reasonModules:origins.resolvedModule.[].[not shouldHideModule()];
+    $chunkModules:..modules.[not shouldHideModule()];
+    $chunkModulesPackages:$chunkModules.(resolvedResource.nodeModule()).[].(name.resolvePackage(${hash}));
     $chunkPackages:$chunkModulesPackages.({name: name, instances: instances.[modules.[$ in $chunkModules]]});
-    $modules:modules.identifier.(resolveModule(${hash})).[not shouldHideModule()];
+    $modules:modules.[not shouldHideModule()];
     [{
       title: "Reasons",
       reasons: $reasonModules,
-      data: $reasonModules.chunks.(resolveChunk(${hash})).sort(initial desc, entry desc, size desc),
+      data: $reasonModules.chunks.sort(initial desc, entry desc, size desc),
       visible: $reasonModules,
       type: 'reasons'
     }, {
@@ -45,8 +47,8 @@ export function chunkItemConfig(getter = '$', hash = '#.params.hash') {
       type: 'packages'
     }, {
       title: "Assets",
-      data: files.(resolveAsset(${hash})).[$].sort(isOverSizeLimit asc, size desc),
-      visible: files,
+      data: files.[].sort(isOverSizeLimit asc, size desc),
+      visible: files.[],
       type: 'assets'
     }].[visible]`,
     itemConfig: {
@@ -78,7 +80,7 @@ export function chunkItemConfig(getter = '$', hash = '#.params.hash') {
             view: 'tree-leaf',
             content: 'text:title',
             children: `
-            $reasonChunks:reasons.chunks.(resolveChunk(${hash}));
+            $reasonChunks:reasons.chunks;
             [{
               title: "Chunks",
               reasons: reasons,

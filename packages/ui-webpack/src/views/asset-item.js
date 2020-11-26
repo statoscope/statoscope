@@ -1,8 +1,12 @@
+import style from './badge-margin-fix.css';
+
 export default function (discovery) {
   discovery.view.define('asset-item', render);
 
   function render(el, config, data, context) {
     const { showSize = true, inline = false } = data;
+
+    el.classList.add(style.root);
 
     if (inline) {
       el.classList.add('inline-block');
@@ -31,7 +35,6 @@ export default function (discovery) {
         },
         {
           view: 'badge',
-          className: 'hack-badge-margin-left',
           data: `{
             text: asset.size.formatSize(),
             color: asset.isOverSizeLimit and 0.colorFromH(),

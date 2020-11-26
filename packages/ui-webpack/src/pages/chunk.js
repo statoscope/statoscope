@@ -3,7 +3,7 @@ import chunksTree from './default/chunks-tree';
 export default function (discovery) {
   discovery.page.define('chunk', [
     {
-      data: '#.params.hash.resolveStats()',
+      data: '#.params.hash.resolveCompilation()',
       view: 'switch',
       content: [
         {
@@ -14,9 +14,9 @@ export default function (discovery) {
           when: '$',
           content: [
             {
-              when: 'not __validation.result',
+              when: 'not validation.result',
               view: 'alert-danger',
-              data: `__validation.message`,
+              data: `validation.message`,
             },
             {
               view: 'switch',
@@ -40,7 +40,7 @@ export default function (discovery) {
                     {
                       view: 'foam-tree',
                       data: `
-                      $chunkModules:modules.identifier.(resolveModule(#.params.hash)).[not shouldHideModule()];
+                      $chunkModules:modules.[not shouldHideModule()];
                       $chunkModules.modulesToFoamTree()
                       `,
                     },

@@ -7,12 +7,14 @@ export default (hash) => {
   return {
     view: 'tree',
     expanded: false,
+    limitLines: '= settingListItemsLimit()',
     itemConfig: assetItemConfig(void 0, hash),
   };
 };
 
 export function assetItemConfig(getter = '$', hash = '#.params.hash') {
   return {
+    limit: '= settingListItemsLimit()',
     content: {
       view: 'asset-item',
       data: `{
@@ -22,19 +24,16 @@ export function assetItemConfig(getter = '$', hash = '#.params.hash') {
       }`,
     },
     children: `
-    $entrypoints:${hash}.resolveStats().entrypoints.entries().(
-      $chunks:value.chunks.(resolveChunk(${hash}));
-      {
-        name: key,
-        data: value, 
-        chunks: $chunks + $chunks..(children.(resolveChunk(${hash})))
-      }
-    );
-    $topLevelAssetChunks:chunks.(resolveChunk(${hash})).[files has @.name];
-    $assetChunks: ($topLevelAssetChunks + $topLevelAssetChunks..(children.(resolveChunk(${hash})))).[files has @.name];
+    $entrypoints:${hash}.resolveCompilation().entrypoints.({
+      name,
+      data, 
+      chunks: chunks + chunks..children
+    });
+    $topLevelAssetChunks:chunks.[files has @];
+    $assetChunks: $topLevelAssetChunks + $topLevelAssetChunks..children.[files has @];
     $assetEntrypoints:$entrypoints.[chunks[id in $assetChunks.id]];
-    $chunksModules:$assetChunks.(..modules).identifier.(resolveModule(${hash})).[not shouldHideModule()];
-    $chunksModulesPackages:$chunksModules.(moduleResource().nodeModule()).[].(name.resolvePackage(${hash})).[$];
+    $chunksModules:$assetChunks.(..modules).[not shouldHideModule()];
+    $chunksModulesPackages:$chunksModules.(resolvedResource.nodeModule()).[].(name.resolvePackage(${hash})).[];
     $chunksPackages:$chunksModulesPackages.({name: name, instances: instances.[modules.[$ in $chunksModules]]});
     [{
       title: "Entrypoints",

@@ -1,8 +1,12 @@
+import style from './badge-margin-fix.css';
+
 export default function (discovery) {
   discovery.view.define('module-item', render);
 
   function render(el, config, data, context) {
     const { showSize = true, inline = false } = data;
+
+    el.classList.add(style.root);
 
     if (inline) {
       el.classList.add('inline-block');
@@ -13,9 +17,9 @@ export default function (discovery) {
       [
         {
           view: 'badge',
-          when: 'module.moduleResource().fileType()',
+          when: 'module.resolvedResource.fileType()',
           data: `
-          $moduleResource:module.moduleResource();
+          $moduleResource:module.resolvedResource;
           {
             text: $moduleResource.fileExt(),
             color: $moduleResource.fileType().color(),
@@ -26,20 +30,18 @@ export default function (discovery) {
           view: 'link',
           data: `{
             href: (module.id or module.identifier).pageLink("module", {hash:hash or #.params.hash}),
-            text: module.moduleResource() or module.name or module.id,
+            text: module.resolvedResource or module.name or module.id,
             match: match
           }`,
           content: 'text-match',
         },
         {
           view: 'badge',
-          className: 'hack-badge-margin-left',
           data: `{text: module.moduleSize().formatSize()}`,
           when: showSize && data.module.size,
         },
         {
           view: 'badge',
-          className: 'hack-badge-margin-left',
           data: `{
             text: "+" + module.modules.size().pluralWithValue(['module', 'modules']),
             color: 40.colorFromH()
@@ -48,13 +50,12 @@ export default function (discovery) {
         },
         {
           view: 'badge',
-          className: 'hack-badge-margin-left',
+          when: 'module.optimizationBailout',
           data: `{
-            text: "deopt",
+            text: module.optimizationBailout.size().pluralWithValue(['deopt', 'deopts']),
             color: 0.colorFromH(),
             hint: module.optimizationBailout
           }`,
-          when: 'module.optimizationBailout',
         },
       ],
       data,
