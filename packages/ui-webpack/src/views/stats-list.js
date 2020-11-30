@@ -26,6 +26,7 @@ export default function (discovery) {
             builtAt: compilation.builtAt
           }).sort(builtAt desc)`,
           view: 'menu',
+          emptyText: `No stats found. Ensure that you're using valid webpack stats.`,
           onChange(el, data, context) {
             if (typeof onClick === 'function') {
               onClick(el, data, context);

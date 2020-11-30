@@ -44,7 +44,7 @@ function addLinks(discovery) {
 
   discovery.nav.primary.append({
     name: 'donate',
-    data: `{ text: "Donate", href: 'https://opencollective.com/statoscope' }`,
+    data: `{ text: "Support", href: 'https://opencollective.com/statoscope' }`,
   });
 }
 

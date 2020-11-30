@@ -3,9 +3,17 @@
 # Statoscope for webpack
 
 [![npm version](https://badge.fury.io/js/%40statoscope%2Fui-webpack.svg)](https://badge.fury.io/js/%40statoscope%2Fui-webpack)
-[![Donate](https://img.shields.io/badge/-Donate-blue)](https://opencollective.com/statoscope)
+[![Support](https://img.shields.io/badge/-Support-blue)](https://opencollective.com/statoscope)
 
-Statoscope analyzes webpack stats and supplies the UI to display it.
+Statoscope analyzes webpack stats and supplies the UI to display.
+
+It can tell almost all about your bundle:
+
+- 🌳 Modules/chunks/assets/packages tree
+- 🗺 Entrypoints/chunks/packages map
+- 🕵️ Duplicate modules and packages copies
+- 🔄 Stats diff
+- 📊 Custom reports about your bundle
 
 You can try it at [Statoscope sandbox](https://statoscope.tech)
 
@@ -29,8 +37,13 @@ webpack --json > stats.json
 import init from '@statoscope/ui-webpack';
 import stats from 'path/to/stats.json'
 
-init(stats);
+init({
+  name: "stats.json",
+  data: stats
+});
 ```
+
+> Also, you may pass an array of stats
 
 ### Importing styles
 
@@ -41,8 +54,6 @@ To import scripts and styles separately, use:
 ```js
 import '@statoscope/ui-webpack/dist/split/main.css';
 import init from '@statoscope/ui-webpack/dist/split/main.js';
-
-init(stats);
 ```
 
 ## Use-cases
@@ -93,6 +104,17 @@ Statoscope has a powerful tool to compare the stats.
 
 <img src="docs/diff.png" width="300px"/>
 
+### Create a custom report and share it
+
+Statoscope provides a way to create your own report with [Jora language](https://github.com/discoveryjs/jora) and [Discovery.js](https://github.com/discoveryjs/discovery).
+
+- click `Make report`
+- write a jora-request
+- describe a UI to view the result
+- copy the URL and share it
+
+Example: [Top 5 biggest assets](https://statoscope.tech/#report&dzen&title=Top%205%20biggest%20assets&q=Y29tcGlsYXRpb25zLmFzc2V0cy5zb3J0KHNpemUgZGVzYylbOjVd&v=ewogICAgdmlldzogJ2xpc3QnLAogICAgaXRlbTogewogICAgICB2aWV3OiAnYXNzZXQtaXRlbScsCiAgICAgIGRhdGE6IGB7YXNzZXQ6ICR9YAogICAgfQp9)
+
 ## FAQ
 
 ### Getting stats from a boilerplate project
@@ -118,6 +140,7 @@ stats: {
   hash: true, // add a compilation hash
 }
 ```
+
 It works, but useless, because the result stats is empty.
 
 You may disable some stats-flags to decrease your stats-file size.

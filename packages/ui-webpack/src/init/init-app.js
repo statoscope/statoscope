@@ -10,7 +10,9 @@ export default ({ element = document.body, data, name, prepare, views, pages }) 
     setup: {},
   });
 
-  console.log(discovery);
+  if (data) {
+    data = Array.isArray(data) ? data : [data];
+  }
 
   const context = {
     name,
