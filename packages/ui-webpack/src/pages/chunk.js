@@ -3,24 +3,24 @@ import chunksTree from './default/chunks-tree';
 export default function (discovery) {
   discovery.page.define('chunk', [
     {
-      data: '#.params.hash.resolveCompilation()',
+      data: '#.params.hash.resolveStat()',
       view: 'switch',
       content: [
         {
-          when: 'not $',
+          when: 'not compilation',
           content: 'stats-list',
         },
         {
-          when: '$',
+          when: 'compilation',
           content: [
             {
-              when: 'not validation.result',
+              when: 'not file.validation.result',
               view: 'alert-danger',
-              data: `validation.message`,
+              content: ['h3: "Stats is invalid"', 'md: file.validation.message'],
             },
             {
               view: 'switch',
-              data: `chunks.[(''+id)=#.id.decodeURIComponent()][0]`,
+              data: `compilation.chunks.[(''+id)=#.id.decodeURIComponent()][0]`,
               content: [
                 {
                   when: 'not $',

@@ -24,7 +24,7 @@ export function assetItemConfig(getter = '$', hash = '#.params.hash') {
       }`,
     },
     children: `
-    $entrypoints:${hash}.resolveCompilation().entrypoints.({
+    $entrypoints:${hash}.resolveStat().compilation.entrypoints.({
       name,
       data, 
       chunks: chunks + chunks..children

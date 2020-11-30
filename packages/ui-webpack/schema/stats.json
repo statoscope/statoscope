@@ -63,15 +63,6 @@
               }
             }
           }
-        },
-        "entrypoints": {
-          "$ref": "#/definitions/Entrypoints"
-        },
-        "chunks": {
-          "$ref": "#/definitions/Chunks"
-        },
-        "assets": {
-          "$ref": "#/definitions/Assets"
         }
       }
     },

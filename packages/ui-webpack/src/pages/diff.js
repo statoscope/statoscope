@@ -6,10 +6,10 @@ function statsSelect(value, onChange) {
     placeholder: 'choose a stat',
     value: value,
     text: `
-    $compilation: resolveCompilation();
-    $compilation.compilationName() + ' ' + $compilation.builtAt.formatDate()
+    $stat: resolveStat();
+    $stat ? ($stat.statName() + ' ' + $stat.compilation.builtAt.formatDate()) : "n/a"
     `,
-    data: 'values().hash',
+    data: 'compilations.hash',
     onChange,
   };
 }
@@ -448,444 +448,504 @@ export default function (discovery) {
       ],
     },
     {
-      view: 'context',
-      modifiers: {
-        view: 'toggle-group',
-        name: 'toggleShowValue',
-        data: [
-          {
-            value: 'percent',
-            text: '%',
-          },
-          {
-            value: 'value',
-            text: 'V',
-          },
-        ],
-      },
-      content: {
-        view: 'block',
-        className: styles['indicators-block'],
-        data: `
-        $statA: #.params.hash.resolveCompilation();
-        $statB: #.params.diffWith.resolveCompilation();
-        
-        $getSize: => (
-          $chunks: data.chunks + data.chunks..children;
-          $assets: $chunks.files;
-          $assets.size.reduce(=> $ + $$, 0)
-        );
-        $getInitialSize: => (
-          $chunks: data.chunks.[initial];
-          $assets: $chunks.files;
-          $assets.size.reduce(=> $ + $$, 0)
-        );
-        
-        [
-          {
-            $totalSizeA: $statA.entrypoints.($getSize()).reduce(=> $ + $$, 0);
-            $totalSizeB: $statB.entrypoints.($getSize()).reduce(=> $ + $$, 0);
-            $value: $totalSizeA - $totalSizeB;
-            $valueP: $totalSizeA.percentFrom($totalSizeB);
-            value: #.toggleShowValue='percent' ? $valueP : $value,
-            valueText:  #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value.formatSize(),
-            label: "Total size"
-          },
-          {
-            $initialSizeA: $statA.entrypoints.($getInitialSize()).reduce(=> $ + $$, 0);
-            $initialSizeB: $statB.entrypoints.($getInitialSize()).reduce(=> $ + $$, 0);
-            $value: $initialSizeA - $initialSizeB;
-            $valueP: $initialSizeA.percentFrom($initialSizeB);
-            value: #.toggleShowValue='percent' ? $valueP : $value,
-            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value.formatSize(),
-            label: 'Initial size'
-          },
-          {
-            $packagesSizeA: $statA.nodeModules.instances.modules.size.reduce(=> $ + $$, 0);
-            $packagesSizeB: $statB.nodeModules.instances.modules.size.reduce(=> $ + $$, 0);
-            $value: $packagesSizeA - $packagesSizeB;
-            $valueP: $packagesSizeA.percentFrom($packagesSizeB);
-            value: #.toggleShowValue='percent' ? $valueP : $value,
-            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value.formatSize(),
-            label: 'Packages size'
-          },
-          {
-            $value: $statA.time - $statB.time;
-            $valueP: $statA.time.percentFrom($statB.time);
-            value: #.toggleShowValue='percent' ? $valueP : $value,
-            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value.formatDuration(),
-            label: 'Build Time'
-          },
-          {
-            $a: $statA.entrypoints.size();
-            $b: $statB.entrypoints.size();
-            $value: $a - $b;
-            $valueP: $a.percentFrom($b);
-            value: #.toggleShowValue='percent' ? $valueP : $value,
-            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value,
-            label: 'Entrypoints'
-          },
-          {
-            $a: ($statA..modules).size();
-            $b: ($statB..modules).size();
-            $value: $a - $b;
-            $valueP: $a.percentFrom($b);
-            value: #.toggleShowValue='percent' ? $valueP : $value,
-            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value,
-            label: 'Modules'
-          },
-          {
-            $getDuplicateModules: => (
-              $duplicates: (..modules).[source].group(<source>)
-                .({source: key, duplicates: value})
-                .[duplicates.size() > 1].(
-                  $module: duplicates[0];
-                  $dups: duplicates - [duplicates[0]];
-                  {
-                    module: $module,
-                    duplicates: $dups
-                  }
-                );
-              $duplicates.module.size()
-            );
-            $a: $statA.$getDuplicateModules();
-            $b: $statB.$getDuplicateModules();
-            $value: $a - $b;
-            $valueP: $a.percentFrom($b);
-            value: #.toggleShowValue='percent' ? $valueP : $value,
-            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value,
-            label: 'Duplicate modules'
-          },
-          {
-            $a: ($statA.chunks + $statA.chunks..children).size();
-            $b: ($statB.chunks + $statB.chunks..children).size();
-            $value: $a - $b;
-            $valueP: $a.percentFrom($b);
-            value: #.toggleShowValue='percent' ? $valueP : $value,
-            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value,
-            label: 'Chunks'
-          },
-          {
-            $a: $statA.assets.size();
-            $b: $statB.assets.size();
-            $value: $a - $b;
-            $valueP: $a.percentFrom($b);
-            value: #.toggleShowValue='percent' ? $valueP : $value,
-            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value,
-            label: 'Assets'
-          },
-          {
-            $a: $statA.nodeModules.size();
-            $b: $statB.nodeModules.size();
-            $value: $a - $b;
-            $valueP: $a.percentFrom($b);
-            value: #.toggleShowValue='percent' ? $valueP : $value,
-            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value,
-            label: 'Packages'
-          },
-          {
-            $packagesWithMultipleInstancesA: $statA.nodeModules.[instances.size() > 1];
-            $packagesWithMultipleInstancesB: $statB.nodeModules.[instances.size() > 1];
-            $a: $packagesWithMultipleInstancesA.instances.size() - $packagesWithMultipleInstancesA.size();
-            $b: $packagesWithMultipleInstancesB.instances.size() - $packagesWithMultipleInstancesB.size();
-            $value: $a - $b;
-            $valueP: $a.percentFrom($b);
-            value: #.toggleShowValue='percent' ? $valueP : $value,
-            valueText: #.toggleShowValue='percent' ? $valueP.toFixed() + '%' : $value,
-            label: 'Package copies'
-          },
-        ]
-        `,
-        content: {
-          view: 'inline-list',
-          item: {
-            when: 'value',
-            view: 'diff-indicator',
-          },
-        },
-      },
+      when: `
+      $statA: #.params.hash.resolveStat();
+      $statB: #.params.diffWith.resolveStat();
+      not ($statA and $statB)
+      `,
+      view: 'alert-warning',
+      data: '"Choose two stats to compare"',
     },
     {
+      when: `
+      $statA: #.params.hash.resolveStat();
+      $statB: #.params.diffWith.resolveStat();
+      $statA and $statB
+      `,
+      view: 'block',
       data: `
-      $statA: #.params.hash.resolveCompilation();
-      $statB: #.params.diffWith.resolveCompilation();
-      $aModules: $statA..modules.[not shouldHideModule()];
-      $bModules: $statB..modules.[not shouldHideModule()];
+      $statA: #.params.hash.resolveStat();
+      $statB: #.params.diffWith.resolveStat();
       
-      $addedModules: $aModules.[identifier not in $bModules.identifier];
-      $removedModules: $bModules.[identifier not in $aModules.identifier]; 
-      $changedModules: $aModules.(
-        $moduleA: $;
-        $moduleB: $bModules.[identifier=$moduleA.identifier].pick();
-        {
-          a: $moduleA,
-          b: $moduleB,
-        }
-      ).[b and (a.size != b.size or a.source != b.source)];
-      
-      $modulesDiff: {
-        added: $addedModules.sort(moduleSize() desc).({module: $, valueA: size, valueB: 0, hash: $statA.hash}),
-        removed: $removedModules.sort(moduleSize() desc).({module: $, valueA: 0, valueB: size, hash: $statB.hash}),
-        changed: $changedModules.sort(a.moduleSize() desc).({module: a, valueA: a.size, valueB: b.size, hash: $statA.hash}),
-      };
-      
-      $getDuplicateModules: => (
-        $compilation: $;
-        (..modules).[
-          source and not shouldHideModule() and name~=#.filter
-        ].group(<source>)
-        .({source: key, duplicates: value})
-        .[duplicates.size() > 1].(
-          $module: duplicates[0];
-          $instance: $module.resolvedResource.nodeModule();
-          $package: $instance.name.resolvePackage($compilation.hash);
-          $dups: duplicates - [duplicates[0]];
-          $dupModules: $dups;
-          $dupPackages: $dups.(resolvedResource.nodeModule()).[].({
-            $path: path;
-            $resolvedPackage: name.resolvePackage($compilation.hash);
-            package: $resolvedPackage,
-            name: $resolvedPackage.name,
-            instances: $resolvedPackage.instances.[path = $path]
-          }).group(<name>).({name: key, instances: value.instances});
-          {
-            module: $module,
-            hash: $compilation.hash,
-            instance: $instance,
-            isLocal: not $module.resolvedResource.nodeModule(),
-            dupModules: $dupModules
-          }
-        )
-        .sort(isLocal desc, instance.isRoot desc, dupModules.size() desc)
+      $getSize: => (
+        $chunks: data.chunks + data.chunks..children;
+        $assets: $chunks.files;
+        $assets.size.reduce(=> $ + $$, 0)
       );
-      $dupModulesA: $statA.$getDuplicateModules();
-      $dupModulesB: $statB.$getDuplicateModules();
-      
-      $dupModulesDiff: {
-        added: $dupModulesA.[module.identifier not in $dupModulesB.module.identifier],
-        removed: $dupModulesB.[module.identifier not in $dupModulesA.module.identifier],
-      };
-      
-      $addedChunks: $statA.chunks.[id not in $statB.chunks.id]; 
-      $removedChunks: $statB.chunks.[id not in $statA.chunks.id]; 
-      $changedChunks: $statA.chunks.(
-        $chunk: $;
-        {
-          a: $,
-          b: $statB.chunks.[id=$chunk.id].pick()
-        }
-      ).[
-        $aModules: a..modules.identifier;
-        $bModules: b..modules.identifier;
-        $changedModulesIds: $changedModules.a.identifier;
-        b and (
-          a.size != b.size or
-          $aModules - 
-          $bModules or 
-          $bModules - 
-          $aModules or
-          $aModules.[$ in $changedModulesIds]
-        )
-      ];
-      
-      $chunksDiff: {
-        added: $addedChunks.sort(initial desc, entry desc, size desc).({
-          chunk: $,
-          valueA: size,
-          valueB: 0,
-          hash: $statA.hash
-        }),
-        removed: $removedChunks.sort(initial desc, entry desc, size desc).({
-          chunk: $,
-          valueA: 0,
-          valueB: size,
-          hash: $statB.hash
-        }),
-        changed: $changedChunks.sort(a.initial desc, a.entry desc, a.size desc).({
-          chunk: a,
-          valueA: a.size,
-          valueB: b.size,
-          hash: $statA.hash
-        })
-      };
-      
       $getInitialSize: => (
         $chunks: data.chunks.[initial];
         $assets: $chunks.files;
         $assets.size.reduce(=> $ + $$, 0)
       );
-
-      $added: $statA.entrypoints.[name not in $statB.entrypoints.name].(
-        $initialChunks: data.chunks.[initial];
-        $initialAssets: $initialChunks.files;
+      
+      [
         {
-          name: name,
-          data: data,
-          size: $initialAssets.size.reduce(=> $ + $$, 0)
-        }
-      );
-      $removed: $statB.entrypoints.[name not in $statA.entrypoints.name].(
-        $initialChunks: data.chunks.[initial];
-        $initialAssets: $initialChunks.files;
-        {
-          name: name,
-          data: data,
-          size: $initialAssets.size.reduce(=> $ + $$, 0)
-        }
-      );
-      $changed: $statA.entrypoints.(
-        $name: name;
-        $a: $;
-        $b: $statB.entrypoints.[name=$name].pick();
-        {
-          a: $a,
-          b: $b
-        } | {
-          a: {...a, hash: $statA.hash, size: a.$getInitialSize()},
-          b: b and {...b, hash: $statB.hash, size: b.$getInitialSize()}
-        }
-      ).[
-        $aChunksTop: a.chunks;
-        $aChunks: $aChunksTop + $aChunksTop..children;
-        $bChunksTop: b.chunks;
-        $bChunks: $bChunksTop + $bChunksTop..children;
-        $changedChunksIds: $changedChunks.a.id;
-        b and (
-          a.size != b.size or
-          $aChunks - 
-          $bChunks or 
-          $bChunks - 
-          $aChunks or
-          $aChunks.[$ in $changedChunksIds]
-        )
-      ];
-      
-      $entryDiff: {
-        changed: $changed.sort(a.data.isOverSizeLimit asc, a.size desc).({entry:a, hash: $statA.hash, valueA: a.size, valueB: b.size}),
-        added: $added.sort(data.isOverSizeLimit asc, size desc).({entry:$, hash: $statA.hash, valueA: size, valueB: 0}),
-        removed: $removed.sort(data.isOverSizeLimit asc, size desc).({entry:$, hash: $statB.hash, valueA: 0, valueB: size})
-      };
-      
-      $addedAssets: $statA.assets.[name not in $statB.assets.name]; 
-      $removedAssets: $statB.assets.[name not in $statA.assets.name];
-      $changedAssets: $statA.assets.(
-        $asset: $;
-        {
-          a: $,
-          b: $statB.assets.[name=$asset.name].pick()
-        }
-      ).[b and a.size != b.size or chunks.[$ in $changedChunks.a.id]];
-      
-      $assetsDiff: {
-        changed: $changedAssets.sort(a.isOverSizeLimit asc, a.size desc).({asset: a, valueA: a.size, valueB: b.size}),
-        added: $addedAssets.sort(isOverSizeLimit asc, size desc).({asset: $, valueA: size, valueB: 0, hash: $statA.hash}),
-        removed: $removedAssets.sort(isOverSizeLimit asc, size desc).({asset: $, valueA: 0, valueB: size, hash: $statB.hash})
-      };
-      
-      $addedPackages: $statA.nodeModules.name - $statB.nodeModules.name;
-      $removedPackages: $statB.nodeModules.name - $statA.nodeModules.name;
-      $changedPackages: $statA.nodeModules.(
-        $packageA: $;
-        $packageB: $statB.nodeModules.[name=$packageA.name].pick();
-        {
-          a: $packageA,
-          b: $packageB,
-          instances: $packageB and {
-            added: ($packageA.instances.path - $packageB.instances.path).(
-              $path: $;
-              {
-                package: $packageA,
-                instance: $packageA.instances.[path=$path].pick(),
-                hash: $statA.hash
-              }
-            ).[instance],
-            removed: ($packageB.instances.path - $packageA.instances.path).(
-              $path: $;
-              {
-                package: $packageB,
-                instance: $packageB.instances.[path=$path].pick(),
-                hash: $statB.hash
-              }
-            ).[instance]
-          }
-        }
-      ).[b and (instances.added or instances.removed)];
-      
-      $packagesDiff: {
-        added: $addedPackages.(resolvePackage($statA.hash)).sort(instances.size() desc, name asc).({
-          package: $,
-          hash: $statA.hash,
-          instances: {
-            added: $.instances,
-            removed: []
-          }
-        }),
-        removed: $removedPackages.(resolvePackage($statB.hash)).sort(instances.size() desc, name asc).({
-          package: $,
-          hash: $statB.hash,
-          instances: {
-            added: [],
-            removed: $.instances
-          }
-        }),
-        changed: $changedPackages.sort(instances.added.size() desc, instances.removed.size() desc, name asc).({
-          package: $,
-          hash: $statA.hash,
-          instances
-        })
-      };
-      
-      {
-        entries: $entryDiff,
-        assets: $assetsDiff,
-        chunks: $chunksDiff,
-        modules: $modulesDiff,
-        moduleDups: $dupModulesDiff,
-        packages: $packagesDiff
-      }
-      `,
-      view: 'tabs',
-      name: 'diffTabs',
-      tabs: [
-        { value: 'assets', text: 'Assets' },
-        { value: 'chunks', text: 'Chunks' },
-        { value: 'modules', text: 'Modules' },
-        { value: 'modules-dups', text: 'Duplicate modules' },
-        { value: 'entrypoints', text: 'Entrypoints' },
-        { value: 'packages', text: 'Packages' },
-      ],
-      content: {
-        view: 'content-filter',
-        content: {
-          view: 'switch',
-          content: [
-            {
-              when: '#.diffTabs="entrypoints"',
-              content: entriesTab(),
-            },
-            {
-              when: '#.diffTabs="chunks"',
-              content: chunksTab(),
-            },
-            {
-              when: '#.diffTabs="assets"',
-              content: assetsTab(),
-            },
-            {
-              when: '#.diffTabs="modules"',
-              content: modulesTab(),
-            },
-            {
-              when: '#.diffTabs="modules-dups"',
-              content: modulesDupsTab(),
-            },
-            {
-              when: '#.diffTabs="packages"',
-              content: packagesTab(),
-            },
-          ],
+          $totalSizeA: $statA.compilation.entrypoints.($getSize()).reduce(=> $ + $$, 0);
+          $totalSizeB: $statB.compilation.entrypoints.($getSize()).reduce(=> $ + $$, 0);
+          $value: $totalSizeA - $totalSizeB;
+          $valueP: $totalSizeA.percentFrom($totalSizeB);
+          value: $value,
+          valueP: $valueP,
+          valueText: $value.formatSize(),
+          valueTextP: $valueP.toFixed() + '%',
+          label: "Total size",
+          visible: $value
         },
-      },
+        {
+          $initialSizeA: $statA.compilation.entrypoints.($getInitialSize()).reduce(=> $ + $$, 0);
+          $initialSizeB: $statB.compilation.entrypoints.($getInitialSize()).reduce(=> $ + $$, 0);
+          $value: $initialSizeA - $initialSizeB;
+          $valueP: $initialSizeA.percentFrom($initialSizeB);
+          value: $value,
+          valueP: $valueP,
+          valueText: $value.formatSize(),
+          valueTextP: $valueP.toFixed() + '%',
+          label: 'Initial size',
+          visible: $value
+        },
+        {
+          $packagesSizeA: $statA.compilation.nodeModules.instances.modules.size.reduce(=> $ + $$, 0);
+          $packagesSizeB: $statB.compilation.nodeModules.instances.modules.size.reduce(=> $ + $$, 0);
+          $value: $packagesSizeA - $packagesSizeB;
+          $valueP: $packagesSizeA.percentFrom($packagesSizeB);
+          value: $value,
+          valueP: $valueP,
+          valueText: $value.formatSize(),
+          valueTextP: $valueP.toFixed() + '%',
+          label: 'Packages size',
+          visible: $value
+        },
+        {
+          $value: $statA.compilation.time - $statB.compilation.time;
+          $valueP: $statA.compilation.time.percentFrom($statB.compilation.time);
+          value: $value,
+          valueP: $valueP,
+          valueText: $value.formatDuration(),
+          valueTextP: $valueP.toFixed() + '%',
+          label: 'Build Time',
+          visible: $value
+        },
+        {
+          $a: $statA.compilation.entrypoints.size();
+          $b: $statB.compilation.entrypoints.size();
+          $value: $a - $b;
+          $valueP: $a.percentFrom($b);
+          value: $value,
+          valueP: $valueP,
+          valueText: $value,
+          valueTextP: $valueP.toFixed() + '%',
+          label: 'Entrypoints',
+          visible: $value
+        },
+        {
+          $a: ($statA.compilation..modules).size();
+          $b: ($statB.compilation..modules).size();
+          $value: $a - $b;
+          $valueP: $a.percentFrom($b);
+          value: $value,
+          valueP: $valueP,
+          valueText: $value,
+          valueTextP: $valueP.toFixed() + '%',
+          label: 'Modules',
+          visible: $value
+        },
+        {
+          $getDuplicateModules: => (
+            $duplicates: (..modules).[source].group(<source>)
+              .({source: key, duplicates: value})
+              .[duplicates.size() > 1].(
+                $module: duplicates[0];
+                $dups: duplicates - [duplicates[0]];
+                {
+                  module: $module,
+                  duplicates: $dups
+                }
+              );
+            $duplicates.module.size()
+          );
+          $a: $statA.compilation.$getDuplicateModules();
+          $b: $statB.compilation.$getDuplicateModules();
+          $value: $a - $b;
+          $valueP: $a.percentFrom($b);
+          value: $value,
+          valueP: $valueP,
+          valueText: $value,
+          valueTextP: $valueP.toFixed() + '%',
+          label: 'Duplicate modules',
+          visible: $value
+        },
+        {
+          $a: ($statA.compilation.chunks + $statA.compilation.chunks..children).size();
+          $b: ($statB.compilation.chunks + $statB.compilation.chunks..children).size();
+          $value: $a - $b;
+          $valueP: $a.percentFrom($b);
+          value: $value,
+          valueP: $valueP,
+          valueText: $value,
+          valueTextP: $valueP.toFixed() + '%',
+          label: 'Chunks',
+          visible: $value
+        },
+        {
+          $a: $statA.compilation.assets.size();
+          $b: $statB.compilation.assets.size();
+          $value: $a - $b;
+          $valueP: $a.percentFrom($b);
+          value: $value,
+          valueP: $valueP,
+          valueText: $value,
+          valueTextP: $valueP.toFixed() + '%',
+          label: 'Assets',
+          visible: $value
+        },
+        {
+          $a: $statA.compilation.nodeModules.size();
+          $b: $statB.compilation.nodeModules.size();
+          $value: $a - $b;
+          $valueP: $a.percentFrom($b);
+          value: $value,
+          valueP: $valueP,
+          valueText: $value,
+          valueTextP: $valueP.toFixed() + '%',
+          label: 'Packages',
+          visible: $value
+        },
+        {
+          $packagesWithMultipleInstancesA: $statA.compilation.nodeModules.[instances.size() > 1];
+          $packagesWithMultipleInstancesB: $statB.compilation.nodeModules.[instances.size() > 1];
+          $a: $packagesWithMultipleInstancesA.instances.size() - $packagesWithMultipleInstancesA.size();
+          $b: $packagesWithMultipleInstancesB.instances.size() - $packagesWithMultipleInstancesB.size();
+          $value: $a - $b;
+          $valueP: $a.percentFrom($b);
+          value: $value,
+          valueP: $valueP,
+          valueText: $value,
+          valueTextP: $valueP.toFixed() + '%',
+          label: 'Package copies',
+          visible: $value
+        },
+      ]
+      `,
+      content: [
+        {
+          when: `not .[visible]`,
+          view: 'alert-success',
+          data: '"The stats has no diff"',
+        },
+        {
+          when: `.[visible]`,
+          view: 'context',
+          modifiers: {
+            view: 'toggle-group',
+            name: 'toggleShowValue',
+            data: [
+              {
+                value: 'percent',
+                text: '%',
+              },
+              {
+                value: 'value',
+                text: 'V',
+              },
+            ],
+          },
+          content: {
+            view: 'block',
+            className: styles['indicators-block'],
+            content: {
+              view: 'inline-list',
+              item: {
+                when: 'value',
+                view: 'diff-indicator',
+                data: `{label, value, valueText: #.toggleShowValue='value' ? valueText : valueTextP}`,
+              },
+            },
+          },
+        },
+        {
+          when: `.[visible]`,
+          data: `
+          $statA: #.params.hash.resolveStat();
+          $statB: #.params.diffWith.resolveStat();
+          $aModules: $statA.compilation..modules.[not shouldHideModule()];
+          $bModules: $statB.compilation..modules.[not shouldHideModule()];
+          
+          $addedModules: $aModules.[identifier not in $bModules.identifier];
+          $removedModules: $bModules.[identifier not in $aModules.identifier]; 
+          $changedModules: $aModules.(
+            $moduleA: $;
+            $moduleB: $bModules.[identifier=$moduleA.identifier].pick();
+            {
+              a: $moduleA,
+              b: $moduleB,
+            }
+          ).[b and (a.size != b.size or a.source != b.source)];
+          
+          $modulesDiff: {
+            added: $addedModules.sort(moduleSize() desc).({module: $, valueA: size, valueB: 0, hash: $statA.compilation.hash}),
+            removed: $removedModules.sort(moduleSize() desc).({module: $, valueA: 0, valueB: size, hash: $statB.compilation.hash}),
+            changed: $changedModules.sort(a.moduleSize() desc).({module: a, valueA: a.size, valueB: b.size, hash: $statA.compilation.hash}),
+          };
+          
+          $getDuplicateModules: => (
+            $compilation: $;
+            (..modules).[
+              source and not shouldHideModule() and name~=#.filter
+            ].group(<source>)
+            .({source: key, duplicates: value})
+            .[duplicates.size() > 1].(
+              $module: duplicates[0];
+              $instance: $module.resolvedResource.nodeModule();
+              $package: $instance.name.resolvePackage($compilation.hash);
+              $dups: duplicates - [duplicates[0]];
+              $dupModules: $dups;
+              $dupPackages: $dups.(resolvedResource.nodeModule()).[].({
+                $path: path;
+                $resolvedPackage: name.resolvePackage($compilation.hash);
+                package: $resolvedPackage,
+                name: $resolvedPackage.name,
+                instances: $resolvedPackage.instances.[path = $path]
+              }).group(<name>).({name: key, instances: value.instances});
+              {
+                module: $module,
+                hash: $compilation.hash,
+                instance: $instance,
+                isLocal: not $module.resolvedResource.nodeModule(),
+                dupModules: $dupModules
+              }
+            )
+            .sort(isLocal desc, instance.isRoot desc, dupModules.size() desc)
+          );
+          $dupModulesA: $statA.compilation.$getDuplicateModules();
+          $dupModulesB: $statB.compilation.$getDuplicateModules();
+          
+          $dupModulesDiff: {
+            added: $dupModulesA.[module.identifier not in $dupModulesB.module.identifier],
+            removed: $dupModulesB.[module.identifier not in $dupModulesA.module.identifier],
+          };
+          
+          $addedChunks: $statA.compilation.chunks.[id not in $statB.compilation.chunks.id]; 
+          $removedChunks: $statB.compilation.chunks.[id not in $statA.compilation.chunks.id]; 
+          $changedChunks: $statA.compilation.chunks.(
+            $chunk: $;
+            {
+              a: $,
+              b: $statB.compilation.chunks.[id=$chunk.id].pick()
+            }
+          ).[
+            $aModules: a..modules.identifier;
+            $bModules: b..modules.identifier;
+            $changedModulesIds: $changedModules.a.identifier;
+            b and (
+              a.size != b.size or
+              $aModules - 
+              $bModules or 
+              $bModules - 
+              $aModules or
+              $aModules.[$ in $changedModulesIds]
+            )
+          ];
+          
+          $chunksDiff: {
+            added: $addedChunks.sort(initial desc, entry desc, size desc).({
+              chunk: $,
+              valueA: size,
+              valueB: 0,
+              hash: $statA.compilation.hash
+            }),
+            removed: $removedChunks.sort(initial desc, entry desc, size desc).({
+              chunk: $,
+              valueA: 0,
+              valueB: size,
+              hash: $statB.compilation.hash
+            }),
+            changed: $changedChunks.sort(a.initial desc, a.entry desc, a.size desc).({
+              chunk: a,
+              valueA: a.size,
+              valueB: b.size,
+              hash: $statA.compilation.hash
+            })
+          };
+          
+          $getInitialSize: => (
+            $chunks: data.chunks.[initial];
+            $assets: $chunks.files;
+            $assets.size.reduce(=> $ + $$, 0)
+          );
+    
+          $added: $statA.compilation.entrypoints.[name not in $statB.compilation.entrypoints.name].(
+            $initialChunks: data.chunks.[initial];
+            $initialAssets: $initialChunks.files;
+            {
+              name: name,
+              data: data,
+              size: $initialAssets.size.reduce(=> $ + $$, 0)
+            }
+          );
+          $removed: $statB.compilation.entrypoints.[name not in $statA.compilation.entrypoints.name].(
+            $initialChunks: data.chunks.[initial];
+            $initialAssets: $initialChunks.files;
+            {
+              name: name,
+              data: data,
+              size: $initialAssets.size.reduce(=> $ + $$, 0)
+            }
+          );
+          $changed: $statA.compilation.entrypoints.(
+            $name: name;
+            $a: $;
+            $b: $statB.compilation.entrypoints.[name=$name].pick();
+            {
+              a: $a,
+              b: $b
+            } | {
+              a: {...a, hash: $statA.compilation.hash, size: a.$getInitialSize()},
+              b: b and {...b, hash: $statB.compilation.hash, size: b.$getInitialSize()}
+            }
+          ).[
+            $aChunksTop: a.chunks;
+            $aChunks: $aChunksTop + $aChunksTop..children;
+            $bChunksTop: b.chunks;
+            $bChunks: $bChunksTop + $bChunksTop..children;
+            $changedChunksIds: $changedChunks.a.id;
+            b and (
+              a.size != b.size or
+              $aChunks - 
+              $bChunks or 
+              $bChunks - 
+              $aChunks or
+              $aChunks.[$ in $changedChunksIds]
+            )
+          ];
+          
+          $entryDiff: {
+            changed: $changed.sort(a.data.isOverSizeLimit asc, a.size desc).({entry:a, hash: $statA.compilation.hash, valueA: a.size, valueB: b.size}),
+            added: $added.sort(data.isOverSizeLimit asc, size desc).({entry:$, hash: $statA.compilation.hash, valueA: size, valueB: 0}),
+            removed: $removed.sort(data.isOverSizeLimit asc, size desc).({entry:$, hash: $statB.compilation.hash, valueA: 0, valueB: size})
+          };
+          
+          $addedAssets: $statA.compilation.assets.[name not in $statB.compilation.assets.name]; 
+          $removedAssets: $statB.compilation.assets.[name not in $statA.compilation.assets.name];
+          $changedAssets: $statA.compilation.assets.(
+            $asset: $;
+            {
+              a: $,
+              b: $statB.compilation.assets.[name=$asset.name].pick()
+            }
+          ).[b and a.size != b.size or chunks.[$ in $changedChunks.a.id]];
+          
+          $assetsDiff: {
+            changed: $changedAssets.sort(a.isOverSizeLimit asc, a.size desc).({asset: a, valueA: a.size, valueB: b.size}),
+            added: $addedAssets.sort(isOverSizeLimit asc, size desc).({asset: $, valueA: size, valueB: 0, hash: $statA.compilation.hash}),
+            removed: $removedAssets.sort(isOverSizeLimit asc, size desc).({asset: $, valueA: 0, valueB: size, hash: $statB.compilation.hash})
+          };
+          
+          $addedPackages: $statA.compilation.nodeModules.name - $statB.compilation.nodeModules.name;
+          $removedPackages: $statB.compilation.nodeModules.name - $statA.compilation.nodeModules.name;
+          $changedPackages: $statA.compilation.nodeModules.(
+            $packageA: $;
+            $packageB: $statB.compilation.nodeModules.[name=$packageA.name].pick();
+            {
+              a: $packageA,
+              b: $packageB,
+              instances: $packageB and {
+                added: ($packageA.instances.path - $packageB.instances.path).(
+                  $path: $;
+                  {
+                    package: $packageA,
+                    instance: $packageA.instances.[path=$path].pick(),
+                    hash: $statA.compilation.hash
+                  }
+                ).[instance],
+                removed: ($packageB.instances.path - $packageA.instances.path).(
+                  $path: $;
+                  {
+                    package: $packageB,
+                    instance: $packageB.instances.[path=$path].pick(),
+                    hash: $statB.compilation.hash
+                  }
+                ).[instance]
+              }
+            }
+          ).[b and (instances.added or instances.removed)];
+          
+          $packagesDiff: {
+            added: $addedPackages.(resolvePackage($statA.compilation.hash)).sort(instances.size() desc, name asc).({
+              package: $,
+              hash: $statA.compilation.hash,
+              instances: {
+                added: $.instances,
+                removed: []
+              }
+            }),
+            removed: $removedPackages.(resolvePackage($statB.compilation.hash)).sort(instances.size() desc, name asc).({
+              package: $,
+              hash: $statB.compilation.hash,
+              instances: {
+                added: [],
+                removed: $.instances
+              }
+            }),
+            changed: $changedPackages.sort(instances.added.size() desc, instances.removed.size() desc, name asc).({
+              package: $,
+              hash: $statA.compilation.hash,
+              instances
+            })
+          };
+          
+          {
+            entries: $entryDiff,
+            assets: $assetsDiff,
+            chunks: $chunksDiff,
+            modules: $modulesDiff,
+            moduleDups: $dupModulesDiff,
+            packages: $packagesDiff
+          }
+          `,
+          view: 'tabs',
+          name: 'diffTabs',
+          tabs: [
+            { value: 'assets', text: 'Assets' },
+            { value: 'chunks', text: 'Chunks' },
+            { value: 'modules', text: 'Modules' },
+            { value: 'modules-dups', text: 'Duplicate modules' },
+            { value: 'entrypoints', text: 'Entrypoints' },
+            { value: 'packages', text: 'Packages' },
+          ],
+          content: {
+            view: 'content-filter',
+            content: {
+              view: 'switch',
+              content: [
+                {
+                  when: '#.diffTabs="entrypoints"',
+                  content: entriesTab(),
+                },
+                {
+                  when: '#.diffTabs="chunks"',
+                  content: chunksTab(),
+                },
+                {
+                  when: '#.diffTabs="assets"',
+                  content: assetsTab(),
+                },
+                {
+                  when: '#.diffTabs="modules"',
+                  content: modulesTab(),
+                },
+                {
+                  when: '#.diffTabs="modules-dups"',
+                  content: modulesDupsTab(),
+                },
+                {
+                  when: '#.diffTabs="packages"',
+                  content: packagesTab(),
+                },
+              ],
+            },
+          },
+        },
+      ],
     },
   ]);
 }

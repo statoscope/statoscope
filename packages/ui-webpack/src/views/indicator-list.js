@@ -10,7 +10,7 @@ export default function indicatorList(data) {
       data: `
       .({
         label: title,
-        value: query.query(#.params.hash.resolveCompilation(), #)
+        value: query.query(#.params.hash.resolveStat(), #)
       })`,
     },
   };

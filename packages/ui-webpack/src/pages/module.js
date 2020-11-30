@@ -5,24 +5,24 @@ import chunksTree from './default/chunks-tree';
 export default function (discovery) {
   discovery.page.define('module', [
     {
-      data: '#.params.hash.resolveCompilation()',
+      data: '#.params.hash.resolveStat()',
       view: 'switch',
       content: [
         {
-          when: 'not $',
+          when: 'not compilation',
           content: 'stats-list',
         },
         {
-          when: '$',
+          when: 'compilation',
           content: [
             {
-              when: 'not validation.result',
+              when: 'not file.validation.result',
               view: 'alert-danger',
-              data: `validation.message`,
+              content: ['h3: "Stats is invalid"', 'md: file.validation.message'],
             },
             {
               view: 'switch',
-              data: `(..modules).[identifier=#.id.decodeURIComponent() or (''+id)=#.id.decodeURIComponent()][0]`,
+              data: `compilation.(..modules).[identifier=#.id.decodeURIComponent() or (''+id)=#.id.decodeURIComponent()][0]`,
               content: [
                 {
                   when: 'not $',
@@ -115,7 +115,7 @@ export default function (discovery) {
                                   {
                                     when: '#.depsTabs="modules"',
                                     data: `
-                                    #.params.hash.resolveCompilation().(..modules)
+                                    #.params.hash.resolveStat().(..modules)
                                       .[not shouldHideModule() and name~=#.filter]
                                       .[reasons.[resolvedModule=@]]
                                       .sort(moduleSize() desc)
@@ -127,7 +127,7 @@ export default function (discovery) {
                                   {
                                     when: '#.depsTabs="chunks"',
                                     data: `
-                                    #.params.hash.resolveCompilation().(..modules).[not shouldHideModule()]
+                                    #.params.hash.resolveStat().(..modules).[not shouldHideModule()]
                                       .[reasons.[resolvedModule=@]]
                                       .chunks.[chunkName()~=#.filter].sort(initial desc, entry desc, size desc)
                                     `,

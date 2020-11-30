@@ -14,7 +14,7 @@ export default ({ element = document.body, data, name, prepare, views, pages }) 
 
   const context = {
     name,
-    get data() {
+    get stats() {
       return discovery.data;
     },
     get rawData() {

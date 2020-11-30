@@ -92,7 +92,7 @@ export function moduleItemConfig(getter = '$', hash = '#.params.hash') {
                     children: `data.({value: $, reasons: @.reasons})`,
                     itemConfig: {
                       content: `chunk-item:{chunk: value, hash: ${hash}}`,
-                      children: `reasons.[chunks has @.value.id]`,
+                      children: `reasons.[chunks has @.value]`,
                       limit: '= settingListItemsLimit()',
                       get itemConfig() {
                         return moduleItemConfig();

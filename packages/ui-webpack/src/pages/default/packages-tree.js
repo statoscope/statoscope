@@ -92,7 +92,7 @@ export function packageInstanceItemConfig(hash = '#.params.hash') {
                     itemConfig: {
                       content: `chunk-item:{chunk: value, hash: ${hash}}`,
                       children: `
-                        $chunks:reasons.[module.chunks has @.value.id];
+                        $chunks:reasons.[module.chunks has @.value];
                         $chunks.module.({value: $, reasons: $chunks.reason}).sort(value.moduleSize() desc)
                         `,
                       limit: '= settingListItemsLimit()',

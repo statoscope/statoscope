@@ -14,25 +14,36 @@ import { makeEntityResolver } from './entity';
 import normalize from './normalize';
 
 export default (discovery) => (rawData, { addQueryHelpers }) => {
-  const compilationsMap = new Map();
-  const compilations = [];
+  const fileCompilationMap = new Map();
+  const files = [];
 
   if (!Array.isArray(rawData)) {
     rawData = [rawData];
   }
 
-  for (const data of rawData) {
-    const compilationData = normalize(data);
+  for (const rawFile of rawData) {
+    const fileData = normalize(rawFile);
+    const file = {
+      name: fileData.name,
+      version: fileData.version,
+      validation: fileData.validation,
+      compilations: [],
+    };
 
-    for (const compilation of compilationData.compilations) {
-      compilationsMap.set(compilation.data.hash, compilation);
-      compilations.push(compilation.data);
+    for (const compilation of fileData.compilations) {
+      fileCompilationMap.set(compilation.data.hash, {
+        file,
+        compilation,
+      });
+      file.compilations.push(compilation.data);
     }
+
+    files.push(file);
   }
 
   const resolveCompilationFromMap = makeEntityResolver(
-    compilationsMap,
-    (item) => item?.data?.hash
+    fileCompilationMap,
+    (item) => item?.compilation?.data?.hash
   );
 
   addQueryHelpers({
@@ -106,19 +117,30 @@ export default (discovery) => (rawData, { addQueryHelpers }) => {
       (value.files || []).reduce((sum, file) => sum + file.size, 0),
     toMatchRegexp: (value) => new RegExp(`(${value})`),
     resolveChunk(id, compilationHash) {
-      return resolveCompilationFromMap(compilationHash)?.resolvers.resolveChunk(id);
+      return resolveCompilationFromMap(
+        compilationHash
+      )?.compilation?.resolvers.resolveChunk(id);
     },
     resolveAsset(id, compilationHash) {
-      return resolveCompilationFromMap(compilationHash)?.resolvers.resolveAsset(id);
+      return resolveCompilationFromMap(
+        compilationHash
+      )?.compilation?.resolvers.resolveAsset(id);
     },
     resolveModule(id, compilationHash) {
-      return resolveCompilationFromMap(compilationHash)?.resolvers.resolveModule(id);
+      return resolveCompilationFromMap(
+        compilationHash
+      )?.compilation?.resolvers.resolveModule(id);
     },
     resolvePackage(id, compilationHash) {
-      return resolveCompilationFromMap(compilationHash)?.resolvers.resolvePackage(id);
+      return resolveCompilationFromMap(
+        compilationHash
+      )?.compilation?.resolvers.resolvePackage(id);
     },
-    resolveCompilation(id) {
-      return resolveCompilationFromMap(id)?.data;
+    resolveStat(id) {
+      const resolved = resolveCompilationFromMap(id);
+      return (
+        resolved && { file: resolved?.file, compilation: resolved?.compilation?.data }
+      );
     },
     moduleResource: module,
     moduleReasonResource,
@@ -162,22 +184,22 @@ export default (discovery) => (rawData, { addQueryHelpers }) => {
         .get(SETTING_LIST_ITEMS_LIMIT, SETTING_LIST_ITEMS_LIMIT_DEFAULT)
         .get();
     },
-    compilationName(compilation) {
-      if (!compilation) {
+    statName(stat) {
+      if (!stat) {
         return 'unknown';
       }
 
-      const hash = compilation.hash.slice(0, 7);
+      const hash = stat.compilation.hash.slice(0, 7);
 
-      if (compilation.fileName) {
-        return `${compilation.fileName} (${compilation.name || hash})`;
-      } else if (compilation.name) {
-        return `${compilation.name} (${hash})`;
+      if (stat.file.name) {
+        return `${stat.file.name} (${stat.compilation.name || hash})`;
+      } else if (stat.compilation.name) {
+        return `${stat.compilation.name} (${hash})`;
       }
 
       return hash;
     },
   });
 
-  return { compilations };
+  return files;
 };

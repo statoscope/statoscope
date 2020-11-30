@@ -27,18 +27,19 @@ export function entryItemConfig(getter = '$', hash = '#.params.hash') {
     $entry:$;
     $topLevelChunks:$entry.data.chunks;
     $chunks:$topLevelChunks + $topLevelChunks..children;
-    $chunksModules:$chunks..modules.[not shouldHideModule()];
-    $chunksModulesPackages:$chunksModules.(resolvedResource.nodeModule()).[].(name.resolvePackage(${hash})).[];
-    $chunksPackages:$chunksModulesPackages.({name: name, instances: instances.[modules.[$ in $chunksModules]]});
+    $chunksAllModules:$chunks..modules.[not shouldHideModule()];
+    $chunksModules:$chunks.modules.[not shouldHideModule()];
+    $chunksModulesPackages:$chunksAllModules.(resolvedResource.nodeModule()).[].(name.resolvePackage(${hash})).[];
+    $chunksPackages:$chunksModulesPackages.({name: name, instances: instances.[modules.[$ in $chunksAllModules]]});
     [{
       title: "Chunks",
       data: $chunks.sort(initial desc, entry desc, size desc),
-      visible: true,
+      visible: $chunks,
       type: 'chunks'
     },{
       title: "Modules",
-      data: $chunks.modules.[not shouldHideModule()].sort(moduleSize() desc),
-      visible: true,
+      data: $chunksModules.sort(moduleSize() desc),
+      visible: $chunksModules,
       type: 'modules'
     },{
       title: "Packages",
@@ -47,7 +48,6 @@ export function entryItemConfig(getter = '$', hash = '#.params.hash') {
       type: 'packages'
     },{
       title: "Assets",
-      visible: true,
       chunks: $chunks,
       visible: $chunks,
       type: 'assets'

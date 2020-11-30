@@ -1,3 +1,5 @@
+import badgeFix from './badge-margin-fix.css';
+
 export default function (discovery) {
   discovery.view.define('stats-list', render);
 
@@ -10,17 +12,19 @@ export default function (discovery) {
         {
           when: 'showHeader!=false',
           view: 'h2',
-          data: '"Choose a stats to view:"',
+          data: '"Choose a stat to view:"',
         },
         {
-          data: `#.data.compilations.[hash!=#.params.hash].({
-            text: fileName or hash.slice(0, 7),
-            href: #.id.pageLink(#.page, { ...#.params,hash }),
-            version,
-            name,
-            hash,
-            builtAt
-          })`,
+          data: `#.stats.compilations.hash.(resolveStat()).({
+            text: file.name or compilation.hash.slice(0, 7),
+            version: file.version,
+            fileName: file.name,
+            href: #.id.pageLink(#.page, { ...#.params, hash: compilation.hash }),
+            selected: #.params.hash = compilation.hash,
+            name: compilation.name,
+            hash: compilation.hash,
+            builtAt: compilation.builtAt
+          }).sort(builtAt desc)`,
           view: 'menu',
           onChange(el, data, context) {
             if (typeof onClick === 'function') {
@@ -30,6 +34,7 @@ export default function (discovery) {
             location.assign(el.href);
           },
           itemConfig: {
+            className: badgeFix.root,
             content: [
               {
                 view: 'link',
@@ -37,22 +42,23 @@ export default function (discovery) {
               },
               {
                 view: 'badge',
-                className: 'hack-badge-margin-left',
-                data: `{prefix: 'webpack',text: version}`,
-              },
-              {
-                view: 'badge',
                 when: 'name',
-                data: `{prefix: 'name',text: name}`,
+                data: `{prefix: 'name', text: name}`,
               },
               {
                 view: 'badge',
-                when: 'fileName',
-                data: `{prefix: 'hash',text: hash.slice(0, 7)}`,
+                when: 'version',
+                data: `{prefix: 'webpack', text: version}`,
               },
               {
                 view: 'badge',
-                data: `{prefix: 'date',text: builtAt.formatDate()}`,
+                when: 'hash and fileName',
+                data: `{prefix: 'hash', text: hash.slice(0, 7)}`,
+              },
+              {
+                view: 'badge',
+                when: 'builtAt',
+                data: `{prefix: 'date', text: builtAt.formatDate()}`,
               },
             ],
           },

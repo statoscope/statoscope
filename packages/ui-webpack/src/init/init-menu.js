@@ -33,7 +33,7 @@ function addCustomIndex(discovery) {
 function addLinks(discovery) {
   discovery.nav.append({
     name: 'diff',
-    when: `#.widget | pageId != 'diff' and #.data.compilations.size()>1`,
+    when: `#.widget | pageId != 'diff' and #.stats.compilations.size()>1`,
     data: `{ text: "Diff", href: pageLink('diff', {hash:#.params.hash}) }`,
   });
 
@@ -52,7 +52,7 @@ function addStatsList(discovery) {
   const popup = new discovery.view.Popup({});
   discovery.nav.append({
     name: 'stats-list',
-    when: `#.widget and #.data.compilations.size()>1`,
+    when: `#.widget and #.stats.compilations.size()>1`,
     content: 'html:"Choose stats &#9660"',
     onClick: (el) => {
       popup.toggle(el, (popupEl) =>

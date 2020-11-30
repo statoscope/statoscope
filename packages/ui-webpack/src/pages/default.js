@@ -9,43 +9,48 @@ import assetsTree from './default/assets-tree';
 export default function (discovery) {
   discovery.page.define('default', [
     {
-      data: '#.params.hash.resolveCompilation()',
+      data: '#.params.hash.resolveStat()',
       view: 'switch',
       content: [
         {
-          when: 'not $',
+          when: 'not compilation',
           content: 'stats-list',
         },
         {
-          when: '$',
+          when: 'compilation',
           content: [
             {
-              when: 'not validation.result',
+              when: 'not file.validation.result',
               view: 'alert-danger',
-              data: `validation.message`,
+              content: ['h3: "Stats is invalid"', 'md: file.validation.message'],
             },
             {
               view: 'page-header',
               prelude: [
                 {
-                  when: 'fileName',
+                  when: 'file.name',
                   view: 'badge',
-                  data: `{ prefix: 'file name', text: fileName }`,
+                  data: `{ prefix: 'file name', text: file.name }`,
                 },
                 {
-                  when: 'name',
+                  when: 'compilation.name',
                   view: 'badge',
-                  data: `{ prefix: 'name', text: name }`,
+                  data: `{ prefix: 'name', text: compilation.name }`,
                 },
                 {
-                  when: 'builtAt',
+                  when: 'compilation.builtAt',
                   view: 'badge',
-                  data: `{ prefix: 'date', text: builtAt.formatDate() }`,
+                  data: `{ prefix: 'date', text: compilation.builtAt.formatDate() }`,
                 },
                 {
-                  when: 'hash',
+                  when: 'compilation.hash',
                   view: 'badge',
-                  data: `{prefix:'hash',text:hash}`,
+                  data: `{prefix:'hash',text: compilation.hash}`,
+                },
+                {
+                  when: 'file.version',
+                  view: 'badge',
+                  data: `{prefix:'version',text: file.version}`,
                 },
               ],
               content: 'h1:#.name',
@@ -53,7 +58,7 @@ export default function (discovery) {
             {
               view: 'block',
               data: `
-              $statA: #.params.hash.resolveCompilation();
+              $statA: $;
               
               $getSize: => (
                 $chunks: data.chunks + data.chunks..children;
@@ -68,34 +73,42 @@ export default function (discovery) {
               
               [
                 {
-                  $totalSizeA: $statA.entrypoints.($getSize()).reduce(=> $ + $$, 0);
+                  $totalSizeA: $statA.compilation.entrypoints.($getSize()).reduce(=> $ + $$, 0);
                   value: $totalSizeA.formatSize(),
-                  label: "Total size"
+                  label: "Total size",
+                  visible: $statA.compilation.chunks.files
                 },
                 {
-                  $initialSizeA: $statA.entrypoints.($getInitialSize()).reduce(=> $ + $$, 0);
+                  $initialSizeA: $statA.compilation.entrypoints.($getInitialSize()).reduce(=> $ + $$, 0);
                   value: $initialSizeA.formatSize(),
-                  label: 'Initial size'
+                  label: 'Initial size',
+                  visible: $statA.compilation.chunks.files
                 },
                 {
-                  $packagesSizeA: $statA.nodeModules.instances.modules.size.reduce(=> $ + $$, 0);
+                  $packagesModulesA: $statA.compilation.nodeModules.instances.modules;
+                  $packagesSizeA: $packagesModulesA.size.reduce(=> $ + $$, 0);
                   value: $packagesSizeA.formatSize(),
-                  label: 'Packages size'
+                  label: 'Packages size',
+                  visible: $packagesModulesA
                 },
                 {
-                  value: $statA.time.formatDuration(),
-                  label: 'Build Time'
+                  value: $statA.compilation.time.formatDuration(),
+                  label: 'Build Time',
+                  visible: $statA.compilation.time
                 },
                 {
-                  value: $statA.entrypoints.size(),
-                  label: 'Entrypoints'
+                  value: $statA.compilation.entrypoints.size(),
+                  label: 'Entrypoints',
+                  visible: $statA.compilation.entrypoints
                 },
                 {
-                  value: ($statA..modules).size(),
-                  label: 'Modules'
+                  $modules: $statA.compilation..modules;
+                  value: $modules.size(),
+                  label: 'Modules',
+                  visible: $modules
                 },
                 {
-                  $duplicates: $statA.(..modules).[source].group(<source>)
+                  $duplicates: $statA.compilation.(..modules).[source].group(<source>)
                     .({source: key, duplicates: value})
                     .[duplicates.size() > 1].(
                       $module: duplicates[0];
@@ -106,33 +119,40 @@ export default function (discovery) {
                       }
                     );
                   value: $duplicates.module.size(),
-                  label: 'Duplicate modules'
+                  label: 'Duplicate modules',
+                  visible: $duplicates
                 },
                 {
-                  value: ($statA.chunks + $statA.chunks..children).size(),
-                  label: 'Chunks'
+                  value: ($statA.compilation.chunks + $statA.compilation.chunks..children).size(),
+                  label: 'Chunks',
+                  visible: $statA.compilation.chunks
                 },
                 {
-                  value: $statA.assets.size(),
-                  label: 'Assets'
+                  value: $statA.compilation.assets.size(),
+                  label: 'Assets',
+                  visible: $statA.compilation.assets
                 },
                 {
-                  value: $statA.nodeModules.size(),
-                  label: 'Packages'
+                  value: $statA.compilation.nodeModules.size(),
+                  label: 'Packages',
+                  visible: $statA.compilation.nodeModules
                 },
                 {
-                  value: (
-                    $packagesWithMultipleInstancesA: $statA.nodeModules.[instances.size() > 1];
+                  $value: (
+                    $packagesWithMultipleInstancesA: $statA.compilation.nodeModules.[instances.size() > 1];
                     $copiesA: $packagesWithMultipleInstancesA.instances.size() - $packagesWithMultipleInstancesA.size();
                     $copiesA
-                  ),
-                  label: 'Package copies'
+                  );
+                  value: $value,
+                  label: 'Package copies',
+                  visible: $value
                 },
               ]
               `,
               content: {
                 view: 'inline-list',
                 item: {
+                  when: 'visible',
                   view: 'indicator',
                   className: diffIndicatorStyle.root,
                 },
@@ -163,7 +183,7 @@ export default function (discovery) {
                           {
                             when: '#.instantLists="modules"',
                             data: `
-                            modules.[not shouldHideModule()].[
+                            compilation.modules.[not shouldHideModule()].[
                               name~=#.filter or modules and modules.[name~=#.filter]
                             ]
                             .sort(moduleSize() desc)
@@ -175,36 +195,38 @@ export default function (discovery) {
                           {
                             when: '#.instantLists="modules-dups"',
                             data: `
-                            $hash: hash;
-                            (..modules).[
-                              source and not shouldHideModule() and name~=#.filter
-                            ].group(<source>)
-                            .({source: key, duplicates: value})
-                            .[duplicates.size() > 1].(
-                              $module: duplicates[0];
-                              $instance: $module.resolvedResource.nodeModule();
-                              $package: $instance.name.resolvePackage($hash);
-                              $dups: duplicates - [duplicates[0]];
-                              $dupModules: $dups;
-                              $dupPackages: $dups.(resolvedResource.nodeModule()).[].({
-                                $path: path;
-                                $resolvedPackage: name.resolvePackage($hash);
-                                package: $resolvedPackage,
-                                name: $resolvedPackage.name,
-                                instances: $resolvedPackage.instances.[path = $path]
-                              }).group(<name>).({name: key, instances: value.instances});
-                              {
-                                module: $module,
-                                hash: $hash,
-                                package: $package,
-                                instance: $instance,
-                                isLocal: not $module.resolvedResource.nodeModule(),
-                                dupModules: $dupModules,
-                                dupPackages: $dupPackages,
-                                hasDupesInLocal: $dupModules.[not resolvedResource.nodeModule()].size() > 0
-                              }
-                            )
-                            .sort(isLocal desc, instance.isRoot desc, dupModules.size() desc)
+                            $hash: compilation.hash;
+                            compilation
+                              .(..modules).[
+                                source and not shouldHideModule() and name~=#.filter
+                              ]
+                              .group(<source>)
+                              .({source: key, duplicates: value})
+                              .[duplicates.size() > 1].(
+                                $module: duplicates[0];
+                                $instance: $module.resolvedResource.nodeModule();
+                                $package: $instance.name.resolvePackage($hash);
+                                $dups: duplicates - [duplicates[0]];
+                                $dupModules: $dups;
+                                $dupPackages: $dups.(resolvedResource.nodeModule()).[].({
+                                  $path: path;
+                                  $resolvedPackage: name.resolvePackage($hash);
+                                  package: $resolvedPackage,
+                                  name: $resolvedPackage.name,
+                                  instances: $resolvedPackage.instances.[path = $path]
+                                }).group(<name>).({name: key, instances: value.instances});
+                                {
+                                  module: $module,
+                                  hash: $hash,
+                                  package: $package,
+                                  instance: $instance,
+                                  isLocal: not $module.resolvedResource.nodeModule(),
+                                  dupModules: $dupModules,
+                                  dupPackages: $dupPackages,
+                                  hasDupesInLocal: $dupModules.[not resolvedResource.nodeModule()].size() > 0
+                                }
+                              )
+                              .sort(isLocal desc, instance.isRoot desc, dupModules.size() desc)
                             `,
                             content: {
                               view: 'tree',
@@ -227,7 +249,7 @@ export default function (discovery) {
                           {
                             when: '#.instantLists="chunks"',
                             data: `
-                            chunks.sort(initial desc, entry desc, size desc).[
+                            compilation.chunks.sort(initial desc, entry desc, size desc).[
                               chunkName()~=#.filter or id~=#.filter
                             ]
                             `,
@@ -238,7 +260,7 @@ export default function (discovery) {
                           {
                             when: '#.instantLists="assets"',
                             data: `
-                            assets.[name~=#.filter]
+                            compilation.assets.[name~=#.filter]
                             .sort(isOverSizeLimit asc, size desc)
                             `,
                             content: {
@@ -248,7 +270,7 @@ export default function (discovery) {
                           {
                             when: '#.instantLists="entrypoints"',
                             data: `
-                            entrypoints
+                            compilation.entrypoints
                               .[name~=#.filter]
                               .sort(data.isOverSizeLimit asc, size desc)
                             `,
@@ -259,7 +281,7 @@ export default function (discovery) {
                           {
                             when: '#.instantLists="packages"',
                             data: `
-                            nodeModules
+                            compilation.nodeModules
                               .[name~=#.filter]
                               .sort(instances.size() desc, name asc)
                             `,
