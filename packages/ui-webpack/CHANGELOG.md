@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.0 (01 December 2020)
+
+### Features
+
+- Goto first compilation when load multiple stats or a stat with multiple compilations
+
 ## 3.0.0 (01 December 2020)
 
 ### Features
