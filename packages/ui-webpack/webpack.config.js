@@ -8,6 +8,7 @@ const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development
 module.exports = [
   {
     mode,
+    name: 'mono',
     entry: './src/index.js',
     output: {
       library: 'Statoscope',
@@ -47,6 +48,7 @@ module.exports = [
   },
   {
     mode,
+    name: 'split',
     entry: './src/index.js',
     output: {
       library: 'Statoscope',

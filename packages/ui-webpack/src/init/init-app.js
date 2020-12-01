@@ -39,10 +39,11 @@ export default ({ element = document.body, data, name, prepare, views, pages }) 
   setDataPromise.then(() => {
     const context = discovery.getRenderContext();
 
-    if (!context.params.hash && discovery.data.length === 1) {
+    if (!context.params.hash) {
+      const targetHash = discovery.data[0]?.compilations[0]?.hash;
       const link = discovery.encodePageHash(context.page, context.id, {
         ...context.params,
-        hash: discovery.data[0].hash,
+        hash: targetHash,
       });
       location.assign(link);
     }

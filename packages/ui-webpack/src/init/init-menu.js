@@ -25,8 +25,7 @@ function addCustomIndex(discovery) {
   discovery.nav.prepend({
     name: 'index-page2',
     when: '#.widget | pageId != defaultPageId',
-    data:
-      '{ text: "Index", href: pageLink(#.widget.defaultPageId, {hash:#.params.hash}) }',
+    data: `{ text: "Index", href: pageLink(#.widget.defaultPageId, {hash:#.params.hash or ''}) }`,
   });
 }
 
@@ -34,7 +33,7 @@ function addLinks(discovery) {
   discovery.nav.append({
     name: 'diff',
     when: `#.widget | pageId != 'diff' and #.stats.compilations.size()>1`,
-    data: `{ text: "Diff", href: pageLink('diff', {hash:#.params.hash}) }`,
+    data: `{ text: "Diff", href: pageLink('diff', {hash:#.params.hash or ''}) }`,
   });
 
   discovery.nav.primary.append({
