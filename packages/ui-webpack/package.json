@@ -2,7 +2,8 @@
   "name": "@statoscope/ui-webpack",
   "version": "3.1.0",
   "description": "UI for analyzing webpack bundle with Statoscope",
-  "main": "dist/main.js",
+  "browser": "dist/main.js",
+  "main": "./plugin.js",
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
@@ -15,12 +16,13 @@
     "url": "https://twitter.com/smelukov"
   },
   "files": [
+    "plugin.js",
     "dist/*"
   ],
   "license": "MIT",
   "homepage": "https://github.com/smelukov/statoscope/",
   "devDependencies": {
-    "@discoveryjs/discovery": "^1.0.0-beta.51",
+    "@discoveryjs/discovery": "^1.0.0-beta.52",
     "@popperjs/core": "^2.5.3",
     "@wdxlab/events": "^1.1.0",
     "babel-loader": "^8.1.0",
@@ -35,5 +37,8 @@
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@discoveryjs/json-ext": "^0.5.0",
+    "open": "^7.3.0"
+  }
 }
