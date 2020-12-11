@@ -1,5 +1,26 @@
 # Changelog
 
+## 3.2.0 (11 December 2020)
+
+### Features
+
+- Added webpack plugin
+
+    Now you may use Statoscope as a webpack plugin:
+    
+    **webpack.config.js:**
+    ```js
+    const StatoscopeWebpackPlugin = require('@statoscope/ui-webpack');
+
+    config.plugins.push(new StatoscopeWebpackPlugin());
+    ```
+  
+    See the readme for more information.
+
+### Misc
+
+- Update [@discoveryjs/discovery](https://github.com/discoveryjs/discovery) to [1.0.0-beta.52](https://github.com/discoveryjs/discovery/blob/master/CHANGELOG.md#100-beta52-19-11-2020)
+
 ## 3.1.0 (01 December 2020)
 
 ### Features
