@@ -1,5 +1,3 @@
-
-
 # Statoscope for webpack
 
 [![npm version](https://badge.fury.io/js/%40statoscope%2Fui-webpack.svg)](https://badge.fury.io/js/%40statoscope%2Fui-webpack)
@@ -24,6 +22,53 @@ npm install @statoscope/ui-webpack --save-dev
 ```
 
 ## Usage
+
+### As webpack plugin
+
+Statoscope webpack plugin saves a report into an HTML file.
+
+**webpack.config.js:**
+```js
+const StatoscopeWebpackPlugin = require('@statoscope/ui-webpack');
+
+config.plugins.push(new StatoscopeWebpackPlugin());
+```
+
+There are some **optional** options.
+
+```js
+new StatoscopeWebpackPlugin({
+  saveTo: '/abs/path/to/file.html',
+  name: 'some-name',
+  open: 'file'
+})
+```
+
+#### options.saveTo: string
+
+Absolute path to an HTML with a report.
+
+By default is a temporary directory with filename: `statoscope-[name].html`
+
+`[name]` replacing by `options.name` (if specified) or `compilation.name` (if specified) or `compilation.hash`
+
+#### options.name: string
+
+Custom compilation name.
+
+By default `compilation.name` (if specified)
+
+#### options.open: enum
+
+Open report after compilation.
+
+- `false` - don't open report
+- `file` - open html with report
+- `dir` - open a directory with html file
+
+`dir` by default.
+
+### As standalone UI (only for browser)
 
 **1\.** Collect the bundle stats with:
 
@@ -74,7 +119,7 @@ Less initial size is better:
 
 <img src="docs/size-ratio.png" width="300px"/>
 
-Use chunks tree to find out which chunks are synchronous and try to [split it](https://webpack.js.org/guides/code-splitting/). 
+Use chunks tree to find out which chunks are synchronous and try to [split it](https://webpack.js.org/guides/code-splitting/).
 
 <img src="docs/chunks.png" width="300px"/>
 
@@ -177,7 +222,7 @@ stats: {
   source: true, // add module sources (uses to find modules duplicates)
 },
 ```
-  
+
 ## Support
 
 If you are an engineer or a company that is interested in Statoscope improvements, you may support Statoscope by financial contribution at [OpenCollective](https://opencollective.com/statoscope).
