@@ -2,7 +2,24 @@
 
 ## Next
 
+### Features
+
+**Plugin**
+
+- Add `saveStatsTo` option
+  
+  Now you can save a webpack stats with `saveStatsTo: '/abs/path/to/stats.json'`
+
+- Add `diffWith` option
+
+  Now you can diff the stats with `diffWith: '/abs/path/to/previous/stats.json'`
+
+  Statoscope plugin will generate a report for two stats: for current stats and for `diffWith` stats.
+  You may diff these stats by `Diff` page
+  
 ### Bugfix
+
+**UI**
 
 - Fix resolving module resource that starts with `..`
 

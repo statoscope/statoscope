@@ -2,8 +2,8 @@
   "name": "@statoscope/ui-webpack",
   "version": "3.2.0",
   "description": "Webpack plugin and UI for analyzing webpack bundle with Statoscope",
-  "browser": "dist/main.js",
-  "main": "./plugin.js",
+  "browser": "./dist/main.js",
+  "main": "./plugin/index.js",
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
@@ -16,7 +16,7 @@
     "url": "https://twitter.com/smelukov"
   },
   "files": [
-    "plugin.js",
+    "plugin/*",
     "dist/*"
   ],
   "license": "MIT",
