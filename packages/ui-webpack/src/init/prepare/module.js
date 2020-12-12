@@ -1,4 +1,4 @@
-export const extractFileRx = /.*(?:(?:^|!|\s+)\.?[\\/])(.+)/;
+export const extractFileRx = /.*(?:^|!|\s+)(\.?\.?[\\/].+)/;
 export const concatenatedIdRx = /(.+) \+ \d+ modules$/;
 export const contextIdRx = /(.+) (?:sync|eager|weak|async-weak|lazy|lazy-once)(?:\s|$)/;
 
@@ -18,11 +18,16 @@ export function moduleNameResource(name) {
       return name;
     }
 
-    return (
+    const nameResource =
       matchRxValue(concatenatedIdRx, normalized) ||
       matchRxValue(contextIdRx, normalized) ||
-      normalized
-    );
+      normalized;
+
+    if (nameResource.startsWith('./') || nameResource.startsWith('.\\')) {
+      return nameResource.slice(2);
+    }
+
+    return nameResource;
   }
 }
 

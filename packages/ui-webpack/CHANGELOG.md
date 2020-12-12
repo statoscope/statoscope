@@ -1,5 +1,11 @@
 # Changelog
 
+## Next
+
+### Bugfix
+
+- Fix resolving module resource that starts with `..`
+
 ## 3.2.0 (11 December 2020)
 
 ### Features
