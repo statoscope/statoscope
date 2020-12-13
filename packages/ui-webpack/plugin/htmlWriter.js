@@ -13,7 +13,7 @@ module.exports = class HTMLWriter {
     this.postWriter = makePostWriter('jsonExtAPI');
     this.writer = makeWriter(async (write, pipeFrom) => {
       await pipeFrom(this.preWriter);
-      await Promise.all(this.chunkWriters.map(pipeFrom));
+      await pipeFrom(this.chunkWriters);
       await pipeFrom(this.postWriter);
     });
     this.writer.getStream().pipe(this.stream);

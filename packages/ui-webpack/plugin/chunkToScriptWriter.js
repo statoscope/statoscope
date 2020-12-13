@@ -18,7 +18,7 @@ function makeHeaderWriter(jsonExtAPIName) {
     await write(`
     <script>
       ${fs.readFileSync(
-        require.resolve('@discoveryjs/json-ext/dist/json-ext.js'),
+        require.resolve('@discoveryjs/json-ext/dist/json-ext.min.js'),
         'utf8'
       )}
     </script>

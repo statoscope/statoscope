@@ -12,28 +12,34 @@ function makeEndFn(stream) {
 }
 
 function makePipeFromFn(stream) {
-  return (pipeFromStreamOrWriter) => {
-    let pipeFromStream = pipeFromStreamOrWriter;
+  return (source) => {
+    source = Array.isArray(source) ? source : [source];
 
-    if (!(pipeFromStreamOrWriter instanceof Stream)) {
-      pipeFromStream = pipeFromStreamOrWriter.getStream();
-      pipeFromStreamOrWriter.write();
-    }
+    return Promise.all(
+      source.map((streamOrWriter) => {
+        let sourceStream = streamOrWriter;
 
-    return new Promise((resolve, reject) => {
-      if (!pipeFromStream.readable && !pipeFromStream.writable) {
-        return resolve();
-      }
-
-      pipeFromStream.pipe(stream, { end: false });
-      pipeFromStream.on('end', (err) => {
-        if (err) {
-          return reject(err);
+        if (!(streamOrWriter instanceof Stream)) {
+          sourceStream = streamOrWriter.getStream();
+          streamOrWriter.write();
         }
 
-        resolve();
-      });
-    });
+        return new Promise((resolve, reject) => {
+          if (!sourceStream.readable && !sourceStream.writable) {
+            return resolve();
+          }
+
+          sourceStream.pipe(stream, { end: false });
+          sourceStream.on('end', (err) => {
+            if (err) {
+              return reject(err);
+            }
+
+            resolve();
+          });
+        });
+      })
+    );
   };
 }
 
