@@ -57,6 +57,11 @@ function makePostWriter(jsonExtAPIName) {
   return makeWriter(async (write) => {
     write(`
     <script>
+        // cleanup script-tags to free memory
+        for (const element of document.querySelectorAll('script')) {
+          element.remove();
+        }
+        
         ${jsonExtAPIName}.parse()
           .then(items => {
             Statoscope.default(items.map(item => ({ name: item.id, data: item.data })));

@@ -30,13 +30,8 @@ function makePipeFromFn(stream) {
           }
 
           sourceStream.pipe(stream, { end: false });
-          sourceStream.on('end', (err) => {
-            if (err) {
-              return reject(err);
-            }
-
-            resolve();
-          });
+          sourceStream.once('end', resolve);
+          sourceStream.once('error', reject);
         });
       })
     );
@@ -44,8 +39,10 @@ function makePipeFromFn(stream) {
 }
 
 module.exports = function makeWriter(writer) {
-  const stream = new PassThrough();
+  const stream = new PassThrough({});
   let started = false;
+
+  stream.setMaxListeners(Infinity);
 
   return {
     async write(options = {}) {

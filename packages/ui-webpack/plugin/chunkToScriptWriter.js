@@ -15,11 +15,12 @@ module.exports = function makeChunkToScript(jsonExtAPIName = 'jsonExtAPI') {
 
 function makeHeaderWriter(jsonExtAPIName) {
   return makeWriter(async (write) => {
-    // TODO replace it by @discoveryjs/json-ext package
-    // after https://github.com/discoveryjs/json-ext/pull/4/files will be merged
     await write(`
     <script>
-      ${fs.readFileSync(require.resolve('./json-ext.min.js'), 'utf8')}
+      ${fs.readFileSync(
+        require.resolve('@discoveryjs/json-ext/dist/json-ext.min.js'),
+        'utf8'
+      )}
     </script>
     <script>
       function _makeJsonExtAPI() {
@@ -55,7 +56,7 @@ function makeChunkToScriptWriter(source, jsonExtAPIName, id) {
       callback(
         null,
         `<script>${jsonExtAPIName}.pushChunk(${JSON.stringify(id)}, ${JSON.stringify(
-          chunk.toString()
+          chunk.toString().replace(/<([!/])/g, '<\\\\$1')
         )})</script>`
       );
     },

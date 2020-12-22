@@ -12,7 +12,9 @@ const HTMLWriter = require('./htmlWriter');
  * @property {string} [name]
  * @property {string} [saveTo]
  * @property {string} [saveStatsTo]
- * @property {string} [diffWith]
+ * @property {string[]} [additionalStats]
+ * @property {Object} [statsOptions]
+ * @property {boolean} [watchMode]
  * @property {false|'dir'|'file'} [open]
  */
 
@@ -37,32 +39,56 @@ module.exports = class StatoscopeWebpackPlugin {
     }
   }
 
+  interpolate(string, compilation, customName) {
+    return string
+      .replace(/\[name]/gi, customName || compilation.name || 'unnamed')
+      .replace(/\[hash]/gi, compilation.hash);
+  }
+
   apply(compiler) {
     const { options } = this;
 
     compiler.hooks.done.tapAsync('Statoscope Webpack Plugin', async (stats, cb) => {
-      const statsObj = stats.toJson(compiler.options.stats);
-      const name = options.name || stats.compilation.name || stats.hash.slice(0, 7);
-      const htmlPath =
-        options.saveToFile || path.join(options.saveToDir, `statoscope-${name}.html`);
+      if (compiler.watchMode && options.watchMode !== true) {
+        return cb();
+      }
 
+      const statsObj = stats.toJson(options.statsOptions || compiler.options.stats);
       statsObj.name = options.name || statsObj.name || stats.compilation.name;
+      const htmlPath =
+        options.saveToFile ||
+        path.join(options.saveToDir, `statoscope-[name]-[hash].html`);
+      const resolvedHtmlPath = path.resolve(
+        this.interpolate(htmlPath, stats.compilation, statsObj.name)
+      );
+      const resolvedSaveStatsTo =
+        options.saveStatsTo &&
+        path.resolve(
+          this.interpolate(options.saveStatsTo, stats.compilation, statsObj.name)
+        );
 
       const webpackStatsStream = stringifyStream(statsObj);
-      const htmlWriter = new HTMLWriter(htmlPath);
+      const htmlWriter = new HTMLWriter(resolvedHtmlPath);
 
       htmlWriter.addChunkWriter(
         webpackStatsStream,
-        options.saveStatsTo ? path.basename(options.saveStatsTo) : 'stats.json'
+        resolvedSaveStatsTo ? path.basename(resolvedSaveStatsTo) : 'stats.json'
       );
 
-      if (options.diffWith) {
-        const stream = fs.createReadStream(options.diffWith);
-        htmlWriter.addChunkWriter(stream, path.basename(options.diffWith));
+      if (options.additionalStats) {
+        for (const statsPath of options.additionalStats) {
+          const resolvedStatsPath = path.resolve(statsPath);
+          if (resolvedStatsPath === resolvedSaveStatsTo) {
+            continue;
+          }
+
+          const stream = fs.createReadStream(resolvedStatsPath);
+          htmlWriter.addChunkWriter(stream, path.basename(resolvedStatsPath));
+        }
       }
 
-      if (options.saveStatsTo) {
-        const statsFileStream = fs.createWriteStream(options.saveStatsTo);
+      if (resolvedSaveStatsTo) {
+        const statsFileStream = fs.createWriteStream(resolvedSaveStatsTo);
         webpackStatsStream.pipe(statsFileStream);
       }
 
@@ -71,9 +97,9 @@ module.exports = class StatoscopeWebpackPlugin {
 
         if (options.open) {
           if (options.open === 'file') {
-            open(htmlPath);
+            open(resolvedHtmlPath);
           } else {
-            open(path.dirname(htmlPath));
+            open(path.dirname(resolvedHtmlPath));
           }
         }
 
