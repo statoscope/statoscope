@@ -38,7 +38,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@discoveryjs/json-ext": "^0.5.0",
+    "@discoveryjs/json-ext": "^0.5.1",
     "open": "^7.3.0"
   }
 }
