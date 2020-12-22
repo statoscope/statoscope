@@ -1,7 +1,9 @@
 /* global require, process, module */
 const path = require('path');
+const glob = require('glob');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const StatoscopeWebpackPlugin = require('./');
 
 const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
@@ -57,6 +59,10 @@ module.exports = [
       filename: 'split/[name].js',
     },
     plugins: [
+      new StatoscopeWebpackPlugin({
+        saveStatsTo: path.resolve('../foo-[name]-[hash].json'),
+        additionalStats: glob.sync('../*.json'),
+      }),
       new MiniCssExtractPlugin({
         filename: 'split/[name].css',
       }),

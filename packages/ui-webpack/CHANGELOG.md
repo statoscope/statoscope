@@ -1,21 +1,40 @@
 # Changelog
 
-## Next
+## 3.3.0 (22 December 2020)
 
 ### Features
 
+- Support stats with any size.
+
+  JS engines have a string size limit (e.g. 512mb for V8). It means that JSON with a size bigger than this limitation can't be parsed with JSON.parse
+
+  Now Statoscope uses a streaming JSON parsing (thanks to [json-ext](https://github.com/discoveryjs/json-ext)) to ignore this limitation.
+
 **Plugin**
 
-- Add `saveStatsTo` option
+- Add `saveStatsTo: string` option
   
-  Now you can save a webpack stats with `saveStatsTo: '/abs/path/to/stats.json'`
+  You can save a webpack stats with `saveStatsTo: '/abs/path/to/stats.json'`
 
-- Add `diffWith` option
+  Use `[name]` and `[hash]` placeholders to replace these by `compilation.name` and `compilation.hash` 
 
-  Now you can diff the stats with `diffWith: '/abs/path/to/previous/stats.json'`
+- Add `additionalStats: string[]` option
 
-  Statoscope plugin will generate a report for two stats: for current stats and for `diffWith` stats.
-  You may diff these stats by `Diff` page
+  You can load any stats to Statoscope to switch between them or diff these on the Diff page.
+  
+  `additionalStats: ['/abs/path/to/previous/stats.json']`
+  
+- Add `statsOptions: Object` option
+  
+  You can override your webpack-config `stats` option by `statsOptions` option
+  `statsOptions: { all: true, source: false }`
+  All stats-options see at [docs](https://webpack.js.org/configuration/stats/#stats-options)
+  
+- Add `watchMode:boolean` option
+
+  By default, Statoscode does not generate a report if webpack run in watch-mode. Set `watchMode: true` to generate a report in watch-mode
+  
+- Add `[name]` and `[hash]` placeholders to `staveTo` option to replace these by `compilation.name` and `compilation.hash`
   
 ### Bugfix
 

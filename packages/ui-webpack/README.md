@@ -12,6 +12,7 @@ It can tell almost all about your bundle:
 - 🕵️ Duplicate modules and packages copies
 - 🔄 Stats diff
 - 📊 Custom reports about your bundle
+- 🐘 No stats size limitation
 
 You can try it at [Statoscope sandbox](https://statoscope.tech)
 
@@ -38,7 +39,11 @@ There are some **optional** options.
 
 ```js
 new StatoscopeWebpackPlugin({
-  saveTo: '/abs/path/to/file.html',
+  saveTo: 'path/to/report-[name]-[hash].html',
+  saveStatsTo: 'path/to/saving/stats-[name]-[hash].json',
+  statsOptions: { /* any webpack stats options */ },
+  additionalStats: ['path/to/any/stats.json'],
+  watchMode: false,
   name: 'some-name',
   open: 'file'
 })
@@ -46,11 +51,61 @@ new StatoscopeWebpackPlugin({
 
 #### options.saveTo: string
 
-Absolute path to an HTML with a report.
+Path to an HTML with a report.
 
-By default is a temporary directory with filename: `statoscope-[name].html`
+By default is a temporary directory with filename: `statoscope-[name]-[hash].html`
 
-`[name]` replacing by `options.name` (if specified) or `compilation.name` (if specified) or `compilation.hash`
+`[name]` replacing by `options.name` (if specified) or `compilation.name` (if specified) or `unnamed`
+
+`[hash]` replacing by `compilation.hash`
+
+
+#### options.saveStatsTo: string
+
+A path for saving the stats: `stats-[name]-[hash].json`
+
+`[name]` replacing by `options.name` (if specified) or `compilation.name` (if specified) or `unnamed`
+
+`[hash]` replacing by `compilation.hash`
+
+By default don't save anything
+
+#### options.statsOptions: [StatsOptions](https://webpack.js.org/configuration/stats/#stats-options)
+
+With `statsOptions` you can override your webpack-config `stats` option
+
+For example: `statsOptions: { all: true, source: false }`
+
+If not specified (by default) then `stats` options from your webpack config will be used.
+
+> All stats-options see at [docs](https://webpack.js.org/configuration/stats/#stats-options)
+
+#### options.additionalStats: string[]
+
+List with the paths to webpack stats that will be loaded into Statoscope along with current compilation stats.
+
+In UI, you may switch between them or diff.
+
+```js
+const glob = require('glob');
+
+new StatoscopeWebpackPlugin({
+  saveStatsTo: 'path/to/stats/stats-[name]-[hash].json',
+  additionalStats: glob.sync('path/to/stats/*.json'),
+})
+```
+
+In this example, the stats from every compilation will be saved into `path/to/stats/` directory.
+
+Also, all JSON files from `path/to/stats/` directory will be added to the Statoscope report.
+
+In this way, you can collect the stats from all compilations and diff these to find out how your bundle was changing in time.
+
+#### options.watchMode: boolean
+
+By default, Statoscode does not generate a report if the webpack runs in watch-mode.
+
+Set `watchMode: true` to generate a report in watch-mode
 
 #### options.name: string
 

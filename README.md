@@ -12,6 +12,7 @@ It can tell almost all about your bundle:
 - 🕵️ Duplicate modules and packages copies
 - 🔄 Stats diff
 - 📊 Custom reports about your bundle
+- 🐘 No stats size limitation
 
 You can try it at [Statoscope sandbox](https://statoscope.tech)
 
