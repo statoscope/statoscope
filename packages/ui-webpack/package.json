@@ -39,6 +39,6 @@
   },
   "dependencies": {
     "@discoveryjs/json-ext": "^0.5.1",
-    "open": "^7.3.0"
+    "open": "^7.3.1"
   }
 }
