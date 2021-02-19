@@ -8,6 +8,7 @@ export default (data, element = document.body) => {
   const pagesContext = require.context('./pages', false, /\.js$/);
 
   return initApp({
+    element,
     data,
     pages: pagesContext.keys().map(pagesContext),
     views: viewsContext.keys().map(viewsContext),
