@@ -57,9 +57,12 @@ function makePostWriter(jsonExtAPIName) {
   return makeWriter(async (write) => {
     write(`
     <script>
-        // cleanup script-tags to free memory
         for (const element of document.querySelectorAll('script')) {
-          element.remove();
+          if(element.dataset.id) {
+            ${jsonExtAPIName}.pushChunk(element.dataset.id, element.innerText);
+            // cleanup script-tags to free memory
+            element.remove();
+          }
         }
         
         ${jsonExtAPIName}.parse()

@@ -8,7 +8,7 @@ module.exports = function makeChunkToScript(jsonExtAPIName = 'jsonExtAPI') {
   return {
     preWriter: makeHeaderWriter(jsonExtAPIName),
     makeChunkWriter(source, id) {
-      return makeChunkToScriptWriter(source, jsonExtAPIName, id);
+      return makeChunkToScriptWriter(source, id);
     },
   };
 };
@@ -50,14 +50,14 @@ function makeHeaderWriter(jsonExtAPIName) {
   });
 }
 
-function makeChunkToScriptWriter(source, jsonExtAPIName, id) {
+function makeChunkToScriptWriter(source, id) {
   const transformer = new Transform({
     transform(chunk, encoding, callback) {
       callback(
         null,
-        `<script>${jsonExtAPIName}.pushChunk(${JSON.stringify(id)}, ${JSON.stringify(
-          chunk.toString().replace(/<([!/])/g, '<\\\\$1')
-        )})</script>`
+        `<script type="text/plain" data-id=${JSON.stringify(
+          id
+        )}>${chunk.toString().replace(/<([!/])/g, '<\\\\$1')}</script>`
       );
     },
   });
