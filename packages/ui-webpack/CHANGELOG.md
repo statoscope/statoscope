@@ -1,14 +1,26 @@
 # Changelog
 
+## 3.5.0 (21 February 2021)
+
+### Improvement
+
+**Plugin**
+
+- Improve stats normalization performance (#43)
+
 ## 3.4.0 (20 February 2021)
 
 ### Improvement
+
+**Plugin**
 
 - Huge improvement for HTML-report loading time ([3824a83](/commit/9b582955b7a8799714ced3d61fd331f2b3824a83))
 
 ### Bugfix
 
-- Fix ignoring `element` parameter on Statoscope init-function #42
+**UI**
+
+- Fix ignoring `element` parameter on Statoscope init-function (#42)
 
 ## 3.3.0 (22 December 2020)
 
