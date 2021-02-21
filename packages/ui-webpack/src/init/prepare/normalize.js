@@ -200,59 +200,70 @@ function prepareEntries(compilation, { resolveChunk, resolveAsset }) {
 }
 
 function extractPackages(compilation, { resolvePackage }) {
+  const buildReasonKey = (type, moduleIdentifier, loc) => {
+    return [type, moduleIdentifier, loc].join(';');
+  };
+
+  const extractModulePackages = (module) => {
+    const resource = moduleResource(module);
+
+    if (!resource) {
+      return;
+    }
+
+    const modulePackage = nodeModule(resource);
+
+    if (modulePackage) {
+      let resolvedPackage = resolvePackage(modulePackage.name);
+
+      if (!resolvedPackage) {
+        resolvedPackage = { name: modulePackage.name, instances: [] };
+        compilation.nodeModules.push(resolvedPackage);
+      }
+
+      let instance = resolvedPackage.instances.find(
+        ({ path }) => path === modulePackage.path
+      );
+
+      if (!instance) {
+        const isRoot = !modulePackage.path.match(/\/node_modules\/.+\/node_modules\//);
+        instance = { path: modulePackage.path, isRoot, reasons: [], modules: [module] };
+        resolvedPackage.instances.push(instance);
+      } else {
+        if (!instance.modules.includes(module)) {
+          instance.modules.push(module);
+        }
+      }
+
+      const instanceReasonsKeys = new Set(
+        instance.reasons.map((reason) => {
+          return buildReasonKey(
+            reason.type,
+            reason.data.moduleIdentifier,
+            reason.data.loc
+          );
+        })
+      );
+
+      for (const reason of module.reasons) {
+        const reasonPackage = nodeModule(moduleReasonResource(reason));
+
+        if (reasonPackage && reasonPackage.path === instance.path) {
+          continue;
+        }
+
+        const reasonType = 'module';
+        const reasonKey = buildReasonKey(reasonType, reason.moduleIdentifier, reason.loc);
+
+        if (!instanceReasonsKeys.has(reasonKey)) {
+          instance.reasons.push({ type: reasonType, data: reason });
+          instanceReasonsKeys.add(reasonKey);
+        }
+      }
+    }
+  };
+
   for (const chunk of compilation.chunks) {
-    const extractModulePackages = (module) => {
-      const resource = moduleResource(module);
-
-      if (!resource) {
-        return;
-      }
-
-      const modulePackage = nodeModule(resource);
-
-      if (modulePackage) {
-        let resolvedPackage = resolvePackage(modulePackage.name);
-
-        if (!resolvedPackage) {
-          resolvedPackage = { name: modulePackage.name, instances: [] };
-          compilation.nodeModules.push(resolvedPackage);
-        }
-
-        let instance = resolvedPackage.instances.find(
-          ({ path }) => path === modulePackage.path
-        );
-
-        if (!instance) {
-          const isRoot = !modulePackage.path.match(/\/node_modules\/.+\/node_modules\//);
-          instance = { path: modulePackage.path, isRoot, reasons: [], modules: [module] };
-          resolvedPackage.instances.push(instance);
-        } else {
-          if (!instance.modules.includes(module)) {
-            instance.modules.push(module);
-          }
-        }
-
-        for (const reason of module.reasons) {
-          const reasonPackage = nodeModule(moduleReasonResource(reason));
-
-          if (reasonPackage && reasonPackage.path === instance.path) {
-            continue;
-          }
-
-          if (
-            !instance.reasons.find(
-              (r) =>
-                r.type === 'module' &&
-                r.data.moduleIdentifier === reason.moduleIdentifier &&
-                r.data.loc === reason.loc
-            )
-          ) {
-            instance.reasons.push({ type: 'module', data: reason });
-          }
-        }
-      }
-    };
-
     for (const module of chunk.modules) {
       extractModulePackages(module);
 
