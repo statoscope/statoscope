@@ -37,6 +37,11 @@ export default function (discovery) {
           data: '{ text: chunk.size.formatSize() }',
           when: showSize,
         },
+        {
+          view: 'badge',
+          data: '{ text: chunk.files.size.reduce(=> $ + $$, 0).formatSize() }',
+          when: showSize,
+        },
       ],
       data,
       context
