@@ -1,5 +1,13 @@
 # Changelog
 
+## Next
+
+### Improvement
+
+**UI**
+
+- Show chunk file size (#47)
+
 ## 3.5.0 (21 February 2021)
 
 ### Improvement
