@@ -34,12 +34,13 @@ export default function (discovery) {
         },
         {
           view: 'badge',
-          data: '{ text: chunk.size.formatSize() }',
+          data: '{ prefix: "parsed", text: chunk.size.formatSize() }',
           when: showSize,
         },
         {
           view: 'badge',
-          data: '{ text: chunk.files.size.reduce(=> $ + $$, 0).formatSize() }',
+          data:
+            '{ prefix: "file", text: chunk.files.size.reduce(=> $ + $$, 0).formatSize() }',
           when: showSize,
         },
       ],
