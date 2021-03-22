@@ -22,6 +22,7 @@
   "license": "MIT",
   "homepage": "https://github.com/smelukov/statoscope/",
   "devDependencies": {
+    "@carrotsearch/foamtree": "3.5.0",
     "@discoveryjs/discovery": "^1.0.0-beta.52",
     "@popperjs/core": "^2.5.3",
     "@wdxlab/events": "^1.1.0",

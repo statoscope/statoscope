@@ -1,9 +1,9 @@
-import './carrotsearch.foamtree.js';
+import CarrotSearchFoamTree from '@carrotsearch/foamtree';
 
 class FoamTreeWrapper {
   constructor({ element, dataObject, onGroupHover, onGroupSecondaryClick }) {
     const wrapper = this;
-    wrapper.foamTree = new window.CarrotSearchFoamTree({
+    wrapper.foamTree = new CarrotSearchFoamTree({
       element,
       layout: 'squarified',
       stacking: 'flattened',
@@ -37,12 +37,6 @@ class FoamTreeWrapper {
         event.preventDefault();
       },
       onGroupHover(event) {
-        // Ignoring hovering on `FoamTree` branding group
-        if (event.group && event.group.attribution) {
-          event.preventDefault();
-          return;
-        }
-
         if (onGroupHover) {
           onGroupHover.call(wrapper, event);
         }

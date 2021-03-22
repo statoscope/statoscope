@@ -73,6 +73,12 @@ export default function (discovery) {
         element,
         dataObject: data,
         onGroupHover(event) {
+          if (event.group.attribution) {
+            event.preventDefault();
+            destroyPopup();
+            return false;
+          }
+
           getPopup(discovery, event.group);
         },
         onGroupSecondaryClick(event) {
