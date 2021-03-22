@@ -8,6 +8,16 @@ export default ({ element = document.body, data, name, prepare, views, pages }) 
   const discovery = new discoveryLib.App(element, {
     darkmode: 'disabled',
     setup: {},
+    styles: [
+      ...document.querySelectorAll('link[rel="stylesheet"]'),
+      ...document.querySelectorAll('style'),
+    ].map((el) => {
+      if (el.tagName === 'LINK') {
+        return { type: 'link', href: el.href };
+      }
+
+      return el.textContent;
+    }),
   });
 
   if (data) {

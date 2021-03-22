@@ -23,7 +23,7 @@
   "homepage": "https://github.com/smelukov/statoscope/",
   "devDependencies": {
     "@carrotsearch/foamtree": "3.5.0",
-    "@discoveryjs/discovery": "^1.0.0-beta.52",
+    "@discoveryjs/discovery": "^1.0.0-beta.60",
     "@popperjs/core": "^2.5.3",
     "@wdxlab/events": "^1.1.0",
     "babel-loader": "^8.1.0",
