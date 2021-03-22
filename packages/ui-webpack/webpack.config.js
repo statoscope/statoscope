@@ -20,6 +20,10 @@ module.exports = [
     module: {
       rules: [
         {
+          test: /node_modules\/@carrotsearch\/foamtree\/foamtree\.js$/,
+          use: ['./patch-foam'],
+        },
+        {
           test: /\.js?$/,
           exclude: /node_modules/,
           use: 'babel-loader',
@@ -60,6 +64,7 @@ module.exports = [
     },
     plugins: [
       new StatoscopeWebpackPlugin({
+        watchMode: true,
         saveStatsTo: path.resolve('../foo-[name]-[hash].json'),
         additionalStats: glob.sync('../*.json'),
       }),
@@ -72,6 +77,10 @@ module.exports = [
     ],
     module: {
       rules: [
+        {
+          test: /node_modules\/@carrotsearch\/foamtree\/foamtree\.js$/,
+          use: ['./patch-foam'],
+        },
         {
           test: /\.js?$/,
           exclude: /node_modules/,

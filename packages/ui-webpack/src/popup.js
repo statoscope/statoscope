@@ -25,7 +25,7 @@ export default (discovery, view) => {
   }
 
   const el = document.createElement('div');
-  document.body.append(el);
+  discovery.dom.container.append(el);
   el.id = 'popupContent';
   let popper;
   let data;
@@ -56,7 +56,7 @@ export default (discovery, view) => {
     },
     destroy() {
       popper.destroy();
-      el.parentNode.removeChild(el);
+      el.remove();
     },
   };
 };
