@@ -23,7 +23,8 @@ export default function (discovery) {
             selected: #.params.hash = compilation.hash,
             name: compilation.name,
             hash: compilation.hash,
-            builtAt: compilation.builtAt
+            builtAt: compilation.builtAt,
+            isChild: compilation.isChild
           }).sort(builtAt desc)`,
           view: 'menu',
           emptyText: `No stats found. Ensure that you're using valid webpack stats.`,
@@ -60,6 +61,11 @@ export default function (discovery) {
                 view: 'badge',
                 when: 'builtAt',
                 data: `{prefix: 'date', text: builtAt.formatDate()}`,
+              },
+              {
+                view: 'badge',
+                when: 'isChild',
+                data: `{text: 'child'}`,
               },
             ],
           },
