@@ -83,6 +83,14 @@ function makeModuleResolver(compilation) {
     }
   }
 
+  if (compilation.modules?.length) {
+    for (const module of compilation.modules) {
+      if (!modulesMap.has(module.identifier)) {
+        modulesMap.set(module.identifier, module);
+      }
+    }
+  }
+
   compilation.modules = [...modulesMap.values()];
 
   for (const [, module] of modulesMap) {

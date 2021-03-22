@@ -40,7 +40,9 @@ export default ({ element = document.body, data, name, prepare, views, pages }) 
     const context = discovery.getRenderContext();
 
     if (!context.params.hash) {
-      const targetHash = discovery.data[0]?.compilations[0]?.hash;
+      const targetHash = discovery.data[0]?.compilations.find(
+        (compilation) => !compilation.isChild
+      )?.hash;
       const link = discovery.encodePageHash(context.page, context.id, {
         ...context.params,
         hash: targetHash,

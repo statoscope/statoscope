@@ -41,15 +41,17 @@ function makePreWriter(preSource) {
     await pipeFrom(preSource);
     await write(`
       <style>
-          .discovery-root .loading {
-              display: none;
-          }
+        html, body {
+          padding: 0;
+          margin: 0;
+          height: 100%;
+          border: none;
+          -webkit-text-size-adjust: 100%;
+        }
       </style>
   </head>
   <body>
-    <div class="loading">
-        Loading...
-    </div>`);
+    <div id="loading">Loading...</div>`);
   });
 }
 
@@ -68,6 +70,7 @@ function makePostWriter(jsonExtAPIName) {
         ${jsonExtAPIName}.parse()
           .then(items => {
             Statoscope.default(items.map(item => ({ name: item.id, data: item.data })));
+            document.querySelector('#loading').remove();
           });
     </script>
   </body>
