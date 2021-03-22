@@ -1,6 +1,8 @@
 import path from 'path';
 
 import settings, {
+  SETTING_HIDE_CHILD_COMPILATIONS,
+  SETTING_HIDE_CHILD_COMPILATIONS_DEFAULT,
   SETTING_HIDE_NODE_MODULES,
   SETTING_HIDE_NODE_MODULES_DEFAULT,
   SETTING_LIST_ITEMS_LIMIT,
@@ -178,6 +180,17 @@ export default (discovery) => (rawData, { addQueryHelpers }) => {
       }
 
       return !!resource.match(/node_modules/);
+    },
+    shouldHideCompilation(compilation) {
+      if (!compilation) {
+        return true;
+      }
+
+      const shouldHide = settings
+        .get(SETTING_HIDE_CHILD_COMPILATIONS, SETTING_HIDE_CHILD_COMPILATIONS_DEFAULT)
+        .get();
+
+      return shouldHide && compilation.isChild;
     },
     settingListItemsLimit() {
       return settings

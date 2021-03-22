@@ -9,7 +9,7 @@ function statsSelect(value, onChange) {
     $stat: resolveStat();
     $stat ? ($stat.statName() + ' ' + $stat.compilation.builtAt.formatDate()) : "n/a"
     `,
-    data: 'compilations.hash',
+    data: 'compilations.[not shouldHideCompilation()].hash',
     onChange,
   };
 }

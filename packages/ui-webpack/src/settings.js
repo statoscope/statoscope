@@ -111,5 +111,7 @@ export default new Settings();
 
 export const SETTING_HIDE_NODE_MODULES = 'hide_node_modules';
 export const SETTING_HIDE_NODE_MODULES_DEFAULT = false;
+export const SETTING_HIDE_CHILD_COMPILATIONS = 'hide_child_compilations';
+export const SETTING_HIDE_CHILD_COMPILATIONS_DEFAULT = true;
 export const SETTING_LIST_ITEMS_LIMIT = 'list_items_limit';
 export const SETTING_LIST_ITEMS_LIMIT_DEFAULT = '20';

@@ -57,6 +57,31 @@ export default function (discovery) {
             },
             {
               view: 'block',
+              content: [
+                {
+                  when: `not (
+                    compilation.modules or 
+                    compilation.chunks or 
+                    compilation.assets or 
+                    compilation.entrypoints
+                  )`,
+                  view: 'alert-warning',
+                  content: [
+                    'h3: "No Data"',
+                    `md: "Seems like this is an empty compilation"`,
+                    `link: {text: "Choose another one", href: pageLink(#.page, {hash: ''})}`,
+                  ],
+                },
+              ],
+            },
+            {
+              when: `
+                compilation.modules or 
+                compilation.chunks or 
+                compilation.assets or 
+                compilation.entrypoints
+              `,
+              view: 'block',
               data: `
               $statA: $;
               
@@ -147,6 +172,12 @@ export default function (discovery) {
                   label: 'Package copies',
                   visible: $value
                 },
+                {
+                  $childCompilations: $statA.compilation.children.[not shouldHideCompilation()];
+                  value: $childCompilations.size(),
+                  label: "Child compilations",
+                  visible: $childCompilations
+                },
               ]
               `,
               content: {
@@ -162,6 +193,12 @@ export default function (discovery) {
               view: 'block',
               content: [
                 {
+                  when: `
+                    compilation.modules or 
+                    compilation.chunks or 
+                    compilation.assets or 
+                    compilation.entrypoints
+                  `,
                   view: 'section',
                   header: 'text:"Instant lists"',
                   content: {

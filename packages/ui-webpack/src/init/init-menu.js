@@ -2,6 +2,8 @@ import settingsStyles from '../settings-styles.css';
 import settings, {
   SETTING_HIDE_NODE_MODULES,
   SETTING_HIDE_NODE_MODULES_DEFAULT,
+  SETTING_HIDE_CHILD_COMPILATIONS,
+  SETTING_HIDE_CHILD_COMPILATIONS_DEFAULT,
   SETTING_LIST_ITEMS_LIMIT,
   SETTING_LIST_ITEMS_LIMIT_DEFAULT,
 } from '../settings';
@@ -78,20 +80,17 @@ function addStatsList(discovery) {
   });
 }
 
-function addSettings(discovery) {
-  discovery.nav.menu.append({
+function makeBooleanSetting(discovery, { title, key, defaultValue }) {
+  return {
     view: 'block',
     className: [settingsStyles.item, settingsStyles.toggle],
-    name: 'node-modules',
+    name: key,
     postRender: (el, opts, data, { hide }) => {
-      const hideNodeModules = settings.get(
-        SETTING_HIDE_NODE_MODULES,
-        SETTING_HIDE_NODE_MODULES_DEFAULT
-      );
+      const settingValue = settings.get(key, defaultValue);
 
-      render(hideNodeModules.get());
+      render(settingValue.get());
 
-      hideNodeModules.eventChange.on((sender, { value }) => render(value));
+      settingValue.eventChange.on((sender, { value }) => render(value));
 
       function render(value) {
         el.innerHTML = '';
@@ -99,9 +98,9 @@ function addSettings(discovery) {
           el,
           {
             view: 'toggle-group',
-            beforeToggles: 'text:"Hide node_modules"',
+            beforeToggles: `text:"${title}"`,
             onChange: (value) => {
-              hideNodeModules.set(value);
+              settingValue.set(value);
               hide();
             },
             value,
@@ -115,7 +114,25 @@ function addSettings(discovery) {
         );
       }
     },
-  });
+  };
+}
+
+function addSettings(discovery) {
+  discovery.nav.menu.append(
+    makeBooleanSetting(discovery, {
+      title: 'Hide node_modules',
+      key: SETTING_HIDE_NODE_MODULES,
+      defaultValue: SETTING_HIDE_NODE_MODULES_DEFAULT,
+    })
+  );
+
+  discovery.nav.menu.append(
+    makeBooleanSetting(discovery, {
+      title: 'Hide child compilations',
+      key: SETTING_HIDE_CHILD_COMPILATIONS,
+      defaultValue: SETTING_HIDE_CHILD_COMPILATIONS_DEFAULT,
+    })
+  );
 
   discovery.nav.menu.append({
     view: 'block',

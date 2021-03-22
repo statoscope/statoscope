@@ -15,7 +15,7 @@ export default function (discovery) {
           data: '"Choose a stat to view:"',
         },
         {
-          data: `#.stats.compilations.hash.(resolveStat()).({
+          data: `#.stats.compilations.hash.(resolveStat()).[not compilation.shouldHideCompilation()].({
             text: file.name or compilation.hash.slice(0, 7),
             version: file.version,
             fileName: file.name,

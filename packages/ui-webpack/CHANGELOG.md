@@ -6,6 +6,10 @@
 
 **UI**
 
+- Handle all child compilations (#ce8adb0)
+  Now Statoscope will handle all child compilation.
+  It's usefull with cases like https://github.com/GoogleChrome/workbox/issues/2785
+  By default, Statoscope doesn't show any child compilation, but there is a setting `Hide child compilations` to change it.
 - Show chunk file size (#47)
 
 ## 3.5.0 (21 February 2021)

@@ -1,6 +1,6 @@
 {
   "definitions": {
-    "SingleStat": {
+    "StatsContainer": {
       "type": "object",
       "properties": {
         "version": {
@@ -26,42 +26,11 @@
         },
         "assets": {
           "$ref": "#/definitions/Assets"
-        }
-      }
-    },
-    "MultipleStat": {
-      "type": "object",
-      "properties": {
-        "version": {
-          "type": "string"
         },
         "children": {
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "hash": {
-                "type": "string"
-              },
-              "time": {
-                "type": "number"
-              },
-              "name": {
-                "type": "string"
-              },
-              "builtAt": {
-                "type": "number"
-              },
-              "entrypoints": {
-                "$ref": "#/definitions/Entrypoints"
-              },
-              "chunks": {
-                "$ref": "#/definitions/Chunks"
-              },
-              "assets": {
-                "$ref": "#/definitions/Assets"
-              }
-            }
+            "$ref": "#/definitions/StatsContainer"
           }
         }
       }
@@ -217,10 +186,7 @@
   },
   "anyOf": [
     {
-      "$ref": "#/definitions/SingleStat"
-    },
-    {
-      "$ref": "#/definitions/MultipleStat"
+      "$ref": "#/definitions/StatsContainer"
     }
   ]
 }

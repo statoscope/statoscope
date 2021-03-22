@@ -1,6 +1,28 @@
+import crypto from 'crypto';
 import validateStats from '../../validate';
 import moduleResource, { moduleReasonResource, nodeModule } from './module';
 import { makeEntityResolver } from './entity';
+
+function md5(source) {
+  return crypto.createHash('md5').update(source).digest('hex');
+}
+
+function prepareCompilation(compilation, parent) {
+  return {
+    time: compilation.time,
+    builtAt: compilation.builtAt,
+    name: compilation.name,
+    hash: compilation.hash || md5(compilation.hash + compilation.name),
+    entrypoints: compilation.entrypoints || [],
+    chunks: compilation.chunks || [],
+    assets: compilation.assets || [],
+    nodeModules: [],
+    children: (compilation.children || []).map((child) =>
+      prepareCompilation(child, compilation)
+    ),
+    ...(parent && { isChild: true, parent: parent.hash }),
+  };
+}
 
 export default function normalize(statObject) {
   const file = {
@@ -10,34 +32,15 @@ export default function normalize(statObject) {
     compilations: [],
   };
 
-  if (!statObject.data.chunks && statObject.data.children) {
-    for (const child of statObject.data.children) {
-      file.compilations.push(
-        handleCompilation({
-          name: child.name,
-          builtAt: child.builtAt,
-          time: child.time,
-          hash: child.hash,
-          entrypoints: child.entrypoints || [],
-          chunks: child.chunks || [],
-          assets: child.assets || [],
-          nodeModules: [],
-        })
-      );
+  const stack = [prepareCompilation(statObject.data)];
+  let cursor;
+
+  while ((cursor = stack.pop())) {
+    file.compilations.push(handleCompilation(cursor));
+
+    for (const child of cursor.children) {
+      stack.push(child);
     }
-  } else {
-    file.compilations.push(
-      handleCompilation({
-        time: statObject.data.time,
-        builtAt: statObject.data.builtAt,
-        name: statObject.data.name,
-        hash: statObject.data.hash,
-        entrypoints: statObject.data.entrypoints || [],
-        chunks: statObject.data.chunks || [],
-        assets: statObject.data.assets || [],
-        nodeModules: [],
-      })
-    );
   }
 
   return file;
