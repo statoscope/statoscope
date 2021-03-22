@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/ui-webpack",
-  "version": "3.5.0",
+  "version": "3.6.0",
   "description": "Webpack plugin and UI for analyzing webpack bundle with Statoscope",
   "browser": "./dist/main.js",
   "main": "./plugin/index.js",
