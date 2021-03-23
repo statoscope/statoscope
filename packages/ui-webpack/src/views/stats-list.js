@@ -45,7 +45,7 @@ export default function (discovery) {
               {
                 view: 'badge',
                 when: 'name',
-                data: `{prefix: 'name', text: name}`,
+                data: `{prefix: 'name', text: name.moduleNameResource()}`,
               },
               {
                 view: 'badge',

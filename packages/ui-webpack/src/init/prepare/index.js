@@ -203,11 +203,13 @@ export default (discovery) => (rawData, { addQueryHelpers }) => {
       }
 
       const hash = stat.compilation.hash.slice(0, 7);
+      const compilationName =
+        stat.compilation.name && moduleNameResource(stat.compilation.name);
 
       if (stat.file.name) {
-        return `${stat.file.name} (${stat.compilation.name || hash})`;
-      } else if (stat.compilation.name) {
-        return `${stat.compilation.name} (${hash})`;
+        return `${stat.file.name} (${compilationName || hash})`;
+      } else if (compilationName) {
+        return `${compilationName} (${hash})`;
       }
 
       return hash;

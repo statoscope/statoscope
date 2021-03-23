@@ -29,6 +29,10 @@ function makeConfig(config) {
             exclude: /node_modules/,
             use: 'babel-loader',
           },
+          {
+            test: /node_modules\/@carrotsearch\/foamtree\/foamtree\.js$/,
+            use: ['./patch-foam'],
+          },
         ],
       },
       plugins: [

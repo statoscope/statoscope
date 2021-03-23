@@ -12,6 +12,8 @@ export default ({ element = document.body, data, name, prepare, views, pages }) 
       ...document.querySelectorAll('link[rel="stylesheet"]'),
       ...document.querySelectorAll('style'),
     ].map((el) => {
+      el.remove();
+
       if (el.tagName === 'LINK') {
         return { type: 'link', href: el.href };
       }
