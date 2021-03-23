@@ -2,7 +2,6 @@
 const path = require('path');
 const { merge } = require('webpack-merge');
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const StatoscopeWebpackPlugin = require('./');
 
 const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
@@ -45,64 +44,45 @@ function makeConfig(config) {
   );
 }
 
-module.exports = [
-  makeConfig({
-    name: 'mono',
-    module: {
-      rules: [
-        {
-          test: /\.css$/,
-          include: /node_modules\/@discoveryjs/,
-          use: ['style-loader', 'css-loader'],
-        },
-        {
-          test: /\.css$/,
-          include: path.resolve('src'),
-          use: [
-            'style-loader',
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
+module.exports = makeConfig({
+  plugins: process.env.DEBUG ? [new StatoscopeWebpackPlugin()] : [],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        include: /node_modules\/@discoveryjs/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              attributes: {
+                'statoscope-style': true,
               },
             },
-          ],
-        },
-      ],
-    },
-  }),
-  makeConfig({
-    name: 'split',
-    output: {
-      filename: 'split/[name].js',
-    },
-    plugins: [
-      new StatoscopeWebpackPlugin(),
-      new MiniCssExtractPlugin({
-        filename: 'split/[name].css',
-      }),
+          },
+          'css-loader',
+        ],
+      },
+      {
+        test: /\.css$/,
+        include: path.resolve('src'),
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              attributes: {
+                'statoscope-style': true,
+              },
+            },
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            },
+          },
+        ],
+      },
     ],
-    module: {
-      rules: [
-        {
-          test: /\.css$/,
-          include: /node_modules\/@discoveryjs/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader'],
-        },
-        {
-          test: /\.css$/,
-          include: path.resolve('src'),
-          use: [
-            MiniCssExtractPlugin.loader,
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-              },
-            },
-          ],
-        },
-      ],
-    },
-  }),
-];
+  },
+});
