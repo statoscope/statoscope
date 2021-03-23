@@ -145,17 +145,6 @@ init({
 
 > Also, you may pass an array of stats
 
-### Importing styles
-
-`import init from '@statoscope/ui-webpack'` imports a bundle with built-in scripts and styles.
-
-To import scripts and styles separately, use:
-
-```js
-import '@statoscope/ui-webpack/dist/split/main.css';
-import init from '@statoscope/ui-webpack/dist/split/main.js';
-```
-
 ## Use-cases
 
 ### Find out why a module was bundled

@@ -1,6 +1,12 @@
 # Changelog
 
-## 3.6.0 (23 March 2021)
+## 4.0.0 (23 March 2021)
+
+### Changes
+
+**UI**
+
+- **BREAKING:** remove separated-styles build
 
 ### Improvement
 
