@@ -1,11 +1,7 @@
-import crypto from 'crypto';
+import md5 from 'md5';
 import validateStats from '../../validate';
 import moduleResource, { moduleReasonResource, nodeModule } from './module';
 import { makeEntityResolver } from './entity';
-
-function md5(source) {
-  return crypto.createHash('md5').update(source).digest('hex');
-}
 
 function prepareCompilation(compilation, parent) {
   return {
