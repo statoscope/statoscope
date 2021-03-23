@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.6.0 (22 March 2021)
+## 3.6.0 (23 March 2021)
 
 ### Improvement
 
@@ -15,6 +15,7 @@
   
 ### Internals
 
+- Update discovery
 - Update build stack (webpack/babel/etc) (#3371565)
 - Update foamtree (#9fb2116)
 
