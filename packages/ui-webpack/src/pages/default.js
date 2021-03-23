@@ -35,7 +35,7 @@ export default function (discovery) {
                 {
                   when: 'compilation.name',
                   view: 'badge',
-                  data: `{ prefix: 'name', text: compilation.name }`,
+                  data: `{ prefix: 'name', text: compilation.name.moduleNameResource() }`,
                 },
                 {
                   when: 'compilation.builtAt',

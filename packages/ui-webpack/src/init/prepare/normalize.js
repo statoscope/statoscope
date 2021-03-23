@@ -118,7 +118,10 @@ function prepareModule(module, { resolveChunk, resolveModule }) {
   }
 
   if (module.reasons) {
-    module.reasons.map((r) => (r.resolvedModule = resolveModule(r.moduleIdentifier)));
+    module.reasons = module.reasons.filter(
+      (r) => r.moduleIdentifier !== module.identifier
+    );
+    module.reasons.forEach((r) => (r.resolvedModule = resolveModule(r.moduleIdentifier)));
   } else {
     module.reasons = [];
   }

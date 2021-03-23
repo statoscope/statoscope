@@ -9,8 +9,8 @@ export default ({ element = document.body, data, name, prepare, views, pages }) 
     darkmode: 'disabled',
     setup: {},
     styles: [
-      ...document.querySelectorAll('link[rel="stylesheet"]'),
-      ...document.querySelectorAll('style'),
+      ...document.querySelectorAll('link[rel="stylesheet"][statoscope-style]'),
+      ...document.querySelectorAll('style[statoscope-style]'),
     ].map((el) => {
       el.remove();
 
