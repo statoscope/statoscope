@@ -31,20 +31,20 @@
   "homepage": "https://github.com/smelukov/statoscope",
   "dependencies": {},
   "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/preset-env": "^7.11.5",
-    "eslint": "^7.9.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jsdoc": "^29.2.0",
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "eslint": "^7.22.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsdoc": "^32.3.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-prettier": "^3.3.1",
     "glob": "^7.1.6",
-    "husky": "^4.3.0",
+    "husky": "^5.2.0",
     "jest": "^26.6.3",
     "jscodeshift": "^0.11.0",
-    "lerna": "^3.22.1",
-    "lint-staged": "^10.4.0",
-    "prettier": "^2.1.2"
+    "lerna": "^4.0.0",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1"
   }
 }

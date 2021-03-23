@@ -1,29 +1,51 @@
 /* global require, process, module */
 const path = require('path');
-const glob = require('glob');
+const { merge } = require('webpack-merge');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const StatoscopeWebpackPlugin = require('./');
 
 const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
-module.exports = [
-  {
-    mode,
-    name: 'mono',
-    entry: './src/index.js',
-    output: {
-      library: 'Statoscope',
-      libraryTarget: 'umd',
-      path: path.resolve('dist'),
+function makeConfig(config) {
+  return merge(
+    {
+      mode,
+      entry: './src/index.js',
+      output: {
+        library: 'Statoscope',
+        libraryTarget: 'umd',
+        path: path.resolve('dist'),
+      },
+      resolve: {
+        fallback: {
+          path: require.resolve('path-browserify'),
+        },
+      },
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: 'babel-loader',
+          },
+        ],
+      },
+      plugins: [
+        new webpack.EnvironmentPlugin({
+          STATOSCOPE_VERSION: require('./package.json').version,
+        }),
+      ],
     },
+    config
+  );
+}
+
+module.exports = [
+  makeConfig({
+    name: 'mono',
     module: {
       rules: [
-        {
-          test: /\.js?$/,
-          exclude: /node_modules/,
-          use: 'babel-loader',
-        },
         {
           test: /\.css$/,
           include: /node_modules\/@discoveryjs/,
@@ -44,39 +66,20 @@ module.exports = [
         },
       ],
     },
-    optimization: {
-      usedExports: false,
-    },
-  },
-  {
-    mode,
+  }),
+  makeConfig({
     name: 'split',
-    entry: './src/index.js',
     output: {
-      library: 'Statoscope',
-      libraryTarget: 'umd',
-      path: path.resolve('dist'),
       filename: 'split/[name].js',
     },
     plugins: [
-      new StatoscopeWebpackPlugin({
-        saveStatsTo: path.resolve('../foo-[name]-[hash].json'),
-        additionalStats: glob.sync('../*.json'),
-      }),
+      new StatoscopeWebpackPlugin(),
       new MiniCssExtractPlugin({
         filename: 'split/[name].css',
-      }),
-      new webpack.EnvironmentPlugin({
-        STATOSCOPE_VERSION: require('./package.json').version,
       }),
     ],
     module: {
       rules: [
-        {
-          test: /\.js?$/,
-          exclude: /node_modules/,
-          use: 'babel-loader',
-        },
         {
           test: /\.css$/,
           include: /node_modules\/@discoveryjs/,
@@ -97,8 +100,5 @@ module.exports = [
         },
       ],
     },
-    optimization: {
-      usedExports: false,
-    },
-  },
+  }),
 ];

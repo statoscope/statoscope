@@ -1,16 +1,22 @@
 # Changelog
 
-## Next
+## 3.6.0 (22 March 2021)
 
 ### Improvement
 
 **UI**
 
-- Handle all child compilations (#ce8adb0)
+- Handle all child compilations (#46d813c)
   Now Statoscope will handle all child compilation.
-  It's usefull with cases like https://github.com/GoogleChrome/workbox/issues/2785
+  It's useful for cases like https://github.com/GoogleChrome/workbox/issues/2785
   By default, Statoscope doesn't show any child compilation, but there is a setting `Hide child compilations` to change it.
 - Show chunk file size (#47)
+  Now Statoscope shows a little more info about a chunk
+  
+### Internals
+
+- Update build stack (webpack/babel/etc) (#3371565)
+- Update foamtree (#9fb2116)
 
 ## 3.5.0 (21 February 2021)
 
