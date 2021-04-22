@@ -22,7 +22,7 @@ export default function (discovery) {
             },
             {
               view: 'switch',
-              data: `compilation.(..modules).[identifier=#.id.decodeURIComponent() or (''+id)=#.id.decodeURIComponent()][0]`,
+              data: `compilation.(..modules).[name=#.id.decodeURIComponent() or (''+id)=#.id.decodeURIComponent()][0]`,
               content: [
                 {
                   when: 'not $',

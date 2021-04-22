@@ -75,14 +75,14 @@ function makeModuleResolver(compilation) {
     }
 
     for (const module of chunk.modules) {
-      modulesMap.set(module.identifier, module);
+      modulesMap.set(module.name, module);
     }
   }
 
   if (compilation.modules?.length) {
     for (const module of compilation.modules) {
-      if (!modulesMap.has(module.identifier)) {
-        modulesMap.set(module.identifier, module);
+      if (!modulesMap.has(module.name)) {
+        modulesMap.set(module.name, module);
       }
     }
   }
@@ -95,20 +95,20 @@ function makeModuleResolver(compilation) {
     }
 
     for (const innerModule of module.modules) {
-      modulesMap.set(innerModule.identifier, innerModule);
+      modulesMap.set(innerModule.name, innerModule);
     }
   }
 
   const modules = [...modulesMap.values()];
 
-  return makeEntityResolver(modules, ({ identifier }) => identifier);
+  return makeEntityResolver(modules, ({ name }) => name);
 }
 
 function prepareModule(module, { resolveChunk, resolveModule }) {
   module.resolvedResource = moduleResource(module);
 
   if (module.issuerPath) {
-    module.issuerPath.map((i) => (i.resolvedModule = resolveModule(i.identifier)));
+    module.issuerPath.map((i) => (i.resolvedModule = resolveModule(i.name)));
   }
 
   if (module.chunks) {
@@ -119,9 +119,9 @@ function prepareModule(module, { resolveChunk, resolveModule }) {
 
   if (module.reasons) {
     module.reasons = module.reasons.filter(
-      (r) => r.moduleIdentifier !== module.identifier
+      (r) => r.moduleName !== module.name
     );
-    module.reasons.forEach((r) => (r.resolvedModule = resolveModule(r.moduleIdentifier)));
+    module.reasons.forEach((r) => (r.resolvedModule = resolveModule(r.moduleName)));
   } else {
     module.reasons = [];
   }
@@ -143,7 +143,7 @@ function prepareChunks(compilation, { resolveModule, resolveAsset, resolveChunk 
   for (const chunk of compilation.chunks) {
     if (chunk.modules) {
       chunk.modules = chunk.modules
-        .map((m) => resolveModule(m.identifier))
+        .map((m) => resolveModule(m.name))
         .filter(Boolean);
     } else {
       chunk.modules = [];
@@ -174,7 +174,7 @@ function prepareChunks(compilation, { resolveModule, resolveAsset, resolveChunk 
     }
 
     if (chunk.origins) {
-      chunk.origins.map((o) => (o.resolvedModule = resolveModule(o.moduleIdentifier)));
+      chunk.origins.map((o) => (o.resolvedModule = resolveModule(o.moduleName)));
     } else {
       chunk.origins = [];
     }
@@ -210,8 +210,8 @@ function prepareEntries(compilation, { resolveChunk, resolveAsset }) {
 }
 
 function extractPackages(compilation, { resolvePackage }) {
-  const buildReasonKey = (type, moduleIdentifier, loc) => {
-    return [type, moduleIdentifier, loc].join(';');
+  const buildReasonKey = (type, moduleName, loc) => {
+    return [type, moduleName, loc].join(';');
   };
 
   const extractModulePackages = (module) => {
@@ -249,7 +249,7 @@ function extractPackages(compilation, { resolvePackage }) {
         instance.reasons.map((reason) => {
           return buildReasonKey(
             reason.type,
-            reason.data.moduleIdentifier,
+            reason.data.moduleName,
             reason.data.loc
           );
         })
@@ -263,7 +263,7 @@ function extractPackages(compilation, { resolvePackage }) {
         }
 
         const reasonType = 'module';
-        const reasonKey = buildReasonKey(reasonType, reason.moduleIdentifier, reason.loc);
+        const reasonKey = buildReasonKey(reasonType, reason.moduleName, reason.loc);
 
         if (!instanceReasonsKeys.has(reasonKey)) {
           instance.reasons.push({ type: reasonType, data: reason });

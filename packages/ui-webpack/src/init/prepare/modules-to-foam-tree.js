@@ -47,7 +47,7 @@ function handleModule(root, module) {
     const last = parts[parts.length - 1];
     last.link = {
       page: 'module',
-      id: module.id || module.identifier,
+      id: module.id || module.name,
     };
   }
 

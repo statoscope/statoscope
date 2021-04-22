@@ -29,7 +29,7 @@ export default function (discovery) {
         {
           view: 'link',
           data: `{
-            href: (module.id or module.identifier).pageLink("module", {hash:hash or #.params.hash}),
+            href: (module.id or module.name).pageLink("module", {hash:hash or #.params.hash}),
             text: module.resolvedResource or module.name or module.id,
             match: match
           }`,
