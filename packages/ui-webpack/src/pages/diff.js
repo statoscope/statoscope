@@ -670,16 +670,16 @@ export default function (discovery) {
           $aModules: $statA.compilation..modules.[not shouldHideModule()];
           $bModules: $statB.compilation..modules.[not shouldHideModule()];
           
-          $addedModules: $aModules.[identifier not in $bModules.identifier];
-          $removedModules: $bModules.[identifier not in $aModules.identifier]; 
+          $addedModules: $aModules.[resolveModule(name, #.params.diffWith)];
+          $removedModules: $bModules.[resolveModule(name, #.params.hash)]; 
           $changedModules: $aModules.(
             $moduleA: $;
-            $moduleB: $bModules.[identifier=$moduleA.identifier].pick();
+            $moduleB: resolveModule($moduleA.name, #.params.diffWith);
             {
               a: $moduleA,
               b: $moduleB,
             }
-          ).[b and (a.size != b.size or a.source != b.source)];
+          ).[b and (a.id != b.id or a.size != b.size or a.source != b.source)];
           
           $modulesDiff: {
             added: $addedModules.sort(moduleSize() desc).({module: $, valueA: size, valueB: 0, hash: $statA.compilation.hash}),
@@ -720,8 +720,8 @@ export default function (discovery) {
           $dupModulesB: $statB.compilation.$getDuplicateModules();
           
           $dupModulesDiff: {
-            added: $dupModulesA.[module.identifier not in $dupModulesB.module.identifier],
-            removed: $dupModulesB.[module.identifier not in $dupModulesA.module.identifier],
+            added: $dupModulesA.[module.name not in $dupModulesB.module.name],
+            removed: $dupModulesB.[module.name not in $dupModulesA.module.name],
           };
           
           $addedChunks: $statA.compilation.chunks.[id not in $statB.compilation.chunks.id]; 
@@ -733,10 +733,11 @@ export default function (discovery) {
               b: $statB.compilation.chunks.[id=$chunk.id].pick()
             }
           ).[
-            $aModules: a..modules.identifier;
-            $bModules: b..modules.identifier;
-            $changedModulesIds: $changedModules.a.identifier;
+            $aModules: a..modules.name;
+            $bModules: b..modules.name;
+            $changedModulesIds: $changedModules.a.name;
             b and (
+              a.id != b.id or
               a.size != b.size or
               $aModules - 
               $bModules or 
