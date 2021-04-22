@@ -670,11 +670,11 @@ export default function (discovery) {
           $aModules: $statA.compilation..modules.[not shouldHideModule()];
           $bModules: $statB.compilation..modules.[not shouldHideModule()];
           
-          $addedModules: $aModules.[resolveModule(name, #.params.diffWith)];
-          $removedModules: $bModules.[resolveModule(name, #.params.hash)]; 
+          $addedModules: $aModules.[not name.resolveModule(#.params.diffWith)];
+          $removedModules: $bModules.[not name.resolveModule(#.params.hash)]; 
           $changedModules: $aModules.(
             $moduleA: $;
-            $moduleB: resolveModule($moduleA.name, #.params.diffWith);
+            $moduleB: $moduleA.name.resolveModule(#.params.diffWith);
             {
               a: $moduleA,
               b: $moduleB,

@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.1.1 (23 April 2021)
+
+### Bugfix
+
+**UI**
+
+- Diff modules bug
+
 ## 4.1.0 (23 April 2021)
 
 ### Improvement
