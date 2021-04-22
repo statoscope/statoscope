@@ -906,12 +906,12 @@ export default function (discovery) {
           view: 'tabs',
           name: 'diffTabs',
           tabs: [
-            { value: 'assets', text: 'Assets' },
-            { value: 'chunks', text: 'Chunks' },
-            { value: 'modules', text: 'Modules' },
-            { value: 'modules-dups', text: 'Duplicate modules' },
-            { value: 'entrypoints', text: 'Entrypoints' },
-            { value: 'packages', text: 'Packages' },
+            { value: 'assets', when: 'assets.added or assets.changed or assets.removed', text: 'Assets' },
+            { value: 'chunks', when: 'chunks.added or chunks.changed or chunks.removed', text: 'Chunks' },
+            { value: 'modules', when: 'modules.added or modules.changed or modules.removed', text: 'Modules' },
+            { value: 'modules-dups', when: 'modules-dups.added or modules-dups.changed or modules-dups.removed', text: 'Duplicate modules' },
+            { value: 'entrypoints', when: 'entrypoints.added or entrypoints.changed or entrypoints.removed', text: 'Entrypoints' },
+            { value: 'packages', when: 'packages.added or packages.changed or packages.removed', text: 'Packages' },
           ],
           content: {
             view: 'content-filter',
