@@ -1,5 +1,22 @@
 # Changelog
 
+## 4.1.0 (23 April 2021)
+
+### Improvement
+
+**UI**
+
+- Improve starting up performance at 25% (#6966139)
+- Huge improvement of diff performance (#1b8f346)
+- Hide useless tabs at the diff page (#2130c74)
+  
+  For example, if there is no diff in the modules, then no Modules-tab will be shown
+
+
+### Bugfix
+
+- Use module.name instead of module.identifier to more accuracy diff
+
 ## 4.0.0 (23 March 2021)
 
 ### Changes
@@ -13,10 +30,12 @@
 **UI**
 
 - Handle all child compilations (#46d813c)
+  
   Now Statoscope will handle all child compilation.
   It's useful for cases like https://github.com/GoogleChrome/workbox/issues/2785
   By default, Statoscope doesn't show any child compilation, but there is a setting `Hide child compilations` to change it.
 - Show chunk file size (#47)
+  
   Now Statoscope shows a little more info about a chunk
   
 ### Internals

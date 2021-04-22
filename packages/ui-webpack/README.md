@@ -267,6 +267,16 @@ stats: {
 },
 ```
 
+### Statoscope shows an absolute path to the modules
+
+Just specify a context to stats options:
+
+```
+stats: {
+  context: 'path/to/project/root'
+}
+```
+
 ## Support
 
 If you are an engineer or a company that is interested in Statoscope improvements, you may support Statoscope by financial contribution at [OpenCollective](https://opencollective.com/statoscope).
