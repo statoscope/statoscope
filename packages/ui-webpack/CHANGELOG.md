@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.1.2 (24 April 2021)
+
+### Bugfix
+
+**UI**
+
+- Module page: dependencies-block
+
 ## 4.1.1 (23 April 2021)
 
 ### Bugfix
