@@ -115,7 +115,7 @@ export default function (discovery) {
                                   {
                                     when: '#.depsTabs="modules"',
                                     data: `
-                                    #.params.hash.resolveStat().(..modules)
+                                    #.params.hash.resolveStat().compilation.(..modules)
                                       .[not shouldHideModule() and name~=#.filter]
                                       .[reasons.[resolvedModule=@]]
                                       .sort(moduleSize() desc)
@@ -127,7 +127,7 @@ export default function (discovery) {
                                   {
                                     when: '#.depsTabs="chunks"',
                                     data: `
-                                    #.params.hash.resolveStat().(..modules).[not shouldHideModule()]
+                                    #.params.hash.resolveStat().compilation.(..modules).[not shouldHideModule()]
                                       .[reasons.[resolvedModule=@]]
                                       .chunks.[chunkName()~=#.filter].sort(initial desc, entry desc, size desc)
                                     `,
