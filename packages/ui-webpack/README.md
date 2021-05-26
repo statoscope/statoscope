@@ -191,6 +191,10 @@ Sometimes we have a few modules with the same content. Statoscope can find these
 
 Statoscope has a powerful tool to compare the stats.
 
+Just drop two (or more) stats files to https://statoscope.tech and press the `Diff` button.
+
+If you're using the webpack plugin, use [additionalStats](https://github.com/smelukov/statoscope/tree/master/packages/ui-webpack#optionsadditionalstats-string) property.
+
 <img src="docs/diff.png" width="300px"/>
 
 ### Create a custom report and share it
