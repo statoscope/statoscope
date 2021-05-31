@@ -1,10 +1,9 @@
 {
   "name": "@statoscope/report-writer",
-  "version": "4.1.2",
+  "version": "5.0.0",
   "description": "Statoscope report writer",
   "main": "./src/index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {
     "name": "Sergey Melyukov",
@@ -15,8 +14,6 @@
   ],
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
-  "devDependencies": {
-  },
   "dependencies": {
     "@discoveryjs/json-ext": "^0.5.2"
   }

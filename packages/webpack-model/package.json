@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/webpack-model",
-  "version": "4.1.2",
+  "version": "5.0.0",
   "description": "This package contains helpers to process webpack stats",
   "main": "./dist/index.js",
   "scripts": {
@@ -17,8 +17,6 @@
   ],
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
-  "devDependencies": {
-  },
   "dependencies": {
     "ajv": "^8.5.0",
     "jora": "^1.0.0-beta.5",

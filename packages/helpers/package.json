@@ -1,10 +1,9 @@
 {
   "name": "@statoscope/helpers",
-  "version": "4.1.2",
+  "version": "5.0.0",
   "description": "Statoscope utils",
   "main": "./src/index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {
     "name": "Sergey Melyukov",
@@ -14,9 +13,5 @@
     "src/*"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/statoscope/statoscope/",
-  "devDependencies": {
-  },
-  "dependencies": {
-  }
+  "homepage": "https://github.com/statoscope/statoscope/"
 }

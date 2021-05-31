@@ -1,9 +1,8 @@
 {
   "name": "@statoscope/cli",
-  "version": "4.1.2",
+  "version": "5.0.0",
   "description": "Statoscope CLI tools",
-  "scripts": {
-  },
+  "scripts": {},
   "bin": {
     "statoscope": "./bin/cli.js"
   },
@@ -18,13 +17,11 @@
   ],
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
-  "devDependencies": {
-  },
   "dependencies": {
     "@discoveryjs/json-ext": "^0.5.2",
-    "@statoscope/helpers": "^4.1.2",
-    "@statoscope/webpack-model": "^4.1.2",
-    "@statoscope/report-writer": "^4.1.2",
+    "@statoscope/helpers": "^5.0.0",
+    "@statoscope/report-writer": "^5.0.0",
+    "@statoscope/webpack-model": "^5.0.0",
     "open": "^8.0.4",
     "yargs": "^17.0.1"
   }
