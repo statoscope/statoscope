@@ -6,7 +6,7 @@ const HTMLWriter = require('@statoscope/report-writer');
 async function transform(from, to) {
   const id = from.length === 1 ? path.basename(from[0], '.json') : Date.now();
   to = to || path.join(os.tmpdir(), `statoscope-report-${id}.html`);
-  const htmlWriter = new HTMLWriter(to, {
+  const htmlWriter = new HTMLWriter({
     scripts: [require.resolve('@statoscope/webpack-ui')],
     init: function (data) {
       // eslint-disable-next-line
