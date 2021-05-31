@@ -8,7 +8,8 @@
     "bootstrap": "lerna bootstrap",
     "postinstall": "npm run bootstrap",
     "code-lint": "eslint . --ext '.js' --cache",
-    "fix": "npm run code-lint -- --fix"
+    "fix": "npm run code-lint -- --fix",
+    "prepublishOnly": "npm run code-lint"
   },
   "repository": "https://github.com/statoscope/statoscope",
   "author": {

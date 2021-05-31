@@ -1,3 +1,5 @@
+/* global module */
+
 function pluralFactory(pluralFn) {
   return {
     plural: pluralFn,

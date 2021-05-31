@@ -1,3 +1,5 @@
+/* global module, require */
+
 const path = require('path');
 const { colorFromH, colorMap, fileTypeMap, generateColor } = require('./colors');
 const { pluralEng, pluralRus } = require('./plural');

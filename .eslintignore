@@ -4,6 +4,7 @@ dist
 **/node_modules
 **/dist
 **/dist-test
+test/
 
 # Ignore not support files
 carrotsearch.foamtree.js
