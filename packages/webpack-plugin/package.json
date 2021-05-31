@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/webpack-plugin",
-  "version": "5.0.0-alpha.0",
+  "version": "5.0.0-alpha.1",
   "description": "Helpers for webpack part of Statoscope",
   "main": "./src/index.js",
   "scripts": {},
@@ -19,8 +19,8 @@
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
     "@discoveryjs/json-ext": "^0.5.2",
-    "@statoscope/report-writer": "^5.0.0-alpha.0",
-    "@statoscope/webpack-ui": "^5.0.0-alpha.0",
+    "@statoscope/report-writer": "^5.0.0-alpha.1",
+    "@statoscope/webpack-ui": "^5.0.0-alpha.1",
     "open": "^8.0.4"
   }
 }
