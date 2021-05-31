@@ -1,0 +1,26 @@
+{
+  "name": "@statoscope/webpack-plugin",
+  "version": "4.1.2",
+  "description": "Helpers for webpack part of Statoscope",
+  "main": "./src/index.js",
+  "scripts": {
+  },
+  "repository": "https://github.com/statoscope/statoscope.git",
+  "author": {
+    "name": "Sergey Melyukov",
+    "url": "https://twitter.com/smelukov"
+  },
+  "files": [
+    "src/*"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/statoscope/statoscope/",
+  "devDependencies": {
+  },
+  "dependencies": {
+    "@discoveryjs/json-ext": "^0.5.2",
+    "@statoscope/report-writer": "^4.1.2",
+    "@statoscope/webpack-ui": "^4.1.2",
+    "open": "^8.0.4"
+  }
+}

@@ -16,7 +16,7 @@
     "url": "https://twitter.com/smelukov"
   },
   "bugs": {
-    "url": "https://github.com/smelukov/statoscope/issues"
+    "url": "https://github.com/statoscope/statoscope/issues"
   },
   "husky": {
     "hooks": {
@@ -31,6 +31,7 @@
   "homepage": "https://github.com/smelukov/statoscope",
   "dependencies": {},
   "devDependencies": {
+    "@babel/cli": "^7.13.10",
     "@babel/core": "^7.13.10",
     "@babel/preset-env": "^7.13.10",
     "eslint": "^7.22.0",
@@ -45,6 +46,7 @@
     "jscodeshift": "^0.11.0",
     "lerna": "^4.0.0",
     "lint-staged": "^10.5.4",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "typescript": "^4.3.2"
   }
 }

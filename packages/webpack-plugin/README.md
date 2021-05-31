@@ -1,0 +1,174 @@
+# Statoscope webpack-plugin
+
+[![npm version](https://badge.fury.io/js/%40statoscope%2Fwebpack-plugin.svg)](https://badge.fury.io/js/%40statoscope%2Fwebpack-plugin)
+[![Support](https://img.shields.io/badge/-Support-blue)](https://opencollective.com/statoscope)
+
+This webpack-plugin generates statoscope HTML-report from webpack-stats.
+
+## Installation
+
+```sh
+npm install @statoscope/webpack-plugin --save-dev
+```
+
+## Usage
+
+
+**webpack.config.js:**
+```js
+const StatoscopeWebpackPlugin = require('@statoscope/webpack-plugin');
+
+config.plugins.push(new StatoscopeWebpackPlugin());
+```
+
+There are some **optional** options.
+
+```js
+new StatoscopeWebpackPlugin({
+  saveTo: 'path/to/report-[name]-[hash].html',
+  saveStatsTo: 'path/to/saving/stats-[name]-[hash].json',
+  statsOptions: { /* any webpack stats options */ },
+  additionalStats: ['path/to/any/stats.json'],
+  watchMode: false,
+  name: 'some-name',
+  open: 'file'
+})
+```
+
+#### options.saveTo: string
+
+Path to an HTML with a report.
+
+By default is a temporary directory with filename: `statoscope-[name]-[hash].html`
+
+`[name]` replacing by `options.name` (if specified) or `compilation.name` (if specified) or `unnamed`
+
+`[hash]` replacing by `compilation.hash`
+
+
+#### options.saveStatsTo: string
+
+A path for saving the stats: `stats-[name]-[hash].json`
+
+`[name]` replacing by `options.name` (if specified) or `compilation.name` (if specified) or `unnamed`
+
+`[hash]` replacing by `compilation.hash`
+
+By default don't save anything
+
+#### options.statsOptions: [StatsOptions](https://webpack.js.org/configuration/stats/#stats-options)
+
+With `statsOptions` you can override your webpack-config `stats` option
+
+For example: `statsOptions: { all: true, source: false }`
+
+If not specified (by default) then `stats` options from your webpack config will be used.
+
+> All stats-options see at [docs](https://webpack.js.org/configuration/stats/#stats-options)
+
+#### options.additionalStats: string[]
+
+List with the paths to webpack stats that will be loaded into Statoscope along with current compilation stats.
+
+In UI, you may switch between them or diff.
+
+```js
+const glob = require('glob');
+
+new StatoscopeWebpackPlugin({
+  saveStatsTo: 'path/to/stats/stats-[name]-[hash].json',
+  additionalStats: glob.sync('path/to/stats/*.json'),
+})
+```
+
+In this example, the stats from every compilation will be saved into `path/to/stats/` directory.
+
+Also, all JSON files from `path/to/stats/` directory will be added to the Statoscope report.
+
+In this way, you can collect the stats from all compilations and diff these to find out how your bundle was changing in time.
+
+#### options.watchMode: boolean
+
+By default, Statoscode does not generate a report if the webpack runs in watch-mode.
+
+Set `watchMode: true` to generate a report in watch-mode
+
+#### options.name: string
+
+Custom compilation name.
+
+By default `compilation.name` (if specified)
+
+#### options.open: enum
+
+Open report after compilation.
+
+- `false` - don't open report
+- `file` - open html with report
+- `dir` - open a directory with html file
+
+`dir` by default.
+
+## FAQ
+
+### Which stats-flags Statoscope use?
+
+Statoscope use only stats that it has. There is only one required flag - `hash`.
+
+```
+stats: {
+  all: false, // disable all the stats
+  hash: true, // add a compilation hash
+}
+```
+
+It works, but useless, because the result stats is empty.
+
+You may disable some stats-flags to decrease your stats-file size.
+Here is a set of minimum useful stats flags:
+
+```
+stats: {
+  all: false, // disable all the stats
+  hash: true, // add compilation hash
+  entrypoints: true, // add entrypoints stats
+  chunks: true, // add chunks stats
+  chunkModules: true, // add modules stats
+  reasons: true, // add modules reasons stats
+},
+```
+
+And an example of full stats:
+
+```
+stats: {
+  all: false, // disable all the stats
+  hash: true, // add compilation hash
+  entrypoints: true, // add entrypoints stats
+  chunks: true, // add chunks stats
+  chunkModules: true, // add modules stats
+  reasons: true, // add modules reasons stats
+
+  assets: true, // add assets stats
+  chunkOrigins: true, // add chunks origins stats (to find out which modules require a chunk)
+  version: true, // add webpack version
+  builtAt: true, // add build at time
+  timings: true, // add build at time
+  performance: true, // add info about oversized assets
+  source: true, // add module sources (uses to find modules duplicates)
+},
+```
+
+### Statoscope shows an absolute path to the modules
+
+Just specify a context to stats options:
+
+```
+stats: {
+  context: 'path/to/project/root'
+}
+```
+
+## Support
+
+If you are an engineer or a company that is interested in Statoscope improvements, you may support Statoscope by financial contribution at [OpenCollective](https://opencollective.com/statoscope).
