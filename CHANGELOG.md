@@ -1,13 +1,12 @@
 # Changelog
 
-## Next
+## 5.0.0 (31 May 2021)
 
 ### Features
 
 - `[ui-webpack]` **BREAKING:** deprecated in favor of new package `webpack-ui`
 - `[cli]` new package with CLI tools (validate, generate, serve)
 - `[webpack-plugin]` new package with webpack plugin that generated statoscope report
-- `[webpack-model]` new package with helpers for processing webpack stats
 
 ## 4.1.2 (24 April 2021)
 
