@@ -9,7 +9,7 @@
     "build:prod": "NODE_ENV=production webpack",
     "prepublishOnly": "npm run build:prod"
   },
-  "repository": "https://github.com/smelukov/statoscope.git",
+  "repository": "https://github.com/statoscope/statoscope.git",
   "author": {
     "name": "Sergey Melyukov",
     "url": "https://twitter.com/smelukov"

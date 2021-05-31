@@ -25,6 +25,7 @@
     "@statoscope/helpers": "^5.0.0-alpha.0",
     "@statoscope/report-writer": "^5.0.0-alpha.0",
     "@statoscope/webpack-model": "^5.0.0-alpha.0",
+    "@statoscope/webpack-ui": "^5.0.0-alpha.0",
     "open": "^8.0.4",
     "yargs": "^17.0.1"
   }

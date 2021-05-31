@@ -40,7 +40,7 @@ function addLinks(discovery) {
 
   discovery.nav.primary.append({
     name: 'github',
-    data: `{ text: "Github", href: 'https://github.com/smelukov/statoscope' }`,
+    data: `{ text: "Github", href: 'https://github.com/statoscope/statoscope' }`,
   });
 
   discovery.nav.primary.append({

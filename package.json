@@ -10,7 +10,7 @@
     "code-lint": "eslint . --ext '.js' --cache",
     "fix": "npm run code-lint -- --fix"
   },
-  "repository": "https://github.com/smelukov/statoscope",
+  "repository": "https://github.com/statoscope/statoscope",
   "author": {
     "name": "Serget Melyukov",
     "url": "https://twitter.com/smelukov"
@@ -28,7 +28,7 @@
       "eslint --cache --fix"
     ]
   },
-  "homepage": "https://github.com/smelukov/statoscope",
+  "homepage": "https://github.com/statoscope/statoscope",
   "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.13.10",
