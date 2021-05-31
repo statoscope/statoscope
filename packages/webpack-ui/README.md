@@ -13,6 +13,7 @@ It can tell almost all about your bundle:
 - 🔄 Stats diff
 - 📊 Custom reports about your bundle
 - 🐘 No stats size limitation
+- 🧪 Stats validation via CLI
 
 You can try it at [Statoscope sandbox](https://statoscope.tech)
 

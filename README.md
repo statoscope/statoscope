@@ -13,9 +13,12 @@ It can tell almost all about your bundle:
 - 🔄 Stats diff
 - 📊 Custom reports about your bundle
 - 🐘 No stats size limitation
+- 🧪 Stats validation via CLI
 
 You can try it at [Statoscope sandbox](https://statoscope.tech)
 
-See source code at [packages/webpack-plugin](packages/webpack-plugin) and [packages/webpack-ui](packages/webpack-ui)
+- [packages/webpack-plugin](packages/webpack-plugin) - webpack plugin
+- [packages/webpack-ui](packages/webpack-ui) - UI for webpack stats
+- [packages/cli](packages/cli) - CLI tools to analazy stats
 
 <img src="packages/webpack-ui/docs/dashboard.png" width="500px"/>
