@@ -11,6 +11,9 @@
     "name": "Sergey Melyukov",
     "url": "https://twitter.com/smelukov"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "schema/*",
     "dist/*"

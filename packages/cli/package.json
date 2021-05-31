@@ -6,6 +6,9 @@
   "bin": {
     "statoscope": "./bin/cli.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {
     "name": "Sergey Melyukov",

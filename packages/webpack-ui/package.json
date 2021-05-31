@@ -17,6 +17,9 @@
   "files": [
     "dist/*"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "devDependencies": {
