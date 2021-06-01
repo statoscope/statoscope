@@ -1,11 +1,36 @@
-const fs = require('fs');
-const path = require('path');
-const { parseChunked } = require('@discoveryjs/json-ext');
-const { prepareWithJora } = require('@statoscope/webpack-model');
-const { jora: joraHelpers } = require('@statoscope/helpers');
+import fs from 'fs';
+import path from 'path';
+import { Argv } from 'yargs';
+// @ts-ignore
+import { parseChunked } from '@discoveryjs/json-ext';
+import { prepareWithJora } from '@statoscope/webpack-model';
+import { jora as joraHelpers } from '@statoscope/helpers';
 
-function makeQueryValidator(query) {
-  function validate(type, message) {
+export type TestEntry = {
+  type?: 'error' | 'warn' | 'info'; // 'error' by default
+  assert?: boolean; // false by default
+  message: string;
+  filename?: string;
+};
+
+export type Data = {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  files: Object[];
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  compilations: Object[];
+  query: (query: string, data?: any) => any; // query-parameter is jora-syntax query
+};
+
+export type API = {
+  error(message: string, filename?: string): void;
+  warn(message: string, filename?: string): void;
+  info(message: string, filename?: string): void;
+};
+
+export type ValidatorFn = (data: Data, api: API) => Promise<string | void>;
+
+function makeQueryValidator(query: string): ValidatorFn {
+  function validate(type?: string, message?: string) {
     if (!(!type || type === 'error' || type === 'warn' || type === 'info')) {
       throw new Error(`Unknown message type [${type}]`);
     }
@@ -15,7 +40,7 @@ function makeQueryValidator(query) {
     }
   }
 
-  function callAPI(api, { type, filename, message }) {
+  function callAPI(api: API, { type, filename, message }: TestEntry) {
     validate(type, message);
 
     if (typeof type === 'undefined' || type === 'error') {
@@ -30,7 +55,7 @@ function makeQueryValidator(query) {
     }
   }
 
-  return (data, api) => {
+  return async (data, api): Promise<void> => {
     const result = data.query(query);
 
     for (const item of result) {
@@ -41,24 +66,25 @@ function makeQueryValidator(query) {
   };
 }
 
-function handleValidator(validator) {
+function handleValidator(validator: string): ValidatorFn {
   const validatorPath = path.resolve(validator);
   const ext = path.extname(validatorPath);
+  let validatorFn: string | ValidatorFn;
 
   if (ext === '.js') {
-    validator = require(validatorPath);
+    validatorFn = require(validatorPath);
   } else {
-    validator = fs.readFileSync(validatorPath, 'utf8');
+    validatorFn = fs.readFileSync(validatorPath, 'utf8');
   }
 
-  if (typeof validator === 'string') {
-    validator = makeQueryValidator(validator);
+  if (typeof validatorFn === 'string') {
+    validatorFn = makeQueryValidator(validator);
   }
 
-  return validator;
+  return validatorFn;
 }
 
-module.exports = function (yargs) {
+export default function (yargs: Argv): Argv {
   return yargs.command(
     'validate [validator] [input]',
     `[BETA] Validate one or more JSON stats
@@ -96,12 +122,12 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
       }
       const prepared = prepareWithJora(files, { helpers: joraHelpers() });
       const validator = handleValidator(argv.validator);
-      const storage = {};
+      const storage: { [key: string]: TestEntry[] } = {};
       let hasErrors = false;
       let errors = 0;
       let warnings = 0;
       let infos = 0;
-      const api = {
+      const api: API = {
         warn(message, filename = 'unknown') {
           if (argv['warn-as-error']) {
             hasErrors = true;
@@ -124,7 +150,14 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
         },
       };
 
-      await validator({ files: prepared.files, query: prepared.query }, api);
+      await validator(
+        {
+          files: prepared.files,
+          compilations: prepared.compilations,
+          query: prepared.query,
+        },
+        api
+      );
 
       for (const [filename, items] of Object.entries(storage)) {
         console.log(filename);
@@ -153,4 +186,4 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
       }
     }
   );
-};
+}

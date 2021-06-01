@@ -1,9 +1,10 @@
-const fs = require('fs');
-const http = require('http');
-const open = require('open');
-const { transform } = require('../utils');
+import fs from 'fs';
+import http from 'http';
+import { Argv } from 'yargs';
+import open from 'open';
+import { transform } from '../utils';
 
-module.exports = function (yargs) {
+export default function (yargs: Argv): Argv {
   return yargs.command(
     'serve [input]',
     `Start HTTP-server and serve JSON-stats as HTML report
@@ -42,7 +43,7 @@ Multiple stats: serve --input path/to/stats-1.json path/to/stats-2.json
         .createServer((req, res) => {
           fs.createReadStream(reportPath).pipe(res);
         })
-        .listen(argv.port, argv.host)
+        .listen({ port: argv.port, host: argv.host })
         .on('listening', () => {
           const link = `http://${argv.host}:${argv.port}`;
           console.log(`Statoscope server listen at ${link}`);
@@ -53,4 +54,4 @@ Multiple stats: serve --input path/to/stats-1.json path/to/stats-2.json
         });
     }
   );
-};
+}

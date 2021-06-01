@@ -16,7 +16,7 @@
   },
   "files": [
     "bin/*",
-    "src/*"
+    "dist/*"
   ],
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
@@ -28,5 +28,8 @@
     "@statoscope/webpack-ui": "^5.0.1",
     "open": "^8.0.4",
     "yargs": "^17.0.1"
+  },
+  "devDependencies": {
+    "@types/yargs": "^17.0.0"
   }
 }

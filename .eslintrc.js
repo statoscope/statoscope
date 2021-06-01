@@ -1,12 +1,17 @@
 // eslint-disable-next-line no-undef
 module.exports = {
   root: true,
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
   },
-  plugins: ['prettier', 'jsdoc', 'import'],
-  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
+  plugins: ['prettier', 'import', '@typescript-eslint'],
+  extends: [
+    'eslint:recommended',
+    'plugin:prettier/recommended',
+    'plugin:@typescript-eslint/recommended',
+  ],
   env: {
     es6: true,
     browser: true,
@@ -34,15 +39,6 @@ module.exports = {
     indent: 'off',
     'no-console': 'off',
     'import/order': 'error',
-    'jsdoc/require-hyphen-before-param-description': ['error', 'never'],
-    'jsdoc/check-tag-names': 'error',
-    'jsdoc/check-param-names': 'error',
-    'jsdoc/require-param-description': 'error',
-    'jsdoc/require-param-name': 'error',
-    'jsdoc/require-param-type': 'error',
-    'jsdoc/require-param': 'error',
-    'jsdoc/require-returns-description': 'error',
-    'jsdoc/require-returns-type': 'error',
-    'jsdoc/require-returns': 'error',
+    '@typescript-eslint/ban-ts-comment': 'off',
   },
 };

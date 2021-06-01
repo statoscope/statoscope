@@ -1,15 +1,17 @@
-const fs = require('fs');
-const os = require('os');
-const path = require('path');
-const HTMLWriter = require('@statoscope/report-writer');
+/* global Statoscope */
 
-async function transform(from, to) {
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
+import HTMLWriter from '@statoscope/report-writer';
+
+export async function transform(from: string[], to?: string): Promise<string> {
   const id = from.length === 1 ? path.basename(from[0], '.json') : Date.now();
   to = to || path.join(os.tmpdir(), `statoscope-report-${id}.html`);
   const htmlWriter = new HTMLWriter({
     scripts: [require.resolve('@statoscope/webpack-ui')],
-    init: function (data) {
-      // eslint-disable-next-line
+    init: function (data: any) {
+      // @ts-ignore
       Statoscope.default(data.map((item) => ({ name: item.id, data: item.data })));
     },
   });
@@ -24,5 +26,3 @@ async function transform(from, to) {
   await htmlWriter.write();
   return to;
 }
-
-module.exports.transform = transform;
