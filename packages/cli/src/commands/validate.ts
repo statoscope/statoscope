@@ -30,7 +30,7 @@ export type API = {
 export type ValidatorFn = (data: Data, api: API) => Promise<string | void>;
 
 function makeQueryValidator(query: string): ValidatorFn {
-  function validate(type?: string, message?: string) {
+  function validate(type?: string, message?: string): void {
     if (!(!type || type === 'error' || type === 'warn' || type === 'info')) {
       throw new Error(`Unknown message type [${type}]`);
     }
@@ -40,7 +40,7 @@ function makeQueryValidator(query: string): ValidatorFn {
     }
   }
 
-  function callAPI(api: API, { type, filename, message }: TestEntry) {
+  function callAPI(api: API, { type, filename, message }: TestEntry): void {
     validate(type, message);
 
     if (typeof type === 'undefined' || type === 'error') {
@@ -78,7 +78,7 @@ function handleValidator(validator: string): ValidatorFn {
   }
 
   if (typeof validatorFn === 'string') {
-    validatorFn = makeQueryValidator(validator);
+    validatorFn = makeQueryValidator(validatorFn);
   }
 
   return validatorFn;

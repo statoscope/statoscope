@@ -12,7 +12,8 @@
     "strict": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "declaration": true
   },
   "exclude": [
     "node_modules",

@@ -40,5 +40,6 @@ module.exports = {
     'no-console': 'off',
     'import/order': 'error',
     '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'error',
   },
 };
