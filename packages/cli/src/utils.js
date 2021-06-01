@@ -19,6 +19,8 @@ async function transform(from, to) {
     htmlWriter.addChunkWriter(fs.createReadStream(file), id);
   }
 
+  htmlWriter.getStream().pipe(fs.createWriteStream(to));
+
   await htmlWriter.write();
   return to;
 }
