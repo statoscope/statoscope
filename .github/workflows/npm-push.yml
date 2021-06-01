@@ -12,3 +12,4 @@ jobs:
           node-version: 12
       - run: npm ci
       - run: npm run code-lint
+      - run: npx lerna run build
