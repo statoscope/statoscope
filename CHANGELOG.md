@@ -4,7 +4,10 @@
 
 ### Fixes
 
-- `[cli]` fix `generate command
+- `[cli]` fix `generate` command
+- `[cli]` fix readme
+- `[webpack-plugin]` npm audit fix
+- `[webpack-ui]` npm audit fix
 
 ## 5.0.0 (31 May 2021)
 
