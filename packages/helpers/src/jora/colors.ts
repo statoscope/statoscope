@@ -1,6 +1,4 @@
-/* global module */
-
-function generateColor(str) {
+export function generateColor(str: string): string {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
     hash = str.charCodeAt(i) + ((hash << 5) - hash);
@@ -10,15 +8,19 @@ function generateColor(str) {
   return colorFromH(h);
 }
 
-function colorFromH(h) {
+export function colorFromH(h: string | number): string {
   return getHSLValue(h, 50, 85);
 }
 
-function getHSLValue(h, s, l) {
+export function getHSLValue(
+  h: string | number,
+  s: string | number,
+  l: string | number
+): string {
   return `hsl(${h}, ${s}%, ${l}%)`;
 }
 
-const fileTypeMap = {
+export const fileTypeMap: { [key: string]: string } = {
   '.wasm': 'wasm',
   '.json': 'json',
   '.html': 'html',
@@ -49,10 +51,12 @@ const fileTypeMap = {
   '.woff2': 'font',
 };
 
-function createColorsFromString(strings) {
-  const step = Math.round(360 / (strings.length || strings.size || 0));
+export type ColorMap = { [key: string]: { color: string } };
+
+export function createColorsFromString(strings: string[] | Set<string>): ColorMap {
+  const step = Math.round(360 / (strings instanceof Set ? strings.size : strings.length));
   let currentStep = 0;
-  const all = {};
+  const all: ColorMap = {};
   for (const value of strings) {
     all[value] = { color: colorFromH(currentStep) };
     currentStep += step;
@@ -61,15 +65,6 @@ function createColorsFromString(strings) {
   return all;
 }
 
-const colorMap = {
+export const colorMap = {
   ...createColorsFromString(new Set(Object.values(fileTypeMap))),
-};
-
-module.exports = {
-  generateColor,
-  colorFromH,
-  getHSLValue,
-  fileTypeMap,
-  createColorsFromString,
-  colorMap,
 };

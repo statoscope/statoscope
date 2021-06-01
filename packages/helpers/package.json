@@ -2,7 +2,7 @@
   "name": "@statoscope/helpers",
   "version": "5.0.0",
   "description": "Statoscope utils",
-  "main": "./src/index.js",
+  "main": "./dist/index.js",
   "publishConfig": {
     "access": "public"
   },
@@ -13,7 +13,7 @@
     "url": "https://twitter.com/smelukov"
   },
   "files": [
-    "src/*"
+    "dist/*"
   ],
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/"

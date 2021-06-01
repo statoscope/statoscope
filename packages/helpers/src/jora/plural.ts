@@ -1,15 +1,15 @@
-/* global module */
+export type PluralFn = (value: number, words: string[]) => string;
 
-function pluralFactory(pluralFn) {
+export function pluralFactory(pluralFn: PluralFn) {
   return {
     plural: pluralFn,
-    pluralWithValue(value, words) {
+    pluralWithValue(value: number, words: string[]) {
       return `${value} ${pluralFn(value, words)}`;
     },
   };
 }
 
-const pluralRus = pluralFactory((value, [one, two, five = two]) => {
+export const pluralRus = pluralFactory((value, [one, two, five = two]) => {
   let n = Math.abs(value);
 
   n %= 100;
@@ -31,14 +31,8 @@ const pluralRus = pluralFactory((value, [one, two, five = two]) => {
   return five;
 });
 
-const pluralEng = pluralFactory((value, [one, many]) => {
+export const pluralEng = pluralFactory((value, [one, many]) => {
   const n = Math.abs(value);
 
   return n === 0 || n > 1 ? many : one;
 });
-
-module.exports = {
-  pluralFactory,
-  pluralRus,
-  pluralEng,
-};
