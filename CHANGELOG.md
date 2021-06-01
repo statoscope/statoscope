@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.0.1 (1 June 2021)
+
+### Fixes
+
+- `[cli]` fix `generate command
+
 ## 5.0.0 (31 May 2021)
 
 ### Features
