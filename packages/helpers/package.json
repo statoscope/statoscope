@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/helpers",
-  "version": "5.0.0",
+  "version": "5.1.0-alpha.0",
   "description": "Statoscope utils",
   "main": "./dist/index.js",
   "publishConfig": {
