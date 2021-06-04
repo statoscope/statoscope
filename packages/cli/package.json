@@ -2,7 +2,9 @@
   "name": "@statoscope/cli",
   "version": "5.0.1",
   "description": "Statoscope CLI tools",
-  "scripts": {},
+  "scripts": {
+    "build": "../../node_modules/.bin/tsc"
+  },
   "bin": {
     "statoscope": "./bin/cli.js"
   },
@@ -21,7 +23,7 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "@discoveryjs/json-ext": "^0.5.2",
+    "@discoveryjs/json-ext": "^0.5.3",
     "@statoscope/helpers": "^5.0.0",
     "@statoscope/report-writer": "^5.0.0",
     "@statoscope/webpack-model": "^5.0.0",

@@ -1,5 +1,20 @@
 # Changelog
 
+## Next
+
+### Fixes
+
+- `[webpack-ui]` - fix popup positioning when page was scrolled
+
+### Refactoring
+
+- `[cli]` - migrate to typescript
+- `[webpack-plugin]` - migrate to typescript
+- `[webpack-ui]` - migrate to typescript
+- `[webpack-model]` - migrate to typescript
+- `[report-writer]` - migrate to typescript
+- `[helpers]` - migrate to typescript
+
 ## 5.0.1 (1 June 2021)
 
 ### Fixes

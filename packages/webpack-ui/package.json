@@ -3,11 +3,13 @@
   "version": "5.0.1",
   "description": "Webpack plugin and UI for analyzing webpack bundle with Statoscope",
   "main": "./dist/main.js",
+  "types": "./types.d.ts",
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
     "build:prod": "NODE_ENV=production webpack",
-    "prepublishOnly": "npm run build:prod"
+    "prepublishOnly": "npm run build:prod",
+    "lint": "../../node_modules/.bin/tsc"
   },
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {
@@ -15,7 +17,8 @@
     "url": "https://twitter.com/smelukov"
   },
   "files": [
-    "dist/*"
+    "dist/*",
+    "types.d.ts"
   ],
   "publishConfig": {
     "access": "public"

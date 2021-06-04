@@ -2,8 +2,10 @@
   "name": "@statoscope/report-writer",
   "version": "5.0.0",
   "description": "Statoscope report writer",
-  "main": "./src/index.js",
-  "scripts": {},
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "../../node_modules/.bin/tsc"
+  },
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {
     "name": "Sergey Melyukov",
@@ -13,11 +15,14 @@
     "access": "public"
   },
   "files": [
-    "src/*"
+    "dist/*"
   ],
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "@discoveryjs/json-ext": "^0.5.2"
+    "@discoveryjs/json-ext": "^0.5.3"
+  },
+  "devDependencies": {
+    "@types/node": "^12.0.0"
   }
 }

@@ -5,6 +5,10 @@ import { Argv } from 'yargs';
 import { parseChunked } from '@discoveryjs/json-ext';
 import { prepareWithJora } from '@statoscope/webpack-model';
 import { jora as joraHelpers } from '@statoscope/helpers';
+import {
+  NormalizedFile,
+  RawStatsFileDescriptor,
+} from '@statoscope/webpack-model/dist/normalize';
 
 export type TestEntry = {
   type?: 'error' | 'warn' | 'info'; // 'error' by default
@@ -18,7 +22,7 @@ export type Data = {
   files: Object[];
   // eslint-disable-next-line @typescript-eslint/ban-types
   compilations: Object[];
-  query: (query: string, data?: any) => any; // query-parameter is jora-syntax query
+  query: (query: string, data?: NormalizedFile[]) => unknown; // query-parameter is jora-syntax query
 };
 
 export type API = {
@@ -56,7 +60,7 @@ function makeQueryValidator(query: string): ValidatorFn {
   }
 
   return async (data, api): Promise<void> => {
-    const result = data.query(query);
+    const result = data.query(query) as TestEntry[];
 
     for (const item of result) {
       if (!item.assert) {
@@ -112,7 +116,7 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
         .demandOption(['validator', 'input']);
     },
     async (argv) => {
-      const files = [];
+      const files: RawStatsFileDescriptor[] = [];
       for (const file of argv.input) {
         const data = await parseChunked(fs.createReadStream(file));
         files.push({
@@ -179,6 +183,8 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
       if (infos) {
         console.log(`Infos: ${infos}`);
       }
+
+      console.log('Done');
 
       if (hasErrors) {
         // eslint-disable-next-line no-process-exit

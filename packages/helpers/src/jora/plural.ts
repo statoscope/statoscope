@@ -1,9 +1,14 @@
 export type PluralFn = (value: number, words: string[]) => string;
 
-export function pluralFactory(pluralFn: PluralFn) {
+export type PluralType = {
+  plural: PluralFn;
+  pluralWithValue(value: number, words: string[]): string;
+};
+
+export function pluralFactory(pluralFn: PluralFn): PluralType {
   return {
     plural: pluralFn,
-    pluralWithValue(value: number, words: string[]) {
+    pluralWithValue(value: number, words: string[]): string {
       return `${value} ${pluralFn(value, words)}`;
     },
   };

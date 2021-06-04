@@ -1,4 +1,5 @@
-/* global require, process, module */
+/* eslint-env node */
+
 const path = require('path');
 const { merge } = require('webpack-merge');
 const webpack = require('webpack');
@@ -10,13 +11,14 @@ function makeConfig(config) {
   return merge(
     {
       mode,
-      entry: './src/index.js',
+      entry: './src/',
       output: {
         library: 'Statoscope',
         libraryTarget: 'umd',
         path: path.resolve('dist'),
       },
       resolve: {
+        extensions: ['.ts', '.js', '.json', '.wasm'],
         fallback: {
           path: require.resolve('path-browserify'),
         },
@@ -24,7 +26,7 @@ function makeConfig(config) {
       module: {
         rules: [
           {
-            test: /\.js$/,
+            test: /\.[tj]s$/,
             exclude: /node_modules/,
             use: 'babel-loader',
           },
