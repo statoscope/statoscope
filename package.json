@@ -9,8 +9,8 @@
     "postinstall": "npm run bootstrap",
     "lint": "npm run lint:script && lerna run lint",
     "lint:script": "eslint . --ext .js,.ts --cache",
-    "fix": "npm run code-lint -- --fix",
-    "prepublishOnly": "npm run code-lint"
+    "fix": "npm run lint:script -- --fix",
+    "prepublishOnly": "npm run lint"
   },
   "repository": "https://github.com/statoscope/statoscope",
   "author": {
