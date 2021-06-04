@@ -11,5 +11,5 @@ jobs:
         with:
           node-version: 12
       - run: npm ci
-      - run: npm run lint
       - run: npx lerna run build
+      - run: npm run lint
