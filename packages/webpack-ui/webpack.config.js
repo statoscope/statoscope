@@ -3,7 +3,6 @@
 const path = require('path');
 const { merge } = require('webpack-merge');
 const webpack = require('webpack');
-const StatoscopeWebpackPlugin = require('../webpack-plugin');
 
 const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
@@ -47,7 +46,6 @@ function makeConfig(config) {
 }
 
 module.exports = makeConfig({
-  plugins: process.env.DEBUG ? [new StatoscopeWebpackPlugin({ open: 'file' })] : [],
   module: {
     rules: [
       {
