@@ -3,8 +3,8 @@
     "packages/*",
     "examples/*"
   ],
-  "version": "5.1.0-alpha.0",
-  "command":{
+  "version": "5.1.0-alpha.1",
+  "command": {
     "publish": {
       "ignoreChanges": [
         "**/README.md",
