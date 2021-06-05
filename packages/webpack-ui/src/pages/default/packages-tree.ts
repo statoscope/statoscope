@@ -11,18 +11,18 @@ export default (hash?: string): PackageTree => ({
 
 export type PackageInstanceTree = Record<string, unknown>;
 
-export function packageInstanceTree(): PackageInstanceTree {
+export function packageInstanceTree(hash?: string): PackageInstanceTree {
   return {
     view: 'tree',
     expanded: false,
     limitLines: '= settingListItemsLimit()',
-    itemConfig: packageInstanceItemConfig(),
+    itemConfig: packageInstanceItemConfig(hash),
   };
 }
 
 export type PackageItemConfig = Record<string, unknown>;
 
-export function packageItemConfig(hash = '$'): PackageItemConfig {
+export function packageItemConfig(hash = '#.params.hash'): PackageItemConfig {
   return {
     limit: '= settingListItemsLimit()',
     children: 'instances.sort(size() asc, $ asc).({instance: $, package: @.name})',
