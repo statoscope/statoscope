@@ -7,8 +7,8 @@
   "command": {
     "publish": {
       "ignoreChanges": [
-        "**/README.md",
-        "**/package-lock.json"
+        "packages/*/README.md",
+        "packages/*/package-lock.json"
       ]
     }
   }
