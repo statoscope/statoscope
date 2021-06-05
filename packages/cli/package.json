@@ -3,7 +3,8 @@
   "version": "5.1.0-alpha.0",
   "description": "Statoscope CLI tools",
   "scripts": {
-    "build": "../../node_modules/.bin/tsc"
+    "build": "../../node_modules/.bin/tsc",
+    "prepublishOnly": "npm run build"
   },
   "bin": {
     "statoscope": "./bin/cli.js"

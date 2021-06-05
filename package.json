@@ -10,7 +10,8 @@
     "lint": "npm run lint:script && lerna run lint",
     "lint:script": "eslint . --ext .js,.ts --cache",
     "fix": "npm run lint:script -- --fix",
-    "prepublishOnly": "npm run lint"
+    "build": "lerna run build",
+    "prepublishOnly": "npm run build && npm run lint"
   },
   "repository": "https://github.com/statoscope/statoscope",
   "author": {

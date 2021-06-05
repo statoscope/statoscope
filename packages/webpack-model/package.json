@@ -4,7 +4,8 @@
   "description": "This package contains helpers to process webpack stats",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "../../node_modules/.bin/tsc"
+    "build": "../../node_modules/.bin/tsc",
+    "prepublishOnly": "npm run build"
   },
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {
