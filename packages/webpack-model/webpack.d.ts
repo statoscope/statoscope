@@ -5,15 +5,19 @@ export declare namespace Webpack {
     name: string;
   };
 
+  type ModuleID = string | number;
+
   type Module = {
-    id: string;
+    id: ModuleID;
     name: string;
     size: number;
     issuerPath?: IssuerPathItem[];
-    chunks: Array<Chunk | string>;
+    chunks: Array<Chunk | ChunkID>;
     reasons?: Reason[];
-    modules?: Module[];
+    modules?: InnerModule[];
   };
+
+  type InnerModule = Omit<Module, 'id' | 'modules'> & { id: null };
 
   type Reason = {
     moduleName: string;
@@ -22,20 +26,22 @@ export declare namespace Webpack {
 
   type Entrypoint = {
     name: string;
-    chunks?: Array<string | Chunk>;
+    chunks?: Array<ChunkID | Chunk>;
     assets?: Array<string | File>;
     isOverSizeLimit: boolean;
   };
 
+  type ChunkID = number | string;
+
   type Chunk = {
-    id: string;
+    id: ChunkID;
     name: string;
     names: string[];
     modules?: Module[];
     reason?: string | null;
-    children?: Array<string | Chunk>;
-    siblings?: Array<string | Chunk>;
-    parents?: Array<string | Chunk>;
+    children?: Array<ChunkID | Chunk>;
+    siblings?: Array<ChunkID | Chunk>;
+    parents?: Array<ChunkID | Chunk>;
     origins?: Array<Reason>;
     files: Array<string | File>;
   };
@@ -47,7 +53,7 @@ export declare namespace Webpack {
 
   type Asset = {
     name: string;
-    chunks?: Array<string | Chunk>;
+    chunks?: Array<ChunkID | Chunk>;
     files: File[];
   };
 

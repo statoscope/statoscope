@@ -48,14 +48,17 @@ export default function make<TID, TEntity>(
 
     if (Array.isArray(entities) || entities instanceof Set) {
       for (const entity of entities) {
-        if (getId(entity) === id) {
+        // disable eqeqeq cause id may be string or number
+        // eslint-disable-next-line eqeqeq
+        if (getId(entity) == id) {
           result = entity;
           break;
         }
       }
     } else if (entities instanceof Map) {
       for (const [, entity] of entities) {
-        if (getId(entity) === id) {
+        // eslint-disable-next-line eqeqeq
+        if (getId(entity) == id) {
           result = entity;
           break;
         }
@@ -64,7 +67,8 @@ export default function make<TID, TEntity>(
       for (const name in entities) {
         const entity = entities[name];
 
-        if (getId(entity) === id) {
+        // eslint-disable-next-line eqeqeq
+        if (getId(entity) == id) {
           result = entity;
           break;
         }

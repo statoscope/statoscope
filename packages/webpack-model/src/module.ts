@@ -1,4 +1,3 @@
-import { Webpack } from '../webpack';
 import { NormalizedModule, NormalizedReason } from './normalize';
 
 export const extractFileRx = /.*(?:^|!|\s+)(\.?\.?[\\/].+)/;
@@ -36,15 +35,11 @@ export function moduleNameResource(name: string | null): string | null {
   return null;
 }
 
-export function moduleResource(
-  module: NormalizedModule | Webpack.Module | null
-): string | null {
+export function moduleResource(module: NormalizedModule | null): string | null {
   return moduleNameResource(module && module.name);
 }
 
-export function moduleReasonResource(
-  reason: NormalizedReason | Webpack.Reason | null
-): string | null {
+export function moduleReasonResource(reason: NormalizedReason | null): string | null {
   return moduleNameResource(reason && reason.moduleName);
 }
 export type NodeModule = {

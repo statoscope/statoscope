@@ -3,6 +3,7 @@ import { Webpack } from '../webpack';
 import validateStats, { ValidationResult } from './validate';
 import { moduleResource, moduleReasonResource, nodeModule } from './module';
 import makeEntityResolver, { Resolver } from './entity-resolver';
+import ChunkID = Webpack.ChunkID;
 
 export type NormalizedChunk = Omit<
   Webpack.Chunk,
@@ -78,7 +79,7 @@ export type HandledStats = {
 
 export type CompilationResolvers = {
   resolveModule: Resolver<string, NormalizedModule>;
-  resolveChunk: Resolver<string, NormalizedChunk>;
+  resolveChunk: Resolver<ChunkID, NormalizedChunk>;
   resolveAsset: Resolver<string, NormalizedAsset>;
   resolvePackage: Resolver<string, NormalizedPackage>;
 };
@@ -180,9 +181,9 @@ function handleCompilation(
     name: compilation.name,
     hash: getHash(compilation, parent),
     entrypoints: [],
-    chunks: (compilation.chunks as NormalizedChunk[]) || [],
-    assets: (compilation.assets as NormalizedAsset[]) || [],
-    modules: (compilation.modules as NormalizedModule[]) || [],
+    chunks: (compilation.chunks as unknown as NormalizedChunk[]) || [],
+    assets: (compilation.assets as unknown as NormalizedAsset[]) || [],
+    modules: (compilation.modules as unknown as NormalizedModule[]) || [],
     nodeModules: [],
     children: [],
     isChild: !!parent?.hash,
@@ -234,11 +235,11 @@ function makeModuleResolver(
 
   compilation.modules.length = 0;
 
-  for (const module of modules) {
+  for (const module of [...modules]) {
     compilation.modules.push(module);
     for (const innerModule of module.modules || []) {
       modules.push(innerModule);
-      compilation.modules.push(module);
+      compilation.modules.push(innerModule);
     }
   }
 
@@ -246,10 +247,12 @@ function makeModuleResolver(
 }
 
 function prepareModule(
-  module: Webpack.Module,
+  module: Webpack.Module | Webpack.InnerModule,
   { resolveChunk, resolveModule }: CompilationResolvers
 ): void {
-  (module as unknown as NormalizedModule).resolvedResource = moduleResource(module);
+  (module as unknown as NormalizedModule).resolvedResource = moduleResource(
+    module as unknown as NormalizedModule
+  );
 
   if (module.issuerPath) {
     module.issuerPath.map(
@@ -259,7 +262,7 @@ function prepareModule(
 
   if (module.chunks) {
     (module as unknown as NormalizedModule).chunks = module.chunks
-      .map((c) => resolveChunk(typeof c === 'string' ? c : c.id))
+      .map((c) => resolveChunk(typeof c === 'string' || typeof c === 'number' ? c : c.id))
       .filter(Boolean) as NormalizedChunk[];
   } else {
     module.chunks = [];
@@ -313,7 +316,9 @@ function prepareChunks(
 
     if (chunk.children) {
       (chunk as unknown as NormalizedChunk).children = chunk.children
-        .map((c) => resolveChunk(typeof c === 'string' ? c : c.id))
+        .map((c) =>
+          resolveChunk(typeof c === 'string' || typeof c === 'number' ? c : c.id)
+        )
         .filter(Boolean) as NormalizedChunk[];
     } else {
       chunk.children = [];
@@ -321,7 +326,9 @@ function prepareChunks(
 
     if (chunk.siblings) {
       (chunk as unknown as NormalizedChunk).siblings = chunk.siblings
-        .map((c) => resolveChunk(typeof c === 'string' ? c : c.id))
+        .map((c) =>
+          resolveChunk(typeof c === 'string' || typeof c === 'number' ? c : c.id)
+        )
         .filter(Boolean) as NormalizedChunk[];
     } else {
       chunk.siblings = [];
@@ -329,7 +336,9 @@ function prepareChunks(
 
     if (chunk.parents) {
       (chunk as unknown as NormalizedChunk).parents = chunk.parents
-        .map((c) => resolveChunk(typeof c === 'string' ? c : c.id))
+        .map((c) =>
+          resolveChunk(typeof c === 'string' || typeof c === 'number' ? c : c.id)
+        )
         .filter(Boolean) as NormalizedChunk[];
     } else {
       chunk.parents = [];
@@ -354,7 +363,9 @@ function prepareAssets(
   for (const asset of compilation.assets || []) {
     if (asset.chunks) {
       (asset as unknown as NormalizedAsset).chunks = asset.chunks
-        .map((c) => resolveChunk(typeof c === 'string' ? c : c.id))
+        .map((c) =>
+          resolveChunk(typeof c === 'string' || typeof c === 'number' ? c : c.id)
+        )
         .filter(Boolean) as NormalizedChunk[];
     } else {
       asset.chunks = [];
@@ -375,7 +386,9 @@ function prepareEntries(
 
     if (entry.chunks) {
       (entry as NormalizedEntrypoint).chunks = entry.chunks
-        .map((c) => resolveChunk(typeof c === 'string' ? c : c.id))
+        .map((c) =>
+          resolveChunk(typeof c === 'string' || typeof c === 'number' ? c : c.id)
+        )
         .filter(Boolean) as NormalizedChunk[];
     }
 
