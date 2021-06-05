@@ -16,7 +16,8 @@
     "access": "public"
   },
   "files": [
-    "dist/*"
+    "dist/*",
+    "webpack.d.ts"
   ],
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
