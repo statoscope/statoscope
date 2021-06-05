@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 5.1.0 (6 June 2021)
 
 ### Fixes
 
