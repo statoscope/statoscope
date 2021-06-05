@@ -63,7 +63,7 @@ function handleModule(root: Node, module: NormalizedModule): void {
     const last = parts[parts.length - 1];
     last.link = {
       page: 'module',
-      id: module.id || module.name,
+      id: String(module.id || module.name),
     };
   }
 
