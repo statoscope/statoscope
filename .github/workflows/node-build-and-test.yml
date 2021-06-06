@@ -1,6 +1,6 @@
-name: Node
+name: Build and Test
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   build:
