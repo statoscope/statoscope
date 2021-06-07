@@ -1,5 +1,11 @@
 # Changelog
 
+## Next
+
+### Features
+
+- `[webpack-ui]` - show `asset module` badge for asset modules (#72)
+
 ## 5.1.0 (6 June 2021)
 
 ### Fixes
