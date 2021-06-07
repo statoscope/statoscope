@@ -65,6 +65,15 @@ export default function (discovery: StatoscopeWidget): void {
             hint: module.optimizationBailout
           }`,
           },
+          {
+            view: 'badge',
+            when: `module.moduleType~=/^asset\\/?/`,
+            data: `{
+            text: 'asset module',
+            color: 40.colorFromH(),
+            hint: module.moduleType
+          }`,
+          },
         ],
         data,
         context
