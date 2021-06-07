@@ -13,3 +13,6 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run lint
+      - uses: codecov/codecov-action@v1
+        with:
+          files: ./coverage
