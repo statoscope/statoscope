@@ -4,5 +4,8 @@
     "module": "CommonJS",
     "outDir": "./dist"
   },
-  "exclude": ["./dist"]
+  "exclude": [
+    "./dist",
+    "**/*.spec.ts"
+  ]
 }

@@ -4,6 +4,10 @@
   "description": "A tool for analyzing the stats of the bundles",
   "license": "MIT",
   "scripts": {
+    "ci": "npm run build && npm run lint && npm run test:ci",
+    "test:ci": "npm run test -- --ci --coverage",
+    "test": "jest",
+    "pretest": "pushd test/bundles && npm ci && popd",
     "lerna": "lerna",
     "bootstrap": "lerna bootstrap",
     "postinstall": "npm run bootstrap",
@@ -11,7 +15,7 @@
     "lint:script": "eslint . --ext .js,.ts --cache",
     "fix": "npm run lint:script -- --fix",
     "build": "lerna run build",
-    "prepublishOnly": "npm run build && npm run lint"
+    "prepublishOnly": "npm run build && npm run lint && npm run test"
   },
   "repository": "https://github.com/statoscope/statoscope",
   "author": {
@@ -38,19 +42,22 @@
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.4",
     "@babel/preset-typescript": "^7.13.0",
+    "@types/jest": "^26.0.23",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.0",
+    "babel-jest": "^27.0.2",
     "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^24.3.6",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "glob": "^7.1.6",
     "husky": "^6.0.0",
-    "jest": "^26.6.3",
+    "jest": "^27.0.4",
     "lerna": "^4.0.0",
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.0",
+    "ts-jest": "^27.0.3",
     "typescript": "^4.3.2"
   }
 }

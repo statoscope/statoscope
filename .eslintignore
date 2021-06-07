@@ -1,10 +1,10 @@
 # Ignore node_modules
 node_modules
-dist
 **/node_modules
 **/dist
-**/dist-test
-test/
+**/dist-*
+test/temp
+coverage
 
 # Ignore not support files
 carrotsearch.foamtree.js

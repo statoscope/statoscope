@@ -1,0 +1,14 @@
+{
+  "name": "simple",
+  "version": "1.0.0",
+  "main": "./src/index.js",
+  "scripts": {
+    "build": "npm run build:dev && npm run build:prod",
+    "build:dev": "../node_modules/.bin/webpack -o dist-prod --mode=production --json stats-prod.json",
+    "build:prod": "../node_modules/.bin/webpack -o dist-prod --mode=production --json stats-prod.json"
+  },
+  "dependencies": {
+    "foo": "1.0.0",
+    "bar": "1.0.0"
+  }
+}
