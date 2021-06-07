@@ -1,4 +1,4 @@
-name: Lint, Build, Test
+name: CI
 
 on: [push]
 
@@ -12,10 +12,10 @@ jobs:
           node-version: 12
       - name: Install
         run: npm ci
-      - name: Lint
-        run: npm run lint
       - name: Build
         run: npm run build
+      - name: Lint
+        run: npm run lint
       - name: Test
         run: npm run test:ci
       - uses: codecov/codecov-action@v1
