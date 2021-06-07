@@ -11,7 +11,7 @@
     "bootstrap": "lerna bootstrap",
     "postinstall": "npm run bootstrap",
     "lint": "npm run lint:eslint && npm run lint:ts",
-    "lint:ts": "lerna exec tsc --noEmit",
+    "lint:ts": "lerna exec -- tsc --noEmit",
     "lint:eslint": "eslint . --ext .js,.ts --cache",
     "lint:eslint:fix": "npm run lint:script -- --fix",
     "build": "lerna run build",
