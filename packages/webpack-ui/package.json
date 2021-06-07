@@ -9,7 +9,6 @@
     "watch": "webpack --watch",
     "build:prod": "NODE_ENV=production webpack",
     "prepublishOnly": "npm run build:prod",
-    "lint": "../../node_modules/.bin/tsc"
   },
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {

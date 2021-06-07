@@ -10,8 +10,12 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 12
-      - run: npm ci
-      - run: npm run build
-      - run: npm run lint
-      - run: npm run test:ci
+      - name: Lint
+        run: npm run lint
+      - name: Build
+        run: npm run build
+      - name: Test
+        run: npm run test:ci
       - uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
