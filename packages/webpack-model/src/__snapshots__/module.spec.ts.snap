@@ -1,0 +1,247 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`moduleResource should work 1`] = `
+Array [
+  Object {
+    "after": "src/index.ts",
+    "before": "./src/index.ts + 3 modules",
+  },
+  Object {
+    "after": "src/index2.ts",
+    "before": "./src/index2.ts + 1 modules",
+  },
+  Object {
+    "after": "src/sub-module.ts",
+    "before": "./src/sub-module.ts",
+  },
+  Object {
+    "after": "src/index2.css",
+    "before": "./src/index2.css",
+  },
+  Object {
+    "after": "external \\"extLib\\"",
+    "before": "external \\"extLib\\"",
+  },
+  Object {
+    "after": "src/test.txt",
+    "before": "./src/test.txt",
+  },
+  Object {
+    "after": "src/dyn.ts",
+    "before": "./src/dyn.ts",
+  },
+  Object {
+    "after": "node_modules/foo/index.js",
+    "before": "./node_modules/foo/index.js",
+  },
+  Object {
+    "after": "node_modules/bar/index.js",
+    "before": "./node_modules/bar/index.js",
+  },
+  Object {
+    "after": "../node_modules/css-loader/dist/runtime/api.js",
+    "before": "../node_modules/css-loader/dist/runtime/api.js",
+  },
+  Object {
+    "after": "../node_modules/css-loader/dist/runtime/getUrl.js",
+    "before": "../node_modules/css-loader/dist/runtime/getUrl.js",
+  },
+  Object {
+    "after": "src/statoscope.png",
+    "before": "./src/statoscope.png",
+  },
+  Object {
+    "after": "webpack/runtime/compat get default export",
+    "before": "webpack/runtime/compat get default export",
+  },
+  Object {
+    "after": "webpack/runtime/define property getters",
+    "before": "webpack/runtime/define property getters",
+  },
+  Object {
+    "after": "webpack/runtime/define property getters",
+    "before": "webpack/runtime/define property getters",
+  },
+  Object {
+    "after": "webpack/runtime/ensure chunk",
+    "before": "webpack/runtime/ensure chunk",
+  },
+  Object {
+    "after": "webpack/runtime/get javascript chunk filename",
+    "before": "webpack/runtime/get javascript chunk filename",
+  },
+  Object {
+    "after": "webpack/runtime/global",
+    "before": "webpack/runtime/global",
+  },
+  Object {
+    "after": "webpack/runtime/hasOwnProperty shorthand",
+    "before": "webpack/runtime/hasOwnProperty shorthand",
+  },
+  Object {
+    "after": "webpack/runtime/hasOwnProperty shorthand",
+    "before": "webpack/runtime/hasOwnProperty shorthand",
+  },
+  Object {
+    "after": "webpack/runtime/jsonp chunk loading",
+    "before": "webpack/runtime/jsonp chunk loading",
+  },
+  Object {
+    "after": "webpack/runtime/load script",
+    "before": "webpack/runtime/load script",
+  },
+  Object {
+    "after": "webpack/runtime/make namespace object",
+    "before": "webpack/runtime/make namespace object",
+  },
+  Object {
+    "after": "webpack/runtime/make namespace object",
+    "before": "webpack/runtime/make namespace object",
+  },
+  Object {
+    "after": "webpack/runtime/publicPath",
+    "before": "webpack/runtime/publicPath",
+  },
+]
+`;
+
+exports[`moduleResource should work 2`] = `
+Array [
+  Object {
+    "after": null,
+    "before": null,
+  },
+  Object {
+    "after": null,
+    "before": null,
+  },
+  Object {
+    "after": "src/index.ts",
+    "before": "./src/index.ts",
+  },
+  Object {
+    "after": "src/index.ts",
+    "before": "./src/index.ts",
+  },
+  Object {
+    "after": "src/index2.ts",
+    "before": "./src/index2.ts + 1 modules",
+  },
+  Object {
+    "after": "src/index2.ts",
+    "before": "./src/index2.ts + 1 modules",
+  },
+  Object {
+    "after": "src/index2.ts",
+    "before": "./src/index2.ts",
+  },
+  Object {
+    "after": "src/index2.ts",
+    "before": "./src/index2.ts + 1 modules",
+  },
+  Object {
+    "after": "src/index2.ts",
+    "before": "./src/index2.ts + 1 modules",
+  },
+  Object {
+    "after": "src/sub-module.ts",
+    "before": "./src/sub-module.ts",
+  },
+  Object {
+    "after": "src/sub-module.ts",
+    "before": "./src/sub-module.ts",
+  },
+  Object {
+    "after": "src/sub-module.ts",
+    "before": "./src/sub-module.ts",
+  },
+  Object {
+    "after": "src/sub-module.ts",
+    "before": "./src/sub-module.ts",
+  },
+  Object {
+    "after": "src/index2.css",
+    "before": "./src/index2.css",
+  },
+  Object {
+    "after": "src/index2.css",
+    "before": "./src/index2.css",
+  },
+  Object {
+    "after": "../node_modules/css-loader/dist/runtime/api.js",
+    "before": "../node_modules/css-loader/dist/runtime/api.js",
+  },
+  Object {
+    "after": "src/index2.css",
+    "before": "./src/index2.css",
+  },
+  Object {
+    "after": "src/index2.css",
+    "before": "./src/index2.css",
+  },
+  Object {
+    "after": "../node_modules/css-loader/dist/runtime/getUrl.js",
+    "before": "../node_modules/css-loader/dist/runtime/getUrl.js",
+  },
+  Object {
+    "after": "src/index2.css",
+    "before": "./src/index2.css",
+  },
+  Object {
+    "after": "src/index2.css",
+    "before": "./src/index2.css",
+  },
+  Object {
+    "after": null,
+    "before": "",
+  },
+  Object {
+    "after": null,
+    "before": "",
+  },
+  Object {
+    "after": "src/index2.ts",
+    "before": "./src/index2.ts",
+  },
+]
+`;
+
+exports[`nodeModule should work 1`] = `
+Object {
+  "isRoot": true,
+  "name": "foo",
+  "path": "./node_modules/foo",
+}
+`;
+
+exports[`nodeModule should work 2`] = `
+Object {
+  "isRoot": true,
+  "name": "@foo/bar",
+  "path": "./node_modules/@foo/bar",
+}
+`;
+
+exports[`nodeModule should work 3`] = `
+Object {
+  "isRoot": false,
+  "name": "bar",
+  "path": "./node_modules/foo/node_modules/bar",
+}
+`;
+
+exports[`nodeModule should work 4`] = `
+Object {
+  "isRoot": false,
+  "name": "@bar/baz",
+  "path": "./node_modules/foo/node_modules/@bar/baz",
+}
+`;
+
+exports[`nodeModule should work 5`] = `
+Object {
+  "isRoot": false,
+  "name": "@baz/quux",
+  "path": "./node_modules/@foo/bar/node_modules/@baz/quux",
+}
+`;

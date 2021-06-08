@@ -1,0 +1,338 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should work 1`] = `
+Object {
+  "groups": Array [
+    Object {
+      "groups": Array [
+        Object {
+          "groups": Array [],
+          "label": "index.ts",
+          "link": Object {
+            "id": "292",
+            "page": "module",
+          },
+          "path": "src/index.ts",
+          "weight": 54,
+        },
+        Object {
+          "groups": Array [],
+          "label": "sub-module.ts",
+          "link": Object {
+            "id": "./src/sub-module.ts",
+            "page": "module",
+          },
+          "path": "src/sub-module.ts",
+          "weight": 190,
+        },
+        Object {
+          "groups": Array [],
+          "label": "index2.ts",
+          "link": Object {
+            "id": "995",
+            "page": "module",
+          },
+          "path": "src/index2.ts",
+          "weight": 216,
+        },
+        Object {
+          "groups": Array [],
+          "label": "index2.css",
+          "link": Object {
+            "id": "945",
+            "page": "module",
+          },
+          "path": "src/index2.css",
+          "weight": 644,
+        },
+        Object {
+          "groups": Array [],
+          "label": "test.txt",
+          "link": Object {
+            "id": "742",
+            "page": "module",
+          },
+          "path": "src/test.txt",
+          "weight": 42,
+        },
+        Object {
+          "groups": Array [],
+          "label": "dyn.ts",
+          "link": Object {
+            "id": "848",
+            "page": "module",
+          },
+          "path": "src/dyn.ts",
+          "weight": 21,
+        },
+        Object {
+          "groups": Array [],
+          "label": "statoscope.png",
+          "link": Object {
+            "id": "412",
+            "page": "module",
+          },
+          "path": "src/statoscope.png",
+          "weight": 8311.84,
+        },
+      ],
+      "label": "src",
+      "link": undefined,
+      "path": "src",
+      "weight": 9478.84,
+    },
+    Object {
+      "groups": Array [
+        Object {
+          "groups": Array [
+            Object {
+              "groups": Array [],
+              "label": "index.js",
+              "link": Object {
+                "id": "./node_modules/foo/index.js",
+                "page": "module",
+              },
+              "path": "node_modules/foo/index.js",
+              "weight": 50,
+            },
+          ],
+          "label": "foo",
+          "link": Object {
+            "id": "foo",
+            "page": "package",
+            "params": Object {
+              "instance": "node_modules/foo",
+            },
+          },
+          "path": "node_modules/foo",
+          "weight": 50,
+        },
+        Object {
+          "groups": Array [
+            Object {
+              "groups": Array [],
+              "label": "index.js",
+              "link": Object {
+                "id": "./node_modules/bar/index.js",
+                "page": "module",
+              },
+              "path": "node_modules/bar/index.js",
+              "weight": 50,
+            },
+          ],
+          "label": "bar",
+          "link": Object {
+            "id": "bar",
+            "page": "package",
+            "params": Object {
+              "instance": "node_modules/bar",
+            },
+          },
+          "path": "node_modules/bar",
+          "weight": 50,
+        },
+      ],
+      "label": "node_modules",
+      "link": undefined,
+      "path": "node_modules",
+      "weight": 100,
+    },
+    Object {
+      "groups": Array [],
+      "label": "external \\"extLib\\"",
+      "link": Object {
+        "id": "external \\"extLib\\"",
+        "page": "module",
+      },
+      "path": "external \\"extLib\\"",
+      "weight": 84,
+    },
+    Object {
+      "groups": Array [
+        Object {
+          "groups": Array [
+            Object {
+              "groups": Array [
+                Object {
+                  "groups": Array [
+                    Object {
+                      "groups": Array [
+                        Object {
+                          "groups": Array [],
+                          "label": "api.js",
+                          "link": Object {
+                            "id": "476",
+                            "page": "module",
+                          },
+                          "path": "../node_modules/css-loader/dist/runtime/api.js",
+                          "weight": 1605,
+                        },
+                        Object {
+                          "groups": Array [],
+                          "label": "getUrl.js",
+                          "link": Object {
+                            "id": "678",
+                            "page": "module",
+                          },
+                          "path": "../node_modules/css-loader/dist/runtime/getUrl.js",
+                          "weight": 830,
+                        },
+                      ],
+                      "label": "runtime",
+                      "link": undefined,
+                      "path": "../node_modules/css-loader/dist/runtime",
+                      "weight": 2435,
+                    },
+                  ],
+                  "label": "dist",
+                  "link": undefined,
+                  "path": "../node_modules/css-loader/dist",
+                  "weight": 2435,
+                },
+              ],
+              "label": "css-loader",
+              "link": Object {
+                "id": "css-loader",
+                "page": "package",
+                "params": Object {
+                  "instance": "../node_modules/css-loader",
+                },
+              },
+              "path": "../node_modules/css-loader",
+              "weight": 2435,
+            },
+          ],
+          "label": "node_modules",
+          "link": undefined,
+          "path": "../node_modules",
+          "weight": 2435,
+        },
+      ],
+      "label": "..",
+      "link": undefined,
+      "path": "..",
+      "weight": 2435,
+    },
+    Object {
+      "groups": Array [
+        Object {
+          "groups": Array [
+            Object {
+              "groups": Array [],
+              "label": "compat get default export",
+              "link": Object {
+                "id": "webpack/runtime/compat get default export",
+                "page": "module",
+              },
+              "path": "webpack/runtime/compat get default export",
+              "weight": 267,
+            },
+            Object {
+              "groups": Array [],
+              "label": "define property getters",
+              "link": Object {
+                "id": "webpack/runtime/define property getters",
+                "page": "module",
+              },
+              "path": "webpack/runtime/define property getters",
+              "weight": 616,
+            },
+            Object {
+              "groups": Array [],
+              "label": "ensure chunk",
+              "link": Object {
+                "id": "webpack/runtime/ensure chunk",
+                "page": "module",
+              },
+              "path": "webpack/runtime/ensure chunk",
+              "weight": 326,
+            },
+            Object {
+              "groups": Array [],
+              "label": "get javascript chunk filename",
+              "link": Object {
+                "id": "webpack/runtime/get javascript chunk filename",
+                "page": "module",
+              },
+              "path": "webpack/runtime/get javascript chunk filename",
+              "weight": 167,
+            },
+            Object {
+              "groups": Array [],
+              "label": "global",
+              "link": Object {
+                "id": "webpack/runtime/global",
+                "page": "module",
+              },
+              "path": "webpack/runtime/global",
+              "weight": 221,
+            },
+            Object {
+              "groups": Array [],
+              "label": "hasOwnProperty shorthand",
+              "link": Object {
+                "id": "webpack/runtime/hasOwnProperty shorthand",
+                "page": "module",
+              },
+              "path": "webpack/runtime/hasOwnProperty shorthand",
+              "weight": 176,
+            },
+            Object {
+              "groups": Array [],
+              "label": "jsonp chunk loading",
+              "link": Object {
+                "id": "webpack/runtime/jsonp chunk loading",
+                "page": "module",
+              },
+              "path": "webpack/runtime/jsonp chunk loading",
+              "weight": 3072,
+            },
+            Object {
+              "groups": Array [],
+              "label": "load script",
+              "link": Object {
+                "id": "webpack/runtime/load script",
+                "page": "module",
+              },
+              "path": "webpack/runtime/load script",
+              "weight": 1503,
+            },
+            Object {
+              "groups": Array [],
+              "label": "make namespace object",
+              "link": Object {
+                "id": "webpack/runtime/make namespace object",
+                "page": "module",
+              },
+              "path": "webpack/runtime/make namespace object",
+              "weight": 548,
+            },
+            Object {
+              "groups": Array [],
+              "label": "publicPath",
+              "link": Object {
+                "id": "webpack/runtime/publicPath",
+                "page": "module",
+              },
+              "path": "webpack/runtime/publicPath",
+              "weight": 867,
+            },
+          ],
+          "label": "runtime",
+          "link": undefined,
+          "path": "webpack/runtime",
+          "weight": 7763,
+        },
+      ],
+      "label": "webpack",
+      "link": undefined,
+      "path": "webpack",
+      "weight": 7763,
+    },
+  ],
+  "label": "",
+  "link": undefined,
+  "path": "/",
+  "weight": 19860.84,
+}
+`;

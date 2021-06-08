@@ -5,4 +5,8 @@ import 'extLib';
 
 const txt = new URL('./test.txt', import.meta.url);
 
+import('./dyn').then((Module) => {
+  console.log(Module.default);
+});
+
 console.log(txt, styles.root);
