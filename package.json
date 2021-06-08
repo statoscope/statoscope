@@ -6,7 +6,6 @@
   "scripts": {
     "test:ci": "npm run test -- --ci --coverage",
     "test": "jest",
-    "pretest": "cd test/bundles && npm ci && cd ../..",
     "lerna": "lerna",
     "bootstrap": "lerna bootstrap",
     "postinstall": "npm run bootstrap",
