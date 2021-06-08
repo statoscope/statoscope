@@ -3,6 +3,10 @@ import stats from '../../../test/bundles/simple/stats-prod.json';
 import normalize from './normalize';
 
 test('should work', () => {
+  // @ts-ignore
+  delete stats.time;
+  // @ts-ignore
+  delete stats.builtAt;
   const normalized = normalize({ name: 'stats.json', data: stats });
   expect(JSON.parse(stringify(normalized))).toMatchSnapshot();
 });

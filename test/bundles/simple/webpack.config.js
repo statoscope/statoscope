@@ -11,6 +11,9 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js', '.json', '.wasm'],
   },
+  stats: {
+    context: __dirname,
+  },
   plugins: [],
   module: {
     rules: [
