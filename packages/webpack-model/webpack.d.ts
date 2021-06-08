@@ -1,17 +1,17 @@
 export declare namespace Webpack {
   type IssuerPathItem = {
-    id: string;
+    id: number | string | null;
     identifier: string;
     name: string;
   };
 
-  type ModuleID = string | number;
+  type ModuleID = string | number | null;
 
   type Module = {
     id: ModuleID;
     name: string;
     size: number;
-    issuerPath?: IssuerPathItem[];
+    issuerPath?: IssuerPathItem[] | null;
     chunks: Array<Chunk | ChunkID>;
     reasons?: Reason[];
     modules?: InnerModule[];
@@ -20,7 +20,7 @@ export declare namespace Webpack {
   type InnerModule = Omit<Module, 'id' | 'modules'> & { id: null };
 
   type Reason = {
-    moduleName: string;
+    moduleName: string | null;
     loc: string;
   };
 
@@ -35,7 +35,7 @@ export declare namespace Webpack {
 
   type Chunk = {
     id: ChunkID;
-    name: string;
+    name?: string;
     names: string[];
     modules?: Module[];
     reason?: string | null;
@@ -53,8 +53,9 @@ export declare namespace Webpack {
 
   type Asset = {
     name: string;
+    size: number;
     chunks?: Array<ChunkID | Chunk>;
-    files: File[];
+    files?: File[];
   };
 
   type Compilation = {

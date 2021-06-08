@@ -271,7 +271,10 @@ function prepareModule(
   if (module.reasons) {
     module.reasons = module.reasons.filter((r) => r.moduleName !== module.name);
     module.reasons.forEach(
-      (r) => ((r as NormalizedReason).resolvedModule = resolveModule(r.moduleName))
+      (r) =>
+        ((r as NormalizedReason).resolvedModule = r.moduleName
+          ? resolveModule(r.moduleName)
+          : null)
     );
   } else {
     module.reasons = [];
@@ -347,7 +350,10 @@ function prepareChunks(
     if (chunk.origins) {
       chunk.origins
         .map(
-          (o) => ((o as NormalizedReason).resolvedModule = resolveModule(o.moduleName))
+          (o) =>
+            ((o as NormalizedReason).resolvedModule = o.moduleName
+              ? resolveModule(o.moduleName)
+              : null)
         )
         .filter(Boolean);
     } else {
@@ -445,7 +451,11 @@ function extractPackages(
 
       const instanceReasonsKeys = new Set(
         instance.reasons.map((reason) => {
-          return buildReasonKey(reason.type, reason.data.moduleName, reason.data.loc);
+          return buildReasonKey(
+            reason.type,
+            reason.data.moduleName ?? 'unknown',
+            reason.data.loc
+          );
         })
       );
 
@@ -457,7 +467,11 @@ function extractPackages(
         }
 
         const reasonType = 'module';
-        const reasonKey = buildReasonKey(reasonType, reason.moduleName, reason.loc);
+        const reasonKey = buildReasonKey(
+          reasonType,
+          reason.moduleName ?? 'unknown',
+          reason.loc
+        );
 
         if (!instanceReasonsKeys.has(reasonKey)) {
           instance.reasons.push({ type: reasonType, data: reason });
