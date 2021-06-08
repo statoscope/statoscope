@@ -20,8 +20,9 @@ export type NormalizedEntrypoint = Omit<Webpack.Entrypoint, 'chunks' | 'assets'>
   chunks: NormalizedChunk[];
   assets: NormalizedAsset[];
 };
-export type NormalizedAsset = Omit<Webpack.Asset, 'chunks'> & {
+export type NormalizedAsset = Omit<Webpack.Asset, 'chunks' | 'files'> & {
   chunks: NormalizedChunk[];
+  files: Webpack.File[];
 };
 export type NormalizedIssuerPathItem = Webpack.IssuerPathItem & {
   resolvedModule: NormalizedModule | null;
