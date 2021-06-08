@@ -8,10 +8,10 @@ describe('moduleResource', () => {
 
     expect(moduleResource(null)).toBeNull();
 
-    for (const module of stats.modules) {
+    for (const module of stats.modules as unknown as NormalizedModule[]) {
       resource.push({
         before: module.name,
-        after: moduleResource(module as unknown as NormalizedModule),
+        after: moduleResource(module),
       });
     }
 
@@ -25,20 +25,20 @@ describe('moduleResource', () => {
 
     expect(moduleResource(null)).toBeNull();
 
-    for (const module of stats.modules) {
+    for (const module of stats.modules as unknown as NormalizedModule[]) {
       for (const reason of module.reasons) {
         reasons.push({
           before: reason.moduleName,
-          after: moduleReasonResource(reason as unknown as NormalizedReason),
+          after: moduleReasonResource(reason),
         });
       }
     }
 
     for (const chunk of stats.chunks) {
-      for (const reason of chunk.origins) {
+      for (const reason of chunk.origins as unknown as NormalizedReason[]) {
         reasons.push({
           before: reason.moduleName,
-          after: moduleReasonResource(reason as unknown as NormalizedReason),
+          after: moduleReasonResource(reason),
         });
       }
     }
