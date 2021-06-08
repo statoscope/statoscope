@@ -1,6 +1,7 @@
 # Statoscope
 
 [![Build and Test](https://github.com/statoscope/statoscope/actions/workflows/node-build-and-test.yml/badge.svg)](https://github.com/statoscope/statoscope/actions/workflows/node-build-and-test.yml)
+[![codecov](https://codecov.io/gh/statoscope/statoscope/branch/master/graph/badge.svg?token=0FB85kXcPz)](https://codecov.io/gh/statoscope/statoscope)
 [![npm version](https://badge.fury.io/js/%40statoscope%2Fwebpack-ui.svg)](https://badge.fury.io/js/%40statoscope%2Fwebpack-ui)
 [![Support](https://img.shields.io/badge/-Support-blue)](https://opencollective.com/statoscope)
 
