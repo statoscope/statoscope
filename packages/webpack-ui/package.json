@@ -8,7 +8,8 @@
     "build": "webpack",
     "watch": "webpack --watch",
     "build:prod": "NODE_ENV=production webpack",
-    "prepublishOnly": "npm run build:prod"
+    "prepublishOnly": "npm run build:prod",
+    "lint:custom": "../../node_modules/.bin/tsc --noEmit"
   },
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {
