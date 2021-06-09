@@ -13,7 +13,7 @@ jobs:
       - name: Install
         run: npm ci
       - name: Check commit message
-          run: ./node_modules/.bin/commitlint --from HEAD~1 --to HEAD --verbose
+        run: ./node_modules/.bin/commitlint --from HEAD~1 --to HEAD --verbose
   ci:
     runs-on: ubuntu-latest
     steps:
