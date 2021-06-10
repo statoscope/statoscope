@@ -1,3 +1,4 @@
+import { Webpack } from '../webpack';
 import {
   moduleResource,
   moduleNameResource,
@@ -14,10 +15,12 @@ import {
   NormalizedModule,
   NormalizedPackage,
 } from './normalize';
+import ChunkID = Webpack.ChunkID;
 
 export type ResolvedStats = { file: NormalizedFile; compilation: NormalizedCompilation };
 
-export default function (compilations: HandledCompilation[]): Record<string, unknown> {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
+export default function (compilations: HandledCompilation[]) {
   const resolveCompilation = makeEntityResolver(compilations, (item) => item?.data?.hash);
 
   return {
@@ -32,7 +35,7 @@ export default function (compilations: HandledCompilation[]): Record<string, unk
     },
     getTotalFilesSize: (asset: NormalizedAsset): number =>
       asset.files.reduce((sum, file) => sum + file.size, 0),
-    resolveChunk(id: string, compilationHash: string): NormalizedChunk | null {
+    resolveChunk(id: ChunkID, compilationHash: string): NormalizedChunk | null {
       return resolveCompilation(compilationHash)?.resolvers.resolveChunk(id) || null;
     },
     resolveAsset(id: string, compilationHash: string): NormalizedAsset | null {
