@@ -1,5 +1,5 @@
 import stats from '../../../test/bundles/simple/stats-prod.json';
-import normalize, { NormalizedChunk } from './normalize';
+import normalize from './normalize';
 import makeHelpers, { ResolvedStats } from './jora-helpers';
 
 const normalized = normalize({ name: 'stats.js', data: stats });
