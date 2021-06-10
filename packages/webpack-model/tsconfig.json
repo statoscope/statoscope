@@ -2,8 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "module": "CommonJS",
-    "outDir": "./dist",
-    "resolveJsonModule": true
+    "outDir": "./dist"
   },
-  "include": ["./src"]
+  "exclude": ["./dist", "**/*.spec.ts"]
 }
