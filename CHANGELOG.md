@@ -6,6 +6,12 @@
 
 - `[webpack-ui]` - show `asset module` badge for asset modules (#72)
 
+### Fixed
+
+- `[webpack-model]` - make `context`-parameter in `Prepared.query` as optional
+- `[webpack-model]` - make `stats`-parameter in `statName`-helper as optional
+- `[webpack-model]` - use `chunk.name` in `chunkName`-helper
+
 ## 5.1.0 (6 June 2021)
 
 ### Fixes

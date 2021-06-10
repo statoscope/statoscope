@@ -29,7 +29,7 @@ export default function (compilations: HandledCompilation[]) {
       return module.size;
     },
     chunkName(chunk: NormalizedChunk): string {
-      return `${chunk.names[0] ? chunk.names.join(', ') : chunk.id}${
+      return `${chunk.names[0] ? chunk.names.join(', ') : chunk.name || chunk.id}${
         chunk.reason ? ' [' + chunk.reason + ']' : ''
       }`;
     },
@@ -59,7 +59,7 @@ export default function (compilations: HandledCompilation[]) {
     moduleReasonResource,
     moduleNameResource,
     nodeModule,
-    statName(stat: ResolvedStats): string {
+    statName(stat?: ResolvedStats): string {
       if (!stat) {
         return 'unknown';
       }

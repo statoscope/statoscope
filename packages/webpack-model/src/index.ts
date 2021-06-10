@@ -21,7 +21,7 @@ export type Options = {
 export type Prepared = {
   files: NormalizedFile[];
   compilations: NormalizedCompilation[];
-  query: (query: string, data: unknown) => unknown;
+  query: (query: string, data?: unknown) => unknown;
 };
 
 export function prepareWithJora(
