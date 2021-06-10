@@ -4,7 +4,6 @@ module.exports = {
   coverageDirectory: './coverage/',
   preset: 'ts-jest',
   testEnvironment: 'node',
-  coverageProvider: 'v8',
   collectCoverageFrom: [
     'packages/*/src/**/*.{js,ts}',
     '!**/node_modules/**',
