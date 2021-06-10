@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should work 1`] = `
+Object {
+  "errors": Array [
+    Object {
+      "instancePath": "/chunks/0/modules/0/id",
+      "keyword": "enum",
+      "message": "must be equal to one of the allowed values",
+      "params": Object {
+        "allowedValues": Array [
+          null,
+        ],
+      },
+      "schemaPath": "#/definitions/Module/properties/id/oneOf/0/enum",
+    },
+    Object {
+      "instancePath": "/chunks/0/modules/0/id",
+      "keyword": "type",
+      "message": "must be string",
+      "params": Object {
+        "type": "string",
+      },
+      "schemaPath": "#/definitions/Module/properties/id/oneOf/1/type",
+    },
+    Object {
+      "instancePath": "/chunks/0/modules/0/id",
+      "keyword": "type",
+      "message": "must be number",
+      "params": Object {
+        "type": "number",
+      },
+      "schemaPath": "#/definitions/Module/properties/id/oneOf/2/type",
+    },
+    Object {
+      "instancePath": "/chunks/0/modules/0/id",
+      "keyword": "oneOf",
+      "message": "must match exactly one schema in oneOf",
+      "params": Object {
+        "passingSchemas": null,
+      },
+      "schemaPath": "#/definitions/Module/properties/id/oneOf",
+    },
+    Object {
+      "instancePath": "",
+      "keyword": "anyOf",
+      "message": "must match a schema in anyOf",
+      "params": Object {},
+      "schemaPath": "#/anyOf",
+    },
+  ],
+  "result": false,
+}
+`;
