@@ -2,8 +2,4 @@
 . "$(dirname "$0")/_/husky.sh"
 
 COMMIT_MSG_FILE=$(echo $1 | head -n1 | cut -d " " -f1)
-hint=$(cat "$COMMIT_MSG_FILE")
-
-cat $(dirname "$0")/prepare-commit-msg.txt > $COMMIT_MSG_FILE
-echo "$hint" >> $COMMIT_MSG_FILE
-
+cat $(dirname "$0")/prepare-commit-msg.txt >> $COMMIT_MSG_FILE
