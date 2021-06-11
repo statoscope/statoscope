@@ -1,14 +1,13 @@
 {
-  "packages": [
-    "packages/*",
-    "examples/*"
-  ],
+  "packages": ["packages/*"],
   "version": "5.1.0",
   "command": {
     "publish": {
       "ignoreChanges": [
         "packages/*/README.md",
-        "packages/*/package-lock.json"
+        "packages/*/package-lock.json",
+        "packages/*/dist",
+        "packages/*/**/*spec.ts"
       ]
     }
   }
