@@ -3,6 +3,8 @@
   "version": "5.1.0",
   "command": {
     "publish": {
+      "registry": "https://registry.npmjs.org",
+      "message": "chore: publish release %s",
       "ignoreChanges": [
         "packages/*/README.md",
         "packages/*/package-lock.json",
