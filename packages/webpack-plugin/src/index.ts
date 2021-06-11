@@ -3,6 +3,7 @@
 import fs from 'fs';
 import path from 'path';
 import { tmpdir } from 'os';
+import { Readable } from 'stream';
 import open from 'open';
 // @ts-ignore
 import { stringifyStream } from '@discoveryjs/json-ext';
@@ -24,11 +25,11 @@ export default class StatoscopeWebpackPlugin {
   saveToDir?: string;
   saveToFile?: string;
 
-  constructor(options: Partial<Options>) {
+  constructor(options: Partial<Options> = {}) {
     this.options = {
-      ...options,
-      open: options.open ?? 'file',
+      open: 'file',
       additionalStats: [],
+      ...options,
     };
 
     if (!this.options.saveTo) {
@@ -69,7 +70,7 @@ export default class StatoscopeWebpackPlugin {
           this.interpolate(options.saveStatsTo, stats.compilation, statsObj.name)
         );
 
-      const webpackStatsStream = stringifyStream(statsObj);
+      const webpackStatsStream = stringifyStream(statsObj) as Readable;
       const htmlWriter = new HTMLWriter({
         scripts: [require.resolve('@statoscope/webpack-ui')],
         init: function (data): void {
@@ -96,13 +97,13 @@ export default class StatoscopeWebpackPlugin {
         }
       }
 
-      if (resolvedSaveStatsTo) {
-        const statsFileStream = fs.createWriteStream(resolvedSaveStatsTo);
-        webpackStatsStream.pipe(statsFileStream);
-      }
-
       try {
         await htmlWriter.write();
+
+        if (resolvedSaveStatsTo) {
+          const statsFileStream = fs.createWriteStream(resolvedSaveStatsTo);
+          webpackStatsStream.pipe(statsFileStream);
+        }
 
         if (options.open) {
           if (options.open === 'file') {
