@@ -4,6 +4,7 @@
   "description": "Helpers for webpack part of Statoscope",
   "main": "./dist/index.js",
   "scripts": {
+    "prebuild": "node ./scripts/extract-version.js",
     "build": "../../node_modules/.bin/tsc",
     "prepublishOnly": "npm run build"
   },
@@ -22,8 +23,10 @@
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
     "@discoveryjs/json-ext": "^0.5.3",
+    "@statoscope/stats": "^5.2.0",
     "@statoscope/report-writer": "^5.2.0",
     "@statoscope/webpack-ui": "^5.2.0",
+    "gzip-size": "^6.0.0",
     "open": "^8.0.4"
   },
   "devDependencies": {

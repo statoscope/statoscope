@@ -4,11 +4,21 @@ import fs from 'fs';
 import path from 'path';
 import { tmpdir } from 'os';
 import { Readable } from 'stream';
+import { promisify } from 'util';
 import open from 'open';
 // @ts-ignore
 import { stringifyStream } from '@discoveryjs/json-ext';
 import HTMLWriter from '@statoscope/report-writer';
-import { Compiler, Compilation } from 'webpack';
+import { Compilation, Compiler, Module } from 'webpack';
+import gzipSize from 'gzip-size';
+import { Stats } from '@statoscope/stats';
+import { Compilation as StatoscopeCompilation } from '@statoscope/stats/spec/compilation';
+import { Asset as StatoscopeAsset } from '@statoscope/stats/spec/asset';
+import { Module as StatoscopeModule } from '@statoscope/stats/spec/module';
+import { Size } from '@statoscope/stats/spec/source';
+import * as version from './version';
+
+export type CompressFunction = (source: Buffer | string, filename: string) => Size;
 
 export type Options = {
   name?: string;
@@ -17,7 +27,14 @@ export type Options = {
   additionalStats?: string[];
   statsOptions?: Record<string, unknown>;
   watchMode?: boolean;
-  open: false | 'dir' | 'file';
+  open?: false | 'dir' | 'file';
+  clientCompression?: false | 'gzip' | CompressFunction;
+};
+
+const compressByType: Record<string, CompressFunction> = {
+  gzip(source: Buffer | string): Size {
+    return { compressor: 'gzip', size: gzipSize.sync(source) };
+  },
 };
 
 export default class StatoscopeWebpackPlugin {
@@ -28,6 +45,7 @@ export default class StatoscopeWebpackPlugin {
   constructor(options: Partial<Options> = {}) {
     this.options = {
       open: 'file',
+      clientCompression: 'gzip',
       additionalStats: [],
       ...options,
     };
@@ -58,6 +76,7 @@ export default class StatoscopeWebpackPlugin {
       // @ts-ignore
       const statsObj = stats.toJson(options.statsOptions || compiler.options.stats);
       statsObj.name = options.name || statsObj.name || stats.compilation.name;
+      statsObj.__statoscope = await this.getStatoscopeMeta(stats.compilation);
       const htmlPath =
         this.saveToFile ||
         path.join(this.saveToDir as string, `statoscope-[name]-[hash].html`);
@@ -118,5 +137,120 @@ export default class StatoscopeWebpackPlugin {
         cb(e);
       }
     });
+  }
+
+  private async getStatoscopeMeta(compilation: Compilation): Promise<Stats | null> {
+    const compressor = this.resolveCompressor();
+
+    if (!compressor) {
+      return null;
+    }
+
+    const statoscopeMeta: Stats = {
+      format: { name: version.name, version: version.version },
+      compilations: [],
+    };
+    const stack: Compilation[] = [compilation];
+    let cursor: Compilation | undefined;
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    while ((cursor = stack.pop())) {
+      stack.push(...cursor.children);
+
+      const readFile = promisify(
+        cursor.compiler.outputFileSystem.readFile.bind(cursor.compiler.outputFileSystem)
+      );
+
+      const compilationData: StatoscopeCompilation = {
+        id: cursor.hash as string,
+        modules: [],
+        assets: [],
+      };
+
+      statoscopeMeta.compilations.push(compilationData);
+
+      for (const name of Object.keys(cursor.assets)) {
+        const assetData: StatoscopeAsset = {
+          id: name,
+          source: { sizes: [] },
+        };
+        const assetPath = path.join(cursor.compiler.outputPath, name);
+        const content = await readFile(assetPath);
+
+        compilationData.assets.push(assetData);
+
+        if (!content) {
+          throw new Error(`Can't read ${name} asset`);
+        }
+
+        assetData.source?.sizes.push(compressor(content, name));
+      }
+
+      const modulesStack: Module[] = [...cursor.modules];
+      let modulesCursor: Module | undefined;
+      while ((modulesCursor = modulesStack.pop())) {
+        // @ts-ignore
+        if (modulesCursor.modules) {
+          // @ts-ignore
+          modulesStack.push(...modulesCursor.modules);
+        }
+        const moduleName = modulesCursor.readableIdentifier(
+          cursor.compiler.requestShortener
+        );
+        // @ts-ignore
+        const moduleData: StatoscopeModule = {
+          resource: moduleName,
+          source: { sizes: [] },
+        };
+        compilationData.modules.push(moduleData);
+
+        let compressedSize = 0;
+        let compressorType = '';
+
+        for (const type of modulesCursor.getSourceTypes()) {
+          const runtimeChunk = cursor.chunkGraph
+            .getModuleChunks(modulesCursor)
+            .find((chunk) => chunk.runtime);
+
+          if (runtimeChunk) {
+            const source = cursor.codeGenerationResults.getSource(
+              modulesCursor,
+              runtimeChunk.runtime,
+              type
+            );
+            const content = source.source();
+            const compressed = compressor(content, moduleName);
+
+            compressedSize += compressed.size;
+            compressorType = compressed.compressor as string;
+          }
+        }
+
+        moduleData.source?.sizes.push({
+          compressor: compressorType,
+          size: compressedSize,
+        });
+      }
+    }
+
+    return statoscopeMeta;
+  }
+
+  private resolveCompressor(): CompressFunction | null {
+    const { clientCompression } = this.options;
+
+    if (!clientCompression) {
+      return null;
+    }
+
+    if (typeof clientCompression === 'function') {
+      return clientCompression;
+    }
+
+    if (Object.prototype.hasOwnProperty.call(compressByType, clientCompression)) {
+      return compressByType[clientCompression];
+    }
+
+    throw new Error('Unknown compression type');
   }
 }
