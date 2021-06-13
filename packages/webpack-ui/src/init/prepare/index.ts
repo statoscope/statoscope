@@ -1,10 +1,13 @@
 import { joraHelpers as webpackJoraHelpers, normalize } from '@statoscope/webpack-model';
 import { jora as joraHelpers } from '@statoscope/helpers';
-import modulesToFoamTree from '@statoscope/webpack-model/dist/modules-to-foam-tree';
+import { Node } from '@statoscope/webpack-model/dist/modules-to-foam-tree';
 import {
+  NormalizedAsset,
+  NormalizedChunk,
   NormalizedCompilation,
   NormalizedModule,
 } from '@statoscope/webpack-model/dist/normalize';
+import { Size } from '@statoscope/stats/spec/source';
 import settings, {
   SETTING_HIDE_CHILD_COMPILATIONS,
   SETTING_HIDE_CHILD_COMPILATIONS_DEFAULT,
@@ -12,19 +15,46 @@ import settings, {
   SETTING_HIDE_NODE_MODULES_DEFAULT,
   SETTING_LIST_ITEMS_LIMIT,
   SETTING_LIST_ITEMS_LIMIT_DEFAULT,
+  SETTING_SHOW_COMPRESSED,
+  SETTING_SHOW_COMPRESSED_DEFAULT,
 } from '../../settings';
 import { PrepareFn, RawData, StatoscopeWidget, TargetData } from '../../../types';
 
 export default (() =>
   (rawData: RawData, { addQueryHelpers }: StatoscopeWidget): unknown => {
     const { files, compilations } = normalize(rawData);
+    const wpJoraHelpers = webpackJoraHelpers(compilations, files);
 
     addQueryHelpers({
-      ...webpackJoraHelpers(compilations),
+      ...wpJoraHelpers,
       ...joraHelpers(),
       encodeURIComponent: encodeURIComponent,
       decodeURIComponent: decodeURIComponent,
-      modulesToFoamTree: modulesToFoamTree,
+      modulesToFoamTree(modules: NormalizedModule[], hash?: string): Node {
+        return wpJoraHelpers.modulesToFoamTree(
+          modules,
+          hash,
+          settings.get(SETTING_SHOW_COMPRESSED, SETTING_SHOW_COMPRESSED_DEFAULT).get()
+        );
+      },
+      getModuleSize(module: NormalizedModule, hash: string, compressed?: boolean): Size {
+        return wpJoraHelpers.getModuleSize(
+          module,
+          hash,
+          typeof compressed === 'boolean'
+            ? compressed
+            : settings.get(SETTING_SHOW_COMPRESSED, SETTING_SHOW_COMPRESSED_DEFAULT).get()
+        );
+      },
+      getAssetSize(asset: NormalizedAsset, hash: string, compressed?: boolean): Size {
+        return wpJoraHelpers.getAssetSize(
+          asset,
+          hash,
+          typeof compressed === 'boolean'
+            ? compressed
+            : settings.get(SETTING_SHOW_COMPRESSED, SETTING_SHOW_COMPRESSED_DEFAULT).get()
+        );
+      },
       setting(name: string, defaultValue: unknown) {
         return settings.get(name, defaultValue).get();
       },
@@ -58,6 +88,11 @@ export default (() =>
       settingListItemsLimit() {
         return settings
           .get(SETTING_LIST_ITEMS_LIMIT, SETTING_LIST_ITEMS_LIMIT_DEFAULT)
+          .get();
+      },
+      settingShowCompressed() {
+        return settings
+          .get(SETTING_SHOW_COMPRESSED, SETTING_SHOW_COMPRESSED_DEFAULT)
           .get();
       },
     });

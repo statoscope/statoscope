@@ -37,7 +37,7 @@ export default function (discovery: StatoscopeWidget): void {
                       view: 'foam-tree',
                       data: `
                       $chunkModules:modules.[not shouldHideModule()];
-                      $chunkModules.modulesToFoamTree()
+                      $chunkModules.modulesToFoamTree(#.params.hash)
                       `,
                     },
                   ],

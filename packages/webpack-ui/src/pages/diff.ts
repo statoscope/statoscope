@@ -469,21 +469,25 @@ export default function (discovery: StatoscopeWidget): void {
       $statA: #.params.hash.resolveStat();
       $statB: #.params.diffWith.resolveStat();
       
+      $statsACompressed: $statA.file.__statoscope.compilations.modules.source.sizes.[compressor].size();
+      $statsBCompressed: $statB.file.__statoscope.compilations.modules.source.sizes.[compressor].size();
+      $useCompressedSize: settingShowCompressed() and $statsACompressed and $statsBCompressed;
+      
       $getSize: => (
         $chunks: data.chunks + data.chunks..children;
         $assets: $chunks.files;
-        $assets.size.reduce(=> $ + $$, 0)
+        $assets.(getAssetSize($$.hash, $$.use).size).reduce(=> $ + $$, 0)
       );
       $getInitialSize: => (
         $chunks: data.chunks.[initial];
         $assets: $chunks.files;
-        $assets.size.reduce(=> $ + $$, 0)
+        $assets.(getAssetSize($$.hash, $$.use).size).reduce(=> $ + $$, 0)
       );
       
       [
         {
-          $totalSizeA: $statA.compilation.entrypoints.($getSize()).reduce(=> $ + $$, 0);
-          $totalSizeB: $statB.compilation.entrypoints.($getSize()).reduce(=> $ + $$, 0);
+          $totalSizeA: $statA.compilation.entrypoints.($getSize({hash: $statA.compilation.hash, use: $useCompressedSize})).reduce(=> $ + $$, 0);
+          $totalSizeB: $statB.compilation.entrypoints.($getSize({hash: $statB.compilation.hash, use: $useCompressedSize})).reduce(=> $ + $$, 0);
           $value: $totalSizeA - $totalSizeB;
           $valueP: $totalSizeA.percentFrom($totalSizeB);
           value: $value,
@@ -494,8 +498,8 @@ export default function (discovery: StatoscopeWidget): void {
           visible: $value
         },
         {
-          $initialSizeA: $statA.compilation.entrypoints.($getInitialSize()).reduce(=> $ + $$, 0);
-          $initialSizeB: $statB.compilation.entrypoints.($getInitialSize()).reduce(=> $ + $$, 0);
+          $initialSizeA: $statA.compilation.entrypoints.($getInitialSize({hash: $statA.compilation.hash, use: $useCompressedSize})).reduce(=> $ + $$, 0);
+          $initialSizeB: $statB.compilation.entrypoints.($getInitialSize({hash: $statB.compilation.hash, use: $useCompressedSize})).reduce(=> $ + $$, 0);
           $value: $initialSizeA - $initialSizeB;
           $valueP: $initialSizeA.percentFrom($initialSizeB);
           value: $value,
@@ -506,8 +510,8 @@ export default function (discovery: StatoscopeWidget): void {
           visible: $value
         },
         {
-          $packagesSizeA: $statA.compilation.nodeModules.instances.modules.size.reduce(=> $ + $$, 0);
-          $packagesSizeB: $statB.compilation.nodeModules.instances.modules.size.reduce(=> $ + $$, 0);
+          $packagesSizeA: $statA.compilation.nodeModules.instances.modules.(getModuleSize($statA.compilation.hash, $useCompressedSize).size).reduce(=> $ + $$, 0);
+          $packagesSizeB: $statB.compilation.nodeModules.instances.modules.(getModuleSize($statB.compilation.hash, $useCompressedSize).size).reduce(=> $ + $$, 0);
           $value: $packagesSizeA - $packagesSizeB;
           $valueP: $packagesSizeA.percentFrom($packagesSizeB);
           value: $value,
@@ -681,12 +685,12 @@ export default function (discovery: StatoscopeWidget): void {
               a: $moduleA,
               b: $moduleB,
             }
-          ).[b and (a.id != b.id or a.size != b.size or a.source != b.source)];
+          ).[b and (a.id != b.id or a.getModuleSize($statA.compilation.hash, $useCompressedSize).size != b.getModuleSize($statB.compilation.hash, $useCompressedSize).size or a.source != b.source)];
           
           $modulesDiff: {
-            added: $addedModules.sort(moduleSize() desc).({module: $, valueA: size, valueB: 0, hash: $statA.compilation.hash}),
-            removed: $removedModules.sort(moduleSize() desc).({module: $, valueA: 0, valueB: size, hash: $statB.compilation.hash}),
-            changed: $changedModules.sort(a.moduleSize() desc).({module: a, valueA: a.size, valueB: b.size, hash: $statA.compilation.hash}),
+            added: $addedModules.sort(getModuleSize($statA.compilation.hash, $useCompressedSize).size desc).({module: $, valueA: getModuleSize($statA.compilation.hash, $useCompressedSize).size, valueB: 0, hash: $statA.compilation.hash}),
+            removed: $removedModules.sort(getModuleSize($statB.compilation.hash, $useCompressedSize).size desc).({module: $, valueA: 0, valueB: getModuleSize($statB.compilation.hash, $useCompressedSize).size, hash: $statB.compilation.hash}),
+            changed: $changedModules.sort(a.getModuleSize($statA.compilation.hash, $useCompressedSize).size desc).({module: a, valueA: a.getModuleSize($statA.compilation.hash, $useCompressedSize).size, valueB: b.getModuleSize($statB.compilation.hash, $useCompressedSize).size, hash: $statA.compilation.hash}),
           };
           
           $getDuplicateModules: => (
@@ -773,7 +777,7 @@ export default function (discovery: StatoscopeWidget): void {
           $getInitialSize: => (
             $chunks: data.chunks.[initial];
             $assets: $chunks.files;
-            $assets.size.reduce(=> $ + $$, 0)
+            $assets.(getAssetSize($$).size).reduce(=> $ + $$, 0)
           );
     
           $added: $statA.compilation.entrypoints.[name not in $statB.compilation.entrypoints.name].(
@@ -782,7 +786,7 @@ export default function (discovery: StatoscopeWidget): void {
             {
               name: name,
               data: data,
-              size: $initialAssets.size.reduce(=> $ + $$, 0)
+              size: $initialAssets.(getAssetSize($statA.compilation.hash, $useCompressedSize).size).reduce(=> $ + $$, 0)
             }
           );
           $removed: $statB.compilation.entrypoints.[name not in $statA.compilation.entrypoints.name].(
@@ -791,7 +795,7 @@ export default function (discovery: StatoscopeWidget): void {
             {
               name: name,
               data: data,
-              size: $initialAssets.size.reduce(=> $ + $$, 0)
+              size: $initialAssets.(getAssetSize($statB.compilation.hash, $useCompressedSize).size).reduce(=> $ + $$, 0)
             }
           );
           $changed: $statA.compilation.entrypoints.(
@@ -802,8 +806,8 @@ export default function (discovery: StatoscopeWidget): void {
               a: $a,
               b: $b
             } | {
-              a: {...a, hash: $statA.compilation.hash, size: a.$getInitialSize()},
-              b: b and {...b, hash: $statB.compilation.hash, size: b.$getInitialSize()}
+              a: {...a, hash: $statA.compilation.hash, size: a.$getInitialSize({hash: $statA.compilation.hash, use: $useCompressedSize})},
+              b: b and {...b, hash: $statB.compilation.hash, size: b.$getInitialSize$statB.compilation.hash()}
             }
           ).[
             $aChunksTop: a.chunks;
@@ -835,12 +839,12 @@ export default function (discovery: StatoscopeWidget): void {
               a: $,
               b: $statB.compilation.assets.[name=$asset.name].pick()
             }
-          ).[b and a.size != b.size or chunks.[$ in $changedChunks.a.id]];
+          ).[b and a.getAssetSize($statA.compilation.hash, $useCompressedSize).size != b.getAssetSize($statB.compilation.hash, $useCompressedSize).size or chunks.[$ in $changedChunks.a.id]];
           
           $assetsDiff: {
-            changed: $changedAssets.sort(a.isOverSizeLimit asc, a.size desc).({asset: a, valueA: a.size, valueB: b.size}),
-            added: $addedAssets.sort(isOverSizeLimit asc, size desc).({asset: $, valueA: size, valueB: 0, hash: $statA.compilation.hash}),
-            removed: $removedAssets.sort(isOverSizeLimit asc, size desc).({asset: $, valueA: 0, valueB: size, hash: $statB.compilation.hash})
+            changed: $changedAssets.sort(a.isOverSizeLimit asc, a.getAssetSize($statA.compilation.hash, $useCompressedSize).size desc).({asset: a, valueA: a.getAssetSize($statA.compilation.hash, $useCompressedSize).size, valueB: b.getAssetSize($statB.compilation.hash, $useCompressedSize).size}),
+            added: $addedAssets.sort(isOverSizeLimit asc, getAssetSize($statA.compilation.hash, $useCompressedSize).size desc).({asset: $, valueA: getAssetSize($statA.compilation.hash, $useCompressedSize).size, valueB: 0, hash: $statA.compilation.hash}),
+            removed: $removedAssets.sort(isOverSizeLimit asc, getAssetSize($statB.compilation.hash, $useCompressedSize).size desc).({asset: $, valueA: 0, valueB: getAssetSize($statB.compilation.hash, $useCompressedSize).size, hash: $statB.compilation.hash})
           };
           
           $addedPackages: $statA.compilation.nodeModules.name - $statB.compilation.nodeModules.name;

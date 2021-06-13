@@ -46,7 +46,12 @@ export default function (discovery: StatoscopeWidget): void {
           },
           {
             view: 'badge',
-            data: '{ prefix: "file", text: chunk.files.size.reduce(=> $ + $$, 0).formatSize() }',
+            data: `{
+              $sizes: chunk.files.[].(getAssetSize(hash or #.params.hash));
+              prefix: "file",
+              text: $sizes.size.reduce(=> $ + $$, 0).formatSize(),
+              hint: $sizes.[compressor].size() ? 'compressed' : 'uncompressed'
+            }`,
             when: showSize,
           },
         ],

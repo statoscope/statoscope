@@ -38,9 +38,10 @@ export default function (discovery: StatoscopeWidget): void {
           {
             view: 'badge',
             data: `{
-            text: asset.size.formatSize(),
+            $size: asset.getAssetSize(hash or #.params.hash);
+            text: $size.size.formatSize(),
             color: asset.isOverSizeLimit and 0.colorFromH(),
-            hint: asset.isOverSizeLimit and "oversized"
+            hint: [asset.isOverSizeLimit ? "oversized": undefined, $size.compressor or 'uncompressed'].[]
           }`,
             when: showSize,
           },

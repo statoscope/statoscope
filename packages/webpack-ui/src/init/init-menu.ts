@@ -7,6 +7,8 @@ import settings, {
   SETTING_HIDE_CHILD_COMPILATIONS_DEFAULT,
   SETTING_LIST_ITEMS_LIMIT,
   SETTING_LIST_ITEMS_LIMIT_DEFAULT,
+  SETTING_SHOW_COMPRESSED,
+  SETTING_SHOW_COMPRESSED_DEFAULT,
 } from '../settings';
 import { StatoscopeWidget, ViewConfigData } from '../../types';
 
@@ -145,6 +147,14 @@ function addSettings(discovery: StatoscopeWidget): void {
       title: 'Hide child compilations',
       key: SETTING_HIDE_CHILD_COMPILATIONS,
       defaultValue: SETTING_HIDE_CHILD_COMPILATIONS_DEFAULT,
+    })
+  );
+
+  discovery.nav.menu.append(
+    makeBooleanSetting(discovery, {
+      title: 'Show compressed size (if available)',
+      key: SETTING_SHOW_COMPRESSED,
+      defaultValue: SETTING_SHOW_COMPRESSED_DEFAULT,
     })
   );
 

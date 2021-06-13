@@ -30,10 +30,11 @@ export default function (discovery: StatoscopeWidget): void {
             view: 'badge',
             data: `$hash:hash or #.params.hash;
           {
+            $sizes: entrypoint.data.chunks.[initial].files.[].(getAssetSize(hash or #.params.hash));
             prefix: "initial size",
-            text: entrypoint.data.chunks.[initial].files.[].size.reduce(=> $ + $$, 0).formatSize(),
+            text: $sizes.size.reduce(=> $ + $$, 0).formatSize(),
             color: entrypoint.data.isOverSizeLimit and 0.colorFromH(),
-            hint: entrypoint.data.isOverSizeLimit and "oversized"
+            hint: [entrypoint.data.isOverSizeLimit ? "oversized": undefined, $sizes.[compressor].size() ? 'compressed' : 'uncompressed'].[]
           }`,
             when: showSize,
           },

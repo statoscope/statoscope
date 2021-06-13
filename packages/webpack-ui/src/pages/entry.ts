@@ -52,7 +52,7 @@ export default function (discovery: StatoscopeWidget): void {
                               $topLevelChunks: data.chunks;
                               $chunks: $topLevelChunks + $topLevelChunks..children;
                               $chunkModules: $chunks.modules.[not shouldHideModule()];
-                              $chunkModules.modulesToFoamTree()
+                              $chunkModules.modulesToFoamTree(#.params.hash)
                               `,
                             },
                           },
@@ -64,7 +64,7 @@ export default function (discovery: StatoscopeWidget): void {
                               $topLevelChunks: data.chunks;
                               $chunks: $topLevelChunks + $topLevelChunks..children;
                               $chunkModules: $chunks.[initial].modules.[not shouldHideModule()];
-                              $chunkModules.modulesToFoamTree()
+                              $chunkModules.modulesToFoamTree(#.params.hash)
                               `,
                             },
                           },
@@ -76,7 +76,7 @@ export default function (discovery: StatoscopeWidget): void {
                               $topLevelChunks: data.chunks;
                               $chunks: $topLevelChunks + $topLevelChunks..children;
                               $chunkModules: $chunks.[not initial].modules.[not shouldHideModule()];
-                              $chunkModules.modulesToFoamTree()
+                              $chunkModules.modulesToFoamTree(#.params.hash)
                               `,
                             },
                           },

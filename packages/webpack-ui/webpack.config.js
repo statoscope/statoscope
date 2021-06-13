@@ -3,6 +3,7 @@
 const path = require('path');
 const { merge } = require('webpack-merge');
 const webpack = require('webpack');
+const Statoscope = require('../webpack-plugin').default;
 
 const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
@@ -36,6 +37,11 @@ function makeConfig(config) {
         ],
       },
       plugins: [
+        new Statoscope({
+          saveTo: `analyze/statoscope-[name]-[hash].html`,
+          saveStatsTo: `analyze/stats-[name]-[hash].json`,
+          open: 'file',
+        }),
         new webpack.EnvironmentPlugin({
           STATOSCOPE_VERSION: require('./package.json').version,
         }),

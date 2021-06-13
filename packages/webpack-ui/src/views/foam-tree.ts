@@ -27,9 +27,11 @@ function getPopup<TData>(discovery: StatoscopeWidget, data: TData): PopupAPI<TDa
         content: [
           {
             view: 'block',
-            content: 'html:"<b>size:&nbsp;</b>"',
+            content: 'html:`<b>size:&nbsp;</b>`',
           },
           'text:weight.formatSize()',
+          // eslint-disable-next-line no-template-curly-in-string
+          'text:weightCompressor ? ` [${weightCompressor}]` : ""',
         ],
       },
       {

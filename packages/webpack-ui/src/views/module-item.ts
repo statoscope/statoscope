@@ -45,8 +45,12 @@ export default function (discovery: StatoscopeWidget): void {
           },
           {
             view: 'badge',
-            data: `{text: module.moduleSize().formatSize()}`,
-            when: showSize && data?.module.size,
+            data: `{
+              $size: module.getModuleSize(hash or #.params.hash);
+              text: $size.size.formatSize(),
+              hint: $size.compressor or 'uncompressed'
+            }`,
+            when: showSize,
           },
           {
             view: 'badge',

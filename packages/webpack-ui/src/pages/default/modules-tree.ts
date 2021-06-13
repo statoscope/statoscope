@@ -28,7 +28,7 @@ export function moduleItemConfig(getter = '$', hash = '#.params.hash'): ModuleIt
     },
     {
       title: "Concatenated",
-      data: ${getter}.modules.[not shouldHideModule()].sort(moduleSize() desc),
+      data: ${getter}.modules.[not shouldHideModule()].sort(getModuleSize(${hash}).size desc),
       visible: ${getter}.modules,
       type: 'concatenated'
     }].[visible]`,

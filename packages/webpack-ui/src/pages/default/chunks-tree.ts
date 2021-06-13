@@ -41,7 +41,7 @@ export function chunkItemConfig(getter = '$', hash = '#.params.hash'): ChunkItem
     }, {
       title: "Modules",
       // todo: wait contexts and filter modules by current chunk
-      data: $modules.sort(moduleSize() desc),
+      data: $modules.sort(getModuleSize(${hash}).size desc),
       visible: $modules,
       type: 'modules'
     }, {
@@ -51,7 +51,7 @@ export function chunkItemConfig(getter = '$', hash = '#.params.hash'): ChunkItem
       type: 'packages'
     }, {
       title: "Assets",
-      data: files.[].sort(isOverSizeLimit asc, size desc),
+      data: files.[].sort(isOverSizeLimit asc, getAssetSize(${hash}).size desc),
       visible: files.[],
       type: 'assets'
     }].[visible]`,
@@ -176,7 +176,7 @@ export function chunkItemConfig(getter = '$', hash = '#.params.hash'): ChunkItem
                 className: 'hack-badge-margin-left',
                 data: `{
                   text: data.size(),
-                  postfix: data.reduce(=> $$ + $.size, 0).formatSize()
+                  postfix: data.reduce(=> $$ + $.getAssetSize(${hash}).size, 0).formatSize()
                 }`,
               },
             ],

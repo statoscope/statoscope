@@ -30,6 +30,7 @@
     "@discoveryjs/discovery": "^1.0.0-beta.60",
     "@popperjs/core": "^2.9.1",
     "@statoscope/helpers": "^5.2.0",
+    "@statoscope/stats": "^5.2.0",
     "@statoscope/webpack-model": "^5.2.0",
     "@wdxlab/events": "^1.1.0",
     "babel-loader": "^8.2.2",

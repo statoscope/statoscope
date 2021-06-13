@@ -119,3 +119,5 @@ export const SETTING_HIDE_CHILD_COMPILATIONS = 'hide_child_compilations';
 export const SETTING_HIDE_CHILD_COMPILATIONS_DEFAULT = true;
 export const SETTING_LIST_ITEMS_LIMIT = 'list_items_limit';
 export const SETTING_LIST_ITEMS_LIMIT_DEFAULT = '20';
+export const SETTING_SHOW_COMPRESSED = 'show_compressed';
+export const SETTING_SHOW_COMPRESSED_DEFAULT = true;

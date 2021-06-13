@@ -85,12 +85,12 @@ export default function (discovery: StatoscopeWidget): void {
               $getSize: => (
                 $chunks: data.chunks + data.chunks..children;
                 $assets: $chunks.files;
-                $assets.size.reduce(=> $ + $$, 0)
+                $assets.(getAssetSize($statA.compilation.hash).size).reduce(=> $ + $$, 0)
               );
               $getInitialSize: => (
                 $chunks: data.chunks.[initial];
                 $assets: $chunks.files;
-                $assets.size.reduce(=> $ + $$, 0)
+                $assets.(getAssetSize($statA.compilation.hash).size).reduce(=> $ + $$, 0)
               );
               
               [
@@ -108,7 +108,7 @@ export default function (discovery: StatoscopeWidget): void {
                 },
                 {
                   $packagesModulesA: $statA.compilation.nodeModules.instances.modules;
-                  $packagesSizeA: $packagesModulesA.size.reduce(=> $ + $$, 0);
+                  $packagesSizeA: $packagesModulesA.(getModuleSize($statA.compilation.hash).size).reduce(=> $ + $$, 0);
                   value: $packagesSizeA.formatSize(),
                   label: 'Packages size',
                   visible: $packagesModulesA
@@ -217,10 +217,11 @@ export default function (discovery: StatoscopeWidget): void {
                           {
                             when: '#.instantLists="modules"',
                             data: `
+                            $hash: compilation.hash;
                             compilation.modules.[not shouldHideModule()].[
                               name~=#.filter or modules and modules.[name~=#.filter]
                             ]
-                            .sort(moduleSize() desc)
+                            .sort(getModuleSize($hash).size desc)
                             `,
                             content: {
                               ...modulesTree(),
@@ -294,8 +295,9 @@ export default function (discovery: StatoscopeWidget): void {
                           {
                             when: '#.instantLists="assets"',
                             data: `
+                            $hash: compilation.hash;
                             compilation.assets.[name~=#.filter]
-                            .sort(isOverSizeLimit asc, size desc)
+                            .sort(isOverSizeLimit asc, getAssetSize($hash).size desc)
                             `,
                             content: {
                               ...assetsTree(),
@@ -304,9 +306,10 @@ export default function (discovery: StatoscopeWidget): void {
                           {
                             when: '#.instantLists="entrypoints"',
                             data: `
+                            $hash: compilation.hash;
                             compilation.entrypoints
                               .[name~=#.filter]
-                              .sort(data.isOverSizeLimit asc, size desc)
+                              .sort(data.isOverSizeLimit asc)
                             `,
                             content: {
                               ...entryTree(),

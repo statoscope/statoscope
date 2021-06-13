@@ -54,7 +54,7 @@ export function packageInstanceItemConfig(
         type: 'reasons'
       },{
         title: "Modules",
-        data: instance.modules.[not shouldHideModule()].sort(moduleSize() desc),
+        data: instance.modules.[not shouldHideModule()].sort(getModuleSize(${hash}).size desc),
         type: 'modules'
       }]`,
     itemConfig: {
@@ -74,7 +74,7 @@ export function packageInstanceItemConfig(
                 type: 'chunk'
               }, {
                 title: "Modules",
-                children: $reasonsWithModule.module.[not shouldHideModule()].sort(moduleSize() desc),
+                children: $reasonsWithModule.module.[not shouldHideModule()].sort(getModuleSize(${hash}).size desc),
                 type: 'module'
               }, {
                 title: "Packages",
@@ -103,7 +103,7 @@ export function packageInstanceItemConfig(
                       content: `chunk-item:{chunk: value, hash: ${hash}}`,
                       children: `
                         $chunks:reasons.[module.chunks has @.value];
-                        $chunks.module.({value: $, reasons: $chunks.reason}).sort(value.moduleSize() desc)
+                        $chunks.module.({value: $, reasons: $chunks.reason}).sort(value.getModuleSize(${hash}).size desc)
                         `,
                       limit: '= settingListItemsLimit()',
                       get itemConfig(): ModuleItemConfig {
@@ -177,7 +177,7 @@ export function packageInstanceItemConfig(
                           {
                             instance: $instance,
                             reasonModules: reasons.[not module.shouldHideModule() and reason.moduleReasonResource().nodeModule().path=$instance.value.path]
-                              .group(<module>).({module:key,reasons:value.reason}).sort(module.moduleSize() desc)
+                              .group(<module>).({module:key,reasons:value.reason}).sort(module.getModuleSize(${hash}).size desc)
                           })`,
                       itemConfig: {
                         content: [
