@@ -1,11 +1,15 @@
+import { Module as StatoscopeModule } from '@statoscope/stats/spec/module';
+import { Compilation as StatoscopeCompilation } from '@statoscope/stats/spec/compilation';
+import { Asset as StatoscopeAsset } from '@statoscope/stats/spec/asset';
+import { Size } from '@statoscope/stats/spec/source';
 import { Webpack } from '../webpack';
 import {
-  moduleResource,
   moduleNameResource,
   moduleReasonResource,
+  moduleResource,
   nodeModule,
 } from './module';
-import makeEntityResolver from './entity-resolver';
+import makeEntityResolver, { Resolver } from './entity-resolver';
 import {
   HandledCompilation,
   NormalizedAsset,
@@ -15,17 +19,53 @@ import {
   NormalizedModule,
   NormalizedPackage,
 } from './normalize';
+import modulesToFoamTree from './modules-to-foam-tree';
+import { Node } from './modules-to-foam-tree';
 import ChunkID = Webpack.ChunkID;
 
 export type ResolvedStats = { file: NormalizedFile; compilation: NormalizedCompilation };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
-export default function (compilations: HandledCompilation[]) {
+export default function (compilations: HandledCompilation[], files: NormalizedFile[]) {
   const resolveCompilation = makeEntityResolver(compilations, (item) => item?.data?.hash);
+
+  const metaCompilations: {
+    file: NormalizedFile;
+    compilation: StatoscopeCompilation;
+  }[] = [];
+
+  for (const file of files) {
+    for (const compilation of file.__statoscope?.compilations || []) {
+      metaCompilations.push({ file, compilation });
+    }
+  }
+
+  const resolveMetaCompilation = makeEntityResolver(
+    metaCompilations,
+    (item) => item.compilation.id
+  );
+
+  const metaCompilationResolvers: Map<
+    StatoscopeCompilation,
+    {
+      resolveModule: Resolver<string, StatoscopeModule>;
+      resolveAsset: Resolver<string, StatoscopeAsset>;
+    }
+  > = new Map();
+
+  for (const item of metaCompilations) {
+    metaCompilationResolvers.set(item.compilation, {
+      resolveModule: makeEntityResolver(
+        item.compilation.modules,
+        (item) => item.resource
+      ),
+      resolveAsset: makeEntityResolver(item.compilation.assets, (item) => item.id),
+    });
+  }
 
   return {
     moduleSize(module: NormalizedModule): number {
-      // todo gzip
+      console.warn('moduleSize helper was deprecated. Use getModuleSize');
       return module.size;
     },
     chunkName(chunk: NormalizedChunk): string {
@@ -55,6 +95,58 @@ export default function (compilations: HandledCompilation[]) {
       const resolved = resolveCompilation(id);
       return (resolved && resolved?.data) || null;
     },
+    getModuleSize(module: NormalizedModule, hash: string, compressed: boolean): Size {
+      if (compressed) {
+        if (!hash) {
+          throw new Error('[getModuleSize-helper]: hash-parameter is required');
+        }
+
+        const metaCompilation = resolveMetaCompilation(hash);
+        if (!metaCompilation) {
+          return { size: module.size };
+        }
+
+        const resolvers = metaCompilationResolvers.get(metaCompilation.compilation);
+        if (!resolvers) {
+          return { size: module.size };
+        }
+
+        const metaModule = resolvers.resolveModule(module.name);
+        if (!metaModule) {
+          return { size: module.size };
+        }
+
+        return metaModule.source?.sizes[0] ?? { size: module.size };
+      }
+
+      return { size: module.size };
+    },
+    getAssetSize(asset: NormalizedAsset, hash: string, compressed: boolean): Size {
+      if (compressed) {
+        if (!hash) {
+          throw new Error('[getAssetSize-helper]: hash-parameter is required');
+        }
+
+        const metaCompilation = resolveMetaCompilation(hash);
+        if (!metaCompilation) {
+          return { size: asset.size };
+        }
+
+        const resolvers = metaCompilationResolvers.get(metaCompilation.compilation);
+        if (!resolvers) {
+          return { size: asset.size };
+        }
+
+        const metaAsset = resolvers.resolveAsset(asset.name);
+        if (!metaAsset) {
+          return { size: asset.size };
+        }
+
+        return metaAsset.source?.sizes[0] ?? { size: asset.size };
+      }
+
+      return { size: asset.size };
+    },
     moduleResource,
     moduleReasonResource,
     moduleNameResource,
@@ -75,6 +167,23 @@ export default function (compilations: HandledCompilation[]) {
       }
 
       return hash;
+    },
+    modulesToFoamTree(
+      modules: NormalizedModule[],
+      hash?: string,
+      compressed?: boolean
+    ): Node {
+      if (compressed && !hash) {
+        throw new Error('[modulesToFoamTree-helper]: hash-parameter is required');
+      }
+
+      return modulesToFoamTree(modules, (module: NormalizedModule): Size => {
+        if (compressed && hash) {
+          return this.getModuleSize(module, hash, compressed);
+        }
+
+        return { size: module.size };
+      });
     },
   };
 }

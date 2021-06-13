@@ -22,6 +22,7 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
+    "@statoscope/stats": "5.2.0",
     "ajv": "^8.5.0",
     "jora": "^1.0.0-beta.5",
     "md5": "^2.3.0"

@@ -1,7 +1,8 @@
 import md5 from 'md5';
+import { Stats } from '@statoscope/stats';
 import { Webpack } from '../webpack';
 import validateStats, { ValidationResult } from './validate';
-import { moduleResource, moduleReasonResource, nodeModule } from './module';
+import { moduleReasonResource, moduleResource, nodeModule } from './module';
 import makeEntityResolver, { Resolver } from './entity-resolver';
 import ChunkID = Webpack.ChunkID;
 
@@ -71,6 +72,7 @@ export type NormalizedFile = {
   version: string;
   validation: ValidationResult;
   compilations: NormalizedCompilation[];
+  __statoscope?: Stats;
 };
 
 export type HandledStats = {
@@ -138,6 +140,7 @@ export function handleRawFile(
     version: rawStatsFileDescriptor.data.version || 'unknown',
     validation: validateStats(rawStatsFileDescriptor.data),
     compilations: [],
+    __statoscope: rawStatsFileDescriptor.data.__statoscope,
   };
   const compilations = [];
 

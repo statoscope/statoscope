@@ -31,7 +31,7 @@ export function prepareWithJora(
   const { files, compilations } = normalize(stats);
   const j = jora.setup({
     ...options.helpers,
-    ...joraHelpers(compilations),
+    ...joraHelpers(compilations, files),
   });
   const context = {};
 
