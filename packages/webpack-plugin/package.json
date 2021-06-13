@@ -4,9 +4,9 @@
   "description": "Helpers for webpack part of Statoscope",
   "main": "./dist/index.js",
   "scripts": {
-    "prebuild": "node ./scripts/extract-version.js",
     "build": "../../node_modules/.bin/tsc",
-    "prepublishOnly": "npm run build"
+    "buildVersionTS": "node ./scripts/extract-version.js",
+    "prepublishOnly": "npm run buildVersionTS && npm run build"
   },
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {
