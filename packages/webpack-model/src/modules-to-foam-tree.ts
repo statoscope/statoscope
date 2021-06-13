@@ -115,10 +115,7 @@ function apply(root: Node, parts: NodeData[], size: Size): void {
   applyToStack(stack, size);
 }
 
-export type GetModuleSizeFN = (module: NormalizedModule) => {
-  compressor?: string;
-  size: number;
-};
+export type GetModuleSizeFN = (module: NormalizedModule) => Size;
 export default function modulesToFoamTree(
   modules: NormalizedModule[],
   getModuleSize: GetModuleSizeFN
