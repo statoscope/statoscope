@@ -1,5 +1,5 @@
-import { promisify } from 'util';
 import path from 'path';
+import { promisify } from 'util';
 import { Compilation, Module } from 'webpack';
 import { ExtensionDescriptor } from '@statoscope/stats/spec/extension';
 import CompressedExtensionGenerator, {
@@ -27,9 +27,17 @@ export default class WebpackCompressedExtension {
         stack.push(...cursor.children);
       }
 
-      const readFile = promisify(
-        cursor.compiler.outputFileSystem.readFile.bind(cursor.compiler.outputFileSystem)
+      // webpack 4
+      let readFile = promisify(
+        cursor.compiler.inputFileSystem.readFile.bind(cursor.compiler.inputFileSystem)
       );
+
+      // webpack 5
+      if (typeof cursor.compiler.outputFileSystem.readFile === 'function') {
+        readFile = promisify(
+          cursor.compiler.outputFileSystem.readFile.bind(cursor.compiler.outputFileSystem)
+        );
+      }
 
       for (const name of Object.keys(cursor.assets)) {
         const assetPath = path.join(cursor.compiler.outputPath, name);
@@ -59,25 +67,44 @@ export default class WebpackCompressedExtension {
           cursor.compiler.requestShortener
         );
 
-        let concatenated = new Buffer('');
+        let concatenated = Buffer.from('');
 
-        for (const type of modulesCursor.getSourceTypes()) {
-          const runtimeChunk = cursor.chunkGraph
-            .getModuleChunks(modulesCursor)
-            .find((chunk) => chunk.runtime);
+        // webpack 5
+        if (typeof modulesCursor.getSourceTypes === 'function') {
+          for (const type of modulesCursor.getSourceTypes()) {
+            const runtimeChunk = cursor.chunkGraph
+              .getModuleChunks(modulesCursor)
+              .find((chunk) => chunk.runtime);
 
-          if (runtimeChunk) {
-            const source = cursor.codeGenerationResults.getSource(
-              modulesCursor,
-              runtimeChunk.runtime,
-              type
-            );
-            const content = source.source();
-            concatenated = Buffer.concat([
-              concatenated,
-              content instanceof Buffer ? content : Buffer.from(content),
-            ]);
+            if (runtimeChunk) {
+              const source = cursor.codeGenerationResults.getSource(
+                modulesCursor,
+                runtimeChunk.runtime,
+                type
+              );
+              const content = source.source();
+              concatenated = Buffer.concat([
+                concatenated,
+                content instanceof Buffer ? content : Buffer.from(content),
+              ]);
+            }
           }
+        } else {
+          // webpack 4
+          if (modulesCursor.id == null) {
+            continue;
+          }
+          // @ts-ignore
+          const source = cursor.moduleTemplate.render(
+            modulesCursor,
+            cursor.dependencyTemplates,
+            { chunk: modulesCursor.getChunks()[0] }
+          );
+          const content = source.source();
+          concatenated = Buffer.concat([
+            concatenated,
+            content instanceof Buffer ? content : Buffer.from(content),
+          ]);
         }
 
         this.compressedExtensionGenerator.handleResource(
