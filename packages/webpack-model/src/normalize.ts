@@ -1,9 +1,13 @@
 import md5 from 'md5';
-import { Stats } from '@statoscope/stats';
+import { StatsDescriptor } from '@statoscope/stats';
+import { Extension } from '@statoscope/stats/spec/extension';
+import makeEntityResolver, { Resolver } from '@statoscope/helpers/dist/entity-resolver';
+import { APIFactory, Container } from '@statoscope/extensions';
+import * as CompressedExtension from '@statoscope/stats-extension-compressed';
+import CompressedExtensionPackage from '@statoscope/stats-extension-compressed/package.json';
 import { Webpack } from '../webpack';
 import validateStats, { ValidationResult } from './validate';
 import { moduleReasonResource, moduleResource, nodeModule } from './module';
-import makeEntityResolver, { Resolver } from './entity-resolver';
 import ChunkID = Webpack.ChunkID;
 
 export type NormalizedChunk = Omit<
@@ -72,7 +76,12 @@ export type NormalizedFile = {
   version: string;
   validation: ValidationResult;
   compilations: NormalizedCompilation[];
-  __statoscope?: Stats;
+  __statoscope?: { descriptor: StatsDescriptor; extensions: Extension<unknown>[] };
+};
+
+export type NormalizedExtension<TPayload, TAPI> = {
+  data: Extension<TPayload>;
+  api: TAPI;
 };
 
 export type HandledStats = {
@@ -85,6 +94,7 @@ export type CompilationResolvers = {
   resolveChunk: Resolver<ChunkID, NormalizedChunk>;
   resolveAsset: Resolver<string, NormalizedAsset>;
   resolvePackage: Resolver<string, NormalizedPackage>;
+  resolveExtension: Resolver<string, NormalizedExtension<unknown, unknown> | null>;
 };
 
 export type HandledCompilation = {
@@ -97,6 +107,15 @@ export type NormalizeResult = {
   files: NormalizedFile[];
   compilations: HandledCompilation[];
 };
+
+// todo: make it injectable
+const extensionContainer = new Container();
+
+extensionContainer.register(
+  CompressedExtensionPackage.name,
+  CompressedExtensionPackage.version,
+  CompressedExtension.api as APIFactory<unknown, unknown>
+);
 
 function getHash(
   compilation: Webpack.Compilation,
@@ -194,15 +213,37 @@ function handleCompilation(
     parent: parent?.hash || null,
   };
 
+  const extensions =
+    compilation.__statoscope?.extensions.map((ext): NormalizedExtension<
+      unknown,
+      unknown
+    > | null => {
+      const item = extensionContainer.resolve(ext.descriptor.name);
+      if (!item) {
+        console.warn(`Unknown extension ${ext.descriptor.name}:`, ext);
+        return null;
+      }
+
+      return {
+        data: ext,
+        api: item.apiFactory(ext),
+      };
+    }) ?? [];
+
   const resolveModule = makeModuleResolver(normalized);
   const resolveChunk = makeEntityResolver(normalized.chunks, ({ id }) => id);
   const resolveAsset = makeEntityResolver(normalized.assets || [], ({ name }) => name);
   const resolvePackage = makeEntityResolver(normalized.nodeModules, ({ name }) => name);
+  const resolveExtension = makeEntityResolver(
+    extensions,
+    (ext) => ext?.data.descriptor.name
+  );
   const resolvers: CompilationResolvers = {
     resolveModule,
     resolveChunk,
     resolveAsset,
     resolvePackage,
+    resolveExtension,
   };
 
   prepareModules(compilation, resolvers);

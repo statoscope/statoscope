@@ -1,7 +1,6 @@
-import { Module as StatoscopeModule } from '@statoscope/stats/spec/module';
-import { Compilation as StatoscopeCompilation } from '@statoscope/stats/spec/compilation';
-import { Asset as StatoscopeAsset } from '@statoscope/stats/spec/asset';
-import { Size } from '@statoscope/stats/spec/source';
+import makeEntityResolver from '@statoscope/helpers/dist/entity-resolver';
+import { CompressedExtensionAPI } from '@statoscope/stats-extension-compressed/dist/api';
+import { Size } from '@statoscope/stats-extension-compressed/dist/generator';
 import { Webpack } from '../webpack';
 import {
   moduleNameResource,
@@ -9,7 +8,6 @@ import {
   moduleResource,
   nodeModule,
 } from './module';
-import makeEntityResolver, { Resolver } from './entity-resolver';
 import {
   HandledCompilation,
   NormalizedAsset,
@@ -26,42 +24,8 @@ import ChunkID = Webpack.ChunkID;
 export type ResolvedStats = { file: NormalizedFile; compilation: NormalizedCompilation };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
-export default function (compilations: HandledCompilation[], files: NormalizedFile[]) {
+export default function (compilations: HandledCompilation[]) {
   const resolveCompilation = makeEntityResolver(compilations, (item) => item?.data?.hash);
-
-  const metaCompilations: {
-    file: NormalizedFile;
-    compilation: StatoscopeCompilation;
-  }[] = [];
-
-  for (const file of files) {
-    for (const compilation of file.__statoscope?.compilations || []) {
-      metaCompilations.push({ file, compilation });
-    }
-  }
-
-  const resolveMetaCompilation = makeEntityResolver(
-    metaCompilations,
-    (item) => item.compilation.id
-  );
-
-  const metaCompilationResolvers: Map<
-    StatoscopeCompilation,
-    {
-      resolveModule: Resolver<string, StatoscopeModule>;
-      resolveAsset: Resolver<string, StatoscopeAsset>;
-    }
-  > = new Map();
-
-  for (const item of metaCompilations) {
-    metaCompilationResolvers.set(item.compilation, {
-      resolveModule: makeEntityResolver(
-        item.compilation.modules,
-        (item) => item.resource
-      ),
-      resolveAsset: makeEntityResolver(item.compilation.assets, (item) => item.id),
-    });
-  }
 
   return {
     moduleSize(module: NormalizedModule): number {
@@ -96,56 +60,45 @@ export default function (compilations: HandledCompilation[], files: NormalizedFi
       return (resolved && resolved?.data) || null;
     },
     getModuleSize(module: NormalizedModule, hash: string, compressed: boolean): Size {
-      if (compressed) {
-        if (!hash) {
-          throw new Error('[getModuleSize-helper]: hash-parameter is required');
-        }
-
-        const metaCompilation = resolveMetaCompilation(hash);
-        if (!metaCompilation) {
-          return { size: module.size };
-        }
-
-        const resolvers = metaCompilationResolvers.get(metaCompilation.compilation);
-        if (!resolvers) {
-          return { size: module.size };
-        }
-
-        const metaModule = resolvers.resolveModule(module.name);
-        if (!metaModule) {
-          return { size: module.size };
-        }
-
-        return metaModule.source?.sizes[0] ?? { size: module.size };
+      if (!compressed) {
+        return { size: module.size };
       }
 
-      return { size: module.size };
+      if (!hash) {
+        throw new Error('[getModuleSize-helper]: hash-parameter is required');
+      }
+
+      const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
+        '@statoscope/stats-extension-compressed'
+      );
+
+      const resolverSize = ext?.api as CompressedExtensionAPI | undefined;
+
+      return (
+        resolverSize?.(hash, module.name) ?? {
+          size: module.size,
+        }
+      );
     },
     getAssetSize(asset: NormalizedAsset, hash: string, compressed: boolean): Size {
-      if (compressed) {
-        if (!hash) {
-          throw new Error('[getAssetSize-helper]: hash-parameter is required');
-        }
-
-        const metaCompilation = resolveMetaCompilation(hash);
-        if (!metaCompilation) {
-          return { size: asset.size };
-        }
-
-        const resolvers = metaCompilationResolvers.get(metaCompilation.compilation);
-        if (!resolvers) {
-          return { size: asset.size };
-        }
-
-        const metaAsset = resolvers.resolveAsset(asset.name);
-        if (!metaAsset) {
-          return { size: asset.size };
-        }
-
-        return metaAsset.source?.sizes[0] ?? { size: asset.size };
+      if (!compressed) {
+        return { size: asset.size };
       }
 
-      return { size: asset.size };
+      if (!hash) {
+        throw new Error('[getAssetSize-helper]: hash-parameter is required');
+      }
+
+      const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
+        '@statoscope/stats-extension-compressed'
+      );
+      const resolverSize = ext?.api as CompressedExtensionAPI | undefined;
+
+      return (
+        resolverSize?.(hash, asset.name) ?? {
+          size: asset.size,
+        }
+      );
     },
     moduleResource,
     moduleReasonResource,

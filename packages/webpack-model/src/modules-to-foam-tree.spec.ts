@@ -1,4 +1,4 @@
-import { Size } from '@statoscope/stats/spec/source';
+import { Size } from '@statoscope/stats-extension-compressed/dist/generator';
 import stats from '../../../test/bundles/simple/stats-prod.json';
 import convert from './modules-to-foam-tree';
 import { NormalizedModule } from './normalize';

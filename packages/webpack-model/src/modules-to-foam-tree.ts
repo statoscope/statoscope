@@ -1,4 +1,4 @@
-import { Size } from '@statoscope/stats/spec/source';
+import { Compressor, Size } from '@statoscope/stats-extension-compressed/dist/generator';
 import { moduleResource } from './module';
 import { NormalizedModule } from './normalize';
 
@@ -12,7 +12,7 @@ export type NodeData = {
 export type Node = {
   label: string;
   weight: number;
-  weightCompressor?: string;
+  weightCompressor?: Compressor;
   groups: Node[];
   link?: string | NodeLink;
   path: string;

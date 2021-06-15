@@ -8,7 +8,6 @@ import normalize, {
   RawStatsFileDescriptor,
 } from './normalize';
 
-export { default as makeEntityResolver } from './entity-resolver';
 export { default as validate } from './validate';
 export * as module from './module';
 
@@ -31,7 +30,7 @@ export function prepareWithJora(
   const { files, compilations } = normalize(stats);
   const j = jora.setup({
     ...options.helpers,
-    ...joraHelpers(compilations, files),
+    ...joraHelpers(compilations),
   });
   const context = {};
 
