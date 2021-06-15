@@ -1,0 +1,16 @@
+{
+  "name": "simple",
+  "version": "1.0.0",
+  "main": "./src/index.js",
+  "scripts": {
+    "build": "npm run build:dev && npm run build:prod",
+    "build:dev": "../node_modules/.bin/webpack -o dist-dev --mode=development --json stats-dev.json",
+    "postbuild:dev": "cat stats-dev.json | sed \"s#$(pwd)#.#g\" | sed \"s#$(dirname \"$(pwd)..\")#..#g\" > stats-dev.json",
+    "build:prod": "../node_modules/.bin/webpack -o dist-prod --mode=production --json stats-prod.json",
+    "postbuild:prod": "cat stats-prod.json | sed \"s#$(pwd)#.#g\" | sed \"s#$(dirname \"$(pwd)..\")#..#g\" > stats-prod.json"
+  },
+  "dependencies": {
+    "foo": "1.0.0",
+    "bar": "1.0.0"
+  }
+}
