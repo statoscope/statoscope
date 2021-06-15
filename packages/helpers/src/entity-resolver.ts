@@ -29,7 +29,7 @@ export type Resolver<TID, TEntity> = (id: TID) => TEntity | null;
 
 export type GetIDFn<TID, TEntity> = (entity: TEntity) => TID;
 
-export default function make<TID, TEntity>(
+export default function makeResolver<TID, TEntity>(
   entities: Entities<TEntity>,
   getId: (entity: TEntity) => TID
 ): Resolver<TID, TEntity> {
