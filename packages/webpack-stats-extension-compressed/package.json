@@ -1,0 +1,31 @@
+{
+  "name": "@statoscope/webpack-stats-extension-compressed",
+  "version": "5.2.0",
+  "description": "Webpack adapter for @statoscope/stats-extension-compressed",
+  "main": "./dist/index.js",
+  "scripts": {
+    "prebuild": "node ../../scripts/extract-version.js --field author --field homepage",
+    "build": "../../node_modules/.bin/tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": "https://github.com/statoscope/statoscope.git",
+  "author": {
+    "name": "Sergey Melyukov",
+    "url": "https://twitter.com/smelukov"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/statoscope/statoscope/",
+  "dependencies": {
+    "@statoscope/stats-extension-compressed": "5.2.0"
+  },
+  "devDependencies": {
+    "@statoscope/stats": "5.2.0",
+    "@types/webpack": "^5.28.0"
+  }
+}
