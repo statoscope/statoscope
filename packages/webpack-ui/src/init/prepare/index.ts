@@ -6,7 +6,7 @@ import {
   NormalizedCompilation,
   NormalizedModule,
 } from '@statoscope/webpack-model/dist/normalize';
-import { Size } from '@statoscope/stats/spec/source';
+import { Size } from '@statoscope/stats-extension-compressed/dist/generator';
 import settings, {
   SETTING_HIDE_CHILD_COMPILATIONS,
   SETTING_HIDE_CHILD_COMPILATIONS_DEFAULT,
@@ -22,7 +22,7 @@ import { PrepareFn, RawData, StatoscopeWidget, TargetData } from '../../../types
 export default (() =>
   (rawData: RawData, { addQueryHelpers }: StatoscopeWidget): unknown => {
     const { files, compilations } = normalize(rawData);
-    const wpJoraHelpers = webpackJoraHelpers(compilations, files);
+    const wpJoraHelpers = webpackJoraHelpers(compilations);
 
     addQueryHelpers({
       ...wpJoraHelpers,
