@@ -3,6 +3,14 @@
 const path = require('path');
 const { merge } = require('webpack-merge');
 const webpack = require('webpack');
+let Statoscope;
+try {
+  Statoscope = require('../webpack-plugin').default;
+} catch (e) {
+  Statoscope = class {
+    apply() {}
+  };
+}
 
 const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
@@ -21,6 +29,11 @@ function makeConfig(config) {
         fallback: {
           path: require.resolve('path-browserify'),
         },
+        alias: {
+          [require.resolve(
+            '@statoscope/stats-extension-compressed/dist/generator'
+          )]: false,
+        },
       },
       module: {
         rules: [
@@ -36,6 +49,11 @@ function makeConfig(config) {
         ],
       },
       plugins: [
+        new Statoscope({
+          saveTo: `analyze/statoscope-[name]-[hash].html`,
+          saveStatsTo: `analyze/stats-[name]-[hash].json`,
+          open: 'file',
+        }),
         new webpack.EnvironmentPlugin({
           STATOSCOPE_VERSION: require('./package.json').version,
         }),
