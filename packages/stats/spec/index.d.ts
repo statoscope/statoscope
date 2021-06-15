@@ -1,11 +1,11 @@
-import { Compilation } from './compilation';
+import { Extension } from './extension';
 
-export type StatsFormat = {
+export type StatsDescriptor = {
   name: string;
   version: string;
 };
 
 export type Stats = {
-  format: StatsFormat;
-  compilations: Compilation[];
+  descriptor: StatsDescriptor;
+  extensions?: Extension<unknown>[];
 };
