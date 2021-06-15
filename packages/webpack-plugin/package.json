@@ -25,8 +25,9 @@
     "@discoveryjs/json-ext": "^0.5.3",
     "@statoscope/stats": "^5.2.0",
     "@statoscope/report-writer": "^5.2.0",
+    "@statoscope/stats-extension-compressed": "^5.2.0",
+    "@statoscope/webpack-stats-extension-compressed": "^5.2.0",
     "@statoscope/webpack-ui": "^5.2.0",
-    "gzip-size": "^6.0.0",
     "open": "^8.0.4"
   },
   "devDependencies": {
