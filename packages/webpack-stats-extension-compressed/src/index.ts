@@ -95,7 +95,7 @@ export default class WebpackCompressedExtension {
             continue;
           }
           // @ts-ignore
-          const source = cursor.moduleTemplate.render(
+          const source = cursor.moduleTemplates.javascript.render(
             modulesCursor,
             cursor.dependencyTemplates,
             { chunk: modulesCursor.getChunks()[0] }
