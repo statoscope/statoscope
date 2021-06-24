@@ -13,10 +13,10 @@ npm install @statoscope/webpack-plugin --save-dev
 
 ## Usage
 
-
 **webpack.config.js:**
+
 ```js
-const StatoscopeWebpackPlugin = require('@statoscope/webpack-plugin');
+const StatoscopeWebpackPlugin = require('@statoscope/webpack-plugin').default;
 
 config.plugins.push(new StatoscopeWebpackPlugin());
 ```
@@ -27,12 +27,15 @@ There are some **optional** options.
 new StatoscopeWebpackPlugin({
   saveTo: 'path/to/report-[name]-[hash].html',
   saveStatsTo: 'path/to/saving/stats-[name]-[hash].json',
-  statsOptions: { /* any webpack stats options */ },
+  statsOptions: {
+    /* any webpack stats options */
+  },
   additionalStats: ['path/to/any/stats.json'],
   watchMode: false,
   name: 'some-name',
-  open: 'file'
-})
+  open: 'file',
+  compressor: 'gzip',
+});
 ```
 
 #### options.saveTo: string
@@ -44,7 +47,6 @@ By default is a temporary directory with filename: `statoscope-[name]-[hash].htm
 `[name]` replacing by `options.name` (if specified) or `compilation.name` (if specified) or `unnamed`
 
 `[hash]` replacing by `compilation.hash`
-
 
 #### options.saveStatsTo: string
 
@@ -78,7 +80,7 @@ const glob = require('glob');
 new StatoscopeWebpackPlugin({
   saveStatsTo: 'path/to/stats/stats-[name]-[hash].json',
   additionalStats: glob.sync('path/to/stats/*.json'),
-})
+});
 ```
 
 In this example, the stats from every compilation will be saved into `path/to/stats/` directory.
@@ -108,6 +110,28 @@ Open report after compilation.
 - `dir` - open a directory with html file
 
 `dir` by default.
+
+#### options.compressor: enum
+
+Collect compressed (e.g. gzip) size of the resources (assets and modules).
+
+- `'gzip'` (default) - compress all the resources with gzip and collect the compressed sizes
+- `CompressFunction` - a function that takes source as an input and should return compressed size for this resource (useful if you want to use non-gzip compressor)
+- `false` - don't collect compressed sizes
+
+##### Example with a suctom compressor
+
+```ts
+new Statoscope({
+  compressor(source: Buffer | string, filename: string) => {
+    const compressed = customCompressor(source);
+    return {
+      compressor: 'my-custom-compressor',
+      size: compressed.length
+    }
+  }
+})
+```
 
 ## FAQ
 
