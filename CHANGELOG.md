@@ -1,34 +1,124 @@
 # Changelog
 
+## Next
+
+### Features
+
+- `[webpack-plugin]` collect compressed (e.g. gzip) size of the resources (assets and modules)
+
+  There is a new `compressor` - option that can be `false | 'gzip' | CompressFunction`:
+
+  - `'gzip'` (default) - compress all the resources with gzip and collect the compressed sizes
+
+  - `CompressFunction` - a function that takes source as an input and should return compressed size for this resource (useful if you want to use non-gzip compressor)
+
+  - `false` - don't collect compressed sizes
+
+  > It uses `webpack-stats-extension-compressed` upder the hood
+
+- `[webpack-ui]` taking resources compressed (e.g. gzip) size of the resources into account
+
+  There is a new setting to taking resources compressed size into account.
+
+  If enabled then all the sizes will be shown as compressed.
+
+  > It uses `stats-extension-compressed` under the hood and works only when the stats-file was taken from `webpack-plugin@5.3` or any source that uses `stats-extension-compressed`
+
+- `[stats-extension-compressed]` extension for collecting compressed resource sizes
+
+  It allows compressing specified resource content (`string` or `Buffer`) with `gzip` or any other compressor.
+
+  Also, it contains the API to generate and extract this info.
+
+- `[webpack-stats-extension-compressed]` webpack adapter for `stats-extension-compressed`
+
+  It allows collecting compressed resource sizes from webpack stats
+
+- `[webpack-ui]` download time measure
+
+  There are two new settings to select network speed and assets inject type. A download time for assets/chunks/entrypoints will be calculated based on specified network speed and assets inject type.
+
+  There are two assets inject types:
+
+  - `sync`: dowload time = `sum(downloadTime(assets))`
+    Download time is sum of download time of all the assets
+
+  - `async`: dowload time = `max(downloadTime(assets))`
+    Download time is a download time of most heavy asset (usefull if `async`/`defer` used to inject your assets)
+
+  The network type is `3G DC-HSPA+ (8MBit/s)` by default.
+
+  Assets inject type is `sequential` by default.
+
+- `[webpack-ui]` add `compact`-property to `asset/chunk/module/entry-item`-widget
+
+  This property removes all the badges from the entity item
+
+- `[webpack-ui]` add `Entrypoints` tab on `diff`-page
+
+  Honestly, I just forgot to enable this tab a few releases ago 🙈
+
+- `[stats]` a new package that contains Statoscope own stats format (extension-entity for now, but there are will be more entities)
+
+- `[extensions]` a new package that contains Statoscope extensions toolkit
+
+- `[report-writer]` add Piper - a proxy to ensure that all a stream consumers has got a chunk
+
+### Fixes
+
+- `[webpack-model]` fix cases in normalization when no `compilation.modules`
+- `[webpack-model]` fix normalization of `chunk.children`
+- `[webpack-model]` fix `isRoot`-field for node-modules instances
+
+  `isRoot` was falsy positive if the module name not starts from `.`
+
+- `[webpack-plugin]` fix `saveStatsTo`
+
+  Now it works
+
+- `[webpack-ui]` fix packages instances list on `diff`-page
+
+  There was `undefined` instead of instances links
+
+### Improvements
+
+- `[webpack-ui]` better sorting of package instances
+
+  Root-instances goes first
+
+### Refactor
+
+- `[webpack-ui]` refactor diff-page to make it more flexible and extendable
+
 ## 5.2.0 11 June 2021
 
 ### Features
 
-- `[webpack-ui]` - show `asset module` badge for asset modules (#72)
-- `[webpack-model]` - use `chunk.name` in `chunkName`-helper
-- `[webpack-plugin]` - make `options`-parameter as optional
+- `[webpack-ui]` show `asset module` badge for asset modules (#72)
+- `[webpack-model]` use `chunk.name` in `chunkName`-helper
+- `[webpack-plugin]` make `options`-parameter as optional
 
-### Fixed
+### Fixes
 
-- `[webpack-plugin]` - (crit) broken html report
-- `[webpack-plugin]` - (crit) fix taking `additionalStats` into account
-- `[webpack-model]` - make `context`-parameter in `Prepared.query` as optional (types)
-- `[webpack-model]` - make `stats`-parameter in `statName`-helper as optional (types)
+- `[webpack-plugin]` (crit) broken html report
+- `[webpack-plugin]` (crit) fix taking `additionalStats` into account
+- `[webpack-model]` make `context`-parameter in `Prepared.query` as optional (types)
+- `[webpack-model]` make `stats`-parameter in `statName`-helper as optional (types)
 
 ## 5.1.0 (6 June 2021)
 
 ### Fixes
 
-- `[webpack-ui]` - fix popup positioning when page was scrolled
+- `[webpack-ui]` fix popup positioning when page was scrolled
 
 ### Refactoring
 
-- `[cli]` - migrate to typescript
-- `[webpack-plugin]` - migrate to typescript
-- `[webpack-ui]` - migrate to typescript
-- `[webpack-model]` - migrate to typescript
-- `[report-writer]` - migrate to typescript
-- `[helpers]` - migrate to typescript
+- `[cli]` migrate to typescript
+- `[webpack-plugin]` migrate to typescript
+- `[webpack-ui]` migrate to typescript
+- `[webpack-model]` migrate to typescript
+- `[report-writer]` migrate to typescript
+- `[helpers]` migrate to typescript
 
 ## 5.0.1 (1 June 2021)
 
@@ -157,6 +247,7 @@
   Now you may use Statoscope as a webpack plugin:
 
   **webpack.config.js:**
+
   ```js
   const StatoscopeWebpackPlugin = require('@statoscope/ui-webpack');
 
@@ -191,15 +282,15 @@
 
   Statoscope init-function argument also changed:
 
-    ```js
-    import init from '@statoscope/ui-webpack';
-    import stats from 'path/to/stats.json'
-    
-    init({
-      name: "stats.json",
-      data: stats
-    });
-    ```
+  ```js
+  import init from '@statoscope/ui-webpack';
+  import stats from 'path/to/stats.json';
+
+  init({
+    name: 'stats.json',
+    data: stats,
+  });
+  ```
 
 - Stats diff
 
