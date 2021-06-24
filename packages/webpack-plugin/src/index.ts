@@ -8,7 +8,13 @@ import open from 'open';
 // @ts-ignore
 import { stringifyStream } from '@discoveryjs/json-ext';
 import HTMLWriter from '@statoscope/report-writer';
-import { Compiler, Compilation } from 'webpack';
+import { Compilation, Compiler } from 'webpack';
+import { StatsDescriptor } from '@statoscope/stats';
+import statsPackage from '@statoscope/stats/package.json';
+import { Extension } from '@statoscope/stats/spec/extension';
+import WebpackCompressedExtension from '@statoscope/webpack-stats-extension-compressed';
+import { CompressFunction } from '@statoscope/stats-extension-compressed/dist/generator';
+import Piper from '@statoscope/report-writer/dist/piper';
 
 export type Options = {
   name?: string;
@@ -17,7 +23,13 @@ export type Options = {
   additionalStats?: string[];
   statsOptions?: Record<string, unknown>;
   watchMode?: boolean;
-  open: false | 'dir' | 'file';
+  open?: false | 'dir' | 'file';
+  compressor?: false | 'gzip' | CompressFunction;
+};
+
+export type StatoscopeMeta = {
+  descriptor: StatsDescriptor;
+  extensions: Extension<unknown>[];
 };
 
 export default class StatoscopeWebpackPlugin {
@@ -28,6 +40,7 @@ export default class StatoscopeWebpackPlugin {
   constructor(options: Partial<Options> = {}) {
     this.options = {
       open: 'file',
+      compressor: 'gzip',
       additionalStats: [],
       ...options,
     };
@@ -58,6 +71,19 @@ export default class StatoscopeWebpackPlugin {
       // @ts-ignore
       const statsObj = stats.toJson(options.statsOptions || compiler.options.stats);
       statsObj.name = options.name || statsObj.name || stats.compilation.name;
+
+      if (this.options.compressor) {
+        const compressedExtension = new WebpackCompressedExtension(
+          this.options.compressor
+        );
+        // @ts-ignore
+        await compressedExtension.handleCompilation(stats.compilation);
+        statsObj.__statoscope = {
+          descriptor: { name: statsPackage.name, version: statsPackage.version },
+          extensions: [compressedExtension.get()],
+        } as StatoscopeMeta;
+      }
+
       const htmlPath =
         this.saveToFile ||
         path.join(this.saveToDir as string, `statoscope-[name]-[hash].html`);
@@ -70,9 +96,9 @@ export default class StatoscopeWebpackPlugin {
           this.interpolate(options.saveStatsTo, stats.compilation, statsObj.name)
         );
 
-      const webpackStatsStream = stringifyStream(statsObj) as Readable;
+      const webpackStatsStream = new Piper(stringifyStream(statsObj) as Readable);
       const htmlWriter = new HTMLWriter({
-        scripts: [require.resolve('@statoscope/webpack-ui')],
+        scripts: [{ type: 'path', path: require.resolve('@statoscope/webpack-ui') }],
         init: function (data): void {
           // @ts-ignore
           Statoscope.default(data.map((item) => ({ name: item.id, data: item.data })));
@@ -81,9 +107,14 @@ export default class StatoscopeWebpackPlugin {
 
       htmlWriter.getStream().pipe(fs.createWriteStream(resolvedHtmlPath));
       htmlWriter.addChunkWriter(
-        webpackStatsStream,
+        webpackStatsStream.getOutput(),
         resolvedSaveStatsTo ? path.basename(resolvedSaveStatsTo) : 'stats.json'
       );
+
+      if (resolvedSaveStatsTo) {
+        const statsFileStream = fs.createWriteStream(resolvedSaveStatsTo);
+        webpackStatsStream.addConsumer(statsFileStream);
+      }
 
       if (options.additionalStats) {
         for (const statsPath of options.additionalStats) {
@@ -98,12 +129,7 @@ export default class StatoscopeWebpackPlugin {
       }
 
       try {
-        await htmlWriter.write();
-
-        if (resolvedSaveStatsTo) {
-          const statsFileStream = fs.createWriteStream(resolvedSaveStatsTo);
-          webpackStatsStream.pipe(statsFileStream);
-        }
+        await Promise.all([webpackStatsStream.consume(), htmlWriter.write()]);
 
         if (options.open) {
           if (options.open === 'file') {

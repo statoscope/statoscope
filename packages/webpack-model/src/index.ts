@@ -8,7 +8,6 @@ import normalize, {
   RawStatsFileDescriptor,
 } from './normalize';
 
-export { default as makeEntityResolver } from './entity-resolver';
 export { default as validate } from './validate';
 export * as module from './module';
 

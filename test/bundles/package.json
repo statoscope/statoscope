@@ -2,7 +2,8 @@
   "name": "test-bundles",
   "private": true,
   "scripts": {
-    "postinstall": "cd simple && npm run build && cd .."
+    "postinstall": "npm run v4 && cd simple && npm run build && cd ..",
+    "v4": "cd v4 && npm install && cd .."
   },
   "devDependencies": {
     "webpack": "^5.38.1",

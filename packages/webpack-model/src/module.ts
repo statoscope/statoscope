@@ -13,7 +13,7 @@ export function moduleNameResource(name: string | null): string | null {
   if (name && !name.includes('(ignored)') && !name.startsWith('multi')) {
     const normalized = matchRxValue(
       extractFileRx,
-      name.replace('(webpack)', '/node_modules/webpack')
+      name.replace('(webpack)', 'node_modules/webpack')
     );
 
     if (!normalized) {
@@ -56,6 +56,8 @@ export function nodeModule(path: string | null): NodeModule | null {
   const lastNodeModulesRx =
     /.*(?:^|[/\\])node_modules[/\\](@.+?[/\\][^/\\\s]+|[^/\\\s]+)/;
   const [input, name] = path.match(lastNodeModulesRx) || [];
-  const isRoot = input ? !input.match(/\/node_modules\/.+\/node_modules\//) : false;
+  const isRoot = input
+    ? !/.*(?:^|[/\\])node_modules[/\\].+[/\\]node_modules[/\\]/.test(input)
+    : false;
   return name ? { path: input, name, isRoot } : null;
 }

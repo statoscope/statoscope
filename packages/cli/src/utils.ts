@@ -9,7 +9,7 @@ export async function transform(from: string[], to?: string): Promise<string> {
   const id = from.length === 1 ? path.basename(from[0], '.json') : Date.now();
   to = to || path.join(os.tmpdir(), `statoscope-report-${id}.html`);
   const htmlWriter = new HTMLWriter({
-    scripts: [require.resolve('@statoscope/webpack-ui')],
+    scripts: [{ type: 'path', path: require.resolve('@statoscope/webpack-ui') }],
     init: function (data: InitArg): void {
       // @ts-ignore
       Statoscope.default(data.map((item) => ({ name: item.id, data: item.data })));

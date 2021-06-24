@@ -1,3 +1,6 @@
+import { StatsDescriptor } from '@statoscope/stats';
+import { Extension } from '@statoscope/stats/spec/extension';
+
 export declare namespace Webpack {
   type IssuerPathItem = {
     id: number | string | null;
@@ -38,6 +41,7 @@ export declare namespace Webpack {
     name?: string;
     names: string[];
     modules?: Module[];
+    size: number;
     reason?: string | null;
     children?: Array<ChunkID | Chunk>;
     siblings?: Array<ChunkID | Chunk>;
@@ -69,5 +73,9 @@ export declare namespace Webpack {
     assets?: Asset[];
     modules?: Module[];
     children?: Compilation[];
+    __statoscope?: {
+      descriptor: StatsDescriptor;
+      extensions: Extension<unknown>[];
+    };
   };
 }

@@ -42,7 +42,7 @@ export function entryItemConfig(getter = '$', hash = '#.params.hash'): EntryItem
       type: 'chunks'
     },{
       title: "Modules",
-      data: $chunksModules.sort(moduleSize() desc),
+      data: $chunksModules.sort(getModuleSize(${hash}).size desc),
       visible: $chunksModules,
       type: 'modules'
     },{
@@ -149,13 +149,13 @@ export function entryItemConfig(getter = '$', hash = '#.params.hash'): EntryItem
             $asyncAssets:$asyncChunks.files;
             [{
               title: "Initial",
-              data: $initialAssets.sort(isOverSizeLimit asc, size desc),
+              data: $initialAssets.sort(isOverSizeLimit asc, getAssetSize(${hash}).size desc),
               visible: $initialAssets,
               type: 'initial'
             },
             {
               title: "Async",
-              data: $asyncAssets.sort(isOverSizeLimit asc, size desc),
+              data: $asyncAssets.sort(isOverSizeLimit asc, getAssetSize(${hash}).size desc),
               visible: $asyncAssets,
               type: 'async'
             }].[visible]`,

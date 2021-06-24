@@ -4,8 +4,14 @@ import { promisify } from 'util';
 import makeChunkToScriptWriter from './chunkToScriptWriter';
 
 export type InitArg = { id: string; data: unknown }[];
+export type ScriptItem =
+  | {
+      type: 'path';
+      path: string;
+    }
+  | { type: 'raw'; content: string };
 export type Options = {
-  scripts: string[];
+  scripts: ScriptItem[];
   init: (data: InitArg) => void;
   jsonExtAPIName?: string;
 };
@@ -46,18 +52,23 @@ async function writeHeader(stream: Writable, options: Options): Promise<void> {
   await write(`
 <html>
   <head>
-      <meta charset="UTF-8">
-      <script>
-        ${options.scripts.map((filename) =>
-          fs.readFileSync(require.resolve(filename), 'utf8')
-        )}
-      </script>
-      <script>
+    <meta charset="UTF-8">
+    <script>
       ${fs.readFileSync(
         require.resolve('@discoveryjs/json-ext/dist/json-ext.min.js'),
         'utf8'
       )}
     </script>
+    ${options.scripts
+      .map(
+        (item) =>
+          `<script>${
+            item.type === 'path'
+              ? fs.readFileSync(require.resolve(item.path), 'utf8')
+              : item.content
+          }</script>`
+      )
+      .join('\n')}
     <script>
       function _makeJsonExtAPI() {
         const jsonExtData = new Object(null);

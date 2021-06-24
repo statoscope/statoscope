@@ -1,0 +1,32 @@
+{
+  "name": "@statoscope/stats-extension-compressed",
+  "version": "5.2.0",
+  "description": "Statoscope extension for collecting compressed resource sizes",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "../../node_modules/.bin/tsc",
+    "buildVersionTS": "node ../../scripts/extract-version.js --field author --field homepage",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": "https://github.com/statoscope/statoscope.git",
+  "author": {
+    "name": "Sergey Melyukov",
+    "url": "https://twitter.com/smelukov"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/statoscope/statoscope/",
+  "dependencies": {
+    "@statoscope/helpers": "5.2.0",
+    "gzip-size": "^6.0.0"
+  },
+  "devDependencies": {
+    "@statoscope/extensions": "5.2.0",
+    "@statoscope/stats": "5.2.0"
+  }
+}

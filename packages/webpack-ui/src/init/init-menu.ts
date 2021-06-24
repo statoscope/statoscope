@@ -1,14 +1,21 @@
 // @ts-ignore
 import settingsStyles from '../settings-styles.css';
 import settings, {
-  SETTING_HIDE_NODE_MODULES,
-  SETTING_HIDE_NODE_MODULES_DEFAULT,
+  SETTING_ASSETS_INJECT_TYPE,
+  SETTING_ASSETS_INJECT_TYPE_DEFAULT,
   SETTING_HIDE_CHILD_COMPILATIONS,
   SETTING_HIDE_CHILD_COMPILATIONS_DEFAULT,
+  SETTING_HIDE_NODE_MODULES,
+  SETTING_HIDE_NODE_MODULES_DEFAULT,
   SETTING_LIST_ITEMS_LIMIT,
   SETTING_LIST_ITEMS_LIMIT_DEFAULT,
+  SETTING_NETWORK_SPEED,
+  SETTING_NETWORK_SPEED_DEFAULT,
+  SETTING_SHOW_COMPRESSED,
+  SETTING_SHOW_COMPRESSED_DEFAULT,
 } from '../settings';
 import { StatoscopeWidget, ViewConfigData } from '../../types';
+import networkTypeList from '../network-type-list';
 
 export default (discovery: StatoscopeWidget): void => {
   hideUseless(discovery);
@@ -83,11 +90,16 @@ function addStatsList(discovery: StatoscopeWidget): void {
   });
 }
 
-export type SettingOptions<TValue> = { title: string; key: string; defaultValue: TValue };
+export type SettingOptions<TValue> = {
+  title: string;
+  key: string;
+  hint?: string;
+  defaultValue: TValue;
+};
 
 function makeBooleanSetting(
   discovery: StatoscopeWidget,
-  { title, key, defaultValue }: SettingOptions<boolean>
+  { title, key, hint, defaultValue }: SettingOptions<boolean>
 ): ViewConfigData {
   return {
     view: 'block',
@@ -112,7 +124,21 @@ function makeBooleanSetting(
           // @ts-ignore
           {
             view: 'toggle-group',
-            beforeToggles: `text:"${title}"`,
+            beforeToggles: [
+              `text:"${title}"`,
+              (
+                element: HTMLDivElement /*,
+                props: unknown,
+                data: Array<{ value: boolean; text: string }>,
+                context: { widget: StatoscopeWidget }*/
+              ): void => {
+                if (hint) {
+                  element.style.display = 'inline-block';
+                  element.textContent = '❓';
+                  element.title = hint;
+                }
+              },
+            ],
             onChange: (value: boolean) => {
               settingValue.set(value);
               hide();
@@ -145,6 +171,15 @@ function addSettings(discovery: StatoscopeWidget): void {
       title: 'Hide child compilations',
       key: SETTING_HIDE_CHILD_COMPILATIONS,
       defaultValue: SETTING_HIDE_CHILD_COMPILATIONS_DEFAULT,
+    })
+  );
+
+  discovery.nav.menu.append(
+    makeBooleanSetting(discovery, {
+      title: 'Show compressed size',
+      hint: 'Makes sense only when @statoscope/webpack-plugin used',
+      key: SETTING_SHOW_COMPRESSED,
+      defaultValue: SETTING_SHOW_COMPRESSED_DEFAULT,
     })
   );
 
@@ -187,6 +222,111 @@ function addSettings(discovery: StatoscopeWidget): void {
               { value: '100', text: 100 },
             ],
           },
+          null,
+          { widget: discovery }
+        );
+      }
+    },
+  });
+
+  discovery.nav.menu.append({
+    view: 'block',
+    className: [settingsStyles.item, settingsStyles.select],
+    name: 'network-type',
+    postRender: (
+      el: HTMLElement,
+      opts: unknown,
+      data: unknown,
+      { hide }: { hide(): void }
+    ): void => {
+      const limit = settings.get(SETTING_NETWORK_SPEED, SETTING_NETWORK_SPEED_DEFAULT);
+
+      render();
+
+      limit.eventChange.on(() => render());
+
+      function render(): void {
+        el.innerHTML = '';
+        discovery.view.render(
+          el,
+          [
+            {
+              view: 'block',
+              className: settingsStyles.caption,
+              content: `text:"Network type"`,
+            },
+            {
+              view: 'select',
+              placeholder: 'choose a type',
+              value: 'settingNetworkType()',
+              text: `getNetworkTypeInfo().getNetworkTypeName()`,
+              data: networkTypeList.map((item) => item.name),
+              onChange: (value: string): void => {
+                limit.set(value);
+                hide();
+              },
+            },
+          ],
+          null,
+          { widget: discovery }
+        );
+      }
+    },
+  });
+
+  discovery.nav.menu.append({
+    view: 'block',
+    className: [settingsStyles.item, settingsStyles.select],
+    name: 'client-download-type',
+    postRender: (
+      el: HTMLElement,
+      opts: unknown,
+      data: unknown,
+      { hide }: { hide(): void }
+    ): void => {
+      const limit = settings.get(
+        SETTING_ASSETS_INJECT_TYPE,
+        SETTING_ASSETS_INJECT_TYPE_DEFAULT
+      );
+
+      render();
+
+      limit.eventChange.on(() => render());
+
+      function render(): void {
+        el.innerHTML = '';
+        discovery.view.render(
+          el,
+          [
+            {
+              view: 'block',
+              className: settingsStyles.caption,
+              content: [
+                `text:"Assets inject type"`,
+                (
+                  element: HTMLDivElement /*,
+                props: unknown,
+                data: Array<{ value: boolean; text: string }>,
+                context: { widget: StatoscopeWidget }*/
+                ): void => {
+                  element.style.display = 'inline-block';
+                  element.textContent = '❓';
+                  element.title =
+                    'sync: dowload time = sum(downloadTime(assets))\nasync: dowload time = max(downloadTime(assets))';
+                },
+              ],
+            },
+            {
+              view: 'select',
+              placeholder: 'choose a type',
+              value: 'settingAssetsInjectType()',
+              data: ['sync', 'async'],
+              onChange: (value: string): void => {
+                limit.set(value);
+                hide();
+              },
+            },
+          ],
           null,
           { widget: discovery }
         );

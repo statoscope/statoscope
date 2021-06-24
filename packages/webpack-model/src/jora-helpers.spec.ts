@@ -44,11 +44,30 @@ test('statName', () => {
   expect(helpers.statName()).toBe('unknown');
 });
 
-test('moduleSize', () => {
+test('getModuleSize', () => {
   const module = firstCompilation.modules[0];
-  const size = helpers.moduleSize(module);
-  expect(typeof size === 'number').toBe(true);
-  expect(size).toBeGreaterThan(0);
+  const originalModuleSize = module.size;
+  expect(helpers.getModuleSize.bind(helpers, module, true)).toThrow();
+  const moduleSize = helpers.getModuleSize(module, false);
+  const compressedModuleSize = helpers.getModuleSize(module, true, hash);
+
+  expect(moduleSize.size).toBe(originalModuleSize);
+  expect(compressedModuleSize).not.toStrictEqual(moduleSize);
+  expect(typeof compressedModuleSize.size === 'number').toBe(true);
+  expect(compressedModuleSize.size).toBeGreaterThan(0);
+});
+
+test('getAssetSize', () => {
+  const asset = firstCompilation.assets[0];
+  const originalAssetSize = asset.size;
+  expect(helpers.getAssetSize.bind(helpers, asset, true)).toThrow();
+  const assetSize = helpers.getAssetSize(asset, false);
+  const compressedAssetSize = helpers.getAssetSize(asset, true, hash);
+
+  expect(assetSize.size).toBe(originalAssetSize);
+  expect(compressedAssetSize).not.toStrictEqual(assetSize);
+  expect(typeof compressedAssetSize.size === 'number').toBe(true);
+  expect(compressedAssetSize.size).toBeGreaterThan(0);
 });
 
 test.each([

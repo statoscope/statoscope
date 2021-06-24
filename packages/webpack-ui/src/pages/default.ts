@@ -81,34 +81,37 @@ export default function (discovery: StatoscopeWidget): void {
               view: 'block',
               data: `
               $statA: $;
-              
-              $getSize: => (
-                $chunks: data.chunks + data.chunks..children;
-                $assets: $chunks.files;
-                $assets.size.reduce(=> $ + $$, 0)
-              );
-              $getInitialSize: => (
-                $chunks: data.chunks.[initial];
-                $assets: $chunks.files;
-                $assets.size.reduce(=> $ + $$, 0)
-              );
+            
+              $allChunks: $statA.compilation.entrypoints.data.chunks + $statA.compilation.entrypoints.data.chunks..children;
+              $allAssetsSize: $allChunks.files.[].(getAssetSize($statA.compilation.hash)).reduce(=> size + $$, 0);
+
+              $initialChunks: $allChunks.[initial];
+              $initialAssetsSizes: $initialChunks.files.[].(getAssetSize($statA.compilation.hash));
+              $initialAssetsSize: $initialAssetsSizes.reduce(=> size + $$, 0);
+
+              $initialAssetsDownloadTime: $statA.compilation.entrypoints.data.chunks + $statA.compilation.entrypoints.data.chunks..children
+                .reduce(=> settingAssetsInjectType() = 'sync' ? (size + $$) : (size > $$ ? size : $$), 0)
+                .getDownloadTime();
               
               [
                 {
-                  $totalSizeA: $statA.compilation.entrypoints.($getSize()).reduce(=> $ + $$, 0);
-                  value: $totalSizeA.formatSize(),
+                  value: $allAssetsSize.formatSize(),
                   label: "Total size",
                   visible: $statA.compilation.chunks.files
                 },
                 {
-                  $initialSizeA: $statA.compilation.entrypoints.($getInitialSize()).reduce(=> $ + $$, 0);
-                  value: $initialSizeA.formatSize(),
+                  value: $initialAssetsSize.formatSize(),
                   label: 'Initial size',
                   visible: $statA.compilation.chunks.files
                 },
                 {
+                  value: $initialAssetsDownloadTime.formatDuration(),
+                  label: 'Initial download time',
+                  visible: $statA.compilation.chunks.files
+                },
+                {
                   $packagesModulesA: $statA.compilation.nodeModules.instances.modules;
-                  $packagesSizeA: $packagesModulesA.size.reduce(=> $ + $$, 0);
+                  $packagesSizeA: $packagesModulesA.(getModuleSize($statA.compilation.hash)).reduce(=> size + $$, 0);
                   value: $packagesSizeA.formatSize(),
                   label: 'Packages size',
                   visible: $packagesModulesA
@@ -217,10 +220,11 @@ export default function (discovery: StatoscopeWidget): void {
                           {
                             when: '#.instantLists="modules"',
                             data: `
+                            $hash: compilation.hash;
                             compilation.modules.[not shouldHideModule()].[
                               name~=#.filter or modules and modules.[name~=#.filter]
                             ]
-                            .sort(moduleSize() desc)
+                            .sort(getModuleSize($hash).size desc)
                             `,
                             content: {
                               ...modulesTree(),
@@ -294,8 +298,9 @@ export default function (discovery: StatoscopeWidget): void {
                           {
                             when: '#.instantLists="assets"',
                             data: `
+                            $hash: compilation.hash;
                             compilation.assets.[name~=#.filter]
-                            .sort(isOverSizeLimit asc, size desc)
+                            .sort(isOverSizeLimit asc, getAssetSize($hash).size desc)
                             `,
                             content: {
                               ...assetsTree(),
@@ -304,9 +309,10 @@ export default function (discovery: StatoscopeWidget): void {
                           {
                             when: '#.instantLists="entrypoints"',
                             data: `
+                            $hash: compilation.hash;
                             compilation.entrypoints
                               .[name~=#.filter]
-                              .sort(data.isOverSizeLimit asc, size desc)
+                              .sort(data.isOverSizeLimit asc)
                             `,
                             content: {
                               ...entryTree(),

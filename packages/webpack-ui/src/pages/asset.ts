@@ -38,7 +38,7 @@ export default function (discovery: StatoscopeWidget): void {
                       data: `
                       $topLevelAssetChunks:chunks.[files has @];
                       $assetChunks: ($topLevelAssetChunks + $topLevelAssetChunks..children).[files has @];
-                      $assetChunks.modules.[not shouldHideModule()].modulesToFoamTree()
+                      $assetChunks.modules.[not shouldHideModule()].modulesToFoamTree(#.params.hash)
                       `,
                     },
                   ],

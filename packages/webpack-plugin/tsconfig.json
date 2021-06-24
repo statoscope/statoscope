@@ -4,5 +4,5 @@
     "module": "CommonJS",
     "outDir": "./dist"
   },
-  "exclude": ["./dist"]
+  "exclude": ["./dist", "./package.json"]
 }

@@ -5,7 +5,8 @@
   "main": "./dist/index.js",
   "scripts": {
     "build": "../../node_modules/.bin/tsc",
-    "prepublishOnly": "npm run build"
+    "buildVersionTS": "node ./scripts/extract-version.js",
+    "prepublishOnly": "npm run buildVersionTS && npm run build"
   },
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {
@@ -22,7 +23,10 @@
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
     "@discoveryjs/json-ext": "^0.5.3",
+    "@statoscope/stats": "^5.2.0",
     "@statoscope/report-writer": "^5.2.0",
+    "@statoscope/stats-extension-compressed": "^5.2.0",
+    "@statoscope/webpack-stats-extension-compressed": "^5.2.0",
     "@statoscope/webpack-ui": "^5.2.0",
     "open": "^8.0.4"
   },

@@ -60,7 +60,7 @@ export default function (discovery: StatoscopeWidget): void {
                                     when: '#.reasonsTabs="modules"',
                                     data: `
                                     $modules: reasons.resolvedModule.[];
-                                    $modules.[not shouldHideModule() and name~=#.filter].sort(moduleSize() desc)
+                                    $modules.[not shouldHideModule() and name~=#.filter].sort(getModuleSize(#.params.hash).size desc)
                                     `,
                                     content: {
                                       ...modulesTree(),
@@ -78,7 +78,7 @@ export default function (discovery: StatoscopeWidget): void {
                                     data: `
                                     chunks
                                       .[chunkName()~=#.filter]
-                                      .sort(initial desc, entry desc, size desc)
+                                      .sort(initial desc, entry desc, getModuleSize(#.params.hash).size desc)
                                     `,
                                     content: {
                                       ...chunksTree(),
@@ -115,7 +115,7 @@ export default function (discovery: StatoscopeWidget): void {
                                     #.params.hash.resolveStat().compilation.(..modules)
                                       .[not shouldHideModule() and name~=#.filter]
                                       .[reasons.[resolvedModule=@]]
-                                      .sort(moduleSize() desc)
+                                      .sort(getModuleSize(#.params.hash).size desc)
                                     `,
                                     content: {
                                       ...modulesTree(),
@@ -135,7 +135,7 @@ export default function (discovery: StatoscopeWidget): void {
                                   {
                                     when: '#.depsTabs="concatenated"',
                                     data: `
-                                    modules.[not shouldHideModule() and name~=#.filter].sort(moduleSize() desc)
+                                    modules.[not shouldHideModule() and name~=#.filter].sort(getModuleSize(#.params.hash).size desc)
                                     `,
                                     content: {
                                       ...modulesTree(),

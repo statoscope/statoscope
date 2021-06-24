@@ -49,7 +49,7 @@ export default function (discovery: StatoscopeWidget): void {
                       view: 'foam-tree',
                       data: `
                       $packageModules:package.instances.modules;
-                      $packageModules.[not shouldHideModule()].modulesToFoamTree()
+                      $packageModules.[not shouldHideModule()].modulesToFoamTree(#.params.hash)
                       `,
                     },
                   ],
@@ -69,7 +69,7 @@ export default function (discovery: StatoscopeWidget): void {
                       view: 'foam-tree',
                       data: `
                       $packageModules:instance.modules;
-                      $packageModules.[not shouldHideModule()].modulesToFoamTree()
+                      $packageModules.[not shouldHideModule()].modulesToFoamTree(#.params.hash)
                       `,
                     },
                   ],

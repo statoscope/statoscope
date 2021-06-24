@@ -1,3 +1,4 @@
+import { Compressor, Size } from '@statoscope/stats-extension-compressed/dist/generator';
 import { moduleResource } from './module';
 import { NormalizedModule } from './normalize';
 
@@ -11,22 +12,28 @@ export type NodeData = {
 export type Node = {
   label: string;
   weight: number;
+  weightCompressor?: Compressor;
   groups: Node[];
   link?: string | NodeLink;
   path: string;
 };
 
-function makeNode(data: NodeData, size: number, path: string): Node {
+function makeNode(data: NodeData, size: Size, path: string): Node {
   return {
     label: data.label,
-    weight: size,
+    weight: size.size,
+    weightCompressor: size.compressor,
     groups: [],
     link: data.link,
     path,
   };
 }
 
-function handleModule(root: Node, module: NormalizedModule): void {
+function handleModule(
+  root: Node,
+  module: NormalizedModule,
+  getModuleSize: GetModuleSizeFN
+): void {
   const resource = moduleResource(module);
 
   if (!resource) {
@@ -67,16 +74,21 @@ function handleModule(root: Node, module: NormalizedModule): void {
     };
   }
 
-  apply(root, parts, module.modules ? 0 : module.size);
+  apply(root, parts, module.modules ? { size: 0 } : getModuleSize(module));
 }
 
-function apply(root: Node, parts: NodeData[], size: number): void {
+function apply(root: Node, parts: NodeData[], size: Size): void {
   const stack: Node[] = [root];
   let cursor: Node | null = root;
 
-  function applyToStack(stack: Node[], size: number): void {
+  function applyToStack(stack: Node[], size: Size): void {
     for (const item of stack) {
-      item.weight += size;
+      if (!item.weightCompressor) {
+        item.weightCompressor = size.compressor;
+      } else if (item.weightCompressor !== size.compressor) {
+        item.weightCompressor = 'multiple compressors';
+      }
+      item.weight += size.size;
     }
   }
 
@@ -87,7 +99,7 @@ function apply(root: Node, parts: NodeData[], size: number): void {
     if (!node) {
       node = makeNode(
         part,
-        0,
+        { size: 0 },
         [...stack, part]
           .map((item) => item.label)
           .filter(Boolean)
@@ -103,15 +115,19 @@ function apply(root: Node, parts: NodeData[], size: number): void {
   applyToStack(stack, size);
 }
 
-export default function modulesToFoamTree(modules: NormalizedModule[]): Node {
-  const root = makeNode({ label: '' }, 0, '/');
+export type GetModuleSizeFN = (module: NormalizedModule) => Size;
+export default function modulesToFoamTree(
+  modules: NormalizedModule[],
+  getModuleSize: GetModuleSizeFN
+): Node {
+  const root = makeNode({ label: '' }, { size: 0 }, '/');
 
   for (const module of modules) {
-    handleModule(root, module);
+    handleModule(root, module, getModuleSize);
 
     if (module.modules) {
       for (const innerModule of module.modules) {
-        handleModule(root, innerModule);
+        handleModule(root, innerModule, getModuleSize);
       }
     }
   }

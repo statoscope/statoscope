@@ -1,0 +1,19 @@
+{
+  "name": "@statoscope/stats",
+  "version": "5.2.0",
+  "description": "Statoscope stats spec",
+  "types": "./spec/index.d.ts",
+  "scripts": {},
+  "repository": "https://github.com/statoscope/statoscope/",
+  "author": {
+    "name": "Sergey Melyukov",
+    "url": "https://twitter.com/smelukov"
+  },
+  "files": [
+    "src/*"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/statoscope/statoscope/",
+  "devDependencies": {},
+  "dependencies": {}
+}
