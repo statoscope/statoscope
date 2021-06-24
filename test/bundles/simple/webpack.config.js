@@ -1,5 +1,7 @@
 /* eslint-env node */
 
+const Statoscope = require('../../../packages/webpack-plugin').default;
+
 module.exports = {
   entry: {
     one: './src/index.ts',
@@ -14,7 +16,13 @@ module.exports = {
   stats: {
     context: __dirname,
   },
-  plugins: [],
+  plugins: [
+    new Statoscope({
+      saveStatsTo:
+        process.env.MODE === 'production' ? 'stats-prod.json' : 'stats-dev.json',
+      open: false,
+    }),
+  ],
   module: {
     rules: [
       {
