@@ -2,7 +2,8 @@ import path from 'path';
 import { colorFromH, colorMap, fileTypeMap, generateColor } from './colors';
 import { pluralEng, pluralRus } from './plural';
 
-export default (): Record<string, unknown> => {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
+export default () => {
   return {
     stringify: JSON.stringify,
     toNumber(str: string): number {
@@ -33,7 +34,7 @@ export default (): Record<string, unknown> => {
           return (sign * ms).toFixed(0) + ' ms';
         }
 
-        return (sign * (ms / 1000)).toFixed(0) + ' sec';
+        return (sign * (ms / 1000)).toFixed(1) + ' sec';
       }
       return 'n/a';
     },
@@ -59,10 +60,18 @@ export default (): Record<string, unknown> => {
     },
     color: (value: string): string =>
       colorMap[value] ? colorMap[value].color : generateColor(value),
-    fileExt: (value = ''): string => {
+    fileExt: (value?: string): string => {
+      if (value == null) {
+        return '';
+      }
+
       return path.extname(value);
     },
-    fileType: (value = ''): string => {
+    fileType: (value?: string): string => {
+      if (value == null) {
+        return '';
+      }
+
       const extname = path.extname(value);
       return fileTypeMap[extname] || extname;
     },
