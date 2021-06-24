@@ -37,8 +37,29 @@ export default function (compilations: HandledCompilation[]) {
         chunk.reason ? ' [' + chunk.reason + ']' : ''
       }`;
     },
-    getTotalFilesSize: (asset: NormalizedAsset): number =>
-      asset.files.reduce((sum, file) => sum + file.size, 0),
+    getTotalFilesSize: (
+      asset: NormalizedAsset,
+      compressed?: boolean,
+      hash?: string
+    ): number => {
+      if (!compressed) {
+        return asset.files.reduce((sum, file) => sum + file.size, 0);
+      }
+
+      if (!hash) {
+        throw new Error('[getTotalFilesSize-helper]: hash-parameter is required');
+      }
+
+      const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
+        '@statoscope/stats-extension-compressed'
+      );
+
+      const resolverSize = ext?.api as CompressedExtensionAPI | undefined;
+
+      return asset.files
+        .map((f) => resolverSize?.(hash, f.name) ?? null)
+        .reduce((sum, file) => sum + (file?.size ?? 0), 0);
+    },
     resolveChunk(id: ChunkID, compilationHash: string): NormalizedChunk | null {
       return resolveCompilation(compilationHash)?.resolvers.resolveChunk(id) || null;
     },
@@ -59,7 +80,7 @@ export default function (compilations: HandledCompilation[]) {
       const resolved = resolveCompilation(id);
       return (resolved && resolved?.data) || null;
     },
-    getModuleSize(module: NormalizedModule, hash: string, compressed: boolean): Size {
+    getModuleSize(module: NormalizedModule, compressed?: boolean, hash?: string): Size {
       if (!compressed) {
         return { size: module.size };
       }
@@ -80,7 +101,7 @@ export default function (compilations: HandledCompilation[]) {
         }
       );
     },
-    getAssetSize(asset: NormalizedAsset, hash: string, compressed: boolean): Size {
+    getAssetSize(asset: NormalizedAsset, compressed?: boolean, hash?: string): Size {
       if (!compressed) {
         return { size: asset.size };
       }
@@ -123,8 +144,8 @@ export default function (compilations: HandledCompilation[]) {
     },
     modulesToFoamTree(
       modules: NormalizedModule[],
-      hash?: string,
-      compressed?: boolean
+      compressed?: boolean,
+      hash?: string
     ): Node {
       if (compressed && !hash) {
         throw new Error('[modulesToFoamTree-helper]: hash-parameter is required');
@@ -132,7 +153,7 @@ export default function (compilations: HandledCompilation[]) {
 
       return modulesToFoamTree(modules, (module: NormalizedModule): Size => {
         if (compressed && hash) {
-          return this.getModuleSize(module, hash, compressed);
+          return this.getModuleSize(module, compressed, hash);
         }
 
         return { size: module.size };

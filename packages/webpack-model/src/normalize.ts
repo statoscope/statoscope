@@ -10,6 +10,8 @@ import validateStats, { ValidationResult } from './validate';
 import { moduleReasonResource, moduleResource, nodeModule } from './module';
 import ChunkID = Webpack.ChunkID;
 
+export const normalizedSymbol = Symbol('sttoscope.normalized');
+
 export type NormalizedChunk = Omit<
   Webpack.Chunk,
   'modules' | 'files' | 'children' | 'parents' | 'siblings'
@@ -295,6 +297,14 @@ function prepareModule(
   module: Webpack.Module | Webpack.InnerModule,
   { resolveChunk, resolveModule }: CompilationResolvers
 ): void {
+  // @ts-ignore
+  if (module[normalizedSymbol]) {
+    return;
+  }
+
+  // @ts-ignore
+  module[normalizedSymbol] = true;
+
   (module as unknown as NormalizedModule).resolvedResource = moduleResource(
     module as unknown as NormalizedModule
   );
@@ -341,69 +351,90 @@ function prepareModules(
   }
 }
 
+function prepareChunk(chunk: Webpack.Chunk, resolvers: CompilationResolvers): void {
+  const { resolveModule, resolveAsset, resolveChunk } = resolvers;
+
+  // @ts-ignore
+  if (chunk[normalizedSymbol]) {
+    return;
+  }
+
+  // @ts-ignore
+  chunk[normalizedSymbol] = true;
+
+  if (chunk.modules) {
+    (chunk as unknown as NormalizedChunk).modules = chunk.modules
+      .map((m) => resolveModule(m.name))
+      .filter(Boolean) as NormalizedModule[];
+
+    for (const module of chunk.modules) {
+      prepareModule(module, resolvers);
+
+      if (module.modules) {
+        for (const innerModule of module.modules) {
+          prepareModule(innerModule, resolvers);
+        }
+      }
+    }
+  } else {
+    chunk.modules = [];
+  }
+
+  if (chunk.files) {
+    (chunk as unknown as NormalizedChunk).files = chunk.files
+      .map((f) => resolveAsset(typeof f === 'string' ? f : f.name))
+      .filter(Boolean) as NormalizedAsset[];
+  } else {
+    chunk.files = [];
+  }
+
+  if (chunk.children) {
+    (chunk as unknown as NormalizedChunk).children = chunk.children
+      .map((c) => resolveChunk(typeof c === 'string' || typeof c === 'number' ? c : c.id))
+      .filter(Boolean) as NormalizedChunk[];
+    for (const children of chunk.children as Webpack.Chunk[]) {
+      prepareChunk(children, resolvers);
+    }
+  } else {
+    chunk.children = [];
+  }
+
+  if (chunk.siblings) {
+    (chunk as unknown as NormalizedChunk).siblings = chunk.siblings
+      .map((c) => resolveChunk(typeof c === 'string' || typeof c === 'number' ? c : c.id))
+      .filter(Boolean) as NormalizedChunk[];
+  } else {
+    chunk.siblings = [];
+  }
+
+  if (chunk.parents) {
+    (chunk as unknown as NormalizedChunk).parents = chunk.parents
+      .map((c) => resolveChunk(typeof c === 'string' || typeof c === 'number' ? c : c.id))
+      .filter(Boolean) as NormalizedChunk[];
+  } else {
+    chunk.parents = [];
+  }
+
+  if (chunk.origins) {
+    chunk.origins
+      .map(
+        (o) =>
+          ((o as NormalizedReason).resolvedModule = o.moduleName
+            ? resolveModule(o.moduleName)
+            : null)
+      )
+      .filter(Boolean);
+  } else {
+    chunk.origins = [];
+  }
+}
+
 function prepareChunks(
   compilation: Webpack.Compilation,
-  { resolveModule, resolveAsset, resolveChunk }: CompilationResolvers
+  resolvers: CompilationResolvers
 ): void {
   for (const chunk of compilation.chunks || []) {
-    if (chunk.modules) {
-      (chunk as unknown as NormalizedChunk).modules = chunk.modules
-        .map((m) => resolveModule(m.name))
-        .filter(Boolean) as NormalizedModule[];
-    } else {
-      chunk.modules = [];
-    }
-
-    if (chunk.files) {
-      (chunk as unknown as NormalizedChunk).files = chunk.files
-        .map((f) => resolveAsset(typeof f === 'string' ? f : f.name))
-        .filter(Boolean) as NormalizedAsset[];
-    } else {
-      chunk.files = [];
-    }
-
-    if (chunk.children) {
-      (chunk as unknown as NormalizedChunk).children = chunk.children
-        .map((c) =>
-          resolveChunk(typeof c === 'string' || typeof c === 'number' ? c : c.id)
-        )
-        .filter(Boolean) as NormalizedChunk[];
-    } else {
-      chunk.children = [];
-    }
-
-    if (chunk.siblings) {
-      (chunk as unknown as NormalizedChunk).siblings = chunk.siblings
-        .map((c) =>
-          resolveChunk(typeof c === 'string' || typeof c === 'number' ? c : c.id)
-        )
-        .filter(Boolean) as NormalizedChunk[];
-    } else {
-      chunk.siblings = [];
-    }
-
-    if (chunk.parents) {
-      (chunk as unknown as NormalizedChunk).parents = chunk.parents
-        .map((c) =>
-          resolveChunk(typeof c === 'string' || typeof c === 'number' ? c : c.id)
-        )
-        .filter(Boolean) as NormalizedChunk[];
-    } else {
-      chunk.parents = [];
-    }
-
-    if (chunk.origins) {
-      chunk.origins
-        .map(
-          (o) =>
-            ((o as NormalizedReason).resolvedModule = o.moduleName
-              ? resolveModule(o.moduleName)
-              : null)
-        )
-        .filter(Boolean);
-    } else {
-      chunk.origins = [];
-    }
+    prepareChunk(chunk, resolvers);
   }
 }
 
@@ -485,8 +516,12 @@ function extractPackages(
       );
 
       if (!instance) {
-        const isRoot = !modulePackage.path.match(/\/node_modules\/.+\/node_modules\//);
-        instance = { path: modulePackage.path, isRoot, reasons: [], modules: [module] };
+        instance = {
+          path: modulePackage.path,
+          isRoot: modulePackage.isRoot,
+          reasons: [],
+          modules: [module],
+        };
         resolvedPackage.instances.push(instance);
       } else {
         if (!instance.modules.includes(module)) {
