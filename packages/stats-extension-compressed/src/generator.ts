@@ -33,17 +33,17 @@ export default class CompressedExtensionGenerator {
     CompressedExtensionCompilation,
     Resolver<string, CompressedExtensionResource>
   > = new Map();
-  descriptor: ExtensionDescriptor = {
+  private descriptor: ExtensionDescriptor = {
     name,
     version,
     author,
     homepage,
     adapter: this.adapter,
   };
-  payload: CompressedExtensionPayload = { compilations: [] };
-  resolveCompilation = makeResolver(this.payload.compilations, (item) => item.id);
+  private payload: CompressedExtensionPayload = { compilations: [] };
+  private resolveCompilation = makeResolver(this.payload.compilations, (item) => item.id);
 
-  constructor(public adapter?: ExtensionDescriptor) {}
+  constructor(private adapter?: ExtensionDescriptor) {}
 
   handleResource(
     compilationId: string,
@@ -86,6 +86,6 @@ export default class CompressedExtensionGenerator {
       return compressorByType[compressor];
     }
 
-    throw new Error('Unknown compress type');
+    throw new Error(`Unknown compress ${compressor}`);
   }
 }

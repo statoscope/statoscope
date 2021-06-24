@@ -1,7 +1,7 @@
 {
   "name": "@statoscope/stats-extension-compressed",
   "version": "5.2.0",
-  "description": "Statoscope extension for collecting compressed size of the resources",
+  "description": "Statoscope extension for collecting compressed resource sizes",
   "main": "./dist/index.js",
   "scripts": {
     "build": "../../node_modules/.bin/tsc",

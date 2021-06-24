@@ -1,0 +1,178 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`custom compressor 1`] = `
+Object {
+  "descriptor": Object {
+    "adapter": Object {
+      "name": "test-adapter",
+      "version": "7.7.7",
+    },
+    "author": Object {
+      "name": "Sergey Melyukov",
+      "url": "https://twitter.com/smelukov",
+    },
+    "homepage": "https://github.com/statoscope/statoscope/",
+    "name": "@statoscope/stats-extension-compressed",
+    "version": "5.2.0",
+  },
+  "payload": Object {
+    "compilations": Array [
+      Object {
+        "id": "foo-compilation",
+        "resources": Array [
+          Object {
+            "id": "foo-resource",
+            "size": Object {
+              "compressor": "custom-compressor",
+              "size": 100,
+            },
+          },
+          Object {
+            "id": "bar-resource",
+            "size": Object {
+              "compressor": "custom-compressor",
+              "size": 100,
+            },
+          },
+        ],
+      },
+      Object {
+        "id": "bar-compilation",
+        "resources": Array [
+          Object {
+            "id": "foo-resource",
+            "size": Object {
+              "compressor": Object {
+                "name": "custom-compressor",
+                "version": "7.7.7",
+              },
+              "size": 100,
+            },
+          },
+        ],
+      },
+    ],
+  },
+}
+`;
+
+exports[`custom compressor 2`] = `
+Object {
+  "calls": Array [
+    Array [
+      "foo-foo-content",
+      "foo-resource",
+    ],
+    Array [
+      "foo-bar-content",
+      "bar-resource",
+    ],
+  ],
+  "instances": Array [
+    undefined,
+    undefined,
+  ],
+  "invocationCallOrder": Array [
+    1,
+    2,
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Object {
+        "compressor": "custom-compressor",
+        "size": 100,
+      },
+    },
+    Object {
+      "type": "return",
+      "value": Object {
+        "compressor": "custom-compressor",
+        "size": 100,
+      },
+    },
+  ],
+}
+`;
+
+exports[`custom compressor 3`] = `
+Object {
+  "calls": Array [
+    Array [
+      "bar-foo-content",
+      "foo-resource",
+    ],
+  ],
+  "instances": Array [
+    undefined,
+  ],
+  "invocationCallOrder": Array [
+    3,
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Object {
+        "compressor": Object {
+          "name": "custom-compressor",
+          "version": "7.7.7",
+        },
+        "size": 100,
+      },
+    },
+  ],
+}
+`;
+
+exports[`preset compressor gzip 1`] = `
+Object {
+  "descriptor": Object {
+    "adapter": Object {
+      "name": "test-adapter",
+      "version": "7.7.7",
+    },
+    "author": Object {
+      "name": "Sergey Melyukov",
+      "url": "https://twitter.com/smelukov",
+    },
+    "homepage": "https://github.com/statoscope/statoscope/",
+    "name": "@statoscope/stats-extension-compressed",
+    "version": "5.2.0",
+  },
+  "payload": Object {
+    "compilations": Array [
+      Object {
+        "id": "foo-compilation",
+        "resources": Array [
+          Object {
+            "id": "foo-resource",
+            "size": Object {
+              "compressor": "gzip",
+              "size": 33,
+            },
+          },
+          Object {
+            "id": "bar-resource",
+            "size": Object {
+              "compressor": "gzip",
+              "size": 38,
+            },
+          },
+        ],
+      },
+      Object {
+        "id": "bar-compilation",
+        "resources": Array [
+          Object {
+            "id": "foo-resource",
+            "size": Object {
+              "compressor": "gzip",
+              "size": 48,
+            },
+          },
+        ],
+      },
+    ],
+  },
+}
+`;
