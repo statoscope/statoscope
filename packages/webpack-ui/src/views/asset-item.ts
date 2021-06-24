@@ -1,3 +1,4 @@
+import { NormalizedAsset } from '@statoscope/webpack-model/dist/normalize';
 import { StatoscopeWidget } from '../../types';
 // @ts-ignore
 import style from './badge-margin-fix.css';
@@ -5,8 +6,24 @@ import style from './badge-margin-fix.css';
 export default function (discovery: StatoscopeWidget): void {
   discovery.view.define(
     'asset-item',
-    (el, config, data?: { showSize?: boolean; inline?: boolean }, context?) => {
-      const { showSize = true, inline = false } = data || {};
+    (
+      el,
+      config,
+      data?: {
+        showSize?: boolean;
+        inline?: boolean;
+        showDownloadTime?: boolean;
+        compact?: boolean;
+        asset: NormalizedAsset;
+      },
+      context?
+    ) => {
+      const {
+        showSize = true,
+        inline = false,
+        showDownloadTime = true,
+        compact = false,
+      } = data || {};
 
       el.classList.add(style.root);
 
@@ -43,7 +60,13 @@ export default function (discovery: StatoscopeWidget): void {
             color: asset.isOverSizeLimit and 0.colorFromH(),
             hint: [asset.isOverSizeLimit ? "oversized": undefined, $size.compressor or 'uncompressed'].[]
           }`,
-            when: showSize,
+            when: !compact && showSize,
+          },
+          {
+            // todo: interpolate color from gray(0s) to red(1s)
+            view: 'download-badge',
+            data: `{ size: asset.getAssetSize(hash or #.params.hash).size }`,
+            when: !compact && showDownloadTime,
           },
         ],
         data,

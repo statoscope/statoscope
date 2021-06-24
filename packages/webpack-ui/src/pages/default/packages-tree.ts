@@ -25,7 +25,7 @@ export type PackageItemConfig = Record<string, unknown>;
 export function packageItemConfig(hash = '#.params.hash'): PackageItemConfig {
   return {
     limit: '= settingListItemsLimit()',
-    children: 'instances.sort(size() asc, $ asc).({instance: $, package: @.name})',
+    children: 'instances.sort(isRoot desc, path asc).({instance: $, package: @.name})',
     content: `package-item:{package:$, hash: ${hash}, match: #.filter}`,
     get itemConfig(): PackageInstanceItemConfig {
       return packageInstanceItemConfig();

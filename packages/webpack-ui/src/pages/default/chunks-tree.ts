@@ -176,7 +176,7 @@ export function chunkItemConfig(getter = '$', hash = '#.params.hash'): ChunkItem
                 className: 'hack-badge-margin-left',
                 data: `{
                   text: data.size(),
-                  postfix: data.reduce(=> $$ + $.getAssetSize(${hash}).size, 0).formatSize()
+                  postfix: data.reduce(=> $$ + getAssetSize(${hash}).size, 0).formatSize()
                 }`,
               },
             ],

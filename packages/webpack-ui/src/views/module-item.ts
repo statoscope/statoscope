@@ -9,10 +9,15 @@ export default function (discovery: StatoscopeWidget): void {
     (
       el,
       config,
-      data?: { showSize?: boolean; inline?: boolean; module: NormalizedModule },
+      data?: {
+        showSize?: boolean;
+        inline?: boolean;
+        compact?: boolean;
+        module: NormalizedModule;
+      },
       context?
     ) => {
-      const { showSize = true, inline = false } = data || {};
+      const { showSize = true, inline = false, compact = false } = data || {};
 
       el.classList.add(style.root);
 
@@ -50,7 +55,7 @@ export default function (discovery: StatoscopeWidget): void {
               text: $size.size.formatSize(),
               hint: $size.compressor or 'uncompressed'
             }`,
-            when: showSize,
+            when: !compact && showSize,
           },
           {
             view: 'badge',
@@ -58,11 +63,11 @@ export default function (discovery: StatoscopeWidget): void {
             text: "+" + module.modules.size().pluralWithValue(['module', 'modules']),
             color: 40.colorFromH()
           }`,
-            when: 'module.modules',
+            when: 'not compact and module.modules',
           },
           {
             view: 'badge',
-            when: 'module.optimizationBailout',
+            when: 'not compact and module.optimizationBailout',
             data: `{
             text: module.optimizationBailout.size().pluralWithValue(['deopt', 'deopts']),
             color: 0.colorFromH(),
@@ -71,7 +76,7 @@ export default function (discovery: StatoscopeWidget): void {
           },
           {
             view: 'badge',
-            when: `module.moduleType~=/^asset\\/?/`,
+            when: `not compact and module.moduleType~=/^asset\\/?/`,
             data: `{
             text: 'asset module',
             color: 40.colorFromH(),

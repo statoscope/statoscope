@@ -1,3 +1,4 @@
+import { NormalizedEntrypointItem } from '@statoscope/webpack-model/dist/normalize';
 import { StatoscopeWidget } from '../../types';
 // @ts-ignore
 import style from './badge-margin-fix.css';
@@ -5,8 +6,24 @@ import style from './badge-margin-fix.css';
 export default function (discovery: StatoscopeWidget): void {
   discovery.view.define(
     'entry-item',
-    (el, config, data?: { showSize?: boolean; inline?: boolean }, context?) => {
-      const { showSize = true, inline = false } = data || {};
+    (
+      el,
+      config,
+      data?: {
+        showSize?: boolean;
+        inline?: boolean;
+        showDownloadTime?: boolean;
+        compact?: boolean;
+        entrypoint: NormalizedEntrypointItem;
+      },
+      context?
+    ) => {
+      const {
+        showSize = true,
+        inline = false,
+        showDownloadTime = true,
+        compact = false,
+      } = data || {};
 
       el.classList.add(style.root);
 
@@ -32,11 +49,20 @@ export default function (discovery: StatoscopeWidget): void {
           {
             $sizes: entrypoint.data.chunks.[initial].files.[].(getAssetSize(hash or #.params.hash));
             prefix: "initial size",
-            text: $sizes.size.reduce(=> $ + $$, 0).formatSize(),
+            text: $sizes.reduce(=> size + $$, 0).formatSize(),
             color: entrypoint.data.isOverSizeLimit and 0.colorFromH(),
             hint: [entrypoint.data.isOverSizeLimit ? "oversized": undefined, $sizes.[compressor].size() ? 'compressed' : 'uncompressed'].[]
           }`,
-            when: showSize,
+            when: !compact && showSize,
+          },
+          {
+            // todo: interpolate color from gray(0s) to red(1s)
+            view: 'download-badge',
+            data: `{
+              $sizes: entrypoint.data.chunks.[initial].files.[].(getAssetSize(hash or #.params.hash));
+              size: $sizes.reduce(=> settingAssetsInjectType() = 'sync' ? (size + $$) : (size > $$ ? size : $$), 0)
+            }`,
+            when: !compact && showDownloadTime,
           },
         ],
         data,

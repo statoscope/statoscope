@@ -1,3 +1,4 @@
+import { NormalizedPackage } from '../../../webpack-model/dist/normalize';
 import { StatoscopeWidget } from '../../types';
 // @ts-ignore
 import style from './badge-margin-fix.css';
@@ -5,7 +6,12 @@ import style from './badge-margin-fix.css';
 export default function (discovery: StatoscopeWidget): void {
   discovery.view.define(
     'package-item',
-    (el, config, data?: { inline?: boolean }, context?) => {
+    (
+      el,
+      config,
+      data?: { inline?: boolean; compact?: boolean; package: NormalizedPackage },
+      context?
+    ) => {
       const { inline = false } = data || {};
 
       el.classList.add(style.root);
@@ -27,7 +33,7 @@ export default function (discovery: StatoscopeWidget): void {
             content: 'text-match',
           },
           {
-            when: 'showInstancesTotal!=false and package.instances.size() > 1',
+            when: 'not compact and showInstancesTotal!=false and package.instances.size() > 1',
             view: 'badge',
             data: "{text: \"+\" + (package.instances.size() - 1), postfix: (package.instances.size()-1).plural(['copy', 'copies'])}",
           },
