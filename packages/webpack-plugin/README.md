@@ -16,7 +16,7 @@ npm install @statoscope/webpack-plugin --save-dev
 
 **webpack.config.js:**
 ```js
-const StatoscopeWebpackPlugin = require('@statoscope/webpack-plugin');
+const StatoscopeWebpackPlugin = require('@statoscope/webpack-plugin').default;
 
 config.plugins.push(new StatoscopeWebpackPlugin());
 ```
