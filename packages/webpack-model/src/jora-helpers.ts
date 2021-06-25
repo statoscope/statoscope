@@ -1,6 +1,8 @@
 import makeEntityResolver from '@statoscope/helpers/dist/entity-resolver';
-import { CompressedExtensionAPI } from '@statoscope/stats-extension-compressed/dist/api';
-import { Size } from '@statoscope/stats-extension-compressed/dist/generator';
+import { API as ExtensionCompressedAPI } from '@statoscope/stats-extension-compressed/dist/api';
+import type { Size } from '@statoscope/stats-extension-compressed/dist/generator';
+import { API as ExtensionPackageInfoAPI } from '@statoscope/stats-extension-package-info/dist/api';
+import type { Instance } from '@statoscope/stats-extension-package-info/dist/generator';
 import { Webpack } from '../webpack';
 import {
   moduleNameResource,
@@ -54,7 +56,7 @@ export default function (compilations: HandledCompilation[]) {
         '@statoscope/stats-extension-compressed'
       );
 
-      const resolverSize = ext?.api as CompressedExtensionAPI | undefined;
+      const resolverSize = ext?.api as ExtensionCompressedAPI | undefined;
 
       return asset.files
         .map((f) => resolverSize?.(hash, f.name) ?? null)
@@ -80,6 +82,9 @@ export default function (compilations: HandledCompilation[]) {
       const resolved = resolveCompilation(id);
       return (resolved && resolved?.data) || null;
     },
+    resolveExtension(id: string, hash: string): unknown {
+      return resolveCompilation(hash)?.resolvers.resolveExtension(id);
+    },
     getModuleSize(module: NormalizedModule, compressed?: boolean, hash?: string): Size {
       if (!compressed) {
         return { size: module.size };
@@ -93,7 +98,7 @@ export default function (compilations: HandledCompilation[]) {
         '@statoscope/stats-extension-compressed'
       );
 
-      const resolverSize = ext?.api as CompressedExtensionAPI | undefined;
+      const resolverSize = ext?.api as ExtensionCompressedAPI | undefined;
 
       return (
         resolverSize?.(hash, module.name) ?? {
@@ -113,13 +118,29 @@ export default function (compilations: HandledCompilation[]) {
       const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
         '@statoscope/stats-extension-compressed'
       );
-      const resolverSize = ext?.api as CompressedExtensionAPI | undefined;
+      const resolverSize = ext?.api as ExtensionCompressedAPI | undefined;
 
       return (
         resolverSize?.(hash, asset.name) ?? {
           size: asset.size,
         }
       );
+    },
+    getInstanceInfo(
+      packageName: string,
+      instancePath: string,
+      hash: string
+    ): Instance | null {
+      if (!hash) {
+        throw new Error('[getAssetSize-helper]: hash-parameter is required');
+      }
+
+      const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
+        '@statoscope/stats-extension-package-info'
+      );
+      const api = ext?.api as ExtensionPackageInfoAPI | undefined;
+
+      return api?.getInstance(hash, packageName, instancePath) ?? null;
     },
     moduleResource,
     moduleReasonResource,

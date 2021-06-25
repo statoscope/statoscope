@@ -3,8 +3,10 @@ import { StatsDescriptor } from '@statoscope/stats';
 import { Extension } from '@statoscope/stats/spec/extension';
 import makeEntityResolver, { Resolver } from '@statoscope/helpers/dist/entity-resolver';
 import { APIFactory, Container } from '@statoscope/extensions';
-import * as CompressedExtension from '@statoscope/stats-extension-compressed';
-import CompressedExtensionPackage from '@statoscope/stats-extension-compressed/package.json';
+import * as ExtensionCompressed from '@statoscope/stats-extension-compressed';
+import ExtensionCompressedPackage from '@statoscope/stats-extension-compressed/package.json';
+import * as ExtensionPackageInfo from '@statoscope/stats-extension-package-info';
+import ExtensionPackageInfoPackage from '@statoscope/stats-extension-package-info/package.json';
 import { Webpack } from '../webpack';
 import validateStats, { ValidationResult } from './validate';
 import { moduleReasonResource, moduleResource, nodeModule } from './module';
@@ -114,9 +116,15 @@ export type NormalizeResult = {
 const extensionContainer = new Container();
 
 extensionContainer.register(
-  CompressedExtensionPackage.name,
-  CompressedExtensionPackage.version,
-  CompressedExtension.api as APIFactory<unknown, unknown>
+  ExtensionCompressedPackage.name,
+  ExtensionCompressedPackage.version,
+  ExtensionCompressed.api as APIFactory<unknown, unknown>
+);
+
+extensionContainer.register(
+  ExtensionPackageInfoPackage.name,
+  ExtensionPackageInfoPackage.version,
+  ExtensionPackageInfo.api as APIFactory<unknown, unknown>
 );
 
 function getHash(
