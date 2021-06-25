@@ -32,6 +32,7 @@
     "@statoscope/helpers": "5.2.0",
     "@statoscope/stats": "5.2.0",
     "@statoscope/stats-extension-compressed": "5.2.0",
+    "@statoscope/stats-extension-package-info": "5.2.0",
     "@statoscope/webpack-model": "5.2.0",
     "@wdxlab/events": "^1.1.0",
     "babel-loader": "^8.2.2",

@@ -6,7 +6,8 @@ import {
   NormalizedCompilation,
   NormalizedModule,
 } from '@statoscope/webpack-model/dist/normalize';
-import { Size } from '@statoscope/stats-extension-compressed/dist/generator';
+import type { Size } from '@statoscope/stats-extension-compressed/dist/generator';
+import type { Instance } from '@statoscope/stats-extension-package-info/dist/generator';
 import settings, {
   SETTING_ASSETS_INJECT_TYPE,
   SETTING_ASSETS_INJECT_TYPE_DEFAULT,
@@ -104,6 +105,13 @@ export default (() =>
                 .get(),
           hash
         );
+      },
+      getInstanceInfo(
+        packageName: string,
+        instancePath: string,
+        hash: string
+      ): Instance | null {
+        return wpJoraHelpers.getInstanceInfo(packageName, instancePath, hash);
       },
       getNetworkTypeInfo(networkType: string): Item | null {
         return networkTypeList.find((item) => item.name === networkType) ?? null;

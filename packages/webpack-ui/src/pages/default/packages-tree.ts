@@ -39,15 +39,25 @@ export function packageInstanceItemConfig(
   hash = '#.params.hash'
 ): PackageInstanceItemConfig {
   return {
-    content: {
-      view: 'link',
-      data: `{
-        text: instance.path,
-        href: package.pageLink("package", {instance: instance.path, hash:${hash}}),
-        match: package
-      }`,
-      content: 'text-match',
-    },
+    content: [
+      {
+        view: 'link',
+        data: `{
+          text: instance.path,
+          href: package.pageLink("package", {instance: instance.path, hash:${hash}}),
+          match: package
+        }`,
+        content: 'text-match',
+      },
+      {
+        view: 'badge',
+        className: 'hack-badge-margin-left',
+        when: `package.getInstanceInfo(instance.path, ${hash})`,
+        data: `{
+          text: package.getInstanceInfo(instance.path, ${hash}).info.version
+        }`,
+      },
+    ],
     children: `[{
         title: "Reasons",
         data: instance.reasons,
@@ -170,12 +180,27 @@ export function packageInstanceItemConfig(
                           className: 'hack-badge-margin-left',
                           data: `{text: instances.size(), postfix: instances.size().plural(['instance', 'instances'])}`,
                         },
+                        {
+                          when: `
+                          $package: value;
+                          not compact and instances.($package.getInstanceInfo(value.path, ${hash})).info.version.size() > 1
+                          `,
+                          view: 'badge',
+                          data: `
+                          $package: value;
+                          $size: instances.($package.getInstanceInfo(value.path, ${hash})).info.version.size();
+                          {
+                            text: $size,
+                            postfix: $size.plural(['version', 'versions'])
+                          }
+                          `,
+                        },
                       ],
                       children: `
                         instances.(
                           $instance: $;
                           {
-                            instance: $instance,
+                            $instance,
                             reasonModules: reasons.[not module.shouldHideModule() and reason.moduleReasonResource().nodeModule().path=$instance.value.path]
                               .group(<module>).({module:key,reasons:value.reason}).sort(module.getModuleSize(${hash}).size desc)
                           })`,
@@ -186,6 +211,14 @@ export function packageInstanceItemConfig(
                             view: 'link',
                             data: `{text: instance.value.path, href: "#package:" + instance.package.encodeURIComponent()+"&instance="+instance.value.path.encodeURIComponent(), match: instance.package}`,
                             content: 'text-match',
+                          },
+                          {
+                            view: 'badge',
+                            className: 'hack-badge-margin-left',
+                            when: `instance.package.getInstanceInfo(instance.value.path, ${hash})`,
+                            data: `{
+                              text: instance.package.getInstanceInfo(instance.value.path, ${hash}).info.version
+                            }`,
                           },
                           {
                             when: 'instance.reasons',

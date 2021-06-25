@@ -37,6 +37,24 @@ export default function (discovery: StatoscopeWidget): void {
             view: 'badge',
             data: "{text: \"+\" + (package.instances.size() - 1), postfix: (package.instances.size()-1).plural(['copy', 'copies'])}",
           },
+          {
+            when: `
+            $hash: hash;
+            $package: package;
+            not compact and $package.instances.($package.name.getInstanceInfo(path, $hash or #.params.hash)).info.version.size() > 1
+            `,
+            view: 'badge',
+            data: `
+            $hash: hash;
+            $package: package;
+            $size: $package.instances.($package.name.getInstanceInfo(path, $hash or #.params.hash)).info.version.size();
+            {
+              $package,
+              text: $size,
+              postfix: $size.plural(['version', 'versions'])
+            }
+            `,
+          },
         ],
         data,
         context

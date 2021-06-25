@@ -132,7 +132,7 @@ export default function (compilations: HandledCompilation[]) {
       hash: string
     ): Instance | null {
       if (!hash) {
-        throw new Error('[getAssetSize-helper]: hash-parameter is required');
+        throw new Error('[getInstanceInfo-helper]: hash-parameter is required');
       }
 
       const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
