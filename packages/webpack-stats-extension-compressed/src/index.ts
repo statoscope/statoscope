@@ -3,7 +3,7 @@ import { promisify } from 'util';
 import { Compilation, Module } from 'webpack';
 import { ExtensionDescriptor } from '@statoscope/stats/spec/extension';
 import CompressedExtensionGenerator, {
-  CompressedExtensionFormat,
+  Format,
   CompressorOrPreset,
 } from '@statoscope/stats-extension-compressed/dist/generator';
 import { author, homepage, name, version } from './version';
@@ -14,7 +14,7 @@ export default class WebpackCompressedExtension {
 
   constructor(public compressor: CompressorOrPreset) {}
 
-  get(): CompressedExtensionFormat {
+  get(): Format {
     return this.compressedExtensionGenerator.get();
   }
 
@@ -33,7 +33,10 @@ export default class WebpackCompressedExtension {
       );
 
       // webpack 5
-      if (typeof cursor.compiler.outputFileSystem.readFile === 'function') {
+      if (
+        cursor.compiler.outputFileSystem &&
+        typeof cursor.compiler.outputFileSystem.readFile === 'function'
+      ) {
         readFile = promisify(
           cursor.compiler.outputFileSystem.readFile.bind(cursor.compiler.outputFileSystem)
         );
@@ -82,6 +85,9 @@ export default class WebpackCompressedExtension {
                 runtimeChunk.runtime,
                 type
               );
+              if (!source) {
+                continue;
+              }
               const content = source.source();
               concatenated = Buffer.concat([
                 concatenated,
