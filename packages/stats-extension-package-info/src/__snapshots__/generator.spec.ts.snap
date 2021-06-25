@@ -12,7 +12,7 @@ Object {
       "url": "https://twitter.com/smelukov",
     },
     "homepage": "https://github.com/statoscope/statoscope/",
-    "name": "@statoscope/stats-extension-compressed",
+    "name": "@statoscope/stats-extension-package-info",
     "version": "5.2.0",
   },
   "payload": Object {
