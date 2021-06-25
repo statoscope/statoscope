@@ -13,6 +13,7 @@ import { StatsDescriptor } from '@statoscope/stats';
 import statsPackage from '@statoscope/stats/package.json';
 import { Extension } from '@statoscope/stats/spec/extension';
 import WebpackCompressedExtension from '@statoscope/webpack-stats-extension-compressed';
+import WebpackPackageInfoExtension from '@statoscope/webpack-stats-extension-package-info';
 import { CompressFunction } from '@statoscope/stats-extension-compressed/dist/generator';
 import Piper from '@statoscope/report-writer/dist/piper';
 
@@ -63,6 +64,12 @@ export default class StatoscopeWebpackPlugin {
   apply(compiler: Compiler): void {
     const { options } = this;
 
+    let packageInfoExtension: WebpackPackageInfoExtension | null = null;
+
+    packageInfoExtension = new WebpackPackageInfoExtension();
+    // @ts-ignore
+    packageInfoExtension.handleCompiler(compiler);
+
     compiler.hooks.done.tapAsync('Statoscope Webpack Plugin', async (stats, cb) => {
       if (compiler.watchMode && options.watchMode !== true) {
         return cb();
@@ -72,16 +79,21 @@ export default class StatoscopeWebpackPlugin {
       const statsObj = stats.toJson(options.statsOptions || compiler.options.stats);
       statsObj.name = options.name || statsObj.name || stats.compilation.name;
 
+      const statoscopeMeta: StatoscopeMeta = {
+        descriptor: { name: statsPackage.name, version: statsPackage.version },
+        extensions: [],
+      };
+      statsObj.__statoscope = statoscopeMeta;
+
+      statoscopeMeta.extensions.push(packageInfoExtension!.get());
+
       if (this.options.compressor) {
         const compressedExtension = new WebpackCompressedExtension(
           this.options.compressor
         );
         // @ts-ignore
         await compressedExtension.handleCompilation(stats.compilation);
-        statsObj.__statoscope = {
-          descriptor: { name: statsPackage.name, version: statsPackage.version },
-          extensions: [compressedExtension.get()],
-        } as StatoscopeMeta;
+        statoscopeMeta.extensions.push(compressedExtension.get());
       }
 
       const htmlPath =
