@@ -101,10 +101,10 @@ $chunksDiff: {
         {
           type: 'time',
           title: 'download',
-          a: $chunkAFileSize
+          a: $chunkAFileSizes
             .reduce(=> settingAssetsInjectType() = 'sync' ? (size + $$) : (size > $$ ? size : $$), 0)
             .getDownloadTime(),
-          b: $chunkBFileSize
+          b: $chunkBFileSizes
             .reduce(=> settingAssetsInjectType() = 'sync' ? (size + $$) : (size > $$ ? size : $$), 0)
             .getDownloadTime(),
         },

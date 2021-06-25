@@ -89,7 +89,7 @@ export default function (discovery: StatoscopeWidget): void {
               $initialAssetsSizes: $initialChunks.files.[].(getAssetSize($statA.compilation.hash));
               $initialAssetsSize: $initialAssetsSizes.reduce(=> size + $$, 0);
 
-              $initialAssetsDownloadTime: $statA.compilation.entrypoints.data.chunks + $statA.compilation.entrypoints.data.chunks..children
+              $initialAssetsDownloadTime: $initialAssetsSizes
                 .reduce(=> settingAssetsInjectType() = 'sync' ? (size + $$) : (size > $$ ? size : $$), 0)
                 .getDownloadTime();
               
@@ -107,7 +107,7 @@ export default function (discovery: StatoscopeWidget): void {
                 {
                   value: $initialAssetsDownloadTime.formatDuration(),
                   label: 'Initial download time',
-                  visible: $statA.compilation.chunks.files
+                  visible: $initialAssetsDownloadTime
                 },
                 {
                   $packagesModulesA: $statA.compilation.nodeModules.instances.modules;

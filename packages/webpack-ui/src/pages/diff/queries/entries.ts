@@ -83,8 +83,8 @@ $entryDiff: {
       $assetsAsyncSize: $chunksAsync.$getEntryChunksSizes(hash).reduce(=> size + $$, 0);
 
       $downloadTime: $assetsInitialSizes
-          .reduce(=> settingAssetsInjectType() = 'sync' ? (size + $$) : (size > $$ ? size : $$), 0)
-          .getDownloadTime();
+        .reduce(=> settingAssetsInjectType() = 'sync' ? (size + $$) : (size > $$ ? size : $$), 0)
+        .getDownloadTime();
       entry,
       hash,
       diff: [
