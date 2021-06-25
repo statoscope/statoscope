@@ -10,14 +10,14 @@ export type Size = {
 };
 export type CompressFunction = (source: Buffer | string, filename: string) => Size;
 
-export type CompressedExtensionFormat = Extension<CompressedExtensionPayload>;
-export type CompressedExtensionResource = { id: string; size: Size };
-export type CompressedExtensionCompilation = {
+export type Format = Extension<Payload>;
+export type Resource = { id: string; size: Size };
+export type Compilation = {
   id: string;
-  resources: Array<CompressedExtensionResource>;
+  resources: Array<Resource>;
 };
-export type CompressedExtensionPayload = {
-  compilations: Array<CompressedExtensionCompilation>;
+export type Payload = {
+  compilations: Array<Compilation>;
 };
 
 const compressorByType: Record<string, CompressFunction> = {
@@ -28,11 +28,8 @@ const compressorByType: Record<string, CompressFunction> = {
 
 export type CompressorOrPreset = string | CompressFunction;
 
-export default class CompressedExtensionGenerator {
-  private sizeResolvers: Map<
-    CompressedExtensionCompilation,
-    Resolver<string, CompressedExtensionResource>
-  > = new Map();
+export default class Generator {
+  private sizeResolvers: Map<Compilation, Resolver<string, Resource>> = new Map();
   private descriptor: ExtensionDescriptor = {
     name,
     version,
@@ -40,7 +37,7 @@ export default class CompressedExtensionGenerator {
     homepage,
     adapter: this.adapter,
   };
-  private payload: CompressedExtensionPayload = { compilations: [] };
+  private payload: Payload = { compilations: [] };
   private resolveCompilation = makeResolver(this.payload.compilations, (item) => item.id);
 
   constructor(private adapter?: ExtensionDescriptor) {}
@@ -52,7 +49,7 @@ export default class CompressedExtensionGenerator {
     compressor: CompressorOrPreset
   ): void {
     let compilation = this.resolveCompilation(compilationId);
-    let sizeResolver: Resolver<string, CompressedExtensionResource> | undefined;
+    let sizeResolver: Resolver<string, Resource> | undefined;
 
     if (compilation) {
       sizeResolver = this.sizeResolvers.get(compilation);
@@ -73,7 +70,7 @@ export default class CompressedExtensionGenerator {
     }
   }
 
-  get(): CompressedExtensionFormat {
+  get(): Format {
     return { descriptor: this.descriptor, payload: this.payload };
   }
 

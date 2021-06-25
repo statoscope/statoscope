@@ -3,23 +3,12 @@ import {
   Resolver,
 } from '@statoscope/helpers/dist/entity-resolver';
 import { APIFactory } from '@statoscope/extensions';
-import {
-  CompressedExtensionFormat,
-  CompressedExtensionResource,
-  Size,
-} from './generator';
+import { Format, Resource, Size } from './generator';
 
-export type CompressedExtensionAPI = (
-  compilationId: string,
-  resourceId: string
-) => Size | null;
+export type API = (compilationId: string, resourceId: string) => Size | null;
 
-const makeCompressedExtensionAPI: APIFactory<
-  CompressedExtensionFormat,
-  CompressedExtensionAPI
-> = (source) => {
-  const sizeResolvers: Map<string, Resolver<string, CompressedExtensionResource>> =
-    new Map();
+const makeAPI: APIFactory<Format, API> = (source) => {
+  const sizeResolvers: Map<string, Resolver<string, Resource>> = new Map();
 
   for (const compilation of source.payload.compilations) {
     sizeResolvers.set(
@@ -33,4 +22,4 @@ const makeCompressedExtensionAPI: APIFactory<
   };
 };
 
-export default makeCompressedExtensionAPI;
+export default makeAPI;

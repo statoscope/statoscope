@@ -1,7 +1,7 @@
 import APIFactory from './api';
 import Generator from './generator';
 
-test('foo', () => {
+test('should work', () => {
   const generator = new Generator();
   generator.handleResource('foo-compilation', 'foo-resource', 'foo-foo-content', 'gzip');
   generator.handleResource(
