@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should work 1`] = `
+Object {
+  "descriptor": Object {
+    "adapter": Object {
+      "name": "test-adapter",
+      "version": "7.7.7",
+    },
+    "author": Object {
+      "name": "Sergey Melyukov",
+      "url": "https://twitter.com/smelukov",
+    },
+    "homepage": "https://github.com/statoscope/statoscope/",
+    "name": "@statoscope/stats-extension-compressed",
+    "version": "5.2.0",
+  },
+  "payload": Object {
+    "compilations": Array [
+      Object {
+        "id": "foo-compilation",
+        "packages": Array [
+          Object {
+            "instances": Array [
+              Object {
+                "info": Object {
+                  "version": "1.0.0",
+                },
+                "path": "foo-instance",
+              },
+              Object {
+                "info": Object {
+                  "version": "2.0.0",
+                },
+                "path": "bar-instance",
+              },
+            ],
+            "name": "foo-package",
+          },
+          Object {
+            "instances": Array [
+              Object {
+                "info": Object {
+                  "version": "3.0.0",
+                },
+                "path": "bar-instance",
+              },
+            ],
+            "name": "bar-package",
+          },
+        ],
+      },
+      Object {
+        "id": "bar-compilation",
+        "packages": Array [
+          Object {
+            "instances": Array [
+              Object {
+                "info": Object {
+                  "version": "4.0.0",
+                },
+                "path": "bar-instance",
+              },
+            ],
+            "name": "foo-package",
+          },
+        ],
+      },
+    ],
+  },
+}
+`;
