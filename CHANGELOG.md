@@ -16,6 +16,10 @@
 
   > It uses `webpack-stats-extension-compressed` upder the hood
 
+- `[webpack-plugin]` collect packages versions
+
+  > It uses `webpack-stats-extension-package-info` upder the hood
+
 - `[webpack-ui]` taking resources compressed (e.g. gzip) size of the resources into account
 
   There is a new setting to taking resources compressed size into account.
@@ -24,15 +28,9 @@
 
   > It uses `stats-extension-compressed` under the hood and works only when the stats-file was taken from `webpack-plugin@5.3` or any source that uses `stats-extension-compressed`
 
-- `[stats-extension-compressed]` extension for collecting compressed resource sizes
+- `[webpack-ui]` taking packages versions into account and output these in all the package items
 
-  It allows compressing specified resource content (`string` or `Buffer`) with `gzip` or any other compressor.
-
-  Also, it contains the API to generate and extract this info.
-
-- `[webpack-stats-extension-compressed]` webpack adapter for `stats-extension-compressed`
-
-  It allows collecting compressed resource sizes from webpack stats
+  > It uses `stats-extension-package-info` under the hood and works only when the stats-file was taken from `webpack-plugin@5.3` or any source that uses `stats-extension-package-info`
 
 - `[webpack-ui]` download time measure
 
@@ -57,6 +55,28 @@
 - `[webpack-ui]` add `Entrypoints` tab on `diff`-page
 
   Honestly, I just forgot to enable this tab a few releases ago 🙈
+
+- `[stats-extension-compressed]` extension for collecting compressed resource sizes
+
+  It allows compressing specified resource content (`string` or `Buffer`) with `gzip` or any other compressor.
+
+  Also, it contains the API to generate and extract this info.
+
+- `[webpack-stats-extension-compressed]` webpack adapter for `stats-extension-compressed`
+
+  It allows collecting compressed resource sizes from webpack compilation
+
+- `[stats-extension-package-info]` extension for collecting packages versions
+
+  It allows compressing specified resource content (`string` or `Buffer`) with `gzip` or any other compressor.
+
+  Also, it contains the API to generate and extract this info.
+
+- `[webpack-stats-extension-package-info]` webpack adapter for `stats-extension-package-info`
+
+  It allows collecting package versions from webpack compilation
+
+- `[webpack-model]` support `stats-extension-compressed` and `stats-extension-package-info`
 
 - `[stats]` a new package that contains Statoscope own stats format (extension-entity for now, but there are will be more entities)
 
