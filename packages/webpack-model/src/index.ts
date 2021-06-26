@@ -20,7 +20,7 @@ export type Options = {
 export type Prepared = {
   files: NormalizedFile[];
   compilations: NormalizedCompilation[];
-  query: (query: string, data?: unknown) => unknown;
+  query: (query: string, data?: unknown, context?: unknown) => unknown;
 };
 
 export function prepareWithJora(
@@ -32,11 +32,11 @@ export function prepareWithJora(
     ...options.helpers,
     ...joraHelpers(compilations),
   });
-  const context = {};
 
   return {
     files,
     compilations: compilations.map((c) => c.data),
-    query: (query: string, data: unknown): unknown => j(query)(data || files, context),
+    query: (query: string, data: unknown, context: unknown = {}): unknown =>
+      j(query)(data || files, context),
   };
 }
