@@ -44,17 +44,17 @@ export function packageInstanceItemConfig(
         view: 'link',
         data: `{
           text: instance.path,
-          href: package.pageLink("package", {instance: instance.path, hash:${hash}}),
-          match: package
+          href: (package.name or package).pageLink("package", {instance: instance.path, hash:${hash}}),
+          match: (package.name or package)
         }`,
         content: 'text-match',
       },
       {
         view: 'badge',
         className: 'hack-badge-margin-left',
-        when: `package.getInstanceInfo(instance.path, ${hash})`,
+        when: `(package.name or package).getInstanceInfo(instance.path, ${hash})`,
         data: `{
-          text: package.getInstanceInfo(instance.path, ${hash}).info.version
+          text: (package.name or package).getInstanceInfo(instance.path, ${hash}).info.version
         }`,
       },
     ],

@@ -19,6 +19,24 @@ function getPopup<TData>(discovery: StatoscopeWidget, data: TData): PopupAPI<TDa
             content: 'html:"<b>"+(link.page or "directory") + ":&nbsp;</b>"',
           },
           `text:link.page = 'package' ? link.id : label`,
+          {
+            view: 'badge',
+            className: 'hack-badge-margin-left',
+            when: `
+            $package: link.package;
+            $instance: $package.name.getInstanceInfo($package.instance.path, "${
+              discovery.getRenderContext().params.hash
+            }");
+            link.page = 'package' and $instance.info.version
+            `,
+            data: `{
+              $package: link.package;
+              $instance: $package.name.getInstanceInfo($package.instance.path, "${
+                discovery.getRenderContext().params.hash
+              }");
+              text: $instance.info.version
+            }`,
+          },
         ],
       },
       {

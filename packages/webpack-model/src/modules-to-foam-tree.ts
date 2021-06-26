@@ -1,8 +1,18 @@
 import { Compressor, Size } from '@statoscope/stats-extension-compressed/dist/generator';
-import { moduleResource } from './module';
+import { moduleResource, nodeModule } from './module';
 import { NormalizedModule } from './normalize';
 
-export type NodeLink = { page: string; id: string; params?: Record<string, unknown> };
+export type NodeLink = {
+  page: string;
+  id: string;
+  package?: {
+    name: string;
+    instance: {
+      path: string;
+    };
+  };
+  params?: Record<string, unknown>;
+};
 
 export type NodeData = {
   label: string;
@@ -51,9 +61,18 @@ function handleModule(
         currentPackage = { name: part.label };
       } else {
         currentPackage.name += (currentPackage.name ? '/' : '') + part.label;
+        const instance = nodeModule(moduleResource(module));
         part.link = {
           page: 'package',
           id: currentPackage.name,
+          package: instance
+            ? {
+                name: instance?.name,
+                instance: {
+                  path: instance?.path,
+                },
+              }
+            : undefined,
           params: {
             instance: parts
               .map((part) => part.label)
