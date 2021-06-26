@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`validtor types raw jora-query fail.jora 1`] = `
+exports[`validator types jora-query from js jora-fail.js 1`] = `
 Array [
   Array [
     "unknown",
@@ -20,7 +20,7 @@ Array [
 ]
 `;
 
-exports[`validtor types raw jora-query ok.jora 1`] = `
+exports[`validator types jora-query from js jora-ok.js 1`] = `
 Array [
   Array [
     "",
@@ -31,7 +31,38 @@ Array [
 ]
 `;
 
-exports[`validtor types raw jora-query rules.jora 1`] = `
+exports[`validator types raw jora-query fail.jora 1`] = `
+Array [
+  Array [
+    "unknown",
+  ],
+  Array [
+    "  error: Fail",
+  ],
+  Array [
+    "",
+  ],
+  Array [
+    "Errors: 1",
+  ],
+  Array [
+    "Done",
+  ],
+]
+`;
+
+exports[`validator types raw jora-query ok.jora 1`] = `
+Array [
+  Array [
+    "",
+  ],
+  Array [
+    "Done",
+  ],
+]
+`;
+
+exports[`validator types raw jora-query rules.jora 1`] = `
 Array [
   Array [
     "unknown",

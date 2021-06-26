@@ -11,12 +11,20 @@ const validatorFixturesJoraQuery = [
   path: path.resolve(__dirname, filename),
 }));
 
+const validatorFixturesJSJoraQuery = [
+  '../../../../test/fixtures/cli/validate/jora-ok.js',
+  '../../../../test/fixtures/cli/validate/jora-fail.js',
+].map((filename) => ({
+  name: path.basename(filename),
+  path: path.resolve(__dirname, filename),
+}));
+
 const inputFixturePath = path.resolve(
   __dirname,
   '../../../../test/bundles/simple/stats-dev.json'
 );
 
-const consoleLog = console.log.bind(console);
+// const consoleLog = console.log.bind(console);
 const output: string[][] = [];
 let consoleLogSpy: jest.SpyInstance<void, string[]> | null = null;
 
@@ -37,19 +45,25 @@ function getOutput(): string[][] {
   return output;
 }
 
-describe('validtor types', () => {
+describe('validator types', () => {
   test.each(validatorFixturesJoraQuery)('raw jora-query $name', async (item) => {
-    process.on('exit', (code) => {
-      console.log('!@!@!@!X');
-      if (code) {
-        consoleLog(getOutput());
-      }
-    });
-
     let y = yargs(['validate', '--validator', item.path, '--input', inputFixturePath]);
 
     y = validate(y);
-    y.fail((message, error) => {
+    y.fail((_, error) => {
+      console.error(error);
+    });
+
+    await y.argv;
+
+    expect(getOutput()).toMatchSnapshot();
+  });
+
+  test.each(validatorFixturesJSJoraQuery)('jora-query from js $name', async (item) => {
+    let y = yargs(['validate', '--validator', item.path, '--input', inputFixturePath]);
+
+    y = validate(y);
+    y.fail((_, error) => {
       console.error(error);
     });
 
