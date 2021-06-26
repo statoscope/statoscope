@@ -108,6 +108,12 @@ Object {
           "label": "foo",
           "link": Object {
             "id": "foo",
+            "package": Object {
+              "instance": Object {
+                "path": "node_modules/foo",
+              },
+              "name": "foo",
+            },
             "page": "package",
             "params": Object {
               "instance": "node_modules/foo",
@@ -134,6 +140,12 @@ Object {
           "label": "bar",
           "link": Object {
             "id": "bar",
+            "package": Object {
+              "instance": Object {
+                "path": "node_modules/bar",
+              },
+              "name": "bar",
+            },
             "page": "package",
             "params": Object {
               "instance": "node_modules/bar",
@@ -211,6 +223,12 @@ Object {
               "label": "css-loader",
               "link": Object {
                 "id": "css-loader",
+                "package": Object {
+                  "instance": Object {
+                    "path": "../node_modules/css-loader",
+                  },
+                  "name": "css-loader",
+                },
                 "page": "package",
                 "params": Object {
                   "instance": "../node_modules/css-loader",

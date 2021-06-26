@@ -22,89 +22,23 @@ test('should work', () => {
 
   expect(api.getPackage('foo', 'bar')).toBeNull();
   expect(api.getPackage('foo-compilation', 'bar')).toBeNull();
-  expect(api.getPackage('foo-compilation', 'foo-package')).toMatchInlineSnapshot(`
-    Object {
-      "instances": Array [
-        Object {
-          "info": Object {
-            "version": "1.0.0",
-          },
-          "path": "foo-instance",
-        },
-        Object {
-          "info": Object {
-            "version": "2.0.0",
-          },
-          "path": "bar-instance",
-        },
-      ],
-      "name": "foo-package",
-    }
-  `);
-  expect(api.getPackage('foo-compilation', 'bar-package')).toMatchInlineSnapshot(`
-    Object {
-      "instances": Array [
-        Object {
-          "info": Object {
-            "version": "3.0.0",
-          },
-          "path": "bar-instance",
-        },
-      ],
-      "name": "bar-package",
-    }
-  `);
-  expect(api.getPackage('bar-compilation', 'foo-package')).toMatchInlineSnapshot(`
-    Object {
-      "instances": Array [
-        Object {
-          "info": Object {
-            "version": "4.0.0",
-          },
-          "path": "bar-instance",
-        },
-      ],
-      "name": "foo-package",
-    }
-  `);
+  expect(api.getPackage('foo-compilation', 'foo-package')).toMatchSnapshot();
+  expect(api.getPackage('foo-compilation', 'bar-package')).toMatchSnapshot();
+  expect(api.getPackage('bar-compilation', 'foo-package')).toMatchSnapshot();
 
   expect(api.getInstance('foo', 'bar', 'bar')).toBeNull();
   expect(api.getInstance('foo-compilation', 'bar', 'baz')).toBeNull();
   expect(api.getInstance('foo-compilation', 'foo-package', 'bar')).toBeNull();
-  expect(api.getInstance('foo-compilation', 'foo-package', 'foo-instance'))
-    .toMatchInlineSnapshot(`
-    Object {
-      "info": Object {
-        "version": "1.0.0",
-      },
-      "path": "foo-instance",
-    }
-  `);
-  expect(api.getInstance('foo-compilation', 'foo-package', 'bar-instance'))
-    .toMatchInlineSnapshot(`
-    Object {
-      "info": Object {
-        "version": "2.0.0",
-      },
-      "path": "bar-instance",
-    }
-  `);
-  expect(api.getInstance('foo-compilation', 'bar-package', 'bar-instance'))
-    .toMatchInlineSnapshot(`
-    Object {
-      "info": Object {
-        "version": "3.0.0",
-      },
-      "path": "bar-instance",
-    }
-  `);
-  expect(api.getInstance('bar-compilation', 'foo-package', 'bar-instance'))
-    .toMatchInlineSnapshot(`
-    Object {
-      "info": Object {
-        "version": "4.0.0",
-      },
-      "path": "bar-instance",
-    }
-  `);
+  expect(
+    api.getInstance('foo-compilation', 'foo-package', 'foo-instance')
+  ).toMatchSnapshot();
+  expect(
+    api.getInstance('foo-compilation', 'foo-package', 'bar-instance')
+  ).toMatchSnapshot();
+  expect(
+    api.getInstance('foo-compilation', 'bar-package', 'bar-instance')
+  ).toMatchSnapshot();
+  expect(
+    api.getInstance('bar-compilation', 'foo-package', 'bar-instance')
+  ).toMatchSnapshot();
 });
