@@ -4,14 +4,11 @@ export type ContainerItem<TData, TAPI> = {
 };
 export type APIFactory<TData, TAPI> = (data: TData) => TAPI;
 
-export class Container {
+export default class Container {
   private extensions: Map<string, ContainerItem<unknown, unknown>> = new Map();
 
-  register(
-    name: string,
-    version: string,
-    apiFactory: APIFactory<unknown, unknown>
-  ): void {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  register(name: string, version: string, apiFactory: APIFactory<any, any>): void {
     this.extensions.set(name, { version, apiFactory });
   }
 
