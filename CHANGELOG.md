@@ -103,6 +103,8 @@
 
   There was `undefined` instead of instances links
 
+- `[webpack-ui]` fix modules diff calculation
+
 - `[cli]` (validate): use console.info for `info`-type messages
 
 ### Improvements
