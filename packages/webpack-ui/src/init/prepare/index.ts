@@ -23,7 +23,6 @@ import settings, {
   SETTING_SHOW_COMPRESSED_DEFAULT,
 } from '../../settings';
 import { PrepareFn, RawData, StatoscopeWidget, TargetData } from '../../../types';
-import networkTypeList, { bytesInMBit, Item } from '../../network-type-list';
 
 export interface BaseDiffItem {
   id?: string;
@@ -113,27 +112,14 @@ export default (() =>
       ): Instance | null {
         return wpJoraHelpers.getInstanceInfo(packageName, instancePath, hash);
       },
-      getNetworkTypeInfo(networkType: string): Item | null {
-        return networkTypeList.find((item) => item.name === networkType) ?? null;
-      },
-      getNetworkTypeName(networkType: Item): string | null {
-        return `${networkType.type}: ${networkType.name} (${parseFloat(
-          (networkType.typicalSpeed / bytesInMBit).toFixed(1)
-        )} MBit/s)`;
-      },
       getDownloadTime(size: number, networkType?: string): number {
         if (networkType == null) {
           networkType = settings
             .get(SETTING_NETWORK_SPEED, SETTING_NETWORK_SPEED_DEFAULT)
             .get();
         }
-        const item = networkTypeList.find((item) => item.name === networkType);
 
-        if (item) {
-          return (size / item.typicalSpeed) * 1000;
-        }
-
-        throw new Error(`Unknown network type ${networkType}`);
+        return commonJoraHelpers.getDownloadTime(size, networkType);
       },
       setting(name: string, defaultValue: unknown) {
         return settings.get(name, defaultValue).get();

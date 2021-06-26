@@ -1,4 +1,5 @@
 import path from 'path';
+import networkTypeList, { bytesInMBit, Item } from '../network-type-list';
 import { colorFromH, colorMap, fileTypeMap, generateColor } from './colors';
 import { pluralEng, pluralRus } from './plural';
 
@@ -89,6 +90,23 @@ export default () => {
     },
     pluralWithValueRus(value: number, words: string[]): string {
       return pluralRus.pluralWithValue(value, words);
+    },
+    getNetworkTypeInfo(networkType: string): Item | null {
+      return networkTypeList.find((item) => item.name === networkType) ?? null;
+    },
+    getNetworkTypeName(networkType: Item): string | null {
+      return `${networkType.type}: ${networkType.name} (${parseFloat(
+        (networkType.typicalSpeed / bytesInMBit).toFixed(1)
+      )} MBit/s)`;
+    },
+    getDownloadTime(size: number, networkType: string): number {
+      const item = networkTypeList.find((item) => item.name === networkType);
+
+      if (item) {
+        return (size / item.typicalSpeed) * 1000;
+      }
+
+      throw new Error(`Unknown network type ${networkType}`);
     },
   };
 };

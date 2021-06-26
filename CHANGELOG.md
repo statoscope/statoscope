@@ -77,6 +77,7 @@
   It allows collecting package versions from webpack compilation
 
 - `[webpack-model]` support `stats-extension-compressed` and `stats-extension-package-info`
+- `[webpack-model]` added helpers to getting network type and download speed
 
 - `[cli]` (validate): use `info`-type for messages by default
 

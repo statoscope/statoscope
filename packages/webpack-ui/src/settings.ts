@@ -1,5 +1,5 @@
 import EventEmitter from '@wdxlab/events';
-import { TYPE_DC_HSPA_PLUS } from './network-type-list';
+import { TYPE_DC_HSPA_PLUS } from '@statoscope/helpers/dist/network-type-list';
 
 const LS_KEY = 'statoscope_settings';
 
