@@ -10,8 +10,9 @@ import {
   RawStatsFileDescriptor,
 } from '@statoscope/webpack-model/dist/normalize';
 
+export type TestEntryType = 'error' | 'warn' | 'info';
 export type TestEntry = {
-  type?: 'error' | 'warn' | 'info'; // 'error' by default
+  type?: TestEntryType; // 'error' by default
   assert?: boolean; // false by default
   message: string;
   filename?: string;
@@ -52,7 +53,7 @@ function makeQueryValidator(query: string): ValidatorFn {
     } else if (type === 'warn') {
       api.warn(message, filename);
     } else if (type === 'info') {
-      api.warn(message, filename);
+      api.info(message, filename);
     } else {
       console.log('Unknown message type:', type);
       api.error(message, filename);
@@ -63,8 +64,14 @@ function makeQueryValidator(query: string): ValidatorFn {
     const result = data.query(query) as TestEntry[];
 
     for (const item of result) {
+      let type: TestEntryType | undefined = item.type;
+
       if (!item.assert) {
-        callAPI(api, { type: item.type, message: item.message, filename: item.filename });
+        if (type === undefined && !Object.prototype.hasOwnProperty.call(item, 'assert')) {
+          type = 'info';
+        }
+
+        callAPI(api, { type, message: item.message, filename: item.filename });
       }
     }
   };
@@ -181,14 +188,14 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
         console.log(`Warnings: ${warnings}`);
       }
       if (infos) {
-        console.log(`Infos: ${infos}`);
+        console.log(`Info: ${infos}`);
       }
 
       console.log('Done');
 
       if (hasErrors) {
         // eslint-disable-next-line no-process-exit
-        process.exit(1);
+        process.exitCode = 1;
       }
     }
   );

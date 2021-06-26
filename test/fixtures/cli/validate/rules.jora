@@ -1,0 +1,67 @@
+$file: .pick();
+
+[
+  {
+    message: "Auto info message"
+  },
+  {
+    type: 'info',
+    message: "Info message without assert"
+  },
+  {
+    type: "info",
+    assert: 1 > 0,
+    message: "Info with assert (should not trigger!)"
+  },
+  {
+    type: "info",
+    assert: 1 < 0,
+    message: "Info with assert"
+  },
+
+  {
+    type: "warn",
+    message: "Warn without assert"
+  },
+  {
+    type: "warn",
+    assert: 1 > 0,
+    message: "Warn with assert (should not trigger!)"
+  },
+  {
+    type: "warn",
+    assert: 1 < 0,
+    message: "Warn with assert"
+  },
+
+  {
+    message: "Auto info for file",
+    filename: $file.name
+  },
+  {
+    message: "Info for file",
+    type: 'info',
+    filename: $file.name
+  },
+  {
+    message: "Warn for file",
+    type: 'warn',
+    filename: $file.name
+  },
+  {
+    message: "Error for file",
+    type: 'error',
+    filename: $file.name
+  },
+
+  // test possibility to use jora-helpers
+  {
+    $compilation: $file.compilations.pick();
+    $versions: $compilation.nodeModules.(
+      $name: name;
+      instances.($name.getInstanceInfo(path, $compilation.hash))
+    ).info.version;
+    assert: $versions.[$~=/\d\.\d\.\d/].size() > 0,
+    message: "Something wrong (should not trigger!)" + $versions.stringify()
+  }
+]

@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`validtor types raw jora-query fail.jora 1`] = `
+Array [
+  Array [
+    "unknown",
+  ],
+  Array [
+    "  error: Fail",
+  ],
+  Array [
+    "",
+  ],
+  Array [
+    "Errors: 1",
+  ],
+  Array [
+    "Done",
+  ],
+]
+`;
+
+exports[`validtor types raw jora-query ok.jora 1`] = `
+Array [
+  Array [
+    "",
+  ],
+  Array [
+    "Done",
+  ],
+]
+`;
+
+exports[`validtor types raw jora-query rules.jora 1`] = `
+Array [
+  Array [
+    "unknown",
+  ],
+  Array [
+    "  info: Auto info message",
+  ],
+  Array [
+    "  info: Info message without assert",
+  ],
+  Array [
+    "  info: Info with assert",
+  ],
+  Array [
+    "  warn: Warn without assert",
+  ],
+  Array [
+    "  warn: Warn with assert",
+  ],
+  Array [
+    "stats-dev.json",
+  ],
+  Array [
+    "  info: Auto info for file",
+  ],
+  Array [
+    "  info: Info for file",
+  ],
+  Array [
+    "  warn: Warn for file",
+  ],
+  Array [
+    "  error: Error for file",
+  ],
+  Array [
+    "",
+  ],
+  Array [
+    "Errors: 1",
+  ],
+  Array [
+    "Warnings: 3",
+  ],
+  Array [
+    "Info: 5",
+  ],
+  Array [
+    "Done",
+  ],
+]
+`;

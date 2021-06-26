@@ -78,6 +78,8 @@
 
 - `[webpack-model]` support `stats-extension-compressed` and `stats-extension-package-info`
 
+- `[cli]` (validate): use `info`-type for messages by default
+
 - `[stats]` a new package that contains Statoscope own stats format (extension-entity for now, but there are will be more entities)
 
 - `[extensions]` a new package that contains Statoscope extensions toolkit
@@ -99,6 +101,8 @@
 - `[webpack-ui]` fix packages instances list on `diff`-page
 
   There was `undefined` instead of instances links
+
+- `[cli]` (validate): use console.info for `info`-type messages
 
 ### Improvements
 
