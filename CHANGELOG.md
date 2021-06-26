@@ -78,6 +78,7 @@
 
 - `[webpack-model]` support `stats-extension-compressed` and `stats-extension-package-info`
 - `[webpack-model]` added helpers to getting network type and download speed
+- `[helpers]` add `locale`-parameter to `formatDate`-helper
 
 - `[cli]` (validate): use `info`-type for messages by default
 

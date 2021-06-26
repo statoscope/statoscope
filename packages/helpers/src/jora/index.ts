@@ -23,8 +23,8 @@ export default () => {
       }
       return 'n/a';
     },
-    formatDate(ts: number): string {
-      return new Date(ts).toLocaleString();
+    formatDate(ts: number, locale?: string): string {
+      return new Date(ts).toLocaleString(locale);
     },
     formatDuration(ms: number): string {
       const sign = Math.sign(ms);
