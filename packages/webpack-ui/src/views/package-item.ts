@@ -41,13 +41,13 @@ export default function (discovery: StatoscopeWidget): void {
             when: `
             $hash: hash;
             $package: package;
-            not compact and $package.instances.($package.name.getInstanceInfo(path, $hash or #.params.hash)).info.version.size() > 1
+            not compact and $package.instances.($package.name.getPackageInstanceInfo(path, $hash or #.params.hash)).info.version.size() > 1
             `,
             view: 'badge',
             data: `
             $hash: hash;
             $package: package;
-            $size: $package.instances.($package.name.getInstanceInfo(path, $hash or #.params.hash)).info.version.size();
+            $size: $package.instances.($package.name.getPackageInstanceInfo(path, $hash or #.params.hash)).info.version.size();
             {
               $package,
               text: $size,

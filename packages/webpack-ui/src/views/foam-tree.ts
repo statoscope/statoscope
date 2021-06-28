@@ -24,14 +24,14 @@ function getPopup<TData>(discovery: StatoscopeWidget, data: TData): PopupAPI<TDa
             className: 'hack-badge-margin-left',
             when: `
             $package: link.package;
-            $instance: $package.name.getInstanceInfo($package.instance.path, "${
+            $instance: $package.name.getPackageInstanceInfo($package.instance.path, "${
               discovery.getRenderContext().params.hash
             }");
             link.page = 'package' and $instance.info.version
             `,
             data: `{
               $package: link.package;
-              $instance: $package.name.getInstanceInfo($package.instance.path, "${
+              $instance: $package.name.getPackageInstanceInfo($package.instance.path, "${
                 discovery.getRenderContext().params.hash
               }");
               text: $instance.info.version

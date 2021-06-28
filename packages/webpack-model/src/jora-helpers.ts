@@ -126,13 +126,13 @@ export default function (compilations: HandledCompilation[]) {
         }
       );
     },
-    getInstanceInfo(
+    getPackageInstanceInfo(
       packageName: string,
       instancePath: string,
       hash: string
     ): Instance | null {
       if (!hash) {
-        throw new Error('[getInstanceInfo-helper]: hash-parameter is required');
+        throw new Error('[getPackageInstanceInfo-helper]: hash-parameter is required');
       }
 
       const ext = resolveCompilation(hash)?.resolvers.resolveExtension(

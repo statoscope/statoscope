@@ -2660,18 +2660,21 @@ Array [
     "modules": "545",
     "path": "543",
     "reasons": "544",
+    "version": "546",
   },
   Object {
     "isRoot": true,
-    "modules": "548",
-    "path": "546",
-    "reasons": "547",
+    "modules": "549",
+    "path": "547",
+    "reasons": "548",
+    "version": "546",
   },
   Object {
     "isRoot": true,
-    "modules": "551",
-    "path": "549",
-    "reasons": "550",
+    "modules": "552",
+    "path": "550",
+    "reasons": "551",
+    "version": "553",
   },
   "Sergey Melyukov",
   "https://twitter.com/smelukov",
@@ -2682,7 +2685,7 @@ Array [
   },
   Object {
     "id": "14",
-    "packages": "552",
+    "packages": "554",
   },
   "@statoscope/webpack-stats-extension-compressed",
   Object {
@@ -2691,7 +2694,7 @@ Array [
   },
   Object {
     "id": "14",
-    "resources": "553",
+    "resources": "555",
   },
   Object {
     "name": "146",
@@ -2729,40 +2732,40 @@ Array [
   "6:73-102",
   "node_modules/foo",
   Array [
-    "554",
-    "555",
+    "556",
+    "557",
   ],
   Array [
     "37",
   ],
+  "1.0.0",
   "node_modules/bar",
   Array [
-    "556",
-    "557",
+    "558",
+    "559",
   ],
   Array [
     "38",
   ],
   "../node_modules/css-loader",
   Array [
-    "558",
-    "559",
     "560",
     "561",
+    "562",
+    "563",
   ],
   Array [
     "49",
     "50",
   ],
+  "5.2.6",
   Array [
-    "562",
-    "563",
     "564",
     "565",
-  ],
-  Array [
     "566",
     "567",
+  ],
+  Array [
     "568",
     "569",
     "570",
@@ -2789,6 +2792,8 @@ Array [
     "591",
     "592",
     "593",
+    "594",
+    "595",
   ],
   Object {
     "data": "449",
@@ -2823,288 +2828,286 @@ Array [
     "type": "156",
   },
   Object {
-    "instances": "595",
-    "name": "594",
-  },
-  Object {
-    "instances": "596",
-    "name": "413",
-  },
-  Object {
     "instances": "597",
-    "name": "415",
+    "name": "596",
   },
   Object {
     "instances": "598",
+    "name": "413",
+  },
+  Object {
+    "instances": "599",
+    "name": "415",
+  },
+  Object {
+    "instances": "600",
     "name": "417",
   },
   Object {
     "id": "126",
-    "size": "599",
-  },
-  Object {
-    "id": "116",
-    "size": "600",
-  },
-  Object {
-    "id": "146",
     "size": "601",
   },
   Object {
-    "id": "136",
+    "id": "116",
     "size": "602",
   },
   Object {
-    "id": "353",
+    "id": "146",
     "size": "603",
   },
   Object {
-    "id": "387",
+    "id": "136",
     "size": "604",
   },
   Object {
-    "id": "360",
+    "id": "353",
     "size": "605",
   },
   Object {
-    "id": "367",
+    "id": "387",
     "size": "606",
   },
   Object {
-    "id": "394",
+    "id": "360",
     "size": "607",
   },
   Object {
-    "id": "346",
+    "id": "367",
     "size": "608",
   },
   Object {
-    "id": "380",
+    "id": "394",
     "size": "609",
   },
   Object {
-    "id": "407",
+    "id": "346",
     "size": "610",
   },
   Object {
-    "id": "333",
+    "id": "380",
     "size": "611",
   },
   Object {
-    "id": "325",
+    "id": "407",
     "size": "612",
   },
   Object {
-    "id": "211",
+    "id": "333",
     "size": "613",
   },
   Object {
-    "id": "231",
+    "id": "325",
     "size": "614",
   },
   Object {
-    "id": "212",
+    "id": "211",
     "size": "615",
   },
   Object {
-    "id": "160",
+    "id": "231",
     "size": "616",
   },
   Object {
-    "id": "200",
+    "id": "212",
     "size": "617",
   },
   Object {
-    "id": "190",
+    "id": "160",
     "size": "618",
   },
   Object {
-    "id": "181",
+    "id": "200",
     "size": "619",
   },
   Object {
-    "id": "161",
+    "id": "190",
     "size": "620",
   },
   Object {
-    "id": "307",
+    "id": "181",
     "size": "621",
   },
   Object {
-    "id": "300",
+    "id": "161",
     "size": "622",
   },
   Object {
-    "id": "315",
+    "id": "307",
     "size": "623",
   },
   Object {
-    "id": "247",
+    "id": "300",
     "size": "624",
   },
   Object {
-    "id": "275",
+    "id": "315",
     "size": "625",
   },
   Object {
-    "id": "265",
+    "id": "247",
     "size": "626",
   },
+  Object {
+    "id": "275",
+    "size": "627",
+  },
+  Object {
+    "id": "265",
+    "size": "628",
+  },
   "simple",
-  Array [
-    "627",
-  ],
-  Array [
-    "628",
-  ],
   Array [
     "629",
   ],
   Array [
     "630",
   ],
+  Array [
+    "631",
+  ],
+  Array [
+    "632",
+  ],
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 277,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 8529,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 33,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 135,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 154,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 683,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 155,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 97,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 186,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 212,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 1088,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 432,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 197,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 192,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 295,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 20,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 20,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 283,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 20,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 20,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 20,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 20,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 406,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 662,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 6217,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 431,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 160,
   },
   Object {
-    "compressor": "631",
+    "compressor": "633",
     "size": 99,
   },
   Object {
-    "info": "632",
+    "info": "634",
     "path": "326",
   },
   Object {
-    "info": "633",
+    "info": "635",
     "path": "543",
   },
   Object {
-    "info": "634",
-    "path": "546",
+    "info": "636",
+    "path": "547",
   },
   Object {
-    "info": "635",
-    "path": "549",
+    "info": "637",
+    "path": "550",
   },
   "gzip",
   Object {
-    "version": "636",
+    "version": "546",
   },
   Object {
-    "version": "636",
+    "version": "546",
   },
   Object {
-    "version": "636",
+    "version": "546",
   },
   Object {
-    "version": "637",
+    "version": "553",
   },
-  "1.0.0",
-  "5.2.6",
 ]
 `;

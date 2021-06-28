@@ -105,12 +105,12 @@ export default (() =>
           hash
         );
       },
-      getInstanceInfo(
+      getPackageInstanceInfo(
         packageName: string,
         instancePath: string,
         hash: string
       ): Instance | null {
-        return wpJoraHelpers.getInstanceInfo(packageName, instancePath, hash);
+        return wpJoraHelpers.getPackageInstanceInfo(packageName, instancePath, hash);
       },
       getDownloadTime(size: number, networkType?: string): number {
         if (networkType == null) {

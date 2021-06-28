@@ -52,9 +52,9 @@ export function packageInstanceItemConfig(
       {
         view: 'badge',
         className: 'hack-badge-margin-left',
-        when: `(package.name or package).getInstanceInfo(instance.path, ${hash})`,
+        when: `(package.name or package).getPackageInstanceInfo(instance.path, ${hash})`,
         data: `{
-          text: (package.name or package).getInstanceInfo(instance.path, ${hash}).info.version
+          text: (package.name or package).getPackageInstanceInfo(instance.path, ${hash}).info.version
         }`,
       },
     ],
@@ -183,12 +183,12 @@ export function packageInstanceItemConfig(
                         {
                           when: `
                           $package: value;
-                          not compact and instances.($package.getInstanceInfo(value.path, ${hash})).info.version.size() > 1
+                          not compact and instances.($package.getPackageInstanceInfo(value.path, ${hash})).info.version.size() > 1
                           `,
                           view: 'badge',
                           data: `
                           $package: value;
-                          $size: instances.($package.getInstanceInfo(value.path, ${hash})).info.version.size();
+                          $size: instances.($package.getPackageInstanceInfo(value.path, ${hash})).info.version.size();
                           {
                             text: $size,
                             postfix: $size.plural(['version', 'versions'])
@@ -215,9 +215,9 @@ export function packageInstanceItemConfig(
                           {
                             view: 'badge',
                             className: 'hack-badge-margin-left',
-                            when: `instance.package.getInstanceInfo(instance.value.path, ${hash})`,
+                            when: `instance.package.getPackageInstanceInfo(instance.value.path, ${hash})`,
                             data: `{
-                              text: instance.package.getInstanceInfo(instance.value.path, ${hash}).info.version
+                              text: instance.package.getPackageInstanceInfo(instance.value.path, ${hash}).info.version
                             }`,
                           },
                           {

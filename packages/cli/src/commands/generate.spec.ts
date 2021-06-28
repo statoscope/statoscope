@@ -28,5 +28,5 @@ test('should work', async () => {
 
   expect(
     crypto.createHash('md5').update(fs.readFileSync(outputPath)).digest('hex')
-  ).toMatchInlineSnapshot(`"6e995f73b2e2f0518fc2c4ccb66f991a"`);
+  ).toMatchInlineSnapshot(`"f2c42726d7a94fd5a79cc7197db099c0"`);
 });

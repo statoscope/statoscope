@@ -2,10 +2,11 @@ import md5 from 'md5';
 import { StatsDescriptor } from '@statoscope/stats';
 import { Extension } from '@statoscope/stats/spec/extension';
 import makeEntityResolver, { Resolver } from '@statoscope/helpers/dist/entity-resolver';
-import { APIFactory, Container } from '@statoscope/extensions';
+import Container, { APIFactory } from '@statoscope/extensions';
 import * as ExtensionCompressed from '@statoscope/stats-extension-compressed';
 import ExtensionCompressedPackage from '@statoscope/stats-extension-compressed/package.json';
 import * as ExtensionPackageInfo from '@statoscope/stats-extension-package-info';
+import type { API as ExtensionPackageInfoAPI } from '@statoscope/stats-extension-package-info/dist/api';
 import ExtensionPackageInfoPackage from '@statoscope/stats-extension-package-info/package.json';
 import { Webpack } from '../webpack';
 import validateStats, { ValidationResult } from './validate';
@@ -56,6 +57,7 @@ export type NodeModuleInstance = {
   isRoot: boolean;
   reasons: { type: 'module'; data: NormalizedReason }[];
   modules: NormalizedModule[];
+  version?: string;
 };
 
 export type NormalizedCompilation = {
@@ -496,7 +498,7 @@ function prepareEntries(
 
 function extractPackages(
   compilation: NormalizedCompilation,
-  { resolvePackage }: CompilationResolvers
+  { resolvePackage, resolveExtension }: CompilationResolvers
 ): void {
   const buildReasonKey = (type: string, moduleName: string, loc: string): string => {
     return [type, moduleName, loc].join(';');
@@ -524,11 +526,21 @@ function extractPackages(
       );
 
       if (!instance) {
+        const packageInfoExt = resolveExtension(
+          '@statoscope/stats-extension-package-info'
+        );
+        const api = packageInfoExt?.api as ExtensionPackageInfoAPI | undefined;
+
+        const extInstance =
+          api?.getInstance(compilation.hash, resolvedPackage.name, modulePackage.path) ??
+          null;
+
         instance = {
           path: modulePackage.path,
           isRoot: modulePackage.isRoot,
           reasons: [],
           modules: [module],
+          version: extInstance?.info.version,
         };
         resolvedPackage.instances.push(instance);
       } else {

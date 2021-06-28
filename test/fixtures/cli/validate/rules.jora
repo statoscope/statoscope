@@ -59,7 +59,7 @@ $file: .pick();
     $compilation: $file.compilations.pick();
     $versions: $compilation.nodeModules.(
       $name: name;
-      instances.($name.getInstanceInfo(path, $compilation.hash))
+      instances.($name.getPackageInstanceInfo(path, $compilation.hash))
     ).info.version;
     assert: $versions.[$~=/\d\.\d\.\d/].size() > 0,
     message: "Something wrong (should not trigger!)" + $versions.stringify()

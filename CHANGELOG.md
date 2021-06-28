@@ -10,7 +10,7 @@
 
   - `'gzip'` (default) - compress all the resources with gzip and collect the compressed sizes
 
-  - `CompressFunction` - a function that takes source as an input and should return compressed size for this resource (useful if you want to use non-gzip compressor)
+  - `CompressFunction` - a function that takes source as an input and should return compressed size for this resource (useful if you want to use a non-gzip compressor)
 
   - `false` - don't collect compressed sizes
 
@@ -20,15 +20,22 @@
 
   > It uses `webpack-stats-extension-package-info` upder the hood
 
-- `[webpack-ui]` taking resources compressed (e.g. gzip) size of the resources into account
+- `[webpack-ui]` taking compressed (e.g. gzip) size of the resources into account
 
   There is a new setting to taking resources compressed size into account.
 
   If enabled then all the sizes will be shown as compressed.
 
+  New jora-helpers:
+
+  - `getModuleSize(module, hash?)` return compressed or normal module size
+  - `getAssetSize(asset, hash?)` return compressed or normal asset size
+
   > It uses `stats-extension-compressed` under the hood and works only when the stats-file was taken from `webpack-plugin@5.3` or any source that uses `stats-extension-compressed`
 
 - `[webpack-ui]` taking packages versions into account and output these in all the package items
+
+  Also, added instance version into `compilations.nodeModules.instance`
 
   > It uses `stats-extension-package-info` under the hood and works only when the stats-file was taken from `webpack-plugin@5.3` or any source that uses `stats-extension-package-info`
 
@@ -39,7 +46,7 @@
   There are two assets inject types:
 
   - `sync`: dowload time = `sum(downloadTime(assets))`
-    Download time is sum of download time of all the assets
+    Download time is a sum of the download time of all the assets
 
   - `async`: dowload time = `max(downloadTime(assets))`
     Download time is a download time of most heavy asset (usefull if `async`/`defer` used to inject your assets)
@@ -76,8 +83,26 @@
 
   It allows collecting package versions from webpack compilation
 
-- `[webpack-model]` support `stats-extension-compressed` and `stats-extension-package-info`
-- `[webpack-model]` added helpers to getting network type and download speed
+- `[webpack-model]` added `resolveExtension(name)` return extension API
+- `[webpack-model]` support `stats-extension-package-info` extension
+
+  There is a new jora-helpers:
+
+  - `getPackageInstanceInfo(package, instancePath, hash)` that returns a package instance information
+
+- `[webpack-model]` support `stats-extension-compressed` extension
+
+  There are new jora-helpers:
+
+  - `getModuleSize(module, compressed?, hash?)` returns compressed or normal module size
+  - `getAssetSize(asset, compressed?, hash?)` returns compressed or normal asset size
+
+- `[webpack-model]` added jora-helpers to getting network type and download speed:
+
+- `getNetworkTypeInfo(networkType: string)` return full info about specified network by its name (full list of type you can find at network-type-list.ts)
+- `getNetworkTypeName(networkType: Item)` return full name for specified network
+- `getDownloadTime(size: number, networkType: string)` calculate download time based on selected network type
+
 - `[helpers]` add `locale`-parameter to `formatDate`-helper
 
 - `[cli]` (validate): use `info`-type for messages by default
@@ -86,7 +111,7 @@
 
 - `[extensions]` a new package that contains Statoscope extensions toolkit
 
-- `[report-writer]` add Piper - a proxy to ensure that all a stream consumers has got a chunk
+- `[report-writer]` add Piper - a proxy to ensure that all stream consumers have got a chunk
 
 ### Fixes
 

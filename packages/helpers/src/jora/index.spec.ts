@@ -16,8 +16,8 @@ test('formatSize', () => {
   expect(helpers.formatSize(1024 ** 3 * 2)).toMatchInlineSnapshot(`"2048.00 mb"`);
 });
 test('formatDate', () => {
-  expect(helpers.formatDate(1624731388203, 'en-US')).toMatchInlineSnapshot(
-    `"6/26/2021, 11:16:28 PM"`
+  expect(helpers.formatDate(1624731388203, 'en-US')).toMatch(
+    /6\/26\/2021, \d+:\d+:\d+ PM/
   );
 });
 test('formatDuration', () => {
