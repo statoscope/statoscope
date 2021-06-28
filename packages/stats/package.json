@@ -9,8 +9,11 @@
     "name": "Sergey Melyukov",
     "url": "https://twitter.com/smelukov"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
-    "src/*"
+    "spec/*"
   ],
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
