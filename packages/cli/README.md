@@ -41,10 +41,10 @@ A query must return `TestEntry[]`:
 
 ```ts
 type TestEntry = {
-    type?: 'error' | 'warn' | 'info'; // 'error' by default
-    assert?: boolean; // false by default
-    messsage: string;
-    filename?: string
+  type?: 'error' | 'warn' | 'info'; // 'error' by default
+  assert?: boolean; // false by default
+  messsage: string;
+  filename?: string;
 };
 ```
 
@@ -154,7 +154,7 @@ statoscope validate rules.jora --input master.json --input branch.json
 ```
 branch.json
   error: Initial assets size increased at 249.57 kb (9.16%)"
-  
+
 Errors: 1
 ```
 
@@ -164,29 +164,32 @@ Validator-script may export `ValidatorFn` that will be called to validate stats 
 
 ```ts
 type Data = {
-    files: Object[];
-    compilations: Object[];
-    query: (query: string, data?: any) => any; // query-parameter is jora-syntax query
-}
+  files: Object[];
+  compilations: Object[];
+  query: (query: string, data?: any) => any; // query-parameter is jora-syntax query
+};
 
 type API = {
-    error(message: string, filename?: string): void;
-    warn(message: string, filename?: string): void;
-    info(message: string, filename?: string): void;
-}
-type ValidatorFn = (data: Data, api: API) => Promise<string | void>
+  error(message: string, filename?: string): void;
+  warn(message: string, filename?: string): void;
+  info(message: string, filename?: string): void;
+};
+type ValidatorFn = (data: Data, api: API) => Promise<string | void>;
 ```
 
 **Example:**
 
 ```js
 module.exports = (data, api) => {
-    const lodash = data.query('compilations.nodeModules.[name="lodash"]');
+  const lodash = data.query('compilations.nodeModules.[name="lodash"]');
 
-    if (lodash.length) {
-        api.error('Lodash usage detected. Please do not use lodash in this project', data.files[0].name);
-    }
-}
+  if (lodash.length) {
+    api.error(
+      'Lodash usage detected. Please do not use lodash in this project',
+      data.files[0].name
+    );
+  }
+};
 ```
 
 ```sh
@@ -234,7 +237,7 @@ Generate HTML report from JSON-stats.
 **Example:**
 
 ```sh
-statoscope serve path/to/stats.json path/to/report.html -o 
+statoscope generate path/to/stats.json path/to/report.html -o
 ```
 
 Create statoscope report, save it to `path/to/report.html` and open
