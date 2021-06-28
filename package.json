@@ -30,7 +30,9 @@
     ]
   },
   "homepage": "https://github.com/statoscope/statoscope",
-  "dependencies": {},
+  "dependencies": {
+    "@statoscope/cli": "^5.3.0-alpha.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.4",

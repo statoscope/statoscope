@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 5.3.0 (28 June 2020)
 
 ### Features
 
@@ -28,16 +28,16 @@
 
   New jora-helpers:
 
-  - `getModuleSize(module, hash?)` return compressed or normal module size
-  - `getAssetSize(asset, hash?)` return compressed or normal asset size
+  - `getModuleSize(module, hash)` return compressed or normal module size
+  - `getAssetSize(asset, hash)` return compressed or normal asset size
 
-  > It uses `stats-extension-compressed` under the hood and works only when the stats-file was taken from `webpack-plugin@5.3` or any source that uses `stats-extension-compressed`
+  > It uses `stats-extension-compressed` under the hood and works only when the stats-file was taken from `webpack-plugin@>=5.3` or any source that uses `stats-extension-compressed`
 
 - `[webpack-ui]` taking packages versions into account and output these in all the package items
 
   Also, added instance version into `compilations.nodeModules.instance`
 
-  > It uses `stats-extension-package-info` under the hood and works only when the stats-file was taken from `webpack-plugin@5.3` or any source that uses `stats-extension-package-info`
+  > It uses `stats-extension-package-info` under the hood and works only when the stats-file was taken from `webpack-plugin@>=5.3` or any source that uses `stats-extension-package-info`
 
 - `[webpack-ui]` download time measure
 
@@ -45,15 +45,15 @@
 
   There are two assets inject types:
 
-  - `sync`: dowload time = `sum(downloadTime(assets))`
+  - `sync`: download time = `sum(downloadTime(assets))`
     Download time is a sum of the download time of all the assets
 
-  - `async`: dowload time = `max(downloadTime(assets))`
+  - `async`: download time = `max(downloadTime(assets))`
     Download time is a download time of most heavy asset (usefull if `async`/`defer` used to inject your assets)
 
   The network type is `3G DC-HSPA+ (8MBit/s)` by default.
 
-  Assets inject type is `sequential` by default.
+  Assets inject type is `sync` by default.
 
 - `[webpack-ui]` add `compact`-property to `asset/chunk/module/entry-item`-widget
 
@@ -83,25 +83,22 @@
 
   It allows collecting package versions from webpack compilation
 
-- `[webpack-model]` added `resolveExtension(name)` return extension API
+- `[webpack-model]` added `resolveExtension(name)` jora-helper that returns extension API
 - `[webpack-model]` support `stats-extension-package-info` extension
 
   There is a new jora-helpers:
-
   - `getPackageInstanceInfo(package, instancePath, hash)` that returns a package instance information
 
 - `[webpack-model]` support `stats-extension-compressed` extension
 
   There are new jora-helpers:
-
   - `getModuleSize(module, compressed?, hash?)` returns compressed or normal module size
   - `getAssetSize(asset, compressed?, hash?)` returns compressed or normal asset size
 
 - `[webpack-model]` added jora-helpers to getting network type and download speed:
-
-- `getNetworkTypeInfo(networkType: string)` return full info about specified network by its name (full list of type you can find at network-type-list.ts)
-- `getNetworkTypeName(networkType: Item)` return full name for specified network
-- `getDownloadTime(size: number, networkType: string)` calculate download time based on selected network type
+  - `getNetworkTypeInfo(networkType: string)` return full info about specified network by its name (full list of type you can find at network-type-list.ts)
+  - `getNetworkTypeName(networkType: Item)` return full name for specified network
+  - `getDownloadTime(size: number, networkType: string)` calculate download time based on selected network type
 
 - `[helpers]` add `locale`-parameter to `formatDate`-helper
 

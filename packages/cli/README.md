@@ -58,6 +58,10 @@ type TestEntry = {
     assert: compilations.nodeModules.[name="lodash"].size() = 0,
     message: 'Lodash usage detected. Please do not use lodash in this project',
     filename: name
+  },
+  {
+    message: 'Just info message',
+    filename: name
   }
 ]
 ```
@@ -70,8 +74,10 @@ statoscope validate rules.jora stats.json
 
 ```
 stats.json
+  info: Just info message
   error: Lodash usage detected. Please do not use lodash in this project
 
+Info: 1
 Errors: 1
 ```
 
@@ -120,9 +126,11 @@ Errors: 1
 Warnings: 1
 ```
 
-Also, there
-are [a lot of jora-helpers](https://github.com/statoscope/statoscope/blob/master/packages/webpack-model/src/jora-helpers.js)
-. For example:
+Also, there are a lot of jora-helpers that you can use in your rules:
+- [common helpers](https://github.com/statoscope/statoscope/blob/master/packages/helpers/src/jora/index.ts)
+- [webpack-model helpers](https://github.com/statoscope/statoscope/blob/master/packages/webpack-model/src/jora-helpers.js)
+
+For example:
 
 `rules.jora:`
 
