@@ -12,8 +12,40 @@ const inputArgs = inputFixtures.map((filename) => ['--input', filename]).flat();
 
 const rootPath = path.resolve(__dirname, '../../../../');
 const outputDir = path.join(rootPath, 'test/temp', path.relative(rootPath, __filename));
+const webpackUIPath = require.resolve('@statoscope/webpack-ui');
+const webpackUIFixture = path.join(rootPath, 'test/fixtures/report-writer/injectable.js');
 
 fs.mkdirSync(outputDir, { recursive: true });
+
+jest.mock('fs', () => {
+  const ofs = jest.requireActual('fs');
+  return {
+    ...ofs,
+    readFile(name: string, ...args: unknown[]): unknown {
+      if (path.resolve(name) === webpackUIPath) {
+        name = webpackUIFixture;
+      }
+
+      return ofs.readFile(name, ...args);
+    },
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    readFileSync(name: string, ...args: unknown[]): unknown {
+      if (path.resolve(name) === webpackUIPath) {
+        name = webpackUIFixture;
+      }
+
+      return ofs.readFileSync(name, ...args);
+    },
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    createReadStream(name: string, ...args: unknown[]): unknown {
+      if (path.resolve(name) === webpackUIPath) {
+        name = webpackUIFixture;
+      }
+
+      return ofs.createReadStream(name, ...args);
+    },
+  };
+});
 
 test('should work', async () => {
   const outputPath = path.join(outputDir, `${Date.now()}.html`);
@@ -26,7 +58,5 @@ test('should work', async () => {
 
   await y.argv;
 
-  expect(
-    crypto.createHash('md5').update(fs.readFileSync(outputPath)).digest('hex')
-  ).toMatchInlineSnapshot(`"f2c42726d7a94fd5a79cc7197db099c0"`);
+  expect(fs.readFileSync(outputPath, 'utf8')).toMatchSnapshot();
 });
