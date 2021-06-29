@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import crypto from 'crypto';
 import yargs from 'yargs';
 import generate from './generate';
 

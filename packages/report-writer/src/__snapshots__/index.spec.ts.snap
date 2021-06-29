@@ -74,6 +74,7 @@ exports[`should work 1`] = `
         }
         
         const initFunction = function (foo) {
+            /* istanbul ignore next */
             console.log(foo);
         };
         

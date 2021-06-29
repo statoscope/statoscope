@@ -112,6 +112,7 @@ export default class StatoscopeWebpackPlugin {
       const htmlWriter = new HTMLWriter({
         scripts: [{ type: 'path', path: require.resolve('@statoscope/webpack-ui') }],
         init: function (data): void {
+          /* istanbul ignore next */
           // @ts-ignore
           Statoscope.default(data.map((item) => ({ name: item.id, data: item.data })));
         },

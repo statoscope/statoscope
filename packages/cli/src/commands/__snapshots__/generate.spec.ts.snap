@@ -66,6 +66,7 @@ exports[`should work 1`] = `
         }
         
         const initFunction = function (data) {
+            /* istanbul ignore next */
             // @ts-ignore
             Statoscope.default(data.map((item) => ({ name: item.id, data: item.data })));
         };

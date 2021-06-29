@@ -30,6 +30,7 @@ test('should work', async () => {
   const writer = new Writer({
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     init: function (foo) {
+      /* istanbul ignore next */
       console.log(foo);
     },
     scripts: [
