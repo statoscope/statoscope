@@ -2,11 +2,12 @@ import md5 from 'md5';
 import { StatsDescriptor } from '@statoscope/stats';
 import { Extension } from '@statoscope/stats/spec/extension';
 import makeEntityResolver, { Resolver } from '@statoscope/helpers/dist/entity-resolver';
-import Container, { APIFactory } from '@statoscope/extensions';
-import * as ExtensionCompressed from '@statoscope/stats-extension-compressed';
+import Container from '@statoscope/extensions';
+import ExtensionCompressedAPIFactory from '@statoscope/stats-extension-compressed/dist/api';
 import ExtensionCompressedPackage from '@statoscope/stats-extension-compressed/package.json';
-import * as ExtensionPackageInfo from '@statoscope/stats-extension-package-info';
-import type { API as ExtensionPackageInfoAPI } from '@statoscope/stats-extension-package-info/dist/api';
+import ExtensionPackageInfoAPIFactory, {
+  API as ExtensionPackageInfoAPI,
+} from '@statoscope/stats-extension-package-info/dist/api';
 import ExtensionPackageInfoPackage from '@statoscope/stats-extension-package-info/package.json';
 import { Webpack } from '../webpack';
 import validateStats, { ValidationResult } from './validate';
@@ -120,13 +121,13 @@ const extensionContainer = new Container();
 extensionContainer.register(
   ExtensionCompressedPackage.name,
   ExtensionCompressedPackage.version,
-  ExtensionCompressed.api as APIFactory<unknown, unknown>
+  ExtensionCompressedAPIFactory
 );
 
 extensionContainer.register(
   ExtensionPackageInfoPackage.name,
   ExtensionPackageInfoPackage.version,
-  ExtensionPackageInfo.api as APIFactory<unknown, unknown>
+  ExtensionPackageInfoAPIFactory
 );
 
 function getHash(
