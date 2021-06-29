@@ -1,6 +1,6 @@
 # Changelog
 
-## 5.3.0 (28 June 2020)
+## Next
 
 ### Features
 
@@ -135,6 +135,8 @@
 - `[webpack-ui]` better sorting of package instances
 
   Root-instances goes first
+
+- `[webpack-ui]` fix loading-styles
 
 ### Refactor
 
