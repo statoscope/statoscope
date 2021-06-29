@@ -28,9 +28,9 @@ test('should work', async () => {
   const outputFile = path.join(outputDir, `${Date.now()}.html`);
   const outputStream = fs.createWriteStream(outputFile);
   const writer = new Writer({
+    /* istanbul ignore next */
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     init: function (foo) {
-      /* istanbul ignore next */
       console.log(foo);
     },
     scripts: [

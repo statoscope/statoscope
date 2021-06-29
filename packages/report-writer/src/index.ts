@@ -11,7 +11,7 @@ export type ScriptItem =
   | { type: 'raw'; content: string };
 export type Options = {
   scripts: ScriptItem[];
-  init: (data: InitArg) => void;
+  init: string | ((data: InitArg) => void);
   jsonExtAPIName?: string;
 };
 

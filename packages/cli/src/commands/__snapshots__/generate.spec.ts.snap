@@ -65,11 +65,9 @@ exports[`should work 1`] = `
           }
         }
         
-        const initFunction = function (data) {
-            /* istanbul ignore next */
-            // @ts-ignore
-            Statoscope.default(data.map((item) => ({ name: item.id, data: item.data })));
-        };
+        const initFunction = function (data: InitArg): void {
+      Statoscope.default(data.map((item) => ({ name: item.id, data: item.data })));
+    };
         
         jsonExtAPIName.parse()
           .then(items => {
