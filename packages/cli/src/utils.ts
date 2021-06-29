@@ -1,10 +1,8 @@
-/* global Statoscope */
-
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
 import { Readable, Writable } from 'stream';
-import HTMLWriter, { InitArg } from '@statoscope/report-writer';
+import HTMLWriter from '@statoscope/report-writer';
 
 export function waitFinished(stream: Readable | Writable): Promise<void> {
   return new Promise((resolve, reject) => {
