@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { Readable, Writable } from 'stream';
 import Writer from './';
 
 const injectablePath = path.resolve(
@@ -11,12 +12,21 @@ const sourcePath = path.resolve(
   '../../../test/fixtures/report-writer/source.json'
 );
 
+function finishedPromise(stream: Readable | Writable): Promise<void> {
+  return new Promise((resolve, reject) => {
+    stream.once('end', resolve);
+    stream.once('finish', resolve);
+    stream.once('error', reject);
+  });
+}
+
 const rootPath = path.resolve(__dirname, '../../..');
 const outputDir = path.join(rootPath, 'test/temp', path.relative(rootPath, __filename));
 
 fs.mkdirSync(outputDir, { recursive: true });
 test('should work', async () => {
   const outputFile = path.join(outputDir, `${Date.now()}.html`);
+  const outputStream = fs.createWriteStream(outputFile);
   const writer = new Writer({
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     init: function (foo) {
@@ -36,9 +46,11 @@ test('should work', async () => {
 
   writer.addChunkWriter(fs.createReadStream(sourcePath), 'foo');
   writer.addChunkWriter(fs.createReadStream(sourcePath), 'bar');
-  writer.getStream().pipe(fs.createWriteStream(outputFile));
+  writer.addChunkWriter(fs.createReadStream(sourcePath), 'baz');
+  writer.getStream().pipe(outputStream);
 
   await writer.write();
+  await finishedPromise(outputStream);
 
   expect(fs.readFileSync(outputFile, 'utf8')).toMatchSnapshot();
 });

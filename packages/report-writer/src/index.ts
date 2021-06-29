@@ -1,6 +1,5 @@
 import fs from 'fs';
 import { PassThrough, Readable, Writable } from 'stream';
-import { promisify } from 'util';
 import makeChunkToScriptWriter from './chunkToScriptWriter';
 
 export type InitArg = { id: string; data: unknown }[];
@@ -19,14 +18,14 @@ export type Options = {
 export default class HTMLWriter {
   options: Options;
   chunkWriters: Array<{ id: string; stream: Readable }>;
-  stream: PassThrough;
+  stream: PassThrough = new PassThrough();
 
   constructor(options: Options) {
     this.options = {
       ...options,
       jsonExtAPIName: options.jsonExtAPIName || 'jsonExtAPIName',
     };
-    this.stream = new PassThrough();
+    this.stream.setMaxListeners(100);
     this.chunkWriters = [];
   }
 
@@ -35,11 +34,19 @@ export default class HTMLWriter {
   }
 
   async write(): Promise<void> {
-    await writeHeader(this.stream, this.options);
-    for (const writer of this.chunkWriters) {
-      await makeChunkToScriptWriter(writer.stream, this.stream, writer.id);
-    }
-    await writeFooter(this.stream, this.options);
+    writeHeader(this.stream, this.options);
+    await Promise.all(
+      this.chunkWriters.map((writer) =>
+        makeChunkToScriptWriter(writer.stream, this.stream, writer.id)
+      )
+    );
+    writeFooter(this.stream, this.options);
+    this.stream.end();
+
+    return new Promise((resolve, reject) => {
+      this.stream.once('finish', resolve);
+      this.stream.once('error', reject);
+    });
   }
 
   addChunkWriter(source: Readable, id: string): void {
@@ -47,10 +54,9 @@ export default class HTMLWriter {
   }
 }
 
-async function writeHeader(stream: Writable, options: Options): Promise<void> {
-  const write: (chunk: string) => Promise<void> = promisify(stream.write.bind(stream));
-  await write(`
-<html>
+function writeHeader(stream: Writable, options: Options): void {
+  stream.write(`<!doctype html>
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <script>
@@ -95,23 +101,27 @@ async function writeHeader(stream: Writable, options: Options): Promise<void> {
     </script>
     
     <style>
-        html, body {
-          padding: 0;
-          margin: 0;
-          height: 100%;
-          border: none;
-          -webkit-text-size-adjust: 100%;
-        }
-      </style>
+      html, body {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        border: none;
+        -webkit-text-size-adjust: 100%;
+      }
+      
+      #loading {
+        margin: 5px;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      }
+    </style>
   </head>
   <body>
     <div id="loading">Loading...</div>
 `);
 }
 
-async function writeFooter(stream: Writable, options: Options): Promise<void> {
-  const write: (chunk: string) => Promise<void> = promisify(stream.write.bind(stream));
-  await write(`
+function writeFooter(stream: Writable, options: Options): void {
+  stream.write(`
     <script>
         for (const element of document.querySelectorAll('script')) {
           if(element.dataset.id) {
