@@ -65,7 +65,7 @@ exports[`should work 1`] = `
           }
         }
         
-        const initFunction = function (data: InitArg): void {
+        const initFunction = function (data) {
       Statoscope.default(data.map((item) => ({ name: item.id, data: item.data })));
     };
         

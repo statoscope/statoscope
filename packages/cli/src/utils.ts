@@ -18,7 +18,7 @@ export async function transform(from: string[], to?: string): Promise<string> {
   const outputStream = fs.createWriteStream(to);
   const htmlWriter = new HTMLWriter({
     scripts: [{ type: 'path', path: require.resolve('@statoscope/webpack-ui') }],
-    init: `function (data: InitArg): void {
+    init: `function (data) {
       Statoscope.default(data.map((item) => ({ name: item.id, data: item.data })));
     }`,
   });

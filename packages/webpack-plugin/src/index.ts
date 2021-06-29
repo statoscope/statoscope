@@ -109,7 +109,7 @@ export default class StatoscopeWebpackPlugin {
       const webpackStatsStream = new Piper(stringifyStream(statsObj) as Readable);
       const htmlWriter = new HTMLWriter({
         scripts: [{ type: 'path', path: require.resolve('@statoscope/webpack-ui') }],
-        init: `function (data): void {
+        init: `function (data) {
           Statoscope.default(data.map((item) => ({ name: item.id, data: item.data })));
         }`,
       });
