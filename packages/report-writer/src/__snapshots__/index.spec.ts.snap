@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should work 1`] = `
-"
-<html>
+"<!doctype html>
+<html lang=\\"en\\">
   <head>
     <meta charset=\\"UTF-8\\">
     <script>
@@ -38,19 +38,52 @@ exports[`should work 1`] = `
     </script>
     
     <style>
-        html, body {
-          padding: 0;
-          margin: 0;
-          height: 100%;
-          border: none;
-          -webkit-text-size-adjust: 100%;
-        }
-      </style>
+      html, body {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        border: none;
+        -webkit-text-size-adjust: 100%;
+      }
+      
+      #loading {
+        margin: 5px;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      }
+    </style>
   </head>
   <body>
     <div id=\\"loading\\">Loading...</div>
 <script type=\\"text/plain\\" data-id=\\"foo\\">{
   \\"foo\\": \\"bar\\"
 }
-</script>"
+</script><script type=\\"text/plain\\" data-id=\\"bar\\">{
+  \\"foo\\": \\"bar\\"
+}
+</script><script type=\\"text/plain\\" data-id=\\"baz\\">{
+  \\"foo\\": \\"bar\\"
+}
+</script>
+    <script>
+        for (const element of document.querySelectorAll('script')) {
+          if(element.dataset.id) {
+            jsonExtAPIName.pushChunk(element.dataset.id, element.innerText);
+            // cleanup script-tags to free memory
+            element.remove();
+          }
+        }
+        
+        const initFunction = function (foo) {
+            console.log(foo);
+        };
+        
+        jsonExtAPIName.parse()
+          .then(items => {
+            initFunction(items);
+            document.querySelector('#loading').remove();
+          });
+    </script>
+  </body>
+</html>
+"
 `;
