@@ -1,4 +1,3 @@
-#
 # Please, use semantic commit message:
 # type(scope): message
 # or
