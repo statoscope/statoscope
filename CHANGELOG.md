@@ -1,6 +1,6 @@
 # Changelog
 
-5.3.0 (30 June 2021)
+## 5.3.0 (30 June 2021)
 
 ### Features
 
