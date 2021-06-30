@@ -25,18 +25,27 @@ test('should work', () => {
   expect(api('foo-compilation', 'foo-resource')).toMatchInlineSnapshot(`
 Object {
   "compressor": "gzip",
+  "meta": Object {
+    "level": 6,
+  },
   "size": 33,
 }
 `);
   expect(api('foo-compilation', 'bar-resource')).toMatchInlineSnapshot(`
 Object {
   "compressor": "gzip",
+  "meta": Object {
+    "level": 6,
+  },
   "size": 38,
 }
 `);
   expect(api('bar-compilation', 'foo-resource')).toMatchInlineSnapshot(`
 Object {
   "compressor": "gzip",
+  "meta": Object {
+    "level": 6,
+  },
   "size": 48,
 }
 `);

@@ -1,3 +1,4 @@
+import { ZlibOptions } from 'zlib';
 import { Extension, ExtensionDescriptor } from '@statoscope/stats/spec/extension';
 import makeResolver, { Resolver } from '@statoscope/helpers/dist/entity-resolver';
 import gzipSize from 'gzip-size';
@@ -7,8 +8,14 @@ export type Compressor = string | { name: string; version: string };
 export type Size = {
   compressor?: Compressor;
   size: number;
+  meta?: unknown;
 };
-export type CompressFunction = (source: Buffer | string, filename: string) => Size;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type CompressFunction<TOptions = any> = (
+  source: Buffer | string,
+  filename: string,
+  options?: TOptions
+) => Size;
 
 export type Format = Extension<Payload>;
 export type Resource = { id: string; size: Size };
@@ -21,12 +28,25 @@ export type Payload = {
 };
 
 const compressorByType: Record<string, CompressFunction> = {
-  gzip(source: Buffer | string): Size {
-    return { compressor: 'gzip', size: gzipSize.sync(source) };
+  gzip(source: Buffer | string, filename: string, options?: ZlibOptions): Size {
+    const level = options?.level ?? 6;
+    return {
+      compressor: 'gzip',
+      size: gzipSize.sync(source, { level, ...options }),
+      meta: {
+        level: 6,
+      },
+    };
   },
 };
 
-export type CompressorOrPreset = string | CompressFunction;
+export type ResolvedCompressor = {
+  compressor: CompressFunction<unknown>;
+  params?: unknown;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type CompressorOrPreset = string | ['gzip', ZlibOptions?] | CompressFunction;
 
 export default class Generator {
   private sizeResolvers: Map<Compilation, Resolver<string, Resource>> = new Map();
@@ -64,8 +84,12 @@ export default class Generator {
     }
 
     if (!sizeResolver!(resourceId)) {
-      const resolveCompressor = this.resolveCompressor(compressor);
-      const size = resolveCompressor(source, resourceId);
+      const resolvedCompressor = this.resolveCompressor(compressor);
+      const size = resolvedCompressor.compressor(
+        source,
+        resourceId,
+        resolvedCompressor.params
+      );
       compilation.resources.push({ id: resourceId, size });
     }
   }
@@ -74,13 +98,20 @@ export default class Generator {
     return { descriptor: this.descriptor, payload: this.payload };
   }
 
-  private resolveCompressor(compressor: CompressorOrPreset): CompressFunction {
-    if (typeof compressor === 'function') {
-      return compressor;
+  private resolveCompressor(compressor: CompressorOrPreset): ResolvedCompressor {
+    if (compressor === 'gzip') {
+      compressor = [compressor];
     }
 
-    if (Object.prototype.hasOwnProperty.call(compressorByType, compressor)) {
-      return compressorByType[compressor];
+    if (typeof compressor === 'function') {
+      return { compressor };
+    }
+
+    if (Array.isArray(compressor)) {
+      const [name, params] = compressor;
+      if (Object.prototype.hasOwnProperty.call(compressorByType, name)) {
+        return { compressor: compressorByType[name], params };
+      }
     }
 
     throw new Error(`Unknown compress ${compressor}`);

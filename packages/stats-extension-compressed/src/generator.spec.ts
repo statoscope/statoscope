@@ -24,6 +24,12 @@ describe('preset compressor', () => {
       'bar-foo-content'.repeat(100),
       'gzip'
     );
+    generator.handleResource(
+      'bar-compilation',
+      'bar-resource',
+      'bar-foo-content'.repeat(100),
+      ['gzip', { level: 1 }]
+    );
 
     expect(generator.get()).toMatchSnapshot();
   });

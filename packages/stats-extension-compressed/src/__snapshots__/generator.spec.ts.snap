@@ -62,15 +62,79 @@ Object {
     Array [
       "foo-foo-content",
       "foo-resource",
+      undefined,
     ],
     Array [
       "foo-bar-content",
       "bar-resource",
+      undefined,
     ],
   ],
   "instances": Array [
-    undefined,
-    undefined,
+    Object {
+      "compressor": [MockFunction] {
+        "calls": Array [
+          Array [
+            "foo-foo-content",
+            "foo-resource",
+            undefined,
+          ],
+          Array [
+            "foo-bar-content",
+            "bar-resource",
+            undefined,
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": Object {
+              "compressor": "custom-compressor",
+              "size": 100,
+            },
+          },
+          Object {
+            "type": "return",
+            "value": Object {
+              "compressor": "custom-compressor",
+              "size": 100,
+            },
+          },
+        ],
+      },
+    },
+    Object {
+      "compressor": [MockFunction] {
+        "calls": Array [
+          Array [
+            "foo-foo-content",
+            "foo-resource",
+            undefined,
+          ],
+          Array [
+            "foo-bar-content",
+            "bar-resource",
+            undefined,
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": Object {
+              "compressor": "custom-compressor",
+              "size": 100,
+            },
+          },
+          Object {
+            "type": "return",
+            "value": Object {
+              "compressor": "custom-compressor",
+              "size": 100,
+            },
+          },
+        ],
+      },
+    },
   ],
   "invocationCallOrder": Array [
     1,
@@ -101,10 +165,33 @@ Object {
     Array [
       "bar-foo-content",
       "foo-resource",
+      undefined,
     ],
   ],
   "instances": Array [
-    undefined,
+    Object {
+      "compressor": [MockFunction] {
+        "calls": Array [
+          Array [
+            "bar-foo-content",
+            "foo-resource",
+            undefined,
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": Object {
+              "compressor": Object {
+                "name": "custom-compressor",
+                "version": "7.7.7",
+              },
+              "size": 100,
+            },
+          },
+        ],
+      },
+    },
   ],
   "invocationCallOrder": Array [
     3,
@@ -148,6 +235,9 @@ Object {
             "id": "foo-resource",
             "size": Object {
               "compressor": "gzip",
+              "meta": Object {
+                "level": 6,
+              },
               "size": 33,
             },
           },
@@ -155,6 +245,9 @@ Object {
             "id": "bar-resource",
             "size": Object {
               "compressor": "gzip",
+              "meta": Object {
+                "level": 6,
+              },
               "size": 38,
             },
           },
@@ -167,7 +260,20 @@ Object {
             "id": "foo-resource",
             "size": Object {
               "compressor": "gzip",
+              "meta": Object {
+                "level": 6,
+              },
               "size": 48,
+            },
+          },
+          Object {
+            "id": "bar-resource",
+            "size": Object {
+              "compressor": "gzip",
+              "meta": Object {
+                "level": 6,
+              },
+              "size": 51,
             },
           },
         ],
