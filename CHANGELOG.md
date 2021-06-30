@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+5.3.0 (30 June 2021)
 
 ### Features
 
@@ -144,7 +144,7 @@
 
 - `[webpack-ui]` refactor diff-page to make it more flexible and extendable
 
-## 5.2.0 11 June 2021
+## 5.2.0 (11 June 2021)
 
 ### Features
 
