@@ -53,7 +53,7 @@
   - `async`: download time = `max(downloadTime(assets))`
     Download time is a download time of most heavy asset (usefull if `async`/`defer` used to inject your assets)
 
-  The network type is `3G DC-HSPA+ (8MBit/s)` by default.
+  The default network type is `3G Fast (1.37 MBit/s)` (like in Chromium).
 
   Assets inject type is `sync` by default.
 
