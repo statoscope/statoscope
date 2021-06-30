@@ -2,6 +2,12 @@
 
 ## 5.3.0 (30 June 2021)
 
+### Fixes
+
+- fix all @statoscope-deps version for not to old versions
+
+## 5.3.0 (30 June 2021)
+
 ### Features
 
 - `[webpack-plugin]` collect compressed (e.g. gzip) size of the resources (assets and modules)
