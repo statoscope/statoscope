@@ -103,13 +103,12 @@ test('pluralWithValueRus', () => {
 });
 test('getNetworkTypeInfo', () => {
   expect(helpers.getNetworkTypeInfo(TYPE_DC_HSPA_PLUS.name)).toMatchInlineSnapshot(`
-    Object {
-      "maxSpeed": 5505024,
-      "name": "DC-HSPA+",
-      "type": "3G",
-      "typicalSpeed": 1048576,
-    }
-  `);
+Object {
+  "name": "DC-HSPA+",
+  "type": "3G",
+  "typicalSpeed": 1048576,
+}
+`);
 });
 test('getNetworkTypeName', () => {
   expect(helpers.getNetworkTypeName(TYPE_DC_HSPA_PLUS)).toMatchInlineSnapshot(
