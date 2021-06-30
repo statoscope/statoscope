@@ -57,10 +57,10 @@ exports[`should work 1`] = `
 <script type=\\"text/plain\\" data-id=\\"foo\\">{
   \\"foo\\": \\"bar\\"
 }
-</script><script type=\\"text/plain\\" data-id=\\"bar\\">{
+</script><script type=\\"text/plain\\" data-id=\\"foo\\">{
   \\"foo\\": \\"bar\\"
 }
-</script><script type=\\"text/plain\\" data-id=\\"baz\\">{
+</script><script type=\\"text/plain\\" data-id=\\"foo\\">{
   \\"foo\\": \\"bar\\"
 }
 </script>

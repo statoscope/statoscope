@@ -46,8 +46,8 @@ test('should work', async () => {
   });
 
   writer.addChunkWriter(fs.createReadStream(sourcePath), 'foo');
-  writer.addChunkWriter(fs.createReadStream(sourcePath), 'bar');
-  writer.addChunkWriter(fs.createReadStream(sourcePath), 'baz');
+  writer.addChunkWriter(fs.createReadStream(sourcePath), 'foo');
+  writer.addChunkWriter(fs.createReadStream(sourcePath), 'foo');
   writer.getStream().pipe(outputStream);
 
   await writer.write();
