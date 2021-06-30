@@ -10,7 +10,7 @@ export type ScriptItem =
     }
   | { type: 'raw'; content: string };
 export type Options = {
-  scripts: ScriptItem[];
+  scripts: Array<ScriptItem | string>;
   init: string | ((data: InitArg) => void);
   jsonExtAPIName?: string;
 };
@@ -66,14 +66,16 @@ function writeHeader(stream: Writable, options: Options): void {
       )}
     </script>
     ${options.scripts
-      .map(
-        (item) =>
-          `<script>${
-            item.type === 'path'
-              ? fs.readFileSync(require.resolve(item.path), 'utf8')
-              : item.content
-          }</script>`
-      )
+      .map((item) => {
+        if (typeof item === 'string') {
+          item = { type: 'path', path: item };
+        }
+        return `<script>${
+          item.type === 'path'
+            ? fs.readFileSync(require.resolve(item.path), 'utf8')
+            : item.content
+        }</script>`;
+      })
       .join('\n')}
     <script>
       function _makeJsonExtAPI() {

@@ -11,6 +11,8 @@ exports[`should work 1`] = `
     </script>
     <script>console.log('hello from injectable!');
 </script>
+<script>console.log('hello from injectable!');
+</script>
 <script>console.log('hello from raw!');</script>
     <script>
       function _makeJsonExtAPI() {

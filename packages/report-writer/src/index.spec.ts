@@ -34,6 +34,7 @@ test('should work', async () => {
       console.log(foo);
     },
     scripts: [
+      injectablePath,
       {
         type: 'path',
         path: injectablePath,
