@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/stats-extension-compressed",
-  "version": "5.3.0",
+  "version": "5.3.1",
   "description": "Statoscope extension for collecting compressed resource sizes",
   "main": "./dist/index.js",
   "scripts": {
