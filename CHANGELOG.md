@@ -1,6 +1,12 @@
 # Changelog
 
-## 5.3.0 (30 June 2021)
+## 5.3.2 (30 June 2021)
+
+### Fixes
+
+- `[report-writer]` return `options.scripts` as `Array<stirng, Item>`
+
+## 5.3.1 (30 June 2021)
 
 ### Fixes
 
