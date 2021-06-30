@@ -116,10 +116,16 @@ Open report after compilation.
 Collect compressed (e.g. gzip) size of the resources (assets and modules).
 
 - `'gzip'` (default) - compress all the resources with gzip and collect the compressed sizes
+- `['gzip', ZlibOptions]` - the same as above but with custom [zlib settings](https://nodejs.org/api/zlib.html#zlib_class_options)
+  ```ts
+  new Statoscope({
+      compressor: ['gzip', {level: 9}]
+  })
+  ```
 - `CompressFunction` - a function that takes source as an input and should return compressed size for this resource (useful if you want to use non-gzip compressor)
 - `false` - don't collect compressed sizes
 
-##### Example with a suctom compressor
+##### Example with a custom compressor
 
 ```ts
 new Statoscope({

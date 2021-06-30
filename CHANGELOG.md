@@ -6,19 +6,21 @@
 
 - `[webpack-plugin]` collect compressed (e.g. gzip) size of the resources (assets and modules)
 
-  There is a new `compressor` - option that can be `false | 'gzip' | CompressFunction`:
+  There is a new `compressor` - option that can be `false | 'gzip' | ['gzip', ZlibOptions] | CompressFunction`:
 
-  - `'gzip'` (default) - compress all the resources with gzip and collect the compressed sizes
+  - `'gzip'` (default) - compress all the resources with gzip (compression level - 6) and collect the compressed sizes
+
+  - `['gzip', ZlibOptions]` - the same as `gzip` but with custom [zlib settings](https://nodejs.org/api/zlib.html#zlib_class_options)
 
   - `CompressFunction` - a function that takes source as an input and should return compressed size for this resource (useful if you want to use a non-gzip compressor)
 
   - `false` - don't collect compressed sizes
 
-  > It uses `webpack-stats-extension-compressed` upder the hood
+  > It uses `webpack-stats-extension-compressed` under the hood
 
 - `[webpack-plugin]` collect packages versions
 
-  > It uses `webpack-stats-extension-package-info` upder the hood
+  > It uses `webpack-stats-extension-package-info` under the hood
 
 - `[webpack-ui]` taking compressed (e.g. gzip) size of the resources into account
 
