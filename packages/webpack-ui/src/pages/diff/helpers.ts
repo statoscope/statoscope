@@ -29,13 +29,13 @@ export function diffBadges(): ViewConfigData {
       data: `
       $diff: $;
       $diffValue: b - a;
-      $diffPerc: b.percentFrom(a).toFixed();
+      $diffPerc: b.percentFrom(a);
       $inc: $diffValue > 0;
       $prefix: $inc ? '+' : '';
       {
         prefix: title,
         text: $prefix + $diff.formatDiff(),
-        postfix: a and b ? $prefix + $diffPerc + '%' : undefined,
+        postfix: a and b and $diffPerc ? $prefix + $diffPerc.toFixed() + '%' : undefined,
         color: $inc ? 0.colorFromH() : 100.colorFromH(),
       }`,
     },
