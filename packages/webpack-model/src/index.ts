@@ -32,6 +32,8 @@ export function prepareWithJora(
     ...options.helpers,
     ...joraHelpers(compilations),
   });
+  
+  const rootContext = {};
 
   return {
     files,
