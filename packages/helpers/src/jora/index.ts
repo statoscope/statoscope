@@ -1,11 +1,51 @@
 import path from 'path';
+import semverDiff from 'semver/functions/diff';
+import semverGT from 'semver/functions/gt';
+import semverGTE from 'semver/functions/gte';
+import semverLT from 'semver/functions/lt';
+import semverLTE from 'semver/functions/lte';
+import semverEQ from 'semver/functions/eq';
+import semverParse from 'semver/functions/parse';
+import { SemVer } from 'semver';
 import networkTypeList, { bytesInMBit, Item } from '../network-type-list';
 import { colorFromH, colorMap, fileTypeMap, generateColor } from './colors';
 import { pluralEng, pluralRus } from './plural';
 
+export interface BaseDiffItem {
+  id?: string;
+  title?: string;
+}
+
+export interface TimeDiffItem extends BaseDiffItem {
+  type: 'time';
+  a: number;
+  b: number;
+}
+
+export interface SizeDiffItem extends BaseDiffItem {
+  type: 'size';
+  a: number;
+  b: number;
+}
+
+export interface NumberDiffItem extends BaseDiffItem {
+  type: 'number';
+  a: number;
+  b: number;
+  plural?: { words: string[] };
+}
+
+export interface VersionDiffItem extends BaseDiffItem {
+  type: 'version';
+  a: string;
+  b: string;
+}
+
+export type DiffItem = TimeDiffItem | SizeDiffItem | NumberDiffItem | VersionDiffItem;
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
 export default () => {
-  return {
+  const helpers = {
     stringify: JSON.stringify,
     toNumber(str: string): number {
       return parseInt(str, 10);
@@ -108,5 +148,52 @@ export default () => {
 
       throw new Error(`Unknown network type ${networkType}`);
     },
+
+    semverGT(a: string, b: string): boolean {
+      return semverGT(a, b);
+    },
+    semverGTE(a: string, b: string): boolean {
+      return semverGTE(a, b);
+    },
+    semverLT(a: string, b: string): boolean {
+      return semverLT(a, b);
+    },
+    semverLTE(a: string, b: string): boolean {
+      return semverLTE(a, b);
+    },
+    semverEQ(a: string, b: string): boolean {
+      return semverEQ(a, b);
+    },
+    semverDiff(a: string, b: string): string | null {
+      return semverDiff(a, b);
+    },
+    semverParse(version?: string): SemVer | null {
+      return semverParse(version);
+    },
+
+    formatDiff(value: DiffItem): string {
+      if (value.type === 'size') {
+        return helpers.formatSize(value.b - value.a);
+      }
+
+      if (value.type === 'time') {
+        return helpers.formatDuration(value.b - value.a);
+      }
+
+      if (value.type === 'version') {
+        const diff = semverDiff(value.a, value.b);
+        const type = semverGT(value.a, value.b) ? 'downgrade' : 'upgrade';
+
+        return diff ? `${diff} ${type} from ${value.a}` : '';
+      }
+
+      if (value.plural?.words) {
+        return helpers.pluralWithValue(value.b - value.a, value.plural.words);
+      }
+
+      return (value.b - value.a).toString();
+    },
   };
+
+  return helpers;
 };
