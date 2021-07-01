@@ -24,32 +24,6 @@ import settings, {
 } from '../../settings';
 import { PrepareFn, RawData, StatoscopeWidget, TargetData } from '../../../types';
 
-export interface BaseDiffItem {
-  id?: string;
-  title?: string;
-}
-
-export interface TimeDiffItem extends BaseDiffItem {
-  type: 'time';
-  a: number;
-  b: number;
-}
-
-export interface SizeDiffItem extends BaseDiffItem {
-  type: 'size';
-  a: number;
-  b: number;
-}
-
-export interface NumberDiffItem extends BaseDiffItem {
-  type: 'number';
-  a: number;
-  b: number;
-  plural?: { words: string[] };
-}
-
-export type DiffItem = TimeDiffItem | SizeDiffItem | NumberDiffItem;
-
 export default (() =>
   (rawData: RawData, { addQueryHelpers }: StatoscopeWidget): unknown => {
     const { files, compilations } = normalize(rawData);
@@ -59,21 +33,7 @@ export default (() =>
     addQueryHelpers({
       ...wpJoraHelpers,
       ...commonJoraHelpers,
-      formatDiff(value: DiffItem): string {
-        if (value.type === 'size') {
-          return commonJoraHelpers.formatSize(value.b - value.a);
-        }
 
-        if (value.type === 'time') {
-          return commonJoraHelpers.formatDuration(value.b - value.a);
-        }
-
-        if (value.plural?.words) {
-          return commonJoraHelpers.pluralWithValue(value.b - value.a, value.plural.words);
-        }
-
-        return (value.b - value.a).toString();
-      },
       encodeURIComponent: encodeURIComponent,
       decodeURIComponent: decodeURIComponent,
       modulesToFoamTree(modules: NormalizedModule[], hash?: string): Node {

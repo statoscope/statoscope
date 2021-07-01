@@ -47,7 +47,22 @@ $packagesDiff: {
         .[not path in $a.package.instances.path].sort(isRoot desc, name asc),
       removed: $a.package.instances
         .[not path in $b.package.instances.path].sort(isRoot desc, name asc),
+      changed: $a.package.instances.({
+        $path: path;
+        a: {instance: $a.package.name.getPackageInstanceInfo($path, $a.hash), hash: $a.hash},
+        b: {instance: $b.package.name.getPackageInstanceInfo($path, $b.hash), hash: $b.hash}
+      }).({
+        $a: a;
+        $b: b;
+        ...b,
+        diff: [{
+          type: 'version',
+          a: $a.instance.info.version,
+          b: $b.instance.info.version,
+        }].[a != b]
+      })
+      .sort(instance.isRoot desc, instance.path asc),
     }
-  }).[instances.added or instances.removed]
+  }).[instances.added or instances.removed or instances.changed.diff]
 };
 `;

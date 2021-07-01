@@ -1,5 +1,23 @@
 # Changelog
 
+## Next
+
+### Features
+
+- `[webpack-ui]` add package version-diff
+  Adds the badges like: `major upgrade from x.x.x`
+- `[helpers]` add `semverGT`-helper
+- `[helpers]` add `semverGTE`-helper
+- `[helpers]` add `semverLT`-helper
+- `[helpers]` add `semverLTE`-helper
+- `[helpers]` add `semverEQ`-helper
+- `[helpers]` add `semverDiff`-helper
+- `[helpers]` add `semverParse`-helper
+
+### Refactor
+
+- `[helpers]` move `formatDiff`-helper from `webpack-ui`
+
 ## 5.3.2 (30 June 2021)
 
 ### Fixes

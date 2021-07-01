@@ -1,4 +1,5 @@
 import { ViewConfigData } from '../../../types';
+import { diffBadges } from './helpers';
 
 export default function packagesTab(): ViewConfigData[] {
   return [
@@ -44,6 +45,12 @@ export default function packagesTab(): ViewConfigData[] {
             $package:package;
             $hash:hash;
             [{
+              type: "changed",
+              title: "Changed",
+              visible: instances.changed.diff,
+              data: instances.changed.({...$, package: $package, hash: $hash})
+            },
+            {
               type: "added",
               title: "Added",
               visible: instances.added,
@@ -60,6 +67,7 @@ export default function packagesTab(): ViewConfigData[] {
               {
                 view: 'badge',
                 className: 'hack-badge-margin-left',
+                when: 'instances.added.size() or instances.removed.size()',
                 data: `
                 $added: instances.added.size() ? "+" + instances.added.size() : '';
                 $removed: instances.removed.size() ? "-" + instances.removed.size() : '';
@@ -90,6 +98,13 @@ export default function packagesTab(): ViewConfigData[] {
                     }`,
                     content: 'text-match',
                   },
+                  {
+                    view: 'badge',
+                    className: 'hack-badge-margin-left',
+                    when: 'instance.info.version',
+                    data: `{text: instance.info.version}`,
+                  },
+                  diffBadges(),
                 ],
                 children: false,
               },
