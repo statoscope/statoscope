@@ -36,7 +36,7 @@ export function prepareWithJora(
   return {
     files,
     compilations: compilations.map((c) => c.data),
-    query: (query: string, data: unknown, context: unknown = {}): unknown =>
+    query: (query: string, data: unknown, context: unknown = rootContext): unknown =>
       j(query)(data || files, context),
   };
 }
