@@ -14,6 +14,9 @@
 - `[helpers]` add `semverDiff`-helper
 - `[helpers]` add `semverParse`-helper
 
+- `[webpack-model]` add `context`-param to jora query-method (#82)
+- `[cli]` add `context`-param to jora query-method (#82)
+
 ### Refactor
 
 - `[helpers]` move `formatDiff`-helper from `webpack-ui`
