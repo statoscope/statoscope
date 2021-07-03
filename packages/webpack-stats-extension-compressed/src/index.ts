@@ -44,18 +44,23 @@ export default class WebpackCompressedExtension {
 
       for (const name of Object.keys(cursor.assets)) {
         const assetPath = path.join(cursor.compiler.outputPath, name);
-        const content = await readFile(assetPath);
+        let content: string | Buffer | undefined;
+        try {
+          content = await readFile(assetPath);
 
-        if (!content) {
-          throw new Error(`Can't read ${name} asset`);
+          if (!content) {
+            throw new Error();
+          }
+
+          this.compressedExtensionGenerator.handleResource(
+            cursor.hash as string,
+            name,
+            content,
+            this.compressor
+          );
+        } catch (e) {
+          console.warn(`Can't read the asset ${name}`);
         }
-
-        this.compressedExtensionGenerator.handleResource(
-          cursor.hash as string,
-          name,
-          content,
-          this.compressor
-        );
       }
 
       const modulesStack: Module[] = [...cursor.modules];
@@ -72,8 +77,22 @@ export default class WebpackCompressedExtension {
 
         let concatenated = Buffer.from('');
 
-        // webpack 5
-        if (typeof modulesCursor.getSourceTypes === 'function') {
+        if (
+          modulesCursor.constructor.name === 'CssModule' &&
+          // @ts-ignore
+          (typeof modulesCursor.content === 'string' ||
+            // @ts-ignore
+            modulesCursor.content instanceof Buffer)
+        ) {
+          this.compressedExtensionGenerator.handleResource(
+            cursor.hash as string,
+            moduleName,
+            // @ts-ignore
+            modulesCursor.content,
+            this.compressor
+          );
+        } else if (cursor.chunkGraph) {
+          // webpack 5
           for (const type of modulesCursor.getSourceTypes()) {
             const runtimeChunk = cursor.chunkGraph
               .getModuleChunks(modulesCursor)
