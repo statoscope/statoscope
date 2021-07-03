@@ -227,7 +227,7 @@ function handleCompilation(
   };
 
   const extensions =
-    compilation.__statoscope?.extensions.map((ext): NormalizedExtension<
+    file.__statoscope?.extensions.map((ext): NormalizedExtension<
       unknown,
       unknown
     > | null => {

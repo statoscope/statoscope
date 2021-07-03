@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.4.1 (03 July)
+
+### Fixes
+
+- `[webpack-model]` stats extensions now works for child compilations
+
 ## 5.4.0 (03 July)
 
 ### Features
