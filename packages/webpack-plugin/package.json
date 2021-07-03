@@ -23,7 +23,7 @@
   "dependencies": {
     "@discoveryjs/json-ext": "^0.5.3",
     "@statoscope/report-writer": "^5.3.2",
-    "@statoscope/stats": "5.3.0",
+    "@statoscope/stats": "^5.3.0",
     "@statoscope/stats-extension-compressed": "^5.3.1",
     "@statoscope/webpack-stats-extension-compressed": "^5.3.1",
     "@statoscope/webpack-stats-extension-package-info": "^5.3.1",

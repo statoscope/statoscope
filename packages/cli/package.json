@@ -25,7 +25,7 @@
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
     "@discoveryjs/json-ext": "^0.5.3",
-    "@statoscope/helpers": "5.3.0",
+    "@statoscope/helpers": "^5.3.0",
     "@statoscope/report-writer": "^5.3.2",
     "@statoscope/webpack-model": "^5.3.1",
     "@statoscope/webpack-ui": "^5.3.1",
