@@ -100,11 +100,16 @@ export default class StatoscopeWebpackPlugin {
       const resolvedHtmlPath = path.resolve(
         this.interpolate(htmlPath, stats.compilation, statsObj.name)
       );
+      fs.mkdirSync(path.dirname(resolvedHtmlPath), { recursive: true });
       const resolvedSaveStatsTo =
         options.saveStatsTo &&
         path.resolve(
           this.interpolate(options.saveStatsTo, stats.compilation, statsObj.name)
         );
+
+      if (resolvedSaveStatsTo) {
+        fs.mkdirSync(path.dirname(resolvedSaveStatsTo), { recursive: true });
+      }
 
       const webpackStatsStream = new Piper(stringifyStream(statsObj) as Readable);
       const htmlWriter = new HTMLWriter({
