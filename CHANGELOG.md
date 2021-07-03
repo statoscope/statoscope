@@ -1,9 +1,11 @@
 # Changelog
 
-## Next
+## 5.4.0 (03 July)
 
 ### Features
 
+- `[ui-webpack]` use as an alias to webpack-ui and webpack-plugin
+- `[webpack-plugin]` create directory before write the stats and report
 - `[webpack-ui]` add package version-diff
   Adds the badges like: `major upgrade from x.x.x`
 - `[helpers]` add `semverGT`-helper
@@ -13,9 +15,13 @@
 - `[helpers]` add `semverEQ`-helper
 - `[helpers]` add `semverDiff`-helper
 - `[helpers]` add `semverParse`-helper
-
 - `[webpack-model]` add `context`-param to jora query-method (#82)
 - `[cli]` add `context`-param to jora query-method (#82)
+
+### Fixes
+
+- `[webpack-stats-extension-compressed]` fix CssModule handling
+- `[webpack-stats-extension-compressed]` fix temporary assets handling
 
 ### Refactor
 
