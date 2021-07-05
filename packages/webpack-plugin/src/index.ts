@@ -119,7 +119,8 @@ export default class StatoscopeWebpackPlugin {
         }`,
       });
 
-      htmlWriter.getStream().pipe(fs.createWriteStream(resolvedHtmlPath));
+      const htmlReportOutputStream = fs.createWriteStream(resolvedHtmlPath);
+      htmlWriter.getStream().pipe(htmlReportOutputStream);
       htmlWriter.addChunkWriter(
         webpackStatsStream.getOutput(),
         resolvedSaveStatsTo ? path.basename(resolvedSaveStatsTo) : 'stats.json'
@@ -143,7 +144,14 @@ export default class StatoscopeWebpackPlugin {
       }
 
       try {
-        await Promise.all([webpackStatsStream.consume(), htmlWriter.write()]);
+        await Promise.all([
+          webpackStatsStream.consume(),
+          htmlWriter.write(),
+          new Promise((resolve, reject) => {
+            htmlReportOutputStream.on('finish', resolve);
+            htmlReportOutputStream.on('error', reject);
+          }),
+        ]);
 
         if (options.open) {
           if (options.open === 'file') {
