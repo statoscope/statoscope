@@ -11,6 +11,10 @@ Array [
     "before": "./src/index2.ts + 1 modules",
   },
   Object {
+    "after": "../node_modules/is-array/index.js",
+    "before": "../node_modules/is-array/index.js",
+  },
+  Object {
     "after": "src/sub-module.ts",
     "before": "./src/sub-module.ts",
   },
@@ -49,6 +53,10 @@ Array [
   Object {
     "after": "src/statoscope.png",
     "before": "./src/statoscope.png",
+  },
+  Object {
+    "after": "webpack/runtime/compat get default export",
+    "before": "webpack/runtime/compat get default export",
   },
   Object {
     "after": "webpack/runtime/compat get default export",
@@ -114,6 +122,18 @@ Array [
   Object {
     "after": null,
     "before": null,
+  },
+  Object {
+    "after": "src/index.ts",
+    "before": "./src/index.ts + 3 modules",
+  },
+  Object {
+    "after": "src/index.ts",
+    "before": "./src/index.ts + 3 modules",
+  },
+  Object {
+    "after": "../node_modules/is-array/index.js",
+    "before": "../node_modules/is-array/index.js",
   },
   Object {
     "after": "src/index.ts",

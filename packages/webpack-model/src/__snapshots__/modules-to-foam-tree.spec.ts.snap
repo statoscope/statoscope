@@ -13,7 +13,7 @@ Object {
             "page": "module",
           },
           "path": "src/index.ts",
-          "weight": 54,
+          "weight": 113,
           "weightCompressor": undefined,
         },
         Object {
@@ -86,7 +86,7 @@ Object {
       "label": "src",
       "link": undefined,
       "path": "src",
-      "weight": 9478.84,
+      "weight": 9537.84,
       "weightCompressor": undefined,
     },
     Object {
@@ -180,6 +180,38 @@ Object {
             Object {
               "groups": Array [
                 Object {
+                  "groups": Array [],
+                  "label": "index.js",
+                  "link": Object {
+                    "id": "929",
+                    "page": "module",
+                  },
+                  "path": "../node_modules/is-array/index.js",
+                  "weight": 470,
+                  "weightCompressor": undefined,
+                },
+              ],
+              "label": "is-array",
+              "link": Object {
+                "id": "is-array",
+                "package": Object {
+                  "instance": Object {
+                    "path": "../node_modules/is-array",
+                  },
+                  "name": "is-array",
+                },
+                "page": "package",
+                "params": Object {
+                  "instance": "../node_modules/is-array",
+                },
+              },
+              "path": "../node_modules/is-array",
+              "weight": 470,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [
+                Object {
                   "groups": Array [
                     Object {
                       "groups": Array [
@@ -242,14 +274,14 @@ Object {
           "label": "node_modules",
           "link": undefined,
           "path": "../node_modules",
-          "weight": 2435,
+          "weight": 2905,
           "weightCompressor": undefined,
         },
       ],
       "label": "..",
       "link": undefined,
       "path": "..",
-      "weight": 2435,
+      "weight": 2905,
       "weightCompressor": undefined,
     },
     Object {
@@ -264,7 +296,7 @@ Object {
                 "page": "module",
               },
               "path": "webpack/runtime/compat get default export",
-              "weight": 267,
+              "weight": 534,
               "weightCompressor": undefined,
             },
             Object {
@@ -370,21 +402,21 @@ Object {
           "label": "runtime",
           "link": undefined,
           "path": "webpack/runtime",
-          "weight": 7763,
+          "weight": 8030,
           "weightCompressor": undefined,
         },
       ],
       "label": "webpack",
       "link": undefined,
       "path": "webpack",
-      "weight": 7763,
+      "weight": 8030,
       "weightCompressor": undefined,
     },
   ],
   "label": "",
   "link": undefined,
   "path": "/",
-  "weight": 19860.84,
+  "weight": 20656.84,
   "weightCompressor": undefined,
 }
 `;

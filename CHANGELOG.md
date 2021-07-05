@@ -1,12 +1,20 @@
 # Changelog
 
-## 5.4.1 (03 July)
+## 5.4.2 (05 July 2021)
+
+## Fixes
+
+- `[webpack-plugin]` sometimes a report was opening before it written to the disk
+- `[webpack-stats-extension-compressed]` fix fails on reexport usage (webpack 4)
+- `[webpack-stats-extension-package-info]` taking into account that webpack 4 uses absolute path for some module names
+
+## 5.4.1 (03 July 2021)
 
 ### Fixes
 
 - `[webpack-model]` stats extensions now works for child compilations
 
-## 5.4.0 (03 July)
+## 5.4.0 (03 July 2021)
 
 ### Features
 

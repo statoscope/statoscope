@@ -45,10 +45,15 @@ export default class WebpackCompressedExtension {
             } | null;
 
             if (pkg && result.descriptionFileRoot) {
-              const instancePath = path.relative(
+              let instancePath = path.relative(
                 compiler.context,
                 result.descriptionFileRoot
               );
+
+              // webpack 4 uses absolute path for modules that path >= two levels from project context
+              if (!compilation.chunkGraph && instancePath.match(/^\.\.[/\\]\.\./)) {
+                instancePath = result.descriptionFileRoot;
+              }
 
               items.push({
                 packageName: pkg.name,

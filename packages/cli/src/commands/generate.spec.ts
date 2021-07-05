@@ -6,6 +6,8 @@ import generate from './generate';
 const inputFixtures = [
   '../../../../test/bundles/simple/stats-dev.json',
   '../../../../test/bundles/simple/stats-prod.json',
+  '../../../../test/bundles/v4/simple/stats-dev.json',
+  '../../../../test/bundles/v4/simple/stats-prod.json',
 ].map((filepath) => path.resolve(__dirname, filepath));
 const inputArgs = inputFixtures.map((filename) => ['--input', filename]).flat();
 

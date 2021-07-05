@@ -19,10 +19,10 @@ const validatorFixturesJSJoraQuery = [
   path: path.resolve(__dirname, filename),
 }));
 
-const inputFixturePath = path.resolve(
-  __dirname,
-  '../../../../test/bundles/simple/stats-dev.json'
-);
+const inputFixturePath = [
+  '../../../../test/bundles/simple/stats-dev.json',
+  '../../../../test/bundles/v4/simple/stats-dev.json',
+].map((filepath) => path.resolve(__dirname, filepath));
 
 // const consoleLog = console.log.bind(console);
 const output: string[][] = [];
@@ -47,7 +47,7 @@ function getOutput(): string[][] {
 
 describe('validator types', () => {
   test.each(validatorFixturesJoraQuery)('raw jora-query $name', async (item) => {
-    let y = yargs(['validate', '--validator', item.path, '--input', inputFixturePath]);
+    let y = yargs(['validate', '--validator', item.path, '--input', ...inputFixturePath]);
 
     y = validate(y);
     y.fail((_, error) => {
@@ -60,7 +60,7 @@ describe('validator types', () => {
   });
 
   test.each(validatorFixturesJSJoraQuery)('jora-query from js $name', async (item) => {
-    let y = yargs(['validate', '--validator', item.path, '--input', inputFixturePath]);
+    let y = yargs(['validate', '--validator', item.path, '--input', ...inputFixturePath]);
 
     y = validate(y);
     y.fail((_, error) => {
