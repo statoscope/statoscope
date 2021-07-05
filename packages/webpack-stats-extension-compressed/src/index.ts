@@ -116,20 +116,25 @@ export default class WebpackCompressedExtension {
           }
         } else {
           // webpack 4
-          if (modulesCursor.id == null) {
-            continue;
+          try {
+            // @ts-ignore
+            const source = cursor.moduleTemplates.javascript.render(
+              modulesCursor,
+              cursor.dependencyTemplates,
+              { chunk: modulesCursor.getChunks()[0] }
+            );
+            const content = source.source();
+            concatenated = Buffer.concat([
+              concatenated,
+              content instanceof Buffer ? content : Buffer.from(content),
+            ]);
+          } catch (e) {
+            // in webpack 4 we can't generate source for all the modules :(
           }
-          // @ts-ignore
-          const source = cursor.moduleTemplates.javascript.render(
-            modulesCursor,
-            cursor.dependencyTemplates,
-            { chunk: modulesCursor.getChunks()[0] }
-          );
-          const content = source.source();
-          concatenated = Buffer.concat([
-            concatenated,
-            content instanceof Buffer ? content : Buffer.from(content),
-          ]);
+        }
+
+        if (!concatenated.length) {
+          continue;
         }
 
         this.compressedExtensionGenerator.handleResource(
