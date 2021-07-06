@@ -37,7 +37,6 @@ export default class WebpackCompressedExtension {
       compilation.resolverFactory.hooks.resolver
         .for('normal')
         .tap(pluginName, (resolver) => {
-          // you can tap into resolver.hooks now
           resolver.hooks.result.tap('MyPlugin', (result) => {
             const pkg = result.descriptionFileData as {
               name: string;
@@ -45,21 +44,25 @@ export default class WebpackCompressedExtension {
             } | null;
 
             if (pkg && result.descriptionFileRoot) {
-              let instancePath = path.relative(
+              const instancePath = path.relative(
                 compiler.context,
                 result.descriptionFileRoot
               );
-
-              // webpack 4 uses absolute path for modules that path >= two levels from project context
-              if (!compilation.chunkGraph && instancePath.match(/^\.\.[/\\]\.\./)) {
-                instancePath = result.descriptionFileRoot;
-              }
 
               items.push({
                 packageName: pkg.name,
                 instancePath,
                 info: { version: pkg.version },
               });
+
+              // webpack 4 uses absolute path for some modules
+              if (!compilation.chunkGraph && instancePath.match(/^\.\./)) {
+                items.push({
+                  packageName: pkg.name,
+                  instancePath: result.descriptionFileRoot,
+                  info: { version: pkg.version },
+                });
+              }
             }
 
             return result;
