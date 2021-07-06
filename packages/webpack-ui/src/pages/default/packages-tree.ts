@@ -76,7 +76,7 @@ export function packageInstanceItemConfig(
             view: 'tree-leaf',
             content: 'text:title',
             children: `
-              $reasonsWithModule:data.[type='module'].data.({reason: $, module: resolvedModule});
+              $reasonsWithModule:data.[type='module'].data.({reason: $, module: resolvedModule}).[module];
               [{
                 title: "Chunks",
                 reasons: $reasonsWithModule,
