@@ -1,5 +1,12 @@
 # Changelog
 
+## 5.4.3 (06 July 2021)
+
+### Fixes
+
+- `[webpack-ui]` handle unresolved module reasons for a package
+- `[webpack-stats-extension-package-info]` match package version for webpack 4
+
 ## 5.4.2 (05 July 2021)
 
 ## Fixes
