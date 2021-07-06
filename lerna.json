@@ -11,7 +11,8 @@
         "packages/*/README.md",
         "packages/*/package-lock.json",
         "packages/*/dist",
-        "packages/*/**/*spec.ts"
+        "packages/*/**/*.spec.ts",
+        "packages/*/**/*.snap"
       ]
     }
   }
