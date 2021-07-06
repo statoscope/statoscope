@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/cli",
-  "version": "5.4.2",
+  "version": "5.4.3",
   "description": "Statoscope CLI tools",
   "scripts": {
     "build": "../../node_modules/.bin/tsc",
@@ -28,7 +28,7 @@
     "@statoscope/helpers": "^5.4.0",
     "@statoscope/report-writer": "^5.4.2",
     "@statoscope/webpack-model": "^5.4.2",
-    "@statoscope/webpack-ui": "^5.4.2",
+    "@statoscope/webpack-ui": "^5.4.3",
     "open": "^8.0.4",
     "yargs": "^17.0.1"
   },

@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/webpack-plugin",
-  "version": "5.4.2",
+  "version": "5.4.3",
   "description": "Helpers for webpack part of Statoscope",
   "main": "./dist/index.js",
   "scripts": {
@@ -26,8 +26,8 @@
     "@statoscope/stats": "^5.3.0",
     "@statoscope/stats-extension-compressed": "^5.4.0",
     "@statoscope/webpack-stats-extension-compressed": "^5.4.2",
-    "@statoscope/webpack-stats-extension-package-info": "^5.4.2",
-    "@statoscope/webpack-ui": "^5.4.2",
+    "@statoscope/webpack-stats-extension-package-info": "^5.4.3",
+    "@statoscope/webpack-ui": "^5.4.3",
     "open": "^8.0.4"
   },
   "devDependencies": {
