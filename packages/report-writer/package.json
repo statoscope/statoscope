@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/report-writer",
-  "version": "5.5.0",
+  "version": "5.5.1",
   "description": "Statoscope report writer",
   "main": "./dist/index.js",
   "scripts": {
