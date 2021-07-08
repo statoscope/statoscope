@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { tmpdir } from 'os';
-import { Readable } from 'stream';
+import { Readable, Writable } from 'stream';
 import open from 'open';
 // @ts-ignore
 import { stringifyStream } from '@discoveryjs/json-ext';
@@ -17,13 +17,16 @@ import Piper from '@statoscope/report-writer/dist/piper';
 
 export type Options = {
   name?: string;
+  saveReportTo?: string;
+  // todo statoscope 6: remove
   saveTo?: string;
   saveStatsTo?: string;
-  additionalStats?: string[];
+  saveOnlyStats: boolean;
+  additionalStats: string[];
   statsOptions?: Record<string, unknown>;
-  watchMode?: boolean;
-  open?: false | 'dir' | 'file';
-  compressor?: false | 'gzip' | CompressFunction;
+  watchMode: boolean;
+  open: false | 'dir' | 'file';
+  compressor: false | 'gzip' | CompressFunction;
 };
 
 export type StatoscopeMeta = {
@@ -33,24 +36,22 @@ export type StatoscopeMeta = {
 
 export default class StatoscopeWebpackPlugin {
   options: Options;
-  saveToDir?: string;
-  saveToFile?: string;
 
   constructor(options: Partial<Options> = {}) {
     this.options = {
       open: 'file',
       compressor: 'gzip',
       additionalStats: [],
+      saveOnlyStats: false,
+      watchMode: false,
       ...options,
     };
 
-    if (!this.options.saveTo) {
-      this.saveToDir = tmpdir();
-    } else if (this.options.saveTo.endsWith('.html')) {
-      this.saveToFile = this.options.saveTo;
-    } else {
-      this.saveToDir = this.options.saveTo;
+    if (this.options.saveOnlyStats) {
+      this.options.open = false;
     }
+
+    this.options.saveReportTo ??= this.options.saveTo;
   }
 
   interpolate(string: string, compilation: Compilation, customName?: string): string {
@@ -62,14 +63,12 @@ export default class StatoscopeWebpackPlugin {
   apply(compiler: Compiler): void {
     const { options } = this;
 
-    let packageInfoExtension: WebpackPackageInfoExtension | null = null;
-
-    packageInfoExtension = new WebpackPackageInfoExtension();
+    const packageInfoExtension = new WebpackPackageInfoExtension();
     // @ts-ignore
     packageInfoExtension.handleCompiler(compiler);
 
     compiler.hooks.done.tapAsync('Statoscope Webpack Plugin', async (stats, cb) => {
-      if (compiler.watchMode && options.watchMode !== true) {
+      if (compiler.watchMode && !options.watchMode) {
         return cb();
       }
 
@@ -83,7 +82,7 @@ export default class StatoscopeWebpackPlugin {
       };
       statsObj.__statoscope = statoscopeMeta;
 
-      statoscopeMeta.extensions.push(packageInfoExtension!.get());
+      statoscopeMeta.extensions.push(packageInfoExtension.get());
 
       if (this.options.compressor) {
         const compressedExtension = new WebpackCompressedExtension(
@@ -94,70 +93,41 @@ export default class StatoscopeWebpackPlugin {
         statoscopeMeta.extensions.push(compressedExtension.get());
       }
 
-      const htmlPath =
-        this.saveToFile ||
-        path.join(this.saveToDir as string, `statoscope-[name]-[hash].html`);
-      const resolvedHtmlPath = path.resolve(
-        this.interpolate(htmlPath, stats.compilation, statsObj.name)
-      );
-      fs.mkdirSync(path.dirname(resolvedHtmlPath), { recursive: true });
-      const resolvedSaveStatsTo =
-        options.saveStatsTo &&
-        path.resolve(
+      const webpackStatsStream = new Piper(stringifyStream(statsObj) as Readable);
+      let statsFileOutputStream: Writable | undefined;
+      let resolvedSaveStatsTo: string | undefined;
+
+      if (options.saveStatsTo) {
+        resolvedSaveStatsTo = path.resolve(
           this.interpolate(options.saveStatsTo, stats.compilation, statsObj.name)
         );
-
-      if (resolvedSaveStatsTo) {
         fs.mkdirSync(path.dirname(resolvedSaveStatsTo), { recursive: true });
+        statsFileOutputStream = fs.createWriteStream(resolvedSaveStatsTo);
+        webpackStatsStream.addConsumer(statsFileOutputStream);
       }
 
-      const webpackStatsStream = new Piper(stringifyStream(statsObj) as Readable);
-      const htmlWriter = new HTMLWriter({
-        scripts: [{ type: 'path', path: require.resolve('@statoscope/webpack-ui') }],
-        init: `function (data) {
-          Statoscope.default(data.map((item) => ({ name: item.id, data: item.data })));
-        }`,
+      const statsForReport = this.getStatsForHTMLReport({
+        filename: resolvedSaveStatsTo,
+        stream: webpackStatsStream.getInput(),
       });
-
-      const htmlReportOutputStream = fs.createWriteStream(resolvedHtmlPath);
-      htmlWriter.getStream().pipe(htmlReportOutputStream);
-      htmlWriter.addChunkWriter(
-        webpackStatsStream.getOutput(),
-        resolvedSaveStatsTo ? path.basename(resolvedSaveStatsTo) : 'stats.json'
+      const htmlReportPath = this.getHTMLReportPath();
+      const resolvedHTMLReportPath = path.resolve(
+        this.interpolate(htmlReportPath, stats.compilation, statsObj.name)
       );
-
-      if (resolvedSaveStatsTo) {
-        const statsFileStream = fs.createWriteStream(resolvedSaveStatsTo);
-        webpackStatsStream.addConsumer(statsFileStream);
-      }
-
-      if (options.additionalStats) {
-        for (const statsPath of options.additionalStats) {
-          const resolvedStatsPath = path.resolve(statsPath);
-          if (resolvedStatsPath === resolvedSaveStatsTo) {
-            continue;
-          }
-
-          const stream = fs.createReadStream(resolvedStatsPath);
-          htmlWriter.addChunkWriter(stream, path.basename(resolvedStatsPath));
-        }
-      }
+      const htmlReport = this.makeReport(resolvedHTMLReportPath, statsForReport);
 
       try {
         await Promise.all([
+          htmlReport.writer?.write(),
           webpackStatsStream.consume(),
-          htmlWriter.write(),
-          new Promise((resolve, reject) => {
-            htmlReportOutputStream.on('finish', resolve);
-            htmlReportOutputStream.on('error', reject);
-          }),
+          waitStreamEnd(htmlReport.stream),
         ]);
 
         if (options.open) {
           if (options.open === 'file') {
-            open(resolvedHtmlPath);
+            open(resolvedHTMLReportPath);
           } else {
-            open(path.dirname(resolvedHtmlPath));
+            open(path.dirname(resolvedHTMLReportPath));
           }
         }
 
@@ -167,4 +137,75 @@ export default class StatoscopeWebpackPlugin {
       }
     });
   }
+
+  getStatsForHTMLReport(mainStats: {
+    filename?: string;
+    stream: Readable;
+  }): Array<{ filename: string; stream: Readable }> {
+    const mainStatsFilename = mainStats.filename
+      ? path.basename(mainStats.filename)
+      : 'stats.json';
+
+    return [
+      {
+        filename: mainStatsFilename,
+        stream: mainStats.stream,
+      },
+      ...this.options.additionalStats
+        .map((statsPath) => {
+          const filename = path.resolve(statsPath);
+          return { filename, stream: fs.createReadStream(filename) };
+        })
+        .filter(({ filename }) => filename !== mainStatsFilename),
+    ];
+  }
+
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types,@typescript-eslint/explicit-function-return-type
+  makeReport(outputPath: string, stats: Array<{ filename: string; stream: Readable }>) {
+    if (this.options.saveOnlyStats) {
+      return { writer: null, stream: null };
+    }
+
+    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+    const outputStream = fs.createWriteStream(outputPath);
+    const writer = new HTMLWriter({
+      scripts: [{ type: 'path', path: require.resolve('@statoscope/webpack-ui') }],
+      init: `function (data) {
+          Statoscope.default(data.map((item) => ({ name: item.id, data: item.data })));
+        }`,
+    });
+
+    writer.getStream().pipe(outputStream);
+
+    for (const { filename, stream } of stats) {
+      writer.addChunkWriter(stream, path.basename(filename));
+    }
+
+    return { writer, stream: outputStream };
+  }
+
+  getHTMLReportPath(): string {
+    const defaultReportName = `statoscope-[name]-[hash].html`;
+
+    if (this.options.saveReportTo) {
+      if (this.options.saveReportTo.endsWith('.html')) {
+        return this.options.saveReportTo;
+      }
+
+      return path.join(this.options.saveReportTo, defaultReportName);
+    }
+
+    return path.join(tmpdir(), defaultReportName);
+  }
+}
+
+async function waitStreamEnd(stream?: Writable | null): Promise<void> {
+  if (!stream) {
+    return;
+  }
+
+  return new Promise((resolve, reject) => {
+    stream.on('finish', resolve);
+    stream.on('error', reject);
+  });
 }

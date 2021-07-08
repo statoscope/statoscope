@@ -33,7 +33,7 @@ test('should work', async () => {
   piper.addConsumer(outputStream1);
   piper.addConsumer(outputStream2);
   fs.createReadStream(statsFixturePath).pipe(outputStream2, { end: false });
-  piper.getOutput().pipe(fs.createWriteStream(outputFile));
+  piper.getInput().pipe(fs.createWriteStream(outputFile));
   await piper.consume();
   expect(fs.readFileSync(outputFile, 'utf8')).toMatchSnapshot();
   expect(fs.readFileSync(outputFile1, 'utf8')).toMatchSnapshot();

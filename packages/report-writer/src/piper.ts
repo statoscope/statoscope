@@ -1,40 +1,18 @@
-import { PassThrough, Readable, Writable } from 'stream';
-import { promisify } from 'util';
-
-const writeMap: WeakMap<Writable, (chunk: unknown) => Promise<unknown>> = new WeakMap();
-const endMap: WeakMap<Writable, () => Promise<unknown>> = new WeakMap();
-
-function write(stream: Writable, chunk: unknown): Promise<unknown> {
-  let cached = writeMap.get(stream);
-
-  if (!cached) {
-    cached = promisify(stream.write.bind(stream));
-    writeMap.set(stream, cached);
-  }
-
-  return cached(chunk);
-}
-
-function end(stream: Writable): Promise<unknown> {
-  let cached = endMap.get(stream);
-
-  if (!cached) {
-    cached = promisify(stream.end.bind(stream));
-    endMap.set(stream, cached);
-  }
-
-  return cached();
-}
+import { Readable, Writable } from 'stream';
+import events from 'events';
 
 export type ConsumeOptions = { end: boolean };
 
 export default class Piper {
   private readonly input: Readable;
   private readonly consumers: Writable[] = [];
-  private readonly output = new PassThrough();
 
   constructor(input: Readable) {
     this.input = input;
+  }
+
+  getInput(): Readable {
+    return this.input;
   }
 
   addConsumer(stream: Writable): void {
@@ -42,22 +20,37 @@ export default class Piper {
   }
 
   async consume(options: ConsumeOptions = { end: true }): Promise<void> {
+    const needToDrain = new WeakMap<Writable, boolean>();
+
+    for (const consumer of this.consumers) {
+      consumer.on('drain', () => needToDrain.delete(consumer));
+    }
+
     for await (const chunk of this.input) {
       for (const consumer of this.consumers) {
-        await write(consumer, chunk);
+        if (needToDrain.has(consumer)) {
+          await events.once(consumer, 'drain');
+        }
+        if (!consumer.write(chunk)) {
+          needToDrain.set(consumer, true);
+        }
       }
-      await write(this.output, chunk);
     }
 
     if (options.end) {
-      for (const consumer of this.consumers) {
-        await end(consumer);
-      }
-      await end(this.output);
-    }
-  }
+      const promises: Promise<void>[] = [];
 
-  getOutput(): PassThrough {
-    return this.output;
+      for (const consumer of this.consumers) {
+        consumer.end();
+        promises.push(
+          new Promise((resolve, reject) => {
+            consumer.once('finish', resolve);
+            consumer.once('error', reject);
+          })
+        );
+      }
+
+      await Promise.all(promises);
+    }
   }
 }
