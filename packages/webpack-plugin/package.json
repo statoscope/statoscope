@@ -28,9 +28,10 @@
     "@statoscope/webpack-stats-extension-compressed": "^5.4.2",
     "@statoscope/webpack-stats-extension-package-info": "^5.4.3",
     "@statoscope/webpack-ui": "^5.4.3",
+    "@types/webpack": "^5.28.0",
+    "@types/node": "^12.20.15",
     "open": "^8.0.4"
   },
   "devDependencies": {
-    "@types/webpack": "^5.28.0"
   }
 }
