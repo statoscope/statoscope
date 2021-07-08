@@ -93,7 +93,7 @@ export default class StatoscopeWebpackPlugin {
         statoscopeMeta.extensions.push(compressedExtension.get());
       }
 
-      const webpackStatsStream = new Piper(stringifyStream(statsObj) as Readable);
+      const webpackStatsStream = stringifyStream(statsObj);
       let statsFileOutputStream: Writable | undefined;
       let resolvedSaveStatsTo: string | undefined;
 
@@ -103,12 +103,12 @@ export default class StatoscopeWebpackPlugin {
         );
         fs.mkdirSync(path.dirname(resolvedSaveStatsTo), { recursive: true });
         statsFileOutputStream = fs.createWriteStream(resolvedSaveStatsTo);
-        webpackStatsStream.addConsumer(statsFileOutputStream);
+        webpackStatsStream.pipe(statsFileOutputStream);
       }
 
       const statsForReport = this.getStatsForHTMLReport({
         filename: resolvedSaveStatsTo,
-        stream: webpackStatsStream.getInput(),
+        stream: stringifyStream(statsObj),
       });
       const htmlReportPath = this.getHTMLReportPath();
       const resolvedHTMLReportPath = path.resolve(
@@ -119,7 +119,7 @@ export default class StatoscopeWebpackPlugin {
       try {
         await Promise.all([
           htmlReport.writer?.write(),
-          webpackStatsStream.consume(),
+          waitStreamEnd(statsFileOutputStream),
           waitStreamEnd(htmlReport.stream),
         ]);
 
