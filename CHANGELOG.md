@@ -1,5 +1,16 @@
 # Changelog
 
+## 5.5.1 (08 July 2021)
+
+## Fixes
+
+- `[report-writer]` rollback to sync stream polling model
+- `[webpack-plugin]` broken html report
+
+## Chore
+
+- clean all the packages from dev-files
+
 ## 5.5.0 (08 July 2021)
 
 ## Features
