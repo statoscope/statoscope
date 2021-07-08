@@ -25,8 +25,9 @@ There are some **optional** options.
 
 ```js
 new StatoscopeWebpackPlugin({
-  saveTo: 'path/to/report-[name]-[hash].html',
-  saveStatsTo: 'path/to/saving/stats-[name]-[hash].json',
+  saveReportTo: 'path/to/report-[name]-[hash].html',
+  saveStatsTo: 'path/to/stats-[name]-[hash].json',
+  saveOnlyStats: false,
   statsOptions: {
     /* any webpack stats options */
   },
@@ -38,7 +39,7 @@ new StatoscopeWebpackPlugin({
 });
 ```
 
-#### options.saveTo: string
+#### options.saveReportTo: string
 
 Path to an HTML with a report.
 
@@ -57,6 +58,12 @@ A path for saving the stats: `stats-[name]-[hash].json`
 `[hash]` replacing by `compilation.hash`
 
 By default don't save anything
+
+#### options.saveOnlyStats: boolean
+
+If `true` then only json with the stats will be generated. HTML report will be omitted.
+
+`false` by default.
 
 #### options.statsOptions: [StatsOptions](https://webpack.js.org/configuration/stats/#stats-options)
 
@@ -129,7 +136,7 @@ Collect compressed (e.g. gzip) size of the resources (assets and modules).
 
 ```ts
 new Statoscope({
-  compressor(source: Buffer | string, filename: string) => {
+  compressor(source: Buffer | string, filename: string) {
     const compressed = customCompressor(source);
     return {
       compressor: 'my-custom-compressor',
