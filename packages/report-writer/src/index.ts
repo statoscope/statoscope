@@ -35,11 +35,11 @@ export default class HTMLWriter {
 
   async write(): Promise<void> {
     writeHeader(this.stream, this.options);
-    await Promise.all(
-      this.chunkWriters.map((writer) =>
-        makeChunkToScriptWriter(writer.stream, this.stream, writer.id)
-      )
-    );
+
+    for (const writer of this.chunkWriters) {
+      await makeChunkToScriptWriter(writer.stream, this.stream, writer.id);
+    }
+
     writeFooter(this.stream, this.options);
     this.stream.end();
 
