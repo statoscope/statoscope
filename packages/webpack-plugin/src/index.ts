@@ -13,7 +13,6 @@ import { Extension } from '@statoscope/stats/spec/extension';
 import WebpackCompressedExtension from '@statoscope/webpack-stats-extension-compressed';
 import WebpackPackageInfoExtension from '@statoscope/webpack-stats-extension-package-info';
 import { CompressFunction } from '@statoscope/stats-extension-compressed/dist/generator';
-import Piper from '@statoscope/report-writer/dist/piper';
 
 export type Options = {
   name?: string;
