@@ -1,1 +1,2 @@
-**/dist/**/*.spec.{js,ts,d.ts,map}
+**/dist/**/*.spec.{js,d.ts}
+**/dist/**/*.js.map
