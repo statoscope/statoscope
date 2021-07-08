@@ -1,5 +1,17 @@
 # Changelog
 
+## 5.5.0 (08 July 2021)
+
+## Features
+
+- `[webpack-plugin]` add new property `saveOnlyStats`
+- `[webpack-plugin]` add new property `saveReportTo` (as a replacement for `saveTo`)
+
+## Refactor
+
+- `[webpack-plugin]` refactoring to make code more flexible
+- `[report-writer]` refactor work with the streams
+
 ## 5.4.3 (06 July 2021)
 
 ### Fixes
