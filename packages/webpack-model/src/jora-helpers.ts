@@ -3,6 +3,7 @@ import { API as ExtensionCompressedAPI } from '@statoscope/stats-extension-compr
 import type { Size } from '@statoscope/stats-extension-compressed/dist/generator';
 import { API as ExtensionPackageInfoAPI } from '@statoscope/stats-extension-package-info/dist/api';
 import type { Instance } from '@statoscope/stats-extension-package-info/dist/generator';
+import Graph, { PathSolution } from '@statoscope/helpers/dist/graph';
 import { Webpack } from '../webpack';
 import {
   moduleNameResource,
@@ -12,15 +13,17 @@ import {
 } from './module';
 import {
   HandledCompilation,
+  ModuleGraphNodeData,
   NormalizedAsset,
   NormalizedChunk,
   NormalizedCompilation,
+  NormalizedEntrypointItem,
   NormalizedFile,
   NormalizedModule,
   NormalizedPackage,
 } from './normalize';
 import modulesToFoamTree from './modules-to-foam-tree';
-import { Node } from './modules-to-foam-tree';
+import { Node as FoamTreeNode } from './modules-to-foam-tree';
 import ChunkID = Webpack.ChunkID;
 
 export type ResolvedStats = { file: NormalizedFile; compilation: NormalizedCompilation };
@@ -163,11 +166,80 @@ export default function (compilations: HandledCompilation[]) {
 
       return hash;
     },
+    getModuleGraph(hash: string): Graph<ModuleGraphNodeData> | null {
+      return resolveCompilation(hash)?.graph.module ?? null;
+    },
+    moduleGraph_getEntrypoints(
+      module?: NormalizedModule | null,
+      graph?: Graph<ModuleGraphNodeData>,
+      entrypoints?: NormalizedEntrypointItem[],
+      max = Infinity
+    ): NormalizedEntrypointItem[] {
+      if (!module || !graph || !entrypoints) {
+        return [];
+      }
+
+      const moduleNode = graph.getNode(module.name);
+
+      if (!moduleNode) {
+        return [];
+      }
+
+      let total = 0;
+
+      return entrypoints.filter(
+        // @ts-ignore
+        (entry) => {
+          if (total === max) {
+            return false;
+          }
+
+          const entryModuleName = entry.data.dep?.module.name as string;
+          const entryModule = graph.getNode(entryModuleName);
+
+          if (entryModule) {
+            if (moduleNode === entryModule) {
+              total++;
+              return true;
+            }
+
+            const solution = graph.findPaths(moduleNode, entryModule, 1);
+
+            if (solution.children.length) {
+              total++;
+              return true;
+            }
+          }
+
+          return false;
+        }
+      );
+    },
+
+    moduleGraph_getPaths(
+      from?: NormalizedModule,
+      graph?: Graph<ModuleGraphNodeData>,
+      to?: NormalizedModule,
+      max = Infinity
+    ): PathSolution<ModuleGraphNodeData> | null {
+      if (!from || !to || !graph) {
+        return null;
+      }
+
+      const fromNode = graph.getNode(from.name);
+      const toNode = graph.getNode(to.name);
+
+      if (!fromNode || !toNode) {
+        return null;
+      }
+
+      return graph.findPaths(fromNode, toNode, max);
+    },
     modulesToFoamTree(
       modules: NormalizedModule[],
       compressed?: boolean,
       hash?: string
-    ): Node {
+    ): FoamTreeNode {
       if (compressed && !hash) {
         throw new Error('[modulesToFoamTree-helper]: hash-parameter is required');
       }

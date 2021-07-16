@@ -9,10 +9,12 @@ import ExtensionPackageInfoAPIFactory, {
   API as ExtensionPackageInfoAPI,
 } from '@statoscope/stats-extension-package-info/dist/api';
 import ExtensionPackageInfoPackage from '@statoscope/stats-extension-package-info/package.json';
+import Graph, { Node } from '@statoscope/helpers/dist/graph';
 import { Webpack } from '../webpack';
 import validateStats, { ValidationResult } from './validate';
 import { moduleReasonResource, moduleResource, nodeModule } from './module';
 import ChunkID = Webpack.ChunkID;
+import Reason = Webpack.Reason;
 
 export const normalizedSymbol = Symbol('sttoscope.normalized');
 
@@ -30,6 +32,7 @@ export type NormalizedEntrypointItem = { name: string; data: NormalizedEntrypoin
 export type NormalizedEntrypoint = Omit<Webpack.Entrypoint, 'chunks' | 'assets'> & {
   chunks: NormalizedChunk[];
   assets: NormalizedAsset[];
+  dep?: NormalizedModuleDependency;
 };
 export type NormalizedAsset = Omit<Webpack.Asset, 'chunks' | 'files'> & {
   chunks: NormalizedChunk[];
@@ -37,9 +40,18 @@ export type NormalizedAsset = Omit<Webpack.Asset, 'chunks' | 'files'> & {
 };
 export type NormalizedIssuerPathItem = Webpack.IssuerPathItem & {
   resolvedModule: NormalizedModule | null;
+  resolvedEntry?: NormalizedEntrypointItem | null;
+  resolvedEntryName?: string | null;
 };
 export type NormalizedReason = Webpack.Reason & {
   resolvedModule: NormalizedModule | null;
+  resolvedEntry?: NormalizedEntrypointItem | null;
+  resolvedEntryName?: string | null;
+};
+export type NormalizedModuleDependency = {
+  type: 'module';
+  module: NormalizedModule;
+  reason: NormalizedReason;
 };
 export type NormalizedModule = Omit<Webpack.Module, 'chunks' | 'reasons' | 'modules'> & {
   resolvedResource: string | null;
@@ -48,6 +60,7 @@ export type NormalizedModule = Omit<Webpack.Module, 'chunks' | 'reasons' | 'modu
   chunks: NormalizedChunk[];
   reasons: NormalizedReason[];
   modules: NormalizedModule[];
+  deps?: NormalizedModuleDependency[];
 };
 export type NormalizedPackage = {
   name: string;
@@ -56,7 +69,7 @@ export type NormalizedPackage = {
 export type NodeModuleInstance = {
   path: string;
   isRoot: boolean;
-  reasons: { type: 'module'; data: NormalizedReason }[];
+  reasons: Array<{ type: 'module' | 'entry'; data: NormalizedReason }>;
   modules: NormalizedModule[];
   version?: string;
 };
@@ -101,12 +114,16 @@ export type CompilationResolvers = {
   resolveChunk: Resolver<ChunkID, NormalizedChunk>;
   resolveAsset: Resolver<string, NormalizedAsset>;
   resolvePackage: Resolver<string, NormalizedPackage>;
+  resolveEntrypoint: Resolver<string, NormalizedEntrypointItem>;
   resolveExtension: Resolver<string, NormalizedExtension<unknown, unknown> | null>;
 };
 
 export type HandledCompilation = {
   data: NormalizedCompilation;
   resolvers: CompilationResolvers;
+  graph: {
+    module: Graph<ModuleGraphNodeData>;
+  };
   file: NormalizedFile;
 };
 
@@ -206,6 +223,62 @@ export function handleRawFile(
   return { file, compilations };
 }
 
+export type ModuleGraphNodeData = {
+  module: NormalizedModule;
+  entries?: NormalizedEntrypointItem[];
+};
+
+function buildGraph(compilation: NormalizedCompilation): {
+  module: Graph<ModuleGraphNodeData>;
+} {
+  const moduleGraph = new Graph<ModuleGraphNodeData>();
+  const globalHandled = new Set<NormalizedModule>();
+
+  for (const entry of compilation.entrypoints) {
+    if (entry.data.dep?.module) {
+      handleModuleNode(moduleGraph, entry.data.dep.module);
+    }
+  }
+
+  return {
+    module: moduleGraph,
+  };
+
+  function handleModuleNode(
+    graph: Graph<ModuleGraphNodeData>,
+    module: NormalizedModule
+  ): Node<ModuleGraphNodeData> {
+    if (globalHandled.has(module)) {
+      return graph.getNode(module.name)!;
+    }
+
+    globalHandled.add(module);
+
+    const entries = module.reasons
+      .filter((r) => r.resolvedEntry)
+      .map((r) => r.resolvedEntry!);
+    const node =
+      graph.getNode(module.name) ?? graph.makeNode(module.name, { module, entries });
+    const handled = new WeakSet<NormalizedModule>();
+
+    for (const innerModule of module.modules) {
+      handled.add(innerModule);
+      node.addChild(handleModuleNode(graph, innerModule));
+    }
+
+    for (const dep of module.deps ?? []) {
+      if (handled.has(dep.module)) {
+        continue;
+      }
+
+      handled.add(dep.module);
+      node.addChild(handleModuleNode(graph, dep.module));
+    }
+
+    return node;
+  }
+}
+
 function handleCompilation(
   compilation: Webpack.Compilation,
   file: NormalizedFile,
@@ -251,23 +324,35 @@ function handleCompilation(
     extensions,
     (ext) => ext?.data.descriptor.name
   );
+
+  normalized.entrypoints = prepareEntries(compilation, resolveChunk, resolveAsset);
+  const resolveEntrypoint = makeEntityResolver(
+    normalized.entrypoints,
+    ({ name }) => name
+  );
+
   const resolvers: CompilationResolvers = {
     resolveModule,
     resolveChunk,
     resolveAsset,
     resolvePackage,
+    resolveEntrypoint,
     resolveExtension,
   };
 
   prepareModules(compilation, resolvers);
   prepareChunks(compilation, resolvers);
   prepareAssets(compilation, resolvers);
-  normalized.entrypoints = prepareEntries(compilation, resolvers);
   extractPackages(normalized, resolvers);
+
+  const graph = buildGraph(normalized);
 
   return {
     data: normalized,
     resolvers,
+    graph: {
+      module: graph.module,
+    },
     file,
   };
 }
@@ -306,7 +391,7 @@ function makeModuleResolver(
 
 function prepareModule(
   module: Webpack.Module | Webpack.InnerModule,
-  { resolveChunk, resolveModule }: CompilationResolvers
+  resolvers: CompilationResolvers
 ): void {
   // @ts-ignore
   if (module[normalizedSymbol]) {
@@ -315,6 +400,8 @@ function prepareModule(
 
   // @ts-ignore
   module[normalizedSymbol] = true;
+
+  const { resolveChunk, resolveModule } = resolvers;
 
   (module as unknown as NormalizedModule).resolvedResource = moduleResource(
     module as unknown as NormalizedModule
@@ -336,14 +423,58 @@ function prepareModule(
 
   if (module.reasons) {
     module.reasons = module.reasons.filter((r) => r.moduleName !== module.name);
-    module.reasons.forEach(
-      (r) =>
-        ((r as NormalizedReason).resolvedModule = r.moduleName
-          ? resolveModule(r.moduleName)
-          : null)
-    );
+    for (const reason of module.reasons) {
+      normalizeReason(reason, resolvers);
+      const resolvedModule = (reason as NormalizedReason).resolvedModule;
+      const resolvedEntry = (reason as NormalizedReason).resolvedEntry;
+
+      if (resolvedModule) {
+        resolvedModule.deps ??= [];
+        resolvedModule.deps.push({
+          type: 'module',
+          module: module as NormalizedModule,
+          reason: reason as NormalizedReason,
+        });
+      }
+
+      if (resolvedEntry) {
+        resolvedEntry.data.dep = {
+          type: 'module',
+          module:
+            (reason as NormalizedReason).resolvedModule ?? (module as NormalizedModule),
+          reason: reason as NormalizedReason,
+        };
+      }
+    }
   } else {
     module.reasons = [];
+  }
+}
+
+function normalizeReason(
+  reason: Reason,
+  { resolveEntrypoint, resolveModule }: CompilationResolvers
+): void {
+  (reason as NormalizedReason).resolvedModule = reason.moduleName
+    ? resolveModule(reason.moduleName)
+    : null;
+
+  if (/(?:.+ )?entry$/.test(reason.type ?? '')) {
+    if (reason.loc) {
+      let resolvedName = reason.loc;
+      let resolved = resolveEntrypoint(resolvedName);
+
+      if (!resolved) {
+        // handle foo[0] for webpack 4 single entry
+        resolvedName = reason.loc.slice(0, -3);
+        resolved = resolveEntrypoint(resolvedName);
+      }
+
+      if (resolved) {
+        (reason as NormalizedReason).resolvedEntryName = resolvedName;
+        (reason as NormalizedReason).resolvedEntry = resolved;
+      }
+    }
   }
 }
 
@@ -358,6 +489,8 @@ function prepareModules(
       for (const innerModule of module.modules) {
         prepareModule(innerModule, resolvers);
       }
+    } else {
+      module.modules = [];
     }
   }
 }
@@ -385,6 +518,8 @@ function prepareChunk(chunk: Webpack.Chunk, resolvers: CompilationResolvers): vo
         for (const innerModule of module.modules) {
           prepareModule(innerModule, resolvers);
         }
+      } else {
+        module.modules = [];
       }
     }
   } else {
@@ -470,7 +605,8 @@ function prepareAssets(
 
 function prepareEntries(
   compilation: Webpack.Compilation,
-  { resolveChunk, resolveAsset }: CompilationResolvers
+  resolveChunk: Resolver<ChunkID, NormalizedChunk>,
+  resolveAsset: Resolver<string, NormalizedAsset>
 ): NormalizedEntrypointItem[] {
   const entrypoints: NormalizedEntrypointItem[] = [];
 
@@ -555,7 +691,7 @@ function extractPackages(
           return buildReasonKey(
             reason.type,
             reason.data.moduleName ?? 'unknown',
-            reason.data.loc
+            reason.data.loc ?? 'unknown'
           );
         })
       );
@@ -571,7 +707,7 @@ function extractPackages(
         const reasonKey = buildReasonKey(
           reasonType,
           reason.moduleName ?? 'unknown',
-          reason.loc
+          reason.loc ?? 'unknown'
         );
 
         if (!instanceReasonsKeys.has(reasonKey)) {
@@ -590,6 +726,8 @@ function extractPackages(
         for (const innerModule of module.modules) {
           extractModulePackages(innerModule);
         }
+      } else {
+        module.modules = [];
       }
     }
   }
