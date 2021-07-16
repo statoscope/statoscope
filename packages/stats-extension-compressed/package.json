@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/stats-extension-compressed",
-  "version": "5.6.0",
+  "version": "5.6.1",
   "description": "Statoscope extension for collecting compressed resource sizes",
   "main": "./dist/index.js",
   "scripts": {
@@ -22,7 +22,7 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "@statoscope/helpers": "^5.6.0",
+    "@statoscope/helpers": "^5.6.1",
     "gzip-size": "^6.0.0"
   },
   "devDependencies": {
