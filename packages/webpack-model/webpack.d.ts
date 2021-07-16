@@ -23,12 +23,13 @@ export declare namespace Webpack {
   type InnerModule = Omit<Module, 'id' | 'modules'> & { id: null };
 
   type Reason = {
+    type?: string;
     moduleName: string | null;
-    loc: string;
+    loc?: string;
   };
 
   type Entrypoint = {
-    name: string;
+    name?: string;
     chunks?: Array<ChunkID | Chunk>;
     assets?: Array<string | File>;
     isOverSizeLimit: boolean;
