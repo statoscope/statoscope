@@ -1,0 +1,255 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`module matches 1`] = `
+Array [
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "No module reasons (seems like this is an entrypoint)
+",
+    "filename": "stats.json",
+    "message": "./src/index.ts should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "No module reasons (seems like this is an entrypoint)
+",
+    "filename": "stats.json",
+    "message": "./src/index.ts + 3 modules should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "No module reasons (seems like this is an entrypoint)
+",
+    "filename": "stats.json",
+    "message": "./src/index.ts should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "Module reasons:
+└── ./src/index.ts
+",
+    "filename": "stats.json",
+    "message": "./src/sub-module.ts should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "No module reasons (seems like this is an entrypoint)
+",
+    "filename": "stats.json",
+    "message": "./src/index2.ts + 1 modules should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "No module reasons (seems like this is an entrypoint)
+",
+    "filename": "stats.json",
+    "message": "./src/index2.ts should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "Module reasons:
+└── ./src/index.ts
+",
+    "filename": "stats.json",
+    "message": "./src/sub-module.ts should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "Module reasons:
+└── ./src/index2.ts + 1 modules
+",
+    "filename": "stats.json",
+    "message": "./src/index2.css should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "Module reasons:
+└── ./src/index2.ts + 1 modules
+",
+    "filename": "stats.json",
+    "message": "./src/test.txt should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "Module reasons:
+└── ./src/index2.ts + 1 modules
+",
+    "filename": "stats.json",
+    "message": "./src/dyn.ts should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "Module reasons:
+└─┬ ./src/index2.css
+  └── ./src/index2.ts
+",
+    "filename": "stats.json",
+    "message": "./src/statoscope.png should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "No module reasons (seems like this is an entrypoint)
+",
+    "filename": "stats.json",
+    "message": "./src/index.ts should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "No module reasons (seems like this is an entrypoint)
+",
+    "filename": "stats.json",
+    "message": "./src/index.ts + 3 modules should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "No module reasons (seems like this is an entrypoint)
+",
+    "filename": "stats.json",
+    "message": "./src/index.ts should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "Module reasons:
+└── ./src/index.ts
+",
+    "filename": "stats.json",
+    "message": "./src/sub-module.ts should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "No module reasons (seems like this is an entrypoint)
+",
+    "filename": "stats.json",
+    "message": "./src/index2.ts + 1 modules should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "No module reasons (seems like this is an entrypoint)
+",
+    "filename": "stats.json",
+    "message": "./src/index2.ts should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "Module reasons:
+└── ./src/index.ts
+",
+    "filename": "stats.json",
+    "message": "./src/sub-module.ts should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "Module reasons:
+└── ./src/index2.ts + 1 modules
+",
+    "filename": "stats.json",
+    "message": "./src/index2.css should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "Module reasons:
+└── ./src/index2.ts + 1 modules
+",
+    "filename": "stats.json",
+    "message": "./src/test.txt should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "Module reasons:
+└── ./src/index2.ts + 1 modules
+",
+    "filename": "stats.json",
+    "message": "./src/dyn.ts should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "Module reasons:
+└─┬ ./src/index2.css
+  └── ./src/index2.ts
+",
+    "filename": "stats.json",
+    "message": "./src/statoscope.png should not be used",
+    "type": "error",
+  },
+]
+`;
+
+exports[`module not matches 1`] = `Array []`;
+
+exports[`package matches 1`] = `
+Array [
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "Instance reasons [node_modules/foo]:
+└─┬ ./src/sub-module.ts
+  └── ./src/index.ts
+",
+    "filename": "stats.json",
+    "message": "foo@1.0.0 should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "Instance reasons [node_modules/foo]:
+└─┬ ./src/sub-module.ts
+  └── ./src/index.ts
+",
+    "filename": "stats.json",
+    "message": "foo@1.0.0 should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "Instance reasons [node_modules/foo]:
+└─┬ ./src/sub-module.ts
+  └── ./src/index.ts
+",
+    "filename": "stats.json",
+    "message": "foo@1.0.0 should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "Instance reasons [node_modules/foo]:
+└─┬ ./src/sub-module.ts
+  └── ./src/index.ts
+",
+    "filename": "stats.json",
+    "message": "foo@1.0.0 should not be used",
+    "type": "error",
+  },
+  Object {
+    "compilation": "d395b2ff19d3d6f0efe3",
+    "details": "Instance reasons [node_modules/foo]:
+└─┬ ./src/sub-module.ts
+  └── ./src/index.ts
+",
+    "filename": "stats.json",
+    "message": "foo@1.0.0 should not be used",
+    "type": "error",
+  },
+]
+`;
+
+exports[`package not matches 1`] = `Array []`;
