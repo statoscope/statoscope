@@ -62,6 +62,17 @@ $file: .pick();
       instances.($name.getPackageInstanceInfo(path, $compilation.hash))
     ).info.version;
     assert: $versions.[$~=/\d\.\d\.\d/].size() > 0,
-    message: "Something wrong (should not trigger!)" + $versions.stringify()
+    message: "Something wrong (should not trigger!)" + $versions.stringify(),
+    filename: $file.name,
+    compilation: $compilation.name or $compilation.hash
+  },
+
+  // test compilation-field (always trigger)
+  {
+    $compilation: $file.compilations.pick();
+    assert: 1 > 1,
+    message: "Something wrong",
+    filename: $file.name,
+    compilation: $compilation.name or $compilation.hash
   }
 ]
