@@ -21,9 +21,11 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "semver": "^7.3.5"
+    "@types/archy": "^0.0.32",
+    "@types/semver": "^7.3.6",
+    "archy": "~1.0.0",
+    "semver": "^7.3.5",
+    "jora": "^1.0.0-beta.5"
   },
-  "devDependencies": {
-    "@types/semver": "^7.3.6"
-  }
+  "devDependencies": {}
 }

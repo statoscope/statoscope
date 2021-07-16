@@ -1,4 +1,4 @@
-import { TYPE_DC_HSPA_PLUS, TYPE_EDGE } from '../../dist/network-type-list';
+import { TYPE_DC_HSPA_PLUS, TYPE_EDGE } from '../network-type-list';
 import make from './';
 
 const helpers = make();

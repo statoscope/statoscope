@@ -1,4 +1,6 @@
 import path from 'path';
+// @ts-ignore
+import jora from 'jora';
 import semverDiff from 'semver/functions/diff';
 import semverGT from 'semver/functions/gt';
 import semverGTE from 'semver/functions/gte';
@@ -6,7 +8,8 @@ import semverLT from 'semver/functions/lt';
 import semverLTE from 'semver/functions/lte';
 import semverEQ from 'semver/functions/eq';
 import semverParse from 'semver/functions/parse';
-import { SemVer } from 'semver';
+import semverSatisfies from 'semver/functions/satisfies';
+import { Range, SemVer } from 'semver';
 import networkTypeList, { bytesInMBit, Item } from '../network-type-list';
 import { colorFromH, colorMap, fileTypeMap, generateColor } from './colors';
 import { pluralEng, pluralRus } from './plural';
@@ -44,7 +47,7 @@ export interface VersionDiffItem extends BaseDiffItem {
 export type DiffItem = TimeDiffItem | SizeDiffItem | NumberDiffItem | VersionDiffItem;
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
-export default () => {
+export default function helpers() {
   const helpers = {
     stringify: JSON.stringify,
     toNumber(str: string): number {
@@ -170,6 +173,9 @@ export default () => {
     semverParse(version?: string): SemVer | null {
       return semverParse(version);
     },
+    semverSatisfies(version: string | SemVer, range: string | Range): boolean {
+      return semverSatisfies(version, range);
+    },
 
     formatDiff(value: DiffItem): string {
       if (value.type === 'size') {
@@ -193,7 +199,35 @@ export default () => {
 
       return (value.b - value.a).toString();
     },
+    isMatch(a: string, b?: string | RegExp): boolean {
+      return b instanceof RegExp ? b.test(a) : typeof b === 'string' ? a === b : true;
+    },
   };
 
   return helpers;
+}
+
+export type Prepared = {
+  query: (query: string, data?: unknown, context?: unknown) => unknown;
 };
+
+export type Options = {
+  helpers?: Record<string, unknown>;
+};
+
+export function prepareWithJora(input: unknown, options: Options = {}): Prepared {
+  const j = jora.setup({
+    ...options.helpers,
+    ...helpers(),
+  });
+
+  const rootContext = {};
+
+  return {
+    query: (
+      query: string,
+      data: unknown = input,
+      context: unknown = rootContext
+    ): unknown => j(query)(data || input, context),
+  };
+}
