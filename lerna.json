@@ -4,9 +4,6 @@
   ],
   "version": "5.5.1",
   "command": {
-    "version": {
-      "exact": true
-    },
     "publish": {
       "registry": "https://registry.npmjs.org",
       "message": "chore: publish release %s\n",
