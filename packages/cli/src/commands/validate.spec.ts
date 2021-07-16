@@ -32,7 +32,7 @@ beforeEach(() => {
   consoleLogSpy = jest
     .spyOn(global.console, 'log')
     .mockImplementation((...args: string[]) => {
-      output.push(args);
+      output.push(args.map((o) => String(o).replace(process.cwd(), '<pwd>')));
     });
 });
 

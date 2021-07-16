@@ -3,114 +3,102 @@
 exports[`validator types jora-query from js jora-fail.js 1`] = `
 Array [
   Array [
-    "unknown",
+    "[4munknown file[24m",
   ],
   Array [
-    "  error: Fail",
+    "[36munknown compilation[39m",
+  ],
+  Array [
+    "[31merror[39m  Fail  [36m<pwd>/test/fixtures/cli/validate/jora-fail.js[39m",
   ],
   Array [
     "",
   ],
   Array [
-    "Errors: 1",
-  ],
-  Array [
-    "Done",
+    "[33m1 problems (1 errors, 0 warnings)[39m",
   ],
 ]
 `;
 
-exports[`validator types jora-query from js jora-ok.js 1`] = `
-Array [
-  Array [
-    "",
-  ],
-  Array [
-    "Done",
-  ],
-]
-`;
+exports[`validator types jora-query from js jora-ok.js 1`] = `Array []`;
 
 exports[`validator types raw jora-query fail.jora 1`] = `
 Array [
   Array [
-    "unknown",
+    "[4munknown file[24m",
   ],
   Array [
-    "  error: Fail",
+    "[36munknown compilation[39m",
+  ],
+  Array [
+    "[31merror[39m  Fail  [36m<pwd>/test/fixtures/cli/validate/fail.jora[39m",
   ],
   Array [
     "",
   ],
   Array [
-    "Errors: 1",
-  ],
-  Array [
-    "Done",
+    "[33m1 problems (1 errors, 0 warnings)[39m",
   ],
 ]
 `;
 
-exports[`validator types raw jora-query ok.jora 1`] = `
-Array [
-  Array [
-    "",
-  ],
-  Array [
-    "Done",
-  ],
-]
-`;
+exports[`validator types raw jora-query ok.jora 1`] = `Array []`;
 
 exports[`validator types raw jora-query rules.jora 1`] = `
 Array [
   Array [
-    "unknown",
+    "[4munknown file[24m",
   ],
   Array [
-    "  info: Auto info message",
+    "[36munknown compilation[39m",
   ],
   Array [
-    "  info: Info message without assert",
+    "[0minfo[0m  Auto info message  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
   ],
   Array [
-    "  info: Info with assert",
+    "[0minfo[0m  Info message without assert  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
   ],
   Array [
-    "  warn: Warn without assert",
+    "[0minfo[0m  Info with assert  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
   ],
   Array [
-    "  warn: Warn with assert",
+    "[33mwarn[39m  Warn without assert  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
   ],
   Array [
-    "stats-dev.json",
-  ],
-  Array [
-    "  info: Auto info for file",
-  ],
-  Array [
-    "  info: Info for file",
-  ],
-  Array [
-    "  warn: Warn for file",
-  ],
-  Array [
-    "  error: Error for file",
+    "[33mwarn[39m  Warn with assert  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
   ],
   Array [
     "",
   ],
   Array [
-    "Errors: 1",
+    "[4m<pwd>/test/bundles/simple/stats-dev.json[24m",
   ],
   Array [
-    "Warnings: 3",
+    "[36munknown compilation[39m",
   ],
   Array [
-    "Info: 5",
+    "[0minfo[0m  Auto info for file  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
   ],
   Array [
-    "Done",
+    "[0minfo[0m  Info for file  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
+  ],
+  Array [
+    "[33mwarn[39m  Warn for file  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
+  ],
+  Array [
+    "[31merror[39m  Error for file  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
+  ],
+  Array [
+    "[36med4bbcc136a84609ae9f[39m",
+  ],
+  Array [
+    "[31merror[39m  Something wrong  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
+  ],
+  Array [
+    "",
+  ],
+  Array [
+    "[33m5 problems (2 errors, 3 warnings)[39m",
   ],
 ]
 `;
