@@ -8,6 +8,7 @@ import semverEQ from 'semver/functions/eq';
 import semverParse from 'semver/functions/parse';
 import { SemVer } from 'semver';
 import networkTypeList, { bytesInMBit, Item } from '../network-type-list';
+import Graph, { Node as GraphNode, PathSolution } from '../graph';
 import { colorFromH, colorMap, fileTypeMap, generateColor } from './colors';
 import { pluralEng, pluralRus } from './plural';
 
@@ -192,6 +193,23 @@ export default () => {
       }
 
       return (value.b - value.a).toString();
+    },
+
+    graph_getNode<TData>(id?: string, graph?: Graph<TData>): GraphNode<TData> | null {
+      return graph?.getNode(id!) ?? null;
+    },
+
+    graph_getPaths<TData>(
+      from?: GraphNode<TData>,
+      graph?: Graph<TData>,
+      to?: GraphNode<TData>,
+      max = Infinity
+    ): PathSolution<TData> | null {
+      if (!from || !to || !graph) {
+        return null;
+      }
+
+      return graph.findPaths(from, to, max);
     },
   };
 
