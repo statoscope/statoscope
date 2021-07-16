@@ -1,4 +1,4 @@
-import { ViewConfigData } from '../../../types';
+import { ViewConfigData } from '@statoscope/types';
 import { diffBadges } from './helpers';
 
 export default function packagesTab(): ViewConfigData[] {

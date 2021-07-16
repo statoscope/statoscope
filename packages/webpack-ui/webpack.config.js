@@ -35,6 +35,7 @@ function makeConfig(config) {
           )]: false,
         },
       },
+      cache: { type: 'filesystem' },
       module: {
         rules: [
           {

@@ -25,6 +25,9 @@
   },
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
+  "dependencies": {
+    "@statoscope/types": "^5.4.0"
+  },
   "devDependencies": {
     "@carrotsearch/foamtree": "3.5.0",
     "@discoveryjs/discovery": "^1.0.0-beta.60",

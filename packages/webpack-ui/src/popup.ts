@@ -1,5 +1,6 @@
 import { createPopper, Instance } from '@popperjs/core';
-import { StatoscopeWidget, ViewConfig } from '../types';
+import { ViewConfig } from '@statoscope/types';
+import { StatoscopeWidget } from '../types';
 
 let mouse = { clientX: 0, clientY: 0 };
 

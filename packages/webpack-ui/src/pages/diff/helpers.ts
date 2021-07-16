@@ -1,4 +1,4 @@
-import { ViewConfigData } from '../../../types';
+import { ViewConfigData } from '@statoscope/types';
 // @ts-ignore
 import styles from './helpers.css';
 

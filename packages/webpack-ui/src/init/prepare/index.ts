@@ -8,6 +8,7 @@ import {
 } from '@statoscope/webpack-model/dist/normalize';
 import type { Size } from '@statoscope/stats-extension-compressed/dist/generator';
 import type { Instance } from '@statoscope/stats-extension-package-info/dist/generator';
+import { PrepareFn } from '@statoscope/types';
 import settings, {
   SETTING_ASSETS_INJECT_TYPE,
   SETTING_ASSETS_INJECT_TYPE_DEFAULT,
@@ -22,7 +23,7 @@ import settings, {
   SETTING_SHOW_COMPRESSED,
   SETTING_SHOW_COMPRESSED_DEFAULT,
 } from '../../settings';
-import { PrepareFn, RawData, StatoscopeWidget, TargetData } from '../../../types';
+import { RawData, StatoscopeWidget, TargetData } from '../../../types';
 
 export default (() =>
   (rawData: RawData, { addQueryHelpers }: StatoscopeWidget): unknown => {

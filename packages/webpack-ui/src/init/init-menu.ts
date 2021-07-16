@@ -1,3 +1,4 @@
+import { ViewConfigData } from '@statoscope/types';
 import networkTypeList from '@statoscope/helpers/dist/network-type-list';
 // @ts-ignore
 import settingsStyles from '../settings-styles.css';
@@ -15,7 +16,7 @@ import settings, {
   SETTING_SHOW_COMPRESSED,
   SETTING_SHOW_COMPRESSED_DEFAULT,
 } from '../settings';
-import { StatoscopeWidget, ViewConfigData } from '../../types';
+import { StatoscopeWidget } from '../../types';
 
 export default (discovery: StatoscopeWidget): void => {
   hideUseless(discovery);
