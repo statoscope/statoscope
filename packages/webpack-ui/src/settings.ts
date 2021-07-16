@@ -53,8 +53,9 @@ export class Settings {
 
     for (const [key] of this.map) {
       // eslint-disable-next-line no-prototype-builtins
-      const value = data.hasOwnProperty(key) ? data[key] : undefined;
-      this.set(key, value);
+      if (data.hasOwnProperty(key)) {
+        this.set(key, data[key]);
+      }
     }
   }
 
