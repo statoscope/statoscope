@@ -64,6 +64,7 @@ export default class Graph<TData> {
       solutions.set(module, solution);
 
       if (module === entry) {
+        total++;
         return solution;
       }
 
@@ -83,7 +84,7 @@ export default class Graph<TData> {
             parentSolutionDeps.add(solution);
           }
 
-          if (++total === max) {
+          if (total === max) {
             break;
           }
         }

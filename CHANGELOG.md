@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.6.1 (16 July 2021)
+
+## Fixes
+
+- `[helpers]` fix handling `max`-property in `Graph.findPaths`
+
 ## 5.6.0 (16 July 2021)
 
 ## Features
