@@ -3,6 +3,7 @@ import { StatoscopeWidget } from '../../types';
 import styles from './split-layout.css';
 import modulesTree from './default/modules-tree';
 import chunksTree from './default/chunks-tree';
+import entryTree from './default/entry-tree';
 
 export default function (discovery: StatoscopeWidget): void {
   discovery.page.define('module', [
@@ -50,6 +51,7 @@ export default function (discovery: StatoscopeWidget): void {
                               { value: 'modules', text: 'Modules' },
                               { value: 'issuers', text: 'Issuer Path' },
                               { value: 'chunks', text: 'Chunks' },
+                              { value: 'entrypoints', text: 'Entrypoints' },
                             ],
                             content: {
                               view: 'content-filter',
@@ -68,9 +70,38 @@ export default function (discovery: StatoscopeWidget): void {
                                   },
                                   {
                                     when: '#.reasonsTabs="issuers"',
-                                    data: `issuerPath.resolvedModule.[].[not shouldHideModule() and name~=#.filter]`,
+                                    data: `
+                                    $module: $;
+                                    $moduleGraph: #.params.hash.getModuleGraph();
+                                    $entrypoints: #.params.hash.resolveCompilation().entrypoints;
+                                    $issuerPath: (issuerPath.resolvedModule or [])
+                                      .[not shouldHideModule() and name~=#.filter]
+                                      .({type: 'module', item: $});
+                                    $issuerPath.reverse() + 
+                                    ($issuerPath[0].item or $module)
+                                      .moduleGraph_getEntrypoints($moduleGraph, $entrypoints, 1)
+                                      .({type: 'entry', item: $})
+                                      .[item and name~=#.filter]
+                                    `,
                                     content: {
-                                      ...modulesTree(),
+                                      view: 'ul',
+                                      item: {
+                                        view: 'switch',
+                                        content: [
+                                          {
+                                            when: `type='module'`,
+                                            data: `item`,
+                                            content:
+                                              'module-item:{module:$,hash:#.params.hash}',
+                                          },
+                                          {
+                                            when: `type='entry'`,
+                                            data: `item`,
+                                            content:
+                                              'entry-item:{entrypoint:$,hash:#.params.hash}',
+                                          },
+                                        ],
+                                      },
                                     },
                                   },
                                   {
@@ -82,6 +113,43 @@ export default function (discovery: StatoscopeWidget): void {
                                     `,
                                     content: {
                                       ...chunksTree(),
+                                    },
+                                  },
+                                  {
+                                    when: '#.reasonsTabs="entrypoints"',
+                                    data: `
+                                    $moduleGraph: #.params.hash.getModuleGraph();
+                                    $entrypoints: #.params.hash.resolveCompilation().entrypoints;
+                                    $module: $;
+                                    $module.moduleGraph_getEntrypoints($moduleGraph, $entrypoints).[name~=#.filter].sort(data.isOverSizeLimit asc)
+                                      .({ entry: $, $module })
+                                    `,
+                                    content: {
+                                      view: 'tree',
+                                      children: false,
+                                      expanded: false,
+                                      itemConfig: {
+                                        children: `
+                                          $moduleGraph: #.params.hash.getModuleGraph();
+                                          $module: module;
+                                          $entry: entry;
+                                          [$module.moduleGraph_getPaths($moduleGraph, $entry.data.dep.module)]
+                                            .[(..children).node.data.module.[name~=#.filter]]`,
+                                        content: [
+                                          {
+                                            view: 'entry-item',
+                                            data: '{entrypoint: entry, match:#.filter}',
+                                          },
+                                        ],
+                                        itemConfig: {
+                                          children:
+                                            'children.[children and (..children).node.data.module.[name~=#.filter]]',
+                                          content: {
+                                            view: 'module-item',
+                                            data: '{module: node.data.module, hash: #.params.hash, match:#.filter}',
+                                          },
+                                        },
+                                      },
                                     },
                                   },
                                 ],
