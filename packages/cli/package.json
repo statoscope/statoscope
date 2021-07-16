@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/cli",
-  "version": "5.5.1",
+  "version": "5.6.0",
   "description": "Statoscope CLI tools",
   "scripts": {
     "build": "../../node_modules/.bin/tsc",
@@ -25,10 +25,10 @@
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
     "@discoveryjs/json-ext": "^0.5.3",
-    "@statoscope/helpers": "^5.5.1",
+    "@statoscope/helpers": "^5.6.0",
     "@statoscope/report-writer": "^5.5.1",
-    "@statoscope/webpack-model": "^5.5.1",
-    "@statoscope/webpack-ui": "^5.5.1",
+    "@statoscope/webpack-model": "^5.6.0",
+    "@statoscope/webpack-ui": "^5.6.0",
     "open": "^8.0.4",
     "yargs": "^17.0.1"
   },
