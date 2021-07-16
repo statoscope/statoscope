@@ -16,14 +16,24 @@ export function moduleItemConfig(getter = '$', hash = '#.params.hash'): ModuleIt
     limit: '= settingListItemsLimit()',
     content: `module-item:{module: ${getter}, hash: ${hash}, match: #.filter}`,
     children: `
+    $moduleGraph: ${hash}.getModuleGraph();
+    $entrypoints: ${hash}.resolveCompilation().entrypoints;
     $module: ${getter};
-    $issuerPath: $module.issuerPath.resolvedModule.[].[not shouldHideModule()];
+    $issuerPath: ($module.issuerPath.resolvedModule or []).[not shouldHideModule()]
+      .({
+        type: 'module',
+        item: $
+      }).[item];
+    $issuerPathWithEntry: $issuerPath.reverse() + 
+      ($issuerPath[0].item or $module).moduleGraph_getEntrypoints($moduleGraph, $entrypoints, 1)
+        .({type: 'entry', item: $})
+        .[item];
     $reasonsModule: $module.reasons.resolvedModule.[].[not shouldHideModule()];
     [{
       title: "Reasons",
       data: $reasonsModule,
-      issuerPath: $issuerPath,
-      visible: $reasonsModule or $issuerPath,
+      issuerPath: $issuerPathWithEntry,
+      visible: $reasonsModule or $issuerPathWithEntry,
       type: 'reasons'
     },
     {
@@ -120,7 +130,18 @@ export function moduleItemConfig(getter = '$', hash = '#.params.hash'): ModuleIt
                     children: 'data',
                     itemConfig: {
                       children: false,
-                      content: `module-item:{module: $, hash: ${hash}}`,
+                      content: [
+                        {
+                          when: `type='module'`,
+                          view: 'module-item',
+                          data: `{module: item, hash: ${hash}}`,
+                        },
+                        {
+                          when: `type='entry'`,
+                          view: 'entry-item',
+                          data: `{entrypoint: item, hash: ${hash}}`,
+                        },
+                      ],
                     },
                   },
                 },

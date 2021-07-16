@@ -4,21 +4,21 @@ import yargs from 'yargs';
 import generate from './generate';
 
 const inputFixtures = [
-  '../../../../test/bundles/simple/stats-dev.json',
   '../../../../test/bundles/simple/stats-prod.json',
-  '../../../../test/bundles/v4/simple/stats-dev.json',
-  '../../../../test/bundles/v4/simple/stats-prod.json',
+  '../../../../test/bundles/simple/stats-prod.json',
+  '../../../../test/bundles/simple/stats-prod.json',
+  '../../../../test/bundles/simple/stats-prod.json',
 ].map((filepath) => path.resolve(__dirname, filepath));
 const inputArgs = inputFixtures.map((filename) => ['--input', filename]).flat();
 
 const rootPath = path.resolve(__dirname, '../../../../');
 const outputDir = path.join(rootPath, 'test/temp', path.relative(rootPath, __filename));
-const webpackUIPath = require.resolve('@statoscope/webpack-ui');
 const webpackUIFixture = path.join(rootPath, 'test/fixtures/report-writer/injectable.js');
 
 fs.mkdirSync(outputDir, { recursive: true });
 
 jest.mock('fs', () => {
+  const webpackUIPath = require.resolve('@statoscope/webpack-ui');
   const ofs = jest.requireActual('fs');
   return {
     ...ofs,

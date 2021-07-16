@@ -1,5 +1,45 @@
 # Changelog
 
+## 5.6.1 (16 July 2021)
+
+## Fixes
+
+- `[helpers]` fix handling `max`-property in `Graph.findPaths`
+
+## 5.6.0 (16 July 2021)
+
+## Features
+
+- `[webpack-ui]` add entrypoint tab into the module page. How it's possible to inspect all the paths from specific module to an entrypoint
+- `[webpack-ui]` add entrypoint into issuer path
+- `[helpers]` add `Graph`, `Node` and `SolutionPath` classes to solve the graph-specific tasks.
+  Add a few jora-helpers:
+  - `graph_getNode(id, graph)` - get a node by its id
+  - `graph_getPaths(from, graph, to, max)` - get all or `max` possible paths from `from` node to `to` node
+
+- `[webpack-model]` add `deps` for every module. There are all the modules that the module requires
+- `[webpack-model]` add `dep` for every entrypoint. There is a module that an entrypoint requires 
+- `[webpack-model]` add `resolvedEntry` and `resolvedEntryName` for entrypoint-reasons 
+- `[webpack-model]` add a few jora-helpers:
+  - `getModuleGraph(hash)` - get module graph for specified compilation
+  - `moduleGraph_getEntrypoints(module, graph, entrypoints, max)` - get all or `max` entrypoints of `module`
+  - `moduleGraph_getPaths(from, graph, to, max)` - get all or `max` possible paths from `from` module to `to` module
+  
+## Fixes
+
+- `[webpack-ui]` fix settings error when multiple tabs opened
+
+## 5.5.1 (08 July 2021)
+
+## Fixes
+
+- `[report-writer]` rollback to sync stream polling model
+- `[webpack-plugin]` broken html report
+
+## Chore
+
+- clean all the packages from dev-files
+
 ## 5.5.0 (08 July 2021)
 
 ## Features
