@@ -1,7 +1,7 @@
 import { makeAPI } from '@statoscope/stats-validator/dist/api';
-import plugin from '../';
-import statsV5 from '../../../../test/bundles/simple/stats-prod.json';
-import rule from './disallowed-deps';
+import plugin from '../..';
+import statsV5 from '../../../../../test/bundles/simple/stats-prod.json';
+import rule from './';
 
 describe('package', () => {
   test('matches', () => {

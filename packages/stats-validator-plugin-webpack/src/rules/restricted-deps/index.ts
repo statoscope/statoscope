@@ -7,9 +7,8 @@ import {
   NormalizedPackage,
 } from '@statoscope/webpack-model/dist/normalize';
 import { API } from '@statoscope/stats-validator/dist/api';
-import { Node } from '@statoscope/helpers/dist/asciiTree';
-import { makeASCIITree } from '@statoscope/helpers';
-import { WebpackRule } from '../';
+import chalk from 'chalk';
+import { WebpackRule } from '../../';
 
 export type PackageResultItem = {
   file: NormalizedFile;
@@ -37,60 +36,6 @@ export type Target = ModuleTarget | PackageTarget;
 
 const packageRx = /^(@.+?[/\\][^/\\\s@]+|[^/\\\s@]+)(?:@(.+))?/;
 
-function makeDetailsFromReasonModules(
-  data: Prepared,
-  reasons: NormalizedModule[],
-  rootTitle: string
-): string {
-  const reasonsPaths = data.query(
-    '.([[...issuerPath.resolvedModule, $].[].reverse()])',
-    reasons
-  ) as NormalizedModule[][];
-
-  const tree: Node = { label: rootTitle, nodes: [] };
-
-  for (const reasonPath of reasonsPaths) {
-    let cursor = tree;
-
-    for (const reason of reasonPath) {
-      const newNode: Node = { label: reason.name, nodes: [] };
-      cursor.nodes?.push(newNode);
-      cursor = newNode;
-    }
-  }
-
-  return makeASCIITree(tree);
-}
-
-function makeDetailsFromPackageInstance(
-  data: Prepared,
-  instance: NodeModuleInstance
-): string {
-  const instanceReasons = data.query(
-    'reasons.data.resolvedModule.[]',
-    instance
-  ) as NormalizedModule[];
-  return makeDetailsFromReasonModules(
-    data,
-    instanceReasons,
-    `Instance reasons [${instance.path}]:`
-  );
-}
-
-function makeDetailsFromModule(data: Prepared, module: NormalizedModule): string {
-  const moduleReasons = data.query(
-    'reasons.resolvedModule.[]',
-    module
-  ) as NormalizedModule[];
-  return makeDetailsFromReasonModules(
-    data,
-    moduleReasons,
-    moduleReasons.length
-      ? `Module reasons:`
-      : `No module reasons (seems like this is an entrypoint)`
-  );
-}
-
 function handledModules(
   target: ModuleTarget,
   data: Prepared,
@@ -117,7 +62,6 @@ function handledModules(
       api.error(`${module.name} should not be used`, {
         filename: resultItem.file.name,
         compilation: resultItem.compilation.name || resultItem.compilation.hash,
-        details: makeDetailsFromModule(data, module),
       });
     }
   }
@@ -164,7 +108,10 @@ function handlePackages(
           {
             filename: resultItem.file.name,
             compilation: resultItem.compilation.name || resultItem.compilation.hash,
-            details: makeDetailsFromPackageInstance(data, instance),
+            details: [
+              { type: 'text', content: makeInstanceDetailsContent(instance, false) },
+              { type: 'tty', content: makeInstanceDetailsContent(instance, true) },
+            ],
           }
         );
       }
@@ -172,6 +119,11 @@ function handlePackages(
   }
 
   return result;
+}
+
+function makeInstanceDetailsContent(instance: NodeModuleInstance, tty: boolean): string {
+  const ctx = new chalk.Instance(tty ? {} : { level: 0 });
+  return `Instance: ${instance.path}  ${ctx.yellow(instance.version) ?? ''}`;
 }
 
 function makePackageTarget(name: string | RegExp, version?: string): PackageTarget {

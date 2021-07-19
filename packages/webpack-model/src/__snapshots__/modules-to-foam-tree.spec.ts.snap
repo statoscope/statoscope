@@ -101,7 +101,48 @@ Object {
                 "page": "module",
               },
               "path": "node_modules/foo/index.js",
-              "weight": 50,
+              "weight": 96,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [
+                Object {
+                  "groups": Array [
+                    Object {
+                      "groups": Array [],
+                      "label": "index.js",
+                      "link": Object {
+                        "id": "./node_modules/foo/node_modules/bar/index.js",
+                        "page": "module",
+                      },
+                      "path": "node_modules/foo/node_modules/bar/index.js",
+                      "weight": 25,
+                      "weightCompressor": undefined,
+                    },
+                  ],
+                  "label": "bar",
+                  "link": Object {
+                    "id": "bar",
+                    "package": Object {
+                      "instance": Object {
+                        "path": "node_modules/foo/node_modules/bar",
+                      },
+                      "name": "bar",
+                    },
+                    "page": "package",
+                    "params": Object {
+                      "instance": "node_modules/foo/node_modules/bar",
+                    },
+                  },
+                  "path": "node_modules/foo/node_modules/bar",
+                  "weight": 25,
+                  "weightCompressor": undefined,
+                },
+              ],
+              "label": "node_modules",
+              "link": undefined,
+              "path": "node_modules/foo/node_modules",
+              "weight": 25,
               "weightCompressor": undefined,
             },
           ],
@@ -120,7 +161,7 @@ Object {
             },
           },
           "path": "node_modules/foo",
-          "weight": 50,
+          "weight": 121,
           "weightCompressor": undefined,
         },
         Object {
@@ -159,7 +200,7 @@ Object {
       "label": "node_modules",
       "link": undefined,
       "path": "node_modules",
-      "weight": 100,
+      "weight": 171,
       "weightCompressor": undefined,
     },
     Object {
@@ -416,7 +457,7 @@ Object {
   "label": "",
   "link": undefined,
   "path": "/",
-  "weight": 20656.84,
+  "weight": 20727.84,
   "weightCompressor": undefined,
 }
 `;

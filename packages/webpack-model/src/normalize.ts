@@ -482,12 +482,22 @@ function prepareModules(
   compilation: Webpack.Compilation,
   resolvers: CompilationResolvers
 ): void {
-  for (const module of compilation.modules || []) {
-    prepareModule(module, resolvers);
+  for (const [i, module] of Object.entries(compilation.modules || [])) {
+    const resolved = resolvers.resolveModule(module.name);
+    if (resolved) {
+      (compilation as unknown as NormalizedCompilation).modules[+i] = resolved;
+    } else {
+      prepareModule(module, resolvers);
+    }
 
     if (module.modules) {
-      for (const innerModule of module.modules) {
-        prepareModule(innerModule, resolvers);
+      for (const [i, innerModule] of Object.entries(module.modules)) {
+        const resolved = resolvers.resolveModule(innerModule.name);
+        if (resolved) {
+          (module as unknown as NormalizedModule).modules[+i] = resolved;
+        } else {
+          prepareModule(innerModule, resolvers);
+        }
       }
     } else {
       module.modules = [];
@@ -511,12 +521,22 @@ function prepareChunk(chunk: Webpack.Chunk, resolvers: CompilationResolvers): vo
       .map((m) => resolveModule(m.name))
       .filter(Boolean) as NormalizedModule[];
 
-    for (const module of chunk.modules) {
-      prepareModule(module, resolvers);
+    for (const [i, module] of Object.entries(chunk.modules)) {
+      const resolved = resolvers.resolveModule(module.name);
+      if (resolved) {
+        (chunk as unknown as NormalizedChunk).modules[+i] = resolved;
+      } else {
+        prepareModule(module, resolvers);
+      }
 
       if (module.modules) {
-        for (const innerModule of module.modules) {
-          prepareModule(innerModule, resolvers);
+        for (const [i, innerModule] of Object.entries(module.modules)) {
+          const resolved = resolvers.resolveModule(innerModule.name);
+          if (resolved) {
+            (module as unknown as NormalizedModule).modules[+i] = resolved;
+          } else {
+            prepareModule(innerModule, resolvers);
+          }
         }
       } else {
         module.modules = [];
@@ -718,17 +738,25 @@ function extractPackages(
     }
   };
 
+  function handleModule(module: NormalizedModule): void {
+    extractModulePackages(module);
+
+    if (module.modules) {
+      for (const innerModule of module.modules) {
+        handleModule(innerModule);
+      }
+    } else {
+      module.modules ??= [];
+    }
+  }
+
+  for (const module of compilation.modules) {
+    handleModule(module);
+  }
+
   for (const chunk of compilation.chunks) {
     for (const module of chunk.modules) {
-      extractModulePackages(module);
-
-      if (module.modules) {
-        for (const innerModule of module.modules) {
-          extractModulePackages(innerModule);
-        }
-      } else {
-        module.modules = [];
-      }
+      handleModule(module);
     }
   }
 }
