@@ -3,191 +3,141 @@
 exports[`module matches 1`] = `
 Array [
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "No module reasons (seems like this is an entrypoint)
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/index.ts should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "No module reasons (seems like this is an entrypoint)
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/index.ts + 3 modules should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "No module reasons (seems like this is an entrypoint)
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/index.ts should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "Module reasons:
-└── ./src/index.ts
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/sub-module.ts should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "No module reasons (seems like this is an entrypoint)
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/index2.ts + 1 modules should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "No module reasons (seems like this is an entrypoint)
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/index2.ts should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "Module reasons:
-└── ./src/index.ts
-",
-    "filename": "stats.json",
-    "message": "./src/sub-module.ts should not be used",
-    "type": "error",
-  },
-  Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "Module reasons:
-└── ./src/index2.ts + 1 modules
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/index2.css should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "Module reasons:
-└── ./src/index2.ts + 1 modules
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/test.txt should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "Module reasons:
-└── ./src/index2.ts + 1 modules
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/dyn.ts should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "Module reasons:
-└─┬ ./src/index2.css
-  └── ./src/index2.ts
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/statoscope.png should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "No module reasons (seems like this is an entrypoint)
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/index.ts should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "No module reasons (seems like this is an entrypoint)
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/index.ts + 3 modules should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "No module reasons (seems like this is an entrypoint)
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/index.ts should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "Module reasons:
-└── ./src/index.ts
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/sub-module.ts should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "No module reasons (seems like this is an entrypoint)
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/index2.ts + 1 modules should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "No module reasons (seems like this is an entrypoint)
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/index2.ts should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "Module reasons:
-└── ./src/index.ts
-",
-    "filename": "stats.json",
-    "message": "./src/sub-module.ts should not be used",
-    "type": "error",
-  },
-  Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "Module reasons:
-└── ./src/index2.ts + 1 modules
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/index2.css should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "Module reasons:
-└── ./src/index2.ts + 1 modules
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/test.txt should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "Module reasons:
-└── ./src/index2.ts + 1 modules
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/dyn.ts should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "Module reasons:
-└─┬ ./src/index2.css
-  └── ./src/index2.ts
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": undefined,
     "filename": "stats.json",
     "message": "./src/statoscope.png should not be used",
     "type": "error",
@@ -200,51 +150,81 @@ exports[`module not matches 1`] = `Array []`;
 exports[`package matches 1`] = `
 Array [
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "Instance reasons [node_modules/foo]:
-└─┬ ./src/sub-module.ts
-  └── ./src/index.ts
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": Array [
+      Object {
+        "content": "Instance: node_modules/foo  1.0.0",
+        "type": "text",
+      },
+      Object {
+        "content": "Instance: node_modules/foo  [33m1.0.0[39m",
+        "type": "tty",
+      },
+    ],
     "filename": "stats.json",
     "message": "foo@1.0.0 should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "Instance reasons [node_modules/foo]:
-└─┬ ./src/sub-module.ts
-  └── ./src/index.ts
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": Array [
+      Object {
+        "content": "Instance: node_modules/foo  1.0.0",
+        "type": "text",
+      },
+      Object {
+        "content": "Instance: node_modules/foo  [33m1.0.0[39m",
+        "type": "tty",
+      },
+    ],
     "filename": "stats.json",
     "message": "foo@1.0.0 should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "Instance reasons [node_modules/foo]:
-└─┬ ./src/sub-module.ts
-  └── ./src/index.ts
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": Array [
+      Object {
+        "content": "Instance: node_modules/foo  1.0.0",
+        "type": "text",
+      },
+      Object {
+        "content": "Instance: node_modules/foo  [33m1.0.0[39m",
+        "type": "tty",
+      },
+    ],
     "filename": "stats.json",
     "message": "foo@1.0.0 should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "Instance reasons [node_modules/foo]:
-└─┬ ./src/sub-module.ts
-  └── ./src/index.ts
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": Array [
+      Object {
+        "content": "Instance: node_modules/foo  1.0.0",
+        "type": "text",
+      },
+      Object {
+        "content": "Instance: node_modules/foo  [33m1.0.0[39m",
+        "type": "tty",
+      },
+    ],
     "filename": "stats.json",
     "message": "foo@1.0.0 should not be used",
     "type": "error",
   },
   Object {
-    "compilation": "d395b2ff19d3d6f0efe3",
-    "details": "Instance reasons [node_modules/foo]:
-└─┬ ./src/sub-module.ts
-  └── ./src/index.ts
-",
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": Array [
+      Object {
+        "content": "Instance: node_modules/foo  1.0.0",
+        "type": "text",
+      },
+      Object {
+        "content": "Instance: node_modules/foo  [33m1.0.0[39m",
+        "type": "tty",
+      },
+    ],
     "filename": "stats.json",
     "message": "foo@1.0.0 should not be used",
     "type": "error",

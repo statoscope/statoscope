@@ -147,7 +147,7 @@ function makeModuleTarget(name: string | RegExp): ModuleTarget {
   };
 }
 
-const disallowedDeps: WebpackRule<Params> = (ruleParams, data, api): void => {
+const restrictedDeps: WebpackRule<Params> = (ruleParams, data, api): void => {
   const targets: Target[] = ruleParams.map((item): Target => {
     if (item instanceof RegExp || (typeof item === 'string' && item.startsWith('.'))) {
       return makeModuleTarget(item);
@@ -171,4 +171,4 @@ const disallowedDeps: WebpackRule<Params> = (ruleParams, data, api): void => {
   }
 };
 
-export default disallowedDeps;
+export default restrictedDeps;

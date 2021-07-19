@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`exclude 1`] = `Array []`;
+
+exports[`should work 1`] = `
+Array [
+  Object {
+    "compilation": "09913f11a4a7b3c92a1e",
+    "details": Array [
+      Object {
+        "content": "- node_modules/bar  1.0.0
+- node_modules/foo/node_modules/bar  2.0.0",
+        "type": "text",
+      },
+      Object {
+        "content": "- node_modules/bar  [33m1.0.0[39m
+- node_modules/foo/node_modules/bar  [33m2.0.0[39m",
+        "type": "tty",
+      },
+    ],
+    "filename": "stats.json",
+    "message": "Package bar has 2 instances with 2 versions",
+    "type": "error",
+  },
+]
+`;
