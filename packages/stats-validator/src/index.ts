@@ -5,7 +5,7 @@ import { parseChunked } from '@discoveryjs/json-ext';
 import { API, makeAPI } from './api';
 import { InputFile, PluginFn, PrepareFn } from './plugin';
 import { Rule } from './rule';
-import { Config, RuleExecParams } from './config';
+import { Config, NormalizedRuleExecParams, RuleExecMode, RuleExecParams } from './config';
 
 export type ValidationResult = {
   rules: Array<{
@@ -21,7 +21,7 @@ export default class Validator {
     {
       aliases: string[];
       prepare?: PrepareFn<unknown>;
-      rules: Record<string, Rule<unknown>>;
+      rules: Record<string, Rule<unknown, unknown>>;
     }
   > = {};
 
@@ -59,7 +59,7 @@ export default class Validator {
     }
   }
 
-  resolveRule(name: string): Rule<unknown> | null {
+  resolveRule(name: string): Rule<unknown, unknown> | null {
     const ruleRx = /^(?:(@.+?[/\\][^/\\\s]+|[^/\\\s]+)[/\\])?(.+)/;
     const [, pluginAlias, ruleName] = name.match(ruleRx) || [];
 
@@ -95,7 +95,9 @@ export default class Validator {
       }
     }
 
-    for (const [ruleName, ruleDesc] of Object.entries(this.config?.rules ?? {})) {
+    for (const [ruleName, ruleDesc] of Object.entries(
+      this.config?.validate.rules ?? {}
+    )) {
       let ruleParams: unknown;
       let execParams: RuleExecParams;
 
@@ -104,7 +106,7 @@ export default class Validator {
       } else {
         execParams = ruleDesc;
       }
-
+      const normalizedExecParams = this.normalizeExecParams(execParams);
       const api = makeAPI({ warnAsError: false });
       const resolvedRule = this.resolveRule(ruleName);
 
@@ -112,11 +114,7 @@ export default class Validator {
         throw new Error(`Can't resolve rule ${ruleName}`);
       }
 
-      if (typeof execParams === 'string') {
-        if (execParams === 'off') {
-          continue;
-        }
-      } else if (execParams.mode === 'off') {
+      if (normalizedExecParams.mode === 'off') {
         continue;
       }
 
@@ -125,5 +123,13 @@ export default class Validator {
     }
 
     return result;
+  }
+
+  normalizeExecParams(execParams: RuleExecParams): NormalizedRuleExecParams {
+    const mode: RuleExecMode = typeof execParams === 'string' ? execParams : 'error';
+
+    return {
+      mode,
+    };
   }
 }

@@ -1,14 +1,20 @@
 import { ViewConfig } from '@statoscope/types';
 
 export type Type = 'error' | 'warn' | 'info';
-export type DetailsTextContent = string | string[];
+export type DetailsTextContent = string | string[] | (() => string | string[]);
 export type DetailsDescriptorDiscovery<TData> = {
   type: 'discovery';
   data: TData;
   view: ViewConfig<TData, unknown>;
 };
-export type DetailsDescriptorTTY = { type: 'tty'; content: DetailsTextContent };
-export type DetailsDescriptorText = { type: 'text'; content: DetailsTextContent };
+export type DetailsDescriptorTTY = {
+  type: 'tty';
+  content: DetailsTextContent;
+};
+export type DetailsDescriptorText = {
+  type: 'text';
+  content: DetailsTextContent;
+};
 export type DetailsDescriptor =
   | DetailsDescriptorTTY
   | DetailsDescriptorText
