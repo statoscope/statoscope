@@ -56,29 +56,37 @@ export default class ConsoleReporter implements Reporter<Options> {
                 | undefined;
 
               if (typeof item.details === 'string') {
-                detailDescriptor = { type: 'tty', content: item.details };
+                detailDescriptor = {
+                  type: 'tty',
+                  content: item.details,
+                };
               } else {
+                // @ts-ignore
                 detailDescriptor =
-                  (item.details.find((item) => item.type === 'tty') as
-                    | DetailsDescriptorTTY
-                    | undefined) ||
-                  (item.details.find((item) => item.type === 'text') as
-                    | DetailsDescriptorText
-                    | undefined);
-
-                if (!detailDescriptor) {
-                  throw new Error(
-                    `[${rule}] Unknown item detail ${JSON.stringify(item.details)}`
-                  );
-                }
+                  item.details.find((detail) => detail.type === 'tty') ||
+                  item.details.find((detail) => detail.type === 'text');
               }
 
-              if (typeof detailDescriptor.content === 'string') {
-                console.log(detailDescriptor.content);
-              } else {
-                for (const line of detailDescriptor.content) {
-                  console.log(line);
+              if (detailDescriptor) {
+                let content: string | string[];
+
+                if (typeof detailDescriptor.content === 'string') {
+                  content = detailDescriptor.content;
+                } else if (typeof detailDescriptor.content === 'function') {
+                  content = detailDescriptor.content.call(null);
+                } else {
+                  content = detailDescriptor.content;
                 }
+
+                console.group();
+                if (typeof content === 'string') {
+                  console.log(content);
+                } else {
+                  for (const line of content) {
+                    console.log(line);
+                  }
+                }
+                console.groupEnd();
               }
             }
 
