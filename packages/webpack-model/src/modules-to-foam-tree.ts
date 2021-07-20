@@ -93,7 +93,11 @@ function handleModule(
     };
   }
 
-  apply(root, parts, module.modules ? { size: 0 } : getModuleSize(module));
+  apply(
+    root,
+    parts,
+    module.modules && module.modules.length ? { size: 0 } : getModuleSize(module)
+  );
 }
 
 function apply(root: Node, parts: NodeData[], size: Size): void {
