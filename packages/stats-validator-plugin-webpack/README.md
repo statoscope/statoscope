@@ -7,4 +7,5 @@ Webpack plugin for @statoscope/stats-validator
 
 ## Rules
 
-- disallowed-deps
+- [restricted-deps](docs/rules/restricted-deps.md) - restricted to use of specified dependencies
+- [no-packages-dups](docs/rules/no-packages-dups.md) - disallow duplicates of packages

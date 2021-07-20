@@ -1,4 +1,4 @@
-# Disallow to use of specified dependencies
+# Restricted to use of specified dependencies
 
 Fail validation if some of the specified dependencies (module or package) are used by the bundle.
 
@@ -6,7 +6,7 @@ Fail validation if some of the specified dependencies (module or package) are us
 
 ```json
 {
-  "disallowed-deps": [
+  "restricted-deps": [
     "error",
     [
       "lodash",
@@ -16,7 +16,7 @@ Fail validation if some of the specified dependencies (module or package) are us
 }
 ```
 
-In this example there are two disallowed dependencies - `lodash` and `rxjs` version prior 6.
+In this example there are two restricted dependencies - `lodash` and `rxjs` version prior 6.
 
 ## Options
 
@@ -30,7 +30,7 @@ Array<
 
 ### string
 
-Specify disallowed package or module, depends on string content.
+Specify restricted package or module, depends on string content.
 
 If dependency name is a relative path (starts from `.`) it treats as a module:
 
@@ -59,7 +59,7 @@ Also, there is an extra syntax for a package: `name@version`
 
 ### RegExp
 
-Specify disallowed module.
+Specify restricted module.
 
 ```js
 [/foo-module\.js/, /\/some-dir\//]
@@ -69,7 +69,7 @@ Specify disallowed module.
 
 `{ type: 'module', name: string | RegExp }`
 
-Specify the disallowed module explicitly.
+Specify the restricted module explicitly.
 
 ```js
 [
@@ -82,7 +82,7 @@ Specify the disallowed module explicitly.
 
 `{ type: 'package', name: string | RegExp, version?: string }`
 
-Specify the disallowed package explicitly.
+Specify the restricted package explicitly.
 
 ```js
 [
