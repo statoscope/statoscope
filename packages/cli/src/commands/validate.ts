@@ -2,6 +2,8 @@ import path from 'path';
 import { Argv } from 'yargs';
 import Validator, { ValidationResult } from '@statoscope/stats-validator';
 import ConsoleReporter from '@statoscope/stats-validator-reporter-console';
+import StatsReporter from '@statoscope/stats-validator-reporter-stats';
+import { Reporter } from '@statoscope/stats-validator/dist/reporter';
 import legacyWebpackStatsValidator from './legacyWebpackValidator';
 
 export default function (yargs: Argv): Argv {
@@ -28,6 +30,11 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
           alias: 'i',
           type: 'string',
         })
+        .option('diff-with', {
+          describe: 'path to a stats that will be used by diff-rules as "before"',
+          type: 'string',
+          alias: 'd',
+        })
         .option('warn-as-error', {
           type: 'boolean',
           describe: 'Treat warnings as errors',
@@ -38,6 +45,12 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
     },
     async (argv) => {
       let result: ValidationResult | undefined;
+
+      if (argv['diff-with'] && argv.input.length > 1) {
+        console.warn(
+          'When "diff-with" is used, only the first file from "input" will be used'
+        );
+      }
 
       // todo statoscope 6: remove this or use as prepare + validator
       if (argv.validator) {
@@ -56,8 +69,22 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
         result = await validator.validate(argv.input.map((file) => path.resolve(file)));
       }
 
-      const reporter = new ConsoleReporter();
-      await reporter.run(result, { warnAsError: argv['warn-as-error'] });
+      type ReporterItem = { reporter: Reporter<unknown>; options: unknown };
+
+      const reporters: ReporterItem[] = [
+        {
+          reporter: new ConsoleReporter(),
+          options: {},
+        },
+        {
+          reporter: new StatsReporter(),
+          options: {},
+        },
+      ];
+
+      for (const item of reporters) {
+        await item.reporter.run(result, item.options);
+      }
     }
   );
 }

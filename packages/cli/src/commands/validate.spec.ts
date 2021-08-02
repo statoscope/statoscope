@@ -1,3 +1,4 @@
+import os from 'os';
 import path from 'path';
 import yargs from 'yargs';
 import validate from './validate';
@@ -32,7 +33,11 @@ beforeEach(() => {
   consoleLogSpy = jest
     .spyOn(global.console, 'log')
     .mockImplementation((...args: string[]) => {
-      output.push(args.map((o) => String(o).replace(process.cwd(), '<pwd>')));
+      output.push(
+        args.map((o) =>
+          String(o).replace(process.cwd(), '<pwd>').replace(os.tmpdir(), '<tmp>')
+        )
+      );
     });
 });
 

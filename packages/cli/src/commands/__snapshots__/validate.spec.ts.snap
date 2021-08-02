@@ -3,102 +3,153 @@
 exports[`validator types jora-query from js jora-fail.js 1`] = `
 Array [
   Array [
-    "[4munknown file[24m",
+    "unknown file",
   ],
   Array [
-    "[36munknown compilation[39m",
+    "unknown compilation",
   ],
   Array [
-    "[31merror[39m  Fail  [36m<pwd>/test/fixtures/cli/validate/jora-fail.js[39m",
+    "error  Fail  <pwd>/test/fixtures/cli/validate/jora-fail.js",
   ],
   Array [
     "",
   ],
   Array [
-    "[33m1 problems (1 errors, 0 warnings)[39m",
+    "1 problems (1 errors, 0 warnings)",
+  ],
+  Array [
+    "Preparing data for Statoscope report...",
+  ],
+  Array [
+    "Generating Statoscope report...",
+  ],
+  Array [
+    "Statoscope report saved into <tmp>/statoscope-report-stats-dev.html",
   ],
 ]
 `;
 
-exports[`validator types jora-query from js jora-ok.js 1`] = `Array []`;
+exports[`validator types jora-query from js jora-ok.js 1`] = `
+Array [
+  Array [
+    "Preparing data for Statoscope report...",
+  ],
+  Array [
+    "Generating Statoscope report...",
+  ],
+  Array [
+    "Statoscope report saved into <tmp>/statoscope-report-stats-dev.html",
+  ],
+]
+`;
 
 exports[`validator types raw jora-query fail.jora 1`] = `
 Array [
   Array [
-    "[4munknown file[24m",
+    "unknown file",
   ],
   Array [
-    "[36munknown compilation[39m",
+    "unknown compilation",
   ],
   Array [
-    "[31merror[39m  Fail  [36m<pwd>/test/fixtures/cli/validate/fail.jora[39m",
+    "error  Fail  <pwd>/test/fixtures/cli/validate/fail.jora",
   ],
   Array [
     "",
   ],
   Array [
-    "[33m1 problems (1 errors, 0 warnings)[39m",
+    "1 problems (1 errors, 0 warnings)",
+  ],
+  Array [
+    "Preparing data for Statoscope report...",
+  ],
+  Array [
+    "Generating Statoscope report...",
+  ],
+  Array [
+    "Statoscope report saved into <tmp>/statoscope-report-stats-dev.html",
   ],
 ]
 `;
 
-exports[`validator types raw jora-query ok.jora 1`] = `Array []`;
+exports[`validator types raw jora-query ok.jora 1`] = `
+Array [
+  Array [
+    "Preparing data for Statoscope report...",
+  ],
+  Array [
+    "Generating Statoscope report...",
+  ],
+  Array [
+    "Statoscope report saved into <tmp>/statoscope-report-stats-dev.html",
+  ],
+]
+`;
 
 exports[`validator types raw jora-query rules.jora 1`] = `
 Array [
   Array [
-    "[4munknown file[24m",
+    "unknown file",
   ],
   Array [
-    "[36munknown compilation[39m",
+    "unknown compilation",
   ],
   Array [
-    "[0minfo[0m  Auto info message  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
+    "info  Auto info message  <pwd>/test/fixtures/cli/validate/rules.jora",
   ],
   Array [
-    "[0minfo[0m  Info message without assert  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
+    "info  Info message without assert  <pwd>/test/fixtures/cli/validate/rules.jora",
   ],
   Array [
-    "[0minfo[0m  Info with assert  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
+    "info  Info with assert  <pwd>/test/fixtures/cli/validate/rules.jora",
   ],
   Array [
-    "[33mwarn[39m  Warn without assert  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
+    "warn  Warn without assert  <pwd>/test/fixtures/cli/validate/rules.jora",
   ],
   Array [
-    "[33mwarn[39m  Warn with assert  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
-  ],
-  Array [
-    "",
-  ],
-  Array [
-    "[4m<pwd>/test/bundles/simple/stats-dev.json[24m",
-  ],
-  Array [
-    "[36munknown compilation[39m",
-  ],
-  Array [
-    "[0minfo[0m  Auto info for file  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
-  ],
-  Array [
-    "[0minfo[0m  Info for file  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
-  ],
-  Array [
-    "[33mwarn[39m  Warn for file  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
-  ],
-  Array [
-    "[31merror[39m  Error for file  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
-  ],
-  Array [
-    "[36m07bc8b29d878ad4a5451[39m",
-  ],
-  Array [
-    "[31merror[39m  Something wrong  [36m<pwd>/test/fixtures/cli/validate/rules.jora[39m",
+    "warn  Warn with assert  <pwd>/test/fixtures/cli/validate/rules.jora",
   ],
   Array [
     "",
   ],
   Array [
-    "[33m5 problems (2 errors, 3 warnings)[39m",
+    "<pwd>/test/bundles/simple/stats-dev.json",
+  ],
+  Array [
+    "unknown compilation",
+  ],
+  Array [
+    "info  Auto info for file  <pwd>/test/fixtures/cli/validate/rules.jora",
+  ],
+  Array [
+    "info  Info for file  <pwd>/test/fixtures/cli/validate/rules.jora",
+  ],
+  Array [
+    "warn  Warn for file  <pwd>/test/fixtures/cli/validate/rules.jora",
+  ],
+  Array [
+    "error  Error for file  <pwd>/test/fixtures/cli/validate/rules.jora",
+  ],
+  Array [
+    "da95abcf6bbf9b157ff6",
+  ],
+  Array [
+    "error  Something wrong  <pwd>/test/fixtures/cli/validate/rules.jora",
+  ],
+  Array [
+    "",
+  ],
+  Array [
+    "5 problems (2 errors, 3 warnings)",
+  ],
+  Array [
+    "Preparing data for Statoscope report...",
+  ],
+  Array [
+    "Generating Statoscope report...",
+  ],
+  Array [
+    "Statoscope report saved into <tmp>/statoscope-report-stats-dev.html",
   ],
 ]
 `;

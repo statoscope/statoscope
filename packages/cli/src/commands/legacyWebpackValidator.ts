@@ -118,5 +118,7 @@ export default async function validateWebpackStart(
 
   return {
     rules: [{ name: path.resolve(validatorPath), api }],
+    input: files.map((item) => item.name),
+    reference: [],
   };
 }
