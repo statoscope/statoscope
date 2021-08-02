@@ -1,11 +1,12 @@
-import { ViewConfig } from '@statoscope/types';
-
 export type Type = 'error' | 'warn' | 'info';
 export type DetailsTextContent = string | string[] | (() => string | string[]);
-export type DetailsDescriptorDiscovery<TData> = {
+export type DetailsDescriptorDiscovery = {
   type: 'discovery';
-  data: TData;
-  view: ViewConfig<TData, unknown>;
+  filename: string;
+  query: string;
+  context?: unknown;
+  // (context: unknown) => unknown
+  normalize?: string;
 };
 export type DetailsDescriptorTTY = {
   type: 'tty';
@@ -18,8 +19,17 @@ export type DetailsDescriptorText = {
 export type DetailsDescriptor =
   | DetailsDescriptorTTY
   | DetailsDescriptorText
-  | DetailsDescriptorDiscovery<unknown>;
+  | DetailsDescriptorDiscovery;
 export type Details = string | DetailsDescriptor[];
+export type RelatedItem =
+  | {
+      type: 'module' | 'package' | 'package-instance' | 'resource' | 'entry';
+      id: string;
+    }
+  | {
+      type: 'chunk';
+      id: string | number;
+    };
 export type TestEntry = {
   type?: Type; // 'error' by default
   assert?: boolean; // false by default
@@ -27,4 +37,5 @@ export type TestEntry = {
   filename?: string;
   compilation?: string;
   details?: Details;
+  related?: RelatedItem[];
 };

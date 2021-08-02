@@ -1,6 +1,6 @@
-# Statoscope report writer
+# Statoscope Stats Validator
 
-[![npm version](https://badge.fury.io/js/%40statoscope%2Freport-writer.svg)](https://badge.fury.io/js/%40statoscope%2Freport-writer)
+[![npm version](https://badge.fury.io/js/%40statoscope%2Fstats-validator.svg)](https://badge.fury.io/js/%40statoscope%2Fstats-validator)
 [![Support](https://img.shields.io/badge/-Support-blue)](https://opencollective.com/statoscope)
 
-This package generates a stream with statoscope HTML-report from one or more json-files.
+This package contains a toolkit for validating stats

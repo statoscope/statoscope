@@ -2,20 +2,27 @@ import fs from 'fs';
 import module from 'module';
 // @ts-ignore
 import { parseChunked } from '@discoveryjs/json-ext';
-import { API, makeAPI } from './api';
+import { API, makeAPI, MakeAPIParams } from './api';
 import { InputFile, PluginFn, PrepareFn } from './plugin';
-import { Rule } from './rule';
+import { Rule, RuleDataInput } from './rule';
 import { Config, NormalizedRuleExecParams, RuleExecMode, RuleExecParams } from './config';
 
+export type ValidationResultItem = {
+  name: string;
+  api: API;
+};
+
 export type ValidationResult = {
-  rules: Array<{
-    name: string;
-    api: API;
-  }>;
+  rules: Array<ValidationResultItem>;
+  input: string[];
+  reference: string[];
 };
 
 export default class Validator {
-  public config?: Config;
+  // @ts-ignore
+  public configPath: string;
+  // @ts-ignore
+  public config: Config;
   public plugins: Record<
     string,
     {
@@ -25,13 +32,14 @@ export default class Validator {
     }
   > = {};
 
-  constructor(public configPath?: string) {
-    if (!configPath) {
-      return;
-    }
+  constructor(configPath: string) {
+    this.applyConfig(configPath);
+  }
 
+  applyConfig(configPath: string): void {
+    this.configPath = configPath;
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    this.config = require(configPath) as Config;
+    this.config = require(this.configPath) as Config;
 
     if (this.config.plugins) {
       for (const pluginDesc of this.config.plugins) {
@@ -74,26 +82,48 @@ export default class Validator {
     return null;
   }
 
-  async validate(files: string[]): Promise<ValidationResult> {
-    const parsedFiles: InputFile[] = [];
-    let prepared: unknown;
+  async validate(
+    input: string[],
+    reference?: string | null,
+    options?: { warnAsError?: boolean }
+  ): Promise<ValidationResult> {
+    const parsedInput: InputFile[] = [];
+    const parsedReference: InputFile[] = [];
+    let preparedInput: unknown;
+    let preparedReference: unknown;
 
-    for (const file of files) {
-      parsedFiles.push({
+    for (const file of input) {
+      parsedInput.push({
         name: file,
         data: await parseChunked(fs.createReadStream(file)),
       });
+      if (reference) {
+        parsedReference.push({
+          name: reference,
+          data: await parseChunked(fs.createReadStream(reference)),
+        });
+        break;
+      }
     }
 
     const result: ValidationResult = {
       rules: [],
+      input: parsedInput.map((item) => item.name),
+      reference: parsedReference.map((item) => item.name),
     };
 
     for (const [, plugin] of Object.entries(this.plugins)) {
       if (typeof plugin.prepare === 'function') {
-        prepared = await plugin.prepare(parsedFiles);
+        preparedInput = await plugin.prepare(parsedInput);
+
+        if (parsedReference) {
+          preparedReference = await plugin.prepare(parsedReference);
+        }
       }
     }
+
+    preparedInput ??= parsedInput;
+    preparedReference ??= parsedReference;
 
     for (const [ruleName, ruleDesc] of Object.entries(
       this.config?.validate.rules ?? {}
@@ -107,22 +137,39 @@ export default class Validator {
         execParams = ruleDesc;
       }
       const normalizedExecParams = this.normalizeExecParams(execParams);
-      const api = makeAPI({ warnAsError: false });
+
+      if (normalizedExecParams.mode === 'off') {
+        continue;
+      }
+
       const resolvedRule = this.resolveRule(ruleName);
 
       if (!resolvedRule) {
         throw new Error(`Can't resolve rule ${ruleName}`);
       }
 
-      if (normalizedExecParams.mode === 'off') {
-        continue;
-      }
-
-      await resolvedRule(ruleParams, prepared, api);
+      const api = await this.execRule(
+        resolvedRule,
+        ruleParams,
+        { input: preparedInput, reference: preparedReference },
+        options
+      );
       result.rules.push({ name: ruleName, api });
     }
 
     return result;
+  }
+
+  async execRule(
+    rule: Rule<unknown, unknown>,
+    params: unknown,
+    data: RuleDataInput<unknown>,
+    options?: MakeAPIParams
+  ): Promise<API> {
+    const api = makeAPI(options);
+    await rule(params, data, api);
+
+    return api;
   }
 
   normalizeExecParams(execParams: RuleExecParams): NormalizedRuleExecParams {

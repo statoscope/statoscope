@@ -1,7 +1,9 @@
 import { API } from './api';
 
-export type Rule<TParams, TInput> = (params: TParams, data: TInput, api: API) => void;
+export type RuleDataInput<TInput> = { reference?: TInput; input: TInput };
 
-export type DiffRuleInput<TInput> = { before: TInput; after: TInput };
-
-export type DiffRule<TParams, TInput> = Rule<TParams, DiffRuleInput<TInput>>;
+export type Rule<TParams, TInput> = (
+  params: TParams | null,
+  data: RuleDataInput<TInput>,
+  api: API
+) => void;

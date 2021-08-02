@@ -1,5 +1,5 @@
 import { ViewConfig } from '@statoscope/types';
-import { TestEntry, Details } from './test-entry';
+import { TestEntry, Details, RelatedItem } from './test-entry';
 
 export type RuleResult<TData> = {
   data: TData;
@@ -12,6 +12,7 @@ export type APIFnOptions = {
   filename?: string;
   compilation?: string;
   details?: Details;
+  related?: RelatedItem[];
 };
 
 export type API = {
@@ -26,10 +27,10 @@ export type API = {
 };
 
 export type MakeAPIParams = {
-  warnAsError: boolean;
+  warnAsError?: boolean;
 };
 
-export function makeAPI(params: MakeAPIParams): API {
+export function makeAPI(params?: MakeAPIParams): API {
   const storage: Storage = [];
   let hasErrors = false;
   let errors = 0;
@@ -52,7 +53,7 @@ export function makeAPI(params: MakeAPIParams): API {
       return storage;
     },
     warn(message, filenameOrOptions): void {
-      if (params.warnAsError) {
+      if (params?.warnAsError) {
         hasErrors = true;
       }
 
@@ -66,6 +67,7 @@ export function makeAPI(params: MakeAPIParams): API {
         filename: filenameOrOptions?.filename,
         compilation: filenameOrOptions?.compilation,
         details: filenameOrOptions?.details,
+        related: filenameOrOptions?.related,
         message,
       });
       warnings++;
@@ -82,6 +84,7 @@ export function makeAPI(params: MakeAPIParams): API {
         filename: filenameOrOptions?.filename,
         compilation: filenameOrOptions?.compilation,
         details: filenameOrOptions?.details,
+        related: filenameOrOptions?.related,
         message,
       });
       errors++;
@@ -97,6 +100,7 @@ export function makeAPI(params: MakeAPIParams): API {
         filename: filenameOrOptions?.filename,
         compilation: filenameOrOptions?.compilation,
         details: filenameOrOptions?.details,
+        related: filenameOrOptions?.related,
         message,
       });
       infos++;
