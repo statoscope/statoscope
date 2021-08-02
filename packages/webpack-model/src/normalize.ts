@@ -486,18 +486,18 @@ function prepareModules(
     const resolved = resolvers.resolveModule(module.name);
     if (resolved) {
       (compilation as unknown as NormalizedCompilation).modules[+i] = resolved;
-    } else {
-      prepareModule(module, resolvers);
     }
+
+    prepareModule(module, resolvers);
 
     if (module.modules) {
       for (const [i, innerModule] of Object.entries(module.modules)) {
         const resolved = resolvers.resolveModule(innerModule.name);
         if (resolved) {
           (module as unknown as NormalizedModule).modules[+i] = resolved;
-        } else {
-          prepareModule(innerModule, resolvers);
         }
+
+        prepareModule(innerModule, resolvers);
       }
     } else {
       module.modules = [];
@@ -525,18 +525,18 @@ function prepareChunk(chunk: Webpack.Chunk, resolvers: CompilationResolvers): vo
       const resolved = resolvers.resolveModule(module.name);
       if (resolved) {
         (chunk as unknown as NormalizedChunk).modules[+i] = resolved;
-      } else {
-        prepareModule(module, resolvers);
       }
+
+      prepareModule(module, resolvers);
 
       if (module.modules) {
         for (const [i, innerModule] of Object.entries(module.modules)) {
           const resolved = resolvers.resolveModule(innerModule.name);
           if (resolved) {
             (module as unknown as NormalizedModule).modules[+i] = resolved;
-          } else {
-            prepareModule(innerModule, resolvers);
           }
+
+          prepareModule(innerModule, resolvers);
         }
       } else {
         module.modules = [];
