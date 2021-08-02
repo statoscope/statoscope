@@ -14,33 +14,43 @@ const inputArgs = inputFixtures.map((filename) => ['--input', filename]).flat();
 const rootPath = path.resolve(__dirname, '../../../../');
 const outputDir = path.join(rootPath, 'test/temp', path.relative(rootPath, __filename));
 const webpackUIFixture = path.join(rootPath, 'test/fixtures/report-writer/injectable.js');
+const statsFixture = path.join(rootPath, 'test/fixtures/report-writer/source.json');
+const mockedContent = new Map([
+  [require.resolve('@statoscope/webpack-ui'), webpackUIFixture],
+  [require.resolve('../../../../test/bundles/simple/stats-prod.json'), statsFixture],
+]);
 
 fs.mkdirSync(outputDir, { recursive: true });
 
 jest.mock('fs', () => {
-  const webpackUIPath = require.resolve('@statoscope/webpack-ui');
   const ofs = jest.requireActual('fs');
   return {
     ...ofs,
     readFile(name: string, ...args: unknown[]): unknown {
-      if (path.resolve(name) === webpackUIPath) {
-        name = webpackUIFixture;
+      const mocked = mockedContent.get(path.resolve(name));
+
+      if (mocked) {
+        name = mocked;
       }
 
       return ofs.readFile(name, ...args);
     },
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     readFileSync(name: string, ...args: unknown[]): unknown {
-      if (path.resolve(name) === webpackUIPath) {
-        name = webpackUIFixture;
+      const mocked = mockedContent.get(path.resolve(name));
+
+      if (mocked) {
+        name = mocked;
       }
 
       return ofs.readFileSync(name, ...args);
     },
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     createReadStream(name: string, ...args: unknown[]): unknown {
-      if (path.resolve(name) === webpackUIPath) {
-        name = webpackUIFixture;
+      const mocked = mockedContent.get(path.resolve(name));
+
+      if (mocked) {
+        name = mocked;
       }
 
       return ofs.createReadStream(name, ...args);
