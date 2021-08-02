@@ -1,7 +1,7 @@
 {
   "name": "@statoscope/stats-validator-plugin-webpack",
   "version": "5.3.1",
-  "description": "Webpack plugin for @statoscope/stats-validator",
+  "description": "Webpack stats validator plugin for @statoscope/stats-validator",
   "main": "./dist/index.js",
   "scripts": {
     "build": "../../node_modules/.bin/tsc",
@@ -23,6 +23,7 @@
   "dependencies": {
     "@statoscope/helpers": "^5.3.0",
     "@statoscope/stats-validator": "^5.4.0",
+    "@statoscope/stats-extension-compressed": "^5.4.0",
     "@statoscope/webpack-model": "^5.3.0",
     "chalk": "^4.1.1",
     "semver": "^7.3.5"

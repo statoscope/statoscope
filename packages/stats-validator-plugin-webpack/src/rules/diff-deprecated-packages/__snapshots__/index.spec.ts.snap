@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches 1`] = `
+Array [
+  Object {
+    "compilation": undefined,
+    "details": undefined,
+    "filename": "after.json",
+    "message": "Usage of is-array was increased from 2 to 4",
+    "related": Array [
+      Object {
+        "id": "is-array",
+        "type": "package",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`not matches 1`] = `Array []`;

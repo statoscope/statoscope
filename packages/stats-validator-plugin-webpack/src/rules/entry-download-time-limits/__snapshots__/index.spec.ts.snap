@@ -1,0 +1,338 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`exclude entry object 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download time of assets is 9 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`exclude entry regexp 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download time of assets is 9 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`exclude entry string 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download time of assets is 9 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`exclude no exclude 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download time of assets is 9 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download time of assets is 175 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxAsyncDownloadTime global 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download time of async assets is 3 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxAsyncDownloadTime not match - global 1`] = `Array []`;
+
+exports[`maxAsyncDownloadTime not match - override global 1`] = `Array []`;
+
+exports[`maxAsyncDownloadTime override global 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download time of async assets is 3 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxAsyncDownloadTime with useCompressedSize = false 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download time of async assets is 3 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxDownloadTime global 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download time of assets is 9 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download time of assets is 175 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxDownloadTime not match - global 1`] = `Array []`;
+
+exports[`maxDownloadTime not match - override global 1`] = `Array []`;
+
+exports[`maxDownloadTime override global 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download time of assets is 9 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download time of assets is 175 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxDownloadTime with useCompressedSize = false 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download time of assets is 16 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download time of assets is 249 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxInitialDownloadTime global 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download time of initial assets is 9 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download time of initial assets is 173 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxInitialDownloadTime not match - global 1`] = `Array []`;
+
+exports[`maxInitialDownloadTime not match - override global 1`] = `Array []`;
+
+exports[`maxInitialDownloadTime override global 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download time of initial assets is 9 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download time of initial assets is 173 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxInitialDownloadTime with useCompressedSize = false 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download time of initial assets is 16 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download time of initial assets is 246 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;

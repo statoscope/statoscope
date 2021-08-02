@@ -4,9 +4,19 @@ import {
   NormalizedFile,
   NormalizedPackage,
 } from '@statoscope/webpack-model/dist/normalize';
+import { RelatedItem } from '@statoscope/stats-validator/dist/test-entry';
 import { WebpackRule } from '../../';
+import { ExcludeItem, normalizeExclude } from '../../limits-helpers';
 
-export type Params = { exclude?: string[] };
+export type RuleExcludeItem = ExcludeItem<'compilation' | 'package'>;
+
+export type NormalizedParams = {
+  exclude: RuleExcludeItem[];
+};
+
+export type Params = {
+  exclude?: Array<string | RegExp | RuleExcludeItem>;
+};
 
 export type Result = {
   file: NormalizedFile;
@@ -15,27 +25,40 @@ export type Result = {
 };
 
 const noPackagesDups: WebpackRule<Params> = (ruleParams, data, api): void => {
-  const duplicatePackages = data.query(
-    `
-    $exclude: #.exclude;
-    .group(<compilations>)
-    .({file:value.pick(), compilation:key})
+  const normalizedParams: NormalizedParams = {
+    exclude: ruleParams?.exclude?.map((item) => normalizeExclude(item, 'package')) ?? [],
+  };
+  const query = `
+  $exclude: #.exclude;
+  .group(<compilations>)
+  .({file: value.pick(), compilation: key})
+  .exclude({
+    exclude: $exclude.[type='compilation'].name,
+    get: <compilation.name>,
+  })
+  .({
+    ...$,
+    packages: compilation
+    .nodeModules
+    .exclude({
+      exclude: $exclude.[type='package'].name,
+      get: <name>,
+    })
+    .[instances.size() > 1]
     .({
       ...$,
-      packages: compilation.nodeModules.[name not in $exclude].[instances.size() > 1].({
-        ...$,
-        instances: instances.sort(isRoot desc, path.size() asc)
-      })
-      .sort(instances.size() desc, name asc)
+      instances: instances.sort(isRoot desc, path.size() asc)
     })
-    .[packages]`,
-    data.files,
-    { exclude: ruleParams.exclude }
-  ) as Result[];
+    .sort(instances.size() desc, name asc)
+  })
+  .[packages]`;
+  const duplicatePackages = data.input.query(query, data.input.files, {
+    exclude: normalizedParams.exclude,
+  }) as Result[];
 
   for (const item of duplicatePackages) {
     for (const packageItem of item.packages) {
-      const versions = data.query('instances.version.[]', packageItem) as string[];
+      const versions = data.input.query('instances.version.[]', packageItem) as string[];
       api.error(
         `Package ${packageItem.name} has ${packageItem.instances.length} instances ${
           versions.length ? `with ${versions.length} versions` : ''
@@ -52,6 +75,15 @@ const noPackagesDups: WebpackRule<Params> = (ruleParams, data, api): void => {
               type: 'tty',
               content: makeDetailsContent(packageItem, true),
             },
+          ],
+          related: [
+            { type: 'package', id: packageItem.name },
+            ...packageItem.instances.map(
+              (instance): RelatedItem => ({
+                type: 'package-instance',
+                id: instance.path,
+              })
+            ),
           ],
         }
       );

@@ -3,8 +3,15 @@ import { jora as joraHelpers } from '@statoscope/helpers';
 import { RawStatsFileDescriptor } from '@statoscope/webpack-model/dist/normalize';
 import { Rule } from '@statoscope/stats-validator/dist/rule';
 import { PluginFn } from '@statoscope/stats-validator/dist/plugin';
-import ruleRestrictedDeps from './rules/restricted-deps';
-import ruleNoPackagesDups from './rules/no-packages-dups';
+import diffDeprecatedModules from './rules/diff-deprecated-modules';
+import diffDeprecatedPackages from './rules/diff-deprecated-packages';
+import diffEntryDownloadSizeLimits from './rules/diff-entry-download-size-limits';
+import diffEntryDownloadTimeLimits from './rules/diff-entry-download-time-limits';
+import entryDownloadSizeLimits from './rules/entry-download-size-limits';
+import entryDownloadTimeLimits from './rules/entry-download-time-limits';
+import noPackagesDups from './rules/no-packages-dups';
+import restrictedModules from './rules/restricted-modules';
+import restrictedPackages from './rules/restricted-packages';
 
 export type WebpackRule<TParams> = Rule<TParams, Prepared>;
 
@@ -14,8 +21,15 @@ const webpackPlugin: PluginFn<Prepared> = () => {
       return prepareWithJora(files, { helpers: joraHelpers() });
     },
     rules: {
-      'restricted-deps': ruleRestrictedDeps,
-      'no-package-dups': ruleNoPackagesDups,
+      'diff-deprecated-modules': diffDeprecatedModules,
+      'diff-deprecated-packages': diffDeprecatedPackages,
+      'diff-entry-download-size-limits': diffEntryDownloadSizeLimits,
+      'diff-entry-download-time-limits': diffEntryDownloadTimeLimits,
+      'entry-download-size-limits': entryDownloadSizeLimits,
+      'entry-download-time-limits': entryDownloadTimeLimits,
+      'no-packages-dups': noPackagesDups,
+      'restricted-modules': restrictedModules,
+      'restricted-packages': restrictedPackages,
     },
   };
 };

@@ -1,0 +1,1141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`maxAsyncDownloadTimeDiff global 1`] = `
+Array [
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": Array [
+      Object {
+        "filename": "after.json",
+        "query": "
+  $params: #.params;
+  $reference: #.reference;
+  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
+  $network: [$params.network, 'Slow'].useNotNullish();
+  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  
+  compilations
+  .exclude({
+    exclude: $params.exclude.[type='compilation'].name,
+    get: <name>,
+  })
+  .({
+    $compilation: $;
+    $compilation,
+    entrypoints: entrypoints
+    .({
+      $entry: $;
+      $referenceEntry: $reference.compilations
+      .exclude({
+        exclude: $params.exclude.[type='compilation'].name,
+        get: <name>,
+      })
+      .entrypoints.[name=$entry.name].pick();
+      $entry,
+      $referenceEntry
+    })
+    .[entry and referenceEntry]
+    .exclude({
+      exclude: $params.exclude.[type='entry'].name,
+      get: <entry.name>,
+    })
+    .({
+      $entry;
+      $referenceEntry;
+      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
+      $rule: {
+        maxDownloadTimeDiff: [$matchedRule.maxDownloadTimeDiff, $params.global.maxDownloadTimeDiff, Infinity].useNotNullish(),
+        maxInitialDownloadTimeDiff: [$matchedRule.maxInitialDownloadTimeDiff, $params.global.maxInitialDownloadTimeDiff, Infinity].useNotNullish(),
+        maxAsyncDownloadTimeDiff: [$matchedRule.maxAsyncDownloadTimeDiff, $params.global.maxAsyncDownloadTimeDiff, Infinity].useNotNullish(),
+      };
+      
+      $referenceEntry,
+      afterEntry: $entry,
+      $rule
+    })
+    .({
+      $rule;
+      $handleEntry: => {
+        $chunks: data.chunks + data.chunks..children;
+        $initialChunks: $chunks.[initial];
+        $asyncChunks: $chunks.[not initial];
+        $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        
+        entry: $,
+        $chunks,
+        $initialChunks,
+        $asyncChunks,
+        $downloadTime,
+        $initialDownloadTime,
+        $asyncDownloadTime,
+      };
+      $reference: referenceEntry.$handleEntry();
+      $after: afterEntry.$handleEntry();
+      $rule,
+      $reference,
+      $after,
+      diff: {
+        downloadTime: {
+          $diff: {
+            absolute: $after.downloadTime - $reference.downloadTime,
+            percent: $after.downloadTime.percentFrom($reference.downloadTime),
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxDownloadTimeDiff)
+        },
+        initialDownloadTime: {
+          $diff: {
+            absolute: $after.initialDownloadTime - $reference.initialDownloadTime,
+            percent: $after.initialDownloadTime.percentFrom($reference.initialDownloadTime)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxInitialDownloadTimeDiff)
+        },
+        asyncDownloadTime: {
+          $diff: {
+            absolute: $after.asyncDownloadTime - $reference.asyncDownloadTime,
+            percent: $after.asyncDownloadTime.percentFrom($reference.asyncDownloadTime)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxAsyncDownloadTimeDiff)
+        }
+      }
+    })
+    .[
+      not diff.downloadTime.ok or
+      not diff.initialDownloadTime.ok or
+      not diff.asyncDownloadTime.ok
+    ]
+  })
+  .[entrypoints]",
+        "type": "discovery",
+      },
+    ],
+    "filename": "after.json",
+    "message": "Entry \\"two\\": Download time diff of async assets is 9 ms (316.20%). It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxAsyncDownloadTimeDiff not match - global 1`] = `Array []`;
+
+exports[`maxAsyncDownloadTimeDiff not match - override global 1`] = `Array []`;
+
+exports[`maxAsyncDownloadTimeDiff override global 1`] = `
+Array [
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": Array [
+      Object {
+        "filename": "after.json",
+        "query": "
+  $params: #.params;
+  $reference: #.reference;
+  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
+  $network: [$params.network, 'Slow'].useNotNullish();
+  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  
+  compilations
+  .exclude({
+    exclude: $params.exclude.[type='compilation'].name,
+    get: <name>,
+  })
+  .({
+    $compilation: $;
+    $compilation,
+    entrypoints: entrypoints
+    .({
+      $entry: $;
+      $referenceEntry: $reference.compilations
+      .exclude({
+        exclude: $params.exclude.[type='compilation'].name,
+        get: <name>,
+      })
+      .entrypoints.[name=$entry.name].pick();
+      $entry,
+      $referenceEntry
+    })
+    .[entry and referenceEntry]
+    .exclude({
+      exclude: $params.exclude.[type='entry'].name,
+      get: <entry.name>,
+    })
+    .({
+      $entry;
+      $referenceEntry;
+      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
+      $rule: {
+        maxDownloadTimeDiff: [$matchedRule.maxDownloadTimeDiff, $params.global.maxDownloadTimeDiff, Infinity].useNotNullish(),
+        maxInitialDownloadTimeDiff: [$matchedRule.maxInitialDownloadTimeDiff, $params.global.maxInitialDownloadTimeDiff, Infinity].useNotNullish(),
+        maxAsyncDownloadTimeDiff: [$matchedRule.maxAsyncDownloadTimeDiff, $params.global.maxAsyncDownloadTimeDiff, Infinity].useNotNullish(),
+      };
+      
+      $referenceEntry,
+      afterEntry: $entry,
+      $rule
+    })
+    .({
+      $rule;
+      $handleEntry: => {
+        $chunks: data.chunks + data.chunks..children;
+        $initialChunks: $chunks.[initial];
+        $asyncChunks: $chunks.[not initial];
+        $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        
+        entry: $,
+        $chunks,
+        $initialChunks,
+        $asyncChunks,
+        $downloadTime,
+        $initialDownloadTime,
+        $asyncDownloadTime,
+      };
+      $reference: referenceEntry.$handleEntry();
+      $after: afterEntry.$handleEntry();
+      $rule,
+      $reference,
+      $after,
+      diff: {
+        downloadTime: {
+          $diff: {
+            absolute: $after.downloadTime - $reference.downloadTime,
+            percent: $after.downloadTime.percentFrom($reference.downloadTime),
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxDownloadTimeDiff)
+        },
+        initialDownloadTime: {
+          $diff: {
+            absolute: $after.initialDownloadTime - $reference.initialDownloadTime,
+            percent: $after.initialDownloadTime.percentFrom($reference.initialDownloadTime)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxInitialDownloadTimeDiff)
+        },
+        asyncDownloadTime: {
+          $diff: {
+            absolute: $after.asyncDownloadTime - $reference.asyncDownloadTime,
+            percent: $after.asyncDownloadTime.percentFrom($reference.asyncDownloadTime)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxAsyncDownloadTimeDiff)
+        }
+      }
+    })
+    .[
+      not diff.downloadTime.ok or
+      not diff.initialDownloadTime.ok or
+      not diff.asyncDownloadTime.ok
+    ]
+  })
+  .[entrypoints]",
+        "type": "discovery",
+      },
+    ],
+    "filename": "after.json",
+    "message": "Entry \\"two\\": Download time diff of async assets is 9 ms (316.20%). It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxAsyncDownloadTimeDiff with useCompressedSize = false 1`] = `
+Array [
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": Array [
+      Object {
+        "filename": "after.json",
+        "query": "
+  $params: #.params;
+  $reference: #.reference;
+  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
+  $network: [$params.network, 'Slow'].useNotNullish();
+  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  
+  compilations
+  .exclude({
+    exclude: $params.exclude.[type='compilation'].name,
+    get: <name>,
+  })
+  .({
+    $compilation: $;
+    $compilation,
+    entrypoints: entrypoints
+    .({
+      $entry: $;
+      $referenceEntry: $reference.compilations
+      .exclude({
+        exclude: $params.exclude.[type='compilation'].name,
+        get: <name>,
+      })
+      .entrypoints.[name=$entry.name].pick();
+      $entry,
+      $referenceEntry
+    })
+    .[entry and referenceEntry]
+    .exclude({
+      exclude: $params.exclude.[type='entry'].name,
+      get: <entry.name>,
+    })
+    .({
+      $entry;
+      $referenceEntry;
+      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
+      $rule: {
+        maxDownloadTimeDiff: [$matchedRule.maxDownloadTimeDiff, $params.global.maxDownloadTimeDiff, Infinity].useNotNullish(),
+        maxInitialDownloadTimeDiff: [$matchedRule.maxInitialDownloadTimeDiff, $params.global.maxInitialDownloadTimeDiff, Infinity].useNotNullish(),
+        maxAsyncDownloadTimeDiff: [$matchedRule.maxAsyncDownloadTimeDiff, $params.global.maxAsyncDownloadTimeDiff, Infinity].useNotNullish(),
+      };
+      
+      $referenceEntry,
+      afterEntry: $entry,
+      $rule
+    })
+    .({
+      $rule;
+      $handleEntry: => {
+        $chunks: data.chunks + data.chunks..children;
+        $initialChunks: $chunks.[initial];
+        $asyncChunks: $chunks.[not initial];
+        $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        
+        entry: $,
+        $chunks,
+        $initialChunks,
+        $asyncChunks,
+        $downloadTime,
+        $initialDownloadTime,
+        $asyncDownloadTime,
+      };
+      $reference: referenceEntry.$handleEntry();
+      $after: afterEntry.$handleEntry();
+      $rule,
+      $reference,
+      $after,
+      diff: {
+        downloadTime: {
+          $diff: {
+            absolute: $after.downloadTime - $reference.downloadTime,
+            percent: $after.downloadTime.percentFrom($reference.downloadTime),
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxDownloadTimeDiff)
+        },
+        initialDownloadTime: {
+          $diff: {
+            absolute: $after.initialDownloadTime - $reference.initialDownloadTime,
+            percent: $after.initialDownloadTime.percentFrom($reference.initialDownloadTime)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxInitialDownloadTimeDiff)
+        },
+        asyncDownloadTime: {
+          $diff: {
+            absolute: $after.asyncDownloadTime - $reference.asyncDownloadTime,
+            percent: $after.asyncDownloadTime.percentFrom($reference.asyncDownloadTime)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxAsyncDownloadTimeDiff)
+        }
+      }
+    })
+    .[
+      not diff.downloadTime.ok or
+      not diff.initialDownloadTime.ok or
+      not diff.asyncDownloadTime.ok
+    ]
+  })
+  .[entrypoints]",
+        "type": "discovery",
+      },
+    ],
+    "filename": "after.json",
+    "message": "Entry \\"two\\": Download time diff of async assets is 21 ms (745.07%). It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxDownloadTimeDiff global 1`] = `
+Array [
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": Array [
+      Object {
+        "filename": "after.json",
+        "query": "
+  $params: #.params;
+  $reference: #.reference;
+  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
+  $network: [$params.network, 'Slow'].useNotNullish();
+  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  
+  compilations
+  .exclude({
+    exclude: $params.exclude.[type='compilation'].name,
+    get: <name>,
+  })
+  .({
+    $compilation: $;
+    $compilation,
+    entrypoints: entrypoints
+    .({
+      $entry: $;
+      $referenceEntry: $reference.compilations
+      .exclude({
+        exclude: $params.exclude.[type='compilation'].name,
+        get: <name>,
+      })
+      .entrypoints.[name=$entry.name].pick();
+      $entry,
+      $referenceEntry
+    })
+    .[entry and referenceEntry]
+    .exclude({
+      exclude: $params.exclude.[type='entry'].name,
+      get: <entry.name>,
+    })
+    .({
+      $entry;
+      $referenceEntry;
+      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
+      $rule: {
+        maxDownloadTimeDiff: [$matchedRule.maxDownloadTimeDiff, $params.global.maxDownloadTimeDiff, Infinity].useNotNullish(),
+        maxInitialDownloadTimeDiff: [$matchedRule.maxInitialDownloadTimeDiff, $params.global.maxInitialDownloadTimeDiff, Infinity].useNotNullish(),
+        maxAsyncDownloadTimeDiff: [$matchedRule.maxAsyncDownloadTimeDiff, $params.global.maxAsyncDownloadTimeDiff, Infinity].useNotNullish(),
+      };
+      
+      $referenceEntry,
+      afterEntry: $entry,
+      $rule
+    })
+    .({
+      $rule;
+      $handleEntry: => {
+        $chunks: data.chunks + data.chunks..children;
+        $initialChunks: $chunks.[initial];
+        $asyncChunks: $chunks.[not initial];
+        $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        
+        entry: $,
+        $chunks,
+        $initialChunks,
+        $asyncChunks,
+        $downloadTime,
+        $initialDownloadTime,
+        $asyncDownloadTime,
+      };
+      $reference: referenceEntry.$handleEntry();
+      $after: afterEntry.$handleEntry();
+      $rule,
+      $reference,
+      $after,
+      diff: {
+        downloadTime: {
+          $diff: {
+            absolute: $after.downloadTime - $reference.downloadTime,
+            percent: $after.downloadTime.percentFrom($reference.downloadTime),
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxDownloadTimeDiff)
+        },
+        initialDownloadTime: {
+          $diff: {
+            absolute: $after.initialDownloadTime - $reference.initialDownloadTime,
+            percent: $after.initialDownloadTime.percentFrom($reference.initialDownloadTime)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxInitialDownloadTimeDiff)
+        },
+        asyncDownloadTime: {
+          $diff: {
+            absolute: $after.asyncDownloadTime - $reference.asyncDownloadTime,
+            percent: $after.asyncDownloadTime.percentFrom($reference.asyncDownloadTime)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxAsyncDownloadTimeDiff)
+        }
+      }
+    })
+    .[
+      not diff.downloadTime.ok or
+      not diff.initialDownloadTime.ok or
+      not diff.asyncDownloadTime.ok
+    ]
+  })
+  .[entrypoints]",
+        "type": "discovery",
+      },
+    ],
+    "filename": "after.json",
+    "message": "Entry \\"two\\": Download time diff of assets is 9 ms (3.64%). It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxDownloadTimeDiff not match - global 1`] = `Array []`;
+
+exports[`maxDownloadTimeDiff not match - override global 1`] = `Array []`;
+
+exports[`maxDownloadTimeDiff override global 1`] = `
+Array [
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": Array [
+      Object {
+        "filename": "after.json",
+        "query": "
+  $params: #.params;
+  $reference: #.reference;
+  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
+  $network: [$params.network, 'Slow'].useNotNullish();
+  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  
+  compilations
+  .exclude({
+    exclude: $params.exclude.[type='compilation'].name,
+    get: <name>,
+  })
+  .({
+    $compilation: $;
+    $compilation,
+    entrypoints: entrypoints
+    .({
+      $entry: $;
+      $referenceEntry: $reference.compilations
+      .exclude({
+        exclude: $params.exclude.[type='compilation'].name,
+        get: <name>,
+      })
+      .entrypoints.[name=$entry.name].pick();
+      $entry,
+      $referenceEntry
+    })
+    .[entry and referenceEntry]
+    .exclude({
+      exclude: $params.exclude.[type='entry'].name,
+      get: <entry.name>,
+    })
+    .({
+      $entry;
+      $referenceEntry;
+      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
+      $rule: {
+        maxDownloadTimeDiff: [$matchedRule.maxDownloadTimeDiff, $params.global.maxDownloadTimeDiff, Infinity].useNotNullish(),
+        maxInitialDownloadTimeDiff: [$matchedRule.maxInitialDownloadTimeDiff, $params.global.maxInitialDownloadTimeDiff, Infinity].useNotNullish(),
+        maxAsyncDownloadTimeDiff: [$matchedRule.maxAsyncDownloadTimeDiff, $params.global.maxAsyncDownloadTimeDiff, Infinity].useNotNullish(),
+      };
+      
+      $referenceEntry,
+      afterEntry: $entry,
+      $rule
+    })
+    .({
+      $rule;
+      $handleEntry: => {
+        $chunks: data.chunks + data.chunks..children;
+        $initialChunks: $chunks.[initial];
+        $asyncChunks: $chunks.[not initial];
+        $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        
+        entry: $,
+        $chunks,
+        $initialChunks,
+        $asyncChunks,
+        $downloadTime,
+        $initialDownloadTime,
+        $asyncDownloadTime,
+      };
+      $reference: referenceEntry.$handleEntry();
+      $after: afterEntry.$handleEntry();
+      $rule,
+      $reference,
+      $after,
+      diff: {
+        downloadTime: {
+          $diff: {
+            absolute: $after.downloadTime - $reference.downloadTime,
+            percent: $after.downloadTime.percentFrom($reference.downloadTime),
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxDownloadTimeDiff)
+        },
+        initialDownloadTime: {
+          $diff: {
+            absolute: $after.initialDownloadTime - $reference.initialDownloadTime,
+            percent: $after.initialDownloadTime.percentFrom($reference.initialDownloadTime)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxInitialDownloadTimeDiff)
+        },
+        asyncDownloadTime: {
+          $diff: {
+            absolute: $after.asyncDownloadTime - $reference.asyncDownloadTime,
+            percent: $after.asyncDownloadTime.percentFrom($reference.asyncDownloadTime)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxAsyncDownloadTimeDiff)
+        }
+      }
+    })
+    .[
+      not diff.downloadTime.ok or
+      not diff.initialDownloadTime.ok or
+      not diff.asyncDownloadTime.ok
+    ]
+  })
+  .[entrypoints]",
+        "type": "discovery",
+      },
+    ],
+    "filename": "after.json",
+    "message": "Entry \\"two\\": Download time diff of assets is 9 ms (3.64%). It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxDownloadTimeDiff with useCompressedSize = false 1`] = `
+Array [
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": Array [
+      Object {
+        "filename": "after.json",
+        "query": "
+  $params: #.params;
+  $reference: #.reference;
+  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
+  $network: [$params.network, 'Slow'].useNotNullish();
+  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  
+  compilations
+  .exclude({
+    exclude: $params.exclude.[type='compilation'].name,
+    get: <name>,
+  })
+  .({
+    $compilation: $;
+    $compilation,
+    entrypoints: entrypoints
+    .({
+      $entry: $;
+      $referenceEntry: $reference.compilations
+      .exclude({
+        exclude: $params.exclude.[type='compilation'].name,
+        get: <name>,
+      })
+      .entrypoints.[name=$entry.name].pick();
+      $entry,
+      $referenceEntry
+    })
+    .[entry and referenceEntry]
+    .exclude({
+      exclude: $params.exclude.[type='entry'].name,
+      get: <entry.name>,
+    })
+    .({
+      $entry;
+      $referenceEntry;
+      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
+      $rule: {
+        maxDownloadTimeDiff: [$matchedRule.maxDownloadTimeDiff, $params.global.maxDownloadTimeDiff, Infinity].useNotNullish(),
+        maxInitialDownloadTimeDiff: [$matchedRule.maxInitialDownloadTimeDiff, $params.global.maxInitialDownloadTimeDiff, Infinity].useNotNullish(),
+        maxAsyncDownloadTimeDiff: [$matchedRule.maxAsyncDownloadTimeDiff, $params.global.maxAsyncDownloadTimeDiff, Infinity].useNotNullish(),
+      };
+      
+      $referenceEntry,
+      afterEntry: $entry,
+      $rule
+    })
+    .({
+      $rule;
+      $handleEntry: => {
+        $chunks: data.chunks + data.chunks..children;
+        $initialChunks: $chunks.[initial];
+        $asyncChunks: $chunks.[not initial];
+        $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        
+        entry: $,
+        $chunks,
+        $initialChunks,
+        $asyncChunks,
+        $downloadTime,
+        $initialDownloadTime,
+        $asyncDownloadTime,
+      };
+      $reference: referenceEntry.$handleEntry();
+      $after: afterEntry.$handleEntry();
+      $rule,
+      $reference,
+      $after,
+      diff: {
+        downloadTime: {
+          $diff: {
+            absolute: $after.downloadTime - $reference.downloadTime,
+            percent: $after.downloadTime.percentFrom($reference.downloadTime),
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxDownloadTimeDiff)
+        },
+        initialDownloadTime: {
+          $diff: {
+            absolute: $after.initialDownloadTime - $reference.initialDownloadTime,
+            percent: $after.initialDownloadTime.percentFrom($reference.initialDownloadTime)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxInitialDownloadTimeDiff)
+        },
+        asyncDownloadTime: {
+          $diff: {
+            absolute: $after.asyncDownloadTime - $reference.asyncDownloadTime,
+            percent: $after.asyncDownloadTime.percentFrom($reference.asyncDownloadTime)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxAsyncDownloadTimeDiff)
+        }
+      }
+    })
+    .[
+      not diff.downloadTime.ok or
+      not diff.initialDownloadTime.ok or
+      not diff.asyncDownloadTime.ok
+    ]
+  })
+  .[entrypoints]",
+        "type": "discovery",
+      },
+    ],
+    "filename": "after.json",
+    "message": "Entry \\"one\\": Download time diff of assets is 151 ms (943.55%). It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": Array [
+      Object {
+        "filename": "after.json",
+        "query": "
+  $params: #.params;
+  $reference: #.reference;
+  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
+  $network: [$params.network, 'Slow'].useNotNullish();
+  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  
+  compilations
+  .exclude({
+    exclude: $params.exclude.[type='compilation'].name,
+    get: <name>,
+  })
+  .({
+    $compilation: $;
+    $compilation,
+    entrypoints: entrypoints
+    .({
+      $entry: $;
+      $referenceEntry: $reference.compilations
+      .exclude({
+        exclude: $params.exclude.[type='compilation'].name,
+        get: <name>,
+      })
+      .entrypoints.[name=$entry.name].pick();
+      $entry,
+      $referenceEntry
+    })
+    .[entry and referenceEntry]
+    .exclude({
+      exclude: $params.exclude.[type='entry'].name,
+      get: <entry.name>,
+    })
+    .({
+      $entry;
+      $referenceEntry;
+      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
+      $rule: {
+        maxDownloadTimeDiff: [$matchedRule.maxDownloadTimeDiff, $params.global.maxDownloadTimeDiff, Infinity].useNotNullish(),
+        maxInitialDownloadTimeDiff: [$matchedRule.maxInitialDownloadTimeDiff, $params.global.maxInitialDownloadTimeDiff, Infinity].useNotNullish(),
+        maxAsyncDownloadTimeDiff: [$matchedRule.maxAsyncDownloadTimeDiff, $params.global.maxAsyncDownloadTimeDiff, Infinity].useNotNullish(),
+      };
+      
+      $referenceEntry,
+      afterEntry: $entry,
+      $rule
+    })
+    .({
+      $rule;
+      $handleEntry: => {
+        $chunks: data.chunks + data.chunks..children;
+        $initialChunks: $chunks.[initial];
+        $asyncChunks: $chunks.[not initial];
+        $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        
+        entry: $,
+        $chunks,
+        $initialChunks,
+        $asyncChunks,
+        $downloadTime,
+        $initialDownloadTime,
+        $asyncDownloadTime,
+      };
+      $reference: referenceEntry.$handleEntry();
+      $after: afterEntry.$handleEntry();
+      $rule,
+      $reference,
+      $after,
+      diff: {
+        downloadTime: {
+          $diff: {
+            absolute: $after.downloadTime - $reference.downloadTime,
+            percent: $after.downloadTime.percentFrom($reference.downloadTime),
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxDownloadTimeDiff)
+        },
+        initialDownloadTime: {
+          $diff: {
+            absolute: $after.initialDownloadTime - $reference.initialDownloadTime,
+            percent: $after.initialDownloadTime.percentFrom($reference.initialDownloadTime)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxInitialDownloadTimeDiff)
+        },
+        asyncDownloadTime: {
+          $diff: {
+            absolute: $after.asyncDownloadTime - $reference.asyncDownloadTime,
+            percent: $after.asyncDownloadTime.percentFrom($reference.asyncDownloadTime)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxAsyncDownloadTimeDiff)
+        }
+      }
+    })
+    .[
+      not diff.downloadTime.ok or
+      not diff.initialDownloadTime.ok or
+      not diff.asyncDownloadTime.ok
+    ]
+  })
+  .[entrypoints]",
+        "type": "discovery",
+      },
+    ],
+    "filename": "after.json",
+    "message": "Entry \\"two\\": Download time diff of assets is 358 ms (143.93%). It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxInitialDownloadTimeDiff global 1`] = `Array []`;
+
+exports[`maxInitialDownloadTimeDiff not match - global 1`] = `Array []`;
+
+exports[`maxInitialDownloadTimeDiff not match - override global 1`] = `Array []`;
+
+exports[`maxInitialDownloadTimeDiff override global 1`] = `Array []`;
+
+exports[`maxInitialDownloadTimeDiff with useCompressedSize = false 1`] = `
+Array [
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": Array [
+      Object {
+        "filename": "after.json",
+        "query": "
+  $params: #.params;
+  $reference: #.reference;
+  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
+  $network: [$params.network, 'Slow'].useNotNullish();
+  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  
+  compilations
+  .exclude({
+    exclude: $params.exclude.[type='compilation'].name,
+    get: <name>,
+  })
+  .({
+    $compilation: $;
+    $compilation,
+    entrypoints: entrypoints
+    .({
+      $entry: $;
+      $referenceEntry: $reference.compilations
+      .exclude({
+        exclude: $params.exclude.[type='compilation'].name,
+        get: <name>,
+      })
+      .entrypoints.[name=$entry.name].pick();
+      $entry,
+      $referenceEntry
+    })
+    .[entry and referenceEntry]
+    .exclude({
+      exclude: $params.exclude.[type='entry'].name,
+      get: <entry.name>,
+    })
+    .({
+      $entry;
+      $referenceEntry;
+      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
+      $rule: {
+        maxDownloadTimeDiff: [$matchedRule.maxDownloadTimeDiff, $params.global.maxDownloadTimeDiff, Infinity].useNotNullish(),
+        maxInitialDownloadTimeDiff: [$matchedRule.maxInitialDownloadTimeDiff, $params.global.maxInitialDownloadTimeDiff, Infinity].useNotNullish(),
+        maxAsyncDownloadTimeDiff: [$matchedRule.maxAsyncDownloadTimeDiff, $params.global.maxAsyncDownloadTimeDiff, Infinity].useNotNullish(),
+      };
+      
+      $referenceEntry,
+      afterEntry: $entry,
+      $rule
+    })
+    .({
+      $rule;
+      $handleEntry: => {
+        $chunks: data.chunks + data.chunks..children;
+        $initialChunks: $chunks.[initial];
+        $asyncChunks: $chunks.[not initial];
+        $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        
+        entry: $,
+        $chunks,
+        $initialChunks,
+        $asyncChunks,
+        $downloadTime,
+        $initialDownloadTime,
+        $asyncDownloadTime,
+      };
+      $reference: referenceEntry.$handleEntry();
+      $after: afterEntry.$handleEntry();
+      $rule,
+      $reference,
+      $after,
+      diff: {
+        downloadTime: {
+          $diff: {
+            absolute: $after.downloadTime - $reference.downloadTime,
+            percent: $after.downloadTime.percentFrom($reference.downloadTime),
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxDownloadTimeDiff)
+        },
+        initialDownloadTime: {
+          $diff: {
+            absolute: $after.initialDownloadTime - $reference.initialDownloadTime,
+            percent: $after.initialDownloadTime.percentFrom($reference.initialDownloadTime)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxInitialDownloadTimeDiff)
+        },
+        asyncDownloadTime: {
+          $diff: {
+            absolute: $after.asyncDownloadTime - $reference.asyncDownloadTime,
+            percent: $after.asyncDownloadTime.percentFrom($reference.asyncDownloadTime)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxAsyncDownloadTimeDiff)
+        }
+      }
+    })
+    .[
+      not diff.downloadTime.ok or
+      not diff.initialDownloadTime.ok or
+      not diff.asyncDownloadTime.ok
+    ]
+  })
+  .[entrypoints]",
+        "type": "discovery",
+      },
+    ],
+    "filename": "after.json",
+    "message": "Entry \\"one\\": Download time diff of initial assets is 151 ms (943.55%). It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": Array [
+      Object {
+        "filename": "after.json",
+        "query": "
+  $params: #.params;
+  $reference: #.reference;
+  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
+  $network: [$params.network, 'Slow'].useNotNullish();
+  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  
+  compilations
+  .exclude({
+    exclude: $params.exclude.[type='compilation'].name,
+    get: <name>,
+  })
+  .({
+    $compilation: $;
+    $compilation,
+    entrypoints: entrypoints
+    .({
+      $entry: $;
+      $referenceEntry: $reference.compilations
+      .exclude({
+        exclude: $params.exclude.[type='compilation'].name,
+        get: <name>,
+      })
+      .entrypoints.[name=$entry.name].pick();
+      $entry,
+      $referenceEntry
+    })
+    .[entry and referenceEntry]
+    .exclude({
+      exclude: $params.exclude.[type='entry'].name,
+      get: <entry.name>,
+    })
+    .({
+      $entry;
+      $referenceEntry;
+      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
+      $rule: {
+        maxDownloadTimeDiff: [$matchedRule.maxDownloadTimeDiff, $params.global.maxDownloadTimeDiff, Infinity].useNotNullish(),
+        maxInitialDownloadTimeDiff: [$matchedRule.maxInitialDownloadTimeDiff, $params.global.maxInitialDownloadTimeDiff, Infinity].useNotNullish(),
+        maxAsyncDownloadTimeDiff: [$matchedRule.maxAsyncDownloadTimeDiff, $params.global.maxAsyncDownloadTimeDiff, Infinity].useNotNullish(),
+      };
+      
+      $referenceEntry,
+      afterEntry: $entry,
+      $rule
+    })
+    .({
+      $rule;
+      $handleEntry: => {
+        $chunks: data.chunks + data.chunks..children;
+        $initialChunks: $chunks.[initial];
+        $asyncChunks: $chunks.[not initial];
+        $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        
+        entry: $,
+        $chunks,
+        $initialChunks,
+        $asyncChunks,
+        $downloadTime,
+        $initialDownloadTime,
+        $asyncDownloadTime,
+      };
+      $reference: referenceEntry.$handleEntry();
+      $after: afterEntry.$handleEntry();
+      $rule,
+      $reference,
+      $after,
+      diff: {
+        downloadTime: {
+          $diff: {
+            absolute: $after.downloadTime - $reference.downloadTime,
+            percent: $after.downloadTime.percentFrom($reference.downloadTime),
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxDownloadTimeDiff)
+        },
+        initialDownloadTime: {
+          $diff: {
+            absolute: $after.initialDownloadTime - $reference.initialDownloadTime,
+            percent: $after.initialDownloadTime.percentFrom($reference.initialDownloadTime)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxInitialDownloadTimeDiff)
+        },
+        asyncDownloadTime: {
+          $diff: {
+            absolute: $after.asyncDownloadTime - $reference.asyncDownloadTime,
+            percent: $after.asyncDownloadTime.percentFrom($reference.asyncDownloadTime)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxAsyncDownloadTimeDiff)
+        }
+      }
+    })
+    .[
+      not diff.downloadTime.ok or
+      not diff.initialDownloadTime.ok or
+      not diff.asyncDownloadTime.ok
+    ]
+  })
+  .[entrypoints]",
+        "type": "discovery",
+      },
+    ],
+    "filename": "after.json",
+    "message": "Entry \\"two\\": Download time diff of initial assets is 337 ms (136.96%). It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;

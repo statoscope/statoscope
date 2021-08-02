@@ -1,0 +1,338 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`exclude entry object 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download size of assets is 0.44 kb. It's over the 0.00 kb limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`exclude entry regexp 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download size of assets is 0.44 kb. It's over the 0.00 kb limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`exclude entry string 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download size of assets is 0.44 kb. It's over the 0.00 kb limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`exclude no exclude 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download size of assets is 0.44 kb. It's over the 0.00 kb limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download size of assets is 8.53 kb. It's over the 0.00 kb limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxAsyncSize global 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download size of async assets is 0.13 kb. It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxAsyncSize not match - global 1`] = `Array []`;
+
+exports[`maxAsyncSize not match - override global 1`] = `Array []`;
+
+exports[`maxAsyncSize override global 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download size of async assets is 0.13 kb. It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxAsyncSize with useCompressedSize = false 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download size of async assets is 0.14 kb. It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxInitialSize global 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download size of initial assets is 0.44 kb. It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download size of initial assets is 8.40 kb. It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxInitialSize not match - global 1`] = `Array []`;
+
+exports[`maxInitialSize not match - override global 1`] = `Array []`;
+
+exports[`maxInitialSize override global 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download size of initial assets is 0.44 kb. It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download size of initial assets is 8.40 kb. It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxInitialSize with useCompressedSize = false 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download size of initial assets is 0.78 kb. It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download size of initial assets is 11.97 kb. It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxSize global 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download size of assets is 0.44 kb. It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download size of assets is 8.53 kb. It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxSize not match - global 1`] = `Array []`;
+
+exports[`maxSize not match - override global 1`] = `Array []`;
+
+exports[`maxSize override global 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download size of assets is 0.44 kb. It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download size of assets is 8.53 kb. It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxSize with useCompressedSize = false 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"one\\": Download size of assets is 0.78 kb. It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "Entry \\"two\\": Download size of assets is 12.10 kb. It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;

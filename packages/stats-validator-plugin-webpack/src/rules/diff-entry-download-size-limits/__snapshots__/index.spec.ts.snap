@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`maxAsyncSizeDiff global 1`] = `
+Array [
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": undefined,
+    "filename": "after.json",
+    "message": "Entry \\"two\\": Download size diff of async assets is 0.44 kb (316.20%). It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxAsyncSizeDiff not match - global 1`] = `Array []`;
+
+exports[`maxAsyncSizeDiff not match - override global 1`] = `Array []`;
+
+exports[`maxAsyncSizeDiff override global 1`] = `
+Array [
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": undefined,
+    "filename": "after.json",
+    "message": "Entry \\"two\\": Download size diff of async assets is 0.44 kb (316.20%). It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxAsyncSizeDiff with useCompressedSize = false 1`] = `
+Array [
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": undefined,
+    "filename": "after.json",
+    "message": "Entry \\"two\\": Download size diff of async assets is 1.03 kb (745.07%). It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxInitialSizeDiff global 1`] = `Array []`;
+
+exports[`maxInitialSizeDiff not match - global 1`] = `Array []`;
+
+exports[`maxInitialSizeDiff not match - override global 1`] = `Array []`;
+
+exports[`maxInitialSizeDiff override global 1`] = `Array []`;
+
+exports[`maxInitialSizeDiff with useCompressedSize = false 1`] = `
+Array [
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": undefined,
+    "filename": "after.json",
+    "message": "Entry \\"one\\": Download size diff of initial assets is 7.36 kb (943.55%). It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": undefined,
+    "filename": "after.json",
+    "message": "Entry \\"two\\": Download size diff of initial assets is 16.39 kb (136.96%). It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxSizeDiff global 1`] = `
+Array [
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": undefined,
+    "filename": "after.json",
+    "message": "Entry \\"two\\": Download size diff of assets is 0.44 kb (3.64%). It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxSizeDiff not match - global 1`] = `Array []`;
+
+exports[`maxSizeDiff not match - override global 1`] = `Array []`;
+
+exports[`maxSizeDiff override global 1`] = `
+Array [
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": undefined,
+    "filename": "after.json",
+    "message": "Entry \\"two\\": Download size diff of assets is 0.44 kb (3.64%). It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`maxSizeDiff with useCompressedSize = false 1`] = `
+Array [
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": undefined,
+    "filename": "after.json",
+    "message": "Entry \\"one\\": Download size diff of assets is 7.36 kb (943.55%). It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": undefined,
+    "filename": "after.json",
+    "message": "Entry \\"two\\": Download size diff of assets is 17.42 kb (143.93%). It's over the 0.10 kb limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;

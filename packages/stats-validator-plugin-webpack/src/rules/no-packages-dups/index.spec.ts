@@ -8,17 +8,49 @@ test('should work', () => {
   const prepared = pluginInstance.prepare!([{ name: 'stats.json', data: statsV5 }]);
   const api = makeAPI({ warnAsError: false });
 
-  rule({}, prepared, api);
+  rule({}, { input: prepared }, api);
 
   expect(api.getStorage()).toMatchSnapshot();
 });
 
-test('exclude', () => {
-  const pluginInstance = plugin();
-  const prepared = pluginInstance.prepare!([{ name: 'stats.json', data: statsV5 }]);
-  const api = makeAPI({ warnAsError: false });
+describe('exclude', () => {
+  test('string', () => {
+    const pluginInstance = plugin();
+    const prepared = pluginInstance.prepare!([{ name: 'stats.json', data: statsV5 }]);
+    const api = makeAPI({ warnAsError: false });
 
-  rule({ exclude: ['bar'] }, prepared, api);
+    rule({ exclude: ['bar'] }, { input: prepared }, api);
 
-  expect(api.getStorage()).toMatchSnapshot();
+    expect(api.getStorage()).toMatchSnapshot();
+  });
+
+  test('regexp', () => {
+    const pluginInstance = plugin();
+    const prepared = pluginInstance.prepare!([{ name: 'stats.json', data: statsV5 }]);
+    const api = makeAPI({ warnAsError: false });
+
+    rule({ exclude: [/ba/] }, { input: prepared }, api);
+
+    expect(api.getStorage()).toMatchSnapshot();
+  });
+
+  test('object', () => {
+    const pluginInstance = plugin();
+    const prepared = pluginInstance.prepare!([{ name: 'stats.json', data: statsV5 }]);
+    const api = makeAPI({ warnAsError: false });
+
+    rule({ exclude: [{ type: 'package', name: 'bar' }] }, { input: prepared }, api);
+
+    expect(api.getStorage()).toMatchSnapshot();
+  });
+
+  test('no exclude', () => {
+    const pluginInstance = plugin();
+    const prepared = pluginInstance.prepare!([{ name: 'stats.json', data: statsV5 }]);
+    const api = makeAPI({ warnAsError: false });
+
+    rule({ exclude: [/baaaaaa/] }, { input: prepared }, api);
+
+    expect(api.getStorage()).toMatchSnapshot();
+  });
 });

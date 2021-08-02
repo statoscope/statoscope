@@ -1,0 +1,268 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/index.ts should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/index.ts",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/index.ts + 3 modules should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/index.ts + 3 modules",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/index.ts should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/index.ts",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/sub-module.ts should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/sub-module.ts",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/index2.ts + 1 modules should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/index2.ts + 1 modules",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/index2.ts should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/index2.ts",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/index2.css should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/index2.css",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/test.txt should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/test.txt",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/dyn.ts should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/dyn.ts",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/statoscope.png should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/statoscope.png",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/index.ts should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/index.ts",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/index.ts + 3 modules should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/index.ts + 3 modules",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/index.ts should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/index.ts",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/sub-module.ts should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/sub-module.ts",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/index2.ts + 1 modules should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/index2.ts + 1 modules",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/index2.ts should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/index2.ts",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/index2.css should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/index2.css",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/test.txt should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/test.txt",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/dyn.ts should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/dyn.ts",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": undefined,
+    "filename": "stats.json",
+    "message": "./src/statoscope.png should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/statoscope.png",
+        "type": "module",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`not matches 1`] = `Array []`;

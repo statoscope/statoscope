@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "content": "Instance: node_modules/foo  1.0.0",
+        "type": "text",
+      },
+      Object {
+        "content": "Instance: node_modules/foo  1.0.0",
+        "type": "tty",
+      },
+    ],
+    "filename": "stats.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "content": "Instance: node_modules/foo  1.0.0",
+        "type": "text",
+      },
+      Object {
+        "content": "Instance: node_modules/foo  1.0.0",
+        "type": "tty",
+      },
+    ],
+    "filename": "stats.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "content": "Instance: node_modules/foo  1.0.0",
+        "type": "text",
+      },
+      Object {
+        "content": "Instance: node_modules/foo  1.0.0",
+        "type": "tty",
+      },
+    ],
+    "filename": "stats.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "content": "Instance: node_modules/foo  1.0.0",
+        "type": "text",
+      },
+      Object {
+        "content": "Instance: node_modules/foo  1.0.0",
+        "type": "tty",
+      },
+    ],
+    "filename": "stats.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+    "type": "error",
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "content": "Instance: node_modules/foo  1.0.0",
+        "type": "text",
+      },
+      Object {
+        "content": "Instance: node_modules/foo  1.0.0",
+        "type": "tty",
+      },
+    ],
+    "filename": "stats.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+    "type": "error",
+  },
+]
+`;
+
+exports[`not matches 1`] = `Array []`;
