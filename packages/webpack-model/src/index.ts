@@ -1,6 +1,3 @@
-// @ts-ignore
-import jora from 'jora';
-
 import {
   prepareWithJora as prepareWithJoraOriginal,
   Options,
@@ -29,7 +26,7 @@ export function prepareWithJora(
 ): Prepared {
   const { files, compilations } = normalize(stats);
   const prepared = prepareWithJoraOriginal(files, {
-    helpers: { ...options.helpers, ...joraHelpers(compilations) },
+    helpers: { ...joraHelpers(compilations), ...options.helpers },
   });
 
   return {
