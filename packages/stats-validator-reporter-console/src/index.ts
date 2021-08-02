@@ -7,10 +7,15 @@ import {
   TestEntry,
 } from '@statoscope/stats-validator/dist/test-entry';
 
-export type Options = { warnAsError: boolean };
+export type Options = { warnAsError?: boolean; useColors?: boolean };
 
 export default class ConsoleReporter implements Reporter<Options> {
   async run(result: ValidationResult, options: Options): Promise<void> {
+    const normalizedOptions: Required<Options> = {
+      useColors: options.useColors ?? true,
+      warnAsError: options.warnAsError ?? false,
+    };
+    const chalkCtx = new chalk.Instance(normalizedOptions.useColors ? {} : { level: 0 });
     // file -> compilation -> rule -> entry
     const groupedStorage: Record<string, Record<string, Record<string, TestEntry[]>>> =
       {};
@@ -31,23 +36,25 @@ export default class ConsoleReporter implements Reporter<Options> {
     let error = 0;
 
     for (const [filename, compilations] of Object.entries(groupedStorage)) {
-      console.log(chalk.underline(filename));
+      console.log(chalkCtx.underline(filename));
       console.group();
 
       for (const [compilation, rules] of Object.entries(compilations)) {
-        console.log(`${chalk.cyan(compilation)}`);
+        console.log(`${chalkCtx.cyan(compilation)}`);
         console.group();
 
         for (const [rule, items] of Object.entries(rules)) {
           for (const item of items) {
-            let decorate = chalk.reset;
+            let decorate = chalkCtx.reset;
             if (item.type === 'error') {
-              decorate = chalk.red;
+              decorate = chalkCtx.red;
             } else if (item.type === 'warn') {
-              decorate = chalk.yellow;
+              decorate = chalkCtx.yellow;
             }
 
-            console.log(`${decorate(item.type)}  ${item.message}  ${chalk.cyan(rule)}`);
+            console.log(
+              `${decorate(item.type)}  ${item.message}  ${chalkCtx.cyan(rule)}`
+            );
 
             if (item.details) {
               let detailDescriptor:
@@ -91,7 +98,7 @@ export default class ConsoleReporter implements Reporter<Options> {
             }
 
             if (item.type === 'warn') {
-              if (options.warnAsError) {
+              if (normalizedOptions.warnAsError) {
                 error++;
               } else {
                 warn++;
@@ -111,7 +118,7 @@ export default class ConsoleReporter implements Reporter<Options> {
 
     if (error || warn) {
       console.log(
-        chalk.yellow(`${error + warn} problems (${error} errors, ${warn} warnings)`)
+        chalkCtx.yellow(`${error + warn} problems (${error} errors, ${warn} warnings)`)
       );
     }
 

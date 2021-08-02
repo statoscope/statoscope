@@ -1,10 +1,11 @@
 {
-  "name": "@statoscope/stats-validator-reporter-console",
+  "name": "@statoscope/stats-validator-reporter-stats",
   "version": "5.4.0",
-  "description": "Console reporter for @statoscope/stats-validator",
+  "description": "Stats reporter for @statoscope/stats-validator",
   "main": "./dist/index.js",
   "scripts": {
     "build": "../../node_modules/.bin/tsc",
+    "buildVersionTS": "node ../../scripts/extract-version.js --field author --field homepage",
     "prepublishOnly": "npm run build"
   },
   "repository": "https://github.com/statoscope/statoscope.git",
@@ -21,7 +22,12 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
+    "@discoveryjs/json-ext": "0.5.3",
+    "@statoscope/report-writer": "^5.4.0",
+    "@statoscope/stats": "^5.3.0",
+    "@statoscope/stats-extension-stats-validation-result": "^5.6.1",
     "@statoscope/stats-validator": "^5.4.0",
-    "chalk": "^4.1.1"
+    "@statoscope/webpack-ui": "^5.6.2",
+    "open": "^8.2.1"
   }
 }
