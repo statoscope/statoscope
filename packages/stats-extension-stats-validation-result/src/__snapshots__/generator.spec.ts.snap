@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should work 1`] = `
+Object {
+  "descriptor": Object {
+    "adapter": Object {
+      "name": "test-adapter",
+      "version": "7.7.7",
+    },
+    "author": Object {
+      "name": "Sergey Melyukov",
+      "url": "https://twitter.com/smelukov",
+    },
+    "homepage": "https://github.com/statoscope/statoscope/",
+    "name": "@statoscope/stats-extension-stats-validation-result",
+    "version": "5.6.1",
+  },
+  "payload": Object {
+    "compilations": Array [
+      Object {
+        "id": "foo-compilation",
+        "items": Array [
+          Object {
+            "details": Array [],
+            "message": "foo-message",
+            "related": Array [
+              Object {
+                "id": "foo-foo-module",
+                "type": "module",
+              },
+              Object {
+                "id": "foo-foo-entry",
+                "type": "entry",
+              },
+            ],
+            "rule": "foo-rule",
+            "type": "error",
+          },
+          Object {
+            "details": Array [],
+            "message": "bar-message",
+            "related": Array [
+              Object {
+                "id": "foo-foo-module",
+                "type": "module",
+              },
+              Object {
+                "id": "foo-bar-module",
+                "type": "module",
+              },
+              Object {
+                "id": "foo-foo-entry",
+                "type": "entry",
+              },
+              Object {
+                "id": "foo-bar-entry",
+                "type": "entry",
+              },
+            ],
+            "rule": "foo-rule",
+            "type": "error",
+          },
+        ],
+      },
+      Object {
+        "id": "bar-compilation",
+        "items": Array [
+          Object {
+            "details": Array [],
+            "message": "bar-message",
+            "related": Array [
+              Object {
+                "id": "bar-foo-module",
+                "type": "module",
+              },
+              Object {
+                "id": "bar-bar-module",
+                "type": "module",
+              },
+              Object {
+                "id": "bar-foo-entry",
+                "type": "entry",
+              },
+              Object {
+                "id": "bar-bar-entry",
+                "type": "entry",
+              },
+            ],
+            "rule": "foo-rule",
+            "type": "error",
+          },
+        ],
+      },
+    ],
+  },
+}
+`;

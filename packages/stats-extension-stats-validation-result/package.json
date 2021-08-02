@@ -1,0 +1,31 @@
+{
+  "name": "@statoscope/stats-extension-stats-validation-result",
+  "version": "5.6.1",
+  "description": "Statoscope extension for discover stats validator result",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "../../node_modules/.bin/tsc",
+    "buildVersionTS": "node ../../scripts/extract-version.js --field author --field homepage",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": "https://github.com/statoscope/statoscope.git",
+  "author": {
+    "name": "Sergey Melyukov",
+    "url": "https://twitter.com/smelukov"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/statoscope/statoscope/",
+  "dependencies": {
+    "@statoscope/extensions": "^5.5.1",
+    "@statoscope/helpers": "^5.5.1",
+    "@statoscope/stats": "^5.3.0",
+    "@statoscope/stats-validator": "^5.4.0"
+  },
+  "devDependencies": {}
+}
