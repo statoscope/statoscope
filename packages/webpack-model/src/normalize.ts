@@ -9,6 +9,8 @@ import ExtensionPackageInfoAPIFactory, {
   API as ExtensionPackageInfoAPI,
 } from '@statoscope/stats-extension-package-info/dist/api';
 import ExtensionPackageInfoPackage from '@statoscope/stats-extension-package-info/package.json';
+import ExtensionValidationResultPackage from '@statoscope/stats-extension-stats-validation-result/package.json';
+import ExtensionValidationResultAPIFactory from '@statoscope/stats-extension-stats-validation-result/dist/api';
 import Graph, { Node } from '@statoscope/helpers/dist/graph';
 import { Webpack } from '../webpack';
 import validateStats, { ValidationResult } from './validate';
@@ -145,6 +147,12 @@ extensionContainer.register(
   ExtensionPackageInfoPackage.name,
   ExtensionPackageInfoPackage.version,
   ExtensionPackageInfoAPIFactory
+);
+
+extensionContainer.register(
+  ExtensionValidationResultPackage.name,
+  ExtensionValidationResultPackage.version,
+  ExtensionValidationResultAPIFactory
 );
 
 function getHash(
