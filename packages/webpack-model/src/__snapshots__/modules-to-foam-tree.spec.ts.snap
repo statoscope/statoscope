@@ -35,7 +35,7 @@ Object {
             "page": "module",
           },
           "path": "src/index2.ts",
-          "weight": 216,
+          "weight": 276,
           "weightCompressor": undefined,
         },
         Object {
@@ -86,7 +86,7 @@ Object {
       "label": "src",
       "link": undefined,
       "path": "src",
-      "weight": 9537.84,
+      "weight": 9597.84,
       "weightCompressor": undefined,
     },
     Object {
@@ -457,7 +457,7 @@ Object {
   "label": "",
   "link": undefined,
   "path": "/",
-  "weight": 20727.84,
+  "weight": 20787.84,
   "weightCompressor": undefined,
 }
 `;

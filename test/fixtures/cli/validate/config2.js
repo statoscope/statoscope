@@ -5,8 +5,8 @@ module.exports = {
   validate: {
     rules: {
       //'webpack/disallowed-deps': ['error', ['foo', { type: 'module', name: /\.\/src/ }]],
-      'webpack/disallowed-deps': ['error', ['lodash']],
-      'webpack/no-package-dups': ['error'],
+      'webpack/restricted-packages': ['error', ['lodash']],
+      'webpack/no-packages-dups': ['error'],
       //'webpack/disallowed-deps': ['error', [/\.min\.js/]],
     },
   },

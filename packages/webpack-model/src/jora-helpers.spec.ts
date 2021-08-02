@@ -1,5 +1,10 @@
+import { PathSolution } from '@statoscope/helpers/dist/graph';
 import stats from '../../../test/bundles/simple/stats-prod.json';
-import normalize, { NormalizedAsset, NormalizedChunk } from './normalize';
+import normalize, {
+  ModuleGraphNodeData,
+  NormalizedAsset,
+  NormalizedChunk,
+} from './normalize';
 import makeHelpers, { ResolvedStats } from './jora-helpers';
 
 const normalized = normalize({ name: 'stats.js', data: stats });
@@ -47,9 +52,9 @@ test('statName', () => {
 test('getModuleSize', () => {
   const module = firstCompilation.modules[0];
   const originalModuleSize = module.size;
-  expect(helpers.getModuleSize.bind(helpers, module, true)).toThrow();
-  const moduleSize = helpers.getModuleSize(module, false);
-  const compressedModuleSize = helpers.getModuleSize(module, true, hash);
+  expect(helpers.getModuleSize.bind(helpers, module, void 0, true)).toThrow();
+  const moduleSize = helpers.getModuleSize(module, void 0, false);
+  const compressedModuleSize = helpers.getModuleSize(module, hash, true);
 
   expect(moduleSize.size).toBe(originalModuleSize);
   expect(compressedModuleSize).not.toStrictEqual(moduleSize);
@@ -60,9 +65,9 @@ test('getModuleSize', () => {
 test('getAssetSize', () => {
   const asset = firstCompilation.assets[0];
   const originalAssetSize = asset.size;
-  expect(helpers.getAssetSize.bind(helpers, asset, true)).toThrow();
-  const assetSize = helpers.getAssetSize(asset, false);
-  const compressedAssetSize = helpers.getAssetSize(asset, true, hash);
+  expect(helpers.getAssetSize.bind(helpers, asset, void 0, true)).toThrow();
+  const assetSize = helpers.getAssetSize(asset, void 0, false);
+  const compressedAssetSize = helpers.getAssetSize(asset, hash, true);
 
   expect(assetSize.size).toBe(originalAssetSize);
   expect(compressedAssetSize).not.toStrictEqual(assetSize);
@@ -126,4 +131,74 @@ test('getTotalFilesSize', () => {
       )
     )
   ).toBe(150);
+  const [asset] = firstCompilation.assets;
+  const sizeA = helpers.getTotalFilesSize(asset, hash, true);
+  const sizeB = helpers.getTotalFilesSize(asset, hash, false);
+  expect(typeof sizeA).toBe('number');
+  expect(typeof sizeB).toBe('number');
+  expect(sizeA && sizeB && sizeA < sizeB).toBe(true);
+  expect(helpers.getTotalFilesSize.bind(helpers, asset, void 0, true)).toThrow();
+});
+
+test('getPackageInstanceInfo', () => {
+  const packageItem = firstCompilation.nodeModules.find(
+    (item) => item.name === 'is-array'
+  )!;
+  expect(
+    helpers.getPackageInstanceInfo(packageItem.name, packageItem.instances[0].path, hash)
+  ).toMatchInlineSnapshot(`
+    Object {
+      "info": Object {
+        "version": "1.0.1",
+      },
+      "path": "../node_modules/is-array",
+    }
+  `);
+});
+
+test('moduleGraph_getEntrypoints', () => {
+  const module = firstCompilation.nodeModules.find((item) => item.name === 'is-array')!
+    .instances[0].modules[0];
+  const graph = helpers.getModuleGraph(hash)!;
+  expect(
+    helpers
+      .moduleGraph_getEntrypoints(module, graph, firstCompilation.entrypoints)
+      .map((entry) => entry.name)
+  ).toMatchInlineSnapshot(`
+    Array [
+      "one",
+      "two",
+    ]
+  `);
+});
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+function serializeSolutionPath(solution: PathSolution<ModuleGraphNodeData>): object {
+  return {
+    node: {
+      id: solution.node.id,
+    },
+    children: solution.children.map(serializeSolutionPath),
+  };
+}
+
+test('moduleGraph_getPaths', () => {
+  const fromModule = firstCompilation.nodeModules.find(
+    (item) => item.name === 'is-array'
+  )!.instances[0].modules[0];
+  const toModule = firstCompilation.entrypoints[0].data.dep!.module!;
+  const graph = helpers.getModuleGraph(hash)!;
+  const paths = helpers.moduleGraph_getPaths(fromModule, graph, toModule)!;
+
+  expect(serializeSolutionPath(paths)).toMatchSnapshot();
+});
+
+test('modulesToFoamTree', () => {
+  expect(helpers.modulesToFoamTree(firstCompilation.modules)).toMatchSnapshot();
+  expect(
+    helpers.modulesToFoamTree(firstCompilation.modules, hash, false)
+  ).toMatchSnapshot();
+  expect(
+    helpers.modulesToFoamTree(firstCompilation.modules, hash, true)
+  ).toMatchSnapshot();
 });

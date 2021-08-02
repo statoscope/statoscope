@@ -4,7 +4,8 @@ module.exports = {
   plugins: [['../../../../packages/stats-validator-plugin-webpack', 'webpack']],
   validate: {
     rules: {
-      'webpack/disallowed-deps': ['error', ['foo', { type: 'module', name: /\.\/src/ }]],
+      'webpack/restricted-modules': ['error', [/\.\/src/]],
+      'webpack/restricted-packages': ['error', ['foo']],
     },
   },
 };

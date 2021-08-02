@@ -136,6 +136,14 @@ Array [
     "before": "./src/index.ts + 3 modules",
   },
   Object {
+    "after": "src/index2.ts",
+    "before": "./src/index2.ts + 1 modules",
+  },
+  Object {
+    "after": "src/index2.ts",
+    "before": "./src/index2.ts + 1 modules",
+  },
+  Object {
     "after": "../node_modules/is-array/index.js",
     "before": "../node_modules/is-array/index.js",
   },

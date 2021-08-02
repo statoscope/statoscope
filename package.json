@@ -12,7 +12,7 @@
     "lint": "npm run lint:eslint && npm run lint:custom",
     "lint:custom": "lerna run lint:custom",
     "lint:eslint": "eslint . --ext .js,.ts --cache",
-    "lint:eslint:fix": "npm run lint:script -- --fix",
+    "lint:eslint:fix": "npm run lint:eslint -- --fix",
     "build": "lerna run build",
     "prepublishOnly": "npm run build && npm run lint && npm run test"
   },
