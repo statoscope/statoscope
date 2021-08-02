@@ -40,30 +40,26 @@ export default (() =>
       modulesToFoamTree(modules: NormalizedModule[], hash?: string): Node {
         return wpJoraHelpers.modulesToFoamTree(
           modules,
-          settings.get(SETTING_SHOW_COMPRESSED, SETTING_SHOW_COMPRESSED_DEFAULT).get(),
-          hash
+          hash,
+          settings.get(SETTING_SHOW_COMPRESSED, SETTING_SHOW_COMPRESSED_DEFAULT).get()
         );
       },
       getModuleSize(module: NormalizedModule, hash: string, compressed?: boolean): Size {
         return wpJoraHelpers.getModuleSize(
           module,
+          hash,
           typeof compressed === 'boolean'
             ? compressed
-            : settings
-                .get(SETTING_SHOW_COMPRESSED, SETTING_SHOW_COMPRESSED_DEFAULT)
-                .get(),
-          hash
+            : settings.get(SETTING_SHOW_COMPRESSED, SETTING_SHOW_COMPRESSED_DEFAULT).get()
         );
       },
       getAssetSize(asset: NormalizedAsset, hash: string, compressed?: boolean): Size {
         return wpJoraHelpers.getAssetSize(
           asset,
+          hash,
           typeof compressed === 'boolean'
             ? compressed
-            : settings
-                .get(SETTING_SHOW_COMPRESSED, SETTING_SHOW_COMPRESSED_DEFAULT)
-                .get(),
-          hash
+            : settings.get(SETTING_SHOW_COMPRESSED, SETTING_SHOW_COMPRESSED_DEFAULT).get()
         );
       },
       getPackageInstanceInfo(

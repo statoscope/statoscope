@@ -3,7 +3,6 @@ import { StatoscopeWidget } from '../../types';
 import styles from './split-layout.css';
 import modulesTree from './default/modules-tree';
 import chunksTree from './default/chunks-tree';
-import entryTree from './default/entry-tree';
 
 export default function (discovery: StatoscopeWidget): void {
   discovery.page.define('module', [

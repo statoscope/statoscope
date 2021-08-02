@@ -194,7 +194,7 @@ function addSettings(discovery: StatoscopeWidget): void {
       data: unknown,
       { hide }: { hide(): void }
     ): void => {
-      const limit = settings.get(
+      const limit = settings.get<string>(
         SETTING_LIST_ITEMS_LIMIT,
         SETTING_LIST_ITEMS_LIMIT_DEFAULT
       );
@@ -240,7 +240,10 @@ function addSettings(discovery: StatoscopeWidget): void {
       data: unknown,
       { hide }: { hide(): void }
     ): void => {
-      const limit = settings.get(SETTING_NETWORK_SPEED, SETTING_NETWORK_SPEED_DEFAULT);
+      const limit = settings.get<typeof networkTypeList[number]['name']>(
+        SETTING_NETWORK_SPEED,
+        SETTING_NETWORK_SPEED_DEFAULT
+      );
 
       render();
 
@@ -262,7 +265,7 @@ function addSettings(discovery: StatoscopeWidget): void {
               value: 'settingNetworkType()',
               text: `getNetworkTypeInfo().getNetworkTypeName()`,
               data: networkTypeList.map((item) => item.name),
-              onChange: (value: string): void => {
+              onChange: (value: typeof networkTypeList[number]['name']): void => {
                 limit.set(value);
                 hide();
               },
