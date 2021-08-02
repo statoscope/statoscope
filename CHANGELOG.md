@@ -1,5 +1,12 @@
 # Changelog
 
+## 5.6.2 (16 July 2021)
+
+## Fixes
+
+- `[webpack-model]` - calculating modules size on `foam-tree`-helper
+- `[webpack-ui]` - show modules size on foam-tree map
+
 ## 5.6.1 (16 July 2021)
 
 ## Fixes
