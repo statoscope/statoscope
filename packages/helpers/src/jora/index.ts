@@ -45,12 +45,73 @@ export interface VersionDiffItem extends BaseDiffItem {
   b: string;
 }
 
+export type Limit =
+  | { type: 'absolute'; number: number }
+  | { type: 'percent'; number: number };
+
+export type ValueDiff = {
+  absolute: number;
+  percent: number;
+};
+
+export type SerializedStringOrRegexp =
+  | {
+      type: 'string';
+      content: string;
+    }
+  | {
+      type: 'regexp';
+      content: string;
+      flags: string;
+    };
+
+const identityFn = (arg: unknown): unknown => arg;
+
 export type DiffItem = TimeDiffItem | SizeDiffItem | NumberDiffItem | VersionDiffItem;
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
 export default function helpers() {
   const helpers = {
     stringify: JSON.stringify,
+    typeof(value: unknown): string {
+      return typeof value;
+    },
+    isNullish(value: unknown): boolean {
+      return value == null;
+    },
+    useNotNullish(values: unknown[]): unknown | null {
+      for (const value of values) {
+        if (value != null) {
+          return value;
+        }
+      }
+
+      return null;
+    },
+    serializeStringOrRegexp(value?: string | RegExp): SerializedStringOrRegexp | null {
+      if (value == null) {
+        return null;
+      }
+
+      if (value instanceof RegExp) {
+        return { type: 'regexp', content: value.source, flags: value.flags };
+      }
+
+      return { type: 'string', content: value };
+    },
+    deserializeStringOrRegexp(
+      value?: SerializedStringOrRegexp | null
+    ): string | RegExp | null {
+      if (value == null) {
+        return null;
+      }
+
+      if (value.type === 'regexp') {
+        return new RegExp(value.content, value.flags);
+      }
+
+      return value.content;
+    },
     toNumber(str: string): number {
       return parseInt(str, 10);
     },
@@ -200,8 +261,35 @@ export default function helpers() {
 
       return (value.b - value.a).toString();
     },
-    isMatch(a: string, b?: string | RegExp): boolean {
-      return b instanceof RegExp ? b.test(a) : typeof b === 'string' ? a === b : true;
+
+    isMatch(a?: string, b?: string | RegExp): boolean {
+      if (!a || !b) {
+        return a === b;
+      }
+
+      return b instanceof RegExp ? b.test(a) : a === b;
+    },
+
+    exclude<TItem>(
+      items: TItem[],
+      params?: {
+        exclude?: Array<string | RegExp>;
+        // @ts-ignore
+        get?: (arg: TItem) => string | undefined;
+      }
+    ): TItem[] {
+      return items.filter((item) => {
+        for (const excludeItem of params?.exclude ?? []) {
+          const getter = params?.get ?? identityFn;
+          const value = getter(item);
+
+          if (this.isMatch(value as string, excludeItem)) {
+            return false;
+          }
+        }
+
+        return true;
+      });
     },
 
     graph_getNode<TData>(id?: string, graph?: Graph<TData>): GraphNode<TData> | null {
@@ -220,6 +308,23 @@ export default function helpers() {
 
       return graph.findPaths(from, to, max);
     },
+
+    diff_normalizeLimit(limit?: number | Limit | null): Limit | null {
+      return typeof limit === 'number'
+        ? { type: 'absolute', number: limit }
+        : limit ?? null;
+    },
+
+    diff_isOverTheLimit(valueDiff: ValueDiff, limit?: number | Limit | null): boolean {
+      const normalizedLimit = this.diff_normalizeLimit(limit);
+
+      return (
+        !normalizedLimit ||
+        (normalizedLimit.type === 'absolute'
+          ? valueDiff.absolute <= normalizedLimit.number
+          : valueDiff.percent <= normalizedLimit.number)
+      );
+    },
   };
 
   return helpers;
@@ -235,8 +340,8 @@ export type Options = {
 
 export function prepareWithJora(input: unknown, options: Options = {}): Prepared {
   const j = jora.setup({
-    ...options.helpers,
     ...helpers(),
+    ...options.helpers,
   });
 
   const rootContext = {};
