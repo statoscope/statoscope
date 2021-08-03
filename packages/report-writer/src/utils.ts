@@ -30,16 +30,11 @@ export async function transform(
     writer: Options;
   },
   from: Array<string | FromItem>,
-  to?: string
+  to: string
 ): Promise<string> {
   const normalizedFrom: FromItem[] = from.map((item) =>
     typeof item === 'string' ? { type: 'filename', filename: item } : item
   );
-  const id =
-    normalizedFrom.length === 1
-      ? path.basename(normalizedFrom[0].filename, '.json')
-      : Date.now();
-  to = to || path.join(os.tmpdir(), `statoscope-report-${id}.html`);
   const outputStream = fs.createWriteStream(to);
   const htmlWriter = new HTMLWriter(options.writer);
 

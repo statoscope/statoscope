@@ -1,7 +1,7 @@
 {
-  "name": "@statoscope/stats-validator-reporter-stats",
+  "name": "@statoscope/stats-validator-reporter-stats-report",
   "version": "5.4.0",
-  "description": "Stats reporter for @statoscope/stats-validator",
+  "description": "Stats report reporter for @statoscope/stats-validator",
   "main": "./dist/index.js",
   "scripts": {
     "build": "../../node_modules/.bin/tsc",

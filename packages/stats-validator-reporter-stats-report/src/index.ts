@@ -1,17 +1,25 @@
 import fs from 'fs';
+import path from 'path';
+import os from 'os';
+import { Readable } from 'stream';
 import open from 'open';
 // @ts-ignore
-import { parseChunked } from '@discoveryjs/json-ext';
+import { parseChunked, stringifyStream } from '@discoveryjs/json-ext';
 import { ValidationResult } from '@statoscope/stats-validator';
 import { Reporter } from '@statoscope/stats-validator/dist/reporter';
-import { transform } from '@statoscope/report-writer/dist/utils';
+import { transform, waitFinished } from '@statoscope/report-writer/dist/utils';
 import { StatsDescriptor } from '@statoscope/stats';
 import statsPackage from '@statoscope/stats/package.json';
 import { Extension } from '@statoscope/stats/spec/extension';
 import ExtensionValidationResultGenerator from '@statoscope/stats-extension-stats-validation-result/dist/generator';
 import * as version from './version';
 
-export type Options = { to?: string; open?: boolean };
+export type Options = {
+  saveReportTo?: string;
+  saveStatsTo?: string;
+  saveOnlyStats: boolean;
+  open?: boolean;
+};
 
 export type StatoscopeMeta = {
   descriptor: StatsDescriptor;
@@ -41,31 +49,47 @@ export default class ConsoleReporter implements Reporter<Options> {
     parsedInput.__statoscope ??= meta;
     parsedInput.__statoscope.extensions.push(generator.get());
 
-    console.log(`Generating Statoscope report...`);
-    const reportFilename = await transform(
-      {
-        writer: {
-          scripts: [{ type: 'path', path: require.resolve('@statoscope/webpack-ui') }],
-          init: `function (data) {
+    const id = path.basename(result.input[0], '.json');
+    const reportPath =
+      options?.saveReportTo || path.join(os.tmpdir(), `statoscope-report-${id}.html`);
+    const statsPath = options?.saveStatsTo;
+
+    if (statsPath) {
+      console.log(`Generating stats...`);
+      const statsFileStream = fs.createWriteStream(statsPath);
+      const statStream: Readable = stringifyStream(parsedInput);
+      statStream.pipe(statsFileStream);
+      await waitFinished(statsFileStream);
+      console.log(`Stats saved into ${statsPath}`);
+    }
+
+    if (reportPath && !options?.saveOnlyStats) {
+      console.log(`Generating Statoscope report...`);
+      const reportFilename = await transform(
+        {
+          writer: {
+            scripts: [{ type: 'path', path: require.resolve('@statoscope/webpack-ui') }],
+            init: `function (data) {
             Statoscope.default(data.map((item) => ({ name: item.id, data: item.data })));
           }`,
+          },
         },
-      },
-      // @ts-ignore
-      [
-        {
-          type: 'data',
-          filename: result.input[0],
-          data: parsedInput,
-        },
-        result.reference[0],
-      ].filter(Boolean),
-      options?.to
-    );
-    console.log(`Statoscope report saved into ${reportFilename}`);
+        // @ts-ignore
+        [
+          {
+            type: 'data',
+            filename: result.input[0],
+            data: parsedInput,
+          },
+          result.reference[0],
+        ].filter(Boolean),
+        reportPath
+      );
+      console.log(`Statoscope report saved into ${reportFilename}`);
 
-    if (options?.open) {
-      open(reportFilename);
+      if (options?.open) {
+        open(reportFilename);
+      }
     }
   }
 }

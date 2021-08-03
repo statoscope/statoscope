@@ -29,7 +29,7 @@
     "@statoscope/report-writer": "^5.5.1",
     "@statoscope/stats-validator": "^5.4.0",
     "@statoscope/stats-validator-reporter-console": "^5.4.0",
-    "@statoscope/stats-validator-reporter-stats": "^5.4.0",
+    "@statoscope/stats-validator-reporter-stats-report": "^5.4.0",
     "@statoscope/webpack-model": "^5.6.2",
     "@statoscope/webpack-ui": "^5.6.2",
     "open": "^8.0.4",

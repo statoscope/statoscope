@@ -2,7 +2,7 @@ import path from 'path';
 import { Argv } from 'yargs';
 import Validator, { ValidationResult } from '@statoscope/stats-validator';
 import ConsoleReporter from '@statoscope/stats-validator-reporter-console';
-import StatsReporter from '@statoscope/stats-validator-reporter-stats';
+import StatsReporter from '@statoscope/stats-validator-reporter-stats-report';
 import { Reporter } from '@statoscope/stats-validator/dist/reporter';
 import legacyWebpackStatsValidator from './legacyWebpackValidator';
 
