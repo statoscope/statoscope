@@ -16,6 +16,11 @@ test('isNullish', () => {
   expect(helpers.isNullish(void 0)).toBe(true);
   expect(helpers.isNullish(null)).toBe(true);
 });
+test('isArray', () => {
+  expect(helpers.isArray(0)).toBe(false);
+  expect(helpers.isArray('')).toBe(false);
+  expect(helpers.isArray([])).toBe(true);
+});
 test('useNotNullish', () => {
   expect(helpers.useNotNullish([1, null])).toBe(1);
   expect(helpers.useNotNullish([null, null])).toBe(null);

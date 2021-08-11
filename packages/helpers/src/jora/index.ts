@@ -79,6 +79,9 @@ export default function helpers() {
     isNullish(value: unknown): boolean {
       return value == null;
     },
+    isArray(value: unknown): boolean {
+      return Array.isArray(value);
+    },
     useNotNullish(values: unknown[]): unknown | null {
       for (const value of values) {
         if (value != null) {
