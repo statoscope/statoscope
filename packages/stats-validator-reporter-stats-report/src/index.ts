@@ -39,7 +39,7 @@ export default class ConsoleReporter implements Reporter<Options> {
       }
     }
 
-    const parsedInput = (await parseChunked(fs.createReadStream(result.input[0]))) as {
+    const parsedInput = (await parseChunked(fs.createReadStream(result.files.input))) as {
       __statoscope?: StatoscopeMeta;
     };
     const meta: StatoscopeMeta = {
@@ -49,13 +49,24 @@ export default class ConsoleReporter implements Reporter<Options> {
     parsedInput.__statoscope ??= meta;
     parsedInput.__statoscope.extensions.push(generator.get());
 
-    const id = path.basename(result.input[0], '.json');
+    let parsedReference;
+
+    if (result.files.reference) {
+      parsedReference = await parseChunked(fs.createReadStream(result.files.reference));
+    }
+
+    const id = path.basename(result.files.input, '.json');
     const reportPath =
-      options?.saveReportTo || path.join(os.tmpdir(), `statoscope-report-${id}.html`);
+      options?.saveReportTo ||
+      path.join(os.tmpdir(), `statoscope-report-${id}-${Date.now()}.html`);
     const statsPath = options?.saveStatsTo;
 
     if (statsPath) {
       console.log(`Generating stats...`);
+      const toDir = path.dirname(statsPath);
+      if (!fs.existsSync(toDir)) {
+        fs.mkdirSync(toDir, { recursive: true });
+      }
       const statsFileStream = fs.createWriteStream(statsPath);
       const statStream: Readable = stringifyStream(parsedInput);
       statStream.pipe(statsFileStream);
@@ -78,10 +89,16 @@ export default class ConsoleReporter implements Reporter<Options> {
         [
           {
             type: 'data',
-            filename: result.input[0],
+            filename: 'input.json',
             data: parsedInput,
           },
-          result.reference[0],
+          parsedReference
+            ? {
+                type: 'data',
+                filename: 'reference.json',
+                data: parsedReference,
+              }
+            : null,
         ].filter(Boolean),
         reportPath
       );
