@@ -1,12 +1,25 @@
+import { ViewConfig } from '@statoscope/types';
+
 export type Type = 'error' | 'warn' | 'info';
 export type DetailsTextContent = string | string[] | (() => string | string[]);
+export type DiscoveryDeserializeType =
+  | {
+      type: 'query';
+      content: string;
+    }
+  | {
+      type: 'function';
+      content: string;
+    };
 export type DetailsDescriptorDiscovery = {
   type: 'discovery';
   filename: string;
   query: string;
-  context?: unknown;
-  // (context: unknown) => unknown
-  normalize?: string;
+  serialized?: {
+    context?: unknown;
+  };
+  deserialize?: DiscoveryDeserializeType;
+  view?: ViewConfig<unknown, unknown>;
 };
 export type DetailsDescriptorTTY = {
   type: 'tty';

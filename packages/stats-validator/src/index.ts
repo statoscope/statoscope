@@ -14,8 +14,10 @@ export type ValidationResultItem = {
 
 export type ValidationResult = {
   rules: Array<ValidationResultItem>;
-  input: string[];
-  reference: string[];
+  files: {
+    input: string;
+    reference?: string | null;
+  };
 };
 
 export default class Validator {
@@ -83,47 +85,40 @@ export default class Validator {
   }
 
   async validate(
-    input: string[],
+    input: string,
     reference?: string | null,
     options?: { warnAsError?: boolean }
   ): Promise<ValidationResult> {
     const parsedInput: InputFile[] = [];
-    const parsedReference: InputFile[] = [];
     let preparedInput: unknown;
-    let preparedReference: unknown;
 
-    for (const file of input) {
+    parsedInput.push({
+      name: 'input.json',
+      data: await parseChunked(fs.createReadStream(input)),
+    });
+
+    if (reference) {
       parsedInput.push({
-        name: file,
-        data: await parseChunked(fs.createReadStream(file)),
+        name: 'reference.json',
+        data: await parseChunked(fs.createReadStream(reference)),
       });
-      if (reference) {
-        parsedReference.push({
-          name: reference,
-          data: await parseChunked(fs.createReadStream(reference)),
-        });
-        break;
-      }
     }
 
     const result: ValidationResult = {
       rules: [],
-      input: parsedInput.map((item) => item.name),
-      reference: parsedReference.map((item) => item.name),
+      files: {
+        input: input,
+        reference: reference,
+      },
     };
 
     for (const [, plugin] of Object.entries(this.plugins)) {
       if (typeof plugin.prepare === 'function') {
         preparedInput = await plugin.prepare(parsedInput);
-
-        if (parsedReference) {
-          preparedReference = await plugin.prepare(parsedReference);
-        }
       }
     }
 
     preparedInput ??= parsedInput;
-    preparedReference ??= parsedReference;
 
     for (const [ruleName, ruleDesc] of Object.entries(
       this.config?.validate.rules ?? {}
@@ -148,12 +143,7 @@ export default class Validator {
         throw new Error(`Can't resolve rule ${ruleName}`);
       }
 
-      const api = await this.execRule(
-        resolvedRule,
-        ruleParams,
-        { input: preparedInput, reference: preparedReference },
-        options
-      );
+      const api = await this.execRule(resolvedRule, ruleParams, preparedInput, options);
       result.rules.push({ name: ruleName, api });
     }
 
