@@ -4,11 +4,12 @@ import Validator, { ValidationResult } from '@statoscope/stats-validator';
 import ConsoleReporter from '@statoscope/stats-validator-reporter-console';
 import StatsReporter from '@statoscope/stats-validator-reporter-stats-report';
 import { Reporter } from '@statoscope/stats-validator/dist/reporter';
+import { Options } from '@statoscope/stats-validator-reporter-stats-report/dist';
 import legacyWebpackStatsValidator from './legacyWebpackValidator';
 
 export default function (yargs: Argv): Argv {
   return yargs.command(
-    'validate [validator] [config] [input]',
+    'validate [validator] [input]',
     `[BETA] Validate one or more JSON stats
 Examples:
 Single stats: validate path/to/validator.js path/to/stats.json
@@ -30,6 +31,11 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
           alias: 'i',
           type: 'string',
         })
+        .option('reference', {
+          describe: 'path to a stats-file to diff with',
+          alias: 'r',
+          type: 'string',
+        })
         .option('diff-with', {
           describe: 'path to a stats that will be used by diff-rules as "before"',
           type: 'string',
@@ -40,7 +46,6 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
           describe: 'Treat warnings as errors',
           alias: 'w',
         })
-        .array('input')
         .demandOption(['input']);
     },
     async (argv) => {
@@ -57,6 +62,7 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
         result = await legacyWebpackStatsValidator(
           path.relative(process.cwd(), argv.validator),
           argv.input,
+          argv.reference,
           {
             warnAsError: argv['warn-as-error'],
           }
@@ -66,7 +72,10 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
         const configPath = path.resolve(argv.config);
         const validator = new Validator(configPath);
 
-        result = await validator.validate(argv.input.map((file) => path.resolve(file)));
+        result = await validator.validate(
+          path.resolve(argv.input),
+          argv.reference ? path.resolve(argv.reference) : void 0
+        );
       }
 
       type ReporterItem = { reporter: Reporter<unknown>; options: unknown };
@@ -78,7 +87,10 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
         },
         {
           reporter: new StatsReporter(),
-          options: {},
+          options: {
+            open: true,
+            //saveStatsTo: path.resolve('stats-with-validation.json'),
+          } as Options,
         },
       ];
 

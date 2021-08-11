@@ -25,6 +25,8 @@ const inputFixturePath = [
   '../../../../test/bundles/v4/simple/stats-dev.json',
 ].map((filepath) => path.resolve(__dirname, filepath));
 
+const rootPath = path.resolve(__dirname, '../../../../');
+const outputDir = path.join(rootPath, 'test/temp', path.relative(rootPath, __filename));
 // const consoleLog = console.log.bind(console);
 const output: string[][] = [];
 let consoleLogSpy: jest.SpyInstance<void, string[]> | null = null;
@@ -52,7 +54,16 @@ function getOutput(): string[][] {
 
 describe('validator types', () => {
   test.each(validatorFixturesJoraQuery)('raw jora-query $name', async (item) => {
-    let y = yargs(['validate', '--validator', item.path, '--input', ...inputFixturePath]);
+    const outputPath = path.join(outputDir, `raw jora-query ${item.name}.html`);
+    let y = yargs([
+      'validate',
+      '--validator',
+      item.path,
+      '--input',
+      ...inputFixturePath,
+      '--output',
+      outputPath,
+    ]);
 
     y = validate(y);
     y.fail((_, error) => {
@@ -65,7 +76,16 @@ describe('validator types', () => {
   });
 
   test.each(validatorFixturesJSJoraQuery)('jora-query from js $name', async (item) => {
-    let y = yargs(['validate', '--validator', item.path, '--input', ...inputFixturePath]);
+    const outputPath = path.join(outputDir, `jora-query from js ${item.name}.html`);
+    let y = yargs([
+      'validate',
+      '--validator',
+      item.path,
+      '--input',
+      ...inputFixturePath,
+      '--output',
+      outputPath,
+    ]);
 
     y = validate(y);
     y.fail((_, error) => {

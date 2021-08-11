@@ -91,15 +91,21 @@ function handleValidator(validator: string): ValidatorFn {
 
 export default async function validateWebpackStart(
   validatorPath: string,
-  inputFiles: string[],
+  input: string,
+  reference?: string | null,
   params?: { warnAsError: boolean }
 ): Promise<ValidationResult> {
   const files: Array<{ name: string; data: unknown }> = [];
-  for (const file of inputFiles) {
-    const data = await parseChunked(fs.createReadStream(file));
+  const inputData = await parseChunked(fs.createReadStream(input));
+  files.push({
+    name: 'input.json',
+    data: inputData,
+  });
+  if (reference) {
+    const referenceData = await parseChunked(fs.createReadStream(reference));
     files.push({
-      name: path.resolve(file),
-      data,
+      name: 'reference.json',
+      data: referenceData,
     });
   }
   // @ts-ignore
@@ -118,7 +124,6 @@ export default async function validateWebpackStart(
 
   return {
     rules: [{ name: path.resolve(validatorPath), api }],
-    input: files.map((item) => item.name),
-    reference: [],
+    files: { input, reference },
   };
 }
