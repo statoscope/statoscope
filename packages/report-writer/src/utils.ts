@@ -35,6 +35,10 @@ export async function transform(
   const normalizedFrom: FromItem[] = from.map((item) =>
     typeof item === 'string' ? { type: 'filename', filename: item } : item
   );
+  const toDir = path.dirname(to);
+  if (!fs.existsSync(toDir)) {
+    fs.mkdirSync(toDir, { recursive: true });
+  }
   const outputStream = fs.createWriteStream(to);
   const htmlWriter = new HTMLWriter(options.writer);
 
