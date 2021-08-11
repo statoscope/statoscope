@@ -178,6 +178,13 @@ export default function (discovery: StatoscopeWidget): void {
                   label: "Child compilations",
                   visible: $childCompilations
                 },
+                {
+                  $compilationItems: $statA.compilation.hash.validation_getItems();
+                  value: $compilationItems.size(),
+                  label: "Validation messages",
+                  visible: $compilationItems,
+                  href: pageLink("stats-validation", { hash: $statA.compilation.hash })
+                },
               ]
               `,
               content: {
