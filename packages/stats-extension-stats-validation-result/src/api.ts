@@ -7,9 +7,10 @@ import { Format, Item } from './generator';
 export type API = {
   getItems: (
     compilationId: string | null,
-    type: RelatedItem['type'],
+    type?: RelatedItem['type'] | null,
     relatedId?: string | number
   ) => Item[];
+  getItemById(id: number): Item | null;
 };
 
 type IndexItem = { item: Item; related: RelatedItem };
@@ -18,7 +19,7 @@ type Index = {
   links: IndexItem[];
   items: Item[];
   related: RelatedItem[];
-  resolveItem: Resolver<string | number, Item>;
+  byRelatedId: Resolver<string | number, Item>;
 };
 
 export type IndexAPI = {
@@ -34,7 +35,7 @@ function makeIndex(type: RelatedItem['type']): IndexAPI {
     links,
     items: [],
     related: [],
-    resolveItem: makeEntityResolver(
+    byRelatedId: makeEntityResolver(
       links,
       (item) => item.related.id,
       (item) => item.item
@@ -83,7 +84,8 @@ const makeAPI: APIFactory<Format, API> = (source) => {
     compilationResolvers,
     (item) => item.id
   );
-
+  const items: Item[] = [];
+  const resolveItemById = makeEntityResolver(items, (item) => item.id);
   for (const compilation of source.payload.compilations) {
     const indexes: IndexAPI[] = [];
     const compilationData: CompilationData = {
@@ -94,6 +96,7 @@ const makeAPI: APIFactory<Format, API> = (source) => {
     compilationResolvers.push(compilationData);
 
     for (const item of compilation.items) {
+      items.push(item);
       for (const related of item.related) {
         let index = compilationData.resolveIndex(related.type);
 
@@ -110,10 +113,14 @@ const makeAPI: APIFactory<Format, API> = (source) => {
   return {
     getItems: (
       compilationId: string | null,
-      type: RelatedItem['type'],
+      type?: RelatedItem['type'] | null,
       relatedId?: string | number
     ): Item[] => {
       if (relatedId) {
+        if (!type) {
+          throw new Error('type must be specified');
+        }
+
         return (
           resolveCompilationsResolvers(compilationId)
             ?.resolveIndex(type)
@@ -121,9 +128,17 @@ const makeAPI: APIFactory<Format, API> = (source) => {
         );
       }
 
-      return (
-        resolveCompilationsResolvers(compilationId)?.resolveIndex(type)?.getItems() ?? []
-      );
+      if (type) {
+        return (
+          resolveCompilationsResolvers(compilationId)?.resolveIndex(type)?.getItems() ??
+          []
+        );
+      }
+
+      return resolveCompilationsResolvers(compilationId)?.items ?? [];
+    },
+    getItemById(id: number): Item | null {
+      return resolveItemById(id);
     },
   };
 };

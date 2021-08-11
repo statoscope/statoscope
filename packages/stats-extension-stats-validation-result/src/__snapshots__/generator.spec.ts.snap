@@ -22,6 +22,7 @@ Object {
         "items": Array [
           Object {
             "details": Array [],
+            "id": 0,
             "message": "foo-message",
             "related": Array [
               Object {
@@ -38,6 +39,7 @@ Object {
           },
           Object {
             "details": Array [],
+            "id": 1,
             "message": "bar-message",
             "related": Array [
               Object {
@@ -67,6 +69,7 @@ Object {
         "items": Array [
           Object {
             "details": Array [],
+            "id": 2,
             "message": "bar-message",
             "related": Array [
               Object {

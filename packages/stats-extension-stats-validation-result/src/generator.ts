@@ -1,7 +1,7 @@
 import { Extension, ExtensionDescriptor } from '@statoscope/stats/spec/extension';
 import makeResolver from '@statoscope/helpers/dist/entity-resolver';
 import {
-  DetailsDescriptorDiscovery,
+  DetailsDescriptor,
   RelatedItem,
   TestEntry,
   Type,
@@ -10,10 +10,11 @@ import { name, version, author, homepage } from './version';
 
 export type Format = Extension<Payload>;
 export type Item = {
+  id: number;
   type: Type;
   rule: string;
   message: string;
-  details: DetailsDescriptorDiscovery[];
+  details: DetailsDescriptor[];
   related: RelatedItem[];
 };
 export type Compilation = {
@@ -25,6 +26,7 @@ export type Payload = {
 };
 
 export default class Generator {
+  private lastId = 0;
   private descriptor: ExtensionDescriptor = {
     name,
     version,
@@ -49,12 +51,16 @@ export default class Generator {
     }
 
     compilation.items.push({
+      id: this.lastId++,
       rule: ruleName,
       type: entry.type ?? 'error',
       message: entry.message,
-      details: (Array.isArray(entry.details)
-        ? entry.details.filter((item) => item.type === 'discovery')
-        : []) as DetailsDescriptorDiscovery[],
+      details: (entry.details == null
+        ? []
+        : Array.isArray(entry.details)
+        ? entry.details
+        : ([{ type: 'text', content: entry.details }] as DetailsDescriptor[])
+      ).filter((item) => item.type === 'discovery'),
       related: entry.related ?? [],
     });
   }
