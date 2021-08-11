@@ -6,15 +6,31 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "filename": "after.json",
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
         "query": "
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
   $params: #.params;
-  $reference: #.reference;
   $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
   $network: [$params.network, 'Slow'].useNotNullish();
   $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
   
-  compilations
+  $input.compilations
   .exclude({
     exclude: $params.exclude.[type='compilation'].name,
     get: <name>,
@@ -110,10 +126,27 @@ Array [
     ]
   })
   .[entrypoints]",
+        "serialized": Object {
+          "context": Object {
+            "params": Object {
+              "byName": Array [],
+              "exclude": Array [],
+              "global": Object {
+                "maxAsyncDownloadTimeDiff": Object {
+                  "number": 1,
+                  "type": "absolute",
+                },
+                "maxDownloadTimeDiff": null,
+                "maxInitialDownloadTimeDiff": null,
+              },
+              "useCompressedSize": true,
+            },
+          },
+        },
         "type": "discovery",
       },
     ],
-    "filename": "after.json",
+    "filename": "input.json",
     "message": "Entry \\"two\\": Download time diff of async assets is 9 ms (316.20%). It's over the 1 ms limit",
     "related": Array [
       Object {
@@ -136,15 +169,31 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "filename": "after.json",
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
         "query": "
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
   $params: #.params;
-  $reference: #.reference;
   $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
   $network: [$params.network, 'Slow'].useNotNullish();
   $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
   
-  compilations
+  $input.compilations
   .exclude({
     exclude: $params.exclude.[type='compilation'].name,
     get: <name>,
@@ -240,10 +289,43 @@ Array [
     ]
   })
   .[entrypoints]",
+        "serialized": Object {
+          "context": Object {
+            "params": Object {
+              "byName": Array [
+                Object {
+                  "limits": Object {
+                    "maxAsyncDownloadTimeDiff": Object {
+                      "number": 1,
+                      "type": "absolute",
+                    },
+                    "maxDownloadTimeDiff": null,
+                    "maxInitialDownloadTimeDiff": null,
+                  },
+                  "name": Object {
+                    "content": ".+",
+                    "flags": "",
+                    "type": "regexp",
+                  },
+                },
+              ],
+              "exclude": Array [],
+              "global": Object {
+                "maxAsyncDownloadTimeDiff": Object {
+                  "number": 100000,
+                  "type": "absolute",
+                },
+                "maxDownloadTimeDiff": null,
+                "maxInitialDownloadTimeDiff": null,
+              },
+              "useCompressedSize": true,
+            },
+          },
+        },
         "type": "discovery",
       },
     ],
-    "filename": "after.json",
+    "filename": "input.json",
     "message": "Entry \\"two\\": Download time diff of async assets is 9 ms (316.20%). It's over the 1 ms limit",
     "related": Array [
       Object {
@@ -262,15 +344,31 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "filename": "after.json",
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
         "query": "
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
   $params: #.params;
-  $reference: #.reference;
   $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
   $network: [$params.network, 'Slow'].useNotNullish();
   $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
   
-  compilations
+  $input.compilations
   .exclude({
     exclude: $params.exclude.[type='compilation'].name,
     get: <name>,
@@ -366,10 +464,27 @@ Array [
     ]
   })
   .[entrypoints]",
+        "serialized": Object {
+          "context": Object {
+            "params": Object {
+              "byName": Array [],
+              "exclude": Array [],
+              "global": Object {
+                "maxAsyncDownloadTimeDiff": Object {
+                  "number": 1,
+                  "type": "absolute",
+                },
+                "maxDownloadTimeDiff": null,
+                "maxInitialDownloadTimeDiff": null,
+              },
+              "useCompressedSize": false,
+            },
+          },
+        },
         "type": "discovery",
       },
     ],
-    "filename": "after.json",
+    "filename": "input.json",
     "message": "Entry \\"two\\": Download time diff of async assets is 21 ms (745.07%). It's over the 1 ms limit",
     "related": Array [
       Object {
@@ -388,15 +503,31 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "filename": "after.json",
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
         "query": "
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
   $params: #.params;
-  $reference: #.reference;
   $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
   $network: [$params.network, 'Slow'].useNotNullish();
   $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
   
-  compilations
+  $input.compilations
   .exclude({
     exclude: $params.exclude.[type='compilation'].name,
     get: <name>,
@@ -492,10 +623,27 @@ Array [
     ]
   })
   .[entrypoints]",
+        "serialized": Object {
+          "context": Object {
+            "params": Object {
+              "byName": Array [],
+              "exclude": Array [],
+              "global": Object {
+                "maxAsyncDownloadTimeDiff": null,
+                "maxDownloadTimeDiff": Object {
+                  "number": 1,
+                  "type": "absolute",
+                },
+                "maxInitialDownloadTimeDiff": null,
+              },
+              "useCompressedSize": true,
+            },
+          },
+        },
         "type": "discovery",
       },
     ],
-    "filename": "after.json",
+    "filename": "input.json",
     "message": "Entry \\"two\\": Download time diff of assets is 9 ms (3.64%). It's over the 1 ms limit",
     "related": Array [
       Object {
@@ -518,15 +666,31 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "filename": "after.json",
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
         "query": "
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
   $params: #.params;
-  $reference: #.reference;
   $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
   $network: [$params.network, 'Slow'].useNotNullish();
   $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
   
-  compilations
+  $input.compilations
   .exclude({
     exclude: $params.exclude.[type='compilation'].name,
     get: <name>,
@@ -622,10 +786,43 @@ Array [
     ]
   })
   .[entrypoints]",
+        "serialized": Object {
+          "context": Object {
+            "params": Object {
+              "byName": Array [
+                Object {
+                  "limits": Object {
+                    "maxAsyncDownloadTimeDiff": null,
+                    "maxDownloadTimeDiff": Object {
+                      "number": 1,
+                      "type": "absolute",
+                    },
+                    "maxInitialDownloadTimeDiff": null,
+                  },
+                  "name": Object {
+                    "content": ".+",
+                    "flags": "",
+                    "type": "regexp",
+                  },
+                },
+              ],
+              "exclude": Array [],
+              "global": Object {
+                "maxAsyncDownloadTimeDiff": null,
+                "maxDownloadTimeDiff": Object {
+                  "number": 100000,
+                  "type": "absolute",
+                },
+                "maxInitialDownloadTimeDiff": null,
+              },
+              "useCompressedSize": true,
+            },
+          },
+        },
         "type": "discovery",
       },
     ],
-    "filename": "after.json",
+    "filename": "input.json",
     "message": "Entry \\"two\\": Download time diff of assets is 9 ms (3.64%). It's over the 1 ms limit",
     "related": Array [
       Object {
@@ -644,15 +841,31 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "filename": "after.json",
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
         "query": "
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
   $params: #.params;
-  $reference: #.reference;
   $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
   $network: [$params.network, 'Slow'].useNotNullish();
   $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
   
-  compilations
+  $input.compilations
   .exclude({
     exclude: $params.exclude.[type='compilation'].name,
     get: <name>,
@@ -748,10 +961,27 @@ Array [
     ]
   })
   .[entrypoints]",
+        "serialized": Object {
+          "context": Object {
+            "params": Object {
+              "byName": Array [],
+              "exclude": Array [],
+              "global": Object {
+                "maxAsyncDownloadTimeDiff": null,
+                "maxDownloadTimeDiff": Object {
+                  "number": 1,
+                  "type": "absolute",
+                },
+                "maxInitialDownloadTimeDiff": null,
+              },
+              "useCompressedSize": false,
+            },
+          },
+        },
         "type": "discovery",
       },
     ],
-    "filename": "after.json",
+    "filename": "input.json",
     "message": "Entry \\"one\\": Download time diff of assets is 151 ms (943.55%). It's over the 1 ms limit",
     "related": Array [
       Object {
@@ -765,15 +995,31 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "filename": "after.json",
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
         "query": "
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
   $params: #.params;
-  $reference: #.reference;
   $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
   $network: [$params.network, 'Slow'].useNotNullish();
   $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
   
-  compilations
+  $input.compilations
   .exclude({
     exclude: $params.exclude.[type='compilation'].name,
     get: <name>,
@@ -869,10 +1115,27 @@ Array [
     ]
   })
   .[entrypoints]",
+        "serialized": Object {
+          "context": Object {
+            "params": Object {
+              "byName": Array [],
+              "exclude": Array [],
+              "global": Object {
+                "maxAsyncDownloadTimeDiff": null,
+                "maxDownloadTimeDiff": Object {
+                  "number": 1,
+                  "type": "absolute",
+                },
+                "maxInitialDownloadTimeDiff": null,
+              },
+              "useCompressedSize": false,
+            },
+          },
+        },
         "type": "discovery",
       },
     ],
-    "filename": "after.json",
+    "filename": "input.json",
     "message": "Entry \\"two\\": Download time diff of assets is 358 ms (143.93%). It's over the 1 ms limit",
     "related": Array [
       Object {
@@ -899,15 +1162,31 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "filename": "after.json",
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
         "query": "
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
   $params: #.params;
-  $reference: #.reference;
   $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
   $network: [$params.network, 'Slow'].useNotNullish();
   $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
   
-  compilations
+  $input.compilations
   .exclude({
     exclude: $params.exclude.[type='compilation'].name,
     get: <name>,
@@ -1003,10 +1282,27 @@ Array [
     ]
   })
   .[entrypoints]",
+        "serialized": Object {
+          "context": Object {
+            "params": Object {
+              "byName": Array [],
+              "exclude": Array [],
+              "global": Object {
+                "maxAsyncDownloadTimeDiff": null,
+                "maxDownloadTimeDiff": null,
+                "maxInitialDownloadTimeDiff": Object {
+                  "number": 1,
+                  "type": "absolute",
+                },
+              },
+              "useCompressedSize": false,
+            },
+          },
+        },
         "type": "discovery",
       },
     ],
-    "filename": "after.json",
+    "filename": "input.json",
     "message": "Entry \\"one\\": Download time diff of initial assets is 151 ms (943.55%). It's over the 1 ms limit",
     "related": Array [
       Object {
@@ -1020,15 +1316,31 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "filename": "after.json",
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
         "query": "
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
   $params: #.params;
-  $reference: #.reference;
   $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
   $network: [$params.network, 'Slow'].useNotNullish();
   $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
   
-  compilations
+  $input.compilations
   .exclude({
     exclude: $params.exclude.[type='compilation'].name,
     get: <name>,
@@ -1124,10 +1436,27 @@ Array [
     ]
   })
   .[entrypoints]",
+        "serialized": Object {
+          "context": Object {
+            "params": Object {
+              "byName": Array [],
+              "exclude": Array [],
+              "global": Object {
+                "maxAsyncDownloadTimeDiff": null,
+                "maxDownloadTimeDiff": null,
+                "maxInitialDownloadTimeDiff": Object {
+                  "number": 1,
+                  "type": "absolute",
+                },
+              },
+              "useCompressedSize": false,
+            },
+          },
+        },
         "type": "discovery",
       },
     ],
-    "filename": "after.json",
+    "filename": "input.json",
     "message": "Entry \\"two\\": Download time diff of initial assets is 337 ms (136.96%). It's over the 1 ms limit",
     "related": Array [
       Object {

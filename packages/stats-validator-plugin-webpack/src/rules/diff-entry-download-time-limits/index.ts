@@ -1,3 +1,4 @@
+import path from 'path';
 import {
   NormalizedChunk,
   NormalizedCompilation,
@@ -10,7 +11,9 @@ import {
   ByNameFilterItem,
   ExcludeItem,
   normalizeExclude,
+  SerializedByNameFilterItem,
   SerializedExcludeItem,
+  serializeExclude,
 } from '../../limits-helpers';
 
 export type Limits = {
@@ -40,6 +43,13 @@ export type NormalizedParams = {
   global: NormalizedLimits;
   exclude: RuleExcludeItem[];
   byName: ByNameFilterItem<NormalizedLimits>[];
+};
+
+export type SerializedParams = {
+  useCompressedSize: boolean;
+  global: NormalizedLimits;
+  exclude: SerializedRuleExcludeItem[];
+  byName: SerializedByNameFilterItem<NormalizedLimits>[];
 };
 
 export type ResultEntryState = {
@@ -96,6 +106,21 @@ function normalizeParams(params: Params): NormalizedParams {
   };
 }
 
+function serializeParams(params: NormalizedParams): SerializedParams {
+  return {
+    useCompressedSize: params.useCompressedSize,
+    global: params.global,
+    byName:
+      params.byName?.map((item) => {
+        return {
+          name: h.serializeStringOrRegexp(item.name)!,
+          limits: item.limits,
+        };
+      }) ?? [],
+    exclude: params.exclude.map(serializeExclude),
+  };
+}
+
 const h = helpers();
 
 function formatError(
@@ -124,20 +149,21 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
     throw new Error('Params is not specified');
   }
 
-  if (!data.reference) {
+  if (!data.files.find((file) => file.name === 'reference.json')) {
     throw new Error('Reference-stats is not specified');
   }
 
-  const normalizedRuleParams = normalizeParams(ruleParams);
+  const normalizedParams = normalizeParams(ruleParams);
 
   const query = `
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
   $params: #.params;
-  $reference: #.reference;
   $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
   $network: [$params.network, 'Slow'].useNotNullish();
   $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
   
-  compilations
+  $input.compilations
   .exclude({
     exclude: $params.exclude.[type='compilation'].name,
     get: <name>,
@@ -233,24 +259,43 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
     ]
   })
   .[entrypoints]`;
-  const result = data.input.query(query, data.input.files[0], {
-    reference: data.reference.files[0],
-    params: normalizedRuleParams,
+  const result = data.query(query, data.files[0], {
+    params: normalizedParams,
   }) as ResultItem[];
 
   for (const item of result) {
     for (const entryItem of item.entrypoints) {
       const options: APIFnOptions = {
-        filename: data.input.files[0].name,
+        filename: data.files[0].name,
         compilation: item.compilation.hash,
+        related: [{ type: 'entry', id: entryItem.after.entry.name }],
         details: [
           {
-            query,
             type: 'discovery',
-            filename: data.input.files[0].name,
+            query,
+            filename: path.basename(data.files[0].name),
+            serialized: {
+              context: {
+                params: serializeParams(normalizedParams),
+              },
+            },
+            deserialize: {
+              type: 'query',
+              content: `
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }`,
+            },
           },
         ],
-        related: [{ type: 'entry', id: entryItem.after.entry.name }],
       };
 
       if (!entryItem.diff.downloadTime.ok) {

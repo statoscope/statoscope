@@ -4,8 +4,88 @@ exports[`matches 1`] = `
 Array [
   Object {
     "compilation": undefined,
-    "details": undefined,
-    "filename": "after.json",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+                $theContext: context;
+                {
+                  context: {
+                    exclude: $theContext.exclude.(deserializeExclude()),
+                    target: {
+                      name: $theContext.target.name.deserializeStringOrRegexp()
+                    }
+                  }
+                }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $after: resolveInputFile();
+  $reference: resolveReferenceFile();
+  $target: #.target;
+  $exclude: #.exclude;
+  
+  $after.compilations
+  .exclude({
+    exclude: $exclude.[type='compilation'].name,
+    get: <name>,
+  })
+  .nodeModules.[name.isMatch($target.name)]
+  .({
+    $instances: instances
+    .[
+      $passVersion: (not $target.version or not version).bool();
+      $passVersion or version.semverSatisfies($target.version)
+    ];
+    package: $,
+    $instances
+  })
+  .group(<package.name>)
+  .({
+    $key;
+    $afterReasons: value.instances.modules.reasons;
+    $referenceReasons: $reference.compilations
+      .exclude({
+        exclude: $exclude.[type='compilation'].name,
+        get: <name>,
+      })
+      .(
+        $compilation: $;
+        $key.resolvePackage($compilation.hash)
+      )
+      .[]
+      .instances
+      .[
+        $passVersion: (not $target.version or not version).bool();
+        $passVersion or version.semverSatisfies($target.version)
+      ]
+      .modules.reasons;
+    $diff: $afterReasons.[
+      $item: $;
+      not $referenceReasons[=>moduleName=$item.moduleName and userRequest=$item.userRequest and type=$item.type]
+    ].group(<resolvedModule>).({module: key, reasons: value}).[reasons];
+    packageName: key,
+    reference: $referenceReasons,
+    after: $afterReasons,
+    $diff
+  }).[diff]",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": ".+",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
     "message": "Usage of is-array was increased from 2 to 4",
     "related": Array [
       Object {

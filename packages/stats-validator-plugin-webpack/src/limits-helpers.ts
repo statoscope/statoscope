@@ -1,4 +1,4 @@
-import { SerializedStringOrRegexp } from '@statoscope/helpers/dist/jora';
+import makeJoraHelpers, { SerializedStringOrRegexp } from '@statoscope/helpers/dist/jora';
 
 export type ExcludeItem<TType> = {
   type: TType;
@@ -15,6 +15,11 @@ export type ByNameFilterItem<TLimit> = {
   limits: TLimit;
 };
 
+export type SerializedByNameFilterItem<TLimit> = {
+  name: SerializedStringOrRegexp;
+  limits: TLimit;
+};
+
 export type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<
   T,
   Exclude<keyof T, Keys>
@@ -22,6 +27,8 @@ export type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<
   {
     [K in Keys]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<Keys, K>>>;
   }[Keys];
+
+const helpers = makeJoraHelpers();
 
 export function normalizeExclude<TType>(
   item: string | RegExp | ExcludeItem<TType>,
@@ -40,13 +47,5 @@ export function normalizeExclude<TType>(
 export function serializeExclude<TType>(
   item: ExcludeItem<TType>
 ): SerializedExcludeItem<TType> {
-  let name: SerializedExcludeItem<TType>['name'];
-
-  if (item.name instanceof RegExp) {
-    name = { type: 'regexp', content: item.name.source, flags: item.name.flags };
-  } else {
-    name = { type: 'string', content: item.name };
-  }
-
-  return { type: item.type, name };
+  return { type: item.type, name: helpers.serializeStringOrRegexp(item.name)! };
 }

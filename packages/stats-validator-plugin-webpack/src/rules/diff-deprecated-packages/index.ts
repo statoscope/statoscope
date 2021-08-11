@@ -1,3 +1,4 @@
+import path from 'path';
 import { Prepared } from '@statoscope/webpack-model';
 import {
   NormalizedModule,
@@ -6,8 +7,13 @@ import {
 import { API } from '@statoscope/stats-validator/dist/api';
 import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
 import { WebpackRule } from '../../';
-import { normalizePackageTarget, PackageTarget, RawTarget } from '../../helpers';
-import { ExcludeItem, normalizeExclude } from '../../limits-helpers';
+import {
+  normalizePackageTarget,
+  PackageTarget,
+  RawTarget,
+  serializeModuleTarget,
+} from '../../helpers';
+import { ExcludeItem, normalizeExclude, serializeExclude } from '../../limits-helpers';
 
 export type PackageResultItem = {
   packageName: string;
@@ -39,8 +45,8 @@ function handleTarget(
   api: API
 ): void {
   const query = `
-  $reference: #.reference;
-  $after: $;
+  $after: resolveInputFile();
+  $reference: resolveReferenceFile();
   $target: #.target;
   $exclude: #.exclude;
   
@@ -81,7 +87,7 @@ function handleTarget(
       .modules.reasons;
     $diff: $afterReasons.[
       $item: $;
-      not $referenceReasons.[moduleName=$item.moduleName and userRequest=$item.userRequest and type=$item.type]
+      not $referenceReasons[=>moduleName=$item.moduleName and userRequest=$item.userRequest and type=$item.type]
     ].group(<resolvedModule>).({module: key, reasons: value}).[reasons];
     packageName: key,
     reference: $referenceReasons,
@@ -89,9 +95,8 @@ function handleTarget(
     $diff
   }).[diff]`;
 
-  const result = data.reference?.query(query, data.input.files, {
+  const result = data.query(query, data.files, {
     target,
-    reference: data.reference.files[0],
     exclude: ruleParams.exclude,
   }) as PackageResultItem[];
 
@@ -100,8 +105,34 @@ function handleTarget(
       api.error(
         `Usage of ${packageItem.packageName} was increased from ${packageItem.reference.length} to ${packageItem.after.length}`,
         {
-          filename: data.input.files[0].name,
+          filename: data.files[0].name,
           related: [{ type: 'package', id: packageItem.packageName }],
+          details: [
+            {
+              type: 'discovery',
+              query,
+              filename: path.basename(data.files[0].name),
+              serialized: {
+                context: {
+                  target: serializeModuleTarget(target),
+                  exclude: ruleParams.exclude.map(serializeExclude),
+                },
+              },
+              deserialize: {
+                type: 'query',
+                content: `
+                $theContext: context;
+                {
+                  context: {
+                    exclude: $theContext.exclude.(deserializeExclude()),
+                    target: {
+                      name: $theContext.target.name.deserializeStringOrRegexp()
+                    }
+                  }
+                }`,
+              },
+            },
+          ],
         }
       );
     }
@@ -124,7 +155,7 @@ const diffDeprecatedPackages: WebpackRule<Params> = (ruleParams, data, api): voi
     throw new Error('Deprecated deps is not specified');
   }
 
-  if (!data.reference) {
+  if (!data.files.find((file) => file.name === 'reference.json')) {
     throw new Error('Reference-stats is not specified');
   }
 

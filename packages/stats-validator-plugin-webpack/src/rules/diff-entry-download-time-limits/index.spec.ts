@@ -8,12 +8,10 @@ import rule, { Params } from './';
 
 function prepareAPI(ruleParams: Params): API {
   const pluginInstance = plugin();
-  const prepared: RuleDataInput<Prepared> = {
-    input: pluginInstance.prepare!([{ name: 'after.json', data: afterStats }]),
-    reference: pluginInstance.prepare!([
-      { name: 'reference.json', data: referenceStats },
-    ]),
-  };
+  const prepared: RuleDataInput<Prepared> = pluginInstance.prepare!([
+    { name: 'input.json', data: afterStats },
+    { name: 'reference.json', data: referenceStats },
+  ]);
   const api = makeAPI({ warnAsError: false });
 
   rule(ruleParams, prepared, api);

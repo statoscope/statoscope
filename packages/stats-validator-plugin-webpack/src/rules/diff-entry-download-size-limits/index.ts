@@ -1,3 +1,4 @@
+import path from 'path';
 import {
   NormalizedChunk,
   NormalizedCompilation,
@@ -6,7 +7,14 @@ import {
 import { APIFnOptions } from '@statoscope/stats-validator/dist/api';
 import helpers, { Limit, ValueDiff } from '@statoscope/helpers/dist/jora';
 import { WebpackRule } from '../../';
-import { ByNameFilterItem, ExcludeItem, normalizeExclude } from '../../limits-helpers';
+import {
+  ByNameFilterItem,
+  ExcludeItem,
+  normalizeExclude,
+  SerializedByNameFilterItem,
+  SerializedExcludeItem,
+  serializeExclude,
+} from '../../limits-helpers';
 
 export type Limits = {
   maxSizeDiff?: number | Limit;
@@ -20,7 +28,21 @@ export type Params = {
   exclude?: Array<string | RegExp | RuleExcludeItem>;
   useCompressedSize?: boolean;
   global?: Limits;
-  byName?: Array<ByNameFilterItem<Limits>>;
+  byName?: ByNameFilterItem<Limits>[];
+};
+
+export type NormalizedParams = {
+  exclude: RuleExcludeItem[];
+  useCompressedSize?: boolean;
+  global?: Limits;
+  byName?: ByNameFilterItem<Limits>[];
+};
+
+export type SerializedParams = {
+  byName: SerializedByNameFilterItem<Limits>[];
+  exclude: SerializedExcludeItem<'compilation' | 'entry'>[];
+  useCompressedSize?: boolean;
+  global?: Limits;
 };
 
 export type ResultEntryState = {
@@ -51,6 +73,21 @@ export type ResultItem = {
 
 const h = helpers();
 
+function serializeParams(params: NormalizedParams): SerializedParams {
+  return {
+    global: params.global,
+    useCompressedSize: params.useCompressedSize,
+    byName:
+      params.byName?.map((item) => {
+        return {
+          name: h.serializeStringOrRegexp(item.name)!,
+          limits: item.limits,
+        };
+      }) ?? [],
+    exclude: params.exclude.map(serializeExclude),
+  };
+}
+
 function formatError(
   type: 'assets' | 'initial assets' | 'async assets',
   entry: NormalizedEntrypointItem,
@@ -73,17 +110,23 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
   data,
   api
 ): void => {
-  if (!data.reference) {
+  if (!data.files.find((file) => file.name === 'reference.json')) {
     throw new Error('Reference-stats is not specified');
   }
 
+  const normalizedParams: NormalizedParams = {
+    ...ruleParams,
+    exclude: ruleParams?.exclude?.map((item) => normalizeExclude(item, 'entry')) ?? [],
+  };
+
   const query = `
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
   $params: #.params;
-  $reference: #.reference;
   $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
   $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
   
-  compilations
+  $input.compilations
   .exclude({
     exclude: $params.exclude.[type='compilation'].name,
     get: <name>,
@@ -179,20 +222,43 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
     ]
   })
   .[entrypoints]`;
-  const result = data.input.query(query, data.input.files[0], {
-    reference: data.reference.files[0],
-    params: {
-      ...ruleParams,
-      exclude: ruleParams?.exclude?.map((item) => normalizeExclude(item, 'entry')) ?? [],
-    },
+  const result = data.query(query, data.files[0], {
+    params: normalizedParams,
   }) as ResultItem[];
 
   for (const item of result) {
     for (const entryItem of item.entrypoints) {
       const options: APIFnOptions = {
-        filename: data.input.files[0].name,
+        filename: data.files[0].name,
         compilation: item.compilation.hash,
         related: [{ type: 'entry', id: entryItem.after.entry.name }],
+        details: [
+          {
+            type: 'discovery',
+            query,
+            filename: path.basename(data.files[0].name),
+            serialized: {
+              context: {
+                params: serializeParams(normalizedParams),
+              },
+            },
+            deserialize: {
+              type: 'query',
+              content: `
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }`,
+            },
+          },
+        ],
       };
 
       if (!entryItem.diff.size.ok) {

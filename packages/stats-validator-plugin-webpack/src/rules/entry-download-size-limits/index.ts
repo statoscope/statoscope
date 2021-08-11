@@ -1,3 +1,4 @@
+import path from 'path';
 import {
   NormalizedChunk,
   NormalizedCompilation,
@@ -6,7 +7,14 @@ import {
 import { APIFnOptions } from '@statoscope/stats-validator/dist/api';
 import helpers from '@statoscope/helpers/dist/jora';
 import { WebpackRule } from '../../';
-import { ByNameFilterItem, ExcludeItem, normalizeExclude } from '../../limits-helpers';
+import {
+  ByNameFilterItem,
+  ExcludeItem,
+  normalizeExclude,
+  SerializedByNameFilterItem,
+  SerializedExcludeItem,
+  serializeExclude,
+} from '../../limits-helpers';
 
 export type Limits = {
   maxSize?: number;
@@ -20,7 +28,7 @@ export type Params = {
   exclude?: Array<string | RegExp | RuleExcludeItem>;
   useCompressedSize?: boolean;
   global?: Limits;
-  byName?: Array<ByNameFilterItem<Limits>>;
+  byName?: ByNameFilterItem<Limits>[];
 };
 
 export type ResultEntryItem = {
@@ -55,16 +63,46 @@ function formatError(
   )}. It's over the ${h.formatSize(limit)} limit`;
 }
 
+export type NormalizedParams = Exclude<Params, 'exclude'> & {
+  exclude: ExcludeItem<'compilation' | 'entry'>[];
+};
+
+export type SerializedParams = {
+  exclude?: SerializedExcludeItem<'compilation' | 'entry'>[];
+  useCompressedSize?: boolean;
+  global?: Limits;
+  byName?: SerializedByNameFilterItem<Limits>[];
+};
+
+function serializeParams(params: NormalizedParams): SerializedParams {
+  return {
+    exclude: params.exclude.map(serializeExclude),
+    byName:
+      params.byName?.map((item) => {
+        return { name: h.serializeStringOrRegexp(item.name)!, limits: item.limits };
+      }) ?? [],
+    global: params.global,
+    useCompressedSize: params.useCompressedSize,
+  };
+}
+
 const entryDownloadSizeLimits: WebpackRule<Params> = (ruleParams, data, api): void => {
   if (!ruleParams?.global && !ruleParams?.byName?.length) {
     throw new Error('Entry size limits is not specified');
   }
 
+  const normalizedParams: NormalizedParams = {
+    ...ruleParams,
+    exclude: ruleParams.exclude?.map((item) => normalizeExclude(item, 'entry')) ?? [],
+  };
+
   const query = `
+  $input: resolveInputFile();
   $params: #.params;
   $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
   $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  compilations
+  
+  $input.compilations
   .exclude({
     exclude: $params.exclude.[type='compilation'].name,
     get: <name>,
@@ -108,19 +146,43 @@ const entryDownloadSizeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
   })
   .[entrypoints]`;
 
-  const result = data.input.query(query, data.input, {
-    params: {
-      ...ruleParams,
-      exclude: ruleParams.exclude?.map((item) => normalizeExclude(item, 'entry')) ?? [],
-    },
+  const result = data.query(query, data.files, {
+    params: normalizedParams,
   }) as ResultItem[];
 
   for (const item of result) {
     for (const entryItem of item.entrypoints) {
       const options: APIFnOptions = {
-        filename: data.input.files[0].name,
+        filename: data.files[0].name,
         compilation: item.compilation.hash,
         related: [{ type: 'entry', id: entryItem.entry.name }],
+        details: [
+          {
+            type: 'discovery',
+            query,
+            filename: path.basename(data.files[0].name),
+            serialized: {
+              context: {
+                params: serializeParams(normalizedParams),
+              },
+            },
+            deserialize: {
+              type: 'query',
+              content: `
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }`,
+            },
+          },
+        ],
       };
 
       if (!entryItem.sizeOK) {

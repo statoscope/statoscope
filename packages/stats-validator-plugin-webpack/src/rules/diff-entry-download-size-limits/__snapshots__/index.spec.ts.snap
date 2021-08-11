@@ -4,8 +4,143 @@ exports[`maxAsyncSizeDiff global 1`] = `
 Array [
   Object {
     "compilation": "da95abcf6bbf9b157ff6",
-    "details": undefined,
-    "filename": "after.json",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
+  $params: #.params;
+  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
+  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  
+  $input.compilations
+  .exclude({
+    exclude: $params.exclude.[type='compilation'].name,
+    get: <name>,
+  })
+  .({
+    $compilation: $;
+    $compilation,
+    entrypoints: entrypoints
+    .({
+      $entry: $;
+      $referenceEntry: $reference.compilations
+      .exclude({
+        exclude: $params.exclude.[type='compilation'].name,
+        get: <name>,
+      })
+      .entrypoints.[name=$entry.name].pick();
+      $entry,
+      $referenceEntry
+    })
+    .[entry and referenceEntry]
+    .exclude({
+      exclude: $params.exclude.[type='entry'].name,
+      get: <entry.name>,
+    })
+    .({
+      $entry;
+      $referenceEntry;
+      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
+      $rule: {
+        maxSizeDiff: [$matchedRule.maxSizeDiff, $params.global.maxSizeDiff, Infinity].useNotNullish(),
+        maxInitialSizeDiff: [$matchedRule.maxInitialSizeDiff, $params.global.maxInitialSizeDiff, Infinity].useNotNullish(),
+        maxAsyncSizeDiff: [$matchedRule.maxAsyncSizeDiff, $params.global.maxAsyncSizeDiff, Infinity].useNotNullish(),
+      };
+      
+      $referenceEntry,
+      afterEntry: $entry,
+      $rule
+    })
+    .({
+      $rule;
+      $handleEntry: => {
+        $chunks: data.chunks + data.chunks..children;
+        $initialChunks: $chunks.[initial];
+        $asyncChunks: $chunks.[not initial];
+        $size: $chunks.$getSizeByChunks($compilation.hash);
+        $initialSize: $initialChunks.$getSizeByChunks($compilation.hash);
+        $asyncSize: $asyncChunks.$getSizeByChunks($compilation.hash);
+        
+        entry: $,
+        $chunks,
+        $initialChunks,
+        $asyncChunks,
+        $size,
+        $initialSize,
+        $asyncSize,
+      };
+      $reference: referenceEntry.$handleEntry();
+      $after: afterEntry.$handleEntry();
+      $rule,
+      $reference,
+      $after,
+      diff: {
+        size: {
+          $diff: {
+            absolute: $after.size - $reference.size,
+            percent: $after.size.percentFrom($reference.size)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxSizeDiff)
+        },
+        initialSize: {
+          $diff: {
+            absolute: $after.initialSize - $reference.initialSize,
+            percent: $after.initialSize.percentFrom($reference.initialSize)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxInitialSizeDiff)
+        },
+        asyncSize: {
+          $diff: {
+            absolute: $after.asyncSize - $reference.asyncSize,
+            percent: $after.asyncSize.percentFrom($reference.asyncSize)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxAsyncSizeDiff)
+        }
+      }
+    })
+    .[
+      not diff.size.ok or
+      not diff.initialSize.ok or
+      not diff.asyncSize.ok
+    ]
+  })
+  .[entrypoints]",
+        "serialized": Object {
+          "context": Object {
+            "params": Object {
+              "byName": Array [],
+              "exclude": Array [],
+              "global": Object {
+                "maxAsyncSizeDiff": 100,
+              },
+              "useCompressedSize": undefined,
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
     "message": "Entry \\"two\\": Download size diff of async assets is 0.44 kb (316.20%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
@@ -26,8 +161,154 @@ exports[`maxAsyncSizeDiff override global 1`] = `
 Array [
   Object {
     "compilation": "da95abcf6bbf9b157ff6",
-    "details": undefined,
-    "filename": "after.json",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
+  $params: #.params;
+  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
+  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  
+  $input.compilations
+  .exclude({
+    exclude: $params.exclude.[type='compilation'].name,
+    get: <name>,
+  })
+  .({
+    $compilation: $;
+    $compilation,
+    entrypoints: entrypoints
+    .({
+      $entry: $;
+      $referenceEntry: $reference.compilations
+      .exclude({
+        exclude: $params.exclude.[type='compilation'].name,
+        get: <name>,
+      })
+      .entrypoints.[name=$entry.name].pick();
+      $entry,
+      $referenceEntry
+    })
+    .[entry and referenceEntry]
+    .exclude({
+      exclude: $params.exclude.[type='entry'].name,
+      get: <entry.name>,
+    })
+    .({
+      $entry;
+      $referenceEntry;
+      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
+      $rule: {
+        maxSizeDiff: [$matchedRule.maxSizeDiff, $params.global.maxSizeDiff, Infinity].useNotNullish(),
+        maxInitialSizeDiff: [$matchedRule.maxInitialSizeDiff, $params.global.maxInitialSizeDiff, Infinity].useNotNullish(),
+        maxAsyncSizeDiff: [$matchedRule.maxAsyncSizeDiff, $params.global.maxAsyncSizeDiff, Infinity].useNotNullish(),
+      };
+      
+      $referenceEntry,
+      afterEntry: $entry,
+      $rule
+    })
+    .({
+      $rule;
+      $handleEntry: => {
+        $chunks: data.chunks + data.chunks..children;
+        $initialChunks: $chunks.[initial];
+        $asyncChunks: $chunks.[not initial];
+        $size: $chunks.$getSizeByChunks($compilation.hash);
+        $initialSize: $initialChunks.$getSizeByChunks($compilation.hash);
+        $asyncSize: $asyncChunks.$getSizeByChunks($compilation.hash);
+        
+        entry: $,
+        $chunks,
+        $initialChunks,
+        $asyncChunks,
+        $size,
+        $initialSize,
+        $asyncSize,
+      };
+      $reference: referenceEntry.$handleEntry();
+      $after: afterEntry.$handleEntry();
+      $rule,
+      $reference,
+      $after,
+      diff: {
+        size: {
+          $diff: {
+            absolute: $after.size - $reference.size,
+            percent: $after.size.percentFrom($reference.size)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxSizeDiff)
+        },
+        initialSize: {
+          $diff: {
+            absolute: $after.initialSize - $reference.initialSize,
+            percent: $after.initialSize.percentFrom($reference.initialSize)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxInitialSizeDiff)
+        },
+        asyncSize: {
+          $diff: {
+            absolute: $after.asyncSize - $reference.asyncSize,
+            percent: $after.asyncSize.percentFrom($reference.asyncSize)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxAsyncSizeDiff)
+        }
+      }
+    })
+    .[
+      not diff.size.ok or
+      not diff.initialSize.ok or
+      not diff.asyncSize.ok
+    ]
+  })
+  .[entrypoints]",
+        "serialized": Object {
+          "context": Object {
+            "params": Object {
+              "byName": Array [
+                Object {
+                  "limits": Object {
+                    "maxAsyncSizeDiff": 100,
+                  },
+                  "name": Object {
+                    "content": ".+",
+                    "flags": "",
+                    "type": "regexp",
+                  },
+                },
+              ],
+              "exclude": Array [],
+              "global": Object {
+                "maxAsyncSizeDiff": 100000,
+              },
+              "useCompressedSize": undefined,
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
     "message": "Entry \\"two\\": Download size diff of async assets is 0.44 kb (316.20%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
@@ -44,8 +325,143 @@ exports[`maxAsyncSizeDiff with useCompressedSize = false 1`] = `
 Array [
   Object {
     "compilation": "da95abcf6bbf9b157ff6",
-    "details": undefined,
-    "filename": "after.json",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
+  $params: #.params;
+  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
+  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  
+  $input.compilations
+  .exclude({
+    exclude: $params.exclude.[type='compilation'].name,
+    get: <name>,
+  })
+  .({
+    $compilation: $;
+    $compilation,
+    entrypoints: entrypoints
+    .({
+      $entry: $;
+      $referenceEntry: $reference.compilations
+      .exclude({
+        exclude: $params.exclude.[type='compilation'].name,
+        get: <name>,
+      })
+      .entrypoints.[name=$entry.name].pick();
+      $entry,
+      $referenceEntry
+    })
+    .[entry and referenceEntry]
+    .exclude({
+      exclude: $params.exclude.[type='entry'].name,
+      get: <entry.name>,
+    })
+    .({
+      $entry;
+      $referenceEntry;
+      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
+      $rule: {
+        maxSizeDiff: [$matchedRule.maxSizeDiff, $params.global.maxSizeDiff, Infinity].useNotNullish(),
+        maxInitialSizeDiff: [$matchedRule.maxInitialSizeDiff, $params.global.maxInitialSizeDiff, Infinity].useNotNullish(),
+        maxAsyncSizeDiff: [$matchedRule.maxAsyncSizeDiff, $params.global.maxAsyncSizeDiff, Infinity].useNotNullish(),
+      };
+      
+      $referenceEntry,
+      afterEntry: $entry,
+      $rule
+    })
+    .({
+      $rule;
+      $handleEntry: => {
+        $chunks: data.chunks + data.chunks..children;
+        $initialChunks: $chunks.[initial];
+        $asyncChunks: $chunks.[not initial];
+        $size: $chunks.$getSizeByChunks($compilation.hash);
+        $initialSize: $initialChunks.$getSizeByChunks($compilation.hash);
+        $asyncSize: $asyncChunks.$getSizeByChunks($compilation.hash);
+        
+        entry: $,
+        $chunks,
+        $initialChunks,
+        $asyncChunks,
+        $size,
+        $initialSize,
+        $asyncSize,
+      };
+      $reference: referenceEntry.$handleEntry();
+      $after: afterEntry.$handleEntry();
+      $rule,
+      $reference,
+      $after,
+      diff: {
+        size: {
+          $diff: {
+            absolute: $after.size - $reference.size,
+            percent: $after.size.percentFrom($reference.size)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxSizeDiff)
+        },
+        initialSize: {
+          $diff: {
+            absolute: $after.initialSize - $reference.initialSize,
+            percent: $after.initialSize.percentFrom($reference.initialSize)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxInitialSizeDiff)
+        },
+        asyncSize: {
+          $diff: {
+            absolute: $after.asyncSize - $reference.asyncSize,
+            percent: $after.asyncSize.percentFrom($reference.asyncSize)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxAsyncSizeDiff)
+        }
+      }
+    })
+    .[
+      not diff.size.ok or
+      not diff.initialSize.ok or
+      not diff.asyncSize.ok
+    ]
+  })
+  .[entrypoints]",
+        "serialized": Object {
+          "context": Object {
+            "params": Object {
+              "byName": Array [],
+              "exclude": Array [],
+              "global": Object {
+                "maxAsyncSizeDiff": 100,
+              },
+              "useCompressedSize": false,
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
     "message": "Entry \\"two\\": Download size diff of async assets is 1.03 kb (745.07%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
@@ -70,8 +486,143 @@ exports[`maxInitialSizeDiff with useCompressedSize = false 1`] = `
 Array [
   Object {
     "compilation": "da95abcf6bbf9b157ff6",
-    "details": undefined,
-    "filename": "after.json",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
+  $params: #.params;
+  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
+  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  
+  $input.compilations
+  .exclude({
+    exclude: $params.exclude.[type='compilation'].name,
+    get: <name>,
+  })
+  .({
+    $compilation: $;
+    $compilation,
+    entrypoints: entrypoints
+    .({
+      $entry: $;
+      $referenceEntry: $reference.compilations
+      .exclude({
+        exclude: $params.exclude.[type='compilation'].name,
+        get: <name>,
+      })
+      .entrypoints.[name=$entry.name].pick();
+      $entry,
+      $referenceEntry
+    })
+    .[entry and referenceEntry]
+    .exclude({
+      exclude: $params.exclude.[type='entry'].name,
+      get: <entry.name>,
+    })
+    .({
+      $entry;
+      $referenceEntry;
+      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
+      $rule: {
+        maxSizeDiff: [$matchedRule.maxSizeDiff, $params.global.maxSizeDiff, Infinity].useNotNullish(),
+        maxInitialSizeDiff: [$matchedRule.maxInitialSizeDiff, $params.global.maxInitialSizeDiff, Infinity].useNotNullish(),
+        maxAsyncSizeDiff: [$matchedRule.maxAsyncSizeDiff, $params.global.maxAsyncSizeDiff, Infinity].useNotNullish(),
+      };
+      
+      $referenceEntry,
+      afterEntry: $entry,
+      $rule
+    })
+    .({
+      $rule;
+      $handleEntry: => {
+        $chunks: data.chunks + data.chunks..children;
+        $initialChunks: $chunks.[initial];
+        $asyncChunks: $chunks.[not initial];
+        $size: $chunks.$getSizeByChunks($compilation.hash);
+        $initialSize: $initialChunks.$getSizeByChunks($compilation.hash);
+        $asyncSize: $asyncChunks.$getSizeByChunks($compilation.hash);
+        
+        entry: $,
+        $chunks,
+        $initialChunks,
+        $asyncChunks,
+        $size,
+        $initialSize,
+        $asyncSize,
+      };
+      $reference: referenceEntry.$handleEntry();
+      $after: afterEntry.$handleEntry();
+      $rule,
+      $reference,
+      $after,
+      diff: {
+        size: {
+          $diff: {
+            absolute: $after.size - $reference.size,
+            percent: $after.size.percentFrom($reference.size)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxSizeDiff)
+        },
+        initialSize: {
+          $diff: {
+            absolute: $after.initialSize - $reference.initialSize,
+            percent: $after.initialSize.percentFrom($reference.initialSize)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxInitialSizeDiff)
+        },
+        asyncSize: {
+          $diff: {
+            absolute: $after.asyncSize - $reference.asyncSize,
+            percent: $after.asyncSize.percentFrom($reference.asyncSize)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxAsyncSizeDiff)
+        }
+      }
+    })
+    .[
+      not diff.size.ok or
+      not diff.initialSize.ok or
+      not diff.asyncSize.ok
+    ]
+  })
+  .[entrypoints]",
+        "serialized": Object {
+          "context": Object {
+            "params": Object {
+              "byName": Array [],
+              "exclude": Array [],
+              "global": Object {
+                "maxInitialSizeDiff": 100,
+              },
+              "useCompressedSize": false,
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
     "message": "Entry \\"one\\": Download size diff of initial assets is 7.36 kb (943.55%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
@@ -83,8 +634,143 @@ Array [
   },
   Object {
     "compilation": "da95abcf6bbf9b157ff6",
-    "details": undefined,
-    "filename": "after.json",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
+  $params: #.params;
+  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
+  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  
+  $input.compilations
+  .exclude({
+    exclude: $params.exclude.[type='compilation'].name,
+    get: <name>,
+  })
+  .({
+    $compilation: $;
+    $compilation,
+    entrypoints: entrypoints
+    .({
+      $entry: $;
+      $referenceEntry: $reference.compilations
+      .exclude({
+        exclude: $params.exclude.[type='compilation'].name,
+        get: <name>,
+      })
+      .entrypoints.[name=$entry.name].pick();
+      $entry,
+      $referenceEntry
+    })
+    .[entry and referenceEntry]
+    .exclude({
+      exclude: $params.exclude.[type='entry'].name,
+      get: <entry.name>,
+    })
+    .({
+      $entry;
+      $referenceEntry;
+      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
+      $rule: {
+        maxSizeDiff: [$matchedRule.maxSizeDiff, $params.global.maxSizeDiff, Infinity].useNotNullish(),
+        maxInitialSizeDiff: [$matchedRule.maxInitialSizeDiff, $params.global.maxInitialSizeDiff, Infinity].useNotNullish(),
+        maxAsyncSizeDiff: [$matchedRule.maxAsyncSizeDiff, $params.global.maxAsyncSizeDiff, Infinity].useNotNullish(),
+      };
+      
+      $referenceEntry,
+      afterEntry: $entry,
+      $rule
+    })
+    .({
+      $rule;
+      $handleEntry: => {
+        $chunks: data.chunks + data.chunks..children;
+        $initialChunks: $chunks.[initial];
+        $asyncChunks: $chunks.[not initial];
+        $size: $chunks.$getSizeByChunks($compilation.hash);
+        $initialSize: $initialChunks.$getSizeByChunks($compilation.hash);
+        $asyncSize: $asyncChunks.$getSizeByChunks($compilation.hash);
+        
+        entry: $,
+        $chunks,
+        $initialChunks,
+        $asyncChunks,
+        $size,
+        $initialSize,
+        $asyncSize,
+      };
+      $reference: referenceEntry.$handleEntry();
+      $after: afterEntry.$handleEntry();
+      $rule,
+      $reference,
+      $after,
+      diff: {
+        size: {
+          $diff: {
+            absolute: $after.size - $reference.size,
+            percent: $after.size.percentFrom($reference.size)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxSizeDiff)
+        },
+        initialSize: {
+          $diff: {
+            absolute: $after.initialSize - $reference.initialSize,
+            percent: $after.initialSize.percentFrom($reference.initialSize)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxInitialSizeDiff)
+        },
+        asyncSize: {
+          $diff: {
+            absolute: $after.asyncSize - $reference.asyncSize,
+            percent: $after.asyncSize.percentFrom($reference.asyncSize)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxAsyncSizeDiff)
+        }
+      }
+    })
+    .[
+      not diff.size.ok or
+      not diff.initialSize.ok or
+      not diff.asyncSize.ok
+    ]
+  })
+  .[entrypoints]",
+        "serialized": Object {
+          "context": Object {
+            "params": Object {
+              "byName": Array [],
+              "exclude": Array [],
+              "global": Object {
+                "maxInitialSizeDiff": 100,
+              },
+              "useCompressedSize": false,
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
     "message": "Entry \\"two\\": Download size diff of initial assets is 16.39 kb (136.96%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
@@ -101,8 +787,143 @@ exports[`maxSizeDiff global 1`] = `
 Array [
   Object {
     "compilation": "da95abcf6bbf9b157ff6",
-    "details": undefined,
-    "filename": "after.json",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
+  $params: #.params;
+  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
+  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  
+  $input.compilations
+  .exclude({
+    exclude: $params.exclude.[type='compilation'].name,
+    get: <name>,
+  })
+  .({
+    $compilation: $;
+    $compilation,
+    entrypoints: entrypoints
+    .({
+      $entry: $;
+      $referenceEntry: $reference.compilations
+      .exclude({
+        exclude: $params.exclude.[type='compilation'].name,
+        get: <name>,
+      })
+      .entrypoints.[name=$entry.name].pick();
+      $entry,
+      $referenceEntry
+    })
+    .[entry and referenceEntry]
+    .exclude({
+      exclude: $params.exclude.[type='entry'].name,
+      get: <entry.name>,
+    })
+    .({
+      $entry;
+      $referenceEntry;
+      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
+      $rule: {
+        maxSizeDiff: [$matchedRule.maxSizeDiff, $params.global.maxSizeDiff, Infinity].useNotNullish(),
+        maxInitialSizeDiff: [$matchedRule.maxInitialSizeDiff, $params.global.maxInitialSizeDiff, Infinity].useNotNullish(),
+        maxAsyncSizeDiff: [$matchedRule.maxAsyncSizeDiff, $params.global.maxAsyncSizeDiff, Infinity].useNotNullish(),
+      };
+      
+      $referenceEntry,
+      afterEntry: $entry,
+      $rule
+    })
+    .({
+      $rule;
+      $handleEntry: => {
+        $chunks: data.chunks + data.chunks..children;
+        $initialChunks: $chunks.[initial];
+        $asyncChunks: $chunks.[not initial];
+        $size: $chunks.$getSizeByChunks($compilation.hash);
+        $initialSize: $initialChunks.$getSizeByChunks($compilation.hash);
+        $asyncSize: $asyncChunks.$getSizeByChunks($compilation.hash);
+        
+        entry: $,
+        $chunks,
+        $initialChunks,
+        $asyncChunks,
+        $size,
+        $initialSize,
+        $asyncSize,
+      };
+      $reference: referenceEntry.$handleEntry();
+      $after: afterEntry.$handleEntry();
+      $rule,
+      $reference,
+      $after,
+      diff: {
+        size: {
+          $diff: {
+            absolute: $after.size - $reference.size,
+            percent: $after.size.percentFrom($reference.size)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxSizeDiff)
+        },
+        initialSize: {
+          $diff: {
+            absolute: $after.initialSize - $reference.initialSize,
+            percent: $after.initialSize.percentFrom($reference.initialSize)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxInitialSizeDiff)
+        },
+        asyncSize: {
+          $diff: {
+            absolute: $after.asyncSize - $reference.asyncSize,
+            percent: $after.asyncSize.percentFrom($reference.asyncSize)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxAsyncSizeDiff)
+        }
+      }
+    })
+    .[
+      not diff.size.ok or
+      not diff.initialSize.ok or
+      not diff.asyncSize.ok
+    ]
+  })
+  .[entrypoints]",
+        "serialized": Object {
+          "context": Object {
+            "params": Object {
+              "byName": Array [],
+              "exclude": Array [],
+              "global": Object {
+                "maxSizeDiff": 100,
+              },
+              "useCompressedSize": undefined,
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
     "message": "Entry \\"two\\": Download size diff of assets is 0.44 kb (3.64%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
@@ -123,8 +944,154 @@ exports[`maxSizeDiff override global 1`] = `
 Array [
   Object {
     "compilation": "da95abcf6bbf9b157ff6",
-    "details": undefined,
-    "filename": "after.json",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
+  $params: #.params;
+  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
+  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  
+  $input.compilations
+  .exclude({
+    exclude: $params.exclude.[type='compilation'].name,
+    get: <name>,
+  })
+  .({
+    $compilation: $;
+    $compilation,
+    entrypoints: entrypoints
+    .({
+      $entry: $;
+      $referenceEntry: $reference.compilations
+      .exclude({
+        exclude: $params.exclude.[type='compilation'].name,
+        get: <name>,
+      })
+      .entrypoints.[name=$entry.name].pick();
+      $entry,
+      $referenceEntry
+    })
+    .[entry and referenceEntry]
+    .exclude({
+      exclude: $params.exclude.[type='entry'].name,
+      get: <entry.name>,
+    })
+    .({
+      $entry;
+      $referenceEntry;
+      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
+      $rule: {
+        maxSizeDiff: [$matchedRule.maxSizeDiff, $params.global.maxSizeDiff, Infinity].useNotNullish(),
+        maxInitialSizeDiff: [$matchedRule.maxInitialSizeDiff, $params.global.maxInitialSizeDiff, Infinity].useNotNullish(),
+        maxAsyncSizeDiff: [$matchedRule.maxAsyncSizeDiff, $params.global.maxAsyncSizeDiff, Infinity].useNotNullish(),
+      };
+      
+      $referenceEntry,
+      afterEntry: $entry,
+      $rule
+    })
+    .({
+      $rule;
+      $handleEntry: => {
+        $chunks: data.chunks + data.chunks..children;
+        $initialChunks: $chunks.[initial];
+        $asyncChunks: $chunks.[not initial];
+        $size: $chunks.$getSizeByChunks($compilation.hash);
+        $initialSize: $initialChunks.$getSizeByChunks($compilation.hash);
+        $asyncSize: $asyncChunks.$getSizeByChunks($compilation.hash);
+        
+        entry: $,
+        $chunks,
+        $initialChunks,
+        $asyncChunks,
+        $size,
+        $initialSize,
+        $asyncSize,
+      };
+      $reference: referenceEntry.$handleEntry();
+      $after: afterEntry.$handleEntry();
+      $rule,
+      $reference,
+      $after,
+      diff: {
+        size: {
+          $diff: {
+            absolute: $after.size - $reference.size,
+            percent: $after.size.percentFrom($reference.size)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxSizeDiff)
+        },
+        initialSize: {
+          $diff: {
+            absolute: $after.initialSize - $reference.initialSize,
+            percent: $after.initialSize.percentFrom($reference.initialSize)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxInitialSizeDiff)
+        },
+        asyncSize: {
+          $diff: {
+            absolute: $after.asyncSize - $reference.asyncSize,
+            percent: $after.asyncSize.percentFrom($reference.asyncSize)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxAsyncSizeDiff)
+        }
+      }
+    })
+    .[
+      not diff.size.ok or
+      not diff.initialSize.ok or
+      not diff.asyncSize.ok
+    ]
+  })
+  .[entrypoints]",
+        "serialized": Object {
+          "context": Object {
+            "params": Object {
+              "byName": Array [
+                Object {
+                  "limits": Object {
+                    "maxSizeDiff": 100,
+                  },
+                  "name": Object {
+                    "content": ".+",
+                    "flags": "",
+                    "type": "regexp",
+                  },
+                },
+              ],
+              "exclude": Array [],
+              "global": Object {
+                "maxSizeDiff": 100000,
+              },
+              "useCompressedSize": undefined,
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
     "message": "Entry \\"two\\": Download size diff of assets is 0.44 kb (3.64%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
@@ -141,8 +1108,143 @@ exports[`maxSizeDiff with useCompressedSize = false 1`] = `
 Array [
   Object {
     "compilation": "da95abcf6bbf9b157ff6",
-    "details": undefined,
-    "filename": "after.json",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
+  $params: #.params;
+  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
+  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  
+  $input.compilations
+  .exclude({
+    exclude: $params.exclude.[type='compilation'].name,
+    get: <name>,
+  })
+  .({
+    $compilation: $;
+    $compilation,
+    entrypoints: entrypoints
+    .({
+      $entry: $;
+      $referenceEntry: $reference.compilations
+      .exclude({
+        exclude: $params.exclude.[type='compilation'].name,
+        get: <name>,
+      })
+      .entrypoints.[name=$entry.name].pick();
+      $entry,
+      $referenceEntry
+    })
+    .[entry and referenceEntry]
+    .exclude({
+      exclude: $params.exclude.[type='entry'].name,
+      get: <entry.name>,
+    })
+    .({
+      $entry;
+      $referenceEntry;
+      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
+      $rule: {
+        maxSizeDiff: [$matchedRule.maxSizeDiff, $params.global.maxSizeDiff, Infinity].useNotNullish(),
+        maxInitialSizeDiff: [$matchedRule.maxInitialSizeDiff, $params.global.maxInitialSizeDiff, Infinity].useNotNullish(),
+        maxAsyncSizeDiff: [$matchedRule.maxAsyncSizeDiff, $params.global.maxAsyncSizeDiff, Infinity].useNotNullish(),
+      };
+      
+      $referenceEntry,
+      afterEntry: $entry,
+      $rule
+    })
+    .({
+      $rule;
+      $handleEntry: => {
+        $chunks: data.chunks + data.chunks..children;
+        $initialChunks: $chunks.[initial];
+        $asyncChunks: $chunks.[not initial];
+        $size: $chunks.$getSizeByChunks($compilation.hash);
+        $initialSize: $initialChunks.$getSizeByChunks($compilation.hash);
+        $asyncSize: $asyncChunks.$getSizeByChunks($compilation.hash);
+        
+        entry: $,
+        $chunks,
+        $initialChunks,
+        $asyncChunks,
+        $size,
+        $initialSize,
+        $asyncSize,
+      };
+      $reference: referenceEntry.$handleEntry();
+      $after: afterEntry.$handleEntry();
+      $rule,
+      $reference,
+      $after,
+      diff: {
+        size: {
+          $diff: {
+            absolute: $after.size - $reference.size,
+            percent: $after.size.percentFrom($reference.size)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxSizeDiff)
+        },
+        initialSize: {
+          $diff: {
+            absolute: $after.initialSize - $reference.initialSize,
+            percent: $after.initialSize.percentFrom($reference.initialSize)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxInitialSizeDiff)
+        },
+        asyncSize: {
+          $diff: {
+            absolute: $after.asyncSize - $reference.asyncSize,
+            percent: $after.asyncSize.percentFrom($reference.asyncSize)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxAsyncSizeDiff)
+        }
+      }
+    })
+    .[
+      not diff.size.ok or
+      not diff.initialSize.ok or
+      not diff.asyncSize.ok
+    ]
+  })
+  .[entrypoints]",
+        "serialized": Object {
+          "context": Object {
+            "params": Object {
+              "byName": Array [],
+              "exclude": Array [],
+              "global": Object {
+                "maxSizeDiff": 100,
+              },
+              "useCompressedSize": false,
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
     "message": "Entry \\"one\\": Download size diff of assets is 7.36 kb (943.55%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
@@ -154,8 +1256,143 @@ Array [
   },
   Object {
     "compilation": "da95abcf6bbf9b157ff6",
-    "details": undefined,
-    "filename": "after.json",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $reference: resolveReferenceFile();
+  $params: #.params;
+  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
+  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  
+  $input.compilations
+  .exclude({
+    exclude: $params.exclude.[type='compilation'].name,
+    get: <name>,
+  })
+  .({
+    $compilation: $;
+    $compilation,
+    entrypoints: entrypoints
+    .({
+      $entry: $;
+      $referenceEntry: $reference.compilations
+      .exclude({
+        exclude: $params.exclude.[type='compilation'].name,
+        get: <name>,
+      })
+      .entrypoints.[name=$entry.name].pick();
+      $entry,
+      $referenceEntry
+    })
+    .[entry and referenceEntry]
+    .exclude({
+      exclude: $params.exclude.[type='entry'].name,
+      get: <entry.name>,
+    })
+    .({
+      $entry;
+      $referenceEntry;
+      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
+      $rule: {
+        maxSizeDiff: [$matchedRule.maxSizeDiff, $params.global.maxSizeDiff, Infinity].useNotNullish(),
+        maxInitialSizeDiff: [$matchedRule.maxInitialSizeDiff, $params.global.maxInitialSizeDiff, Infinity].useNotNullish(),
+        maxAsyncSizeDiff: [$matchedRule.maxAsyncSizeDiff, $params.global.maxAsyncSizeDiff, Infinity].useNotNullish(),
+      };
+      
+      $referenceEntry,
+      afterEntry: $entry,
+      $rule
+    })
+    .({
+      $rule;
+      $handleEntry: => {
+        $chunks: data.chunks + data.chunks..children;
+        $initialChunks: $chunks.[initial];
+        $asyncChunks: $chunks.[not initial];
+        $size: $chunks.$getSizeByChunks($compilation.hash);
+        $initialSize: $initialChunks.$getSizeByChunks($compilation.hash);
+        $asyncSize: $asyncChunks.$getSizeByChunks($compilation.hash);
+        
+        entry: $,
+        $chunks,
+        $initialChunks,
+        $asyncChunks,
+        $size,
+        $initialSize,
+        $asyncSize,
+      };
+      $reference: referenceEntry.$handleEntry();
+      $after: afterEntry.$handleEntry();
+      $rule,
+      $reference,
+      $after,
+      diff: {
+        size: {
+          $diff: {
+            absolute: $after.size - $reference.size,
+            percent: $after.size.percentFrom($reference.size)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxSizeDiff)
+        },
+        initialSize: {
+          $diff: {
+            absolute: $after.initialSize - $reference.initialSize,
+            percent: $after.initialSize.percentFrom($reference.initialSize)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxInitialSizeDiff)
+        },
+        asyncSize: {
+          $diff: {
+            absolute: $after.asyncSize - $reference.asyncSize,
+            percent: $after.asyncSize.percentFrom($reference.asyncSize)
+          };
+          ...$diff,
+          ok: $diff.diff_isOverTheLimit($rule.maxAsyncSizeDiff)
+        }
+      }
+    })
+    .[
+      not diff.size.ok or
+      not diff.initialSize.ok or
+      not diff.asyncSize.ok
+    ]
+  })
+  .[entrypoints]",
+        "serialized": Object {
+          "context": Object {
+            "params": Object {
+              "byName": Array [],
+              "exclude": Array [],
+              "global": Object {
+                "maxSizeDiff": 100,
+              },
+              "useCompressedSize": false,
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
     "message": "Entry \\"two\\": Download size diff of assets is 17.42 kb (143.93%). It's over the 0.10 kb limit",
     "related": Array [
       Object {

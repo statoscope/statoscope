@@ -1,3 +1,4 @@
+import path from 'path';
 import {
   NormalizedChunk,
   NormalizedCompilation,
@@ -7,7 +8,15 @@ import { APIFnOptions } from '@statoscope/stats-validator/dist/api';
 import helpers from '@statoscope/helpers/dist/jora';
 import networkListType from '@statoscope/helpers/dist/network-type-list';
 import { WebpackRule } from '../../';
-import { ByNameFilterItem, ExcludeItem, normalizeExclude } from '../../limits-helpers';
+import {
+  ByNameFilterItem,
+  ExcludeItem,
+  normalizeExclude,
+  SerializedByNameFilterItem,
+  SerializedExcludeItem,
+  serializeExclude,
+} from '../../limits-helpers';
+import { serializeModuleTarget } from '../../helpers';
 
 type NetworkType = typeof networkListType[number]['name'];
 
@@ -23,7 +32,7 @@ export type Params = {
   useCompressedSize?: boolean;
   network: NetworkType;
   global?: Limits;
-  byName?: Array<ByNameFilterItem<Limits>>;
+  byName?: ByNameFilterItem<Limits>[];
 };
 
 export type ResultItem = {
@@ -56,17 +65,49 @@ function formatError(
   )}. It's over the ${h.formatDuration(limit)} limit`;
 }
 
+export type NormalizedParams = Exclude<Params, 'exclude'> & {
+  exclude: ExcludeItem<'compilation' | 'entry'>[];
+};
+
+export type SerializedParams = {
+  exclude?: SerializedExcludeItem<'compilation' | 'entry'>[];
+  useCompressedSize?: boolean;
+  network: NetworkType;
+  global?: Limits;
+  byName?: SerializedByNameFilterItem<Limits>[];
+};
+
+function serializeParams(params: NormalizedParams): SerializedParams {
+  return {
+    exclude: params.exclude.map(serializeExclude),
+    byName:
+      params.byName?.map((item) => {
+        return { name: h.serializeStringOrRegexp(item.name)!, limits: item.limits };
+      }) ?? [],
+    global: params.global,
+    network: params.network,
+    useCompressedSize: params.useCompressedSize,
+  };
+}
+
 const entryDownloadTimeLimits: WebpackRule<Params> = (ruleParams, data, api): void => {
   if (!ruleParams?.global && !ruleParams?.byName?.length) {
     throw new Error('Entry download time limits is not specified');
   }
 
+  const normalizedParams: NormalizedParams = {
+    ...ruleParams,
+    exclude: ruleParams.exclude?.map((item) => normalizeExclude(item, 'entry')) ?? [],
+  };
+
   const query = `
+  $input: resolveInputFile();
   $params: #.params;
   $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
   $network: [$params.network, 'Slow'].useNotNullish();
   $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  compilations
+  
+  $input.compilations
   .exclude({
     exclude: $params.exclude.[type='compilation'].name,
     get: <name>,
@@ -110,19 +151,44 @@ const entryDownloadTimeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
   })
   .[entrypoints]`;
 
-  const result = data.input.query(query, data.input, {
-    params: {
-      ...ruleParams,
-      exclude: ruleParams.exclude?.map((item) => normalizeExclude(item, 'entry')) ?? [],
-    },
+  const result = data.query(query, data.files, {
+    params: normalizedParams,
   }) as ResultItem[];
 
   for (const item of result) {
     for (const entryItem of item.entrypoints) {
       const options: APIFnOptions = {
-        filename: data.input.files[0].name,
+        filename: data.files[0].name,
         compilation: item.compilation.hash,
         related: [{ type: 'entry', id: entryItem.entry.name }],
+        details: [
+          {
+            type: 'discovery',
+            query,
+            filename: path.basename(data.files[0].name),
+            serialized: {
+              context: {
+                params: serializeParams(normalizedParams),
+              },
+            },
+            deserialize: {
+              type: 'query',
+              content: `
+              $theContext: context;
+              {
+                context: {
+                  params: {
+                    exclude: $theContext.params.exclude.(deserializeExclude()),
+                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
+                    global: $theContext.params.global,
+                    network: $theContext.params.network,
+                    useCompressedSize: $theContext.params.useCompressedSize,
+                  },
+                }
+              }`,
+            },
+          },
+        ],
       };
 
       if (!entryItem.downloadTimeOK) {

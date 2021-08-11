@@ -1,3 +1,4 @@
+import path from 'path';
 import chalk from 'chalk';
 import { Prepared } from '@statoscope/webpack-model';
 import {
@@ -10,9 +11,14 @@ import {
 import { API } from '@statoscope/stats-validator/dist/api';
 import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
 import { WebpackRule } from '../../';
-import { normalizePackageTarget, PackageTarget, RawTarget } from '../../helpers';
+import {
+  normalizePackageTarget,
+  PackageTarget,
+  RawTarget,
+  serializePackageTarget,
+} from '../../helpers';
 import { RuleExcludeItem } from '../diff-deprecated-packages';
-import { normalizeExclude } from '../../limits-helpers';
+import { normalizeExclude, serializeExclude } from '../../limits-helpers';
 
 export type PackageResultItem = {
   file: NormalizedFile;
@@ -47,10 +53,11 @@ function handleTarget(
   api: API
 ): PackageResultItem[] {
   const query = `
+  $input: resolveInputFile();
   $target: #.target;
   $exclude: #.exclude;
   
-  .group(<compilations>)
+  $input.group(<compilations>)
   .({file: value.pick(), compilation: key})
   .exclude({
     exclude: $exclude.[type='compilation'].name,
@@ -67,42 +74,81 @@ function handleTarget(
         .[
           $passVersion: (not $target.version or not version).bool();
           $passVersion or version.semverSatisfies($target.version)
-        ]
+        ].sort(isRoot desc, path.size() asc)
     })
   })
   .[packages.instances]`;
-  const result = data.input.query(query, data.input.files, {
+  const result = data.query(query, data.files, {
     target,
     exclude: ruleParams.exclude,
   }) as PackageResultItem[];
 
   for (const resultItem of result) {
     for (const packageItem of resultItem.packages) {
-      for (const instance of packageItem.instances) {
-        api.error(
-          `${packageItem.package.name}${
-            instance.version ? `@${instance.version}` : ''
-          } should not be used`,
-          {
-            filename: resultItem.file.name,
-            compilation: resultItem.compilation.name || resultItem.compilation.hash,
-            details: [
-              { type: 'text', content: makeInstanceDetailsContent(instance, false) },
-              { type: 'tty', content: makeInstanceDetailsContent(instance, true) },
-            ],
-            related: [{ type: 'package-instance', id: instance.path }],
-          }
-        );
-      }
+      const instances = packageItem.instances;
+      const versions = instances.map((item) => item.version).filter(Boolean);
+      api.error(
+        `${packageItem.package.name}${
+          versions.length ? `@${versions.join(', ')}` : ''
+        } should not be used`,
+        {
+          filename: resultItem.file.name,
+          compilation: resultItem.compilation.name || resultItem.compilation.hash,
+          details: [
+            { type: 'text', content: makeInstanceDetailsContent(instances, false) },
+            { type: 'tty', content: makeInstanceDetailsContent(instances, true) },
+            {
+              type: 'discovery',
+              query,
+              filename: path.basename(resultItem.file.name ?? data.files[0].name),
+              serialized: {
+                context: {
+                  target: serializePackageTarget(target),
+                  exclude: ruleParams.exclude.map(serializeExclude),
+                },
+              },
+              deserialize: {
+                type: 'query',
+                content: `
+                $theContext: context;
+                {
+                  context: {
+                    target: {
+                      name: $theContext.target.name.deserializeStringOrRegexp(),
+                      version: $theContext.target.version,
+                    },
+                    exclude: $theContext.exclude.(deserializeStringOrRegexp),
+                  }
+                }`,
+              },
+            },
+          ],
+          related: [
+            { type: 'package', id: packageItem.package.name },
+            ...instances.map(
+              (item) => ({ type: 'package-instance', id: item.path } as const)
+            ),
+          ],
+        }
+      );
     }
   }
 
   return result;
 }
 
-function makeInstanceDetailsContent(instance: NodeModuleInstance, tty: boolean): string {
+function makeInstanceDetailsContent(
+  instances: NodeModuleInstance[],
+  tty: boolean
+): string[] {
   const ctx = new chalk.Instance(tty ? {} : { level: 0 });
-  return `Instance: ${instance.path}  ${ctx.yellow(instance.version) ?? ''}`;
+  return [
+    'Instances:',
+    ...instances.map(
+      (instance) =>
+        `- ${instance.path}  ${instance.version ? ctx.yellow(instance.version) : ''}`
+    ),
+  ];
 }
 
 const restrictedPackages: WebpackRule<Params> = (ruleParams, data, api): void => {

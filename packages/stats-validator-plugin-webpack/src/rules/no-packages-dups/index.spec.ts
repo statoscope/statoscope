@@ -5,10 +5,10 @@ import rule from './';
 
 test('should work', () => {
   const pluginInstance = plugin();
-  const prepared = pluginInstance.prepare!([{ name: 'stats.json', data: statsV5 }]);
+  const prepared = pluginInstance.prepare!([{ name: 'input.json', data: statsV5 }]);
   const api = makeAPI({ warnAsError: false });
 
-  rule({}, { input: prepared }, api);
+  rule({}, prepared, api);
 
   expect(api.getStorage()).toMatchSnapshot();
 });
@@ -16,40 +16,40 @@ test('should work', () => {
 describe('exclude', () => {
   test('string', () => {
     const pluginInstance = plugin();
-    const prepared = pluginInstance.prepare!([{ name: 'stats.json', data: statsV5 }]);
+    const prepared = pluginInstance.prepare!([{ name: 'input.json', data: statsV5 }]);
     const api = makeAPI({ warnAsError: false });
 
-    rule({ exclude: ['bar'] }, { input: prepared }, api);
+    rule({ exclude: ['bar'] }, prepared, api);
 
     expect(api.getStorage()).toMatchSnapshot();
   });
 
   test('regexp', () => {
     const pluginInstance = plugin();
-    const prepared = pluginInstance.prepare!([{ name: 'stats.json', data: statsV5 }]);
+    const prepared = pluginInstance.prepare!([{ name: 'input.json', data: statsV5 }]);
     const api = makeAPI({ warnAsError: false });
 
-    rule({ exclude: [/ba/] }, { input: prepared }, api);
+    rule({ exclude: [/ba/] }, prepared, api);
 
     expect(api.getStorage()).toMatchSnapshot();
   });
 
   test('object', () => {
     const pluginInstance = plugin();
-    const prepared = pluginInstance.prepare!([{ name: 'stats.json', data: statsV5 }]);
+    const prepared = pluginInstance.prepare!([{ name: 'input.json', data: statsV5 }]);
     const api = makeAPI({ warnAsError: false });
 
-    rule({ exclude: [{ type: 'package', name: 'bar' }] }, { input: prepared }, api);
+    rule({ exclude: [{ type: 'package', name: 'bar' }] }, prepared, api);
 
     expect(api.getStorage()).toMatchSnapshot();
   });
 
   test('no exclude', () => {
     const pluginInstance = plugin();
-    const prepared = pluginInstance.prepare!([{ name: 'stats.json', data: statsV5 }]);
+    const prepared = pluginInstance.prepare!([{ name: 'input.json', data: statsV5 }]);
     const api = makeAPI({ warnAsError: false });
 
-    rule({ exclude: [/baaaaaa/] }, { input: prepared }, api);
+    rule({ exclude: [/baaaaaa/] }, prepared, api);
 
     expect(api.getStorage()).toMatchSnapshot();
   });

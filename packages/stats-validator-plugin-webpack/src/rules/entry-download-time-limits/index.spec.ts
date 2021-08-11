@@ -1,13 +1,15 @@
 import { API, makeAPI } from '@statoscope/stats-validator/dist/api';
+import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
+import { Prepared } from '@statoscope/webpack-model';
 import plugin from '../..';
 import statsV5 from '../../../../../test/bundles/simple/stats-prod.json';
 import rule, { Params } from './';
 
 function prepareAPI(ruleParams: Params): API {
   const pluginInstance = plugin();
-  const prepared = {
-    input: pluginInstance.prepare!([{ name: 'stats.json', data: statsV5 }]),
-  };
+  const prepared: RuleDataInput<Prepared> = pluginInstance.prepare!([
+    { name: 'input.json', data: statsV5 },
+  ]);
   const api = makeAPI({ warnAsError: false });
 
   rule(ruleParams, prepared, api);

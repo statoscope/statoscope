@@ -1,3 +1,4 @@
+import path from 'path';
 import chalk from 'chalk';
 import {
   NormalizedCompilation,
@@ -6,7 +7,7 @@ import {
 } from '@statoscope/webpack-model/dist/normalize';
 import { RelatedItem } from '@statoscope/stats-validator/dist/test-entry';
 import { WebpackRule } from '../../';
-import { ExcludeItem, normalizeExclude } from '../../limits-helpers';
+import { ExcludeItem, normalizeExclude, serializeExclude } from '../../limits-helpers';
 
 export type RuleExcludeItem = ExcludeItem<'compilation' | 'package'>;
 
@@ -29,8 +30,10 @@ const noPackagesDups: WebpackRule<Params> = (ruleParams, data, api): void => {
     exclude: ruleParams?.exclude?.map((item) => normalizeExclude(item, 'package')) ?? [],
   };
   const query = `
+  $input: resolveInputFile();
   $exclude: #.exclude;
-  .group(<compilations>)
+  
+  $input.group(<compilations>)
   .({file: value.pick(), compilation: key})
   .exclude({
     exclude: $exclude.[type='compilation'].name,
@@ -52,16 +55,19 @@ const noPackagesDups: WebpackRule<Params> = (ruleParams, data, api): void => {
     .sort(instances.size() desc, name asc)
   })
   .[packages]`;
-  const duplicatePackages = data.input.query(query, data.input.files, {
+
+  const duplicatePackages = data.query(query, data.files, {
     exclude: normalizedParams.exclude,
   }) as Result[];
 
   for (const item of duplicatePackages) {
     for (const packageItem of item.packages) {
-      const versions = data.input.query('instances.version.[]', packageItem) as string[];
+      const versions = data.query('instances.version.[]', packageItem) as
+        | string[]
+        | undefined;
       api.error(
         `Package ${packageItem.name} has ${packageItem.instances.length} instances ${
-          versions.length ? `with ${versions.length} versions` : ''
+          versions?.length ? `with ${versions.length} versions` : ''
         }`,
         {
           filename: item.file.name,
@@ -74,6 +80,26 @@ const noPackagesDups: WebpackRule<Params> = (ruleParams, data, api): void => {
             {
               type: 'tty',
               content: makeDetailsContent(packageItem, true),
+            },
+            {
+              type: 'discovery',
+              query,
+              filename: path.basename(data.files[0].name),
+              serialized: {
+                context: {
+                  exclude: normalizedParams.exclude.map(serializeExclude),
+                },
+              },
+              deserialize: {
+                type: 'query',
+                content: `
+                $theContext: context;
+                {
+                  context: {
+                    exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                  }
+                }`,
+              },
             },
           ],
           related: [
@@ -95,7 +121,7 @@ function makeDetailsContent(packageItem: NormalizedPackage, tty: boolean): strin
   const ctx = new chalk.Instance(tty ? {} : { level: 0 });
 
   return packageItem.instances
-    .map((item) => `- ${item.path}  ${ctx.yellow(item.version) ?? ''}`)
+    .map((item) => `- ${item.path}  ${item.version ? ctx.yellow(item.version) : ''}`)
     .join('\n');
 }
 

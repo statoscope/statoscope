@@ -1,3 +1,4 @@
+import path from 'path';
 import { Prepared } from '@statoscope/webpack-model';
 import {
   NormalizedCompilation,
@@ -7,15 +8,21 @@ import {
 import { API } from '@statoscope/stats-validator/dist/api';
 import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
 import { WebpackRule } from '../../';
-import { ModuleTarget, normalizeModuleTarget, RawTarget } from '../../helpers';
-import { RuleExcludeItem } from '../diff-deprecated-modules';
-import { normalizeExclude } from '../../limits-helpers';
+import {
+  ModuleTarget,
+  normalizeModuleTarget,
+  RawTarget,
+  serializeModuleTarget,
+} from '../../helpers';
+import { ExcludeItem, normalizeExclude, serializeExclude } from '../../limits-helpers';
 
 export type ModuleResultItem = {
   file: NormalizedFile;
   compilation: NormalizedCompilation;
   modules: Array<NormalizedModule>;
 };
+
+export type RuleExcludeItem = ExcludeItem<'compilation'>;
 
 export type NormalizedParams = {
   target: ModuleTarget[];
@@ -36,10 +43,11 @@ function handledTarget(
   api: API
 ): ModuleResultItem[] {
   const query = `
+  $input: resolveInputFile();
   $exclude: #.exclude;
   $target: #.target;
   
-  .group(<compilations>)
+  $input.group(<compilations>)
     .({file: value.pick(), compilation: key})
     .exclude({
       exclude: $exclude.[type='compilation'].name,
@@ -50,17 +58,43 @@ function handledTarget(
       modules: compilation..modules.[name.isMatch($target.name)]
     }).[modules]
   `;
-  const result = data.input.query(query, data.input.files, {
+  const result = data.query(query, data.files, {
     target,
     exclude: ruleParams.exclude,
   }) as ModuleResultItem[];
 
   for (const resultItem of result) {
     for (const module of resultItem.modules) {
-      api.error(`${module.name} should not be used`, {
+      api.error(`Module ${module.name} should not be used`, {
         filename: resultItem.file.name,
         compilation: resultItem.compilation.name || resultItem.compilation.hash,
         related: [{ type: 'module', id: module.name }],
+        details: [
+          {
+            type: 'discovery',
+            query,
+            filename: path.basename(resultItem.file.name ?? data.files[0].name),
+            serialized: {
+              context: {
+                target: serializeModuleTarget(target),
+                exclude: ruleParams.exclude.map(serializeExclude),
+              },
+            },
+            deserialize: {
+              type: 'query',
+              content: `
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }`,
+            },
+          },
+        ],
       });
     }
   }

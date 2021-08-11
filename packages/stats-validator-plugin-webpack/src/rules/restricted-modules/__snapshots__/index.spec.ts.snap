@@ -4,9 +4,54 @@ exports[`matches 1`] = `
 Array [
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/index.ts should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "./src/index.ts",
+                "type": "string",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/index.ts should not be used",
     "related": Array [
       Object {
         "id": "./src/index.ts",
@@ -17,9 +62,55 @@ Array [
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/index.ts + 3 modules should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "^\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/index.ts + 3 modules should not be used",
     "related": Array [
       Object {
         "id": "./src/index.ts + 3 modules",
@@ -30,9 +121,55 @@ Array [
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/index.ts should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "^\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/index.ts should not be used",
     "related": Array [
       Object {
         "id": "./src/index.ts",
@@ -43,9 +180,55 @@ Array [
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/sub-module.ts should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "^\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/sub-module.ts should not be used",
     "related": Array [
       Object {
         "id": "./src/sub-module.ts",
@@ -56,9 +239,55 @@ Array [
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/index2.ts + 1 modules should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "^\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/index2.ts + 1 modules should not be used",
     "related": Array [
       Object {
         "id": "./src/index2.ts + 1 modules",
@@ -69,9 +298,55 @@ Array [
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/index2.ts should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "^\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/index2.ts should not be used",
     "related": Array [
       Object {
         "id": "./src/index2.ts",
@@ -82,9 +357,55 @@ Array [
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/index2.css should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "^\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/index2.css should not be used",
     "related": Array [
       Object {
         "id": "./src/index2.css",
@@ -95,9 +416,55 @@ Array [
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/test.txt should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "^\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/test.txt should not be used",
     "related": Array [
       Object {
         "id": "./src/test.txt",
@@ -108,9 +475,55 @@ Array [
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/dyn.ts should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "^\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/dyn.ts should not be used",
     "related": Array [
       Object {
         "id": "./src/dyn.ts",
@@ -121,9 +534,55 @@ Array [
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/statoscope.png should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "^\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/statoscope.png should not be used",
     "related": Array [
       Object {
         "id": "./src/statoscope.png",
@@ -134,9 +593,54 @@ Array [
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/index.ts should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "./src/index.ts",
+                "type": "string",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/index.ts should not be used",
     "related": Array [
       Object {
         "id": "./src/index.ts",
@@ -147,9 +651,55 @@ Array [
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/index.ts + 3 modules should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "^\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/index.ts + 3 modules should not be used",
     "related": Array [
       Object {
         "id": "./src/index.ts + 3 modules",
@@ -160,9 +710,55 @@ Array [
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/index.ts should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "^\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/index.ts should not be used",
     "related": Array [
       Object {
         "id": "./src/index.ts",
@@ -173,9 +769,55 @@ Array [
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/sub-module.ts should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "^\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/sub-module.ts should not be used",
     "related": Array [
       Object {
         "id": "./src/sub-module.ts",
@@ -186,9 +828,55 @@ Array [
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/index2.ts + 1 modules should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "^\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/index2.ts + 1 modules should not be used",
     "related": Array [
       Object {
         "id": "./src/index2.ts + 1 modules",
@@ -199,9 +887,55 @@ Array [
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/index2.ts should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "^\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/index2.ts should not be used",
     "related": Array [
       Object {
         "id": "./src/index2.ts",
@@ -212,9 +946,55 @@ Array [
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/index2.css should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "^\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/index2.css should not be used",
     "related": Array [
       Object {
         "id": "./src/index2.css",
@@ -225,9 +1005,55 @@ Array [
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/test.txt should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "^\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/test.txt should not be used",
     "related": Array [
       Object {
         "id": "./src/test.txt",
@@ -238,9 +1064,55 @@ Array [
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/dyn.ts should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "^\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/dyn.ts should not be used",
     "related": Array [
       Object {
         "id": "./src/dyn.ts",
@@ -251,9 +1123,55 @@ Array [
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
-    "details": undefined,
-    "filename": "stats.json",
-    "message": "./src/statoscope.png should not be used",
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "^\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./src/statoscope.png should not be used",
     "related": Array [
       Object {
         "id": "./src/statoscope.png",

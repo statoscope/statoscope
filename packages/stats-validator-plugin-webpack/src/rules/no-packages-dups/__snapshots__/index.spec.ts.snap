@@ -15,8 +15,62 @@ Array [
 - node_modules/foo/node_modules/bar  2.0.0",
         "type": "tty",
       },
+      Object {
+        "deserialize": Object {
+          "content": "
+                $theContext: context;
+                {
+                  context: {
+                    exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                  }
+                }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  
+  $input.group(<compilations>)
+  .({file: value.pick(), compilation: key})
+  .exclude({
+    exclude: $exclude.[type='compilation'].name,
+    get: <compilation.name>,
+  })
+  .({
+    ...$,
+    packages: compilation
+    .nodeModules
+    .exclude({
+      exclude: $exclude.[type='package'].name,
+      get: <name>,
+    })
+    .[instances.size() > 1]
+    .({
+      ...$,
+      instances: instances.sort(isRoot desc, path.size() asc)
+    })
+    .sort(instances.size() desc, name asc)
+  })
+  .[packages]",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [
+              Object {
+                "name": Object {
+                  "content": "baaaaaa",
+                  "flags": "",
+                  "type": "regexp",
+                },
+                "type": "package",
+              },
+            ],
+          },
+        },
+        "type": "discovery",
+      },
     ],
-    "filename": "stats.json",
+    "filename": "input.json",
     "message": "Package bar has 2 instances with 2 versions",
     "related": Array [
       Object {
@@ -58,8 +112,53 @@ Array [
 - node_modules/foo/node_modules/bar  2.0.0",
         "type": "tty",
       },
+      Object {
+        "deserialize": Object {
+          "content": "
+                $theContext: context;
+                {
+                  context: {
+                    exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                  }
+                }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  
+  $input.group(<compilations>)
+  .({file: value.pick(), compilation: key})
+  .exclude({
+    exclude: $exclude.[type='compilation'].name,
+    get: <compilation.name>,
+  })
+  .({
+    ...$,
+    packages: compilation
+    .nodeModules
+    .exclude({
+      exclude: $exclude.[type='package'].name,
+      get: <name>,
+    })
+    .[instances.size() > 1]
+    .({
+      ...$,
+      instances: instances.sort(isRoot desc, path.size() asc)
+    })
+    .sort(instances.size() desc, name asc)
+  })
+  .[packages]",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+          },
+        },
+        "type": "discovery",
+      },
     ],
-    "filename": "stats.json",
+    "filename": "input.json",
     "message": "Package bar has 2 instances with 2 versions",
     "related": Array [
       Object {
