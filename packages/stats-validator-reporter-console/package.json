@@ -21,7 +21,7 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "@statoscope/stats-validator": "^5.4.0",
+    "@statoscope/types": "^5.4.0",
     "chalk": "^4.1.1"
   }
 }

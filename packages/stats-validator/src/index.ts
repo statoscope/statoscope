@@ -2,22 +2,20 @@ import fs from 'fs';
 import module from 'module';
 // @ts-ignore
 import { parseChunked } from '@discoveryjs/json-ext';
-import { API, makeAPI, MakeAPIParams } from './api';
+import ConsoleReporter from '@statoscope/stats-validator-reporter-console';
+import {
+  API,
+  MakeAPIParams,
+  Reporter,
+  ValidationResult,
+} from '@statoscope/types/types/validation';
+import { makeAPI } from './api';
 import { InputFile, PluginFn, PrepareFn } from './plugin';
 import { Rule, RuleDataInput } from './rule';
 import { Config, NormalizedRuleExecParams, RuleExecMode, RuleExecParams } from './config';
 
-export type ValidationResultItem = {
-  name: string;
-  api: API;
-};
-
-export type ValidationResult = {
-  rules: Array<ValidationResultItem>;
-  files: {
-    input: string;
-    reference?: string | null;
-  };
+export type ReporterConstructor<TOptions> = {
+  new (options?: TOptions): Reporter;
 };
 
 export default class Validator {

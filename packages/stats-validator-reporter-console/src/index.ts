@@ -1,11 +1,11 @@
-import { ValidationResult } from '@statoscope/stats-validator';
 import chalk from 'chalk';
-import { Reporter } from '@statoscope/stats-validator/dist/reporter';
 import {
   DetailsDescriptorText,
   DetailsDescriptorTTY,
+  Reporter,
   TestEntry,
-} from '@statoscope/stats-validator/dist/test-entry';
+  ValidationResult,
+} from '@statoscope/types/types/validation';
 
 export type Options = { warnAsError?: boolean; useColors?: boolean };
 

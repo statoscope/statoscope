@@ -1,10 +1,11 @@
 import path from 'path';
 import { Argv } from 'yargs';
-import Validator, { ValidationResult } from '@statoscope/stats-validator';
+import Validator from '@statoscope/stats-validator';
 import ConsoleReporter from '@statoscope/stats-validator-reporter-console';
 import StatsReporter from '@statoscope/stats-validator-reporter-stats-report';
 import { Reporter } from '@statoscope/stats-validator/dist/reporter';
 import { Options } from '@statoscope/stats-validator-reporter-stats-report/dist';
+import { ValidationResult } from '@statoscope/types/types/validation';
 import legacyWebpackStatsValidator from './legacyWebpackValidator';
 
 export default function (yargs: Argv): Argv {

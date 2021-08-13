@@ -22,7 +22,8 @@
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
     "@discoveryjs/json-ext": "^0.5.3",
-    "@statoscope/types": "^5.4.0"
+    "@statoscope/types": "^5.4.0",
+    "@statoscope/stats-validator-reporter-console": "^5.4.0"
   },
   "devDependencies": {}
 }

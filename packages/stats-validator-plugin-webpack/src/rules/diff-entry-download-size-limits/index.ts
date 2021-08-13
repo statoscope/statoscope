@@ -4,8 +4,8 @@ import {
   NormalizedCompilation,
   NormalizedEntrypointItem,
 } from '@statoscope/webpack-model/dist/normalize';
-import { APIFnOptions } from '@statoscope/stats-validator/dist/api';
 import helpers, { Limit, ValueDiff } from '@statoscope/helpers/dist/jora';
+import { APIFnOptions } from '@statoscope/types/types/validation';
 import { WebpackRule } from '../../';
 import {
   ByNameFilterItem,

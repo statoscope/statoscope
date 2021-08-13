@@ -5,13 +5,12 @@ import { Readable } from 'stream';
 import open from 'open';
 // @ts-ignore
 import { parseChunked, stringifyStream } from '@discoveryjs/json-ext';
-import { ValidationResult } from '@statoscope/stats-validator';
-import { Reporter } from '@statoscope/stats-validator/dist/reporter';
 import { transform, waitFinished } from '@statoscope/report-writer/dist/utils';
 import { StatsDescriptor } from '@statoscope/stats';
 import statsPackage from '@statoscope/stats/package.json';
 import { Extension } from '@statoscope/stats/spec/extension';
 import ExtensionValidationResultGenerator from '@statoscope/stats-extension-stats-validation-result/dist/generator';
+import { Reporter, ValidationResult } from '@statoscope/types/types/validation';
 import * as version from './version';
 
 export type Options = {

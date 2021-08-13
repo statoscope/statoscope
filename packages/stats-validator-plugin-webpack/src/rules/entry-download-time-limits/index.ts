@@ -4,9 +4,9 @@ import {
   NormalizedCompilation,
   NormalizedEntrypointItem,
 } from '@statoscope/webpack-model/dist/normalize';
-import { APIFnOptions } from '@statoscope/stats-validator/dist/api';
 import helpers from '@statoscope/helpers/dist/jora';
 import networkListType from '@statoscope/helpers/dist/network-type-list';
+import { APIFnOptions } from '@statoscope/types/types/validation';
 import { WebpackRule } from '../../';
 import {
   ByNameFilterItem,
@@ -16,7 +16,6 @@ import {
   SerializedExcludeItem,
   serializeExclude,
 } from '../../limits-helpers';
-import { serializeModuleTarget } from '../../helpers';
 
 type NetworkType = typeof networkListType[number]['name'];
 

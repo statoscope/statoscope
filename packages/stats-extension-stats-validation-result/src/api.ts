@@ -1,7 +1,7 @@
 import makeEntityResolver from '@statoscope/helpers/dist/entity-resolver';
 import { Resolver } from '@statoscope/helpers/dist/entity-resolver';
 import { APIFactory } from '@statoscope/extensions';
-import { RelatedItem } from '@statoscope/stats-validator/dist/test-entry';
+import { RelatedItem } from '@statoscope/types/types/validation';
 import { Format, Item } from './generator';
 
 export type API = {

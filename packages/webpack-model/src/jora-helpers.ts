@@ -6,8 +6,8 @@ import type { Instance } from '@statoscope/stats-extension-package-info/dist/gen
 import { API as ExtensionValidationResultAPI } from '@statoscope/stats-extension-stats-validation-result/dist/api';
 import Graph, { PathSolution } from '@statoscope/helpers/dist/graph';
 import type { Item } from '@statoscope/stats-extension-stats-validation-result/dist/generator';
+import { RelatedItem } from '@statoscope/types/types/validation';
 import { Webpack } from '../webpack';
-import { RelatedItem } from '../../stats-validator/dist/test-entry';
 import {
   moduleNameResource,
   moduleReasonResource,

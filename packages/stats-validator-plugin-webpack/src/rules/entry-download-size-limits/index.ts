@@ -4,7 +4,7 @@ import {
   NormalizedCompilation,
   NormalizedEntrypointItem,
 } from '@statoscope/webpack-model/dist/normalize';
-import { APIFnOptions } from '@statoscope/stats-validator/dist/api';
+import { APIFnOptions } from '@statoscope/types/types/validation';
 import helpers from '@statoscope/helpers/dist/jora';
 import { WebpackRule } from '../../';
 import {

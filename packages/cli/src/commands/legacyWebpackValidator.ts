@@ -3,13 +3,14 @@ import path from 'path';
 // @ts-ignore
 import { parseChunked } from '@discoveryjs/json-ext';
 import { NormalizedFile } from '@statoscope/webpack-model/dist/normalize';
-import { API, makeAPI } from '@statoscope/stats-validator/dist/api';
-import { ValidationResult } from '@statoscope/stats-validator';
+import { makeAPI } from '@statoscope/stats-validator/dist/api';
 import { prepareWithJora } from '@statoscope/webpack-model';
 import {
+  API,
+  ValidationResult,
   TestEntry,
   Type as TestEntryType,
-} from '@statoscope/stats-validator/dist/test-entry';
+} from '@statoscope/types/types/validation';
 
 export type WebpackRawValidatorInputData = {
   // eslint-disable-next-line @typescript-eslint/ban-types

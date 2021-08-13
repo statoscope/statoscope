@@ -8,7 +8,7 @@ import {
   NormalizedModule,
   NormalizedPackage,
 } from '@statoscope/webpack-model/dist/normalize';
-import { API } from '@statoscope/stats-validator/dist/api';
+import { API } from '@statoscope/types/types/validation';
 import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
 import { WebpackRule } from '../../';
 import {

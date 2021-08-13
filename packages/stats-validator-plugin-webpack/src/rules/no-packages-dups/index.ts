@@ -5,7 +5,7 @@ import {
   NormalizedFile,
   NormalizedPackage,
 } from '@statoscope/webpack-model/dist/normalize';
-import { RelatedItem } from '@statoscope/stats-validator/dist/test-entry';
+import { RelatedItem } from '@statoscope/types/types/validation';
 import { WebpackRule } from '../../';
 import { ExcludeItem, normalizeExclude, serializeExclude } from '../../limits-helpers';
 

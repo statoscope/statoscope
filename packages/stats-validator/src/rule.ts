@@ -1,4 +1,4 @@
-import { API } from './api';
+import { API } from '@statoscope/types/types/validation';
 
 export type RuleDataInput<TInput> = TInput;
 

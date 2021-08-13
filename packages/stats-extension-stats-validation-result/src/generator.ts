@@ -5,7 +5,7 @@ import {
   RelatedItem,
   TestEntry,
   Type,
-} from '@statoscope/stats-validator/dist/test-entry';
+} from '@statoscope/types/types/validation';
 import { name, version, author, homepage } from './version';
 
 export type Format = Extension<Payload>;

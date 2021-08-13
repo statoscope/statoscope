@@ -1,34 +1,4 @@
-import { ViewConfig } from '@statoscope/types';
-import { TestEntry, Details, RelatedItem } from './test-entry';
-
-export type RuleResult<TData> = {
-  data: TData;
-  view: ViewConfig<TData, unknown>;
-};
-
-export type Storage = TestEntry[];
-
-export type APIFnOptions = {
-  filename?: string;
-  compilation?: string;
-  details?: Details;
-  related?: RelatedItem[];
-};
-
-export type API = {
-  error(message: string, filenameOrOptions?: string | APIFnOptions): void;
-  warn(message: string, filenameOrOptions?: string | APIFnOptions): void;
-  info(message: string, filenameOrOptions?: string | APIFnOptions): void;
-  hasErrors(): boolean;
-  getInfoTotal(): number;
-  getWarnTotal(): number;
-  getErrorTotal(): number;
-  getStorage(): Storage;
-};
-
-export type MakeAPIParams = {
-  warnAsError?: boolean;
-};
+import { API, MakeAPIParams, Storage } from '@statoscope/types/types/validation';
 
 export function makeAPI(params?: MakeAPIParams): API {
   const storage: Storage = [];

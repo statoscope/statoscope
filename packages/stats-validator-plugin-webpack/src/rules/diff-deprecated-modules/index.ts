@@ -1,8 +1,8 @@
 import path from 'path';
 import { Prepared } from '@statoscope/webpack-model';
 import { NormalizedReason } from '@statoscope/webpack-model/dist/normalize';
-import { API } from '@statoscope/stats-validator/dist/api';
 import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
+import { API } from '@statoscope/types/types/validation';
 import { WebpackRule } from '../../';
 import {
   ModuleTarget,

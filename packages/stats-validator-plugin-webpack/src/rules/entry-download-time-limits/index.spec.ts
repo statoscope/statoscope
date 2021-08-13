@@ -1,6 +1,7 @@
-import { API, makeAPI } from '@statoscope/stats-validator/dist/api';
+import { makeAPI } from '@statoscope/stats-validator/dist/api';
 import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
 import { Prepared } from '@statoscope/webpack-model';
+import { API } from '@statoscope/types/types/validation';
 import plugin from '../..';
 import statsV5 from '../../../../../test/bundles/simple/stats-prod.json';
 import rule, { Params } from './';
