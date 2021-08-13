@@ -17,43 +17,10 @@ Array [
   Array [
     "1 problems (1 errors, 0 warnings)",
   ],
-  Array [
-    "Preparing data for Statoscope report...",
-  ],
-  Array [
-    "Generating stats...",
-  ],
-  Array [
-    "Stats saved into <pwd>/stats-with-validation.json",
-  ],
-  Array [
-    "Generating Statoscope report...",
-  ],
-  Array [
-    "Statoscope report saved into <tmp>/statoscope-report-stats-dev.html",
-  ],
 ]
 `;
 
-exports[`validator types jora-query from js jora-ok.js 1`] = `
-Array [
-  Array [
-    "Preparing data for Statoscope report...",
-  ],
-  Array [
-    "Generating stats...",
-  ],
-  Array [
-    "Stats saved into <pwd>/stats-with-validation.json",
-  ],
-  Array [
-    "Generating Statoscope report...",
-  ],
-  Array [
-    "Statoscope report saved into <tmp>/statoscope-report-stats-dev.html",
-  ],
-]
-`;
+exports[`validator types jora-query from js jora-ok.js 1`] = `Array []`;
 
 exports[`validator types raw jora-query fail.jora 1`] = `
 Array [
@@ -72,43 +39,10 @@ Array [
   Array [
     "1 problems (1 errors, 0 warnings)",
   ],
-  Array [
-    "Preparing data for Statoscope report...",
-  ],
-  Array [
-    "Generating stats...",
-  ],
-  Array [
-    "Stats saved into <pwd>/stats-with-validation.json",
-  ],
-  Array [
-    "Generating Statoscope report...",
-  ],
-  Array [
-    "Statoscope report saved into <tmp>/statoscope-report-stats-dev.html",
-  ],
 ]
 `;
 
-exports[`validator types raw jora-query ok.jora 1`] = `
-Array [
-  Array [
-    "Preparing data for Statoscope report...",
-  ],
-  Array [
-    "Generating stats...",
-  ],
-  Array [
-    "Stats saved into <pwd>/stats-with-validation.json",
-  ],
-  Array [
-    "Generating Statoscope report...",
-  ],
-  Array [
-    "Statoscope report saved into <tmp>/statoscope-report-stats-dev.html",
-  ],
-]
-`;
+exports[`validator types raw jora-query ok.jora 1`] = `Array []`;
 
 exports[`validator types raw jora-query rules.jora 1`] = `
 Array [
@@ -137,7 +71,7 @@ Array [
     "",
   ],
   Array [
-    "<pwd>/test/bundles/simple/stats-dev.json",
+    "input.json",
   ],
   Array [
     "unknown compilation",
@@ -165,21 +99,6 @@ Array [
   ],
   Array [
     "5 problems (2 errors, 3 warnings)",
-  ],
-  Array [
-    "Preparing data for Statoscope report...",
-  ],
-  Array [
-    "Generating stats...",
-  ],
-  Array [
-    "Stats saved into <pwd>/stats-with-validation.json",
-  ],
-  Array [
-    "Generating Statoscope report...",
-  ],
-  Array [
-    "Statoscope report saved into <tmp>/statoscope-report-stats-dev.html",
   ],
 ]
 `;

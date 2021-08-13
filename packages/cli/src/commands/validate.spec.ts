@@ -20,11 +20,10 @@ const validatorFixturesJSJoraQuery = [
   path: path.resolve(__dirname, filename),
 }));
 
-const inputFixturePath = [
-  '../../../../test/bundles/simple/stats-dev.json',
-  '../../../../test/bundles/v4/simple/stats-dev.json',
-].map((filepath) => path.resolve(__dirname, filepath));
-
+const inputFixturePath = path.resolve(
+  __dirname,
+  '../../../../test/bundles/simple/stats-dev.json'
+);
 const rootPath = path.resolve(__dirname, '../../../../');
 const outputDir = path.join(rootPath, 'test/temp', path.relative(rootPath, __filename));
 // const consoleLog = console.log.bind(console);
@@ -60,7 +59,7 @@ describe('validator types', () => {
       '--validator',
       item.path,
       '--input',
-      ...inputFixturePath,
+      inputFixturePath,
       '--output',
       outputPath,
     ]);
@@ -82,7 +81,7 @@ describe('validator types', () => {
       '--validator',
       item.path,
       '--input',
-      ...inputFixturePath,
+      inputFixturePath,
       '--output',
       outputPath,
     ]);

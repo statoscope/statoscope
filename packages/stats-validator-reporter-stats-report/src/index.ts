@@ -25,8 +25,10 @@ export type StatoscopeMeta = {
   extensions: Extension<unknown>[];
 };
 
-export default class ConsoleReporter implements Reporter<Options> {
-  async run(result: ValidationResult, options?: Options): Promise<void> {
+export default class ConsoleReporter implements Reporter {
+  constructor(public options?: Options) {}
+
+  async run(result: ValidationResult): Promise<void> {
     console.log(`Preparing data for Statoscope report...`);
     const generator = new ExtensionValidationResultGenerator(version);
 
@@ -56,9 +58,9 @@ export default class ConsoleReporter implements Reporter<Options> {
 
     const id = path.basename(result.files.input, '.json');
     const reportPath =
-      options?.saveReportTo ||
+      this.options?.saveReportTo ||
       path.join(os.tmpdir(), `statoscope-report-${id}-${Date.now()}.html`);
-    const statsPath = options?.saveStatsTo;
+    const statsPath = this.options?.saveStatsTo;
 
     if (statsPath) {
       console.log(`Generating stats...`);
@@ -73,7 +75,7 @@ export default class ConsoleReporter implements Reporter<Options> {
       console.log(`Stats saved into ${statsPath}`);
     }
 
-    if (reportPath && !options?.saveOnlyStats) {
+    if (reportPath && !this.options?.saveOnlyStats) {
       console.log(`Generating Statoscope report...`);
       const reportFilename = await transform(
         {
@@ -103,7 +105,7 @@ export default class ConsoleReporter implements Reporter<Options> {
       );
       console.log(`Statoscope report saved into ${reportFilename}`);
 
-      if (options?.open) {
+      if (this.options?.open) {
         open(reportFilename);
       }
     }

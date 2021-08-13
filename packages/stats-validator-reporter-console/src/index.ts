@@ -9,11 +9,13 @@ import {
 
 export type Options = { warnAsError?: boolean; useColors?: boolean };
 
-export default class ConsoleReporter implements Reporter<Options> {
-  async run(result: ValidationResult, options: Options): Promise<void> {
+export default class ConsoleReporter implements Reporter {
+  constructor(public options?: Options) {}
+
+  async run(result: ValidationResult): Promise<void> {
     const normalizedOptions: Required<Options> = {
-      useColors: options.useColors ?? true,
-      warnAsError: options.warnAsError ?? false,
+      useColors: this.options?.useColors ?? true,
+      warnAsError: this.options?.warnAsError ?? false,
     };
     const chalkCtx = new chalk.Instance(normalizedOptions.useColors ? {} : { level: 0 });
     // file -> compilation -> rule -> entry

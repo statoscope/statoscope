@@ -2,9 +2,7 @@ import path from 'path';
 import { Argv } from 'yargs';
 import Validator from '@statoscope/stats-validator';
 import ConsoleReporter from '@statoscope/stats-validator-reporter-console';
-import StatsReporter from '@statoscope/stats-validator-reporter-stats-report';
-import { Reporter } from '@statoscope/stats-validator/dist/reporter';
-import { Options } from '@statoscope/stats-validator-reporter-stats-report/dist';
+import { Config } from '@statoscope/stats-validator/dist/config';
 import { ValidationResult } from '@statoscope/types/types/validation';
 import legacyWebpackStatsValidator from './legacyWebpackValidator';
 
@@ -22,14 +20,14 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
           alias: 'v',
           type: 'string',
         })
-        .positional('config', {
-          describe: 'path to statoscope config',
-          alias: 'c',
-          type: 'string',
-        })
         .positional('input', {
           describe: 'path to a stats.json',
           alias: 'i',
+          type: 'string',
+        })
+        .option('config', {
+          describe: 'path to statoscope config',
+          alias: 'c',
           type: 'string',
         })
         .option('reference', {
@@ -50,7 +48,7 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
         .demandOption(['input']);
     },
     async (argv) => {
-      let result: ValidationResult | undefined;
+      let result: ValidationResult;
 
       if (argv['diff-with'] && argv.input.length > 1) {
         console.warn(
@@ -68,35 +66,23 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
             warnAsError: argv['warn-as-error'],
           }
         );
+        const reporter = new ConsoleReporter();
+        await reporter.run(result);
       } else {
         // todo resole nearest config
         const configPath = path.resolve(argv.config);
-        const validator = new Validator(configPath);
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        const config = require(configPath) as Config;
+        const validator = new Validator(config, path.dirname(configPath));
 
         result = await validator.validate(
           path.resolve(argv.input),
           argv.reference ? path.resolve(argv.reference) : void 0
         );
-      }
 
-      type ReporterItem = { reporter: Reporter<unknown>; options: unknown };
-
-      const reporters: ReporterItem[] = [
-        {
-          reporter: new ConsoleReporter(),
-          options: {},
-        },
-        {
-          reporter: new StatsReporter(),
-          options: {
-            open: true,
-            //saveStatsTo: path.resolve('stats-with-validation.json'),
-          } as Options,
-        },
-      ];
-
-      for (const item of reporters) {
-        await item.reporter.run(result, item.options);
+        for (const item of validator.reporters) {
+          await item.run(result);
+        }
       }
     }
   );
