@@ -20,10 +20,26 @@ const validatorFixturesJSJoraQuery = [
   path: path.resolve(__dirname, filename),
 }));
 
+const configFixturePath = path.resolve(
+  __dirname,
+  '../../../../test/fixtures/cli/validate/config.js'
+);
+
+const configReferenceFixturePath = path.resolve(
+  __dirname,
+  '../../../../test/fixtures/cli/validate/config-reference.js'
+);
+
 const inputFixturePath = path.resolve(
   __dirname,
   '../../../../test/bundles/simple/stats-dev.json'
 );
+
+const referenceFixturePath = path.resolve(
+  __dirname,
+  '../../../../test/bundles/v4/simple/stats-dev.json'
+);
+
 const rootPath = path.resolve(__dirname, '../../../../');
 const outputDir = path.join(rootPath, 'test/temp', path.relative(rootPath, __filename));
 // const consoleLog = console.log.bind(console);
@@ -53,16 +69,7 @@ function getOutput(): string[][] {
 
 describe('validator types', () => {
   test.each(validatorFixturesJoraQuery)('raw jora-query $name', async (item) => {
-    const outputPath = path.join(outputDir, `raw jora-query ${item.name}.html`);
-    let y = yargs([
-      'validate',
-      '--validator',
-      item.path,
-      '--input',
-      inputFixturePath,
-      '--output',
-      outputPath,
-    ]);
+    let y = yargs(['validate', '--validator', item.path, '--input', inputFixturePath]);
 
     y = validate(y);
     y.fail((_, error) => {
@@ -75,15 +82,27 @@ describe('validator types', () => {
   });
 
   test.each(validatorFixturesJSJoraQuery)('jora-query from js $name', async (item) => {
-    const outputPath = path.join(outputDir, `jora-query from js ${item.name}.html`);
+    let y = yargs(['validate', '--validator', item.path, '--input', inputFixturePath]);
+
+    y = validate(y);
+    y.fail((_, error) => {
+      console.error(error);
+    });
+
+    await y.argv;
+
+    expect(getOutput()).toMatchSnapshot();
+  });
+
+  test('with reference', async () => {
     let y = yargs([
       'validate',
       '--validator',
-      item.path,
+      validatorFixturesJoraQuery[2].path,
       '--input',
       inputFixturePath,
-      '--output',
-      outputPath,
+      '--reference',
+      referenceFixturePath,
     ]);
 
     y = validate(y);
@@ -94,5 +113,49 @@ describe('validator types', () => {
     await y.argv;
 
     expect(getOutput()).toMatchSnapshot();
+  });
+});
+
+describe('with config', () => {
+  describe('explicit', () => {
+    test('single', async () => {
+      let y = yargs([
+        'validate',
+        '--config',
+        configFixturePath,
+        '--input',
+        inputFixturePath,
+      ]);
+
+      y = validate(y);
+      y.fail((_, error) => {
+        console.error(error);
+      });
+
+      await y.argv;
+
+      expect(getOutput()).toMatchSnapshot();
+    });
+
+    test('reference', async () => {
+      let y = yargs([
+        'validate',
+        '--config',
+        configReferenceFixturePath,
+        '--input',
+        inputFixturePath,
+        '--reference',
+        referenceFixturePath,
+      ]);
+
+      y = validate(y);
+      y.fail((_, error) => {
+        console.error(error);
+      });
+
+      await y.argv;
+
+      expect(getOutput()).toMatchSnapshot();
+    });
   });
 });
