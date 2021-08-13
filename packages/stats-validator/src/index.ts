@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 import module from 'module';
 // @ts-ignore
 import { parseChunked } from '@discoveryjs/json-ext';
@@ -19,10 +20,10 @@ export type ReporterConstructor<TOptions> = {
 };
 
 export default class Validator {
-  // @ts-ignore
-  public configPath: string;
-  // @ts-ignore
-  public config: Config;
+  public rootDir!: string;
+  public config!: Config;
+  public require!: NodeRequire;
+  public reporters: Reporter[] = [];
   public plugins: Record<
     string,
     {
@@ -32,23 +33,47 @@ export default class Validator {
     }
   > = {};
 
-  constructor(configPath: string) {
-    this.applyConfig(configPath);
+  constructor(config: Config, rootDir = process.cwd()) {
+    this.applyConfig(config, rootDir);
   }
 
-  applyConfig(configPath: string): void {
-    this.configPath = configPath;
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    this.config = require(this.configPath) as Config;
+  applyConfig(config: Config, rootDir: string): void {
+    this.rootDir = rootDir;
+    this.config = config;
+    this.require = module.createRequire(path.join(this.rootDir, '_'));
+
+    if (this.config.validate.reporters) {
+      for (const item of this.config.validate.reporters) {
+        const [reporterPath, reporterOptions] = typeof item === 'string' ? [item] : item;
+        const normalizedReporterPath = this.resolvePackage(
+          ['stats-validator-reporter', 'statoscope-stats-validator-reporter'],
+          reporterPath
+        );
+        const Clazz:
+          | ReporterConstructor<unknown>
+          | { default: ReporterConstructor<unknown> } =
+          this.require(normalizedReporterPath);
+        const instance =
+          typeof Clazz === 'function'
+            ? new Clazz(reporterOptions)
+            : new Clazz.default(reporterOptions);
+
+        this.reporters.push(instance);
+      }
+    } else {
+      this.reporters.push(new ConsoleReporter());
+    }
 
     if (this.config.plugins) {
-      for (const pluginDesc of this.config.plugins) {
-        const pluginPath = Array.isArray(pluginDesc) ? pluginDesc[0] : pluginDesc;
-        // todo resolve plugin aliases
-        const pluginAlias = Array.isArray(pluginDesc) ? pluginDesc[1] : 'unknown';
-        const requirePlugin = module.createRequire(this.configPath as string);
-        const resolvedPluginPath = requirePlugin.resolve(pluginPath);
-        const pluginNS = requirePlugin(resolvedPluginPath);
+      for (const pluginName of this.config.plugins) {
+        const pluginPath = Array.isArray(pluginName) ? pluginName[0] : pluginName;
+        const normalizedPluginPath = this.resolvePackage(
+          ['stats-validator-plugin', 'statoscope-stats-validator-plugin'],
+          pluginPath
+        );
+        const pluginAlias = Array.isArray(pluginName) ? pluginName[1] : pluginName;
+        const resolvedPluginPath = this.require.resolve(normalizedPluginPath);
+        const pluginNS = this.require(resolvedPluginPath);
         const plugin = (pluginNS.default ?? pluginNS) as PluginFn<unknown>;
         const pluginDescription = plugin();
 
@@ -166,5 +191,37 @@ export default class Validator {
     return {
       mode,
     };
+  }
+
+  normalizePath(source: string): string {
+    if (source.includes('<rootDir>')) {
+      return source.replace(source, this.rootDir);
+    }
+
+    return source;
+  }
+
+  resolvePackage(prefixes: string[], name: string): string {
+    name = this.normalizePath(name);
+
+    const [packageNamespace, ...packageNameRest] = name.startsWith('@')
+      ? name.split(/[/\\]/)
+      : // eslint-disable-next-line no-sparse-arrays
+        [, name];
+    const packageName = path.join(...(packageNameRest as string[]));
+    const paths = [
+      [name],
+      ...prefixes.map((prefix) => [packageNamespace, `${prefix}-${packageName}`]),
+    ].map((item) => path.join(...(item.filter(Boolean) as string[])));
+
+    for (const item of paths) {
+      try {
+        this.require(item);
+        return item;
+        // eslint-disable-next-line no-empty
+      } catch (e) {}
+    }
+
+    throw new Error(`Can't resolve ${name} with prefixes [${prefixes}]`);
   }
 }
