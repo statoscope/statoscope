@@ -3,11 +3,26 @@
 module.exports = {
   plugins: [['../../../../packages/stats-validator-plugin-webpack', 'webpack']],
   validate: {
+    reporters: [
+      '../../../../packages/stats-validator-reporter-console',
+      ['../../../../packages/stats-validator-reporter-stats-report', { open: true }],
+    ],
     rules: {
-      //'webpack/disallowed-deps': ['error', ['foo', { type: 'module', name: /\.\/src/ }]],
+      'webpack/restricted-modules': ['error', [/css-tree/]],
       'webpack/restricted-packages': ['error', ['lodash']],
       'webpack/no-packages-dups': ['error'],
-      //'webpack/disallowed-deps': ['error', [/\.min\.js/]],
+      'webpack/entry-download-time-limits': ['error', { global: { maxDownloadTime: 1 } }],
+      'webpack/entry-download-size-limits': ['error', { global: { maxSize: 1 } }],
+      'webpack/diff-entry-download-size-limits': [
+        'error',
+        { global: { maxSizeDiff: 1 } },
+      ],
+      'webpack/diff-entry-download-time-limits': [
+        'error',
+        { global: { maxDownloadTimeDiff: 1 } },
+      ],
+      'webpack/diff-deprecated-modules': ['error', [/css-tree/]],
+      'webpack/diff-deprecated-packages': ['error', [/lodash/]],
     },
   },
 };
