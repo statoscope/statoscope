@@ -1,4 +1,4 @@
-import { ViewConfig } from '@statoscope/types';
+import { ViewConfig } from './';
 
 export type Type = 'error' | 'warn' | 'info';
 export type DetailsTextContent = string | string[] | (() => string | string[]);
@@ -52,3 +52,49 @@ export type TestEntry = {
   details?: Details;
   related?: RelatedItem[];
 };
+
+export type ValidationResultItem = {
+  name: string;
+  api: API;
+};
+
+export type ValidationResult = {
+  rules: Array<ValidationResultItem>;
+  files: {
+    input: string;
+    reference?: string | null;
+  };
+};
+
+export type RuleResult<TData> = {
+  data: TData;
+  view: ViewConfig<TData, unknown>;
+};
+
+export type Storage = TestEntry[];
+
+export type APIFnOptions = {
+  filename?: string;
+  compilation?: string;
+  details?: Details;
+  related?: RelatedItem[];
+};
+
+export type API = {
+  error(message: string, filenameOrOptions?: string | APIFnOptions): void;
+  warn(message: string, filenameOrOptions?: string | APIFnOptions): void;
+  info(message: string, filenameOrOptions?: string | APIFnOptions): void;
+  hasErrors(): boolean;
+  getInfoTotal(): number;
+  getWarnTotal(): number;
+  getErrorTotal(): number;
+  getStorage(): Storage;
+};
+
+export type MakeAPIParams = {
+  warnAsError?: boolean;
+};
+
+export interface Reporter {
+  run(result: ValidationResult): Promise<void>;
+}
