@@ -35,11 +35,6 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
           alias: 'r',
           type: 'string',
         })
-        .option('diff-with', {
-          describe: 'path to a stats that will be used by diff-rules as "before"',
-          type: 'string',
-          alias: 'd',
-        })
         .option('warn-as-error', {
           type: 'boolean',
           describe: 'Treat warnings as errors',
@@ -49,12 +44,6 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
     },
     async (argv) => {
       let result: ValidationResult;
-
-      if (argv['diff-with'] && argv.input.length > 1) {
-        console.warn(
-          'When "diff-with" is used, only the first file from "input" will be used'
-        );
-      }
 
       // todo statoscope 6: remove this or use as prepare + validator
       if (argv.validator) {
