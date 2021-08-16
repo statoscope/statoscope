@@ -69,9 +69,7 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
           argv.reference ? path.resolve(argv.reference) : void 0
         );
 
-        for (const item of validator.reporters) {
-          await item.run(result);
-        }
+        await validator.report(result);
       }
     }
   );

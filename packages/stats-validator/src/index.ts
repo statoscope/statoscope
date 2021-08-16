@@ -13,7 +13,13 @@ import {
 import { makeAPI } from './api';
 import { InputFile, PluginFn, PrepareFn } from './plugin';
 import { Rule, RuleDataInput } from './rule';
-import { Config, NormalizedRuleExecParams, RuleExecMode, RuleExecParams } from './config';
+import {
+  Config,
+  NormalizedRuleExecParams,
+  ReporterConfig,
+  RuleExecMode,
+  RuleExecParams,
+} from './config';
 
 export type ReporterConstructor<TOptions> = {
   new (options?: TOptions): Reporter;
@@ -42,26 +48,14 @@ export default class Validator {
     this.config = config;
     this.require = module.createRequire(path.join(this.rootDir, '_'));
 
-    if (this.config.validate.reporters) {
-      for (const item of this.config.validate.reporters) {
-        const [reporterPath, reporterOptions] = typeof item === 'string' ? [item] : item;
-        const normalizedReporterPath = this.resolvePackage(
-          ['stats-validator-reporter', 'statoscope-stats-validator-reporter'],
-          reporterPath
-        );
-        const Clazz:
-          | ReporterConstructor<unknown>
-          | { default: ReporterConstructor<unknown> } =
-          this.require(normalizedReporterPath);
-        const instance =
-          typeof Clazz === 'function'
-            ? new Clazz(reporterOptions)
-            : new Clazz.default(reporterOptions);
-
-        this.reporters.push(instance);
+    if (!this.config.validate.silent) {
+      if (this.config.validate.reporters) {
+        for (const item of this.config.validate.reporters) {
+          this.reporters.push(this.makeReporterInstance(item));
+        }
+      } else {
+        this.reporters.push(new ConsoleReporter());
       }
-    } else {
-      this.reporters.push(new ConsoleReporter());
     }
 
     if (this.config.plugins) {
@@ -90,6 +84,21 @@ export default class Validator {
         }
       }
     }
+  }
+
+  makeReporterInstance(item: ReporterConfig): Reporter {
+    const [reporterPath, reporterOptions] = typeof item === 'string' ? [item] : item;
+    const normalizedReporterPath = this.resolvePackage(
+      ['stats-validator-reporter', 'statoscope-stats-validator-reporter'],
+      reporterPath
+    );
+    const Clazz:
+      | ReporterConstructor<unknown>
+      | { default: ReporterConstructor<unknown> } = this.require(normalizedReporterPath);
+
+    return typeof Clazz === 'function'
+      ? new Clazz(reporterOptions)
+      : new Clazz.default(reporterOptions);
   }
 
   resolveRule(name: string): Rule<unknown, unknown> | null {
@@ -171,6 +180,12 @@ export default class Validator {
     }
 
     return result;
+  }
+
+  async report(result: ValidationResult): Promise<void> {
+    for (const item of this.reporters) {
+      await item.run(result);
+    }
   }
 
   async execRule(
