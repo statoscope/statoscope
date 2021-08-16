@@ -232,7 +232,7 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
             percent: $after.downloadTime.percentFrom($reference.downloadTime),
           };
           ...$diff,
-          ok: $diff.diff_isOverTheLimit($rule.maxDownloadTimeDiff)
+          ok: $diff.diff_isLTETheLimit($rule.maxDownloadTimeDiff)
         },
         initialDownloadTime: {
           $diff: {
@@ -240,7 +240,7 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
             percent: $after.initialDownloadTime.percentFrom($reference.initialDownloadTime)
           };
           ...$diff,
-          ok: $diff.diff_isOverTheLimit($rule.maxInitialDownloadTimeDiff)
+          ok: $diff.diff_isLTETheLimit($rule.maxInitialDownloadTimeDiff)
         },
         asyncDownloadTime: {
           $diff: {
@@ -248,7 +248,7 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
             percent: $after.asyncDownloadTime.percentFrom($reference.asyncDownloadTime)
           };
           ...$diff,
-          ok: $diff.diff_isOverTheLimit($rule.maxAsyncDownloadTimeDiff)
+          ok: $diff.diff_isLTETheLimit($rule.maxAsyncDownloadTimeDiff)
         }
       }
     })

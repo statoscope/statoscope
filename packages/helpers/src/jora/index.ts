@@ -318,7 +318,7 @@ export default function helpers() {
         : limit ?? null;
     },
 
-    diff_isOverTheLimit(valueDiff: ValueDiff, limit?: number | Limit | null): boolean {
+    diff_isLTETheLimit(valueDiff: ValueDiff, limit?: number | Limit | null): boolean {
       const normalizedLimit = this.diff_normalizeLimit(limit);
 
       return (

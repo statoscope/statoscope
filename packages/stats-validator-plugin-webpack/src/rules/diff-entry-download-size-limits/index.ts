@@ -195,7 +195,7 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
             percent: $after.size.percentFrom($reference.size)
           };
           ...$diff,
-          ok: $diff.diff_isOverTheLimit($rule.maxSizeDiff)
+          ok: $diff.diff_isLTETheLimit($rule.maxSizeDiff)
         },
         initialSize: {
           $diff: {
@@ -203,7 +203,7 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
             percent: $after.initialSize.percentFrom($reference.initialSize)
           };
           ...$diff,
-          ok: $diff.diff_isOverTheLimit($rule.maxInitialSizeDiff)
+          ok: $diff.diff_isLTETheLimit($rule.maxInitialSizeDiff)
         },
         asyncSize: {
           $diff: {
@@ -211,7 +211,7 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
             percent: $after.asyncSize.percentFrom($reference.asyncSize)
           };
           ...$diff,
-          ok: $diff.diff_isOverTheLimit($rule.maxAsyncSizeDiff)
+          ok: $diff.diff_isLTETheLimit($rule.maxAsyncSizeDiff)
         }
       }
     })
