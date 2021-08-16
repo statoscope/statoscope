@@ -50,6 +50,10 @@ export default class Graph<TData> {
     return rootSolution;
 
     function walk(module: Node<TData>, entry: Node<TData>): PathSolution<TData> | null {
+      if (module === entry) {
+        total++;
+      }
+
       if (solutions.has(module)) {
         return solutions.get(module)!;
       }
@@ -62,11 +66,6 @@ export default class Graph<TData> {
 
       solutionDepsCache.set(solution, new Set());
       solutions.set(module, solution);
-
-      if (module === entry) {
-        total++;
-        return solution;
-      }
 
       let find = false;
 
