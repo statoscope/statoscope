@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`findPaths 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [],
+          "node": Object {
+            "id": "baz",
+          },
+        },
+      ],
+      "node": Object {
+        "id": "foo",
+      },
+    },
+  ],
+  "node": Object {
+    "id": "target",
+  },
+}
+`;
+
+exports[`findPaths 2`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [],
+          "node": Object {
+            "id": "baz",
+          },
+        },
+      ],
+      "node": Object {
+        "id": "foo",
+      },
+    },
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [],
+          "node": Object {
+            "id": "baz",
+          },
+        },
+      ],
+      "node": Object {
+        "id": "bar",
+      },
+    },
+  ],
+  "node": Object {
+    "id": "target",
+  },
+}
+`;
+
+exports[`findPaths 3`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [],
+          "node": Object {
+            "id": "baz",
+          },
+        },
+      ],
+      "node": Object {
+        "id": "foo",
+      },
+    },
+  ],
+  "node": Object {
+    "id": "target",
+  },
+}
+`;

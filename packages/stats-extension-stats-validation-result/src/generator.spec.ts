@@ -6,6 +6,12 @@ const adapter: ExtensionDescriptor = { name: 'test-adapter', version: '7.7.7' };
 test('should work', () => {
   const generator = new Generator(adapter);
 
+  generator.handleRule({
+    name: 'foo-rule',
+    version: '1.0.0',
+    homepage: 'https://statoscope.tech',
+  });
+
   generator.handleEntry('foo-rule', {
     type: 'error',
     message: 'foo-message',

@@ -1,9 +1,16 @@
+import { PackageDescriptor } from '@statoscope/stats/spec/extension';
+import { TestEntry } from '@statoscope/types/types/validation';
 import APIFactory from './api';
 import Generator from './generator';
 
 const generator = new Generator();
 
-generator.handleEntry('foo-rule', {
+const fooRule: PackageDescriptor = {
+  name: 'foo-rule',
+  version: '1.0.0',
+  homepage: 'https://statoscope.tech',
+};
+const fooMessage: TestEntry = {
   type: 'error',
   message: 'foo-message',
   compilation: 'foo-compilation',
@@ -11,7 +18,11 @@ generator.handleEntry('foo-rule', {
     { type: 'module', id: 'foo-foo-module' },
     { type: 'entry', id: 'foo-foo-entry' },
   ],
-});
+};
+
+generator.handleRule(fooRule);
+
+generator.handleEntry('foo-rule', fooMessage);
 
 generator.handleEntry('foo-rule', {
   type: 'error',
@@ -40,29 +51,45 @@ generator.handleEntry('foo-rule', {
 const data = generator.get();
 const api = APIFactory(data);
 
-test('should return nothing', () => {
-  expect(api.getItems('foo', 'entry')).toStrictEqual([]);
-  expect(api.getItems('foo', 'entry', 'baz')).toStrictEqual([]);
-  expect(api.getItems('foo-compilation', 'entry', 'bar')).toStrictEqual([]);
+test('getItemById', () => {
+  expect(api.getItemById(100)).toBeNull();
+  expect(api.getItemById(0)).toMatchObject({
+    id: 0,
+    rule: 'foo-rule',
+    message: 'foo-message',
+  });
 });
 
-test('should return all entry-items', () => {
-  expect(api.getItems('foo-compilation', 'entry')).toMatchSnapshot();
-  expect(api.getItems('bar-compilation', 'entry')).toMatchSnapshot();
+test('getRule', () => {
+  expect(api.getRule('bar-rule')).toBeNull();
+  expect(api.getRule('foo-rule')).toBe(fooRule);
 });
 
-test('should return entry-item with specific id', () => {
-  expect(api.getItems('foo-compilation', 'entry', 'foo-foo-entry')).toMatchSnapshot();
-  expect(api.getItems('bar-compilation', 'entry', 'bar-foo-entry')).toMatchSnapshot();
-});
+describe('getItems', () => {
+  test('should return nothing', () => {
+    expect(api.getItems('foo', 'entry')).toStrictEqual([]);
+    expect(api.getItems('foo', 'entry', 'baz')).toStrictEqual([]);
+    expect(api.getItems('foo-compilation', 'entry', 'bar')).toStrictEqual([]);
+  });
 
-test('should return all module-items', () => {
-  expect(api.getItems('foo-compilation', 'module')).toMatchSnapshot();
-  expect(api.getItems('bar-compilation', 'module')).toMatchSnapshot();
-});
+  test('should return all entry-items', () => {
+    expect(api.getItems('foo-compilation', 'entry')).toMatchSnapshot();
+    expect(api.getItems('bar-compilation', 'entry')).toMatchSnapshot();
+  });
 
-test('should return module-item with specific id', () => {
-  expect(api.getItems('foo-compilation', 'module', 'foo-foo-module')).toMatchSnapshot();
-  expect(api.getItems('foo-compilation', 'module', 'foo-bar-module')).toMatchSnapshot();
-  expect(api.getItems('bar-compilation', 'module', 'bar-foo-module')).toMatchSnapshot();
+  test('should return entry-item with specific id', () => {
+    expect(api.getItems('foo-compilation', 'entry', 'foo-foo-entry')).toMatchSnapshot();
+    expect(api.getItems('bar-compilation', 'entry', 'bar-foo-entry')).toMatchSnapshot();
+  });
+
+  test('should return all module-items', () => {
+    expect(api.getItems('foo-compilation', 'module')).toMatchSnapshot();
+    expect(api.getItems('bar-compilation', 'module')).toMatchSnapshot();
+  });
+
+  test('should return module-item with specific id', () => {
+    expect(api.getItems('foo-compilation', 'module', 'foo-foo-module')).toMatchSnapshot();
+    expect(api.getItems('foo-compilation', 'module', 'foo-bar-module')).toMatchSnapshot();
+    expect(api.getItems('bar-compilation', 'module', 'bar-foo-module')).toMatchSnapshot();
+  });
 });

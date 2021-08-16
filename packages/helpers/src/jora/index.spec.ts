@@ -1,5 +1,7 @@
 import { TYPE_DC_HSPA_PLUS, TYPE_EDGE } from '../network-type-list';
-import make from './';
+import Graph from '../graph';
+import { serializeSolutionPath } from '../../../../test/helpers';
+import make, { prepareWithJora } from './';
 
 const helpers = make();
 
@@ -29,25 +31,25 @@ test('useNotNullish', () => {
 });
 test('serializeStringOrRegexp', () => {
   expect(helpers.serializeStringOrRegexp('foo')).toMatchInlineSnapshot(`
-Object {
-  "content": "foo",
-  "type": "string",
-}
-`);
+    Object {
+      "content": "foo",
+      "type": "string",
+    }
+  `);
   expect(helpers.serializeStringOrRegexp(/bar/)).toMatchInlineSnapshot(`
-Object {
-  "content": "bar",
-  "flags": "",
-  "type": "regexp",
-}
-`);
+    Object {
+      "content": "bar",
+      "flags": "",
+      "type": "regexp",
+    }
+  `);
   expect(helpers.serializeStringOrRegexp(/bar/i)).toMatchInlineSnapshot(`
-Object {
-  "content": "bar",
-  "flags": "i",
-  "type": "regexp",
-}
-`);
+    Object {
+      "content": "bar",
+      "flags": "i",
+      "type": "regexp",
+    }
+  `);
 });
 test('deserializeStringOrRegexp', () => {
   expect(helpers.deserializeStringOrRegexp(helpers.serializeStringOrRegexp('foo'))).toBe(
@@ -250,4 +252,163 @@ test('exclude', () => {
       },
     ]
   `);
+});
+
+test('diff_normalizeLimit', () => {
+  expect(helpers.diff_normalizeLimit()).toBeNull();
+  expect(helpers.diff_normalizeLimit(null)).toBeNull();
+  expect(helpers.diff_normalizeLimit(10)).toMatchInlineSnapshot(`
+    Object {
+      "number": 10,
+      "type": "absolute",
+    }
+  `);
+  expect(helpers.diff_normalizeLimit({ type: 'absolute', number: 10 }))
+    .toMatchInlineSnapshot(`
+    Object {
+      "number": 10,
+      "type": "absolute",
+    }
+  `);
+});
+test('diff_isLTETheLimit', () => {
+  expect(helpers.diff_isLTETheLimit({ percent: 10, absolute: 100 })).toBe(true);
+  expect(helpers.diff_isLTETheLimit({ percent: 10, absolute: 100 }, null)).toBe(true);
+  expect(helpers.diff_isLTETheLimit({ percent: 10, absolute: 100 }, 100)).toBe(true);
+  expect(helpers.diff_isLTETheLimit({ percent: 10, absolute: 100 }, 99)).toBe(false);
+  expect(
+    helpers.diff_isLTETheLimit(
+      { percent: 10, absolute: 100 },
+      { type: 'absolute', number: 100 }
+    )
+  ).toBe(true);
+  expect(
+    helpers.diff_isLTETheLimit(
+      { percent: 10, absolute: 100 },
+      { type: 'absolute', number: 99 }
+    )
+  ).toBe(false);
+  expect(
+    helpers.diff_isLTETheLimit(
+      { percent: 10, absolute: 100 },
+      { type: 'percent', number: 10 }
+    )
+  ).toBe(true);
+  expect(
+    helpers.diff_isLTETheLimit(
+      { percent: 10, absolute: 100 },
+      { type: 'percent', number: 9 }
+    )
+  ).toBe(false);
+});
+
+test('semverGT', () => {
+  expect(helpers.semverGT('1.0.0', '0.5.0')).toBe(true);
+  expect(helpers.semverGT('1.0.0', '1.0.0')).toBe(false);
+  expect(helpers.semverGT('1.0.0', '1.5.0')).toBe(false);
+});
+
+test('semverGTE', () => {
+  expect(helpers.semverGTE('1.0.0', '0.5.0')).toBe(true);
+  expect(helpers.semverGTE('1.0.0', '1.0.0')).toBe(true);
+  expect(helpers.semverGTE('1.0.0', '1.5.0')).toBe(false);
+});
+
+test('semverLT', () => {
+  expect(helpers.semverLT('1.0.0', '0.5.0')).toBe(false);
+  expect(helpers.semverLT('1.0.0', '1.0.0')).toBe(false);
+  expect(helpers.semverLT('1.0.0', '1.5.0')).toBe(true);
+});
+
+test('semverLTE', () => {
+  expect(helpers.semverLTE('1.0.0', '0.5.0')).toBe(false);
+  expect(helpers.semverLTE('1.0.0', '1.0.0')).toBe(true);
+  expect(helpers.semverLTE('1.0.0', '1.5.0')).toBe(true);
+});
+
+test('semverEQ', () => {
+  expect(helpers.semverEQ('1.0.0', '0.5.0')).toBe(false);
+  expect(helpers.semverEQ('1.0.0', '1.0.0')).toBe(true);
+  expect(helpers.semverEQ('1.0.0', '1.5.0')).toBe(false);
+});
+
+test('semverDiff', () => {
+  expect(helpers.semverDiff('1.0.0', '0.5.0')).toMatchInlineSnapshot(`"major"`);
+  expect(helpers.semverDiff('1.0.0', '1.0.0')).toMatchInlineSnapshot(`null`);
+  expect(helpers.semverDiff('1.0.0', '1.5.0')).toMatchInlineSnapshot(`"minor"`);
+});
+
+test('semverParse', () => {
+  expect(helpers.semverParse('1.0.0')).toMatchInlineSnapshot(`
+    SemVer {
+      "build": Array [],
+      "includePrerelease": false,
+      "loose": false,
+      "major": 1,
+      "minor": 0,
+      "options": Object {},
+      "patch": 0,
+      "prerelease": Array [],
+      "raw": "1.0.0",
+      "version": "1.0.0",
+    }
+  `);
+  expect(helpers.semverParse('^1.0.0')).toMatchInlineSnapshot(`null`);
+});
+
+test('semverSatisfies', () => {
+  expect(helpers.semverSatisfies('1.5.0', '^1.5.0')).toBe(true);
+  expect(helpers.semverSatisfies('1.6.0', '^1.5.0')).toBe(true);
+  expect(helpers.semverSatisfies('1.6.0', '~1.5.0')).toBe(false);
+});
+
+test('graph_getNode', () => {
+  const graph = new Graph();
+  const foo = graph.makeNode('foo', 'foo data');
+  const bar = graph.makeNode('bar', 'bar data');
+
+  expect(helpers.graph_getNode('fff', graph)).toBeNull();
+  expect(helpers.graph_getNode('foo', graph)).toEqual(foo);
+  expect(helpers.graph_getNode('bar', graph)).toEqual(bar);
+});
+
+test('graph_getPaths', () => {
+  const graph = new Graph();
+  const target = graph.makeNode('target', 'target data');
+  const foo = graph.makeNode('foo', 'foo data');
+  const bar = graph.makeNode('bar', 'bar data');
+  const baz = graph.makeNode('baz', 'baz data');
+
+  graph.addChild(baz, foo);
+  graph.addChild(baz, bar);
+
+  graph.addChild(foo, target);
+  graph.addChild(bar, target);
+
+  expect(
+    serializeSolutionPath(helpers.graph_getPaths(baz, graph, target)!)
+  ).toMatchSnapshot();
+  expect(
+    serializeSolutionPath(helpers.graph_getPaths(baz, graph, target, 1)!)
+  ).toMatchSnapshot();
+});
+
+test('prepareWithJora', () => {
+  let prepared = prepareWithJora({ foo: 123 });
+  expect(prepared.query('foo')).toBe(123);
+  expect(prepared.query('foo', { foo: 456 })).toBe(456);
+  expect(prepared.query('#.foo', { foo: 456 }, { foo: 789 })).toBe(789);
+  expect(prepared.query('#.foo', { foo: 456 }, { foo: 789 })).toBe(789);
+
+  prepared = prepareWithJora(
+    { foo: 'text' },
+    {
+      helpers: {
+        bar(v: string) {
+          return v.toUpperCase();
+        },
+      },
+    }
+  );
+  expect(prepared.query('foo.bar()')).toBe('TEXT');
 });

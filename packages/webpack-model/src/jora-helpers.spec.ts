@@ -1,10 +1,6 @@
-import { PathSolution } from '@statoscope/helpers/dist/graph';
 import stats from '../../../test/bundles/simple/stats-prod.json';
-import normalize, {
-  ModuleGraphNodeData,
-  NormalizedAsset,
-  NormalizedChunk,
-} from './normalize';
+import { serializeSolutionPath } from '../../../test/helpers';
+import normalize, { NormalizedAsset, NormalizedChunk } from './normalize';
 import makeHelpers, { ResolvedStats } from './jora-helpers';
 
 const normalized = normalize({ name: 'stats.js', data: stats });
@@ -156,6 +152,26 @@ test('getPackageInstanceInfo', () => {
   `);
 });
 
+test('resolveEntrypoint', () => {
+  const entry = helpers.resolveEntrypoint('one', hash);
+  expect(helpers.resolveEntrypoint('foooo', hash)).toBeNull();
+  expect(entry).not.toBeNull();
+  expect(entry).toBe(firstCompilation.entrypoints.find((e) => e.name === 'one'));
+});
+
+test('resolveFile', () => {
+  expect(helpers.resolveFile('stats.js')).toBe(firstFile);
+});
+
+test('resolveExtension', () => {
+  expect(helpers.resolveExtension('foo', hash)).toBeNull();
+  const ext = helpers.resolveExtension('@statoscope/stats-extension-compressed', hash);
+  // @ts-ignore
+  expect(ext.data).not.toBeNull();
+  // @ts-ignore
+  expect(ext.api).not.toBeNull();
+});
+
 test('moduleGraph_getEntrypoints', () => {
   const module = firstCompilation.nodeModules.find((item) => item.name === 'is-array')!
     .instances[0].modules[0];
@@ -164,23 +180,8 @@ test('moduleGraph_getEntrypoints', () => {
     helpers
       .moduleGraph_getEntrypoints(module, graph, firstCompilation.entrypoints)
       .map((entry) => entry.name)
-  ).toMatchInlineSnapshot(`
-    Array [
-      "one",
-      "two",
-    ]
-  `);
+  ).toEqual(['one', 'two']);
 });
-
-// eslint-disable-next-line @typescript-eslint/ban-types
-function serializeSolutionPath(solution: PathSolution<ModuleGraphNodeData>): object {
-  return {
-    node: {
-      id: solution.node.id,
-    },
-    children: solution.children.map(serializeSolutionPath),
-  };
-}
 
 test('moduleGraph_getPaths', () => {
   const fromModule = firstCompilation.nodeModules.find(
@@ -201,4 +202,45 @@ test('modulesToFoamTree', () => {
   expect(
     helpers.modulesToFoamTree(firstCompilation.modules, hash, true)
   ).toMatchSnapshot();
+});
+
+describe('validation', () => {
+  test('validation_getItems', () => {
+    expect(helpers.validation_getItems(hash, 'entry', './src/statoscope.png')).toEqual(
+      []
+    );
+    expect(helpers.validation_getItems(hash, 'module')).toMatchSnapshot();
+    expect(helpers.validation_getItems(hash, 'module', './src/foo.png')).toEqual([]);
+    expect(
+      helpers.validation_getItems(hash, 'module', './src/statoscope.png')
+    ).toMatchSnapshot();
+  });
+  test('validation_getItem', () => {
+    expect(helpers.validation_getItem(100, hash)).toBeNull();
+    expect(helpers.validation_getItem(0, hash)).toMatchSnapshot();
+  });
+  test('validation_resolveRelatedItem', () => {
+    expect(
+      helpers.validation_resolveRelatedItem({ id: 'foo', type: 'module' }, hash).item
+    ).toBeNull();
+    expect(
+      helpers.validation_resolveRelatedItem(
+        {
+          id: './src/statoscope.png',
+          type: 'module',
+        },
+        hash
+      ).item
+    ).not.toBeNull();
+    expect(
+      helpers.validation_resolveRelatedItem(
+        {
+          id: 'node_modules/foo',
+          type: 'package-instance',
+        },
+        hash
+        // @ts-ignore
+      ).item?.path
+    ).toBe('node_modules/foo');
+  });
 });

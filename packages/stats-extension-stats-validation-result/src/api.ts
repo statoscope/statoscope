@@ -2,6 +2,7 @@ import makeEntityResolver from '@statoscope/helpers/dist/entity-resolver';
 import { Resolver } from '@statoscope/helpers/dist/entity-resolver';
 import { APIFactory } from '@statoscope/extensions';
 import { RelatedItem } from '@statoscope/types/types/validation';
+import type { PackageDescriptor } from '@statoscope/stats/spec/extension';
 import { Format, Item } from './generator';
 
 export type API = {
@@ -11,6 +12,7 @@ export type API = {
     relatedId?: string | number
   ) => Item[];
   getItemById(id: number): Item | null;
+  getRule(id: string): PackageDescriptor | null;
 };
 
 type IndexItem = { item: Item; related: RelatedItem };
@@ -84,6 +86,7 @@ const makeAPI: APIFactory<Format, API> = (source) => {
     compilationResolvers,
     (item) => item.id
   );
+  const resolveRule = makeEntityResolver(source.payload.rules, (item) => item.name);
   const items: Item[] = [];
   const resolveItemById = makeEntityResolver(items, (item) => item.id);
   for (const compilation of source.payload.compilations) {
@@ -136,6 +139,9 @@ const makeAPI: APIFactory<Format, API> = (source) => {
       }
 
       return resolveCompilationsResolvers(compilationId)?.items ?? [];
+    },
+    getRule(id: string): PackageDescriptor | null {
+      return resolveRule(id);
     },
     getItemById(id: number): Item | null {
       return resolveItemById(id);

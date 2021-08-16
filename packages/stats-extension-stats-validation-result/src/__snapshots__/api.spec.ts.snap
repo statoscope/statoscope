@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should return all entry-items 1`] = `
+exports[`getItems should return all entry-items 1`] = `
 Array [
   Object {
     "details": Array [],
@@ -47,7 +47,7 @@ Array [
 ]
 `;
 
-exports[`should return all entry-items 2`] = `
+exports[`getItems should return all entry-items 2`] = `
 Array [
   Object {
     "details": Array [],
@@ -77,7 +77,7 @@ Array [
 ]
 `;
 
-exports[`should return all module-items 1`] = `
+exports[`getItems should return all module-items 1`] = `
 Array [
   Object {
     "details": Array [],
@@ -124,7 +124,7 @@ Array [
 ]
 `;
 
-exports[`should return all module-items 2`] = `
+exports[`getItems should return all module-items 2`] = `
 Array [
   Object {
     "details": Array [],
@@ -154,7 +154,7 @@ Array [
 ]
 `;
 
-exports[`should return entry-item with specific id 1`] = `
+exports[`getItems should return entry-item with specific id 1`] = `
 Array [
   Object {
     "details": Array [],
@@ -201,7 +201,7 @@ Array [
 ]
 `;
 
-exports[`should return entry-item with specific id 2`] = `
+exports[`getItems should return entry-item with specific id 2`] = `
 Array [
   Object {
     "details": Array [],
@@ -231,7 +231,7 @@ Array [
 ]
 `;
 
-exports[`should return module-item with specific id 1`] = `
+exports[`getItems should return module-item with specific id 1`] = `
 Array [
   Object {
     "details": Array [],
@@ -278,7 +278,7 @@ Array [
 ]
 `;
 
-exports[`should return module-item with specific id 2`] = `
+exports[`getItems should return module-item with specific id 2`] = `
 Array [
   Object {
     "details": Array [],
@@ -308,7 +308,7 @@ Array [
 ]
 `;
 
-exports[`should return module-item with specific id 3`] = `
+exports[`getItems should return module-item with specific id 3`] = `
 Array [
   Object {
     "details": Array [],

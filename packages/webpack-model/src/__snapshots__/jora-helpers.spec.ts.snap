@@ -1401,3 +1401,665 @@ Object {
   "weightCompressor": "multiple compressors",
 }
 `;
+
+exports[`validation validation_getItem 1`] = `
+Object {
+  "details": Array [
+    Object {
+      "deserialize": Object {
+        "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+        "type": "query",
+      },
+      "filename": "input.json",
+      "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+      "serialized": Object {
+        "context": Object {
+          "exclude": Array [],
+          "target": Object {
+            "name": Object {
+              "content": "\\\\.\\\\/src",
+              "flags": "",
+              "type": "regexp",
+            },
+          },
+        },
+      },
+      "type": "discovery",
+    },
+  ],
+  "id": 0,
+  "message": "Module ./src/index.ts + 3 modules should not be used",
+  "related": Array [
+    Object {
+      "id": "./src/index.ts + 3 modules",
+      "type": "module",
+    },
+  ],
+  "rule": "webpack/restricted-modules",
+  "type": "error",
+}
+`;
+
+exports[`validation validation_getItems 1`] = `
+Array [
+  Object {
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "id": 0,
+    "message": "Module ./src/index.ts + 3 modules should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/index.ts + 3 modules",
+        "type": "module",
+      },
+    ],
+    "rule": "webpack/restricted-modules",
+    "type": "error",
+  },
+  Object {
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "id": 1,
+    "message": "Module ./src/index.ts should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/index.ts",
+        "type": "module",
+      },
+    ],
+    "rule": "webpack/restricted-modules",
+    "type": "error",
+  },
+  Object {
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "id": 2,
+    "message": "Module ./src/sub-module.ts should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/sub-module.ts",
+        "type": "module",
+      },
+    ],
+    "rule": "webpack/restricted-modules",
+    "type": "error",
+  },
+  Object {
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "id": 3,
+    "message": "Module ./src/index2.ts + 1 modules should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/index2.ts + 1 modules",
+        "type": "module",
+      },
+    ],
+    "rule": "webpack/restricted-modules",
+    "type": "error",
+  },
+  Object {
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "id": 4,
+    "message": "Module ./src/index2.ts should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/index2.ts",
+        "type": "module",
+      },
+    ],
+    "rule": "webpack/restricted-modules",
+    "type": "error",
+  },
+  Object {
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "id": 5,
+    "message": "Module ./src/index2.css should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/index2.css",
+        "type": "module",
+      },
+    ],
+    "rule": "webpack/restricted-modules",
+    "type": "error",
+  },
+  Object {
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "id": 6,
+    "message": "Module ./src/test.txt should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/test.txt",
+        "type": "module",
+      },
+    ],
+    "rule": "webpack/restricted-modules",
+    "type": "error",
+  },
+  Object {
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "id": 7,
+    "message": "Module ./src/dyn.ts should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/dyn.ts",
+        "type": "module",
+      },
+    ],
+    "rule": "webpack/restricted-modules",
+    "type": "error",
+  },
+  Object {
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "id": 8,
+    "message": "Module ./src/statoscope.png should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/statoscope.png",
+        "type": "module",
+      },
+    ],
+    "rule": "webpack/restricted-modules",
+    "type": "error",
+  },
+]
+`;
+
+exports[`validation validation_getItems 2`] = `
+Array [
+  Object {
+    "details": Array [
+      Object {
+        "deserialize": Object {
+          "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+          "type": "query",
+        },
+        "filename": "input.json",
+        "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+        "serialized": Object {
+          "context": Object {
+            "exclude": Array [],
+            "target": Object {
+              "name": Object {
+                "content": "\\\\.\\\\/src",
+                "flags": "",
+                "type": "regexp",
+              },
+            },
+          },
+        },
+        "type": "discovery",
+      },
+    ],
+    "id": 8,
+    "message": "Module ./src/statoscope.png should not be used",
+    "related": Array [
+      Object {
+        "id": "./src/statoscope.png",
+        "type": "module",
+      },
+    ],
+    "rule": "webpack/restricted-modules",
+    "type": "error",
+  },
+]
+`;

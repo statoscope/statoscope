@@ -1,0 +1,205 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`custom reporter 1`] = `
+Object {
+  "files": Object {
+    "input": "/Users/smelukov/github/statoscope/test/bundles/simple/stats-prod.json",
+    "reference": undefined,
+  },
+  "rules": Array [
+    Object {
+      "api": Object {
+        "error": [Function],
+        "getErrorTotal": [Function],
+        "getInfoTotal": [Function],
+        "getStorage": [Function],
+        "getWarnTotal": [Function],
+        "hasErrors": [Function],
+        "info": [Function],
+        "warn": [Function],
+      },
+      "name": "webpack/restricted-modules",
+    },
+    Object {
+      "api": Object {
+        "error": [Function],
+        "getErrorTotal": [Function],
+        "getInfoTotal": [Function],
+        "getStorage": [Function],
+        "getWarnTotal": [Function],
+        "hasErrors": [Function],
+        "info": [Function],
+        "warn": [Function],
+      },
+      "name": "webpack/restricted-packages",
+    },
+  ],
+}
+`;
+
+exports[`custom reporter 2`] = `
+Array [
+  Array [
+    "foo",
+  ],
+  Array [
+    "Module ./src/index.ts + 3 modules should not be used",
+  ],
+  Array [
+    "Module ./src/index.ts should not be used",
+  ],
+  Array [
+    "Module ./src/sub-module.ts should not be used",
+  ],
+  Array [
+    "Module ./src/index2.ts + 1 modules should not be used",
+  ],
+  Array [
+    "Module ./src/index2.ts should not be used",
+  ],
+  Array [
+    "Module ./src/index2.css should not be used",
+  ],
+  Array [
+    "Module ./src/test.txt should not be used",
+  ],
+  Array [
+    "Module ./src/dyn.ts should not be used",
+  ],
+  Array [
+    "Module ./src/statoscope.png should not be used",
+  ],
+  Array [
+    "foo@1.0.0 should not be used",
+  ],
+]
+`;
+
+exports[`should work 1`] = `
+Object {
+  "files": Object {
+    "input": "/Users/smelukov/github/statoscope/test/bundles/simple/stats-prod.json",
+    "reference": undefined,
+  },
+  "rules": Array [
+    Object {
+      "api": Object {
+        "error": [Function],
+        "getErrorTotal": [Function],
+        "getInfoTotal": [Function],
+        "getStorage": [Function],
+        "getWarnTotal": [Function],
+        "hasErrors": [Function],
+        "info": [Function],
+        "warn": [Function],
+      },
+      "name": "webpack/restricted-modules",
+    },
+    Object {
+      "api": Object {
+        "error": [Function],
+        "getErrorTotal": [Function],
+        "getInfoTotal": [Function],
+        "getStorage": [Function],
+        "getWarnTotal": [Function],
+        "hasErrors": [Function],
+        "info": [Function],
+        "warn": [Function],
+      },
+      "name": "webpack/restricted-packages",
+    },
+  ],
+}
+`;
+
+exports[`should work 2`] = `
+Array [
+  Array [
+    "input.json",
+  ],
+  Array [
+    "718159f8e48dcecd92c9",
+  ],
+  Array [
+    "error  Module ./src/index.ts + 3 modules should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/index.ts should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/sub-module.ts should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/index2.ts + 1 modules should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/index2.ts should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/index2.css should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/test.txt should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/dyn.ts should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/statoscope.png should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  foo@1.0.0 should not be used  webpack/restricted-packages",
+  ],
+  Array [
+    "Instances:",
+  ],
+  Array [
+    "- node_modules/foo  1.0.0",
+  ],
+  Array [
+    "",
+  ],
+  Array [
+    "10 problems (10 errors, 0 warnings)",
+  ],
+]
+`;
+
+exports[`silent 1`] = `
+Object {
+  "files": Object {
+    "input": "/Users/smelukov/github/statoscope/test/bundles/simple/stats-prod.json",
+    "reference": undefined,
+  },
+  "rules": Array [
+    Object {
+      "api": Object {
+        "error": [Function],
+        "getErrorTotal": [Function],
+        "getInfoTotal": [Function],
+        "getStorage": [Function],
+        "getWarnTotal": [Function],
+        "hasErrors": [Function],
+        "info": [Function],
+        "warn": [Function],
+      },
+      "name": "webpack/restricted-modules",
+    },
+    Object {
+      "api": Object {
+        "error": [Function],
+        "getErrorTotal": [Function],
+        "getInfoTotal": [Function],
+        "getStorage": [Function],
+        "getWarnTotal": [Function],
+        "hasErrors": [Function],
+        "info": [Function],
+        "warn": [Function],
+      },
+      "name": "webpack/restricted-packages",
+    },
+  ],
+}
+`;
+
+exports[`silent 2`] = `Array []`;

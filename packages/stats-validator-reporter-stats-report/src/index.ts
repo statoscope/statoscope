@@ -16,7 +16,7 @@ import * as version from './version';
 export type Options = {
   saveReportTo?: string;
   saveStatsTo?: string;
-  saveOnlyStats: boolean;
+  saveOnlyStats?: boolean;
   open?: boolean;
 };
 

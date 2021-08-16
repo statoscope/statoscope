@@ -11,6 +11,7 @@ Object {
       "name": "Sergey Melyukov",
       "url": "https://twitter.com/smelukov",
     },
+    "description": "Statoscope extension for discover stats validator result",
     "homepage": "https://github.com/statoscope/statoscope/",
     "name": "@statoscope/stats-extension-stats-validation-result",
     "version": "5.6.1",
@@ -95,6 +96,13 @@ Object {
         ],
       },
     ],
+    "rules": Map {
+      "foo-rule" => Object {
+        "homepage": "https://statoscope.tech",
+        "name": "foo-rule",
+        "version": "1.0.0",
+      },
+    },
   },
 }
 `;

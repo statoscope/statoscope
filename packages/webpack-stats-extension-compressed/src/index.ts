@@ -6,10 +6,10 @@ import CompressedExtensionGenerator, {
   Format,
   CompressorOrPreset,
 } from '@statoscope/stats-extension-compressed/dist/generator';
-import { author, homepage, name, version } from './version';
+import { author, homepage, name, version, description } from './version';
 
 export default class WebpackCompressedExtension {
-  descriptor: ExtensionDescriptor = { name, version, author, homepage };
+  descriptor: ExtensionDescriptor = { name, version, author, homepage, description };
   compressedExtensionGenerator = new CompressedExtensionGenerator(this.descriptor);
 
   constructor(public compressor: CompressorOrPreset) {}
