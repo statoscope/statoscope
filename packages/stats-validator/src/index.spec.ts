@@ -38,6 +38,7 @@ test('should work', async () => {
 
   await validator.report(result);
 
+  result.files.input = result.files.input.replace(process.cwd(), '<pwd>');
   expect(result).toMatchSnapshot();
   expect(output).toMatchSnapshot();
 });
@@ -65,6 +66,7 @@ test('custom reporter', async () => {
 
   await validator.report(result);
 
+  result.files.input = result.files.input.replace(process.cwd(), '<pwd>');
   expect(result).toMatchSnapshot();
   expect(output).toMatchSnapshot();
 });
@@ -93,6 +95,7 @@ test('silent', async () => {
 
   await validator.report(result);
 
+  result.files.input = result.files.input.replace(process.cwd(), '<pwd>');
   expect(result).toMatchSnapshot();
   expect(output).toMatchSnapshot();
 });

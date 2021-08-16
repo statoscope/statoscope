@@ -3,7 +3,7 @@
 exports[`custom reporter 1`] = `
 Object {
   "files": Object {
-    "input": "/Users/smelukov/github/statoscope/test/bundles/simple/stats-prod.json",
+    "input": "<pwd>/test/bundles/simple/stats-prod.json",
     "reference": undefined,
   },
   "rules": Array [
@@ -78,7 +78,7 @@ Array [
 exports[`should work 1`] = `
 Object {
   "files": Object {
-    "input": "/Users/smelukov/github/statoscope/test/bundles/simple/stats-prod.json",
+    "input": "<pwd>/test/bundles/simple/stats-prod.json",
     "reference": undefined,
   },
   "rules": Array [
@@ -168,7 +168,7 @@ Array [
 exports[`silent 1`] = `
 Object {
   "files": Object {
-    "input": "/Users/smelukov/github/statoscope/test/bundles/simple/stats-prod.json",
+    "input": "<pwd>/test/bundles/simple/stats-prod.json",
     "reference": undefined,
   },
   "rules": Array [
