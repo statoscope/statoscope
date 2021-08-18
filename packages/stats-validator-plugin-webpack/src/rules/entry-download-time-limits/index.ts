@@ -16,6 +16,7 @@ import {
   SerializedExcludeItem,
   serializeExclude,
 } from '../../limits-helpers';
+import * as version from '../../version';
 
 type NetworkType = typeof networkListType[number]['name'];
 
@@ -90,6 +91,11 @@ function serializeParams(params: NormalizedParams): SerializedParams {
 }
 
 const entryDownloadTimeLimits: WebpackRule<Params> = (ruleParams, data, api): void => {
+  api.setRuleDescriptor({
+    description: 'Ensure that the download time of entrypoints is not over the limit',
+    package: version,
+  });
+
   if (!ruleParams?.global && !ruleParams?.byName?.length) {
     throw new Error('Entry download time limits is not specified');
   }

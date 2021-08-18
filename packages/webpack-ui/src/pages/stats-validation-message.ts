@@ -1,4 +1,6 @@
 import { StatoscopeWidget } from '../../types';
+// @ts-ignore
+import styles from './stats-validation-message.css';
 
 export default function (discovery: StatoscopeWidget): void {
   discovery.page.define('stats-validation-message', [
@@ -25,11 +27,13 @@ export default function (discovery: StatoscopeWidget): void {
                 {
                   when: '$',
                   data: `
+                  $item: $;
                   $details: details.[type="discovery"].pick();
                   $targetFile: #.stats.[name=$details.filename];
                   $deserialized: $details.deserialize.content.query($details.serialized);
                   {
                     item: $,
+                    rule: $item.rule.validation_resolveRule(#.params.hash),
                     input: $deserialized,
                     query: $details.query,
                     data: $details.query.query($targetFile, $deserialized.context),
@@ -66,8 +70,8 @@ export default function (discovery: StatoscopeWidget): void {
                       expanded: '=not view',
                       header: 'text:"Related with"',
                       content: {
-                        view: 'section',
-                        header: 'text: ""',
+                        view: 'block',
+                        className: styles.related,
                         content: {
                           view: 'content-filter',
                           content: {
@@ -117,6 +121,15 @@ export default function (discovery: StatoscopeWidget): void {
                       content: {
                         view: 'source',
                         data: `{content:view.typeof()='string'?view:view.stringify(null, 2), syntax: 'discovery-view'}`,
+                      },
+                    },
+                    {
+                      when: 'rule',
+                      view: 'expand',
+                      header: 'text:"Rule"',
+                      content: {
+                        view: 'struct',
+                        data: `rule`,
                       },
                     },
                   ],

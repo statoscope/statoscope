@@ -1,3 +1,4 @@
+import { RuleDescriptor } from '@statoscope/types/types/validation';
 import { StatoscopeWidget } from '../../types';
 
 export default function (discovery: StatoscopeWidget): void {
@@ -48,10 +49,26 @@ export default function (discovery: StatoscopeWidget): void {
                             view: 'tree',
                             expanded: false,
                             itemConfig: {
-                              content: {
-                                view: 'text-match',
-                                data: `{text: rule.name, match: #.filter}`,
-                              },
+                              content: [
+                                {
+                                  view: 'text-match',
+                                  data: `{text: rule.name, match: #.filter}`,
+                                },
+                                {
+                                  view: (
+                                    el: HTMLDivElement,
+                                    config: unknown,
+                                    data: RuleDescriptor
+                                  ): void => {
+                                    el.style.display = 'inline-block';
+                                    el.style.marginLeft = '5px';
+                                    el.textContent = 'ℹ️';
+                                    el.title = data.description!;
+                                  },
+                                  when: `rule.name.validation_resolveRule(#.params.hash).description`,
+                                  data: 'rule.name.validation_resolveRule(#.params.hash)',
+                                },
+                              ],
                               children: 'messages',
                               itemConfig: {
                                 content: [

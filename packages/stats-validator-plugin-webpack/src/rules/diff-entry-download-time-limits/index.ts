@@ -15,6 +15,7 @@ import {
   SerializedExcludeItem,
   serializeExclude,
 } from '../../limits-helpers';
+import * as version from '../../version';
 
 export type Limits = {
   maxDownloadTimeDiff?: number | Limit;
@@ -145,6 +146,11 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
   data,
   api
 ): void => {
+  api.setRuleDescriptor({
+    description: 'Diff download time of entrypoints between input and reference stats',
+    package: version,
+  });
+
   if (!ruleParams) {
     throw new Error('Params is not specified');
   }

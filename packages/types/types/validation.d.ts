@@ -1,3 +1,4 @@
+import { PackageDescriptor } from '@statoscope/stats/spec/extension';
 import { ViewConfig } from './';
 
 export type Type = 'error' | 'warn' | 'info';
@@ -81,6 +82,8 @@ export type APIFnOptions = {
 };
 
 export type API = {
+  setRuleDescriptor(descriptor: RuleDescriptor): void;
+  getRuleDescriptor(): RuleDescriptor | null;
   error(message: string, filenameOrOptions?: string | APIFnOptions): void;
   warn(message: string, filenameOrOptions?: string | APIFnOptions): void;
   info(message: string, filenameOrOptions?: string | APIFnOptions): void;
@@ -98,3 +101,8 @@ export type MakeAPIParams = {
 export interface Reporter {
   run(result: ValidationResult): Promise<void>;
 }
+
+export type RuleDescriptor = {
+  description: string;
+  package?: PackageDescriptor;
+};

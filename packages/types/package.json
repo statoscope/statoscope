@@ -15,6 +15,9 @@
   "files": [
     "types/*"
   ],
+  "dependencies": {
+    "@statoscope/stats": "^5.3.0"
+  },
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/"
 }

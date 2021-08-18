@@ -15,6 +15,7 @@ import {
   serializeModuleTarget,
 } from '../../helpers';
 import { ExcludeItem, normalizeExclude, serializeExclude } from '../../limits-helpers';
+import * as version from '../../version';
 
 export type ModuleResultItem = {
   file: NormalizedFile;
@@ -103,6 +104,11 @@ function handledTarget(
 }
 
 const restrictedModules: WebpackRule<Params> = (ruleParams, data, api): void => {
+  api.setRuleDescriptor({
+    description: `Ensures that bundle doesn't use specified modules`,
+    package: version,
+  });
+
   const normalizedRuleParams: NormalizedParams | null = ruleParams
     ? Array.isArray(ruleParams)
       ? { exclude: [], target: ruleParams.map(normalizeModuleTarget) }

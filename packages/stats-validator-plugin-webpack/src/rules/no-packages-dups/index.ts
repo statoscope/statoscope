@@ -8,6 +8,7 @@ import {
 import { RelatedItem } from '@statoscope/types/types/validation';
 import { WebpackRule } from '../../';
 import { ExcludeItem, normalizeExclude, serializeExclude } from '../../limits-helpers';
+import * as version from '../../version';
 
 export type RuleExcludeItem = ExcludeItem<'compilation' | 'package'>;
 
@@ -26,9 +27,15 @@ export type Result = {
 };
 
 const noPackagesDups: WebpackRule<Params> = (ruleParams, data, api): void => {
+  api.setRuleDescriptor({
+    description: `Ensures that bundle hasn't package duplicates`,
+    package: version,
+  });
+
   const normalizedParams: NormalizedParams = {
     exclude: ruleParams?.exclude?.map((item) => normalizeExclude(item, 'package')) ?? [],
   };
+
   const query = `
   $input: resolveInputFile();
   $exclude: #.exclude;

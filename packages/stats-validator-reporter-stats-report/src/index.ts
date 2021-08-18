@@ -34,6 +34,11 @@ export default class ConsoleReporter implements Reporter {
 
     for (const rule of result.rules) {
       const storage = rule.api.getStorage();
+      const ruleDescriptor = rule.api.getRuleDescriptor();
+
+      if (ruleDescriptor) {
+        generator.handleRule(rule.name, ruleDescriptor);
+      }
 
       for (const entry of storage) {
         generator.handleEntry(rule.name, entry);

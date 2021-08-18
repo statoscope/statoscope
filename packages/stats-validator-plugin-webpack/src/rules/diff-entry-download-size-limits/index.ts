@@ -15,6 +15,7 @@ import {
   SerializedExcludeItem,
   serializeExclude,
 } from '../../limits-helpers';
+import * as version from '../../version';
 
 export type Limits = {
   maxSizeDiff?: number | Limit;
@@ -110,6 +111,11 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
   data,
   api
 ): void => {
+  api.setRuleDescriptor({
+    description: 'Diff download size of entrypoints between input and reference stats',
+    package: version,
+  });
+
   if (!data.files.find((file) => file.name === 'reference.json')) {
     throw new Error('Reference-stats is not specified');
   }

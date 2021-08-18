@@ -14,6 +14,7 @@ import {
   serializeModuleTarget,
 } from '../../helpers';
 import { ExcludeItem, normalizeExclude, serializeExclude } from '../../limits-helpers';
+import * as version from '../../version';
 
 export type PackageResultItem = {
   packageName: string;
@@ -140,6 +141,12 @@ function handleTarget(
 }
 
 const diffDeprecatedPackages: WebpackRule<Params> = (ruleParams, data, api): void => {
+  api.setRuleDescriptor({
+    description:
+      'Diff usage of specified packages usage between input and reference stats',
+    package: version,
+  });
+
   const normalizedRuleParams: NormalizedParams | null = ruleParams
     ? Array.isArray(ruleParams)
       ? { exclude: [], target: ruleParams.map(normalizePackageTarget) }

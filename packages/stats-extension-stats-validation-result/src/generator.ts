@@ -1,16 +1,13 @@
-import {
-  Extension,
-  ExtensionDescriptor,
-  PackageDescriptor,
-} from '@statoscope/stats/spec/extension';
+import { Extension, ExtensionDescriptor } from '@statoscope/stats/spec/extension';
 import makeResolver from '@statoscope/helpers/dist/entity-resolver';
 import {
   DetailsDescriptor,
   RelatedItem,
+  RuleDescriptor,
   TestEntry,
   Type,
 } from '@statoscope/types/types/validation';
-import { name, version, author, homepage, description } from './version';
+import { author, description, homepage, name, version } from './version';
 
 export type Format = Extension<Payload>;
 export type Item = {
@@ -26,7 +23,7 @@ export type Compilation = {
   items: Item[];
 };
 export type Payload = {
-  rules: Map<string, PackageDescriptor>;
+  rules: Array<{ name: string; descriptor: RuleDescriptor }>;
   compilations: Array<Compilation>;
 };
 
@@ -42,14 +39,18 @@ export default class Generator {
   };
   private payload: Payload = {
     compilations: [],
-    rules: new Map<string, PackageDescriptor>(),
+    rules: [],
   };
   private resolveCompilation = makeResolver(this.payload.compilations, (item) => item.id);
 
   constructor(private adapter?: ExtensionDescriptor) {}
 
-  handleRule(ruleDescriptor: PackageDescriptor): void {
-    this.payload.rules.set(ruleDescriptor.name, ruleDescriptor);
+  handleRule(name: string, descriptor: RuleDescriptor): void {
+    const existingRule = this.payload.rules.find((rule) => name === rule.name);
+
+    if (!existingRule) {
+      this.payload.rules.push({ name, descriptor });
+    }
   }
 
   handleEntry(ruleName: string, entry: TestEntry): void {

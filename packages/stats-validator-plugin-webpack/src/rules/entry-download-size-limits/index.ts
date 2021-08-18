@@ -15,6 +15,7 @@ import {
   SerializedExcludeItem,
   serializeExclude,
 } from '../../limits-helpers';
+import * as version from '../../version';
 
 export type Limits = {
   maxSize?: number;
@@ -87,6 +88,11 @@ function serializeParams(params: NormalizedParams): SerializedParams {
 }
 
 const entryDownloadSizeLimits: WebpackRule<Params> = (ruleParams, data, api): void => {
+  api.setRuleDescriptor({
+    description: 'Ensure that the download size of entrypoints is not over the limit',
+    package: version,
+  });
+
   if (!ruleParams?.global && !ruleParams?.byName?.length) {
     throw new Error('Entry size limits is not specified');
   }

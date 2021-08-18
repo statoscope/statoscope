@@ -19,6 +19,7 @@ import {
 } from '../../helpers';
 import { RuleExcludeItem } from '../diff-deprecated-packages';
 import { normalizeExclude, serializeExclude } from '../../limits-helpers';
+import * as version from '../../version';
 
 export type PackageResultItem = {
   file: NormalizedFile;
@@ -152,6 +153,11 @@ function makeInstanceDetailsContent(
 }
 
 const restrictedPackages: WebpackRule<Params> = (ruleParams, data, api): void => {
+  api.setRuleDescriptor({
+    description: `Ensures that bundle doesn't use specified packages`,
+    package: version,
+  });
+
   const normalizedRuleParams: NormalizedParams | null = ruleParams
     ? Array.isArray(ruleParams)
       ? { exclude: [], target: ruleParams.map(normalizePackageTarget) }

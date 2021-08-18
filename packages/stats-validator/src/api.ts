@@ -1,4 +1,9 @@
-import { API, MakeAPIParams, Storage } from '@statoscope/types/types/validation';
+import {
+  API,
+  MakeAPIParams,
+  RuleDescriptor,
+  Storage,
+} from '@statoscope/types/types/validation';
 
 export function makeAPI(params?: MakeAPIParams): API {
   const storage: Storage = [];
@@ -6,7 +11,14 @@ export function makeAPI(params?: MakeAPIParams): API {
   let errors = 0;
   let warnings = 0;
   let infos = 0;
+  let descriptor: RuleDescriptor | null = null;
   return {
+    setRuleDescriptor(desc: RuleDescriptor): void {
+      descriptor = desc;
+    },
+    getRuleDescriptor(): RuleDescriptor | null {
+      return descriptor;
+    },
     hasErrors(): boolean {
       return hasErrors;
     },

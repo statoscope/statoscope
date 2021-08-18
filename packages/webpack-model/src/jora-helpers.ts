@@ -6,7 +6,7 @@ import type { Instance } from '@statoscope/stats-extension-package-info/dist/gen
 import { API as ExtensionValidationResultAPI } from '@statoscope/stats-extension-stats-validation-result/dist/api';
 import Graph, { PathSolution } from '@statoscope/helpers/dist/graph';
 import type { Item } from '@statoscope/stats-extension-stats-validation-result/dist/generator';
-import { RelatedItem } from '@statoscope/types/types/validation';
+import { RelatedItem, RuleDescriptor } from '@statoscope/types/types/validation';
 import { Webpack } from '../webpack';
 import {
   moduleNameResource,
@@ -374,6 +374,22 @@ export default function (compilations: HandledCompilation[]) {
         type: item.type,
         item: compilation.resolvers.resolveAsset(item.id),
       };
+    },
+    validation_resolveRule(name?: string, hash?: string): RuleDescriptor | null {
+      if (!hash) {
+        throw new Error('[validation_resolveRule]: hash-parameter is required');
+      }
+
+      if (name == null) {
+        throw new Error('[validation_resolveRule]: name-parameter is required');
+      }
+
+      const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
+        '@statoscope/stats-extension-stats-validation-result'
+      );
+      const api = ext?.api as ExtensionValidationResultAPI | undefined;
+
+      return api?.getRule(name) ?? null;
     },
   };
 }
