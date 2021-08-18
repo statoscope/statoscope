@@ -96,13 +96,19 @@ Object {
         ],
       },
     ],
-    "rules": Map {
-      "foo-rule" => Object {
-        "homepage": "https://statoscope.tech",
+    "rules": Array [
+      Object {
+        "descriptor": Object {
+          "description": "foo-description",
+          "package": Object {
+            "homepage": "https://statoscope.tech",
+            "name": "foo-package",
+            "version": "1.0.0",
+          },
+        },
         "name": "foo-rule",
-        "version": "1.0.0",
       },
-    },
+    ],
   },
 }
 `;

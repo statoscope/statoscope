@@ -243,4 +243,11 @@ describe('validation', () => {
       ).item?.path
     ).toBe('node_modules/foo');
   });
+
+  test('validation_resolveRule', () => {
+    expect(helpers.validation_resolveRule('foo', hash)).toBeNull();
+    expect(
+      helpers.validation_resolveRule('webpack/restricted-modules', hash)
+    ).toMatchSnapshot();
+  });
 });

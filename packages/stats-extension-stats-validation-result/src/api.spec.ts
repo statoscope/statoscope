@@ -1,14 +1,17 @@
 import { PackageDescriptor } from '@statoscope/stats/spec/extension';
-import { TestEntry } from '@statoscope/types/types/validation';
+import { RuleDescriptor, TestEntry } from '@statoscope/types/types/validation';
 import APIFactory from './api';
 import Generator from './generator';
 
 const generator = new Generator();
 
-const fooRule: PackageDescriptor = {
-  name: 'foo-rule',
-  version: '1.0.0',
-  homepage: 'https://statoscope.tech',
+const fooRule: RuleDescriptor = {
+  description: 'foo-rule description',
+  package: {
+    name: 'foo-rule',
+    version: '1.0.0',
+    homepage: 'https://statoscope.tech',
+  },
 };
 const fooMessage: TestEntry = {
   type: 'error',
@@ -20,7 +23,7 @@ const fooMessage: TestEntry = {
   ],
 };
 
-generator.handleRule(fooRule);
+generator.handleRule('foo-rule', fooRule);
 
 generator.handleEntry('foo-rule', fooMessage);
 
@@ -85,6 +88,11 @@ describe('getItems', () => {
   test('should return all module-items', () => {
     expect(api.getItems('foo-compilation', 'module')).toMatchSnapshot();
     expect(api.getItems('bar-compilation', 'module')).toMatchSnapshot();
+  });
+
+  test('should return all items', () => {
+    expect(api.getItems('foo-compilation')).toMatchSnapshot();
+    expect(api.getItems('bar-compilation')).toMatchSnapshot();
   });
 
   test('should return module-item with specific id', () => {

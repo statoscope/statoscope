@@ -2063,3 +2063,5 @@ Array [
   },
 ]
 `;
+
+exports[`validation validation_resolveRule 1`] = `null`;
