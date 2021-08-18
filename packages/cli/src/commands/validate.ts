@@ -29,6 +29,7 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
           describe: 'path to statoscope config',
           alias: 'c',
           type: 'string',
+          default: path.join(process.cwd(), 'statoscope.config.js'),
         })
         .option('reference', {
           describe: 'path to a stats-file to diff with',
@@ -58,7 +59,6 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
         const reporter = new ConsoleReporter();
         await reporter.run(result);
       } else {
-        // todo resole nearest config
         const configPath = path.resolve(argv.config);
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         const config = require(configPath) as Config;
