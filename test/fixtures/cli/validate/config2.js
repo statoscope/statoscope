@@ -1,8 +1,8 @@
 /* eslint-env node */
 
 module.exports = {
-  plugins: [['../../../../packages/stats-validator-plugin-webpack', 'webpack']],
   validate: {
+    plugins: [['../../../../packages/stats-validator-plugin-webpack', 'webpack']],
     reporters: [
       '../../../../packages/stats-validator-reporter-console',
       ['../../../../packages/stats-validator-reporter-stats-report', { open: true }],
@@ -13,6 +13,7 @@ module.exports = {
       'webpack/no-packages-dups': ['error'],
       'webpack/entry-download-time-limits': ['error', { global: { maxDownloadTime: 1 } }],
       'webpack/entry-download-size-limits': ['error', { global: { maxSize: 1 } }],
+      'webpack/no-modules-deopts': ['warn'],
       'webpack/diff-entry-download-size-limits': [
         'error',
         { global: { maxSizeDiff: 1 } },

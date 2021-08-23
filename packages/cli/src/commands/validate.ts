@@ -1,10 +1,7 @@
 import path from 'path';
 import { Argv } from 'yargs';
 import Validator from '@statoscope/stats-validator';
-import ConsoleReporter from '@statoscope/stats-validator-reporter-console';
-import { Config } from '@statoscope/stats-validator/dist/config';
-import { ValidationResult } from '@statoscope/types/types/validation';
-import legacyWebpackStatsValidator from './legacyWebpackValidator';
+import { Config } from '@statoscope/types/types/config';
 
 export default function (yargs: Argv): Argv {
   return yargs.command(
@@ -36,41 +33,23 @@ Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/
           alias: 'r',
           type: 'string',
         })
-        .option('warn-as-error', {
-          type: 'boolean',
-          describe: 'Treat warnings as errors',
-          alias: 'w',
-        })
         .demandOption(['input']);
     },
     async (argv) => {
-      let result: ValidationResult;
+      const configPath = path.resolve(argv.config);
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const config = require(configPath) as Config;
+      const validator = new Validator(
+        config.validate ?? { rules: {} },
+        path.dirname(configPath)
+      );
 
-      // todo statoscope 6: remove this or use as prepare + validator
-      if (argv.validator) {
-        result = await legacyWebpackStatsValidator(
-          path.relative(process.cwd(), argv.validator),
-          argv.input,
-          argv.reference,
-          {
-            warnAsError: argv['warn-as-error'],
-          }
-        );
-        const reporter = new ConsoleReporter();
-        await reporter.run(result);
-      } else {
-        const configPath = path.resolve(argv.config);
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const config = require(configPath) as Config;
-        const validator = new Validator(config, path.dirname(configPath));
+      const result = await validator.validate(
+        path.resolve(argv.input),
+        argv.reference ? path.resolve(argv.reference) : void 0
+      );
 
-        result = await validator.validate(
-          path.resolve(argv.input),
-          argv.reference ? path.resolve(argv.reference) : void 0
-        );
-
-        await validator.report(result);
-      }
+      await validator.report(result);
     }
   );
 }
