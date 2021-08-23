@@ -29,14 +29,13 @@ export default function (discovery: StatoscopeWidget): void {
                   data: `
                   $item: $;
                   $details: details.[type="discovery"].pick();
-                  $targetFile: #.stats.[name=$details.filename];
-                  $deserialized: $details.deserialize.content.query($details.serialized);
+                  $deserialized: $details.deserialize ? $details.deserialize.content.query($details.payload) : $details.payload;
                   {
                     item: $,
                     rule: $item.rule.validation_resolveRule(#.params.hash),
                     input: $deserialized,
                     query: $details.query,
-                    data: $details.query.query($targetFile, $deserialized.context),
+                    data: $details.query.query(#.stats, $deserialized.context or {}),
                     view: $details.view
                   }
                   `,

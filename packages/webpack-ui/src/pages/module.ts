@@ -217,26 +217,25 @@ export default function (discovery: StatoscopeWidget): void {
                     },
                     {
                       view: 'section',
-                      header: 'text:"Details"',
+                      header: 'text:"Messages"',
                       content: {
                         view: 'tabs',
                         name: 'messagesTabs',
-                        tabs: [{ value: 'deopts', text: 'Deoptimizations' }],
+                        tabs: [{ value: 'validation', text: 'Validation' }],
                         content: {
                           view: 'content-filter',
                           content: {
                             view: 'switch',
                             content: [
                               {
-                                when: '#.messagesTabs="deopts"',
-                                data: `optimizationBailout.[$~=#.filter]`,
+                                when: '#.messagesTabs="validation"',
                                 content: {
-                                  view: 'ul',
-                                  limit: '= settingListItemsLimit()',
-                                  item: {
-                                    view: 'text-match',
-                                    data: `{text: $, match: #.filter}`,
-                                  },
+                                  view: 'validation-messages',
+                                  data: `
+                                  $messages: #.params.hash.validation_getItems('module', name);
+                                  $related: {type: 'module', id: name};
+                                  { $messages, $related, showRelated: false }
+                                  `,
                                 },
                               },
                             ],

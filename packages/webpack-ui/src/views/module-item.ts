@@ -67,21 +67,25 @@ export default function (discovery: StatoscopeWidget): void {
           },
           {
             view: 'badge',
-            when: 'not compact and module.optimizationBailout',
-            data: `{
-            text: module.optimizationBailout.size().pluralWithValue(['deopt', 'deopts']),
-            color: 0.colorFromH(),
-            hint: module.optimizationBailout
-          }`,
-          },
-          {
-            view: 'badge',
             when: `not compact and module.moduleType~=/^asset\\/?/`,
             data: `{
             text: 'asset module',
             color: 40.colorFromH(),
             hint: module.moduleType
           }`,
+          },
+          {
+            when: `not compact and (hash or #.params.hash).validation_getItems('module', module.name)`,
+            data: `
+              (hash or #.params.hash).validation_getItems('module', module.name)
+                .size()
+                .pluralWithValue(['validation message', 'validation messages'])
+            `,
+            view: (el: HTMLElement, config: unknown, data: string): void => {
+              el.style.display = 'inline-block';
+              el.textContent = '⚠️';
+              el.title = data;
+            },
           },
         ],
         data,
