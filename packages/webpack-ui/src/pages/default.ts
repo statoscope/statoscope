@@ -51,7 +51,7 @@ export default function (discovery: StatoscopeWidget): void {
               ],
               content: 'h1:#.name',
             },
-            'validation-errors:file',
+            'stats-scheme-validation-error:file',
             {
               view: 'block',
               content: [
