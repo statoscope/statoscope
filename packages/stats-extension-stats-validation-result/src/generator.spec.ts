@@ -15,18 +15,20 @@ test('should work', () => {
     },
   });
 
-  generator.handleEntry('foo-rule', {
-    type: 'error',
-    message: 'foo-message',
-    compilation: 'foo-compilation',
-    related: [
-      { type: 'module', id: 'foo-foo-module' },
-      { type: 'entry', id: 'foo-foo-entry' },
-    ],
-  });
+  generator.handleEntry(
+    'foo-rule',
+    {
+      message: 'foo-message',
+      compilation: 'foo-compilation',
+      related: [
+        { type: 'module', id: 'foo-foo-module' },
+        { type: 'entry', id: 'foo-foo-entry' },
+      ],
+    },
+    'warn'
+  );
 
   generator.handleEntry('foo-rule', {
-    type: 'error',
     message: 'bar-message',
     compilation: 'foo-compilation',
     related: [
@@ -38,7 +40,6 @@ test('should work', () => {
   });
 
   generator.handleEntry('foo-rule', {
-    type: 'error',
     message: 'bar-message',
     compilation: 'bar-compilation',
     related: [

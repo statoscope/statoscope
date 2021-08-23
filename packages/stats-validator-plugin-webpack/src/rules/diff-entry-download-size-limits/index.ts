@@ -5,16 +5,9 @@ import {
   NormalizedEntrypointItem,
 } from '@statoscope/webpack-model/dist/normalize';
 import helpers, { Limit, ValueDiff } from '@statoscope/helpers/dist/jora';
-import { APIFnOptions } from '@statoscope/types/types/validation';
+import { APIFnOptions } from '@statoscope/types/types/validation/api';
 import { WebpackRule } from '../../';
-import {
-  ByNameFilterItem,
-  ExcludeItem,
-  normalizeExclude,
-  SerializedByNameFilterItem,
-  SerializedExcludeItem,
-  serializeExclude,
-} from '../../limits-helpers';
+import { ByNameFilterItem, ExcludeItem, normalizeExclude } from '../../limits-helpers';
 import * as version from '../../version';
 
 export type Limits = {
@@ -34,16 +27,9 @@ export type Params = {
 
 export type NormalizedParams = {
   exclude: RuleExcludeItem[];
-  useCompressedSize?: boolean;
+  useCompressedSize: boolean;
   global?: Limits;
   byName?: ByNameFilterItem<Limits>[];
-};
-
-export type SerializedParams = {
-  byName: SerializedByNameFilterItem<Limits>[];
-  exclude: SerializedExcludeItem<'compilation' | 'entry'>[];
-  useCompressedSize?: boolean;
-  global?: Limits;
 };
 
 export type ResultEntryState = {
@@ -73,21 +59,6 @@ export type ResultItem = {
 };
 
 const h = helpers();
-
-function serializeParams(params: NormalizedParams): SerializedParams {
-  return {
-    global: params.global,
-    useCompressedSize: params.useCompressedSize,
-    byName:
-      params.byName?.map((item) => {
-        return {
-          name: h.serializeStringOrRegexp(item.name)!,
-          limits: item.limits,
-        };
-      }) ?? [],
-    exclude: params.exclude.map(serializeExclude),
-  };
-}
 
 function formatError(
   type: 'assets' | 'initial assets' | 'async assets',
@@ -122,6 +93,7 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
 
   const normalizedParams: NormalizedParams = {
     ...ruleParams,
+    useCompressedSize: ruleParams?.useCompressedSize !== false,
     exclude: ruleParams?.exclude?.map((item) => normalizeExclude(item, 'entry')) ?? [],
   };
 
@@ -241,34 +213,43 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
         details: [
           {
             type: 'discovery',
-            query,
+            query: `
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            `,
             filename: path.basename(data.files[0].name),
-            serialized: {
+            payload: {
               context: {
-                params: serializeParams(normalizedParams),
+                entry: entryItem.after.entry.name,
+                compilation: item.compilation.hash,
+                useCompressedSize: normalizedParams.useCompressedSize,
+                before: {
+                  size: entryItem.reference.size,
+                  initialSize: entryItem.reference.initialSize,
+                  asyncSize: entryItem.reference.asyncSize,
+                },
+                after: {
+                  size: entryItem.after.size,
+                  initialSize: entryItem.after.initialSize,
+                  asyncSize: entryItem.after.asyncSize,
+                },
+                diff: entryItem.diff,
+                rule: entryItem.rule,
               },
-            },
-            deserialize: {
-              type: 'query',
-              content: `
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }`,
             },
           },
         ],
       };
 
       if (!entryItem.diff.size.ok) {
-        api.error(
+        api.message(
           formatError(
             'assets',
             entryItem.after.entry,
@@ -280,7 +261,7 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
       }
 
       if (!entryItem.diff.initialSize.ok) {
-        api.error(
+        api.message(
           formatError(
             'initial assets',
             entryItem.after.entry,
@@ -292,7 +273,7 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
       }
 
       if (!entryItem.diff.asyncSize.ok) {
-        api.error(
+        api.message(
           formatError(
             'async assets',
             entryItem.after.entry,

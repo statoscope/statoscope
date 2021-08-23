@@ -1,5 +1,5 @@
-import { PackageDescriptor } from '@statoscope/stats/spec/extension';
-import { RuleDescriptor, TestEntry } from '@statoscope/types/types/validation';
+import { TestEntry } from '@statoscope/types/types/validation/test-entry';
+import { RuleDescriptor } from '@statoscope/types/types/validation/api';
 import APIFactory from './api';
 import Generator from './generator';
 
@@ -14,7 +14,6 @@ const fooRule: RuleDescriptor = {
   },
 };
 const fooMessage: TestEntry = {
-  type: 'error',
   message: 'foo-message',
   compilation: 'foo-compilation',
   related: [
@@ -27,20 +26,22 @@ generator.handleRule('foo-rule', fooRule);
 
 generator.handleEntry('foo-rule', fooMessage);
 
-generator.handleEntry('foo-rule', {
-  type: 'error',
-  message: 'bar-message',
-  compilation: 'foo-compilation',
-  related: [
-    { type: 'module', id: 'foo-foo-module' },
-    { type: 'module', id: 'foo-bar-module' },
-    { type: 'entry', id: 'foo-foo-entry' },
-    { type: 'entry', id: 'foo-bar-entry' },
-  ],
-});
+generator.handleEntry(
+  'foo-rule',
+  {
+    message: 'bar-message',
+    compilation: 'foo-compilation',
+    related: [
+      { type: 'module', id: 'foo-foo-module' },
+      { type: 'module', id: 'foo-bar-module' },
+      { type: 'entry', id: 'foo-foo-entry' },
+      { type: 'entry', id: 'foo-bar-entry' },
+    ],
+  },
+  'warn'
+);
 
 generator.handleEntry('foo-rule', {
-  type: 'error',
   message: 'bar-message',
   compilation: 'bar-compilation',
   related: [

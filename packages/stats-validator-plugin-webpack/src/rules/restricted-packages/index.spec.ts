@@ -6,7 +6,7 @@ import rule from './';
 test('matches', () => {
   const pluginInstance = plugin();
   const prepared = pluginInstance.prepare!([{ name: 'input.json', data: statsV5 }]);
-  const api = makeAPI({ warnAsError: false });
+  const api = makeAPI();
 
   rule(['foo'], prepared, api);
   rule(['foo@^1.0.0 || ^2.0.0'], prepared, api);
@@ -21,7 +21,7 @@ test('matches', () => {
 test('not matches', () => {
   const pluginInstance = plugin();
   const prepared = pluginInstance.prepare!([{ name: 'input.json', data: statsV5 }]);
-  const api = makeAPI({ warnAsError: false });
+  const api = makeAPI();
 
   rule(['foo@^2.0.0'], prepared, api);
 

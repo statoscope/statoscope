@@ -6,95 +6,33 @@ Array [
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [
-                Object {
-                  "name": Object {
-                    "content": "tw",
-                    "flags": "",
-                    "type": "regexp",
-                  },
-                  "type": "entry",
-                },
-              ],
-              "global": Object {
-                "maxDownloadTime": 1,
-              },
-              "network": "Slow",
-              "useCompressedSize": undefined,
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 9.014731959292764,
+            "entry": "one",
+            "initialDownloadTime": 9.014731959292764,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
             },
+            "useCompressedSize": true,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -106,7 +44,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;
@@ -117,95 +54,33 @@ Array [
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [
-                Object {
-                  "name": Object {
-                    "content": "tw",
-                    "flags": "",
-                    "type": "regexp",
-                  },
-                  "type": "entry",
-                },
-              ],
-              "global": Object {
-                "maxDownloadTime": 1,
-              },
-              "network": "Slow",
-              "useCompressedSize": undefined,
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 9.014731959292764,
+            "entry": "one",
+            "initialDownloadTime": 9.014731959292764,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
             },
+            "useCompressedSize": true,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -217,7 +92,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;
@@ -228,94 +102,33 @@ Array [
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [
-                Object {
-                  "name": Object {
-                    "content": "two",
-                    "type": "string",
-                  },
-                  "type": "entry",
-                },
-              ],
-              "global": Object {
-                "maxDownloadTime": 1,
-              },
-              "network": "Slow",
-              "useCompressedSize": undefined,
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 9.014731959292764,
+            "entry": "one",
+            "initialDownloadTime": 9.014731959292764,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
             },
+            "useCompressedSize": true,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -327,7 +140,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;
@@ -338,95 +150,33 @@ Array [
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [
-                Object {
-                  "name": Object {
-                    "content": "foooo",
-                    "flags": "",
-                    "type": "regexp",
-                  },
-                  "type": "entry",
-                },
-              ],
-              "global": Object {
-                "maxDownloadTime": 1,
-              },
-              "network": "Slow",
-              "useCompressedSize": undefined,
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 9.014731959292764,
+            "entry": "one",
+            "initialDownloadTime": 9.014731959292764,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
             },
+            "useCompressedSize": true,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -438,101 +188,38 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [
-                Object {
-                  "name": Object {
-                    "content": "foooo",
-                    "flags": "",
-                    "type": "regexp",
-                  },
-                  "type": "entry",
-                },
-              ],
-              "global": Object {
-                "maxDownloadTime": 1,
-              },
-              "network": "Slow",
-              "useCompressedSize": undefined,
+            "asyncDownloadTime": 2.71044279399671,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 175.4559968647204,
+            "entry": "two",
+            "initialDownloadTime": 172.74555407072367,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
             },
+            "useCompressedSize": true,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -544,7 +231,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;
@@ -555,86 +241,33 @@ Array [
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [],
-              "global": Object {
-                "maxAsyncDownloadTime": 1,
-              },
-              "network": "Slow",
-              "useCompressedSize": undefined,
+            "asyncDownloadTime": 2.71044279399671,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 175.4559968647204,
+            "entry": "two",
+            "initialDownloadTime": 172.74555407072367,
+            "rule": Object {
+              "maxAsyncDownloadTime": 1,
+              "maxDownloadTime": null,
+              "maxInitialDownloadTime": null,
             },
+            "useCompressedSize": true,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -646,7 +279,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;
@@ -661,97 +293,33 @@ Array [
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [
-                Object {
-                  "limits": Object {
-                    "maxAsyncDownloadTime": 1,
-                  },
-                  "name": Object {
-                    "content": ".+",
-                    "flags": "",
-                    "type": "regexp",
-                  },
-                },
-              ],
-              "exclude": Array [],
-              "global": Object {
-                "maxAsyncDownloadTime": 100000,
-              },
-              "network": "Slow",
-              "useCompressedSize": undefined,
+            "asyncDownloadTime": 2.71044279399671,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 175.4559968647204,
+            "entry": "two",
+            "initialDownloadTime": 172.74555407072367,
+            "rule": Object {
+              "maxAsyncDownloadTime": 1,
+              "maxDownloadTime": null,
+              "maxInitialDownloadTime": null,
             },
+            "useCompressedSize": true,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -763,7 +331,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;
@@ -774,86 +341,33 @@ Array [
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [],
-              "global": Object {
-                "maxAsyncDownloadTime": 1,
-              },
-              "network": "Slow",
-              "useCompressedSize": false,
+            "asyncDownloadTime": 2.8509842722039473,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 248.85880319695724,
+            "entry": "two",
+            "initialDownloadTime": 246.00781892475328,
+            "rule": Object {
+              "maxAsyncDownloadTime": 1,
+              "maxDownloadTime": null,
+              "maxInitialDownloadTime": null,
             },
+            "useCompressedSize": false,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -865,7 +379,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;
@@ -876,86 +389,33 @@ Array [
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [],
-              "global": Object {
-                "maxDownloadTime": 1,
-              },
-              "network": "Slow",
-              "useCompressedSize": undefined,
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 9.014731959292764,
+            "entry": "one",
+            "initialDownloadTime": 9.014731959292764,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
             },
+            "useCompressedSize": true,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -967,92 +427,38 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [],
-              "global": Object {
-                "maxDownloadTime": 1,
-              },
-              "network": "Slow",
-              "useCompressedSize": undefined,
+            "asyncDownloadTime": 2.71044279399671,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 175.4559968647204,
+            "entry": "two",
+            "initialDownloadTime": 172.74555407072367,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
             },
+            "useCompressedSize": true,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -1064,7 +470,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;
@@ -1079,97 +484,33 @@ Array [
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [
-                Object {
-                  "limits": Object {
-                    "maxDownloadTime": 1,
-                  },
-                  "name": Object {
-                    "content": ".+",
-                    "flags": "",
-                    "type": "regexp",
-                  },
-                },
-              ],
-              "exclude": Array [],
-              "global": Object {
-                "maxDownloadTime": 100000,
-              },
-              "network": "Slow",
-              "useCompressedSize": undefined,
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 9.014731959292764,
+            "entry": "one",
+            "initialDownloadTime": 9.014731959292764,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
             },
+            "useCompressedSize": true,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -1181,103 +522,38 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [
-                Object {
-                  "limits": Object {
-                    "maxDownloadTime": 1,
-                  },
-                  "name": Object {
-                    "content": ".+",
-                    "flags": "",
-                    "type": "regexp",
-                  },
-                },
-              ],
-              "exclude": Array [],
-              "global": Object {
-                "maxDownloadTime": 100000,
-              },
-              "network": "Slow",
-              "useCompressedSize": undefined,
+            "asyncDownloadTime": 2.71044279399671,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 175.4559968647204,
+            "entry": "two",
+            "initialDownloadTime": 172.74555407072367,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
             },
+            "useCompressedSize": true,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -1289,7 +565,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;
@@ -1300,86 +575,33 @@ Array [
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [],
-              "global": Object {
-                "maxDownloadTime": 1,
-              },
-              "network": "Slow",
-              "useCompressedSize": false,
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 16.041805869654606,
+            "entry": "one",
+            "initialDownloadTime": 16.041805869654606,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
             },
+            "useCompressedSize": false,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -1391,92 +613,38 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [],
-              "global": Object {
-                "maxDownloadTime": 1,
-              },
-              "network": "Slow",
-              "useCompressedSize": false,
+            "asyncDownloadTime": 2.8509842722039473,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 248.85880319695724,
+            "entry": "two",
+            "initialDownloadTime": 246.00781892475328,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
             },
+            "useCompressedSize": false,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -1488,7 +656,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;
@@ -1499,86 +666,33 @@ Array [
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [],
-              "global": Object {
-                "maxInitialDownloadTime": 1,
-              },
-              "network": "Slow",
-              "useCompressedSize": undefined,
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 9.014731959292764,
+            "entry": "one",
+            "initialDownloadTime": 9.014731959292764,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": null,
+              "maxInitialDownloadTime": 1,
             },
+            "useCompressedSize": true,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -1590,92 +704,38 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [],
-              "global": Object {
-                "maxInitialDownloadTime": 1,
-              },
-              "network": "Slow",
-              "useCompressedSize": undefined,
+            "asyncDownloadTime": 2.71044279399671,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 175.4559968647204,
+            "entry": "two",
+            "initialDownloadTime": 172.74555407072367,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": null,
+              "maxInitialDownloadTime": 1,
             },
+            "useCompressedSize": true,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -1687,7 +747,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;
@@ -1702,97 +761,33 @@ Array [
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [
-                Object {
-                  "limits": Object {
-                    "maxInitialDownloadTime": 1,
-                  },
-                  "name": Object {
-                    "content": ".+",
-                    "flags": "",
-                    "type": "regexp",
-                  },
-                },
-              ],
-              "exclude": Array [],
-              "global": Object {
-                "maxInitialDownloadTime": 100000,
-              },
-              "network": "Slow",
-              "useCompressedSize": undefined,
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 9.014731959292764,
+            "entry": "one",
+            "initialDownloadTime": 9.014731959292764,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": null,
+              "maxInitialDownloadTime": 1,
             },
+            "useCompressedSize": true,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -1804,103 +799,38 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [
-                Object {
-                  "limits": Object {
-                    "maxInitialDownloadTime": 1,
-                  },
-                  "name": Object {
-                    "content": ".+",
-                    "flags": "",
-                    "type": "regexp",
-                  },
-                },
-              ],
-              "exclude": Array [],
-              "global": Object {
-                "maxInitialDownloadTime": 100000,
-              },
-              "network": "Slow",
-              "useCompressedSize": undefined,
+            "asyncDownloadTime": 2.71044279399671,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 175.4559968647204,
+            "entry": "two",
+            "initialDownloadTime": 172.74555407072367,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": null,
+              "maxInitialDownloadTime": 1,
             },
+            "useCompressedSize": true,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -1912,7 +842,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;
@@ -1923,86 +852,33 @@ Array [
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [],
-              "global": Object {
-                "maxInitialDownloadTime": 1,
-              },
-              "network": "Slow",
-              "useCompressedSize": false,
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 16.041805869654606,
+            "entry": "one",
+            "initialDownloadTime": 16.041805869654606,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": null,
+              "maxInitialDownloadTime": 1,
             },
+            "useCompressedSize": false,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -2014,92 +890,38 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <name>,
-    })
-    .({
-      $entry: $;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTime: [$matchedRule.maxDownloadTime, $params.global.maxDownloadTime].useNotNullish(),
-        maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
-        maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
-      };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
-      $initialChunks: $chunks.[initial];
-      $asyncChunks: $chunks.[not initial];
-      $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-      
-      $entry,
-      $chunks,
-      $initialChunks,
-      $asyncChunks,
-      $rule,
-      $downloadTime,
-      $initialDownloadTime,
-      $asyncDownloadTime,
-      downloadTimeOK: $rule.maxDownloadTime = null ? true : $downloadTime <= $rule.maxDownloadTime,
-      initialDownloadTimeOK: $rule.maxInitialDownloadTime = null ? true : $initialDownloadTime <= $rule.maxInitialDownloadTime,
-      asyncDownloadTimeOK: $rule.maxAsyncDownloadTime = null ? true : $asyncDownloadTime <= $rule.maxAsyncDownloadTime,
-    })
-    .[not (downloadTimeOK and initialDownloadTimeOK and asyncDownloadTimeOK)]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [],
-              "global": Object {
-                "maxInitialDownloadTime": 1,
-              },
-              "network": "Slow",
-              "useCompressedSize": false,
+            "asyncDownloadTime": 2.8509842722039473,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 248.85880319695724,
+            "entry": "two",
+            "initialDownloadTime": 246.00781892475328,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": null,
+              "maxInitialDownloadTime": 1,
             },
+            "useCompressedSize": false,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -2111,7 +933,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;

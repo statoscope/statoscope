@@ -10,7 +10,7 @@ test('matches', () => {
   const prepared: RuleDataInput<Prepared> = pluginInstance.prepare!([
     { name: 'input.json', data: statsV5 },
   ]);
-  const api = makeAPI({ warnAsError: false });
+  const api = makeAPI();
 
   rule(['./src/index.ts'], prepared, api);
   rule([/^\.\/src/], prepared, api);
@@ -26,7 +26,7 @@ test('not matches', () => {
   const prepared: RuleDataInput<Prepared> = pluginInstance.prepare!([
     { name: 'input.json', data: statsV5 },
   ]);
-  const api = makeAPI({ warnAsError: false });
+  const api = makeAPI();
 
   rule(['./srF/index.ts'], prepared, api);
   rule([/^\.\/srF/], prepared, api);

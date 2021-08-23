@@ -1,7 +1,7 @@
 import { makeAPI } from '@statoscope/stats-validator/dist/api';
 import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
 import { Prepared } from '@statoscope/webpack-model';
-import { API } from '@statoscope/types/types/validation';
+import { API } from '@statoscope/types/types/validation/api';
 import plugin from '../..';
 import referenceStats from '../../../../../test/bundles/simple/stats-prod.json';
 import afterStats from '../../../../../test/bundles/simple/stats-dev.json';
@@ -13,7 +13,7 @@ function prepareAPI(ruleParams: Params): API {
     { name: 'input.json', data: afterStats },
     { name: 'reference.json', data: referenceStats },
   ]);
-  const api = makeAPI({ warnAsError: false });
+  const api = makeAPI();
 
   rule(ruleParams, prepared, api);
 

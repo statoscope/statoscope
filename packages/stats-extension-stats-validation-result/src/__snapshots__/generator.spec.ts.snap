@@ -36,7 +36,7 @@ Object {
               },
             ],
             "rule": "foo-rule",
-            "type": "error",
+            "type": "warn",
           },
           Object {
             "details": Array [],

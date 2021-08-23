@@ -4,17 +4,10 @@ import {
   NormalizedCompilation,
   NormalizedEntrypointItem,
 } from '@statoscope/webpack-model/dist/normalize';
-import { APIFnOptions } from '@statoscope/types/types/validation';
+import { APIFnOptions } from '@statoscope/types/types/validation/api';
 import helpers from '@statoscope/helpers/dist/jora';
 import { WebpackRule } from '../../';
-import {
-  ByNameFilterItem,
-  ExcludeItem,
-  normalizeExclude,
-  SerializedByNameFilterItem,
-  SerializedExcludeItem,
-  serializeExclude,
-} from '../../limits-helpers';
+import { ByNameFilterItem, ExcludeItem, normalizeExclude } from '../../limits-helpers';
 import * as version from '../../version';
 
 export type Limits = {
@@ -67,25 +60,6 @@ function formatError(
 export type NormalizedParams = Exclude<Params, 'exclude'> & {
   exclude: ExcludeItem<'compilation' | 'entry'>[];
 };
-
-export type SerializedParams = {
-  exclude?: SerializedExcludeItem<'compilation' | 'entry'>[];
-  useCompressedSize?: boolean;
-  global?: Limits;
-  byName?: SerializedByNameFilterItem<Limits>[];
-};
-
-function serializeParams(params: NormalizedParams): SerializedParams {
-  return {
-    exclude: params.exclude.map(serializeExclude),
-    byName:
-      params.byName?.map((item) => {
-        return { name: h.serializeStringOrRegexp(item.name)!, limits: item.limits };
-      }) ?? [],
-    global: params.global,
-    useCompressedSize: params.useCompressedSize,
-  };
-}
 
 const entryDownloadSizeLimits: WebpackRule<Params> = (ruleParams, data, api): void => {
   api.setRuleDescriptor({
@@ -165,41 +139,42 @@ const entryDownloadSizeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
         details: [
           {
             type: 'discovery',
-            query,
+            query: `
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              size: #.size,
+              initialSize: #.initialSize,
+              asyncSize: #.asyncSize,
+              rule: #.rule,
+            }
+            `,
             filename: path.basename(data.files[0].name),
-            serialized: {
+            payload: {
               context: {
-                params: serializeParams(normalizedParams),
+                entry: entryItem.entry.name,
+                compilation: item.compilation.hash,
+                useCompressedSize: normalizedParams.useCompressedSize,
+                size: entryItem.size,
+                initialSize: entryItem.initialSize,
+                asyncSize: entryItem.asyncSize,
+                rule: entryItem.rule,
               },
-            },
-            deserialize: {
-              type: 'query',
-              content: `
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }`,
             },
           },
         ],
       };
 
       if (!entryItem.sizeOK) {
-        api.error(
+        api.message(
           formatError('assets', entryItem.entry, entryItem.size, entryItem.rule.maxSize!),
           options
         );
       }
 
       if (!entryItem.initialSizeOK) {
-        api.error(
+        api.message(
           formatError(
             'initial assets',
             entryItem.entry,
@@ -211,7 +186,7 @@ const entryDownloadSizeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
       }
 
       if (!entryItem.asyncSizeOK) {
-        api.error(
+        api.message(
           formatError(
             'async assets',
             entryItem.entry,

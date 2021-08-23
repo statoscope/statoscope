@@ -6,63 +6,22 @@ Array [
     "compilation": undefined,
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "$theContext: context;
-                {
-                  context: {
-                    exclude: $theContext.exclude.(deserializeExclude()),
-                    target: {
-                      name: $theContext.target.name.deserializeStringOrRegexp()
-                    }
-                  }
-                }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $after: resolveInputFile();
-  $reference: resolveReferenceFile();
-  $target: #.target;
-  $exclude: #.exclude;
-
-  $after.compilations
-  .exclude({
-    exclude: $exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  ..modules.[name.isMatch($target.name)]
-  .group(<name>)
-  .({
-    $key;
-    $afterReasons: value.reasons;
-    $referenceReasons: $reference.compilations
-
-    .(
-      $compilation: $;
-      $key.resolveModule($compilation.hash)
-    ).[].reasons;
-    $diff: $afterReasons.[
-      $item: $;
-      not $referenceReasons[=>moduleName=$item.moduleName and userRequest=$item.userRequest and type=$item.type]
-    ];
-    moduleName: key,
-    after: $afterReasons,
-    reference: $referenceReasons,
-    $diff
-  }).[diff]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": ".+",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "after": 1,
+            "before": 0,
+            "module": "./src/index.ts + 3 modules",
           },
         },
+        "query": "
+              $input: resolveInputFile();
+              {
+                module: $input.compilations.hash.(#.module.resolveModule($)).pick(),
+                before: #.before,
+                after: #.after,
+              }
+              ",
         "type": "discovery",
       },
     ],
@@ -74,69 +33,27 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": undefined,
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "$theContext: context;
-                {
-                  context: {
-                    exclude: $theContext.exclude.(deserializeExclude()),
-                    target: {
-                      name: $theContext.target.name.deserializeStringOrRegexp()
-                    }
-                  }
-                }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $after: resolveInputFile();
-  $reference: resolveReferenceFile();
-  $target: #.target;
-  $exclude: #.exclude;
-
-  $after.compilations
-  .exclude({
-    exclude: $exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  ..modules.[name.isMatch($target.name)]
-  .group(<name>)
-  .({
-    $key;
-    $afterReasons: value.reasons;
-    $referenceReasons: $reference.compilations
-
-    .(
-      $compilation: $;
-      $key.resolveModule($compilation.hash)
-    ).[].reasons;
-    $diff: $afterReasons.[
-      $item: $;
-      not $referenceReasons[=>moduleName=$item.moduleName and userRequest=$item.userRequest and type=$item.type]
-    ];
-    moduleName: key,
-    after: $afterReasons,
-    reference: $referenceReasons,
-    $diff
-  }).[diff]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": ".+",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "after": 4,
+            "before": 0,
+            "module": "../node_modules/is-array/index.js",
           },
         },
+        "query": "
+              $input: resolveInputFile();
+              {
+                module: $input.compilations.hash.(#.module.resolveModule($)).pick(),
+                before: #.before,
+                after: #.after,
+              }
+              ",
         "type": "discovery",
       },
     ],
@@ -148,69 +65,27 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": undefined,
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "$theContext: context;
-                {
-                  context: {
-                    exclude: $theContext.exclude.(deserializeExclude()),
-                    target: {
-                      name: $theContext.target.name.deserializeStringOrRegexp()
-                    }
-                  }
-                }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $after: resolveInputFile();
-  $reference: resolveReferenceFile();
-  $target: #.target;
-  $exclude: #.exclude;
-
-  $after.compilations
-  .exclude({
-    exclude: $exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  ..modules.[name.isMatch($target.name)]
-  .group(<name>)
-  .({
-    $key;
-    $afterReasons: value.reasons;
-    $referenceReasons: $reference.compilations
-
-    .(
-      $compilation: $;
-      $key.resolveModule($compilation.hash)
-    ).[].reasons;
-    $diff: $afterReasons.[
-      $item: $;
-      not $referenceReasons[=>moduleName=$item.moduleName and userRequest=$item.userRequest and type=$item.type]
-    ];
-    moduleName: key,
-    after: $afterReasons,
-    reference: $referenceReasons,
-    $diff
-  }).[diff]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": ".+",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "after": 2,
+            "before": 0,
+            "module": "../node_modules/css-loader/dist/runtime/api.js",
           },
         },
+        "query": "
+              $input: resolveInputFile();
+              {
+                module: $input.compilations.hash.(#.module.resolveModule($)).pick(),
+                before: #.before,
+                after: #.after,
+              }
+              ",
         "type": "discovery",
       },
     ],
@@ -222,69 +97,27 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": undefined,
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "$theContext: context;
-                {
-                  context: {
-                    exclude: $theContext.exclude.(deserializeExclude()),
-                    target: {
-                      name: $theContext.target.name.deserializeStringOrRegexp()
-                    }
-                  }
-                }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $after: resolveInputFile();
-  $reference: resolveReferenceFile();
-  $target: #.target;
-  $exclude: #.exclude;
-
-  $after.compilations
-  .exclude({
-    exclude: $exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  ..modules.[name.isMatch($target.name)]
-  .group(<name>)
-  .({
-    $key;
-    $afterReasons: value.reasons;
-    $referenceReasons: $reference.compilations
-
-    .(
-      $compilation: $;
-      $key.resolveModule($compilation.hash)
-    ).[].reasons;
-    $diff: $afterReasons.[
-      $item: $;
-      not $referenceReasons[=>moduleName=$item.moduleName and userRequest=$item.userRequest and type=$item.type]
-    ];
-    moduleName: key,
-    after: $afterReasons,
-    reference: $referenceReasons,
-    $diff
-  }).[diff]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": ".+",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "after": 2,
+            "before": 0,
+            "module": "../node_modules/css-loader/dist/runtime/getUrl.js",
           },
         },
+        "query": "
+              $input: resolveInputFile();
+              {
+                module: $input.compilations.hash.(#.module.resolveModule($)).pick(),
+                before: #.before,
+                after: #.after,
+              }
+              ",
         "type": "discovery",
       },
     ],
@@ -296,69 +129,27 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": undefined,
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "$theContext: context;
-                {
-                  context: {
-                    exclude: $theContext.exclude.(deserializeExclude()),
-                    target: {
-                      name: $theContext.target.name.deserializeStringOrRegexp()
-                    }
-                  }
-                }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $after: resolveInputFile();
-  $reference: resolveReferenceFile();
-  $target: #.target;
-  $exclude: #.exclude;
-
-  $after.compilations
-  .exclude({
-    exclude: $exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  ..modules.[name.isMatch($target.name)]
-  .group(<name>)
-  .({
-    $key;
-    $afterReasons: value.reasons;
-    $referenceReasons: $reference.compilations
-
-    .(
-      $compilation: $;
-      $key.resolveModule($compilation.hash)
-    ).[].reasons;
-    $diff: $afterReasons.[
-      $item: $;
-      not $referenceReasons[=>moduleName=$item.moduleName and userRequest=$item.userRequest and type=$item.type]
-    ];
-    moduleName: key,
-    after: $afterReasons,
-    reference: $referenceReasons,
-    $diff
-  }).[diff]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": ".+",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "after": 2,
+            "before": 1,
+            "module": "./node_modules/foo/node_modules/bar/index.js",
           },
         },
+        "query": "
+              $input: resolveInputFile();
+              {
+                module: $input.compilations.hash.(#.module.resolveModule($)).pick(),
+                before: #.before,
+                after: #.after,
+              }
+              ",
         "type": "discovery",
       },
     ],
@@ -370,7 +161,6 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
 ]
 `;

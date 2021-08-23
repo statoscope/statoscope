@@ -16,57 +16,19 @@ Array [
         "type": "tty",
       },
       Object {
-        "deserialize": Object {
-          "content": "
-                $theContext: context;
-                {
-                  context: {
-                    exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                  }
-                }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  
-  $input.group(<compilations>)
-  .({file: value.pick(), compilation: key})
-  .exclude({
-    exclude: $exclude.[type='compilation'].name,
-    get: <compilation.name>,
-  })
-  .({
-    ...$,
-    packages: compilation
-    .nodeModules
-    .exclude({
-      exclude: $exclude.[type='package'].name,
-      get: <name>,
-    })
-    .[instances.size() > 1]
-    .({
-      ...$,
-      instances: instances.sort(isRoot desc, path.size() asc)
-    })
-    .sort(instances.size() desc, name asc)
-  })
-  .[packages]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [
-              Object {
-                "name": Object {
-                  "content": "baaaaaa",
-                  "flags": "",
-                  "type": "regexp",
-                },
-                "type": "package",
-              },
-            ],
+            "compilation": "718159f8e48dcecd92c9",
+            "package": "bar",
           },
         },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+              }
+              ",
         "type": "discovery",
       },
     ],
@@ -86,7 +48,6 @@ Array [
         "type": "package-instance",
       },
     ],
-    "type": "error",
   },
 ]
 `;
@@ -113,48 +74,19 @@ Array [
         "type": "tty",
       },
       Object {
-        "deserialize": Object {
-          "content": "
-                $theContext: context;
-                {
-                  context: {
-                    exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                  }
-                }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  
-  $input.group(<compilations>)
-  .({file: value.pick(), compilation: key})
-  .exclude({
-    exclude: $exclude.[type='compilation'].name,
-    get: <compilation.name>,
-  })
-  .({
-    ...$,
-    packages: compilation
-    .nodeModules
-    .exclude({
-      exclude: $exclude.[type='package'].name,
-      get: <name>,
-    })
-    .[instances.size() > 1]
-    .({
-      ...$,
-      instances: instances.sort(isRoot desc, path.size() asc)
-    })
-    .sort(instances.size() desc, name asc)
-  })
-  .[packages]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
+            "compilation": "718159f8e48dcecd92c9",
+            "package": "bar",
           },
         },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+              }
+              ",
         "type": "discovery",
       },
     ],
@@ -174,7 +106,6 @@ Array [
         "type": "package-instance",
       },
     ],
-    "type": "error",
   },
 ]
 `;

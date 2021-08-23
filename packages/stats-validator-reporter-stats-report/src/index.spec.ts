@@ -9,11 +9,9 @@ const outputDir = path.join(rootPath, 'test/temp', path.relative(rootPath, __fil
 test('should work', async () => {
   const validator = new Validator({
     plugins: [[require.resolve('../../stats-validator-plugin-webpack'), 'webpack']],
-    validate: {
-      rules: {
-        'webpack/restricted-modules': ['error', [/\.\/src/]],
-        'webpack/restricted-packages': ['error', ['foo']],
-      },
+    rules: {
+      'webpack/restricted-modules': ['error', [/\.\/src/]],
+      'webpack/restricted-packages': ['error', ['foo']],
     },
   });
   const result = await validator.validate(

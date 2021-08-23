@@ -6,7 +6,7 @@ import rule from './';
 test('should work', () => {
   const pluginInstance = plugin();
   const prepared = pluginInstance.prepare!([{ name: 'input.json', data: statsV5 }]);
-  const api = makeAPI({ warnAsError: false });
+  const api = makeAPI();
 
   rule({}, prepared, api);
 
@@ -17,7 +17,7 @@ describe('exclude', () => {
   test('string', () => {
     const pluginInstance = plugin();
     const prepared = pluginInstance.prepare!([{ name: 'input.json', data: statsV5 }]);
-    const api = makeAPI({ warnAsError: false });
+    const api = makeAPI();
 
     rule({ exclude: ['bar'] }, prepared, api);
 
@@ -27,7 +27,7 @@ describe('exclude', () => {
   test('regexp', () => {
     const pluginInstance = plugin();
     const prepared = pluginInstance.prepare!([{ name: 'input.json', data: statsV5 }]);
-    const api = makeAPI({ warnAsError: false });
+    const api = makeAPI();
 
     rule({ exclude: [/ba/] }, prepared, api);
 
@@ -37,7 +37,7 @@ describe('exclude', () => {
   test('object', () => {
     const pluginInstance = plugin();
     const prepared = pluginInstance.prepare!([{ name: 'input.json', data: statsV5 }]);
-    const api = makeAPI({ warnAsError: false });
+    const api = makeAPI();
 
     rule({ exclude: [{ type: 'package', name: 'bar' }] }, prepared, api);
 
@@ -47,7 +47,7 @@ describe('exclude', () => {
   test('no exclude', () => {
     const pluginInstance = plugin();
     const prepared = pluginInstance.prepare!([{ name: 'input.json', data: statsV5 }]);
-    const api = makeAPI({ warnAsError: false });
+    const api = makeAPI();
 
     rule({ exclude: [/baaaaaa/] }, prepared, api);
 

@@ -2,20 +2,13 @@ import path from 'path';
 import { Prepared } from '@statoscope/webpack-model';
 import { NormalizedReason } from '@statoscope/webpack-model/dist/normalize';
 import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
-import { API } from '@statoscope/types/types/validation';
+import { API } from '@statoscope/types/types/validation/api';
 import { WebpackRule } from '../../';
-import {
-  ModuleTarget,
-  normalizeModuleTarget,
-  RawTarget,
-  SerializedModuleTarget,
-  serializeModuleTarget,
-} from '../../helpers';
+import { ModuleTarget, normalizeModuleTarget, RawTarget } from '../../helpers';
 import {
   ExcludeItem,
   normalizeExclude,
   SerializedExcludeItem,
-  serializeExclude,
 } from '../../limits-helpers';
 import * as version from '../../version';
 
@@ -38,11 +31,6 @@ export type Params =
 export type NormalizedParams = {
   target: ModuleTarget[];
   exclude: RuleExcludeItem[];
-};
-
-export type SerializedParams = {
-  target: SerializedModuleTarget[];
-  exclude: SerializedRuleExcludeItem[];
 };
 
 function handledModules(
@@ -91,7 +79,7 @@ function handledModules(
 
   for (const item of result) {
     if (item.after.length > item.reference.length) {
-      api.error(
+      api.message(
         `Usage of ${item.moduleName} was increased from ${item.reference.length} to ${item.after.length}`,
         {
           filename: data.files[0].name,
@@ -99,25 +87,21 @@ function handledModules(
           details: [
             {
               type: 'discovery',
-              query,
+              query: `
+              $input: resolveInputFile();
+              {
+                module: $input.compilations.hash.(#.module.resolveModule($)).pick(),
+                before: #.before,
+                after: #.after,
+              }
+              `,
               filename: path.basename(data.files[0].name),
-              serialized: {
+              payload: {
                 context: {
-                  target: serializeModuleTarget(target),
-                  exclude: ruleParams.exclude.map(serializeExclude),
+                  module: item.moduleName,
+                  before: item.reference.length,
+                  after: item.after.length,
                 },
-              },
-              deserialize: {
-                type: 'query',
-                content: `$theContext: context;
-                {
-                  context: {
-                    exclude: $theContext.exclude.(deserializeExclude()),
-                    target: {
-                      name: $theContext.target.name.deserializeStringOrRegexp()
-                    }
-                  }
-                }`,
               },
             },
           ],

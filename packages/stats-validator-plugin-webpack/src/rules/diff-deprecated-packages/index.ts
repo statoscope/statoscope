@@ -4,16 +4,11 @@ import {
   NormalizedModule,
   NormalizedReason,
 } from '@statoscope/webpack-model/dist/normalize';
-import { API } from '@statoscope/types/types/validation';
+import { API } from '@statoscope/types/types/validation/api';
 import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
 import { WebpackRule } from '../../';
-import {
-  normalizePackageTarget,
-  PackageTarget,
-  RawTarget,
-  serializeModuleTarget,
-} from '../../helpers';
-import { ExcludeItem, normalizeExclude, serializeExclude } from '../../limits-helpers';
+import { normalizePackageTarget, PackageTarget, RawTarget } from '../../helpers';
+import { ExcludeItem, normalizeExclude } from '../../limits-helpers';
 import * as version from '../../version';
 
 export type PackageResultItem = {
@@ -103,7 +98,7 @@ function handleTarget(
 
   for (const packageItem of result) {
     if (packageItem.after.length > packageItem.reference.length) {
-      api.error(
+      api.message(
         `Usage of ${packageItem.packageName} was increased from ${packageItem.reference.length} to ${packageItem.after.length}`,
         {
           filename: data.files[0].name,
@@ -111,26 +106,21 @@ function handleTarget(
           details: [
             {
               type: 'discovery',
-              query,
+              query: `
+              $input: resolveInputFile();
+              {
+                package: $input.compilations.hash.(#.package.resolvePackage($)).pick(),
+                before: #.before,
+                after: #.after,
+              }
+              `,
               filename: path.basename(data.files[0].name),
-              serialized: {
+              payload: {
                 context: {
-                  target: serializeModuleTarget(target),
-                  exclude: ruleParams.exclude.map(serializeExclude),
+                  package: packageItem.packageName,
+                  before: packageItem.reference.length,
+                  after: packageItem.after.length,
                 },
-              },
-              deserialize: {
-                type: 'query',
-                content: `
-                $theContext: context;
-                {
-                  context: {
-                    exclude: $theContext.exclude.(deserializeExclude()),
-                    target: {
-                      name: $theContext.target.name.deserializeStringOrRegexp()
-                    }
-                  }
-                }`,
               },
             },
           ],

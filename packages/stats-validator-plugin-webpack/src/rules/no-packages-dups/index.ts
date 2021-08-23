@@ -5,9 +5,9 @@ import {
   NormalizedFile,
   NormalizedPackage,
 } from '@statoscope/webpack-model/dist/normalize';
-import { RelatedItem } from '@statoscope/types/types/validation';
+import { RelatedItem } from '@statoscope/types/types/validation/test-entry';
 import { WebpackRule } from '../../';
-import { ExcludeItem, normalizeExclude, serializeExclude } from '../../limits-helpers';
+import { ExcludeItem, normalizeExclude } from '../../limits-helpers';
 import * as version from '../../version';
 
 export type RuleExcludeItem = ExcludeItem<'compilation' | 'package'>;
@@ -72,7 +72,7 @@ const noPackagesDups: WebpackRule<Params> = (ruleParams, data, api): void => {
       const versions = data.query('instances.version.[]', packageItem) as
         | string[]
         | undefined;
-      api.error(
+      api.message(
         `Package ${packageItem.name} has ${packageItem.instances.length} instances ${
           versions?.length ? `with ${versions.length} versions` : ''
         }`,
@@ -90,22 +90,18 @@ const noPackagesDups: WebpackRule<Params> = (ruleParams, data, api): void => {
             },
             {
               type: 'discovery',
-              query,
+              query: `
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+              }
+              `,
               filename: path.basename(data.files[0].name),
-              serialized: {
+              payload: {
                 context: {
-                  exclude: normalizedParams.exclude.map(serializeExclude),
+                  compilation: item.compilation.hash,
+                  package: packageItem.name,
                 },
-              },
-              deserialize: {
-                type: 'query',
-                content: `
-                $theContext: context;
-                {
-                  context: {
-                    exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                  }
-                }`,
               },
             },
           ],

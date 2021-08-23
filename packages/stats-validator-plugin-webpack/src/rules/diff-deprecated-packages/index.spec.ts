@@ -12,7 +12,7 @@ test('matches', () => {
     { name: 'input.json', data: statsV5 },
     { name: 'reference.json', data: statsV4 },
   ]);
-  const api = makeAPI({ warnAsError: false });
+  const api = makeAPI();
 
   rule([{ name: /.+/ }], prepared, api);
 
@@ -25,7 +25,7 @@ test('not matches', () => {
     { name: 'input.json', data: statsV5 },
     { name: 'reference.json', data: statsV4 },
   ]);
-  const api = makeAPI({ warnAsError: false });
+  const api = makeAPI();
 
   rule([{ name: /not_exists/ }], prepared, api);
 

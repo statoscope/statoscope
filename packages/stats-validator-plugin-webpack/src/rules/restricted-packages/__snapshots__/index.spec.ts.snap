@@ -20,59 +20,19 @@ Array [
         "type": "tty",
       },
       Object {
-        "deserialize": Object {
-          "content": "
-                $theContext: context;
-                {
-                  context: {
-                    target: {
-                      name: $theContext.target.name.deserializeStringOrRegexp(),
-                      version: $theContext.target.version,
-                    },
-                    exclude: $theContext.exclude.(deserializeStringOrRegexp),
-                  }
-                }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $target: #.target;
-  $exclude: #.exclude;
-  
-  $input.group(<compilations>)
-  .({file: value.pick(), compilation: key})
-  .exclude({
-    exclude: $exclude.[type='compilation'].name,
-    get: <compilation.name>,
-  })
-  .({
-    ...$,
-    packages: compilation.nodeModules
-    .[name.isMatch($target.name)]
-    .({
-      $package: $;
-      $package,
-      instances: instances
-        .[
-          $passVersion: (not $target.version or not version).bool();
-          $passVersion or version.semverSatisfies($target.version)
-        ].sort(isRoot desc, path.size() asc)
-    })
-  })
-  .[packages.instances]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "foo",
-                "type": "string",
-              },
-              "version": undefined,
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "package": "foo",
           },
         },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+              }
+              ",
         "type": "discovery",
       },
     ],
@@ -88,7 +48,6 @@ Array [
         "type": "package-instance",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
@@ -108,59 +67,19 @@ Array [
         "type": "tty",
       },
       Object {
-        "deserialize": Object {
-          "content": "
-                $theContext: context;
-                {
-                  context: {
-                    target: {
-                      name: $theContext.target.name.deserializeStringOrRegexp(),
-                      version: $theContext.target.version,
-                    },
-                    exclude: $theContext.exclude.(deserializeStringOrRegexp),
-                  }
-                }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $target: #.target;
-  $exclude: #.exclude;
-  
-  $input.group(<compilations>)
-  .({file: value.pick(), compilation: key})
-  .exclude({
-    exclude: $exclude.[type='compilation'].name,
-    get: <compilation.name>,
-  })
-  .({
-    ...$,
-    packages: compilation.nodeModules
-    .[name.isMatch($target.name)]
-    .({
-      $package: $;
-      $package,
-      instances: instances
-        .[
-          $passVersion: (not $target.version or not version).bool();
-          $passVersion or version.semverSatisfies($target.version)
-        ].sort(isRoot desc, path.size() asc)
-    })
-  })
-  .[packages.instances]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "foo",
-                "type": "string",
-              },
-              "version": "^1.0.0 || ^2.0.0",
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "package": "foo",
           },
         },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+              }
+              ",
         "type": "discovery",
       },
     ],
@@ -176,7 +95,6 @@ Array [
         "type": "package-instance",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
@@ -196,59 +114,19 @@ Array [
         "type": "tty",
       },
       Object {
-        "deserialize": Object {
-          "content": "
-                $theContext: context;
-                {
-                  context: {
-                    target: {
-                      name: $theContext.target.name.deserializeStringOrRegexp(),
-                      version: $theContext.target.version,
-                    },
-                    exclude: $theContext.exclude.(deserializeStringOrRegexp),
-                  }
-                }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $target: #.target;
-  $exclude: #.exclude;
-  
-  $input.group(<compilations>)
-  .({file: value.pick(), compilation: key})
-  .exclude({
-    exclude: $exclude.[type='compilation'].name,
-    get: <compilation.name>,
-  })
-  .({
-    ...$,
-    packages: compilation.nodeModules
-    .[name.isMatch($target.name)]
-    .({
-      $package: $;
-      $package,
-      instances: instances
-        .[
-          $passVersion: (not $target.version or not version).bool();
-          $passVersion or version.semverSatisfies($target.version)
-        ].sort(isRoot desc, path.size() asc)
-    })
-  })
-  .[packages.instances]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "foo",
-                "type": "string",
-              },
-              "version": undefined,
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "package": "foo",
           },
         },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+              }
+              ",
         "type": "discovery",
       },
     ],
@@ -264,7 +142,6 @@ Array [
         "type": "package-instance",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
@@ -284,60 +161,19 @@ Array [
         "type": "tty",
       },
       Object {
-        "deserialize": Object {
-          "content": "
-                $theContext: context;
-                {
-                  context: {
-                    target: {
-                      name: $theContext.target.name.deserializeStringOrRegexp(),
-                      version: $theContext.target.version,
-                    },
-                    exclude: $theContext.exclude.(deserializeStringOrRegexp),
-                  }
-                }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $target: #.target;
-  $exclude: #.exclude;
-  
-  $input.group(<compilations>)
-  .({file: value.pick(), compilation: key})
-  .exclude({
-    exclude: $exclude.[type='compilation'].name,
-    get: <compilation.name>,
-  })
-  .({
-    ...$,
-    packages: compilation.nodeModules
-    .[name.isMatch($target.name)]
-    .({
-      $package: $;
-      $package,
-      instances: instances
-        .[
-          $passVersion: (not $target.version or not version).bool();
-          $passVersion or version.semverSatisfies($target.version)
-        ].sort(isRoot desc, path.size() asc)
-    })
-  })
-  .[packages.instances]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "^foo",
-                "flags": "",
-                "type": "regexp",
-              },
-              "version": undefined,
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "package": "foo",
           },
         },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+              }
+              ",
         "type": "discovery",
       },
     ],
@@ -353,7 +189,6 @@ Array [
         "type": "package-instance",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
@@ -373,59 +208,19 @@ Array [
         "type": "tty",
       },
       Object {
-        "deserialize": Object {
-          "content": "
-                $theContext: context;
-                {
-                  context: {
-                    target: {
-                      name: $theContext.target.name.deserializeStringOrRegexp(),
-                      version: $theContext.target.version,
-                    },
-                    exclude: $theContext.exclude.(deserializeStringOrRegexp),
-                  }
-                }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $target: #.target;
-  $exclude: #.exclude;
-  
-  $input.group(<compilations>)
-  .({file: value.pick(), compilation: key})
-  .exclude({
-    exclude: $exclude.[type='compilation'].name,
-    get: <compilation.name>,
-  })
-  .({
-    ...$,
-    packages: compilation.nodeModules
-    .[name.isMatch($target.name)]
-    .({
-      $package: $;
-      $package,
-      instances: instances
-        .[
-          $passVersion: (not $target.version or not version).bool();
-          $passVersion or version.semverSatisfies($target.version)
-        ].sort(isRoot desc, path.size() asc)
-    })
-  })
-  .[packages.instances]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "foo",
-                "type": "string",
-              },
-              "version": "^1.0.0 || ^2.0.0",
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "package": "foo",
           },
         },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+              }
+              ",
         "type": "discovery",
       },
     ],
@@ -441,7 +236,6 @@ Array [
         "type": "package-instance",
       },
     ],
-    "type": "error",
   },
 ]
 `;

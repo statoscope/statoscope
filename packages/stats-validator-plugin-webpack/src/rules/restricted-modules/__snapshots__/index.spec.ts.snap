@@ -6,47 +6,19 @@ Array [
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "./src/index.ts",
-                "type": "string",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/index.ts",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -58,54 +30,24 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "^\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/index.ts + 3 modules",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -117,54 +59,24 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "^\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/index.ts",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -176,54 +88,24 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "^\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/sub-module.ts",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -235,54 +117,24 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "^\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/index2.ts + 1 modules",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -294,54 +146,24 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "^\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/index2.ts",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -353,54 +175,24 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "^\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/index2.css",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -412,54 +204,24 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "^\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/test.txt",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -471,54 +233,24 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "^\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/dyn.ts",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -530,54 +262,24 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "^\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/statoscope.png",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -589,53 +291,24 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "./src/index.ts",
-                "type": "string",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/index.ts",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -647,54 +320,24 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "^\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/index.ts + 3 modules",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -706,54 +349,24 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "^\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/index.ts",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -765,54 +378,24 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "^\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/sub-module.ts",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -824,54 +407,24 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "^\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/index2.ts + 1 modules",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -883,54 +436,24 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "^\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/index2.ts",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -942,54 +465,24 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "^\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/index2.css",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -1001,54 +494,24 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "^\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/test.txt",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -1060,54 +523,24 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "^\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/dyn.ts",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -1119,54 +552,24 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "718159f8e48dcecd92c9",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "^\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "718159f8e48dcecd92c9",
+            "module": "./src/statoscope.png",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -1178,7 +581,6 @@ Array [
         "type": "module",
       },
     ],
-    "type": "error",
   },
 ]
 `;

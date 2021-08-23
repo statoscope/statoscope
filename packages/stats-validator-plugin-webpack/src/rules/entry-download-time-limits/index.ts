@@ -6,16 +6,9 @@ import {
 } from '@statoscope/webpack-model/dist/normalize';
 import helpers from '@statoscope/helpers/dist/jora';
 import networkListType from '@statoscope/helpers/dist/network-type-list';
-import { APIFnOptions } from '@statoscope/types/types/validation';
+import { APIFnOptions } from '@statoscope/types/types/validation/api';
 import { WebpackRule } from '../../';
-import {
-  ByNameFilterItem,
-  ExcludeItem,
-  normalizeExclude,
-  SerializedByNameFilterItem,
-  SerializedExcludeItem,
-  serializeExclude,
-} from '../../limits-helpers';
+import { ByNameFilterItem, ExcludeItem, normalizeExclude } from '../../limits-helpers';
 import * as version from '../../version';
 
 type NetworkType = typeof networkListType[number]['name'];
@@ -65,30 +58,10 @@ function formatError(
   )}. It's over the ${h.formatDuration(limit)} limit`;
 }
 
-export type NormalizedParams = Exclude<Params, 'exclude'> & {
+export type NormalizedParams = Exclude<Params, 'exclude' | 'useCompressedSize'> & {
+  useCompressedSize: boolean;
   exclude: ExcludeItem<'compilation' | 'entry'>[];
 };
-
-export type SerializedParams = {
-  exclude?: SerializedExcludeItem<'compilation' | 'entry'>[];
-  useCompressedSize?: boolean;
-  network: NetworkType;
-  global?: Limits;
-  byName?: SerializedByNameFilterItem<Limits>[];
-};
-
-function serializeParams(params: NormalizedParams): SerializedParams {
-  return {
-    exclude: params.exclude.map(serializeExclude),
-    byName:
-      params.byName?.map((item) => {
-        return { name: h.serializeStringOrRegexp(item.name)!, limits: item.limits };
-      }) ?? [],
-    global: params.global,
-    network: params.network,
-    useCompressedSize: params.useCompressedSize,
-  };
-}
 
 const entryDownloadTimeLimits: WebpackRule<Params> = (ruleParams, data, api): void => {
   api.setRuleDescriptor({
@@ -102,6 +75,7 @@ const entryDownloadTimeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
 
   const normalizedParams: NormalizedParams = {
     ...ruleParams,
+    useCompressedSize: ruleParams.useCompressedSize !== false,
     exclude: ruleParams.exclude?.map((item) => normalizeExclude(item, 'entry')) ?? [],
   };
 
@@ -169,35 +143,35 @@ const entryDownloadTimeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
         details: [
           {
             type: 'discovery',
-            query,
+            query: `
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            `,
             filename: path.basename(data.files[0].name),
-            serialized: {
+            payload: {
               context: {
-                params: serializeParams(normalizedParams),
+                entry: entryItem.entry.name,
+                compilation: item.compilation.hash,
+                useCompressedSize: normalizedParams.useCompressedSize,
+                downloadTime: entryItem.downloadTime,
+                initialDownloadTime: entryItem.initialDownloadTime,
+                asyncDownloadTime: entryItem.asyncDownloadTime,
+                rule: entryItem.rule,
               },
-            },
-            deserialize: {
-              type: 'query',
-              content: `
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    network: $theContext.params.network,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }`,
             },
           },
         ],
       };
 
       if (!entryItem.downloadTimeOK) {
-        api.error(
+        api.message(
           formatError(
             'assets',
             entryItem.entry,
@@ -209,7 +183,7 @@ const entryDownloadTimeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
       }
 
       if (!entryItem.initialDownloadTimeOK) {
-        api.error(
+        api.message(
           formatError(
             'initial assets',
             entryItem.entry,
@@ -221,7 +195,7 @@ const entryDownloadTimeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
       }
 
       if (!entryItem.asyncDownloadTimeOK) {
-        api.error(
+        api.message(
           formatError(
             'async assets',
             entryItem.entry,

@@ -6,143 +6,60 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $reference: resolveReferenceFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .({
-      $entry: $;
-      $referenceEntry: $reference.compilations
-      .exclude({
-        exclude: $params.exclude.[type='compilation'].name,
-        get: <name>,
-      })
-      .entrypoints.[name=$entry.name].pick();
-      $entry,
-      $referenceEntry
-    })
-    .[entry and referenceEntry]
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <entry.name>,
-    })
-    .({
-      $entry;
-      $referenceEntry;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTimeDiff: [$matchedRule.maxDownloadTimeDiff, $params.global.maxDownloadTimeDiff, Infinity].useNotNullish(),
-        maxInitialDownloadTimeDiff: [$matchedRule.maxInitialDownloadTimeDiff, $params.global.maxInitialDownloadTimeDiff, Infinity].useNotNullish(),
-        maxAsyncDownloadTimeDiff: [$matchedRule.maxAsyncDownloadTimeDiff, $params.global.maxAsyncDownloadTimeDiff, Infinity].useNotNullish(),
-      };
-      
-      $referenceEntry,
-      afterEntry: $entry,
-      $rule
-    })
-    .({
-      $rule;
-      $handleEntry: => {
-        $chunks: data.chunks + data.chunks..children;
-        $initialChunks: $chunks.[initial];
-        $asyncChunks: $chunks.[not initial];
-        $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        
-        entry: $,
-        $chunks,
-        $initialChunks,
-        $asyncChunks,
-        $downloadTime,
-        $initialDownloadTime,
-        $asyncDownloadTime,
-      };
-      $reference: referenceEntry.$handleEntry();
-      $after: afterEntry.$handleEntry();
-      $rule,
-      $reference,
-      $after,
-      diff: {
-        downloadTime: {
-          $diff: {
-            absolute: $after.downloadTime - $reference.downloadTime,
-            percent: $after.downloadTime.percentFrom($reference.downloadTime),
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxDownloadTimeDiff)
-        },
-        initialDownloadTime: {
-          $diff: {
-            absolute: $after.initialDownloadTime - $reference.initialDownloadTime,
-            percent: $after.initialDownloadTime.percentFrom($reference.initialDownloadTime)
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxInitialDownloadTimeDiff)
-        },
-        asyncDownloadTime: {
-          $diff: {
-            absolute: $after.asyncDownloadTime - $reference.asyncDownloadTime,
-            percent: $after.asyncDownloadTime.percentFrom($reference.asyncDownloadTime)
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxAsyncDownloadTimeDiff)
-        }
-      }
-    })
-    .[
-      not diff.downloadTime.ok or
-      not diff.initialDownloadTime.ok or
-      not diff.asyncDownloadTime.ok
-    ]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [],
-              "global": Object {
-                "maxAsyncDownloadTimeDiff": Object {
-                  "number": 1,
-                  "type": "absolute",
-                },
-                "maxDownloadTimeDiff": null,
-                "maxInitialDownloadTimeDiff": null,
-              },
-              "useCompressedSize": true,
+            "after": Object {
+              "asyncDownloadTime": 11.86571623149671,
+              "downloadTime": 256.4078883120888,
+              "initialDownloadTime": 244.54217208059208,
             },
+            "before": Object {
+              "asyncDownloadTime": 2.8509842722039473,
+              "downloadTime": 247.39315635279604,
+              "initialDownloadTime": 244.54217208059208,
+            },
+            "compilation": "da95abcf6bbf9b157ff6",
+            "diff": Object {
+              "asyncDownloadTime": Object {
+                "absolute": 9.014731959292764,
+                "ok": false,
+                "percent": 316.1971830985916,
+              },
+              "downloadTime": Object {
+                "absolute": 9.01473195929276,
+                "ok": true,
+                "percent": 3.643888979061849,
+              },
+              "initialDownloadTime": Object {
+                "absolute": 0,
+                "ok": true,
+                "percent": 0,
+              },
+            },
+            "entry": "two",
+            "rule": Object {
+              "maxAsyncDownloadTimeDiff": Object {
+                "number": 1,
+                "type": "absolute",
+              },
+              "maxDownloadTimeDiff": Infinity,
+              "maxInitialDownloadTimeDiff": Infinity,
+            },
+            "useCompressedSize": true,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -154,7 +71,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;
@@ -169,159 +85,60 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $reference: resolveReferenceFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .({
-      $entry: $;
-      $referenceEntry: $reference.compilations
-      .exclude({
-        exclude: $params.exclude.[type='compilation'].name,
-        get: <name>,
-      })
-      .entrypoints.[name=$entry.name].pick();
-      $entry,
-      $referenceEntry
-    })
-    .[entry and referenceEntry]
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <entry.name>,
-    })
-    .({
-      $entry;
-      $referenceEntry;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTimeDiff: [$matchedRule.maxDownloadTimeDiff, $params.global.maxDownloadTimeDiff, Infinity].useNotNullish(),
-        maxInitialDownloadTimeDiff: [$matchedRule.maxInitialDownloadTimeDiff, $params.global.maxInitialDownloadTimeDiff, Infinity].useNotNullish(),
-        maxAsyncDownloadTimeDiff: [$matchedRule.maxAsyncDownloadTimeDiff, $params.global.maxAsyncDownloadTimeDiff, Infinity].useNotNullish(),
-      };
-      
-      $referenceEntry,
-      afterEntry: $entry,
-      $rule
-    })
-    .({
-      $rule;
-      $handleEntry: => {
-        $chunks: data.chunks + data.chunks..children;
-        $initialChunks: $chunks.[initial];
-        $asyncChunks: $chunks.[not initial];
-        $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        
-        entry: $,
-        $chunks,
-        $initialChunks,
-        $asyncChunks,
-        $downloadTime,
-        $initialDownloadTime,
-        $asyncDownloadTime,
-      };
-      $reference: referenceEntry.$handleEntry();
-      $after: afterEntry.$handleEntry();
-      $rule,
-      $reference,
-      $after,
-      diff: {
-        downloadTime: {
-          $diff: {
-            absolute: $after.downloadTime - $reference.downloadTime,
-            percent: $after.downloadTime.percentFrom($reference.downloadTime),
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxDownloadTimeDiff)
-        },
-        initialDownloadTime: {
-          $diff: {
-            absolute: $after.initialDownloadTime - $reference.initialDownloadTime,
-            percent: $after.initialDownloadTime.percentFrom($reference.initialDownloadTime)
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxInitialDownloadTimeDiff)
-        },
-        asyncDownloadTime: {
-          $diff: {
-            absolute: $after.asyncDownloadTime - $reference.asyncDownloadTime,
-            percent: $after.asyncDownloadTime.percentFrom($reference.asyncDownloadTime)
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxAsyncDownloadTimeDiff)
-        }
-      }
-    })
-    .[
-      not diff.downloadTime.ok or
-      not diff.initialDownloadTime.ok or
-      not diff.asyncDownloadTime.ok
-    ]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [
-                Object {
-                  "limits": Object {
-                    "maxAsyncDownloadTimeDiff": Object {
-                      "number": 1,
-                      "type": "absolute",
-                    },
-                    "maxDownloadTimeDiff": null,
-                    "maxInitialDownloadTimeDiff": null,
-                  },
-                  "name": Object {
-                    "content": ".+",
-                    "flags": "",
-                    "type": "regexp",
-                  },
-                },
-              ],
-              "exclude": Array [],
-              "global": Object {
-                "maxAsyncDownloadTimeDiff": Object {
-                  "number": 100000,
-                  "type": "absolute",
-                },
-                "maxDownloadTimeDiff": null,
-                "maxInitialDownloadTimeDiff": null,
-              },
-              "useCompressedSize": true,
+            "after": Object {
+              "asyncDownloadTime": 11.86571623149671,
+              "downloadTime": 256.4078883120888,
+              "initialDownloadTime": 244.54217208059208,
             },
+            "before": Object {
+              "asyncDownloadTime": 2.8509842722039473,
+              "downloadTime": 247.39315635279604,
+              "initialDownloadTime": 244.54217208059208,
+            },
+            "compilation": "da95abcf6bbf9b157ff6",
+            "diff": Object {
+              "asyncDownloadTime": Object {
+                "absolute": 9.014731959292764,
+                "ok": false,
+                "percent": 316.1971830985916,
+              },
+              "downloadTime": Object {
+                "absolute": 9.01473195929276,
+                "ok": true,
+                "percent": 3.643888979061849,
+              },
+              "initialDownloadTime": Object {
+                "absolute": 0,
+                "ok": true,
+                "percent": 0,
+              },
+            },
+            "entry": "two",
+            "rule": Object {
+              "maxAsyncDownloadTimeDiff": Object {
+                "number": 1,
+                "type": "absolute",
+              },
+              "maxDownloadTimeDiff": Infinity,
+              "maxInitialDownloadTimeDiff": Infinity,
+            },
+            "useCompressedSize": true,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -333,7 +150,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;
@@ -344,143 +160,60 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $reference: resolveReferenceFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .({
-      $entry: $;
-      $referenceEntry: $reference.compilations
-      .exclude({
-        exclude: $params.exclude.[type='compilation'].name,
-        get: <name>,
-      })
-      .entrypoints.[name=$entry.name].pick();
-      $entry,
-      $referenceEntry
-    })
-    .[entry and referenceEntry]
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <entry.name>,
-    })
-    .({
-      $entry;
-      $referenceEntry;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTimeDiff: [$matchedRule.maxDownloadTimeDiff, $params.global.maxDownloadTimeDiff, Infinity].useNotNullish(),
-        maxInitialDownloadTimeDiff: [$matchedRule.maxInitialDownloadTimeDiff, $params.global.maxInitialDownloadTimeDiff, Infinity].useNotNullish(),
-        maxAsyncDownloadTimeDiff: [$matchedRule.maxAsyncDownloadTimeDiff, $params.global.maxAsyncDownloadTimeDiff, Infinity].useNotNullish(),
-      };
-      
-      $referenceEntry,
-      afterEntry: $entry,
-      $rule
-    })
-    .({
-      $rule;
-      $handleEntry: => {
-        $chunks: data.chunks + data.chunks..children;
-        $initialChunks: $chunks.[initial];
-        $asyncChunks: $chunks.[not initial];
-        $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        
-        entry: $,
-        $chunks,
-        $initialChunks,
-        $asyncChunks,
-        $downloadTime,
-        $initialDownloadTime,
-        $asyncDownloadTime,
-      };
-      $reference: referenceEntry.$handleEntry();
-      $after: afterEntry.$handleEntry();
-      $rule,
-      $reference,
-      $after,
-      diff: {
-        downloadTime: {
-          $diff: {
-            absolute: $after.downloadTime - $reference.downloadTime,
-            percent: $after.downloadTime.percentFrom($reference.downloadTime),
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxDownloadTimeDiff)
-        },
-        initialDownloadTime: {
-          $diff: {
-            absolute: $after.initialDownloadTime - $reference.initialDownloadTime,
-            percent: $after.initialDownloadTime.percentFrom($reference.initialDownloadTime)
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxInitialDownloadTimeDiff)
-        },
-        asyncDownloadTime: {
-          $diff: {
-            absolute: $after.asyncDownloadTime - $reference.asyncDownloadTime,
-            percent: $after.asyncDownloadTime.percentFrom($reference.asyncDownloadTime)
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxAsyncDownloadTimeDiff)
-        }
-      }
-    })
-    .[
-      not diff.downloadTime.ok or
-      not diff.initialDownloadTime.ok or
-      not diff.asyncDownloadTime.ok
-    ]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [],
-              "global": Object {
-                "maxAsyncDownloadTimeDiff": Object {
-                  "number": 1,
-                  "type": "absolute",
-                },
-                "maxDownloadTimeDiff": null,
-                "maxInitialDownloadTimeDiff": null,
-              },
-              "useCompressedSize": false,
+            "after": Object {
+              "asyncDownloadTime": 24.09282483552632,
+              "downloadTime": 607.0387990851151,
+              "initialDownloadTime": 582.9459742495889,
             },
+            "before": Object {
+              "asyncDownloadTime": 2.8509842722039473,
+              "downloadTime": 248.85880319695724,
+              "initialDownloadTime": 246.00781892475328,
+            },
+            "compilation": "da95abcf6bbf9b157ff6",
+            "diff": Object {
+              "asyncDownloadTime": Object {
+                "absolute": 21.24184056332237,
+                "ok": false,
+                "percent": 745.0704225352114,
+              },
+              "downloadTime": Object {
+                "absolute": 358.17999588815786,
+                "ok": true,
+                "percent": 143.92900363049614,
+              },
+              "initialDownloadTime": Object {
+                "absolute": 336.9381553248356,
+                "ok": true,
+                "percent": 136.96237656084227,
+              },
+            },
+            "entry": "two",
+            "rule": Object {
+              "maxAsyncDownloadTimeDiff": Object {
+                "number": 1,
+                "type": "absolute",
+              },
+              "maxDownloadTimeDiff": Infinity,
+              "maxInitialDownloadTimeDiff": Infinity,
+            },
+            "useCompressedSize": false,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -492,7 +225,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;
@@ -503,143 +235,60 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $reference: resolveReferenceFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .({
-      $entry: $;
-      $referenceEntry: $reference.compilations
-      .exclude({
-        exclude: $params.exclude.[type='compilation'].name,
-        get: <name>,
-      })
-      .entrypoints.[name=$entry.name].pick();
-      $entry,
-      $referenceEntry
-    })
-    .[entry and referenceEntry]
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <entry.name>,
-    })
-    .({
-      $entry;
-      $referenceEntry;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTimeDiff: [$matchedRule.maxDownloadTimeDiff, $params.global.maxDownloadTimeDiff, Infinity].useNotNullish(),
-        maxInitialDownloadTimeDiff: [$matchedRule.maxInitialDownloadTimeDiff, $params.global.maxInitialDownloadTimeDiff, Infinity].useNotNullish(),
-        maxAsyncDownloadTimeDiff: [$matchedRule.maxAsyncDownloadTimeDiff, $params.global.maxAsyncDownloadTimeDiff, Infinity].useNotNullish(),
-      };
-      
-      $referenceEntry,
-      afterEntry: $entry,
-      $rule
-    })
-    .({
-      $rule;
-      $handleEntry: => {
-        $chunks: data.chunks + data.chunks..children;
-        $initialChunks: $chunks.[initial];
-        $asyncChunks: $chunks.[not initial];
-        $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        
-        entry: $,
-        $chunks,
-        $initialChunks,
-        $asyncChunks,
-        $downloadTime,
-        $initialDownloadTime,
-        $asyncDownloadTime,
-      };
-      $reference: referenceEntry.$handleEntry();
-      $after: afterEntry.$handleEntry();
-      $rule,
-      $reference,
-      $after,
-      diff: {
-        downloadTime: {
-          $diff: {
-            absolute: $after.downloadTime - $reference.downloadTime,
-            percent: $after.downloadTime.percentFrom($reference.downloadTime),
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxDownloadTimeDiff)
-        },
-        initialDownloadTime: {
-          $diff: {
-            absolute: $after.initialDownloadTime - $reference.initialDownloadTime,
-            percent: $after.initialDownloadTime.percentFrom($reference.initialDownloadTime)
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxInitialDownloadTimeDiff)
-        },
-        asyncDownloadTime: {
-          $diff: {
-            absolute: $after.asyncDownloadTime - $reference.asyncDownloadTime,
-            percent: $after.asyncDownloadTime.percentFrom($reference.asyncDownloadTime)
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxAsyncDownloadTimeDiff)
-        }
-      }
-    })
-    .[
-      not diff.downloadTime.ok or
-      not diff.initialDownloadTime.ok or
-      not diff.asyncDownloadTime.ok
-    ]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [],
-              "global": Object {
-                "maxAsyncDownloadTimeDiff": null,
-                "maxDownloadTimeDiff": Object {
-                  "number": 1,
-                  "type": "absolute",
-                },
-                "maxInitialDownloadTimeDiff": null,
-              },
-              "useCompressedSize": true,
+            "after": Object {
+              "asyncDownloadTime": 11.86571623149671,
+              "downloadTime": 256.4078883120888,
+              "initialDownloadTime": 244.54217208059208,
             },
+            "before": Object {
+              "asyncDownloadTime": 2.8509842722039473,
+              "downloadTime": 247.39315635279604,
+              "initialDownloadTime": 244.54217208059208,
+            },
+            "compilation": "da95abcf6bbf9b157ff6",
+            "diff": Object {
+              "asyncDownloadTime": Object {
+                "absolute": 9.014731959292764,
+                "ok": true,
+                "percent": 316.1971830985916,
+              },
+              "downloadTime": Object {
+                "absolute": 9.01473195929276,
+                "ok": false,
+                "percent": 3.643888979061849,
+              },
+              "initialDownloadTime": Object {
+                "absolute": 0,
+                "ok": true,
+                "percent": 0,
+              },
+            },
+            "entry": "two",
+            "rule": Object {
+              "maxAsyncDownloadTimeDiff": Infinity,
+              "maxDownloadTimeDiff": Object {
+                "number": 1,
+                "type": "absolute",
+              },
+              "maxInitialDownloadTimeDiff": Infinity,
+            },
+            "useCompressedSize": true,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -651,7 +300,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;
@@ -666,159 +314,60 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $reference: resolveReferenceFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .({
-      $entry: $;
-      $referenceEntry: $reference.compilations
-      .exclude({
-        exclude: $params.exclude.[type='compilation'].name,
-        get: <name>,
-      })
-      .entrypoints.[name=$entry.name].pick();
-      $entry,
-      $referenceEntry
-    })
-    .[entry and referenceEntry]
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <entry.name>,
-    })
-    .({
-      $entry;
-      $referenceEntry;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTimeDiff: [$matchedRule.maxDownloadTimeDiff, $params.global.maxDownloadTimeDiff, Infinity].useNotNullish(),
-        maxInitialDownloadTimeDiff: [$matchedRule.maxInitialDownloadTimeDiff, $params.global.maxInitialDownloadTimeDiff, Infinity].useNotNullish(),
-        maxAsyncDownloadTimeDiff: [$matchedRule.maxAsyncDownloadTimeDiff, $params.global.maxAsyncDownloadTimeDiff, Infinity].useNotNullish(),
-      };
-      
-      $referenceEntry,
-      afterEntry: $entry,
-      $rule
-    })
-    .({
-      $rule;
-      $handleEntry: => {
-        $chunks: data.chunks + data.chunks..children;
-        $initialChunks: $chunks.[initial];
-        $asyncChunks: $chunks.[not initial];
-        $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        
-        entry: $,
-        $chunks,
-        $initialChunks,
-        $asyncChunks,
-        $downloadTime,
-        $initialDownloadTime,
-        $asyncDownloadTime,
-      };
-      $reference: referenceEntry.$handleEntry();
-      $after: afterEntry.$handleEntry();
-      $rule,
-      $reference,
-      $after,
-      diff: {
-        downloadTime: {
-          $diff: {
-            absolute: $after.downloadTime - $reference.downloadTime,
-            percent: $after.downloadTime.percentFrom($reference.downloadTime),
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxDownloadTimeDiff)
-        },
-        initialDownloadTime: {
-          $diff: {
-            absolute: $after.initialDownloadTime - $reference.initialDownloadTime,
-            percent: $after.initialDownloadTime.percentFrom($reference.initialDownloadTime)
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxInitialDownloadTimeDiff)
-        },
-        asyncDownloadTime: {
-          $diff: {
-            absolute: $after.asyncDownloadTime - $reference.asyncDownloadTime,
-            percent: $after.asyncDownloadTime.percentFrom($reference.asyncDownloadTime)
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxAsyncDownloadTimeDiff)
-        }
-      }
-    })
-    .[
-      not diff.downloadTime.ok or
-      not diff.initialDownloadTime.ok or
-      not diff.asyncDownloadTime.ok
-    ]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [
-                Object {
-                  "limits": Object {
-                    "maxAsyncDownloadTimeDiff": null,
-                    "maxDownloadTimeDiff": Object {
-                      "number": 1,
-                      "type": "absolute",
-                    },
-                    "maxInitialDownloadTimeDiff": null,
-                  },
-                  "name": Object {
-                    "content": ".+",
-                    "flags": "",
-                    "type": "regexp",
-                  },
-                },
-              ],
-              "exclude": Array [],
-              "global": Object {
-                "maxAsyncDownloadTimeDiff": null,
-                "maxDownloadTimeDiff": Object {
-                  "number": 100000,
-                  "type": "absolute",
-                },
-                "maxInitialDownloadTimeDiff": null,
-              },
-              "useCompressedSize": true,
+            "after": Object {
+              "asyncDownloadTime": 11.86571623149671,
+              "downloadTime": 256.4078883120888,
+              "initialDownloadTime": 244.54217208059208,
             },
+            "before": Object {
+              "asyncDownloadTime": 2.8509842722039473,
+              "downloadTime": 247.39315635279604,
+              "initialDownloadTime": 244.54217208059208,
+            },
+            "compilation": "da95abcf6bbf9b157ff6",
+            "diff": Object {
+              "asyncDownloadTime": Object {
+                "absolute": 9.014731959292764,
+                "ok": true,
+                "percent": 316.1971830985916,
+              },
+              "downloadTime": Object {
+                "absolute": 9.01473195929276,
+                "ok": false,
+                "percent": 3.643888979061849,
+              },
+              "initialDownloadTime": Object {
+                "absolute": 0,
+                "ok": true,
+                "percent": 0,
+              },
+            },
+            "entry": "two",
+            "rule": Object {
+              "maxAsyncDownloadTimeDiff": Infinity,
+              "maxDownloadTimeDiff": Object {
+                "number": 1,
+                "type": "absolute",
+              },
+              "maxInitialDownloadTimeDiff": Infinity,
+            },
+            "useCompressedSize": true,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -830,7 +379,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;
@@ -841,143 +389,60 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $reference: resolveReferenceFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .({
-      $entry: $;
-      $referenceEntry: $reference.compilations
-      .exclude({
-        exclude: $params.exclude.[type='compilation'].name,
-        get: <name>,
-      })
-      .entrypoints.[name=$entry.name].pick();
-      $entry,
-      $referenceEntry
-    })
-    .[entry and referenceEntry]
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <entry.name>,
-    })
-    .({
-      $entry;
-      $referenceEntry;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTimeDiff: [$matchedRule.maxDownloadTimeDiff, $params.global.maxDownloadTimeDiff, Infinity].useNotNullish(),
-        maxInitialDownloadTimeDiff: [$matchedRule.maxInitialDownloadTimeDiff, $params.global.maxInitialDownloadTimeDiff, Infinity].useNotNullish(),
-        maxAsyncDownloadTimeDiff: [$matchedRule.maxAsyncDownloadTimeDiff, $params.global.maxAsyncDownloadTimeDiff, Infinity].useNotNullish(),
-      };
-      
-      $referenceEntry,
-      afterEntry: $entry,
-      $rule
-    })
-    .({
-      $rule;
-      $handleEntry: => {
-        $chunks: data.chunks + data.chunks..children;
-        $initialChunks: $chunks.[initial];
-        $asyncChunks: $chunks.[not initial];
-        $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        
-        entry: $,
-        $chunks,
-        $initialChunks,
-        $asyncChunks,
-        $downloadTime,
-        $initialDownloadTime,
-        $asyncDownloadTime,
-      };
-      $reference: referenceEntry.$handleEntry();
-      $after: afterEntry.$handleEntry();
-      $rule,
-      $reference,
-      $after,
-      diff: {
-        downloadTime: {
-          $diff: {
-            absolute: $after.downloadTime - $reference.downloadTime,
-            percent: $after.downloadTime.percentFrom($reference.downloadTime),
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxDownloadTimeDiff)
-        },
-        initialDownloadTime: {
-          $diff: {
-            absolute: $after.initialDownloadTime - $reference.initialDownloadTime,
-            percent: $after.initialDownloadTime.percentFrom($reference.initialDownloadTime)
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxInitialDownloadTimeDiff)
-        },
-        asyncDownloadTime: {
-          $diff: {
-            absolute: $after.asyncDownloadTime - $reference.asyncDownloadTime,
-            percent: $after.asyncDownloadTime.percentFrom($reference.asyncDownloadTime)
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxAsyncDownloadTimeDiff)
-        }
-      }
-    })
-    .[
-      not diff.downloadTime.ok or
-      not diff.initialDownloadTime.ok or
-      not diff.asyncDownloadTime.ok
-    ]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [],
-              "global": Object {
-                "maxAsyncDownloadTimeDiff": null,
-                "maxDownloadTimeDiff": Object {
-                  "number": 1,
-                  "type": "absolute",
-                },
-                "maxInitialDownloadTimeDiff": null,
-              },
-              "useCompressedSize": false,
+            "after": Object {
+              "asyncDownloadTime": 0,
+              "downloadTime": 167.40497789884867,
+              "initialDownloadTime": 167.40497789884867,
             },
+            "before": Object {
+              "asyncDownloadTime": 0,
+              "downloadTime": 16.041805869654606,
+              "initialDownloadTime": 16.041805869654606,
+            },
+            "compilation": "da95abcf6bbf9b157ff6",
+            "diff": Object {
+              "asyncDownloadTime": Object {
+                "absolute": 0,
+                "ok": true,
+                "percent": 0,
+              },
+              "downloadTime": Object {
+                "absolute": 151.36317202919406,
+                "ok": false,
+                "percent": 943.5544430538171,
+              },
+              "initialDownloadTime": Object {
+                "absolute": 151.36317202919406,
+                "ok": true,
+                "percent": 943.5544430538171,
+              },
+            },
+            "entry": "one",
+            "rule": Object {
+              "maxAsyncDownloadTimeDiff": Infinity,
+              "maxDownloadTimeDiff": Object {
+                "number": 1,
+                "type": "absolute",
+              },
+              "maxInitialDownloadTimeDiff": Infinity,
+            },
+            "useCompressedSize": false,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -989,149 +454,65 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $reference: resolveReferenceFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .({
-      $entry: $;
-      $referenceEntry: $reference.compilations
-      .exclude({
-        exclude: $params.exclude.[type='compilation'].name,
-        get: <name>,
-      })
-      .entrypoints.[name=$entry.name].pick();
-      $entry,
-      $referenceEntry
-    })
-    .[entry and referenceEntry]
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <entry.name>,
-    })
-    .({
-      $entry;
-      $referenceEntry;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTimeDiff: [$matchedRule.maxDownloadTimeDiff, $params.global.maxDownloadTimeDiff, Infinity].useNotNullish(),
-        maxInitialDownloadTimeDiff: [$matchedRule.maxInitialDownloadTimeDiff, $params.global.maxInitialDownloadTimeDiff, Infinity].useNotNullish(),
-        maxAsyncDownloadTimeDiff: [$matchedRule.maxAsyncDownloadTimeDiff, $params.global.maxAsyncDownloadTimeDiff, Infinity].useNotNullish(),
-      };
-      
-      $referenceEntry,
-      afterEntry: $entry,
-      $rule
-    })
-    .({
-      $rule;
-      $handleEntry: => {
-        $chunks: data.chunks + data.chunks..children;
-        $initialChunks: $chunks.[initial];
-        $asyncChunks: $chunks.[not initial];
-        $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        
-        entry: $,
-        $chunks,
-        $initialChunks,
-        $asyncChunks,
-        $downloadTime,
-        $initialDownloadTime,
-        $asyncDownloadTime,
-      };
-      $reference: referenceEntry.$handleEntry();
-      $after: afterEntry.$handleEntry();
-      $rule,
-      $reference,
-      $after,
-      diff: {
-        downloadTime: {
-          $diff: {
-            absolute: $after.downloadTime - $reference.downloadTime,
-            percent: $after.downloadTime.percentFrom($reference.downloadTime),
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxDownloadTimeDiff)
-        },
-        initialDownloadTime: {
-          $diff: {
-            absolute: $after.initialDownloadTime - $reference.initialDownloadTime,
-            percent: $after.initialDownloadTime.percentFrom($reference.initialDownloadTime)
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxInitialDownloadTimeDiff)
-        },
-        asyncDownloadTime: {
-          $diff: {
-            absolute: $after.asyncDownloadTime - $reference.asyncDownloadTime,
-            percent: $after.asyncDownloadTime.percentFrom($reference.asyncDownloadTime)
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxAsyncDownloadTimeDiff)
-        }
-      }
-    })
-    .[
-      not diff.downloadTime.ok or
-      not diff.initialDownloadTime.ok or
-      not diff.asyncDownloadTime.ok
-    ]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [],
-              "global": Object {
-                "maxAsyncDownloadTimeDiff": null,
-                "maxDownloadTimeDiff": Object {
-                  "number": 1,
-                  "type": "absolute",
-                },
-                "maxInitialDownloadTimeDiff": null,
-              },
-              "useCompressedSize": false,
+            "after": Object {
+              "asyncDownloadTime": 24.09282483552632,
+              "downloadTime": 607.0387990851151,
+              "initialDownloadTime": 582.9459742495889,
             },
+            "before": Object {
+              "asyncDownloadTime": 2.8509842722039473,
+              "downloadTime": 248.85880319695724,
+              "initialDownloadTime": 246.00781892475328,
+            },
+            "compilation": "da95abcf6bbf9b157ff6",
+            "diff": Object {
+              "asyncDownloadTime": Object {
+                "absolute": 21.24184056332237,
+                "ok": true,
+                "percent": 745.0704225352114,
+              },
+              "downloadTime": Object {
+                "absolute": 358.17999588815786,
+                "ok": false,
+                "percent": 143.92900363049614,
+              },
+              "initialDownloadTime": Object {
+                "absolute": 336.9381553248356,
+                "ok": true,
+                "percent": 136.96237656084227,
+              },
+            },
+            "entry": "two",
+            "rule": Object {
+              "maxAsyncDownloadTimeDiff": Infinity,
+              "maxDownloadTimeDiff": Object {
+                "number": 1,
+                "type": "absolute",
+              },
+              "maxInitialDownloadTimeDiff": Infinity,
+            },
+            "useCompressedSize": false,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -1143,7 +524,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;
@@ -1162,143 +542,60 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $reference: resolveReferenceFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .({
-      $entry: $;
-      $referenceEntry: $reference.compilations
-      .exclude({
-        exclude: $params.exclude.[type='compilation'].name,
-        get: <name>,
-      })
-      .entrypoints.[name=$entry.name].pick();
-      $entry,
-      $referenceEntry
-    })
-    .[entry and referenceEntry]
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <entry.name>,
-    })
-    .({
-      $entry;
-      $referenceEntry;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTimeDiff: [$matchedRule.maxDownloadTimeDiff, $params.global.maxDownloadTimeDiff, Infinity].useNotNullish(),
-        maxInitialDownloadTimeDiff: [$matchedRule.maxInitialDownloadTimeDiff, $params.global.maxInitialDownloadTimeDiff, Infinity].useNotNullish(),
-        maxAsyncDownloadTimeDiff: [$matchedRule.maxAsyncDownloadTimeDiff, $params.global.maxAsyncDownloadTimeDiff, Infinity].useNotNullish(),
-      };
-      
-      $referenceEntry,
-      afterEntry: $entry,
-      $rule
-    })
-    .({
-      $rule;
-      $handleEntry: => {
-        $chunks: data.chunks + data.chunks..children;
-        $initialChunks: $chunks.[initial];
-        $asyncChunks: $chunks.[not initial];
-        $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        
-        entry: $,
-        $chunks,
-        $initialChunks,
-        $asyncChunks,
-        $downloadTime,
-        $initialDownloadTime,
-        $asyncDownloadTime,
-      };
-      $reference: referenceEntry.$handleEntry();
-      $after: afterEntry.$handleEntry();
-      $rule,
-      $reference,
-      $after,
-      diff: {
-        downloadTime: {
-          $diff: {
-            absolute: $after.downloadTime - $reference.downloadTime,
-            percent: $after.downloadTime.percentFrom($reference.downloadTime),
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxDownloadTimeDiff)
-        },
-        initialDownloadTime: {
-          $diff: {
-            absolute: $after.initialDownloadTime - $reference.initialDownloadTime,
-            percent: $after.initialDownloadTime.percentFrom($reference.initialDownloadTime)
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxInitialDownloadTimeDiff)
-        },
-        asyncDownloadTime: {
-          $diff: {
-            absolute: $after.asyncDownloadTime - $reference.asyncDownloadTime,
-            percent: $after.asyncDownloadTime.percentFrom($reference.asyncDownloadTime)
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxAsyncDownloadTimeDiff)
-        }
-      }
-    })
-    .[
-      not diff.downloadTime.ok or
-      not diff.initialDownloadTime.ok or
-      not diff.asyncDownloadTime.ok
-    ]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [],
-              "global": Object {
-                "maxAsyncDownloadTimeDiff": null,
-                "maxDownloadTimeDiff": null,
-                "maxInitialDownloadTimeDiff": Object {
-                  "number": 1,
-                  "type": "absolute",
-                },
-              },
-              "useCompressedSize": false,
+            "after": Object {
+              "asyncDownloadTime": 0,
+              "downloadTime": 167.40497789884867,
+              "initialDownloadTime": 167.40497789884867,
             },
+            "before": Object {
+              "asyncDownloadTime": 0,
+              "downloadTime": 16.041805869654606,
+              "initialDownloadTime": 16.041805869654606,
+            },
+            "compilation": "da95abcf6bbf9b157ff6",
+            "diff": Object {
+              "asyncDownloadTime": Object {
+                "absolute": 0,
+                "ok": true,
+                "percent": 0,
+              },
+              "downloadTime": Object {
+                "absolute": 151.36317202919406,
+                "ok": true,
+                "percent": 943.5544430538171,
+              },
+              "initialDownloadTime": Object {
+                "absolute": 151.36317202919406,
+                "ok": false,
+                "percent": 943.5544430538171,
+              },
+            },
+            "entry": "one",
+            "rule": Object {
+              "maxAsyncDownloadTimeDiff": Infinity,
+              "maxDownloadTimeDiff": Infinity,
+              "maxInitialDownloadTimeDiff": Object {
+                "number": 1,
+                "type": "absolute",
+              },
+            },
+            "useCompressedSize": false,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -1310,149 +607,65 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
   Object {
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }",
-          "type": "query",
-        },
         "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $reference: resolveReferenceFile();
-  $params: #.params;
-  $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $network: [$params.network, 'Slow'].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
-  
-  $input.compilations
-  .exclude({
-    exclude: $params.exclude.[type='compilation'].name,
-    get: <name>,
-  })
-  .({
-    $compilation: $;
-    $compilation,
-    entrypoints: entrypoints
-    .({
-      $entry: $;
-      $referenceEntry: $reference.compilations
-      .exclude({
-        exclude: $params.exclude.[type='compilation'].name,
-        get: <name>,
-      })
-      .entrypoints.[name=$entry.name].pick();
-      $entry,
-      $referenceEntry
-    })
-    .[entry and referenceEntry]
-    .exclude({
-      exclude: $params.exclude.[type='entry'].name,
-      get: <entry.name>,
-    })
-    .({
-      $entry;
-      $referenceEntry;
-      $matchedRule: $params.byName.[$entry.name.isMatch(name)].pick(-1).limits;
-      $rule: {
-        maxDownloadTimeDiff: [$matchedRule.maxDownloadTimeDiff, $params.global.maxDownloadTimeDiff, Infinity].useNotNullish(),
-        maxInitialDownloadTimeDiff: [$matchedRule.maxInitialDownloadTimeDiff, $params.global.maxInitialDownloadTimeDiff, Infinity].useNotNullish(),
-        maxAsyncDownloadTimeDiff: [$matchedRule.maxAsyncDownloadTimeDiff, $params.global.maxAsyncDownloadTimeDiff, Infinity].useNotNullish(),
-      };
-      
-      $referenceEntry,
-      afterEntry: $entry,
-      $rule
-    })
-    .({
-      $rule;
-      $handleEntry: => {
-        $chunks: data.chunks + data.chunks..children;
-        $initialChunks: $chunks.[initial];
-        $asyncChunks: $chunks.[not initial];
-        $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        
-        entry: $,
-        $chunks,
-        $initialChunks,
-        $asyncChunks,
-        $downloadTime,
-        $initialDownloadTime,
-        $asyncDownloadTime,
-      };
-      $reference: referenceEntry.$handleEntry();
-      $after: afterEntry.$handleEntry();
-      $rule,
-      $reference,
-      $after,
-      diff: {
-        downloadTime: {
-          $diff: {
-            absolute: $after.downloadTime - $reference.downloadTime,
-            percent: $after.downloadTime.percentFrom($reference.downloadTime),
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxDownloadTimeDiff)
-        },
-        initialDownloadTime: {
-          $diff: {
-            absolute: $after.initialDownloadTime - $reference.initialDownloadTime,
-            percent: $after.initialDownloadTime.percentFrom($reference.initialDownloadTime)
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxInitialDownloadTimeDiff)
-        },
-        asyncDownloadTime: {
-          $diff: {
-            absolute: $after.asyncDownloadTime - $reference.asyncDownloadTime,
-            percent: $after.asyncDownloadTime.percentFrom($reference.asyncDownloadTime)
-          };
-          ...$diff,
-          ok: $diff.diff_isLTETheLimit($rule.maxAsyncDownloadTimeDiff)
-        }
-      }
-    })
-    .[
-      not diff.downloadTime.ok or
-      not diff.initialDownloadTime.ok or
-      not diff.asyncDownloadTime.ok
-    ]
-  })
-  .[entrypoints]",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "params": Object {
-              "byName": Array [],
-              "exclude": Array [],
-              "global": Object {
-                "maxAsyncDownloadTimeDiff": null,
-                "maxDownloadTimeDiff": null,
-                "maxInitialDownloadTimeDiff": Object {
-                  "number": 1,
-                  "type": "absolute",
-                },
-              },
-              "useCompressedSize": false,
+            "after": Object {
+              "asyncDownloadTime": 24.09282483552632,
+              "downloadTime": 607.0387990851151,
+              "initialDownloadTime": 582.9459742495889,
             },
+            "before": Object {
+              "asyncDownloadTime": 2.8509842722039473,
+              "downloadTime": 248.85880319695724,
+              "initialDownloadTime": 246.00781892475328,
+            },
+            "compilation": "da95abcf6bbf9b157ff6",
+            "diff": Object {
+              "asyncDownloadTime": Object {
+                "absolute": 21.24184056332237,
+                "ok": true,
+                "percent": 745.0704225352114,
+              },
+              "downloadTime": Object {
+                "absolute": 358.17999588815786,
+                "ok": true,
+                "percent": 143.92900363049614,
+              },
+              "initialDownloadTime": Object {
+                "absolute": 336.9381553248356,
+                "ok": false,
+                "percent": 136.96237656084227,
+              },
+            },
+            "entry": "two",
+            "rule": Object {
+              "maxAsyncDownloadTimeDiff": Infinity,
+              "maxDownloadTimeDiff": Infinity,
+              "maxInitialDownloadTimeDiff": Object {
+                "number": 1,
+                "type": "absolute",
+              },
+            },
+            "useCompressedSize": false,
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            ",
         "type": "discovery",
       },
     ],
@@ -1464,7 +677,6 @@ Array [
         "type": "entry",
       },
     ],
-    "type": "error",
   },
 ]
 `;

@@ -28,9 +28,9 @@ export default (discovery: StatoscopeWidget): void => {
 
 function hideUseless(discovery: StatoscopeWidget): void {
   discovery.nav.remove('index-page');
-  if (!document.cookie.includes('debug=true')) {
+  /*if (!document.cookie.includes('debug=true')) {
     discovery.nav.remove('inspect');
-  }
+  }*/
 }
 
 function addCustomIndex(discovery: StatoscopeWidget): void {

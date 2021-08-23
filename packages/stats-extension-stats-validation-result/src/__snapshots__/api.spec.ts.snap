@@ -42,7 +42,7 @@ Array [
       },
     ],
     "rule": "foo-rule",
-    "type": "error",
+    "type": "warn",
   },
 ]
 `;
@@ -119,7 +119,7 @@ Array [
       },
     ],
     "rule": "foo-rule",
-    "type": "error",
+    "type": "warn",
   },
 ]
 `;
@@ -196,7 +196,7 @@ Array [
       },
     ],
     "rule": "foo-rule",
-    "type": "error",
+    "type": "warn",
   },
 ]
 `;
@@ -273,7 +273,7 @@ Array [
       },
     ],
     "rule": "foo-rule",
-    "type": "error",
+    "type": "warn",
   },
 ]
 `;
@@ -350,7 +350,7 @@ Array [
       },
     ],
     "rule": "foo-rule",
-    "type": "error",
+    "type": "warn",
   },
 ]
 `;
@@ -380,7 +380,7 @@ Array [
       },
     ],
     "rule": "foo-rule",
-    "type": "error",
+    "type": "warn",
   },
 ]
 `;

@@ -4,16 +4,14 @@ import {
   NormalizedCompilation,
   NormalizedEntrypointItem,
 } from '@statoscope/webpack-model/dist/normalize';
-import { APIFnOptions } from '@statoscope/types/types/validation';
+import { APIFnOptions } from '@statoscope/types/types/validation/api';
 import helpers, { Limit, ValueDiff } from '@statoscope/helpers/dist/jora';
 import { WebpackRule } from '../../';
 import {
   ByNameFilterItem,
   ExcludeItem,
   normalizeExclude,
-  SerializedByNameFilterItem,
   SerializedExcludeItem,
-  serializeExclude,
 } from '../../limits-helpers';
 import * as version from '../../version';
 
@@ -44,13 +42,6 @@ export type NormalizedParams = {
   global: NormalizedLimits;
   exclude: RuleExcludeItem[];
   byName: ByNameFilterItem<NormalizedLimits>[];
-};
-
-export type SerializedParams = {
-  useCompressedSize: boolean;
-  global: NormalizedLimits;
-  exclude: SerializedRuleExcludeItem[];
-  byName: SerializedByNameFilterItem<NormalizedLimits>[];
 };
 
 export type ResultEntryState = {
@@ -104,21 +95,6 @@ function normalizeParams(params: Params): NormalizedParams {
         return { name: item.name, limits: normalizeLimits(item.limits) };
       }) ?? [],
     exclude: params?.exclude?.map((item) => normalizeExclude(item, 'entry')) ?? [],
-  };
-}
-
-function serializeParams(params: NormalizedParams): SerializedParams {
-  return {
-    useCompressedSize: params.useCompressedSize,
-    global: params.global,
-    byName:
-      params.byName?.map((item) => {
-        return {
-          name: h.serializeStringOrRegexp(item.name)!,
-          limits: item.limits,
-        };
-      }) ?? [],
-    exclude: params.exclude.map(serializeExclude),
   };
 }
 
@@ -278,34 +254,43 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
         details: [
           {
             type: 'discovery',
-            query,
+            query: `
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            `,
             filename: path.basename(data.files[0].name),
-            serialized: {
+            payload: {
               context: {
-                params: serializeParams(normalizedParams),
+                entry: entryItem.after.entry.name,
+                compilation: item.compilation.hash,
+                useCompressedSize: normalizedParams.useCompressedSize,
+                before: {
+                  downloadTime: entryItem.reference.downloadTime,
+                  initialDownloadTime: entryItem.reference.initialDownloadTime,
+                  asyncDownloadTime: entryItem.reference.asyncDownloadTime,
+                },
+                after: {
+                  downloadTime: entryItem.after.downloadTime,
+                  initialDownloadTime: entryItem.after.initialDownloadTime,
+                  asyncDownloadTime: entryItem.after.asyncDownloadTime,
+                },
+                diff: entryItem.diff,
+                rule: entryItem.rule,
               },
-            },
-            deserialize: {
-              type: 'query',
-              content: `
-              $theContext: context;
-              {
-                context: {
-                  params: {
-                    exclude: $theContext.params.exclude.(deserializeExclude()),
-                    byName: $theContext.params.byName.({ name: name.deserializeStringOrRegexp(), limits }),
-                    global: $theContext.params.global,
-                    useCompressedSize: $theContext.params.useCompressedSize,
-                  },
-                }
-              }`,
             },
           },
         ],
       };
 
       if (!entryItem.diff.downloadTime.ok) {
-        api.error(
+        api.message(
           formatError(
             'assets',
             entryItem.after.entry,
@@ -317,7 +302,7 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
       }
 
       if (!entryItem.diff.initialDownloadTime.ok) {
-        api.error(
+        api.message(
           formatError(
             'initial assets',
             entryItem.after.entry,
@@ -329,7 +314,7 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
       }
 
       if (!entryItem.diff.asyncDownloadTime.ok) {
-        api.error(
+        api.message(
           formatError(
             'async assets',
             entryItem.after.entry,
