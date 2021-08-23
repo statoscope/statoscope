@@ -9,6 +9,7 @@ import diffEntryDownloadSizeLimits from './rules/diff-entry-download-size-limits
 import diffEntryDownloadTimeLimits from './rules/diff-entry-download-time-limits';
 import entryDownloadSizeLimits from './rules/entry-download-size-limits';
 import entryDownloadTimeLimits from './rules/entry-download-time-limits';
+import noModulesDeopts from './rules/no-modules-deopts';
 import noPackagesDups from './rules/no-packages-dups';
 import restrictedModules from './rules/restricted-modules';
 import restrictedPackages from './rules/restricted-packages';
@@ -27,6 +28,7 @@ const webpackPlugin: PluginFn<Prepared> = () => {
       'diff-entry-download-time-limits': diffEntryDownloadTimeLimits,
       'entry-download-size-limits': entryDownloadSizeLimits,
       'entry-download-time-limits': entryDownloadTimeLimits,
+      'no-modules-deopts': noModulesDeopts,
       'no-packages-dups': noPackagesDups,
       'restricted-modules': restrictedModules,
       'restricted-packages': restrictedPackages,
