@@ -66,6 +66,16 @@ export class PopupView {
   hide(): void;
 }
 
+export type ObjectMarkerOptions<TValue> = {
+  refs?: string[];
+  lookupRefs?: string[];
+  ref?: string;
+  page: string;
+  title?: (value: TValue) => string;
+};
+
+export type MarkObject<TValue> = (value: TValue) => void;
+
 export class Widget<TRawData, TData, TContext> {
   dom: Record<string, HTMLElement>;
   view: {
@@ -112,6 +122,10 @@ export class Widget<TRawData, TData, TContext> {
   ): string;
 
   addQueryHelpers(extensions: { [key: string]: unknown }): void;
+  defineObjectMarker<TValue>(
+    name: string,
+    options: ObjectMarkerOptions<TValue>
+  ): MarkObject<TValue>;
 
   nav: {
     prepend(config: Omit<ViewConfigData, 'view'>): void;

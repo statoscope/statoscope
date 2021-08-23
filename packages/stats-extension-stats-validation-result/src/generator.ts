@@ -1,18 +1,18 @@
 import { Extension, ExtensionDescriptor } from '@statoscope/stats/spec/extension';
 import makeResolver from '@statoscope/helpers/dist/entity-resolver';
+import { TestEntry } from '@statoscope/types/types/validation/test-entry';
 import {
-  DetailsDescriptor,
   RelatedItem,
-  RuleDescriptor,
-  TestEntry,
-  Type,
-} from '@statoscope/types/types/validation';
+  DetailsDescriptor,
+} from '@statoscope/types/types/validation/test-entry';
+import { RuleDescriptor } from '@statoscope/types/types/validation/api';
+import { NormalizedExecParams } from '@statoscope/types/types/validation/rule';
 import { author, description, homepage, name, version } from './version';
 
 export type Format = Extension<Payload>;
 export type Item = {
   id: number;
-  type: Type;
+  type: NormalizedExecParams['mode'];
   rule: string;
   message: string;
   details: DetailsDescriptor[];
@@ -53,7 +53,11 @@ export default class Generator {
     }
   }
 
-  handleEntry(ruleName: string, entry: TestEntry): void {
+  handleEntry(
+    ruleName: string,
+    entry: TestEntry,
+    type?: NormalizedExecParams['mode']
+  ): void {
     let compilation = this.resolveCompilation(entry.compilation ?? null);
 
     if (!compilation) {
@@ -67,7 +71,7 @@ export default class Generator {
     compilation.items.push({
       id: this.lastId++,
       rule: ruleName,
-      type: entry.type ?? 'error',
+      type: type ?? 'error',
       message: entry.message,
       details: (entry.details == null
         ? []

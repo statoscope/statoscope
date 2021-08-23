@@ -9,31 +9,25 @@ Object {
   "rules": Array [
     Object {
       "api": Object {
-        "error": [Function],
-        "getErrorTotal": [Function],
-        "getInfoTotal": [Function],
         "getRuleDescriptor": [Function],
         "getStorage": [Function],
-        "getWarnTotal": [Function],
-        "hasErrors": [Function],
-        "info": [Function],
+        "message": [Function],
         "setRuleDescriptor": [Function],
-        "warn": [Function],
+      },
+      "execParams": Object {
+        "mode": "error",
       },
       "name": "webpack/restricted-modules",
     },
     Object {
       "api": Object {
-        "error": [Function],
-        "getErrorTotal": [Function],
-        "getInfoTotal": [Function],
         "getRuleDescriptor": [Function],
         "getStorage": [Function],
-        "getWarnTotal": [Function],
-        "hasErrors": [Function],
-        "info": [Function],
+        "message": [Function],
         "setRuleDescriptor": [Function],
-        "warn": [Function],
+      },
+      "execParams": Object {
+        "mode": "error",
       },
       "name": "webpack/restricted-packages",
     },
@@ -88,31 +82,25 @@ Object {
   "rules": Array [
     Object {
       "api": Object {
-        "error": [Function],
-        "getErrorTotal": [Function],
-        "getInfoTotal": [Function],
         "getRuleDescriptor": [Function],
         "getStorage": [Function],
-        "getWarnTotal": [Function],
-        "hasErrors": [Function],
-        "info": [Function],
+        "message": [Function],
         "setRuleDescriptor": [Function],
-        "warn": [Function],
+      },
+      "execParams": Object {
+        "mode": "error",
       },
       "name": "webpack/restricted-modules",
     },
     Object {
       "api": Object {
-        "error": [Function],
-        "getErrorTotal": [Function],
-        "getInfoTotal": [Function],
         "getRuleDescriptor": [Function],
         "getStorage": [Function],
-        "getWarnTotal": [Function],
-        "hasErrors": [Function],
-        "info": [Function],
+        "message": [Function],
         "setRuleDescriptor": [Function],
-        "warn": [Function],
+      },
+      "execParams": Object {
+        "mode": "error",
       },
       "name": "webpack/restricted-packages",
     },
@@ -182,31 +170,25 @@ Object {
   "rules": Array [
     Object {
       "api": Object {
-        "error": [Function],
-        "getErrorTotal": [Function],
-        "getInfoTotal": [Function],
         "getRuleDescriptor": [Function],
         "getStorage": [Function],
-        "getWarnTotal": [Function],
-        "hasErrors": [Function],
-        "info": [Function],
+        "message": [Function],
         "setRuleDescriptor": [Function],
-        "warn": [Function],
+      },
+      "execParams": Object {
+        "mode": "error",
       },
       "name": "webpack/restricted-modules",
     },
     Object {
       "api": Object {
-        "error": [Function],
-        "getErrorTotal": [Function],
-        "getInfoTotal": [Function],
         "getRuleDescriptor": [Function],
         "getStorage": [Function],
-        "getWarnTotal": [Function],
-        "hasErrors": [Function],
-        "info": [Function],
+        "message": [Function],
         "setRuleDescriptor": [Function],
-        "warn": [Function],
+      },
+      "execParams": Object {
+        "mode": "error",
       },
       "name": "webpack/restricted-packages",
     },

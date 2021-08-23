@@ -2,25 +2,37 @@ import chalk from 'chalk';
 import {
   DetailsDescriptorText,
   DetailsDescriptorTTY,
-  Reporter,
   TestEntry,
-  ValidationResult,
-} from '@statoscope/types/types/validation';
+} from '@statoscope/types/types/validation/test-entry';
+import { Reporter } from '@statoscope/types/types/validation/reporter';
+import { Result } from '@statoscope/types/types/validation/result';
+import { NormalizedExecParams } from '@statoscope/types/types/validation/rule';
 
 export type Options = { warnAsError?: boolean; useColors?: boolean };
 
 export default class ConsoleReporter implements Reporter {
   constructor(public options?: Options) {}
 
-  async run(result: ValidationResult): Promise<void> {
+  async run(result: Result): Promise<void> {
     const normalizedOptions: Required<Options> = {
       useColors: this.options?.useColors ?? true,
       warnAsError: this.options?.warnAsError ?? false,
     };
     const chalkCtx = new chalk.Instance(normalizedOptions.useColors ? {} : { level: 0 });
     // file -> compilation -> rule -> entry
-    const groupedStorage: Record<string, Record<string, Record<string, TestEntry[]>>> =
-      {};
+    const groupedStorage: Record<
+      string,
+      Record<
+        string,
+        Record<
+          string,
+          Array<{
+            item: TestEntry;
+            execParams: NormalizedExecParams;
+          }>
+        >
+      >
+    > = {};
 
     for (const rule of result.rules) {
       for (const item of rule.api.getStorage()) {
@@ -30,7 +42,10 @@ export default class ConsoleReporter implements Reporter {
         groupedStorage[filename] ??= {};
         groupedStorage[filename][compilation] ??= {};
         groupedStorage[filename][compilation][rule.name] ??= [];
-        groupedStorage[filename][compilation][rule.name].push(item);
+        groupedStorage[filename][compilation][rule.name].push({
+          item,
+          execParams: rule.execParams,
+        });
       }
     }
 
@@ -46,34 +61,39 @@ export default class ConsoleReporter implements Reporter {
         console.group();
 
         for (const [rule, items] of Object.entries(rules)) {
-          for (const item of items) {
+          for (const result of items) {
+            const type =
+              result.execParams.mode === 'error' ||
+              (result.execParams.mode === 'warn' && this.options?.warnAsError)
+                ? 'error'
+                : 'warn';
             let decorate = chalkCtx.reset;
-            if (item.type === 'error') {
+            if (type === 'error') {
               decorate = chalkCtx.red;
-            } else if (item.type === 'warn') {
+            } else {
               decorate = chalkCtx.yellow;
             }
 
             console.log(
-              `${decorate(item.type)}  ${item.message}  ${chalkCtx.cyan(rule)}`
+              `${decorate(type)}  ${result.item.message}  ${chalkCtx.cyan(rule)}`
             );
 
-            if (item.details) {
+            if (result.item.details) {
               let detailDescriptor:
                 | DetailsDescriptorTTY
                 | DetailsDescriptorText
                 | undefined;
 
-              if (typeof item.details === 'string') {
+              if (typeof result.item.details === 'string') {
                 detailDescriptor = {
                   type: 'tty',
-                  content: item.details,
+                  content: result.item.details,
                 };
               } else {
                 // @ts-ignore
                 detailDescriptor =
-                  item.details.find((detail) => detail.type === 'tty') ||
-                  item.details.find((detail) => detail.type === 'text');
+                  result.item.details.find((detail) => detail.type === 'tty') ||
+                  result.item.details.find((detail) => detail.type === 'text');
               }
 
               if (detailDescriptor) {
@@ -99,14 +119,10 @@ export default class ConsoleReporter implements Reporter {
               }
             }
 
-            if (item.type === 'warn') {
-              if (normalizedOptions.warnAsError) {
-                error++;
-              } else {
-                warn++;
-              }
-            } else if (item.type === 'error') {
+            if (type === 'error') {
               error++;
+            } else {
+              warn++;
             }
           }
         }

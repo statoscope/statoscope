@@ -24,11 +24,9 @@ afterEach(() => {
 test('should work', async () => {
   const validator = new Validator({
     plugins: [[require.resolve('../../stats-validator-plugin-webpack'), 'webpack']],
-    validate: {
-      rules: {
-        'webpack/restricted-modules': ['error', [/\.\/src/]],
-        'webpack/restricted-packages': ['error', ['foo']],
-      },
+    rules: {
+      'webpack/restricted-modules': ['error', [/\.\/src/]],
+      'webpack/restricted-packages': ['error', ['foo']],
     },
   });
 
@@ -46,17 +44,15 @@ test('should work', async () => {
 test('custom reporter', async () => {
   const validator = new Validator({
     plugins: [[require.resolve('../../stats-validator-plugin-webpack'), 'webpack']],
-    validate: {
-      reporters: [
-        [
-          require.resolve('../../../test/fixtures/stats-validator/reporters/custom.js'),
-          'foo',
-        ],
+    reporters: [
+      [
+        require.resolve('../../../test/fixtures/stats-validator/reporters/custom.js'),
+        'foo',
       ],
-      rules: {
-        'webpack/restricted-modules': ['error', [/\.\/src/]],
-        'webpack/restricted-packages': ['error', ['foo']],
-      },
+    ],
+    rules: {
+      'webpack/restricted-modules': ['error', [/\.\/src/]],
+      'webpack/restricted-packages': ['error', ['foo']],
     },
   });
 
@@ -74,18 +70,16 @@ test('custom reporter', async () => {
 test('silent', async () => {
   const validator = new Validator({
     plugins: [[require.resolve('../../stats-validator-plugin-webpack'), 'webpack']],
-    validate: {
-      reporters: [
-        [
-          require.resolve('../../../test/fixtures/stats-validator/reporters/custom.js'),
-          'foo',
-        ],
+    reporters: [
+      [
+        require.resolve('../../../test/fixtures/stats-validator/reporters/custom.js'),
+        'foo',
       ],
-      silent: true,
-      rules: {
-        'webpack/restricted-modules': ['error', [/\.\/src/]],
-        'webpack/restricted-packages': ['error', ['foo']],
-      },
+    ],
+    silent: true,
+    rules: {
+      'webpack/restricted-modules': ['error', [/\.\/src/]],
+      'webpack/restricted-packages': ['error', ['foo']],
     },
   });
 

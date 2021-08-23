@@ -6,7 +6,8 @@ import type { Instance } from '@statoscope/stats-extension-package-info/dist/gen
 import { API as ExtensionValidationResultAPI } from '@statoscope/stats-extension-stats-validation-result/dist/api';
 import Graph, { PathSolution } from '@statoscope/helpers/dist/graph';
 import type { Item } from '@statoscope/stats-extension-stats-validation-result/dist/generator';
-import { RelatedItem, RuleDescriptor } from '@statoscope/types/types/validation';
+import { RelatedItem } from '@statoscope/types/types/validation/test-entry';
+import { RuleDescriptor } from '@statoscope/types/types/validation/api';
 import { Webpack } from '../webpack';
 import {
   moduleNameResource,
@@ -289,8 +290,8 @@ export default function (compilations: HandledCompilation[]) {
 
     validation_getItems(
       hash?: string,
-      type?: RelatedItem['type'] | null,
-      entityId?: string | number
+      relatedType?: RelatedItem['type'] | null,
+      relatedId?: string | number
     ): Item[] {
       if (!hash) {
         throw new Error('[validation_getItems]: hash-parameter is required');
@@ -302,8 +303,8 @@ export default function (compilations: HandledCompilation[]) {
       const api = ext?.api as ExtensionValidationResultAPI | undefined;
 
       return [
-        ...(api?.getItems(null, type, entityId) ?? []),
-        ...(api?.getItems(hash, type, entityId) ?? []),
+        ...(api?.getItems(null, relatedType, relatedId) ?? []),
+        ...(api?.getItems(hash, relatedType, relatedId) ?? []),
       ];
     },
     validation_getItem(id?: number, hash?: string): Item | null {

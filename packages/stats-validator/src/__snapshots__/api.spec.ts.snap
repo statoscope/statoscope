@@ -1,6 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`error 1`] = `
+Object {
+  "description": " foo",
+  "package": Object {
+    "name": "foo",
+    "version": "1.0.0",
+  },
+}
+`;
+
+exports[`error 2`] = `
 Array [
   Object {
     "compilation": undefined,
@@ -8,7 +18,6 @@ Array [
     "filename": undefined,
     "message": "foo-message",
     "related": undefined,
-    "type": "error",
   },
   Object {
     "compilation": undefined,
@@ -16,7 +25,6 @@ Array [
     "filename": "foo-filename",
     "message": "bar-message",
     "related": undefined,
-    "type": "error",
   },
   Object {
     "compilation": "foo-compilation",
@@ -38,121 +46,6 @@ Array [
         "type": "package",
       },
     ],
-    "type": "error",
-  },
-]
-`;
-
-exports[`info 1`] = `
-Array [
-  Object {
-    "compilation": undefined,
-    "details": undefined,
-    "filename": undefined,
-    "message": "foo-message",
-    "related": undefined,
-    "type": "info",
-  },
-  Object {
-    "compilation": undefined,
-    "details": undefined,
-    "filename": "foo-filename",
-    "message": "bar-message",
-    "related": undefined,
-    "type": "info",
-  },
-  Object {
-    "compilation": "foo-compilation",
-    "details": undefined,
-    "filename": "foo-filename",
-    "message": "baz-message",
-    "related": Array [
-      Object {
-        "id": "foo-module",
-        "type": "module",
-      },
-      Object {
-        "id": "foo-package",
-        "type": "package",
-      },
-    ],
-    "type": "info",
-  },
-]
-`;
-
-exports[`warn 1`] = `
-Array [
-  Object {
-    "compilation": undefined,
-    "details": undefined,
-    "filename": undefined,
-    "message": "foo-message",
-    "related": undefined,
-    "type": "warn",
-  },
-  Object {
-    "compilation": undefined,
-    "details": undefined,
-    "filename": "foo-filename",
-    "message": "bar-message",
-    "related": undefined,
-    "type": "warn",
-  },
-  Object {
-    "compilation": "foo-compilation",
-    "details": undefined,
-    "filename": "foo-filename",
-    "message": "baz-message",
-    "related": Array [
-      Object {
-        "id": "foo-module",
-        "type": "module",
-      },
-      Object {
-        "id": "foo-package",
-        "type": "package",
-      },
-    ],
-    "type": "warn",
-  },
-]
-`;
-
-exports[`warn as error 1`] = `
-Array [
-  Object {
-    "compilation": undefined,
-    "details": undefined,
-    "filename": undefined,
-    "message": "foo-message",
-    "related": undefined,
-    "type": "warn",
-  },
-  Object {
-    "compilation": undefined,
-    "details": undefined,
-    "filename": "foo-filename",
-    "message": "bar-message",
-    "related": undefined,
-    "type": "warn",
-  },
-  Object {
-    "compilation": "foo-compilation",
-    "details": undefined,
-    "filename": "foo-filename",
-    "message": "baz-message",
-    "related": Array [
-      Object {
-        "id": "foo-module",
-        "type": "module",
-      },
-      Object {
-        "id": "foo-package",
-        "type": "package",
-      },
-    ],
-    "type": "warn",
   },
 ]
 `;

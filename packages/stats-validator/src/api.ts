@@ -1,17 +1,8 @@
-import {
-  API,
-  MakeAPIParams,
-  RuleDescriptor,
-  Storage,
-} from '@statoscope/types/types/validation';
+import { API, Storage, RuleDescriptor } from '@statoscope/types/types/validation/api';
 
-export function makeAPI(params?: MakeAPIParams): API {
-  const storage: Storage = [];
-  let hasErrors = false;
-  let errors = 0;
-  let warnings = 0;
-  let infos = 0;
+export function makeAPI(): API {
   let descriptor: RuleDescriptor | null = null;
+  const storage: Storage = [];
   return {
     setRuleDescriptor(desc: RuleDescriptor): void {
       descriptor = desc;
@@ -19,73 +10,17 @@ export function makeAPI(params?: MakeAPIParams): API {
     getRuleDescriptor(): RuleDescriptor | null {
       return descriptor;
     },
-    hasErrors(): boolean {
-      return hasErrors;
-    },
-    getInfoTotal(): number {
-      return infos;
-    },
-    getWarnTotal(): number {
-      return warnings;
-    },
-    getErrorTotal(): number {
-      return errors;
-    },
     getStorage(): Storage {
       return storage;
     },
-    warn(message, filenameOrOptions): void {
-      if (params?.warnAsError) {
-        hasErrors = true;
-      }
-
-      filenameOrOptions =
-        typeof filenameOrOptions === 'string'
-          ? { filename: filenameOrOptions }
-          : filenameOrOptions;
-
+    message(text, options): void {
       storage.push({
-        type: 'warn',
-        filename: filenameOrOptions?.filename,
-        compilation: filenameOrOptions?.compilation,
-        details: filenameOrOptions?.details,
-        related: filenameOrOptions?.related,
-        message,
+        filename: options?.filename,
+        compilation: options?.compilation,
+        details: options?.details,
+        related: options?.related,
+        message: text,
       });
-      warnings++;
-    },
-    error(message, filenameOrOptions): void {
-      filenameOrOptions =
-        typeof filenameOrOptions === 'string'
-          ? { filename: filenameOrOptions }
-          : filenameOrOptions;
-
-      hasErrors = true;
-      storage.push({
-        type: 'error',
-        filename: filenameOrOptions?.filename,
-        compilation: filenameOrOptions?.compilation,
-        details: filenameOrOptions?.details,
-        related: filenameOrOptions?.related,
-        message,
-      });
-      errors++;
-    },
-    info(message, filenameOrOptions): void {
-      filenameOrOptions =
-        typeof filenameOrOptions === 'string'
-          ? { filename: filenameOrOptions }
-          : filenameOrOptions;
-
-      storage.push({
-        type: 'info',
-        filename: filenameOrOptions?.filename,
-        compilation: filenameOrOptions?.compilation,
-        details: filenameOrOptions?.details,
-        related: filenameOrOptions?.related,
-        message,
-      });
-      infos++;
     },
   };
 }

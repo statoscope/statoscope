@@ -4,22 +4,18 @@ import module from 'module';
 // @ts-ignore
 import { parseChunked } from '@discoveryjs/json-ext';
 import ConsoleReporter from '@statoscope/stats-validator-reporter-console';
+import { API } from '@statoscope/types/types/validation/api';
+import { Reporter } from '@statoscope/types/types/validation/reporter';
+import { Result } from '@statoscope/types/types/validation/result';
+import { Config, ReporterConfig } from '@statoscope/types/types/validation/config';
 import {
-  API,
-  MakeAPIParams,
-  Reporter,
-  ValidationResult,
-} from '@statoscope/types/types/validation';
+  NormalizedExecParams,
+  ExecParams,
+  ExecMode,
+} from '@statoscope/types/types/validation/rule';
 import { makeAPI } from './api';
 import { InputFile, PluginFn, PrepareFn } from './plugin';
 import { Rule, RuleDataInput } from './rule';
-import {
-  Config,
-  NormalizedRuleExecParams,
-  ReporterConfig,
-  RuleExecMode,
-  RuleExecParams,
-} from './config';
 
 export type ReporterConstructor<TOptions> = {
   new (options?: TOptions): Reporter;
@@ -48,9 +44,9 @@ export default class Validator {
     this.config = config;
     this.require = module.createRequire(path.join(this.rootDir, '_'));
 
-    if (!this.config.validate.silent) {
-      if (this.config.validate.reporters) {
-        for (const item of this.config.validate.reporters) {
+    if (!this.config.silent) {
+      if (this.config.reporters) {
+        for (const item of this.config.reporters) {
           this.reporters.push(this.makeReporterInstance(item));
         }
       } else {
@@ -116,11 +112,7 @@ export default class Validator {
     return null;
   }
 
-  async validate(
-    input: string,
-    reference?: string | null,
-    options?: { warnAsError?: boolean }
-  ): Promise<ValidationResult> {
+  async validate(input: string, reference?: string | null): Promise<Result> {
     const parsedInput: InputFile[] = [];
     let preparedInput: unknown;
 
@@ -136,7 +128,7 @@ export default class Validator {
       });
     }
 
-    const result: ValidationResult = {
+    const result: Result = {
       rules: [],
       files: {
         input: input,
@@ -152,11 +144,9 @@ export default class Validator {
 
     preparedInput ??= parsedInput;
 
-    for (const [ruleName, ruleDesc] of Object.entries(
-      this.config?.validate.rules ?? {}
-    )) {
+    for (const [ruleName, ruleDesc] of Object.entries(this.config?.rules ?? {})) {
       let ruleParams: unknown;
-      let execParams: RuleExecParams;
+      let execParams: ExecParams;
 
       if (Array.isArray(ruleDesc)) {
         [execParams, ruleParams] = ruleDesc;
@@ -175,14 +165,14 @@ export default class Validator {
         throw new Error(`Can't resolve rule ${ruleName}`);
       }
 
-      const api = await this.execRule(resolvedRule, ruleParams, preparedInput, options);
-      result.rules.push({ name: ruleName, api });
+      const api = await this.execRule(resolvedRule, ruleParams, preparedInput);
+      result.rules.push({ name: ruleName, api, execParams: normalizedExecParams });
     }
 
     return result;
   }
 
-  async report(result: ValidationResult): Promise<void> {
+  async report(result: Result): Promise<void> {
     for (const item of this.reporters) {
       await item.run(result);
     }
@@ -191,17 +181,16 @@ export default class Validator {
   async execRule(
     rule: Rule<unknown, unknown>,
     params: unknown,
-    data: RuleDataInput<unknown>,
-    options?: MakeAPIParams
+    data: RuleDataInput<unknown>
   ): Promise<API> {
-    const api = makeAPI(options);
+    const api = makeAPI();
     await rule(params, data, api);
 
     return api;
   }
 
-  normalizeExecParams(execParams: RuleExecParams): NormalizedRuleExecParams {
-    const mode: RuleExecMode = typeof execParams === 'string' ? execParams : 'error';
+  normalizeExecParams(execParams: ExecParams): NormalizedExecParams {
+    const mode: ExecMode = typeof execParams === 'string' ? execParams : 'error';
 
     return {
       mode,
