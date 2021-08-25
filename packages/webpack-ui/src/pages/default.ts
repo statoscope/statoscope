@@ -1,6 +1,8 @@
 import { StatoscopeWidget } from '../../types';
 // @ts-ignore
 import diffIndicatorStyle from '../views/diff-indicator.css';
+// @ts-ignore
+import style from '../views/helpers.css';
 import packagesTree from './default/packages-tree';
 import modulesTree, { moduleItemConfig } from './default/modules-tree';
 import chunksTree from './default/chunks-tree';
@@ -278,6 +280,7 @@ export default function (discovery: StatoscopeWidget): void {
                               expanded: false,
                               limitLines: '= settingListItemsLimit()',
                               itemConfig: {
+                                className: style.root,
                                 content: [
                                   `module-item:{module, match: #.filter, inline: true}`,
                                   {

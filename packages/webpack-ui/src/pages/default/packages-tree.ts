@@ -41,20 +41,11 @@ export function packageInstanceItemConfig(
   return {
     content: [
       {
-        view: 'link',
+        view: 'package-instance-item',
         data: `{
-          text: instance.path,
-          href: (package.name or package).pageLink("package", {instance: instance.path, hash:${hash}}),
-          match: (package.name or package)
-        }`,
-        content: 'text-match',
-      },
-      {
-        view: 'badge',
-        className: 'hack-badge-margin-left',
-        when: `(package.name or package).getPackageInstanceInfo(instance.path, ${hash})`,
-        data: `{
-          text: (package.name or package).getPackageInstanceInfo(instance.path, ${hash}).info.version
+          instance,
+          hash: ${hash},
+          match: #.filter
         }`,
       },
     ],
@@ -170,30 +161,13 @@ export function packageInstanceItemConfig(
                       `,
                     itemConfig: {
                       content: [
-                        `link:{
-                          text: value,
-                          href: value.pageLink("package", {hash:${hash}}),
-                        }`,
                         {
-                          when: 'reasons',
-                          view: 'badge',
-                          className: 'hack-badge-margin-left',
-                          data: `{text: instances.size(), postfix: instances.size().plural(['instance', 'instances'])}`,
-                        },
-                        {
-                          when: `
-                          $package: value;
-                          not compact and instances.($package.getPackageInstanceInfo(value.path, ${hash})).info.version.size() > 1
-                          `,
-                          view: 'badge',
-                          data: `
-                          $package: value;
-                          $size: instances.($package.getPackageInstanceInfo(value.path, ${hash})).info.version.size();
-                          {
-                            text: $size,
-                            postfix: $size.plural(['version', 'versions'])
-                          }
-                          `,
+                          view: 'package-item',
+                          data: `{
+                            package: value.resolvePackage(${hash}),
+                            hash: ${hash},
+                            match: #.filter
+                          }`,
                         },
                       ],
                       children: `
@@ -208,23 +182,12 @@ export function packageInstanceItemConfig(
                         content: [
                           //'text-match:{text: instance.value.path, match: instance.package}',
                           {
-                            view: 'link',
-                            data: `{text: instance.value.path, href: "#package:" + instance.package.encodeURIComponent()+"&instance="+instance.value.path.encodeURIComponent(), match: instance.package}`,
-                            content: 'text-match',
-                          },
-                          {
-                            view: 'badge',
-                            className: 'hack-badge-margin-left',
-                            when: `instance.package.getPackageInstanceInfo(instance.value.path, ${hash})`,
+                            view: 'package-instance-item',
                             data: `{
-                              text: instance.package.getPackageInstanceInfo(instance.value.path, ${hash}).info.version
+                              instance: instance.value,
+                              hash: ${hash},
+                              match: #.filter
                             }`,
-                          },
-                          {
-                            when: 'instance.reasons',
-                            view: 'badge',
-                            className: 'hack-badge-margin-left',
-                            data: `{text: reasonModules.size(), postfix: reasonModules.size().plural(['module', 'modules'])}`,
                           },
                         ],
                         children: `reasonModules`,

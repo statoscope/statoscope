@@ -1,6 +1,6 @@
 import { StatoscopeWidget } from '../../types';
 // @ts-ignore
-import badgeFix from './badge-margin-fix.css';
+import badgeFix from './helpers.css';
 
 export default function (discovery: StatoscopeWidget): void {
   discovery.view.define('stats-list', (el, config, data = {}, context?) => {

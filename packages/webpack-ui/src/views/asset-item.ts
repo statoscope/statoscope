@@ -1,7 +1,7 @@
 import { NormalizedAsset } from '@statoscope/webpack-model/dist/normalize';
 import { StatoscopeWidget } from '../../types';
 // @ts-ignore
-import style from './badge-margin-fix.css';
+import style from './helpers.css';
 
 export default function (discovery: StatoscopeWidget): void {
   discovery.view.define(
@@ -67,6 +67,15 @@ export default function (discovery: StatoscopeWidget): void {
             view: 'download-badge',
             data: `{ size: asset.getAssetSize(hash or #.params.hash).size }`,
             when: !compact && showDownloadTime,
+          },
+          {
+            when: !compact,
+            view: 'validation-messages-badge',
+            data: `{
+              hash: hash or #.params.hash,
+              type: 'resource',
+              id: asset.name or files[0].name,
+            }`,
           },
         ],
         data,

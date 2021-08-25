@@ -1,7 +1,7 @@
 import { NormalizedModule } from '@statoscope/webpack-model/dist/normalize';
 import { StatoscopeWidget } from '../../types';
 // @ts-ignore
-import style from './badge-margin-fix.css';
+import style from './helpers.css';
 
 export default function (discovery: StatoscopeWidget): void {
   discovery.view.define(
@@ -76,16 +76,12 @@ export default function (discovery: StatoscopeWidget): void {
           },
           {
             when: `not compact and (hash or #.params.hash).validation_getItems('module', module.name)`,
-            data: `
-              (hash or #.params.hash).validation_getItems('module', module.name)
-                .size()
-                .pluralWithValue(['validation message', 'validation messages'])
-            `,
-            view: (el: HTMLElement, config: unknown, data: string): void => {
-              el.style.display = 'inline-block';
-              el.textContent = '⚠️';
-              el.title = data;
-            },
+            view: 'validation-messages-badge',
+            data: `{
+              hash: hash or #.params.hash,
+              type: 'module',
+              id: module.name,
+            }`,
           },
         ],
         data,

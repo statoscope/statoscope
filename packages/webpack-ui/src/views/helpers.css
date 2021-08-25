@@ -1,0 +1,4 @@
+.root > *:not(:last-child) {
+  margin-left: 0;
+  margin-right: 1ex;
+}

@@ -21,6 +21,7 @@ export function statsSelect(
 
 export function diffBadges(): ViewConfigData {
   return {
+    when: 'diff',
     view: 'inline-list',
     className: [styles['badge-container']],
     data: 'diff',

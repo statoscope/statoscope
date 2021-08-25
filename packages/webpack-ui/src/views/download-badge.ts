@@ -1,6 +1,4 @@
 import { StatoscopeWidget } from '../../types';
-// @ts-ignore
-import style from './badge-margin-fix.css';
 
 export default function (discovery: StatoscopeWidget): void {
   discovery.view.define(
@@ -12,8 +10,6 @@ export default function (discovery: StatoscopeWidget): void {
         throw new Error('[download-badge] size must be specified');
       }
 
-      el.classList.add(style.root);
-
       if (inline) {
         el.classList.add('inline-block');
       }
@@ -22,7 +18,6 @@ export default function (discovery: StatoscopeWidget): void {
         el,
         [
           {
-            // todo: interpolate color from gray(0s) to red(1s)
             view: 'badge',
             data: `{
             $downloadTime: size.getDownloadTime();

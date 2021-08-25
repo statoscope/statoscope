@@ -90,19 +90,12 @@ export default function packagesTab(): ViewConfigData[] {
               itemConfig: {
                 content: [
                   {
-                    view: 'link',
+                    view: 'package-instance-item',
                     data: `{
-                      text: instance.path,
-                      href: package.name.pageLink("package", {instance: instance.path, hash}),
-                      match: package.name
+                      instance,
+                      hash,
+                      match: #.filter
                     }`,
-                    content: 'text-match',
-                  },
-                  {
-                    view: 'badge',
-                    className: 'hack-badge-margin-left',
-                    when: 'instance.info.version',
-                    data: `{text: instance.info.version}`,
                   },
                   diffBadges(),
                 ],
