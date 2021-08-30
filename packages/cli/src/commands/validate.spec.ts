@@ -8,6 +8,11 @@ const configFixturePath = path.resolve(
   '../../../../test/fixtures/cli/validate/config.js'
 );
 
+const configWithReportersFixturePath = path.resolve(
+  __dirname,
+  '../../../../test/fixtures/cli/validate/config-with-reporters.js'
+);
+
 const configReferenceFixturePath = path.resolve(
   __dirname,
   '../../../../test/fixtures/cli/validate/config-reference.js'
@@ -77,6 +82,25 @@ describe('with config', () => {
         inputFixturePath,
         '--reference',
         referenceFixturePath,
+      ]);
+
+      y = validate(y);
+      y.fail((_, error) => {
+        console.error(error);
+      });
+
+      await y.argv;
+
+      expect(getOutput()).toMatchSnapshot();
+    });
+
+    test('reporter', async () => {
+      let y = yargs([
+        'validate',
+        '--config',
+        configWithReportersFixturePath,
+        '--input',
+        inputFixturePath,
       ]);
 
       y = validate(y);
