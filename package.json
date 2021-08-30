@@ -1,7 +1,7 @@
 {
   "name": "statoscope",
   "private": true,
-  "description": "A tool for analyzing the stats of the bundles",
+  "description": "Toolkit for analyzing the stats of the bundles",
   "license": "MIT",
   "scripts": {
     "test:ci": "npm run test -- --ci --coverage",

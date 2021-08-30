@@ -74,7 +74,6 @@ function handled(
               .[hash=#.compilation]
               ..modules.[name=#.module]
             `,
-            filename: path.basename(resultItem.file.name ?? data.files[0].name),
             payload: {
               context: {
                 module: module.name,

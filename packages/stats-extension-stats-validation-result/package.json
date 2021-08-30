@@ -1,7 +1,7 @@
 {
   "name": "@statoscope/stats-extension-stats-validation-result",
   "version": "5.6.1",
-  "description": "Statoscope extension for discover stats validator result",
+  "description": "Statoscope extension that collects stats validation result",
   "main": "./dist/index.js",
   "scripts": {
     "build": "../../node_modules/.bin/tsc",
@@ -25,7 +25,6 @@
     "@statoscope/extensions": "^5.5.1",
     "@statoscope/helpers": "^5.5.1",
     "@statoscope/stats": "^5.3.0",
-    "@statoscope/stats-validator": "^5.4.0",
     "@statoscope/types": "^5.4.0"
   },
   "devDependencies": {}

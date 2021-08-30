@@ -95,7 +95,6 @@ function handledModules(
                 after: #.after,
               }
               `,
-              filename: path.basename(data.files[0].name),
               payload: {
                 context: {
                   module: item.moduleName,
@@ -113,7 +112,8 @@ function handledModules(
 
 const diffDeprecatedModules: WebpackRule<Params> = (ruleParams, data, api): void => {
   api.setRuleDescriptor({
-    description: 'Diff usage of specified modules between input and reference stats',
+    description:
+      'Compares usage of specified modules between input and reference stats. Fails if usage has increased',
     package: version,
   });
 
@@ -133,7 +133,8 @@ const diffDeprecatedModules: WebpackRule<Params> = (ruleParams, data, api): void
   }
 
   if (!data.files.find((file) => file.name === 'reference.json')) {
-    throw new Error('Reference-stats is not specified');
+    console.warn('[diff-deprecated-modules]: reference-stats is not specified');
+    return;
   }
 
   for (const target of normalizedRuleParams.target) {

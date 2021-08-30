@@ -114,7 +114,6 @@ function handleTarget(
                 after: #.after,
               }
               `,
-              filename: path.basename(data.files[0].name),
               payload: {
                 context: {
                   package: packageItem.packageName,
@@ -133,7 +132,7 @@ function handleTarget(
 const diffDeprecatedPackages: WebpackRule<Params> = (ruleParams, data, api): void => {
   api.setRuleDescriptor({
     description:
-      'Diff usage of specified packages usage between input and reference stats',
+      'Compares usage of specified packages usage between input and reference stats. Fails if usage has increased',
     package: version,
   });
 
@@ -153,7 +152,8 @@ const diffDeprecatedPackages: WebpackRule<Params> = (ruleParams, data, api): voi
   }
 
   if (!data.files.find((file) => file.name === 'reference.json')) {
-    throw new Error('Reference-stats is not specified');
+    console.warn('[diff-deprecated-packages]: reference-stats is not specified');
+    return;
   }
 
   for (const target of normalizedRuleParams.target) {

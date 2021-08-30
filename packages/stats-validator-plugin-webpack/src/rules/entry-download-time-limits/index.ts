@@ -65,7 +65,8 @@ export type NormalizedParams = Exclude<Params, 'exclude' | 'useCompressedSize'> 
 
 const entryDownloadTimeLimits: WebpackRule<Params> = (ruleParams, data, api): void => {
   api.setRuleDescriptor({
-    description: 'Ensure that the download time of entrypoints is not over the limit',
+    description:
+      'Ensures that the download time of entrypoints has not exceeded the limit',
     package: version,
   });
 
@@ -154,7 +155,6 @@ const entryDownloadTimeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
               rule: #.rule,
             }
             `,
-            filename: path.basename(data.files[0].name),
             payload: {
               context: {
                 entry: entryItem.entry.name,

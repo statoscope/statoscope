@@ -4,6 +4,7 @@ import {
   NormalizedCompilation,
   NormalizedEntrypointItem,
 } from '@statoscope/webpack-model/dist/normalize';
+import networkListType from '@statoscope/helpers/dist/network-type-list';
 import { APIFnOptions } from '@statoscope/types/types/validation/api';
 import helpers, { Limit, ValueDiff } from '@statoscope/helpers/dist/jora';
 import { WebpackRule } from '../../';
@@ -14,6 +15,8 @@ import {
   SerializedExcludeItem,
 } from '../../limits-helpers';
 import * as version from '../../version';
+
+type NetworkType = typeof networkListType[number]['name'];
 
 export type Limits = {
   maxDownloadTimeDiff?: number | Limit;
@@ -32,6 +35,7 @@ export type SerializedRuleExcludeItem = SerializedExcludeItem<'compilation' | 'e
 
 export type Params = {
   useCompressedSize?: boolean;
+  network?: NetworkType;
   global?: Limits;
   exclude?: Array<string | RegExp | RuleExcludeItem>;
   byName?: ByNameFilterItem<Limits>[];
@@ -39,6 +43,7 @@ export type Params = {
 
 export type NormalizedParams = {
   useCompressedSize: boolean;
+  network: NetworkType;
   global: NormalizedLimits;
   exclude: RuleExcludeItem[];
   byName: ByNameFilterItem<NormalizedLimits>[];
@@ -90,6 +95,7 @@ function normalizeParams(params: Params): NormalizedParams {
   return {
     useCompressedSize: params.useCompressedSize ?? true,
     global: normalizeLimits(params.global),
+    network: params.network ?? 'Slow',
     byName:
       params.byName?.map((item) => {
         return { name: item.name, limits: normalizeLimits(item.limits) };
@@ -123,7 +129,8 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
   api
 ): void => {
   api.setRuleDescriptor({
-    description: 'Diff download time of entrypoints between input and reference stats',
+    description:
+      'Compares download time of entrypoints between input and reference stats. Fails if download time has increased',
     package: version,
   });
 
@@ -132,9 +139,9 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
   }
 
   if (!data.files.find((file) => file.name === 'reference.json')) {
-    throw new Error('Reference-stats is not specified');
+    console.warn('[diff-entry-download-time-limits]: reference-stats is not specified');
+    return;
   }
-
   const normalizedParams = normalizeParams(ruleParams);
 
   const query = `
@@ -265,7 +272,6 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
               rule: #.rule,
             }
             `,
-            filename: path.basename(data.files[0].name),
             payload: {
               context: {
                 entry: entryItem.after.entry.name,

@@ -1,14 +1,18 @@
 
-# Disallow duplicates of packages
+# No packages duplicates
 
-Fail validation if some of the packages have more than one instance (directory with a package in the `node_modules`).
+Ensures that bundle hasn't package duplicates.
+
+Fails validation if some packages have more than one instance (directory with a package within `node_modules`).
 
 ## Example
 
-There are two instances for the `foo`-package:
+Assume that we have two instances for the `foo`-package:
 
 - `node_modules/foo`
 - `node_modules/bar/node_modules/foo`
+
+**Rule:**
 
 ```json
 {
@@ -16,31 +20,62 @@ There are two instances for the `foo`-package:
 }
 ```
 
-There will be an error.
+**Output:**
+
+```
+- ❌ Package foo has 2 instances
+```
 
 ## Options
 
 ```ts
 type Options = {
-  exclude?: string[]
+  exclude?: Array<
+    string |
+    RegExp |
+    {
+      type: 'compilation' | 'package';
+      name: string;
+    }
+  >
 }
 ```
 
 ### exclude
 
-Specify the packages that may have more than one instance:
+Specify packages or compilations that must be ignored by the rule.
 
-```json
+**Exclude by package name:**
+```json5
 {
   "no-packages-dups": [
     "error",
     {
-      "exclude": ["foo"]
+      "exclude": ["foo"] // or regexp
     }
   ]
 }
 ```
 
-There will be no error, even if `foo`-package has more than one instances
+There are no errors, even if `foo` package has more than one instances
+
+**Exclude by compilation name:**
+```json5
+{
+  "no-packages-dups": [
+    "error",
+    {
+      "exclude": [
+        {
+          "type": "compilation",
+          "name": "foo-compilation" // or regexp
+        }
+      ]
+    }
+  ]
+}
+```
+
+There are no errors, even if `foo-compilation` has packages with more than one instances
 
 > Consider not to use exclude-option to make your bundle less excess

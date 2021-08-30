@@ -96,7 +96,6 @@ const noPackagesDups: WebpackRule<Params> = (ruleParams, data, api): void => {
                 package: #.package.resolvePackage(#.compilation),
               }
               `,
-              filename: path.basename(data.files[0].name),
               payload: {
                 context: {
                   compilation: item.compilation.hash,

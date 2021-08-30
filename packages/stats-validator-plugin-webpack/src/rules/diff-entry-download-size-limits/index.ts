@@ -83,12 +83,14 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
   api
 ): void => {
   api.setRuleDescriptor({
-    description: 'Diff download size of entrypoints between input and reference stats',
+    description:
+      'Compares download size of entrypoints between input and reference stats. Fails if download size has increased',
     package: version,
   });
 
   if (!data.files.find((file) => file.name === 'reference.json')) {
-    throw new Error('Reference-stats is not specified');
+    console.warn('[diff-entry-download-size-limits]: reference-stats is not specified');
+    return;
   }
 
   const normalizedParams: NormalizedParams = {
@@ -224,7 +226,6 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
               rule: #.rule,
             }
             `,
-            filename: path.basename(data.files[0].name),
             payload: {
               context: {
                 entry: entryItem.after.entry.name,

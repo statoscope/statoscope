@@ -74,7 +74,6 @@ function handledTarget(
               module: #.module.resolveModule(#.compilation),
             }
             `,
-            filename: path.basename(resultItem.file.name ?? data.files[0].name),
             payload: {
               context: {
                 compilation: resultItem.compilation.hash,
