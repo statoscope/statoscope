@@ -62,6 +62,38 @@ Array [
 ]
 `;
 
+exports[`with config explicit reporter 1`] = `
+Array [
+  Array [
+    "undefined",
+  ],
+  Array [
+    "Module ./src/index.ts should not be used",
+  ],
+  Array [
+    "Module ./src/index2.ts should not be used",
+  ],
+  Array [
+    "Module ./src/sub-module.ts should not be used",
+  ],
+  Array [
+    "Module ./src/index2.css should not be used",
+  ],
+  Array [
+    "Module ./src/test.txt should not be used",
+  ],
+  Array [
+    "Module ./src/dyn.ts should not be used",
+  ],
+  Array [
+    "Module ./src/statoscope.png should not be used",
+  ],
+  Array [
+    "foo@1.0.0 should not be used",
+  ],
+]
+`;
+
 exports[`with config explicit single 1`] = `
 Array [
   Array [

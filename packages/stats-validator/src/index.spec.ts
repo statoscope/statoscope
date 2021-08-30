@@ -1,25 +1,4 @@
-import os from 'os';
 import Validator from './';
-
-const output: string[][] = [];
-let consoleLogSpy: jest.SpyInstance<void, string[]> | null = null;
-
-beforeEach(() => {
-  consoleLogSpy = jest
-    .spyOn(global.console, 'log')
-    .mockImplementation((...args: string[]) => {
-      output.push(
-        args.map((o) =>
-          String(o).replace(process.cwd(), '<pwd>').replace(os.tmpdir(), '<tmp>')
-        )
-      );
-    });
-});
-
-afterEach(() => {
-  consoleLogSpy?.mockRestore();
-  output.length = 0;
-});
 
 test('should work', async () => {
   const validator = new Validator({
@@ -34,11 +13,8 @@ test('should work', async () => {
     require.resolve('../../../test/bundles/simple/stats-prod.json')
   );
 
-  await validator.report(result);
-
   result.files.input = result.files.input.replace(process.cwd(), '<pwd>');
   expect(result).toMatchSnapshot();
-  expect(output).toMatchSnapshot();
 });
 
 test('custom reporter', async () => {
@@ -60,11 +36,8 @@ test('custom reporter', async () => {
     require.resolve('../../../test/bundles/simple/stats-prod.json')
   );
 
-  await validator.report(result);
-
   result.files.input = result.files.input.replace(process.cwd(), '<pwd>');
   expect(result).toMatchSnapshot();
-  expect(output).toMatchSnapshot();
 });
 
 test('silent', async () => {
@@ -87,9 +60,6 @@ test('silent', async () => {
     require.resolve('../../../test/bundles/simple/stats-prod.json')
   );
 
-  await validator.report(result);
-
   result.files.input = result.files.input.replace(process.cwd(), '<pwd>');
   expect(result).toMatchSnapshot();
-  expect(output).toMatchSnapshot();
 });

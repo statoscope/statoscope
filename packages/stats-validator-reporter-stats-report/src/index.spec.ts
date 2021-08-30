@@ -37,9 +37,7 @@ test('should work', async () => {
   saveStatsTo = path.join(outputDir, 'should-work-3.json');
   saveReportTo = path.join(outputDir, 'should-work-3.html');
   reporter = new Reporter({
-    saveReportTo,
     saveStatsTo,
-    saveOnlyStats: true,
   });
   await reporter.run(result);
   expect(fs.existsSync(saveStatsTo)).toBe(true);
