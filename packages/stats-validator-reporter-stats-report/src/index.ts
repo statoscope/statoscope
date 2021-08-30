@@ -17,7 +17,6 @@ import * as version from './version';
 export type Options = {
   saveReportTo?: string;
   saveStatsTo?: string;
-  saveOnlyStats?: boolean;
   open?: boolean;
 };
 
@@ -81,7 +80,7 @@ export default class ConsoleReporter implements Reporter {
       console.log(`Stats saved into ${statsPath}`);
     }
 
-    if (reportPath && !this.options?.saveOnlyStats) {
+    if (this.options?.saveReportTo || this.options?.open) {
       console.log(`Generating Statoscope report...`);
       const reportFilename = await transform(
         {

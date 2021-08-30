@@ -8,7 +8,7 @@ import { Reporter } from '@statoscope/types/types/validation/reporter';
 import { Result } from '@statoscope/types/types/validation/result';
 import { NormalizedExecParams } from '@statoscope/types/types/validation/rule';
 
-export type Options = { warnAsError?: boolean; useColors?: boolean };
+export type Options = { useColors?: boolean };
 
 export default class ConsoleReporter implements Reporter {
   constructor(public options?: Options) {}
@@ -16,7 +16,6 @@ export default class ConsoleReporter implements Reporter {
   async run(result: Result): Promise<void> {
     const normalizedOptions: Required<Options> = {
       useColors: this.options?.useColors ?? true,
-      warnAsError: this.options?.warnAsError ?? false,
     };
     const chalkCtx = new chalk.Instance(normalizedOptions.useColors ? {} : { level: 0 });
     // file -> compilation -> rule -> entry
@@ -62,12 +61,9 @@ export default class ConsoleReporter implements Reporter {
 
         for (const [rule, items] of Object.entries(rules)) {
           for (const result of items) {
-            const type =
-              result.execParams.mode === 'error' ||
-              (result.execParams.mode === 'warn' && this.options?.warnAsError)
-                ? 'error'
-                : 'warn';
+            const type = result.execParams.mode;
             let decorate = chalkCtx.reset;
+
             if (type === 'error') {
               decorate = chalkCtx.red;
             } else {
@@ -138,11 +134,6 @@ export default class ConsoleReporter implements Reporter {
       console.log(
         chalkCtx.yellow(`${error + warn} problems (${error} errors, ${warn} warnings)`)
       );
-    }
-
-    if (error) {
-      // eslint-disable-next-line no-process-exit
-      process.exitCode = 1;
     }
   }
 }

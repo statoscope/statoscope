@@ -1,18 +1,12 @@
 import { ViewConfig } from '../';
 
 export type DetailsTextContent = string | string[] | (() => string | string[]);
-export type DiscoveryDeserializeType =
-  | {
-      type: 'query';
-      content: string;
-    }
-  | {
-      type: 'function';
-      content: string;
-    };
+export type DiscoveryDeserializeType = {
+  type: 'query';
+  content: string;
+};
 export type DetailsDescriptorDiscovery = {
   type: 'discovery';
-  filename: string;
   query: string;
   payload?: {
     context?: unknown;
@@ -44,7 +38,6 @@ export type RelatedItem =
     };
 
 export type TestEntry = {
-  assert?: boolean; // false by default
   message: string;
   filename?: string;
   compilation?: string;

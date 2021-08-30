@@ -1,31 +1,23 @@
 import fs from 'fs';
-import path from 'path';
-import module from 'module';
 // @ts-ignore
 import { parseChunked } from '@discoveryjs/json-ext';
-import ConsoleReporter from '@statoscope/stats-validator-reporter-console';
 import { API } from '@statoscope/types/types/validation/api';
-import { Reporter } from '@statoscope/types/types/validation/reporter';
 import { Result } from '@statoscope/types/types/validation/result';
-import { Config, ReporterConfig } from '@statoscope/types/types/validation/config';
+import { Config } from '@statoscope/types/types/validation/config';
 import {
   NormalizedExecParams,
   ExecParams,
   ExecMode,
 } from '@statoscope/types/types/validation/rule';
+import { makeRequireFromPath, resolveAliasPackage } from '@statoscope/config/dist/path';
 import { makeAPI } from './api';
 import { InputFile, PluginFn, PrepareFn } from './plugin';
 import { Rule, RuleDataInput } from './rule';
-
-export type ReporterConstructor<TOptions> = {
-  new (options?: TOptions): Reporter;
-};
 
 export default class Validator {
   public rootDir!: string;
   public config!: Config;
   public require!: NodeRequire;
-  public reporters: Reporter[] = [];
   public plugins: Record<
     string,
     {
@@ -42,24 +34,15 @@ export default class Validator {
   applyConfig(config: Config, rootDir: string): void {
     this.rootDir = rootDir;
     this.config = config;
-    this.require = module.createRequire(path.join(this.rootDir, '_'));
-
-    if (!this.config.silent) {
-      if (this.config.reporters) {
-        for (const item of this.config.reporters) {
-          this.reporters.push(this.makeReporterInstance(item));
-        }
-      } else {
-        this.reporters.push(new ConsoleReporter());
-      }
-    }
+    this.require = makeRequireFromPath(rootDir);
 
     if (this.config.plugins) {
       for (const pluginName of this.config.plugins) {
         const pluginPath = Array.isArray(pluginName) ? pluginName[0] : pluginName;
-        const normalizedPluginPath = this.resolvePackage(
+        const normalizedPluginPath = resolveAliasPackage(
           ['stats-validator-plugin', 'statoscope-stats-validator-plugin'],
-          pluginPath
+          pluginPath,
+          rootDir
         );
         const pluginAlias = Array.isArray(pluginName) ? pluginName[1] : pluginName;
         const resolvedPluginPath = this.require.resolve(normalizedPluginPath);
@@ -80,21 +63,6 @@ export default class Validator {
         }
       }
     }
-  }
-
-  makeReporterInstance(item: ReporterConfig): Reporter {
-    const [reporterPath, reporterOptions] = typeof item === 'string' ? [item] : item;
-    const normalizedReporterPath = this.resolvePackage(
-      ['stats-validator-reporter', 'statoscope-stats-validator-reporter'],
-      reporterPath
-    );
-    const Clazz:
-      | ReporterConstructor<unknown>
-      | { default: ReporterConstructor<unknown> } = this.require(normalizedReporterPath);
-
-    return typeof Clazz === 'function'
-      ? new Clazz(reporterOptions)
-      : new Clazz.default(reporterOptions);
   }
 
   resolveRule(name: string): Rule<unknown, unknown> | null {
@@ -172,12 +140,6 @@ export default class Validator {
     return result;
   }
 
-  async report(result: Result): Promise<void> {
-    for (const item of this.reporters) {
-      await item.run(result);
-    }
-  }
-
   async execRule(
     rule: Rule<unknown, unknown>,
     params: unknown,
@@ -190,42 +152,14 @@ export default class Validator {
   }
 
   normalizeExecParams(execParams: ExecParams): NormalizedExecParams {
-    const mode: ExecMode = typeof execParams === 'string' ? execParams : 'error';
+    let mode: ExecMode = typeof execParams === 'string' ? execParams : 'error';
+
+    if (mode === 'warn' && this.config.warnAsError) {
+      mode = 'error';
+    }
 
     return {
       mode,
     };
-  }
-
-  normalizePath(source: string): string {
-    if (source.includes('<rootDir>')) {
-      return source.replace(source, this.rootDir);
-    }
-
-    return source;
-  }
-
-  resolvePackage(prefixes: string[], name: string): string {
-    name = this.normalizePath(name);
-
-    const [packageNamespace, ...packageNameRest] = name.startsWith('@')
-      ? name.split(/[/\\]/)
-      : // eslint-disable-next-line no-sparse-arrays
-        [, name];
-    const packageName = path.join(...(packageNameRest as string[]));
-    const paths = [
-      [name],
-      ...prefixes.map((prefix) => [packageNamespace, `${prefix}-${packageName}`]),
-    ].map((item) => path.join(...(item.filter(Boolean) as string[])));
-
-    for (const item of paths) {
-      try {
-        this.require(item);
-        return item;
-        // eslint-disable-next-line no-empty
-      } catch (e) {}
-    }
-
-    throw new Error(`Can't resolve ${name} with prefixes [${prefixes}]`);
   }
 }

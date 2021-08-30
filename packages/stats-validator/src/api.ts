@@ -15,7 +15,6 @@ export function makeAPI(): API {
     },
     message(text, options): void {
       storage.push({
-        filename: options?.filename,
         compilation: options?.compilation,
         details: options?.details,
         related: options?.related,
