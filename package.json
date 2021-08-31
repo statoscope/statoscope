@@ -14,8 +14,8 @@
     "lint:eslint": "eslint . --ext .js,.ts --cache",
     "lint:eslint:fix": "npm run lint:eslint -- --fix",
     "build": "lerna run build",
-    "build:versions": "lerna run buildVersionTS",
-    "prepublishOnly": "npm run build && npm run lint && npm run test"
+    "build:versions": "lerna run buildVersionTS && npm run lint:eslint:fix",
+    "prepublishOnly": "npm run build:versions && npm run build && npm run lint && npm run test"
   },
   "repository": "https://github.com/statoscope/statoscope",
   "author": {

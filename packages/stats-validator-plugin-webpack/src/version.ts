@@ -1,6 +1,6 @@
 export const name = '@statoscope/stats-validator-plugin-webpack';
-export const version = '5.3.1';
+export const version = '5.7.0-alpha.0';
 export const description =
-  'Webpack stats validator plugin for @statoscope/stats-validator';
+  'Plugin for @statoscope/stats-validator to validate webpack stats';
 export const author = { name: 'Sergey Melyukov', url: 'https://twitter.com/smelukov' };
 export const homepage = 'https://github.com/statoscope/statoscope/';

@@ -1,4 +1,3 @@
-import path from 'path';
 import { Prepared } from '@statoscope/webpack-model';
 import {
   NormalizedCompilation,
