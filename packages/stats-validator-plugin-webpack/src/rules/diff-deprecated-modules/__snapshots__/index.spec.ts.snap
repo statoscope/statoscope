@@ -6,7 +6,6 @@ Array [
     "compilation": undefined,
     "details": Array [
       Object {
-        "filename": "input.json",
         "payload": Object {
           "context": Object {
             "after": 1,
@@ -38,7 +37,6 @@ Array [
     "compilation": undefined,
     "details": Array [
       Object {
-        "filename": "input.json",
         "payload": Object {
           "context": Object {
             "after": 4,
@@ -70,7 +68,6 @@ Array [
     "compilation": undefined,
     "details": Array [
       Object {
-        "filename": "input.json",
         "payload": Object {
           "context": Object {
             "after": 2,
@@ -102,7 +99,6 @@ Array [
     "compilation": undefined,
     "details": Array [
       Object {
-        "filename": "input.json",
         "payload": Object {
           "context": Object {
             "after": 2,
@@ -134,7 +130,6 @@ Array [
     "compilation": undefined,
     "details": Array [
       Object {
-        "filename": "input.json",
         "payload": Object {
           "context": Object {
             "after": 2,

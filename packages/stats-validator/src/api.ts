@@ -18,6 +18,7 @@ export function makeAPI(): API {
         compilation: options?.compilation,
         details: options?.details,
         related: options?.related,
+        filename: options?.filename,
         message: text,
       });
     },

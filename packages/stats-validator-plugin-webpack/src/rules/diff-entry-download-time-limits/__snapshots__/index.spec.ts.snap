@@ -6,7 +6,6 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "filename": "input.json",
         "payload": Object {
           "context": Object {
             "after": Object {
@@ -85,7 +84,6 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "filename": "input.json",
         "payload": Object {
           "context": Object {
             "after": Object {
@@ -160,7 +158,6 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "filename": "input.json",
         "payload": Object {
           "context": Object {
             "after": Object {
@@ -235,7 +232,6 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "filename": "input.json",
         "payload": Object {
           "context": Object {
             "after": Object {
@@ -314,7 +310,6 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "filename": "input.json",
         "payload": Object {
           "context": Object {
             "after": Object {
@@ -389,7 +384,6 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "filename": "input.json",
         "payload": Object {
           "context": Object {
             "after": Object {
@@ -459,7 +453,6 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "filename": "input.json",
         "payload": Object {
           "context": Object {
             "after": Object {
@@ -542,7 +535,6 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "filename": "input.json",
         "payload": Object {
           "context": Object {
             "after": Object {
@@ -612,7 +604,6 @@ Array [
     "compilation": "da95abcf6bbf9b157ff6",
     "details": Array [
       Object {
-        "filename": "input.json",
         "payload": Object {
           "context": Object {
             "after": Object {

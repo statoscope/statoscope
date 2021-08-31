@@ -6,7 +6,6 @@ Array [
     "compilation": undefined,
     "details": Array [
       Object {
-        "filename": "input.json",
         "payload": Object {
           "context": Object {
             "after": 4,

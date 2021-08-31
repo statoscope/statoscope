@@ -49,7 +49,6 @@ test('silent', async () => {
         'foo',
       ],
     ],
-    silent: true,
     rules: {
       'webpack/restricted-modules': ['error', [/\.\/src/]],
       'webpack/restricted-packages': ['error', ['foo']],
