@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/webpack-ui",
-  "version": "5.6.2",
+  "version": "5.7.0-alpha.0",
   "description": "Webpack plugin and UI for analyzing webpack bundle with Statoscope",
   "main": "./dist/main.js",
   "types": "./types.d.ts",
@@ -26,18 +26,18 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "@statoscope/stats-extension-stats-validation-result": "^5.3.0",
-    "@statoscope/types": "^5.4.0"
+    "@statoscope/stats-extension-stats-validation-result": "5.7.0-alpha.0",
+    "@statoscope/types": "5.7.0-alpha.0"
   },
   "devDependencies": {
     "@carrotsearch/foamtree": "3.5.0",
     "@discoveryjs/discovery": "^1.0.0-beta.60",
     "@popperjs/core": "^2.9.1",
-    "@statoscope/helpers": "^5.6.1",
-    "@statoscope/stats": "^5.3.0",
-    "@statoscope/stats-extension-compressed": "^5.6.1",
-    "@statoscope/stats-extension-package-info": "^5.6.1",
-    "@statoscope/webpack-model": "^5.6.2",
+    "@statoscope/helpers": "5.7.0-alpha.0",
+    "@statoscope/stats": "5.7.0-alpha.0",
+    "@statoscope/stats-extension-compressed": "5.7.0-alpha.0",
+    "@statoscope/stats-extension-package-info": "5.7.0-alpha.0",
+    "@statoscope/webpack-model": "5.7.0-alpha.0",
     "@wdxlab/events": "^1.1.0",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.1.3",
