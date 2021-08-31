@@ -8,7 +8,7 @@ Fails validation if some modules have deoptimization reason (can't concatenate m
 
 ```json
 {
-  "no-modules-deopts": ["error"]
+  "@statoscope/webpack/no-modules-deopts": ["error"]
 }
 ```
 
@@ -40,7 +40,7 @@ Specify modules name or compilations name that must be ignored by the rule.
 **Exclude by package name:**
 ```json5
 {
-  "no-packages-dups": [
+  "@statoscope/webpack/no-packages-dups": [
     "error",
     {
       "exclude": ["./foo.js"] // or regexp
@@ -54,7 +54,7 @@ There are no errors, even if `./foo.js` module has deoptimization
 **Exclude by compilation name:**
 ```json5
 {
-  "no-packages-dups": [
+  "@statoscope/webpack/no-packages-dups": [
     "error",
     {
       "exclude": [

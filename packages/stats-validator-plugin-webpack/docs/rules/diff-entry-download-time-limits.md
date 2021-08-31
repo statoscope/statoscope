@@ -8,7 +8,7 @@ Fails if the download time of the input bundle is more than specified limit rela
 
 ```json5
 {
-  "diff-entry-download-time-limits": [
+  "@statoscope/webpack/diff-entry-download-time-limits": [
     "error",
     {
       global: {
@@ -74,7 +74,7 @@ Specify limits for all entrypoints
 
 ```json5
 {
-  "diff-entry-download-time-limits": [
+  "@statoscope/webpack/diff-entry-download-time-limits": [
     "error",
     {
       global: {
@@ -96,7 +96,7 @@ Specify limits for any entrypoints separately
 
 ```json5
 {
-  "diff-entry-download-time-limits": [
+  "@statoscope/webpack/diff-entry-download-time-limits": [
     "error",
     {
       byName: [
@@ -138,7 +138,7 @@ Specify compilations or entrypoints that must be ignored.
 
 ```json5
 {
-  "diff-entry-download-time-limits": [
+  "@statoscope/webpack/diff-entry-download-time-limits": [
     "error",
     {
       global: {

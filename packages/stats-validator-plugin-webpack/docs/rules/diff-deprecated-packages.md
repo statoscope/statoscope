@@ -10,7 +10,7 @@ Package usage is just the total imports of a package in your bundle. If you add 
 
 ```json5
 {
-  "diff-deprecated-packages": ["error", ['lodash']]
+  "@statoscope/webpack/diff-deprecated-packages": ["error", ['lodash']]
 }
 ```
 
@@ -40,7 +40,7 @@ Specify packages which usage must be compared
 
 ```json5
 {
-  "diff-deprecated-packages": [
+  "@statoscope/webpack/diff-deprecated-packages": [
     "error",
     [
       /lodash/,
@@ -62,7 +62,7 @@ Specify compilation **names** that must be ignored by rule.
 
 ```json5
 {
-  "diff-deprecated-packages": [
+  "@statoscope/webpack/diff-deprecated-packages": [
     "error",
     {
       "exclude": ["foo-compilation"] // or regexp

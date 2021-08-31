@@ -8,7 +8,7 @@ Fails if the download size of a bundle has exceeded a limit.
 
 ```json5
 {
-  "entry-download-size-limits": [
+  "@statoscope/webpack/entry-download-size-limits": [
     "error",
     {
       global: {
@@ -64,7 +64,7 @@ Specify limits for all entrypoints
 
 ```json5
 {
-  "entry-download-size-limits": [
+  "@statoscope/webpack/entry-download-size-limits": [
     "error",
     {
       global: {
@@ -83,7 +83,7 @@ Specify limits for any entrypoints separately
 
 ```json5
 {
-  "entry-download-size-limits": [
+  "@statoscope/webpack/entry-download-size-limits": [
     "error",
     {
       byName: [
@@ -119,7 +119,7 @@ Specify compilations name or entrypoints name that must be ignored by rule.
 
 ```json5
 {
-  "entry-download-size-limits": [
+  "@statoscope/webpack/entry-download-size-limits": [
     "error",
     {
       global: {

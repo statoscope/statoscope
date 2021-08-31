@@ -21,7 +21,7 @@ Validate multiple stats [DEPRECATED]: validate --validator path/to/validator.js 
         yargs
           // todo remove in 6.0
           .option('validator', {
-            describe: 'path to validator script [DEPRECATED]',
+            describe: '[DEPRECATED] path to validator script',
             alias: 'v',
             type: 'string',
           })

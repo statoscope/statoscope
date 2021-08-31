@@ -10,7 +10,7 @@ Fails validation if some of specified modules have used by the bundle.
 
 ```json5
 {
-  "restricted-modules": [
+  "@statoscope/webpack/restricted-modules": [
     "error",
     ["./foo-module.js", "./bar-module.js"]
   ]
@@ -37,7 +37,7 @@ type Options = Array<
 
 ```json5
 {
-  "restricted-modules": [
+  "@statoscope/webpack/restricted-modules": [
     "error",
     [
       './foo-module.js',
@@ -57,7 +57,7 @@ Specify restricted module.
 
 ```json5
 {
-  "restricted-modules": [
+  "@statoscope/webpack/restricted-modules": [
     "error",
     [/foo-module\.js/, /\/some-dir\//]
   ]

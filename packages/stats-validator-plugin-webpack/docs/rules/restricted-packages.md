@@ -8,7 +8,7 @@ Fails validation if some of specified packages has used by the bundle.
 
 ```json5
 {
-  "restricted-packages": [
+  "@statoscope/webpack/restricted-packages": [
     "error",
     [
       "lodash",
@@ -40,7 +40,7 @@ type Options = Array<
 
 ```json5
 {
-  "restricted-packages": [
+  "@statoscope/webpack/restricted-packages": [
     "error",
     [
       'foo-package',
@@ -56,7 +56,7 @@ type Options = Array<
 
 ```json5
 {
-  "restricted-packages": [
+  "@statoscope/webpack/restricted-packages": [
     "error",
     [
       'foo-package',

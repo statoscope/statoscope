@@ -10,7 +10,7 @@ Module usage is just the total imports of a module in your bundle. If you add mo
 
 ```json5
 {
-  "diff-deprecated-modules": ["error", [/lodash/]]
+  "@statoscope/webpack/diff-deprecated-modules": ["error", [/lodash/]]
 }
 ```
 
@@ -42,7 +42,7 @@ Specify modules which usage must be compared
 
 ```json5
 {
-  "diff-deprecated-modules": [
+  "@statoscope/webpack/diff-deprecated-modules": [
     "error",
     [
       "./node_modules/lodash/unescape.js",
@@ -62,7 +62,7 @@ Specify compilation **names** that must be ignored by rule.
 
 ```json5
 {
-  "diff-deprecated-modules": [
+  "@statoscope/webpack/diff-deprecated-modules": [
     "error",
     {
       "exclude": ["foo-compilation"] // or regexp

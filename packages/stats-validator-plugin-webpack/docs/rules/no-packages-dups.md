@@ -16,7 +16,7 @@ Assume that we have two instances for the `foo`-package:
 
 ```json
 {
-  "no-packages-dups": ["error"]
+  "@statoscope/webpack/no-packages-dups": ["error"]
 }
 ```
 
@@ -48,7 +48,7 @@ Specify packages or compilations that must be ignored by the rule.
 **Exclude by package name:**
 ```json5
 {
-  "no-packages-dups": [
+  "@statoscope/webpack/no-packages-dups": [
     "error",
     {
       "exclude": ["foo"] // or regexp
@@ -62,7 +62,7 @@ There are no errors, even if `foo` package has more than one instances
 **Exclude by compilation name:**
 ```json5
 {
-  "no-packages-dups": [
+  "@statoscope/webpack/no-packages-dups": [
     "error",
     {
       "exclude": [
