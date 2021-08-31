@@ -5,9 +5,9 @@ import { API } from '@statoscope/types/types/validation/api';
 import { Result } from '@statoscope/types/types/validation/result';
 import { Config } from '@statoscope/types/types/validation/config';
 import {
-  NormalizedExecParams,
-  ExecParams,
   ExecMode,
+  ExecParams,
+  NormalizedExecParams,
 } from '@statoscope/types/types/validation/rule';
 import { makeRequireFromPath, resolveAliasPackage } from '@statoscope/config/dist/path';
 import { makeAPI } from './api';
@@ -112,7 +112,13 @@ export default class Validator {
 
     preparedInput ??= parsedInput;
 
-    for (const [ruleName, ruleDesc] of Object.entries(this.config?.rules ?? {})) {
+    const rules = Object.entries(this.config?.rules ?? {});
+
+    if (!rules.length) {
+      console.log('[WARN] No rules has specified in statoscope config');
+    }
+
+    for (const [ruleName, ruleDesc] of rules) {
       let ruleParams: unknown;
       let execParams: ExecParams;
 
