@@ -3,17 +3,16 @@
 [![npm version](https://badge.fury.io/js/%40statoscope%2Fwebpack-ui.svg)](https://badge.fury.io/js/%40statoscope%2Fwebpack-ui)
 [![Support](https://img.shields.io/badge/-Support-blue)](https://opencollective.com/statoscope)
 
-This package supplies UI to inspect webpack stats.
+This package contains a UI for analyzing stats of your bundle.
 
-It can tell almost all about your bundle:
+**Key features:**
 
-- 🌳 Modules/chunks/assets/packages tree
-- 🗺 Entrypoints/chunks/packages map
-- 🕵️ Duplicate modules and packages copies
-- 🔄 Stats diff
-- 📊 Custom reports about your bundle
+- 🌳 Full dependency tree (modules/chunks/assets/entrypoints/packages)
+- 🗺 Size map (entrypoints/chunks/packages)
+- 🕵️ Packages copies and duplicates of modules detection
+- 🔄 Stats comparison
+- 📊 Custom reports for your stats
 - 🐘 No stats size limitation
-- 🧪 Stats validation via CLI
 
 You can try it at [Statoscope sandbox](https://statoscope.tech)
 
