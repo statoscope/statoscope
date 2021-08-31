@@ -16,10 +16,6 @@
     "name": "Sergey Melyukov",
     "url": "https://twitter.com/smelukov"
   },
-  "files": [
-    "dist/*",
-    "types.d.ts"
-  ],
   "publishConfig": {
     "access": "public"
   },

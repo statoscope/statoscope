@@ -15,10 +15,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "dist/*",
-    "webpack.d.ts"
-  ],
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {

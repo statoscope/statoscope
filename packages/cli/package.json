@@ -17,10 +17,6 @@
     "name": "Sergey Melyukov",
     "url": "https://twitter.com/smelukov"
   },
-  "files": [
-    "bin/*",
-    "dist/*"
-  ],
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {

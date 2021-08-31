@@ -12,9 +12,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "types/*"
-  ],
   "dependencies": {
     "@statoscope/stats": "5.7.0-alpha.0"
   },
