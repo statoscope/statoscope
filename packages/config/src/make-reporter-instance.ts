@@ -11,10 +11,15 @@ export type ReporterConstructor<TOptions> = {
 export function makeReporterInstance(item: ReporterConfig, rootDir: string): Reporter {
   const [reporterPath, reporterOptions] = typeof item === 'string' ? [item] : item;
   const normalizedReporterPath = resolveAliasPackage(
-    ['stats-validator-reporter', 'statoscope-stats-validator-reporter'],
+    [
+      'stats-validator-reporter',
+      'statoscope-stats-validator-reporter',
+      '@statoscope/stats-validator-reporter',
+    ],
     reporterPath,
     rootDir
   );
+
   const rootDirRequire = module.createRequire(path.join(rootDir, '_'));
   const Clazz: ReporterConstructor<unknown> | { default: ReporterConstructor<unknown> } =
     rootDirRequire(normalizedReporterPath);

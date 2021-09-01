@@ -40,7 +40,11 @@ export default class Validator {
       for (const pluginName of this.config.plugins) {
         const pluginPath = Array.isArray(pluginName) ? pluginName[0] : pluginName;
         const normalizedPluginPath = resolveAliasPackage(
-          ['stats-validator-plugin', 'statoscope-stats-validator-plugin'],
+          [
+            'stats-validator-plugin',
+            'statoscope-stats-validator-plugin',
+            '@statoscope/stats-validator-plugin',
+          ],
           pluginPath,
           rootDir
         );
