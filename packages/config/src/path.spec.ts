@@ -21,6 +21,11 @@ describe('resolveAliasPackage', () => {
     ).toMatchInlineSnapshot(`"statoscope-stats-validator-reporter-1"`);
     expect(
       normalize(
+        resolveAliasPackage(['@statoscope/stats-validator-reporter'], '1', fixtureDir)
+      )
+    ).toMatchInlineSnapshot(`"@statoscope/stats-validator-reporter-1"`);
+    expect(
+      normalize(
         resolveAliasPackage(
           ['stats-validator-reporter', 'statoscope-stats-validator-reporter'],
           '@statoscope/1',

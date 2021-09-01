@@ -11,10 +11,10 @@ Object {
       "name": "Sergey Melyukov",
       "url": "https://twitter.com/smelukov",
     },
-    "description": "Statoscope extension for discover stats validator result",
+    "description": "Statoscope extension that collects stats validation result",
     "homepage": "https://github.com/statoscope/statoscope/",
     "name": "@statoscope/stats-extension-stats-validation-result",
-    "version": "5.6.1",
+    "version": "5.7.0",
   },
   "payload": Object {
     "compilations": Array [
