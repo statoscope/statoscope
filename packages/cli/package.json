@@ -26,6 +26,7 @@
     "@statoscope/report-writer": "5.7.0-alpha.0",
     "@statoscope/stats-validator": "5.7.0-alpha.0",
     "@statoscope/stats-validator-reporter-console": "5.7.0-alpha.0",
+    "@statoscope/stats-validator-reporter-stats-report": "5.7.0-alpha.0",
     "@statoscope/types": "5.7.0-alpha.0",
     "@statoscope/webpack-model": "5.7.0-alpha.0",
     "@statoscope/webpack-ui": "5.7.0-alpha.0",
