@@ -9,6 +9,8 @@ import ExtensionPackageInfoAPIFactory, {
   API as ExtensionPackageInfoAPI,
 } from '@statoscope/stats-extension-package-info/dist/api';
 import ExtensionPackageInfoPackage from '@statoscope/stats-extension-package-info/package.json';
+import ExtensionValidationResultPackage from '@statoscope/stats-extension-stats-validation-result/package.json';
+import ExtensionValidationResultAPIFactory from '@statoscope/stats-extension-stats-validation-result/dist/api';
 import Graph, { Node } from '@statoscope/helpers/dist/graph';
 import { Webpack } from '../webpack';
 import validateStats, { ValidationResult } from './validate';
@@ -145,6 +147,12 @@ extensionContainer.register(
   ExtensionPackageInfoPackage.name,
   ExtensionPackageInfoPackage.version,
   ExtensionPackageInfoAPIFactory
+);
+
+extensionContainer.register(
+  ExtensionValidationResultPackage.name,
+  ExtensionValidationResultPackage.version,
+  ExtensionValidationResultAPIFactory
 );
 
 function getHash(
@@ -482,11 +490,21 @@ function prepareModules(
   compilation: Webpack.Compilation,
   resolvers: CompilationResolvers
 ): void {
-  for (const module of compilation.modules || []) {
+  for (const [i, module] of Object.entries(compilation.modules || [])) {
+    const resolved = resolvers.resolveModule(module.name);
+    if (resolved) {
+      (compilation as unknown as NormalizedCompilation).modules[+i] = resolved;
+    }
+
     prepareModule(module, resolvers);
 
     if (module.modules) {
-      for (const innerModule of module.modules) {
+      for (const [i, innerModule] of Object.entries(module.modules)) {
+        const resolved = resolvers.resolveModule(innerModule.name);
+        if (resolved) {
+          (module as unknown as NormalizedModule).modules[+i] = resolved;
+        }
+
         prepareModule(innerModule, resolvers);
       }
     } else {
@@ -511,11 +529,21 @@ function prepareChunk(chunk: Webpack.Chunk, resolvers: CompilationResolvers): vo
       .map((m) => resolveModule(m.name))
       .filter(Boolean) as NormalizedModule[];
 
-    for (const module of chunk.modules) {
+    for (const [i, module] of Object.entries(chunk.modules)) {
+      const resolved = resolvers.resolveModule(module.name);
+      if (resolved) {
+        (chunk as unknown as NormalizedChunk).modules[+i] = resolved;
+      }
+
       prepareModule(module, resolvers);
 
       if (module.modules) {
-        for (const innerModule of module.modules) {
+        for (const [i, innerModule] of Object.entries(module.modules)) {
+          const resolved = resolvers.resolveModule(innerModule.name);
+          if (resolved) {
+            (module as unknown as NormalizedModule).modules[+i] = resolved;
+          }
+
           prepareModule(innerModule, resolvers);
         }
       } else {
@@ -718,17 +746,25 @@ function extractPackages(
     }
   };
 
+  function handleModule(module: NormalizedModule): void {
+    extractModulePackages(module);
+
+    if (module.modules) {
+      for (const innerModule of module.modules) {
+        handleModule(innerModule);
+      }
+    } else {
+      module.modules ??= [];
+    }
+  }
+
+  for (const module of compilation.modules) {
+    handleModule(module);
+  }
+
   for (const chunk of compilation.chunks) {
     for (const module of chunk.modules) {
-      extractModulePackages(module);
-
-      if (module.modules) {
-        for (const innerModule of module.modules) {
-          extractModulePackages(innerModule);
-        }
-      } else {
-        module.modules = [];
-      }
+      handleModule(module);
     }
   }
 }

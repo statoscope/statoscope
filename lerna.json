@@ -1,9 +1,11 @@
 {
-  "packages": [
-    "packages/*"
-  ],
-  "version": "5.6.2",
+  "packages": ["packages/*"],
+  "version": "5.7.0-alpha.0",
   "command": {
+    "version": {
+      "exact": true,
+      "noPush": true
+    },
     "publish": {
       "registry": "https://registry.npmjs.org",
       "message": "chore: publish release %s\n",

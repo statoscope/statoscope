@@ -29,22 +29,23 @@ export type Resolver<TID, TEntity> = (id: TID) => TEntity | null;
 
 export type GetIDFn<TID, TEntity> = (entity: TEntity) => TID;
 
-export default function makeResolver<TID, TEntity>(
+export default function makeResolver<TID, TEntity, TReturn = TEntity>(
   entities: Entities<TEntity>,
-  getId: (entity: TEntity) => TID
-): Resolver<TID, TEntity> {
+  getId: (entity: TEntity) => TID,
+  get?: (entity: TEntity) => TReturn
+): Resolver<TID, TReturn> {
   const cache = new Map();
 
   warnCache(entities, getId, cache);
 
-  return (id: TID): TEntity | null => {
+  return (id: TID): TReturn | null => {
     const cached = cache.get(id);
 
     if (cached) {
-      return cached;
+      return get ? get(cached) : cached;
     }
 
-    let result = null;
+    let result: TEntity | null = null;
 
     if (Array.isArray(entities) || entities instanceof Set) {
       for (const entity of entities) {
@@ -77,8 +78,9 @@ export default function makeResolver<TID, TEntity>(
 
     if (result) {
       cache.set(id, result);
+      return (get ? get(result) : result) as TReturn;
     }
 
-    return result;
+    return null;
   };
 }

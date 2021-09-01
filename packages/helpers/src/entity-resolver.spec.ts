@@ -35,3 +35,17 @@ test.each([
   expect(resolve('1')?.data).toBe('foo');
   expect(resolve(2)?.data).toBe('bar');
 });
+
+test('getter', () => {
+  const resolve = make(
+    [foo, bar],
+    (item) => item.id,
+    (item) => item.data
+  );
+
+  expect(resolve(3)).toBeNull();
+  expect(resolve(1)).toBe('foo');
+  // @ts-ignore
+  expect(resolve('1')).toBe('foo');
+  expect(resolve(2)).toBe('bar');
+});

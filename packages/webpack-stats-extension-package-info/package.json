@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/webpack-stats-extension-package-info",
-  "version": "5.6.1",
+  "version": "5.7.0-alpha.0",
   "description": "Webpack adapter for @statoscope/stats-extension-package-info",
   "main": "./dist/index.js",
   "scripts": {
@@ -16,16 +16,16 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "dist/*"
-  ],
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "@statoscope/stats-extension-package-info": "^5.6.1"
+    "@statoscope/stats": "5.7.0-alpha.0",
+    "@statoscope/stats-extension-package-info": "5.7.0-alpha.0"
   },
   "devDependencies": {
-    "@statoscope/stats": "^5.3.0",
     "@types/webpack": "^5.28.0"
+  },
+  "peerDependencies": {
+    "webpack": "^4.0.0 || ^5.0.0"
   }
 }

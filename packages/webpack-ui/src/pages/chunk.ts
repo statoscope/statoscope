@@ -34,6 +34,34 @@ export default function (discovery: StatoscopeWidget): void {
                       ...chunksTree(),
                     },
                     {
+                      view: 'section',
+                      header: 'text:"Messages"',
+                      content: {
+                        view: 'tabs',
+                        name: 'messagesTabs',
+                        tabs: [{ value: 'validation', text: 'Validation' }],
+                        content: {
+                          view: 'content-filter',
+                          content: {
+                            view: 'switch',
+                            content: [
+                              {
+                                when: '#.messagesTabs="validation"',
+                                content: {
+                                  view: 'validation-messages',
+                                  data: `
+                                  $messages: #.params.hash.validation_getItems('chunk', id);
+                                  $related: {type: 'chunk', id};
+                                  { $messages, $related, showRelated: false }
+                                  `,
+                                },
+                              },
+                            ],
+                          },
+                        },
+                      },
+                    },
+                    {
                       view: 'foam-tree',
                       data: `
                       $chunkModules:modules.[not shouldHideModule()];

@@ -1,4 +1,6 @@
 // @ts-ignore
+import isArray from 'is-array';
+// @ts-ignore
 import styles from './index2.css';
 
 import 'extLib';
@@ -9,4 +11,4 @@ import('./dyn').then((Module) => {
   console.log(Module.default);
 });
 
-console.log(txt, styles.root);
+console.log(txt, styles.root, isArray([]));

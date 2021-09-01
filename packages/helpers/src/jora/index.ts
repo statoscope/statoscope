@@ -1,4 +1,6 @@
 import path from 'path';
+// @ts-ignore
+import jora from 'jora';
 import semverDiff from 'semver/functions/diff';
 import semverGT from 'semver/functions/gt';
 import semverGTE from 'semver/functions/gte';
@@ -6,7 +8,8 @@ import semverLT from 'semver/functions/lt';
 import semverLTE from 'semver/functions/lte';
 import semverEQ from 'semver/functions/eq';
 import semverParse from 'semver/functions/parse';
-import { SemVer } from 'semver';
+import semverSatisfies from 'semver/functions/satisfies';
+import { Range, SemVer } from 'semver';
 import networkTypeList, { bytesInMBit, Item } from '../network-type-list';
 import Graph, { Node as GraphNode, PathSolution } from '../graph';
 import { colorFromH, colorMap, fileTypeMap, generateColor } from './colors';
@@ -42,12 +45,76 @@ export interface VersionDiffItem extends BaseDiffItem {
   b: string;
 }
 
+export type Limit =
+  | { type: 'absolute'; number: number }
+  | { type: 'percent'; number: number };
+
+export type ValueDiff = {
+  absolute: number;
+  percent: number;
+};
+
+export type SerializedStringOrRegexp =
+  | {
+      type: 'string';
+      content: string;
+    }
+  | {
+      type: 'regexp';
+      content: string;
+      flags: string;
+    };
+
+const identityFn = (arg: unknown): unknown => arg;
+
 export type DiffItem = TimeDiffItem | SizeDiffItem | NumberDiffItem | VersionDiffItem;
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
-export default () => {
+export default function helpers() {
   const helpers = {
     stringify: JSON.stringify,
+    typeof(value: unknown): string {
+      return typeof value;
+    },
+    isNullish(value: unknown): boolean {
+      return value == null;
+    },
+    isArray(value: unknown): boolean {
+      return Array.isArray(value);
+    },
+    useNotNullish<T>(values: readonly T[]): T | null {
+      for (const value of values) {
+        if (value != null) {
+          return value;
+        }
+      }
+
+      return null;
+    },
+    serializeStringOrRegexp(value?: string | RegExp): SerializedStringOrRegexp | null {
+      if (value == null) {
+        return null;
+      }
+
+      if (value instanceof RegExp) {
+        return { type: 'regexp', content: value.source, flags: value.flags };
+      }
+
+      return { type: 'string', content: value };
+    },
+    deserializeStringOrRegexp(
+      value?: SerializedStringOrRegexp | null
+    ): string | RegExp | null {
+      if (value == null) {
+        return null;
+      }
+
+      if (value.type === 'regexp') {
+        return new RegExp(value.content, value.flags);
+      }
+
+      return value.content;
+    },
     toNumber(str: string): number {
       return parseInt(str, 10);
     },
@@ -171,6 +238,9 @@ export default () => {
     semverParse(version?: string): SemVer | null {
       return semverParse(version);
     },
+    semverSatisfies(version: string | SemVer, range: string | Range): boolean {
+      return semverSatisfies(version, range);
+    },
 
     formatDiff(value: DiffItem): string {
       if (value.type === 'size') {
@@ -195,6 +265,35 @@ export default () => {
       return (value.b - value.a).toString();
     },
 
+    isMatch(a?: string, b?: string | RegExp): boolean {
+      if (!a || !b) {
+        return a === b;
+      }
+
+      return b instanceof RegExp ? b.test(a) : a === b;
+    },
+
+    exclude<TItem>(
+      items: readonly TItem[],
+      params?: {
+        exclude?: Array<string | RegExp>;
+        get?: (arg: TItem) => string | undefined;
+      }
+    ): TItem[] {
+      return items.filter((item) => {
+        for (const excludeItem of params?.exclude ?? []) {
+          const getter = params?.get ?? identityFn;
+          const value = getter(item);
+
+          if (this.isMatch(value as string, excludeItem)) {
+            return false;
+          }
+        }
+
+        return true;
+      });
+    },
+
     graph_getNode<TData>(id?: string, graph?: Graph<TData>): GraphNode<TData> | null {
       return graph?.getNode(id!) ?? null;
     },
@@ -211,7 +310,49 @@ export default () => {
 
       return graph.findPaths(from, to, max);
     },
+
+    diff_normalizeLimit(limit?: number | Limit | null): Limit | null {
+      return typeof limit === 'number'
+        ? { type: 'absolute', number: limit }
+        : limit ?? null;
+    },
+
+    diff_isLTETheLimit(valueDiff: ValueDiff, limit?: number | Limit | null): boolean {
+      const normalizedLimit = this.diff_normalizeLimit(limit);
+
+      return (
+        !normalizedLimit ||
+        (normalizedLimit.type === 'absolute'
+          ? valueDiff.absolute <= normalizedLimit.number
+          : valueDiff.percent <= normalizedLimit.number)
+      );
+    },
   };
 
   return helpers;
+}
+
+export type Prepared = {
+  query: (query: string, data?: unknown, context?: unknown) => unknown;
 };
+
+export type Options = {
+  helpers?: Record<string, unknown>;
+};
+
+export function prepareWithJora(input: unknown, options: Options = {}): Prepared {
+  const j = jora.setup({
+    ...helpers(),
+    ...options.helpers,
+  });
+
+  const rootContext = {};
+
+  return {
+    query: (
+      query: string,
+      data: unknown = input,
+      context: unknown = rootContext
+    ): unknown => j(query)(data || input, context),
+  };
+}

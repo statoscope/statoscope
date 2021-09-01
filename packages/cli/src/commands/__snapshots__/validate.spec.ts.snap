@@ -1,116 +1,142 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`validator types jora-query from js jora-fail.js 1`] = `
+exports[`with config explicit reference 1`] = `
 Array [
   Array [
-    "unknown",
+    "input.json",
   ],
   Array [
-    "  error: Fail",
+    "da95abcf6bbf9b157ff6",
+  ],
+  Array [
+    "error  Module ./src/index.ts should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/index2.ts should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/sub-module.ts should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/index2.css should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/test.txt should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/dyn.ts should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/statoscope.png should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  foo@1.0.0 should not be used  webpack/restricted-packages",
+  ],
+  Array [
+    "Instances:",
+  ],
+  Array [
+    "- node_modules/foo  1.0.0",
+  ],
+  Array [
+    "unknown compilation",
+  ],
+  Array [
+    "error  Usage of ../node_modules/is-array/index.js was increased from 0 to 4  webpack/diff-deprecated-modules",
+  ],
+  Array [
+    "error  Usage of ../node_modules/css-loader/dist/runtime/api.js was increased from 0 to 2  webpack/diff-deprecated-modules",
+  ],
+  Array [
+    "error  Usage of ../node_modules/css-loader/dist/runtime/getUrl.js was increased from 0 to 2  webpack/diff-deprecated-modules",
+  ],
+  Array [
+    "error  Usage of is-array was increased from 2 to 4  webpack/diff-deprecated-packages",
   ],
   Array [
     "",
   ],
   Array [
-    "Errors: 1",
-  ],
-  Array [
-    "Done",
+    "12 problems (12 errors, 0 warnings)",
   ],
 ]
 `;
 
-exports[`validator types jora-query from js jora-ok.js 1`] = `
+exports[`with config explicit reporter 1`] = `
 Array [
   Array [
-    "",
+    "undefined",
   ],
   Array [
-    "Done",
+    "Module ./src/index.ts should not be used",
+  ],
+  Array [
+    "Module ./src/index2.ts should not be used",
+  ],
+  Array [
+    "Module ./src/sub-module.ts should not be used",
+  ],
+  Array [
+    "Module ./src/index2.css should not be used",
+  ],
+  Array [
+    "Module ./src/test.txt should not be used",
+  ],
+  Array [
+    "Module ./src/dyn.ts should not be used",
+  ],
+  Array [
+    "Module ./src/statoscope.png should not be used",
+  ],
+  Array [
+    "foo@1.0.0 should not be used",
   ],
 ]
 `;
 
-exports[`validator types raw jora-query fail.jora 1`] = `
+exports[`with config explicit single 1`] = `
 Array [
   Array [
-    "unknown",
+    "input.json",
   ],
   Array [
-    "  error: Fail",
+    "da95abcf6bbf9b157ff6",
+  ],
+  Array [
+    "error  Module ./src/index.ts should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/index2.ts should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/sub-module.ts should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/index2.css should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/test.txt should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/dyn.ts should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  Module ./src/statoscope.png should not be used  webpack/restricted-modules",
+  ],
+  Array [
+    "error  foo@1.0.0 should not be used  webpack/restricted-packages",
+  ],
+  Array [
+    "Instances:",
+  ],
+  Array [
+    "- node_modules/foo  1.0.0",
   ],
   Array [
     "",
   ],
   Array [
-    "Errors: 1",
-  ],
-  Array [
-    "Done",
-  ],
-]
-`;
-
-exports[`validator types raw jora-query ok.jora 1`] = `
-Array [
-  Array [
-    "",
-  ],
-  Array [
-    "Done",
-  ],
-]
-`;
-
-exports[`validator types raw jora-query rules.jora 1`] = `
-Array [
-  Array [
-    "unknown",
-  ],
-  Array [
-    "  info: Auto info message",
-  ],
-  Array [
-    "  info: Info message without assert",
-  ],
-  Array [
-    "  info: Info with assert",
-  ],
-  Array [
-    "  warn: Warn without assert",
-  ],
-  Array [
-    "  warn: Warn with assert",
-  ],
-  Array [
-    "stats-dev.json",
-  ],
-  Array [
-    "  info: Auto info for file",
-  ],
-  Array [
-    "  info: Info for file",
-  ],
-  Array [
-    "  warn: Warn for file",
-  ],
-  Array [
-    "  error: Error for file",
-  ],
-  Array [
-    "",
-  ],
-  Array [
-    "Errors: 1",
-  ],
-  Array [
-    "Warnings: 3",
-  ],
-  Array [
-    "Info: 5",
-  ],
-  Array [
-    "Done",
+    "8 problems (8 errors, 0 warnings)",
   ],
 ]
 `;

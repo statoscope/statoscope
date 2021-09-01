@@ -11,9 +11,10 @@ Object {
       "name": "Sergey Melyukov",
       "url": "https://twitter.com/smelukov",
     },
+    "description": "Statoscope extension for collecting compressed resource sizes",
     "homepage": "https://github.com/statoscope/statoscope/",
     "name": "@statoscope/stats-extension-compressed",
-    "version": "5.2.0",
+    "version": "5.7.0",
   },
   "payload": Object {
     "compilations": Array [
@@ -222,9 +223,10 @@ Object {
       "name": "Sergey Melyukov",
       "url": "https://twitter.com/smelukov",
     },
+    "description": "Statoscope extension for collecting compressed resource sizes",
     "homepage": "https://github.com/statoscope/statoscope/",
     "name": "@statoscope/stats-extension-compressed",
-    "version": "5.2.0",
+    "version": "5.7.0",
   },
   "payload": Object {
     "compilations": Array [

@@ -1,6 +1,8 @@
 import { StatoscopeWidget } from '../../types';
 // @ts-ignore
 import diffIndicatorStyle from '../views/diff-indicator.css';
+// @ts-ignore
+import style from '../views/helpers.css';
 import packagesTree from './default/packages-tree';
 import modulesTree, { moduleItemConfig } from './default/modules-tree';
 import chunksTree from './default/chunks-tree';
@@ -51,7 +53,7 @@ export default function (discovery: StatoscopeWidget): void {
               ],
               content: 'h1:#.name',
             },
-            'validation-errors:file',
+            'stats-scheme-validation-error:file',
             {
               view: 'block',
               content: [
@@ -178,6 +180,13 @@ export default function (discovery: StatoscopeWidget): void {
                   label: "Child compilations",
                   visible: $childCompilations
                 },
+                {
+                  $compilationItems: $statA.compilation.hash.validation_getItems();
+                  value: $compilationItems.size(),
+                  label: "Validation messages",
+                  visible: $compilationItems,
+                  href: pageLink("stats-validation", { hash: $statA.compilation.hash })
+                },
               ]
               `,
               content: {
@@ -271,6 +280,7 @@ export default function (discovery: StatoscopeWidget): void {
                               expanded: false,
                               limitLines: '= settingListItemsLimit()',
                               itemConfig: {
+                                className: style.root,
                                 content: [
                                   `module-item:{module, match: #.filter, inline: true}`,
                                   {

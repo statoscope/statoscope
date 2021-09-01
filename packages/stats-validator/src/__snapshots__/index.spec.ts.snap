@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`custom reporter 1`] = `
+Object {
+  "files": Object {
+    "input": "<pwd>/test/bundles/simple/stats-prod.json",
+    "reference": undefined,
+  },
+  "rules": Array [
+    Object {
+      "api": Object {
+        "getRuleDescriptor": [Function],
+        "getStorage": [Function],
+        "message": [Function],
+        "setRuleDescriptor": [Function],
+      },
+      "execParams": Object {
+        "mode": "error",
+      },
+      "name": "webpack/restricted-modules",
+    },
+    Object {
+      "api": Object {
+        "getRuleDescriptor": [Function],
+        "getStorage": [Function],
+        "message": [Function],
+        "setRuleDescriptor": [Function],
+      },
+      "execParams": Object {
+        "mode": "error",
+      },
+      "name": "webpack/restricted-packages",
+    },
+  ],
+}
+`;
+
+exports[`should work 1`] = `
+Object {
+  "files": Object {
+    "input": "<pwd>/test/bundles/simple/stats-prod.json",
+    "reference": undefined,
+  },
+  "rules": Array [
+    Object {
+      "api": Object {
+        "getRuleDescriptor": [Function],
+        "getStorage": [Function],
+        "message": [Function],
+        "setRuleDescriptor": [Function],
+      },
+      "execParams": Object {
+        "mode": "error",
+      },
+      "name": "webpack/restricted-modules",
+    },
+    Object {
+      "api": Object {
+        "getRuleDescriptor": [Function],
+        "getStorage": [Function],
+        "message": [Function],
+        "setRuleDescriptor": [Function],
+      },
+      "execParams": Object {
+        "mode": "error",
+      },
+      "name": "webpack/restricted-packages",
+    },
+  ],
+}
+`;
+
+exports[`silent 1`] = `
+Object {
+  "files": Object {
+    "input": "<pwd>/test/bundles/simple/stats-prod.json",
+    "reference": undefined,
+  },
+  "rules": Array [
+    Object {
+      "api": Object {
+        "getRuleDescriptor": [Function],
+        "getStorage": [Function],
+        "message": [Function],
+        "setRuleDescriptor": [Function],
+      },
+      "execParams": Object {
+        "mode": "error",
+      },
+      "name": "webpack/restricted-modules",
+    },
+    Object {
+      "api": Object {
+        "getRuleDescriptor": [Function],
+        "getStorage": [Function],
+        "message": [Function],
+        "setRuleDescriptor": [Function],
+      },
+      "execParams": Object {
+        "mode": "error",
+      },
+      "name": "webpack/restricted-packages",
+    },
+  ],
+}
+`;

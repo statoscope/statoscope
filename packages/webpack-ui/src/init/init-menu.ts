@@ -1,3 +1,4 @@
+import { ViewConfigData } from '@statoscope/types';
 import networkTypeList from '@statoscope/helpers/dist/network-type-list';
 // @ts-ignore
 import settingsStyles from '../settings-styles.css';
@@ -15,7 +16,7 @@ import settings, {
   SETTING_SHOW_COMPRESSED,
   SETTING_SHOW_COMPRESSED_DEFAULT,
 } from '../settings';
-import { StatoscopeWidget, ViewConfigData } from '../../types';
+import { StatoscopeWidget } from '../../types';
 
 export default (discovery: StatoscopeWidget): void => {
   hideUseless(discovery);
@@ -27,7 +28,8 @@ export default (discovery: StatoscopeWidget): void => {
 
 function hideUseless(discovery: StatoscopeWidget): void {
   discovery.nav.remove('index-page');
-  if (!document.cookie.includes('debug=true')) {
+
+  if (!document.cookie.includes('debug=')) {
     discovery.nav.remove('inspect');
   }
 }
@@ -193,7 +195,7 @@ function addSettings(discovery: StatoscopeWidget): void {
       data: unknown,
       { hide }: { hide(): void }
     ): void => {
-      const limit = settings.get(
+      const limit = settings.get<string>(
         SETTING_LIST_ITEMS_LIMIT,
         SETTING_LIST_ITEMS_LIMIT_DEFAULT
       );
@@ -239,7 +241,10 @@ function addSettings(discovery: StatoscopeWidget): void {
       data: unknown,
       { hide }: { hide(): void }
     ): void => {
-      const limit = settings.get(SETTING_NETWORK_SPEED, SETTING_NETWORK_SPEED_DEFAULT);
+      const limit = settings.get<typeof networkTypeList[number]['name']>(
+        SETTING_NETWORK_SPEED,
+        SETTING_NETWORK_SPEED_DEFAULT
+      );
 
       render();
 
@@ -261,7 +266,7 @@ function addSettings(discovery: StatoscopeWidget): void {
               value: 'settingNetworkType()',
               text: `getNetworkTypeInfo().getNetworkTypeName()`,
               data: networkTypeList.map((item) => item.name),
-              onChange: (value: string): void => {
+              onChange: (value: typeof networkTypeList[number]['name']): void => {
                 limit.set(value);
                 hide();
               },

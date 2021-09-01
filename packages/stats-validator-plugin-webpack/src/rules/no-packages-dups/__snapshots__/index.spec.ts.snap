@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`exclude no exclude 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "content": "- node_modules/bar  1.0.0
+- node_modules/foo/node_modules/bar  2.0.0",
+        "type": "text",
+      },
+      Object {
+        "content": "- node_modules/bar  1.0.0
+- node_modules/foo/node_modules/bar  2.0.0",
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "compilation": "718159f8e48dcecd92c9",
+            "package": "bar",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+              }
+              ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Package bar has 2 instances with 2 versions",
+    "related": Array [
+      Object {
+        "id": "bar",
+        "type": "package",
+      },
+      Object {
+        "id": "node_modules/bar",
+        "type": "package-instance",
+      },
+      Object {
+        "id": "node_modules/foo/node_modules/bar",
+        "type": "package-instance",
+      },
+    ],
+  },
+]
+`;
+
+exports[`exclude object 1`] = `Array []`;
+
+exports[`exclude regexp 1`] = `Array []`;
+
+exports[`exclude string 1`] = `Array []`;
+
+exports[`should work 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "content": "- node_modules/bar  1.0.0
+- node_modules/foo/node_modules/bar  2.0.0",
+        "type": "text",
+      },
+      Object {
+        "content": "- node_modules/bar  1.0.0
+- node_modules/foo/node_modules/bar  2.0.0",
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "compilation": "718159f8e48dcecd92c9",
+            "package": "bar",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+              }
+              ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Package bar has 2 instances with 2 versions",
+    "related": Array [
+      Object {
+        "id": "bar",
+        "type": "package",
+      },
+      Object {
+        "id": "node_modules/bar",
+        "type": "package-instance",
+      },
+      Object {
+        "id": "node_modules/foo/node_modules/bar",
+        "type": "package-instance",
+      },
+    ],
+  },
+]
+`;

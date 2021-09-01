@@ -1,7 +1,7 @@
 {
   "name": "statoscope",
   "private": true,
-  "description": "A tool for analyzing the stats of the bundles",
+  "description": "Toolkit for analyzing the stats of the bundles",
   "license": "MIT",
   "scripts": {
     "test:ci": "npm run test -- --ci --coverage",
@@ -12,8 +12,9 @@
     "lint": "npm run lint:eslint && npm run lint:custom",
     "lint:custom": "lerna run lint:custom",
     "lint:eslint": "eslint . --ext .js,.ts --cache",
-    "lint:eslint:fix": "npm run lint:script -- --fix",
+    "lint:eslint:fix": "npm run lint:eslint -- --fix",
     "build": "lerna run build",
+    "build:versions": "lerna run buildVersionTS && npm run lint:eslint:fix",
     "prepublishOnly": "npm run build && npm run lint && npm run test"
   },
   "repository": "https://github.com/statoscope/statoscope",
@@ -30,9 +31,6 @@
     ]
   },
   "homepage": "https://github.com/statoscope/statoscope",
-  "dependencies": {
-    "@statoscope/cli": "^5.3.0-alpha.1"
-  },
   "devDependencies": {
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.4",

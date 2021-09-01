@@ -1,7 +1,7 @@
 import { NormalizedModule } from '@statoscope/webpack-model/dist/normalize';
 import { StatoscopeWidget } from '../../types';
 // @ts-ignore
-import style from './badge-margin-fix.css';
+import style from './helpers.css';
 
 export default function (discovery: StatoscopeWidget): void {
   discovery.view.define(
@@ -67,21 +67,21 @@ export default function (discovery: StatoscopeWidget): void {
           },
           {
             view: 'badge',
-            when: 'not compact and module.optimizationBailout',
-            data: `{
-            text: module.optimizationBailout.size().pluralWithValue(['deopt', 'deopts']),
-            color: 0.colorFromH(),
-            hint: module.optimizationBailout
-          }`,
-          },
-          {
-            view: 'badge',
             when: `not compact and module.moduleType~=/^asset\\/?/`,
             data: `{
             text: 'asset module',
             color: 40.colorFromH(),
             hint: module.moduleType
           }`,
+          },
+          {
+            when: `not compact and (hash or #.params.hash).validation_getItems('module', module.name)`,
+            view: 'validation-messages-badge',
+            data: `{
+              hash: hash or #.params.hash,
+              type: 'module',
+              id: module.name,
+            }`,
           },
         ],
         data,

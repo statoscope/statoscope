@@ -1,4 +1,4 @@
-import { ViewConfigData } from '../../../types';
+import { ViewConfigData } from '@statoscope/types';
 // @ts-ignore
 import styles from './helpers.css';
 
@@ -21,6 +21,7 @@ export function statsSelect(
 
 export function diffBadges(): ViewConfigData {
   return {
+    when: 'diff',
     view: 'inline-list',
     className: [styles['badge-container']],
     data: 'diff',

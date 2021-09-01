@@ -3,7 +3,11 @@ import { API as ExtensionCompressedAPI } from '@statoscope/stats-extension-compr
 import type { Size } from '@statoscope/stats-extension-compressed/dist/generator';
 import { API as ExtensionPackageInfoAPI } from '@statoscope/stats-extension-package-info/dist/api';
 import type { Instance } from '@statoscope/stats-extension-package-info/dist/generator';
+import { API as ExtensionValidationResultAPI } from '@statoscope/stats-extension-stats-validation-result/dist/api';
 import Graph, { PathSolution } from '@statoscope/helpers/dist/graph';
+import type { Item } from '@statoscope/stats-extension-stats-validation-result/dist/generator';
+import { RelatedItem } from '@statoscope/types/types/validation/test-entry';
+import { RuleDescriptor } from '@statoscope/types/types/validation/api';
 import { Webpack } from '../webpack';
 import {
   moduleNameResource,
@@ -14,6 +18,7 @@ import {
 import {
   HandledCompilation,
   ModuleGraphNodeData,
+  NodeModuleInstance,
   NormalizedAsset,
   NormalizedChunk,
   NormalizedCompilation,
@@ -22,15 +27,27 @@ import {
   NormalizedModule,
   NormalizedPackage,
 } from './normalize';
-import modulesToFoamTree from './modules-to-foam-tree';
-import { Node as FoamTreeNode } from './modules-to-foam-tree';
+import modulesToFoamTree, { Node as FoamTreeNode } from './modules-to-foam-tree';
 import ChunkID = Webpack.ChunkID;
 
 export type ResolvedStats = { file: NormalizedFile; compilation: NormalizedCompilation };
 
+export type ResolvedRelatedItem =
+  | { type: 'module'; item: NormalizedModule | null }
+  | { type: 'chunk'; item: NormalizedChunk | null }
+  | { type: 'resource'; item: NormalizedAsset | null }
+  | { type: 'entry'; item: NormalizedEntrypointItem | null }
+  | { type: 'compilation'; item: NormalizedCompilation | null }
+  | { type: 'package'; item: NormalizedPackage | null }
+  | { type: 'package-instance'; item: NodeModuleInstance | null };
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
 export default function (compilations: HandledCompilation[]) {
   const resolveCompilation = makeEntityResolver(compilations, (item) => item?.data?.hash);
+  const resolveFile = makeEntityResolver(
+    compilations.map((c) => c.file),
+    (item) => item.name
+  );
 
   return {
     moduleSize(module: NormalizedModule): number {
@@ -44,15 +61,19 @@ export default function (compilations: HandledCompilation[]) {
     },
     getTotalFilesSize: (
       asset: NormalizedAsset,
-      compressed?: boolean,
-      hash?: string
+      hash?: string,
+      compressed?: boolean
     ): number => {
+      const files: Webpack.File[] = asset.files.length
+        ? asset.files
+        : [{ name: asset.name, size: asset.size }];
+
       if (!compressed) {
-        return asset.files.reduce((sum, file) => sum + file.size, 0);
+        return files.reduce((sum, file) => sum + file.size, 0);
       }
 
       if (!hash) {
-        throw new Error('[getTotalFilesSize-helper]: hash-parameter is required');
+        throw new Error('[getTotalFilesSize]: hash-parameter is required');
       }
 
       const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
@@ -61,7 +82,7 @@ export default function (compilations: HandledCompilation[]) {
 
       const resolverSize = ext?.api as ExtensionCompressedAPI | undefined;
 
-      return asset.files
+      return files
         .map((f) => resolverSize?.(hash, f.name) ?? null)
         .reduce((sum, file) => sum + (file?.size ?? 0), 0);
     },
@@ -77,6 +98,21 @@ export default function (compilations: HandledCompilation[]) {
     resolvePackage(id: string, compilationHash: string): NormalizedPackage | null {
       return resolveCompilation(compilationHash)?.resolvers.resolvePackage(id) || null;
     },
+    resolveEntrypoint(
+      id: string,
+      compilationHash: string
+    ): NormalizedEntrypointItem | null {
+      return resolveCompilation(compilationHash)?.resolvers.resolveEntrypoint(id) || null;
+    },
+    resolveFile(id: string): NormalizedFile | null {
+      return resolveFile(id);
+    },
+    resolveInputFile(): NormalizedFile | null {
+      return this.resolveFile('input.json');
+    },
+    resolveReferenceFile(): NormalizedFile | null {
+      return this.resolveFile('reference.json');
+    },
     resolveStat(id: string): ResolvedStats | null {
       const resolved = resolveCompilation(id);
       return (resolved && { file: resolved?.file, compilation: resolved?.data }) || null;
@@ -88,13 +124,13 @@ export default function (compilations: HandledCompilation[]) {
     resolveExtension(id: string, hash: string): unknown {
       return resolveCompilation(hash)?.resolvers.resolveExtension(id);
     },
-    getModuleSize(module: NormalizedModule, compressed?: boolean, hash?: string): Size {
+    getModuleSize(module: NormalizedModule, hash?: string, compressed?: boolean): Size {
       if (!compressed) {
         return { size: module.size };
       }
 
       if (!hash) {
-        throw new Error('[getModuleSize-helper]: hash-parameter is required');
+        throw new Error('[getModuleSize]: hash-parameter is required');
       }
 
       const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
@@ -109,13 +145,13 @@ export default function (compilations: HandledCompilation[]) {
         }
       );
     },
-    getAssetSize(asset: NormalizedAsset, compressed?: boolean, hash?: string): Size {
+    getAssetSize(asset: NormalizedAsset, hash?: string, compressed?: boolean): Size {
       if (!compressed) {
         return { size: asset.size };
       }
 
       if (!hash) {
-        throw new Error('[getAssetSize-helper]: hash-parameter is required');
+        throw new Error('[getAssetSize]: hash-parameter is required');
       }
 
       const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
@@ -135,7 +171,7 @@ export default function (compilations: HandledCompilation[]) {
       hash: string
     ): Instance | null {
       if (!hash) {
-        throw new Error('[getPackageInstanceInfo-helper]: hash-parameter is required');
+        throw new Error('[getPackageInstanceInfo]: hash-parameter is required');
       }
 
       const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
@@ -237,20 +273,132 @@ export default function (compilations: HandledCompilation[]) {
     },
     modulesToFoamTree(
       modules: NormalizedModule[],
-      compressed?: boolean,
-      hash?: string
+      hash?: string,
+      compressed?: boolean
     ): FoamTreeNode {
       if (compressed && !hash) {
-        throw new Error('[modulesToFoamTree-helper]: hash-parameter is required');
+        throw new Error('[modulesToFoamTree]: hash-parameter is required');
       }
 
       return modulesToFoamTree(modules, (module: NormalizedModule): Size => {
         if (compressed && hash) {
-          return this.getModuleSize(module, compressed, hash);
+          return this.getModuleSize(module, hash, compressed);
         }
 
         return { size: module.size };
       });
+    },
+
+    validation_getItems(
+      hash?: string,
+      relatedType?: RelatedItem['type'] | null,
+      relatedId?: string | number
+    ): Item[] {
+      if (!hash) {
+        throw new Error('[validation_getItems]: hash-parameter is required');
+      }
+
+      const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
+        '@statoscope/stats-extension-stats-validation-result'
+      );
+      const api = ext?.api as ExtensionValidationResultAPI | undefined;
+
+      return [
+        ...(api?.getItems(null, relatedType, relatedId) ?? []),
+        ...(api?.getItems(hash, relatedType, relatedId) ?? []),
+      ];
+    },
+    validation_getItem(id?: number, hash?: string): Item | null {
+      if (!hash) {
+        throw new Error('[validation_getItem]: hash-parameter is required');
+      }
+
+      if (id == null) {
+        throw new Error('[validation_getItem]: id-parameter is required');
+      }
+
+      const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
+        '@statoscope/stats-extension-stats-validation-result'
+      );
+      const api = ext?.api as ExtensionValidationResultAPI | undefined;
+
+      return api?.getItemById(id) ?? null;
+    },
+
+    validation_resolveRelatedItem(
+      item?: RelatedItem,
+      hash?: string
+    ): ResolvedRelatedItem {
+      if (!item) {
+        throw new Error('[validation_resolveRelatedItem]: item-parameter is required');
+      }
+      if (!hash) {
+        throw new Error('[validation_resolveRelatedItem]: hash-parameter is required');
+      }
+      const compilation = resolveCompilation(hash);
+
+      if (!compilation) {
+        throw new Error("[validation_resolveRelatedItem]: can't resolve compilation");
+      }
+
+      if (item.type === 'package') {
+        return { type: item.type, item: compilation.resolvers.resolvePackage(item.id) };
+      }
+
+      if (item.type === 'package-instance') {
+        const instance = nodeModule(item.id)!;
+        const thePackage = compilation.resolvers.resolvePackage(instance.name);
+        const theInstance =
+          thePackage?.instances.find((item) => item.path === instance.path) ?? null;
+
+        return { type: item.type, item: theInstance };
+      }
+
+      if (item.type === 'module') {
+        return { type: item.type, item: compilation.resolvers.resolveModule(item.id) };
+      }
+
+      if (item.type === 'entry') {
+        return {
+          type: item.type,
+          item: compilation.resolvers.resolveEntrypoint(item.id),
+        };
+      }
+
+      if (item.type === 'chunk') {
+        return {
+          type: item.type,
+          item: compilation.resolvers.resolveChunk(item.id),
+        };
+      }
+
+      if (item.type === 'compilation') {
+        return {
+          type: item.type,
+          item: resolveCompilation(item.id)?.data ?? null,
+        };
+      }
+
+      return {
+        type: item.type,
+        item: compilation.resolvers.resolveAsset(item.id),
+      };
+    },
+    validation_resolveRule(name?: string, hash?: string): RuleDescriptor | null {
+      if (!hash) {
+        throw new Error('[validation_resolveRule]: hash-parameter is required');
+      }
+
+      if (name == null) {
+        throw new Error('[validation_resolveRule]: name-parameter is required');
+      }
+
+      const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
+        '@statoscope/stats-extension-stats-validation-result'
+      );
+      const api = ext?.api as ExtensionValidationResultAPI | undefined;
+
+      return api?.getRule(name) ?? null;
     },
   };
 }

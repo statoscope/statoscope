@@ -6,8 +6,9 @@ import {
   NormalizedFile,
   RawStatsFileDescriptor,
 } from '@statoscope/webpack-model/dist/normalize';
+import { WidgetOptions } from '@statoscope/types';
 import settings from '../settings';
-import { Context, InitArg, StatoscopeWidget, WidgetOptions } from '../../types';
+import { Context, InitArg, StatoscopeWidget } from '../../types';
 import initMenu from './init-menu';
 
 export default ({

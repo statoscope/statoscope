@@ -1,4 +1,5 @@
-$file: .pick();
+$input: .pick(=>name='input.json');
+$reference: .pick(=>name='reference.json');
 
 [
   {
@@ -36,32 +37,50 @@ $file: .pick();
 
   {
     message: "Auto info for file",
-    filename: $file.name
+    filename: $input.name
   },
   {
     message: "Info for file",
     type: 'info',
-    filename: $file.name
+    filename: $input.name
   },
   {
     message: "Warn for file",
     type: 'warn',
-    filename: $file.name
+    filename: $input.name
   },
   {
     message: "Error for file",
     type: 'error',
-    filename: $file.name
+    filename: $input.name
   },
 
   // test possibility to use jora-helpers
   {
-    $compilation: $file.compilations.pick();
+    $compilation: $input.compilations.pick();
     $versions: $compilation.nodeModules.(
       $name: name;
       instances.($name.getPackageInstanceInfo(path, $compilation.hash))
     ).info.version;
     assert: $versions.[$~=/\d\.\d\.\d/].size() > 0,
-    message: "Something wrong (should not trigger!)" + $versions.stringify()
+    message: "Something wrong (should not trigger!)" + $versions.stringify(),
+    filename: $input.name,
+    compilation: $compilation.name or $compilation.hash
+  },
+
+  // test compilation-field (always trigger)
+  {
+    $compilation: $input.compilations.pick();
+    assert: 1 > 1,
+    message: "Something wrong",
+    filename: $input.name,
+    compilation: $compilation.name or $compilation.hash
+  },
+
+  // test reference
+  {
+    assert: not $reference,
+    message: "Reference exists",
+    filename: $reference.name
   }
 ]

@@ -46,6 +46,34 @@ export default function (discovery: StatoscopeWidget): void {
                       ...packagesTree(),
                     },
                     {
+                      view: 'section',
+                      header: 'text:"Messages"',
+                      content: {
+                        view: 'tabs',
+                        name: 'messagesTabs',
+                        tabs: [{ value: 'validation', text: 'Validation' }],
+                        content: {
+                          view: 'content-filter',
+                          content: {
+                            view: 'switch',
+                            content: [
+                              {
+                                when: '#.messagesTabs="validation"',
+                                content: {
+                                  view: 'validation-messages',
+                                  data: `
+                                  $messages: #.params.hash.validation_getItems('package', package.name);
+                                  $related: {type: 'package', id: package.name};
+                                  { $messages, $related, showRelated: false }
+                                  `,
+                                },
+                              },
+                            ],
+                          },
+                        },
+                      },
+                    },
+                    {
                       view: 'foam-tree',
                       data: `
                       $packageModules:package.instances.modules;
@@ -64,6 +92,34 @@ export default function (discovery: StatoscopeWidget): void {
                     },
                     {
                       ...packageInstanceTree(),
+                    },
+                    {
+                      view: 'section',
+                      header: 'text:"Messages"',
+                      content: {
+                        view: 'tabs',
+                        name: 'messagesTabs',
+                        tabs: [{ value: 'validation', text: 'Validation' }],
+                        content: {
+                          view: 'content-filter',
+                          content: {
+                            view: 'switch',
+                            content: [
+                              {
+                                when: '#.messagesTabs="validation"',
+                                content: {
+                                  view: 'validation-messages',
+                                  data: `
+                                  $messages: #.params.hash.validation_getItems('package-instance', instance.path);
+                                  $related: {type: 'package-instance', id: instance.path};
+                                  { $messages, $related, showRelated: false }
+                                  `,
+                                },
+                              },
+                            ],
+                          },
+                        },
+                      },
                     },
                     {
                       view: 'foam-tree',

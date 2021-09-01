@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/stats-extension-package-info",
-  "version": "5.6.1",
+  "version": "5.7.0-alpha.0",
   "description": "Statoscope extension for collecting package info (e.g. available versions)",
   "main": "./dist/index.js",
   "scripts": {
@@ -16,16 +16,13 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "dist/*"
-  ],
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "@statoscope/helpers": "^5.6.1"
+    "@statoscope/helpers": "5.7.0-alpha.0"
   },
   "devDependencies": {
-    "@statoscope/extensions": "^5.5.1",
-    "@statoscope/stats": "^5.3.0"
+    "@statoscope/extensions": "5.7.0-alpha.0",
+    "@statoscope/stats": "5.7.0-alpha.0"
   }
 }

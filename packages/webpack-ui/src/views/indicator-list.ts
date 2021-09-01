@@ -11,7 +11,8 @@ export default function indicatorList(data: unknown): Record<string, unknown> {
       data: `
       .({
         label: title,
-        value: query.query(#.params.hash.resolveStat(), #)
+        value: query.query(#.params.hash.resolveStat(), #),
+        href: href
       })`,
     },
   };

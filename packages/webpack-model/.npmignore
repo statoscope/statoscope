@@ -1,2 +1,5 @@
-**/dist/**/*.spec.{js,d.ts}
-**/dist/**/*.js.map
+*
+!bin
+!dist/**/*.{js,d.ts}
+!webpack.d.ts
+**/*.spec.{js,d.ts}

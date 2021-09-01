@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/report-writer",
-  "version": "5.5.1",
+  "version": "5.7.0-alpha.0",
   "description": "Statoscope report writer",
   "main": "./dist/index.js",
   "scripts": {
@@ -15,9 +15,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "dist/*"
-  ],
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {

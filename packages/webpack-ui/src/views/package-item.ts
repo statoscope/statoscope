@@ -1,7 +1,7 @@
-import { NormalizedPackage } from '../../../webpack-model/dist/normalize';
+import { NormalizedPackage } from '@statoscope/webpack-model/dist/normalize';
 import { StatoscopeWidget } from '../../types';
 // @ts-ignore
-import style from './badge-margin-fix.css';
+import style from './helpers.css';
 
 export default function (discovery: StatoscopeWidget): void {
   discovery.view.define(
@@ -54,6 +54,15 @@ export default function (discovery: StatoscopeWidget): void {
               postfix: $size.plural(['version', 'versions'])
             }
             `,
+          },
+          {
+            when: `not compact`,
+            view: 'validation-messages-badge',
+            data: `{
+              hash: hash or #.params.hash,
+              type: 'package',
+              id: package.name,
+            }`,
           },
         ],
         data,

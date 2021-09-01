@@ -1,0 +1,26 @@
+{
+  "name": "@statoscope/stats-validator",
+  "version": "5.7.0-alpha.0",
+  "description": "Statoscope stats validator",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "../../node_modules/.bin/tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": "https://github.com/statoscope/statoscope.git",
+  "author": {
+    "name": "Sergey Melyukov",
+    "url": "https://twitter.com/smelukov"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/statoscope/statoscope/",
+  "dependencies": {
+    "@discoveryjs/json-ext": "^0.5.3",
+    "@statoscope/config": "5.7.0-alpha.0",
+    "@statoscope/stats": "5.7.0-alpha.0",
+    "@statoscope/types": "5.7.0-alpha.0"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@statoscope/config",
+  "version": "5.7.0-alpha.0",
+  "description": "Statoscope config utils",
+  "main": "./dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "../../node_modules/.bin/tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": "https://github.com/statoscope/statoscope.git",
+  "author": {
+    "name": "Sergey Melyukov",
+    "url": "https://twitter.com/smelukov"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/statoscope/statoscope/",
+  "dependencies": {
+    "@statoscope/types": "5.7.0-alpha.0"
+  }
+}

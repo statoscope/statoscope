@@ -19,7 +19,7 @@ yargs(hideBin(process.argv)).command(
   },
   (argv) => {
     const versionPath = path.resolve(argv.output || './src/version.ts');
-    const fields = ['name', 'version', ...(argv.field || [])];
+    const fields = ['name', 'version', 'description', ...(argv.field || [])];
 
     const content = [];
 

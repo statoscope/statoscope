@@ -1,4 +1,4 @@
-import { ViewConfigData } from '../../../types';
+import { ViewConfigData } from '@statoscope/types';
 
 export default function modulesDupsTab(): ViewConfigData[] {
   return [

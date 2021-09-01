@@ -1,7 +1,7 @@
 import { StatoscopeWidget } from '../../types';
 
 export default function (discovery: StatoscopeWidget): void {
-  discovery.view.define('validation-errors', (el, config, data, context) => {
+  discovery.view.define('stats-scheme-validation-error', (el, config, data, context) => {
     discovery.view.render(
       el,
       [

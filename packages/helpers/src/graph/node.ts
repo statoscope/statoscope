@@ -18,7 +18,7 @@ export default class Node<TData> {
     this.graph.addChild(node, this);
   }
 
-  findPathsTo(node: Node<TData>, max = Infinity): PathSolution<TData> | null {
+  findPathsTo(node: Node<TData>, max = Infinity): PathSolution<TData> {
     return this.graph.findPaths(this, node, max);
   }
 }

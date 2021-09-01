@@ -1,0 +1,33 @@
+{
+  "name": "@statoscope/stats-validator-plugin-webpack",
+  "version": "5.7.0-alpha.0",
+  "description": "Plugin for @statoscope/stats-validator to validate webpack stats",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "../../node_modules/.bin/tsc",
+    "prepublishOnly": "npm run build",
+    "buildVersionTS": "node ../../scripts/extract-version.js --field author --field homepage"
+  },
+  "repository": "https://github.com/statoscope/statoscope.git",
+  "author": {
+    "name": "Sergey Melyukov",
+    "url": "https://twitter.com/smelukov"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/statoscope/statoscope/",
+  "dependencies": {
+    "@statoscope/helpers": "5.7.0-alpha.0",
+    "@statoscope/stats-extension-compressed": "5.7.0-alpha.0",
+    "@statoscope/stats-validator": "5.7.0-alpha.0",
+    "@statoscope/types": "5.7.0-alpha.0",
+    "@statoscope/webpack-model": "5.7.0-alpha.0",
+    "chalk": "^4.1.1",
+    "semver": "^7.3.5"
+  },
+  "devDependencies": {
+    "@types/semver": "^7.3.6"
+  }
+}

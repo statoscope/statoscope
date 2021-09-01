@@ -1,0 +1,918 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`exclude entry object 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 9.014731959292764,
+            "entry": "one",
+            "initialDownloadTime": 9.014731959292764,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"one\\": Download time of assets is 9 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+  },
+]
+`;
+
+exports[`exclude entry regexp 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 9.014731959292764,
+            "entry": "one",
+            "initialDownloadTime": 9.014731959292764,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"one\\": Download time of assets is 9 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+  },
+]
+`;
+
+exports[`exclude entry string 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 9.014731959292764,
+            "entry": "one",
+            "initialDownloadTime": 9.014731959292764,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"one\\": Download time of assets is 9 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+  },
+]
+`;
+
+exports[`exclude no exclude 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 9.014731959292764,
+            "entry": "one",
+            "initialDownloadTime": 9.014731959292764,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"one\\": Download time of assets is 9 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 2.71044279399671,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 175.4559968647204,
+            "entry": "two",
+            "initialDownloadTime": 172.74555407072367,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"two\\": Download time of assets is 175 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+  },
+]
+`;
+
+exports[`maxAsyncDownloadTime global 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 2.71044279399671,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 175.4559968647204,
+            "entry": "two",
+            "initialDownloadTime": 172.74555407072367,
+            "rule": Object {
+              "maxAsyncDownloadTime": 1,
+              "maxDownloadTime": null,
+              "maxInitialDownloadTime": null,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"two\\": Download time of async assets is 3 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+  },
+]
+`;
+
+exports[`maxAsyncDownloadTime not match - global 1`] = `Array []`;
+
+exports[`maxAsyncDownloadTime not match - override global 1`] = `Array []`;
+
+exports[`maxAsyncDownloadTime override global 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 2.71044279399671,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 175.4559968647204,
+            "entry": "two",
+            "initialDownloadTime": 172.74555407072367,
+            "rule": Object {
+              "maxAsyncDownloadTime": 1,
+              "maxDownloadTime": null,
+              "maxInitialDownloadTime": null,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"two\\": Download time of async assets is 3 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+  },
+]
+`;
+
+exports[`maxAsyncDownloadTime with useCompressedSize = false 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 2.8509842722039473,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 248.85880319695724,
+            "entry": "two",
+            "initialDownloadTime": 246.00781892475328,
+            "rule": Object {
+              "maxAsyncDownloadTime": 1,
+              "maxDownloadTime": null,
+              "maxInitialDownloadTime": null,
+            },
+            "useCompressedSize": false,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"two\\": Download time of async assets is 3 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+  },
+]
+`;
+
+exports[`maxDownloadTime global 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 9.014731959292764,
+            "entry": "one",
+            "initialDownloadTime": 9.014731959292764,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"one\\": Download time of assets is 9 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 2.71044279399671,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 175.4559968647204,
+            "entry": "two",
+            "initialDownloadTime": 172.74555407072367,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"two\\": Download time of assets is 175 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+  },
+]
+`;
+
+exports[`maxDownloadTime not match - global 1`] = `Array []`;
+
+exports[`maxDownloadTime not match - override global 1`] = `Array []`;
+
+exports[`maxDownloadTime override global 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 9.014731959292764,
+            "entry": "one",
+            "initialDownloadTime": 9.014731959292764,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"one\\": Download time of assets is 9 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 2.71044279399671,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 175.4559968647204,
+            "entry": "two",
+            "initialDownloadTime": 172.74555407072367,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"two\\": Download time of assets is 175 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+  },
+]
+`;
+
+exports[`maxDownloadTime with useCompressedSize = false 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 16.041805869654606,
+            "entry": "one",
+            "initialDownloadTime": 16.041805869654606,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
+            },
+            "useCompressedSize": false,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"one\\": Download time of assets is 16 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 2.8509842722039473,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 248.85880319695724,
+            "entry": "two",
+            "initialDownloadTime": 246.00781892475328,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": 1,
+              "maxInitialDownloadTime": null,
+            },
+            "useCompressedSize": false,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"two\\": Download time of assets is 249 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+  },
+]
+`;
+
+exports[`maxInitialDownloadTime global 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 9.014731959292764,
+            "entry": "one",
+            "initialDownloadTime": 9.014731959292764,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": null,
+              "maxInitialDownloadTime": 1,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"one\\": Download time of initial assets is 9 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 2.71044279399671,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 175.4559968647204,
+            "entry": "two",
+            "initialDownloadTime": 172.74555407072367,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": null,
+              "maxInitialDownloadTime": 1,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"two\\": Download time of initial assets is 173 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+  },
+]
+`;
+
+exports[`maxInitialDownloadTime not match - global 1`] = `Array []`;
+
+exports[`maxInitialDownloadTime not match - override global 1`] = `Array []`;
+
+exports[`maxInitialDownloadTime override global 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 9.014731959292764,
+            "entry": "one",
+            "initialDownloadTime": 9.014731959292764,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": null,
+              "maxInitialDownloadTime": 1,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"one\\": Download time of initial assets is 9 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 2.71044279399671,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 175.4559968647204,
+            "entry": "two",
+            "initialDownloadTime": 172.74555407072367,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": null,
+              "maxInitialDownloadTime": 1,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"two\\": Download time of initial assets is 173 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+  },
+]
+`;
+
+exports[`maxInitialDownloadTime with useCompressedSize = false 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 0,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 16.041805869654606,
+            "entry": "one",
+            "initialDownloadTime": 16.041805869654606,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": null,
+              "maxInitialDownloadTime": 1,
+            },
+            "useCompressedSize": false,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"one\\": Download time of initial assets is 16 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+  },
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncDownloadTime": 2.8509842722039473,
+            "compilation": "718159f8e48dcecd92c9",
+            "downloadTime": 248.85880319695724,
+            "entry": "two",
+            "initialDownloadTime": 246.00781892475328,
+            "rule": Object {
+              "maxAsyncDownloadTime": null,
+              "maxDownloadTime": null,
+              "maxInitialDownloadTime": 1,
+            },
+            "useCompressedSize": false,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              downloadTime: #.downloadTime,
+              initialDownloadTime: #.initialDownloadTime,
+              asyncDownloadTime: #.asyncDownloadTime,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"two\\": Download time of initial assets is 246 ms. It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+  },
+]
+`;

@@ -5,12 +5,12 @@ import Generator, {
   Format,
   InstanceInfo,
 } from '@statoscope/stats-extension-package-info/dist/generator';
-import { author, homepage, name, version } from './version';
+import { author, homepage, name, version, description } from './version';
 
 const pluginName = `${name}@${version}`;
 
 export default class WebpackCompressedExtension {
-  descriptor: ExtensionDescriptor = { name, version, author, homepage };
+  descriptor: ExtensionDescriptor = { name, version, author, homepage, description };
   generator = new Generator(this.descriptor);
 
   get(): Format {

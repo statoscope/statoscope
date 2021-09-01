@@ -1,201 +1,112 @@
-import fs from 'fs';
 import path from 'path';
 import { Argv } from 'yargs';
-// @ts-ignore
-import { parseChunked } from '@discoveryjs/json-ext';
-import { prepareWithJora } from '@statoscope/webpack-model';
-import { jora as joraHelpers } from '@statoscope/helpers';
-import {
-  NormalizedFile,
-  RawStatsFileDescriptor,
-} from '@statoscope/webpack-model/dist/normalize';
-
-export type TestEntryType = 'error' | 'warn' | 'info';
-export type TestEntry = {
-  type?: TestEntryType; // 'error' by default
-  assert?: boolean; // false by default
-  message: string;
-  filename?: string;
-};
-
-export type Data = {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  files: Object[];
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  compilations: Object[];
-  query: (query: string, data?: NormalizedFile[]) => unknown; // query-parameter is jora-syntax query
-};
-
-export type API = {
-  error(message: string, filename?: string): void;
-  warn(message: string, filename?: string): void;
-  info(message: string, filename?: string): void;
-};
-
-export type ValidatorFn = (data: Data, api: API) => Promise<string | void>;
-
-function makeQueryValidator(query: string): ValidatorFn {
-  function validate(type?: string, message?: string): void {
-    if (!(!type || type === 'error' || type === 'warn' || type === 'info')) {
-      throw new Error(`Unknown message type [${type}]`);
-    }
-
-    if (!message) {
-      throw new Error(`Message must be specified`);
-    }
-  }
-
-  function callAPI(api: API, { type, filename, message }: TestEntry): void {
-    validate(type, message);
-
-    if (typeof type === 'undefined' || type === 'error') {
-      api.error(message, filename);
-    } else if (type === 'warn') {
-      api.warn(message, filename);
-    } else if (type === 'info') {
-      api.info(message, filename);
-    } else {
-      console.log('Unknown message type:', type);
-      api.error(message, filename);
-    }
-  }
-
-  return async (data, api): Promise<void> => {
-    const result = data.query(query) as TestEntry[];
-
-    for (const item of result) {
-      let type: TestEntryType | undefined = item.type;
-
-      if (!item.assert) {
-        if (type === undefined && !Object.prototype.hasOwnProperty.call(item, 'assert')) {
-          type = 'info';
-        }
-
-        callAPI(api, { type, message: item.message, filename: item.filename });
-      }
-    }
-  };
-}
-
-function handleValidator(validator: string): ValidatorFn {
-  const validatorPath = path.resolve(validator);
-  const ext = path.extname(validatorPath);
-  let validatorFn: string | ValidatorFn;
-
-  if (ext === '.js') {
-    validatorFn = require(validatorPath);
-  } else {
-    validatorFn = fs.readFileSync(validatorPath, 'utf8');
-  }
-
-  if (typeof validatorFn === 'string') {
-    validatorFn = makeQueryValidator(validatorFn);
-  }
-
-  return validatorFn;
-}
+import Validator from '@statoscope/stats-validator';
+import { Config } from '@statoscope/types/types/config';
+import ConsoleReporter from '@statoscope/stats-validator-reporter-console';
+import { Reporter } from '@statoscope/types/types/validation/reporter';
+import { makeReporterInstance } from '@statoscope/config/dist/make-reporter-instance';
+import legacyWebpackValidator from './legacyWebpackValidator';
 
 export default function (yargs: Argv): Argv {
   return yargs.command(
     'validate [validator] [input]',
-    `[BETA] Validate one or more JSON stats
+    `Validate or compare JSON stats
 Examples:
-Single stats: validate path/to/validator.js path/to/stats.json
-Multiple stats: generate path/to/validator.js --input path/to/stats-1.json path/to/stats-2.json`,
+Validate stats: validate --input path/to/stats.json
+Compare stats: validate --input path/to/branch.json --reference path/to/master.json
+Validate stats [DEPRECATED]: validate --validator path/to/validator.js --input path/to/stats.json
+Validate multiple stats [DEPRECATED]: validate --validator path/to/validator.js --input path/to/stats.json --input path/to/another/stats.json`,
     (yargs) => {
-      return yargs
-        .positional('validator', {
-          describe: 'path to validator script',
-          alias: 'v',
-          type: 'string',
-        })
-        .positional('input', {
-          describe: 'path to a stats.json',
-          alias: 'i',
-          type: 'string',
-        })
-        .option('warn-as-error', {
-          type: 'boolean',
-          describe: 'Treat warnings as errors',
-          alias: 'w',
-        })
-        .array('input')
-        .demandOption(['validator', 'input']);
+      return (
+        yargs
+          // todo remove in 6.0
+          .option('validator', {
+            describe: '[DEPRECATED] path to validator script',
+            alias: 'v',
+            type: 'string',
+          })
+          .option('config', {
+            describe: 'path to statoscope config',
+            alias: 'c',
+            type: 'string',
+            default: path.join(process.cwd(), 'statoscope.config.js'),
+          })
+          .option('input', {
+            describe: 'path to a stats.json',
+            alias: 'i',
+            type: 'string',
+          })
+          .option('reference', {
+            describe: 'path to a stats-file to compare with',
+            alias: 'r',
+            type: 'string',
+          })
+          .option('warn-as-error', {
+            describe: 'treat warn as error',
+            alias: 'w',
+            type: 'boolean',
+          })
+          .demandOption(['input'])
+          .array('input')
+      );
     },
     async (argv) => {
-      const files: RawStatsFileDescriptor[] = [];
-      for (const file of argv.input) {
-        const data = await parseChunked(fs.createReadStream(file));
-        files.push({
-          name: path.basename(file),
-          data,
+      if (argv.validator) {
+        await legacyWebpackValidator({
+          validator: argv.validator,
+          input: argv.input,
+          warnAsError: argv['warn-as-error'],
         });
+        return;
       }
-      const prepared = prepareWithJora(files, { helpers: joraHelpers() });
-      const validator = handleValidator(argv.validator);
-      const storage: { [key: string]: TestEntry[] } = {};
-      let hasErrors = false;
-      let errors = 0;
-      let warnings = 0;
-      let infos = 0;
-      const api: API = {
-        warn(message, filename = 'unknown') {
-          if (argv['warn-as-error']) {
-            hasErrors = true;
+
+      const configPath = path.resolve(argv.config);
+      let config: Config;
+
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        config = require(configPath) as Config;
+      } catch (e) {
+        console.log('[WARN]: No Statoscope-config found');
+        config = {};
+      }
+
+      const rootPath = path.dirname(configPath);
+      const validateConfig = config.validate ?? { rules: {} };
+
+      if (argv['warn-as-error']) {
+        validateConfig.warnAsError = true;
+      }
+
+      const validator = new Validator(validateConfig, rootPath);
+      const reporters: Reporter[] = [];
+
+      if (config?.silent !== true) {
+        if (config?.validate?.reporters) {
+          for (const item of config.validate.reporters) {
+            reporters.push(makeReporterInstance(item, rootPath));
           }
-
-          storage[filename] = storage[filename] || [];
-          storage[filename].push({ type: 'warn', filename, message });
-          warnings++;
-        },
-        error(message, filename = 'unknown') {
-          hasErrors = true;
-          storage[filename] = storage[filename] || [];
-          storage[filename].push({ type: 'error', filename, message });
-          errors++;
-        },
-        info(message, filename = 'unknown') {
-          storage[filename] = storage[filename] || [];
-          storage[filename].push({ type: 'info', filename, message });
-          infos++;
-        },
-      };
-
-      await validator(
-        {
-          files: prepared.files,
-          compilations: prepared.compilations,
-          query: prepared.query,
-        },
-        api
-      );
-
-      for (const [filename, items] of Object.entries(storage)) {
-        console.log(filename);
-
-        for (const item of items) {
-          console.log(`  ${item.type}: ${item.message}`);
+        } else {
+          reporters.push(new ConsoleReporter());
         }
       }
 
-      console.log('');
+      const result = await validator.validate(
+        path.resolve(argv.input[0]),
+        argv.reference ? path.resolve(argv.reference) : void 0
+      );
 
-      if (errors) {
-        console.log(`Errors: ${errors}`);
+      for (const rule of result.rules) {
+        const storage = rule.api.getStorage();
+
+        if (rule.execParams.mode === 'error' && storage.length) {
+          process.exitCode = 1;
+          break;
+        }
       }
 
-      if (warnings) {
-        console.log(`Warnings: ${warnings}`);
-      }
-      if (infos) {
-        console.log(`Info: ${infos}`);
-      }
-
-      console.log('Done');
-
-      if (hasErrors) {
-        // eslint-disable-next-line no-process-exit
-        process.exitCode = 1;
+      for (const reporter of reporters) {
+        await reporter.run(result);
       }
     }
   );

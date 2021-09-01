@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/webpack-plugin",
-  "version": "5.6.2",
+  "version": "5.7.0-alpha.0",
   "description": "Helpers for webpack part of Statoscope",
   "main": "./dist/index.js",
   "scripts": {
@@ -12,9 +12,6 @@
     "name": "Sergey Melyukov",
     "url": "https://twitter.com/smelukov"
   },
-  "files": [
-    "dist/*"
-  ],
   "publishConfig": {
     "access": "public"
   },
@@ -22,14 +19,17 @@
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
     "@discoveryjs/json-ext": "^0.5.3",
-    "@statoscope/report-writer": "^5.5.1",
-    "@statoscope/stats": "^5.3.0",
-    "@statoscope/stats-extension-compressed": "^5.6.1",
-    "@statoscope/webpack-stats-extension-compressed": "^5.6.1",
-    "@statoscope/webpack-stats-extension-package-info": "^5.6.1",
-    "@statoscope/webpack-ui": "^5.6.2",
+    "@statoscope/report-writer": "5.7.0-alpha.0",
+    "@statoscope/stats": "5.7.0-alpha.0",
+    "@statoscope/stats-extension-compressed": "5.7.0-alpha.0",
+    "@statoscope/webpack-stats-extension-compressed": "5.7.0-alpha.0",
+    "@statoscope/webpack-stats-extension-package-info": "5.7.0-alpha.0",
+    "@statoscope/webpack-ui": "5.7.0-alpha.0",
     "@types/node": "^12.20.15",
     "@types/webpack": "^5.28.0",
     "open": "^8.0.4"
+  },
+  "peerDependencies": {
+    "webpack": "^4.0.0 || ^5.0.0"
   }
 }

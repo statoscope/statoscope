@@ -1,6 +1,6 @@
 import { Extension, ExtensionDescriptor } from '@statoscope/stats/spec/extension';
 import makeResolver, { Resolver } from '@statoscope/helpers/dist/entity-resolver';
-import { name, version, author, homepage } from './version';
+import { name, version, author, homepage, description } from './version';
 
 export type Format = Extension<Payload>;
 export type InstanceInfo = { version: string };
@@ -25,6 +25,7 @@ export default class Generator {
     version,
     author,
     homepage,
+    description,
     adapter: this.adapter,
   };
   private payload: Payload = { compilations: [] };

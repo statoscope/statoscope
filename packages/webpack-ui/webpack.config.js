@@ -35,6 +35,7 @@ function makeConfig(config) {
           )]: false,
         },
       },
+      cache: { type: 'filesystem' },
       module: {
         rules: [
           {
@@ -50,8 +51,8 @@ function makeConfig(config) {
       },
       plugins: [
         new Statoscope({
-          saveTo: `analyze/statoscope-[name]-[hash].html`,
-          saveStatsTo: `analyze/stats-[name]-[hash].json`,
+          //saveTo: `analyze/statoscope-[name]-[hash].html`,
+          //saveStatsTo: `analyze/stats-[name]-[hash].json`,
           open: 'file',
         }),
         new webpack.EnvironmentPlugin({

@@ -18,6 +18,7 @@ export declare namespace Webpack {
     chunks: Array<Chunk | ChunkID>;
     reasons?: Reason[];
     modules?: InnerModule[];
+    optimizationBailout?: string[];
   };
 
   type InnerModule = Omit<Module, 'id' | 'modules'> & { id: null };

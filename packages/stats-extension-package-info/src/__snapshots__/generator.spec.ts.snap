@@ -11,9 +11,10 @@ Object {
       "name": "Sergey Melyukov",
       "url": "https://twitter.com/smelukov",
     },
+    "description": "Statoscope extension for collecting package info (e.g. available versions)",
     "homepage": "https://github.com/statoscope/statoscope/",
     "name": "@statoscope/stats-extension-package-info",
-    "version": "5.2.0",
+    "version": "5.7.0",
   },
   "payload": Object {
     "compilations": Array [

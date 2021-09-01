@@ -1,6 +1,7 @@
-// @ts-ignore
-import jora from 'jora';
-
+import {
+  prepareWithJora as prepareWithJoraOriginal,
+  Options,
+} from '@statoscope/helpers/dist/jora';
 import joraHelpers from './jora-helpers';
 import normalize, {
   NormalizedCompilation,
@@ -13,10 +14,6 @@ export * as module from './module';
 
 export { joraHelpers, normalize };
 
-export type Options = {
-  helpers?: Record<string, unknown>;
-};
-
 export type Prepared = {
   files: NormalizedFile[];
   compilations: NormalizedCompilation[];
@@ -28,17 +25,14 @@ export function prepareWithJora(
   options: Options = {}
 ): Prepared {
   const { files, compilations } = normalize(stats);
-  const j = jora.setup({
-    ...options.helpers,
-    ...joraHelpers(compilations),
+  const prepared = prepareWithJoraOriginal(files, {
+    helpers: { ...joraHelpers(compilations), ...options.helpers },
   });
-
-  const rootContext = {};
 
   return {
     files,
     compilations: compilations.map((c) => c.data),
-    query: (query: string, data: unknown, context: unknown = rootContext): unknown =>
-      j(query)(data || files, context),
+    query: (query: string, data?: unknown, context?: unknown): unknown =>
+      prepared.query(query, data, context),
   };
 }
