@@ -48,6 +48,18 @@ export default function (discovery: StatoscopeWidget): void {
                 },
               },
               {
+                when: 'type="compilation"',
+                data: 'id.resolveStat()',
+                content: {
+                  view: 'link',
+                  data: `{
+                    href: pageLink("default", {hash:compilation.hash}),
+                    text: statName(),
+                  }
+                  `,
+                },
+              },
+              {
                 when: 'type="package"',
                 data: 'id.resolvePackage(#.params.hash)',
                 content: {

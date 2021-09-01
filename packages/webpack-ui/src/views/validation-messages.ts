@@ -31,7 +31,9 @@ export default function (discovery: StatoscopeWidget): void {
         .({
           rule: {name: key},
           messages: value
-        })`,
+        })
+        .sort(<rule.name>)
+        `,
         view: 'block',
         content: [
           {

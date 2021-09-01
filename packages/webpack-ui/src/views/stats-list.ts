@@ -68,6 +68,10 @@ export default function (discovery: StatoscopeWidget): void {
                 when: 'isChild',
                 data: `{text: 'child'}`,
               },
+              {
+                view: 'validation-messages-badge',
+                data: `{ hash }`,
+              },
             ],
           },
         },
