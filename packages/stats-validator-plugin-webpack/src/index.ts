@@ -3,6 +3,8 @@ import { jora as joraHelpers } from '@statoscope/helpers';
 import { RawStatsFileDescriptor } from '@statoscope/webpack-model/dist/normalize';
 import { Rule } from '@statoscope/stats-validator/dist/rule';
 import { PluginFn } from '@statoscope/stats-validator/dist/plugin';
+import buildTimeLimits from './rules/build-time-limits';
+import diffBuildTimeLimits from './rules/diff-build-time-limits';
 import diffDeprecatedModules from './rules/diff-deprecated-modules';
 import diffDeprecatedPackages from './rules/diff-deprecated-packages';
 import diffEntryDownloadSizeLimits from './rules/diff-entry-download-size-limits';
@@ -22,6 +24,8 @@ const webpackPlugin: PluginFn<Prepared> = () => {
       return prepareWithJora(files, { helpers: joraHelpers() });
     },
     rules: {
+      'build-time-limits': buildTimeLimits,
+      'diff-build-time-limits': diffBuildTimeLimits,
       'diff-deprecated-modules': diffDeprecatedModules,
       'diff-deprecated-packages': diffDeprecatedPackages,
       'diff-entry-download-size-limits': diffEntryDownloadSizeLimits,

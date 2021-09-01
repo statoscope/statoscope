@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`maxBuildTimeDiff global 1`] = `
+Array [
+  Object {
+    "compilation": "718159f8e48dcecd92c9",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "diff": Object {
+              "absolute": 190,
+              "ok": false,
+              "percent": 47.50000000000001,
+            },
+            "rule": Object {
+              "number": 1,
+              "type": "absolute",
+            },
+            "slowestInputCompilation": "718159f8e48dcecd92c9",
+            "slowestReferenceCompilation": "da95abcf6bbf9b157ff6",
+          },
+        },
+        "query": "
+            {
+              slowestInputCompilation: #.slowestInputCompilation.resolveStat().compilation,
+              slowestReferenceCompilation: #.slowestReferenceCompilation.resolveStat().compilation,
+              rule: #.rule,
+              diff: #.diff,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"718159f\\": Build time diff is 590 ms (47.50%). It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "718159f8e48dcecd92c9",
+        "type": "compilation",
+      },
+    ],
+  },
+]
+`;
+
+exports[`maxBuildTimeDiff not match - global 1`] = `Array []`;

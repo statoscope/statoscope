@@ -12,7 +12,7 @@ Fails if the download time of a bundle has exceeded a limit.
     "error",
     {
       global: {
-        maxInitialDownloadTime: 2000, // 10 sec 
+        maxInitialDownloadTime: 2000, // 2 sec 
       },
       network: 'Fast',
     }
