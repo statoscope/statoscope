@@ -38,6 +38,8 @@ List of plugins (see more about plugins API below).
 
 The main goal of a plugin is providing some rules for validation.
 
+There is a builtin [plugin](/statoscope/statoscope/blob/master/packages/stats-validator-plugin-webpack/) to validate webpack stats
+
 **statoscope.config.js:**
 
 ```js
@@ -69,7 +71,7 @@ module.export = {
     plugins: [
       'statoscope-stats-validator-plugin-foo', // full package name
       '@statoscope/webpack', // short package name, resolves to @statoscope/stats-validator-plugin-webpack
-      'foo', // short package name, resolves to statoscope-stats-validator-plugin-foo
+      'webpack', // short package name, resolves to @statoscope/stats-validator-plugin-webpack or statoscope-stats-validator-plugin-webpack
       ['./my/plugin.js', 'my-plugin'], // relative path (relative config path)
       [require.resolve('./my/another/plugin.js'), 'my-another-plugin'] // absolute path
     ],
@@ -108,7 +110,7 @@ Execution modes:
 module.export = {
   validate: {
     plugins: [
-      '@statoscope/webpack', // short package name, resolves to @statoscope/stats-validator-plugin-webpack
+      '@statoscope/webpack',
     ],
     rules: {
       '@statoscope/webpack/restricted-packages': ['error', ['lodash']],
@@ -123,18 +125,23 @@ List of reporters (see more about reporters API below).
 
 Reporter handles validation results.
 
+There are two builtin reporters:
+
+- [console](/statoscope/statoscope/blob/master/packages/stats-validator-reporter-console/)
+- [stats-report](/statoscope/statoscope/blob/master/packages/stats-validator-reporter-stats-report/)
+
 **statoscope.config.js:**
 
 ```js
 module.export = {
   validate: {
     plugins: [
-      '@statoscope/webpack', // short package name, resolves to @statoscope/stats-validator-plugin-webpack
+      '@statoscope/webpack',
     ],
     reporters: [
       'statoscope-stats-validator-reporter-foo', // full package name
       '@statoscope/stats-report', // short package name, resolves to @statoscope/stats-validator-reporter-stats-report
-      'foo', // short package name, resolves to statoscope-stats-validator-report-foo
+      'stats-report', // short package name, resolves to @statoscope/stats-validator-reporter-stats-report or statoscope-stats-validator-reporter-stats-report
       ['./my/plugin.js', 'my-report'], // relative path (relative config path)
       [require.resolve('./my/another/report.js'), 'my-another-report'] // absolute path
     ],
@@ -229,6 +236,7 @@ There are several types of related items:
 - `package-instance`
 - `resource`
 - `entry`
+- `compilation`
 
 #### options.details?: Details
 

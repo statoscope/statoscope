@@ -1,21 +1,123 @@
 # Changelog
 
+## 5.7.0 (1 September 2021)
+
+### Features
+
+- `[stats-validator]` - add package for validating stats
+- `[stats-validator-plugin-webpack]` - add stats-validator plugin with webpack-rules
+- `[stats-validator-reporter-console]` - add stats-validator reporter to output results into console
+- `[stats-validator-reporter-stats-report]` -  add stats-validator reporter to output results into descovery-based UI
+- `[stats-extension-stats-validation-result]` -  add stats extension to pass validation messages info descovery-based UI
+- `[config]` - add package that contains config-helpers
+- `[webpack-ui]` - support new validation results
+  - support `stats-extension-stats-validation-result`
+  - show badge in the main page
+  - new page with validation results
+  - new page with details of a validation message
+  - mark entities (modules, chunks, packages, etc.) that have messages from the validator
+  - show validation messages of the entities pages (modules, chunks, packages, etc.)
+- `[webpack-ui]` - add some jora-helpers
+  - `resolveEntrypoint(id: string, hash: string): NormalizedEntrypointItem | null`
+    Resolve entrypoint by its name
+  - `resolveFile(id: string): NormalizedFile | null`
+    Resolve file by its name
+  - `resolveInputFile(): NormalizedFile | null`
+    Resolve file with `input.json`
+  - `resolveReferenceFile(): NormalizedFile | null`
+    Resolve file with `reference.json`
+  - `validation_getItems(hash?: string, relatedType?: RelatedItem['type'] | null, relatedId?: string | number): Item[]`
+    Get validation messages
+  - `validation_getItem(id?: number, hash?: string): Item | null`
+    Get validation message
+  - `validation_resolveRelatedItem(item?: RelatedItem, hash?: string): ResolvedRelatedItem`
+    Resolve an entity (module, chunk, etc.) that related with some message
+  - `validation_resolveRule(name?: string, hash?: string): RuleDescriptor | null`
+    Resolve detail info about a rule
+- `[cli]` - support new validators in `validate` command
+  - add `reference`-parameter
+  - add `config`-parameter
+  - use `stats-validator` package
+- `[types]` - add package with statoscope ts-types
+- `[helpers]` - add `get`-parameter into `makeResolver`-function
+- `[helpers]` - add `asciiTree`-helper that generate ASCII tree from object-tree (useful for TTY-reporters)
+- `[helpers]` - add a bunch of useful jora-helpers
+  - `typeof(value: unknown): string`
+    
+    works like native `typeof` operator
+  - `isNullish(value: unknown): boolean`
+    
+    returns `true` if `value` is `null` or `undefined`
+  - `isArray(value: unknown): boolean`
+    
+    returns `true` if `value` is array
+  - `useNotNullish<T>(values: readonly T[]): T | null`
+
+    return first not-nullish element from `values`-array or `null` (`[null, 123].useNotNullish() = 123`)
+  - `serializeStringOrRegexp(value?: string | RegExp): SerializedStringOrRegexp | null`
+      
+    transform string or regexp into json-compatible format
+  - `deserializeStringOrRegexp(value?: SerializedStringOrRegexp | null): string | RegExp | null`
+    
+    reverse the result of `serializeStringOrRegexp`
+  - `semverSatisfies(version: string | SemVer, range: string | Range): boolean`
+    
+    returns `true` if `version` satisfied of range
+  - `isMatch(a?: string, b?: string | RegExp): boolean`
+    
+    returns `true` if `a` matches `b`
+  - ```
+    exclude<T>(
+      items: readonly T[],
+      params?: {
+        exclude?: Array<string | RegExp>;
+        get?: (arg: T) => string | undefined;
+      }
+    ): T[]
+    ```
+    Helps to exclude elements. Examples:
+    - `['foo', 'bar', 'foo'].exclude({exclude: 'foo'}) = ['bar']`
+    - `[fooCompilation, barCompilation, bazCompilation].exclude({exclude: /foo|bar/, get: <name>}) = [bazCompilation]`
+    
+  - `diff_normalizeLimit(limit?: number | Limit | null): Limit | null`
+    Normalize the `limit`
+  - `diff_isLTETheLimit(valueDiff: ValueDiff, limit?: number | Limit | null): boolean`
+    Returns `true` if `valueDiff` has not been exceeded the `limit`
+  
+### Refactor
+
+- `[report-writer]` - move `transform` function from `cli`
+- `[report-writer]` - `to`-parameter of `transform` function now is required
+- `[report-writer]` - `from`-parameter of `transform` might be file name or stats object
+- `[cli]` - use `transform` from `report-writer`
+- `[helpers]` - move `prepareWithJora` from `webpack-model`
+- `[webpck-model]` - use `prepareWithJora` from `helpers`
+
+### Fixes
+
+- `[helpers]` - fix `max`-parameter bug in `graph_findPaths`-helper
+
+### Deprecate
+
+- `[cli]` - `validator` parameter in `validate` command (use statoscope config with rules instead)
+
+
 ## 5.6.2 (16 July 2021)
 
-## Fixes
+### Fixes
 
 - `[webpack-model]` - calculating modules size on `foam-tree`-helper
 - `[webpack-ui]` - show modules size on foam-tree map
 
 ## 5.6.1 (16 July 2021)
 
-## Fixes
+### Fixes
 
 - `[helpers]` fix handling `max`-property in `Graph.findPaths`
 
 ## 5.6.0 (16 July 2021)
 
-## Features
+### Features
 
 - `[webpack-ui]` add entrypoint tab into the module page. How it's possible to inspect all the paths from specific module to an entrypoint
 - `[webpack-ui]` add entrypoint into issuer path
@@ -32,24 +134,24 @@
   - `moduleGraph_getEntrypoints(module, graph, entrypoints, max)` - get all or `max` entrypoints of `module`
   - `moduleGraph_getPaths(from, graph, to, max)` - get all or `max` possible paths from `from` module to `to` module
   
-## Fixes
+### Fixes
 
 - `[webpack-ui]` fix settings error when multiple tabs opened
 
 ## 5.5.1 (08 July 2021)
 
-## Fixes
+### Fixes
 
 - `[report-writer]` rollback to sync stream polling model
 - `[webpack-plugin]` broken html report
 
-## Chore
+### Chore
 
 - clean all the packages from dev-files
 
 ## 5.5.0 (08 July 2021)
 
-## Features
+### Features
 
 - `[webpack-plugin]` add new property `saveOnlyStats`
 - `[webpack-plugin]` add new property `saveReportTo` (as a replacement for `saveTo`)
@@ -68,7 +170,7 @@
 
 ## 5.4.2 (05 July 2021)
 
-## Fixes
+### Fixes
 - `[webpack-plugin]` sometimes a report was opening before it written to the disk
 - `[webpack-stats-extension-compressed]` fix fails on reexport usage on webpack 4
 - `[webpack-stats-extension-package-info]` taking into account that webpack 4 uses absolute path for some module names
