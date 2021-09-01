@@ -37,6 +37,7 @@ export type ResolvedRelatedItem =
   | { type: 'chunk'; item: NormalizedChunk | null }
   | { type: 'resource'; item: NormalizedAsset | null }
   | { type: 'entry'; item: NormalizedEntrypointItem | null }
+  | { type: 'compilation'; item: NormalizedCompilation | null }
   | { type: 'package'; item: NormalizedPackage | null }
   | { type: 'package-instance'; item: NodeModuleInstance | null };
 
@@ -368,6 +369,13 @@ export default function (compilations: HandledCompilation[]) {
         return {
           type: item.type,
           item: compilation.resolvers.resolveChunk(item.id),
+        };
+      }
+
+      if (item.type === 'compilation') {
+        return {
+          type: item.type,
+          item: resolveCompilation(item.id)?.data ?? null,
         };
       }
 

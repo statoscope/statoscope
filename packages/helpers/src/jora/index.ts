@@ -82,7 +82,7 @@ export default function helpers() {
     isArray(value: unknown): boolean {
       return Array.isArray(value);
     },
-    useNotNullish(values: unknown[]): unknown | null {
+    useNotNullish<T>(values: readonly T[]): T | null {
       for (const value of values) {
         if (value != null) {
           return value;
@@ -274,10 +274,9 @@ export default function helpers() {
     },
 
     exclude<TItem>(
-      items: TItem[],
+      items: readonly TItem[],
       params?: {
         exclude?: Array<string | RegExp>;
-        // @ts-ignore
         get?: (arg: TItem) => string | undefined;
       }
     ): TItem[] {

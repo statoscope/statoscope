@@ -29,7 +29,13 @@ export type DetailsDescriptor =
 export type Details = string | DetailsDescriptor[];
 export type RelatedItem =
   | {
-      type: 'module' | 'package' | 'package-instance' | 'resource' | 'entry';
+      type:
+        | 'module'
+        | 'package'
+        | 'package-instance'
+        | 'resource'
+        | 'entry'
+        | 'compilation';
       id: string;
     }
   | {
