@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.7.1 (1 September 2021)
+
+### Fixes
+
+- `[webpack-model]` - add missed json into the package 
+
 ## 5.7.0 (1 September 2021)
 
 ### Features
