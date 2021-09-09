@@ -386,11 +386,23 @@ function makeModuleResolver(
 
   compilation.modules.length = 0;
 
+  const resolveFromCompilation = makeEntityResolver(
+    compilation.modules,
+    ({ name }) => name
+  );
+
   for (const module of [...modules]) {
-    compilation.modules.push(module);
+    if (!resolveFromCompilation(module.name)) {
+      compilation.modules.push(module);
+    }
+
     for (const innerModule of module.modules || []) {
-      modules.push(innerModule);
-      compilation.modules.push(innerModule);
+      if (!resolve(innerModule.name)) {
+        modules.push(innerModule);
+      }
+      if (!resolveFromCompilation(innerModule.name)) {
+        compilation.modules.push(innerModule);
+      }
     }
   }
 
@@ -457,6 +469,9 @@ function prepareModule(
   } else {
     module.reasons = [];
   }
+
+  // @ts-ignore
+  module.modules = module.modules || [];
 }
 
 function normalizeReason(
