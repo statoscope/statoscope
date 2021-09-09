@@ -90,7 +90,7 @@ export default function (discovery: StatoscopeWidget): void {
                               view: 'foam-tree',
                               data: `
                               $topLevelChunks: data.chunks;
-                              $chunks: $topLevelChunks + $topLevelChunks..children;
+                              $chunks: $topLevelChunks;
                               $chunkModules: $chunks.[initial].modules.[not shouldHideModule()];
                               $chunkModules.modulesToFoamTree(#.params.hash)
                               `,
