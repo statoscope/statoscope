@@ -29,8 +29,8 @@ This package contains rules to validate a webpack bundle.
 
 ## Rules
 
-- [build-time-limits.md](docs/rules/build-time-limits.md]) - Ensures that the build time has not exceeded the limit 
-- [diff-build-time-limits.md](docs/rules/diff-build-time-limits.md) - Compares build time between input and reference stats. Fails if build time has increased
+- [build-time-limits](docs/rules/build-time-limits.md) - Ensures that the build time has not exceeded the limit 
+- [diff-build-time-limits](docs/rules/diff-build-time-limits.md) - Compares build time between input and reference stats. Fails if build time has increased
 - [diff-deprecated-modules](docs/rules/diff-deprecated-modules.md) - Compares usage of specified modules between input and reference stats
 - [diff-deprecated-packages](docs/rules/diff-deprecated-packages.md) - Compares usage of specified packages usage between input and reference stats
 - [diff-entry-download-size-limits](docs/rules/diff-entry-download-size-limits.md) - Diff download size of entrypoints between input and reference stats
