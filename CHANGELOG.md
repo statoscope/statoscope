@@ -1,5 +1,15 @@
 # Changelog
 
+## 5.7.2 (9 September 2021)
+
+### Fixes
+
+- `[webpack-ui]` - correct set of modules in `Initial Chunks` tab on the `entry` page (closes #102)
+
+### Chore
+
+- `[config]` - improve error message
+
 ## 5.7.1 (1 September 2021)
 
 ### Fixes

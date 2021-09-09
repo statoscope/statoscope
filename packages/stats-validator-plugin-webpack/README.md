@@ -7,6 +7,26 @@ Webpack stats validator plugin for @statoscope/stats-validator
 
 This package contains rules to validate a webpack bundle.
 
+## Usage
+
+1. Install
+
+   `npm i -D @statoscope/stats-validator-plugin-webpack`
+2. Add into `statoscope.config.js`
+    ```js
+    module.exports = {
+      validate: {
+        // add webpack plugin with rules
+        plugins: ['@statoscope/webpack'],
+        rules: {
+          // ensures that build-time of your bundle hasn't exceeded 10 sec
+          '@statoscope/webpack/build-time-limits': ['error', {global: 10000}],
+          // any other rules
+        }
+      }
+    }   
+    ```
+
 ## Rules
 
 - [build-time-limits.md](docs/rules/build-time-limits.md]) - Ensures that the build time has not exceeded the limit 

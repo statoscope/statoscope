@@ -5,7 +5,24 @@
 
 UI reporter for @statoscope/stats-validator.
 
-Injects validator's result into stats and generates a Statoscope report 
+Injects validator's result into stats and generates a Statoscope report.
+
+## Usage
+
+1. Install
+
+   `npm i -D @statoscope/stats-validator-plugin-webpack`
+2. Add into `statoscope.config.js`
+    ```js
+    module.exports = {
+      validate: {
+        reporters: [["@statoscope/stats-report", { "open": true }]]
+        // any other config parts
+      }
+    }   
+    ```
+
+In this case, Statoscope validator will generate a UI-report and open it.
 
 ## Options
 
@@ -36,9 +53,21 @@ Generate UI report and open it.
 ```json
 {
   "validate": {
+    "reporters": [["@statoscope/stats-report", { "saveStatsTo": "/path/to/report.html" }]]
+  }
+}
+```
+
+Generate UI report info `/path/to/report.html` file.
+
+**statoscope.config.js:**
+
+```json
+{
+  "validate": {
     "reporters": [["@statoscope/stats-report", { "saveStatsTo": "/path/to/new/stats.json" }]]
   }
 }
 ```
 
-Just inject validation result into stats and save it.
+Just inject validation result into stats and save into `/path/to/new/stats.json` file.
