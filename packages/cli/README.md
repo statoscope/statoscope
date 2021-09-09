@@ -32,6 +32,39 @@ Validate or compare webpack stats.
 
 This command uses [stats-validator](/packages/stats-validator). Please look at this package for more info
 
+**Example:**
+
+1. Create a statosope-config:
+
+**statoscope.config.js**
+```js
+module.exports = {
+  validate: {
+    // add webpack plugin with rules
+    plugins: ['@statoscope/webpack'],
+    reporters: [
+      // console-reporter to output results into cinsole (enabled by default)
+      '@statoscope/console',
+      // reporter that henerates UI-report with validation-results
+      ['@statosope/stats-report', {open: true}],
+    ],
+    rules: {
+      // ensures that build-time of your bundle hasn't exceeded 10 sec
+      '@statoscope/webpack/build-time-limits': ['error', {global: 10000}],
+      // any other rules
+    }
+  }
+}
+```
+
+2. Exec the command:
+
+```sh
+statoscope validate --input path/to/stats.json
+```
+
+3. Analyze results in the console or in generated UI-report
+
 ### serve
 
 Start HTTP-server and serve JSON-stats as HTML report
