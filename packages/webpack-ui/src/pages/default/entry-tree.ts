@@ -42,7 +42,7 @@ export function entryItemConfig(getter = '$', hash = '#.params.hash'): EntryItem
       type: 'chunks'
     },{
       title: "Modules",
-      data: $chunksModules.sort(getModuleSize(${hash}).size desc),
+      data: $chunksModules,
       visible: $chunksModules,
       type: 'modules'
     },{

@@ -51,7 +51,7 @@ export function assetItemConfig(getter = '$', hash = '#.params.hash'): AssetItem
       type: 'chunks'
     }, {
       title: "Modules",
-      data: $chunksModules.sort(getModuleSize(${hash}).size desc),
+      data: $chunksModules,
       visible: $chunksModules,
       type: 'modules'
     }, {

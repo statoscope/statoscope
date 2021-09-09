@@ -41,7 +41,7 @@ export function chunkItemConfig(getter = '$', hash = '#.params.hash'): ChunkItem
     }, {
       title: "Modules",
       // todo: wait contexts and filter modules by current chunk
-      data: $modules.sort(getModuleSize(${hash}).size desc),
+      data: $modules,
       visible: $modules,
       type: 'modules'
     }, {

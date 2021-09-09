@@ -55,7 +55,7 @@ export function packageInstanceItemConfig(
         type: 'reasons'
       },{
         title: "Modules",
-        data: instance.modules.[not shouldHideModule()].sort(getModuleSize(${hash}).size desc),
+        data: instance.modules.[not shouldHideModule()],
         type: 'modules'
       }]`,
     itemConfig: {
@@ -75,7 +75,7 @@ export function packageInstanceItemConfig(
                 type: 'chunk'
               }, {
                 title: "Modules",
-                children: $reasonsWithModule.module.[not shouldHideModule()].sort(getModuleSize(${hash}).size desc),
+                children: $reasonsWithModule.module.[not shouldHideModule()],
                 type: 'module'
               }, {
                 title: "Packages",
