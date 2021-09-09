@@ -34,7 +34,10 @@ This command uses [stats-validator](/packages/stats-validator). Please look at t
 
 **Example:**
 
-1. Create a statosope-config:
+1. Install webpack-plugin for the validator:
+`npm install --save-dev @statoscope/stats-validator-plugin-webpack`
+
+2. Create a statosope-config:
 
 **statoscope.config.js**
 ```js
@@ -57,13 +60,13 @@ module.exports = {
 }
 ```
 
-2. Exec the command:
+3. Exec the command:
 
 ```sh
 statoscope validate --input path/to/stats.json
 ```
 
-3. Analyze results in the console or in generated UI-report
+4. Analyze results in the console or generated UI-report
 
 ### serve
 
