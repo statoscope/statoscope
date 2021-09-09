@@ -1,5 +1,15 @@
 # Changelog
 
+## 5.7.3 (9 September 2021)
+
+### Fixes
+
+- `[webpack-ui]` - remove modules duplicates from modules list
+
+### Performance
+
+- `[webpack-ui]` - improve performance of `entries` and `modules` tabs on the main page
+
 ## 5.7.2 (9 September 2021)
 
 ### Fixes
