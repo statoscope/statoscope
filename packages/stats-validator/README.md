@@ -38,7 +38,9 @@ List of plugins (see more about plugins API below).
 
 The main goal of a plugin is providing some rules for validation.
 
-There is a builtin [plugin](/packages/stats-validator-plugin-webpack/) to validate webpack stats
+There is a [plugin](/packages/stats-validator-plugin-webpack/) to validate webpack stats (need to be installed)
+
+`npm install --save-dev @statoscope/stats-validator-plugin-webpack`
 
 **statoscope.config.js:**
 
