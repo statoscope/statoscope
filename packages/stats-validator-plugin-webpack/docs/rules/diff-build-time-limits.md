@@ -25,7 +25,7 @@ Fails if the build time of the input bundle is more than specified limit relativ
 
 ### Limits
 
-Basic info about limits might be found [here](/statoscope/statoscope/packages/stats-validator-plugin-webpack/docs/limits.md)
+Basic info about limits might be found [here](/packages/stats-validator-plugin-webpack/docs/limits.md)
 
 ## Options
 

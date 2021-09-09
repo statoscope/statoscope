@@ -30,7 +30,7 @@ Fails if the download time of the input bundle is more than specified limit rela
 
 ### Limits
 
-Basic info about limits might be found [here](/statoscope/statoscope/packages/stats-validator-plugin-webpack/docs/limits.md)
+Basic info about limits might be found [here](/packages/stats-validator-plugin-webpack/docs/limits.md)
 
 The rule has multiple limits:
 
@@ -44,7 +44,7 @@ type Limits = {
 
 ### Network
 
-Download speed calculation has based on network speed. There are [some network types](/statoscope/statoscope/packages/stats-validator-plugin-webpack/docs/network-types.md).
+Download speed calculation has based on network speed. There are [some network types](/packages/stats-validator-plugin-webpack/docs/network-types.md).
 
 ## Options
 

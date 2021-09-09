@@ -30,7 +30,7 @@ Validate or compare webpack stats.
 - `--config` (`-c`) - path to statoscope config (by default `{pwd}/statoscope.config.js` has used)
 - `--warn-as-error` (`-w`) - treat warnings as errors
 
-This command uses [stats-validator](/statoscope/statoscope/packages/stats-validator). Please look at this package for more info
+This command uses [stats-validator](/packages/stats-validator). Please look at this package for more info
 
 ### serve
 

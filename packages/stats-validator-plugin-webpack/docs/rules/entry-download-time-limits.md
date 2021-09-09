@@ -40,7 +40,7 @@ type Limits = {
 
 ### Network
 
-Download speed calculation has based on network speed. There are [some network types](/statoscope/statoscope/packages/stats-validator-plugin-webpack/docs/network-types.md).
+Download speed calculation has based on network speed. There are [some network types](/packages/stats-validator-plugin-webpack/docs/network-types.md).
 
 ## Options
 

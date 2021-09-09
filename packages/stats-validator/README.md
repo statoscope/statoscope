@@ -38,7 +38,7 @@ List of plugins (see more about plugins API below).
 
 The main goal of a plugin is providing some rules for validation.
 
-There is a builtin [plugin](/statoscope/statoscope/blob/master/packages/stats-validator-plugin-webpack/) to validate webpack stats
+There is a builtin [plugin](/packages/stats-validator-plugin-webpack/) to validate webpack stats
 
 **statoscope.config.js:**
 
@@ -127,8 +127,8 @@ Reporter handles validation results.
 
 There are two builtin reporters:
 
-- [console](/statoscope/statoscope/blob/master/packages/stats-validator-reporter-console/)
-- [stats-report](/statoscope/statoscope/blob/master/packages/stats-validator-reporter-stats-report/)
+- [console](/packages/stats-validator-reporter-console/)
+- [stats-report](/packages/stats-validator-reporter-stats-report/)
 
 **statoscope.config.js:**
 
@@ -276,7 +276,7 @@ api.message(
 
 **tty**
 
-Used by TTY-reporters (e.g. [ConsoleReporter](/statoscope/statoscope/blob/master/packages/stats-validator-reporter-console/src/index.ts))
+Used by TTY-reporters (e.g. [ConsoleReporter](/packages/stats-validator-reporter-console/src/index.ts))
 
 ```js
 import chalk from 'chalk';
@@ -301,7 +301,7 @@ api.message(
 
 **discovery**
 
-Used by discovery-reporters (e.g. [StatsReportReporter](/statoscope/statoscope/blob/master/packages/stats-validator-reporter-stats-report/src/index.ts))
+Used by discovery-reporters (e.g. [StatsReportReporter](/packages/stats-validator-reporter-stats-report/src/index.ts))
 
 The main idea around this type of details is passing some data to stats report viewer (based on [DiscoveryJS](https://github.com/discoveryjs/discovery)).
 
@@ -331,7 +331,7 @@ api.message(`Module ${module.name} should not be used`, {
 });
 ```
 
-See examples at [Stats Validator Webpack Plugin](/statoscope/statoscope/blob/master/packages/stats-validator-plugin-webpack/src/rules/)
+See examples at [Stats Validator Webpack Plugin](/packages/stats-validator-plugin-webpack/src/rules/)
 
 ### api.getStorage(): Storage
 
