@@ -45,5 +45,9 @@ export function resolveAliasPackage(
     } catch (e) {}
   }
 
-  throw new Error(`Can't resolve ${name} with prefixes [${prefixes}]`);
+  throw new Error(
+    `Can't resolve ${name} with prefixes [${prefixes}].${
+      !name.startsWith('.') ? 'Did you forget to install it?' : ''
+    }`
+  );
 }
