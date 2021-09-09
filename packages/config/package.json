@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/config",
-  "version": "5.7.1",
+  "version": "5.7.2",
   "description": "Statoscope config utils",
   "main": "./dist/index.js",
   "publishConfig": {
