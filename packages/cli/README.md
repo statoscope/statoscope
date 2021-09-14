@@ -47,7 +47,7 @@ module.exports = {
       // console-reporter to output results into cinsole (enabled by default)
       '@statoscope/console',
       // reporter that henerates UI-report with validation-results
-      ['@statosope/stats-report', {open: true}],
+      ['@statoscope/stats-report', {open: true}],
     ],
     rules: {
       // ensures that build-time of your bundle hasn't exceeded 10 sec
