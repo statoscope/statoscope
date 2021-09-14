@@ -30,8 +30,6 @@ Validate or compare webpack stats.
 - `--config` (`-c`) - path to statoscope config (by default `{pwd}/statoscope.config.js` has used)
 - `--warn-as-error` (`-w`) - treat warnings as errors
 
-This command uses [stats-validator](/packages/stats-validator). Please look at this package for more info
-
 **Example:**
 
 1. Install webpack-plugin for the validator:
@@ -67,6 +65,8 @@ statoscope validate --input path/to/stats.json
 ```
 
 4. Analyze results in the console or generated UI-report
+
+> Learn more on [@staoscope/stats-validator](/packages/stats-validator) and [@statoscope/stats-validator-plugin-webpack](/packages/stats-validator-plugin-webpack) and
 
 ### serve
 
