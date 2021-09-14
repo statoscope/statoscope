@@ -15,6 +15,7 @@ import Graph, { Node } from '@statoscope/helpers/dist/graph';
 import { Webpack } from '../webpack';
 import validateStats, { ValidationResult } from './validate';
 import { moduleReasonResource, moduleResource, nodeModule } from './module';
+import deserialize from './deserialize';
 import ChunkID = Webpack.ChunkID;
 import Reason = Webpack.Reason;
 
@@ -98,7 +99,7 @@ export type NormalizedFile = {
   version: string;
   validation: ValidationResult;
   compilations: NormalizedCompilation[];
-  __statoscope?: { descriptor: StatsDescriptor; extensions: Extension<unknown>[] };
+  __statoscope?: { descriptor?: StatsDescriptor; extensions?: Extension<unknown>[] };
 };
 
 export type NormalizedExtension<TPayload, TAPI> = {
@@ -192,6 +193,8 @@ export default function normalize(
 export function handleRawFile(
   rawStatsFileDescriptor: RawStatsFileDescriptor
 ): HandledStats {
+  deserialize(rawStatsFileDescriptor.data);
+
   const file: NormalizedFile = {
     name: rawStatsFileDescriptor.name,
     version: rawStatsFileDescriptor.data.version || 'unknown',
@@ -308,7 +311,7 @@ function handleCompilation(
   };
 
   const extensions =
-    file.__statoscope?.extensions.map((ext): NormalizedExtension<
+    file.__statoscope?.extensions?.map((ext): NormalizedExtension<
       unknown,
       unknown
     > | null => {

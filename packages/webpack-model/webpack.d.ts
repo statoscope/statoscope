@@ -76,8 +76,33 @@ export declare namespace Webpack {
     modules?: Module[];
     children?: Compilation[];
     __statoscope?: {
-      descriptor: StatsDescriptor;
-      extensions: Extension<unknown>[];
+      descriptor?: StatsDescriptor;
+      extensions?: Extension<unknown>[];
+      serialization?: SerializationData;
     };
   };
 }
+
+export type ModuleData = {
+  nameToIdMap: Map<string, number>;
+  idToModuleMap: Map<number, Webpack.Module>;
+  lastId: number;
+};
+
+export type CompilationData = {
+  modules: ModuleData;
+};
+
+export type CompilationMap = Map<string, CompilationData>;
+
+export type SerializationData = {
+  links: { modules: ['chunks'] };
+  data: {
+    compilations: Array<{
+      id: string;
+      data: {
+        modules: Array<[number, Webpack.Module]>;
+      };
+    }>;
+  };
+};
