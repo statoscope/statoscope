@@ -11,6 +11,7 @@ import { Extension } from '@statoscope/stats/spec/extension';
 import ExtensionValidationResultGenerator from '@statoscope/stats-extension-stats-validation-result/dist/generator';
 import { Reporter } from '@statoscope/types/types/validation/reporter';
 import { Result } from '@statoscope/types/types/validation/result';
+import serialize from '@statoscope/webpack-model/dist/serialize';
 import * as version from './version';
 
 export type Options = {
@@ -54,10 +55,13 @@ export default class ConsoleReporter implements Reporter {
     parsedInput.__statoscope ??= meta;
     parsedInput.__statoscope.extensions.push(generator.get());
 
+    serialize(parsedInput);
+
     let parsedReference;
 
     if (result.files.reference) {
       parsedReference = await parseChunked(fs.createReadStream(result.files.reference));
+      serialize(parsedReference);
     }
 
     const id = path.basename(result.files.input, '.json');
