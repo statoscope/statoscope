@@ -3,7 +3,6 @@ import path from 'path';
 import os from 'os';
 import { Readable } from 'stream';
 import open from 'open';
-// @ts-ignore
 import { parseChunked, stringifyStream } from '@discoveryjs/json-ext';
 import { transform, waitFinished } from '@statoscope/report-writer/dist/utils';
 import { StatsDescriptor } from '@statoscope/stats';

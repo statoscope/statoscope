@@ -3,7 +3,6 @@ import path from 'path';
 import { tmpdir } from 'os';
 import { Readable, Writable } from 'stream';
 import open from 'open';
-// @ts-ignore
 import { stringifyStream } from '@discoveryjs/json-ext';
 import HTMLWriter from '@statoscope/report-writer';
 import { Compilation, Compiler } from 'webpack';

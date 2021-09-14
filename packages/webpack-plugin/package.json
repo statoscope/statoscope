@@ -18,7 +18,7 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "@discoveryjs/json-ext": "^0.5.3",
+    "@discoveryjs/json-ext": "^0.5.5",
     "@statoscope/report-writer": "5.7.1",
     "@statoscope/stats": "5.7.0",
     "@statoscope/stats-extension-compressed": "5.7.1",
