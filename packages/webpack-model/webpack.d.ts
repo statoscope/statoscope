@@ -78,7 +78,7 @@ export declare namespace Webpack {
     __statoscope?: {
       descriptor?: StatsDescriptor;
       extensions?: Extension<unknown>[];
-      serialization?: SerializationData;
+      normalization?: NormalizationData;
     };
   };
 }
@@ -95,7 +95,7 @@ export type CompilationData = {
 
 export type CompilationMap = Map<string, CompilationData>;
 
-export type SerializationData = {
+export type NormalizationData = {
   links: { modules: ['chunks'] };
   data: {
     compilations: Array<{

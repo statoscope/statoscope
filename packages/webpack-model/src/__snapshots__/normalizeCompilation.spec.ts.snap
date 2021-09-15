@@ -1,0 +1,3330 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should work 1`] = `
+Object {
+  "__statoscope": Object {
+    "descriptor": Object {
+      "name": "@statoscope/stats",
+      "version": "5.3.0",
+    },
+    "extensions": Array [
+      Object {
+        "descriptor": Object {
+          "adapter": Object {
+            "author": Object {
+              "name": "Sergey Melyukov",
+              "url": "https://twitter.com/smelukov",
+            },
+            "description": "Webpack adapter for @statoscope/stats-extension-package-info",
+            "homepage": "https://github.com/statoscope/statoscope/",
+            "name": "@statoscope/webpack-stats-extension-package-info",
+            "version": "5.6.1",
+          },
+          "author": Object {
+            "name": "Sergey Melyukov",
+            "url": "https://twitter.com/smelukov",
+          },
+          "description": "Statoscope extension for collecting package info (e.g. available versions)",
+          "homepage": "https://github.com/statoscope/statoscope/",
+          "name": "@statoscope/stats-extension-package-info",
+          "version": "5.6.1",
+        },
+        "payload": Object {
+          "compilations": Array [
+            Object {
+              "id": "718159f8e48dcecd92c9",
+              "packages": Array [
+                Object {
+                  "instances": Array [
+                    Object {
+                      "info": Object {
+                        "version": "1.0.0",
+                      },
+                      "path": "",
+                    },
+                  ],
+                  "name": "simple",
+                },
+                Object {
+                  "instances": Array [
+                    Object {
+                      "info": Object {
+                        "version": "1.0.1",
+                      },
+                      "path": "../node_modules/is-array",
+                    },
+                    Object {
+                      "info": Object {
+                        "version": "1.0.1",
+                      },
+                      "path": "../node_modules/is-array",
+                    },
+                  ],
+                  "name": "is-array",
+                },
+                Object {
+                  "instances": Array [
+                    Object {
+                      "info": Object {
+                        "version": "1.0.0",
+                      },
+                      "path": "node_modules/bar",
+                    },
+                    Object {
+                      "info": Object {
+                        "version": "2.0.0",
+                      },
+                      "path": "node_modules/foo/node_modules/bar",
+                    },
+                  ],
+                  "name": "bar",
+                },
+                Object {
+                  "instances": Array [
+                    Object {
+                      "info": Object {
+                        "version": "1.0.0",
+                      },
+                      "path": "node_modules/foo",
+                    },
+                  ],
+                  "name": "foo",
+                },
+                Object {
+                  "instances": Array [
+                    Object {
+                      "info": Object {
+                        "version": "5.2.6",
+                      },
+                      "path": "../node_modules/css-loader",
+                    },
+                    Object {
+                      "info": Object {
+                        "version": "5.2.6",
+                      },
+                      "path": "../node_modules/css-loader",
+                    },
+                  ],
+                  "name": "css-loader",
+                },
+              ],
+            },
+          ],
+        },
+      },
+      Object {
+        "descriptor": Object {
+          "adapter": Object {
+            "author": Object {
+              "name": "Sergey Melyukov",
+              "url": "https://twitter.com/smelukov",
+            },
+            "description": "Webpack adapter for @statoscope/stats-extension-compressed",
+            "homepage": "https://github.com/statoscope/statoscope/",
+            "name": "@statoscope/webpack-stats-extension-compressed",
+            "version": "5.6.1",
+          },
+          "author": Object {
+            "name": "Sergey Melyukov",
+            "url": "https://twitter.com/smelukov",
+          },
+          "description": "Statoscope extension for collecting compressed resource sizes",
+          "homepage": "https://github.com/statoscope/statoscope/",
+          "name": "@statoscope/stats-extension-compressed",
+          "version": "5.6.1",
+        },
+        "payload": Object {
+          "compilations": Array [
+            Object {
+              "id": "718159f8e48dcecd92c9",
+              "resources": Array [
+                Object {
+                  "id": "one.js",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 449,
+                  },
+                },
+                Object {
+                  "id": "two.js",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 8604,
+                  },
+                },
+                Object {
+                  "id": "196de80223be41153cc7.txt",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 33,
+                  },
+                },
+                Object {
+                  "id": "848.js",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 135,
+                  },
+                },
+                Object {
+                  "id": "webpack/runtime/get javascript chunk filename",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 154,
+                  },
+                },
+                Object {
+                  "id": "webpack/runtime/load script",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 683,
+                  },
+                },
+                Object {
+                  "id": "webpack/runtime/global",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 155,
+                  },
+                },
+                Object {
+                  "id": "webpack/runtime/hasOwnProperty shorthand",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 97,
+                  },
+                },
+                Object {
+                  "id": "webpack/runtime/make namespace object",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 186,
+                  },
+                },
+                Object {
+                  "id": "webpack/runtime/ensure chunk",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 212,
+                  },
+                },
+                Object {
+                  "id": "webpack/runtime/jsonp chunk loading",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 1089,
+                  },
+                },
+                Object {
+                  "id": "webpack/runtime/publicPath",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 432,
+                  },
+                },
+                Object {
+                  "id": "webpack/runtime/define property getters",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 197,
+                  },
+                },
+                Object {
+                  "id": "webpack/runtime/compat get default export",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 192,
+                  },
+                },
+                Object {
+                  "id": "./src/index2.ts + 1 modules",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 362,
+                  },
+                },
+                Object {
+                  "id": "./src/index.ts + 3 modules",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 361,
+                  },
+                },
+                Object {
+                  "id": "../node_modules/css-loader/dist/runtime/getUrl.js",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 406,
+                  },
+                },
+                Object {
+                  "id": "../node_modules/css-loader/dist/runtime/api.js",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 662,
+                  },
+                },
+                Object {
+                  "id": "./src/statoscope.png",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 6217,
+                  },
+                },
+                Object {
+                  "id": "../node_modules/is-array/index.js",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 268,
+                  },
+                },
+                Object {
+                  "id": "./src/index2.css",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 431,
+                  },
+                },
+                Object {
+                  "id": "./src/dyn.ts",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 160,
+                  },
+                },
+                Object {
+                  "id": "./src/test.txt",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 99,
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      },
+      Object {
+        "descriptor": Object {
+          "adapter": Object {
+            "author": Object {
+              "name": "Sergey Melyukov",
+              "url": "https://twitter.com/smelukov",
+            },
+            "description": "Stats report reporter for @statoscope/stats-validator",
+            "homepage": "https://github.com/statoscope/statoscope/",
+            "name": "@statoscope/stats-validator-reporter-stats-report",
+            "version": "5.4.0",
+          },
+          "author": Object {
+            "name": "Sergey Melyukov",
+            "url": "https://twitter.com/smelukov",
+          },
+          "description": "Statoscope extension for discover stats validator result",
+          "homepage": "https://github.com/statoscope/statoscope/",
+          "name": "@statoscope/stats-extension-stats-validation-result",
+          "version": "5.6.1",
+        },
+        "payload": Object {
+          "compilations": Array [
+            Object {
+              "id": "718159f8e48dcecd92c9",
+              "items": Array [
+                Object {
+                  "details": Array [
+                    Object {
+                      "deserialize": Object {
+                        "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+                        "type": "query",
+                      },
+                      "filename": "input.json",
+                      "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+                      "serialized": Object {
+                        "context": Object {
+                          "exclude": Array [],
+                          "target": Object {
+                            "name": Object {
+                              "content": "\\\\.\\\\/src",
+                              "flags": "",
+                              "type": "regexp",
+                            },
+                          },
+                        },
+                      },
+                      "type": "discovery",
+                    },
+                  ],
+                  "id": 0,
+                  "message": "Module ./src/index.ts + 3 modules should not be used",
+                  "related": Array [
+                    Object {
+                      "id": "./src/index.ts + 3 modules",
+                      "type": "module",
+                    },
+                  ],
+                  "rule": "webpack/restricted-modules",
+                  "type": "error",
+                },
+                Object {
+                  "details": Array [
+                    Object {
+                      "deserialize": Object {
+                        "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+                        "type": "query",
+                      },
+                      "filename": "input.json",
+                      "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+                      "serialized": Object {
+                        "context": Object {
+                          "exclude": Array [],
+                          "target": Object {
+                            "name": Object {
+                              "content": "\\\\.\\\\/src",
+                              "flags": "",
+                              "type": "regexp",
+                            },
+                          },
+                        },
+                      },
+                      "type": "discovery",
+                    },
+                  ],
+                  "id": 1,
+                  "message": "Module ./src/index.ts should not be used",
+                  "related": Array [
+                    Object {
+                      "id": "./src/index.ts",
+                      "type": "module",
+                    },
+                  ],
+                  "rule": "webpack/restricted-modules",
+                  "type": "error",
+                },
+                Object {
+                  "details": Array [
+                    Object {
+                      "deserialize": Object {
+                        "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+                        "type": "query",
+                      },
+                      "filename": "input.json",
+                      "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+                      "serialized": Object {
+                        "context": Object {
+                          "exclude": Array [],
+                          "target": Object {
+                            "name": Object {
+                              "content": "\\\\.\\\\/src",
+                              "flags": "",
+                              "type": "regexp",
+                            },
+                          },
+                        },
+                      },
+                      "type": "discovery",
+                    },
+                  ],
+                  "id": 2,
+                  "message": "Module ./src/sub-module.ts should not be used",
+                  "related": Array [
+                    Object {
+                      "id": "./src/sub-module.ts",
+                      "type": "module",
+                    },
+                  ],
+                  "rule": "webpack/restricted-modules",
+                  "type": "error",
+                },
+                Object {
+                  "details": Array [
+                    Object {
+                      "deserialize": Object {
+                        "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+                        "type": "query",
+                      },
+                      "filename": "input.json",
+                      "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+                      "serialized": Object {
+                        "context": Object {
+                          "exclude": Array [],
+                          "target": Object {
+                            "name": Object {
+                              "content": "\\\\.\\\\/src",
+                              "flags": "",
+                              "type": "regexp",
+                            },
+                          },
+                        },
+                      },
+                      "type": "discovery",
+                    },
+                  ],
+                  "id": 3,
+                  "message": "Module ./src/index2.ts + 1 modules should not be used",
+                  "related": Array [
+                    Object {
+                      "id": "./src/index2.ts + 1 modules",
+                      "type": "module",
+                    },
+                  ],
+                  "rule": "webpack/restricted-modules",
+                  "type": "error",
+                },
+                Object {
+                  "details": Array [
+                    Object {
+                      "deserialize": Object {
+                        "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+                        "type": "query",
+                      },
+                      "filename": "input.json",
+                      "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+                      "serialized": Object {
+                        "context": Object {
+                          "exclude": Array [],
+                          "target": Object {
+                            "name": Object {
+                              "content": "\\\\.\\\\/src",
+                              "flags": "",
+                              "type": "regexp",
+                            },
+                          },
+                        },
+                      },
+                      "type": "discovery",
+                    },
+                  ],
+                  "id": 4,
+                  "message": "Module ./src/index2.ts should not be used",
+                  "related": Array [
+                    Object {
+                      "id": "./src/index2.ts",
+                      "type": "module",
+                    },
+                  ],
+                  "rule": "webpack/restricted-modules",
+                  "type": "error",
+                },
+                Object {
+                  "details": Array [
+                    Object {
+                      "deserialize": Object {
+                        "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+                        "type": "query",
+                      },
+                      "filename": "input.json",
+                      "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+                      "serialized": Object {
+                        "context": Object {
+                          "exclude": Array [],
+                          "target": Object {
+                            "name": Object {
+                              "content": "\\\\.\\\\/src",
+                              "flags": "",
+                              "type": "regexp",
+                            },
+                          },
+                        },
+                      },
+                      "type": "discovery",
+                    },
+                  ],
+                  "id": 5,
+                  "message": "Module ./src/index2.css should not be used",
+                  "related": Array [
+                    Object {
+                      "id": "./src/index2.css",
+                      "type": "module",
+                    },
+                  ],
+                  "rule": "webpack/restricted-modules",
+                  "type": "error",
+                },
+                Object {
+                  "details": Array [
+                    Object {
+                      "deserialize": Object {
+                        "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+                        "type": "query",
+                      },
+                      "filename": "input.json",
+                      "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+                      "serialized": Object {
+                        "context": Object {
+                          "exclude": Array [],
+                          "target": Object {
+                            "name": Object {
+                              "content": "\\\\.\\\\/src",
+                              "flags": "",
+                              "type": "regexp",
+                            },
+                          },
+                        },
+                      },
+                      "type": "discovery",
+                    },
+                  ],
+                  "id": 6,
+                  "message": "Module ./src/test.txt should not be used",
+                  "related": Array [
+                    Object {
+                      "id": "./src/test.txt",
+                      "type": "module",
+                    },
+                  ],
+                  "rule": "webpack/restricted-modules",
+                  "type": "error",
+                },
+                Object {
+                  "details": Array [
+                    Object {
+                      "deserialize": Object {
+                        "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+                        "type": "query",
+                      },
+                      "filename": "input.json",
+                      "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+                      "serialized": Object {
+                        "context": Object {
+                          "exclude": Array [],
+                          "target": Object {
+                            "name": Object {
+                              "content": "\\\\.\\\\/src",
+                              "flags": "",
+                              "type": "regexp",
+                            },
+                          },
+                        },
+                      },
+                      "type": "discovery",
+                    },
+                  ],
+                  "id": 7,
+                  "message": "Module ./src/dyn.ts should not be used",
+                  "related": Array [
+                    Object {
+                      "id": "./src/dyn.ts",
+                      "type": "module",
+                    },
+                  ],
+                  "rule": "webpack/restricted-modules",
+                  "type": "error",
+                },
+                Object {
+                  "details": Array [
+                    Object {
+                      "deserialize": Object {
+                        "content": "
+              $theContext: context;
+              {
+                context: {
+                  target: {
+                    name: $theContext.target.name.deserializeStringOrRegexp(),
+                  },
+                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
+                }
+              }",
+                        "type": "query",
+                      },
+                      "filename": "input.json",
+                      "query": "
+  $input: resolveInputFile();
+  $exclude: #.exclude;
+  $target: #.target;
+  
+  $input.group(<compilations>)
+    .({file: value.pick(), compilation: key})
+    .exclude({
+      exclude: $exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .({
+      ...$,
+      modules: compilation..modules.[name.isMatch($target.name)]
+    }).[modules]
+  ",
+                      "serialized": Object {
+                        "context": Object {
+                          "exclude": Array [],
+                          "target": Object {
+                            "name": Object {
+                              "content": "\\\\.\\\\/src",
+                              "flags": "",
+                              "type": "regexp",
+                            },
+                          },
+                        },
+                      },
+                      "type": "discovery",
+                    },
+                  ],
+                  "id": 8,
+                  "message": "Module ./src/statoscope.png should not be used",
+                  "related": Array [
+                    Object {
+                      "id": "./src/statoscope.png",
+                      "type": "module",
+                    },
+                  ],
+                  "rule": "webpack/restricted-modules",
+                  "type": "error",
+                },
+                Object {
+                  "details": Array [
+                    Object {
+                      "deserialize": Object {
+                        "content": "
+                $theContext: context;
+                {
+                  context: {
+                    target: {
+                      name: $theContext.target.name.deserializeStringOrRegexp(),
+                      version: $theContext.target.version,
+                    },
+                    exclude: $theContext.exclude.(deserializeStringOrRegexp),
+                  }
+                }",
+                        "type": "query",
+                      },
+                      "filename": "input.json",
+                      "query": "
+  $input: resolveInputFile();
+  $target: #.target;
+  $exclude: #.exclude;
+  
+  $input.group(<compilations>)
+  .({file: value.pick(), compilation: key})
+  .exclude({
+    exclude: $exclude.[type='compilation'].name,
+    get: <compilation.name>,
+  })
+  .({
+    ...$,
+    packages: compilation.nodeModules
+    .[name.isMatch($target.name)]
+    .({
+      $package: $;
+      $package,
+      instances: instances
+        .[
+          $passVersion: (not $target.version or not version).bool();
+          $passVersion or version.semverSatisfies($target.version)
+        ].sort(isRoot desc, path.size() asc)
+    })
+  })
+  .[packages.instances]",
+                      "serialized": Object {
+                        "context": Object {
+                          "exclude": Array [],
+                          "target": Object {
+                            "name": Object {
+                              "content": "foo",
+                              "type": "string",
+                            },
+                          },
+                        },
+                      },
+                      "type": "discovery",
+                    },
+                  ],
+                  "id": 9,
+                  "message": "foo@1.0.0 should not be used",
+                  "related": Array [
+                    Object {
+                      "id": "foo",
+                      "type": "package",
+                    },
+                    Object {
+                      "id": "node_modules/foo",
+                      "type": "package-instance",
+                    },
+                  ],
+                  "rule": "webpack/restricted-packages",
+                  "type": "error",
+                },
+              ],
+            },
+          ],
+          "rules": Object {},
+        },
+      },
+    ],
+    "normalization": Object {
+      "data": Object {
+        "compilations": Array [
+          Object {
+            "data": Object {
+              "modules": Array [
+                Array [
+                  1,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": true,
+                    "cacheable": true,
+                    "cached": false,
+                    "chunks": Array [
+                      255,
+                    ],
+                    "codeGenerated": true,
+                    "depth": 0,
+                    "errors": 0,
+                    "failed": false,
+                    "id": 292,
+                    "identifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
+                    "index": 0,
+                    "index2": 4,
+                    "layer": null,
+                    "moduleType": "javascript/esm",
+                    "modules": Array [
+                      Object {
+                        "assets": Array [],
+                        "buildTimeExecuted": false,
+                        "built": true,
+                        "cacheable": true,
+                        "cached": false,
+                        "chunks": Array [],
+                        "codeGenerated": false,
+                        "depth": 0,
+                        "errors": 0,
+                        "failed": false,
+                        "id": null,
+                        "identifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                        "index": 0,
+                        "index2": 4,
+                        "issuer": null,
+                        "issuerId": null,
+                        "issuerName": null,
+                        "issuerPath": null,
+                        "layer": null,
+                        "moduleType": "javascript/auto",
+                        "name": "./src/index.ts",
+                        "nameForCondition": "./src/index.ts",
+                        "optimizationBailout": Array [
+                          "Statement (ExpressionStatement) with side effects in source code at 4:0-30",
+                        ],
+                        "optional": false,
+                        "orphan": false,
+                        "postOrderIndex": 4,
+                        "preOrderIndex": 0,
+                        "providedExports": Array [],
+                        "reasons": Array [],
+                        "size": 113,
+                        "sizes": Object {
+                          "javascript": 113,
+                        },
+                        "type": "module",
+                        "usedExports": Array [],
+                        "warnings": 0,
+                      },
+                      Object {
+                        "assets": Array [],
+                        "buildTimeExecuted": false,
+                        "built": true,
+                        "cacheable": true,
+                        "cached": false,
+                        "chunks": Array [],
+                        "codeGenerated": false,
+                        "depth": 1,
+                        "errors": 0,
+                        "failed": false,
+                        "id": null,
+                        "identifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                        "index": 2,
+                        "index2": 3,
+                        "issuer": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                        "issuerId": null,
+                        "issuerName": "./src/index.ts",
+                        "issuerPath": Array [
+                          Object {
+                            "id": null,
+                            "identifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                            "name": "./src/index.ts",
+                          },
+                        ],
+                        "layer": null,
+                        "moduleType": "javascript/auto",
+                        "name": "./src/sub-module.ts",
+                        "nameForCondition": "./src/sub-module.ts",
+                        "optimizationBailout": Array [],
+                        "optional": false,
+                        "orphan": false,
+                        "postOrderIndex": 3,
+                        "preOrderIndex": 2,
+                        "providedExports": Array [
+                          "bar",
+                          "foo",
+                        ],
+                        "reasons": Array [
+                          Object {
+                            "active": false,
+                            "explanation": "",
+                            "loc": "3:0-36",
+                            "module": "./src/index.ts",
+                            "moduleId": null,
+                            "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                            "moduleName": "./src/index.ts",
+                            "resolvedModule": "./src/index.ts",
+                            "resolvedModuleId": null,
+                            "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                            "type": "harmony side effect evaluation",
+                            "userRequest": "./sub-module",
+                          },
+                          Object {
+                            "active": true,
+                            "explanation": "",
+                            "loc": "4:12-15",
+                            "module": "./src/index.ts",
+                            "moduleId": null,
+                            "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                            "moduleName": "./src/index.ts",
+                            "resolvedModule": "./src/index.ts",
+                            "resolvedModuleId": null,
+                            "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                            "type": "harmony import specifier",
+                            "userRequest": "./sub-module",
+                          },
+                        ],
+                        "size": 95,
+                        "sizes": Object {
+                          "javascript": 95,
+                        },
+                        "type": "module",
+                        "usedExports": true,
+                        "warnings": 0,
+                      },
+                      Object {
+                        "assets": Array [],
+                        "buildTimeExecuted": false,
+                        "built": true,
+                        "cacheable": true,
+                        "cached": false,
+                        "chunks": Array [],
+                        "codeGenerated": false,
+                        "depth": 2,
+                        "errors": 0,
+                        "failed": false,
+                        "id": null,
+                        "identifier": "./node_modules/foo/index.js",
+                        "index": 3,
+                        "index2": 1,
+                        "issuer": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                        "issuerId": null,
+                        "issuerName": "./src/sub-module.ts",
+                        "issuerPath": Array [
+                          Object {
+                            "id": null,
+                            "identifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                            "name": "./src/index.ts",
+                          },
+                          Object {
+                            "id": null,
+                            "identifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                            "name": "./src/sub-module.ts",
+                          },
+                        ],
+                        "layer": null,
+                        "moduleType": "javascript/auto",
+                        "name": "./node_modules/foo/index.js",
+                        "nameForCondition": "./node_modules/foo/index.js",
+                        "optimizationBailout": Array [],
+                        "optional": false,
+                        "orphan": false,
+                        "postOrderIndex": 1,
+                        "preOrderIndex": 3,
+                        "providedExports": Array [
+                          "default",
+                        ],
+                        "reasons": Array [
+                          Object {
+                            "active": false,
+                            "explanation": "",
+                            "loc": "2:0-22",
+                            "module": "./src/sub-module.ts",
+                            "moduleId": null,
+                            "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                            "moduleName": "./src/sub-module.ts",
+                            "resolvedModule": "./src/sub-module.ts",
+                            "resolvedModuleId": null,
+                            "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                            "type": "harmony side effect evaluation",
+                            "userRequest": "foo",
+                          },
+                          Object {
+                            "active": true,
+                            "explanation": "",
+                            "loc": "5:0-20",
+                            "module": "./src/sub-module.ts",
+                            "moduleId": null,
+                            "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                            "moduleName": "./src/sub-module.ts",
+                            "resolvedModule": "./src/sub-module.ts",
+                            "resolvedModuleId": null,
+                            "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                            "type": "harmony export imported specifier",
+                            "userRequest": "foo",
+                          },
+                        ],
+                        "size": 48,
+                        "sizes": Object {
+                          "javascript": 48,
+                        },
+                        "type": "module",
+                        "usedExports": Array [
+                          "default",
+                        ],
+                        "warnings": 0,
+                      },
+                      Object {
+                        "assets": Array [],
+                        "buildTimeExecuted": false,
+                        "built": true,
+                        "cacheable": true,
+                        "cached": false,
+                        "chunks": Array [],
+                        "codeGenerated": false,
+                        "depth": 2,
+                        "errors": 0,
+                        "failed": false,
+                        "id": null,
+                        "identifier": "./node_modules/bar/index.js",
+                        "index": 4,
+                        "index2": 2,
+                        "issuer": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                        "issuerId": null,
+                        "issuerName": "./src/sub-module.ts",
+                        "issuerPath": Array [
+                          Object {
+                            "id": null,
+                            "identifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                            "name": "./src/index.ts",
+                          },
+                          Object {
+                            "id": null,
+                            "identifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                            "name": "./src/sub-module.ts",
+                          },
+                        ],
+                        "layer": null,
+                        "moduleType": "javascript/auto",
+                        "name": "./node_modules/bar/index.js",
+                        "nameForCondition": "./node_modules/bar/index.js",
+                        "optimizationBailout": Array [],
+                        "optional": false,
+                        "orphan": false,
+                        "postOrderIndex": 2,
+                        "preOrderIndex": 4,
+                        "providedExports": Array [
+                          "default",
+                        ],
+                        "reasons": Array [
+                          Object {
+                            "active": false,
+                            "explanation": "",
+                            "loc": "4:0-22",
+                            "module": "./src/sub-module.ts",
+                            "moduleId": null,
+                            "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                            "moduleName": "./src/sub-module.ts",
+                            "resolvedModule": "./src/sub-module.ts",
+                            "resolvedModuleId": null,
+                            "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                            "type": "harmony side effect evaluation",
+                            "userRequest": "bar",
+                          },
+                          Object {
+                            "active": true,
+                            "explanation": "",
+                            "loc": "5:0-20",
+                            "module": "./src/sub-module.ts",
+                            "moduleId": null,
+                            "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                            "moduleName": "./src/sub-module.ts",
+                            "resolvedModule": "./src/sub-module.ts",
+                            "resolvedModuleId": null,
+                            "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                            "type": "harmony export imported specifier",
+                            "userRequest": "bar",
+                          },
+                        ],
+                        "size": 25,
+                        "sizes": Object {
+                          "javascript": 25,
+                        },
+                        "type": "module",
+                        "usedExports": Array [
+                          "default",
+                        ],
+                        "warnings": 0,
+                      },
+                    ],
+                    "name": "./src/index.ts + 3 modules",
+                    "nameForCondition": "./src/index.ts",
+                    "optimizationBailout": Array [
+                      "ModuleConcatenation bailout: Cannot concat with ../node_modules/is-array/index.js: Module is not an ECMAScript module",
+                    ],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": 4,
+                    "preOrderIndex": 0,
+                    "providedExports": Array [],
+                    "reasons": Array [
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "one",
+                        "module": null,
+                        "moduleId": null,
+                        "moduleIdentifier": null,
+                        "moduleName": null,
+                        "resolvedModule": null,
+                        "resolvedModuleId": null,
+                        "resolvedModuleIdentifier": null,
+                        "type": "entry",
+                        "userRequest": "./src/index.ts",
+                      },
+                    ],
+                    "size": 281,
+                    "sizes": Object {
+                      "javascript": 281,
+                    },
+                    "type": "module",
+                    "usedExports": Array [],
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  2,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": true,
+                    "cacheable": false,
+                    "cached": false,
+                    "chunks": Array [
+                      804,
+                    ],
+                    "codeGenerated": true,
+                    "depth": 0,
+                    "errors": 0,
+                    "failed": false,
+                    "id": 995,
+                    "identifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts|747de612a20a2ba335723e88d7c23802",
+                    "index": 5,
+                    "index2": 11,
+                    "layer": null,
+                    "moduleType": "javascript/esm",
+                    "modules": Array [
+                      Object {
+                        "assets": Array [],
+                        "buildTimeExecuted": false,
+                        "built": true,
+                        "cacheable": true,
+                        "cached": false,
+                        "chunks": Array [],
+                        "codeGenerated": false,
+                        "depth": 0,
+                        "errors": 0,
+                        "failed": false,
+                        "id": null,
+                        "identifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                        "index": 5,
+                        "index2": 11,
+                        "issuer": null,
+                        "issuerId": null,
+                        "issuerName": null,
+                        "issuerPath": null,
+                        "layer": null,
+                        "moduleType": "javascript/auto",
+                        "name": "./src/index2.ts",
+                        "nameForCondition": "./src/index2.ts",
+                        "optimizationBailout": Array [
+                          "Statement (ExpressionStatement) with side effects in source code at 7:0-9:3",
+                        ],
+                        "optional": false,
+                        "orphan": false,
+                        "postOrderIndex": 11,
+                        "preOrderIndex": 5,
+                        "providedExports": Array [],
+                        "reasons": Array [],
+                        "size": 276,
+                        "sizes": Object {
+                          "javascript": 276,
+                        },
+                        "type": "module",
+                        "usedExports": Array [],
+                        "warnings": 0,
+                      },
+                      Object {
+                        "assets": Array [],
+                        "buildTimeExecuted": false,
+                        "built": true,
+                        "cached": false,
+                        "chunks": Array [],
+                        "codeGenerated": false,
+                        "depth": 1,
+                        "errors": 0,
+                        "failed": false,
+                        "id": null,
+                        "identifier": "external \\"extLib\\"",
+                        "index": 10,
+                        "index2": 9,
+                        "issuer": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                        "issuerId": null,
+                        "issuerName": "./src/index2.ts",
+                        "issuerPath": Array [
+                          Object {
+                            "id": null,
+                            "identifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                            "name": "./src/index2.ts",
+                          },
+                        ],
+                        "layer": null,
+                        "moduleType": "javascript/dynamic",
+                        "name": "external \\"extLib\\"",
+                        "nameForCondition": null,
+                        "optimizationBailout": Array [],
+                        "optional": false,
+                        "orphan": false,
+                        "postOrderIndex": 9,
+                        "preOrderIndex": 10,
+                        "providedExports": null,
+                        "reasons": Array [
+                          Object {
+                            "active": true,
+                            "explanation": "",
+                            "loc": "5:0-16",
+                            "module": "./src/index2.ts",
+                            "moduleId": null,
+                            "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                            "moduleName": "./src/index2.ts",
+                            "resolvedModule": "./src/index2.ts",
+                            "resolvedModuleId": null,
+                            "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                            "type": "harmony side effect evaluation",
+                            "userRequest": "extLib",
+                          },
+                        ],
+                        "size": 42,
+                        "sizes": Object {
+                          "javascript": 42,
+                        },
+                        "type": "module",
+                        "usedExports": Array [],
+                        "warnings": 0,
+                      },
+                    ],
+                    "name": "./src/index2.ts + 1 modules",
+                    "nameForCondition": "./src/index2.ts",
+                    "optimizationBailout": Array [
+                      "ModuleConcatenation bailout: Cannot concat with ./src/index2.css: Module uses module.id",
+                      "ModuleConcatenation bailout: Cannot concat with ../node_modules/is-array/index.js: Module is not an ECMAScript module",
+                    ],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": 11,
+                    "preOrderIndex": 5,
+                    "providedExports": Array [],
+                    "reasons": Array [
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "two",
+                        "module": null,
+                        "moduleId": null,
+                        "moduleIdentifier": null,
+                        "moduleName": null,
+                        "resolvedModule": null,
+                        "resolvedModuleId": null,
+                        "resolvedModuleIdentifier": null,
+                        "type": "entry",
+                        "userRequest": "./src/index2.ts",
+                      },
+                    ],
+                    "size": 318,
+                    "sizes": Object {
+                      "javascript": 318,
+                    },
+                    "type": "module",
+                    "usedExports": Array [],
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  3,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": true,
+                    "cacheable": true,
+                    "cached": false,
+                    "chunks": Array [
+                      255,
+                      804,
+                    ],
+                    "codeGenerated": true,
+                    "depth": 1,
+                    "errors": 0,
+                    "failed": false,
+                    "id": 929,
+                    "identifier": "../node_modules/is-array/index.js",
+                    "index": 1,
+                    "index2": 0,
+                    "issuer": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                    "issuerId": null,
+                    "issuerName": "./src/index.ts",
+                    "issuerPath": Array [
+                      Object {
+                        "id": null,
+                        "identifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                        "name": "./src/index.ts",
+                      },
+                    ],
+                    "layer": null,
+                    "moduleType": "javascript/auto",
+                    "name": "../node_modules/is-array/index.js",
+                    "nameForCondition": "../node_modules/is-array/index.js",
+                    "optimizationBailout": Array [
+                      "CommonJS bailout: module.exports is used directly at 31:0-14",
+                      "Statement (VariableDeclaration) with side effects in source code at 6:0-28",
+                      "ModuleConcatenation bailout: Module is not an ECMAScript module",
+                    ],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": 0,
+                    "preOrderIndex": 1,
+                    "providedExports": null,
+                    "reasons": Array [
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "2:0-31",
+                        "module": "./src/index.ts + 3 modules",
+                        "moduleId": 292,
+                        "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
+                        "moduleName": "./src/index.ts + 3 modules",
+                        "resolvedModule": "./src/index.ts",
+                        "resolvedModuleId": null,
+                        "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                        "type": "harmony side effect evaluation",
+                        "userRequest": "is-array",
+                      },
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "4:17-24",
+                        "module": "./src/index.ts + 3 modules",
+                        "moduleId": 292,
+                        "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
+                        "moduleName": "./src/index.ts + 3 modules",
+                        "resolvedModule": "./src/index.ts",
+                        "resolvedModuleId": null,
+                        "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                        "type": "harmony import specifier",
+                        "userRequest": "is-array",
+                      },
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "2:0-31",
+                        "module": "./src/index2.ts + 1 modules",
+                        "moduleId": 995,
+                        "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts|747de612a20a2ba335723e88d7c23802",
+                        "moduleName": "./src/index2.ts + 1 modules",
+                        "resolvedModule": "./src/index2.ts",
+                        "resolvedModuleId": null,
+                        "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                        "type": "harmony side effect evaluation",
+                        "userRequest": "is-array",
+                      },
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "10:30-37",
+                        "module": "./src/index2.ts + 1 modules",
+                        "moduleId": 995,
+                        "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts|747de612a20a2ba335723e88d7c23802",
+                        "moduleName": "./src/index2.ts + 1 modules",
+                        "resolvedModule": "./src/index2.ts",
+                        "resolvedModuleId": null,
+                        "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                        "type": "harmony import specifier",
+                        "userRequest": "is-array",
+                      },
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "31:0-14",
+                        "module": "../node_modules/is-array/index.js",
+                        "moduleId": 929,
+                        "moduleIdentifier": "../node_modules/is-array/index.js",
+                        "moduleName": "../node_modules/is-array/index.js",
+                        "resolvedModule": "../node_modules/is-array/index.js",
+                        "resolvedModuleId": 929,
+                        "resolvedModuleIdentifier": "../node_modules/is-array/index.js",
+                        "type": "cjs self exports reference",
+                        "userRequest": null,
+                      },
+                    ],
+                    "size": 470,
+                    "sizes": Object {
+                      "javascript": 470,
+                    },
+                    "type": "module",
+                    "usedExports": null,
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  4,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": true,
+                    "cacheable": true,
+                    "cached": false,
+                    "chunks": Array [],
+                    "codeGenerated": false,
+                    "depth": 1,
+                    "errors": 0,
+                    "failed": false,
+                    "id": null,
+                    "identifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                    "index": 2,
+                    "index2": 3,
+                    "issuer": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                    "issuerId": null,
+                    "issuerName": "./src/index.ts",
+                    "issuerPath": Array [
+                      Object {
+                        "id": null,
+                        "identifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                        "name": "./src/index.ts",
+                      },
+                    ],
+                    "layer": null,
+                    "moduleType": "javascript/auto",
+                    "name": "./src/sub-module.ts",
+                    "nameForCondition": "./src/sub-module.ts",
+                    "optimizationBailout": Array [],
+                    "optional": false,
+                    "orphan": true,
+                    "postOrderIndex": 3,
+                    "preOrderIndex": 2,
+                    "providedExports": Array [
+                      "bar",
+                      "foo",
+                    ],
+                    "reasons": Array [
+                      Object {
+                        "active": false,
+                        "explanation": "",
+                        "loc": "3:0-36",
+                        "module": "./src/index.ts",
+                        "moduleId": null,
+                        "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                        "moduleName": "./src/index.ts",
+                        "resolvedModule": "./src/index.ts",
+                        "resolvedModuleId": null,
+                        "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                        "type": "harmony side effect evaluation",
+                        "userRequest": "./sub-module",
+                      },
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "4:12-15",
+                        "module": "./src/index.ts",
+                        "moduleId": null,
+                        "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                        "moduleName": "./src/index.ts",
+                        "resolvedModule": "./src/index.ts",
+                        "resolvedModuleId": null,
+                        "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                        "type": "harmony import specifier",
+                        "userRequest": "./sub-module",
+                      },
+                    ],
+                    "size": 95,
+                    "sizes": Object {
+                      "javascript": 95,
+                    },
+                    "type": "module",
+                    "usedExports": true,
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  5,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": true,
+                    "cacheable": true,
+                    "cached": false,
+                    "chunks": Array [
+                      804,
+                    ],
+                    "codeGenerated": true,
+                    "depth": 1,
+                    "errors": 0,
+                    "failed": false,
+                    "id": 945,
+                    "identifier": "../node_modules/css-loader/dist/cjs.js!./src/index2.css",
+                    "index": 6,
+                    "index2": 8,
+                    "issuer": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                    "issuerId": null,
+                    "issuerName": "./src/index2.ts",
+                    "issuerPath": Array [
+                      Object {
+                        "id": null,
+                        "identifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                        "name": "./src/index2.ts",
+                      },
+                    ],
+                    "layer": null,
+                    "moduleType": "javascript/auto",
+                    "name": "./src/index2.css",
+                    "nameForCondition": "./src/index2.css",
+                    "optimizationBailout": Array [
+                      "Statement (VariableDeclaration) with side effects in source code at 5:0-84",
+                      "ModuleConcatenation bailout: Module uses module.id",
+                    ],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": 8,
+                    "preOrderIndex": 6,
+                    "providedExports": Array [
+                      "default",
+                    ],
+                    "reasons": Array [
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "4:0-34",
+                        "module": "./src/index2.ts + 1 modules",
+                        "moduleId": 995,
+                        "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts|747de612a20a2ba335723e88d7c23802",
+                        "moduleName": "./src/index2.ts + 1 modules",
+                        "resolvedModule": "./src/index2.ts",
+                        "resolvedModuleId": null,
+                        "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                        "type": "harmony side effect evaluation",
+                        "userRequest": "./index2.css",
+                      },
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "10:17-28",
+                        "module": "./src/index2.ts + 1 modules",
+                        "moduleId": 995,
+                        "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts|747de612a20a2ba335723e88d7c23802",
+                        "moduleName": "./src/index2.ts + 1 modules",
+                        "resolvedModule": "./src/index2.ts",
+                        "resolvedModuleId": null,
+                        "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                        "type": "harmony import specifier",
+                        "userRequest": "./index2.css",
+                      },
+                    ],
+                    "size": 644,
+                    "sizes": Object {
+                      "javascript": 644,
+                    },
+                    "type": "module",
+                    "usedExports": Array [
+                      "default",
+                    ],
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  6,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": true,
+                    "cached": false,
+                    "chunks": Array [],
+                    "codeGenerated": false,
+                    "depth": 1,
+                    "errors": 0,
+                    "failed": false,
+                    "id": null,
+                    "identifier": "external \\"extLib\\"",
+                    "index": 10,
+                    "index2": 9,
+                    "issuer": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                    "issuerId": null,
+                    "issuerName": "./src/index2.ts",
+                    "issuerPath": Array [
+                      Object {
+                        "id": null,
+                        "identifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                        "name": "./src/index2.ts",
+                      },
+                    ],
+                    "layer": null,
+                    "moduleType": "javascript/dynamic",
+                    "name": "external \\"extLib\\"",
+                    "nameForCondition": null,
+                    "optimizationBailout": Array [],
+                    "optional": false,
+                    "orphan": true,
+                    "postOrderIndex": 9,
+                    "preOrderIndex": 10,
+                    "providedExports": null,
+                    "reasons": Array [
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "5:0-16",
+                        "module": "./src/index2.ts",
+                        "moduleId": null,
+                        "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                        "moduleName": "./src/index2.ts",
+                        "resolvedModule": "./src/index2.ts",
+                        "resolvedModuleId": null,
+                        "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                        "type": "harmony side effect evaluation",
+                        "userRequest": "extLib",
+                      },
+                    ],
+                    "size": 42,
+                    "sizes": Object {
+                      "javascript": 42,
+                    },
+                    "type": "module",
+                    "usedExports": Array [],
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  7,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": true,
+                    "cacheable": true,
+                    "cached": false,
+                    "chunks": Array [
+                      804,
+                    ],
+                    "codeGenerated": true,
+                    "depth": 1,
+                    "errors": 0,
+                    "failed": false,
+                    "id": 742,
+                    "identifier": "./src/test.txt",
+                    "index": 11,
+                    "index2": 10,
+                    "issuer": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                    "issuerId": null,
+                    "issuerName": "./src/index2.ts",
+                    "issuerPath": Array [
+                      Object {
+                        "id": null,
+                        "identifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                        "name": "./src/index2.ts",
+                      },
+                    ],
+                    "layer": null,
+                    "moduleType": "asset/resource",
+                    "name": "./src/test.txt",
+                    "nameForCondition": "./src/test.txt",
+                    "optimizationBailout": Array [
+                      "ModuleConcatenation bailout: Module Concatenation is not implemented for AssetGenerator",
+                    ],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": 10,
+                    "preOrderIndex": 11,
+                    "providedExports": Array [],
+                    "reasons": Array [
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "6:12-50",
+                        "module": "./src/index2.ts + 1 modules",
+                        "moduleId": 995,
+                        "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts|747de612a20a2ba335723e88d7c23802",
+                        "moduleName": "./src/index2.ts + 1 modules",
+                        "resolvedModule": "./src/index2.ts",
+                        "resolvedModuleId": null,
+                        "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                        "type": "new URL()",
+                        "userRequest": "./test.txt",
+                      },
+                    ],
+                    "size": 42,
+                    "sizes": Object {
+                      "asset": 15,
+                      "javascript": 42,
+                    },
+                    "type": "module",
+                    "usedExports": true,
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  8,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": true,
+                    "cacheable": true,
+                    "cached": false,
+                    "chunks": Array [
+                      848,
+                    ],
+                    "codeGenerated": true,
+                    "depth": 1,
+                    "errors": 0,
+                    "failed": false,
+                    "id": 848,
+                    "identifier": "../node_modules/babel-loader/lib/index.js!./src/dyn.ts",
+                    "index": 12,
+                    "index2": 12,
+                    "issuer": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                    "issuerId": null,
+                    "issuerName": "./src/index2.ts",
+                    "issuerPath": Array [
+                      Object {
+                        "id": null,
+                        "identifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                        "name": "./src/index2.ts",
+                      },
+                    ],
+                    "layer": null,
+                    "moduleType": "javascript/auto",
+                    "name": "./src/dyn.ts",
+                    "nameForCondition": "./src/dyn.ts",
+                    "optimizationBailout": Array [],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": 12,
+                    "preOrderIndex": 12,
+                    "providedExports": Array [
+                      "default",
+                    ],
+                    "reasons": Array [
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "7:0-15",
+                        "module": "./src/index2.ts + 1 modules",
+                        "moduleId": 995,
+                        "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts|747de612a20a2ba335723e88d7c23802",
+                        "moduleName": "./src/index2.ts + 1 modules",
+                        "resolvedModule": "./src/index2.ts",
+                        "resolvedModuleId": null,
+                        "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                        "type": "import()",
+                        "userRequest": "./dyn",
+                      },
+                    ],
+                    "size": 21,
+                    "sizes": Object {
+                      "javascript": 21,
+                    },
+                    "type": "module",
+                    "usedExports": true,
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  9,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": true,
+                    "cacheable": true,
+                    "cached": false,
+                    "chunks": Array [],
+                    "codeGenerated": false,
+                    "depth": 2,
+                    "errors": 0,
+                    "failed": false,
+                    "id": null,
+                    "identifier": "./node_modules/foo/index.js",
+                    "index": 3,
+                    "index2": 1,
+                    "issuer": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                    "issuerId": null,
+                    "issuerName": "./src/sub-module.ts",
+                    "issuerPath": Array [
+                      Object {
+                        "id": null,
+                        "identifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                        "name": "./src/index.ts",
+                      },
+                      Object {
+                        "id": null,
+                        "identifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                        "name": "./src/sub-module.ts",
+                      },
+                    ],
+                    "layer": null,
+                    "moduleType": "javascript/auto",
+                    "name": "./node_modules/foo/index.js",
+                    "nameForCondition": "./node_modules/foo/index.js",
+                    "optimizationBailout": Array [],
+                    "optional": false,
+                    "orphan": true,
+                    "postOrderIndex": 1,
+                    "preOrderIndex": 3,
+                    "providedExports": Array [
+                      "default",
+                    ],
+                    "reasons": Array [
+                      Object {
+                        "active": false,
+                        "explanation": "",
+                        "loc": "2:0-22",
+                        "module": "./src/sub-module.ts",
+                        "moduleId": null,
+                        "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                        "moduleName": "./src/sub-module.ts",
+                        "resolvedModule": "./src/sub-module.ts",
+                        "resolvedModuleId": null,
+                        "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                        "type": "harmony side effect evaluation",
+                        "userRequest": "foo",
+                      },
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "5:0-20",
+                        "module": "./src/sub-module.ts",
+                        "moduleId": null,
+                        "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                        "moduleName": "./src/sub-module.ts",
+                        "resolvedModule": "./src/sub-module.ts",
+                        "resolvedModuleId": null,
+                        "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                        "type": "harmony export imported specifier",
+                        "userRequest": "foo",
+                      },
+                    ],
+                    "size": 48,
+                    "sizes": Object {
+                      "javascript": 48,
+                    },
+                    "type": "module",
+                    "usedExports": Array [
+                      "default",
+                    ],
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  10,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": true,
+                    "cacheable": true,
+                    "cached": false,
+                    "chunks": Array [],
+                    "codeGenerated": false,
+                    "depth": 2,
+                    "errors": 0,
+                    "failed": false,
+                    "id": null,
+                    "identifier": "./node_modules/bar/index.js",
+                    "index": 4,
+                    "index2": 2,
+                    "issuer": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                    "issuerId": null,
+                    "issuerName": "./src/sub-module.ts",
+                    "issuerPath": Array [
+                      Object {
+                        "id": null,
+                        "identifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                        "name": "./src/index.ts",
+                      },
+                      Object {
+                        "id": null,
+                        "identifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                        "name": "./src/sub-module.ts",
+                      },
+                    ],
+                    "layer": null,
+                    "moduleType": "javascript/auto",
+                    "name": "./node_modules/bar/index.js",
+                    "nameForCondition": "./node_modules/bar/index.js",
+                    "optimizationBailout": Array [],
+                    "optional": false,
+                    "orphan": true,
+                    "postOrderIndex": 2,
+                    "preOrderIndex": 4,
+                    "providedExports": Array [
+                      "default",
+                    ],
+                    "reasons": Array [
+                      Object {
+                        "active": false,
+                        "explanation": "",
+                        "loc": "4:0-22",
+                        "module": "./src/sub-module.ts",
+                        "moduleId": null,
+                        "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                        "moduleName": "./src/sub-module.ts",
+                        "resolvedModule": "./src/sub-module.ts",
+                        "resolvedModuleId": null,
+                        "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                        "type": "harmony side effect evaluation",
+                        "userRequest": "bar",
+                      },
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "5:0-20",
+                        "module": "./src/sub-module.ts",
+                        "moduleId": null,
+                        "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                        "moduleName": "./src/sub-module.ts",
+                        "resolvedModule": "./src/sub-module.ts",
+                        "resolvedModuleId": null,
+                        "resolvedModuleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                        "type": "harmony export imported specifier",
+                        "userRequest": "bar",
+                      },
+                    ],
+                    "size": 25,
+                    "sizes": Object {
+                      "javascript": 25,
+                    },
+                    "type": "module",
+                    "usedExports": Array [
+                      "default",
+                    ],
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  11,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": true,
+                    "cacheable": true,
+                    "cached": false,
+                    "chunks": Array [
+                      804,
+                    ],
+                    "codeGenerated": true,
+                    "depth": 2,
+                    "errors": 0,
+                    "failed": false,
+                    "id": 476,
+                    "identifier": "../node_modules/css-loader/dist/runtime/api.js",
+                    "index": 7,
+                    "index2": 5,
+                    "issuer": "../node_modules/css-loader/dist/cjs.js!./src/index2.css",
+                    "issuerId": 945,
+                    "issuerName": "./src/index2.css",
+                    "issuerPath": Array [
+                      Object {
+                        "id": null,
+                        "identifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                        "name": "./src/index2.ts",
+                      },
+                      Object {
+                        "id": 945,
+                        "identifier": "../node_modules/css-loader/dist/cjs.js!./src/index2.css",
+                        "name": "./src/index2.css",
+                      },
+                    ],
+                    "layer": null,
+                    "moduleType": "javascript/auto",
+                    "name": "../node_modules/css-loader/dist/runtime/api.js",
+                    "nameForCondition": "../node_modules/css-loader/dist/runtime/api.js",
+                    "optimizationBailout": Array [
+                      "CommonJS bailout: module.exports is used directly at 9:0-14",
+                      "Statement (ExpressionStatement) with side effects in source code at 9:0-66:2",
+                      "ModuleConcatenation bailout: Module is not an ECMAScript module",
+                    ],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": 5,
+                    "preOrderIndex": 7,
+                    "providedExports": null,
+                    "reasons": Array [
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "2:0-92",
+                        "module": "./src/index2.css",
+                        "moduleId": 945,
+                        "moduleIdentifier": "../node_modules/css-loader/dist/cjs.js!./src/index2.css",
+                        "moduleName": "./src/index2.css",
+                        "resolvedModule": "./src/index2.css",
+                        "resolvedModuleId": 945,
+                        "resolvedModuleIdentifier": "../node_modules/css-loader/dist/cjs.js!./src/index2.css",
+                        "type": "harmony side effect evaluation",
+                        "userRequest": "../../node_modules/css-loader/dist/runtime/api.js",
+                      },
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "5:30-57",
+                        "module": "./src/index2.css",
+                        "moduleId": 945,
+                        "moduleIdentifier": "../node_modules/css-loader/dist/cjs.js!./src/index2.css",
+                        "moduleName": "./src/index2.css",
+                        "resolvedModule": "./src/index2.css",
+                        "resolvedModuleId": 945,
+                        "resolvedModuleIdentifier": "../node_modules/css-loader/dist/cjs.js!./src/index2.css",
+                        "type": "harmony import specifier",
+                        "userRequest": "../../node_modules/css-loader/dist/runtime/api.js",
+                      },
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "9:0-14",
+                        "module": "../node_modules/css-loader/dist/runtime/api.js",
+                        "moduleId": 476,
+                        "moduleIdentifier": "../node_modules/css-loader/dist/runtime/api.js",
+                        "moduleName": "../node_modules/css-loader/dist/runtime/api.js",
+                        "resolvedModule": "../node_modules/css-loader/dist/runtime/api.js",
+                        "resolvedModuleId": 476,
+                        "resolvedModuleIdentifier": "../node_modules/css-loader/dist/runtime/api.js",
+                        "type": "cjs self exports reference",
+                        "userRequest": null,
+                      },
+                    ],
+                    "size": 1605,
+                    "sizes": Object {
+                      "javascript": 1605,
+                    },
+                    "type": "module",
+                    "usedExports": null,
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  12,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": true,
+                    "cacheable": true,
+                    "cached": false,
+                    "chunks": Array [
+                      804,
+                    ],
+                    "codeGenerated": true,
+                    "depth": 2,
+                    "errors": 0,
+                    "failed": false,
+                    "id": 678,
+                    "identifier": "../node_modules/css-loader/dist/runtime/getUrl.js",
+                    "index": 8,
+                    "index2": 6,
+                    "issuer": "../node_modules/css-loader/dist/cjs.js!./src/index2.css",
+                    "issuerId": 945,
+                    "issuerName": "./src/index2.css",
+                    "issuerPath": Array [
+                      Object {
+                        "id": null,
+                        "identifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                        "name": "./src/index2.ts",
+                      },
+                      Object {
+                        "id": 945,
+                        "identifier": "../node_modules/css-loader/dist/cjs.js!./src/index2.css",
+                        "name": "./src/index2.css",
+                      },
+                    ],
+                    "layer": null,
+                    "moduleType": "javascript/auto",
+                    "name": "../node_modules/css-loader/dist/runtime/getUrl.js",
+                    "nameForCondition": "../node_modules/css-loader/dist/runtime/getUrl.js",
+                    "optimizationBailout": Array [
+                      "CommonJS bailout: module.exports is used directly at 3:0-14",
+                      "Statement (ExpressionStatement) with side effects in source code at 3:0-34:2",
+                      "ModuleConcatenation bailout: Module is not an ECMAScript module",
+                    ],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": 6,
+                    "preOrderIndex": 8,
+                    "providedExports": null,
+                    "reasons": Array [
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "3:0-99",
+                        "module": "./src/index2.css",
+                        "moduleId": 945,
+                        "moduleIdentifier": "../node_modules/css-loader/dist/cjs.js!./src/index2.css",
+                        "moduleName": "./src/index2.css",
+                        "resolvedModule": "./src/index2.css",
+                        "resolvedModuleId": 945,
+                        "resolvedModuleIdentifier": "../node_modules/css-loader/dist/cjs.js!./src/index2.css",
+                        "type": "harmony side effect evaluation",
+                        "userRequest": "../../node_modules/css-loader/dist/runtime/getUrl.js",
+                      },
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "6:41-72",
+                        "module": "./src/index2.css",
+                        "moduleId": 945,
+                        "moduleIdentifier": "../node_modules/css-loader/dist/cjs.js!./src/index2.css",
+                        "moduleName": "./src/index2.css",
+                        "resolvedModule": "./src/index2.css",
+                        "resolvedModuleId": 945,
+                        "resolvedModuleIdentifier": "../node_modules/css-loader/dist/cjs.js!./src/index2.css",
+                        "type": "harmony import specifier",
+                        "userRequest": "../../node_modules/css-loader/dist/runtime/getUrl.js",
+                      },
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "3:0-14",
+                        "module": "../node_modules/css-loader/dist/runtime/getUrl.js",
+                        "moduleId": 678,
+                        "moduleIdentifier": "../node_modules/css-loader/dist/runtime/getUrl.js",
+                        "moduleName": "../node_modules/css-loader/dist/runtime/getUrl.js",
+                        "resolvedModule": "../node_modules/css-loader/dist/runtime/getUrl.js",
+                        "resolvedModuleId": 678,
+                        "resolvedModuleIdentifier": "../node_modules/css-loader/dist/runtime/getUrl.js",
+                        "type": "cjs self exports reference",
+                        "userRequest": null,
+                      },
+                    ],
+                    "size": 830,
+                    "sizes": Object {
+                      "javascript": 830,
+                    },
+                    "type": "module",
+                    "usedExports": null,
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  13,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": true,
+                    "cacheable": true,
+                    "cached": false,
+                    "chunks": Array [
+                      804,
+                    ],
+                    "codeGenerated": true,
+                    "depth": 2,
+                    "errors": 0,
+                    "failed": false,
+                    "id": 412,
+                    "identifier": "./src/statoscope.png",
+                    "index": 9,
+                    "index2": 7,
+                    "issuer": "../node_modules/css-loader/dist/cjs.js!./src/index2.css",
+                    "issuerId": 945,
+                    "issuerName": "./src/index2.css",
+                    "issuerPath": Array [
+                      Object {
+                        "id": null,
+                        "identifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+                        "name": "./src/index2.ts",
+                      },
+                      Object {
+                        "id": 945,
+                        "identifier": "../node_modules/css-loader/dist/cjs.js!./src/index2.css",
+                        "name": "./src/index2.css",
+                      },
+                    ],
+                    "layer": null,
+                    "moduleType": "asset/inline",
+                    "name": "./src/statoscope.png",
+                    "nameForCondition": "./src/statoscope.png",
+                    "optimizationBailout": Array [
+                      "ModuleConcatenation bailout: Module Concatenation is not implemented for AssetGenerator",
+                    ],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": 7,
+                    "preOrderIndex": 9,
+                    "providedExports": Array [],
+                    "reasons": Array [
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "4:0-61",
+                        "module": "./src/index2.css",
+                        "moduleId": 945,
+                        "moduleIdentifier": "../node_modules/css-loader/dist/cjs.js!./src/index2.css",
+                        "moduleName": "./src/index2.css",
+                        "resolvedModule": "./src/index2.css",
+                        "resolvedModuleId": 945,
+                        "resolvedModuleIdentifier": "../node_modules/css-loader/dist/cjs.js!./src/index2.css",
+                        "type": "harmony side effect evaluation",
+                        "userRequest": "./statoscope.png",
+                      },
+                      Object {
+                        "active": true,
+                        "explanation": "",
+                        "loc": "6:73-102",
+                        "module": "./src/index2.css",
+                        "moduleId": 945,
+                        "moduleIdentifier": "../node_modules/css-loader/dist/cjs.js!./src/index2.css",
+                        "moduleName": "./src/index2.css",
+                        "resolvedModule": "./src/index2.css",
+                        "resolvedModuleId": 945,
+                        "resolvedModuleIdentifier": "../node_modules/css-loader/dist/cjs.js!./src/index2.css",
+                        "type": "harmony import specifier",
+                        "userRequest": "./statoscope.png",
+                      },
+                    ],
+                    "size": 8311.84,
+                    "sizes": Object {
+                      "javascript": 8311.84,
+                    },
+                    "type": "module",
+                    "usedExports": true,
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  14,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": true,
+                    "cacheable": true,
+                    "cached": false,
+                    "chunks": Array [],
+                    "codeGenerated": false,
+                    "depth": 3,
+                    "errors": 0,
+                    "failed": false,
+                    "id": null,
+                    "identifier": "./node_modules/foo/node_modules/bar/index.js",
+                    "index": null,
+                    "index2": null,
+                    "issuer": "./node_modules/foo/index.js",
+                    "issuerId": null,
+                    "issuerName": "./node_modules/foo/index.js",
+                    "issuerPath": Array [
+                      Object {
+                        "id": null,
+                        "identifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts",
+                        "name": "./src/index.ts",
+                      },
+                      Object {
+                        "id": null,
+                        "identifier": "../node_modules/babel-loader/lib/index.js!./src/sub-module.ts",
+                        "name": "./src/sub-module.ts",
+                      },
+                      Object {
+                        "id": null,
+                        "identifier": "./node_modules/foo/index.js",
+                        "name": "./node_modules/foo/index.js",
+                      },
+                    ],
+                    "layer": null,
+                    "moduleType": "javascript/auto",
+                    "name": "./node_modules/foo/node_modules/bar/index.js",
+                    "nameForCondition": "./node_modules/foo/node_modules/bar/index.js",
+                    "optimizationBailout": Array [
+                      "ModuleConcatenation bailout: Module is not in any chunk",
+                    ],
+                    "optional": false,
+                    "orphan": true,
+                    "postOrderIndex": null,
+                    "preOrderIndex": null,
+                    "providedExports": Array [
+                      "default",
+                    ],
+                    "reasons": Array [
+                      Object {
+                        "active": false,
+                        "explanation": "",
+                        "loc": "1:0-22",
+                        "module": "./src/index.ts + 3 modules",
+                        "moduleId": 292,
+                        "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
+                        "moduleName": "./src/index.ts + 3 modules",
+                        "resolvedModule": "./node_modules/foo/index.js",
+                        "resolvedModuleId": null,
+                        "resolvedModuleIdentifier": "./node_modules/foo/index.js",
+                        "type": "harmony side effect evaluation",
+                        "userRequest": "bar",
+                      },
+                      Object {
+                        "active": false,
+                        "explanation": "",
+                        "loc": "1:0-22",
+                        "module": "./node_modules/foo/index.js",
+                        "moduleId": null,
+                        "moduleIdentifier": "./node_modules/foo/index.js",
+                        "moduleName": "./node_modules/foo/index.js",
+                        "resolvedModule": "./node_modules/foo/index.js",
+                        "resolvedModuleId": null,
+                        "resolvedModuleIdentifier": "./node_modules/foo/index.js",
+                        "type": "harmony side effect evaluation",
+                        "userRequest": "bar",
+                      },
+                    ],
+                    "size": 25,
+                    "sizes": Object {
+                      "javascript": 25,
+                    },
+                    "type": "module",
+                    "usedExports": false,
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  15,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": false,
+                    "cached": false,
+                    "chunks": Array [
+                      255,
+                    ],
+                    "codeGenerated": true,
+                    "depth": null,
+                    "errors": 0,
+                    "failed": false,
+                    "id": "",
+                    "identifier": "webpack/runtime/compat get default export",
+                    "index": null,
+                    "index2": null,
+                    "layer": null,
+                    "moduleType": "runtime",
+                    "name": "webpack/runtime/compat get default export",
+                    "nameForCondition": null,
+                    "optimizationBailout": Array [],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": null,
+                    "preOrderIndex": null,
+                    "providedExports": Array [],
+                    "reasons": Array [],
+                    "size": 267,
+                    "sizes": Object {
+                      "runtime": 267,
+                    },
+                    "type": "module",
+                    "usedExports": null,
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  16,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": false,
+                    "cached": false,
+                    "chunks": Array [
+                      255,
+                    ],
+                    "codeGenerated": true,
+                    "depth": null,
+                    "errors": 0,
+                    "failed": false,
+                    "id": "",
+                    "identifier": "webpack/runtime/define property getters",
+                    "index": null,
+                    "index2": null,
+                    "layer": null,
+                    "moduleType": "runtime",
+                    "name": "webpack/runtime/define property getters",
+                    "nameForCondition": null,
+                    "optimizationBailout": Array [],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": null,
+                    "preOrderIndex": null,
+                    "providedExports": Array [],
+                    "reasons": Array [],
+                    "size": 308,
+                    "sizes": Object {
+                      "runtime": 308,
+                    },
+                    "type": "module",
+                    "usedExports": null,
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  17,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": false,
+                    "cached": false,
+                    "chunks": Array [
+                      804,
+                    ],
+                    "codeGenerated": true,
+                    "depth": null,
+                    "errors": 0,
+                    "failed": false,
+                    "id": "",
+                    "identifier": "webpack/runtime/ensure chunk",
+                    "index": null,
+                    "index2": null,
+                    "layer": null,
+                    "moduleType": "runtime",
+                    "name": "webpack/runtime/ensure chunk",
+                    "nameForCondition": null,
+                    "optimizationBailout": Array [],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": null,
+                    "preOrderIndex": null,
+                    "providedExports": Array [],
+                    "reasons": Array [],
+                    "size": 326,
+                    "sizes": Object {
+                      "runtime": 326,
+                    },
+                    "type": "module",
+                    "usedExports": null,
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  18,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": false,
+                    "cached": false,
+                    "chunks": Array [
+                      804,
+                    ],
+                    "codeGenerated": true,
+                    "depth": null,
+                    "errors": 0,
+                    "failed": false,
+                    "id": "",
+                    "identifier": "webpack/runtime/get javascript chunk filename",
+                    "index": null,
+                    "index2": null,
+                    "layer": null,
+                    "moduleType": "runtime",
+                    "name": "webpack/runtime/get javascript chunk filename",
+                    "nameForCondition": null,
+                    "optimizationBailout": Array [],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": null,
+                    "preOrderIndex": null,
+                    "providedExports": Array [],
+                    "reasons": Array [],
+                    "size": 167,
+                    "sizes": Object {
+                      "runtime": 167,
+                    },
+                    "type": "module",
+                    "usedExports": null,
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  19,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": false,
+                    "cached": false,
+                    "chunks": Array [
+                      804,
+                    ],
+                    "codeGenerated": true,
+                    "depth": null,
+                    "errors": 0,
+                    "failed": false,
+                    "id": "",
+                    "identifier": "webpack/runtime/global",
+                    "index": null,
+                    "index2": null,
+                    "layer": null,
+                    "moduleType": "runtime",
+                    "name": "webpack/runtime/global",
+                    "nameForCondition": null,
+                    "optimizationBailout": Array [],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": null,
+                    "preOrderIndex": null,
+                    "providedExports": Array [],
+                    "reasons": Array [],
+                    "size": 221,
+                    "sizes": Object {
+                      "runtime": 221,
+                    },
+                    "type": "module",
+                    "usedExports": null,
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  20,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": false,
+                    "cached": false,
+                    "chunks": Array [
+                      255,
+                    ],
+                    "codeGenerated": true,
+                    "depth": null,
+                    "errors": 0,
+                    "failed": false,
+                    "id": "",
+                    "identifier": "webpack/runtime/hasOwnProperty shorthand",
+                    "index": null,
+                    "index2": null,
+                    "layer": null,
+                    "moduleType": "runtime",
+                    "name": "webpack/runtime/hasOwnProperty shorthand",
+                    "nameForCondition": null,
+                    "optimizationBailout": Array [],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": null,
+                    "preOrderIndex": null,
+                    "providedExports": Array [],
+                    "reasons": Array [],
+                    "size": 88,
+                    "sizes": Object {
+                      "runtime": 88,
+                    },
+                    "type": "module",
+                    "usedExports": null,
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  21,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": false,
+                    "cached": false,
+                    "chunks": Array [
+                      804,
+                    ],
+                    "codeGenerated": true,
+                    "depth": null,
+                    "errors": 0,
+                    "failed": false,
+                    "id": "",
+                    "identifier": "webpack/runtime/jsonp chunk loading",
+                    "index": null,
+                    "index2": null,
+                    "layer": null,
+                    "moduleType": "runtime",
+                    "name": "webpack/runtime/jsonp chunk loading",
+                    "nameForCondition": null,
+                    "optimizationBailout": Array [],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": null,
+                    "preOrderIndex": null,
+                    "providedExports": Array [],
+                    "reasons": Array [],
+                    "size": 3072,
+                    "sizes": Object {
+                      "runtime": 3072,
+                    },
+                    "type": "module",
+                    "usedExports": null,
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  22,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": false,
+                    "cached": false,
+                    "chunks": Array [
+                      804,
+                    ],
+                    "codeGenerated": true,
+                    "depth": null,
+                    "errors": 0,
+                    "failed": false,
+                    "id": "",
+                    "identifier": "webpack/runtime/load script",
+                    "index": null,
+                    "index2": null,
+                    "layer": null,
+                    "moduleType": "runtime",
+                    "name": "webpack/runtime/load script",
+                    "nameForCondition": null,
+                    "optimizationBailout": Array [],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": null,
+                    "preOrderIndex": null,
+                    "providedExports": Array [],
+                    "reasons": Array [],
+                    "size": 1503,
+                    "sizes": Object {
+                      "runtime": 1503,
+                    },
+                    "type": "module",
+                    "usedExports": null,
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  23,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": false,
+                    "cached": false,
+                    "chunks": Array [
+                      255,
+                    ],
+                    "codeGenerated": true,
+                    "depth": null,
+                    "errors": 0,
+                    "failed": false,
+                    "id": "",
+                    "identifier": "webpack/runtime/make namespace object",
+                    "index": null,
+                    "index2": null,
+                    "layer": null,
+                    "moduleType": "runtime",
+                    "name": "webpack/runtime/make namespace object",
+                    "nameForCondition": null,
+                    "optimizationBailout": Array [],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": null,
+                    "preOrderIndex": null,
+                    "providedExports": Array [],
+                    "reasons": Array [],
+                    "size": 274,
+                    "sizes": Object {
+                      "runtime": 274,
+                    },
+                    "type": "module",
+                    "usedExports": null,
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  24,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": false,
+                    "cached": false,
+                    "chunks": Array [
+                      804,
+                    ],
+                    "codeGenerated": true,
+                    "depth": null,
+                    "errors": 0,
+                    "failed": false,
+                    "id": "",
+                    "identifier": "webpack/runtime/publicPath",
+                    "index": null,
+                    "index2": null,
+                    "layer": null,
+                    "moduleType": "runtime",
+                    "name": "webpack/runtime/publicPath",
+                    "nameForCondition": null,
+                    "optimizationBailout": Array [],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": null,
+                    "preOrderIndex": null,
+                    "providedExports": Array [],
+                    "reasons": Array [],
+                    "size": 867,
+                    "sizes": Object {
+                      "runtime": 867,
+                    },
+                    "type": "module",
+                    "usedExports": null,
+                    "warnings": 0,
+                  },
+                ],
+              ],
+            },
+            "id": "718159f8e48dcecd92c9",
+          },
+        ],
+      },
+      "links": Object {
+        "modules": Array [
+          "chunks",
+        ],
+      },
+    },
+  },
+  "assets": Array [
+    Object {
+      "auxiliaryChunkIdHints": Array [],
+      "auxiliaryChunkNames": Array [],
+      "auxiliaryChunks": Array [],
+      "cached": false,
+      "chunkIdHints": Array [],
+      "chunkNames": Array [
+        "two",
+      ],
+      "chunks": Array [
+        804,
+      ],
+      "comparedForEmit": true,
+      "emitted": false,
+      "info": Object {
+        "javascriptModule": false,
+        "minimized": true,
+        "size": 12253,
+      },
+      "isOverSizeLimit": false,
+      "name": "two.js",
+      "related": Object {},
+      "size": 12253,
+      "type": "asset",
+    },
+    Object {
+      "auxiliaryChunkIdHints": Array [],
+      "auxiliaryChunkNames": Array [],
+      "auxiliaryChunks": Array [],
+      "cached": false,
+      "chunkIdHints": Array [],
+      "chunkNames": Array [
+        "one",
+      ],
+      "chunks": Array [
+        255,
+      ],
+      "comparedForEmit": true,
+      "emitted": false,
+      "info": Object {
+        "javascriptModule": false,
+        "minimized": true,
+        "size": 799,
+      },
+      "isOverSizeLimit": false,
+      "name": "one.js",
+      "related": Object {},
+      "size": 799,
+      "type": "asset",
+    },
+    Object {
+      "auxiliaryChunkIdHints": Array [],
+      "auxiliaryChunkNames": Array [],
+      "auxiliaryChunks": Array [],
+      "cached": false,
+      "chunkIdHints": Array [],
+      "chunkNames": Array [],
+      "chunks": Array [
+        848,
+      ],
+      "comparedForEmit": true,
+      "emitted": false,
+      "info": Object {
+        "javascriptModule": false,
+        "minimized": true,
+        "size": 142,
+      },
+      "isOverSizeLimit": false,
+      "name": "848.js",
+      "related": Object {},
+      "size": 142,
+      "type": "asset",
+    },
+    Object {
+      "auxiliaryChunkIdHints": Array [],
+      "auxiliaryChunkNames": Array [
+        "two",
+      ],
+      "auxiliaryChunks": Array [
+        804,
+      ],
+      "cached": true,
+      "chunkIdHints": Array [],
+      "chunkNames": Array [],
+      "chunks": Array [],
+      "comparedForEmit": false,
+      "emitted": false,
+      "info": Object {
+        "contenthash": "196de80223be41153cc7",
+        "immutable": true,
+        "size": 15,
+        "sourceFilename": "src/test.txt",
+      },
+      "isOverSizeLimit": false,
+      "name": "196de80223be41153cc7.txt",
+      "related": Object {},
+      "size": 15,
+      "type": "asset",
+    },
+  ],
+  "assetsByChunkName": Object {
+    "one": Array [
+      "one.js",
+    ],
+    "two": Array [
+      "two.js",
+    ],
+  },
+  "builtAt": 1629138114929,
+  "children": Array [],
+  "chunks": Array [
+    Object {
+      "auxiliaryFiles": Array [],
+      "children": Array [],
+      "childrenByOrder": Object {},
+      "entry": true,
+      "files": Array [
+        "one.js",
+      ],
+      "hash": "4272dd245fc9e59a4dcf",
+      "id": 255,
+      "idHints": Array [],
+      "initial": true,
+      "modules": Array [
+        3,
+        1,
+        15,
+        16,
+        20,
+        23,
+      ],
+      "names": Array [
+        "one",
+      ],
+      "origins": Array [
+        Object {
+          "loc": "one",
+          "module": "",
+          "moduleIdentifier": "",
+          "moduleName": "",
+          "request": "./src/index.ts",
+        },
+      ],
+      "parents": Array [],
+      "recorded": false,
+      "rendered": true,
+      "runtime": Array [
+        "one",
+      ],
+      "siblings": Array [],
+      "size": 1688,
+      "sizes": Object {
+        "javascript": 751,
+        "runtime": 937,
+      },
+    },
+    Object {
+      "auxiliaryFiles": Array [
+        "196de80223be41153cc7.txt",
+      ],
+      "children": Array [
+        848,
+      ],
+      "childrenByOrder": Object {},
+      "entry": true,
+      "files": Array [
+        "two.js",
+      ],
+      "hash": "fd8f425bb3992444427b",
+      "id": 804,
+      "idHints": Array [],
+      "initial": true,
+      "modules": Array [
+        11,
+        12,
+        3,
+        5,
+        2,
+        13,
+        7,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+      ],
+      "names": Array [
+        "two",
+      ],
+      "origins": Array [
+        Object {
+          "loc": "two",
+          "module": "",
+          "moduleIdentifier": "",
+          "moduleName": "",
+          "request": "./src/index2.ts",
+        },
+      ],
+      "parents": Array [],
+      "recorded": false,
+      "rendered": true,
+      "runtime": Array [
+        "two",
+      ],
+      "siblings": Array [],
+      "size": 19328.84,
+      "sizes": Object {
+        "asset": 15,
+        "javascript": 12220.84,
+        "runtime": 7093,
+      },
+    },
+    Object {
+      "auxiliaryFiles": Array [],
+      "children": Array [],
+      "childrenByOrder": Object {},
+      "entry": false,
+      "files": Array [
+        "848.js",
+      ],
+      "hash": "08a48e510c377a29980b",
+      "id": 848,
+      "idHints": Array [],
+      "initial": false,
+      "modules": Array [
+        8,
+      ],
+      "names": Array [],
+      "origins": Array [
+        Object {
+          "loc": "7:0-15",
+          "module": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+          "moduleId": null,
+          "moduleIdentifier": "../node_modules/babel-loader/lib/index.js!./src/index2.ts",
+          "moduleName": "./src/index2.ts",
+          "request": "./dyn",
+        },
+      ],
+      "parents": Array [
+        804,
+      ],
+      "recorded": false,
+      "rendered": true,
+      "runtime": Array [
+        "two",
+      ],
+      "siblings": Array [],
+      "size": 21,
+      "sizes": Object {
+        "javascript": 21,
+      },
+    },
+  ],
+  "entrypoints": Object {
+    "one": Object {
+      "assets": Array [
+        Object {
+          "name": "one.js",
+          "size": 799,
+        },
+      ],
+      "assetsSize": 799,
+      "auxiliaryAssets": Array [],
+      "auxiliaryAssetsSize": 0,
+      "childAssets": Object {},
+      "children": Object {},
+      "chunks": Array [
+        255,
+      ],
+      "filteredAssets": 0,
+      "filteredAuxiliaryAssets": 0,
+      "isOverSizeLimit": false,
+      "name": "one",
+    },
+    "two": Object {
+      "assets": Array [
+        Object {
+          "name": "two.js",
+          "size": 12253,
+        },
+      ],
+      "assetsSize": 12253,
+      "auxiliaryAssets": Array [
+        Object {
+          "name": "196de80223be41153cc7.txt",
+          "size": 15,
+        },
+      ],
+      "auxiliaryAssetsSize": 15,
+      "childAssets": Object {},
+      "children": Object {},
+      "chunks": Array [
+        804,
+      ],
+      "filteredAssets": 0,
+      "filteredAuxiliaryAssets": 0,
+      "isOverSizeLimit": false,
+      "name": "two",
+    },
+  },
+  "errors": Array [],
+  "errorsCount": 0,
+  "hash": "718159f8e48dcecd92c9",
+  "modules": Array [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    15,
+    16,
+    16,
+    17,
+    18,
+    19,
+    20,
+    20,
+    21,
+    22,
+    23,
+    23,
+    24,
+  ],
+  "namedChunkGroups": Object {
+    "one": Object {
+      "assets": Array [
+        Object {
+          "name": "one.js",
+          "size": 799,
+        },
+      ],
+      "assetsSize": 799,
+      "auxiliaryAssets": Array [],
+      "auxiliaryAssetsSize": 0,
+      "childAssets": Object {},
+      "children": Object {},
+      "chunks": Array [
+        255,
+      ],
+      "filteredAssets": 0,
+      "filteredAuxiliaryAssets": 0,
+      "isOverSizeLimit": false,
+      "name": "one",
+    },
+    "two": Object {
+      "assets": Array [
+        Object {
+          "name": "two.js",
+          "size": 12253,
+        },
+      ],
+      "assetsSize": 12253,
+      "auxiliaryAssets": Array [
+        Object {
+          "name": "196de80223be41153cc7.txt",
+          "size": 15,
+        },
+      ],
+      "auxiliaryAssetsSize": 15,
+      "childAssets": Object {},
+      "children": Object {},
+      "chunks": Array [
+        804,
+      ],
+      "filteredAssets": 0,
+      "filteredAuxiliaryAssets": 0,
+      "isOverSizeLimit": false,
+      "name": "two",
+    },
+  },
+  "outputPath": "./dist-prod",
+  "publicPath": "auto",
+  "time": 590,
+  "version": "5.38.1",
+  "warnings": Array [],
+  "warningsCount": 0,
+}
+`;

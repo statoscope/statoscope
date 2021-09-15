@@ -15,7 +15,7 @@ import Graph, { Node } from '@statoscope/helpers/dist/graph';
 import { Webpack } from '../webpack';
 import validateStats, { ValidationResult } from './validate';
 import { moduleReasonResource, moduleResource, nodeModule } from './module';
-import deserialize from './deserialize';
+import denormalizeCompilation from './denormalizeCompilation';
 import ChunkID = Webpack.ChunkID;
 import Reason = Webpack.Reason;
 
@@ -193,7 +193,7 @@ export default function normalize(
 export function handleRawFile(
   rawStatsFileDescriptor: RawStatsFileDescriptor
 ): HandledStats {
-  deserialize(rawStatsFileDescriptor.data);
+  denormalizeCompilation(rawStatsFileDescriptor.data);
 
   const file: NormalizedFile = {
     name: rawStatsFileDescriptor.name,

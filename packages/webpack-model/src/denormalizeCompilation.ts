@@ -1,4 +1,4 @@
-import { SerializationData, Webpack } from '../webpack';
+import { NormalizationData, Webpack } from '../webpack';
 import Compilation = Webpack.Compilation;
 import Module = Webpack.Module;
 import Chunk = Webpack.Chunk;
@@ -12,8 +12,8 @@ export type CompilationData = {
   };
 };
 
-export type DeserializationData = {
-  links: SerializationData['links'];
+export type DenormalizationData = {
+  links: NormalizationData['links'];
   data: {
     compilations: CompilationData[];
   };
@@ -39,9 +39,9 @@ function handleChunk(chunk: Chunk, compilationData: CompilationData): void {
 
 function handleCompilation(
   compilation: Compilation,
-  deserializationData: DeserializationData
+  denormalizationData: DenormalizationData
 ): void {
-  const compilationData = deserializationData.data.compilations.find(
+  const compilationData = denormalizationData.data.compilations.find(
     (c) => c.id === (compilation.hash || compilation.name)
   );
 
@@ -60,15 +60,15 @@ function handleCompilation(
   }
 }
 
-export default function deserialize<T extends Compilation>(json: T): T {
-  if (!json.__statoscope?.serialization) {
+export default function denormalizeCompilation<T extends Compilation>(json: T): T {
+  if (!json.__statoscope?.normalization) {
     return json;
   }
 
-  const deserializationData: DeserializationData = {
-    links: json.__statoscope.serialization.links,
+  const denormalizationData: DenormalizationData = {
+    links: json.__statoscope.normalization.links,
     data: {
-      compilations: json.__statoscope.serialization.data.compilations.map(
+      compilations: json.__statoscope.normalization.data.compilations.map(
         (compilation) => {
           return {
             id: compilation.id,
@@ -85,7 +85,7 @@ export default function deserialize<T extends Compilation>(json: T): T {
   let cursor: Compilation | undefined;
 
   while ((cursor = compilations.pop())) {
-    handleCompilation(cursor, deserializationData);
+    handleCompilation(cursor, denormalizationData);
 
     for (const child of cursor.children || []) {
       compilations.push(child);
@@ -93,7 +93,7 @@ export default function deserialize<T extends Compilation>(json: T): T {
   }
 
   // @ts-ignore
-  delete json.__statoscope?.serialization;
+  delete json.__statoscope?.normalization;
 
   return json;
 }

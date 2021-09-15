@@ -12,7 +12,7 @@ import { Extension } from '@statoscope/stats/spec/extension';
 import WebpackCompressedExtension from '@statoscope/webpack-stats-extension-compressed';
 import WebpackPackageInfoExtension from '@statoscope/webpack-stats-extension-package-info';
 import { CompressFunction } from '@statoscope/stats-extension-compressed/dist/generator';
-import serialize from '@statoscope/webpack-model/dist/serialize';
+import normalizeCompilation from '@statoscope/webpack-model/dist/normalizeCompilation';
 
 export type Options = {
   name?: string;
@@ -106,7 +106,7 @@ export default class StatoscopeWebpackPlugin {
         await waitStreamEnd(statsFileOutputStream);
       }
 
-      serialize(statsObj);
+      normalizeCompilation(statsObj);
 
       const statsForReport = this.getStatsForHTMLReport({
         filename: resolvedSaveStatsTo,

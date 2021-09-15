@@ -1,4 +1,4 @@
-import { CompilationMap, ModuleData, SerializationData, Webpack } from '../webpack';
+import { CompilationMap, ModuleData, NormalizationData, Webpack } from '../webpack';
 import Module = Webpack.Module;
 import Compilation = Webpack.Compilation;
 import Chunk = Webpack.Chunk;
@@ -46,7 +46,9 @@ function handleCompilation(
   }
 }
 
-export default function serialize<T extends Record<string, unknown>>(json: T): T {
+export default function normalizeCompilation<T extends Record<string, unknown>>(
+  json: T
+): T {
   const compilationMap: CompilationMap = new Map();
   const compilations: Compilation[] = [json];
   let cursor: Compilation | undefined;
@@ -59,7 +61,7 @@ export default function serialize<T extends Record<string, unknown>>(json: T): T
     }
   }
 
-  const serialization: SerializationData = {
+  const normalizationData: NormalizationData = {
     links: { modules: ['chunks'] },
     data: {
       compilations: [...compilationMap.entries()].map(([id, compilation]) => {
@@ -76,7 +78,7 @@ export default function serialize<T extends Record<string, unknown>>(json: T): T
   // @ts-ignore
   json.__statoscope = json.__statoscope || {};
   // @ts-ignore
-  json.__statoscope.serialization = serialization;
+  json.__statoscope.normalization = normalizationData;
 
   return json;
 }

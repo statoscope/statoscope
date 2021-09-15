@@ -6,18 +6,18 @@ import {
   transform as transformOriginal,
 } from '@statoscope/report-writer/dist/utils';
 import { parseChunked } from '@discoveryjs/json-ext';
-import serialize from '@statoscope/webpack-model/dist/serialize';
+import normalizeCompilation from '@statoscope/webpack-model/dist/normalizeCompilation';
 
 export async function transform(from: string[], to?: string): Promise<string> {
   const id = path.basename(from[0], '.json');
   const reportPath =
     to || path.join(os.tmpdir(), `statoscope-report-${id}-${Date.now()}.html`);
-  const serializedFrom: FromItem[] = [];
+  const normalizedFrom: FromItem[] = [];
 
   for (const item of from) {
     const parsed = await parseChunked(fs.createReadStream(item));
-    serialize(parsed);
-    serializedFrom.push({ type: 'data', filename: item, data: parsed });
+    normalizeCompilation(parsed);
+    normalizedFrom.push({ type: 'data', filename: item, data: parsed });
   }
 
   return transformOriginal(
@@ -29,7 +29,7 @@ export async function transform(from: string[], to?: string): Promise<string> {
         }`,
       },
     },
-    serializedFrom,
+    normalizedFrom,
     reportPath
   );
 }
