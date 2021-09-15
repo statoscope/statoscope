@@ -1,5 +1,4 @@
 import fs from 'fs';
-// @ts-ignore
 import { parseChunked } from '@discoveryjs/json-ext';
 import { API } from '@statoscope/types/types/validation/api';
 import { Result } from '@statoscope/types/types/validation/result';

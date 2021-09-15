@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import { Readable, Writable } from 'stream';
-// @ts-ignore
 import { stringifyStream } from '@discoveryjs/json-ext';
 import HTMLWriter, { Options } from './';
 
