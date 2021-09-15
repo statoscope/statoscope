@@ -3,7 +3,6 @@ import path from 'path';
 import { tmpdir } from 'os';
 import { Readable, Writable } from 'stream';
 import open from 'open';
-// @ts-ignore
 import { stringifyStream } from '@discoveryjs/json-ext';
 import HTMLWriter from '@statoscope/report-writer';
 import { Compilation, Compiler } from 'webpack';
@@ -13,6 +12,7 @@ import { Extension } from '@statoscope/stats/spec/extension';
 import WebpackCompressedExtension from '@statoscope/webpack-stats-extension-compressed';
 import WebpackPackageInfoExtension from '@statoscope/webpack-stats-extension-package-info';
 import { CompressFunction } from '@statoscope/stats-extension-compressed/dist/generator';
+import normalizeCompilation from '@statoscope/webpack-model/dist/normalizeCompilation';
 
 export type Options = {
   name?: string;
@@ -103,7 +103,10 @@ export default class StatoscopeWebpackPlugin {
         fs.mkdirSync(path.dirname(resolvedSaveStatsTo), { recursive: true });
         statsFileOutputStream = fs.createWriteStream(resolvedSaveStatsTo);
         webpackStatsStream.pipe(statsFileOutputStream);
+        await waitStreamEnd(statsFileOutputStream);
       }
+
+      normalizeCompilation(statsObj);
 
       const statsForReport = this.getStatsForHTMLReport({
         filename: resolvedSaveStatsTo,
@@ -116,11 +119,7 @@ export default class StatoscopeWebpackPlugin {
       const htmlReport = this.makeReport(resolvedHTMLReportPath, statsForReport);
 
       try {
-        await Promise.all([
-          htmlReport.writer?.write(),
-          waitStreamEnd(statsFileOutputStream),
-          waitStreamEnd(htmlReport.stream),
-        ]);
+        await Promise.all([htmlReport.writer?.write(), waitStreamEnd(htmlReport.stream)]);
 
         if (options.open) {
           if (options.open === 'file') {

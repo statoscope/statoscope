@@ -15,6 +15,7 @@ import Graph, { Node } from '@statoscope/helpers/dist/graph';
 import { Webpack } from '../webpack';
 import validateStats, { ValidationResult } from './validate';
 import { moduleReasonResource, moduleResource, nodeModule } from './module';
+import denormalizeCompilation from './denormalizeCompilation';
 import ChunkID = Webpack.ChunkID;
 import Reason = Webpack.Reason;
 
@@ -98,7 +99,7 @@ export type NormalizedFile = {
   version: string;
   validation: ValidationResult;
   compilations: NormalizedCompilation[];
-  __statoscope?: { descriptor: StatsDescriptor; extensions: Extension<unknown>[] };
+  __statoscope?: { descriptor?: StatsDescriptor; extensions?: Extension<unknown>[] };
 };
 
 export type NormalizedExtension<TPayload, TAPI> = {
@@ -192,6 +193,8 @@ export default function normalize(
 export function handleRawFile(
   rawStatsFileDescriptor: RawStatsFileDescriptor
 ): HandledStats {
+  denormalizeCompilation(rawStatsFileDescriptor.data);
+
   const file: NormalizedFile = {
     name: rawStatsFileDescriptor.name,
     version: rawStatsFileDescriptor.data.version || 'unknown',
@@ -308,7 +311,7 @@ function handleCompilation(
   };
 
   const extensions =
-    file.__statoscope?.extensions.map((ext): NormalizedExtension<
+    file.__statoscope?.extensions?.map((ext): NormalizedExtension<
       unknown,
       unknown
     > | null => {
@@ -378,8 +381,9 @@ function makeModuleResolver(
       if (!resolved) {
         modules.push(module);
       } else {
-        // @ts-ignore
-        chunk.modules[ix] = module;
+        const chunks = new Set([...resolved.chunks, ...chunk.modules[+ix].chunks]);
+        resolved.chunks = [...chunks];
+        chunk.modules[+ix] = resolved;
       }
     }
   }
@@ -547,6 +551,12 @@ function prepareChunk(chunk: Webpack.Chunk, resolvers: CompilationResolvers): vo
     for (const [i, module] of Object.entries(chunk.modules)) {
       const resolved = resolvers.resolveModule(module.name);
       if (resolved) {
+        const chunks = new Set([...resolved.chunks, ...chunk.modules[+i].chunks]);
+        resolved.chunks = [...chunks].map((chunk) =>
+          typeof chunk === 'string' || typeof chunk === 'number'
+            ? (resolveChunk(chunk) as NormalizedChunk)
+            : (chunk as NormalizedChunk)
+        );
         (chunk as unknown as NormalizedChunk).modules[+i] = resolved;
       }
 

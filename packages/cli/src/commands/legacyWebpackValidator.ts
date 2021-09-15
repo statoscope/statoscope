@@ -1,7 +1,6 @@
 // todo remove in 6.0
 import fs from 'fs';
 import path from 'path';
-// @ts-ignore
 import { parseChunked } from '@discoveryjs/json-ext';
 import { prepareWithJora } from '@statoscope/webpack-model';
 import { jora as joraHelpers } from '@statoscope/helpers';
