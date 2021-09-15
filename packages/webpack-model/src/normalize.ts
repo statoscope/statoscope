@@ -381,8 +381,9 @@ function makeModuleResolver(
       if (!resolved) {
         modules.push(module);
       } else {
-        // @ts-ignore
-        chunk.modules[ix] = module;
+        const chunks = new Set([...resolved.chunks, ...chunk.modules[+ix].chunks]);
+        resolved.chunks = [...chunks];
+        chunk.modules[+ix] = resolved;
       }
     }
   }
@@ -550,6 +551,12 @@ function prepareChunk(chunk: Webpack.Chunk, resolvers: CompilationResolvers): vo
     for (const [i, module] of Object.entries(chunk.modules)) {
       const resolved = resolvers.resolveModule(module.name);
       if (resolved) {
+        const chunks = new Set([...resolved.chunks, ...chunk.modules[+i].chunks]);
+        resolved.chunks = [...chunks].map((chunk) =>
+          typeof chunk === 'string' || typeof chunk === 'number'
+            ? (resolveChunk(chunk) as NormalizedChunk)
+            : (chunk as NormalizedChunk)
+        );
         (chunk as unknown as NormalizedChunk).modules[+i] = resolved;
       }
 
