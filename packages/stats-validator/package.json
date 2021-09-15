@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/stats-validator",
-  "version": "5.8.0-alpha.0",
+  "version": "5.8.0",
   "description": "Statoscope stats validator",
   "main": "./dist/index.js",
   "scripts": {
