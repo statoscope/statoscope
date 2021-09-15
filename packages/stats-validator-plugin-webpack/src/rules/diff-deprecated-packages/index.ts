@@ -108,14 +108,32 @@ function handleTarget(
               query: `
               $input: resolveInputFile();
               {
-                package: $input.compilations.hash.(#.package.resolvePackage($)).pick(),
+                package: $input.compilations.hash.(#.packageName.resolvePackage($)).pick(),
+                diff: #.diff.({
+                  $module;
+                  module: $input.compilations.hash.($module.resolveModule($)).pick(),
+                  changedReasons: changedReasons.({
+                    $reason: $;
+                    ...$,
+                    resolvedModule: $input.compilations.hash.($reason.moduleName.resolveModule($)).pick(),
+                  })
+                }),
                 before: #.before,
                 after: #.after,
               }
               `,
               payload: {
                 context: {
-                  package: packageItem.packageName,
+                  packageName: packageItem.packageName,
+                  diff: packageItem.diff.map((item) => ({
+                    module: item.module.name,
+                    changedReasons: item.reasons.map((reason) => ({
+                      type: reason.type,
+                      loc: reason.loc,
+                      moduleName: reason.moduleName,
+                      resolvedEntryName: reason.resolvedEntryName,
+                    })),
+                  })),
                   before: packageItem.reference.length,
                   after: packageItem.after.length,
                 },
