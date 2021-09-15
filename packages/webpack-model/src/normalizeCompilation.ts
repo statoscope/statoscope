@@ -10,6 +10,9 @@ function handleModule(module: Module, modulesData: ModuleData): number {
     resolvedId = modulesData.lastId++;
     modulesData.nameToIdMap.set(module.name, resolvedId);
     modulesData.idToModuleMap.set(resolvedId, module);
+  } else {
+    const resolvedModule = modulesData.idToModuleMap.get(resolvedId);
+    resolvedModule!.chunks = [...new Set([...resolvedModule!.chunks, ...module.chunks])];
   }
 
   return resolvedId;
