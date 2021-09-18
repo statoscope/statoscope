@@ -1,5 +1,12 @@
 # Changelog
 
+## 5.8.1 (19 September 2021)
+
+### Fixes
+
+- `[stats-validator-plugin-webpack]` - fix chunk resolving in `diff-entry-download-size-limits` rule (#106)
+- `[stats-validator-plugin-webpack]` - fix chunk resolving in `diff-entry-download-time-limits` rule (#106)
+
 ## 5.8.0 (15 September 2021)
 
 ### Features
