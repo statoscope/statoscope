@@ -14,26 +14,26 @@ Array [
               "initialDownloadTime": 244.54217208059208,
             },
             "before": Object {
-              "asyncDownloadTime": 2.8509842722039473,
-              "downloadTime": 247.39315635279604,
-              "initialDownloadTime": 244.54217208059208,
+              "asyncDownloadTime": 2.71044279399671,
+              "downloadTime": 175.4559968647204,
+              "initialDownloadTime": 172.74555407072367,
             },
             "compilation": "da95abcf6bbf9b157ff6",
             "diff": Object {
               "asyncDownloadTime": Object {
-                "absolute": 9.014731959292764,
+                "absolute": 9.1552734375,
                 "ok": false,
-                "percent": 316.1971830985916,
+                "percent": 337.7777777777778,
               },
               "downloadTime": Object {
-                "absolute": 9.01473195929276,
+                "absolute": 80.95189144736841,
                 "ok": true,
-                "percent": 3.643888979061849,
+                "percent": 46.138002059732216,
               },
               "initialDownloadTime": Object {
-                "absolute": 0,
+                "absolute": 71.79661800986841,
                 "ok": true,
-                "percent": 0,
+                "percent": 41.562064156206404,
               },
             },
             "entry": "two",
@@ -63,7 +63,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time diff of async assets is 9 ms (316.20%). It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time diff of async assets is 9 ms (337.78%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -92,26 +92,26 @@ Array [
               "initialDownloadTime": 244.54217208059208,
             },
             "before": Object {
-              "asyncDownloadTime": 2.8509842722039473,
-              "downloadTime": 247.39315635279604,
-              "initialDownloadTime": 244.54217208059208,
+              "asyncDownloadTime": 2.71044279399671,
+              "downloadTime": 175.4559968647204,
+              "initialDownloadTime": 172.74555407072367,
             },
             "compilation": "da95abcf6bbf9b157ff6",
             "diff": Object {
               "asyncDownloadTime": Object {
-                "absolute": 9.014731959292764,
+                "absolute": 9.1552734375,
                 "ok": false,
-                "percent": 316.1971830985916,
+                "percent": 337.7777777777778,
               },
               "downloadTime": Object {
-                "absolute": 9.01473195929276,
+                "absolute": 80.95189144736841,
                 "ok": true,
-                "percent": 3.643888979061849,
+                "percent": 46.138002059732216,
               },
               "initialDownloadTime": Object {
-                "absolute": 0,
+                "absolute": 71.79661800986841,
                 "ok": true,
-                "percent": 0,
+                "percent": 41.562064156206404,
               },
             },
             "entry": "two",
@@ -141,7 +141,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time diff of async assets is 9 ms (316.20%). It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time diff of async assets is 9 ms (337.78%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -235,31 +235,100 @@ Array [
         "payload": Object {
           "context": Object {
             "after": Object {
+              "asyncDownloadTime": 0,
+              "downloadTime": 37.7855802837171,
+              "initialDownloadTime": 37.7855802837171,
+            },
+            "before": Object {
+              "asyncDownloadTime": 0,
+              "downloadTime": 9.014731959292764,
+              "initialDownloadTime": 9.014731959292764,
+            },
+            "compilation": "da95abcf6bbf9b157ff6",
+            "diff": Object {
+              "asyncDownloadTime": Object {
+                "absolute": 0,
+                "ok": true,
+                "percent": 0,
+              },
+              "downloadTime": Object {
+                "absolute": 28.77084832442434,
+                "ok": false,
+                "percent": 319.15367483296205,
+              },
+              "initialDownloadTime": Object {
+                "absolute": 28.77084832442434,
+                "ok": true,
+                "percent": 319.15367483296205,
+              },
+            },
+            "entry": "one",
+            "rule": Object {
+              "maxAsyncDownloadTimeDiff": Infinity,
+              "maxDownloadTimeDiff": Object {
+                "number": 1,
+                "type": "absolute",
+              },
+              "maxInitialDownloadTimeDiff": Infinity,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"one\\": Download time diff of assets is 29 ms (319.15%). It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+  },
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "after": Object {
               "asyncDownloadTime": 11.86571623149671,
               "downloadTime": 256.4078883120888,
               "initialDownloadTime": 244.54217208059208,
             },
             "before": Object {
-              "asyncDownloadTime": 2.8509842722039473,
-              "downloadTime": 247.39315635279604,
-              "initialDownloadTime": 244.54217208059208,
+              "asyncDownloadTime": 2.71044279399671,
+              "downloadTime": 175.4559968647204,
+              "initialDownloadTime": 172.74555407072367,
             },
             "compilation": "da95abcf6bbf9b157ff6",
             "diff": Object {
               "asyncDownloadTime": Object {
-                "absolute": 9.014731959292764,
+                "absolute": 9.1552734375,
                 "ok": true,
-                "percent": 316.1971830985916,
+                "percent": 337.7777777777778,
               },
               "downloadTime": Object {
-                "absolute": 9.01473195929276,
+                "absolute": 80.95189144736841,
                 "ok": false,
-                "percent": 3.643888979061849,
+                "percent": 46.138002059732216,
               },
               "initialDownloadTime": Object {
-                "absolute": 0,
+                "absolute": 71.79661800986841,
                 "ok": true,
-                "percent": 0,
+                "percent": 41.562064156206404,
               },
             },
             "entry": "two",
@@ -289,7 +358,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time diff of assets is 9 ms (3.64%). It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time diff of assets is 81 ms (46.14%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -313,31 +382,100 @@ Array [
         "payload": Object {
           "context": Object {
             "after": Object {
+              "asyncDownloadTime": 0,
+              "downloadTime": 37.7855802837171,
+              "initialDownloadTime": 37.7855802837171,
+            },
+            "before": Object {
+              "asyncDownloadTime": 0,
+              "downloadTime": 9.014731959292764,
+              "initialDownloadTime": 9.014731959292764,
+            },
+            "compilation": "da95abcf6bbf9b157ff6",
+            "diff": Object {
+              "asyncDownloadTime": Object {
+                "absolute": 0,
+                "ok": true,
+                "percent": 0,
+              },
+              "downloadTime": Object {
+                "absolute": 28.77084832442434,
+                "ok": false,
+                "percent": 319.15367483296205,
+              },
+              "initialDownloadTime": Object {
+                "absolute": 28.77084832442434,
+                "ok": true,
+                "percent": 319.15367483296205,
+              },
+            },
+            "entry": "one",
+            "rule": Object {
+              "maxAsyncDownloadTimeDiff": Infinity,
+              "maxDownloadTimeDiff": Object {
+                "number": 1,
+                "type": "absolute",
+              },
+              "maxInitialDownloadTimeDiff": Infinity,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"one\\": Download time diff of assets is 29 ms (319.15%). It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+  },
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "after": Object {
               "asyncDownloadTime": 11.86571623149671,
               "downloadTime": 256.4078883120888,
               "initialDownloadTime": 244.54217208059208,
             },
             "before": Object {
-              "asyncDownloadTime": 2.8509842722039473,
-              "downloadTime": 247.39315635279604,
-              "initialDownloadTime": 244.54217208059208,
+              "asyncDownloadTime": 2.71044279399671,
+              "downloadTime": 175.4559968647204,
+              "initialDownloadTime": 172.74555407072367,
             },
             "compilation": "da95abcf6bbf9b157ff6",
             "diff": Object {
               "asyncDownloadTime": Object {
-                "absolute": 9.014731959292764,
+                "absolute": 9.1552734375,
                 "ok": true,
-                "percent": 316.1971830985916,
+                "percent": 337.7777777777778,
               },
               "downloadTime": Object {
-                "absolute": 9.01473195929276,
+                "absolute": 80.95189144736841,
                 "ok": false,
-                "percent": 3.643888979061849,
+                "percent": 46.138002059732216,
               },
               "initialDownloadTime": Object {
-                "absolute": 0,
+                "absolute": 71.79661800986841,
                 "ok": true,
-                "percent": 0,
+                "percent": 41.562064156206404,
               },
             },
             "entry": "two",
@@ -367,7 +505,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time diff of assets is 9 ms (3.64%). It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time diff of assets is 81 ms (46.14%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -521,13 +659,295 @@ Array [
 ]
 `;
 
-exports[`maxInitialDownloadTimeDiff global 1`] = `Array []`;
+exports[`maxInitialDownloadTimeDiff global 1`] = `
+Array [
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "after": Object {
+              "asyncDownloadTime": 0,
+              "downloadTime": 37.7855802837171,
+              "initialDownloadTime": 37.7855802837171,
+            },
+            "before": Object {
+              "asyncDownloadTime": 0,
+              "downloadTime": 9.014731959292764,
+              "initialDownloadTime": 9.014731959292764,
+            },
+            "compilation": "da95abcf6bbf9b157ff6",
+            "diff": Object {
+              "asyncDownloadTime": Object {
+                "absolute": 0,
+                "ok": true,
+                "percent": 0,
+              },
+              "downloadTime": Object {
+                "absolute": 28.77084832442434,
+                "ok": true,
+                "percent": 319.15367483296205,
+              },
+              "initialDownloadTime": Object {
+                "absolute": 28.77084832442434,
+                "ok": false,
+                "percent": 319.15367483296205,
+              },
+            },
+            "entry": "one",
+            "rule": Object {
+              "maxAsyncDownloadTimeDiff": Infinity,
+              "maxDownloadTimeDiff": Infinity,
+              "maxInitialDownloadTimeDiff": Object {
+                "number": 1,
+                "type": "absolute",
+              },
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"one\\": Download time diff of initial assets is 29 ms (319.15%). It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+  },
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "after": Object {
+              "asyncDownloadTime": 11.86571623149671,
+              "downloadTime": 256.4078883120888,
+              "initialDownloadTime": 244.54217208059208,
+            },
+            "before": Object {
+              "asyncDownloadTime": 2.71044279399671,
+              "downloadTime": 175.4559968647204,
+              "initialDownloadTime": 172.74555407072367,
+            },
+            "compilation": "da95abcf6bbf9b157ff6",
+            "diff": Object {
+              "asyncDownloadTime": Object {
+                "absolute": 9.1552734375,
+                "ok": true,
+                "percent": 337.7777777777778,
+              },
+              "downloadTime": Object {
+                "absolute": 80.95189144736841,
+                "ok": true,
+                "percent": 46.138002059732216,
+              },
+              "initialDownloadTime": Object {
+                "absolute": 71.79661800986841,
+                "ok": false,
+                "percent": 41.562064156206404,
+              },
+            },
+            "entry": "two",
+            "rule": Object {
+              "maxAsyncDownloadTimeDiff": Infinity,
+              "maxDownloadTimeDiff": Infinity,
+              "maxInitialDownloadTimeDiff": Object {
+                "number": 1,
+                "type": "absolute",
+              },
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"two\\": Download time diff of initial assets is 72 ms (41.56%). It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+  },
+]
+`;
 
 exports[`maxInitialDownloadTimeDiff not match - global 1`] = `Array []`;
 
 exports[`maxInitialDownloadTimeDiff not match - override global 1`] = `Array []`;
 
-exports[`maxInitialDownloadTimeDiff override global 1`] = `Array []`;
+exports[`maxInitialDownloadTimeDiff override global 1`] = `
+Array [
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "after": Object {
+              "asyncDownloadTime": 0,
+              "downloadTime": 37.7855802837171,
+              "initialDownloadTime": 37.7855802837171,
+            },
+            "before": Object {
+              "asyncDownloadTime": 0,
+              "downloadTime": 9.014731959292764,
+              "initialDownloadTime": 9.014731959292764,
+            },
+            "compilation": "da95abcf6bbf9b157ff6",
+            "diff": Object {
+              "asyncDownloadTime": Object {
+                "absolute": 0,
+                "ok": true,
+                "percent": 0,
+              },
+              "downloadTime": Object {
+                "absolute": 28.77084832442434,
+                "ok": true,
+                "percent": 319.15367483296205,
+              },
+              "initialDownloadTime": Object {
+                "absolute": 28.77084832442434,
+                "ok": false,
+                "percent": 319.15367483296205,
+              },
+            },
+            "entry": "one",
+            "rule": Object {
+              "maxAsyncDownloadTimeDiff": Infinity,
+              "maxDownloadTimeDiff": Infinity,
+              "maxInitialDownloadTimeDiff": Object {
+                "number": 1,
+                "type": "absolute",
+              },
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"one\\": Download time diff of initial assets is 29 ms (319.15%). It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+  },
+  Object {
+    "compilation": "da95abcf6bbf9b157ff6",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "after": Object {
+              "asyncDownloadTime": 11.86571623149671,
+              "downloadTime": 256.4078883120888,
+              "initialDownloadTime": 244.54217208059208,
+            },
+            "before": Object {
+              "asyncDownloadTime": 2.71044279399671,
+              "downloadTime": 175.4559968647204,
+              "initialDownloadTime": 172.74555407072367,
+            },
+            "compilation": "da95abcf6bbf9b157ff6",
+            "diff": Object {
+              "asyncDownloadTime": Object {
+                "absolute": 9.1552734375,
+                "ok": true,
+                "percent": 337.7777777777778,
+              },
+              "downloadTime": Object {
+                "absolute": 80.95189144736841,
+                "ok": true,
+                "percent": 46.138002059732216,
+              },
+              "initialDownloadTime": Object {
+                "absolute": 71.79661800986841,
+                "ok": false,
+                "percent": 41.562064156206404,
+              },
+            },
+            "entry": "two",
+            "rule": Object {
+              "maxAsyncDownloadTimeDiff": Infinity,
+              "maxDownloadTimeDiff": Infinity,
+              "maxInitialDownloadTimeDiff": Object {
+                "number": 1,
+                "type": "absolute",
+              },
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"two\\": Download time diff of initial assets is 72 ms (41.56%). It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+  },
+]
+`;
 
 exports[`maxInitialDownloadTimeDiff with useCompressedSize = false 1`] = `
 Array [
