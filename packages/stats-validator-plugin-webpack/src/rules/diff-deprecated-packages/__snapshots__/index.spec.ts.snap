@@ -10,13 +10,41 @@ Array [
           "context": Object {
             "after": 4,
             "before": 2,
-            "package": "is-array",
+            "diff": Array [
+              Object {
+                "changedReasons": Array [
+                  Object {
+                    "loc": "2:0-31",
+                    "moduleName": "./src/index2.ts",
+                    "resolvedEntryName": undefined,
+                    "type": "harmony side effect evaluation",
+                  },
+                  Object {
+                    "loc": "10:30-37",
+                    "moduleName": "./src/index2.ts",
+                    "resolvedEntryName": undefined,
+                    "type": "harmony import specifier",
+                  },
+                ],
+                "module": "./src/index2.ts",
+              },
+            ],
+            "packageName": "is-array",
           },
         },
         "query": "
               $input: resolveInputFile();
               {
-                package: $input.compilations.hash.(#.package.resolvePackage($)).pick(),
+                package: $input.compilations.hash.(#.packageName.resolvePackage($)).pick(),
+                diff: #.diff.({
+                  $module;
+                  module: $input.compilations.hash.($module.resolveModule($)).pick(),
+                  changedReasons: changedReasons.({
+                    $reason: $;
+                    ...$,
+                    resolvedModule: $input.compilations.hash.($reason.moduleName.resolveModule($)).pick(),
+                  })
+                }),
                 before: #.before,
                 after: #.after,
               }

@@ -1,5 +1,18 @@
 # Changelog
 
+## 5.8.0 (15 September 2021)
+
+### Features
+
+- `[cli, webpack-plugin, stats-validator-reporter-stats-report]` - generate UI-reports with normalized stats (#104)
+  It reduces generated UI-report size (sometimes it is more than 10x smaller)
+- `[webpack-model, webpack-ui]` - support normalized UI-reports (#104)
+- `[stats-validator-plugin-webpack]` - show changed reasons in diff-deprecated-modules/packages rules
+
+### Fixes
+
+- `[webpack-model]` - merge modules chunks info to collect more truthy info about modules chunks (#104)
+
 ## 5.7.3 (9 September 2021)
 
 ### Fixes
@@ -24,7 +37,7 @@
 
 ### Fixes
 
-- `[webpack-model]` - add missed json into the package 
+- `[webpack-model]` - add missed json into the package
 
 ## 5.7.0 (1 September 2021)
 
@@ -69,28 +82,28 @@
 - `[helpers]` - add `asciiTree`-helper that generate ASCII tree from object-tree (useful for TTY-reporters)
 - `[helpers]` - add a bunch of useful jora-helpers
   - `typeof(value: unknown): string`
-    
+
     works like native `typeof` operator
   - `isNullish(value: unknown): boolean`
-    
+
     returns `true` if `value` is `null` or `undefined`
   - `isArray(value: unknown): boolean`
-    
+
     returns `true` if `value` is array
   - `useNotNullish<T>(values: readonly T[]): T | null`
 
     return first not-nullish element from `values`-array or `null` (`[null, 123].useNotNullish() = 123`)
   - `serializeStringOrRegexp(value?: string | RegExp): SerializedStringOrRegexp | null`
-      
+
     transform string or regexp into json-compatible format
   - `deserializeStringOrRegexp(value?: SerializedStringOrRegexp | null): string | RegExp | null`
-    
+
     reverse the result of `serializeStringOrRegexp`
   - `semverSatisfies(version: string | SemVer, range: string | Range): boolean`
-    
+
     returns `true` if `version` satisfied of range
   - `isMatch(a?: string, b?: string | RegExp): boolean`
-    
+
     returns `true` if `a` matches `b`
   - ```
     exclude<T>(
@@ -104,12 +117,12 @@
     Helps to exclude elements. Examples:
     - `['foo', 'bar', 'foo'].exclude({exclude: 'foo'}) = ['bar']`
     - `[fooCompilation, barCompilation, bazCompilation].exclude({exclude: /foo|bar/, get: <name>}) = [bazCompilation]`
-    
+
   - `diff_normalizeLimit(limit?: number | Limit | null): Limit | null`
     Normalize the `limit`
   - `diff_isLTETheLimit(valueDiff: ValueDiff, limit?: number | Limit | null): boolean`
     Returns `true` if `valueDiff` has not been exceeded the `limit`
-  
+
 ### Refactor
 
 - `[report-writer]` - move `transform` function from `cli`
@@ -153,13 +166,13 @@
   - `graph_getPaths(from, graph, to, max)` - get all or `max` possible paths from `from` node to `to` node
 
 - `[webpack-model]` add `deps` for every module. There are all the modules that the module requires
-- `[webpack-model]` add `dep` for every entrypoint. There is a module that an entrypoint requires 
-- `[webpack-model]` add `resolvedEntry` and `resolvedEntryName` for entrypoint-reasons 
+- `[webpack-model]` add `dep` for every entrypoint. There is a module that an entrypoint requires
+- `[webpack-model]` add `resolvedEntry` and `resolvedEntryName` for entrypoint-reasons
 - `[webpack-model]` add a few jora-helpers:
   - `getModuleGraph(hash)` - get module graph for specified compilation
   - `moduleGraph_getEntrypoints(module, graph, entrypoints, max)` - get all or `max` entrypoints of `module`
   - `moduleGraph_getPaths(from, graph, to, max)` - get all or `max` possible paths from `from` module to `to` module
-  
+
 ### Fixes
 
 - `[webpack-ui]` fix settings error when multiple tabs opened

@@ -10,6 +10,14 @@ Array [
           "context": Object {
             "after": 1,
             "before": 0,
+            "diff": Array [
+              Object {
+                "loc": "one",
+                "moduleName": null,
+                "resolvedEntryName": "one",
+                "type": "entry",
+              },
+            ],
             "module": "./src/index.ts + 3 modules",
           },
         },
@@ -17,6 +25,11 @@ Array [
               $input: resolveInputFile();
               {
                 module: $input.compilations.hash.(#.module.resolveModule($)).pick(),
+                diff: #.diff.({
+                  $reason: $;
+                  ...$,
+                  resolvedModule: $input.compilations.hash.($reason.moduleName.resolveModule($)).pick(),
+                }),
                 before: #.before,
                 after: #.after,
               }
@@ -41,6 +54,32 @@ Array [
           "context": Object {
             "after": 4,
             "before": 0,
+            "diff": Array [
+              Object {
+                "loc": "2:0-31",
+                "moduleName": "./src/index.ts + 3 modules",
+                "resolvedEntryName": undefined,
+                "type": "harmony side effect evaluation",
+              },
+              Object {
+                "loc": "4:17-24",
+                "moduleName": "./src/index.ts + 3 modules",
+                "resolvedEntryName": undefined,
+                "type": "harmony import specifier",
+              },
+              Object {
+                "loc": "2:0-31",
+                "moduleName": "./src/index2.ts + 1 modules",
+                "resolvedEntryName": undefined,
+                "type": "harmony side effect evaluation",
+              },
+              Object {
+                "loc": "10:30-37",
+                "moduleName": "./src/index2.ts + 1 modules",
+                "resolvedEntryName": undefined,
+                "type": "harmony import specifier",
+              },
+            ],
             "module": "../node_modules/is-array/index.js",
           },
         },
@@ -48,6 +87,11 @@ Array [
               $input: resolveInputFile();
               {
                 module: $input.compilations.hash.(#.module.resolveModule($)).pick(),
+                diff: #.diff.({
+                  $reason: $;
+                  ...$,
+                  resolvedModule: $input.compilations.hash.($reason.moduleName.resolveModule($)).pick(),
+                }),
                 before: #.before,
                 after: #.after,
               }
@@ -72,6 +116,20 @@ Array [
           "context": Object {
             "after": 2,
             "before": 0,
+            "diff": Array [
+              Object {
+                "loc": "2:0-92",
+                "moduleName": "./src/index2.css",
+                "resolvedEntryName": undefined,
+                "type": "harmony side effect evaluation",
+              },
+              Object {
+                "loc": "5:30-57",
+                "moduleName": "./src/index2.css",
+                "resolvedEntryName": undefined,
+                "type": "harmony import specifier",
+              },
+            ],
             "module": "../node_modules/css-loader/dist/runtime/api.js",
           },
         },
@@ -79,6 +137,11 @@ Array [
               $input: resolveInputFile();
               {
                 module: $input.compilations.hash.(#.module.resolveModule($)).pick(),
+                diff: #.diff.({
+                  $reason: $;
+                  ...$,
+                  resolvedModule: $input.compilations.hash.($reason.moduleName.resolveModule($)).pick(),
+                }),
                 before: #.before,
                 after: #.after,
               }
@@ -103,6 +166,20 @@ Array [
           "context": Object {
             "after": 2,
             "before": 0,
+            "diff": Array [
+              Object {
+                "loc": "3:0-99",
+                "moduleName": "./src/index2.css",
+                "resolvedEntryName": undefined,
+                "type": "harmony side effect evaluation",
+              },
+              Object {
+                "loc": "6:41-72",
+                "moduleName": "./src/index2.css",
+                "resolvedEntryName": undefined,
+                "type": "harmony import specifier",
+              },
+            ],
             "module": "../node_modules/css-loader/dist/runtime/getUrl.js",
           },
         },
@@ -110,6 +187,11 @@ Array [
               $input: resolveInputFile();
               {
                 module: $input.compilations.hash.(#.module.resolveModule($)).pick(),
+                diff: #.diff.({
+                  $reason: $;
+                  ...$,
+                  resolvedModule: $input.compilations.hash.($reason.moduleName.resolveModule($)).pick(),
+                }),
                 before: #.before,
                 after: #.after,
               }
@@ -134,6 +216,14 @@ Array [
           "context": Object {
             "after": 2,
             "before": 1,
+            "diff": Array [
+              Object {
+                "loc": "1:0-22",
+                "moduleName": "./src/index.ts + 3 modules",
+                "resolvedEntryName": undefined,
+                "type": "harmony side effect evaluation",
+              },
+            ],
             "module": "./node_modules/foo/node_modules/bar/index.js",
           },
         },
@@ -141,6 +231,11 @@ Array [
               $input: resolveInputFile();
               {
                 module: $input.compilations.hash.(#.module.resolveModule($)).pick(),
+                diff: #.diff.({
+                  $reason: $;
+                  ...$,
+                  resolvedModule: $input.compilations.hash.($reason.moduleName.resolveModule($)).pick(),
+                }),
                 before: #.before,
                 after: #.after,
               }

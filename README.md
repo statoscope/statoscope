@@ -23,3 +23,8 @@ You can try it at [Statoscope sandbox](https://statoscope.tech)
 - [packages/cli](packages/cli) - CLI tools for validating your stats
 
 <img src="packages/webpack-ui/docs/dashboard.png" width="500px"/>
+
+## Support
+
+If you are an engineer or a company that is interested in Statoscope improvements, you may support Statoscope by
+financial contribution at [OpenCollective](https://opencollective.com/statoscope).

@@ -13,6 +13,7 @@ import * as version from '../../version';
 
 export type ModuleResultItem = {
   moduleName: string;
+  diff: NormalizedReason[];
   after: NormalizedReason[];
   reference: NormalizedReason[];
 };
@@ -90,6 +91,11 @@ function handledModules(
               $input: resolveInputFile();
               {
                 module: $input.compilations.hash.(#.module.resolveModule($)).pick(),
+                diff: #.diff.({
+                  $reason: $;
+                  ...$,
+                  resolvedModule: $input.compilations.hash.($reason.moduleName.resolveModule($)).pick(),
+                }),
                 before: #.before,
                 after: #.after,
               }
@@ -97,6 +103,12 @@ function handledModules(
               payload: {
                 context: {
                   module: item.moduleName,
+                  diff: item.diff.map((reason) => ({
+                    type: reason.type,
+                    loc: reason.loc,
+                    moduleName: reason.moduleName,
+                    resolvedEntryName: reason.resolvedEntryName,
+                  })),
                   before: item.reference.length,
                   after: item.after.length,
                 },
