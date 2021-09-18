@@ -112,16 +112,18 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
   })
   .({
     $compilation: $;
+    $referenceCompilation: $reference.compilations
+    .exclude({
+      exclude: $params.exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .[name=$compilation.name].pick();
     $compilation,
+    $referenceCompilation,
     entrypoints: entrypoints
     .({
       $entry: $;
-      $referenceEntry: $reference.compilations
-      .exclude({
-        exclude: $params.exclude.[type='compilation'].name,
-        get: <name>,
-      })
-      .entrypoints.[name=$entry.name].pick();
+      $referenceEntry: $referenceCompilation.entrypoints.[name=$entry.name].pick();
       $entry,
       $referenceEntry
     })
@@ -150,9 +152,9 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
         $chunks: data.chunks + data.chunks..children;
         $initialChunks: $chunks.[initial];
         $asyncChunks: $chunks.[not initial];
-        $size: $chunks.$getSizeByChunks($compilation.hash);
-        $initialSize: $initialChunks.$getSizeByChunks($compilation.hash);
-        $asyncSize: $asyncChunks.$getSizeByChunks($compilation.hash);
+        $size: $chunks.$getSizeByChunks($$);
+        $initialSize: $initialChunks.$getSizeByChunks($$);
+        $asyncSize: $asyncChunks.$getSizeByChunks($$);
         
         entry: $,
         $chunks,
@@ -162,8 +164,8 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
         $initialSize,
         $asyncSize,
       };
-      $reference: referenceEntry.$handleEntry();
-      $after: afterEntry.$handleEntry();
+      $reference: referenceEntry.$handleEntry($referenceCompilation.hash);
+      $after: afterEntry.$handleEntry($compilation.hash);
       $rule,
       $reference,
       $after,

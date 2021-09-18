@@ -158,16 +158,18 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
   })
   .({
     $compilation: $;
+    $referenceCompilation: $reference.compilations
+    .exclude({
+      exclude: $params.exclude.[type='compilation'].name,
+      get: <name>,
+    })
+    .[name=$compilation.name].pick();
     $compilation,
+    $referenceCompilation,
     entrypoints: entrypoints
     .({
       $entry: $;
-      $referenceEntry: $reference.compilations
-      .exclude({
-        exclude: $params.exclude.[type='compilation'].name,
-        get: <name>,
-      })
-      .entrypoints.[name=$entry.name].pick();
+      $referenceEntry: $referenceCompilation.entrypoints.[name=$entry.name].pick();
       $entry,
       $referenceEntry
     })
@@ -196,9 +198,9 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
         $chunks: data.chunks + data.chunks..children;
         $initialChunks: $chunks.[initial];
         $asyncChunks: $chunks.[not initial];
-        $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $initialDownloadTime: $initialChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
-        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);
+        $downloadTime: $chunks.$getSizeByChunks($$).getDownloadTime($network);
+        $initialDownloadTime: $initialChunks.$getSizeByChunks($$).getDownloadTime($network);
+        $asyncDownloadTime: $asyncChunks.$getSizeByChunks($$).getDownloadTime($network);
         
         entry: $,
         $chunks,
@@ -208,8 +210,8 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
         $initialDownloadTime,
         $asyncDownloadTime,
       };
-      $reference: referenceEntry.$handleEntry();
-      $after: afterEntry.$handleEntry();
+      $reference: referenceEntry.$handleEntry($referenceCompilation.hash);
+      $after: afterEntry.$handleEntry($compilation.hash);
       $rule,
       $reference,
       $after,
