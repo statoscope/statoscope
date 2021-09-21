@@ -331,7 +331,12 @@ function handleCompilation(
   const resolveModule = makeModuleResolver(normalized);
   const resolveChunk = makeEntityResolver(normalized.chunks, ({ id }) => id);
   const resolveAsset = makeEntityResolver(normalized.assets || [], ({ name }) => name);
-  const resolvePackage = makeEntityResolver(normalized.nodeModules, ({ name }) => name);
+  const resolvePackage = makeEntityResolver(
+    normalized.nodeModules,
+    ({ name }) => name,
+    null,
+    false
+  );
   const resolveExtension = makeEntityResolver(
     extensions,
     (ext) => ext?.data.descriptor.name
@@ -358,6 +363,8 @@ function handleCompilation(
   extractPackages(normalized, resolvers);
 
   const graph = buildGraph(normalized);
+
+  resolvePackage.lock();
 
   return {
     data: normalized,
@@ -417,6 +424,8 @@ function makeModuleResolver(
       }
     }
   }
+
+  resolve.lock();
 
   return resolve;
 }
