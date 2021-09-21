@@ -31,7 +31,7 @@ $dupModulesA: $statA.compilation.$getDuplicateModules();
 $dupModulesB: $statB.compilation.$getDuplicateModules();
 
 $dupModulesDiff: {
-  added: $dupModulesB.[module.name not in $dupModulesA.module.name],
-  removed: $dupModulesA.[module.name not in $dupModulesB.module.name],
+  added: $dupModulesB.[module.identifier not in $dupModulesA.module.identifier],
+  removed: $dupModulesA.[module.identifier not in $dupModulesB.module.identifier],
 };
 `;

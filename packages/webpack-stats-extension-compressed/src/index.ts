@@ -71,9 +71,6 @@ export default class WebpackCompressedExtension {
           // @ts-ignore
           modulesStack.push(...modulesCursor.modules);
         }
-        const moduleName = modulesCursor.readableIdentifier(
-          cursor.compiler.requestShortener
-        );
 
         let concatenated = Buffer.from('');
 
@@ -86,7 +83,7 @@ export default class WebpackCompressedExtension {
         ) {
           this.compressedExtensionGenerator.handleResource(
             cursor.hash as string,
-            moduleName,
+            modulesCursor.identifier(),
             // @ts-ignore
             modulesCursor.content,
             this.compressor
@@ -139,7 +136,7 @@ export default class WebpackCompressedExtension {
 
         this.compressedExtensionGenerator.handleResource(
           cursor.hash as string,
-          moduleName,
+          modulesCursor.identifier(),
           concatenated,
           this.compressor
         );

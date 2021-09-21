@@ -136,8 +136,8 @@ $downloadTimeB: $assetsInitialSizesB
     visible: $value
   },
   {
-    $a: $statA.compilation.modules.name.size();
-    $b: $statB.compilation.modules.name.size();
+    $a: $statA.compilation.modules.identifier.size();
+    $b: $statB.compilation.modules.identifier.size();
     $value: $b - $a;
     $valueP: $b.percentFrom($a);
     value: $value,

@@ -2,23 +2,19 @@ import { Prepared } from '@statoscope/webpack-model';
 import { NormalizedReason } from '@statoscope/webpack-model/dist/normalize';
 import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
 import { API } from '@statoscope/types/types/validation/api';
+import { NormalizedModule } from '@statoscope/webpack-model/src/normalize';
 import { WebpackRule } from '../../';
 import { ModuleTarget, normalizeModuleTarget, RawTarget } from '../../helpers';
-import {
-  ExcludeItem,
-  normalizeExclude,
-  SerializedExcludeItem,
-} from '../../limits-helpers';
+import { ExcludeItem, normalizeExclude } from '../../limits-helpers';
 import * as version from '../../version';
 
 export type ModuleResultItem = {
-  moduleName: string;
+  module: NormalizedModule;
   diff: NormalizedReason[];
   after: NormalizedReason[];
   reference: NormalizedReason[];
 };
 
-export type SerializedRuleExcludeItem = SerializedExcludeItem<'compilation'>;
 export type RuleExcludeItem = ExcludeItem<'compilation'>;
 
 export type Params =
@@ -52,21 +48,20 @@ function handledModules(
     get: <name>,
   })
   ..modules.[name.isMatch($target.name)]
-  .group(<name>)
+  .group(<identifier>)
   .({
     $key;
     $afterReasons: value.reasons;
     $referenceReasons: $reference.compilations
-
     .(
       $compilation: $;
       $key.resolveModule($compilation.hash)
     ).[].reasons;
     $diff: $afterReasons.[
       $item: $;
-      not $referenceReasons[=>moduleName=$item.moduleName and userRequest=$item.userRequest and type=$item.type]
+      not $referenceReasons[=>moduleIdentifier=$item.moduleIdentifier and userRequest=$item.userRequest and type=$item.type]
     ];
-    moduleName: key,
+    module: value.pick(),
     after: $afterReasons,
     reference: $referenceReasons,
     $diff
@@ -80,10 +75,10 @@ function handledModules(
   for (const item of result) {
     if (item.after.length > item.reference.length) {
       api.message(
-        `Usage of ${item.moduleName} was increased from ${item.reference.length} to ${item.after.length}`,
+        `Usage of ${item.module.name} was increased from ${item.reference.length} to ${item.after.length}`,
         {
           filename: data.files[0].name,
-          related: [{ type: 'module', id: item.moduleName }],
+          related: [{ type: 'module', id: item.module.identifier }],
           details: [
             {
               type: 'discovery',
@@ -94,7 +89,8 @@ function handledModules(
                 diff: #.diff.({
                   $reason: $;
                   ...$,
-                  resolvedModule: $input.compilations.hash.($reason.moduleName.resolveModule($)).pick(),
+                  resolvedModule: $input.compilations.hash.($reason.moduleIdentifier.resolveModule($)).pick(),
+                  resolvedEntry: $input.compilations.hash.($reason.resolvedEntryName.resolveEntrypoint($)).pick(),
                 }),
                 before: #.before,
                 after: #.after,
@@ -102,12 +98,11 @@ function handledModules(
               `,
               payload: {
                 context: {
-                  module: item.moduleName,
+                  module: item.module.identifier,
                   diff: item.diff.map((reason) => ({
-                    type: reason.type,
-                    loc: reason.loc,
-                    moduleName: reason.moduleName,
-                    resolvedEntryName: reason.resolvedEntryName,
+                    ...reason,
+                    resolvedModule: null,
+                    resolvedEntry: null,
                   })),
                   before: item.reference.length,
                   after: item.after.length,

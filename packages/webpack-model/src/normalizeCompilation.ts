@@ -4,14 +4,14 @@ import Compilation = Webpack.Compilation;
 import Chunk = Webpack.Chunk;
 
 function handleModule(module: Module, modulesData: ModuleData): number {
-  let resolvedId = modulesData.nameToIdMap.get(module.name);
+  let resolvedId = modulesData.idToIxMap.get(module.identifier);
 
   if (!resolvedId) {
     resolvedId = modulesData.lastId++;
-    modulesData.nameToIdMap.set(module.name, resolvedId);
-    modulesData.idToModuleMap.set(resolvedId, module);
+    modulesData.idToIxMap.set(module.identifier, resolvedId);
+    modulesData.ixToModuleMap.set(resolvedId, module);
   } else {
-    const resolvedModule = modulesData.idToModuleMap.get(resolvedId);
+    const resolvedModule = modulesData.ixToModuleMap.get(resolvedId);
     resolvedModule!.chunks = [...new Set([...resolvedModule!.chunks, ...module.chunks])];
   }
 
@@ -30,8 +30,8 @@ function handleCompilation(
   compilationMap: CompilationMap
 ): void {
   const modulesData: ModuleData = {
-    idToModuleMap: new Map(),
-    nameToIdMap: new Map(),
+    ixToModuleMap: new Map(),
+    idToIxMap: new Map(),
     lastId: 1,
   };
 
@@ -71,7 +71,7 @@ export default function normalizeCompilation<T extends Record<string, unknown>>(
         return {
           id,
           data: {
-            modules: [...compilation.modules.idToModuleMap.entries()],
+            modules: [...compilation.modules.ixToModuleMap.entries()],
           },
         };
       }),

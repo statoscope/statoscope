@@ -82,7 +82,7 @@ function handleTarget(
       .modules.reasons;
     $diff: $afterReasons.[
       $item: $;
-      not $referenceReasons[=>moduleName=$item.moduleName and userRequest=$item.userRequest and type=$item.type]
+      not $referenceReasons[=>moduleIdentifier=$item.moduleIdentifier and userRequest=$item.userRequest and type=$item.type]
     ].group(<resolvedModule>).({module: key, reasons: value}).[reasons];
     packageName: key,
     reference: $referenceReasons,
@@ -115,7 +115,8 @@ function handleTarget(
                   changedReasons: changedReasons.({
                     $reason: $;
                     ...$,
-                    resolvedModule: $input.compilations.hash.($reason.moduleName.resolveModule($)).pick(),
+                    resolvedModule: $input.compilations.hash.($reason.moduleIdentifier.resolveModule($)).pick(),
+                    resolvedEntry: $input.compilations.hash.($reason.resolvedEntryName.resolveEntrypoint($)).pick(),
                   })
                 }),
                 before: #.before,
@@ -126,12 +127,11 @@ function handleTarget(
                 context: {
                   packageName: packageItem.packageName,
                   diff: packageItem.diff.map((item) => ({
-                    module: item.module.name,
+                    module: item.module.identifier,
                     changedReasons: item.reasons.map((reason) => ({
-                      type: reason.type,
-                      loc: reason.loc,
-                      moduleName: reason.moduleName,
-                      resolvedEntryName: reason.resolvedEntryName,
+                      ...reason,
+                      resolvedModule: null,
+                      resolvedEntry: null,
                     })),
                   })),
                   before: packageItem.reference.length,

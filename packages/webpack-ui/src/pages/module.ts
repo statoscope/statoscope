@@ -19,7 +19,7 @@ export default function (discovery: StatoscopeWidget): void {
           content: [
             {
               view: 'switch',
-              data: `compilation.(..modules).[name=#.id.decodeURIComponent() or (''+id)=#.id.decodeURIComponent()][0]`,
+              data: `compilation.(..modules).[identifier=#.id.decodeURIComponent() or (''+id)=#.id.decodeURIComponent()][0]`,
               content: [
                 {
                   when: 'not $',
@@ -231,8 +231,8 @@ export default function (discovery: StatoscopeWidget): void {
                                 content: {
                                   view: 'validation-messages',
                                   data: `
-                                  $messages: #.params.hash.validation_getItems('module', name);
-                                  $related: {type: 'module', id: name};
+                                  $messages: #.params.hash.validation_getItems('module', identifier);
+                                  $related: {type: 'module', id: identifier};
                                   { $messages, $related, showRelated: false }
                                   `,
                                 },

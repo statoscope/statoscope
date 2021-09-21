@@ -59,7 +59,7 @@ function handled(
       api.message(`Module ${module.name} has deoptimizations`, {
         filename: resultItem.file.name,
         compilation: resultItem.compilation.name || resultItem.compilation.hash,
-        related: [{ type: 'module', id: module.name }],
+        related: [{ type: 'module', id: module.identifier }],
         details: [
           {
             type: 'text',
@@ -75,7 +75,7 @@ function handled(
             `,
             payload: {
               context: {
-                module: module.name,
+                module: module.identifier,
                 compilation: resultItem.compilation.hash,
               },
             },

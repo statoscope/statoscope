@@ -140,7 +140,7 @@ export default function (compilations: HandledCompilation[]) {
       const resolverSize = ext?.api as ExtensionCompressedAPI | undefined;
 
       return (
-        resolverSize?.(hash, module.name) ?? {
+        resolverSize?.(hash, module.identifier) ?? {
           size: module.size,
         }
       );
@@ -215,7 +215,7 @@ export default function (compilations: HandledCompilation[]) {
         return [];
       }
 
-      const moduleNode = graph.getNode(module.name);
+      const moduleNode = graph.getNode(module.identifier);
 
       if (!moduleNode) {
         return [];
@@ -230,8 +230,8 @@ export default function (compilations: HandledCompilation[]) {
             return false;
           }
 
-          const entryModuleName = entry.data.dep?.module.name as string;
-          const entryModule = graph.getNode(entryModuleName);
+          const entryModuleId = entry.data.dep?.module.identifier as string;
+          const entryModule = graph.getNode(entryModuleId);
 
           if (entryModule) {
             if (moduleNode === entryModule) {
@@ -262,8 +262,8 @@ export default function (compilations: HandledCompilation[]) {
         return null;
       }
 
-      const fromNode = graph.getNode(from.name);
-      const toNode = graph.getNode(to.name);
+      const fromNode = graph.getNode(from.identifier);
+      const toNode = graph.getNode(to.identifier);
 
       if (!fromNode || !toNode) {
         return null;

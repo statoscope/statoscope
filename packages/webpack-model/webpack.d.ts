@@ -12,6 +12,7 @@ export declare namespace Webpack {
 
   type Module = {
     id: ModuleID;
+    identifier: string;
     name: string;
     size: number;
     issuerPath?: IssuerPathItem[] | null;
@@ -25,6 +26,7 @@ export declare namespace Webpack {
 
   type Reason = {
     type?: string;
+    moduleIdentifier: string | null;
     moduleName: string | null;
     loc?: string;
   };
@@ -87,8 +89,8 @@ export type StatoscopeMeta = {
 };
 
 export type ModuleData = {
-  nameToIdMap: Map<string, number>;
-  idToModuleMap: Map<number, Webpack.Module>;
+  idToIxMap: Map<string, number>;
+  ixToModuleMap: Map<number, Webpack.Module>;
   lastId: number;
 };
 
