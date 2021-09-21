@@ -3,26 +3,26 @@
 exports[`matches 1`] = `
 Array [
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
           "Instances:",
-          "- node_modules/foo  1.0.0",
+          "- simple/node_modules/foo  1.0.0",
         ],
         "type": "text",
       },
       Object {
         "content": Array [
           "Instances:",
-          "- node_modules/foo  1.0.0",
+          "- simple/node_modules/foo  1.0.0",
         ],
         "type": "tty",
       },
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
+            "compilation": "34ea3837a1050e206fe0",
             "package": "foo",
           },
         },
@@ -43,32 +43,32 @@ Array [
         "type": "package",
       },
       Object {
-        "id": "node_modules/foo",
+        "id": "simple/node_modules/foo",
         "type": "package-instance",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
           "Instances:",
-          "- node_modules/foo  1.0.0",
+          "- simple/node_modules/foo  1.0.0",
         ],
         "type": "text",
       },
       Object {
         "content": Array [
           "Instances:",
-          "- node_modules/foo  1.0.0",
+          "- simple/node_modules/foo  1.0.0",
         ],
         "type": "tty",
       },
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
+            "compilation": "34ea3837a1050e206fe0",
             "package": "foo",
           },
         },
@@ -89,32 +89,32 @@ Array [
         "type": "package",
       },
       Object {
-        "id": "node_modules/foo",
+        "id": "simple/node_modules/foo",
         "type": "package-instance",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
           "Instances:",
-          "- node_modules/foo  1.0.0",
+          "- simple/node_modules/foo  1.0.0",
         ],
         "type": "text",
       },
       Object {
         "content": Array [
           "Instances:",
-          "- node_modules/foo  1.0.0",
+          "- simple/node_modules/foo  1.0.0",
         ],
         "type": "tty",
       },
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
+            "compilation": "34ea3837a1050e206fe0",
             "package": "foo",
           },
         },
@@ -135,32 +135,32 @@ Array [
         "type": "package",
       },
       Object {
-        "id": "node_modules/foo",
+        "id": "simple/node_modules/foo",
         "type": "package-instance",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
           "Instances:",
-          "- node_modules/foo  1.0.0",
+          "- simple/node_modules/foo  1.0.0",
         ],
         "type": "text",
       },
       Object {
         "content": Array [
           "Instances:",
-          "- node_modules/foo  1.0.0",
+          "- simple/node_modules/foo  1.0.0",
         ],
         "type": "tty",
       },
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
+            "compilation": "34ea3837a1050e206fe0",
             "package": "foo",
           },
         },
@@ -181,32 +181,32 @@ Array [
         "type": "package",
       },
       Object {
-        "id": "node_modules/foo",
+        "id": "simple/node_modules/foo",
         "type": "package-instance",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
           "Instances:",
-          "- node_modules/foo  1.0.0",
+          "- simple/node_modules/foo  1.0.0",
         ],
         "type": "text",
       },
       Object {
         "content": Array [
           "Instances:",
-          "- node_modules/foo  1.0.0",
+          "- simple/node_modules/foo  1.0.0",
         ],
         "type": "tty",
       },
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
+            "compilation": "34ea3837a1050e206fe0",
             "package": "foo",
           },
         },
@@ -227,7 +227,7 @@ Array [
         "type": "package",
       },
       Object {
-        "id": "node_modules/foo",
+        "id": "simple/node_modules/foo",
         "type": "package-instance",
       },
     ],

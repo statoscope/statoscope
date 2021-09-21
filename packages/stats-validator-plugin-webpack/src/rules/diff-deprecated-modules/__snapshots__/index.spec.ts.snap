@@ -12,13 +12,23 @@ Array [
             "before": 0,
             "diff": Array [
               Object {
+                "active": true,
+                "explanation": "",
                 "loc": "one",
+                "module": null,
+                "moduleId": null,
+                "moduleIdentifier": null,
                 "moduleName": null,
+                "resolvedEntry": null,
                 "resolvedEntryName": "one",
+                "resolvedModule": null,
+                "resolvedModuleId": null,
+                "resolvedModuleIdentifier": null,
                 "type": "entry",
+                "userRequest": "./src/index.ts",
               },
             ],
-            "module": "./src/index.ts + 3 modules",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
           },
         },
         "query": "
@@ -28,7 +38,8 @@ Array [
                 diff: #.diff.({
                   $reason: $;
                   ...$,
-                  resolvedModule: $input.compilations.hash.($reason.moduleName.resolveModule($)).pick(),
+                  resolvedModule: $input.compilations.hash.($reason.moduleIdentifier.resolveModule($)).pick(),
+                  resolvedEntry: $input.compilations.hash.($reason.resolvedEntryName.resolveEntrypoint($)).pick(),
                 }),
                 before: #.before,
                 after: #.after,
@@ -38,10 +49,119 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Usage of ./src/index.ts + 3 modules was increased from 0 to 1",
+    "message": "Usage of ./simple/src/index.ts + 3 modules was increased from 0 to 1",
     "related": Array [
       Object {
-        "id": "./src/index.ts + 3 modules",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
+        "type": "module",
+      },
+    ],
+  },
+  Object {
+    "compilation": undefined,
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "after": 1,
+            "before": 0,
+            "diff": Array [
+              Object {
+                "active": true,
+                "explanation": "",
+                "loc": "two",
+                "module": null,
+                "moduleId": null,
+                "moduleIdentifier": null,
+                "moduleName": null,
+                "resolvedEntry": null,
+                "resolvedEntryName": "two",
+                "resolvedModule": null,
+                "resolvedModuleId": null,
+                "resolvedModuleIdentifier": null,
+                "type": "entry",
+                "userRequest": "./src/index2.ts",
+              },
+            ],
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                module: $input.compilations.hash.(#.module.resolveModule($)).pick(),
+                diff: #.diff.({
+                  $reason: $;
+                  ...$,
+                  resolvedModule: $input.compilations.hash.($reason.moduleIdentifier.resolveModule($)).pick(),
+                  resolvedEntry: $input.compilations.hash.($reason.resolvedEntryName.resolveEntrypoint($)).pick(),
+                }),
+                before: #.before,
+                after: #.after,
+              }
+              ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Usage of ./simple/src/index2.ts + 1 modules was increased from 0 to 1",
+    "related": Array [
+      Object {
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
+        "type": "module",
+      },
+    ],
+  },
+  Object {
+    "compilation": undefined,
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "after": 1,
+            "before": 0,
+            "diff": Array [
+              Object {
+                "active": true,
+                "explanation": "",
+                "loc": "5:0-16",
+                "module": "./simple/src/index2.ts",
+                "moduleId": null,
+                "moduleIdentifier": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
+                "moduleName": "./simple/src/index2.ts",
+                "resolvedEntry": null,
+                "resolvedModule": null,
+                "resolvedModuleId": null,
+                "resolvedModuleIdentifier": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
+                "type": "harmony side effect evaluation",
+                "userRequest": "extLib",
+              },
+            ],
+            "module": "external var \\"extLib\\"",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                module: $input.compilations.hash.(#.module.resolveModule($)).pick(),
+                diff: #.diff.({
+                  $reason: $;
+                  ...$,
+                  resolvedModule: $input.compilations.hash.($reason.moduleIdentifier.resolveModule($)).pick(),
+                  resolvedEntry: $input.compilations.hash.($reason.resolvedEntryName.resolveEntrypoint($)).pick(),
+                }),
+                before: #.before,
+                after: #.after,
+              }
+              ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Usage of external \\"extLib\\" was increased from 0 to 1",
+    "related": Array [
+      Object {
+        "id": "external var \\"extLib\\"",
         "type": "module",
       },
     ],
@@ -53,34 +173,70 @@ Array [
         "payload": Object {
           "context": Object {
             "after": 4,
-            "before": 0,
+            "before": 2,
             "diff": Array [
               Object {
+                "active": true,
+                "explanation": "",
                 "loc": "2:0-31",
-                "moduleName": "./src/index.ts + 3 modules",
-                "resolvedEntryName": undefined,
+                "module": "./simple/src/index.ts + 3 modules",
+                "moduleId": 292,
+                "moduleIdentifier": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
+                "moduleName": "./simple/src/index.ts + 3 modules",
+                "resolvedEntry": null,
+                "resolvedModule": null,
+                "resolvedModuleId": null,
+                "resolvedModuleIdentifier": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
                 "type": "harmony side effect evaluation",
+                "userRequest": "is-array",
               },
               Object {
+                "active": true,
+                "explanation": "",
                 "loc": "4:17-24",
-                "moduleName": "./src/index.ts + 3 modules",
-                "resolvedEntryName": undefined,
+                "module": "./simple/src/index.ts + 3 modules",
+                "moduleId": 292,
+                "moduleIdentifier": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
+                "moduleName": "./simple/src/index.ts + 3 modules",
+                "resolvedEntry": null,
+                "resolvedModule": null,
+                "resolvedModuleId": null,
+                "resolvedModuleIdentifier": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
                 "type": "harmony import specifier",
+                "userRequest": "is-array",
               },
               Object {
+                "active": true,
+                "explanation": "",
                 "loc": "2:0-31",
-                "moduleName": "./src/index2.ts + 1 modules",
-                "resolvedEntryName": undefined,
+                "module": "./simple/src/index2.ts + 1 modules",
+                "moduleId": 503,
+                "moduleIdentifier": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
+                "moduleName": "./simple/src/index2.ts + 1 modules",
+                "resolvedEntry": null,
+                "resolvedModule": null,
+                "resolvedModuleId": null,
+                "resolvedModuleIdentifier": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
                 "type": "harmony side effect evaluation",
+                "userRequest": "is-array",
               },
               Object {
+                "active": true,
+                "explanation": "",
                 "loc": "10:30-37",
-                "moduleName": "./src/index2.ts + 1 modules",
-                "resolvedEntryName": undefined,
+                "module": "./simple/src/index2.ts + 1 modules",
+                "moduleId": 503,
+                "moduleIdentifier": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
+                "moduleName": "./simple/src/index2.ts + 1 modules",
+                "resolvedEntry": null,
+                "resolvedModule": null,
+                "resolvedModuleId": null,
+                "resolvedModuleIdentifier": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
                 "type": "harmony import specifier",
+                "userRequest": "is-array",
               },
             ],
-            "module": "../node_modules/is-array/index.js",
+            "module": "./node_modules/is-array/index.js",
           },
         },
         "query": "
@@ -90,7 +246,8 @@ Array [
                 diff: #.diff.({
                   $reason: $;
                   ...$,
-                  resolvedModule: $input.compilations.hash.($reason.moduleName.resolveModule($)).pick(),
+                  resolvedModule: $input.compilations.hash.($reason.moduleIdentifier.resolveModule($)).pick(),
+                  resolvedEntry: $input.compilations.hash.($reason.resolvedEntryName.resolveEntrypoint($)).pick(),
                 }),
                 before: #.before,
                 after: #.after,
@@ -100,10 +257,64 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Usage of ../node_modules/is-array/index.js was increased from 0 to 4",
+    "message": "Usage of ./node_modules/is-array/index.js was increased from 2 to 4",
     "related": Array [
       Object {
-        "id": "../node_modules/is-array/index.js",
+        "id": "./node_modules/is-array/index.js",
+        "type": "module",
+      },
+    ],
+  },
+  Object {
+    "compilation": undefined,
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "after": 1,
+            "before": 0,
+            "diff": Array [
+              Object {
+                "active": true,
+                "explanation": "",
+                "loc": "6:12-50",
+                "module": "./simple/src/index2.ts + 1 modules",
+                "moduleId": 503,
+                "moduleIdentifier": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
+                "moduleName": "./simple/src/index2.ts + 1 modules",
+                "resolvedEntry": null,
+                "resolvedModule": null,
+                "resolvedModuleId": null,
+                "resolvedModuleIdentifier": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
+                "type": "new URL()",
+                "userRequest": "./test.txt",
+              },
+            ],
+            "module": "asset/resource|./simple/src/test.txt",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                module: $input.compilations.hash.(#.module.resolveModule($)).pick(),
+                diff: #.diff.({
+                  $reason: $;
+                  ...$,
+                  resolvedModule: $input.compilations.hash.($reason.moduleIdentifier.resolveModule($)).pick(),
+                  resolvedEntry: $input.compilations.hash.($reason.resolvedEntryName.resolveEntrypoint($)).pick(),
+                }),
+                before: #.before,
+                after: #.after,
+              }
+              ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Usage of ./simple/src/test.txt was increased from 0 to 1",
+    "related": Array [
+      Object {
+        "id": "asset/resource|./simple/src/test.txt",
         "type": "module",
       },
     ],
@@ -118,19 +329,37 @@ Array [
             "before": 0,
             "diff": Array [
               Object {
-                "loc": "2:0-92",
-                "moduleName": "./src/index2.css",
-                "resolvedEntryName": undefined,
+                "active": true,
+                "explanation": "",
+                "loc": "4:0-61",
+                "module": "./simple/src/index2.css",
+                "moduleId": 945,
+                "moduleIdentifier": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
+                "moduleName": "./simple/src/index2.css",
+                "resolvedEntry": null,
+                "resolvedModule": null,
+                "resolvedModuleId": 945,
+                "resolvedModuleIdentifier": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
                 "type": "harmony side effect evaluation",
+                "userRequest": "./statoscope.png",
               },
               Object {
-                "loc": "5:30-57",
-                "moduleName": "./src/index2.css",
-                "resolvedEntryName": undefined,
+                "active": true,
+                "explanation": "",
+                "loc": "6:73-102",
+                "module": "./simple/src/index2.css",
+                "moduleId": 945,
+                "moduleIdentifier": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
+                "moduleName": "./simple/src/index2.css",
+                "resolvedEntry": null,
+                "resolvedModule": null,
+                "resolvedModuleId": 945,
+                "resolvedModuleIdentifier": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
                 "type": "harmony import specifier",
+                "userRequest": "./statoscope.png",
               },
             ],
-            "module": "../node_modules/css-loader/dist/runtime/api.js",
+            "module": "asset/inline|./simple/src/statoscope.png",
           },
         },
         "query": "
@@ -140,7 +369,8 @@ Array [
                 diff: #.diff.({
                   $reason: $;
                   ...$,
-                  resolvedModule: $input.compilations.hash.($reason.moduleName.resolveModule($)).pick(),
+                  resolvedModule: $input.compilations.hash.($reason.moduleIdentifier.resolveModule($)).pick(),
+                  resolvedEntry: $input.compilations.hash.($reason.resolvedEntryName.resolveEntrypoint($)).pick(),
                 }),
                 before: #.before,
                 after: #.after,
@@ -150,60 +380,10 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Usage of ../node_modules/css-loader/dist/runtime/api.js was increased from 0 to 2",
+    "message": "Usage of ./simple/src/statoscope.png was increased from 0 to 2",
     "related": Array [
       Object {
-        "id": "../node_modules/css-loader/dist/runtime/api.js",
-        "type": "module",
-      },
-    ],
-  },
-  Object {
-    "compilation": undefined,
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
-            "after": 2,
-            "before": 0,
-            "diff": Array [
-              Object {
-                "loc": "3:0-99",
-                "moduleName": "./src/index2.css",
-                "resolvedEntryName": undefined,
-                "type": "harmony side effect evaluation",
-              },
-              Object {
-                "loc": "6:41-72",
-                "moduleName": "./src/index2.css",
-                "resolvedEntryName": undefined,
-                "type": "harmony import specifier",
-              },
-            ],
-            "module": "../node_modules/css-loader/dist/runtime/getUrl.js",
-          },
-        },
-        "query": "
-              $input: resolveInputFile();
-              {
-                module: $input.compilations.hash.(#.module.resolveModule($)).pick(),
-                diff: #.diff.({
-                  $reason: $;
-                  ...$,
-                  resolvedModule: $input.compilations.hash.($reason.moduleName.resolveModule($)).pick(),
-                }),
-                before: #.before,
-                after: #.after,
-              }
-              ",
-        "type": "discovery",
-      },
-    ],
-    "filename": "input.json",
-    "message": "Usage of ../node_modules/css-loader/dist/runtime/getUrl.js was increased from 0 to 2",
-    "related": Array [
-      Object {
-        "id": "../node_modules/css-loader/dist/runtime/getUrl.js",
+        "id": "asset/inline|./simple/src/statoscope.png",
         "type": "module",
       },
     ],
@@ -218,13 +398,22 @@ Array [
             "before": 1,
             "diff": Array [
               Object {
+                "active": false,
+                "explanation": "",
                 "loc": "1:0-22",
-                "moduleName": "./src/index.ts + 3 modules",
-                "resolvedEntryName": undefined,
+                "module": "./simple/src/index.ts + 3 modules",
+                "moduleId": 292,
+                "moduleIdentifier": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
+                "moduleName": "./simple/src/index.ts + 3 modules",
+                "resolvedEntry": null,
+                "resolvedModule": null,
+                "resolvedModuleId": null,
+                "resolvedModuleIdentifier": "./simple/node_modules/foo/index.js",
                 "type": "harmony side effect evaluation",
+                "userRequest": "bar",
               },
             ],
-            "module": "./node_modules/foo/node_modules/bar/index.js",
+            "module": "./simple/node_modules/foo/node_modules/bar/index.js",
           },
         },
         "query": "
@@ -234,7 +423,8 @@ Array [
                 diff: #.diff.({
                   $reason: $;
                   ...$,
-                  resolvedModule: $input.compilations.hash.($reason.moduleName.resolveModule($)).pick(),
+                  resolvedModule: $input.compilations.hash.($reason.moduleIdentifier.resolveModule($)).pick(),
+                  resolvedEntry: $input.compilations.hash.($reason.resolvedEntryName.resolveEntrypoint($)).pick(),
                 }),
                 before: #.before,
                 after: #.after,
@@ -244,10 +434,10 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Usage of ./node_modules/foo/node_modules/bar/index.js was increased from 1 to 2",
+    "message": "Usage of ./simple/node_modules/foo/node_modules/bar/index.js was increased from 1 to 2",
     "related": Array [
       Object {
-        "id": "./node_modules/foo/node_modules/bar/index.js",
+        "id": "./simple/node_modules/foo/node_modules/bar/index.js",
         "type": "module",
       },
     ],

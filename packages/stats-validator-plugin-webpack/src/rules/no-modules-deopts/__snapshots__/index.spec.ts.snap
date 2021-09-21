@@ -3,19 +3,19 @@
 exports[`matches 1`] = `
 Array [
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
-          "ModuleConcatenation bailout: Cannot concat with ../node_modules/is-array/index.js: Module is not an ECMAScript module",
+          "ModuleConcatenation bailout: Cannot concat with ./node_modules/is-array/index.js: Module is not an ECMAScript module",
         ],
         "type": "text",
       },
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index.ts + 3 modules",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
           },
         },
         "query": "
@@ -28,16 +28,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index.ts + 3 modules has deoptimizations",
+    "message": "Module ./simple/src/index.ts + 3 modules has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index.ts + 3 modules",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -48,8 +48,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index.ts",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
           },
         },
         "query": "
@@ -62,29 +62,29 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index.ts has deoptimizations",
+    "message": "Module ./simple/src/index.ts has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index.ts",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
-          "ModuleConcatenation bailout: Cannot concat with ./src/index2.css: Module uses module.id",
-          "ModuleConcatenation bailout: Cannot concat with ../node_modules/is-array/index.js: Module is not an ECMAScript module",
+          "ModuleConcatenation bailout: Cannot concat with ./simple/src/index2.css: Module uses module.id",
+          "ModuleConcatenation bailout: Cannot concat with ./node_modules/is-array/index.js: Module is not an ECMAScript module",
         ],
         "type": "text",
       },
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index2.ts + 1 modules",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
           },
         },
         "query": "
@@ -97,16 +97,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index2.ts + 1 modules has deoptimizations",
+    "message": "Module ./simple/src/index2.ts + 1 modules has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index2.ts + 1 modules",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -117,8 +117,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index2.ts",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
           },
         },
         "query": "
@@ -131,16 +131,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index2.ts has deoptimizations",
+    "message": "Module ./simple/src/index2.ts has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index2.ts",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -153,8 +153,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "../node_modules/is-array/index.js",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/is-array/index.js",
           },
         },
         "query": "
@@ -167,16 +167,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ../node_modules/is-array/index.js has deoptimizations",
+    "message": "Module ./node_modules/is-array/index.js has deoptimizations",
     "related": Array [
       Object {
-        "id": "../node_modules/is-array/index.js",
+        "id": "./node_modules/is-array/index.js",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -188,8 +188,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index2.css",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
           },
         },
         "query": "
@@ -202,16 +202,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index2.css has deoptimizations",
+    "message": "Module ./simple/src/index2.css has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index2.css",
+        "id": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -222,8 +222,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/test.txt",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "asset/resource|./simple/src/test.txt",
           },
         },
         "query": "
@@ -236,16 +236,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/test.txt has deoptimizations",
+    "message": "Module ./simple/src/test.txt has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/test.txt",
+        "id": "asset/resource|./simple/src/test.txt",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -258,8 +258,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "../node_modules/css-loader/dist/runtime/api.js",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/css-loader/dist/runtime/api.js",
           },
         },
         "query": "
@@ -272,16 +272,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ../node_modules/css-loader/dist/runtime/api.js has deoptimizations",
+    "message": "Module ./node_modules/css-loader/dist/runtime/api.js has deoptimizations",
     "related": Array [
       Object {
-        "id": "../node_modules/css-loader/dist/runtime/api.js",
+        "id": "./node_modules/css-loader/dist/runtime/api.js",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -294,8 +294,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "../node_modules/css-loader/dist/runtime/getUrl.js",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/css-loader/dist/runtime/getUrl.js",
           },
         },
         "query": "
@@ -308,16 +308,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ../node_modules/css-loader/dist/runtime/getUrl.js has deoptimizations",
+    "message": "Module ./node_modules/css-loader/dist/runtime/getUrl.js has deoptimizations",
     "related": Array [
       Object {
-        "id": "../node_modules/css-loader/dist/runtime/getUrl.js",
+        "id": "./node_modules/css-loader/dist/runtime/getUrl.js",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -328,8 +328,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/statoscope.png",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "asset/inline|./simple/src/statoscope.png",
           },
         },
         "query": "
@@ -342,16 +342,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/statoscope.png has deoptimizations",
+    "message": "Module ./simple/src/statoscope.png has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/statoscope.png",
+        "id": "asset/inline|./simple/src/statoscope.png",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -362,8 +362,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./node_modules/foo/node_modules/bar/index.js",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./simple/node_modules/foo/node_modules/bar/index.js",
           },
         },
         "query": "
@@ -376,28 +376,28 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./node_modules/foo/node_modules/bar/index.js has deoptimizations",
+    "message": "Module ./simple/node_modules/foo/node_modules/bar/index.js has deoptimizations",
     "related": Array [
       Object {
-        "id": "./node_modules/foo/node_modules/bar/index.js",
+        "id": "./simple/node_modules/foo/node_modules/bar/index.js",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
-          "ModuleConcatenation bailout: Cannot concat with ../node_modules/is-array/index.js: Module is not an ECMAScript module",
+          "ModuleConcatenation bailout: Cannot concat with ./node_modules/is-array/index.js: Module is not an ECMAScript module",
         ],
         "type": "text",
       },
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index.ts + 3 modules",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
           },
         },
         "query": "
@@ -410,16 +410,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index.ts + 3 modules has deoptimizations",
+    "message": "Module ./simple/src/index.ts + 3 modules has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index.ts + 3 modules",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -430,8 +430,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index.ts",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
           },
         },
         "query": "
@@ -444,29 +444,29 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index.ts has deoptimizations",
+    "message": "Module ./simple/src/index.ts has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index.ts",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
-          "ModuleConcatenation bailout: Cannot concat with ./src/index2.css: Module uses module.id",
-          "ModuleConcatenation bailout: Cannot concat with ../node_modules/is-array/index.js: Module is not an ECMAScript module",
+          "ModuleConcatenation bailout: Cannot concat with ./simple/src/index2.css: Module uses module.id",
+          "ModuleConcatenation bailout: Cannot concat with ./node_modules/is-array/index.js: Module is not an ECMAScript module",
         ],
         "type": "text",
       },
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index2.ts + 1 modules",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
           },
         },
         "query": "
@@ -479,16 +479,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index2.ts + 1 modules has deoptimizations",
+    "message": "Module ./simple/src/index2.ts + 1 modules has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index2.ts + 1 modules",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -499,8 +499,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index2.ts",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
           },
         },
         "query": "
@@ -513,16 +513,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index2.ts has deoptimizations",
+    "message": "Module ./simple/src/index2.ts has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index2.ts",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -535,8 +535,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "../node_modules/is-array/index.js",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/is-array/index.js",
           },
         },
         "query": "
@@ -549,16 +549,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ../node_modules/is-array/index.js has deoptimizations",
+    "message": "Module ./node_modules/is-array/index.js has deoptimizations",
     "related": Array [
       Object {
-        "id": "../node_modules/is-array/index.js",
+        "id": "./node_modules/is-array/index.js",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -570,8 +570,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index2.css",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
           },
         },
         "query": "
@@ -584,16 +584,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index2.css has deoptimizations",
+    "message": "Module ./simple/src/index2.css has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index2.css",
+        "id": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -604,8 +604,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/test.txt",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "asset/resource|./simple/src/test.txt",
           },
         },
         "query": "
@@ -618,16 +618,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/test.txt has deoptimizations",
+    "message": "Module ./simple/src/test.txt has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/test.txt",
+        "id": "asset/resource|./simple/src/test.txt",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -640,8 +640,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "../node_modules/css-loader/dist/runtime/api.js",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/css-loader/dist/runtime/api.js",
           },
         },
         "query": "
@@ -654,16 +654,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ../node_modules/css-loader/dist/runtime/api.js has deoptimizations",
+    "message": "Module ./node_modules/css-loader/dist/runtime/api.js has deoptimizations",
     "related": Array [
       Object {
-        "id": "../node_modules/css-loader/dist/runtime/api.js",
+        "id": "./node_modules/css-loader/dist/runtime/api.js",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -676,8 +676,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "../node_modules/css-loader/dist/runtime/getUrl.js",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/css-loader/dist/runtime/getUrl.js",
           },
         },
         "query": "
@@ -690,16 +690,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ../node_modules/css-loader/dist/runtime/getUrl.js has deoptimizations",
+    "message": "Module ./node_modules/css-loader/dist/runtime/getUrl.js has deoptimizations",
     "related": Array [
       Object {
-        "id": "../node_modules/css-loader/dist/runtime/getUrl.js",
+        "id": "./node_modules/css-loader/dist/runtime/getUrl.js",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -710,8 +710,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/statoscope.png",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "asset/inline|./simple/src/statoscope.png",
           },
         },
         "query": "
@@ -724,16 +724,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/statoscope.png has deoptimizations",
+    "message": "Module ./simple/src/statoscope.png has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/statoscope.png",
+        "id": "asset/inline|./simple/src/statoscope.png",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -744,8 +744,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./node_modules/foo/node_modules/bar/index.js",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./simple/node_modules/foo/node_modules/bar/index.js",
           },
         },
         "query": "
@@ -758,28 +758,28 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./node_modules/foo/node_modules/bar/index.js has deoptimizations",
+    "message": "Module ./simple/node_modules/foo/node_modules/bar/index.js has deoptimizations",
     "related": Array [
       Object {
-        "id": "./node_modules/foo/node_modules/bar/index.js",
+        "id": "./simple/node_modules/foo/node_modules/bar/index.js",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
-          "ModuleConcatenation bailout: Cannot concat with ../node_modules/is-array/index.js: Module is not an ECMAScript module",
+          "ModuleConcatenation bailout: Cannot concat with ./node_modules/is-array/index.js: Module is not an ECMAScript module",
         ],
         "type": "text",
       },
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index.ts + 3 modules",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
           },
         },
         "query": "
@@ -792,16 +792,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index.ts + 3 modules has deoptimizations",
+    "message": "Module ./simple/src/index.ts + 3 modules has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index.ts + 3 modules",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -812,8 +812,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index.ts",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
           },
         },
         "query": "
@@ -826,29 +826,29 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index.ts has deoptimizations",
+    "message": "Module ./simple/src/index.ts has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index.ts",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
-          "ModuleConcatenation bailout: Cannot concat with ./src/index2.css: Module uses module.id",
-          "ModuleConcatenation bailout: Cannot concat with ../node_modules/is-array/index.js: Module is not an ECMAScript module",
+          "ModuleConcatenation bailout: Cannot concat with ./simple/src/index2.css: Module uses module.id",
+          "ModuleConcatenation bailout: Cannot concat with ./node_modules/is-array/index.js: Module is not an ECMAScript module",
         ],
         "type": "text",
       },
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index2.ts + 1 modules",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
           },
         },
         "query": "
@@ -861,16 +861,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index2.ts + 1 modules has deoptimizations",
+    "message": "Module ./simple/src/index2.ts + 1 modules has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index2.ts + 1 modules",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -881,8 +881,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index2.ts",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
           },
         },
         "query": "
@@ -895,16 +895,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index2.ts has deoptimizations",
+    "message": "Module ./simple/src/index2.ts has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index2.ts",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -917,8 +917,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "../node_modules/is-array/index.js",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/is-array/index.js",
           },
         },
         "query": "
@@ -931,16 +931,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ../node_modules/is-array/index.js has deoptimizations",
+    "message": "Module ./node_modules/is-array/index.js has deoptimizations",
     "related": Array [
       Object {
-        "id": "../node_modules/is-array/index.js",
+        "id": "./node_modules/is-array/index.js",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -952,8 +952,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index2.css",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
           },
         },
         "query": "
@@ -966,16 +966,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index2.css has deoptimizations",
+    "message": "Module ./simple/src/index2.css has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index2.css",
+        "id": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -986,8 +986,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/test.txt",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "asset/resource|./simple/src/test.txt",
           },
         },
         "query": "
@@ -1000,16 +1000,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/test.txt has deoptimizations",
+    "message": "Module ./simple/src/test.txt has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/test.txt",
+        "id": "asset/resource|./simple/src/test.txt",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -1022,8 +1022,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "../node_modules/css-loader/dist/runtime/api.js",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/css-loader/dist/runtime/api.js",
           },
         },
         "query": "
@@ -1036,16 +1036,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ../node_modules/css-loader/dist/runtime/api.js has deoptimizations",
+    "message": "Module ./node_modules/css-loader/dist/runtime/api.js has deoptimizations",
     "related": Array [
       Object {
-        "id": "../node_modules/css-loader/dist/runtime/api.js",
+        "id": "./node_modules/css-loader/dist/runtime/api.js",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -1058,8 +1058,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "../node_modules/css-loader/dist/runtime/getUrl.js",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/css-loader/dist/runtime/getUrl.js",
           },
         },
         "query": "
@@ -1072,16 +1072,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ../node_modules/css-loader/dist/runtime/getUrl.js has deoptimizations",
+    "message": "Module ./node_modules/css-loader/dist/runtime/getUrl.js has deoptimizations",
     "related": Array [
       Object {
-        "id": "../node_modules/css-loader/dist/runtime/getUrl.js",
+        "id": "./node_modules/css-loader/dist/runtime/getUrl.js",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -1092,8 +1092,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/statoscope.png",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "asset/inline|./simple/src/statoscope.png",
           },
         },
         "query": "
@@ -1106,16 +1106,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/statoscope.png has deoptimizations",
+    "message": "Module ./simple/src/statoscope.png has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/statoscope.png",
+        "id": "asset/inline|./simple/src/statoscope.png",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -1126,8 +1126,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./node_modules/foo/node_modules/bar/index.js",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./simple/node_modules/foo/node_modules/bar/index.js",
           },
         },
         "query": "
@@ -1140,28 +1140,28 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./node_modules/foo/node_modules/bar/index.js has deoptimizations",
+    "message": "Module ./simple/node_modules/foo/node_modules/bar/index.js has deoptimizations",
     "related": Array [
       Object {
-        "id": "./node_modules/foo/node_modules/bar/index.js",
+        "id": "./simple/node_modules/foo/node_modules/bar/index.js",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
-          "ModuleConcatenation bailout: Cannot concat with ../node_modules/is-array/index.js: Module is not an ECMAScript module",
+          "ModuleConcatenation bailout: Cannot concat with ./node_modules/is-array/index.js: Module is not an ECMAScript module",
         ],
         "type": "text",
       },
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index.ts + 3 modules",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
           },
         },
         "query": "
@@ -1174,16 +1174,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index.ts + 3 modules has deoptimizations",
+    "message": "Module ./simple/src/index.ts + 3 modules has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index.ts + 3 modules",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -1194,8 +1194,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index.ts",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
           },
         },
         "query": "
@@ -1208,29 +1208,29 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index.ts has deoptimizations",
+    "message": "Module ./simple/src/index.ts has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index.ts",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
-          "ModuleConcatenation bailout: Cannot concat with ./src/index2.css: Module uses module.id",
-          "ModuleConcatenation bailout: Cannot concat with ../node_modules/is-array/index.js: Module is not an ECMAScript module",
+          "ModuleConcatenation bailout: Cannot concat with ./simple/src/index2.css: Module uses module.id",
+          "ModuleConcatenation bailout: Cannot concat with ./node_modules/is-array/index.js: Module is not an ECMAScript module",
         ],
         "type": "text",
       },
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index2.ts + 1 modules",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
           },
         },
         "query": "
@@ -1243,16 +1243,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index2.ts + 1 modules has deoptimizations",
+    "message": "Module ./simple/src/index2.ts + 1 modules has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index2.ts + 1 modules",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -1263,8 +1263,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index2.ts",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
           },
         },
         "query": "
@@ -1277,16 +1277,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index2.ts has deoptimizations",
+    "message": "Module ./simple/src/index2.ts has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index2.ts",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -1299,8 +1299,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "../node_modules/is-array/index.js",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/is-array/index.js",
           },
         },
         "query": "
@@ -1313,16 +1313,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ../node_modules/is-array/index.js has deoptimizations",
+    "message": "Module ./node_modules/is-array/index.js has deoptimizations",
     "related": Array [
       Object {
-        "id": "../node_modules/is-array/index.js",
+        "id": "./node_modules/is-array/index.js",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -1334,8 +1334,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/index2.css",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
           },
         },
         "query": "
@@ -1348,16 +1348,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/index2.css has deoptimizations",
+    "message": "Module ./simple/src/index2.css has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/index2.css",
+        "id": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -1368,8 +1368,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/test.txt",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "asset/resource|./simple/src/test.txt",
           },
         },
         "query": "
@@ -1382,16 +1382,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/test.txt has deoptimizations",
+    "message": "Module ./simple/src/test.txt has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/test.txt",
+        "id": "asset/resource|./simple/src/test.txt",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -1404,8 +1404,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "../node_modules/css-loader/dist/runtime/api.js",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/css-loader/dist/runtime/api.js",
           },
         },
         "query": "
@@ -1418,16 +1418,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ../node_modules/css-loader/dist/runtime/api.js has deoptimizations",
+    "message": "Module ./node_modules/css-loader/dist/runtime/api.js has deoptimizations",
     "related": Array [
       Object {
-        "id": "../node_modules/css-loader/dist/runtime/api.js",
+        "id": "./node_modules/css-loader/dist/runtime/api.js",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -1440,8 +1440,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "../node_modules/css-loader/dist/runtime/getUrl.js",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/css-loader/dist/runtime/getUrl.js",
           },
         },
         "query": "
@@ -1454,16 +1454,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ../node_modules/css-loader/dist/runtime/getUrl.js has deoptimizations",
+    "message": "Module ./node_modules/css-loader/dist/runtime/getUrl.js has deoptimizations",
     "related": Array [
       Object {
-        "id": "../node_modules/css-loader/dist/runtime/getUrl.js",
+        "id": "./node_modules/css-loader/dist/runtime/getUrl.js",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -1474,8 +1474,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./src/statoscope.png",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "asset/inline|./simple/src/statoscope.png",
           },
         },
         "query": "
@@ -1488,16 +1488,16 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./src/statoscope.png has deoptimizations",
+    "message": "Module ./simple/src/statoscope.png has deoptimizations",
     "related": Array [
       Object {
-        "id": "./src/statoscope.png",
+        "id": "asset/inline|./simple/src/statoscope.png",
         "type": "module",
       },
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "content": Array [
@@ -1508,8 +1508,8 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
-            "module": "./node_modules/foo/node_modules/bar/index.js",
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./simple/node_modules/foo/node_modules/bar/index.js",
           },
         },
         "query": "
@@ -1522,10 +1522,10 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Module ./node_modules/foo/node_modules/bar/index.js has deoptimizations",
+    "message": "Module ./simple/node_modules/foo/node_modules/bar/index.js has deoptimizations",
     "related": Array [
       Object {
-        "id": "./node_modules/foo/node_modules/bar/index.js",
+        "id": "./simple/node_modules/foo/node_modules/bar/index.js",
         "type": "module",
       },
     ],

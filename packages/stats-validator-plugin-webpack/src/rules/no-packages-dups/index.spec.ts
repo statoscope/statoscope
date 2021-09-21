@@ -1,6 +1,6 @@
 import { makeAPI } from '@statoscope/stats-validator/dist/api';
 import plugin from '../..';
-import statsV5 from '../../../../../test/bundles/simple/stats-prod.json';
+import statsV5 from '../../../../../test/bundles/v5/simple/stats-prod.json';
 import rule from './';
 
 test('should work', () => {

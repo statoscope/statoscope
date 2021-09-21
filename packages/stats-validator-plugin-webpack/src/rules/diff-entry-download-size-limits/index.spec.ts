@@ -3,8 +3,8 @@ import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
 import { Prepared } from '@statoscope/webpack-model';
 import { API } from '@statoscope/types/types/validation/api';
 import plugin from '../..';
-import referenceStats from '../../../../../test/bundles/simple/stats-prod.json';
-import afterStats from '../../../../../test/bundles/simple/stats-dev.json';
+import referenceStats from '../../../../../test/bundles/v5/simple/stats-prod.json';
+import afterStats from '../../../../../test/bundles/v5/simple/stats-dev.json';
 import rule, { Params } from './';
 
 function prepareAPI(ruleParams: Params): API {

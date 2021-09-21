@@ -1,5 +1,5 @@
 import { stringify } from 'flatted';
-import stats from '../../../test/bundles/simple/stats-prod.json';
+import stats from '../../../test/bundles/v5/simple/stats-prod.json';
 import normalize from './normalize';
 
 test('should work', () => {

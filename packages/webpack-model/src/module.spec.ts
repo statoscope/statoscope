@@ -1,4 +1,4 @@
-import stats from '../../../test/bundles/simple/stats-prod.json';
+import stats from '../../../test/bundles/v5/simple/stats-prod.json';
 import { moduleReasonResource, moduleResource, nodeModule } from './module';
 import { NormalizedModule, NormalizedReason } from './normalize';
 

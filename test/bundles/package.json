@@ -2,17 +2,8 @@
   "name": "test-bundles",
   "private": true,
   "scripts": {
-    "postinstall": "npm run v4 && cd simple && npm run build && cd ..",
-    "v4": "cd v4 && npm install && cd .."
-  },
-  "devDependencies": {
-    "is-array": "^1.0.1",
-    "webpack": "^5.38.1",
-    "webpack-cli": "^4.7.1",
-    "babel-loader": "^8.2.2",
-    "@babel/core": "^7.14.3",
-    "@babel/preset-env": "^7.14.4",
-    "@babel/preset-typescript": "^7.13.0",
-    "css-loader": "^5.2.6"
+    "postinstall": "npm run v4 && npm run v5",
+    "v4": "cd v4 && npm i && cd ..",
+    "v5": "cd v5 && npm i && cd .."
   }
 }

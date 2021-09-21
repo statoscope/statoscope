@@ -1,4 +1,4 @@
-import stats from '../../../test/bundles/simple/stats-prod.json';
+import stats from '../../../test/bundles/v5/simple/stats-prod.json';
 import { serializeSolutionPath } from '../../../test/helpers';
 import normalize, { NormalizedAsset, NormalizedChunk } from './normalize';
 import makeHelpers, { ResolvedStats } from './jora-helpers';
@@ -27,7 +27,7 @@ test('resolveAsset', () => {
 
 test('resolveModule', () => {
   const module = firstCompilation.modules[0];
-  expect(helpers.resolveModule(module.name, hash)).toBe(module);
+  expect(helpers.resolveModule(module.identifier, hash)).toBe(module);
 });
 
 test('resolvePackage', () => {
@@ -147,7 +147,7 @@ test('getPackageInstanceInfo', () => {
       "info": Object {
         "version": "1.0.1",
       },
-      "path": "../node_modules/is-array",
+      "path": "node_modules/is-array",
     }
   `);
 });
@@ -226,7 +226,7 @@ describe('validation', () => {
     expect(
       helpers.validation_resolveRelatedItem(
         {
-          id: './src/statoscope.png',
+          id: 'asset/inline|./simple/src/statoscope.png',
           type: 'module',
         },
         hash
@@ -235,13 +235,13 @@ describe('validation', () => {
     expect(
       helpers.validation_resolveRelatedItem(
         {
-          id: 'node_modules/foo',
+          id: 'simple/node_modules/foo',
           type: 'package-instance',
         },
         hash
         // @ts-ignore
       ).item?.path
-    ).toBe('node_modules/foo');
+    ).toBe('simple/node_modules/foo');
   });
 
   test('validation_resolveRule', () => {

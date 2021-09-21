@@ -4,10 +4,10 @@ import yargs from 'yargs';
 import generate from './generate';
 
 const inputFixtures = [
-  '../../../../test/bundles/simple/stats-prod.json',
-  '../../../../test/bundles/simple/stats-prod.json',
-  '../../../../test/bundles/simple/stats-prod.json',
-  '../../../../test/bundles/simple/stats-prod.json',
+  '../../../../test/bundles/v5/simple/stats-prod.json',
+  '../../../../test/bundles/v5/simple/stats-prod.json',
+  '../../../../test/bundles/v5/simple/stats-prod.json',
+  '../../../../test/bundles/v5/simple/stats-prod.json',
 ].map((filepath) => path.resolve(__dirname, filepath));
 const inputArgs = inputFixtures.map((filename) => ['--input', filename]).flat();
 
@@ -17,7 +17,7 @@ const webpackUIFixture = path.join(rootPath, 'test/fixtures/report-writer/inject
 const statsFixture = path.join(rootPath, 'test/fixtures/report-writer/source.json');
 const mockedContent = new Map([
   [require.resolve('@statoscope/webpack-ui'), webpackUIFixture],
-  [require.resolve('../../../../test/bundles/simple/stats-prod.json'), statsFixture],
+  [require.resolve('../../../../test/bundles/v5/simple/stats-prod.json'), statsFixture],
 ]);
 
 fs.mkdirSync(outputDir, { recursive: true });

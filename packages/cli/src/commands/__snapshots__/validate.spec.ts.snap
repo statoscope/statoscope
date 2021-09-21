@@ -6,28 +6,28 @@ Array [
     "input.json",
   ],
   Array [
-    "da95abcf6bbf9b157ff6",
+    "9eb9a218218f1ee4ba40",
   ],
   Array [
-    "error  Module ./src/index.ts should not be used  webpack/restricted-modules",
+    "error  Module ./simple/src/index.ts should not be used  webpack/restricted-modules",
   ],
   Array [
-    "error  Module ./src/index2.ts should not be used  webpack/restricted-modules",
+    "error  Module ./simple/src/index2.ts should not be used  webpack/restricted-modules",
   ],
   Array [
-    "error  Module ./src/sub-module.ts should not be used  webpack/restricted-modules",
+    "error  Module ./simple/src/sub-module.ts should not be used  webpack/restricted-modules",
   ],
   Array [
-    "error  Module ./src/index2.css should not be used  webpack/restricted-modules",
+    "error  Module ./simple/src/index2.css should not be used  webpack/restricted-modules",
   ],
   Array [
-    "error  Module ./src/test.txt should not be used  webpack/restricted-modules",
+    "error  Module ./simple/src/test.txt should not be used  webpack/restricted-modules",
   ],
   Array [
-    "error  Module ./src/dyn.ts should not be used  webpack/restricted-modules",
+    "error  Module ./simple/src/dyn.ts should not be used  webpack/restricted-modules",
   ],
   Array [
-    "error  Module ./src/statoscope.png should not be used  webpack/restricted-modules",
+    "error  Module ./simple/src/statoscope.png should not be used  webpack/restricted-modules",
   ],
   Array [
     "error  foo@1.0.0 should not be used  webpack/restricted-packages",
@@ -36,19 +36,22 @@ Array [
     "Instances:",
   ],
   Array [
-    "- node_modules/foo  1.0.0",
+    "- simple/node_modules/foo  1.0.0",
   ],
   Array [
     "unknown compilation",
   ],
   Array [
-    "error  Usage of ../node_modules/is-array/index.js was increased from 0 to 4  webpack/diff-deprecated-modules",
+    "error  Usage of ./node_modules/is-array/index.js was increased from 2 to 4  webpack/diff-deprecated-modules",
   ],
   Array [
-    "error  Usage of ../node_modules/css-loader/dist/runtime/api.js was increased from 0 to 2  webpack/diff-deprecated-modules",
+    "error  Usage of external \\"extLib\\" was increased from 0 to 1  webpack/diff-deprecated-modules",
   ],
   Array [
-    "error  Usage of ../node_modules/css-loader/dist/runtime/getUrl.js was increased from 0 to 2  webpack/diff-deprecated-modules",
+    "error  Usage of ./simple/src/test.txt was increased from 0 to 1  webpack/diff-deprecated-modules",
+  ],
+  Array [
+    "error  Usage of ./simple/src/statoscope.png was increased from 0 to 2  webpack/diff-deprecated-modules",
   ],
   Array [
     "error  Usage of is-array was increased from 2 to 4  webpack/diff-deprecated-packages",
@@ -57,7 +60,7 @@ Array [
     "",
   ],
   Array [
-    "12 problems (12 errors, 0 warnings)",
+    "13 problems (13 errors, 0 warnings)",
   ],
 ]
 `;
@@ -68,25 +71,25 @@ Array [
     "undefined",
   ],
   Array [
-    "Module ./src/index.ts should not be used",
+    "Module ./simple/src/index.ts should not be used",
   ],
   Array [
-    "Module ./src/index2.ts should not be used",
+    "Module ./simple/src/index2.ts should not be used",
   ],
   Array [
-    "Module ./src/sub-module.ts should not be used",
+    "Module ./simple/src/sub-module.ts should not be used",
   ],
   Array [
-    "Module ./src/index2.css should not be used",
+    "Module ./simple/src/index2.css should not be used",
   ],
   Array [
-    "Module ./src/test.txt should not be used",
+    "Module ./simple/src/test.txt should not be used",
   ],
   Array [
-    "Module ./src/dyn.ts should not be used",
+    "Module ./simple/src/dyn.ts should not be used",
   ],
   Array [
-    "Module ./src/statoscope.png should not be used",
+    "Module ./simple/src/statoscope.png should not be used",
   ],
   Array [
     "foo@1.0.0 should not be used",
@@ -100,28 +103,28 @@ Array [
     "input.json",
   ],
   Array [
-    "da95abcf6bbf9b157ff6",
+    "9eb9a218218f1ee4ba40",
   ],
   Array [
-    "error  Module ./src/index.ts should not be used  webpack/restricted-modules",
+    "error  Module ./simple/src/index.ts should not be used  webpack/restricted-modules",
   ],
   Array [
-    "error  Module ./src/index2.ts should not be used  webpack/restricted-modules",
+    "error  Module ./simple/src/index2.ts should not be used  webpack/restricted-modules",
   ],
   Array [
-    "error  Module ./src/sub-module.ts should not be used  webpack/restricted-modules",
+    "error  Module ./simple/src/sub-module.ts should not be used  webpack/restricted-modules",
   ],
   Array [
-    "error  Module ./src/index2.css should not be used  webpack/restricted-modules",
+    "error  Module ./simple/src/index2.css should not be used  webpack/restricted-modules",
   ],
   Array [
-    "error  Module ./src/test.txt should not be used  webpack/restricted-modules",
+    "error  Module ./simple/src/test.txt should not be used  webpack/restricted-modules",
   ],
   Array [
-    "error  Module ./src/dyn.ts should not be used  webpack/restricted-modules",
+    "error  Module ./simple/src/dyn.ts should not be used  webpack/restricted-modules",
   ],
   Array [
-    "error  Module ./src/statoscope.png should not be used  webpack/restricted-modules",
+    "error  Module ./simple/src/statoscope.png should not be used  webpack/restricted-modules",
   ],
   Array [
     "error  foo@1.0.0 should not be used  webpack/restricted-packages",
@@ -130,7 +133,7 @@ Array [
     "Instances:",
   ],
   Array [
-    "- node_modules/foo  1.0.0",
+    "- simple/node_modules/foo  1.0.0",
   ],
   Array [
     "",
