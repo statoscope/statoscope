@@ -1,8 +1,19 @@
+function getIdWrapper<TID, TEntity>(
+  getId: GetIDFn<TID, TEntity>
+): GetIDFn<TID | string, TEntity> {
+  return (entity): TID | string => {
+    const id = getId(entity);
+    return typeof id === 'number' ? String(id) : id;
+  };
+}
+
 function warnCache<TID, TEntity>(
   entities: Entities<TEntity>,
   getId: GetIDFn<TID, TEntity>,
-  cache: Map<TID, TEntity>
+  cache: Map<TID | string, TEntity>
 ): void {
+  cache.clear();
+
   if (Array.isArray(entities) || entities instanceof Set) {
     for (const entity of entities) {
       cache.set(getId(entity), entity);
@@ -25,41 +36,50 @@ export type Entities<TEntity> =
   | Map<unknown, TEntity>
   | Record<string, TEntity>;
 
-export type Resolver<TID, TEntity> = (id: TID) => TEntity | null;
+export type ResolverAPI = {
+  lock(): void;
+  unlock(): void;
+};
+
+export type ResolverFn<TID, TReturn> = (id: TID) => TReturn | null;
+
+export type Resolver<TID, TReturn> = ResolverFn<TID, TReturn> & ResolverAPI;
 
 export type GetIDFn<TID, TEntity> = (entity: TEntity) => TID;
 
 export default function makeResolver<TID, TEntity, TReturn = TEntity>(
   entities: Entities<TEntity>,
   getId: (entity: TEntity) => TID,
-  get?: (entity: TEntity) => TReturn
+  get?: ((entity: TEntity) => TReturn) | null,
+  locked = true
 ): Resolver<TID, TReturn> {
-  const cache = new Map();
+  const wrappedGetId = getIdWrapper(getId);
+  const cache: Map<TID | string, TEntity> = new Map();
 
-  warnCache(entities, getId, cache);
+  warnCache(entities, wrappedGetId, cache);
 
-  return (id: TID): TReturn | null => {
-    const cached = cache.get(id);
+  const resolver: Resolver<TID, TReturn> = (id): TReturn | null => {
+    const idForCache = typeof id === 'number' ? String(id) : id;
+    const cached = cache.get(idForCache);
 
     if (cached) {
-      return get ? get(cached) : cached;
+      return (get ? get(cached) : cached) as TReturn;
+    } else if (locked) {
+      return null;
     }
 
     let result: TEntity | null = null;
 
     if (Array.isArray(entities) || entities instanceof Set) {
       for (const entity of entities) {
-        // disable eqeqeq cause id may be string or number
-        // eslint-disable-next-line eqeqeq
-        if (getId(entity) == id) {
+        if (getId(entity) === id) {
           result = entity;
           break;
         }
       }
     } else if (entities instanceof Map) {
       for (const [, entity] of entities) {
-        // eslint-disable-next-line eqeqeq
-        if (getId(entity) == id) {
+        if (getId(entity) === id) {
           result = entity;
           break;
         }
@@ -68,8 +88,7 @@ export default function makeResolver<TID, TEntity, TReturn = TEntity>(
       for (const name in entities) {
         const entity = entities[name];
 
-        // eslint-disable-next-line eqeqeq
-        if (getId(entity) == id) {
+        if (getId(entity) === id) {
           result = entity;
           break;
         }
@@ -83,4 +102,12 @@ export default function makeResolver<TID, TEntity, TReturn = TEntity>(
 
     return null;
   };
+
+  resolver.lock = (): void => {
+    warnCache(entities, wrappedGetId, cache);
+    locked = true;
+  };
+  resolver.unlock = (): void => void (locked = false);
+
+  return resolver;
 }

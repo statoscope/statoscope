@@ -41,7 +41,12 @@ export default class Generator {
     compilations: [],
     rules: [],
   };
-  private resolveCompilation = makeResolver(this.payload.compilations, (item) => item.id);
+  private resolveCompilation = makeResolver(
+    this.payload.compilations,
+    (item) => item.id,
+    null,
+    false
+  );
 
   constructor(private adapter?: ExtensionDescriptor) {}
 

@@ -260,7 +260,7 @@ function buildGraph(compilation: NormalizedCompilation): {
     module: NormalizedModule
   ): Node<ModuleGraphNodeData> {
     if (globalHandled.has(module)) {
-      return graph.getNode(module.name)!;
+      return graph.getNode(module.identifier)!;
     }
 
     globalHandled.add(module);
@@ -269,7 +269,8 @@ function buildGraph(compilation: NormalizedCompilation): {
       .filter((r) => r.resolvedEntry)
       .map((r) => r.resolvedEntry!);
     const node =
-      graph.getNode(module.name) ?? graph.makeNode(module.name, { module, entries });
+      graph.getNode(module.identifier) ??
+      graph.makeNode(module.identifier, { module, entries });
     const handled = new WeakSet<NormalizedModule>();
 
     for (const innerModule of module.modules) {
@@ -330,7 +331,12 @@ function handleCompilation(
   const resolveModule = makeModuleResolver(normalized);
   const resolveChunk = makeEntityResolver(normalized.chunks, ({ id }) => id);
   const resolveAsset = makeEntityResolver(normalized.assets || [], ({ name }) => name);
-  const resolvePackage = makeEntityResolver(normalized.nodeModules, ({ name }) => name);
+  const resolvePackage = makeEntityResolver(
+    normalized.nodeModules,
+    ({ name }) => name,
+    null,
+    false
+  );
   const resolveExtension = makeEntityResolver(
     extensions,
     (ext) => ext?.data.descriptor.name
@@ -358,6 +364,8 @@ function handleCompilation(
 
   const graph = buildGraph(normalized);
 
+  resolvePackage.lock();
+
   return {
     data: normalized,
     resolvers,
@@ -372,11 +380,16 @@ function makeModuleResolver(
   compilation: NormalizedCompilation
 ): Resolver<string, NormalizedModule> {
   const modules: NormalizedModule[] = [...compilation.modules];
-  const resolve = makeEntityResolver(modules, ({ name }) => name);
+  const resolve = makeEntityResolver(
+    modules,
+    ({ identifier }) => identifier,
+    null,
+    false
+  );
 
   for (const chunk of compilation.chunks) {
     for (const [ix, module] of Object.entries(chunk.modules || [])) {
-      const resolved = resolve(module.name);
+      const resolved = resolve(module.identifier);
 
       if (!resolved) {
         modules.push(module);
@@ -392,23 +405,27 @@ function makeModuleResolver(
 
   const resolveFromCompilation = makeEntityResolver(
     compilation.modules,
-    ({ name }) => name
+    ({ identifier }) => identifier,
+    null,
+    false
   );
 
   for (const module of [...modules]) {
-    if (!resolveFromCompilation(module.name)) {
+    if (!resolveFromCompilation(module.identifier)) {
       compilation.modules.push(module);
     }
 
     for (const innerModule of module.modules || []) {
-      if (!resolve(innerModule.name)) {
+      if (!resolve(innerModule.identifier)) {
         modules.push(innerModule);
       }
-      if (!resolveFromCompilation(innerModule.name)) {
+      if (!resolveFromCompilation(innerModule.identifier)) {
         compilation.modules.push(innerModule);
       }
     }
   }
+
+  resolve.lock();
 
   return resolve;
 }
@@ -433,7 +450,8 @@ function prepareModule(
 
   if (module.issuerPath) {
     module.issuerPath.map(
-      (i) => ((i as NormalizedIssuerPathItem).resolvedModule = resolveModule(i.name))
+      (i) =>
+        ((i as NormalizedIssuerPathItem).resolvedModule = resolveModule(i.identifier))
     );
   }
 
@@ -446,7 +464,9 @@ function prepareModule(
   }
 
   if (module.reasons) {
-    module.reasons = module.reasons.filter((r) => r.moduleName !== module.name);
+    module.reasons = module.reasons.filter(
+      (r) => r.moduleIdentifier !== module.identifier
+    );
     for (const reason of module.reasons) {
       normalizeReason(reason, resolvers);
       const resolvedModule = (reason as NormalizedReason).resolvedModule;
@@ -482,8 +502,8 @@ function normalizeReason(
   reason: Reason,
   { resolveEntrypoint, resolveModule }: CompilationResolvers
 ): void {
-  (reason as NormalizedReason).resolvedModule = reason.moduleName
-    ? resolveModule(reason.moduleName)
+  (reason as NormalizedReason).resolvedModule = reason.moduleIdentifier
+    ? resolveModule(reason.moduleIdentifier)
     : null;
 
   if (/(?:.+ )?entry$/.test(reason.type ?? '')) {
@@ -510,7 +530,7 @@ function prepareModules(
   resolvers: CompilationResolvers
 ): void {
   for (const [i, module] of Object.entries(compilation.modules || [])) {
-    const resolved = resolvers.resolveModule(module.name);
+    const resolved = resolvers.resolveModule(module.identifier);
     if (resolved) {
       (compilation as unknown as NormalizedCompilation).modules[+i] = resolved;
     }
@@ -519,7 +539,7 @@ function prepareModules(
 
     if (module.modules) {
       for (const [i, innerModule] of Object.entries(module.modules)) {
-        const resolved = resolvers.resolveModule(innerModule.name);
+        const resolved = resolvers.resolveModule(innerModule.identifier);
         if (resolved) {
           (module as unknown as NormalizedModule).modules[+i] = resolved;
         }
@@ -545,11 +565,11 @@ function prepareChunk(chunk: Webpack.Chunk, resolvers: CompilationResolvers): vo
 
   if (chunk.modules) {
     (chunk as unknown as NormalizedChunk).modules = chunk.modules
-      .map((m) => resolveModule(m.name))
+      .map((m) => resolveModule(m.identifier))
       .filter(Boolean) as NormalizedModule[];
 
     for (const [i, module] of Object.entries(chunk.modules)) {
-      const resolved = resolvers.resolveModule(module.name);
+      const resolved = resolvers.resolveModule(module.identifier);
       if (resolved) {
         const chunks = new Set([...resolved.chunks, ...chunk.modules[+i].chunks]);
         resolved.chunks = [...chunks].map((chunk) =>
@@ -564,7 +584,7 @@ function prepareChunk(chunk: Webpack.Chunk, resolvers: CompilationResolvers): vo
 
       if (module.modules) {
         for (const [i, innerModule] of Object.entries(module.modules)) {
-          const resolved = resolvers.resolveModule(innerModule.name);
+          const resolved = resolvers.resolveModule(innerModule.identifier);
           if (resolved) {
             (module as unknown as NormalizedModule).modules[+i] = resolved;
           }
@@ -618,8 +638,8 @@ function prepareChunk(chunk: Webpack.Chunk, resolvers: CompilationResolvers): vo
     chunk.origins
       .map(
         (o) =>
-          ((o as NormalizedReason).resolvedModule = o.moduleName
-            ? resolveModule(o.moduleName)
+          ((o as NormalizedReason).resolvedModule = o.moduleIdentifier
+            ? resolveModule(o.moduleIdentifier)
             : null)
       )
       .filter(Boolean);
@@ -690,8 +710,12 @@ function extractPackages(
   compilation: NormalizedCompilation,
   { resolvePackage, resolveExtension }: CompilationResolvers
 ): void {
-  const buildReasonKey = (type: string, moduleName: string, loc: string): string => {
-    return [type, moduleName, loc].join(';');
+  const buildReasonKey = (
+    type: string,
+    moduleIdentifier: string,
+    loc: string
+  ): string => {
+    return [type, moduleIdentifier, loc].join(';');
   };
 
   const extractModulePackages = (module: NormalizedModule): void => {
@@ -743,7 +767,7 @@ function extractPackages(
         instance.reasons.map((reason) => {
           return buildReasonKey(
             reason.type,
-            reason.data.moduleName ?? 'unknown',
+            reason.data.moduleIdentifier ?? 'unknown',
             reason.data.loc ?? 'unknown'
           );
         })
@@ -759,7 +783,7 @@ function extractPackages(
         const reasonType = 'module';
         const reasonKey = buildReasonKey(
           reasonType,
-          reason.moduleName ?? 'unknown',
+          reason.moduleIdentifier ?? 'unknown',
           reason.loc ?? 'unknown'
         );
 

@@ -20,7 +20,7 @@ const validatorFixturesJSJoraQuery = [
 }));
 
 const inputFixturePath = [
-  '../../../../test/bundles/simple/stats-dev.json',
+  '../../../../test/bundles/v5/simple/stats-dev.json',
   '../../../../test/bundles/v4/simple/stats-dev.json',
 ].map((filepath) => path.resolve(__dirname, filepath));
 

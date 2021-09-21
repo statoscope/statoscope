@@ -63,7 +63,7 @@ function handledTarget(
       api.message(`Module ${module.name} should not be used`, {
         filename: resultItem.file.name,
         compilation: resultItem.compilation.name || resultItem.compilation.hash,
-        related: [{ type: 'module', id: module.name }],
+        related: [{ type: 'module', id: module.identifier }],
         details: [
           {
             type: 'discovery',
@@ -76,7 +76,7 @@ function handledTarget(
             payload: {
               context: {
                 compilation: resultItem.compilation.hash,
-                module: module.name,
+                module: module.identifier,
               },
             },
           },

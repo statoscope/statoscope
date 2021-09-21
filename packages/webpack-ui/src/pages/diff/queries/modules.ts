@@ -2,11 +2,11 @@ export default `
 $aModules: $statA.compilation.modules.[not shouldHideModule()];
 $bModules: $statB.compilation.modules.[not shouldHideModule()];
 
-$addedModules: $bModules.[not name.resolveModule($statA.compilation.hash)].({module: $, hash: $statB.compilation.hash});
-$removedModules: $aModules.[not name.resolveModule($statB.compilation.hash)].({module: $, hash: $statA.compilation.hash});
+$addedModules: $bModules.[not identifier.resolveModule($statA.compilation.hash)].({module: $, hash: $statB.compilation.hash});
+$removedModules: $aModules.[not identifier.resolveModule($statB.compilation.hash)].({module: $, hash: $statA.compilation.hash});
 $intersectedModules: $statA.compilation.modules.({
   $moduleA: $;
-  $moduleB: $moduleA.name.resolveModule($statB.compilation.hash);
+  $moduleB: $moduleA.identifier.resolveModule($statB.compilation.hash);
   a: {module: $moduleA, hash: $statA.compilation.hash},
   b: {module: $moduleB, hash: $statB.compilation.hash},
 }).[b.module];

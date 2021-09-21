@@ -20,7 +20,7 @@ const configReferenceFixturePath = path.resolve(
 
 const inputFixturePath = path.resolve(
   __dirname,
-  '../../../../test/bundles/simple/stats-dev.json'
+  '../../../../test/bundles/v5/simple/stats-dev.json'
 );
 
 const referenceFixturePath = path.resolve(

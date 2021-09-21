@@ -3,7 +3,7 @@ import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
 import { Prepared } from '@statoscope/webpack-model';
 import plugin from '../..';
 import statsV4 from '../../../../../test/bundles/v4/simple/stats-dev.json';
-import statsV5 from '../../../../../test/bundles/simple/stats-dev.json';
+import statsV5 from '../../../../../test/bundles/v5/simple/stats-dev.json';
 import rule from './';
 
 test('matches', () => {

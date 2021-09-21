@@ -26,12 +26,12 @@ test('should work', async () => {
   const validator = new Validator({
     plugins: [[require.resolve('../../stats-validator-plugin-webpack'), 'webpack']],
     rules: {
-      'webpack/restricted-modules': ['error', [/\.\/src/]],
+      'webpack/restricted-modules': ['error', [/\/src\//]],
       'webpack/restricted-packages': ['error', ['foo']],
     },
   });
   const result = await validator.validate(
-    require.resolve('../../../test/bundles/simple/stats-prod.json')
+    require.resolve('../../../test/bundles/v5/simple/stats-prod.json')
   );
   const reporter = new Reporter();
   await reporter.run(result);

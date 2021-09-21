@@ -6,12 +6,12 @@ Object {
     Object {
       "children": Array [],
       "node": Object {
-        "id": "../node_modules/is-array/index.js",
+        "id": "./node_modules/is-array/index.js",
       },
     },
   ],
   "node": Object {
-    "id": "./src/index.ts + 3 modules",
+    "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
   },
 }
 `;
@@ -22,208 +22,217 @@ Object {
     Object {
       "groups": Array [
         Object {
-          "groups": Array [],
-          "label": "index.ts",
-          "link": Object {
-            "id": "292",
-            "page": "module",
-          },
-          "path": "src/index.ts",
-          "weight": 226,
-          "weightCompressor": undefined,
-        },
-        Object {
-          "groups": Array [],
-          "label": "sub-module.ts",
-          "link": Object {
-            "id": "./src/sub-module.ts",
-            "page": "module",
-          },
-          "path": "src/sub-module.ts",
-          "weight": 190,
-          "weightCompressor": undefined,
-        },
-        Object {
-          "groups": Array [],
-          "label": "index2.ts",
-          "link": Object {
-            "id": "995",
-            "page": "module",
-          },
-          "path": "src/index2.ts",
-          "weight": 552,
-          "weightCompressor": undefined,
-        },
-        Object {
-          "groups": Array [],
-          "label": "index2.css",
-          "link": Object {
-            "id": "945",
-            "page": "module",
-          },
-          "path": "src/index2.css",
-          "weight": 644,
-          "weightCompressor": undefined,
-        },
-        Object {
-          "groups": Array [],
-          "label": "test.txt",
-          "link": Object {
-            "id": "742",
-            "page": "module",
-          },
-          "path": "src/test.txt",
-          "weight": 42,
-          "weightCompressor": undefined,
-        },
-        Object {
-          "groups": Array [],
-          "label": "dyn.ts",
-          "link": Object {
-            "id": "848",
-            "page": "module",
-          },
-          "path": "src/dyn.ts",
-          "weight": 21,
-          "weightCompressor": undefined,
-        },
-        Object {
-          "groups": Array [],
-          "label": "statoscope.png",
-          "link": Object {
-            "id": "412",
-            "page": "module",
-          },
-          "path": "src/statoscope.png",
-          "weight": 8311.84,
-          "weightCompressor": undefined,
-        },
-      ],
-      "label": "src",
-      "link": undefined,
-      "path": "src",
-      "weight": 9986.84,
-      "weightCompressor": undefined,
-    },
-    Object {
-      "groups": Array [
-        Object {
           "groups": Array [
             Object {
               "groups": Array [],
-              "label": "index.js",
+              "label": "index.ts",
               "link": Object {
-                "id": "./node_modules/foo/index.js",
+                "id": "292",
                 "page": "module",
               },
-              "path": "node_modules/foo/index.js",
-              "weight": 96,
+              "path": "simple/src/index.ts",
+              "weight": 226,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [],
+              "label": "sub-module.ts",
+              "link": Object {
+                "id": "./node_modules/babel-loader/lib/index.js!./simple/src/sub-module.ts",
+                "page": "module",
+              },
+              "path": "simple/src/sub-module.ts",
+              "weight": 190,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [],
+              "label": "index2.ts",
+              "link": Object {
+                "id": "503",
+                "page": "module",
+              },
+              "path": "simple/src/index2.ts",
+              "weight": 552,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [],
+              "label": "index2.css",
+              "link": Object {
+                "id": "945",
+                "page": "module",
+              },
+              "path": "simple/src/index2.css",
+              "weight": 644,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [],
+              "label": "test.txt",
+              "link": Object {
+                "id": "47",
+                "page": "module",
+              },
+              "path": "simple/src/test.txt",
+              "weight": 42,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [],
+              "label": "dyn.ts",
+              "link": Object {
+                "id": "848",
+                "page": "module",
+              },
+              "path": "simple/src/dyn.ts",
+              "weight": 21,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [],
+              "label": "statoscope.png",
+              "link": Object {
+                "id": "523",
+                "page": "module",
+              },
+              "path": "simple/src/statoscope.png",
+              "weight": 8311.84,
+              "weightCompressor": undefined,
+            },
+          ],
+          "label": "src",
+          "link": undefined,
+          "path": "simple/src",
+          "weight": 9986.84,
+          "weightCompressor": undefined,
+        },
+        Object {
+          "groups": Array [
+            Object {
+              "groups": Array [
+                Object {
+                  "groups": Array [],
+                  "label": "index.js",
+                  "link": Object {
+                    "id": "./simple/node_modules/foo/index.js",
+                    "page": "module",
+                  },
+                  "path": "simple/node_modules/foo/index.js",
+                  "weight": 96,
+                  "weightCompressor": undefined,
+                },
+                Object {
+                  "groups": Array [
+                    Object {
+                      "groups": Array [
+                        Object {
+                          "groups": Array [],
+                          "label": "index.js",
+                          "link": Object {
+                            "id": "./simple/node_modules/foo/node_modules/bar/index.js",
+                            "page": "module",
+                          },
+                          "path": "simple/node_modules/foo/node_modules/bar/index.js",
+                          "weight": 25,
+                          "weightCompressor": undefined,
+                        },
+                      ],
+                      "label": "bar",
+                      "link": Object {
+                        "id": "bar",
+                        "package": Object {
+                          "instance": Object {
+                            "path": "simple/node_modules/foo/node_modules/bar",
+                          },
+                          "name": "bar",
+                        },
+                        "page": "package",
+                        "params": Object {
+                          "instance": "simple/node_modules/foo/node_modules/bar",
+                        },
+                      },
+                      "path": "simple/node_modules/foo/node_modules/bar",
+                      "weight": 25,
+                      "weightCompressor": undefined,
+                    },
+                  ],
+                  "label": "node_modules",
+                  "link": undefined,
+                  "path": "simple/node_modules/foo/node_modules",
+                  "weight": 25,
+                  "weightCompressor": undefined,
+                },
+              ],
+              "label": "foo",
+              "link": Object {
+                "id": "foo",
+                "package": Object {
+                  "instance": Object {
+                    "path": "simple/node_modules/foo",
+                  },
+                  "name": "foo",
+                },
+                "page": "package",
+                "params": Object {
+                  "instance": "simple/node_modules/foo",
+                },
+              },
+              "path": "simple/node_modules/foo",
+              "weight": 121,
               "weightCompressor": undefined,
             },
             Object {
               "groups": Array [
                 Object {
-                  "groups": Array [
-                    Object {
-                      "groups": Array [],
-                      "label": "index.js",
-                      "link": Object {
-                        "id": "./node_modules/foo/node_modules/bar/index.js",
-                        "page": "module",
-                      },
-                      "path": "node_modules/foo/node_modules/bar/index.js",
-                      "weight": 25,
-                      "weightCompressor": undefined,
-                    },
-                  ],
-                  "label": "bar",
+                  "groups": Array [],
+                  "label": "index.js",
                   "link": Object {
-                    "id": "bar",
-                    "package": Object {
-                      "instance": Object {
-                        "path": "node_modules/foo/node_modules/bar",
-                      },
-                      "name": "bar",
-                    },
-                    "page": "package",
-                    "params": Object {
-                      "instance": "node_modules/foo/node_modules/bar",
-                    },
+                    "id": "./simple/node_modules/bar/index.js",
+                    "page": "module",
                   },
-                  "path": "node_modules/foo/node_modules/bar",
-                  "weight": 25,
+                  "path": "simple/node_modules/bar/index.js",
+                  "weight": 50,
                   "weightCompressor": undefined,
                 },
               ],
-              "label": "node_modules",
-              "link": undefined,
-              "path": "node_modules/foo/node_modules",
-              "weight": 25,
-              "weightCompressor": undefined,
-            },
-          ],
-          "label": "foo",
-          "link": Object {
-            "id": "foo",
-            "package": Object {
-              "instance": Object {
-                "path": "node_modules/foo",
-              },
-              "name": "foo",
-            },
-            "page": "package",
-            "params": Object {
-              "instance": "node_modules/foo",
-            },
-          },
-          "path": "node_modules/foo",
-          "weight": 121,
-          "weightCompressor": undefined,
-        },
-        Object {
-          "groups": Array [
-            Object {
-              "groups": Array [],
-              "label": "index.js",
+              "label": "bar",
               "link": Object {
-                "id": "./node_modules/bar/index.js",
-                "page": "module",
+                "id": "bar",
+                "package": Object {
+                  "instance": Object {
+                    "path": "simple/node_modules/bar",
+                  },
+                  "name": "bar",
+                },
+                "page": "package",
+                "params": Object {
+                  "instance": "simple/node_modules/bar",
+                },
               },
-              "path": "node_modules/bar/index.js",
+              "path": "simple/node_modules/bar",
               "weight": 50,
               "weightCompressor": undefined,
             },
           ],
-          "label": "bar",
-          "link": Object {
-            "id": "bar",
-            "package": Object {
-              "instance": Object {
-                "path": "node_modules/bar",
-              },
-              "name": "bar",
-            },
-            "page": "package",
-            "params": Object {
-              "instance": "node_modules/bar",
-            },
-          },
-          "path": "node_modules/bar",
-          "weight": 50,
+          "label": "node_modules",
+          "link": undefined,
+          "path": "simple/node_modules",
+          "weight": 171,
           "weightCompressor": undefined,
         },
       ],
-      "label": "node_modules",
+      "label": "simple",
       "link": undefined,
-      "path": "node_modules",
-      "weight": 171,
+      "path": "simple",
+      "weight": 10157.84,
       "weightCompressor": undefined,
     },
     Object {
       "groups": Array [],
       "label": "external \\"extLib\\"",
       "link": Object {
-        "id": "external \\"extLib\\"",
+        "id": "external var \\"extLib\\"",
         "page": "module",
       },
       "path": "external \\"extLib\\"",
@@ -235,109 +244,100 @@ Object {
         Object {
           "groups": Array [
             Object {
-              "groups": Array [
-                Object {
-                  "groups": Array [],
-                  "label": "index.js",
-                  "link": Object {
-                    "id": "929",
-                    "page": "module",
-                  },
-                  "path": "../node_modules/is-array/index.js",
-                  "weight": 470,
-                  "weightCompressor": undefined,
-                },
-              ],
-              "label": "is-array",
+              "groups": Array [],
+              "label": "index.js",
               "link": Object {
-                "id": "is-array",
-                "package": Object {
-                  "instance": Object {
-                    "path": "../node_modules/is-array",
-                  },
-                  "name": "is-array",
-                },
-                "page": "package",
-                "params": Object {
-                  "instance": "../node_modules/is-array",
-                },
+                "id": "929",
+                "page": "module",
               },
-              "path": "../node_modules/is-array",
+              "path": "node_modules/is-array/index.js",
               "weight": 470,
               "weightCompressor": undefined,
             },
+          ],
+          "label": "is-array",
+          "link": Object {
+            "id": "is-array",
+            "package": Object {
+              "instance": Object {
+                "path": "node_modules/is-array",
+              },
+              "name": "is-array",
+            },
+            "page": "package",
+            "params": Object {
+              "instance": "node_modules/is-array",
+            },
+          },
+          "path": "node_modules/is-array",
+          "weight": 470,
+          "weightCompressor": undefined,
+        },
+        Object {
+          "groups": Array [
             Object {
               "groups": Array [
                 Object {
                   "groups": Array [
                     Object {
-                      "groups": Array [
-                        Object {
-                          "groups": Array [],
-                          "label": "api.js",
-                          "link": Object {
-                            "id": "476",
-                            "page": "module",
-                          },
-                          "path": "../node_modules/css-loader/dist/runtime/api.js",
-                          "weight": 1605,
-                          "weightCompressor": undefined,
-                        },
-                        Object {
-                          "groups": Array [],
-                          "label": "getUrl.js",
-                          "link": Object {
-                            "id": "678",
-                            "page": "module",
-                          },
-                          "path": "../node_modules/css-loader/dist/runtime/getUrl.js",
-                          "weight": 830,
-                          "weightCompressor": undefined,
-                        },
-                      ],
-                      "label": "runtime",
-                      "link": undefined,
-                      "path": "../node_modules/css-loader/dist/runtime",
-                      "weight": 2435,
+                      "groups": Array [],
+                      "label": "api.js",
+                      "link": Object {
+                        "id": "476",
+                        "page": "module",
+                      },
+                      "path": "node_modules/css-loader/dist/runtime/api.js",
+                      "weight": 1605,
+                      "weightCompressor": undefined,
+                    },
+                    Object {
+                      "groups": Array [],
+                      "label": "getUrl.js",
+                      "link": Object {
+                        "id": "678",
+                        "page": "module",
+                      },
+                      "path": "node_modules/css-loader/dist/runtime/getUrl.js",
+                      "weight": 830,
                       "weightCompressor": undefined,
                     },
                   ],
-                  "label": "dist",
+                  "label": "runtime",
                   "link": undefined,
-                  "path": "../node_modules/css-loader/dist",
+                  "path": "node_modules/css-loader/dist/runtime",
                   "weight": 2435,
                   "weightCompressor": undefined,
                 },
               ],
-              "label": "css-loader",
-              "link": Object {
-                "id": "css-loader",
-                "package": Object {
-                  "instance": Object {
-                    "path": "../node_modules/css-loader",
-                  },
-                  "name": "css-loader",
-                },
-                "page": "package",
-                "params": Object {
-                  "instance": "../node_modules/css-loader",
-                },
-              },
-              "path": "../node_modules/css-loader",
+              "label": "dist",
+              "link": undefined,
+              "path": "node_modules/css-loader/dist",
               "weight": 2435,
               "weightCompressor": undefined,
             },
           ],
-          "label": "node_modules",
-          "link": undefined,
-          "path": "../node_modules",
-          "weight": 2905,
+          "label": "css-loader",
+          "link": Object {
+            "id": "css-loader",
+            "package": Object {
+              "instance": Object {
+                "path": "node_modules/css-loader",
+              },
+              "name": "css-loader",
+            },
+            "page": "package",
+            "params": Object {
+              "instance": "node_modules/css-loader",
+            },
+          },
+          "path": "node_modules/css-loader",
+          "weight": 2435,
           "weightCompressor": undefined,
         },
       ],
-      "label": "..",
+      "label": "node_modules",
       "link": undefined,
-      "path": "..",
+      "path": "node_modules",
       "weight": 2905,
       "weightCompressor": undefined,
     },
@@ -419,7 +419,7 @@ Object {
                 "page": "module",
               },
               "path": "webpack/runtime/jsonp chunk loading",
-              "weight": 3072,
+              "weight": 3139,
               "weightCompressor": undefined,
             },
             Object {
@@ -459,21 +459,21 @@ Object {
           "label": "runtime",
           "link": undefined,
           "path": "webpack/runtime",
-          "weight": 7093,
+          "weight": 7160,
           "weightCompressor": undefined,
         },
       ],
       "label": "webpack",
       "link": undefined,
       "path": "webpack",
-      "weight": 7093,
+      "weight": 7160,
       "weightCompressor": undefined,
     },
   ],
   "label": "",
   "link": undefined,
   "path": "/",
-  "weight": 20239.84,
+  "weight": 20306.84,
   "weightCompressor": undefined,
 }
 `;
@@ -484,208 +484,217 @@ Object {
     Object {
       "groups": Array [
         Object {
-          "groups": Array [],
-          "label": "index.ts",
-          "link": Object {
-            "id": "292",
-            "page": "module",
-          },
-          "path": "src/index.ts",
-          "weight": 226,
-          "weightCompressor": undefined,
-        },
-        Object {
-          "groups": Array [],
-          "label": "sub-module.ts",
-          "link": Object {
-            "id": "./src/sub-module.ts",
-            "page": "module",
-          },
-          "path": "src/sub-module.ts",
-          "weight": 190,
-          "weightCompressor": undefined,
-        },
-        Object {
-          "groups": Array [],
-          "label": "index2.ts",
-          "link": Object {
-            "id": "995",
-            "page": "module",
-          },
-          "path": "src/index2.ts",
-          "weight": 552,
-          "weightCompressor": undefined,
-        },
-        Object {
-          "groups": Array [],
-          "label": "index2.css",
-          "link": Object {
-            "id": "945",
-            "page": "module",
-          },
-          "path": "src/index2.css",
-          "weight": 644,
-          "weightCompressor": undefined,
-        },
-        Object {
-          "groups": Array [],
-          "label": "test.txt",
-          "link": Object {
-            "id": "742",
-            "page": "module",
-          },
-          "path": "src/test.txt",
-          "weight": 42,
-          "weightCompressor": undefined,
-        },
-        Object {
-          "groups": Array [],
-          "label": "dyn.ts",
-          "link": Object {
-            "id": "848",
-            "page": "module",
-          },
-          "path": "src/dyn.ts",
-          "weight": 21,
-          "weightCompressor": undefined,
-        },
-        Object {
-          "groups": Array [],
-          "label": "statoscope.png",
-          "link": Object {
-            "id": "412",
-            "page": "module",
-          },
-          "path": "src/statoscope.png",
-          "weight": 8311.84,
-          "weightCompressor": undefined,
-        },
-      ],
-      "label": "src",
-      "link": undefined,
-      "path": "src",
-      "weight": 9986.84,
-      "weightCompressor": undefined,
-    },
-    Object {
-      "groups": Array [
-        Object {
           "groups": Array [
             Object {
               "groups": Array [],
-              "label": "index.js",
+              "label": "index.ts",
               "link": Object {
-                "id": "./node_modules/foo/index.js",
+                "id": "292",
                 "page": "module",
               },
-              "path": "node_modules/foo/index.js",
-              "weight": 96,
+              "path": "simple/src/index.ts",
+              "weight": 226,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [],
+              "label": "sub-module.ts",
+              "link": Object {
+                "id": "./node_modules/babel-loader/lib/index.js!./simple/src/sub-module.ts",
+                "page": "module",
+              },
+              "path": "simple/src/sub-module.ts",
+              "weight": 190,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [],
+              "label": "index2.ts",
+              "link": Object {
+                "id": "503",
+                "page": "module",
+              },
+              "path": "simple/src/index2.ts",
+              "weight": 552,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [],
+              "label": "index2.css",
+              "link": Object {
+                "id": "945",
+                "page": "module",
+              },
+              "path": "simple/src/index2.css",
+              "weight": 644,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [],
+              "label": "test.txt",
+              "link": Object {
+                "id": "47",
+                "page": "module",
+              },
+              "path": "simple/src/test.txt",
+              "weight": 42,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [],
+              "label": "dyn.ts",
+              "link": Object {
+                "id": "848",
+                "page": "module",
+              },
+              "path": "simple/src/dyn.ts",
+              "weight": 21,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [],
+              "label": "statoscope.png",
+              "link": Object {
+                "id": "523",
+                "page": "module",
+              },
+              "path": "simple/src/statoscope.png",
+              "weight": 8311.84,
+              "weightCompressor": undefined,
+            },
+          ],
+          "label": "src",
+          "link": undefined,
+          "path": "simple/src",
+          "weight": 9986.84,
+          "weightCompressor": undefined,
+        },
+        Object {
+          "groups": Array [
+            Object {
+              "groups": Array [
+                Object {
+                  "groups": Array [],
+                  "label": "index.js",
+                  "link": Object {
+                    "id": "./simple/node_modules/foo/index.js",
+                    "page": "module",
+                  },
+                  "path": "simple/node_modules/foo/index.js",
+                  "weight": 96,
+                  "weightCompressor": undefined,
+                },
+                Object {
+                  "groups": Array [
+                    Object {
+                      "groups": Array [
+                        Object {
+                          "groups": Array [],
+                          "label": "index.js",
+                          "link": Object {
+                            "id": "./simple/node_modules/foo/node_modules/bar/index.js",
+                            "page": "module",
+                          },
+                          "path": "simple/node_modules/foo/node_modules/bar/index.js",
+                          "weight": 25,
+                          "weightCompressor": undefined,
+                        },
+                      ],
+                      "label": "bar",
+                      "link": Object {
+                        "id": "bar",
+                        "package": Object {
+                          "instance": Object {
+                            "path": "simple/node_modules/foo/node_modules/bar",
+                          },
+                          "name": "bar",
+                        },
+                        "page": "package",
+                        "params": Object {
+                          "instance": "simple/node_modules/foo/node_modules/bar",
+                        },
+                      },
+                      "path": "simple/node_modules/foo/node_modules/bar",
+                      "weight": 25,
+                      "weightCompressor": undefined,
+                    },
+                  ],
+                  "label": "node_modules",
+                  "link": undefined,
+                  "path": "simple/node_modules/foo/node_modules",
+                  "weight": 25,
+                  "weightCompressor": undefined,
+                },
+              ],
+              "label": "foo",
+              "link": Object {
+                "id": "foo",
+                "package": Object {
+                  "instance": Object {
+                    "path": "simple/node_modules/foo",
+                  },
+                  "name": "foo",
+                },
+                "page": "package",
+                "params": Object {
+                  "instance": "simple/node_modules/foo",
+                },
+              },
+              "path": "simple/node_modules/foo",
+              "weight": 121,
               "weightCompressor": undefined,
             },
             Object {
               "groups": Array [
                 Object {
-                  "groups": Array [
-                    Object {
-                      "groups": Array [],
-                      "label": "index.js",
-                      "link": Object {
-                        "id": "./node_modules/foo/node_modules/bar/index.js",
-                        "page": "module",
-                      },
-                      "path": "node_modules/foo/node_modules/bar/index.js",
-                      "weight": 25,
-                      "weightCompressor": undefined,
-                    },
-                  ],
-                  "label": "bar",
+                  "groups": Array [],
+                  "label": "index.js",
                   "link": Object {
-                    "id": "bar",
-                    "package": Object {
-                      "instance": Object {
-                        "path": "node_modules/foo/node_modules/bar",
-                      },
-                      "name": "bar",
-                    },
-                    "page": "package",
-                    "params": Object {
-                      "instance": "node_modules/foo/node_modules/bar",
-                    },
+                    "id": "./simple/node_modules/bar/index.js",
+                    "page": "module",
                   },
-                  "path": "node_modules/foo/node_modules/bar",
-                  "weight": 25,
+                  "path": "simple/node_modules/bar/index.js",
+                  "weight": 50,
                   "weightCompressor": undefined,
                 },
               ],
-              "label": "node_modules",
-              "link": undefined,
-              "path": "node_modules/foo/node_modules",
-              "weight": 25,
-              "weightCompressor": undefined,
-            },
-          ],
-          "label": "foo",
-          "link": Object {
-            "id": "foo",
-            "package": Object {
-              "instance": Object {
-                "path": "node_modules/foo",
-              },
-              "name": "foo",
-            },
-            "page": "package",
-            "params": Object {
-              "instance": "node_modules/foo",
-            },
-          },
-          "path": "node_modules/foo",
-          "weight": 121,
-          "weightCompressor": undefined,
-        },
-        Object {
-          "groups": Array [
-            Object {
-              "groups": Array [],
-              "label": "index.js",
+              "label": "bar",
               "link": Object {
-                "id": "./node_modules/bar/index.js",
-                "page": "module",
+                "id": "bar",
+                "package": Object {
+                  "instance": Object {
+                    "path": "simple/node_modules/bar",
+                  },
+                  "name": "bar",
+                },
+                "page": "package",
+                "params": Object {
+                  "instance": "simple/node_modules/bar",
+                },
               },
-              "path": "node_modules/bar/index.js",
+              "path": "simple/node_modules/bar",
               "weight": 50,
               "weightCompressor": undefined,
             },
           ],
-          "label": "bar",
-          "link": Object {
-            "id": "bar",
-            "package": Object {
-              "instance": Object {
-                "path": "node_modules/bar",
-              },
-              "name": "bar",
-            },
-            "page": "package",
-            "params": Object {
-              "instance": "node_modules/bar",
-            },
-          },
-          "path": "node_modules/bar",
-          "weight": 50,
+          "label": "node_modules",
+          "link": undefined,
+          "path": "simple/node_modules",
+          "weight": 171,
           "weightCompressor": undefined,
         },
       ],
-      "label": "node_modules",
+      "label": "simple",
       "link": undefined,
-      "path": "node_modules",
-      "weight": 171,
+      "path": "simple",
+      "weight": 10157.84,
       "weightCompressor": undefined,
     },
     Object {
       "groups": Array [],
       "label": "external \\"extLib\\"",
       "link": Object {
-        "id": "external \\"extLib\\"",
+        "id": "external var \\"extLib\\"",
         "page": "module",
       },
       "path": "external \\"extLib\\"",
@@ -697,109 +706,100 @@ Object {
         Object {
           "groups": Array [
             Object {
-              "groups": Array [
-                Object {
-                  "groups": Array [],
-                  "label": "index.js",
-                  "link": Object {
-                    "id": "929",
-                    "page": "module",
-                  },
-                  "path": "../node_modules/is-array/index.js",
-                  "weight": 470,
-                  "weightCompressor": undefined,
-                },
-              ],
-              "label": "is-array",
+              "groups": Array [],
+              "label": "index.js",
               "link": Object {
-                "id": "is-array",
-                "package": Object {
-                  "instance": Object {
-                    "path": "../node_modules/is-array",
-                  },
-                  "name": "is-array",
-                },
-                "page": "package",
-                "params": Object {
-                  "instance": "../node_modules/is-array",
-                },
+                "id": "929",
+                "page": "module",
               },
-              "path": "../node_modules/is-array",
+              "path": "node_modules/is-array/index.js",
               "weight": 470,
               "weightCompressor": undefined,
             },
+          ],
+          "label": "is-array",
+          "link": Object {
+            "id": "is-array",
+            "package": Object {
+              "instance": Object {
+                "path": "node_modules/is-array",
+              },
+              "name": "is-array",
+            },
+            "page": "package",
+            "params": Object {
+              "instance": "node_modules/is-array",
+            },
+          },
+          "path": "node_modules/is-array",
+          "weight": 470,
+          "weightCompressor": undefined,
+        },
+        Object {
+          "groups": Array [
             Object {
               "groups": Array [
                 Object {
                   "groups": Array [
                     Object {
-                      "groups": Array [
-                        Object {
-                          "groups": Array [],
-                          "label": "api.js",
-                          "link": Object {
-                            "id": "476",
-                            "page": "module",
-                          },
-                          "path": "../node_modules/css-loader/dist/runtime/api.js",
-                          "weight": 1605,
-                          "weightCompressor": undefined,
-                        },
-                        Object {
-                          "groups": Array [],
-                          "label": "getUrl.js",
-                          "link": Object {
-                            "id": "678",
-                            "page": "module",
-                          },
-                          "path": "../node_modules/css-loader/dist/runtime/getUrl.js",
-                          "weight": 830,
-                          "weightCompressor": undefined,
-                        },
-                      ],
-                      "label": "runtime",
-                      "link": undefined,
-                      "path": "../node_modules/css-loader/dist/runtime",
-                      "weight": 2435,
+                      "groups": Array [],
+                      "label": "api.js",
+                      "link": Object {
+                        "id": "476",
+                        "page": "module",
+                      },
+                      "path": "node_modules/css-loader/dist/runtime/api.js",
+                      "weight": 1605,
+                      "weightCompressor": undefined,
+                    },
+                    Object {
+                      "groups": Array [],
+                      "label": "getUrl.js",
+                      "link": Object {
+                        "id": "678",
+                        "page": "module",
+                      },
+                      "path": "node_modules/css-loader/dist/runtime/getUrl.js",
+                      "weight": 830,
                       "weightCompressor": undefined,
                     },
                   ],
-                  "label": "dist",
+                  "label": "runtime",
                   "link": undefined,
-                  "path": "../node_modules/css-loader/dist",
+                  "path": "node_modules/css-loader/dist/runtime",
                   "weight": 2435,
                   "weightCompressor": undefined,
                 },
               ],
-              "label": "css-loader",
-              "link": Object {
-                "id": "css-loader",
-                "package": Object {
-                  "instance": Object {
-                    "path": "../node_modules/css-loader",
-                  },
-                  "name": "css-loader",
-                },
-                "page": "package",
-                "params": Object {
-                  "instance": "../node_modules/css-loader",
-                },
-              },
-              "path": "../node_modules/css-loader",
+              "label": "dist",
+              "link": undefined,
+              "path": "node_modules/css-loader/dist",
               "weight": 2435,
               "weightCompressor": undefined,
             },
           ],
-          "label": "node_modules",
-          "link": undefined,
-          "path": "../node_modules",
-          "weight": 2905,
+          "label": "css-loader",
+          "link": Object {
+            "id": "css-loader",
+            "package": Object {
+              "instance": Object {
+                "path": "node_modules/css-loader",
+              },
+              "name": "css-loader",
+            },
+            "page": "package",
+            "params": Object {
+              "instance": "node_modules/css-loader",
+            },
+          },
+          "path": "node_modules/css-loader",
+          "weight": 2435,
           "weightCompressor": undefined,
         },
       ],
-      "label": "..",
+      "label": "node_modules",
       "link": undefined,
-      "path": "..",
+      "path": "node_modules",
       "weight": 2905,
       "weightCompressor": undefined,
     },
@@ -881,7 +881,7 @@ Object {
                 "page": "module",
               },
               "path": "webpack/runtime/jsonp chunk loading",
-              "weight": 3072,
+              "weight": 3139,
               "weightCompressor": undefined,
             },
             Object {
@@ -921,21 +921,21 @@ Object {
           "label": "runtime",
           "link": undefined,
           "path": "webpack/runtime",
-          "weight": 7093,
+          "weight": 7160,
           "weightCompressor": undefined,
         },
       ],
       "label": "webpack",
       "link": undefined,
       "path": "webpack",
-      "weight": 7093,
+      "weight": 7160,
       "weightCompressor": undefined,
     },
   ],
   "label": "",
   "link": undefined,
   "path": "/",
-  "weight": 20239.84,
+  "weight": 20306.84,
   "weightCompressor": undefined,
 }
 `;
@@ -946,208 +946,217 @@ Object {
     Object {
       "groups": Array [
         Object {
-          "groups": Array [],
-          "label": "index.ts",
-          "link": Object {
-            "id": "292",
-            "page": "module",
-          },
-          "path": "src/index.ts",
-          "weight": 226,
-          "weightCompressor": undefined,
-        },
-        Object {
-          "groups": Array [],
-          "label": "sub-module.ts",
-          "link": Object {
-            "id": "./src/sub-module.ts",
-            "page": "module",
-          },
-          "path": "src/sub-module.ts",
-          "weight": 190,
-          "weightCompressor": undefined,
-        },
-        Object {
-          "groups": Array [],
-          "label": "index2.ts",
-          "link": Object {
-            "id": "995",
-            "page": "module",
-          },
-          "path": "src/index2.ts",
-          "weight": 552,
-          "weightCompressor": undefined,
-        },
-        Object {
-          "groups": Array [],
-          "label": "index2.css",
-          "link": Object {
-            "id": "945",
-            "page": "module",
-          },
-          "path": "src/index2.css",
-          "weight": 431,
-          "weightCompressor": "gzip",
-        },
-        Object {
-          "groups": Array [],
-          "label": "test.txt",
-          "link": Object {
-            "id": "742",
-            "page": "module",
-          },
-          "path": "src/test.txt",
-          "weight": 99,
-          "weightCompressor": "gzip",
-        },
-        Object {
-          "groups": Array [],
-          "label": "dyn.ts",
-          "link": Object {
-            "id": "848",
-            "page": "module",
-          },
-          "path": "src/dyn.ts",
-          "weight": 160,
-          "weightCompressor": "gzip",
-        },
-        Object {
-          "groups": Array [],
-          "label": "statoscope.png",
-          "link": Object {
-            "id": "412",
-            "page": "module",
-          },
-          "path": "src/statoscope.png",
-          "weight": 6217,
-          "weightCompressor": "gzip",
-        },
-      ],
-      "label": "src",
-      "link": undefined,
-      "path": "src",
-      "weight": 7875,
-      "weightCompressor": "gzip",
-    },
-    Object {
-      "groups": Array [
-        Object {
           "groups": Array [
             Object {
               "groups": Array [],
-              "label": "index.js",
+              "label": "index.ts",
               "link": Object {
-                "id": "./node_modules/foo/index.js",
+                "id": "292",
                 "page": "module",
               },
-              "path": "node_modules/foo/index.js",
-              "weight": 96,
+              "path": "simple/src/index.ts",
+              "weight": 226,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [],
+              "label": "sub-module.ts",
+              "link": Object {
+                "id": "./node_modules/babel-loader/lib/index.js!./simple/src/sub-module.ts",
+                "page": "module",
+              },
+              "path": "simple/src/sub-module.ts",
+              "weight": 190,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [],
+              "label": "index2.ts",
+              "link": Object {
+                "id": "503",
+                "page": "module",
+              },
+              "path": "simple/src/index2.ts",
+              "weight": 552,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [],
+              "label": "index2.css",
+              "link": Object {
+                "id": "945",
+                "page": "module",
+              },
+              "path": "simple/src/index2.css",
+              "weight": 438,
+              "weightCompressor": "gzip",
+            },
+            Object {
+              "groups": Array [],
+              "label": "test.txt",
+              "link": Object {
+                "id": "47",
+                "page": "module",
+              },
+              "path": "simple/src/test.txt",
+              "weight": 99,
+              "weightCompressor": "gzip",
+            },
+            Object {
+              "groups": Array [],
+              "label": "dyn.ts",
+              "link": Object {
+                "id": "848",
+                "page": "module",
+              },
+              "path": "simple/src/dyn.ts",
+              "weight": 160,
+              "weightCompressor": "gzip",
+            },
+            Object {
+              "groups": Array [],
+              "label": "statoscope.png",
+              "link": Object {
+                "id": "523",
+                "page": "module",
+              },
+              "path": "simple/src/statoscope.png",
+              "weight": 6217,
+              "weightCompressor": "gzip",
+            },
+          ],
+          "label": "src",
+          "link": undefined,
+          "path": "simple/src",
+          "weight": 7882,
+          "weightCompressor": "gzip",
+        },
+        Object {
+          "groups": Array [
+            Object {
+              "groups": Array [
+                Object {
+                  "groups": Array [],
+                  "label": "index.js",
+                  "link": Object {
+                    "id": "./simple/node_modules/foo/index.js",
+                    "page": "module",
+                  },
+                  "path": "simple/node_modules/foo/index.js",
+                  "weight": 96,
+                  "weightCompressor": undefined,
+                },
+                Object {
+                  "groups": Array [
+                    Object {
+                      "groups": Array [
+                        Object {
+                          "groups": Array [],
+                          "label": "index.js",
+                          "link": Object {
+                            "id": "./simple/node_modules/foo/node_modules/bar/index.js",
+                            "page": "module",
+                          },
+                          "path": "simple/node_modules/foo/node_modules/bar/index.js",
+                          "weight": 25,
+                          "weightCompressor": undefined,
+                        },
+                      ],
+                      "label": "bar",
+                      "link": Object {
+                        "id": "bar",
+                        "package": Object {
+                          "instance": Object {
+                            "path": "simple/node_modules/foo/node_modules/bar",
+                          },
+                          "name": "bar",
+                        },
+                        "page": "package",
+                        "params": Object {
+                          "instance": "simple/node_modules/foo/node_modules/bar",
+                        },
+                      },
+                      "path": "simple/node_modules/foo/node_modules/bar",
+                      "weight": 25,
+                      "weightCompressor": undefined,
+                    },
+                  ],
+                  "label": "node_modules",
+                  "link": undefined,
+                  "path": "simple/node_modules/foo/node_modules",
+                  "weight": 25,
+                  "weightCompressor": undefined,
+                },
+              ],
+              "label": "foo",
+              "link": Object {
+                "id": "foo",
+                "package": Object {
+                  "instance": Object {
+                    "path": "simple/node_modules/foo",
+                  },
+                  "name": "foo",
+                },
+                "page": "package",
+                "params": Object {
+                  "instance": "simple/node_modules/foo",
+                },
+              },
+              "path": "simple/node_modules/foo",
+              "weight": 121,
               "weightCompressor": undefined,
             },
             Object {
               "groups": Array [
                 Object {
-                  "groups": Array [
-                    Object {
-                      "groups": Array [],
-                      "label": "index.js",
-                      "link": Object {
-                        "id": "./node_modules/foo/node_modules/bar/index.js",
-                        "page": "module",
-                      },
-                      "path": "node_modules/foo/node_modules/bar/index.js",
-                      "weight": 25,
-                      "weightCompressor": undefined,
-                    },
-                  ],
-                  "label": "bar",
+                  "groups": Array [],
+                  "label": "index.js",
                   "link": Object {
-                    "id": "bar",
-                    "package": Object {
-                      "instance": Object {
-                        "path": "node_modules/foo/node_modules/bar",
-                      },
-                      "name": "bar",
-                    },
-                    "page": "package",
-                    "params": Object {
-                      "instance": "node_modules/foo/node_modules/bar",
-                    },
+                    "id": "./simple/node_modules/bar/index.js",
+                    "page": "module",
                   },
-                  "path": "node_modules/foo/node_modules/bar",
-                  "weight": 25,
+                  "path": "simple/node_modules/bar/index.js",
+                  "weight": 50,
                   "weightCompressor": undefined,
                 },
               ],
-              "label": "node_modules",
-              "link": undefined,
-              "path": "node_modules/foo/node_modules",
-              "weight": 25,
-              "weightCompressor": undefined,
-            },
-          ],
-          "label": "foo",
-          "link": Object {
-            "id": "foo",
-            "package": Object {
-              "instance": Object {
-                "path": "node_modules/foo",
-              },
-              "name": "foo",
-            },
-            "page": "package",
-            "params": Object {
-              "instance": "node_modules/foo",
-            },
-          },
-          "path": "node_modules/foo",
-          "weight": 121,
-          "weightCompressor": undefined,
-        },
-        Object {
-          "groups": Array [
-            Object {
-              "groups": Array [],
-              "label": "index.js",
+              "label": "bar",
               "link": Object {
-                "id": "./node_modules/bar/index.js",
-                "page": "module",
+                "id": "bar",
+                "package": Object {
+                  "instance": Object {
+                    "path": "simple/node_modules/bar",
+                  },
+                  "name": "bar",
+                },
+                "page": "package",
+                "params": Object {
+                  "instance": "simple/node_modules/bar",
+                },
               },
-              "path": "node_modules/bar/index.js",
+              "path": "simple/node_modules/bar",
               "weight": 50,
               "weightCompressor": undefined,
             },
           ],
-          "label": "bar",
-          "link": Object {
-            "id": "bar",
-            "package": Object {
-              "instance": Object {
-                "path": "node_modules/bar",
-              },
-              "name": "bar",
-            },
-            "page": "package",
-            "params": Object {
-              "instance": "node_modules/bar",
-            },
-          },
-          "path": "node_modules/bar",
-          "weight": 50,
+          "label": "node_modules",
+          "link": undefined,
+          "path": "simple/node_modules",
+          "weight": 171,
           "weightCompressor": undefined,
         },
       ],
-      "label": "node_modules",
+      "label": "simple",
       "link": undefined,
-      "path": "node_modules",
-      "weight": 171,
-      "weightCompressor": undefined,
+      "path": "simple",
+      "weight": 8053,
+      "weightCompressor": "multiple compressors",
     },
     Object {
       "groups": Array [],
       "label": "external \\"extLib\\"",
       "link": Object {
-        "id": "external \\"extLib\\"",
+        "id": "external var \\"extLib\\"",
         "page": "module",
       },
       "path": "external \\"extLib\\"",
@@ -1159,109 +1168,100 @@ Object {
         Object {
           "groups": Array [
             Object {
-              "groups": Array [
-                Object {
-                  "groups": Array [],
-                  "label": "index.js",
-                  "link": Object {
-                    "id": "929",
-                    "page": "module",
-                  },
-                  "path": "../node_modules/is-array/index.js",
-                  "weight": 268,
-                  "weightCompressor": "gzip",
-                },
-              ],
-              "label": "is-array",
+              "groups": Array [],
+              "label": "index.js",
               "link": Object {
-                "id": "is-array",
-                "package": Object {
-                  "instance": Object {
-                    "path": "../node_modules/is-array",
-                  },
-                  "name": "is-array",
-                },
-                "page": "package",
-                "params": Object {
-                  "instance": "../node_modules/is-array",
-                },
+                "id": "929",
+                "page": "module",
               },
-              "path": "../node_modules/is-array",
+              "path": "node_modules/is-array/index.js",
               "weight": 268,
               "weightCompressor": "gzip",
             },
+          ],
+          "label": "is-array",
+          "link": Object {
+            "id": "is-array",
+            "package": Object {
+              "instance": Object {
+                "path": "node_modules/is-array",
+              },
+              "name": "is-array",
+            },
+            "page": "package",
+            "params": Object {
+              "instance": "node_modules/is-array",
+            },
+          },
+          "path": "node_modules/is-array",
+          "weight": 268,
+          "weightCompressor": "gzip",
+        },
+        Object {
+          "groups": Array [
             Object {
               "groups": Array [
                 Object {
                   "groups": Array [
                     Object {
-                      "groups": Array [
-                        Object {
-                          "groups": Array [],
-                          "label": "api.js",
-                          "link": Object {
-                            "id": "476",
-                            "page": "module",
-                          },
-                          "path": "../node_modules/css-loader/dist/runtime/api.js",
-                          "weight": 662,
-                          "weightCompressor": "gzip",
-                        },
-                        Object {
-                          "groups": Array [],
-                          "label": "getUrl.js",
-                          "link": Object {
-                            "id": "678",
-                            "page": "module",
-                          },
-                          "path": "../node_modules/css-loader/dist/runtime/getUrl.js",
-                          "weight": 406,
-                          "weightCompressor": "gzip",
-                        },
-                      ],
-                      "label": "runtime",
-                      "link": undefined,
-                      "path": "../node_modules/css-loader/dist/runtime",
-                      "weight": 1068,
+                      "groups": Array [],
+                      "label": "api.js",
+                      "link": Object {
+                        "id": "476",
+                        "page": "module",
+                      },
+                      "path": "node_modules/css-loader/dist/runtime/api.js",
+                      "weight": 662,
+                      "weightCompressor": "gzip",
+                    },
+                    Object {
+                      "groups": Array [],
+                      "label": "getUrl.js",
+                      "link": Object {
+                        "id": "678",
+                        "page": "module",
+                      },
+                      "path": "node_modules/css-loader/dist/runtime/getUrl.js",
+                      "weight": 406,
                       "weightCompressor": "gzip",
                     },
                   ],
-                  "label": "dist",
+                  "label": "runtime",
                   "link": undefined,
-                  "path": "../node_modules/css-loader/dist",
+                  "path": "node_modules/css-loader/dist/runtime",
                   "weight": 1068,
                   "weightCompressor": "gzip",
                 },
               ],
-              "label": "css-loader",
-              "link": Object {
-                "id": "css-loader",
-                "package": Object {
-                  "instance": Object {
-                    "path": "../node_modules/css-loader",
-                  },
-                  "name": "css-loader",
-                },
-                "page": "package",
-                "params": Object {
-                  "instance": "../node_modules/css-loader",
-                },
-              },
-              "path": "../node_modules/css-loader",
+              "label": "dist",
+              "link": undefined,
+              "path": "node_modules/css-loader/dist",
               "weight": 1068,
               "weightCompressor": "gzip",
             },
           ],
-          "label": "node_modules",
-          "link": undefined,
-          "path": "../node_modules",
-          "weight": 1336,
+          "label": "css-loader",
+          "link": Object {
+            "id": "css-loader",
+            "package": Object {
+              "instance": Object {
+                "path": "node_modules/css-loader",
+              },
+              "name": "css-loader",
+            },
+            "page": "package",
+            "params": Object {
+              "instance": "node_modules/css-loader",
+            },
+          },
+          "path": "node_modules/css-loader",
+          "weight": 1068,
           "weightCompressor": "gzip",
         },
       ],
-      "label": "..",
+      "label": "node_modules",
       "link": undefined,
-      "path": "..",
+      "path": "node_modules",
       "weight": 1336,
       "weightCompressor": "gzip",
     },
@@ -1343,7 +1343,7 @@ Object {
                 "page": "module",
               },
               "path": "webpack/runtime/jsonp chunk loading",
-              "weight": 1089,
+              "weight": 1109,
               "weightCompressor": "gzip",
             },
             Object {
@@ -1383,21 +1383,21 @@ Object {
           "label": "runtime",
           "link": undefined,
           "path": "webpack/runtime",
-          "weight": 3397,
+          "weight": 3417,
           "weightCompressor": "gzip",
         },
       ],
       "label": "webpack",
       "link": undefined,
       "path": "webpack",
-      "weight": 3397,
+      "weight": 3417,
       "weightCompressor": "gzip",
     },
   ],
   "label": "",
   "link": undefined,
   "path": "/",
-  "weight": 12863,
+  "weight": 12890,
   "weightCompressor": "multiple compressors",
 }
 `;
@@ -1406,56 +1406,26 @@ exports[`validation validation_getItem 1`] = `
 Object {
   "details": Array [
     Object {
-      "deserialize": Object {
-        "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-        "type": "query",
-      },
-      "filename": "input.json",
-      "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-      "serialized": Object {
+      "payload": Object {
         "context": Object {
-          "exclude": Array [],
-          "target": Object {
-            "name": Object {
-              "content": "\\\\.\\\\/src",
-              "flags": "",
-              "type": "regexp",
-            },
-          },
+          "compilation": "34ea3837a1050e206fe0",
+          "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
         },
       },
+      "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
       "type": "discovery",
     },
   ],
   "id": 0,
-  "message": "Module ./src/index.ts + 3 modules should not be used",
+  "message": "Module ./simple/src/index.ts + 3 modules should not be used",
   "related": Array [
     Object {
-      "id": "./src/index.ts + 3 modules",
+      "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
       "type": "module",
     },
   ],
@@ -1469,56 +1439,26 @@ Array [
   Object {
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
-        "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
     "id": 0,
-    "message": "Module ./src/index.ts + 3 modules should not be used",
+    "message": "Module ./simple/src/index.ts + 3 modules should not be used",
     "related": Array [
       Object {
-        "id": "./src/index.ts + 3 modules",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
         "type": "module",
       },
     ],
@@ -1528,56 +1468,26 @@ Array [
   Object {
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
-        "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
     "id": 1,
-    "message": "Module ./src/index.ts should not be used",
+    "message": "Module ./simple/src/index.ts should not be used",
     "related": Array [
       Object {
-        "id": "./src/index.ts",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
         "type": "module",
       },
     ],
@@ -1587,56 +1497,26 @@ Array [
   Object {
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
-        "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/sub-module.ts",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
     "id": 2,
-    "message": "Module ./src/sub-module.ts should not be used",
+    "message": "Module ./simple/src/sub-module.ts should not be used",
     "related": Array [
       Object {
-        "id": "./src/sub-module.ts",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/sub-module.ts",
         "type": "module",
       },
     ],
@@ -1646,56 +1526,26 @@ Array [
   Object {
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
-        "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
     "id": 3,
-    "message": "Module ./src/index2.ts + 1 modules should not be used",
+    "message": "Module ./simple/src/index2.ts + 1 modules should not be used",
     "related": Array [
       Object {
-        "id": "./src/index2.ts + 1 modules",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
         "type": "module",
       },
     ],
@@ -1705,56 +1555,26 @@ Array [
   Object {
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
-        "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
     "id": 4,
-    "message": "Module ./src/index2.ts should not be used",
+    "message": "Module ./simple/src/index2.ts should not be used",
     "related": Array [
       Object {
-        "id": "./src/index2.ts",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
         "type": "module",
       },
     ],
@@ -1764,56 +1584,26 @@ Array [
   Object {
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
-        "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
     "id": 5,
-    "message": "Module ./src/index2.css should not be used",
+    "message": "Module ./simple/src/index2.css should not be used",
     "related": Array [
       Object {
-        "id": "./src/index2.css",
+        "id": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
         "type": "module",
       },
     ],
@@ -1823,56 +1613,26 @@ Array [
   Object {
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
-        "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "asset/resource|./simple/src/test.txt",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
     "id": 6,
-    "message": "Module ./src/test.txt should not be used",
+    "message": "Module ./simple/src/test.txt should not be used",
     "related": Array [
       Object {
-        "id": "./src/test.txt",
+        "id": "asset/resource|./simple/src/test.txt",
         "type": "module",
       },
     ],
@@ -1882,56 +1642,26 @@ Array [
   Object {
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
-        "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/dyn.ts",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
     "id": 7,
-    "message": "Module ./src/dyn.ts should not be used",
+    "message": "Module ./simple/src/dyn.ts should not be used",
     "related": Array [
       Object {
-        "id": "./src/dyn.ts",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/dyn.ts",
         "type": "module",
       },
     ],
@@ -1941,56 +1671,26 @@ Array [
   Object {
     "details": Array [
       Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
-        "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
+        "payload": Object {
           "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "asset/inline|./simple/src/statoscope.png",
           },
         },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
         "type": "discovery",
       },
     ],
     "id": 8,
-    "message": "Module ./src/statoscope.png should not be used",
+    "message": "Module ./simple/src/statoscope.png should not be used",
     "related": Array [
       Object {
-        "id": "./src/statoscope.png",
+        "id": "asset/inline|./simple/src/statoscope.png",
         "type": "module",
       },
     ],
@@ -2000,68 +1700,20 @@ Array [
 ]
 `;
 
-exports[`validation validation_getItems 2`] = `
-Array [
-  Object {
-    "details": Array [
-      Object {
-        "deserialize": Object {
-          "content": "
-              $theContext: context;
-              {
-                context: {
-                  target: {
-                    name: $theContext.target.name.deserializeStringOrRegexp(),
-                  },
-                  exclude: $theContext.exclude.(deserializeStringOrRegexp)
-                }
-              }",
-          "type": "query",
-        },
-        "filename": "input.json",
-        "query": "
-  $input: resolveInputFile();
-  $exclude: #.exclude;
-  $target: #.target;
-  
-  $input.group(<compilations>)
-    .({file: value.pick(), compilation: key})
-    .exclude({
-      exclude: $exclude.[type='compilation'].name,
-      get: <name>,
-    })
-    .({
-      ...$,
-      modules: compilation..modules.[name.isMatch($target.name)]
-    }).[modules]
-  ",
-        "serialized": Object {
-          "context": Object {
-            "exclude": Array [],
-            "target": Object {
-              "name": Object {
-                "content": "\\\\.\\\\/src",
-                "flags": "",
-                "type": "regexp",
-              },
-            },
-          },
-        },
-        "type": "discovery",
-      },
-    ],
-    "id": 8,
-    "message": "Module ./src/statoscope.png should not be used",
-    "related": Array [
-      Object {
-        "id": "./src/statoscope.png",
-        "type": "module",
-      },
-    ],
-    "rule": "webpack/restricted-modules",
-    "type": "error",
-  },
-]
-`;
+exports[`validation validation_getItems 2`] = `Array []`;
 
-exports[`validation validation_resolveRule 1`] = `null`;
+exports[`validation validation_resolveRule 1`] = `
+Object {
+  "description": "Ensures that bundle doesn't use specified modules",
+  "package": Object {
+    "author": Object {
+      "name": "Sergey Melyukov",
+      "url": "https://twitter.com/smelukov",
+    },
+    "description": "Plugin for @statoscope/stats-validator to validate webpack stats",
+    "homepage": "https://github.com/statoscope/statoscope/",
+    "name": "@statoscope/stats-validator-plugin-webpack",
+    "version": "5.7.0",
+  },
+}
+`;

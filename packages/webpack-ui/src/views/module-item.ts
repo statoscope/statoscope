@@ -42,8 +42,8 @@ export default function (discovery: StatoscopeWidget): void {
           {
             view: 'link',
             data: `{
-            href: (module.id or module.name).pageLink("module", {hash:hash or #.params.hash}),
-            text: module.resolvedResource or module.name or module.id,
+            href: (module.id or module.identifier).pageLink("module", {hash:hash or #.params.hash}),
+            text: module.resolvedResource or module.name or module.identifier,
             match: match
           }`,
             content: 'text-match',
@@ -75,12 +75,12 @@ export default function (discovery: StatoscopeWidget): void {
           }`,
           },
           {
-            when: `not compact and (hash or #.params.hash).validation_getItems('module', module.name)`,
+            when: `not compact and (hash or #.params.hash).validation_getItems('module', module.identifier)`,
             view: 'validation-messages-badge',
             data: `{
               hash: hash or #.params.hash,
               type: 'module',
-              id: module.name,
+              id: module.identifier,
             }`,
           },
         ],

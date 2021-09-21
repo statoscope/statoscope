@@ -1,5 +1,24 @@
 # Changelog
 
+## Next
+
+### Features
+
+- `[helpers]` - support lock/unlock for makeEntityResolver (#107)
+
+### Refactor
+
+- `[webpack-model]` - use module.identifier to resolve a module (#107)
+- `[webpack-ui]` - use module.identifier to resolve a module (#107)
+- `[webpack-stats-extension-compressed]` - use module.identifier to resolve a module (#107)
+- `[stats-validator-plugin-webpack]` - use module.identifier to resolve a module (#107)
+- `[cli]` - add `makeReplacer` helper to create json replacer (#107)
+
+- `[webpack-model]` - add `__statoscope.context` field (#107)
+- `[report-writer]` - remove context path from stats (it makes all the path relative from context) (#107)
+- `[webpack-plugin]` - remove context path from stats (it makes all the path relative from context) (#107)
+- `[webpack-stats-extension-package-info]` - remove context path from stats (it makes all the path relative from context) (#107)
+
 ## 5.8.1 (19 September 2021)
 
 ### Fixes
@@ -202,7 +221,7 @@
 - `[webpack-plugin]` add new property `saveOnlyStats`
 - `[webpack-plugin]` add new property `saveReportTo` (as a replacement for `saveTo`)
 
-## Refactor
+### Refactor
 
 - `[webpack-plugin]` refactoring to make code more flexible
 - `[report-writer]` refactor work with the streams

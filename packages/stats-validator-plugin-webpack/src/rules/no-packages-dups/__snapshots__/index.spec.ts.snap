@@ -3,22 +3,22 @@
 exports[`exclude no exclude 1`] = `
 Array [
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
-        "content": "- node_modules/bar  1.0.0
-- node_modules/foo/node_modules/bar  2.0.0",
+        "content": "- simple/node_modules/bar  1.0.0
+- simple/node_modules/foo/node_modules/bar  2.0.0",
         "type": "text",
       },
       Object {
-        "content": "- node_modules/bar  1.0.0
-- node_modules/foo/node_modules/bar  2.0.0",
+        "content": "- simple/node_modules/bar  1.0.0
+- simple/node_modules/foo/node_modules/bar  2.0.0",
         "type": "tty",
       },
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
+            "compilation": "34ea3837a1050e206fe0",
             "package": "bar",
           },
         },
@@ -39,11 +39,11 @@ Array [
         "type": "package",
       },
       Object {
-        "id": "node_modules/bar",
+        "id": "simple/node_modules/bar",
         "type": "package-instance",
       },
       Object {
-        "id": "node_modules/foo/node_modules/bar",
+        "id": "simple/node_modules/foo/node_modules/bar",
         "type": "package-instance",
       },
     ],
@@ -60,22 +60,22 @@ exports[`exclude string 1`] = `Array []`;
 exports[`should work 1`] = `
 Array [
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
-        "content": "- node_modules/bar  1.0.0
-- node_modules/foo/node_modules/bar  2.0.0",
+        "content": "- simple/node_modules/bar  1.0.0
+- simple/node_modules/foo/node_modules/bar  2.0.0",
         "type": "text",
       },
       Object {
-        "content": "- node_modules/bar  1.0.0
-- node_modules/foo/node_modules/bar  2.0.0",
+        "content": "- simple/node_modules/bar  1.0.0
+- simple/node_modules/foo/node_modules/bar  2.0.0",
         "type": "tty",
       },
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "718159f8e48dcecd92c9",
+            "compilation": "34ea3837a1050e206fe0",
             "package": "bar",
           },
         },
@@ -96,11 +96,11 @@ Array [
         "type": "package",
       },
       Object {
-        "id": "node_modules/bar",
+        "id": "simple/node_modules/bar",
         "type": "package-instance",
       },
       Object {
-        "id": "node_modules/foo/node_modules/bar",
+        "id": "simple/node_modules/foo/node_modules/bar",
         "type": "package-instance",
       },
     ],

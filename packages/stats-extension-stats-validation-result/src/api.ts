@@ -84,7 +84,9 @@ const makeAPI: APIFactory<Format, API> = (source) => {
   const compilationResolvers: CompilationData[] = [];
   const resolveCompilationsResolvers = makeEntityResolver(
     compilationResolvers,
-    (item) => item.id
+    (item) => item.id,
+    null,
+    false
   );
   const resolveRule = makeEntityResolver(
     source.payload.rules,
@@ -92,13 +94,13 @@ const makeAPI: APIFactory<Format, API> = (source) => {
     (item) => item.descriptor
   );
   const items: Item[] = [];
-  const resolveItemById = makeEntityResolver(items, (item) => item.id);
+  const resolveItemById = makeEntityResolver(items, (item) => item.id, null, false);
   for (const compilation of source.payload.compilations) {
     const indexes: IndexAPI[] = [];
     const compilationData: CompilationData = {
       id: compilation.id,
       items: compilation.items,
-      resolveIndex: makeEntityResolver(indexes, (index) => index.type),
+      resolveIndex: makeEntityResolver(indexes, (index) => index.type, null, false),
     };
     compilationResolvers.push(compilationData);
 
@@ -115,7 +117,12 @@ const makeAPI: APIFactory<Format, API> = (source) => {
         index.add(item, related);
       }
     }
+
+    compilationData.resolveIndex.lock();
   }
+
+  resolveItemById.lock();
+  resolveCompilationsResolvers.lock();
 
   return {
     getItems: (

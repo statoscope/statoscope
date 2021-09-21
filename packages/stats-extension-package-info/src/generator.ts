@@ -29,7 +29,12 @@ export default class Generator {
     adapter: this.adapter,
   };
   private payload: Payload = { compilations: [] };
-  private resolveCompilation = makeResolver(this.payload.compilations, (item) => item.id);
+  private resolveCompilation = makeResolver(
+    this.payload.compilations,
+    (item) => item.id,
+    null,
+    false
+  );
 
   constructor(private adapter?: ExtensionDescriptor) {}
 
@@ -49,7 +54,12 @@ export default class Generator {
         id: compilationId,
         packages: [],
       };
-      packageResolver = makeResolver(compilation.packages, (item) => item.name);
+      packageResolver = makeResolver(
+        compilation.packages,
+        (item) => item.name,
+        null,
+        false
+      );
       this.packageResolvers.set(compilation, packageResolver);
       this.payload.compilations.push(compilation);
     }

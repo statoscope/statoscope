@@ -3,7 +3,7 @@ import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
 import { Prepared } from '@statoscope/webpack-model';
 import { API } from '@statoscope/types/types/validation/api';
 import plugin from '../..';
-import statsV5 from '../../../../../test/bundles/simple/stats-prod.json';
+import statsV5 from '../../../../../test/bundles/v5/simple/stats-prod.json';
 import rule, { Params } from './';
 
 function prepareAPI(ruleParams: Params): API {

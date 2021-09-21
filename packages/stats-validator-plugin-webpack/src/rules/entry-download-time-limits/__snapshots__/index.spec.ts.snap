@@ -3,13 +3,13 @@
 exports[`exclude entry object 1`] = `
 Array [
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "718159f8e48dcecd92c9",
+            "compilation": "34ea3837a1050e206fe0",
             "downloadTime": 9.014731959292764,
             "entry": "one",
             "initialDownloadTime": 9.014731959292764,
@@ -50,13 +50,13 @@ Array [
 exports[`exclude entry regexp 1`] = `
 Array [
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "718159f8e48dcecd92c9",
+            "compilation": "34ea3837a1050e206fe0",
             "downloadTime": 9.014731959292764,
             "entry": "one",
             "initialDownloadTime": 9.014731959292764,
@@ -97,13 +97,13 @@ Array [
 exports[`exclude entry string 1`] = `
 Array [
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "718159f8e48dcecd92c9",
+            "compilation": "34ea3837a1050e206fe0",
             "downloadTime": 9.014731959292764,
             "entry": "one",
             "initialDownloadTime": 9.014731959292764,
@@ -144,13 +144,13 @@ Array [
 exports[`exclude no exclude 1`] = `
 Array [
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "718159f8e48dcecd92c9",
+            "compilation": "34ea3837a1050e206fe0",
             "downloadTime": 9.014731959292764,
             "entry": "one",
             "initialDownloadTime": 9.014731959292764,
@@ -186,16 +186,16 @@ Array [
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
-            "asyncDownloadTime": 2.71044279399671,
-            "compilation": "718159f8e48dcecd92c9",
-            "downloadTime": 175.4559968647204,
+            "asyncDownloadTime": 2.6903654399671053,
+            "compilation": "34ea3837a1050e206fe0",
+            "downloadTime": 175.65677040501646,
             "entry": "two",
-            "initialDownloadTime": 172.74555407072367,
+            "initialDownloadTime": 172.96640496504935,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": 1,
@@ -219,7 +219,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time of assets is 175 ms. It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time of assets is 176 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -233,16 +233,16 @@ Array [
 exports[`maxAsyncDownloadTime global 1`] = `
 Array [
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
-            "asyncDownloadTime": 2.71044279399671,
-            "compilation": "718159f8e48dcecd92c9",
-            "downloadTime": 175.4559968647204,
+            "asyncDownloadTime": 2.6903654399671053,
+            "compilation": "34ea3837a1050e206fe0",
+            "downloadTime": 175.65677040501646,
             "entry": "two",
-            "initialDownloadTime": 172.74555407072367,
+            "initialDownloadTime": 172.96640496504935,
             "rule": Object {
               "maxAsyncDownloadTime": 1,
               "maxDownloadTime": null,
@@ -284,16 +284,16 @@ exports[`maxAsyncDownloadTime not match - override global 1`] = `Array []`;
 exports[`maxAsyncDownloadTime override global 1`] = `
 Array [
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
-            "asyncDownloadTime": 2.71044279399671,
-            "compilation": "718159f8e48dcecd92c9",
-            "downloadTime": 175.4559968647204,
+            "asyncDownloadTime": 2.6903654399671053,
+            "compilation": "34ea3837a1050e206fe0",
+            "downloadTime": 175.65677040501646,
             "entry": "two",
-            "initialDownloadTime": 172.74555407072367,
+            "initialDownloadTime": 172.96640496504935,
             "rule": Object {
               "maxAsyncDownloadTime": 1,
               "maxDownloadTime": null,
@@ -331,16 +331,16 @@ Array [
 exports[`maxAsyncDownloadTime with useCompressedSize = false 1`] = `
 Array [
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 2.8509842722039473,
-            "compilation": "718159f8e48dcecd92c9",
-            "downloadTime": 248.85880319695724,
+            "compilation": "34ea3837a1050e206fe0",
+            "downloadTime": 249.34065969366776,
             "entry": "two",
-            "initialDownloadTime": 246.00781892475328,
+            "initialDownloadTime": 246.4896754214638,
             "rule": Object {
               "maxAsyncDownloadTime": 1,
               "maxDownloadTime": null,
@@ -378,13 +378,13 @@ Array [
 exports[`maxDownloadTime global 1`] = `
 Array [
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "718159f8e48dcecd92c9",
+            "compilation": "34ea3837a1050e206fe0",
             "downloadTime": 9.014731959292764,
             "entry": "one",
             "initialDownloadTime": 9.014731959292764,
@@ -420,16 +420,16 @@ Array [
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
-            "asyncDownloadTime": 2.71044279399671,
-            "compilation": "718159f8e48dcecd92c9",
-            "downloadTime": 175.4559968647204,
+            "asyncDownloadTime": 2.6903654399671053,
+            "compilation": "34ea3837a1050e206fe0",
+            "downloadTime": 175.65677040501646,
             "entry": "two",
-            "initialDownloadTime": 172.74555407072367,
+            "initialDownloadTime": 172.96640496504935,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": 1,
@@ -453,7 +453,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time of assets is 175 ms. It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time of assets is 176 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -471,13 +471,13 @@ exports[`maxDownloadTime not match - override global 1`] = `Array []`;
 exports[`maxDownloadTime override global 1`] = `
 Array [
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "718159f8e48dcecd92c9",
+            "compilation": "34ea3837a1050e206fe0",
             "downloadTime": 9.014731959292764,
             "entry": "one",
             "initialDownloadTime": 9.014731959292764,
@@ -513,16 +513,16 @@ Array [
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
-            "asyncDownloadTime": 2.71044279399671,
-            "compilation": "718159f8e48dcecd92c9",
-            "downloadTime": 175.4559968647204,
+            "asyncDownloadTime": 2.6903654399671053,
+            "compilation": "34ea3837a1050e206fe0",
+            "downloadTime": 175.65677040501646,
             "entry": "two",
-            "initialDownloadTime": 172.74555407072367,
+            "initialDownloadTime": 172.96640496504935,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": 1,
@@ -546,7 +546,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time of assets is 175 ms. It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time of assets is 176 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -560,13 +560,13 @@ Array [
 exports[`maxDownloadTime with useCompressedSize = false 1`] = `
 Array [
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "718159f8e48dcecd92c9",
+            "compilation": "34ea3837a1050e206fe0",
             "downloadTime": 16.041805869654606,
             "entry": "one",
             "initialDownloadTime": 16.041805869654606,
@@ -602,16 +602,16 @@ Array [
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 2.8509842722039473,
-            "compilation": "718159f8e48dcecd92c9",
-            "downloadTime": 248.85880319695724,
+            "compilation": "34ea3837a1050e206fe0",
+            "downloadTime": 249.34065969366776,
             "entry": "two",
-            "initialDownloadTime": 246.00781892475328,
+            "initialDownloadTime": 246.4896754214638,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": 1,
@@ -649,13 +649,13 @@ Array [
 exports[`maxInitialDownloadTime global 1`] = `
 Array [
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "718159f8e48dcecd92c9",
+            "compilation": "34ea3837a1050e206fe0",
             "downloadTime": 9.014731959292764,
             "entry": "one",
             "initialDownloadTime": 9.014731959292764,
@@ -691,16 +691,16 @@ Array [
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
-            "asyncDownloadTime": 2.71044279399671,
-            "compilation": "718159f8e48dcecd92c9",
-            "downloadTime": 175.4559968647204,
+            "asyncDownloadTime": 2.6903654399671053,
+            "compilation": "34ea3837a1050e206fe0",
+            "downloadTime": 175.65677040501646,
             "entry": "two",
-            "initialDownloadTime": 172.74555407072367,
+            "initialDownloadTime": 172.96640496504935,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": null,
@@ -742,13 +742,13 @@ exports[`maxInitialDownloadTime not match - override global 1`] = `Array []`;
 exports[`maxInitialDownloadTime override global 1`] = `
 Array [
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "718159f8e48dcecd92c9",
+            "compilation": "34ea3837a1050e206fe0",
             "downloadTime": 9.014731959292764,
             "entry": "one",
             "initialDownloadTime": 9.014731959292764,
@@ -784,16 +784,16 @@ Array [
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
-            "asyncDownloadTime": 2.71044279399671,
-            "compilation": "718159f8e48dcecd92c9",
-            "downloadTime": 175.4559968647204,
+            "asyncDownloadTime": 2.6903654399671053,
+            "compilation": "34ea3837a1050e206fe0",
+            "downloadTime": 175.65677040501646,
             "entry": "two",
-            "initialDownloadTime": 172.74555407072367,
+            "initialDownloadTime": 172.96640496504935,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": null,
@@ -831,13 +831,13 @@ Array [
 exports[`maxInitialDownloadTime with useCompressedSize = false 1`] = `
 Array [
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "718159f8e48dcecd92c9",
+            "compilation": "34ea3837a1050e206fe0",
             "downloadTime": 16.041805869654606,
             "entry": "one",
             "initialDownloadTime": 16.041805869654606,
@@ -873,16 +873,16 @@ Array [
     ],
   },
   Object {
-    "compilation": "718159f8e48dcecd92c9",
+    "compilation": "34ea3837a1050e206fe0",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 2.8509842722039473,
-            "compilation": "718159f8e48dcecd92c9",
-            "downloadTime": 248.85880319695724,
+            "compilation": "34ea3837a1050e206fe0",
+            "downloadTime": 249.34065969366776,
             "entry": "two",
-            "initialDownloadTime": 246.00781892475328,
+            "initialDownloadTime": 246.4896754214638,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": null,

@@ -2,7 +2,7 @@ import { makeAPI } from '@statoscope/stats-validator/dist/api';
 import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
 import { Prepared } from '@statoscope/webpack-model';
 import plugin from '../..';
-import statsV5 from '../../../../../test/bundles/simple/stats-prod.json';
+import statsV5 from '../../../../../test/bundles/v5/simple/stats-prod.json';
 import rule from './';
 
 test('matches', () => {
@@ -13,10 +13,10 @@ test('matches', () => {
   const api = makeAPI();
 
   rule(['./src/index.ts'], prepared, api);
-  rule([/^\.\/src/], prepared, api);
+  rule([/^\/src\//], prepared, api);
 
   rule([{ name: './src/index.ts' }], prepared, api);
-  rule([{ name: /^\.\/src/ }], prepared, api);
+  rule([{ name: /\/src\// }], prepared, api);
 
   expect(api.getStorage()).toMatchSnapshot();
 });

@@ -3,37 +3,37 @@
 exports[`maxAsyncSizeDiff global 1`] = `
 Array [
   Object {
-    "compilation": "da95abcf6bbf9b157ff6",
+    "compilation": "9eb9a218218f1ee4ba40",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
-              "asyncSize": 591,
-              "initialSize": 12180,
-              "size": 12771,
+              "asyncSize": 590,
+              "initialSize": 12211,
+              "size": 12801,
             },
             "before": Object {
-              "asyncSize": 135,
-              "initialSize": 8604,
-              "size": 8739,
+              "asyncSize": 134,
+              "initialSize": 8615,
+              "size": 8749,
             },
-            "compilation": "da95abcf6bbf9b157ff6",
+            "compilation": "9eb9a218218f1ee4ba40",
             "diff": Object {
               "asyncSize": Object {
                 "absolute": 456,
                 "ok": false,
-                "percent": 337.7777777777778,
+                "percent": 340.2985074626866,
               },
               "initialSize": Object {
-                "absolute": 3576,
+                "absolute": 3596,
                 "ok": true,
-                "percent": 41.562064156206425,
+                "percent": 41.74114915844458,
               },
               "size": Object {
-                "absolute": 4032,
+                "absolute": 4052,
                 "ok": true,
-                "percent": 46.138002059732244,
+                "percent": 46.313864441650466,
               },
             },
             "entry": "two",
@@ -60,7 +60,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size diff of async assets is 0.45 kb (337.78%). It's over the 0.10 kb limit",
+    "message": "Entry \\"two\\": Download size diff of async assets is 0.45 kb (340.30%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "two",
@@ -78,37 +78,37 @@ exports[`maxAsyncSizeDiff not match - override global 1`] = `Array []`;
 exports[`maxAsyncSizeDiff override global 1`] = `
 Array [
   Object {
-    "compilation": "da95abcf6bbf9b157ff6",
+    "compilation": "9eb9a218218f1ee4ba40",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
-              "asyncSize": 591,
-              "initialSize": 12180,
-              "size": 12771,
+              "asyncSize": 590,
+              "initialSize": 12211,
+              "size": 12801,
             },
             "before": Object {
-              "asyncSize": 135,
-              "initialSize": 8604,
-              "size": 8739,
+              "asyncSize": 134,
+              "initialSize": 8615,
+              "size": 8749,
             },
-            "compilation": "da95abcf6bbf9b157ff6",
+            "compilation": "9eb9a218218f1ee4ba40",
             "diff": Object {
               "asyncSize": Object {
                 "absolute": 456,
                 "ok": false,
-                "percent": 337.7777777777778,
+                "percent": 340.2985074626866,
               },
               "initialSize": Object {
-                "absolute": 3576,
+                "absolute": 3596,
                 "ok": true,
-                "percent": 41.562064156206425,
+                "percent": 41.74114915844458,
               },
               "size": Object {
-                "absolute": 4032,
+                "absolute": 4052,
                 "ok": true,
-                "percent": 46.138002059732244,
+                "percent": 46.313864441650466,
               },
             },
             "entry": "two",
@@ -135,7 +135,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size diff of async assets is 0.45 kb (337.78%). It's over the 0.10 kb limit",
+    "message": "Entry \\"two\\": Download size diff of async assets is 0.45 kb (340.30%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "two",
@@ -149,22 +149,22 @@ Array [
 exports[`maxAsyncSizeDiff with useCompressedSize = false 1`] = `
 Array [
   Object {
-    "compilation": "da95abcf6bbf9b157ff6",
+    "compilation": "9eb9a218218f1ee4ba40",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncSize": 1200,
-              "initialSize": 29035,
-              "size": 30235,
+              "initialSize": 29129,
+              "size": 30329,
             },
             "before": Object {
               "asyncSize": 142,
-              "initialSize": 12253,
-              "size": 12395,
+              "initialSize": 12277,
+              "size": 12419,
             },
-            "compilation": "da95abcf6bbf9b157ff6",
+            "compilation": "9eb9a218218f1ee4ba40",
             "diff": Object {
               "asyncSize": Object {
                 "absolute": 1058,
@@ -172,14 +172,14 @@ Array [
                 "percent": 745.0704225352113,
               },
               "initialSize": Object {
-                "absolute": 16782,
+                "absolute": 16852,
                 "ok": true,
-                "percent": 136.96237656084222,
+                "percent": 137.26480410523743,
               },
               "size": Object {
-                "absolute": 17840,
+                "absolute": 17910,
                 "ok": true,
-                "percent": 143.9290036304962,
+                "percent": 144.21451002496175,
               },
             },
             "entry": "two",
@@ -220,22 +220,22 @@ Array [
 exports[`maxInitialSizeDiff global 1`] = `
 Array [
   Object {
-    "compilation": "da95abcf6bbf9b157ff6",
+    "compilation": "9eb9a218218f1ee4ba40",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncSize": 0,
-              "initialSize": 1882,
-              "size": 1882,
+              "initialSize": 1887,
+              "size": 1887,
             },
             "before": Object {
               "asyncSize": 0,
               "initialSize": 449,
               "size": 449,
             },
-            "compilation": "da95abcf6bbf9b157ff6",
+            "compilation": "9eb9a218218f1ee4ba40",
             "diff": Object {
               "asyncSize": Object {
                 "absolute": 0,
@@ -243,14 +243,14 @@ Array [
                 "percent": 0,
               },
               "initialSize": Object {
-                "absolute": 1433,
+                "absolute": 1438,
                 "ok": false,
-                "percent": 319.15367483296217,
+                "percent": 320.26726057906455,
               },
               "size": Object {
-                "absolute": 1433,
+                "absolute": 1438,
                 "ok": true,
-                "percent": 319.15367483296217,
+                "percent": 320.26726057906455,
               },
             },
             "entry": "one",
@@ -277,7 +277,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download size diff of initial assets is 1.40 kb (319.15%). It's over the 0.10 kb limit",
+    "message": "Entry \\"one\\": Download size diff of initial assets is 1.40 kb (320.27%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "one",
@@ -286,37 +286,37 @@ Array [
     ],
   },
   Object {
-    "compilation": "da95abcf6bbf9b157ff6",
+    "compilation": "9eb9a218218f1ee4ba40",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
-              "asyncSize": 591,
-              "initialSize": 12180,
-              "size": 12771,
+              "asyncSize": 590,
+              "initialSize": 12211,
+              "size": 12801,
             },
             "before": Object {
-              "asyncSize": 135,
-              "initialSize": 8604,
-              "size": 8739,
+              "asyncSize": 134,
+              "initialSize": 8615,
+              "size": 8749,
             },
-            "compilation": "da95abcf6bbf9b157ff6",
+            "compilation": "9eb9a218218f1ee4ba40",
             "diff": Object {
               "asyncSize": Object {
                 "absolute": 456,
                 "ok": true,
-                "percent": 337.7777777777778,
+                "percent": 340.2985074626866,
               },
               "initialSize": Object {
-                "absolute": 3576,
+                "absolute": 3596,
                 "ok": false,
-                "percent": 41.562064156206425,
+                "percent": 41.74114915844458,
               },
               "size": Object {
-                "absolute": 4032,
+                "absolute": 4052,
                 "ok": true,
-                "percent": 46.138002059732244,
+                "percent": 46.313864441650466,
               },
             },
             "entry": "two",
@@ -343,7 +343,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size diff of initial assets is 3.49 kb (41.56%). It's over the 0.10 kb limit",
+    "message": "Entry \\"two\\": Download size diff of initial assets is 3.51 kb (41.74%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "two",
@@ -361,22 +361,22 @@ exports[`maxInitialSizeDiff not match - override global 1`] = `Array []`;
 exports[`maxInitialSizeDiff override global 1`] = `
 Array [
   Object {
-    "compilation": "da95abcf6bbf9b157ff6",
+    "compilation": "9eb9a218218f1ee4ba40",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncSize": 0,
-              "initialSize": 1882,
-              "size": 1882,
+              "initialSize": 1887,
+              "size": 1887,
             },
             "before": Object {
               "asyncSize": 0,
               "initialSize": 449,
               "size": 449,
             },
-            "compilation": "da95abcf6bbf9b157ff6",
+            "compilation": "9eb9a218218f1ee4ba40",
             "diff": Object {
               "asyncSize": Object {
                 "absolute": 0,
@@ -384,14 +384,14 @@ Array [
                 "percent": 0,
               },
               "initialSize": Object {
-                "absolute": 1433,
+                "absolute": 1438,
                 "ok": false,
-                "percent": 319.15367483296217,
+                "percent": 320.26726057906455,
               },
               "size": Object {
-                "absolute": 1433,
+                "absolute": 1438,
                 "ok": true,
-                "percent": 319.15367483296217,
+                "percent": 320.26726057906455,
               },
             },
             "entry": "one",
@@ -418,7 +418,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download size diff of initial assets is 1.40 kb (319.15%). It's over the 0.10 kb limit",
+    "message": "Entry \\"one\\": Download size diff of initial assets is 1.40 kb (320.27%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "one",
@@ -427,37 +427,37 @@ Array [
     ],
   },
   Object {
-    "compilation": "da95abcf6bbf9b157ff6",
+    "compilation": "9eb9a218218f1ee4ba40",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
-              "asyncSize": 591,
-              "initialSize": 12180,
-              "size": 12771,
+              "asyncSize": 590,
+              "initialSize": 12211,
+              "size": 12801,
             },
             "before": Object {
-              "asyncSize": 135,
-              "initialSize": 8604,
-              "size": 8739,
+              "asyncSize": 134,
+              "initialSize": 8615,
+              "size": 8749,
             },
-            "compilation": "da95abcf6bbf9b157ff6",
+            "compilation": "9eb9a218218f1ee4ba40",
             "diff": Object {
               "asyncSize": Object {
                 "absolute": 456,
                 "ok": true,
-                "percent": 337.7777777777778,
+                "percent": 340.2985074626866,
               },
               "initialSize": Object {
-                "absolute": 3576,
+                "absolute": 3596,
                 "ok": false,
-                "percent": 41.562064156206425,
+                "percent": 41.74114915844458,
               },
               "size": Object {
-                "absolute": 4032,
+                "absolute": 4052,
                 "ok": true,
-                "percent": 46.138002059732244,
+                "percent": 46.313864441650466,
               },
             },
             "entry": "two",
@@ -484,7 +484,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size diff of initial assets is 3.49 kb (41.56%). It's over the 0.10 kb limit",
+    "message": "Entry \\"two\\": Download size diff of initial assets is 3.51 kb (41.74%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "two",
@@ -498,22 +498,22 @@ Array [
 exports[`maxInitialSizeDiff with useCompressedSize = false 1`] = `
 Array [
   Object {
-    "compilation": "da95abcf6bbf9b157ff6",
+    "compilation": "9eb9a218218f1ee4ba40",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncSize": 0,
-              "initialSize": 8338,
-              "size": 8338,
+              "initialSize": 8348,
+              "size": 8348,
             },
             "before": Object {
               "asyncSize": 0,
               "initialSize": 799,
               "size": 799,
             },
-            "compilation": "da95abcf6bbf9b157ff6",
+            "compilation": "9eb9a218218f1ee4ba40",
             "diff": Object {
               "asyncSize": Object {
                 "absolute": 0,
@@ -521,14 +521,14 @@ Array [
                 "percent": 0,
               },
               "initialSize": Object {
-                "absolute": 7539,
+                "absolute": 7549,
                 "ok": false,
-                "percent": 943.5544430538173,
+                "percent": 944.8060075093867,
               },
               "size": Object {
-                "absolute": 7539,
+                "absolute": 7549,
                 "ok": true,
-                "percent": 943.5544430538173,
+                "percent": 944.8060075093867,
               },
             },
             "entry": "one",
@@ -555,7 +555,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download size diff of initial assets is 7.36 kb (943.55%). It's over the 0.10 kb limit",
+    "message": "Entry \\"one\\": Download size diff of initial assets is 7.37 kb (944.81%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "one",
@@ -564,22 +564,22 @@ Array [
     ],
   },
   Object {
-    "compilation": "da95abcf6bbf9b157ff6",
+    "compilation": "9eb9a218218f1ee4ba40",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncSize": 1200,
-              "initialSize": 29035,
-              "size": 30235,
+              "initialSize": 29129,
+              "size": 30329,
             },
             "before": Object {
               "asyncSize": 142,
-              "initialSize": 12253,
-              "size": 12395,
+              "initialSize": 12277,
+              "size": 12419,
             },
-            "compilation": "da95abcf6bbf9b157ff6",
+            "compilation": "9eb9a218218f1ee4ba40",
             "diff": Object {
               "asyncSize": Object {
                 "absolute": 1058,
@@ -587,14 +587,14 @@ Array [
                 "percent": 745.0704225352113,
               },
               "initialSize": Object {
-                "absolute": 16782,
+                "absolute": 16852,
                 "ok": false,
-                "percent": 136.96237656084222,
+                "percent": 137.26480410523743,
               },
               "size": Object {
-                "absolute": 17840,
+                "absolute": 17910,
                 "ok": true,
-                "percent": 143.9290036304962,
+                "percent": 144.21451002496175,
               },
             },
             "entry": "two",
@@ -621,7 +621,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size diff of initial assets is 16.39 kb (136.96%). It's over the 0.10 kb limit",
+    "message": "Entry \\"two\\": Download size diff of initial assets is 16.46 kb (137.26%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "two",
@@ -635,22 +635,22 @@ Array [
 exports[`maxSizeDiff global 1`] = `
 Array [
   Object {
-    "compilation": "da95abcf6bbf9b157ff6",
+    "compilation": "9eb9a218218f1ee4ba40",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncSize": 0,
-              "initialSize": 1882,
-              "size": 1882,
+              "initialSize": 1887,
+              "size": 1887,
             },
             "before": Object {
               "asyncSize": 0,
               "initialSize": 449,
               "size": 449,
             },
-            "compilation": "da95abcf6bbf9b157ff6",
+            "compilation": "9eb9a218218f1ee4ba40",
             "diff": Object {
               "asyncSize": Object {
                 "absolute": 0,
@@ -658,14 +658,14 @@ Array [
                 "percent": 0,
               },
               "initialSize": Object {
-                "absolute": 1433,
+                "absolute": 1438,
                 "ok": true,
-                "percent": 319.15367483296217,
+                "percent": 320.26726057906455,
               },
               "size": Object {
-                "absolute": 1433,
+                "absolute": 1438,
                 "ok": false,
-                "percent": 319.15367483296217,
+                "percent": 320.26726057906455,
               },
             },
             "entry": "one",
@@ -692,7 +692,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download size diff of assets is 1.40 kb (319.15%). It's over the 0.10 kb limit",
+    "message": "Entry \\"one\\": Download size diff of assets is 1.40 kb (320.27%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "one",
@@ -701,37 +701,37 @@ Array [
     ],
   },
   Object {
-    "compilation": "da95abcf6bbf9b157ff6",
+    "compilation": "9eb9a218218f1ee4ba40",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
-              "asyncSize": 591,
-              "initialSize": 12180,
-              "size": 12771,
+              "asyncSize": 590,
+              "initialSize": 12211,
+              "size": 12801,
             },
             "before": Object {
-              "asyncSize": 135,
-              "initialSize": 8604,
-              "size": 8739,
+              "asyncSize": 134,
+              "initialSize": 8615,
+              "size": 8749,
             },
-            "compilation": "da95abcf6bbf9b157ff6",
+            "compilation": "9eb9a218218f1ee4ba40",
             "diff": Object {
               "asyncSize": Object {
                 "absolute": 456,
                 "ok": true,
-                "percent": 337.7777777777778,
+                "percent": 340.2985074626866,
               },
               "initialSize": Object {
-                "absolute": 3576,
+                "absolute": 3596,
                 "ok": true,
-                "percent": 41.562064156206425,
+                "percent": 41.74114915844458,
               },
               "size": Object {
-                "absolute": 4032,
+                "absolute": 4052,
                 "ok": false,
-                "percent": 46.138002059732244,
+                "percent": 46.313864441650466,
               },
             },
             "entry": "two",
@@ -758,7 +758,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size diff of assets is 3.94 kb (46.14%). It's over the 0.10 kb limit",
+    "message": "Entry \\"two\\": Download size diff of assets is 3.96 kb (46.31%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "two",
@@ -776,22 +776,22 @@ exports[`maxSizeDiff not match - override global 1`] = `Array []`;
 exports[`maxSizeDiff override global 1`] = `
 Array [
   Object {
-    "compilation": "da95abcf6bbf9b157ff6",
+    "compilation": "9eb9a218218f1ee4ba40",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncSize": 0,
-              "initialSize": 1882,
-              "size": 1882,
+              "initialSize": 1887,
+              "size": 1887,
             },
             "before": Object {
               "asyncSize": 0,
               "initialSize": 449,
               "size": 449,
             },
-            "compilation": "da95abcf6bbf9b157ff6",
+            "compilation": "9eb9a218218f1ee4ba40",
             "diff": Object {
               "asyncSize": Object {
                 "absolute": 0,
@@ -799,14 +799,14 @@ Array [
                 "percent": 0,
               },
               "initialSize": Object {
-                "absolute": 1433,
+                "absolute": 1438,
                 "ok": true,
-                "percent": 319.15367483296217,
+                "percent": 320.26726057906455,
               },
               "size": Object {
-                "absolute": 1433,
+                "absolute": 1438,
                 "ok": false,
-                "percent": 319.15367483296217,
+                "percent": 320.26726057906455,
               },
             },
             "entry": "one",
@@ -833,7 +833,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download size diff of assets is 1.40 kb (319.15%). It's over the 0.10 kb limit",
+    "message": "Entry \\"one\\": Download size diff of assets is 1.40 kb (320.27%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "one",
@@ -842,37 +842,37 @@ Array [
     ],
   },
   Object {
-    "compilation": "da95abcf6bbf9b157ff6",
+    "compilation": "9eb9a218218f1ee4ba40",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
-              "asyncSize": 591,
-              "initialSize": 12180,
-              "size": 12771,
+              "asyncSize": 590,
+              "initialSize": 12211,
+              "size": 12801,
             },
             "before": Object {
-              "asyncSize": 135,
-              "initialSize": 8604,
-              "size": 8739,
+              "asyncSize": 134,
+              "initialSize": 8615,
+              "size": 8749,
             },
-            "compilation": "da95abcf6bbf9b157ff6",
+            "compilation": "9eb9a218218f1ee4ba40",
             "diff": Object {
               "asyncSize": Object {
                 "absolute": 456,
                 "ok": true,
-                "percent": 337.7777777777778,
+                "percent": 340.2985074626866,
               },
               "initialSize": Object {
-                "absolute": 3576,
+                "absolute": 3596,
                 "ok": true,
-                "percent": 41.562064156206425,
+                "percent": 41.74114915844458,
               },
               "size": Object {
-                "absolute": 4032,
+                "absolute": 4052,
                 "ok": false,
-                "percent": 46.138002059732244,
+                "percent": 46.313864441650466,
               },
             },
             "entry": "two",
@@ -899,7 +899,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size diff of assets is 3.94 kb (46.14%). It's over the 0.10 kb limit",
+    "message": "Entry \\"two\\": Download size diff of assets is 3.96 kb (46.31%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "two",
@@ -913,22 +913,22 @@ Array [
 exports[`maxSizeDiff with useCompressedSize = false 1`] = `
 Array [
   Object {
-    "compilation": "da95abcf6bbf9b157ff6",
+    "compilation": "9eb9a218218f1ee4ba40",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncSize": 0,
-              "initialSize": 8338,
-              "size": 8338,
+              "initialSize": 8348,
+              "size": 8348,
             },
             "before": Object {
               "asyncSize": 0,
               "initialSize": 799,
               "size": 799,
             },
-            "compilation": "da95abcf6bbf9b157ff6",
+            "compilation": "9eb9a218218f1ee4ba40",
             "diff": Object {
               "asyncSize": Object {
                 "absolute": 0,
@@ -936,14 +936,14 @@ Array [
                 "percent": 0,
               },
               "initialSize": Object {
-                "absolute": 7539,
+                "absolute": 7549,
                 "ok": true,
-                "percent": 943.5544430538173,
+                "percent": 944.8060075093867,
               },
               "size": Object {
-                "absolute": 7539,
+                "absolute": 7549,
                 "ok": false,
-                "percent": 943.5544430538173,
+                "percent": 944.8060075093867,
               },
             },
             "entry": "one",
@@ -970,7 +970,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download size diff of assets is 7.36 kb (943.55%). It's over the 0.10 kb limit",
+    "message": "Entry \\"one\\": Download size diff of assets is 7.37 kb (944.81%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "one",
@@ -979,22 +979,22 @@ Array [
     ],
   },
   Object {
-    "compilation": "da95abcf6bbf9b157ff6",
+    "compilation": "9eb9a218218f1ee4ba40",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncSize": 1200,
-              "initialSize": 29035,
-              "size": 30235,
+              "initialSize": 29129,
+              "size": 30329,
             },
             "before": Object {
               "asyncSize": 142,
-              "initialSize": 12253,
-              "size": 12395,
+              "initialSize": 12277,
+              "size": 12419,
             },
-            "compilation": "da95abcf6bbf9b157ff6",
+            "compilation": "9eb9a218218f1ee4ba40",
             "diff": Object {
               "asyncSize": Object {
                 "absolute": 1058,
@@ -1002,14 +1002,14 @@ Array [
                 "percent": 745.0704225352113,
               },
               "initialSize": Object {
-                "absolute": 16782,
+                "absolute": 16852,
                 "ok": true,
-                "percent": 136.96237656084222,
+                "percent": 137.26480410523743,
               },
               "size": Object {
-                "absolute": 17840,
+                "absolute": 17910,
                 "ok": false,
-                "percent": 143.9290036304962,
+                "percent": 144.21451002496175,
               },
             },
             "entry": "two",
@@ -1036,7 +1036,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size diff of assets is 17.42 kb (143.93%). It's over the 0.10 kb limit",
+    "message": "Entry \\"two\\": Download size diff of assets is 17.49 kb (144.21%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "two",

@@ -3,7 +3,7 @@
 exports[`custom reporter 1`] = `
 Object {
   "files": Object {
-    "input": "<pwd>/test/bundles/simple/stats-prod.json",
+    "input": "<pwd>/test/bundles/v5/simple/stats-prod.json",
     "reference": undefined,
   },
   "rules": Array [
@@ -38,7 +38,7 @@ Object {
 exports[`should work 1`] = `
 Object {
   "files": Object {
-    "input": "<pwd>/test/bundles/simple/stats-prod.json",
+    "input": "<pwd>/test/bundles/v5/simple/stats-prod.json",
     "reference": undefined,
   },
   "rules": Array [
@@ -73,7 +73,7 @@ Object {
 exports[`silent 1`] = `
 Object {
   "files": Object {
-    "input": "<pwd>/test/bundles/simple/stats-prod.json",
+    "input": "<pwd>/test/bundles/v5/simple/stats-prod.json",
     "reference": undefined,
   },
   "rules": Array [

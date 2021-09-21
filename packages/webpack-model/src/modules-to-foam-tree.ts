@@ -89,7 +89,7 @@ function handleModule(
     const last = parts[parts.length - 1];
     last.link = {
       page: 'module',
-      id: String(module.id || module.name),
+      id: String(module.id || module.identifier),
     };
   }
 

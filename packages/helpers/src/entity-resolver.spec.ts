@@ -49,3 +49,39 @@ test('getter', () => {
   expect(resolve('1')).toBe('foo');
   expect(resolve(2)).toBe('bar');
 });
+
+describe('locking', () => {
+  test('lock/unlock', () => {
+    const list: Array<typeof foo | typeof bar> = [];
+    const resolve = make(
+      list,
+      (item) => item.id,
+      (item) => item.data,
+      false
+    );
+
+    list.push(foo);
+    resolve.lock();
+    expect(resolve(1)).toBe('foo');
+    list.push(bar);
+    expect(resolve(2)).toBeNull();
+    resolve.unlock();
+    list.push(bar);
+    expect(resolve(2)).toBe('bar');
+  });
+
+  test('locked by default', () => {
+    const list: Array<typeof foo | typeof bar> = [];
+    const resolve = make(
+      list,
+      (item) => item.id,
+      (item) => item.data
+    );
+
+    list.push(foo);
+    expect(resolve(1)).toBeNull();
+    resolve.unlock();
+    list.push(foo);
+    expect(resolve(1)).toBe('foo');
+  });
+});
