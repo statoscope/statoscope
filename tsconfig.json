@@ -13,7 +13,8 @@
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "resolveJsonModule": true,
-    "declaration": true
+    "declaration": true,
+    "incremental": true
   },
   "exclude": ["node_modules", "dist", "test"]
 }
