@@ -75,13 +75,16 @@ export declare namespace Webpack {
     assets?: Asset[];
     modules?: Module[];
     children?: Compilation[];
-    __statoscope?: {
-      descriptor?: StatsDescriptor;
-      extensions?: Extension<unknown>[];
-      normalization?: NormalizationData;
-    };
+    __statoscope?: StatoscopeMeta;
   };
 }
+
+export type StatoscopeMeta = {
+  descriptor?: StatsDescriptor;
+  extensions?: Extension<unknown>[];
+  normalization?: NormalizationData;
+  context?: string;
+};
 
 export type ModuleData = {
   nameToIdMap: Map<string, number>;

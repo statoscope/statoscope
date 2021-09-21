@@ -17,7 +17,9 @@ export default class WebpackCompressedExtension {
     return this.generator.get();
   }
 
-  handleCompiler(compiler: Compiler): void {
+  handleCompiler(compiler: Compiler, context?: string): void {
+    // @ts-ignore
+    context ??= compiler.options.stats.context ?? compiler.context;
     compiler.hooks.compilation.tap(pluginName, (compilation): void => {
       const items: Array<{
         packageName: string;
@@ -44,10 +46,7 @@ export default class WebpackCompressedExtension {
             } | null;
 
             if (pkg && result.descriptionFileRoot) {
-              const instancePath = path.relative(
-                compiler.context,
-                result.descriptionFileRoot
-              );
+              const instancePath = path.relative(context!, result.descriptionFileRoot);
 
               items.push({
                 packageName: pkg.name,

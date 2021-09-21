@@ -6,13 +6,13 @@ import open from 'open';
 import { stringifyStream } from '@discoveryjs/json-ext';
 import HTMLWriter from '@statoscope/report-writer';
 import { Compilation, Compiler } from 'webpack';
-import { StatsDescriptor } from '@statoscope/stats';
 import statsPackage from '@statoscope/stats/package.json';
-import { Extension } from '@statoscope/stats/spec/extension';
 import WebpackCompressedExtension from '@statoscope/webpack-stats-extension-compressed';
 import WebpackPackageInfoExtension from '@statoscope/webpack-stats-extension-package-info';
 import { CompressFunction } from '@statoscope/stats-extension-compressed/dist/generator';
 import normalizeCompilation from '@statoscope/webpack-model/dist/normalizeCompilation';
+import { StatoscopeMeta } from '@statoscope/webpack-model/webpack';
+import { makeReplacer } from '@statoscope/report-writer/dist/utils';
 
 export type Options = {
   name?: string;
@@ -26,11 +26,6 @@ export type Options = {
   watchMode: boolean;
   open: false | 'dir' | 'file';
   compressor: false | 'gzip' | CompressFunction;
-};
-
-export type StatoscopeMeta = {
-  descriptor: StatsDescriptor;
-  extensions: Extension<unknown>[];
 };
 
 export default class StatoscopeWebpackPlugin {
@@ -61,10 +56,15 @@ export default class StatoscopeWebpackPlugin {
 
   apply(compiler: Compiler): void {
     const { options } = this;
+    const context =
+      options.statsOptions?.context ??
+      // @ts-ignore
+      compiler.options.stats.context ??
+      compiler.context;
 
     const packageInfoExtension = new WebpackPackageInfoExtension();
     // @ts-ignore
-    packageInfoExtension.handleCompiler(compiler);
+    packageInfoExtension.handleCompiler(compiler, context);
 
     compiler.hooks.done.tapAsync('Statoscope Webpack Plugin', async (stats, cb) => {
       if (compiler.watchMode && !options.watchMode) {
@@ -78,10 +78,11 @@ export default class StatoscopeWebpackPlugin {
       const statoscopeMeta: StatoscopeMeta = {
         descriptor: { name: statsPackage.name, version: statsPackage.version },
         extensions: [],
+        context,
       };
       statsObj.__statoscope = statoscopeMeta;
 
-      statoscopeMeta.extensions.push(packageInfoExtension.get());
+      statoscopeMeta.extensions!.push(packageInfoExtension.get());
 
       if (this.options.compressor) {
         const compressedExtension = new WebpackCompressedExtension(
@@ -89,10 +90,13 @@ export default class StatoscopeWebpackPlugin {
         );
         // @ts-ignore
         await compressedExtension.handleCompilation(stats.compilation);
-        statoscopeMeta.extensions.push(compressedExtension.get());
+        statoscopeMeta.extensions!.push(compressedExtension.get());
       }
 
-      const webpackStatsStream = stringifyStream(statsObj);
+      const webpackStatsStream = stringifyStream(
+        statsObj,
+        makeReplacer(context, '.', ['context', 'source'])
+      );
       let statsFileOutputStream: Writable | undefined;
       let resolvedSaveStatsTo: string | undefined;
 
@@ -110,7 +114,10 @@ export default class StatoscopeWebpackPlugin {
 
       const statsForReport = this.getStatsForHTMLReport({
         filename: resolvedSaveStatsTo,
-        stream: stringifyStream(statsObj),
+        stream: stringifyStream(
+          statsObj,
+          makeReplacer(context, '.', ['context', 'source'])
+        ),
       });
       const htmlReportPath = this.getHTMLReportPath();
       const resolvedHTMLReportPath = path.resolve(

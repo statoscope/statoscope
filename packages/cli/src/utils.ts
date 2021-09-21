@@ -3,10 +3,13 @@ import os from 'os';
 import fs from 'fs';
 import {
   FromItem,
+  makeReplacer,
   transform as transformOriginal,
 } from '@statoscope/report-writer/dist/utils';
 import { parseChunked } from '@discoveryjs/json-ext';
 import normalizeCompilation from '@statoscope/webpack-model/dist/normalizeCompilation';
+import { Webpack } from '@statoscope/webpack-model/webpack';
+import Compilation = Webpack.Compilation;
 
 export async function transform(from: string[], to?: string): Promise<string> {
   const id = path.basename(from[0], '.json');
@@ -15,9 +18,14 @@ export async function transform(from: string[], to?: string): Promise<string> {
   const normalizedFrom: FromItem[] = [];
 
   for (const item of from) {
-    const parsed = await parseChunked(fs.createReadStream(item));
+    const parsed: Compilation = await parseChunked(fs.createReadStream(item));
     normalizeCompilation(parsed);
-    normalizedFrom.push({ type: 'data', filename: item, data: parsed });
+    normalizedFrom.push({
+      type: 'data',
+      filename: item,
+      data: parsed,
+      replacer: makeReplacer(parsed.__statoscope?.context, '.', ['context', 'source']),
+    });
   }
 
   return transformOriginal(

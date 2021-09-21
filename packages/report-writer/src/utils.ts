@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { Readable, Writable } from 'stream';
-import { stringifyStream } from '@discoveryjs/json-ext';
+import { stringifyStream, TReplacer } from '@discoveryjs/json-ext';
 import HTMLWriter, { Options } from './';
 
 export function waitFinished(stream: Readable | Writable): Promise<void> {
@@ -17,10 +17,12 @@ export type FromItem =
       type: 'data';
       filename: string;
       data: unknown;
+      replacer?: TReplacer;
     }
   | {
       type: 'filename';
       filename: string;
+      replacer?: TReplacer;
     };
 
 export async function transform(
@@ -47,7 +49,7 @@ export async function transform(
     if (fromItem.type === 'filename') {
       stream = fs.createReadStream(fromItem.filename);
     } else {
-      stream = stringifyStream(fromItem.data);
+      stream = stringifyStream(fromItem.data, fromItem.replacer);
     }
 
     htmlWriter.addChunkWriter(stream, id);
@@ -59,4 +61,22 @@ export async function transform(
   await waitFinished(outputStream);
 
   return to;
+}
+
+export function makeReplacer(
+  from?: string,
+  to = '',
+  ignoreKeys: string[] = []
+): TReplacer | undefined {
+  if (!from) {
+    return;
+  }
+
+  return (key, value): unknown => {
+    if (typeof value === 'string' && !ignoreKeys.includes(key)) {
+      if (value.includes(from)) return value.split(from).join(to);
+    }
+
+    return value;
+  };
 }

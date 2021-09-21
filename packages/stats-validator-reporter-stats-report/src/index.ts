@@ -3,8 +3,13 @@ import path from 'path';
 import os from 'os';
 import { Readable } from 'stream';
 import open from 'open';
-import { parseChunked, stringifyStream } from '@discoveryjs/json-ext';
-import { transform, waitFinished } from '@statoscope/report-writer/dist/utils';
+import { parseChunked, stringifyStream, TReplacer } from '@discoveryjs/json-ext';
+import {
+  FromItem,
+  makeReplacer,
+  transform,
+  waitFinished,
+} from '@statoscope/report-writer/dist/utils';
 import { StatsDescriptor } from '@statoscope/stats';
 import statsPackage from '@statoscope/stats/package.json';
 import { Extension } from '@statoscope/stats/spec/extension';
@@ -12,17 +17,13 @@ import ExtensionValidationResultGenerator from '@statoscope/stats-extension-stat
 import { Reporter } from '@statoscope/types/types/validation/reporter';
 import { Result } from '@statoscope/types/types/validation/result';
 import normalizeCompilation from '@statoscope/webpack-model/dist/normalizeCompilation';
+import { StatoscopeMeta } from '@statoscope/webpack-model/webpack';
 import * as version from './version';
 
 export type Options = {
   saveReportTo?: string;
   saveStatsTo?: string;
   open?: boolean;
-};
-
-export type StatoscopeMeta = {
-  descriptor: StatsDescriptor;
-  extensions: Extension<unknown>[];
 };
 
 export default class ConsoleReporter implements Reporter {
@@ -53,15 +54,13 @@ export default class ConsoleReporter implements Reporter {
       extensions: [],
     };
     parsedInput.__statoscope ??= meta;
+    parsedInput.__statoscope.extensions ??= [];
     parsedInput.__statoscope.extensions.push(generator.get());
-
-    normalizeCompilation(parsedInput);
 
     let parsedReference;
 
     if (result.files.reference) {
       parsedReference = await parseChunked(fs.createReadStream(result.files.reference));
-      normalizeCompilation(parsedReference);
     }
 
     const id = path.basename(result.files.input, '.json');
@@ -77,7 +76,10 @@ export default class ConsoleReporter implements Reporter {
         fs.mkdirSync(toDir, { recursive: true });
       }
       const statsFileStream = fs.createWriteStream(statsPath);
-      const statStream: Readable = stringifyStream(parsedInput);
+      const statStream: Readable = stringifyStream(
+        parsedInput,
+        makeReplacer(parsedInput.__statoscope.context, '.', ['context', 'source'])
+      );
       statStream.pipe(statsFileStream);
       await waitFinished(statsFileStream);
       console.log(`Stats saved into ${statsPath}`);
@@ -85,6 +87,12 @@ export default class ConsoleReporter implements Reporter {
 
     if (this.options?.saveReportTo || this.options?.open) {
       console.log(`Generating Statoscope report...`);
+      normalizeCompilation(parsedInput);
+
+      if (parsedReference) {
+        normalizeCompilation(parsedReference);
+      }
+
       const reportFilename = await transform(
         {
           writer: {
@@ -94,21 +102,28 @@ export default class ConsoleReporter implements Reporter {
           }`,
           },
         },
-        // @ts-ignore
         [
           {
             type: 'data',
             filename: 'input.json',
             data: parsedInput,
+            replacer: makeReplacer(parsedInput.__statoscope?.context, '.', [
+              'context',
+              'source',
+            ]),
           },
           parsedReference
             ? {
                 type: 'data',
                 filename: 'reference.json',
                 data: parsedReference,
+                replacer: makeReplacer(parsedReference.__statoscope?.context, '.', [
+                  'context',
+                  'source',
+                ]),
               }
             : null,
-        ].filter(Boolean),
+        ].filter(Boolean) as FromItem[],
         reportPath
       );
       console.log(`Statoscope report saved into ${reportFilename}`);
