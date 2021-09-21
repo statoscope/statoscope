@@ -3,16 +3,14 @@ import path from 'path';
 import os from 'os';
 import { Readable } from 'stream';
 import open from 'open';
-import { parseChunked, stringifyStream, TReplacer } from '@discoveryjs/json-ext';
+import { parseChunked, stringifyStream } from '@discoveryjs/json-ext';
 import {
   FromItem,
   makeReplacer,
   transform,
   waitFinished,
 } from '@statoscope/report-writer/dist/utils';
-import { StatsDescriptor } from '@statoscope/stats';
 import statsPackage from '@statoscope/stats/package.json';
-import { Extension } from '@statoscope/stats/spec/extension';
 import ExtensionValidationResultGenerator from '@statoscope/stats-extension-stats-validation-result/dist/generator';
 import { Reporter } from '@statoscope/types/types/validation/reporter';
 import { Result } from '@statoscope/types/types/validation/result';

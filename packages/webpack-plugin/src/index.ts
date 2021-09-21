@@ -138,7 +138,7 @@ export default class StatoscopeWebpackPlugin {
 
         cb();
       } catch (e) {
-        cb(e);
+        cb(e as Error);
       }
     });
   }

@@ -28,7 +28,7 @@
     "@statoscope/webpack-ui": "5.8.0",
     "@types/node": "^12.20.15",
     "@types/webpack": "^5.28.0",
-    "open": "^8.0.4"
+    "open": "^8.2.1"
   },
   "peerDependencies": {
     "webpack": "^4.0.0 || ^5.0.0"
