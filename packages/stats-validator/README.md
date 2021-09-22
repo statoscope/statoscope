@@ -448,3 +448,5 @@ module.exports = {
   }
 }
 ```
+
+> For more rule examples, please see [existing rule sources](/packages/stats-validator-plugin-webpack/src/rules)
