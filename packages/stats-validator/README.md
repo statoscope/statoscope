@@ -7,11 +7,11 @@ This package contains a toolkit to validate stats.
 
 ## API
 
-### new Validator(config: Config, rootDir?: string)
+### `new Validator(config: Config, rootDir?: string)`
 
 Create the Validator instance with config (see below), relative `rootDir`-directory (current working directory by default)
 
-### validate(input: string, reference?: string): Promise<Result>
+### `validate(input: string, reference?: string): Promise<Result>`
 
 Apply rules to `input` and `reference` (if specified) files.
 
@@ -387,7 +387,6 @@ interface Reporter {
 }
 ```
 
-
 **Example:**
 
 ```js
@@ -410,6 +409,42 @@ class MyConsoleReporter {
         }
       }
     }
+  }
+}
+```
+
+## Custom Plugin Example
+
+Create custom plugin script:
+
+__my-custom-stats-validator-plugin.js:__
+
+```js
+module.exports = () => {
+  return {
+    'my-rule': (ruleParams, data, api) => {
+      const result = data.query('some jora query', data.files, {ruleParams});
+
+      if(result.notOk) {
+        api.message(':(')
+      }
+    }
+  }
+}
+```
+
+Add this plugin to statoscope config:
+
+__statoscope.config.js:__
+
+```js
+module.exports = {
+  validate: {
+    plugins: ['@statoscope/webpack', ['./my-custom-stats-validator-plugin.js', 'my-plugin']],
+    rules: {
+      '@statoscope/webpack/restricted-packages': ['error', ['foo']],
+      'my-plugin/my-rule': ['error', 'rule params'],
+    },
   }
 }
 ```
