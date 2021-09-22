@@ -422,11 +422,13 @@ __my-custom-stats-validator-plugin.js:__
 ```js
 module.exports = () => {
   return {
-    'my-rule': (ruleParams, data, api) => {
-      const result = data.query('some jora query', data.files, {ruleParams});
+    rules: {
+      'my-rule': (ruleParams, data, api) => {
+        const result = data.query('some jora query', data.files, {ruleParams});
 
-      if(result.notOk) {
-        api.message(':(')
+        if(result.notOk) {
+          api.message(':(')
+        }
       }
     }
   }
