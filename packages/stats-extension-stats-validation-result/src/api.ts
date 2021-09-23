@@ -1,133 +1,92 @@
-import makeEntityResolver from '@statoscope/helpers/dist/entity-resolver';
-import { Resolver } from '@statoscope/helpers/dist/entity-resolver';
 import { APIFactory } from '@statoscope/extensions';
-import { RelatedItem } from '@statoscope/types/types/validation/test-entry';
+import { RelationItem } from '@statoscope/types/types';
 import { RuleDescriptor } from '@statoscope/types/types/validation/api';
+import makeIndex, { IndexAPI } from '@statoscope/helpers/dist/indexer';
 import { Format, Item } from './generator';
 
 export type API = {
   getItems: (
     compilationId: string | null,
-    type?: RelatedItem['type'] | null,
+    type?: RelationItem['type'] | null,
     relatedId?: string | number
   ) => Item[];
   getItemById(id: number): Item | null;
   getRule(id: string): RuleDescriptor | null;
 };
 
-type IndexItem = { item: Item; related: RelatedItem };
-type Index = {
-  type: RelatedItem['type'];
-  links: IndexItem[];
-  items: Item[];
-  related: RelatedItem[];
-  byRelatedId: Resolver<string | number, Item>;
-};
-
-export type IndexAPI = {
-  readonly type: RelatedItem['type'];
-  add(item: Item, related: RelatedItem): void;
-  getItems(id?: string | number): Item[];
-};
-
-function makeIndex(type: RelatedItem['type']): IndexAPI {
-  const links: IndexItem[] = [];
-  const index: Index = {
-    type,
-    links,
-    items: [],
-    related: [],
-    byRelatedId: makeEntityResolver(
-      links,
-      (item) => item.related.id,
-      (item) => item.item
-    ),
-  };
-
-  return {
-    type,
-    add(item: Item, related: RelatedItem): void {
-      if (!index.items.includes(item)) {
-        index.items.push(item);
-      }
-
-      if (!index.related.includes(related)) {
-        index.related.push(related);
-      }
-
-      if (!index.links.find((link) => link.item === item && link.related === related)) {
-        index.links.push({ item, related });
-      }
-    },
-    getItems(id?: string | number): Item[] {
-      if (id != null) {
-        return (
-          index.links
-            // eslint-disable-next-line eqeqeq
-            .filter((link) => link.related.id == id)
-            .map((link) => link.item)
-        );
-      }
-
-      return index.items;
-    },
-  };
-}
-
-export type CompilationData = {
+type CompilationIndexItem = {
   id: string | null;
-  items: Item[];
-  resolveIndex: Resolver<RelatedItem['type'], IndexAPI>;
+  relationTypeIndex: IndexAPI<RelationItem['type'], TypeIndexItem>;
+  itemIndex: IndexAPI<Item['id'], Item>;
+};
+
+type TypeIndexItem = {
+  type: RelationItem['type'];
+  relationIdIndex: IndexAPI<RelationItem['id'], IdIndexItem>;
+  itemIndex: IndexAPI<Item['id'], Item>;
+};
+
+type IdIndexItem = {
+  id: RelationItem['id'];
+  index: IndexAPI<RelationItem['id'], Item>;
 };
 
 const makeAPI: APIFactory<Format, API> = (source) => {
-  const compilationResolvers: CompilationData[] = [];
-  const resolveCompilationsResolvers = makeEntityResolver(
-    compilationResolvers,
-    (item) => item.id,
-    null,
-    false
-  );
-  const resolveRule = makeEntityResolver(
-    source.payload.rules,
-    (item) => item.name,
-    (item) => item.descriptor
-  );
-  const items: Item[] = [];
-  const resolveItemById = makeEntityResolver(items, (item) => item.id, null, false);
+  const idIndex = makeIndex((entity: Item) => entity.id);
+  const compilationIndex = makeIndex((entity: CompilationIndexItem) => entity.id);
+  const ruleIndex = makeIndex((item) => item.name, source.payload.rules);
+
   for (const compilation of source.payload.compilations) {
-    const indexes: IndexAPI[] = [];
-    const compilationData: CompilationData = {
-      id: compilation.id,
-      items: compilation.items,
-      resolveIndex: makeEntityResolver(indexes, (index) => index.type, null, false),
-    };
-    compilationResolvers.push(compilationData);
+    let compilationItem = compilationIndex.get(compilation.id);
 
-    for (const item of compilation.items) {
-      items.push(item);
-      for (const related of item.related) {
-        let index = compilationData.resolveIndex(related.type);
+    if (!compilationItem) {
+      compilationItem = {
+        id: compilation.id,
+        relationTypeIndex: makeIndex((entity: TypeIndexItem) => entity.type),
+        itemIndex: makeIndex((entity: Item) => entity.id),
+      };
 
-        if (!index) {
-          index = makeIndex(related.type);
-          indexes.push(index);
-        }
-
-        index.add(item, related);
-      }
+      compilationIndex.add(compilationItem);
     }
 
-    compilationData.resolveIndex.lock();
-  }
+    for (const item of compilation.items) {
+      compilationItem.itemIndex.add(item);
+      idIndex.add(item);
 
-  resolveItemById.lock();
-  resolveCompilationsResolvers.lock();
+      for (const related of item.related) {
+        let typeItem = compilationItem.relationTypeIndex.get(related.type);
+
+        if (!typeItem) {
+          typeItem = {
+            type: related.type,
+            relationIdIndex: makeIndex((entity: IdIndexItem) => entity.id),
+            itemIndex: makeIndex((entity: Item) => entity.id),
+          };
+
+          compilationItem.relationTypeIndex.add(typeItem);
+        }
+
+        let idItem = typeItem.relationIdIndex.get(related.id);
+
+        if (!idItem) {
+          idItem = {
+            id: related.id,
+            index: makeIndex((entity: Item) => entity.id),
+          };
+
+          typeItem.relationIdIndex.add(idItem);
+        }
+
+        typeItem.itemIndex.add(item);
+        idItem.index.add(item);
+      }
+    }
+  }
 
   return {
     getItems: (
       compilationId: string | null,
-      type?: RelatedItem['type'] | null,
+      type?: RelationItem['type'] | null,
       relatedId?: string | number
     ): Item[] => {
       if (relatedId) {
@@ -136,26 +95,30 @@ const makeAPI: APIFactory<Format, API> = (source) => {
         }
 
         return (
-          resolveCompilationsResolvers(compilationId)
-            ?.resolveIndex(type)
-            ?.getItems(relatedId) ?? []
+          compilationIndex
+            .get(compilationId)
+            ?.relationTypeIndex.get(type)
+            ?.relationIdIndex.get(relatedId)
+            ?.index.getAll() ?? []
         );
       }
 
       if (type) {
         return (
-          resolveCompilationsResolvers(compilationId)?.resolveIndex(type)?.getItems() ??
-          []
+          compilationIndex
+            .get(compilationId)
+            ?.relationTypeIndex.get(type)
+            ?.itemIndex.getAll() ?? []
         );
       }
 
-      return resolveCompilationsResolvers(compilationId)?.items ?? [];
+      return compilationIndex.get(compilationId)?.itemIndex.getAll() ?? [];
     },
     getRule(id: string): RuleDescriptor | null {
-      return resolveRule(id);
+      return ruleIndex.get(id)?.descriptor || null;
     },
     getItemById(id: number): Item | null {
-      return resolveItemById(id);
+      return idIndex.get(id);
     },
   };
 };

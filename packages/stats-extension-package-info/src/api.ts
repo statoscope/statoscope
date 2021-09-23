@@ -1,8 +1,5 @@
-import {
-  default as makeEntityResolver,
-  Resolver,
-} from '@statoscope/helpers/dist/entity-resolver';
 import { APIFactory } from '@statoscope/extensions';
+import makeIndex, { IndexAPI } from '@statoscope/helpers/dist/indexer';
 import { Format, Package, Instance } from './generator';
 
 export type API = {
@@ -15,39 +12,39 @@ export type API = {
 };
 
 const makeAPI: APIFactory<Format, API> = (source) => {
-  const packageResolvers: Map<string, Resolver<string, Package>> = new Map();
-  const instanceResolvers: Map<Package, Resolver<string, Instance>> = new Map();
+  const packageIndexes: Map<string, IndexAPI<string, Package>> = new Map();
+  const instanceIndexes: Map<Package, IndexAPI<string, Instance>> = new Map();
 
   for (const compilation of source.payload.compilations) {
-    packageResolvers.set(
+    packageIndexes.set(
       compilation.id,
-      makeEntityResolver(compilation.packages, (r) => r.name)
+      makeIndex((r) => r.name, compilation.packages)
     );
 
     for (const packageItem of compilation.packages) {
-      instanceResolvers.set(
+      instanceIndexes.set(
         packageItem,
-        makeEntityResolver(packageItem.instances, (r) => r.path)
+        makeIndex((r) => r.path, packageItem.instances)
       );
     }
   }
 
   return {
     getPackage(compilationId: string, packageId: string): Package | null {
-      return packageResolvers.get(compilationId)?.(packageId) ?? null;
+      return packageIndexes.get(compilationId)?.get(packageId) ?? null;
     },
     getInstance(
       compilationId: string,
       packageId: string,
       instancePath: string
     ): Instance | null {
-      const resolvedPackage = packageResolvers.get(compilationId)?.(packageId) ?? null;
+      const resolvedPackage = packageIndexes.get(compilationId)?.get(packageId) ?? null;
 
       if (!resolvedPackage) {
         return null;
       }
 
-      return instanceResolvers.get(resolvedPackage)?.(instancePath) ?? null;
+      return instanceIndexes.get(resolvedPackage)?.get(instancePath) ?? null;
     },
   };
 };
