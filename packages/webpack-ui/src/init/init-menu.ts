@@ -21,6 +21,7 @@ import { StatoscopeWidget } from '../../types';
 export default (discovery: StatoscopeWidget): void => {
   hideUseless(discovery);
   addCustomIndex(discovery);
+  addReportsList(discovery);
   addStatsList(discovery);
   addSettings(discovery);
   addLinks(discovery);
@@ -75,6 +76,44 @@ function addStatsList(discovery: StatoscopeWidget): void {
             {
               view: 'stats-list',
               data: { showHeader: false },
+              onClick(): void {
+                popup.hide();
+              },
+            },
+          ],
+          discovery.data,
+          {
+            ...discovery.getRenderContext(),
+            widget: discovery,
+            hide: () => popup.hide(),
+          }
+        )
+      );
+    },
+  });
+}
+
+function addReportsList(discovery: StatoscopeWidget): void {
+  const popup = new discovery.view.Popup({});
+  discovery.nav.append({
+    name: 'custom-reports-list',
+    when: `#.widget and #.stats.(
+      $file: $;
+      compilations.(
+        $compilation: $;
+        $file.name.customReports_getItems($compilation.hash)
+      )
+    )`,
+    content: 'html:"Custom reports &#9660"',
+    onClick: (el: HTMLElement) => {
+      popup.toggle(el, (popupEl: HTMLElement) =>
+        discovery.view.render(
+          popupEl,
+          [
+            // @ts-ignore
+            {
+              view: 'custom-reports-list',
+              data: {},
               onClick(): void {
                 popup.hide();
               },

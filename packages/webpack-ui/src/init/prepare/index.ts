@@ -27,8 +27,8 @@ import { RawData, StatoscopeWidget, TargetData } from '../../../types';
 
 export default (() =>
   (rawData: RawData, { addQueryHelpers }: StatoscopeWidget): unknown => {
-    const { files, compilations } = normalize(rawData);
-    const wpJoraHelpers = webpackJoraHelpers(compilations);
+    const normalizeResult = normalize(rawData);
+    const wpJoraHelpers = webpackJoraHelpers(normalizeResult);
     const commonJoraHelpers = joraHelpers();
 
     addQueryHelpers({
@@ -128,5 +128,5 @@ export default (() =>
       },
     });
 
-    return files;
+    return normalizeResult.files;
   }) as () => PrepareFn<RawData, TargetData>;
