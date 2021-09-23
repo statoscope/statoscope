@@ -1,5 +1,6 @@
 import { PackageDescriptor } from '@statoscope/stats/spec/extension';
-import { Details, RelatedItem, TestEntry } from './test-entry';
+import { RelationItem } from '..';
+import { Details, TestEntry } from './test-entry';
 
 export type Storage = TestEntry[];
 
@@ -7,7 +8,7 @@ export type APIFnOptions = {
   filename?: string;
   compilation?: string;
   details?: Details;
-  related?: RelatedItem[];
+  related?: RelationItem[];
 };
 
 export type RuleDescriptor = {

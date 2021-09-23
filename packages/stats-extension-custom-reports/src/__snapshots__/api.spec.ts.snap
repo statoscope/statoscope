@@ -1,0 +1,316 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should work 1`] = `
+Array [
+  Object {
+    "context": "context",
+    "data": "data",
+    "id": "foo",
+    "name": "name",
+    "view": Array [
+      "some-ui",
+    ],
+  },
+  Object {
+    "context": "context2",
+    "data": "data2",
+    "id": "foo2",
+    "name": "name2",
+    "view": Array [
+      "some-ui2",
+    ],
+  },
+  Object {
+    "context": "context3",
+    "data": "data3",
+    "id": "foo3",
+    "name": "name3",
+    "relations": Array [
+      Object {
+        "id": "foo",
+        "type": "module",
+      },
+    ],
+    "view": Array [
+      "some-ui3",
+    ],
+  },
+  Object {
+    "context": "context4",
+    "data": "data4",
+    "id": "foo4",
+    "name": "name4",
+    "relations": Array [
+      Object {
+        "id": "foo",
+        "type": "module",
+      },
+    ],
+    "view": Array [
+      "some-ui4",
+    ],
+  },
+  Object {
+    "context": "context5",
+    "data": "data5",
+    "id": "foo5",
+    "name": "name5",
+    "relations": Array [
+      Object {
+        "id": "bar",
+        "type": "module",
+      },
+    ],
+    "view": Array [
+      "some-ui5",
+    ],
+  },
+  Object {
+    "context": "context6",
+    "data": "data6",
+    "id": "foo6",
+    "name": "name6",
+    "relations": Array [
+      Object {
+        "id": "foo",
+        "type": "chunk",
+      },
+    ],
+    "view": Array [
+      "some-ui6",
+    ],
+  },
+]
+`;
+
+exports[`should work 2`] = `
+Array [
+  Object {
+    "context": "context3",
+    "data": "data3",
+    "id": "foo3",
+    "name": "name3",
+    "relations": Array [
+      Object {
+        "id": "foo",
+        "type": "module",
+      },
+    ],
+    "view": Array [
+      "some-ui3",
+    ],
+  },
+  Object {
+    "context": "context4",
+    "data": "data4",
+    "id": "foo4",
+    "name": "name4",
+    "relations": Array [
+      Object {
+        "id": "foo",
+        "type": "module",
+      },
+    ],
+    "view": Array [
+      "some-ui4",
+    ],
+  },
+  Object {
+    "context": "context5",
+    "data": "data5",
+    "id": "foo5",
+    "name": "name5",
+    "relations": Array [
+      Object {
+        "id": "bar",
+        "type": "module",
+      },
+    ],
+    "view": Array [
+      "some-ui5",
+    ],
+  },
+]
+`;
+
+exports[`should work 3`] = `
+Array [
+  Object {
+    "context": "context3",
+    "data": "data3",
+    "id": "foo3",
+    "name": "name3",
+    "relations": Array [
+      Object {
+        "id": "foo",
+        "type": "module",
+      },
+    ],
+    "view": Array [
+      "some-ui3",
+    ],
+  },
+  Object {
+    "context": "context4",
+    "data": "data4",
+    "id": "foo4",
+    "name": "name4",
+    "relations": Array [
+      Object {
+        "id": "foo",
+        "type": "module",
+      },
+    ],
+    "view": Array [
+      "some-ui4",
+    ],
+  },
+]
+`;
+
+exports[`should work 4`] = `
+Array [
+  Object {
+    "context": "context5",
+    "data": "data5",
+    "id": "foo5",
+    "name": "name5",
+    "relations": Array [
+      Object {
+        "id": "bar",
+        "type": "module",
+      },
+    ],
+    "view": Array [
+      "some-ui5",
+    ],
+  },
+]
+`;
+
+exports[`should work 5`] = `
+Array [
+  Object {
+    "context": "context6",
+    "data": "data6",
+    "id": "foo6",
+    "name": "name6",
+    "relations": Array [
+      Object {
+        "id": "foo",
+        "type": "chunk",
+      },
+    ],
+    "view": Array [
+      "some-ui6",
+    ],
+  },
+]
+`;
+
+exports[`should work 6`] = `
+Array [
+  Object {
+    "context": "context6",
+    "data": "data6",
+    "id": "foo6",
+    "name": "name6",
+    "relations": Array [
+      Object {
+        "id": "foo",
+        "type": "chunk",
+      },
+    ],
+    "view": Array [
+      "some-ui6",
+    ],
+  },
+]
+`;
+
+exports[`should work 7`] = `
+Array [
+  Object {
+    "compilation": "foo-compilation",
+    "context": "context7",
+    "data": "data7",
+    "id": "foo7",
+    "name": "name7",
+    "relations": Array [
+      Object {
+        "id": "foo",
+        "type": "chunk",
+      },
+    ],
+    "view": Array [
+      "some-ui7",
+    ],
+  },
+]
+`;
+
+exports[`should work 8`] = `
+Array [
+  Object {
+    "compilation": "foo-compilation",
+    "context": "context7",
+    "data": "data7",
+    "id": "foo7",
+    "name": "name7",
+    "relations": Array [
+      Object {
+        "id": "foo",
+        "type": "chunk",
+      },
+    ],
+    "view": Array [
+      "some-ui7",
+    ],
+  },
+]
+`;
+
+exports[`should work 9`] = `
+Array [
+  Object {
+    "compilation": "foo-compilation",
+    "context": "context7",
+    "data": "data7",
+    "id": "foo7",
+    "name": "name7",
+    "relations": Array [
+      Object {
+        "id": "foo",
+        "type": "chunk",
+      },
+    ],
+    "view": Array [
+      "some-ui7",
+    ],
+  },
+]
+`;
+
+exports[`should work 10`] = `
+Object {
+  "context": "context",
+  "data": "data",
+  "id": "foo",
+  "name": "name",
+  "view": Array [
+    "some-ui",
+  ],
+}
+`;
+
+exports[`should work 11`] = `
+Object {
+  "context": "context2",
+  "data": "data2",
+  "id": "foo2",
+  "name": "name2",
+  "view": Array [
+    "some-ui2",
+  ],
+}
+`;
