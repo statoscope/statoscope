@@ -5,7 +5,8 @@ import Generator, {
   Format,
   InstanceInfo,
 } from '@statoscope/stats-extension-package-info/dist/generator';
-import { author, homepage, name, version, description } from './version';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { author, homepage, name, version, description } = require('../package.json');
 
 const pluginName = `${name}@${version}`;
 

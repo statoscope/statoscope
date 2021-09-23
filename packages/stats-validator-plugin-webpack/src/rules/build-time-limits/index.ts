@@ -3,7 +3,8 @@ import helpers from '@statoscope/helpers/dist/jora';
 import { APIFnOptions } from '@statoscope/types/types/validation/api';
 import { WebpackRule } from '../../';
 import { ByNameFilterItem, ExcludeItem, normalizeExclude } from '../../limits-helpers';
-import * as version from '../../version';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const version = require('../../../package.json');
 
 export type Limits = number;
 

@@ -5,8 +5,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "build": "../../node_modules/.bin/tsc",
-    "prepublishOnly": "npm run build",
-    "buildVersionTS": "node ../../scripts/extract-version.js --field author --field homepage"
+    "prepublishOnly": "npm run build"
   },
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {

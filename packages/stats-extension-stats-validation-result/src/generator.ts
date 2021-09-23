@@ -1,13 +1,14 @@
 import { Extension, ExtensionDescriptor } from '@statoscope/stats/spec/extension';
 import makeResolver from '@statoscope/helpers/dist/entity-resolver';
-import { TestEntry } from '@statoscope/types/types/validation/test-entry';
 import {
-  RelatedItem,
   DetailsDescriptor,
+  TestEntry,
 } from '@statoscope/types/types/validation/test-entry';
 import { RuleDescriptor } from '@statoscope/types/types/validation/api';
 import { NormalizedExecParams } from '@statoscope/types/types/validation/rule';
-import { author, description, homepage, name, version } from './version';
+import { RelationItem } from '@statoscope/types';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { author, description, homepage, name, version } = require('../package.json');
 
 export type Format = Extension<Payload>;
 export type Item = {
@@ -16,7 +17,7 @@ export type Item = {
   rule: string;
   message: string;
   details: DetailsDescriptor[];
-  related: RelatedItem[];
+  related: RelationItem[];
 };
 export type Compilation = {
   id: string | null;

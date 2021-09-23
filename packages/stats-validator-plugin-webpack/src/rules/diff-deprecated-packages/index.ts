@@ -8,7 +8,8 @@ import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
 import { WebpackRule } from '../../';
 import { normalizePackageTarget, PackageTarget, RawTarget } from '../../helpers';
 import { ExcludeItem, normalizeExclude } from '../../limits-helpers';
-import * as version from '../../version';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const version = require('../../../package.json');
 
 export type PackageResultItem = {
   packageName: string;

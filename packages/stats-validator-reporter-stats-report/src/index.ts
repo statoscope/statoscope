@@ -16,7 +16,8 @@ import { Reporter } from '@statoscope/types/types/validation/reporter';
 import { Result } from '@statoscope/types/types/validation/result';
 import normalizeCompilation from '@statoscope/webpack-model/dist/normalizeCompilation';
 import { StatoscopeMeta } from '@statoscope/webpack-model/webpack';
-import * as version from './version';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const version = require('../package.json');
 
 export type Options = {
   saveReportTo?: string;

@@ -13,7 +13,8 @@ import { WebpackRule } from '../../';
 import { normalizePackageTarget, PackageTarget, RawTarget } from '../../helpers';
 import { RuleExcludeItem } from '../diff-deprecated-packages';
 import { normalizeExclude } from '../../limits-helpers';
-import * as version from '../../version';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const version = require('../../../package.json');
 
 export type PackageResultItem = {
   file: NormalizedFile;

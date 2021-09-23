@@ -11,7 +11,8 @@ import {
   normalizeExclude,
   SerializedExcludeItem,
 } from '../../limits-helpers';
-import * as version from '../../version';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const version = require('../../../package.json');
 
 export type Limits = number | Limit;
 
