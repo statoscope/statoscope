@@ -11,6 +11,8 @@ import ExtensionPackageInfoAPIFactory, {
 import ExtensionPackageInfoPackage from '@statoscope/stats-extension-package-info/package.json';
 import ExtensionValidationResultPackage from '@statoscope/stats-extension-stats-validation-result/package.json';
 import ExtensionValidationResultAPIFactory from '@statoscope/stats-extension-stats-validation-result/dist/api';
+import ExtensionCustomReportsPackage from '@statoscope/stats-extension-custom-reports/package.json';
+import ExtensionCustomReportsAPIFactory from '@statoscope/stats-extension-custom-reports/dist/api';
 import Graph, { Node } from '@statoscope/helpers/dist/graph';
 import { Webpack } from '../webpack';
 import validateStats, { ValidationResult } from './validate';
@@ -110,6 +112,9 @@ export type NormalizedExtension<TPayload, TAPI> = {
 export type HandledStats = {
   file: NormalizedFile;
   compilations: HandledCompilation[];
+  resolvers: {
+    resolveExtension: Resolver<string, NormalizedExtension<unknown, unknown>>;
+  };
 };
 
 export type CompilationResolvers = {
@@ -118,7 +123,7 @@ export type CompilationResolvers = {
   resolveAsset: Resolver<string, NormalizedAsset>;
   resolvePackage: Resolver<string, NormalizedPackage>;
   resolveEntrypoint: Resolver<string, NormalizedEntrypointItem>;
-  resolveExtension: Resolver<string, NormalizedExtension<unknown, unknown> | null>;
+  resolveExtension: Resolver<string, NormalizedExtension<unknown, unknown>>;
 };
 
 export type HandledCompilation = {
@@ -133,6 +138,7 @@ export type HandledCompilation = {
 export type NormalizeResult = {
   files: NormalizedFile[];
   compilations: HandledCompilation[];
+  fileResolvers: Map<string, HandledStats['resolvers']>;
 };
 
 // todo: make it injectable
@@ -156,6 +162,12 @@ extensionContainer.register(
   ExtensionValidationResultAPIFactory
 );
 
+extensionContainer.register(
+  ExtensionCustomReportsPackage.name,
+  ExtensionCustomReportsPackage.version,
+  ExtensionCustomReportsAPIFactory
+);
+
 function getHash(
   compilation: Webpack.Compilation,
   parent?: NormalizedCompilation | null
@@ -176,6 +188,7 @@ export default function normalize(
 ): NormalizeResult {
   const files = [];
   const compilations = [];
+  const fileResolvers = new Map<string, HandledStats['resolvers']>();
 
   if (!Array.isArray(rawData)) {
     rawData = [rawData];
@@ -185,9 +198,10 @@ export default function normalize(
     const handledFile = handleRawFile(rawFile);
     files.push(handledFile.file);
     compilations.push(...handledFile.compilations);
+    fileResolvers.set(rawFile.name, handledFile.resolvers);
   }
 
-  return { files, compilations };
+  return { files, compilations, fileResolvers };
 }
 
 export function handleRawFile(
@@ -201,6 +215,28 @@ export function handleRawFile(
     validation: validateStats(rawStatsFileDescriptor.data),
     compilations: [],
     __statoscope: rawStatsFileDescriptor.data.__statoscope,
+  };
+  const extensions =
+    file.__statoscope?.extensions?.map(
+      (ext): NormalizedExtension<unknown, unknown> | null => {
+        const item = extensionContainer.resolve(ext.descriptor.name);
+        if (!item) {
+          console.warn(`Unknown extension ${ext.descriptor.name}:`, ext);
+          return null;
+        }
+
+        return {
+          data: ext,
+          api: item.apiFactory(ext),
+        };
+      }
+    ) ?? [];
+  const resolveExtension = makeEntityResolver(
+    extensions,
+    (ext) => ext!.data.descriptor.name
+  );
+  const resolvers: HandledStats['resolvers'] = {
+    resolveExtension,
   };
   const compilations = [];
 
@@ -217,7 +253,7 @@ export function handleRawFile(
   let cursor: StackItem | undefined;
 
   while ((cursor = stack.pop())) {
-    const handled = handleCompilation(cursor.compilation, file, cursor.parent);
+    const handled = handleCompilation(cursor.compilation, file, cursor.parent, resolvers);
 
     if (cursor.parent) {
       cursor.parent.children.push(handled.data);
@@ -231,7 +267,11 @@ export function handleRawFile(
     }
   }
 
-  return { file, compilations };
+  return {
+    file,
+    compilations,
+    resolvers,
+  };
 }
 
 export type ModuleGraphNodeData = {
@@ -294,7 +334,8 @@ function buildGraph(compilation: NormalizedCompilation): {
 function handleCompilation(
   compilation: Webpack.Compilation,
   file: NormalizedFile,
-  parent?: NormalizedCompilation | null
+  parent: NormalizedCompilation | null,
+  fileResolvers: HandledStats['resolvers']
 ): HandledCompilation {
   const normalized: NormalizedCompilation = {
     time: compilation.time,
@@ -311,22 +352,6 @@ function handleCompilation(
     parent: parent?.hash || null,
   };
 
-  const extensions =
-    file.__statoscope?.extensions?.map(
-      (ext): NormalizedExtension<unknown, unknown> | null => {
-        const item = extensionContainer.resolve(ext.descriptor.name);
-        if (!item) {
-          console.warn(`Unknown extension ${ext.descriptor.name}:`, ext);
-          return null;
-        }
-
-        return {
-          data: ext,
-          api: item.apiFactory(ext),
-        };
-      }
-    ) ?? [];
-
   const resolveModule = makeModuleResolver(normalized);
   const resolveChunk = makeEntityResolver(normalized.chunks, ({ id }) => id);
   const resolveAsset = makeEntityResolver(normalized.assets || [], ({ name }) => name);
@@ -335,10 +360,6 @@ function handleCompilation(
     ({ name }) => name,
     null,
     false
-  );
-  const resolveExtension = makeEntityResolver(
-    extensions,
-    (ext) => ext?.data.descriptor.name
   );
 
   normalized.entrypoints = prepareEntries(compilation, resolveChunk, resolveAsset);
@@ -353,7 +374,7 @@ function handleCompilation(
     resolveAsset,
     resolvePackage,
     resolveEntrypoint,
-    resolveExtension,
+    resolveExtension: fileResolvers.resolveExtension,
   };
 
   prepareModules(compilation, resolvers);
@@ -417,9 +438,6 @@ function makeModuleResolver(
     for (const innerModule of module.modules || []) {
       if (!resolve(innerModule.identifier)) {
         modules.push(innerModule);
-      }
-      if (!resolveFromCompilation(innerModule.identifier)) {
-        compilation.modules.push(innerModule);
       }
     }
   }
