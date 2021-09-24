@@ -121,7 +121,13 @@ const diffDeprecatedModules: WebpackRule<Params> = (ruleParams, data, api): void
   api.setRuleDescriptor({
     description:
       'Compares usage of specified modules between input and reference stats. Fails if usage has increased',
-    package: version,
+    package: {
+      author: version.author,
+      description: version.description,
+      homepage: version.homepage,
+      name: version.name,
+      version: version.version,
+    },
   });
 
   const normalizedRuleParams: NormalizedParams | null = ruleParams

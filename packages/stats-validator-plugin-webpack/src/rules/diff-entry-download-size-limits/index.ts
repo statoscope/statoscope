@@ -85,7 +85,13 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
   api.setRuleDescriptor({
     description:
       'Compares download size of entrypoints between input and reference stats. Fails if download size has increased',
-    package: version,
+    package: {
+      author: version.author,
+      description: version.description,
+      homepage: version.homepage,
+      name: version.name,
+      version: version.version,
+    },
   });
 
   if (!data.files.find((file) => file.name === 'reference.json')) {

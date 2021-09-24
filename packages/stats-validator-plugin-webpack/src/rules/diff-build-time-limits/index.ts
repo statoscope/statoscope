@@ -88,7 +88,13 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
   api.setRuleDescriptor({
     description:
       'Compares build time between input and reference stats. Fails if build time has increased',
-    package: version,
+    package: {
+      author: version.author,
+      description: version.description,
+      homepage: version.homepage,
+      name: version.name,
+      version: version.version,
+    },
   });
 
   if (!ruleParams) {

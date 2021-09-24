@@ -118,60 +118,6 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "after": 1,
-            "before": 0,
-            "diff": Array [
-              Object {
-                "active": true,
-                "explanation": "",
-                "loc": "5:0-16",
-                "module": "./simple/src/index2.ts",
-                "moduleId": null,
-                "moduleIdentifier": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
-                "moduleName": "./simple/src/index2.ts",
-                "resolvedEntry": null,
-                "resolvedModule": null,
-                "resolvedModuleId": null,
-                "resolvedModuleIdentifier": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
-                "type": "harmony side effect evaluation",
-                "userRequest": "extLib",
-              },
-            ],
-            "module": "external var \\"extLib\\"",
-          },
-        },
-        "query": "
-              $input: resolveInputFile();
-              {
-                module: $input.compilations.hash.(#.module.resolveModule($)).pick(),
-                diff: #.diff.({
-                  $reason: $;
-                  ...$,
-                  resolvedModule: $input.compilations.hash.($reason.moduleIdentifier.resolveModule($)).pick(),
-                  resolvedEntry: $input.compilations.hash.($reason.resolvedEntryName.resolveEntrypoint($)).pick(),
-                }),
-                before: #.before,
-                after: #.after,
-              }
-              ",
-        "type": "discovery",
-      },
-    ],
-    "filename": "input.json",
-    "message": "Usage of external \\"extLib\\" was increased from 0 to 1",
-    "related": Array [
-      Object {
-        "id": "external var \\"extLib\\"",
-        "type": "module",
-      },
-    ],
-  },
-  Object {
-    "compilation": undefined,
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
             "after": 4,
             "before": 2,
             "diff": Array [
@@ -261,6 +207,60 @@ Array [
     "related": Array [
       Object {
         "id": "./node_modules/is-array/index.js",
+        "type": "module",
+      },
+    ],
+  },
+  Object {
+    "compilation": undefined,
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "after": 1,
+            "before": 0,
+            "diff": Array [
+              Object {
+                "active": true,
+                "explanation": "",
+                "loc": "5:0-16",
+                "module": "./simple/src/index2.ts",
+                "moduleId": null,
+                "moduleIdentifier": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
+                "moduleName": "./simple/src/index2.ts",
+                "resolvedEntry": null,
+                "resolvedModule": null,
+                "resolvedModuleId": null,
+                "resolvedModuleIdentifier": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
+                "type": "harmony side effect evaluation",
+                "userRequest": "extLib",
+              },
+            ],
+            "module": "external var \\"extLib\\"",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                module: $input.compilations.hash.(#.module.resolveModule($)).pick(),
+                diff: #.diff.({
+                  $reason: $;
+                  ...$,
+                  resolvedModule: $input.compilations.hash.($reason.moduleIdentifier.resolveModule($)).pick(),
+                  resolvedEntry: $input.compilations.hash.($reason.resolvedEntryName.resolveEntrypoint($)).pick(),
+                }),
+                before: #.before,
+                after: #.after,
+              }
+              ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Usage of external \\"extLib\\" was increased from 0 to 1",
+    "related": Array [
+      Object {
+        "id": "external var \\"extLib\\"",
         "type": "module",
       },
     ],

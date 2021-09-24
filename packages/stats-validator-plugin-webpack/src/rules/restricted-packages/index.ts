@@ -140,7 +140,13 @@ function makeInstanceDetailsContent(
 const restrictedPackages: WebpackRule<Params> = (ruleParams, data, api): void => {
   api.setRuleDescriptor({
     description: `Ensures that bundle doesn't use specified packages`,
-    package: version,
+    package: {
+      author: version.author,
+      description: version.description,
+      homepage: version.homepage,
+      name: version.name,
+      version: version.version,
+    },
   });
 
   const normalizedRuleParams: NormalizedParams | null = ruleParams

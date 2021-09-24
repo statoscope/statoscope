@@ -19,7 +19,7 @@ Object {
             "description": "Webpack adapter for @statoscope/stats-extension-package-info",
             "homepage": "https://github.com/statoscope/statoscope/",
             "name": "@statoscope/webpack-stats-extension-package-info",
-            "version": "5.7.0",
+            "version": "5.7.1",
           },
           "author": Object {
             "name": "Sergey Melyukov",
@@ -28,7 +28,7 @@ Object {
           "description": "Statoscope extension for collecting package info (e.g. available versions)",
           "homepage": "https://github.com/statoscope/statoscope/",
           "name": "@statoscope/stats-extension-package-info",
-          "version": "5.7.0",
+          "version": "5.7.1",
         },
         "payload": Object {
           "compilations": Array [
@@ -111,7 +111,7 @@ Object {
             "description": "Webpack adapter for @statoscope/stats-extension-compressed",
             "homepage": "https://github.com/statoscope/statoscope/",
             "name": "@statoscope/webpack-stats-extension-compressed",
-            "version": "5.7.0",
+            "version": "5.7.1",
           },
           "author": Object {
             "name": "Sergey Melyukov",
@@ -120,7 +120,7 @@ Object {
           "description": "Statoscope extension for collecting compressed resource sizes",
           "homepage": "https://github.com/statoscope/statoscope/",
           "name": "@statoscope/stats-extension-compressed",
-          "version": "5.7.0",
+          "version": "5.7.1",
         },
         "payload": Object {
           "compilations": Array [
@@ -372,7 +372,7 @@ Object {
             "description": "Stats report reporter for @statoscope/stats-validator",
             "homepage": "https://github.com/statoscope/statoscope/",
             "name": "@statoscope/stats-validator-reporter-stats-report",
-            "version": "5.7.0",
+            "version": "5.8.0",
           },
           "author": Object {
             "name": "Sergey Melyukov",
@@ -381,7 +381,7 @@ Object {
           "description": "Statoscope extension that collects stats validation result",
           "homepage": "https://github.com/statoscope/statoscope/",
           "name": "@statoscope/stats-extension-stats-validation-result",
-          "version": "5.7.0",
+          "version": "5.7.1",
         },
         "payload": Object {
           "compilations": Array [
@@ -423,7 +423,7 @@ Object {
                       "payload": Object {
                         "context": Object {
                           "compilation": "34ea3837a1050e206fe0",
-                          "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
+                          "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
                         },
                       },
                       "query": "
@@ -436,10 +436,10 @@ Object {
                     },
                   ],
                   "id": 1,
-                  "message": "Module ./simple/src/index.ts should not be used",
+                  "message": "Module ./simple/src/index2.ts + 1 modules should not be used",
                   "related": Array [
                     Object {
-                      "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
+                      "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
                       "type": "module",
                     },
                   ],
@@ -481,64 +481,6 @@ Object {
                       "payload": Object {
                         "context": Object {
                           "compilation": "34ea3837a1050e206fe0",
-                          "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
-                        },
-                      },
-                      "query": "
-            $input: resolveInputFile();
-            {
-              module: #.module.resolveModule(#.compilation),
-            }
-            ",
-                      "type": "discovery",
-                    },
-                  ],
-                  "id": 3,
-                  "message": "Module ./simple/src/index2.ts + 1 modules should not be used",
-                  "related": Array [
-                    Object {
-                      "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
-                      "type": "module",
-                    },
-                  ],
-                  "rule": "webpack/restricted-modules",
-                  "type": "error",
-                },
-                Object {
-                  "details": Array [
-                    Object {
-                      "payload": Object {
-                        "context": Object {
-                          "compilation": "34ea3837a1050e206fe0",
-                          "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
-                        },
-                      },
-                      "query": "
-            $input: resolveInputFile();
-            {
-              module: #.module.resolveModule(#.compilation),
-            }
-            ",
-                      "type": "discovery",
-                    },
-                  ],
-                  "id": 4,
-                  "message": "Module ./simple/src/index2.ts should not be used",
-                  "related": Array [
-                    Object {
-                      "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
-                      "type": "module",
-                    },
-                  ],
-                  "rule": "webpack/restricted-modules",
-                  "type": "error",
-                },
-                Object {
-                  "details": Array [
-                    Object {
-                      "payload": Object {
-                        "context": Object {
-                          "compilation": "34ea3837a1050e206fe0",
                           "module": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
                         },
                       },
@@ -551,7 +493,7 @@ Object {
                       "type": "discovery",
                     },
                   ],
-                  "id": 5,
+                  "id": 3,
                   "message": "Module ./simple/src/index2.css should not be used",
                   "related": Array [
                     Object {
@@ -580,7 +522,7 @@ Object {
                       "type": "discovery",
                     },
                   ],
-                  "id": 6,
+                  "id": 4,
                   "message": "Module ./simple/src/test.txt should not be used",
                   "related": Array [
                     Object {
@@ -609,7 +551,7 @@ Object {
                       "type": "discovery",
                     },
                   ],
-                  "id": 7,
+                  "id": 5,
                   "message": "Module ./simple/src/dyn.ts should not be used",
                   "related": Array [
                     Object {
@@ -638,11 +580,69 @@ Object {
                       "type": "discovery",
                     },
                   ],
-                  "id": 8,
+                  "id": 6,
                   "message": "Module ./simple/src/statoscope.png should not be used",
                   "related": Array [
                     Object {
                       "id": "asset/inline|./simple/src/statoscope.png",
+                      "type": "module",
+                    },
+                  ],
+                  "rule": "webpack/restricted-modules",
+                  "type": "error",
+                },
+                Object {
+                  "details": Array [
+                    Object {
+                      "payload": Object {
+                        "context": Object {
+                          "compilation": "34ea3837a1050e206fe0",
+                          "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
+                        },
+                      },
+                      "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
+                      "type": "discovery",
+                    },
+                  ],
+                  "id": 7,
+                  "message": "Module ./simple/src/index.ts should not be used",
+                  "related": Array [
+                    Object {
+                      "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
+                      "type": "module",
+                    },
+                  ],
+                  "rule": "webpack/restricted-modules",
+                  "type": "error",
+                },
+                Object {
+                  "details": Array [
+                    Object {
+                      "payload": Object {
+                        "context": Object {
+                          "compilation": "34ea3837a1050e206fe0",
+                          "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
+                        },
+                      },
+                      "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
+                      "type": "discovery",
+                    },
+                  ],
+                  "id": 8,
+                  "message": "Module ./simple/src/index2.ts should not be used",
+                  "related": Array [
+                    Object {
+                      "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
                       "type": "module",
                     },
                   ],
@@ -697,7 +697,7 @@ Object {
                   "description": "Plugin for @statoscope/stats-validator to validate webpack stats",
                   "homepage": "https://github.com/statoscope/statoscope/",
                   "name": "@statoscope/stats-validator-plugin-webpack",
-                  "version": "5.7.0",
+                  "version": "5.8.1",
                 },
               },
               "name": "webpack/restricted-modules",
@@ -713,7 +713,7 @@ Object {
                   "description": "Plugin for @statoscope/stats-validator to validate webpack stats",
                   "homepage": "https://github.com/statoscope/statoscope/",
                   "name": "@statoscope/stats-validator-plugin-webpack",
-                  "version": "5.7.0",
+                  "version": "5.8.1",
                 },
               },
               "name": "webpack/restricted-packages",
@@ -2759,7 +2759,7 @@ Object {
       "two.js",
     ],
   },
-  "builtAt": 1632129549439,
+  "builtAt": 1632483935858,
   "children": Array [],
   "chunks": Array [
     Object {
@@ -3038,7 +3038,7 @@ Object {
   },
   "outputPath": "./simple/dist-prod",
   "publicPath": "auto",
-  "time": 584,
+  "time": 955,
   "version": "5.53.0",
   "warnings": Array [],
   "warningsCount": 0,

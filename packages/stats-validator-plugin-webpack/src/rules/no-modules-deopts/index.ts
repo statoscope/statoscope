@@ -92,7 +92,13 @@ function handled(
 const restrictedModules: WebpackRule<Params> = (ruleParams, data, api): void => {
   api.setRuleDescriptor({
     description: `Ensures that bundle doesn't have modules with deoptimization`,
-    package: version,
+    package: {
+      author: version.author,
+      description: version.description,
+      homepage: version.homepage,
+      name: version.name,
+      version: version.version,
+    },
   });
 
   const normalizedRuleParams: NormalizedParams = {

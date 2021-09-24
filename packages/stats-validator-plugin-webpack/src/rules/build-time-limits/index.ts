@@ -33,7 +33,13 @@ export type NormalizedParams = Exclude<Params, 'exclude'> & {
 const buildTimeLimits: WebpackRule<Params> = (ruleParams, data, api): void => {
   api.setRuleDescriptor({
     description: 'Ensures that the build time has not exceeded the limit',
-    package: version,
+    package: {
+      author: version.author,
+      description: version.description,
+      homepage: version.homepage,
+      name: version.name,
+      version: version.version,
+    },
   });
 
   if (typeof ruleParams === 'number') {

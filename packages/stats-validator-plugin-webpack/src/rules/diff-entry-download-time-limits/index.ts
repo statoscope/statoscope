@@ -131,7 +131,13 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
   api.setRuleDescriptor({
     description:
       'Compares download time of entrypoints between input and reference stats. Fails if download time has increased',
-    package: version,
+    package: {
+      author: version.author,
+      description: version.description,
+      homepage: version.homepage,
+      name: version.name,
+      version: version.version,
+    },
   });
 
   if (!ruleParams) {

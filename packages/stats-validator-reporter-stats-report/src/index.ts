@@ -30,7 +30,14 @@ export default class ConsoleReporter implements Reporter {
 
   async run(result: Result): Promise<void> {
     console.log(`Preparing data for Statoscope report...`);
-    const generator = new ExtensionValidationResultGenerator(version);
+    const generator = new ExtensionValidationResultGenerator({
+      adapter: version.adapter,
+      author: version.author,
+      description: version.description,
+      homepage: version.homepage,
+      name: version.name,
+      version: version.version,
+    });
 
     for (const rule of result.rules) {
       const storage = rule.api.getStorage();

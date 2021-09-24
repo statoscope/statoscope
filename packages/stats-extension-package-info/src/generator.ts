@@ -74,7 +74,7 @@ export default class Generator {
       compilation.packages.push(resolvedPackage);
       this.instanceResolvers.set(
         resolvedPackage,
-        makeResolver(instances, (item) => item.path)
+        makeResolver(instances, (item) => item.path, null, false)
       );
     }
 

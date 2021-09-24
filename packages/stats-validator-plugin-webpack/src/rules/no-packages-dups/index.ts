@@ -29,7 +29,13 @@ export type Result = {
 const noPackagesDups: WebpackRule<Params> = (ruleParams, data, api): void => {
   api.setRuleDescriptor({
     description: `Ensures that bundle hasn't package duplicates`,
-    package: version,
+    package: {
+      author: version.author,
+      description: version.description,
+      homepage: version.homepage,
+      name: version.name,
+      version: version.version,
+    },
   });
 
   const normalizedParams: NormalizedParams = {

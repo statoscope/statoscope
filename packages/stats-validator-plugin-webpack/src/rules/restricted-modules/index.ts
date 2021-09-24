@@ -92,7 +92,13 @@ function handledTarget(
 const restrictedModules: WebpackRule<Params> = (ruleParams, data, api): void => {
   api.setRuleDescriptor({
     description: `Ensures that bundle doesn't use specified modules`,
-    package: version,
+    package: {
+      author: version.author,
+      description: version.description,
+      homepage: version.homepage,
+      name: version.name,
+      version: version.version,
+    },
   });
 
   const normalizedRuleParams: NormalizedParams | null = ruleParams

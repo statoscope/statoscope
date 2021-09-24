@@ -5,7 +5,7 @@ import makeHelpers, { ResolvedStats } from './jora-helpers';
 
 const normalized = normalize({ name: 'stats.js', data: stats });
 const firstFile = normalized.files[0];
-const helpers = makeHelpers(normalized.compilations);
+const helpers = makeHelpers(normalized);
 const firstCompilation = firstFile.compilations[0];
 const hash = firstCompilation.hash;
 

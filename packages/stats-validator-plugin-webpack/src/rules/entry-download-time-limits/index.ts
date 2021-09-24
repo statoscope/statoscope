@@ -67,7 +67,13 @@ const entryDownloadTimeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
   api.setRuleDescriptor({
     description:
       'Ensures that the download time of entrypoints has not exceeded the limit',
-    package: version,
+    package: {
+      author: version.author,
+      description: version.description,
+      homepage: version.homepage,
+      name: version.name,
+      version: version.version,
+    },
   });
 
   if (!ruleParams?.global && !ruleParams?.byName?.length) {
