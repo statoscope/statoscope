@@ -21,7 +21,7 @@ const StatoscopeWebpackPlugin = require('@statoscope/webpack-plugin').default;
 config.plugins.push(new StatoscopeWebpackPlugin());
 ```
 
-There are some **optional** options.
+There are some options:
 
 ```js
 new StatoscopeWebpackPlugin({
@@ -36,6 +36,7 @@ new StatoscopeWebpackPlugin({
   name: 'some-name',
   open: 'file',
   compressor: 'gzip',
+  reports: [/* ... */]
 });
 ```
 
@@ -144,6 +145,41 @@ new Statoscope({
     }
   }
 })
+```
+
+### options.reports: Report
+
+List of custom reports that will be passed into the UI.
+
+See report format in [stats-extension-custom-reports readme](/packages/stats-extension-custom-reports/README.md).
+
+**Example:**
+
+```js
+new Statoscope({
+  reports: [
+    {
+      id: 'top-20-biggest-modules',
+      name: 'Top 20 biggest modules',
+      data: { some: { custom: 'data' } }, // or () => fetchAsyncData()
+      view: [
+        'struct',
+        {
+          data: `#.stats.compilations.(
+            $compilation: $;
+            modules.({
+              module: $,
+              hash: $compilation.hash,
+              size: getModuleSize($compilation.hash)
+            })
+          ).sort(size.size desc)[:20]`,
+          view: 'list',
+          item: 'module-item',
+        },
+      ],
+    },
+  ],
+});
 ```
 
 ## FAQ
