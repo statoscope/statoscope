@@ -251,3 +251,17 @@ describe('validation', () => {
     ).toMatchSnapshot();
   });
 });
+
+describe('customReports', () => {
+  test('customReports_getItems', () => {
+    expect(helpers.customReports_getItems(firstFile.name)).toMatchSnapshot();
+    expect(helpers.customReports_getItems(firstFile.name, hash)).toMatchSnapshot();
+    expect(helpers.customReports_getItems(firstFile.name, 'foo')).toMatchSnapshot();
+  });
+  test('customReports_getItem', () => {
+    expect(helpers.customReports_getItem('foo', firstFile.name)).toBeNull();
+    expect(
+      helpers.customReports_getItem('top-20-biggest-modules', firstFile.name)
+    ).toMatchSnapshot();
+  });
+});

@@ -1,5 +1,143 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`customReports customReports_getItem 1`] = `
+Object {
+  "data": Object {
+    "some": Object {
+      "custom": "data",
+    },
+  },
+  "id": "top-20-biggest-modules",
+  "name": "Top 20 biggest modules",
+  "view": Array [
+    "struct",
+    Object {
+      "data": "#.stats.compilations.(
+            $compilation: $;
+            modules.({
+              module: $,
+              hash: $compilation.hash,
+              size: getModuleSize($compilation.hash)
+            })
+          ).sort(size.size desc)[:20]",
+      "item": "module-item",
+      "view": "list",
+    },
+  ],
+}
+`;
+
+exports[`customReports customReports_getItems 1`] = `
+Array [
+  Object {
+    "data": Object {
+      "some": Object {
+        "custom": "data",
+      },
+    },
+    "id": "top-20-biggest-modules",
+    "name": "Top 20 biggest modules",
+    "view": Array [
+      "struct",
+      Object {
+        "data": "#.stats.compilations.(
+            $compilation: $;
+            modules.({
+              module: $,
+              hash: $compilation.hash,
+              size: getModuleSize($compilation.hash)
+            })
+          ).sort(size.size desc)[:20]",
+        "item": "module-item",
+        "view": "list",
+      },
+    ],
+  },
+  Object {
+    "data": Object {
+      "some": Object {
+        "custom": "data",
+      },
+    },
+    "id": "top-20-biggest-modules",
+    "name": "Top 20 biggest modules",
+    "view": Array [
+      "struct",
+      Object {
+        "data": "#.stats.compilations.(
+            $compilation: $;
+            modules.({
+              module: $,
+              hash: $compilation.hash,
+              size: getModuleSize($compilation.hash)
+            })
+          ).sort(size.size desc)[:20]",
+        "item": "module-item",
+        "view": "list",
+      },
+    ],
+  },
+]
+`;
+
+exports[`customReports customReports_getItems 2`] = `
+Array [
+  Object {
+    "data": Object {
+      "some": Object {
+        "custom": "data",
+      },
+    },
+    "id": "top-20-biggest-modules",
+    "name": "Top 20 biggest modules",
+    "view": Array [
+      "struct",
+      Object {
+        "data": "#.stats.compilations.(
+            $compilation: $;
+            modules.({
+              module: $,
+              hash: $compilation.hash,
+              size: getModuleSize($compilation.hash)
+            })
+          ).sort(size.size desc)[:20]",
+        "item": "module-item",
+        "view": "list",
+      },
+    ],
+  },
+]
+`;
+
+exports[`customReports customReports_getItems 3`] = `
+Array [
+  Object {
+    "data": Object {
+      "some": Object {
+        "custom": "data",
+      },
+    },
+    "id": "top-20-biggest-modules",
+    "name": "Top 20 biggest modules",
+    "view": Array [
+      "struct",
+      Object {
+        "data": "#.stats.compilations.(
+            $compilation: $;
+            modules.({
+              module: $,
+              hash: $compilation.hash,
+              size: getModuleSize($compilation.hash)
+            })
+          ).sort(size.size desc)[:20]",
+        "item": "module-item",
+        "view": "list",
+      },
+    ],
+  },
+]
+`;
+
 exports[`moduleGraph_getPaths 1`] = `
 Object {
   "children": Array [
