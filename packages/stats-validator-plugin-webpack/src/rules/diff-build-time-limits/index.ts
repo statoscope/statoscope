@@ -144,7 +144,7 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
       ok: $diff.diff_isLTETheLimit($rule)
     }
   }`;
-  const result = data.query(query, data.files[0], {
+  const result = data.query(query, data.files, {
     params: normalizedParams,
   }) as Result;
 

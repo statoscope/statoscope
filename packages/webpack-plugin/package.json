@@ -19,7 +19,6 @@
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
     "@discoveryjs/json-ext": "^0.5.5",
-    "@statoscope/config": "5.7.2",
     "@statoscope/report-writer": "5.8.0",
     "@statoscope/stats": "5.7.0",
     "@statoscope/stats-extension-compressed": "5.7.1",

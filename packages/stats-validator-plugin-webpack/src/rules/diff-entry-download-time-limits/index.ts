@@ -256,7 +256,7 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
     ]
   })
   .[entrypoints]`;
-  const result = data.query(query, data.files[0], {
+  const result = data.query(query, data.files, {
     params: normalizedParams,
   }) as ResultItem[];
 

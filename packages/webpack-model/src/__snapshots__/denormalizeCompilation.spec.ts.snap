@@ -364,6 +364,51 @@ Object {
       },
       Object {
         "descriptor": Object {
+          "author": Object {
+            "name": "Sergey Melyukov",
+            "url": "https://twitter.com/smelukov",
+          },
+          "description": "Statoscope extension to store custom reports in stats",
+          "homepage": "https://github.com/statoscope/statoscope/",
+          "name": "@statoscope/stats-extension-custom-reports",
+          "version": "5.7.1",
+        },
+        "payload": Object {
+          "compilations": Array [
+            Object {
+              "id": null,
+              "reports": Array [
+                Object {
+                  "data": Object {
+                    "some": Object {
+                      "custom": "data",
+                    },
+                  },
+                  "id": "top-20-biggest-modules",
+                  "name": "Top 20 biggest modules",
+                  "view": Array [
+                    "struct",
+                    Object {
+                      "data": "#.stats.compilations.(
+            $compilation: $;
+            modules.({
+              module: $,
+              hash: $compilation.hash,
+              size: getModuleSize($compilation.hash)
+            })
+          ).sort(size.size desc)[:20]",
+                      "item": "module-item",
+                      "view": "list",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      },
+      Object {
+        "descriptor": Object {
           "adapter": Object {
             "author": Object {
               "name": "Sergey Melyukov",
@@ -832,7 +877,7 @@ Object {
       "two.js",
     ],
   },
-  "builtAt": 1632483935858,
+  "builtAt": 1632498487018,
   "children": Array [],
   "chunks": Array [
     Object {
@@ -4758,7 +4803,7 @@ Object {
   },
   "outputPath": "./simple/dist-prod",
   "publicPath": "auto",
-  "time": 955,
+  "time": 607,
   "version": "5.53.0",
   "warnings": Array [],
   "warningsCount": 0,

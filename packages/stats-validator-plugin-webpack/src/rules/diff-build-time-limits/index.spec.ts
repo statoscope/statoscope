@@ -10,8 +10,8 @@ import rule, { Params } from './';
 function prepareAPI(ruleParams: Params): API {
   const pluginInstance = plugin();
   const prepared: RuleDataInput<Prepared> = pluginInstance.prepare!([
-    { name: 'input.json', data: referenceStats },
-    { name: 'reference.json', data: afterStats },
+    { name: 'input.json', data: afterStats },
+    { name: 'reference.json', data: referenceStats },
   ]);
   const api = makeAPI();
 

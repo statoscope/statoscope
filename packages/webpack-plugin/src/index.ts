@@ -14,9 +14,7 @@ import normalizeCompilation from '@statoscope/webpack-model/dist/normalizeCompil
 import { StatoscopeMeta } from '@statoscope/webpack-model/webpack';
 import { makeReplacer } from '@statoscope/report-writer/dist/utils';
 import { default as CustomReportsExtensionGenerator } from '@statoscope/stats-extension-custom-reports/dist/generator';
-import { Config } from '@statoscope/types/types/config';
 import { Report } from '@statoscope/types/types/custom-report';
-import { requireConfig } from '@statoscope/config';
 
 export type Options = {
   name?: string;
@@ -30,13 +28,11 @@ export type Options = {
   watchMode: boolean;
   open: false | 'dir' | 'file';
   compressor: false | 'gzip' | CompressFunction;
-  statoscopeConfig?: string;
   reports?: Report<unknown, unknown>[];
 };
 
 export default class StatoscopeWebpackPlugin {
   options: Options;
-  statoscopeConfig: Config;
 
   constructor(options: Partial<Options> = {}) {
     this.options = {
@@ -48,8 +44,6 @@ export default class StatoscopeWebpackPlugin {
       reports: [],
       ...options,
     };
-
-    this.statoscopeConfig = requireConfig(this.options.statoscopeConfig).config;
 
     if (this.options.saveOnlyStats) {
       this.options.open = false;
@@ -103,12 +97,9 @@ export default class StatoscopeWebpackPlugin {
         statoscopeMeta.extensions!.push(compressedExtension.get());
       }
 
-      const reports =
-        (this.options.reports?.length
-          ? this.options.reports
-          : this.statoscopeConfig.ui?.customReports) ?? [];
+      const reports = this.options.reports ?? [];
 
-      if (reports?.length) {
+      if (reports.length) {
         const generator = new CustomReportsExtensionGenerator();
 
         for (const report of reports) {
