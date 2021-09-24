@@ -26,6 +26,7 @@ If applicable, add screenshots to help explain your problem.
 **Versions**:
  - Node (for non-browser bug): 
  - Browser (for browser-bug): 
+ - Webpack: 
  - Statoscope: 
 
 **Additional context**
