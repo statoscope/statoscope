@@ -3,22 +3,22 @@
 exports[`maxBuildTimeDiff global 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "9eb9a218218f1ee4ba40",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "diff": Object {
-              "absolute": 185,
+              "absolute": 142,
               "ok": false,
-              "percent": 46.36591478696741,
+              "percent": 23.393739703459637,
             },
             "rule": Object {
               "number": 1,
               "type": "absolute",
             },
-            "slowestInputCompilation": "34ea3837a1050e206fe0",
-            "slowestReferenceCompilation": "9eb9a218218f1ee4ba40",
+            "slowestInputCompilation": "9eb9a218218f1ee4ba40",
+            "slowestReferenceCompilation": "34ea3837a1050e206fe0",
           },
         },
         "query": "
@@ -33,10 +33,10 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"34ea383\\": Build time diff is 584 ms (46.37%). It's over the 1 ms limit",
+    "message": "Entry \\"9eb9a21\\": Build time diff is 749 ms (23.39%). It's over the 1 ms limit",
     "related": Array [
       Object {
-        "id": "34ea3837a1050e206fe0",
+        "id": "9eb9a218218f1ee4ba40",
         "type": "compilation",
       },
     ],

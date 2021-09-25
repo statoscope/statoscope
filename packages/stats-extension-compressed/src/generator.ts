@@ -2,7 +2,8 @@ import { ZlibOptions } from 'zlib';
 import { Extension, ExtensionDescriptor } from '@statoscope/stats/spec/extension';
 import makeResolver, { Resolver } from '@statoscope/helpers/dist/entity-resolver';
 import gzipSize from 'gzip-size';
-import { name, version, author, homepage, description } from './version';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { name, version, author, homepage, description } = require('../package.json');
 
 export type Compressor = string | { name: string; version: string };
 export type Size = {

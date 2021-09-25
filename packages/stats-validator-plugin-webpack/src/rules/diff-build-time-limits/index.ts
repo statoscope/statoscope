@@ -11,7 +11,8 @@ import {
   normalizeExclude,
   SerializedExcludeItem,
 } from '../../limits-helpers';
-import * as version from '../../version';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const version = require('../../../package.json');
 
 export type Limits = number | Limit;
 
@@ -87,7 +88,13 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
   api.setRuleDescriptor({
     description:
       'Compares build time between input and reference stats. Fails if build time has increased',
-    package: version,
+    package: {
+      author: version.author,
+      description: version.description,
+      homepage: version.homepage,
+      name: version.name,
+      version: version.version,
+    },
   });
 
   if (!ruleParams) {
@@ -137,7 +144,7 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
       ok: $diff.diff_isLTETheLimit($rule)
     }
   }`;
-  const result = data.query(query, data.files[0], {
+  const result = data.query(query, data.files, {
     params: normalizedParams,
   }) as Result;
 

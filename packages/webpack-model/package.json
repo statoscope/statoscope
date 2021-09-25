@@ -22,6 +22,7 @@
     "@statoscope/helpers": "5.7.1",
     "@statoscope/stats": "5.7.0",
     "@statoscope/stats-extension-compressed": "5.7.1",
+    "@statoscope/stats-extension-custom-reports": "5.7.1",
     "@statoscope/stats-extension-package-info": "5.7.1",
     "@statoscope/stats-extension-stats-validation-result": "5.7.1",
     "@statoscope/types": "5.7.1",

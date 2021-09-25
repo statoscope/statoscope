@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should work 1`] = `
+Object {
+  "descriptor": Object {
+    "adapter": Object {
+      "name": "test-adapter",
+      "version": "7.7.7",
+    },
+    "author": Object {
+      "name": "Sergey Melyukov",
+      "url": "https://twitter.com/smelukov",
+    },
+    "description": "Statoscope extension to store custom reports in stats",
+    "homepage": "https://github.com/statoscope/statoscope/",
+    "name": "@statoscope/stats-extension-custom-reports",
+    "version": "5.7.1",
+  },
+  "payload": Object {
+    "compilations": Array [
+      Object {
+        "id": null,
+        "reports": Array [
+          Object {
+            "context": "context",
+            "data": "data",
+            "id": "foo",
+            "name": "name",
+            "view": Array [
+              "some-ui",
+            ],
+          },
+        ],
+      },
+      Object {
+        "id": "foo-compilation",
+        "reports": Array [
+          Object {
+            "compilation": "foo-compilation",
+            "context": "context2",
+            "data": "data2",
+            "id": "foo2",
+            "name": "name2",
+            "relations": Array [
+              Object {
+                "id": "foo",
+                "type": "module",
+              },
+            ],
+            "view": Array [
+              "some-ui2",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+}
+`;

@@ -5,7 +5,7 @@ import makeHelpers, { ResolvedStats } from './jora-helpers';
 
 const normalized = normalize({ name: 'stats.js', data: stats });
 const firstFile = normalized.files[0];
-const helpers = makeHelpers(normalized.compilations);
+const helpers = makeHelpers(normalized);
 const firstCompilation = firstFile.compilations[0];
 const hash = firstCompilation.hash;
 
@@ -248,6 +248,20 @@ describe('validation', () => {
     expect(helpers.validation_resolveRule('foo', hash)).toBeNull();
     expect(
       helpers.validation_resolveRule('webpack/restricted-modules', hash)
+    ).toMatchSnapshot();
+  });
+});
+
+describe('customReports', () => {
+  test('customReports_getItems', () => {
+    expect(helpers.customReports_getItems(firstFile.name)).toMatchSnapshot();
+    expect(helpers.customReports_getItems(firstFile.name, hash)).toMatchSnapshot();
+    expect(helpers.customReports_getItems(firstFile.name, 'foo')).toMatchSnapshot();
+  });
+  test('customReports_getItem', () => {
+    expect(helpers.customReports_getItem('foo', firstFile.name)).toBeNull();
+    expect(
+      helpers.customReports_getItem('top-20-biggest-modules', firstFile.name)
     ).toMatchSnapshot();
   });
 });

@@ -1,9 +1,13 @@
-function getIdWrapper<TID, TEntity>(
+export function normalizeId<TID>(id: TID): TID | string {
+  return typeof id === 'number' || typeof id === 'bigint' ? String(id) : id;
+}
+
+export function getIdWrapper<TID, TEntity>(
   getId: GetIDFn<TID, TEntity>
 ): GetIDFn<TID | string, TEntity> {
   return (entity): TID | string => {
     const id = getId(entity);
-    return typeof id === 'number' ? String(id) : id;
+    return normalizeId(id);
   };
 }
 
@@ -59,7 +63,7 @@ export default function makeResolver<TID, TEntity, TReturn = TEntity>(
   warnCache(entities, wrappedGetId, cache);
 
   const resolver: Resolver<TID, TReturn> = (id): TReturn | null => {
-    const idForCache = typeof id === 'number' ? String(id) : id;
+    const idForCache = normalizeId(id);
     const cached = cache.get(idForCache);
 
     if (cached) {

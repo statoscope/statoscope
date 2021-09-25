@@ -13,7 +13,8 @@ import { WebpackRule } from '../../';
 import { normalizePackageTarget, PackageTarget, RawTarget } from '../../helpers';
 import { RuleExcludeItem } from '../diff-deprecated-packages';
 import { normalizeExclude } from '../../limits-helpers';
-import * as version from '../../version';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const version = require('../../../package.json');
 
 export type PackageResultItem = {
   file: NormalizedFile;
@@ -139,7 +140,13 @@ function makeInstanceDetailsContent(
 const restrictedPackages: WebpackRule<Params> = (ruleParams, data, api): void => {
   api.setRuleDescriptor({
     description: `Ensures that bundle doesn't use specified packages`,
-    package: version,
+    package: {
+      author: version.author,
+      description: version.description,
+      homepage: version.homepage,
+      name: version.name,
+      version: version.version,
+    },
   });
 
   const normalizedRuleParams: NormalizedParams | null = ruleParams

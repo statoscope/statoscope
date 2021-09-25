@@ -1,6 +1,7 @@
 import { Extension, ExtensionDescriptor } from '@statoscope/stats/spec/extension';
 import makeResolver, { Resolver } from '@statoscope/helpers/dist/entity-resolver';
-import { name, version, author, homepage, description } from './version';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { name, version, author, homepage, description } = require('../package.json');
 
 export type Format = Extension<Payload>;
 export type InstanceInfo = { version: string };
@@ -73,7 +74,7 @@ export default class Generator {
       compilation.packages.push(resolvedPackage);
       this.instanceResolvers.set(
         resolvedPackage,
-        makeResolver(instances, (item) => item.path)
+        makeResolver(instances, (item) => item.path, null, false)
       );
     }
 

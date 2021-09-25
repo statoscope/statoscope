@@ -8,7 +8,8 @@ import networkListType from '@statoscope/helpers/dist/network-type-list';
 import { APIFnOptions } from '@statoscope/types/types/validation/api';
 import { WebpackRule } from '../../';
 import { ByNameFilterItem, ExcludeItem, normalizeExclude } from '../../limits-helpers';
-import * as version from '../../version';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const version = require('../../../package.json');
 
 type NetworkType = typeof networkListType[number]['name'];
 
@@ -66,7 +67,13 @@ const entryDownloadTimeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
   api.setRuleDescriptor({
     description:
       'Ensures that the download time of entrypoints has not exceeded the limit',
-    package: version,
+    package: {
+      author: version.author,
+      description: version.description,
+      homepage: version.homepage,
+      name: version.name,
+      version: version.version,
+    },
   });
 
   if (!ruleParams?.global && !ruleParams?.byName?.length) {

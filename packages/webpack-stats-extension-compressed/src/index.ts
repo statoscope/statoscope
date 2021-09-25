@@ -6,7 +6,8 @@ import CompressedExtensionGenerator, {
   Format,
   CompressorOrPreset,
 } from '@statoscope/stats-extension-compressed/dist/generator';
-import { author, homepage, name, version, description } from './version';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { author, homepage, name, version, description } = require('../package.json');
 
 export default class WebpackCompressedExtension {
   descriptor: ExtensionDescriptor = { name, version, author, homepage, description };

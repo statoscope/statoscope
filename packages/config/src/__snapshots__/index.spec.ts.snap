@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`requireConfig should work 1`] = `
+Object {
+  "config": Object {},
+  "path": "<pwd>/statoscope.config.js",
+}
+`;
+
+exports[`requireConfig should work 2`] = `
+Object {
+  "config": Object {},
+  "path": "<pwd>/fooooo",
+}
+`;
+
+exports[`requireConfig should work 3`] = `
+Object {
+  "config": Object {
+    "validate": Object {
+      "plugins": Array [
+        Array [
+          "../../../../packages/stats-validator-plugin-webpack",
+          "webpack",
+        ],
+      ],
+      "rules": Object {
+        "webpack/restricted-modules": Array [
+          "error",
+          Array [
+            /\\\\/src\\\\//,
+          ],
+        ],
+        "webpack/restricted-packages": Array [
+          "error",
+          Array [
+            "foo",
+          ],
+        ],
+      },
+    },
+  },
+  "path": "<pwd>/test/fixtures/cli/validate/config.js",
+}
+`;

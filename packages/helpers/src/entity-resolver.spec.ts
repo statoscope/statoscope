@@ -27,7 +27,7 @@ test.each([
     },
   },
 ])('should resolve: $name', ({ data }) => {
-  const resolve = make(data, (item) => item.id);
+  const resolve = make(data, (item) => item.id, null, false);
 
   expect(resolve(3)).toBeNull();
   expect(resolve(1)?.data).toBe('foo');

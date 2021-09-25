@@ -24,9 +24,10 @@ export function prepareWithJora(
   stats: RawStatsFileDescriptor | RawStatsFileDescriptor[],
   options: Options = {}
 ): Prepared {
-  const { files, compilations } = normalize(stats);
+  const normalizeResult = normalize(stats);
+  const { files, compilations } = normalizeResult;
   const prepared = prepareWithJoraOriginal(files, {
-    helpers: { ...joraHelpers(compilations), ...options.helpers },
+    helpers: { ...joraHelpers(normalizeResult), ...options.helpers },
   });
 
   return {

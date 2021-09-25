@@ -4,20 +4,57 @@
 
 ### Features
 
-- `[helpers]` - support lock/unlock for makeEntityResolver (#107)
+- `[stats-extension-custom-reports]` - add package for passing custom reports to the UI (#108)
+- `[webpack-plugin]` - support custom reports (#108)
+- `[webpack-ui]` - support custom reports (#108)
+- `[helpers]` - support `lock`/`unlock` for `Resolver` (#107)
+  By default, all the resolvers is locked (no items can be added to resolver storage)
+  ```ts
+  const resolver = makeResolver(modules, m => m.identifier);
+  modules.push(fooModule);
+  resolver('foo'); // null
+  resolver.unlock(); // allow to fetch resolver storage for new elements
+  modules.push(fooModule);
+  resolver('foo'); // fooModule
+  ```
+  In other words, locked resolver remembers its source items and ignores any source changes.
+  
+  It is useful for performance.
+- `[helpers]` - add `Indexer` to build an index (#108)
+  Index is more complex of resolver. It provides some API to manipulate its storage:
+  ```ts
+  const moduleIndex = makeIndex(module => module.identifier); // no source needed
+  moduleIndex.add(fooModule);
+  moduleIndex.get('foo'); // fooModule
+  moduleIndex.get('bar'); // null
+  moduleIndex.add(barModule);
+  moduleIndex.get('bar'); // barModule
+  moduleIndex.getAll(); // [fooModule, barModule]
+  ```
 
-### Refactor
-
-- `[webpack-model]` - use module.identifier to resolve a module (#107)
-- `[webpack-ui]` - use module.identifier to resolve a module (#107)
-- `[webpack-stats-extension-compressed]` - use module.identifier to resolve a module (#107)
-- `[stats-validator-plugin-webpack]` - use module.identifier to resolve a module (#107)
+- `[stats-extension-compressed]` - support indexer (#108)
+- `[stats-extension-package-info]` - support indexer (#108)
+- `[stats-extension-stats-validation-result]` - support indexer (#108)
+- `[config]` - add `requireConfig` (#108)
+- `[cli]` - support `requireConfig` (#108)
 - `[cli]` - add `makeReplacer` helper to create json replacer (#107)
-
 - `[webpack-model]` - add `__statoscope.context` field (#107)
 - `[report-writer]` - remove context path from stats (it makes all the path relative from context) (#107)
 - `[webpack-plugin]` - remove context path from stats (it makes all the path relative from context) (#107)
 - `[webpack-stats-extension-package-info]` - remove context path from stats (it makes all the path relative from context) (#107)
+
+### Refactor
+
+- `[webpack-model]` - use module.identifier to resolve a module (#107)
+- `[webpack-model]` - decouple extension and compilation (#108)
+  
+  Extensions have attached to files, not to compilations
+
+- `[webpack-ui]` - use `module.identifier` to resolve a module (#107)
+- `[webpack-stats-extension-compressed]` - use `module.identifier` to resolve a module (#107)
+- `[stats-validator-plugin-webpack]` - use `module.identifier` to resolve a module (#107)
+
+### Bugfix
 
 ## 5.8.1 (19 September 2021)
 

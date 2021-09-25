@@ -4,10 +4,11 @@ import {
   NormalizedFile,
   NormalizedPackage,
 } from '@statoscope/webpack-model/dist/normalize';
-import { RelatedItem } from '@statoscope/types/types/validation/test-entry';
+import { RelationItem } from '@statoscope/types/types';
 import { WebpackRule } from '../../';
 import { ExcludeItem, normalizeExclude } from '../../limits-helpers';
-import * as version from '../../version';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const version = require('../../../package.json');
 
 export type RuleExcludeItem = ExcludeItem<'compilation' | 'package'>;
 
@@ -28,7 +29,13 @@ export type Result = {
 const noPackagesDups: WebpackRule<Params> = (ruleParams, data, api): void => {
   api.setRuleDescriptor({
     description: `Ensures that bundle hasn't package duplicates`,
-    package: version,
+    package: {
+      author: version.author,
+      description: version.description,
+      homepage: version.homepage,
+      name: version.name,
+      version: version.version,
+    },
   });
 
   const normalizedParams: NormalizedParams = {
@@ -106,7 +113,7 @@ const noPackagesDups: WebpackRule<Params> = (ruleParams, data, api): void => {
           related: [
             { type: 'package', id: packageItem.name },
             ...packageItem.instances.map(
-              (instance): RelatedItem => ({
+              (instance): RelationItem => ({
                 type: 'package-instance',
                 id: instance.path,
               })

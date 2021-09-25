@@ -1,10 +1,10 @@
 import path from 'path';
 import { Argv } from 'yargs';
 import Validator from '@statoscope/stats-validator';
-import { Config } from '@statoscope/types/types/config';
 import ConsoleReporter from '@statoscope/stats-validator-reporter-console';
 import { Reporter } from '@statoscope/types/types/validation/reporter';
 import { makeReporterInstance } from '@statoscope/config/dist/make-reporter-instance';
+import { requireConfig } from '@statoscope/config/dist';
 import legacyWebpackValidator from './legacyWebpackValidator';
 
 export default function (yargs: Argv): Argv {
@@ -29,7 +29,6 @@ Validate multiple stats [DEPRECATED]: validate --validator path/to/validator.js 
             describe: 'path to statoscope config',
             alias: 'c',
             type: 'string',
-            default: path.join(process.cwd(), 'statoscope.config.js'),
           })
           .option('input', {
             describe: 'path to a stats.json',
@@ -60,17 +59,7 @@ Validate multiple stats [DEPRECATED]: validate --validator path/to/validator.js 
         return;
       }
 
-      const configPath = path.resolve(argv.config);
-      let config: Config;
-
-      try {
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        config = require(configPath) as Config;
-      } catch (e) {
-        console.log('[WARN]: No Statoscope-config found');
-        config = {};
-      }
-
+      const { path: configPath, config } = requireConfig(argv.config);
       const rootPath = path.dirname(configPath);
       const validateConfig = config.validate ?? { rules: {} };
 

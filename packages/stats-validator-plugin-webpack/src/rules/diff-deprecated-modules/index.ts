@@ -6,7 +6,8 @@ import { NormalizedModule } from '@statoscope/webpack-model/src/normalize';
 import { WebpackRule } from '../../';
 import { ModuleTarget, normalizeModuleTarget, RawTarget } from '../../helpers';
 import { ExcludeItem, normalizeExclude } from '../../limits-helpers';
-import * as version from '../../version';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const version = require('../../../package.json');
 
 export type ModuleResultItem = {
   module: NormalizedModule;
@@ -120,7 +121,13 @@ const diffDeprecatedModules: WebpackRule<Params> = (ruleParams, data, api): void
   api.setRuleDescriptor({
     description:
       'Compares usage of specified modules between input and reference stats. Fails if usage has increased',
-    package: version,
+    package: {
+      author: version.author,
+      description: version.description,
+      homepage: version.homepage,
+      name: version.name,
+      version: version.version,
+    },
   });
 
   const normalizedRuleParams: NormalizedParams | null = ruleParams

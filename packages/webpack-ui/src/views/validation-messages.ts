@@ -1,11 +1,11 @@
 import { RuleDescriptor } from '@statoscope/types/types/validation/api';
-import { RelatedItem } from '@statoscope/types/types/validation/test-entry';
+import { RelationItem } from '@statoscope/types/types';
 import type { Item } from '@statoscope/stats-extension-stats-validation-result/dist/generator';
 import { StatoscopeWidget } from '../../types';
 
 export type Data = {
   showRelated?: boolean;
-  related?: RelatedItem;
+  related?: RelationItem;
   messages?: Item[];
 };
 

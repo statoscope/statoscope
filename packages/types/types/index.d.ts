@@ -147,3 +147,19 @@ export class Widget<TRawData, TData, TContext> {
     options?: WidgetOptions
   );
 }
+
+export type RelationItem =
+  | {
+      type:
+        | 'module'
+        | 'package'
+        | 'package-instance'
+        | 'resource'
+        | 'entry'
+        | 'compilation';
+      id: string;
+    }
+  | {
+      type: 'chunk';
+      id: string | number;
+    };

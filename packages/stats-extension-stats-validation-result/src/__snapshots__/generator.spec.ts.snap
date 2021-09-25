@@ -14,7 +14,7 @@ Object {
     "description": "Statoscope extension that collects stats validation result",
     "homepage": "https://github.com/statoscope/statoscope/",
     "name": "@statoscope/stats-extension-stats-validation-result",
-    "version": "5.7.0",
+    "version": "5.7.1",
   },
   "payload": Object {
     "compilations": Array [

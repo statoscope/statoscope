@@ -41,40 +41,6 @@ Array [
     "details": Array [
       Object {
         "content": Array [
-          "Statement (ExpressionStatement) with side effects in source code at 4:0-30",
-        ],
-        "type": "text",
-      },
-      Object {
-        "payload": Object {
-          "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
-            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
-          },
-        },
-        "query": "
-            $input: resolveInputFile();
-            $input.compilations
-              .[hash=#.compilation]
-              ..modules.[name=#.module]
-            ",
-        "type": "discovery",
-      },
-    ],
-    "filename": "input.json",
-    "message": "Module ./simple/src/index.ts has deoptimizations",
-    "related": Array [
-      Object {
-        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
-        "type": "module",
-      },
-    ],
-  },
-  Object {
-    "compilation": "34ea3837a1050e206fe0",
-    "details": Array [
-      Object {
-        "content": Array [
           "ModuleConcatenation bailout: Cannot concat with ./simple/src/index2.css: Module uses module.id",
           "ModuleConcatenation bailout: Cannot concat with ./node_modules/is-array/index.js: Module is not an ECMAScript module",
         ],
@@ -101,40 +67,6 @@ Array [
     "related": Array [
       Object {
         "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
-        "type": "module",
-      },
-    ],
-  },
-  Object {
-    "compilation": "34ea3837a1050e206fe0",
-    "details": Array [
-      Object {
-        "content": Array [
-          "Statement (ExpressionStatement) with side effects in source code at 7:0-9:3",
-        ],
-        "type": "text",
-      },
-      Object {
-        "payload": Object {
-          "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
-            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
-          },
-        },
-        "query": "
-            $input: resolveInputFile();
-            $input.compilations
-              .[hash=#.compilation]
-              ..modules.[name=#.module]
-            ",
-        "type": "discovery",
-      },
-    ],
-    "filename": "input.json",
-    "message": "Module ./simple/src/index2.ts has deoptimizations",
-    "related": Array [
-      Object {
-        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
         "type": "module",
       },
     ],
@@ -380,6 +312,74 @@ Array [
     "related": Array [
       Object {
         "id": "./simple/node_modules/foo/node_modules/bar/index.js",
+        "type": "module",
+      },
+    ],
+  },
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Statement (ExpressionStatement) with side effects in source code at 4:0-30",
+        ],
+        "type": "text",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            $input.compilations
+              .[hash=#.compilation]
+              ..modules.[name=#.module]
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./simple/src/index.ts has deoptimizations",
+    "related": Array [
+      Object {
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
+        "type": "module",
+      },
+    ],
+  },
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Statement (ExpressionStatement) with side effects in source code at 7:0-9:3",
+        ],
+        "type": "text",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            $input.compilations
+              .[hash=#.compilation]
+              ..modules.[name=#.module]
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./simple/src/index2.ts has deoptimizations",
+    "related": Array [
+      Object {
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
         "type": "module",
       },
     ],
@@ -423,40 +423,6 @@ Array [
     "details": Array [
       Object {
         "content": Array [
-          "Statement (ExpressionStatement) with side effects in source code at 4:0-30",
-        ],
-        "type": "text",
-      },
-      Object {
-        "payload": Object {
-          "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
-            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
-          },
-        },
-        "query": "
-            $input: resolveInputFile();
-            $input.compilations
-              .[hash=#.compilation]
-              ..modules.[name=#.module]
-            ",
-        "type": "discovery",
-      },
-    ],
-    "filename": "input.json",
-    "message": "Module ./simple/src/index.ts has deoptimizations",
-    "related": Array [
-      Object {
-        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
-        "type": "module",
-      },
-    ],
-  },
-  Object {
-    "compilation": "34ea3837a1050e206fe0",
-    "details": Array [
-      Object {
-        "content": Array [
           "ModuleConcatenation bailout: Cannot concat with ./simple/src/index2.css: Module uses module.id",
           "ModuleConcatenation bailout: Cannot concat with ./node_modules/is-array/index.js: Module is not an ECMAScript module",
         ],
@@ -483,40 +449,6 @@ Array [
     "related": Array [
       Object {
         "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
-        "type": "module",
-      },
-    ],
-  },
-  Object {
-    "compilation": "34ea3837a1050e206fe0",
-    "details": Array [
-      Object {
-        "content": Array [
-          "Statement (ExpressionStatement) with side effects in source code at 7:0-9:3",
-        ],
-        "type": "text",
-      },
-      Object {
-        "payload": Object {
-          "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
-            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
-          },
-        },
-        "query": "
-            $input: resolveInputFile();
-            $input.compilations
-              .[hash=#.compilation]
-              ..modules.[name=#.module]
-            ",
-        "type": "discovery",
-      },
-    ],
-    "filename": "input.json",
-    "message": "Module ./simple/src/index2.ts has deoptimizations",
-    "related": Array [
-      Object {
-        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
         "type": "module",
       },
     ],
@@ -762,6 +694,74 @@ Array [
     "related": Array [
       Object {
         "id": "./simple/node_modules/foo/node_modules/bar/index.js",
+        "type": "module",
+      },
+    ],
+  },
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Statement (ExpressionStatement) with side effects in source code at 4:0-30",
+        ],
+        "type": "text",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            $input.compilations
+              .[hash=#.compilation]
+              ..modules.[name=#.module]
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./simple/src/index.ts has deoptimizations",
+    "related": Array [
+      Object {
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
+        "type": "module",
+      },
+    ],
+  },
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Statement (ExpressionStatement) with side effects in source code at 7:0-9:3",
+        ],
+        "type": "text",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            $input.compilations
+              .[hash=#.compilation]
+              ..modules.[name=#.module]
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./simple/src/index2.ts has deoptimizations",
+    "related": Array [
+      Object {
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
         "type": "module",
       },
     ],
@@ -805,40 +805,6 @@ Array [
     "details": Array [
       Object {
         "content": Array [
-          "Statement (ExpressionStatement) with side effects in source code at 4:0-30",
-        ],
-        "type": "text",
-      },
-      Object {
-        "payload": Object {
-          "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
-            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
-          },
-        },
-        "query": "
-            $input: resolveInputFile();
-            $input.compilations
-              .[hash=#.compilation]
-              ..modules.[name=#.module]
-            ",
-        "type": "discovery",
-      },
-    ],
-    "filename": "input.json",
-    "message": "Module ./simple/src/index.ts has deoptimizations",
-    "related": Array [
-      Object {
-        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
-        "type": "module",
-      },
-    ],
-  },
-  Object {
-    "compilation": "34ea3837a1050e206fe0",
-    "details": Array [
-      Object {
-        "content": Array [
           "ModuleConcatenation bailout: Cannot concat with ./simple/src/index2.css: Module uses module.id",
           "ModuleConcatenation bailout: Cannot concat with ./node_modules/is-array/index.js: Module is not an ECMAScript module",
         ],
@@ -865,40 +831,6 @@ Array [
     "related": Array [
       Object {
         "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
-        "type": "module",
-      },
-    ],
-  },
-  Object {
-    "compilation": "34ea3837a1050e206fe0",
-    "details": Array [
-      Object {
-        "content": Array [
-          "Statement (ExpressionStatement) with side effects in source code at 7:0-9:3",
-        ],
-        "type": "text",
-      },
-      Object {
-        "payload": Object {
-          "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
-            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
-          },
-        },
-        "query": "
-            $input: resolveInputFile();
-            $input.compilations
-              .[hash=#.compilation]
-              ..modules.[name=#.module]
-            ",
-        "type": "discovery",
-      },
-    ],
-    "filename": "input.json",
-    "message": "Module ./simple/src/index2.ts has deoptimizations",
-    "related": Array [
-      Object {
-        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
         "type": "module",
       },
     ],
@@ -1144,6 +1076,74 @@ Array [
     "related": Array [
       Object {
         "id": "./simple/node_modules/foo/node_modules/bar/index.js",
+        "type": "module",
+      },
+    ],
+  },
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Statement (ExpressionStatement) with side effects in source code at 4:0-30",
+        ],
+        "type": "text",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            $input.compilations
+              .[hash=#.compilation]
+              ..modules.[name=#.module]
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./simple/src/index.ts has deoptimizations",
+    "related": Array [
+      Object {
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
+        "type": "module",
+      },
+    ],
+  },
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Statement (ExpressionStatement) with side effects in source code at 7:0-9:3",
+        ],
+        "type": "text",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            $input.compilations
+              .[hash=#.compilation]
+              ..modules.[name=#.module]
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./simple/src/index2.ts has deoptimizations",
+    "related": Array [
+      Object {
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
         "type": "module",
       },
     ],
@@ -1187,40 +1187,6 @@ Array [
     "details": Array [
       Object {
         "content": Array [
-          "Statement (ExpressionStatement) with side effects in source code at 4:0-30",
-        ],
-        "type": "text",
-      },
-      Object {
-        "payload": Object {
-          "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
-            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
-          },
-        },
-        "query": "
-            $input: resolveInputFile();
-            $input.compilations
-              .[hash=#.compilation]
-              ..modules.[name=#.module]
-            ",
-        "type": "discovery",
-      },
-    ],
-    "filename": "input.json",
-    "message": "Module ./simple/src/index.ts has deoptimizations",
-    "related": Array [
-      Object {
-        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
-        "type": "module",
-      },
-    ],
-  },
-  Object {
-    "compilation": "34ea3837a1050e206fe0",
-    "details": Array [
-      Object {
-        "content": Array [
           "ModuleConcatenation bailout: Cannot concat with ./simple/src/index2.css: Module uses module.id",
           "ModuleConcatenation bailout: Cannot concat with ./node_modules/is-array/index.js: Module is not an ECMAScript module",
         ],
@@ -1247,40 +1213,6 @@ Array [
     "related": Array [
       Object {
         "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
-        "type": "module",
-      },
-    ],
-  },
-  Object {
-    "compilation": "34ea3837a1050e206fe0",
-    "details": Array [
-      Object {
-        "content": Array [
-          "Statement (ExpressionStatement) with side effects in source code at 7:0-9:3",
-        ],
-        "type": "text",
-      },
-      Object {
-        "payload": Object {
-          "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
-            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
-          },
-        },
-        "query": "
-            $input: resolveInputFile();
-            $input.compilations
-              .[hash=#.compilation]
-              ..modules.[name=#.module]
-            ",
-        "type": "discovery",
-      },
-    ],
-    "filename": "input.json",
-    "message": "Module ./simple/src/index2.ts has deoptimizations",
-    "related": Array [
-      Object {
-        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
         "type": "module",
       },
     ],
@@ -1526,6 +1458,74 @@ Array [
     "related": Array [
       Object {
         "id": "./simple/node_modules/foo/node_modules/bar/index.js",
+        "type": "module",
+      },
+    ],
+  },
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Statement (ExpressionStatement) with side effects in source code at 4:0-30",
+        ],
+        "type": "text",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            $input.compilations
+              .[hash=#.compilation]
+              ..modules.[name=#.module]
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./simple/src/index.ts has deoptimizations",
+    "related": Array [
+      Object {
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
+        "type": "module",
+      },
+    ],
+  },
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Statement (ExpressionStatement) with side effects in source code at 7:0-9:3",
+        ],
+        "type": "text",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            $input.compilations
+              .[hash=#.compilation]
+              ..modules.[name=#.module]
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Module ./simple/src/index2.ts has deoptimizations",
+    "related": Array [
+      Object {
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
         "type": "module",
       },
     ],

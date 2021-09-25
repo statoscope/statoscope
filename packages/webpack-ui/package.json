@@ -5,11 +5,12 @@
   "main": "./dist/main.js",
   "types": "./types.d.ts",
   "scripts": {
-    "build": "../../node_modules/.bin/webpack",
+    "build": "npm run typecheck && ../../node_modules/.bin/webpack",
     "watch": "../../node_modules/.bin/webpack --watch",
     "build:prod": "NODE_ENV=production ../../node_modules/.bin/webpack",
     "prepublishOnly": "npm run build:prod",
-    "lint:custom": "../../node_modules/.bin/tsc --noEmit"
+    "typecheck": "../../node_modules/.bin/tsc --noEmit",
+    "lint:custom": "npm run typecheck"
   },
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {
@@ -22,7 +23,6 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "@statoscope/stats-extension-stats-validation-result": "5.7.1",
     "@statoscope/types": "5.7.1"
   },
   "devDependencies": {
@@ -33,10 +33,13 @@
     "@statoscope/stats": "5.7.0",
     "@statoscope/stats-extension-compressed": "5.7.1",
     "@statoscope/stats-extension-package-info": "5.7.1",
+    "@statoscope/stats-extension-stats-validation-result": "5.7.1",
     "@statoscope/webpack-model": "5.8.0",
+    "@types/md5": "^2.3.1",
     "@wdxlab/events": "^1.1.0",
     "babel-loader": "^8.2.2",
     "css-loader": "^6.3.0",
+    "md5": "^2.3.0",
     "path-browserify": "^1.0.1",
     "style-loader": "^3.2.1"
   }

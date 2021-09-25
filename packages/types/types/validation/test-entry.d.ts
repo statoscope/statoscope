@@ -1,4 +1,4 @@
-import { ViewConfig } from '../';
+import { RelationItem, ViewConfig } from '../';
 
 export type DetailsTextContent = string | string[] | (() => string | string[]);
 export type DiscoveryDeserializeType = {
@@ -27,26 +27,11 @@ export type DetailsDescriptor =
   | DetailsDescriptorText
   | DetailsDescriptorDiscovery;
 export type Details = string | DetailsDescriptor[];
-export type RelatedItem =
-  | {
-      type:
-        | 'module'
-        | 'package'
-        | 'package-instance'
-        | 'resource'
-        | 'entry'
-        | 'compilation';
-      id: string;
-    }
-  | {
-      type: 'chunk';
-      id: string | number;
-    };
 
 export type TestEntry = {
   message: string;
   filename?: string;
   compilation?: string;
   details?: Details;
-  related?: RelatedItem[];
+  related?: RelationItem[];
 };

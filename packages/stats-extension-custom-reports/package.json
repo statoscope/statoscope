@@ -1,0 +1,26 @@
+{
+  "name": "@statoscope/stats-extension-custom-reports",
+  "version": "5.7.1",
+  "description": "Statoscope extension to store custom reports in stats",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "../../node_modules/.bin/tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": "https://github.com/statoscope/statoscope.git",
+  "author": {
+    "name": "Sergey Melyukov",
+    "url": "https://twitter.com/smelukov"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/statoscope/statoscope/",
+  "dependencies": {
+    "@statoscope/extensions": "5.7.1",
+    "@statoscope/helpers": "5.7.1",
+    "@statoscope/stats": "5.7.0",
+    "@statoscope/types": "5.7.1"
+  }
+}

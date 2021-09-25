@@ -1,5 +1,143 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`customReports customReports_getItem 1`] = `
+Object {
+  "data": Object {
+    "some": Object {
+      "custom": "data",
+    },
+  },
+  "id": "top-20-biggest-modules",
+  "name": "Top 20 biggest modules",
+  "view": Array [
+    "struct",
+    Object {
+      "data": "#.stats.compilations.(
+            $compilation: $;
+            modules.({
+              module: $,
+              hash: $compilation.hash,
+              size: getModuleSize($compilation.hash)
+            })
+          ).sort(size.size desc)[:20]",
+      "item": "module-item",
+      "view": "list",
+    },
+  ],
+}
+`;
+
+exports[`customReports customReports_getItems 1`] = `
+Array [
+  Object {
+    "data": Object {
+      "some": Object {
+        "custom": "data",
+      },
+    },
+    "id": "top-20-biggest-modules",
+    "name": "Top 20 biggest modules",
+    "view": Array [
+      "struct",
+      Object {
+        "data": "#.stats.compilations.(
+            $compilation: $;
+            modules.({
+              module: $,
+              hash: $compilation.hash,
+              size: getModuleSize($compilation.hash)
+            })
+          ).sort(size.size desc)[:20]",
+        "item": "module-item",
+        "view": "list",
+      },
+    ],
+  },
+  Object {
+    "data": Object {
+      "some": Object {
+        "custom": "data",
+      },
+    },
+    "id": "top-20-biggest-modules",
+    "name": "Top 20 biggest modules",
+    "view": Array [
+      "struct",
+      Object {
+        "data": "#.stats.compilations.(
+            $compilation: $;
+            modules.({
+              module: $,
+              hash: $compilation.hash,
+              size: getModuleSize($compilation.hash)
+            })
+          ).sort(size.size desc)[:20]",
+        "item": "module-item",
+        "view": "list",
+      },
+    ],
+  },
+]
+`;
+
+exports[`customReports customReports_getItems 2`] = `
+Array [
+  Object {
+    "data": Object {
+      "some": Object {
+        "custom": "data",
+      },
+    },
+    "id": "top-20-biggest-modules",
+    "name": "Top 20 biggest modules",
+    "view": Array [
+      "struct",
+      Object {
+        "data": "#.stats.compilations.(
+            $compilation: $;
+            modules.({
+              module: $,
+              hash: $compilation.hash,
+              size: getModuleSize($compilation.hash)
+            })
+          ).sort(size.size desc)[:20]",
+        "item": "module-item",
+        "view": "list",
+      },
+    ],
+  },
+]
+`;
+
+exports[`customReports customReports_getItems 3`] = `
+Array [
+  Object {
+    "data": Object {
+      "some": Object {
+        "custom": "data",
+      },
+    },
+    "id": "top-20-biggest-modules",
+    "name": "Top 20 biggest modules",
+    "view": Array [
+      "struct",
+      Object {
+        "data": "#.stats.compilations.(
+            $compilation: $;
+            modules.({
+              module: $,
+              hash: $compilation.hash,
+              size: getModuleSize($compilation.hash)
+            })
+          ).sort(size.size desc)[:20]",
+        "item": "module-item",
+        "view": "list",
+      },
+    ],
+  },
+]
+`;
+
 exports[`moduleGraph_getPaths 1`] = `
 Object {
   "children": Array [
@@ -31,7 +169,7 @@ Object {
                 "page": "module",
               },
               "path": "simple/src/index.ts",
-              "weight": 226,
+              "weight": 113,
               "weightCompressor": undefined,
             },
             Object {
@@ -53,7 +191,7 @@ Object {
                 "page": "module",
               },
               "path": "simple/src/index2.ts",
-              "weight": 552,
+              "weight": 276,
               "weightCompressor": undefined,
             },
             Object {
@@ -104,7 +242,7 @@ Object {
           "label": "src",
           "link": undefined,
           "path": "simple/src",
-          "weight": 9986.84,
+          "weight": 9597.84,
           "weightCompressor": undefined,
         },
         Object {
@@ -225,7 +363,7 @@ Object {
       "label": "simple",
       "link": undefined,
       "path": "simple",
-      "weight": 10157.84,
+      "weight": 9768.84,
       "weightCompressor": undefined,
     },
     Object {
@@ -473,7 +611,7 @@ Object {
   "label": "",
   "link": undefined,
   "path": "/",
-  "weight": 20306.84,
+  "weight": 19917.84,
   "weightCompressor": undefined,
 }
 `;
@@ -493,7 +631,7 @@ Object {
                 "page": "module",
               },
               "path": "simple/src/index.ts",
-              "weight": 226,
+              "weight": 113,
               "weightCompressor": undefined,
             },
             Object {
@@ -515,7 +653,7 @@ Object {
                 "page": "module",
               },
               "path": "simple/src/index2.ts",
-              "weight": 552,
+              "weight": 276,
               "weightCompressor": undefined,
             },
             Object {
@@ -566,7 +704,7 @@ Object {
           "label": "src",
           "link": undefined,
           "path": "simple/src",
-          "weight": 9986.84,
+          "weight": 9597.84,
           "weightCompressor": undefined,
         },
         Object {
@@ -687,7 +825,7 @@ Object {
       "label": "simple",
       "link": undefined,
       "path": "simple",
-      "weight": 10157.84,
+      "weight": 9768.84,
       "weightCompressor": undefined,
     },
     Object {
@@ -935,7 +1073,7 @@ Object {
   "label": "",
   "link": undefined,
   "path": "/",
-  "weight": 20306.84,
+  "weight": 19917.84,
   "weightCompressor": undefined,
 }
 `;
@@ -955,7 +1093,7 @@ Object {
                 "page": "module",
               },
               "path": "simple/src/index.ts",
-              "weight": 226,
+              "weight": 113,
               "weightCompressor": undefined,
             },
             Object {
@@ -977,7 +1115,7 @@ Object {
                 "page": "module",
               },
               "path": "simple/src/index2.ts",
-              "weight": 552,
+              "weight": 276,
               "weightCompressor": undefined,
             },
             Object {
@@ -1028,7 +1166,7 @@ Object {
           "label": "src",
           "link": undefined,
           "path": "simple/src",
-          "weight": 7882,
+          "weight": 7493,
           "weightCompressor": "gzip",
         },
         Object {
@@ -1149,7 +1287,7 @@ Object {
       "label": "simple",
       "link": undefined,
       "path": "simple",
-      "weight": 8053,
+      "weight": 7664,
       "weightCompressor": "multiple compressors",
     },
     Object {
@@ -1397,7 +1535,7 @@ Object {
   "label": "",
   "link": undefined,
   "path": "/",
-  "weight": 12890,
+  "weight": 12501,
   "weightCompressor": "multiple compressors",
 }
 `;
@@ -1471,7 +1609,7 @@ Array [
         "payload": Object {
           "context": Object {
             "compilation": "34ea3837a1050e206fe0",
-            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
           },
         },
         "query": "
@@ -1484,10 +1622,10 @@ Array [
       },
     ],
     "id": 1,
-    "message": "Module ./simple/src/index.ts should not be used",
+    "message": "Module ./simple/src/index2.ts + 1 modules should not be used",
     "related": Array [
       Object {
-        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
         "type": "module",
       },
     ],
@@ -1529,64 +1667,6 @@ Array [
         "payload": Object {
           "context": Object {
             "compilation": "34ea3837a1050e206fe0",
-            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
-          },
-        },
-        "query": "
-            $input: resolveInputFile();
-            {
-              module: #.module.resolveModule(#.compilation),
-            }
-            ",
-        "type": "discovery",
-      },
-    ],
-    "id": 3,
-    "message": "Module ./simple/src/index2.ts + 1 modules should not be used",
-    "related": Array [
-      Object {
-        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
-        "type": "module",
-      },
-    ],
-    "rule": "webpack/restricted-modules",
-    "type": "error",
-  },
-  Object {
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
-            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
-          },
-        },
-        "query": "
-            $input: resolveInputFile();
-            {
-              module: #.module.resolveModule(#.compilation),
-            }
-            ",
-        "type": "discovery",
-      },
-    ],
-    "id": 4,
-    "message": "Module ./simple/src/index2.ts should not be used",
-    "related": Array [
-      Object {
-        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
-        "type": "module",
-      },
-    ],
-    "rule": "webpack/restricted-modules",
-    "type": "error",
-  },
-  Object {
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
             "module": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
           },
         },
@@ -1599,7 +1679,7 @@ Array [
         "type": "discovery",
       },
     ],
-    "id": 5,
+    "id": 3,
     "message": "Module ./simple/src/index2.css should not be used",
     "related": Array [
       Object {
@@ -1628,7 +1708,7 @@ Array [
         "type": "discovery",
       },
     ],
-    "id": 6,
+    "id": 4,
     "message": "Module ./simple/src/test.txt should not be used",
     "related": Array [
       Object {
@@ -1657,7 +1737,7 @@ Array [
         "type": "discovery",
       },
     ],
-    "id": 7,
+    "id": 5,
     "message": "Module ./simple/src/dyn.ts should not be used",
     "related": Array [
       Object {
@@ -1686,11 +1766,69 @@ Array [
         "type": "discovery",
       },
     ],
-    "id": 8,
+    "id": 6,
     "message": "Module ./simple/src/statoscope.png should not be used",
     "related": Array [
       Object {
         "id": "asset/inline|./simple/src/statoscope.png",
+        "type": "module",
+      },
+    ],
+    "rule": "webpack/restricted-modules",
+    "type": "error",
+  },
+  Object {
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "id": 7,
+    "message": "Module ./simple/src/index.ts should not be used",
+    "related": Array [
+      Object {
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
+        "type": "module",
+      },
+    ],
+    "rule": "webpack/restricted-modules",
+    "type": "error",
+  },
+  Object {
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "compilation": "34ea3837a1050e206fe0",
+            "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              module: #.module.resolveModule(#.compilation),
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "id": 8,
+    "message": "Module ./simple/src/index2.ts should not be used",
+    "related": Array [
+      Object {
+        "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
         "type": "module",
       },
     ],
@@ -1713,7 +1851,7 @@ Object {
     "description": "Plugin for @statoscope/stats-validator to validate webpack stats",
     "homepage": "https://github.com/statoscope/statoscope/",
     "name": "@statoscope/stats-validator-plugin-webpack",
-    "version": "5.7.0",
+    "version": "5.8.1",
   },
 }
 `;

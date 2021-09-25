@@ -13,7 +13,8 @@ import {
   normalizeExclude,
   SerializedExcludeItem,
 } from '../../limits-helpers';
-import * as version from '../../version';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const version = require('../../../package.json');
 
 type NetworkType = typeof networkListType[number]['name'];
 
@@ -130,7 +131,13 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
   api.setRuleDescriptor({
     description:
       'Compares download time of entrypoints between input and reference stats. Fails if download time has increased',
-    package: version,
+    package: {
+      author: version.author,
+      description: version.description,
+      homepage: version.homepage,
+      name: version.name,
+      version: version.version,
+    },
   });
 
   if (!ruleParams) {
@@ -249,7 +256,7 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
     ]
   })
   .[entrypoints]`;
-  const result = data.query(query, data.files[0], {
+  const result = data.query(query, data.files, {
     params: normalizedParams,
   }) as ResultItem[];
 

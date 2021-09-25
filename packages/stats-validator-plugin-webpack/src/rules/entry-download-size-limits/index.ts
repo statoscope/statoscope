@@ -7,7 +7,8 @@ import { APIFnOptions } from '@statoscope/types/types/validation/api';
 import helpers from '@statoscope/helpers/dist/jora';
 import { WebpackRule } from '../../';
 import { ByNameFilterItem, ExcludeItem, normalizeExclude } from '../../limits-helpers';
-import * as version from '../../version';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const version = require('../../../package.json');
 
 export type Limits = {
   maxSize?: number;
@@ -64,7 +65,13 @@ const entryDownloadSizeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
   api.setRuleDescriptor({
     description:
       'Ensures that the download size of entrypoints has not exceeded the limit',
-    package: version,
+    package: {
+      author: version.author,
+      description: version.description,
+      homepage: version.homepage,
+      name: version.name,
+      version: version.version,
+    },
   });
 
   if (!ruleParams?.global && !ruleParams?.byName?.length) {

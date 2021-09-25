@@ -4,10 +4,12 @@ import type { Size } from '@statoscope/stats-extension-compressed/dist/generator
 import { API as ExtensionPackageInfoAPI } from '@statoscope/stats-extension-package-info/dist/api';
 import type { Instance } from '@statoscope/stats-extension-package-info/dist/generator';
 import { API as ExtensionValidationResultAPI } from '@statoscope/stats-extension-stats-validation-result/dist/api';
+import { API as ExtensionCustomReportsAPI } from '@statoscope/stats-extension-custom-reports/dist/api';
 import Graph, { PathSolution } from '@statoscope/helpers/dist/graph';
 import type { Item } from '@statoscope/stats-extension-stats-validation-result/dist/generator';
-import { RelatedItem } from '@statoscope/types/types/validation/test-entry';
+import { RelationItem } from '@statoscope/types/types';
 import { RuleDescriptor } from '@statoscope/types/types/validation/api';
+import { Report } from '@statoscope/types/types/custom-report';
 import { Webpack } from '../webpack';
 import {
   moduleNameResource,
@@ -16,16 +18,17 @@ import {
   nodeModule,
 } from './module';
 import {
-  HandledCompilation,
   ModuleGraphNodeData,
   NodeModuleInstance,
   NormalizedAsset,
   NormalizedChunk,
   NormalizedCompilation,
   NormalizedEntrypointItem,
+  NormalizedExtension,
   NormalizedFile,
   NormalizedModule,
   NormalizedPackage,
+  NormalizeResult,
 } from './normalize';
 import modulesToFoamTree, { Node as FoamTreeNode } from './modules-to-foam-tree';
 import ChunkID = Webpack.ChunkID;
@@ -42,12 +45,26 @@ export type ResolvedRelatedItem =
   | { type: 'package-instance'; item: NodeModuleInstance | null };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
-export default function (compilations: HandledCompilation[]) {
+export default function (normalizeResult: NormalizeResult) {
+  const compilations = normalizeResult.compilations;
   const resolveCompilation = makeEntityResolver(compilations, (item) => item?.data?.hash);
   const resolveFile = makeEntityResolver(
     compilations.map((c) => c.file),
     (item) => item.name
   );
+
+  const resolveExtension = (
+    hash: string,
+    id: string
+  ): NormalizedExtension<unknown, unknown> | null => {
+    const fileName = resolveCompilation(hash)?.file.name;
+
+    if (!fileName) {
+      return null;
+    }
+
+    return normalizeResult.fileResolvers.get(fileName)?.resolveExtension(id) ?? null;
+  };
 
   return {
     moduleSize(module: NormalizedModule): number {
@@ -76,9 +93,7 @@ export default function (compilations: HandledCompilation[]) {
         throw new Error('[getTotalFilesSize]: hash-parameter is required');
       }
 
-      const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
-        '@statoscope/stats-extension-compressed'
-      );
+      const ext = resolveExtension(hash, '@statoscope/stats-extension-compressed');
 
       const resolverSize = ext?.api as ExtensionCompressedAPI | undefined;
 
@@ -121,8 +136,11 @@ export default function (compilations: HandledCompilation[]) {
       const resolved = resolveCompilation(id);
       return (resolved && resolved?.data) || null;
     },
-    resolveExtension(id: string, hash: string): unknown {
-      return resolveCompilation(hash)?.resolvers.resolveExtension(id);
+    resolveExtension(
+      id: string,
+      hash: string
+    ): NormalizedExtension<unknown, unknown> | null {
+      return resolveExtension(hash, id);
     },
     getModuleSize(module: NormalizedModule, hash?: string, compressed?: boolean): Size {
       if (!compressed) {
@@ -133,9 +151,7 @@ export default function (compilations: HandledCompilation[]) {
         throw new Error('[getModuleSize]: hash-parameter is required');
       }
 
-      const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
-        '@statoscope/stats-extension-compressed'
-      );
+      const ext = resolveExtension(hash, '@statoscope/stats-extension-compressed');
 
       const resolverSize = ext?.api as ExtensionCompressedAPI | undefined;
 
@@ -154,9 +170,7 @@ export default function (compilations: HandledCompilation[]) {
         throw new Error('[getAssetSize]: hash-parameter is required');
       }
 
-      const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
-        '@statoscope/stats-extension-compressed'
-      );
+      const ext = resolveExtension(hash, '@statoscope/stats-extension-compressed');
       const resolverSize = ext?.api as ExtensionCompressedAPI | undefined;
 
       return (
@@ -174,9 +188,7 @@ export default function (compilations: HandledCompilation[]) {
         throw new Error('[getPackageInstanceInfo]: hash-parameter is required');
       }
 
-      const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
-        '@statoscope/stats-extension-package-info'
-      );
+      const ext = resolveExtension(hash, '@statoscope/stats-extension-package-info');
       const api = ext?.api as ExtensionPackageInfoAPI | undefined;
 
       return api?.getInstance(hash, packageName, instancePath) ?? null;
@@ -291,14 +303,15 @@ export default function (compilations: HandledCompilation[]) {
 
     validation_getItems(
       hash?: string,
-      relatedType?: RelatedItem['type'] | null,
+      relatedType?: RelationItem['type'] | null,
       relatedId?: string | number
     ): Item[] {
       if (!hash) {
         throw new Error('[validation_getItems]: hash-parameter is required');
       }
 
-      const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
+      const ext = resolveExtension(
+        hash,
         '@statoscope/stats-extension-stats-validation-result'
       );
       const api = ext?.api as ExtensionValidationResultAPI | undefined;
@@ -317,7 +330,8 @@ export default function (compilations: HandledCompilation[]) {
         throw new Error('[validation_getItem]: id-parameter is required');
       }
 
-      const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
+      const ext = resolveExtension(
+        hash,
         '@statoscope/stats-extension-stats-validation-result'
       );
       const api = ext?.api as ExtensionValidationResultAPI | undefined;
@@ -326,7 +340,7 @@ export default function (compilations: HandledCompilation[]) {
     },
 
     validation_resolveRelatedItem(
-      item?: RelatedItem,
+      item?: RelationItem,
       hash?: string
     ): ResolvedRelatedItem {
       if (!item) {
@@ -393,12 +407,50 @@ export default function (compilations: HandledCompilation[]) {
         throw new Error('[validation_resolveRule]: name-parameter is required');
       }
 
-      const ext = resolveCompilation(hash)?.resolvers.resolveExtension(
+      const ext = resolveExtension(
+        hash,
         '@statoscope/stats-extension-stats-validation-result'
       );
       const api = ext?.api as ExtensionValidationResultAPI | undefined;
 
       return api?.getRule(name) ?? null;
+    },
+
+    customReports_getItems(
+      file: string,
+      hash?: string | null,
+      relatedType?: RelationItem['type'] | null,
+      relatedId?: string | number
+    ): Report<unknown, unknown>[] {
+      if (!file) {
+        throw new Error('[customReports_getItems]: file-parameter is required');
+      }
+
+      const ext = normalizeResult.fileResolvers
+        .get(file)
+        ?.resolveExtension('@statoscope/stats-extension-custom-reports');
+      const api = ext?.api as ExtensionCustomReportsAPI | undefined;
+
+      return [
+        ...(api?.getReports(null, relatedType, relatedId) ?? []),
+        ...(api?.getReports(hash, relatedType, relatedId) ?? []),
+      ];
+    },
+    customReports_getItem(id: string, file: string): Report<unknown, unknown> | null {
+      if (!file) {
+        throw new Error('[customReports_getItem]: file-parameter is required');
+      }
+
+      if (id == null) {
+        throw new Error('[customReports_getItem]: id-parameter is required');
+      }
+
+      const ext = normalizeResult.fileResolvers
+        .get(file)
+        ?.resolveExtension('@statoscope/stats-extension-custom-reports');
+      const api = ext?.api as ExtensionCustomReportsAPI | undefined;
+
+      return api?.getById(id) ?? null;
     },
   };
 }
