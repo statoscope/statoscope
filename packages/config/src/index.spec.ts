@@ -2,10 +2,18 @@ import { requireConfig } from './index';
 
 describe('requireConfig', () => {
   test('should work', () => {
-    expect(requireConfig()).toMatchSnapshot();
-    expect(requireConfig('fooooo')).toMatchSnapshot();
-    expect(
-      requireConfig(require.resolve('../../../test/fixtures/cli/validate/config'))
-    ).toMatchSnapshot();
+    let resolved = requireConfig();
+    resolved.path = String(resolved.path).replace(process.cwd(), '<pwd>');
+    expect(resolved).toMatchSnapshot();
+
+    resolved = requireConfig('fooooo');
+    resolved.path = String(resolved.path).replace(process.cwd(), '<pwd>');
+    expect(resolved).toMatchSnapshot();
+
+    resolved = requireConfig(
+      require.resolve('../../../test/fixtures/cli/validate/config')
+    );
+    resolved.path = String(resolved.path).replace(process.cwd(), '<pwd>');
+    expect(resolved).toMatchSnapshot();
   });
 });

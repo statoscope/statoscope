@@ -3,14 +3,14 @@
 exports[`requireConfig should work 1`] = `
 Object {
   "config": Object {},
-  "path": "/Users/smelukov/github/statoscope/statoscope.config.js",
+  "path": "<pwd>/statoscope.config.js",
 }
 `;
 
 exports[`requireConfig should work 2`] = `
 Object {
   "config": Object {},
-  "path": "/Users/smelukov/github/statoscope/fooooo",
+  "path": "<pwd>/fooooo",
 }
 `;
 
@@ -40,6 +40,6 @@ Object {
       },
     },
   },
-  "path": "/Users/smelukov/github/statoscope/test/fixtures/cli/validate/config.js",
+  "path": "<pwd>/test/fixtures/cli/validate/config.js",
 }
 `;
