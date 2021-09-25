@@ -44,9 +44,9 @@ module.exports = {
     // add webpack plugin with rules
     plugins: ['@statoscope/webpack'],
     reporters: [
-      // console-reporter to output results into cinsole (enabled by default)
+      // console-reporter to output results into console (enabled by default)
       '@statoscope/console',
-      // reporter that henerates UI-report with validation-results
+      // reporter that generates UI-report with validation-results
       ['@statoscope/stats-report', {open: true}],
     ],
     rules: {
