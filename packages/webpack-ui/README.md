@@ -74,7 +74,7 @@ Also, you can view a chunk map to look at a chunk from the other side:
 
 Your bundle may use a few versions of the same package (node module).
 
-Use package tree to find out how many package copies was bundled:
+Use package tree to find out how many package copies were bundled:
 
 <img src="docs/packages.png" width="300px"/>
 
