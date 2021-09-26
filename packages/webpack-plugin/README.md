@@ -188,7 +188,7 @@ new Statoscope({
 
 Statoscope use only stats that it has. There is only one required flag - `hash`.
 
-```
+```jsonc
 stats: {
   all: false, // disable all the stats
   hash: true, // add a compilation hash
@@ -200,7 +200,7 @@ It works, but useless, because the result stats is empty.
 You may disable some stats-flags to decrease your stats-file size.
 Here is a set of minimum useful stats flags:
 
-```
+```jsonc
 stats: {
   all: false, // disable all the stats
   hash: true, // add compilation hash
@@ -213,7 +213,7 @@ stats: {
 
 And an example of full stats:
 
-```
+```jsonc
 stats: {
   all: false, // disable all the stats
   hash: true, // add compilation hash
@@ -226,7 +226,7 @@ stats: {
   chunkOrigins: true, // add chunks origins stats (to find out which modules require a chunk)
   version: true, // add webpack version
   builtAt: true, // add build at time
-  timings: true, // add build at time
+  timings: true, // add timing information
   performance: true, // add info about oversized assets
   source: true, // add module sources (uses to find modules duplicates)
 },
@@ -236,7 +236,7 @@ stats: {
 
 Just specify a context to stats options:
 
-```
+```jsonc
 stats: {
   context: 'path/to/project/root'
 }
