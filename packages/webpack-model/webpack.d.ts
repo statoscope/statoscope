@@ -16,7 +16,7 @@ export declare namespace Webpack {
     name: string;
     size: number;
     issuerPath?: IssuerPathItem[] | null;
-    chunks: Array<Chunk | ChunkID>;
+    chunks?: Array<Chunk | ChunkID>;
     reasons?: Reason[];
     modules?: InnerModule[];
     optimizationBailout?: string[];

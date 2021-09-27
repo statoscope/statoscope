@@ -12,7 +12,9 @@ function handleModule(module: Module, modulesData: ModuleData): number {
     modulesData.ixToModuleMap.set(resolvedId, module);
   } else {
     const resolvedModule = modulesData.ixToModuleMap.get(resolvedId);
-    resolvedModule!.chunks = [...new Set([...resolvedModule!.chunks, ...module.chunks])];
+    resolvedModule!.chunks = [
+      ...new Set([...(resolvedModule!.chunks ?? []), ...(module.chunks ?? [])]),
+    ];
   }
 
   return resolvedId;

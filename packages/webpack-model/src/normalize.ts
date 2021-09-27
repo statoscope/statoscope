@@ -588,7 +588,7 @@ function prepareChunk(chunk: Webpack.Chunk, resolvers: CompilationResolvers): vo
     for (const [i, module] of Object.entries(chunk.modules)) {
       const resolved = resolvers.resolveModule(module.identifier);
       if (resolved) {
-        const chunks = new Set([...resolved.chunks, ...chunk.modules[+i].chunks]);
+        const chunks = new Set([...resolved.chunks, ...(chunk.modules[+i].chunks ?? [])]);
         resolved.chunks = [...chunks].map((chunk) =>
           typeof chunk === 'string' || typeof chunk === 'number'
             ? (resolveChunk(chunk) as NormalizedChunk)
