@@ -14,7 +14,7 @@ Object {
     "description": "Statoscope extension for collecting compressed resource sizes",
     "homepage": "https://github.com/statoscope/statoscope/",
     "name": "@statoscope/stats-extension-compressed",
-    "version": "5.7.1",
+    "version": "5.9.0",
   },
   "payload": Object {
     "compilations": Array [
@@ -226,7 +226,7 @@ Object {
     "description": "Statoscope extension for collecting compressed resource sizes",
     "homepage": "https://github.com/statoscope/statoscope/",
     "name": "@statoscope/stats-extension-compressed",
-    "version": "5.7.1",
+    "version": "5.9.0",
   },
   "payload": Object {
     "compilations": Array [

@@ -14,7 +14,7 @@ Object {
     "description": "Statoscope extension to store custom reports in stats",
     "homepage": "https://github.com/statoscope/statoscope/",
     "name": "@statoscope/stats-extension-custom-reports",
-    "version": "5.7.1",
+    "version": "5.9.0",
   },
   "payload": Object {
     "compilations": Array [

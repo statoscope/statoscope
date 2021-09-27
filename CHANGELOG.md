@@ -1,5 +1,17 @@
 # Changelog
 
+## 5.10.0 (27 September 2021)
+
+### Features
+
+- `[webpack-ui]` - add `chart`-view (based on [highcharts](https://github.com/highcharts/highcharts))
+  ```jsonc
+  {
+    view: 'chart,
+    options: [/* any highcharts options */]
+  }
+  ```
+
 ## 5.9.1 (27 September 2021)
 
 ### Fixes
