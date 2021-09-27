@@ -25,7 +25,7 @@
   "dependencies": {
     "@discoveryjs/view-plugin-highcharts": "^1.0.1",
     "@statoscope/types": "5.9.0",
-    "highcharts": "^8.0.0"
+    "highcharts": "^9.0.0"
   },
   "devDependencies": {
     "@carrotsearch/foamtree": "3.5.0",
