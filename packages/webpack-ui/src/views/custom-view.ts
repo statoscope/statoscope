@@ -10,7 +10,6 @@ function getSessionStorage(): Record<string, boolean> {
 
 function updateSessionStorage(view: string): void {
   const hash = md5(view);
-  console.log(view, hash);
   const allowedViews = getSessionStorage();
   allowedViews[hash] = true;
   sessionStorage.setItem(sessionStorageKey, JSON.stringify(allowedViews));
