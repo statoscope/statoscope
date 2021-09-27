@@ -16,3 +16,34 @@ export type Report<TData, TContext> = {
   view: ViewConfig<TData, TContext>; // any DiscoveryJS view. String turns to script to eval
 };
 ```
+
+## View as a script
+
+Sometimes we need to make a report with more complex view (e.g. with event handling).
+
+JSON can't handle functions, but you can pass any script source into `view`-property instead of JSON.
+
+This source will be `eval`ed on client and should return any DiscoveryJS view.
+
+**my-custom-report-view.js:**
+```js
+(() => [
+  {
+    view: 'button',
+    data: {
+      text: 'Click me',
+    },
+    onClick() {
+      alert('It works!');
+    },
+  },
+])();
+```
+
+**Report config:**
+```js
+({
+  id: 'foo',
+  view: fs.readFileSync('./my-custom-report-view.js', 'utf8')
+})
+```
