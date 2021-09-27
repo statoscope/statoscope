@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/stats-validator-reporter-console",
-  "version": "5.7.1",
+  "version": "5.9.0",
   "description": "Console reporter for @statoscope/stats-validator",
   "main": "./dist/index.js",
   "scripts": {
@@ -18,7 +18,7 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "@statoscope/types": "5.7.1",
+    "@statoscope/types": "5.9.0",
     "chalk": "^4.1.2"
   }
 }
