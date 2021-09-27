@@ -13,6 +13,6 @@ export type Report<TData, TContext> = {
   name?: string; // report title
   compilation?: string | null; // if specified then a report will be shown only in specific compilation
   data?: TData | (() => Promise<TData> | TData); // raw data for the report or a function that produces a data (may return promise)
-  view: ViewConfig<TData, TContext>; // any DiscoveryJS view. String turns to script to eval
+  view: string | ViewConfig<TData, TContext>; // any DiscoveryJS. String turns to script to eval
 };
 ```
