@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 5.9.0 (27 September 2021)
 
 ### Features
 
@@ -55,6 +55,8 @@
 - `[stats-validator-plugin-webpack]` - use `module.identifier` to resolve a module (#107)
 
 ### Bugfix
+
+- `[webpack-model]` - not fail when incomplete stats have used
 
 ## 5.8.1 (19 September 2021)
 
