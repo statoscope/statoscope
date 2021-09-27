@@ -63,7 +63,7 @@ export default class StatoscopeWebpackPlugin {
     const context =
       options.statsOptions?.context ??
       // @ts-ignore
-      compiler.options.stats.context ??
+      compiler.options.stats?.context ??
       compiler.context;
 
     const packageInfoExtension = new WebpackPackageInfoExtension();

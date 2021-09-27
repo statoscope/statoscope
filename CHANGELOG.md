@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.9.1 (27 September 2021)
+
+### Fixes
+
+- `[webpack-plugin]` - fix crash if there is no context in stats config
+
 ## 5.9.0 (27 September 2021)
 
 ### Features
@@ -54,7 +60,7 @@
 - `[webpack-stats-extension-compressed]` - use `module.identifier` to resolve a module (#107)
 - `[stats-validator-plugin-webpack]` - use `module.identifier` to resolve a module (#107)
 
-### Bugfix
+### Fixes
 
 - `[webpack-model]` - not fail when incomplete stats have used
 
