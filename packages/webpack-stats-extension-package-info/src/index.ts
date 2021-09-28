@@ -20,7 +20,7 @@ export default class WebpackCompressedExtension {
 
   handleCompiler(compiler: Compiler, context?: string): void {
     // @ts-ignore
-    context ??= compiler.options.stats.context ?? compiler.context;
+    context ??= compiler.options.stats?.context ?? compiler.context;
     compiler.hooks.compilation.tap(pluginName, (compilation): void => {
       const items: Array<{
         packageName: string;
