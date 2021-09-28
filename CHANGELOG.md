@@ -1,5 +1,12 @@
 # Changelog
 
+## 5.10.1 (28 September 2021)
+
+### Fixes
+
+- `[stats-validator-plugin-webpack]` - fix `diff-deprecated-packages` rule
+- `[stats-validator-plugin-webpack]` - fix `diff-deprecated-modules` rule
+
 ## 5.10.0 (27 September 2021)
 
 ### Features

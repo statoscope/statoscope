@@ -44,7 +44,7 @@ Array [
                     "userRequest": "is-array",
                   },
                 ],
-                "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
+                "module": "./node_modules/is-array/index.js",
               },
             ],
             "packageName": "is-array",

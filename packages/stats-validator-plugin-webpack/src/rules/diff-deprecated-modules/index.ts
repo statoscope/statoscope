@@ -52,19 +52,20 @@ function handledModules(
   .group(<identifier>)
   .({
     $key;
-    $afterReasons: value.reasons;
-    $referenceReasons: $reference.compilations
+    $iReasons: value.reasons;
+    $rReasons: $reference.compilations
     .(
       $compilation: $;
       $key.resolveModule($compilation.hash)
     ).[].reasons;
-    $diff: $afterReasons.[
-      $item: $;
-      not $referenceReasons[=>moduleIdentifier=$item.moduleIdentifier and userRequest=$item.userRequest and type=$item.type]
-    ];
+    $diff: $iReasons.({
+      $ir: $;
+      iReason: $ir,
+      rReason: $rReasons[=>$ir.moduleIdentifier = moduleIdentifier and $ir.type = type and $ir.userRequest = userRequest]
+    }).[not rReason].(iReason);
     module: value.pick(),
-    after: $afterReasons,
-    reference: $referenceReasons,
+    after: $iReasons,
+    reference: $rReasons,
     $diff
   }).[diff]
   `;

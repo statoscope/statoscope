@@ -64,8 +64,8 @@ function handleTarget(
   .group(<package.name>)
   .({
     $key;
-    $afterReasons: value.instances.modules.reasons;
-    $referenceReasons: $reference.compilations
+    $iModules: value.instances.modules;
+    $rModules: $reference.compilations
       .exclude({
         exclude: $exclude.[type='compilation'].name,
         get: <name>,
@@ -80,14 +80,19 @@ function handleTarget(
         $passVersion: (not $target.version or not version).bool();
         $passVersion or version.semverSatisfies($target.version)
       ]
-      .modules.reasons;
-    $diff: $afterReasons.[
-      $item: $;
-      not $referenceReasons[=>moduleIdentifier=$item.moduleIdentifier and userRequest=$item.userRequest and type=$item.type]
-    ].group(<resolvedModule>).({module: key, reasons: value}).[reasons];
-    packageName: key,
-    reference: $referenceReasons,
-    after: $afterReasons,
+      .modules;
+    $rReasons: $rModules.reasons; 
+    $diff: $iModules.({
+      module: $,
+      reasons: reasons.({
+        $ir: $;
+        iReason: $ir,
+        rReason: $rReasons[=>$ir.moduleIdentifier = moduleIdentifier and $ir.type = type and $ir.userRequest = userRequest]
+      }).[not rReason].(iReason)
+    }).[reasons];
+    after: $iModules.reasons,
+    reference: $rModules.reasons,
+    packageName: $key,
     $diff
   }).[diff]`;
 
