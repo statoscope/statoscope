@@ -63,7 +63,7 @@ function handledTarget(
     for (const module of resultItem.modules) {
       api.message(`Module ${module.name} should not be used`, {
         filename: resultItem.file.name,
-        compilation: resultItem.compilation.name || resultItem.compilation.hash,
+        compilation: resultItem.compilation.hash,
         related: [{ type: 'module', id: module.identifier }],
         details: [
           {

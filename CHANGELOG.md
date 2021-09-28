@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.10.3 (28 September 2021)
+
+### Fixes
+
+- `[stats-validator-plugin-webpack]` - use compilation hash instead of compilation name
+
 ## 5.10.2 (28 September 2021)
 
 ### Fixes

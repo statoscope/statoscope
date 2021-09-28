@@ -19,7 +19,7 @@ Object {
             "description": "Webpack adapter for @statoscope/stats-extension-package-info",
             "homepage": "https://github.com/statoscope/statoscope/",
             "name": "@statoscope/webpack-stats-extension-package-info",
-            "version": "5.7.1",
+            "version": "5.10.2",
           },
           "author": Object {
             "name": "Sergey Melyukov",
@@ -28,7 +28,7 @@ Object {
           "description": "Statoscope extension for collecting package info (e.g. available versions)",
           "homepage": "https://github.com/statoscope/statoscope/",
           "name": "@statoscope/stats-extension-package-info",
-          "version": "5.7.1",
+          "version": "5.9.0",
         },
         "payload": Object {
           "compilations": Array [
@@ -63,17 +63,6 @@ Object {
                       "info": Object {
                         "version": "1.0.0",
                       },
-                      "path": "simple/node_modules/foo",
-                    },
-                  ],
-                  "name": "foo",
-                },
-                Object {
-                  "instances": Array [
-                    Object {
-                      "info": Object {
-                        "version": "1.0.0",
-                      },
                       "path": "simple/node_modules/bar",
                     },
                     Object {
@@ -84,6 +73,17 @@ Object {
                     },
                   ],
                   "name": "bar",
+                },
+                Object {
+                  "instances": Array [
+                    Object {
+                      "info": Object {
+                        "version": "1.0.0",
+                      },
+                      "path": "simple/node_modules/foo",
+                    },
+                  ],
+                  "name": "foo",
                 },
                 Object {
                   "instances": Array [
@@ -111,7 +111,7 @@ Object {
             "description": "Webpack adapter for @statoscope/stats-extension-compressed",
             "homepage": "https://github.com/statoscope/statoscope/",
             "name": "@statoscope/webpack-stats-extension-compressed",
-            "version": "5.7.1",
+            "version": "5.9.0",
           },
           "author": Object {
             "name": "Sergey Melyukov",
@@ -120,7 +120,7 @@ Object {
           "description": "Statoscope extension for collecting compressed resource sizes",
           "homepage": "https://github.com/statoscope/statoscope/",
           "name": "@statoscope/stats-extension-compressed",
-          "version": "5.7.1",
+          "version": "5.9.0",
         },
         "payload": Object {
           "compilations": Array [
@@ -371,7 +371,7 @@ Object {
           "description": "Statoscope extension to store custom reports in stats",
           "homepage": "https://github.com/statoscope/statoscope/",
           "name": "@statoscope/stats-extension-custom-reports",
-          "version": "5.7.1",
+          "version": "5.9.0",
         },
         "payload": Object {
           "compilations": Array [
@@ -417,7 +417,7 @@ Object {
             "description": "Stats report reporter for @statoscope/stats-validator",
             "homepage": "https://github.com/statoscope/statoscope/",
             "name": "@statoscope/stats-validator-reporter-stats-report",
-            "version": "5.8.0",
+            "version": "5.10.0",
           },
           "author": Object {
             "name": "Sergey Melyukov",
@@ -426,7 +426,7 @@ Object {
           "description": "Statoscope extension that collects stats validation result",
           "homepage": "https://github.com/statoscope/statoscope/",
           "name": "@statoscope/stats-extension-stats-validation-result",
-          "version": "5.7.1",
+          "version": "5.9.0",
         },
         "payload": Object {
           "compilations": Array [
@@ -742,7 +742,7 @@ Object {
                   "description": "Plugin for @statoscope/stats-validator to validate webpack stats",
                   "homepage": "https://github.com/statoscope/statoscope/",
                   "name": "@statoscope/stats-validator-plugin-webpack",
-                  "version": "5.8.1",
+                  "version": "5.10.1",
                 },
               },
               "name": "webpack/restricted-modules",
@@ -758,7 +758,7 @@ Object {
                   "description": "Plugin for @statoscope/stats-validator to validate webpack stats",
                   "homepage": "https://github.com/statoscope/statoscope/",
                   "name": "@statoscope/stats-validator-plugin-webpack",
-                  "version": "5.8.1",
+                  "version": "5.10.1",
                 },
               },
               "name": "webpack/restricted-packages",
@@ -877,7 +877,7 @@ Object {
       "two.js",
     ],
   },
-  "builtAt": 1632498487018,
+  "builtAt": 1632826836967,
   "children": Array [],
   "chunks": Array [
     Object {
@@ -4803,7 +4803,7 @@ Object {
   },
   "outputPath": "./simple/dist-prod",
   "publicPath": "auto",
-  "time": 607,
+  "time": 671,
   "version": "5.53.0",
   "warnings": Array [],
   "warningsCount": 0,

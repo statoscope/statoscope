@@ -84,7 +84,7 @@ const noPackagesDups: WebpackRule<Params> = (ruleParams, data, api): void => {
         }`,
         {
           filename: item.file.name,
-          compilation: item.compilation.name || item.compilation.hash,
+          compilation: item.compilation.hash,
           details: [
             {
               type: 'text',

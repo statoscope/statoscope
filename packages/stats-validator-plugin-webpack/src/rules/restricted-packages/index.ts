@@ -89,7 +89,7 @@ function handleTarget(
         } should not be used`,
         {
           filename: resultItem.file.name,
-          compilation: resultItem.compilation.name || resultItem.compilation.hash,
+          compilation: resultItem.compilation.hash,
           details: [
             { type: 'text', content: makeInstanceDetailsContent(instances, false) },
             { type: 'tty', content: makeInstanceDetailsContent(instances, true) },
