@@ -2,6 +2,8 @@
 
 ## 5.10.2 (28 September 2021)
 
+### Fixes
+
 - `[webpack-stats-extension-package-info]` - fix crash if there is no context in stats config
 
 ## 5.10.1 (28 September 2021)
