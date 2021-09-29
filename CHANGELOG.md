@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.10.4 (29 September 2021)
+
+### Fixes
+
+- `[cli]` - use `>=12.0.0` instead of `^12.0.0` in engines.node
+
 ## 5.10.3 (28 September 2021)
 
 ### Fixes
