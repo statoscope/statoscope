@@ -71,17 +71,21 @@ export function makeBooleanSetting(
             },
             checked: settingValue.get(),
             content: (element: HTMLDivElement): void => {
-              element.style.display = 'inline-block';
               if (setting.hint) {
                 element.title = setting.hint;
               }
 
+              element.classList.add(settingsStyles.title);
+
               discovery.view.render(element, [
-                `text:"${setting.title}"`,
                 {
-                  view: 'text',
+                  view: 'block',
+                  content: [`text:"${setting.title}"`],
+                },
+                {
+                  view: 'block',
                   when: JSON.stringify(!!setting.hint),
-                  data: '"❓"',
+                  className: settingsStyles.hasHint,
                 },
               ]);
             },
@@ -107,12 +111,14 @@ export function makeToggleSetting<TType>(
               element.title = setting.hint;
             }
 
+            element.classList.add(settingsStyles.title);
+
             discovery.view.render(element, [
               `text:"${setting.title}"`,
               {
-                view: 'text',
+                view: 'block',
                 when: JSON.stringify(!!setting.hint),
-                data: '"❓"',
+                className: settingsStyles.hasHint,
               },
             ]);
           },
@@ -153,12 +159,14 @@ export function makeSelectSetting<TType>(
               element.title = setting.hint;
             }
 
+            element.classList.add(settingsStyles.title);
+
             discovery.view.render(element, [
               `text:"${setting.title}"`,
               {
-                view: 'text',
+                view: 'block',
                 when: JSON.stringify(!!setting.hint),
-                data: '"❓"',
+                className: settingsStyles.hasHint,
               },
             ]);
           },
@@ -197,7 +205,8 @@ export function makeDebounceFn<TArgs extends any[], TFn extends (...args: TArgs)
 
 export function makeStringSetting(
   discovery: StatoscopeWidget,
-  setting: SettingOptions<string>
+  setting: SettingOptions<string>,
+  placeholder = ''
 ): ViewConfigData {
   return makeSettingItem(discovery, setting, (settingValue, setting) => {
     return [
@@ -209,12 +218,14 @@ export function makeStringSetting(
               element.title = setting.hint;
             }
 
+            element.classList.add(settingsStyles.title);
+
             discovery.view.render(element, [
               `text:"${setting.title}"`,
               {
-                view: 'text',
+                view: 'block',
                 when: JSON.stringify(!!setting.hint),
-                data: '"❓"',
+                className: settingsStyles.hasHint,
               },
             ]);
           },
@@ -225,6 +236,7 @@ export function makeStringSetting(
         content: [
           {
             view: 'input',
+            placeholder,
             onChange: makeDebounceFn((value: string): void => {
               settingValue.set(value);
             }),

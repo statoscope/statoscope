@@ -207,11 +207,15 @@ function addSettings(discovery: StatoscopeWidget): void {
   );
 
   discovery.nav.menu.append(
-    makeStringSetting(discovery, {
-      title: 'Ignore from size calculation',
-      hint: 'Ignore matched resources from size calculation',
-      key: SETTING_EXCLUDE_RESOURCES_FROM_SIZE_CALC,
-      defaultValue: SETTING_EXCLUDE_RESOURCES_FROM_SIZE_CALC_DEFAULT,
-    })
+    makeStringSetting(
+      discovery,
+      {
+        title: 'Ignore from size calculation',
+        hint: 'Ignore matched resources from size calculation',
+        key: SETTING_EXCLUDE_RESOURCES_FROM_SIZE_CALC,
+        defaultValue: SETTING_EXCLUDE_RESOURCES_FROM_SIZE_CALC_DEFAULT,
+      },
+      'regexp'
+    )
   );
 }
