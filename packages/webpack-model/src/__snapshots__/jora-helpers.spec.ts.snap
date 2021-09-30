@@ -1851,7 +1851,7 @@ Object {
     "description": "Plugin for @statoscope/stats-validator to validate webpack stats",
     "homepage": "https://github.com/statoscope/statoscope/",
     "name": "@statoscope/stats-validator-plugin-webpack",
-    "version": "5.10.1",
+    "version": "5.10.3",
   },
 }
 `;

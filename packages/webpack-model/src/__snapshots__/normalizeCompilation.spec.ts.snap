@@ -63,6 +63,17 @@ Object {
                       "info": Object {
                         "version": "1.0.0",
                       },
+                      "path": "simple/node_modules/foo",
+                    },
+                  ],
+                  "name": "foo",
+                },
+                Object {
+                  "instances": Array [
+                    Object {
+                      "info": Object {
+                        "version": "1.0.0",
+                      },
                       "path": "simple/node_modules/bar",
                     },
                     Object {
@@ -73,17 +84,6 @@ Object {
                     },
                   ],
                   "name": "bar",
-                },
-                Object {
-                  "instances": Array [
-                    Object {
-                      "info": Object {
-                        "version": "1.0.0",
-                      },
-                      "path": "simple/node_modules/foo",
-                    },
-                  ],
-                  "name": "foo",
                 },
                 Object {
                   "instances": Array [
@@ -742,7 +742,7 @@ Object {
                   "description": "Plugin for @statoscope/stats-validator to validate webpack stats",
                   "homepage": "https://github.com/statoscope/statoscope/",
                   "name": "@statoscope/stats-validator-plugin-webpack",
-                  "version": "5.10.1",
+                  "version": "5.10.3",
                 },
               },
               "name": "webpack/restricted-modules",
@@ -758,7 +758,7 @@ Object {
                   "description": "Plugin for @statoscope/stats-validator to validate webpack stats",
                   "homepage": "https://github.com/statoscope/statoscope/",
                   "name": "@statoscope/stats-validator-plugin-webpack",
-                  "version": "5.10.1",
+                  "version": "5.10.3",
                 },
               },
               "name": "webpack/restricted-packages",
@@ -2804,7 +2804,7 @@ Object {
       "two.js",
     ],
   },
-  "builtAt": 1632826836967,
+  "builtAt": 1632999423868,
   "children": Array [],
   "chunks": Array [
     Object {
@@ -3083,7 +3083,7 @@ Object {
   },
   "outputPath": "./simple/dist-prod",
   "publicPath": "auto",
-  "time": 671,
+  "time": 629,
   "version": "5.53.0",
   "warnings": Array [],
   "warningsCount": 0,
