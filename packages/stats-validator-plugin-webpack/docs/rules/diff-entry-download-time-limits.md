@@ -61,7 +61,7 @@ type Options = {
     string |
     RegExp |
     {
-      type: 'compilation' | 'entry',
+      type: 'compilation' | 'entry' | 'asset',
       name: string
     }
   >;
@@ -147,10 +147,15 @@ Specify compilations or entrypoints that must be ignored.
           number: 10
         }
       },
-      exclude: ["foo"] // or regexp
+      exclude: [
+        {type: 'entrypoint', name:'foo'},
+        {type: 'asset', name: /\.(map)$/}
+      ]
     }
   ]
 }
 ```
 
-There are no errors, even if download time of `foo` entrypoint will be over the limit (10%)
+There are no errors, even if download time of `foo` entrypoint will be over the limit (10%).
+
+Also, size of `.map` files will be ignored.

@@ -53,7 +53,7 @@ type Options = {
     string |
     RegExp |
     {
-      type: 'compilation' | 'entry',
+      type: 'compilation' | 'entry' | 'asset',
       name: string
     }
   >;
@@ -126,7 +126,7 @@ Use compressed size (if available) of chunks to calculate limit exceeding.
 
 ### exclude
 
-Specify compilations name or entrypoints name that must be ignored by rule.
+Specify compilations name, entrypoints name, or assets that must be ignored by rule.
 
 ```json5
 {
@@ -139,10 +139,15 @@ Specify compilations name or entrypoints name that must be ignored by rule.
           number: 10
         }
       },
-      exclude: ["foo"] // or regexp
+      exclude: [
+        {type: 'entrypoint', name:'foo'},
+        {type: 'asset', name: /\.(map)$/}
+      ]
     }
   ]
 }
 ```
 
-There are no errors, even if download size of `foo` entrypoint will be over the limit (10%)
+There are no errors, even if download time of `foo` entrypoint will be over the limit (10%).
+
+Also, size of `.map` files will be ignored.
