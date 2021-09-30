@@ -13,7 +13,7 @@ $chunksDiff: {
     .({
       $hash: hash;
       $chunkSize: chunk.size;
-      $chunkFilesSizes: chunk.files.[].(getAssetSize($hash, $useCompressedSize));
+      $chunkFilesSizes: chunk.files.[].[not name.shouldExcludeResource()].(getAssetSize($hash, $useCompressedSize));
       $chunkFilesSize: $chunkFilesSizes.reduce(=> size + $$, 0);
       chunk,
       hash,
@@ -46,7 +46,7 @@ $chunksDiff: {
     .({
       $hash: hash;
       $chunkSize: chunk.size;
-      $chunkFilesSizes: chunk.files.[].(getAssetSize($hash, $useCompressedSize));
+      $chunkFilesSizes: chunk.files.[].[not name.shouldExcludeResource()].(getAssetSize($hash, $useCompressedSize));
       $chunkFilesSize: $chunkFilesSizes.reduce(=> size + $$, 0);
       chunk,
       hash,
@@ -80,10 +80,10 @@ $chunksDiff: {
       $a: a;
       $b: b;
       $chunkASize: $a.chunk.size;
-      $chunkAFileSizes: $a.chunk.files.[].(getAssetSize($a.hash, $useCompressedSize));
+      $chunkAFileSizes: $a.chunk.files.[].[not name.shouldExcludeResource()].(getAssetSize($a.hash, $useCompressedSize));
       $chunkAFileSize: $chunkAFileSizes.reduce(=> size + $$, 0);
       $chunkBSize: $b.chunk.size;
-      $chunkBFileSizes: $b.chunk.files.[].(getAssetSize($b.hash, $useCompressedSize));
+      $chunkBFileSizes: $b.chunk.files.[].[not name.shouldExcludeResource()].(getAssetSize($b.hash, $useCompressedSize));
       $chunkBFileSize: $chunkBFileSizes.reduce(=> size + $$, 0);
       ...b,
       diff: [

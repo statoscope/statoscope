@@ -61,7 +61,7 @@ export default function (discovery: StatoscopeWidget): void {
           {
             view: 'badge',
             data: `{
-              $sizes: chunk.files.[].(getAssetSize(hash or #.params.hash));
+              $sizes: chunk.files.[].[not name.shouldExcludeResource()].(getAssetSize(hash or #.params.hash));
               prefix: "file",
               text: $sizes.reduce(=> size + $$, 0).formatSize(),
               hint: $sizes.[compressor].size() ? 'compressed' : 'uncompressed'
@@ -72,7 +72,7 @@ export default function (discovery: StatoscopeWidget): void {
             // todo: interpolate color from gray(0s) to red(1s)
             view: 'download-badge',
             data: `{
-              size: chunk.files.[].(getAssetSize(hash or #.params.hash))
+              size: chunk.files.[].[not name.shouldExcludeResource()].(getAssetSize(hash or #.params.hash))
                 .reduce(=> settingAssetsInjectType() = 'sync' ? (size + $$) : (size > $$ ? size : $$), 0)
             }`,
             when: !compact && showDownloadTime,

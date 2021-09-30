@@ -7,7 +7,7 @@ $statsBCompressed: $statB.file.__statoscope.compilations.modules.source.sizes.[c
 $useCompressedSize: settingShowCompressed() and $statsACompressed and $statsBCompressed;
 
 $getChunksAssetsSize: => (
-  files.[].(getAssetSize($$, $useCompressedSize))
+  files.[].[not name.shouldExcludeResource()].(getAssetSize($$, $useCompressedSize))
 );
 
 

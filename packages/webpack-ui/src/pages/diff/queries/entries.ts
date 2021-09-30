@@ -1,6 +1,6 @@
 export default `
 $getEntryChunksSizes: => (
-  files.[].(getAssetSize($$, $useCompressedSize))
+  files.[not name.shouldExcludeResource()].[].(getAssetSize($$, $useCompressedSize))
 );
 
 $addedEntrypoints: $statB.compilation.entrypoints.[

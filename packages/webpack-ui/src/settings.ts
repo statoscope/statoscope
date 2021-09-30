@@ -127,3 +127,6 @@ export const SETTING_NETWORK_SPEED = 'network_speed';
 export const SETTING_NETWORK_SPEED_DEFAULT = TYPE_3G_FAST.name;
 export const SETTING_ASSETS_INJECT_TYPE = 'assets_inject_type';
 export const SETTING_ASSETS_INJECT_TYPE_DEFAULT = 'sync';
+export const SETTING_EXCLUDE_RESOURCES_FROM_SIZE_CALC =
+  'exclude_resources_from_size_calc';
+export const SETTING_EXCLUDE_RESOURCES_FROM_SIZE_CALC_DEFAULT = '\\.(map)$';

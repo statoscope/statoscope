@@ -1,17 +1,20 @@
 .item {
-  padding: 4px 6px 4px 12px;
+  padding: 5px 10px;
 }
 
-.toggle :global(.view-toggle) {
+.item:first-child {
+  padding-top: 10px;
+}
+
+.item:last-child {
+  padding-bottom: 10px;
+}
+
+.item :global(.view-toggle) {
   font-size: 11px;
 }
 
-.select :global(.view-select) {
+.item :global(.view-select), .item :global(.view-input) {
   line-height: 0.9;
   font-size: 11px;
-}
-
-.caption {
-  display: inline-block;
-  padding-right: 1ex;
 }
