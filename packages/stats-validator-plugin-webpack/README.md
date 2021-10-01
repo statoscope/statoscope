@@ -23,7 +23,7 @@ This package contains rules to validate a webpack bundle.
           // ensures that the build time has not exceeded the limit (10 sec)
           '@statoscope/webpack/build-time-limits': ['error', 10000],
           // ensures that bundle doesn't use specified modules
-          '@statoscope/webpack/restricted-modules': ['error', [/some-module\.js/,]],
+          '@statoscope/webpack/restricted-modules': ['error', [/\/some-package\/dist\/some-module\.js/]],
           // ensures that bundle doesn't use specified packages
           '@statoscope/webpack/restricted-packages': ['error', ['lodash', 'browserify-crypto']],
           // ensures that bundle hasn't package duplicates
