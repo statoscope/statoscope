@@ -69,7 +69,7 @@ module.exports = {
         { global: { maxSizeDiff: 3*1024 } },
       ],
       // compares usage of specified packages usage between input and reference stats. Fails if rxjs usage has increased
-      '@statoscope/webpack/diff-deprecated-packages': ['error', ['rxjs'']],
+      '@statoscope/webpack/diff-deprecated-packages': ['error', ['rxjs']],
     }
   }
 }
