@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.11.1 (01 October 2021)
+
+### Build
+
+`[webpack-ui]` - use default target for babel-env (support more browsers)
+
 ## 5.11.0 (01 October 2021)
 
 ### Features
