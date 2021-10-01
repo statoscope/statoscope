@@ -18,6 +18,7 @@ function makeConfig(config) {
   return merge(
     {
       mode,
+      devtool: 'source-map',
       entry: './src/',
       output: {
         library: 'Statoscope',

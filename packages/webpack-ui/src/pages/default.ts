@@ -85,10 +85,10 @@ export default function (discovery: StatoscopeWidget): void {
               $statA: $;
             
               $allChunks: $statA.compilation.entrypoints.data.chunks + $statA.compilation.entrypoints.data.chunks..children;
-              $allAssetsSize: $allChunks.files.[].(getAssetSize($statA.compilation.hash)).reduce(=> size + $$, 0);
+              $allAssetsSize: $allChunks.files.[].[not name.shouldExcludeResource()].(getAssetSize($statA.compilation.hash)).reduce(=> size + $$, 0);
 
               $initialChunks: $allChunks.[initial];
-              $initialAssetsSizes: $initialChunks.files.[].(getAssetSize($statA.compilation.hash));
+              $initialAssetsSizes: $initialChunks.files.[].[not name.shouldExcludeResource()].(getAssetSize($statA.compilation.hash));
               $initialAssetsSize: $initialAssetsSizes.reduce(=> size + $$, 0);
 
               $initialAssetsDownloadTime: $initialAssetsSizes

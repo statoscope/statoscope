@@ -3,6 +3,7 @@ import { jora as joraHelpers } from '@statoscope/helpers';
 import { Node } from '@statoscope/webpack-model/dist/modules-to-foam-tree';
 import {
   NormalizedAsset,
+  NormalizedChunk,
   NormalizedCompilation,
   NormalizedModule,
 } from '@statoscope/webpack-model/dist/normalize';
@@ -12,6 +13,8 @@ import { PrepareFn } from '@statoscope/types';
 import settings, {
   SETTING_ASSETS_INJECT_TYPE,
   SETTING_ASSETS_INJECT_TYPE_DEFAULT,
+  SETTING_EXCLUDE_RESOURCES_FROM_SIZE_CALC,
+  SETTING_EXCLUDE_RESOURCES_FROM_SIZE_CALC_DEFAULT,
   SETTING_HIDE_CHILD_COMPILATIONS,
   SETTING_HIDE_CHILD_COMPILATIONS_DEFAULT,
   SETTING_HIDE_NODE_MODULES,
@@ -125,6 +128,21 @@ export default (() =>
         return settings
           .get(SETTING_ASSETS_INJECT_TYPE, SETTING_ASSETS_INJECT_TYPE_DEFAULT)
           .get();
+      },
+      settingExcludeResourceFromCalc(): string {
+        return settings
+          .get(
+            SETTING_EXCLUDE_RESOURCES_FROM_SIZE_CALC,
+            SETTING_EXCLUDE_RESOURCES_FROM_SIZE_CALC_DEFAULT
+          )
+          .get();
+      },
+      shouldExcludeResource(resource: string): boolean {
+        // @ts-ignore
+        const rxSource = this.settingExcludeResourceFromCalc() || '';
+        const rx = new RegExp(rxSource);
+
+        return !!resource.match(rx);
       },
     });
 

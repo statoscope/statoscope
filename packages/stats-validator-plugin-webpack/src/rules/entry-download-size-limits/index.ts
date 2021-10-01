@@ -16,7 +16,7 @@ export type Limits = {
   maxAsyncSize?: number;
 };
 
-export type RuleExcludeItem = ExcludeItem<'compilation' | 'entry'>;
+export type RuleExcludeItem = ExcludeItem<'compilation' | 'entry' | 'asset'>;
 
 export type Params = {
   exclude?: Array<string | RegExp | RuleExcludeItem>;
@@ -58,7 +58,7 @@ function formatError(
 }
 
 export type NormalizedParams = Exclude<Params, 'exclude'> & {
-  exclude: ExcludeItem<'compilation' | 'entry'>[];
+  exclude: RuleExcludeItem[];
 };
 
 const entryDownloadSizeLimits: WebpackRule<Params> = (ruleParams, data, api): void => {
@@ -87,7 +87,10 @@ const entryDownloadSizeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
   $input: resolveInputFile();
   $params: #.params;
   $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  $getSizeByChunks: => files.exclude({
+    exclude: $params.exclude.[type='asset'].name,
+    get: <name>,
+  }).(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
   
   $input.compilations
   .exclude({

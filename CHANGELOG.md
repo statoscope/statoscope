@@ -1,5 +1,21 @@
 # Changelog
 
+## 5.11.0 (30 September 2021)
+
+### Features
+
+- `[webpack-ui]` - add new options to specify a regexp
+  
+  All assets matched the regexp will be ignored from download size/time calculation
+- `[stats-validator-plugin-webpack]` - add asset-type exclude to `diff-entry-download-size-limits`-rule
+- `[stats-validator-plugin-webpack]` - add asset-type exclude to `diff-entry-download-time-limits`-rule
+- `[stats-validator-plugin-webpack]` - add asset-type exclude to `entry-download-size-limits`-rule
+- `[stats-validator-plugin-webpack]` - add asset-type exclude to `entry-download-time-limits`-rule
+
+### Refactor
+
+- `[webpack-ui]` - improve settings popup
+
 ## 5.10.4 (29 September 2021)
 
 ### Fixes

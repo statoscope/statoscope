@@ -1,5 +1,150 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`exclude asset exclude all 1`] = `Array []`;
+
+exports[`exclude asset exclude some 1`] = `
+Array [
+  Object {
+    "compilation": "9eb9a218218f1ee4ba40",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "after": Object {
+              "asyncDownloadTime": 0,
+              "downloadTime": 37.88596705386514,
+              "initialDownloadTime": 37.88596705386514,
+            },
+            "before": Object {
+              "asyncDownloadTime": 0,
+              "downloadTime": 9.014731959292764,
+              "initialDownloadTime": 9.014731959292764,
+            },
+            "compilation": "9eb9a218218f1ee4ba40",
+            "diff": Object {
+              "asyncDownloadTime": Object {
+                "absolute": 0,
+                "ok": true,
+                "percent": 0,
+              },
+              "downloadTime": Object {
+                "absolute": 28.871235094572373,
+                "ok": false,
+                "percent": 320.26726057906455,
+              },
+              "initialDownloadTime": Object {
+                "absolute": 28.871235094572373,
+                "ok": true,
+                "percent": 320.26726057906455,
+              },
+            },
+            "entry": "one",
+            "rule": Object {
+              "maxAsyncDownloadTimeDiff": Infinity,
+              "maxDownloadTimeDiff": Object {
+                "number": 1,
+                "type": "absolute",
+              },
+              "maxInitialDownloadTimeDiff": Infinity,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"one\\": Download time diff of assets is 29 ms (320.27%). It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+  },
+  Object {
+    "compilation": "9eb9a218218f1ee4ba40",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "after": Object {
+              "asyncDownloadTime": 11.845638877467104,
+              "downloadTime": 257.010208932977,
+              "initialDownloadTime": 245.16457005550987,
+            },
+            "before": Object {
+              "asyncDownloadTime": 2.6903654399671053,
+              "downloadTime": 175.65677040501646,
+              "initialDownloadTime": 172.96640496504935,
+            },
+            "compilation": "9eb9a218218f1ee4ba40",
+            "diff": Object {
+              "asyncDownloadTime": Object {
+                "absolute": 9.1552734375,
+                "ok": true,
+                "percent": 340.2985074626866,
+              },
+              "downloadTime": Object {
+                "absolute": 81.35343852796052,
+                "ok": false,
+                "percent": 46.313864441650466,
+              },
+              "initialDownloadTime": Object {
+                "absolute": 72.19816509046052,
+                "ok": true,
+                "percent": 41.74114915844456,
+              },
+            },
+            "entry": "two",
+            "rule": Object {
+              "maxAsyncDownloadTimeDiff": Infinity,
+              "maxDownloadTimeDiff": Object {
+                "number": 1,
+                "type": "absolute",
+              },
+              "maxInitialDownloadTimeDiff": Infinity,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"two\\": Download time diff of assets is 81 ms (46.31%). It's over the 1 ms limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+  },
+]
+`;
+
 exports[`maxAsyncDownloadTimeDiff global 1`] = `
 Array [
   Object {

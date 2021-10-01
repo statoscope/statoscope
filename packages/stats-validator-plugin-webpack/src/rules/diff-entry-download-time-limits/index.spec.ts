@@ -231,3 +231,22 @@ describe('maxAsyncDownloadTimeDiff', () => {
     expect(api.getStorage()).toMatchSnapshot();
   });
 });
+
+describe('exclude', () => {
+  describe('asset', () => {
+    test('exclude all', () => {
+      const api = prepareAPI({
+        global: { maxDownloadTimeDiff: 1 },
+        exclude: [{ type: 'asset', name: /.+/ }],
+      });
+      expect(api.getStorage()).toMatchSnapshot();
+    });
+    test('exclude some', () => {
+      const api = prepareAPI({
+        global: { maxDownloadTimeDiff: 1 },
+        exclude: [{ type: 'asset', name: /foo/ }],
+      });
+      expect(api.getStorage()).toMatchSnapshot();
+    });
+  });
+});

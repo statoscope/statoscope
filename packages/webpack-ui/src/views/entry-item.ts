@@ -47,7 +47,7 @@ export default function (discovery: StatoscopeWidget): void {
             view: 'badge',
             data: `$hash:hash or #.params.hash;
           {
-            $sizes: entrypoint.data.chunks.[initial].files.[].(getAssetSize(hash or #.params.hash));
+            $sizes: entrypoint.data.chunks.[initial].files.[].[not name.shouldExcludeResource()].(getAssetSize(hash or #.params.hash));
             prefix: "initial size",
             text: $sizes.reduce(=> size + $$, 0).formatSize(),
             color: entrypoint.data.isOverSizeLimit and 0.colorFromH(),
@@ -59,7 +59,7 @@ export default function (discovery: StatoscopeWidget): void {
             // todo: interpolate color from gray(0s) to red(1s)
             view: 'download-badge',
             data: `{
-              $sizes: entrypoint.data.chunks.[initial].files.[].(getAssetSize(hash or #.params.hash));
+              $sizes: entrypoint.data.chunks.[initial].files.[].[not name.shouldExcludeResource()].(getAssetSize(hash or #.params.hash));
               size: $sizes.reduce(=> settingAssetsInjectType() = 'sync' ? (size + $$) : (size > $$ ? size : $$), 0)
             }`,
             when: !compact && showDownloadTime,

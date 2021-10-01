@@ -198,6 +198,27 @@ const excludeCases: Case[] = [
       },
     },
   },
+
+  {
+    name: 'asset all',
+    params: {
+      exclude: [{ type: 'asset', name: /.+/ }],
+      network: 'Slow',
+      global: {
+        maxDownloadTime: 1,
+      },
+    },
+  },
+  {
+    name: 'asset some',
+    params: {
+      exclude: [{ type: 'asset', name: /foo/ }],
+      network: 'Slow',
+      global: {
+        maxDownloadTime: 1,
+      },
+    },
+  },
 ];
 
 const maxAsyncSizeCDownloadTime: Case[] = [

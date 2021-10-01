@@ -16,7 +16,7 @@ export type Limits = {
   maxAsyncSizeDiff?: number | Limit;
 };
 
-export type RuleExcludeItem = ExcludeItem<'compilation' | 'entry'>;
+export type RuleExcludeItem = ExcludeItem<'compilation' | 'entry' | 'asset'>;
 
 export type Params = {
   exclude?: Array<string | RegExp | RuleExcludeItem>;
@@ -110,7 +110,10 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
   $reference: resolveReferenceFile();
   $params: #.params;
   $useCompressedSize: [$params.useCompressedSize, true].useNotNullish();
-  $getSizeByChunks: => files.(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
+  $getSizeByChunks: => files.exclude({
+    exclude: $params.exclude.[type='asset'].name,
+    get: <name>,
+  }).(getAssetSize($$, $useCompressedSize!=false)).reduce(=> size + $$, 0);
   
   $input.compilations
   .exclude({

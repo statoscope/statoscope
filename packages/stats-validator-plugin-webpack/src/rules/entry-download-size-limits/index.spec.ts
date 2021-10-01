@@ -275,3 +275,22 @@ describe('exclude', () => {
     expect(api.getStorage()).toMatchSnapshot();
   });
 });
+
+describe('exclude', () => {
+  describe('asset', () => {
+    test('exclude all', () => {
+      const api = prepareAPI({
+        global: { maxSize: 1 },
+        exclude: [{ type: 'asset', name: /.+/ }],
+      });
+      expect(api.getStorage()).toMatchSnapshot();
+    });
+    test('exclude some', () => {
+      const api = prepareAPI({
+        global: { maxSize: 1 },
+        exclude: [{ type: 'asset', name: /foo/ }],
+      });
+      expect(api.getStorage()).toMatchSnapshot();
+    });
+  });
+});

@@ -3241,11 +3241,11 @@ Array [
   },
   Object {
     "instances": "743",
-    "name": "407",
+    "name": "405",
   },
   Object {
     "instances": "744",
-    "name": "405",
+    "name": "407",
   },
   Object {
     "instances": "745",
@@ -3595,9 +3595,9 @@ Array [
   ],
   Array [
     "827",
-    "828",
   ],
   Array [
+    "828",
     "829",
   ],
   Array [
@@ -3805,7 +3805,7 @@ Array [
   },
   "Plugin for @statoscope/stats-validator to validate webpack stats",
   "@statoscope/stats-validator-plugin-webpack",
-  "5.10.1",
+  "5.10.3",
   Object {
     "name": "541",
     "url": "542",
@@ -3852,15 +3852,15 @@ Array [
   },
   Object {
     "info": "883",
-    "path": "625",
+    "path": "621",
   },
   Object {
     "info": "884",
-    "path": "628",
+    "path": "625",
   },
   Object {
     "info": "885",
-    "path": "621",
+    "path": "628",
   },
   Object {
     "info": "886",
@@ -4061,10 +4061,10 @@ Array [
     "version": "624",
   },
   Object {
-    "version": "631",
+    "version": "624",
   },
   Object {
-    "version": "624",
+    "version": "631",
   },
   Object {
     "version": "639",

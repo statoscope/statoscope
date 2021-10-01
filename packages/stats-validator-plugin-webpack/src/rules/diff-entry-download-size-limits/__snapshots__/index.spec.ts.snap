@@ -1,5 +1,144 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`exclude asset exclude all 1`] = `Array []`;
+
+exports[`exclude asset exclude some 1`] = `
+Array [
+  Object {
+    "compilation": "9eb9a218218f1ee4ba40",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "after": Object {
+              "asyncSize": 0,
+              "initialSize": 1887,
+              "size": 1887,
+            },
+            "before": Object {
+              "asyncSize": 0,
+              "initialSize": 449,
+              "size": 449,
+            },
+            "compilation": "9eb9a218218f1ee4ba40",
+            "diff": Object {
+              "asyncSize": Object {
+                "absolute": 0,
+                "ok": true,
+                "percent": 0,
+              },
+              "initialSize": Object {
+                "absolute": 1438,
+                "ok": true,
+                "percent": 320.26726057906455,
+              },
+              "size": Object {
+                "absolute": 1438,
+                "ok": false,
+                "percent": 320.26726057906455,
+              },
+            },
+            "entry": "one",
+            "rule": Object {
+              "maxAsyncSizeDiff": Infinity,
+              "maxInitialSizeDiff": Infinity,
+              "maxSizeDiff": 1,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"one\\": Download size diff of assets is 1.40 kb (320.27%). It's over the 0.00 kb limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+  },
+  Object {
+    "compilation": "9eb9a218218f1ee4ba40",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "after": Object {
+              "asyncSize": 590,
+              "initialSize": 12211,
+              "size": 12801,
+            },
+            "before": Object {
+              "asyncSize": 134,
+              "initialSize": 8615,
+              "size": 8749,
+            },
+            "compilation": "9eb9a218218f1ee4ba40",
+            "diff": Object {
+              "asyncSize": Object {
+                "absolute": 456,
+                "ok": true,
+                "percent": 340.2985074626866,
+              },
+              "initialSize": Object {
+                "absolute": 3596,
+                "ok": true,
+                "percent": 41.74114915844458,
+              },
+              "size": Object {
+                "absolute": 4052,
+                "ok": false,
+                "percent": 46.313864441650466,
+              },
+            },
+            "entry": "two",
+            "rule": Object {
+              "maxAsyncSizeDiff": Infinity,
+              "maxInitialSizeDiff": Infinity,
+              "maxSizeDiff": 1,
+            },
+            "useCompressedSize": true,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              before: #.before,
+              after: #.after,
+              diff: #.diff,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"two\\": Download size diff of assets is 3.96 kb (46.31%). It's over the 0.00 kb limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+  },
+]
+`;
+
 exports[`maxAsyncSizeDiff global 1`] = `
 Array [
   Object {

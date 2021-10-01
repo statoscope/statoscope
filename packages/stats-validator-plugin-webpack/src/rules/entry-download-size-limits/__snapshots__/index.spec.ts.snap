@@ -1,5 +1,96 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`exclude asset exclude all 1`] = `Array []`;
+
+exports[`exclude asset exclude some 1`] = `
+Array [
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncSize": 0,
+            "compilation": "34ea3837a1050e206fe0",
+            "entry": "one",
+            "initialSize": 449,
+            "rule": Object {
+              "maxAsyncSize": null,
+              "maxInitialSize": null,
+              "maxSize": 1,
+            },
+            "size": 449,
+            "useCompressedSize": undefined,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              size: #.size,
+              initialSize: #.initialSize,
+              asyncSize: #.asyncSize,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"one\\": Download size of assets is 0.44 kb. It's over the 0.00 kb limit",
+    "related": Array [
+      Object {
+        "id": "one",
+        "type": "entry",
+      },
+    ],
+  },
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "payload": Object {
+          "context": Object {
+            "asyncSize": 134,
+            "compilation": "34ea3837a1050e206fe0",
+            "entry": "two",
+            "initialSize": 8615,
+            "rule": Object {
+              "maxAsyncSize": null,
+              "maxInitialSize": null,
+              "maxSize": 1,
+            },
+            "size": 8749,
+            "useCompressedSize": undefined,
+          },
+        },
+        "query": "
+            $input: resolveInputFile();
+            {
+              entry: #.entry.resolveEntrypoint(#.compilation),
+              useCompressedSize: #.useCompressedSize,
+              size: #.size,
+              initialSize: #.initialSize,
+              asyncSize: #.asyncSize,
+              rule: #.rule,
+            }
+            ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "Entry \\"two\\": Download size of assets is 8.54 kb. It's over the 0.00 kb limit",
+    "related": Array [
+      Object {
+        "id": "two",
+        "type": "entry",
+      },
+    ],
+  },
+]
+`;
+
 exports[`exclude entry object 1`] = `
 Array [
   Object {
