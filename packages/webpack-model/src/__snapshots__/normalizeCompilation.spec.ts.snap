@@ -63,17 +63,6 @@ Object {
                       "info": Object {
                         "version": "1.0.0",
                       },
-                      "path": "simple/node_modules/foo",
-                    },
-                  ],
-                  "name": "foo",
-                },
-                Object {
-                  "instances": Array [
-                    Object {
-                      "info": Object {
-                        "version": "1.0.0",
-                      },
                       "path": "simple/node_modules/bar",
                     },
                     Object {
@@ -84,6 +73,17 @@ Object {
                     },
                   ],
                   "name": "bar",
+                },
+                Object {
+                  "instances": Array [
+                    Object {
+                      "info": Object {
+                        "version": "1.0.0",
+                      },
+                      "path": "simple/node_modules/foo",
+                    },
+                  ],
+                  "name": "foo",
                 },
                 Object {
                   "instances": Array [
@@ -2804,7 +2804,7 @@ Object {
       "two.js",
     ],
   },
-  "builtAt": 1632999423868,
+  "builtAt": 1633072506641,
   "children": Array [],
   "chunks": Array [
     Object {
@@ -3083,7 +3083,7 @@ Object {
   },
   "outputPath": "./simple/dist-prod",
   "publicPath": "auto",
-  "time": 629,
+  "time": 594,
   "version": "5.53.0",
   "warnings": Array [],
   "warningsCount": 0,

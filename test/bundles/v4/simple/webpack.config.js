@@ -6,9 +6,17 @@ const Statoscope = require('../../../../packages/webpack-plugin').default;
 const context = path.resolve(__dirname, '..');
 
 module.exports = {
-  entry: {
-    one: './src/index.ts',
-    two: './src/index2.ts',
+  entry() {
+    return new Promise((resolve) => {
+      setTimeout(
+        () =>
+          resolve({
+            one: './src/index.ts',
+            two: './src/index2.ts',
+          }),
+        500
+      );
+    });
   },
   externals: {
     extLib: 'extLib',
