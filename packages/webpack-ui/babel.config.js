@@ -9,7 +9,6 @@ module.exports = (api) => {
       [
         '@babel/env',
         {
-          targets: 'last 10 Chrome versions',
           modules: false,
         },
       ],
