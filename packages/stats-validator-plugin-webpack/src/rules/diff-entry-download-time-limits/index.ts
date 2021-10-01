@@ -7,12 +7,7 @@ import networkListType from '@statoscope/helpers/dist/network-type-list';
 import { APIFnOptions } from '@statoscope/types/types/validation/api';
 import helpers, { Limit, ValueDiff } from '@statoscope/helpers/dist/jora';
 import { WebpackRule } from '../../';
-import {
-  ByNameFilterItem,
-  ExcludeItem,
-  normalizeExclude,
-  SerializedExcludeItem,
-} from '../../limits-helpers';
+import { ByNameFilterItem, ExcludeItem, normalizeExclude } from '../../limits-helpers';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const version = require('../../../package.json');
 

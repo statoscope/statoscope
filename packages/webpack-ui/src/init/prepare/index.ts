@@ -3,7 +3,6 @@ import { jora as joraHelpers } from '@statoscope/helpers';
 import { Node } from '@statoscope/webpack-model/dist/modules-to-foam-tree';
 import {
   NormalizedAsset,
-  NormalizedChunk,
   NormalizedCompilation,
   NormalizedModule,
 } from '@statoscope/webpack-model/dist/normalize';
