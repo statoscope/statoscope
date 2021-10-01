@@ -2,6 +2,7 @@ import { CompilationMap, ModuleData, NormalizationData, Webpack } from '../webpa
 import Module = Webpack.Module;
 import Compilation = Webpack.Compilation;
 import Chunk = Webpack.Chunk;
+import Reason = Webpack.Reason;
 
 function handleModule(module: Module, modulesData: ModuleData): number {
   let resolvedId = modulesData.idToIxMap.get(module.identifier);
@@ -15,6 +16,23 @@ function handleModule(module: Module, modulesData: ModuleData): number {
     resolvedModule!.chunks = [
       ...new Set([...(resolvedModule!.chunks ?? []), ...(module.chunks ?? [])]),
     ];
+    resolvedModule!.reasons = [
+      ...(resolvedModule!.reasons ?? []),
+      ...(module.reasons ?? []),
+    ].reduce((all, current) => {
+      if (
+        !all.find(
+          (r) =>
+            r.moduleIdentifier === current.moduleIdentifier &&
+            r.type === current.type &&
+            r.loc === current.loc
+        )
+      ) {
+        all.push(current);
+      }
+
+      return all;
+    }, [] as Reason[]);
   }
 
   return resolvedId;

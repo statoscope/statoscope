@@ -20,6 +20,7 @@ import { moduleReasonResource, moduleResource, nodeModule } from './module';
 import denormalizeCompilation from './denormalizeCompilation';
 import ChunkID = Webpack.ChunkID;
 import Reason = Webpack.Reason;
+import Module = Webpack.Module;
 
 export const normalizedSymbol = Symbol('sttoscope.normalized');
 
@@ -396,6 +397,25 @@ function handleCompilation(
   };
 }
 
+function mergeModules(from: Module, to: Module): void {
+  const chunks = new Set([...(to.chunks ?? []), ...(from.chunks ?? [])]);
+  to.chunks = [...chunks];
+  to.reasons = [...(to.reasons ?? []), ...(from.reasons ?? [])].reduce((all, current) => {
+    if (
+      !all.find(
+        (r) =>
+          r.moduleIdentifier === current.moduleIdentifier &&
+          r.type === current.type &&
+          r.loc === current.loc
+      )
+    ) {
+      all.push(current);
+    }
+
+    return all;
+  }, [] as Reason[]);
+}
+
 function makeModuleResolver(
   compilation: NormalizedCompilation
 ): Resolver<string, NormalizedModule> {
@@ -414,9 +434,8 @@ function makeModuleResolver(
       if (!resolved) {
         modules.push(module);
       } else {
-        const chunks = new Set([...resolved.chunks, ...chunk.modules[+ix].chunks]);
-        resolved.chunks = [...chunks];
         chunk.modules[+ix] = resolved;
+        mergeModules(module as Module, resolved as Module);
       }
     }
   }
@@ -588,13 +607,8 @@ function prepareChunk(chunk: Webpack.Chunk, resolvers: CompilationResolvers): vo
     for (const [i, module] of Object.entries(chunk.modules)) {
       const resolved = resolvers.resolveModule(module.identifier);
       if (resolved) {
-        const chunks = new Set([...resolved.chunks, ...(chunk.modules[+i].chunks ?? [])]);
-        resolved.chunks = [...chunks].map((chunk) =>
-          typeof chunk === 'string' || typeof chunk === 'number'
-            ? (resolveChunk(chunk) as NormalizedChunk)
-            : (chunk as NormalizedChunk)
-        );
         (chunk as unknown as NormalizedChunk).modules[+i] = resolved;
+        mergeModules(module, resolved as Module);
       }
 
       prepareModule(module, resolvers);
