@@ -69,7 +69,7 @@ module.exports = {
         { global: { maxSizeDiff: 3*1024 } },
       ],
       // compares usage of specified packages usage between input and reference stats. Fails if rxjs usage has increased
-      '@statoscope/webpack/diff-deprecated-packages': ['error', ['rxjs'']],
+      '@statoscope/webpack/diff-deprecated-packages': ['error', ['rxjs']],
     }
   }
 }
@@ -83,7 +83,7 @@ statoscope validate --input path/to/stats.json
 
 4. Analyze results in the console or generated UI-report
 
-> Learn more on [@staoscope/stats-validator](/packages/stats-validator) and [@statoscope/stats-validator-plugin-webpack](/packages/stats-validator-plugin-webpack) and
+> Learn more on [@staoscope/stats-validator](/packages/stats-validator) and [@statoscope/stats-validator-plugin-webpack](/packages/stats-validator-plugin-webpack)
 
 ### serve
 
