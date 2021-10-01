@@ -139,6 +139,11 @@ export default (() =>
       shouldExcludeResource(resource: string): boolean {
         // @ts-ignore
         const rxSource = this.settingExcludeResourceFromCalc() || '';
+
+        if (!rxSource) {
+          return false;
+        }
+
         const rx = new RegExp(rxSource);
 
         return !!resource.match(rx);
