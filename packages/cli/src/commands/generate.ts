@@ -1,13 +1,13 @@
 import open from 'open';
 import { Argv } from 'yargs';
-import { transform } from '../utils';
+import { createDestStatReportPath, transform } from '../utils';
 
 export default function (yargs: Argv): Argv {
   return yargs.command(
-    'generate [input] [output]',
+    'generate [input]',
     `Generate HTML report from JSON-stats
 Examples:
-Single stats: generate path/to/stats.json path/to/report.html
+Single stats: generate path/to/stats.json --output path/to/report.html
 Multiple stats: generate --input path/to/stats-1.json path/to/stats-2.json --output path/to/report.html`,
     (yargs) => {
       return yargs
@@ -26,15 +26,17 @@ Multiple stats: generate --input path/to/stats-1.json path/to/stats-2.json --out
           alias: 'o',
         })
         .array('input')
-        .demandOption(['input', 'output']);
+        .demandOption('input');
     },
     async (argv) => {
-      console.log(`Generating Statoscope report to ${argv.output} ...`);
-      await transform(argv.input, argv.output);
+      const destReportPath = createDestStatReportPath(argv.input, argv.output);
+
+      console.log(`Generating Statoscope report to ${destReportPath} ...`);
+      await transform(argv.input, destReportPath);
       console.log(`Statoscope report saved to ${argv.output}`);
 
       if (argv.open) {
-        open(argv.output);
+        open(destReportPath);
       }
     }
   );
