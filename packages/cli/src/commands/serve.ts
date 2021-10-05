@@ -2,7 +2,7 @@ import fs from 'fs';
 import http from 'http';
 import { Argv } from 'yargs';
 import open from 'open';
-import { transform } from '../utils';
+import { createDestStatReportPath, transform } from '../utils';
 
 export default function (yargs: Argv): Argv {
   return yargs.command(
@@ -36,7 +36,8 @@ Multiple stats: serve --input path/to/stats-1.json path/to/stats-2.json
     },
     async (argv) => {
       console.log(`Generating Statoscope report...`);
-      const reportPath = await transform(argv.input);
+      const destReportPath = createDestStatReportPath(argv.input);
+      const reportPath = await transform(argv.input, destReportPath);
       console.log(`Statoscope report generated`);
 
       http
