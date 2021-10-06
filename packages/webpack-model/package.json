@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/webpack-model",
-  "version": "5.11.0",
+  "version": "5.12.0",
   "description": "This package contains helpers to process webpack stats",
   "main": "./dist/index.js",
   "scripts": {
