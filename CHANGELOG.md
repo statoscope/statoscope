@@ -1,5 +1,16 @@
 # Changelog
 
+## 5.12.0 (06 October 2021)
+
+### Features
+
+- `[cli]` - output is no longer a required argument (tmp directory is used by default) (#119 by @wildOrlik)
+
+### Fixes
+
+- `[webpack-model]` - fix crash when unknown extension is used
+- `[webpack-model]` - fix crash with regenerator runtime
+
 ## 5.11.2 (01 October 2021)
 
 ### Fixes

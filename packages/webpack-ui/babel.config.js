@@ -9,6 +9,7 @@ module.exports = (api) => {
       [
         '@babel/env',
         {
+          exclude: ['@babel/plugin-transform-regenerator'],
           modules: false,
         },
       ],

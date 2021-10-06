@@ -52,8 +52,8 @@ function makeConfig(config) {
       },
       plugins: [
         new Statoscope({
-          //saveTo: `analyze/statoscope-[name]-[hash].html`,
-          //saveStatsTo: `analyze/stats-[name]-[hash].json`,
+          // saveTo: `analyze/statoscope-[name]-[hash].html`,
+          // saveStatsTo: `analyze/webpack-ui-stats.json`,
           open: 'file',
         }),
         new webpack.EnvironmentPlugin({
