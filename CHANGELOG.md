@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.12.1 (08 October 2021)
+
+- `[types]` - add types into package
+
 ## 5.12.0 (06 October 2021)
 
 ### Features

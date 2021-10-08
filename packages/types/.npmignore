@@ -1,4 +1,4 @@
 *
 !bin
-!dist/**/*.{js,d.ts,json}
+!types/**/*.{js,d.ts,json}
 **/*.spec.{js,d.ts}
