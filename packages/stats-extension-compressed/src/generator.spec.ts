@@ -3,6 +3,11 @@ import Generator, { CompressFunction } from './generator';
 
 const adapter: ExtensionDescriptor = { name: 'test-adapter', version: '7.7.7' };
 
+jest.mock('../package.json', () => ({
+  ...jest.requireActual('../package.json'),
+  version: '8.8.8',
+}));
+
 describe('preset compressor', () => {
   test('gzip', () => {
     const generator = new Generator(adapter);
