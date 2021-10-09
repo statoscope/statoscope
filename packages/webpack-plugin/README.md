@@ -36,7 +36,8 @@ new StatoscopeWebpackPlugin({
   name: 'some-name',
   open: 'file',
   compressor: 'gzip',
-  reports: [/* ... */]
+  reports: [/* ... */],
+  extensions: [/* ... */],
 });
 ```
 
@@ -147,7 +148,7 @@ new Statoscope({
 })
 ```
 
-### options.reports: Report
+### options.reports: `Report[]`
 
 List of custom reports that will be passed into the UI.
 
@@ -181,6 +182,61 @@ new Statoscope({
   ],
 });
 ```
+
+### options.extensions: `StatsExtensionWebpackAdapter<TPayload>[]`
+
+List of stats extension webpack adapters.
+
+This options helps you to pass your own webpack stats extensions.
+
+For example, lets implement simple extension that gets webpack compiler context directory.
+
+**webpack-context-extension.ts:**
+
+```ts
+import { Extension } from '@statoscope/stats/spec/extension';
+
+type Payload = {
+  context: string
+};
+
+type ContextExtension = Extension<Payload>;
+
+export default class WebpackContextExtension implements StatsExtensionWebpackAdapter<Payload> {
+  context: string = '';
+
+  handleCompiler(compiler: Compiler): void {
+    this.context = compiler.context;
+  }
+
+  getExtension(): ContextExtension {
+    return {
+      descriptor: {name: 'webpack-context-extension', version: '1.0.0'},
+      payload: {context: this.context}
+    }
+  }
+}
+```
+
+**webpack.config.js:**
+
+```js
+const WebpackContextExtension = require('./webpack-context-extension');
+const StatoscopeWebpackPlugin = require('@statoscope/webpack-plugin').default;
+
+config.plugins.push(new StatoscopeWebpackPlugin({
+  extensions: new WebpackContextExtension()
+}));
+```
+
+Now you can handle your extension payload with jora:
+
+```
+$ext: 'webpack-context-extension'.resolveExtension(@.name.pick()).data;
+$webpackContext: $ext.payload.context;
+```
+
+> `resolveExtension`-helper resolves an extension by its name and a filename that extension attached to
 
 ## FAQ
 
