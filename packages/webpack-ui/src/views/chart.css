@@ -1,0 +1,5 @@
+@import url('../../node_modules/highcharts/css/highcharts.css');
+
+.root .highcharts-data-label text {
+    font-weight: normal !important;
+}
