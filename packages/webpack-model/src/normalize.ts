@@ -222,7 +222,6 @@ export function handleRawFile(
       ?.map((ext): NormalizedExtension<unknown, unknown> | null => {
         const item = extensionContainer.resolve(ext.descriptor.name);
         if (!item) {
-          console.warn(`Unknown extension ${ext.descriptor.name}:`, ext);
           return null;
         }
 
