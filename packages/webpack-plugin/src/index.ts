@@ -15,6 +15,14 @@ import { StatoscopeMeta } from '@statoscope/webpack-model/webpack';
 import { makeReplacer } from '@statoscope/report-writer/dist/utils';
 import { default as CustomReportsExtensionGenerator } from '@statoscope/stats-extension-custom-reports/dist/generator';
 import { Report } from '@statoscope/types/types/custom-report';
+import { StatsExtensionWebpackAdapter } from '@statoscope/webpack-model/dist';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { name, version } = require('../package.json');
+
+export const STATOSCOPE_STAGE_COMPILER_DONE = 5000;
+
+const pluginName = `${name}@${version}`;
 
 export type Options = {
   name?: string;
@@ -29,10 +37,12 @@ export type Options = {
   open: false | 'dir' | 'file';
   compressor: false | 'gzip' | CompressFunction;
   reports?: Report<unknown, unknown>[];
+  extensions: StatsExtensionWebpackAdapter<unknown>[];
 };
 
 export default class StatoscopeWebpackPlugin {
   options: Options;
+  extensions: StatsExtensionWebpackAdapter<unknown>[] = [];
 
   constructor(options: Partial<Options> = {}) {
     this.options = {
@@ -42,6 +52,7 @@ export default class StatoscopeWebpackPlugin {
       saveOnlyStats: false,
       watchMode: false,
       reports: [],
+      extensions: [],
       ...options,
     };
 
@@ -50,6 +61,12 @@ export default class StatoscopeWebpackPlugin {
     }
 
     this.options.saveReportTo ??= this.options.saveTo;
+    this.extensions.push(...(this.options.extensions ?? []));
+
+    this.extensions.push(new WebpackPackageInfoExtension());
+    if (this.options.compressor !== false) {
+      this.extensions.push(new WebpackCompressedExtension(this.options.compressor));
+    }
   }
 
   interpolate(string: string, compilation: Compilation, customName?: string): string {
@@ -66,101 +83,100 @@ export default class StatoscopeWebpackPlugin {
       compiler.options.stats?.context ??
       compiler.context;
 
-    const packageInfoExtension = new WebpackPackageInfoExtension();
-    // @ts-ignore
-    packageInfoExtension.handleCompiler(compiler, context);
+    for (const extension of this.extensions) {
+      extension.handleCompiler(compiler, context);
+    }
 
-    compiler.hooks.done.tapAsync('Statoscope Webpack Plugin', async (stats, cb) => {
-      if (compiler.watchMode && !options.watchMode) {
-        return cb();
-      }
-
-      // @ts-ignore
-      const statsObj = stats.toJson(options.statsOptions || compiler.options.stats);
-      statsObj.name = options.name || statsObj.name || stats.compilation.name;
-
-      const statoscopeMeta: StatoscopeMeta = {
-        descriptor: { name: statsPackage.name, version: statsPackage.version },
-        extensions: [],
-        context,
-      };
-      statsObj.__statoscope = statoscopeMeta;
-
-      statoscopeMeta.extensions!.push(packageInfoExtension.get());
-
-      if (this.options.compressor) {
-        const compressedExtension = new WebpackCompressedExtension(
-          this.options.compressor
-        );
-        // @ts-ignore
-        await compressedExtension.handleCompilation(stats.compilation);
-        statoscopeMeta.extensions!.push(compressedExtension.get());
-      }
-
-      const reports = this.options.reports ?? [];
-
-      if (reports.length) {
-        const generator = new CustomReportsExtensionGenerator();
-
-        for (const report of reports) {
-          if (typeof report.data === 'function') {
-            report.data = await report.data();
-          }
-
-          generator.handleReport(report);
+    compiler.hooks.done.tapAsync(
+      { stage: STATOSCOPE_STAGE_COMPILER_DONE, name: pluginName },
+      async (stats, cb) => {
+        if (compiler.watchMode && !options.watchMode) {
+          return cb();
         }
 
-        statoscopeMeta.extensions!.push(generator.get());
-      }
+        // @ts-ignore
+        const statsObj = stats.toJson(options.statsOptions || compiler.options.stats);
+        statsObj.name = options.name || statsObj.name || stats.compilation.name;
 
-      const webpackStatsStream = stringifyStream(
-        statsObj,
-        makeReplacer(context, '.', ['context', 'source'])
-      );
-      let statsFileOutputStream: Writable | undefined;
-      let resolvedSaveStatsTo: string | undefined;
+        const statoscopeMeta: StatoscopeMeta = {
+          descriptor: { name: statsPackage.name, version: statsPackage.version },
+          extensions: [],
+          context,
+        };
+        statsObj.__statoscope = statoscopeMeta;
 
-      if (options.saveStatsTo) {
-        resolvedSaveStatsTo = path.resolve(
-          this.interpolate(options.saveStatsTo, stats.compilation, statsObj.name)
-        );
-        fs.mkdirSync(path.dirname(resolvedSaveStatsTo), { recursive: true });
-        statsFileOutputStream = fs.createWriteStream(resolvedSaveStatsTo);
-        webpackStatsStream.pipe(statsFileOutputStream);
-        await waitStreamEnd(statsFileOutputStream);
-      }
+        for (const extension of this.extensions) {
+          statoscopeMeta.extensions!.push(extension.getExtension());
+        }
 
-      normalizeCompilation(statsObj);
+        const reports = this.options.reports ?? [];
 
-      const statsForReport = this.getStatsForHTMLReport({
-        filename: resolvedSaveStatsTo,
-        stream: stringifyStream(
+        if (reports.length) {
+          const generator = new CustomReportsExtensionGenerator();
+
+          for (const report of reports) {
+            if (typeof report.data === 'function') {
+              report.data = await report.data();
+            }
+
+            generator.handleReport(report);
+          }
+
+          statoscopeMeta.extensions!.push(generator.get());
+        }
+
+        const webpackStatsStream = stringifyStream(
           statsObj,
           makeReplacer(context, '.', ['context', 'source'])
-        ),
-      });
-      const htmlReportPath = this.getHTMLReportPath();
-      const resolvedHTMLReportPath = path.resolve(
-        this.interpolate(htmlReportPath, stats.compilation, statsObj.name)
-      );
-      const htmlReport = this.makeReport(resolvedHTMLReportPath, statsForReport);
+        );
+        let statsFileOutputStream: Writable | undefined;
+        let resolvedSaveStatsTo: string | undefined;
 
-      try {
-        await Promise.all([htmlReport.writer?.write(), waitStreamEnd(htmlReport.stream)]);
-
-        if (options.open) {
-          if (options.open === 'file') {
-            open(resolvedHTMLReportPath);
-          } else {
-            open(path.dirname(resolvedHTMLReportPath));
-          }
+        if (options.saveStatsTo) {
+          resolvedSaveStatsTo = path.resolve(
+            this.interpolate(options.saveStatsTo, stats.compilation, statsObj.name)
+          );
+          fs.mkdirSync(path.dirname(resolvedSaveStatsTo), { recursive: true });
+          statsFileOutputStream = fs.createWriteStream(resolvedSaveStatsTo);
+          webpackStatsStream.pipe(statsFileOutputStream);
+          await waitStreamEnd(statsFileOutputStream);
         }
 
-        cb();
-      } catch (e) {
-        cb(e as Error);
+        normalizeCompilation(statsObj);
+
+        const statsForReport = this.getStatsForHTMLReport({
+          filename: resolvedSaveStatsTo,
+          stream: stringifyStream(
+            statsObj,
+            makeReplacer(context, '.', ['context', 'source'])
+          ),
+        });
+        const htmlReportPath = this.getHTMLReportPath();
+        const resolvedHTMLReportPath = path.resolve(
+          this.interpolate(htmlReportPath, stats.compilation, statsObj.name)
+        );
+        const htmlReport = this.makeReport(resolvedHTMLReportPath, statsForReport);
+
+        try {
+          await Promise.all([
+            htmlReport.writer?.write(),
+            waitStreamEnd(htmlReport.stream),
+          ]);
+
+          if (options.open) {
+            if (options.open === 'file') {
+              open(resolvedHTMLReportPath);
+            } else {
+              open(path.dirname(resolvedHTMLReportPath));
+            }
+          }
+
+          cb();
+        } catch (e) {
+          cb(e as Error);
+        }
       }
-    });
+    );
   }
 
   getStatsForHTMLReport(mainStats: {

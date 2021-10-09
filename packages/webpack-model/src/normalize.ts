@@ -107,7 +107,7 @@ export type NormalizedFile = {
 
 export type NormalizedExtension<TPayload, TAPI> = {
   data: Extension<TPayload>;
-  api: TAPI;
+  api: TAPI | null;
 };
 
 export type HandledStats = {
@@ -218,20 +218,22 @@ export function handleRawFile(
     __statoscope: rawStatsFileDescriptor.data.__statoscope,
   };
   const extensions =
-    file.__statoscope?.extensions
-      ?.map((ext): NormalizedExtension<unknown, unknown> | null => {
+    file.__statoscope?.extensions?.map(
+      (ext): NormalizedExtension<unknown, unknown> | null => {
         const item = extensionContainer.resolve(ext.descriptor.name);
         if (!item) {
-          console.warn(`Unknown extension ${ext.descriptor.name}:`, ext);
-          return null;
+          return {
+            data: ext,
+            api: null,
+          };
         }
 
         return {
           data: ext,
           api: item.apiFactory(ext),
         };
-      })
-      .filter(Boolean) ?? [];
+      }
+    ) ?? [];
   const resolveExtension = makeEntityResolver(
     extensions,
     (ext) => ext!.data.descriptor.name

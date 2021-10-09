@@ -1,5 +1,4 @@
 import '@discoveryjs/discovery/dist/discovery.css';
-import '@discoveryjs/view-plugin-highcharts/index.css';
 import '../global.css';
 // @ts-ignore
 import * as discoveryLib from '@discoveryjs/discovery';

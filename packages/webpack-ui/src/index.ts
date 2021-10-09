@@ -7,7 +7,7 @@ const V = process.env.STATOSCOPE_VERSION;
 export default (data: RawData, element = document.body): StatoscopeWidget => {
   // @ts-ignore
   const viewsContext = require.context('./views', false, /\.ts$/);
-  const customView = [require('@discoveryjs/view-plugin-highcharts')];
+  const customView = [] as const;
   // @ts-ignore
   const pagesContext = require.context('./pages', false, /\.ts$/);
 

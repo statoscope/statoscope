@@ -23,9 +23,8 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "@discoveryjs/view-plugin-highcharts": "^1.0.1",
     "@statoscope/types": "5.12.1",
-    "highcharts": "^8.0.0"
+    "highcharts": "^9.2.2"
   },
   "devDependencies": {
     "@carrotsearch/foamtree": "3.5.0",

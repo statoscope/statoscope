@@ -12,6 +12,8 @@ import normalize, {
 export { default as validate } from './validate';
 export * as module from './module';
 
+export { StatsExtensionWebpackAdapter } from './stats-extension-webpack-adapter';
+
 export { joraHelpers, normalize };
 
 export type Prepared = {

@@ -54,6 +54,13 @@ export default function (normalizeResult: NormalizeResult) {
   );
 
   const resolveExtension = (
+    fileName: string,
+    id: string
+  ): NormalizedExtension<unknown, unknown> | null => {
+    return normalizeResult.fileResolvers.get(fileName)?.resolveExtension(id) ?? null;
+  };
+
+  const resolveExtensionByCompilation = (
     hash: string,
     id: string
   ): NormalizedExtension<unknown, unknown> | null => {
@@ -63,7 +70,7 @@ export default function (normalizeResult: NormalizeResult) {
       return null;
     }
 
-    return normalizeResult.fileResolvers.get(fileName)?.resolveExtension(id) ?? null;
+    return resolveExtension(fileName, id);
   };
 
   return {
@@ -93,7 +100,10 @@ export default function (normalizeResult: NormalizeResult) {
         throw new Error('[getTotalFilesSize]: hash-parameter is required');
       }
 
-      const ext = resolveExtension(hash, '@statoscope/stats-extension-compressed');
+      const ext = resolveExtensionByCompilation(
+        hash,
+        '@statoscope/stats-extension-compressed'
+      );
 
       const resolverSize = ext?.api as ExtensionCompressedAPI | undefined;
 
@@ -138,9 +148,15 @@ export default function (normalizeResult: NormalizeResult) {
     },
     resolveExtension(
       id: string,
+      fileName: string
+    ): NormalizedExtension<unknown, unknown> | null {
+      return resolveExtension(fileName, id);
+    },
+    resolveExtensionByCompilation(
+      id: string,
       hash: string
     ): NormalizedExtension<unknown, unknown> | null {
-      return resolveExtension(hash, id);
+      return resolveExtensionByCompilation(hash, id);
     },
     getModuleSize(module: NormalizedModule, hash?: string, compressed?: boolean): Size {
       if (!compressed) {
@@ -151,7 +167,10 @@ export default function (normalizeResult: NormalizeResult) {
         throw new Error('[getModuleSize]: hash-parameter is required');
       }
 
-      const ext = resolveExtension(hash, '@statoscope/stats-extension-compressed');
+      const ext = resolveExtensionByCompilation(
+        hash,
+        '@statoscope/stats-extension-compressed'
+      );
 
       const resolverSize = ext?.api as ExtensionCompressedAPI | undefined;
 
@@ -170,7 +189,10 @@ export default function (normalizeResult: NormalizeResult) {
         throw new Error('[getAssetSize]: hash-parameter is required');
       }
 
-      const ext = resolveExtension(hash, '@statoscope/stats-extension-compressed');
+      const ext = resolveExtensionByCompilation(
+        hash,
+        '@statoscope/stats-extension-compressed'
+      );
       const resolverSize = ext?.api as ExtensionCompressedAPI | undefined;
 
       return (
@@ -188,7 +210,10 @@ export default function (normalizeResult: NormalizeResult) {
         throw new Error('[getPackageInstanceInfo]: hash-parameter is required');
       }
 
-      const ext = resolveExtension(hash, '@statoscope/stats-extension-package-info');
+      const ext = resolveExtensionByCompilation(
+        hash,
+        '@statoscope/stats-extension-package-info'
+      );
       const api = ext?.api as ExtensionPackageInfoAPI | undefined;
 
       return api?.getInstance(hash, packageName, instancePath) ?? null;
@@ -310,7 +335,7 @@ export default function (normalizeResult: NormalizeResult) {
         throw new Error('[validation_getItems]: hash-parameter is required');
       }
 
-      const ext = resolveExtension(
+      const ext = resolveExtensionByCompilation(
         hash,
         '@statoscope/stats-extension-stats-validation-result'
       );
@@ -330,7 +355,7 @@ export default function (normalizeResult: NormalizeResult) {
         throw new Error('[validation_getItem]: id-parameter is required');
       }
 
-      const ext = resolveExtension(
+      const ext = resolveExtensionByCompilation(
         hash,
         '@statoscope/stats-extension-stats-validation-result'
       );
@@ -407,7 +432,7 @@ export default function (normalizeResult: NormalizeResult) {
         throw new Error('[validation_resolveRule]: name-parameter is required');
       }
 
-      const ext = resolveExtension(
+      const ext = resolveExtensionByCompilation(
         hash,
         '@statoscope/stats-extension-stats-validation-result'
       );
