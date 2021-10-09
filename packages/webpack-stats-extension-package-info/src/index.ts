@@ -4,17 +4,21 @@ import { ExtensionDescriptor } from '@statoscope/stats/spec/extension';
 import Generator, {
   Format,
   InstanceInfo,
+  Payload,
 } from '@statoscope/stats-extension-package-info/dist/generator';
+import { StatsExtensionWebpackAdapter } from '@statoscope/webpack-model';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { author, homepage, name, version, description } = require('../package.json');
 
 const pluginName = `${name}@${version}`;
 
-export default class WebpackCompressedExtension {
+export default class WebpackCompressedExtension
+  implements StatsExtensionWebpackAdapter<Payload>
+{
   descriptor: ExtensionDescriptor = { name, version, author, homepage, description };
   generator = new Generator(this.descriptor);
 
-  get(): Format {
+  getExtension(): Format {
     return this.generator.get();
   }
 

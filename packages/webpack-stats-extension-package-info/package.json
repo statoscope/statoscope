@@ -19,10 +19,9 @@
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
     "@statoscope/stats": "5.7.0",
-    "@statoscope/stats-extension-package-info": "5.9.0"
-  },
-  "devDependencies": {
-    "@types/webpack": "^5.28.0"
+    "@statoscope/stats-extension-package-info": "5.9.0",
+    "@statoscope/webpack-model": "^5.9.0",
+    "@types/webpack": "^5.0.0"
   },
   "peerDependencies": {
     "webpack": "^4.0.0 || ^5.0.0"
