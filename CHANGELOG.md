@@ -1,5 +1,21 @@
 # Changelog
 
+## 5.12.0 (09 October 2021)
+
+### Features
+
+- `[webpack-model]` - add `resolveExtensionByCompilation`-helper - resolves extension by id and compilation
+- `[webpack-model]` - `resolveExtension*` resolves extension even if the extension has no API (not warning anymore)
+- `[webpack-model]` - add StatsExtensionWebpackAdapter type
+- `[webpack-plugin]` - add `extensions`-options (see plugin readme for more info)
+
+### Refactor
+
+- `[webpack-model]` - `resolveExtension` resolves extension by its name and filename that the extension attached to
+- `[webpack-stats-extension-compressed]` - implement webpack stats extension interface
+- `[webpack-stats-extension-package-info]` - implement webpack stats extension interface
+
+
 ## 5.12.0 (06 October 2021)
 
 ### Features
