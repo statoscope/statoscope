@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/webpack-ui",
-  "version": "5.12.1",
+  "version": "5.13.0",
   "description": "Webpack plugin and UI for analyzing webpack bundle with Statoscope",
   "main": "./dist/main.js",
   "types": "./types.d.ts",
@@ -35,7 +35,7 @@
     "@statoscope/stats-extension-compressed": "5.9.0",
     "@statoscope/stats-extension-package-info": "5.9.0",
     "@statoscope/stats-extension-stats-validation-result": "5.12.1",
-    "@statoscope/webpack-model": "5.12.1",
+    "@statoscope/webpack-model": "5.13.0",
     "@types/md5": "^2.3.1",
     "@wdxlab/events": "^1.1.0",
     "babel-loader": "^8.2.2",

@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/webpack-stats-extension-compressed",
-  "version": "5.9.0",
+  "version": "5.13.0",
   "description": "Webpack adapter for @statoscope/stats-extension-compressed",
   "main": "./dist/index.js",
   "scripts": {
@@ -18,9 +18,9 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "@statoscope/webpack-model": "^5.7.0",
     "@statoscope/stats": "5.7.0",
     "@statoscope/stats-extension-compressed": "5.9.0",
+    "@statoscope/webpack-model": "5.13.0",
     "@types/webpack": "^5.0.0"
   },
   "peerDependencies": {
