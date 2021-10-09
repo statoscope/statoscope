@@ -21,6 +21,7 @@
     "@discoveryjs/json-ext": "^0.5.5",
     "@statoscope/report-writer": "5.9.0",
     "@statoscope/stats": "5.7.0",
+    "@statoscope/webpack-stats-extension-modules-connections": "^5.9.0",
     "@statoscope/stats-extension-compressed": "5.9.0",
     "@statoscope/stats-extension-custom-reports": "5.9.0",
     "@statoscope/types": "5.9.0",
@@ -29,7 +30,7 @@
     "@statoscope/webpack-stats-extension-package-info": "5.10.2",
     "@statoscope/webpack-ui": "5.12.0",
     "@types/node": "^12.20.15",
-    "@types/webpack": "^5.28.0",
+    "@types/webpack": "^5.0.0",
     "open": "^8.2.1"
   },
   "peerDependencies": {
