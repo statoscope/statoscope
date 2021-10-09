@@ -14,7 +14,7 @@ Object {
     "description": "Statoscope extension for collecting package info (e.g. available versions)",
     "homepage": "https://github.com/statoscope/statoscope/",
     "name": "@statoscope/stats-extension-package-info",
-    "version": "5.9.0",
+    "version": "8.8.8",
   },
   "payload": Object {
     "compilations": Array [

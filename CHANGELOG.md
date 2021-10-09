@@ -1,6 +1,6 @@
 # Changelog
 
-## 5.12.0 (09 October 2021)
+## 5.13.0 (09 October 2021)
 
 ### Features
 
@@ -48,6 +48,12 @@
 - `[webpack-model]` - `resolveExtension` resolves extension by its name and filename that the extension attached to
 - `[webpack-stats-extension-compressed]` - implement webpack stats extension interface
 - `[webpack-stats-extension-package-info]` - implement webpack stats extension interface
+
+## 5.12.1 (08 October 2021)
+
+### Fixes 
+
+- `[types]` - add types into package
 
 ## 5.12.0 (06 October 2021)
 

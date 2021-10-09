@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/stats-validator-reporter-stats-report",
-  "version": "5.12.0",
+  "version": "5.12.1",
   "description": "Stats report reporter for @statoscope/stats-validator",
   "main": "./dist/index.js",
   "scripts": {
@@ -21,10 +21,10 @@
     "@discoveryjs/json-ext": "0.5.5",
     "@statoscope/report-writer": "5.9.0",
     "@statoscope/stats": "5.7.0",
-    "@statoscope/stats-extension-stats-validation-result": "5.9.0",
-    "@statoscope/types": "5.9.0",
-    "@statoscope/webpack-model": "5.12.0",
-    "@statoscope/webpack-ui": "5.12.0",
+    "@statoscope/stats-extension-stats-validation-result": "5.12.1",
+    "@statoscope/types": "5.12.1",
+    "@statoscope/webpack-model": "5.12.1",
+    "@statoscope/webpack-ui": "5.12.1",
     "open": "^8.2.1"
   }
 }
