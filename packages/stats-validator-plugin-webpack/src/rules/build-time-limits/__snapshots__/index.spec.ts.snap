@@ -8,7 +8,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "buildTime": 594,
+            "buildTime": 309,
             "buildTimeOK": false,
             "compilation": "34ea3837a1050e206fe0",
             "rule": 1,
@@ -29,7 +29,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Compilation \\"34ea383\\": Build time is 594 ms. It's over the 1 ms limit",
+    "message": "Compilation \\"34ea383\\": Build time is 309 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "34ea3837a1050e206fe0",

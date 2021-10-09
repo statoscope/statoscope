@@ -9,9 +9,9 @@ Array [
         "payload": Object {
           "context": Object {
             "diff": Object {
-              "absolute": 264,
+              "absolute": 446,
               "ok": false,
-              "percent": 44.44444444444444,
+              "percent": 144.336569579288,
             },
             "rule": Object {
               "number": 1,
@@ -33,7 +33,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"13150ee\\": Build time diff is 858 ms (44.44%). It's over the 1 ms limit",
+    "message": "Entry \\"13150ee\\": Build time diff is 755 ms (144.34%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "13150ee616278b6770b8",

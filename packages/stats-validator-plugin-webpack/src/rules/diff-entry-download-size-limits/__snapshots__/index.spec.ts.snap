@@ -78,8 +78,8 @@ Array [
           "context": Object {
             "after": Object {
               "asyncSize": 590,
-              "initialSize": 12211,
-              "size": 12801,
+              "initialSize": 12213,
+              "size": 12803,
             },
             "before": Object {
               "asyncSize": 134,
@@ -94,14 +94,14 @@ Array [
                 "percent": 340.2985074626866,
               },
               "initialSize": Object {
-                "absolute": 3596,
+                "absolute": 3598,
                 "ok": true,
-                "percent": 41.74114915844458,
+                "percent": 41.76436448055716,
               },
               "size": Object {
-                "absolute": 4052,
+                "absolute": 4054,
                 "ok": false,
-                "percent": 46.313864441650466,
+                "percent": 46.33672419705108,
               },
             },
             "entry": "two",
@@ -128,7 +128,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size diff of assets is 3.96 kb (46.31%). It's over the 0.00 kb limit",
+    "message": "Entry \\"two\\": Download size diff of assets is 3.96 kb (46.34%). It's over the 0.00 kb limit",
     "related": Array [
       Object {
         "id": "two",
@@ -149,8 +149,8 @@ Array [
           "context": Object {
             "after": Object {
               "asyncSize": 590,
-              "initialSize": 12211,
-              "size": 12801,
+              "initialSize": 12213,
+              "size": 12803,
             },
             "before": Object {
               "asyncSize": 134,
@@ -165,14 +165,14 @@ Array [
                 "percent": 340.2985074626866,
               },
               "initialSize": Object {
-                "absolute": 3596,
+                "absolute": 3598,
                 "ok": true,
-                "percent": 41.74114915844458,
+                "percent": 41.76436448055716,
               },
               "size": Object {
-                "absolute": 4052,
+                "absolute": 4054,
                 "ok": true,
-                "percent": 46.313864441650466,
+                "percent": 46.33672419705108,
               },
             },
             "entry": "two",
@@ -224,8 +224,8 @@ Array [
           "context": Object {
             "after": Object {
               "asyncSize": 590,
-              "initialSize": 12211,
-              "size": 12801,
+              "initialSize": 12213,
+              "size": 12803,
             },
             "before": Object {
               "asyncSize": 134,
@@ -240,14 +240,14 @@ Array [
                 "percent": 340.2985074626866,
               },
               "initialSize": Object {
-                "absolute": 3596,
+                "absolute": 3598,
                 "ok": true,
-                "percent": 41.74114915844458,
+                "percent": 41.76436448055716,
               },
               "size": Object {
-                "absolute": 4052,
+                "absolute": 4054,
                 "ok": true,
-                "percent": 46.313864441650466,
+                "percent": 46.33672419705108,
               },
             },
             "entry": "two",
@@ -432,8 +432,8 @@ Array [
           "context": Object {
             "after": Object {
               "asyncSize": 590,
-              "initialSize": 12211,
-              "size": 12801,
+              "initialSize": 12213,
+              "size": 12803,
             },
             "before": Object {
               "asyncSize": 134,
@@ -448,14 +448,14 @@ Array [
                 "percent": 340.2985074626866,
               },
               "initialSize": Object {
-                "absolute": 3596,
+                "absolute": 3598,
                 "ok": false,
-                "percent": 41.74114915844458,
+                "percent": 41.76436448055716,
               },
               "size": Object {
-                "absolute": 4052,
+                "absolute": 4054,
                 "ok": true,
-                "percent": 46.313864441650466,
+                "percent": 46.33672419705108,
               },
             },
             "entry": "two",
@@ -482,7 +482,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size diff of initial assets is 3.51 kb (41.74%). It's over the 0.10 kb limit",
+    "message": "Entry \\"two\\": Download size diff of initial assets is 3.51 kb (41.76%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "two",
@@ -573,8 +573,8 @@ Array [
           "context": Object {
             "after": Object {
               "asyncSize": 590,
-              "initialSize": 12211,
-              "size": 12801,
+              "initialSize": 12213,
+              "size": 12803,
             },
             "before": Object {
               "asyncSize": 134,
@@ -589,14 +589,14 @@ Array [
                 "percent": 340.2985074626866,
               },
               "initialSize": Object {
-                "absolute": 3596,
+                "absolute": 3598,
                 "ok": false,
-                "percent": 41.74114915844458,
+                "percent": 41.76436448055716,
               },
               "size": Object {
-                "absolute": 4052,
+                "absolute": 4054,
                 "ok": true,
-                "percent": 46.313864441650466,
+                "percent": 46.33672419705108,
               },
             },
             "entry": "two",
@@ -623,7 +623,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size diff of initial assets is 3.51 kb (41.74%). It's over the 0.10 kb limit",
+    "message": "Entry \\"two\\": Download size diff of initial assets is 3.51 kb (41.76%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "two",
@@ -847,8 +847,8 @@ Array [
           "context": Object {
             "after": Object {
               "asyncSize": 590,
-              "initialSize": 12211,
-              "size": 12801,
+              "initialSize": 12213,
+              "size": 12803,
             },
             "before": Object {
               "asyncSize": 134,
@@ -863,14 +863,14 @@ Array [
                 "percent": 340.2985074626866,
               },
               "initialSize": Object {
-                "absolute": 3596,
+                "absolute": 3598,
                 "ok": true,
-                "percent": 41.74114915844458,
+                "percent": 41.76436448055716,
               },
               "size": Object {
-                "absolute": 4052,
+                "absolute": 4054,
                 "ok": false,
-                "percent": 46.313864441650466,
+                "percent": 46.33672419705108,
               },
             },
             "entry": "two",
@@ -897,7 +897,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size diff of assets is 3.96 kb (46.31%). It's over the 0.10 kb limit",
+    "message": "Entry \\"two\\": Download size diff of assets is 3.96 kb (46.34%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "two",
@@ -988,8 +988,8 @@ Array [
           "context": Object {
             "after": Object {
               "asyncSize": 590,
-              "initialSize": 12211,
-              "size": 12801,
+              "initialSize": 12213,
+              "size": 12803,
             },
             "before": Object {
               "asyncSize": 134,
@@ -1004,14 +1004,14 @@ Array [
                 "percent": 340.2985074626866,
               },
               "initialSize": Object {
-                "absolute": 3596,
+                "absolute": 3598,
                 "ok": true,
-                "percent": 41.74114915844458,
+                "percent": 41.76436448055716,
               },
               "size": Object {
-                "absolute": 4052,
+                "absolute": 4054,
                 "ok": false,
-                "percent": 46.313864441650466,
+                "percent": 46.33672419705108,
               },
             },
             "entry": "two",
@@ -1038,7 +1038,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size diff of assets is 3.96 kb (46.31%). It's over the 0.10 kb limit",
+    "message": "Entry \\"two\\": Download size diff of assets is 3.96 kb (46.34%). It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "two",
