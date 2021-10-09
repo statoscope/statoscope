@@ -164,12 +164,23 @@ test('resolveFile', () => {
 });
 
 test('resolveExtension', () => {
-  expect(helpers.resolveExtension('foo', hash)).toBeNull();
-  const ext = helpers.resolveExtension('@statoscope/stats-extension-compressed', hash);
-  // @ts-ignore
-  expect(ext.data).not.toBeNull();
-  // @ts-ignore
-  expect(ext.api).not.toBeNull();
+  expect(helpers.resolveExtension('foo', firstFile.name)).toBeNull();
+  const ext = helpers.resolveExtension(
+    '@statoscope/stats-extension-compressed',
+    firstFile.name
+  );
+  expect(ext!.data).not.toBeNull();
+  expect(ext!.api).not.toBeNull();
+});
+
+test('resolveExtensionByCompilation', () => {
+  expect(helpers.resolveExtensionByCompilation('foo', hash)).toBeNull();
+  const ext = helpers.resolveExtensionByCompilation(
+    '@statoscope/stats-extension-compressed',
+    hash
+  );
+  expect(ext!.data).not.toBeNull();
+  expect(ext!.api).not.toBeNull();
 });
 
 test('moduleGraph_getEntrypoints', () => {
