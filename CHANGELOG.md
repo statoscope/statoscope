@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.13.1 (1 October 2021)
+
+- `[types]` - rename .ts to .d.ts
+
 ## 5.13.0 (09 October 2021)
 
 ### Features
