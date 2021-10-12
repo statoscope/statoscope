@@ -174,20 +174,6 @@ function makeDetailsContent(
   return content;
 }
 
-function makeInstanceDetailsContent(
-  instances: NodeModuleInstance[],
-  tty: boolean
-): string[] {
-  const ctx = new chalk.Instance(tty ? {} : { level: 0 });
-  return [
-    'Instances:',
-    ...instances.map(
-      (instance) =>
-        `- ${instance.path}  ${instance.version ? ctx.yellow(instance.version) : ''}`
-    ),
-  ];
-}
-
 const restrictedPackages: WebpackRule<Params> = (ruleParams, data, api): void => {
   api.setRuleDescriptor({
     description: `Ensures that bundle doesn't use specified packages`,

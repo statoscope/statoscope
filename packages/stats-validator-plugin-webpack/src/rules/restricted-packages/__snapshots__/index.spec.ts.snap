@@ -1,191 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches 1`] = `
+exports[`basic functionality does not match test 1`] = `Array []`;
+
+exports[`basic functionality does not match test 2`] = `Array []`;
+
+exports[`basic functionality does not match test 3`] = `Array []`;
+
+exports[`basic functionality match test 1`] = `
 Array [
-  Object {
-    "compilation": "34ea3837a1050e206fe0",
-    "details": Array [
-      Object {
-        "content": Array [
-          "Instances:",
-          "- simple/node_modules/foo  1.0.0",
-        ],
-        "type": "text",
-      },
-      Object {
-        "content": Array [
-          "Instances:",
-          "- simple/node_modules/foo  1.0.0",
-        ],
-        "type": "tty",
-      },
-      Object {
-        "payload": Object {
-          "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
-            "package": "foo",
-          },
-        },
-        "query": "
-              $input: resolveInputFile();
-              {
-                package: #.package.resolvePackage(#.compilation),
-              }
-              ",
-        "type": "discovery",
-      },
-    ],
-    "filename": "input.json",
-    "message": "foo@1.0.0 should not be used",
-    "related": Array [
-      Object {
-        "id": "foo",
-        "type": "package",
-      },
-      Object {
-        "id": "simple/node_modules/foo",
-        "type": "package-instance",
-      },
-    ],
-  },
-  Object {
-    "compilation": "34ea3837a1050e206fe0",
-    "details": Array [
-      Object {
-        "content": Array [
-          "Instances:",
-          "- simple/node_modules/foo  1.0.0",
-        ],
-        "type": "text",
-      },
-      Object {
-        "content": Array [
-          "Instances:",
-          "- simple/node_modules/foo  1.0.0",
-        ],
-        "type": "tty",
-      },
-      Object {
-        "payload": Object {
-          "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
-            "package": "foo",
-          },
-        },
-        "query": "
-              $input: resolveInputFile();
-              {
-                package: #.package.resolvePackage(#.compilation),
-              }
-              ",
-        "type": "discovery",
-      },
-    ],
-    "filename": "input.json",
-    "message": "foo@1.0.0 should not be used",
-    "related": Array [
-      Object {
-        "id": "foo",
-        "type": "package",
-      },
-      Object {
-        "id": "simple/node_modules/foo",
-        "type": "package-instance",
-      },
-    ],
-  },
-  Object {
-    "compilation": "34ea3837a1050e206fe0",
-    "details": Array [
-      Object {
-        "content": Array [
-          "Instances:",
-          "- simple/node_modules/foo  1.0.0",
-        ],
-        "type": "text",
-      },
-      Object {
-        "content": Array [
-          "Instances:",
-          "- simple/node_modules/foo  1.0.0",
-        ],
-        "type": "tty",
-      },
-      Object {
-        "payload": Object {
-          "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
-            "package": "foo",
-          },
-        },
-        "query": "
-              $input: resolveInputFile();
-              {
-                package: #.package.resolvePackage(#.compilation),
-              }
-              ",
-        "type": "discovery",
-      },
-    ],
-    "filename": "input.json",
-    "message": "foo@1.0.0 should not be used",
-    "related": Array [
-      Object {
-        "id": "foo",
-        "type": "package",
-      },
-      Object {
-        "id": "simple/node_modules/foo",
-        "type": "package-instance",
-      },
-    ],
-  },
-  Object {
-    "compilation": "34ea3837a1050e206fe0",
-    "details": Array [
-      Object {
-        "content": Array [
-          "Instances:",
-          "- simple/node_modules/foo  1.0.0",
-        ],
-        "type": "text",
-      },
-      Object {
-        "content": Array [
-          "Instances:",
-          "- simple/node_modules/foo  1.0.0",
-        ],
-        "type": "tty",
-      },
-      Object {
-        "payload": Object {
-          "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
-            "package": "foo",
-          },
-        },
-        "query": "
-              $input: resolveInputFile();
-              {
-                package: #.package.resolvePackage(#.compilation),
-              }
-              ",
-        "type": "discovery",
-      },
-    ],
-    "filename": "input.json",
-    "message": "foo@1.0.0 should not be used",
-    "related": Array [
-      Object {
-        "id": "foo",
-        "type": "package",
-      },
-      Object {
-        "id": "simple/node_modules/foo",
-        "type": "package-instance",
-      },
-    ],
-  },
   Object {
     "compilation": "34ea3837a1050e206fe0",
     "details": Array [
@@ -235,4 +57,206 @@ Array [
 ]
 `;
 
-exports[`not matches 1`] = `Array []`;
+exports[`basic functionality match test 2`] = `
+Array [
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "text",
+      },
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "compilation": "34ea3837a1050e206fe0",
+            "package": "foo",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+              }
+              ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "foo",
+        "type": "package",
+      },
+      Object {
+        "id": "simple/node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+  },
+]
+`;
+
+exports[`basic functionality match test 3`] = `
+Array [
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "text",
+      },
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "compilation": "34ea3837a1050e206fe0",
+            "package": "foo",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+              }
+              ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "foo",
+        "type": "package",
+      },
+      Object {
+        "id": "simple/node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+  },
+]
+`;
+
+exports[`basic functionality match test 4`] = `
+Array [
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "text",
+      },
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "compilation": "34ea3837a1050e206fe0",
+            "package": "foo",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+              }
+              ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "foo",
+        "type": "package",
+      },
+      Object {
+        "id": "simple/node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+  },
+]
+`;
+
+exports[`basic functionality match test 5`] = `
+Array [
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "text",
+      },
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "compilation": "34ea3837a1050e206fe0",
+            "package": "foo",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+              }
+              ",
+        "type": "discovery",
+      },
+    ],
+    "filename": "input.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "foo",
+        "type": "package",
+      },
+      Object {
+        "id": "simple/node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+  },
+]
+`;

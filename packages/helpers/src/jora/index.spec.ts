@@ -73,7 +73,7 @@ test('formatSize', () => {
 });
 test('formatDate', () => {
   expect(helpers.formatDate(1624731388203, 'en-US')).toMatch(
-    /6\/26\/2021, \d+:\d+:\d+ PM/
+    /6\/26\/2021, \d+:\d+:\d+ [AP]M/
   );
 });
 test('formatDuration', () => {
