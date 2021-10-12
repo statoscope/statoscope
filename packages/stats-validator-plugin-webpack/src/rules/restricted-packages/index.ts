@@ -9,6 +9,11 @@ import {
 } from '@statoscope/webpack-model/dist/normalize';
 import { API } from '@statoscope/types/types/validation/api';
 import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
+import {
+  DetailsDescriptorDiscovery,
+  DetailsDescriptorText,
+  DetailsDescriptorTTY,
+} from '@statoscope/types/types/validation/test-entry';
 import { WebpackRule } from '../../';
 import { normalizePackageTarget, PackageTarget, RawTarget } from '../../helpers';
 import { RuleExcludeItem } from '../diff-deprecated-packages';
@@ -83,6 +88,33 @@ function handleTarget(
     for (const packageItem of resultItem.packages) {
       const instances = packageItem.instances;
       const versions = instances.map((item) => item.version).filter(Boolean);
+
+      const messageDetails = [
+        {
+          type: 'text' as DetailsDescriptorText['type'],
+          content: makeDetailsContent(target, instances),
+        },
+        {
+          type: 'tty' as DetailsDescriptorTTY['type'],
+          content: makeDetailsContent(target, instances, true),
+        },
+        {
+          type: 'discovery' as DetailsDescriptorDiscovery['type'],
+          query: `
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+              }
+              `,
+          payload: {
+            context: {
+              compilation: resultItem.compilation.hash,
+              package: packageItem.package.name,
+            },
+          },
+        },
+      ];
+
       api.message(
         `${packageItem.package.name}${
           versions.length ? `@${versions.join(', ')}` : ''
@@ -90,25 +122,7 @@ function handleTarget(
         {
           filename: resultItem.file.name,
           compilation: resultItem.compilation.hash,
-          details: [
-            { type: 'text', content: makeInstanceDetailsContent(instances, false) },
-            { type: 'tty', content: makeInstanceDetailsContent(instances, true) },
-            {
-              type: 'discovery',
-              query: `
-              $input: resolveInputFile();
-              {
-                package: #.package.resolvePackage(#.compilation),
-              }
-              `,
-              payload: {
-                context: {
-                  compilation: resultItem.compilation.hash,
-                  package: packageItem.package.name,
-                },
-              },
-            },
-          ],
+          details: messageDetails,
           related: [
             { type: 'package', id: packageItem.package.name },
             ...instances.map(
@@ -121,6 +135,43 @@ function handleTarget(
   }
 
   return result;
+}
+
+/**
+ * Return list of strings to be rendered with:
+ *  - deprecation message defined in the rule target
+ *  - list of package instances found in the bundle
+ *  - list of alternative packages provided in the rule target
+ */
+function makeDetailsContent(
+  target: PackageTarget,
+  instances: NodeModuleInstance[],
+  tty = false
+): string[] {
+  const { description } = target;
+
+  const content = description ? [description] : [];
+
+  const ctx = new chalk.Instance(tty ? {} : { level: 0 });
+  const instancesContent = [
+    'Instances:',
+    ...instances.map(
+      (instance) =>
+        `- ${instance.path}  ${instance.version ? ctx.yellow(instance.version) : ''}`
+    ),
+  ];
+
+  content.push(...instancesContent);
+
+  const { analogs } = target;
+
+  if (analogs?.length) {
+    content.push('Consider using alternative packages:');
+
+    content.push(...analogs.map((analog) => `- ${analog}`));
+  }
+
+  return content;
 }
 
 function makeInstanceDetailsContent(
