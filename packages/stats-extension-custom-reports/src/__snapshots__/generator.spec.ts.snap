@@ -1,5 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should not add existing report 1`] = `
+Object {
+  "descriptor": Object {
+    "adapter": Object {
+      "name": "test-adapter",
+      "version": "7.7.7",
+    },
+    "author": Object {
+      "name": "Sergey Melyukov",
+      "url": "https://twitter.com/smelukov",
+    },
+    "description": "Statoscope extension to store custom reports in stats",
+    "homepage": "https://github.com/statoscope/statoscope/",
+    "name": "@statoscope/stats-extension-custom-reports",
+    "version": "8.8.8",
+  },
+  "payload": Object {
+    "compilations": Array [
+      Object {
+        "id": null,
+        "reports": Array [
+          Object {
+            "context": "context",
+            "data": "data",
+            "id": "foo",
+            "name": "name",
+            "view": Array [
+              "some-ui",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+}
+`;
+
 exports[`should work 1`] = `
 Object {
   "descriptor": Object {

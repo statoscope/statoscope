@@ -32,7 +32,7 @@ test('should work', () => {
   expect(generator.get()).toMatchSnapshot();
 });
 
-test('should throw an exception', () => {
+test('should not add existing report', () => {
   const generator = new Generator(adapter);
 
   generator.handleReport({
@@ -43,13 +43,13 @@ test('should throw an exception', () => {
     view: ['some-ui'],
   });
 
-  expect(
-    generator.handleReport.bind(generator, {
-      context: 'context2',
-      data: 'data2',
-      id: 'foo',
-      name: 'name2',
-      view: ['some-ui2'],
-    })
-  ).toThrow();
+  generator.handleReport({
+    context: 'context2',
+    data: 'data2',
+    id: 'foo',
+    name: 'name2',
+    view: ['some-ui2'],
+  });
+
+  expect(generator.get()).toMatchSnapshot();
 });

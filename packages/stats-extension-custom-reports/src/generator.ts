@@ -36,7 +36,7 @@ export default class Generator {
 
   constructor(private adapter?: ExtensionDescriptor) {}
 
-  handleReport(report: Report<unknown, unknown>): void {
+  handleReport(report: Report<unknown, unknown>): boolean {
     let compilation = this.resolveCompilation(report.compilation ?? null);
 
     if (!compilation) {
@@ -48,10 +48,12 @@ export default class Generator {
     }
 
     if (compilation.reports.find((r) => r.id === report.id)) {
-      throw new Error(`A report with ${report.id} already exits`);
+      return false;
     }
 
     compilation.reports.push(report);
+
+    return true;
   }
 
   get(): Format {

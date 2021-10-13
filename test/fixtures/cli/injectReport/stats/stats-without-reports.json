@@ -1,0 +1,11 @@
+{
+  "__statoscope": {
+    "extensions": [
+      {
+        "descriptor": {
+          "name": "foo"
+        }
+      }
+    ]
+  }
+}
