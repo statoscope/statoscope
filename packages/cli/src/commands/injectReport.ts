@@ -75,9 +75,7 @@ export default function (yargs: Argv): Argv {
           typeof report.id !== 'undefined' &&
           typeof report.view !== 'undefined'
         ) {
-          if (!customReportGenerator.handleReport(report)) {
-            console.log(`Can't add report ${report.id}, it's already exists`);
-          }
+          customReportGenerator.handleReport(report);
         } else {
           throw new Error(
             `Can't add a report. A valid report should contain id and view fields`
