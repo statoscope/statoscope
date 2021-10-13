@@ -22,7 +22,7 @@ export default function (discovery: StatoscopeWidget): void {
               ],
               content: {
                 view: 'h1',
-                data: `name`,
+                data: `name or id`,
               },
             },
             {
