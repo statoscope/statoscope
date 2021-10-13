@@ -11,3 +11,4 @@ dist-test/
 *.js.map
 *.ts.map
 coverage
+packages/webpack-ui/analyze
