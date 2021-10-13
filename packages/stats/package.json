@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/stats",
-  "version": "5.7.0",
+  "version": "5.14.1",
   "description": "Statoscope stats spec",
   "types": "./spec/index.d.ts",
   "scripts": {},

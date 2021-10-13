@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/extensions",
-  "version": "5.7.1",
+  "version": "5.14.1",
   "description": "Statoscope extensions toolkit",
   "main": "./dist/index.js",
   "publishConfig": {

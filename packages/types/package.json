@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/types",
-  "version": "5.13.1",
+  "version": "5.14.1",
   "description": "Statoscope types",
   "types": "./types/index.d.ts",
   "scripts": {},
@@ -13,7 +13,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@statoscope/stats": "5.7.0"
+    "@statoscope/stats": "5.14.1"
   },
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/"

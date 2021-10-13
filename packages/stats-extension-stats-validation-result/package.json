@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/stats-extension-stats-validation-result",
-  "version": "5.13.1",
+  "version": "5.14.1",
   "description": "Statoscope extension that collects stats validation result",
   "main": "./dist/index.js",
   "scripts": {
@@ -18,9 +18,9 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "@statoscope/extensions": "5.7.1",
-    "@statoscope/helpers": "5.9.0",
-    "@statoscope/stats": "5.7.0",
-    "@statoscope/types": "5.13.1"
+    "@statoscope/extensions": "5.14.1",
+    "@statoscope/helpers": "5.14.1",
+    "@statoscope/stats": "5.14.1",
+    "@statoscope/types": "5.14.1"
   }
 }
