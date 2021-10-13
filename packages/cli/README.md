@@ -122,6 +122,67 @@ statoscope generate path/to/stats.json path/to/report.html -o
 
 Create statoscope report, save it to `path/to/report.html` and open
 
+### query
+
+Executes [jora](https://github.com/discoveryjs/jora)-query on stats-file.
+
+`query [...args]`
+
+- `--input` (`-i`) - path to one or more webpack stats
+- `--query` (`-q`) - jora-query
+
+> Also, jora-query could be passed through stdin
+
+**Example:**
+
+```sh
+statoscope query --input path/to/stats.json --query 'compilations.modules.size()' > output.txt
+
+# or
+
+echo 'compilations.modules.size()' | statoscope query --input path/to/stats.json > output.txt
+```
+
+### inject-report
+
+Inject specified [custom reports]((/packages/stats-extension-custom-reports/README.md)) into stats.
+
+`inject-report [...args]`
+
+- `--input` (`-i`) - path to one or more webpack stats
+- `--report` (`-r`) - path to one or more json with reports
+
+> Report could be passed as a single report or an array with reports
+
+> Raw JSON could be passed through stdin
+
+**Example:**
+
+**my-reports.json:**
+
+```json
+[
+  {
+    "id": "foo",
+    "data": [1, 2, 3],
+    "view": ["struct"]
+  },
+  {
+    "id": "bar",
+    "data": [4, 5, 6],
+    "view": ["list"]
+  }
+]
+```
+
+```sh
+statoscope inject-report --input path/to/stats.json --report path/to/my-reports.json > output.json
+
+# or
+
+cat path/to/my-reports.json | statoscope inject-report --input path/to/stats.json > output.json
+```
+
 ## Support
 
 If you are an engineer or a company that is interested in Statoscope improvements, you may support Statoscope by

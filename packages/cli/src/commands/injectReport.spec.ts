@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import yargs from 'yargs';
-import inject from './injectReport';
+import { spawn } from 'child_process';
 
 const rootPath = path.resolve(__dirname, '../../../../');
 const outputDir = path.join(
@@ -48,17 +47,30 @@ const reports = [
 ];
 
 test.each(stats)('%s,', async (filename) => {
-  const newFilename = path.join(outputDir, filename);
-  fs.copyFileSync(path.join(statsDir, filename), newFilename);
-
   for (const report of reports) {
-    const y = inject(yargs);
-    y.fail((_, error) => {
-      console.error(error);
+    const proc = spawn(path.resolve(__dirname, '../../bin/cli.js'), [
+      'inject-report',
+      '--input',
+      path.join(statsDir, filename),
+      '--report',
+      report,
+    ]);
+
+    const output = await new Promise((resolve, reject) => {
+      const stdoutLines: string[] = [];
+      const stderrLines: string[] = [];
+      proc.stdout?.on('data', (data) => stdoutLines.push(data.toString()));
+      proc.stderr?.on('data', (data) => stderrLines.push(data.toString()));
+      proc.on('exit', (code) => {
+        if (!code) {
+          resolve(stdoutLines);
+        } else {
+          console.error(stderrLines);
+          reject(new Error(`Exit code ${code}`));
+        }
+      });
     });
 
-    await y.parse(['inject-report', '--input', newFilename, '--report', report]);
-
-    expect(fs.readFileSync(newFilename, 'utf8')).toMatchSnapshot();
+    expect(output).toMatchSnapshot();
   }
 });

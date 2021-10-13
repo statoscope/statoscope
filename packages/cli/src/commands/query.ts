@@ -4,6 +4,7 @@ import { Argv } from 'yargs';
 import { prepareWithJora } from '@statoscope/webpack-model';
 import { RawStatsFileDescriptor } from '@statoscope/webpack-model/dist/normalize';
 import { parseChunked, stringifyStream } from '@discoveryjs/json-ext';
+import { waitFinished } from '@statoscope/report-writer/dist/utils';
 
 export default function (yargs: Argv): Argv {
   return yargs.command(
@@ -37,8 +38,10 @@ export default function (yargs: Argv): Argv {
 
       const prepared = prepareWithJora(files);
       const result = prepared.query(query);
+      const outputStream = stringifyStream(result);
 
-      stringifyStream(result).pipe(process.stdout);
+      outputStream.pipe(process.stdout);
+      await waitFinished(outputStream);
     }
   );
 }

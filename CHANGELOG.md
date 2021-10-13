@@ -1,6 +1,23 @@
 # Changelog
 
-## 5.13.1 (1 October 2021)
+## 5.14.0 (13 October 2021)
+
+### Features
+
+- `[cli]` - add `query` command (#130)
+- `[cli]` - add `inject-report` command
+
+### Fixes
+
+- `[webpack-ui]` - use report id when no report name specified
+
+### Refactor
+
+- `[stats-extension-custom-reports]` - handleReport returns boolean instead of throw an error
+
+## 5.13.1 (11 October 2021)
+
+### Fixes
 
 - `[types]` - rename .ts to .d.ts
 
