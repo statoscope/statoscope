@@ -39,6 +39,7 @@ export default function (yargs: Argv): Argv {
       if (parsedReports.length) {
         reports.push(...parsedReports.flat());
       } else {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const stdinReports: any[] = [JSON.parse(fs.readFileSync(0, 'utf-8') || '[]')];
 
         reports.push(...stdinReports.flat());
