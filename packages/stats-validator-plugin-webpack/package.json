@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/stats-validator-plugin-webpack",
-  "version": "5.13.1",
+  "version": "5.14.0",
   "description": "Plugin for @statoscope/stats-validator to validate webpack stats",
   "main": "./dist/index.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "@statoscope/stats-extension-compressed": "5.9.0",
     "@statoscope/stats-validator": "5.13.1",
     "@statoscope/types": "5.13.1",
-    "@statoscope/webpack-model": "5.13.1",
+    "@statoscope/webpack-model": "5.14.0",
     "chalk": "^4.1.2",
     "semver": "^7.3.5"
   },
