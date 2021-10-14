@@ -10,7 +10,7 @@ export type PackageTarget = {
   name: string | RegExp;
   version?: string;
   description?: string;
-  analogs?: string[];
+  alternatives?: string[];
 };
 
 export type SerializedPackageTarget = {

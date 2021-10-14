@@ -10,9 +10,8 @@ import {
 import { API } from '@statoscope/types/types/validation/api';
 import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
 import {
+  Details,
   DetailsDescriptorDiscovery,
-  DetailsDescriptorText,
-  DetailsDescriptorTTY,
 } from '@statoscope/types/types/validation/test-entry';
 import { WebpackRule } from '../../';
 import { normalizePackageTarget, PackageTarget, RawTarget } from '../../helpers';
@@ -89,13 +88,13 @@ function handleTarget(
       const instances = packageItem.instances;
       const versions = instances.map((item) => item.version).filter(Boolean);
 
-      const messageDetails = [
+      const messageDetails: Details = [
         {
-          type: 'text' as DetailsDescriptorText['type'],
+          type: 'text',
           content: makeDetailsContent(target, instances),
         },
         {
-          type: 'tty' as DetailsDescriptorTTY['type'],
+          type: 'tty',
           content: makeDetailsContent(target, instances, true),
         },
         {
@@ -104,14 +103,38 @@ function handleTarget(
               $input: resolveInputFile();
               {
                 package: #.package.resolvePackage(#.compilation),
+                alternatives: #.alternatives,
+                description: #.description,
               }
               `,
           payload: {
             context: {
               compilation: resultItem.compilation.hash,
               package: packageItem.package.name,
+              alternatives: target.alternatives,
+              description: target.description,
             },
           },
+          view: [
+            {
+              when: 'description',
+              view: 'block',
+              content: 'text:description',
+            },
+            {
+              when: 'alternatives',
+              view: 'text',
+              data: '"Consider using alternative packages:"',
+            },
+            {
+              view: 'ul',
+              data: 'alternatives',
+              item: {
+                view: 'link',
+                data: `{text: $, href:"https://npmjs.com/package/"+$}`,
+              },
+            },
+          ],
         },
       ];
 
@@ -163,12 +186,12 @@ function makeDetailsContent(
 
   content.push(...instancesContent);
 
-  const { analogs } = target;
+  const { alternatives } = target;
 
-  if (analogs?.length) {
+  if (alternatives?.length) {
     content.push('Consider using alternative packages:');
 
-    content.push(...analogs.map((analog) => `- ${analog}`));
+    content.push(...alternatives.map((alternativePackage) => `- ${alternativePackage}`));
   }
 
   return content;
