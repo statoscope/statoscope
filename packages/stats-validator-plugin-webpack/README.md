@@ -25,7 +25,21 @@ This package contains rules to validate a webpack bundle.
           // ensures that bundle doesn't use specified modules
           '@statoscope/webpack/restricted-modules': ['error', [/\/some-package\/dist\/some-module\.js/]],
           // ensures that bundle doesn't use specified packages
-          '@statoscope/webpack/restricted-packages': ['error', ['lodash', 'browserify-crypto']],
+          '@statoscope/webpack/restricted-packages': [
+            'error',
+            [
+              'lodash',
+              'browserify-crypto',
+              {
+                name: '@bar/foo',
+                version: '1.0.0 - 4.0.0',
+                description: 'Package is not maintained and has security issues',
+                alternatives: [
+                  '@bar/foo2'
+                ]
+              }
+            ],
+          ],
           // ensures that bundle hasn't package duplicates
           '@statoscope/webpack/no-packages-dups': ['error'],
           // ensure that the download time of entrypoints is not over the limit (3 sec)

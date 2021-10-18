@@ -20,8 +20,6 @@ describe('basic functionality', () => {
     api = makeAPI();
   });
 
-  // optional rule target field
-
   const matchTargets: (string | PackageTarget)[] = [
     'foo',
     'foo@^1.0.0 || ^2.0.0',
@@ -67,7 +65,7 @@ describe('Alternative packages support', () => {
     api = makeAPI();
   });
 
-  it('renders a list of alternative packages when provided', () => {
+  it('renders the list of alternative packages when provided', () => {
     const matchTargets: (PackageTarget | string)[] = [
       { name: 'foo', alternatives: ['bar'] },
       { name: 'foo', alternatives: ['bar', 'bar2'], description: targetDescription },

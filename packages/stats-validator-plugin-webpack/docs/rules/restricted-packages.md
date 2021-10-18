@@ -1,8 +1,7 @@
-# Restricted packages
+# Restricted Packages Rule
 
-Ensures that bundle doesn't use specified packages.
-
-Fails validation if some of specified packages has used by the bundle.
+Ensures that bundle doesn't include specified packages.
+Fails validation if some of specified packages are used by the bundle.
 
 ## Example
 
@@ -28,31 +27,45 @@ In this example there are two restricted packages - `lodash` and `rxjs` version 
 ```
 
 ## Options
+Rule options is a list of package targets.
 
 ```ts
 type Options = Array<
   string |
   RegExp |
-  { name: string | RegExp, version?: string }>
+  {
+    name: string | RegExp, // package name or regular expression
+    version?: string, // version being deprecated
+    description?: string, // description of the target
+    alternatives?: string[], // list of alternative packages which could be used instead
+  }>
 ```
 
-### string or RegExp
+### Target can be defined as a string or regular expression
 
 ```json5
 {
   "@statoscope/webpack/restricted-packages": [
     "error",
     [
-      'foo-package',
-      '@bar/package@1.0.0 - 4.0.0'
+      'foo-package', // package name
+      '@bar/foo@1.1.1', // package name and particular version
+      '@bar/package@1.0.0 - 4.0.0' // package name & version range
     ]
   ]
 }
 ```
 
-`@...` is a version or [semver](https://www.npmjs.com/package/semver) range.
+### Target can be defined as an object
 
-### object
+Rule match fields
+- `name: string | RegExp` - Deprecated package name or regular expression matching the name.
+- `version?: string` - Deprecated [version](https://www.npmjs.com/package/semver) or version range.
+  Optional field. When provided only presence of packages with version(s) defined here will fail
+  validation.
+- `description?: string` - Optional human-readable description for the target.
+  When provided will be printed out on the rule match.
+- `alternatives?: string[]` - Optional list of alternative packages to be suggested on the rule match.
 
 ```json5
 {
@@ -63,10 +76,25 @@ type Options = Array<
       {
         name: '@bar/package',
         vesrion: '1.0.0 - 4.0.0',
+        description: 'Deprecated due to severe security vulnerability',
+      }, {
+        name: 'original-dojo',
+        description: 'Package is not maintained',
+        alternatives: ['react'],
       }
     ]
   ]
 }
 ```
 
-`version` is a version or [semver](https://www.npmjs.com/package/semver) range.
+**Output:**
+
+```
+- ❌ foo-package@1.1.1 should not be used
+- ❌ @bar/package@1.1.1 should not be used
+    Deprecated due to severe security vulnerability
+- ❌ original-dojo@1.1.1 should not be used
+    Package is not maintained
+    Consider using alternative packages:
+    - react
+```

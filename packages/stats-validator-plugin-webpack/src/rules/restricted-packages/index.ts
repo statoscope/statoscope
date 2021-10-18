@@ -162,7 +162,7 @@ function handleTarget(
 
 /**
  * Return list of strings to be rendered with:
- *  - deprecation message defined in the rule target
+ *  - rule description message defined in the rule target
  *  - list of package instances found in the bundle
  *  - list of alternative packages provided in the rule target
  */
