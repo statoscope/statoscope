@@ -41,7 +41,8 @@ type Options = Array<
   }>
 ```
 
-### Target can be defined as a string or regular expression
+### string or RegExp
+Target can be defined as a string or regular expression:
 
 ```json5
 {
@@ -56,9 +57,8 @@ type Options = Array<
 }
 ```
 
-### Target can be defined as an object
-
-Rule match fields
+### object
+Target also can be defined as an object:
 - `name: string | RegExp` - Deprecated package name or regular expression matching the name.
 - `version?: string` - Deprecated [version](https://www.npmjs.com/package/semver) or version range.
   Optional field. When provided only presence of packages with version(s) defined here will fail
