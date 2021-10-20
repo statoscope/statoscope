@@ -1,32 +1,92 @@
 import { makeAPI } from '@statoscope/stats-validator/dist/api';
+import { PluginDescription } from '@statoscope/stats-validator/dist/plugin';
+import { API } from '@statoscope/types/types/validation/api';
+import { Prepared } from '@statoscope/webpack-model';
 import plugin from '../..';
 import statsV5 from '../../../../../test/bundles/v5/simple/stats-prod.json';
+import { PackageTarget } from '../../helpers';
 import rule from './';
 
-test('matches', () => {
-  const pluginInstance = plugin();
-  const prepared = pluginInstance.prepare!([{ name: 'input.json', data: statsV5 }]);
-  const api = makeAPI();
+const targetDescription = 'Completely valid reason not to use foo';
 
-  rule(['foo'], prepared, api);
-  rule(['foo@^1.0.0 || ^2.0.0'], prepared, api);
+describe('basic functionality', () => {
+  let pluginInstance!: PluginDescription<Prepared>;
+  let prepared!: Prepared;
+  let api!: API;
 
-  rule([{ name: 'foo' }], prepared, api);
-  rule([{ name: /^foo/ }], prepared, api);
-  rule([{ name: 'foo', version: '^1.0.0 || ^2.0.0' }], prepared, api);
+  beforeEach(() => {
+    pluginInstance = plugin();
+    prepared = pluginInstance.prepare!([{ name: 'input.json', data: statsV5 }]);
+    api = makeAPI();
+  });
 
-  expect(api.getStorage()).toMatchSnapshot();
+  const matchTargets: (string | PackageTarget)[] = [
+    'foo',
+    'foo@^1.0.0 || ^2.0.0',
+    { name: 'foo' },
+    { name: 'foo', description: targetDescription },
+    { name: /^foo/ },
+    { name: 'foo', version: '^1.0.0 || ^2.0.0' },
+    { name: 'foo', version: '^1.0.0 || ^2.0.0', description: targetDescription },
+  ];
+
+  matchTargets.forEach((matchRule) => {
+    test(`match test`, () => {
+      rule([matchRule], prepared, api);
+      expect(api.getStorage()).toMatchSnapshot();
+    });
+  });
+
+  const noMatchTargets: (PackageTarget | string)[] = [
+    'foo@^2.0.0',
+    { name: /^fo$/ },
+    { name: 'foo', version: '^2.0.0' },
+    { name: 'foo', version: '^2.0.0', description: "which doesn't matter" },
+    { name: 'foo', version: '^2.0.0', alternatives: ['bar'] },
+  ];
+
+  noMatchTargets.forEach((nonMatchRule) => {
+    test(`does not match test`, () => {
+      rule([nonMatchRule], prepared, api);
+
+      expect(api.getStorage()).toMatchSnapshot();
+    });
+  });
 });
 
-test('not matches', () => {
-  const pluginInstance = plugin();
-  const prepared = pluginInstance.prepare!([{ name: 'input.json', data: statsV5 }]);
-  const api = makeAPI();
+describe('Alternative packages support', () => {
+  let pluginInstance!: PluginDescription<Prepared>;
+  let prepared!: Prepared;
+  let api!: API;
 
-  rule(['foo@^2.0.0'], prepared, api);
+  beforeEach(() => {
+    pluginInstance = plugin();
+    prepared = pluginInstance.prepare!([{ name: 'input.json', data: statsV5 }]);
+    api = makeAPI();
+  });
 
-  rule([{ name: /^fo$/ }], prepared, api);
-  rule([{ name: 'foo', version: '^2.0.0' }], prepared, api);
+  it('renders the list of alternative packages when provided', () => {
+    const matchTargets: (PackageTarget | string)[] = [
+      { name: 'foo', alternatives: ['bar'] },
+      { name: 'foo', alternatives: ['bar', 'bar2'], description: targetDescription },
+      { name: /^foo/, alternatives: ['bar'] },
+    ];
 
-  expect(api.getStorage()).toMatchSnapshot();
+    matchTargets.forEach((matchRule) => {
+      rule([matchRule], prepared, api);
+      expect(api.getStorage()).toMatchSnapshot();
+    });
+  });
+
+  it("doesn't render the list when alternatives aren't provided", () => {
+    const matchWoAlternativesTargets: (PackageTarget | string)[] = [
+      { name: 'foo' },
+      { name: 'foo', alternatives: [] },
+    ];
+
+    matchWoAlternativesTargets.forEach((matchRule) => {
+      rule([matchRule], prepared, api);
+      expect(api.getStorage()).toMatchSnapshot();
+    });
+  });
 });

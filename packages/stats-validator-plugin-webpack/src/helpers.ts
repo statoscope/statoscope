@@ -9,6 +9,8 @@ export type ModuleTarget = {
 export type PackageTarget = {
   name: string | RegExp;
   version?: string;
+  description?: string;
+  alternatives?: string[];
 };
 
 export type SerializedPackageTarget = {

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches 1`] = `
+exports[`Alternative packages support doesn't render the list when alternatives aren't provided 1`] = `
 Array [
   Object {
     "compilation": "34ea3837a1050e206fe0",
@@ -22,7 +22,9 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
+            "alternatives": undefined,
             "compilation": "34ea3837a1050e206fe0",
+            "description": undefined,
             "package": "foo",
           },
         },
@@ -30,193 +32,31 @@ Array [
               $input: resolveInputFile();
               {
                 package: #.package.resolvePackage(#.compilation),
+                alternatives: #.alternatives,
+                description: #.description,
               }
               ",
         "type": "discovery",
-      },
-    ],
-    "filename": "input.json",
-    "message": "foo@1.0.0 should not be used",
-    "related": Array [
-      Object {
-        "id": "foo",
-        "type": "package",
-      },
-      Object {
-        "id": "simple/node_modules/foo",
-        "type": "package-instance",
-      },
-    ],
-  },
-  Object {
-    "compilation": "34ea3837a1050e206fe0",
-    "details": Array [
-      Object {
-        "content": Array [
-          "Instances:",
-          "- simple/node_modules/foo  1.0.0",
-        ],
-        "type": "text",
-      },
-      Object {
-        "content": Array [
-          "Instances:",
-          "- simple/node_modules/foo  1.0.0",
-        ],
-        "type": "tty",
-      },
-      Object {
-        "payload": Object {
-          "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
-            "package": "foo",
+        "view": Array [
+          Object {
+            "content": "text:description",
+            "view": "block",
+            "when": "description",
           },
-        },
-        "query": "
-              $input: resolveInputFile();
-              {
-                package: #.package.resolvePackage(#.compilation),
-              }
-              ",
-        "type": "discovery",
-      },
-    ],
-    "filename": "input.json",
-    "message": "foo@1.0.0 should not be used",
-    "related": Array [
-      Object {
-        "id": "foo",
-        "type": "package",
-      },
-      Object {
-        "id": "simple/node_modules/foo",
-        "type": "package-instance",
-      },
-    ],
-  },
-  Object {
-    "compilation": "34ea3837a1050e206fe0",
-    "details": Array [
-      Object {
-        "content": Array [
-          "Instances:",
-          "- simple/node_modules/foo  1.0.0",
-        ],
-        "type": "text",
-      },
-      Object {
-        "content": Array [
-          "Instances:",
-          "- simple/node_modules/foo  1.0.0",
-        ],
-        "type": "tty",
-      },
-      Object {
-        "payload": Object {
-          "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
-            "package": "foo",
+          Object {
+            "data": "\\"Consider using alternative packages:\\"",
+            "view": "text",
+            "when": "alternatives",
           },
-        },
-        "query": "
-              $input: resolveInputFile();
-              {
-                package: #.package.resolvePackage(#.compilation),
-              }
-              ",
-        "type": "discovery",
-      },
-    ],
-    "filename": "input.json",
-    "message": "foo@1.0.0 should not be used",
-    "related": Array [
-      Object {
-        "id": "foo",
-        "type": "package",
-      },
-      Object {
-        "id": "simple/node_modules/foo",
-        "type": "package-instance",
-      },
-    ],
-  },
-  Object {
-    "compilation": "34ea3837a1050e206fe0",
-    "details": Array [
-      Object {
-        "content": Array [
-          "Instances:",
-          "- simple/node_modules/foo  1.0.0",
-        ],
-        "type": "text",
-      },
-      Object {
-        "content": Array [
-          "Instances:",
-          "- simple/node_modules/foo  1.0.0",
-        ],
-        "type": "tty",
-      },
-      Object {
-        "payload": Object {
-          "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
-            "package": "foo",
+          Object {
+            "data": "alternatives",
+            "item": Object {
+              "data": "{text: $, href:\\"https://npmjs.com/package/\\"+$}",
+              "view": "link",
+            },
+            "view": "ul",
           },
-        },
-        "query": "
-              $input: resolveInputFile();
-              {
-                package: #.package.resolvePackage(#.compilation),
-              }
-              ",
-        "type": "discovery",
-      },
-    ],
-    "filename": "input.json",
-    "message": "foo@1.0.0 should not be used",
-    "related": Array [
-      Object {
-        "id": "foo",
-        "type": "package",
-      },
-      Object {
-        "id": "simple/node_modules/foo",
-        "type": "package-instance",
-      },
-    ],
-  },
-  Object {
-    "compilation": "34ea3837a1050e206fe0",
-    "details": Array [
-      Object {
-        "content": Array [
-          "Instances:",
-          "- simple/node_modules/foo  1.0.0",
         ],
-        "type": "text",
-      },
-      Object {
-        "content": Array [
-          "Instances:",
-          "- simple/node_modules/foo  1.0.0",
-        ],
-        "type": "tty",
-      },
-      Object {
-        "payload": Object {
-          "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
-            "package": "foo",
-          },
-        },
-        "query": "
-              $input: resolveInputFile();
-              {
-                package: #.package.resolvePackage(#.compilation),
-              }
-              ",
-        "type": "discovery",
       },
     ],
     "filename": "input.json",
@@ -235,4 +75,1167 @@ Array [
 ]
 `;
 
-exports[`not matches 1`] = `Array []`;
+exports[`Alternative packages support doesn't render the list when alternatives aren't provided 2`] = `
+Array [
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "text",
+      },
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "alternatives": undefined,
+            "compilation": "34ea3837a1050e206fe0",
+            "description": undefined,
+            "package": "foo",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+                alternatives: #.alternatives,
+                description: #.description,
+              }
+              ",
+        "type": "discovery",
+        "view": Array [
+          Object {
+            "content": "text:description",
+            "view": "block",
+            "when": "description",
+          },
+          Object {
+            "data": "\\"Consider using alternative packages:\\"",
+            "view": "text",
+            "when": "alternatives",
+          },
+          Object {
+            "data": "alternatives",
+            "item": Object {
+              "data": "{text: $, href:\\"https://npmjs.com/package/\\"+$}",
+              "view": "link",
+            },
+            "view": "ul",
+          },
+        ],
+      },
+    ],
+    "filename": "input.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "foo",
+        "type": "package",
+      },
+      Object {
+        "id": "simple/node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+  },
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "text",
+      },
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "alternatives": Array [],
+            "compilation": "34ea3837a1050e206fe0",
+            "description": undefined,
+            "package": "foo",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+                alternatives: #.alternatives,
+                description: #.description,
+              }
+              ",
+        "type": "discovery",
+        "view": Array [
+          Object {
+            "content": "text:description",
+            "view": "block",
+            "when": "description",
+          },
+          Object {
+            "data": "\\"Consider using alternative packages:\\"",
+            "view": "text",
+            "when": "alternatives",
+          },
+          Object {
+            "data": "alternatives",
+            "item": Object {
+              "data": "{text: $, href:\\"https://npmjs.com/package/\\"+$}",
+              "view": "link",
+            },
+            "view": "ul",
+          },
+        ],
+      },
+    ],
+    "filename": "input.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "foo",
+        "type": "package",
+      },
+      Object {
+        "id": "simple/node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+  },
+]
+`;
+
+exports[`Alternative packages support renders the list of alternative packages when provided 1`] = `
+Array [
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+          "Consider using alternative packages:",
+          "- bar",
+        ],
+        "type": "text",
+      },
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+          "Consider using alternative packages:",
+          "- bar",
+        ],
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "alternatives": Array [
+              "bar",
+            ],
+            "compilation": "34ea3837a1050e206fe0",
+            "description": undefined,
+            "package": "foo",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+                alternatives: #.alternatives,
+                description: #.description,
+              }
+              ",
+        "type": "discovery",
+        "view": Array [
+          Object {
+            "content": "text:description",
+            "view": "block",
+            "when": "description",
+          },
+          Object {
+            "data": "\\"Consider using alternative packages:\\"",
+            "view": "text",
+            "when": "alternatives",
+          },
+          Object {
+            "data": "alternatives",
+            "item": Object {
+              "data": "{text: $, href:\\"https://npmjs.com/package/\\"+$}",
+              "view": "link",
+            },
+            "view": "ul",
+          },
+        ],
+      },
+    ],
+    "filename": "input.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "foo",
+        "type": "package",
+      },
+      Object {
+        "id": "simple/node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+  },
+]
+`;
+
+exports[`Alternative packages support renders the list of alternative packages when provided 2`] = `
+Array [
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+          "Consider using alternative packages:",
+          "- bar",
+        ],
+        "type": "text",
+      },
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+          "Consider using alternative packages:",
+          "- bar",
+        ],
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "alternatives": Array [
+              "bar",
+            ],
+            "compilation": "34ea3837a1050e206fe0",
+            "description": undefined,
+            "package": "foo",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+                alternatives: #.alternatives,
+                description: #.description,
+              }
+              ",
+        "type": "discovery",
+        "view": Array [
+          Object {
+            "content": "text:description",
+            "view": "block",
+            "when": "description",
+          },
+          Object {
+            "data": "\\"Consider using alternative packages:\\"",
+            "view": "text",
+            "when": "alternatives",
+          },
+          Object {
+            "data": "alternatives",
+            "item": Object {
+              "data": "{text: $, href:\\"https://npmjs.com/package/\\"+$}",
+              "view": "link",
+            },
+            "view": "ul",
+          },
+        ],
+      },
+    ],
+    "filename": "input.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "foo",
+        "type": "package",
+      },
+      Object {
+        "id": "simple/node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+  },
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Completely valid reason not to use foo",
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+          "Consider using alternative packages:",
+          "- bar",
+          "- bar2",
+        ],
+        "type": "text",
+      },
+      Object {
+        "content": Array [
+          "Completely valid reason not to use foo",
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+          "Consider using alternative packages:",
+          "- bar",
+          "- bar2",
+        ],
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "alternatives": Array [
+              "bar",
+              "bar2",
+            ],
+            "compilation": "34ea3837a1050e206fe0",
+            "description": "Completely valid reason not to use foo",
+            "package": "foo",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+                alternatives: #.alternatives,
+                description: #.description,
+              }
+              ",
+        "type": "discovery",
+        "view": Array [
+          Object {
+            "content": "text:description",
+            "view": "block",
+            "when": "description",
+          },
+          Object {
+            "data": "\\"Consider using alternative packages:\\"",
+            "view": "text",
+            "when": "alternatives",
+          },
+          Object {
+            "data": "alternatives",
+            "item": Object {
+              "data": "{text: $, href:\\"https://npmjs.com/package/\\"+$}",
+              "view": "link",
+            },
+            "view": "ul",
+          },
+        ],
+      },
+    ],
+    "filename": "input.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "foo",
+        "type": "package",
+      },
+      Object {
+        "id": "simple/node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+  },
+]
+`;
+
+exports[`Alternative packages support renders the list of alternative packages when provided 3`] = `
+Array [
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+          "Consider using alternative packages:",
+          "- bar",
+        ],
+        "type": "text",
+      },
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+          "Consider using alternative packages:",
+          "- bar",
+        ],
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "alternatives": Array [
+              "bar",
+            ],
+            "compilation": "34ea3837a1050e206fe0",
+            "description": undefined,
+            "package": "foo",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+                alternatives: #.alternatives,
+                description: #.description,
+              }
+              ",
+        "type": "discovery",
+        "view": Array [
+          Object {
+            "content": "text:description",
+            "view": "block",
+            "when": "description",
+          },
+          Object {
+            "data": "\\"Consider using alternative packages:\\"",
+            "view": "text",
+            "when": "alternatives",
+          },
+          Object {
+            "data": "alternatives",
+            "item": Object {
+              "data": "{text: $, href:\\"https://npmjs.com/package/\\"+$}",
+              "view": "link",
+            },
+            "view": "ul",
+          },
+        ],
+      },
+    ],
+    "filename": "input.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "foo",
+        "type": "package",
+      },
+      Object {
+        "id": "simple/node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+  },
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Completely valid reason not to use foo",
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+          "Consider using alternative packages:",
+          "- bar",
+          "- bar2",
+        ],
+        "type": "text",
+      },
+      Object {
+        "content": Array [
+          "Completely valid reason not to use foo",
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+          "Consider using alternative packages:",
+          "- bar",
+          "- bar2",
+        ],
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "alternatives": Array [
+              "bar",
+              "bar2",
+            ],
+            "compilation": "34ea3837a1050e206fe0",
+            "description": "Completely valid reason not to use foo",
+            "package": "foo",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+                alternatives: #.alternatives,
+                description: #.description,
+              }
+              ",
+        "type": "discovery",
+        "view": Array [
+          Object {
+            "content": "text:description",
+            "view": "block",
+            "when": "description",
+          },
+          Object {
+            "data": "\\"Consider using alternative packages:\\"",
+            "view": "text",
+            "when": "alternatives",
+          },
+          Object {
+            "data": "alternatives",
+            "item": Object {
+              "data": "{text: $, href:\\"https://npmjs.com/package/\\"+$}",
+              "view": "link",
+            },
+            "view": "ul",
+          },
+        ],
+      },
+    ],
+    "filename": "input.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "foo",
+        "type": "package",
+      },
+      Object {
+        "id": "simple/node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+  },
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+          "Consider using alternative packages:",
+          "- bar",
+        ],
+        "type": "text",
+      },
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+          "Consider using alternative packages:",
+          "- bar",
+        ],
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "alternatives": Array [
+              "bar",
+            ],
+            "compilation": "34ea3837a1050e206fe0",
+            "description": undefined,
+            "package": "foo",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+                alternatives: #.alternatives,
+                description: #.description,
+              }
+              ",
+        "type": "discovery",
+        "view": Array [
+          Object {
+            "content": "text:description",
+            "view": "block",
+            "when": "description",
+          },
+          Object {
+            "data": "\\"Consider using alternative packages:\\"",
+            "view": "text",
+            "when": "alternatives",
+          },
+          Object {
+            "data": "alternatives",
+            "item": Object {
+              "data": "{text: $, href:\\"https://npmjs.com/package/\\"+$}",
+              "view": "link",
+            },
+            "view": "ul",
+          },
+        ],
+      },
+    ],
+    "filename": "input.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "foo",
+        "type": "package",
+      },
+      Object {
+        "id": "simple/node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+  },
+]
+`;
+
+exports[`basic functionality does not match test 1`] = `Array []`;
+
+exports[`basic functionality does not match test 2`] = `Array []`;
+
+exports[`basic functionality does not match test 3`] = `Array []`;
+
+exports[`basic functionality does not match test 4`] = `Array []`;
+
+exports[`basic functionality does not match test 5`] = `Array []`;
+
+exports[`basic functionality match test 1`] = `
+Array [
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "text",
+      },
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "alternatives": undefined,
+            "compilation": "34ea3837a1050e206fe0",
+            "description": undefined,
+            "package": "foo",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+                alternatives: #.alternatives,
+                description: #.description,
+              }
+              ",
+        "type": "discovery",
+        "view": Array [
+          Object {
+            "content": "text:description",
+            "view": "block",
+            "when": "description",
+          },
+          Object {
+            "data": "\\"Consider using alternative packages:\\"",
+            "view": "text",
+            "when": "alternatives",
+          },
+          Object {
+            "data": "alternatives",
+            "item": Object {
+              "data": "{text: $, href:\\"https://npmjs.com/package/\\"+$}",
+              "view": "link",
+            },
+            "view": "ul",
+          },
+        ],
+      },
+    ],
+    "filename": "input.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "foo",
+        "type": "package",
+      },
+      Object {
+        "id": "simple/node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+  },
+]
+`;
+
+exports[`basic functionality match test 2`] = `
+Array [
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "text",
+      },
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "alternatives": undefined,
+            "compilation": "34ea3837a1050e206fe0",
+            "description": undefined,
+            "package": "foo",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+                alternatives: #.alternatives,
+                description: #.description,
+              }
+              ",
+        "type": "discovery",
+        "view": Array [
+          Object {
+            "content": "text:description",
+            "view": "block",
+            "when": "description",
+          },
+          Object {
+            "data": "\\"Consider using alternative packages:\\"",
+            "view": "text",
+            "when": "alternatives",
+          },
+          Object {
+            "data": "alternatives",
+            "item": Object {
+              "data": "{text: $, href:\\"https://npmjs.com/package/\\"+$}",
+              "view": "link",
+            },
+            "view": "ul",
+          },
+        ],
+      },
+    ],
+    "filename": "input.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "foo",
+        "type": "package",
+      },
+      Object {
+        "id": "simple/node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+  },
+]
+`;
+
+exports[`basic functionality match test 3`] = `
+Array [
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "text",
+      },
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "alternatives": undefined,
+            "compilation": "34ea3837a1050e206fe0",
+            "description": undefined,
+            "package": "foo",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+                alternatives: #.alternatives,
+                description: #.description,
+              }
+              ",
+        "type": "discovery",
+        "view": Array [
+          Object {
+            "content": "text:description",
+            "view": "block",
+            "when": "description",
+          },
+          Object {
+            "data": "\\"Consider using alternative packages:\\"",
+            "view": "text",
+            "when": "alternatives",
+          },
+          Object {
+            "data": "alternatives",
+            "item": Object {
+              "data": "{text: $, href:\\"https://npmjs.com/package/\\"+$}",
+              "view": "link",
+            },
+            "view": "ul",
+          },
+        ],
+      },
+    ],
+    "filename": "input.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "foo",
+        "type": "package",
+      },
+      Object {
+        "id": "simple/node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+  },
+]
+`;
+
+exports[`basic functionality match test 4`] = `
+Array [
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Completely valid reason not to use foo",
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "text",
+      },
+      Object {
+        "content": Array [
+          "Completely valid reason not to use foo",
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "alternatives": undefined,
+            "compilation": "34ea3837a1050e206fe0",
+            "description": "Completely valid reason not to use foo",
+            "package": "foo",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+                alternatives: #.alternatives,
+                description: #.description,
+              }
+              ",
+        "type": "discovery",
+        "view": Array [
+          Object {
+            "content": "text:description",
+            "view": "block",
+            "when": "description",
+          },
+          Object {
+            "data": "\\"Consider using alternative packages:\\"",
+            "view": "text",
+            "when": "alternatives",
+          },
+          Object {
+            "data": "alternatives",
+            "item": Object {
+              "data": "{text: $, href:\\"https://npmjs.com/package/\\"+$}",
+              "view": "link",
+            },
+            "view": "ul",
+          },
+        ],
+      },
+    ],
+    "filename": "input.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "foo",
+        "type": "package",
+      },
+      Object {
+        "id": "simple/node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+  },
+]
+`;
+
+exports[`basic functionality match test 5`] = `
+Array [
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "text",
+      },
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "alternatives": undefined,
+            "compilation": "34ea3837a1050e206fe0",
+            "description": undefined,
+            "package": "foo",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+                alternatives: #.alternatives,
+                description: #.description,
+              }
+              ",
+        "type": "discovery",
+        "view": Array [
+          Object {
+            "content": "text:description",
+            "view": "block",
+            "when": "description",
+          },
+          Object {
+            "data": "\\"Consider using alternative packages:\\"",
+            "view": "text",
+            "when": "alternatives",
+          },
+          Object {
+            "data": "alternatives",
+            "item": Object {
+              "data": "{text: $, href:\\"https://npmjs.com/package/\\"+$}",
+              "view": "link",
+            },
+            "view": "ul",
+          },
+        ],
+      },
+    ],
+    "filename": "input.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "foo",
+        "type": "package",
+      },
+      Object {
+        "id": "simple/node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+  },
+]
+`;
+
+exports[`basic functionality match test 6`] = `
+Array [
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "text",
+      },
+      Object {
+        "content": Array [
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "alternatives": undefined,
+            "compilation": "34ea3837a1050e206fe0",
+            "description": undefined,
+            "package": "foo",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+                alternatives: #.alternatives,
+                description: #.description,
+              }
+              ",
+        "type": "discovery",
+        "view": Array [
+          Object {
+            "content": "text:description",
+            "view": "block",
+            "when": "description",
+          },
+          Object {
+            "data": "\\"Consider using alternative packages:\\"",
+            "view": "text",
+            "when": "alternatives",
+          },
+          Object {
+            "data": "alternatives",
+            "item": Object {
+              "data": "{text: $, href:\\"https://npmjs.com/package/\\"+$}",
+              "view": "link",
+            },
+            "view": "ul",
+          },
+        ],
+      },
+    ],
+    "filename": "input.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "foo",
+        "type": "package",
+      },
+      Object {
+        "id": "simple/node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+  },
+]
+`;
+
+exports[`basic functionality match test 7`] = `
+Array [
+  Object {
+    "compilation": "34ea3837a1050e206fe0",
+    "details": Array [
+      Object {
+        "content": Array [
+          "Completely valid reason not to use foo",
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "text",
+      },
+      Object {
+        "content": Array [
+          "Completely valid reason not to use foo",
+          "Instances:",
+          "- simple/node_modules/foo  1.0.0",
+        ],
+        "type": "tty",
+      },
+      Object {
+        "payload": Object {
+          "context": Object {
+            "alternatives": undefined,
+            "compilation": "34ea3837a1050e206fe0",
+            "description": "Completely valid reason not to use foo",
+            "package": "foo",
+          },
+        },
+        "query": "
+              $input: resolveInputFile();
+              {
+                package: #.package.resolvePackage(#.compilation),
+                alternatives: #.alternatives,
+                description: #.description,
+              }
+              ",
+        "type": "discovery",
+        "view": Array [
+          Object {
+            "content": "text:description",
+            "view": "block",
+            "when": "description",
+          },
+          Object {
+            "data": "\\"Consider using alternative packages:\\"",
+            "view": "text",
+            "when": "alternatives",
+          },
+          Object {
+            "data": "alternatives",
+            "item": Object {
+              "data": "{text: $, href:\\"https://npmjs.com/package/\\"+$}",
+              "view": "link",
+            },
+            "view": "ul",
+          },
+        ],
+      },
+    ],
+    "filename": "input.json",
+    "message": "foo@1.0.0 should not be used",
+    "related": Array [
+      Object {
+        "id": "foo",
+        "type": "package",
+      },
+      Object {
+        "id": "simple/node_modules/foo",
+        "type": "package-instance",
+      },
+    ],
+  },
+]
+`;
