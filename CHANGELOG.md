@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.15.0 (21 October 2021)
+
+### Features
+
+- `[stats-validator-plugin-webpack]` - add `description` and `alternatives` for `restricted-packages` rule (#129 by @amalitsky)
+
 ## 5.14.1 (13 October 2021)
 
 ### Fix
