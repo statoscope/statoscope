@@ -1,6 +1,10 @@
 export default `
-$addedChunks: $statB.compilation.chunks.[not id.resolveChunk($statA.compilation.hash)].({chunk: $, hash: $statB.compilation.hash});
-$removedChunks: $statA.compilation.chunks.[not id.resolveChunk($statB.compilation.hash)].({chunk: $, hash: $statA.compilation.hash});
+$addedChunks: $statB.compilation.chunks.[not id.resolveChunk($statA.compilation.hash)].({
+  chunk: $, hash: $statB.compilation.hash
+});
+$removedChunks: $statA.compilation.chunks.[not id.resolveChunk($statB.compilation.hash)].({
+  chunk: $, hash: $statA.compilation.hash
+});
 $intersectedChunks: $statA.compilation.chunks.({
   $chunkA: $;
   $chunkB: $chunkA.id.resolveChunk($statB.compilation.hash);
@@ -17,6 +21,9 @@ $chunksDiff: {
       $chunkFilesSize: $chunkFilesSizes.reduce(=> size + $$, 0);
       chunk,
       hash,
+      modules: {
+          added: chunk.modules
+      },
       diff: [
         {
           type: 'size',
@@ -50,6 +57,9 @@ $chunksDiff: {
       $chunkFilesSize: $chunkFilesSizes.reduce(=> size + $$, 0);
       chunk,
       hash,
+      modules: {
+          removed: chunk.modules
+      },
       diff: [
         {
           type: 'size',
@@ -86,6 +96,27 @@ $chunksDiff: {
       $chunkBFileSizes: $b.chunk.files.[].[not name.shouldExcludeResource()].(getAssetSize($b.hash, $useCompressedSize));
       $chunkBFileSize: $chunkBFileSizes.reduce(=> size + $$, 0);
       ...b,
+      modules: {
+          added: $b.chunk.modules
+            .[not identifier in $a.chunk.modules.identifier],
+          removed: $a.chunk.modules
+            .[not identifier in $b.chunk.modules.identifier],
+          changed: $a.chunk.modules.({
+            $moduleA: $;
+            $moduleB: $moduleA.identifier.resolveModule($statB.compilation.hash);
+            a: {module: $moduleA, hash: $statA.compilation.hash},
+            b: {module: $moduleB, hash: $statB.compilation.hash},
+          }).({
+            $a: a;
+            $b: b;
+            ...b.module,            
+            diff: [{
+              type: 'size',
+              a: $a.getModuleSize(hash or #.params.hash).size,
+              b: $b.getModuleSize(hash or #.params.hash).size,
+            }].[a != b]
+          })
+      },
       diff: [
         {
           type: 'size',
