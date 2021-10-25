@@ -115,7 +115,7 @@ $chunksDiff: {
               a: $a.getModuleSize(hash or #.params.hash).size,
               b: $b.getModuleSize(hash or #.params.hash).size,
             }].[a != b]
-          })
+          }).[diff]
       },
       diff: [
         {
