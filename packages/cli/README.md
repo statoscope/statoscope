@@ -92,6 +92,7 @@ Start HTTP-server and serve JSON-stats as HTML report
 `serve input [...args]`
 
 - `--input` (`-i`) - path to one or more webpack stats
+- `--reference` (`-r`) - path to a stats-file to compare with (optional). When used, only first file from `input` will be used
 - `--host` (`-h`) - server host
 - `--port` (`-p`) - server port
 - `--open` (`-o`) - open browser after server start
@@ -111,6 +112,7 @@ Generate HTML report from JSON-stats.
 `generate input output [...args]`
 
 - `--input` (`-i`) - path to one or more webpack stats
+- `--reference` (`-r`) - path to a stats-file to compare with (optional). When used, only first file from `input` will be used
 - `--output` (`-t`) - path to generated HTML
 - `--open` (`-o`) - open browser after generate
 

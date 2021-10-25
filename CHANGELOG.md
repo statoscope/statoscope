@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.16.0 (25 October 2021)
+
+### Features
+
+- `[cli]` - Support `reference`-arg for `generate` and `serve` commands (#134)
+- `[webpack-ui]` - Use `input` and `reference` files by default for diff page (#134)
+- `[webpack-ui]` - Add details to chunks-tab (Added/Removed/Changed modules) at diff page. (#133 by @andreygmc)
+
 ## 5.15.0 (21 October 2021)
 
 ### Features
