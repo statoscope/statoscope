@@ -6,9 +6,9 @@ export default function chunksTab(): ViewConfigData[] {
     {
       view: 'tree',
       data: `
-      $changed: chunks.changed.[chunk.chunkName()~=#.filter];
-      $added: chunks.added.[chunk.chunkName()~=#.filter];
-      $removed: chunks.removed.[chunk.chunkName()~=#.filter];
+      $changed: chunks.changed.[chunk.chunkName()~=#.filter or chunk.modules[=>name~=#.filter]];
+      $added: chunks.added.[chunk.chunkName()~=#.filter or chunk.modules[=>name~=#.filter]];
+      $removed: chunks.removed.[chunk.chunkName()~=#.filter or chunk.modules[=>name~=#.filter]];
       [{
         type: "changed",
         title: "Changed",
