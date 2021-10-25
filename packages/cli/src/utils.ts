@@ -11,15 +11,25 @@ import normalizeCompilation from '@statoscope/webpack-model/dist/normalizeCompil
 import { Webpack } from '@statoscope/webpack-model/webpack';
 import Compilation = Webpack.Compilation;
 
-export async function transform(from: string[], to: string): Promise<string> {
+export type TransformFrom = {
+  name: string;
+  as: string;
+};
+
+export async function transform(
+  from: Array<TransformFrom | string>,
+  to: string
+): Promise<string> {
   const normalizedFrom: FromItem[] = [];
 
   for (const item of from) {
-    const parsed: Compilation = await parseChunked(fs.createReadStream(item));
+    const filename = typeof item === 'string' ? item : item.name;
+    const as = typeof item === 'string' ? item : item.as;
+    const parsed: Compilation = await parseChunked(fs.createReadStream(filename));
     normalizeCompilation(parsed);
     normalizedFrom.push({
       type: 'data',
-      filename: item,
+      filename: as,
       data: parsed,
       replacer: makeReplacer(parsed.__statoscope?.context, '.', ['context', 'source']),
     });
