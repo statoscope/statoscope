@@ -4,9 +4,14 @@
 
 ### Features
 
+- `[webpack-model]` - support grouped modules (`stats: { all: true }` in webpack 5)
 - `[webpack-model]` - improved `chunkName` helper
   Now `chunkName` helper returns more accurate chunk name
 - `[webpack-model]` - add `assetChunkName` helper
+
+### Refactor
+
+- `[webpack-model]` - total stats preparing refactoring
 
 ## 5.16.0 (25 October 2021)
 
