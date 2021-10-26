@@ -5,7 +5,7 @@ import {
   NormalizedAsset,
   NormalizedCompilation,
   NormalizedModule,
-} from '@statoscope/webpack-model/dist/normalize';
+} from '@statoscope/webpack-model/types';
 import type { Size } from '@statoscope/stats-extension-compressed/dist/generator';
 import type { Instance } from '@statoscope/stats-extension-package-info/dist/generator';
 import { PrepareFn } from '@statoscope/types';

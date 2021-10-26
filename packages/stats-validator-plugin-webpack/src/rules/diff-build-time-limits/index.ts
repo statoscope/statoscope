@@ -1,7 +1,4 @@
-import {
-  NormalizedChunk,
-  NormalizedCompilation,
-} from '@statoscope/webpack-model/dist/normalize';
+import { NormalizedChunk, NormalizedCompilation } from '@statoscope/webpack-model/types';
 import { APIFnOptions } from '@statoscope/types/types/validation/api';
 import helpers, { Limit, ValueDiff } from '@statoscope/helpers/dist/jora';
 import { WebpackRule } from '../../';

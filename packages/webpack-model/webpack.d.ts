@@ -10,19 +10,23 @@ export declare namespace Webpack {
 
   type ModuleID = string | number | null;
 
-  type Module = {
+  type ModuleGroup = { type: 'group name here'; children: Module[] };
+
+  type RawModule = {
+    type: string;
     id: ModuleID;
     identifier: string;
     name: string;
     size: number;
     issuerPath?: IssuerPathItem[] | null;
-    chunks?: Array<Chunk | ChunkID>;
+    chunks?: Array<ChunkID | Chunk>;
     reasons?: Reason[];
     modules?: InnerModule[];
     optimizationBailout?: string[];
   };
+  type Module = ModuleGroup | RawModule;
 
-  type InnerModule = Omit<Module, 'id' | 'modules'> & { id: null };
+  type InnerModule = Omit<RawModule, 'id' | 'modules'> & { id: null };
 
   type Reason = {
     type?: string;
@@ -90,7 +94,7 @@ export type StatoscopeMeta = {
 
 export type ModuleData = {
   idToIxMap: Map<string, number>;
-  ixToModuleMap: Map<number, Webpack.Module>;
+  ixToModuleMap: Map<number, Webpack.RawModule>;
   lastId: number;
 };
 
@@ -106,7 +110,7 @@ export type NormalizationData = {
     compilations: Array<{
       id: string;
       data: {
-        modules: Array<[number, Webpack.Module]>;
+        modules: Array<[number, Webpack.RawModule]>;
       };
     }>;
   };

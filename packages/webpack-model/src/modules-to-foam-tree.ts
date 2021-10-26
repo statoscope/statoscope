@@ -1,6 +1,6 @@
 import { Compressor, Size } from '@statoscope/stats-extension-compressed/dist/generator';
+import { NormalizedModule } from '../types';
 import { moduleResource, nodeModule } from './module';
-import { NormalizedModule } from './normalize';
 
 export type NodeLink = {
   page: string;

@@ -1,6 +1,11 @@
 import stats from '../../../test/bundles/v5/simple/stats-prod.json';
-import { moduleReasonResource, moduleResource, nodeModule } from './module';
-import { NormalizedModule, NormalizedReason } from './normalize';
+import { NormalizedModule, NormalizedReason } from '../types';
+import {
+  moduleNameResource,
+  moduleReasonResource,
+  moduleResource,
+  nodeModule,
+} from './module';
 
 describe('moduleResource', () => {
   test('should work', () => {

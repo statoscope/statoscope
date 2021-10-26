@@ -1,4 +1,4 @@
-import { NormalizedCompilation } from '@statoscope/webpack-model/dist/normalize';
+import { NormalizedCompilation } from '@statoscope/webpack-model/types';
 import helpers from '@statoscope/helpers/dist/jora';
 import { APIFnOptions } from '@statoscope/types/types/validation/api';
 import { WebpackRule } from '../../';

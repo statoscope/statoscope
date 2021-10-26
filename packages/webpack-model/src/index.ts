@@ -2,12 +2,9 @@ import {
   prepareWithJora as prepareWithJoraOriginal,
   Options,
 } from '@statoscope/helpers/dist/jora';
+import { NormalizedCompilation, NormalizedFile, RawStatsFileDescriptor } from '../types';
 import joraHelpers from './jora-helpers';
-import normalize, {
-  NormalizedCompilation,
-  NormalizedFile,
-  RawStatsFileDescriptor,
-} from './normalize';
+import normalize from './handleFile';
 
 export { default as validate } from './validate';
 export * as module from './module';
