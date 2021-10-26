@@ -88,7 +88,17 @@ test.each([
       names: ['bar', 'baz'],
       reason: 'quux',
     },
-    name: 'bar, baz [quux]',
+    name: 'bar [quux]',
+  },
+  {
+    chunk: {
+      id: 123,
+      name: 'foo',
+      names: [],
+      idHints: ['bar'],
+      reason: 'quux',
+    },
+    name: 'bar [quux]',
   },
 
   {
@@ -110,6 +120,42 @@ test.each([
   'chunkName: $name',
   ({ chunk, name }) => {
     expect(helpers.chunkName(chunk as NormalizedChunk)).toBe(name);
+  }
+);
+
+test.each([
+  {
+    asset: {
+      chunkNames: [],
+      chunkIdHints: [],
+    },
+    name: null,
+  },
+  {
+    asset: {
+      chunkNames: ['foo', 'bar'],
+      chunkIdHints: [],
+    },
+    name: 'foo',
+  },
+  {
+    asset: {
+      chunkNames: [],
+      chunkIdHints: ['bar', 'baz'],
+    },
+    name: 'bar',
+  },
+  {
+    asset: {
+      chunkNames: ['foo'],
+      chunkIdHints: ['bar'],
+    },
+    name: 'foo',
+  },
+] as Array<{ asset: Partial<NormalizedAsset>; name: string | null }>)(
+  'assetChunkName: $name',
+  ({ asset, name }) => {
+    expect(helpers.assetChunkName(asset as NormalizedAsset)).toBe(name);
   }
 );
 

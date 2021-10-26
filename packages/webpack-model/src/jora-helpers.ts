@@ -79,9 +79,14 @@ export default function (normalizeResult: NormalizeResult) {
       return module.size;
     },
     chunkName(chunk: NormalizedChunk): string {
-      return `${chunk.names[0] ? chunk.names.join(', ') : chunk.name || chunk.id}${
+      const chunkNames = [...chunk.names, ...(chunk.idHints ?? [])];
+      return `${chunkNames[0] ?? (chunk.name || chunk.id)}${
         chunk.reason ? ' [' + chunk.reason + ']' : ''
       }`;
+    },
+    assetChunkName(asset: NormalizedAsset): string | null {
+      const chunkNames = [...(asset.chunkNames ?? []), ...(asset.chunkIdHints ?? [])];
+      return chunkNames[0] ?? null;
     },
     getTotalFilesSize: (
       asset: NormalizedAsset,

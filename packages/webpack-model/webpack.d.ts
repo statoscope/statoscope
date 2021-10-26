@@ -52,6 +52,7 @@ export declare namespace Webpack {
     parents?: Array<ChunkID | Chunk>;
     origins?: Array<Reason>;
     files: Array<string | File>;
+    idHints?: string[];
   };
 
   type File = {
@@ -64,6 +65,8 @@ export declare namespace Webpack {
     size: number;
     chunks?: Array<ChunkID | Chunk>;
     files?: File[];
+    chunkNames?: string[];
+    chunkIdHints?: string[];
   };
 
   type Compilation = {
