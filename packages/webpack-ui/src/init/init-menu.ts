@@ -52,7 +52,13 @@ function addLinks(discovery: StatoscopeWidget): void {
   discovery.nav.append({
     name: 'diff',
     when: `#.widget | pageId != 'diff' and #.stats.compilations.size()>1`,
-    data: `{ text: "Diff", href: pageLink('diff', {hash:#.params.hash or ''}) }`,
+    data: `{ 
+      text: "Diff",
+      href: pageLink('diff', {
+        diffWith: resolveInputFile().compilations.pick().hash or '',
+        hash: resolveReferenceFile().compilations.pick().hash or #.params.hash or ''
+      })
+    }`,
   });
 
   discovery.nav.primary.append({

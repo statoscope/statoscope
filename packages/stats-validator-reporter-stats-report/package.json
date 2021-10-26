@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/stats-validator-reporter-stats-report",
-  "version": "5.14.1",
+  "version": "5.16.0",
   "description": "Stats report reporter for @statoscope/stats-validator",
   "main": "./dist/index.js",
   "scripts": {
@@ -24,7 +24,7 @@
     "@statoscope/stats-extension-stats-validation-result": "5.14.1",
     "@statoscope/types": "5.14.1",
     "@statoscope/webpack-model": "5.14.1",
-    "@statoscope/webpack-ui": "5.14.1",
+    "@statoscope/webpack-ui": "5.16.0",
     "open": "^8.2.1"
   }
 }
