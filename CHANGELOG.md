@@ -1,5 +1,13 @@
 # Changelog
 
+## Next
+
+### Features
+
+- `[webpack-model]` - improved `chunkName` helper
+  Now `chunkName` helper returns more accurate chunk name
+- `[webpack-model]` - add `assetChunkName` helper
+
 ## 5.16.0 (25 October 2021)
 
 ### Features
