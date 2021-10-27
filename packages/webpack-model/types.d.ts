@@ -10,6 +10,9 @@ import Entrypoint = Webpack.Entrypoint;
 import RawModule = Webpack.RawModule;
 import Asset = Webpack.Asset;
 import Chunk = Webpack.Chunk;
+import IssuerPathItem = Webpack.IssuerPathItem;
+import Compilation = Webpack.Compilation;
+import RawReason = Webpack.RawReason;
 
 export type CompilationResolvers = {
   resolveModule: ResolverFn<string, NormalizedModule>;
@@ -20,7 +23,7 @@ export type CompilationResolvers = {
 };
 
 export type NormalizedChunk = Omit<
-  Webpack.Chunk,
+  Chunk,
   'modules' | 'files' | 'children' | 'parents' | 'siblings'
 > & {
   modules: NormalizedModule[];
@@ -30,21 +33,21 @@ export type NormalizedChunk = Omit<
   siblings: NormalizedChunk[];
 };
 export type NormalizedEntrypointItem = { name: string; data: NormalizedEntrypoint };
-export type NormalizedEntrypoint = Omit<Webpack.Entrypoint, 'chunks' | 'assets'> & {
+export type NormalizedEntrypoint = Omit<Entrypoint, 'chunks' | 'assets'> & {
   chunks: NormalizedChunk[];
   assets: NormalizedAsset[];
   dep?: NormalizedModuleDependency;
 };
-export type NormalizedAsset = Omit<Webpack.Asset, 'chunks' | 'files'> & {
+export type NormalizedAsset = Omit<Asset, 'chunks' | 'files'> & {
   chunks: NormalizedChunk[];
-  files: Webpack.File[];
+  files: File[];
 };
-export type NormalizedIssuerPathItem = Webpack.IssuerPathItem & {
+export type NormalizedIssuerPathItem = IssuerPathItem & {
   resolvedModule: NormalizedModule | null;
   resolvedEntry?: NormalizedEntrypointItem | null;
   resolvedEntryName?: string | null;
 };
-export type NormalizedReason = Webpack.Reason & {
+export type NormalizedReason = RawReason & {
   resolvedModule: NormalizedModule | null;
   resolvedEntry?: NormalizedEntrypointItem | null;
   resolvedEntryName?: string | null;
@@ -55,7 +58,7 @@ export type NormalizedModuleDependency = {
   reason: NormalizedReason;
 };
 export type NormalizedModule = Omit<
-  Webpack.RawModule,
+  RawModule,
   'chunks' | 'reasons' | 'modules' | 'issuerPath'
 > & {
   resolvedResource: string | null;
@@ -148,7 +151,7 @@ export type HandledFileContext = {
   };
 };
 
-export type RawStatsFileDescriptor = { name: string; data: Webpack.Compilation };
+export type RawStatsFileDescriptor = { name: string; data: Compilation };
 
 export type NormalizedFile = {
   name: string;

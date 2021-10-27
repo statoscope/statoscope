@@ -22,14 +22,16 @@ import {
   collectRawChunks,
   collectRawEntrypoints,
   collectRawModules,
+  collectRawModulesFromArray,
+  collectRawReasonsFromArray,
 } from './collector';
 import Asset = Webpack.Asset;
 import Chunk = Webpack.Chunk;
 import ChunkID = Webpack.ChunkID;
-import Reason = Webpack.Reason;
 import RawModule = Webpack.RawModule;
 import Module = Webpack.Module;
 import Compilation = Webpack.Compilation;
+import RawReason = Webpack.RawReason;
 
 function getHash(
   compilation: Webpack.Compilation,
@@ -243,11 +245,11 @@ function mergeModules(
       .map((c) => context.rawIndexes.chunks.get(c) as NormalizedChunk | null)
       .filter(Boolean) as NormalizedChunk[]
   );
+  const toReasons = collectRawReasonsFromArray(to.reasons);
+  const fromReasons = collectRawReasonsFromArray(from.reasons ?? []);
+
   to.chunks = [...chunks];
-  to.reasons = [
-    ...(to.reasons ?? []),
-    ...((from.reasons as NormalizedReason[]) ?? []),
-  ].reduce((all, current) => {
+  to.reasons = [...toReasons.values(), ...fromReasons.values()].reduce((all, current) => {
     if (
       !all.find(
         (r) =>
@@ -256,17 +258,14 @@ function mergeModules(
           r.loc === current.loc
       )
     ) {
-      all.push(current);
+      all.push(current as NormalizedReason);
     }
 
     return all;
   }, [] as NormalizedReason[]);
 }
 
-function prepareModule(
-  module: Webpack.RawModule | Webpack.InnerModule,
-  context: ProcessingContext
-): void {
+function prepareModule(module: RawModule, context: ProcessingContext): void {
   if (context.indexes.modules.hasId(module.identifier)) {
     return;
   }
@@ -298,10 +297,15 @@ function prepareModule(
   }
 
   if (module.reasons) {
-    module.reasons = module.reasons.filter(
-      (r) => r.moduleIdentifier !== module.identifier
-    );
-    for (const reason of module.reasons) {
+    const reasons = collectRawReasonsFromArray(module.reasons!);
+    let newReasons = [];
+
+    for (const item of reasons.values()) {
+      newReasons.push(item);
+    }
+
+    newReasons = newReasons.filter((r) => r.moduleIdentifier !== module.identifier);
+    for (const reason of newReasons) {
       const normalizedReason = normalizeReason(reason, context);
       const resolvedModule = normalizedReason.resolvedModule;
       const resolvedEntry = normalizedReason.resolvedEntry;
@@ -323,6 +327,8 @@ function prepareModule(
         };
       }
     }
+
+    module.reasons = newReasons;
   } else {
     module.reasons = [];
   }
@@ -333,17 +339,20 @@ function prepareModule(
 
   (module as RawModule).modules ??= [];
 
-  const innerModules = (module as RawModule).modules as RawModule[];
+  const innerModules = collectRawModulesFromArray(module.modules!);
+  const newInnerModules = [];
 
-  for (const [ix, item] of innerModules.entries()) {
-    innerModules[ix] = context.rawIndexes.modules.get(item.identifier)!;
+  for (const item of innerModules.values()) {
+    newInnerModules.push(context.rawIndexes.modules.get(item.identifier)!);
   }
 
-  // @ts-ignore
-  module.modules = module.modules || [];
+  module.modules = newInnerModules;
 }
 
-function normalizeReason(reason: Reason, context: ProcessingContext): NormalizedReason {
+function normalizeReason(
+  reason: RawReason,
+  context: ProcessingContext
+): NormalizedReason {
   const normalizedReason = reason as unknown as NormalizedReason;
 
   normalizedReason.resolvedModule = reason.moduleIdentifier
@@ -452,14 +461,15 @@ function prepareChunk(chunk: Webpack.Chunk | null, context: ProcessingContext): 
   }
 
   if (chunk.origins) {
-    chunk.origins
-      .map(
-        (o) =>
-          ((o as NormalizedReason).resolvedModule = o.moduleIdentifier
-            ? (context.rawIndexes.modules.get(o.moduleIdentifier) as NormalizedModule)
-            : null)
-      )
-      .filter(Boolean);
+    const origins = [...collectRawReasonsFromArray(chunk.origins).values()];
+
+    origins.forEach(
+      (o) =>
+        ((o as NormalizedReason).resolvedModule = o.moduleIdentifier
+          ? (context.rawIndexes.modules.get(o.moduleIdentifier) as NormalizedModule)
+          : null)
+    );
+    chunk.origins = origins;
   } else {
     chunk.origins = [];
   }
@@ -582,7 +592,10 @@ function extractPackages(compilation: Compilation, context: ProcessingContext): 
         })
       );
 
-      for (const reason of module.reasons ?? []) {
+      // reasons already ungrouped and normalized
+      const reasons = module.reasons as RawReason[];
+
+      for (const reason of reasons ?? []) {
         const reasonPackage = nodeModule(moduleReasonResource(reason));
 
         if (reasonPackage && reasonPackage.path === instance.path) {

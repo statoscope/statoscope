@@ -1,7 +1,7 @@
 import { Webpack } from '../webpack';
 import { NormalizedModule, NormalizedReason } from '../types';
 import RawModule = Webpack.RawModule;
-import Reason = Webpack.Reason;
+import RawReason = Webpack.RawReason;
 
 export const extractFileRx = /!?([^!]+)$/;
 export const concatenatedIdRx = /(.+) \+ \d+ modules$/;
@@ -41,7 +41,7 @@ export function moduleResource(
 }
 
 export function moduleReasonResource(
-  reason: Reason | NormalizedReason | null
+  reason: RawReason | NormalizedReason | null
 ): string | null {
   return moduleNameResource(reason && reason.moduleName);
 }

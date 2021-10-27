@@ -1,9 +1,9 @@
 import { CompilationMap, ModuleData, NormalizationData, Webpack } from '../webpack';
-import { collectRawModulesFromArray } from './collector';
+import { collectRawModulesFromArray, collectRawReasonsFromArray } from './collector';
 import Compilation = Webpack.Compilation;
 import Chunk = Webpack.Chunk;
-import Reason = Webpack.Reason;
 import RawModule = Webpack.RawModule;
+import RawReason = Webpack.RawReason;
 
 function handleModule(module: RawModule, modulesData: ModuleData): number {
   let resolvedId = modulesData.idToIxMap.get(module.identifier);
@@ -17,23 +17,26 @@ function handleModule(module: RawModule, modulesData: ModuleData): number {
     resolvedModule!.chunks = [
       ...new Set([...(resolvedModule!.chunks ?? []), ...(module.chunks ?? [])]),
     ];
-    resolvedModule!.reasons = [
-      ...(resolvedModule!.reasons ?? []),
-      ...(module.reasons ?? []),
-    ].reduce((all, current) => {
-      if (
-        !all.find(
-          (r) =>
-            r.moduleIdentifier === current.moduleIdentifier &&
-            r.type === current.type &&
-            r.loc === current.loc
-        )
-      ) {
-        all.push(current);
-      }
+    const toReasons = collectRawReasonsFromArray(resolvedModule!.reasons ?? []);
+    const fromReasons = collectRawReasonsFromArray(module.reasons ?? []);
 
-      return all;
-    }, [] as Reason[]);
+    resolvedModule!.reasons = [...toReasons.values(), ...fromReasons.values()].reduce(
+      (all, current) => {
+        if (
+          !all.find(
+            (r) =>
+              r.moduleIdentifier === current.moduleIdentifier &&
+              r.type === current.type &&
+              r.loc === current.loc
+          )
+        ) {
+          all.push(current);
+        }
+
+        return all;
+      },
+      [] as RawReason[]
+    );
   }
 
   return resolvedId;

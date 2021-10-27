@@ -11,6 +11,7 @@ export declare namespace Webpack {
   type ModuleID = string | number | null;
 
   type ModuleGroup = { type: 'group name here'; children: Module[] };
+  type ReasonGroup = { type: 'group name here'; children: Reason[] };
 
   type RawModule = {
     type: string;
@@ -21,14 +22,13 @@ export declare namespace Webpack {
     issuerPath?: IssuerPathItem[] | null;
     chunks?: Array<ChunkID | Chunk>;
     reasons?: Reason[];
-    modules?: InnerModule[];
+    modules?: Module[];
     optimizationBailout?: string[];
   };
   type Module = ModuleGroup | RawModule;
+  type Reason = ReasonGroup | RawReason;
 
-  type InnerModule = Omit<RawModule, 'id' | 'modules'> & { id: null };
-
-  type Reason = {
+  type RawReason = {
     type?: string;
     moduleIdentifier: string | null;
     moduleName: string | null;

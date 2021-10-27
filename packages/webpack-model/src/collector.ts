@@ -6,6 +6,9 @@ import RawModule = Webpack.RawModule;
 import Compilation = Webpack.Compilation;
 import Chunk = Webpack.Chunk;
 import Asset = Webpack.Asset;
+import Reason = Webpack.Reason;
+import RawReason = Webpack.RawReason;
+import ReasonGroup = Webpack.ReasonGroup;
 
 export function collector<TResult, TID, TEntry = TResult>(
   from: TEntry[],
@@ -45,13 +48,11 @@ export function collectRawModules(compilation: Compilation): RawModule[] {
   }
 
   for (const [, item] of collected) {
-    if (!collected.has(item.identifier)) {
-      collected.set(item.identifier, item);
-    }
+    const innerCollected = collectRawModulesFromArray(item.modules ?? []);
 
-    for (const innerModule of item.modules ?? []) {
-      if (!collected.has(innerModule.identifier)) {
-        collected.set(innerModule.identifier, innerModule);
+    for (const [innerId, innerItem] of innerCollected) {
+      if (!collected.has(innerId)) {
+        collected.set(innerId, innerItem);
       }
     }
   }
@@ -65,6 +66,17 @@ export function collectRawModulesFromArray(modules: Module[]): Map<string, RawMo
     (module) => module.type === 'module' || typeof module.type === 'undefined',
     (module) => (module as ModuleGroup).children,
     (module) => module.identifier
+  );
+}
+
+export function collectRawReasonsFromArray(modules: Reason[]): Map<number, RawReason> {
+  let i = 0;
+
+  return collector<RawReason, number, Reason>(
+    modules,
+    (reason) => (reason as RawReason).moduleIdentifier !== undefined,
+    (reasons) => (reasons as ReasonGroup).children,
+    () => i++
   );
 }
 
