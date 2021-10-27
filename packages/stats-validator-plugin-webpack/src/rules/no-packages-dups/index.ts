@@ -1,9 +1,9 @@
 import chalk from 'chalk';
 import {
-  NormalizedCompilation,
   NormalizedFile,
+  NormalizedCompilation,
   NormalizedPackage,
-} from '@statoscope/webpack-model/dist/normalize';
+} from '@statoscope/webpack-model/types';
 import { RelationItem } from '@statoscope/types/types';
 import { WebpackRule } from '../../';
 import { ExcludeItem, normalizeExclude } from '../../limits-helpers';

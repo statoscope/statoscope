@@ -4,10 +4,7 @@ import path from 'path';
 import { parseChunked } from '@discoveryjs/json-ext';
 import { prepareWithJora } from '@statoscope/webpack-model';
 import { jora as joraHelpers } from '@statoscope/helpers';
-import {
-  NormalizedFile,
-  RawStatsFileDescriptor,
-} from '@statoscope/webpack-model/dist/normalize';
+import { NormalizedFile, RawStatsFileDescriptor } from '@statoscope/webpack-model/types';
 
 export type TestEntryType = 'error' | 'warn' | 'info';
 export type TestEntry = {

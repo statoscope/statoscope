@@ -2,7 +2,7 @@ import {
   NormalizedChunk,
   NormalizedCompilation,
   NormalizedEntrypointItem,
-} from '@statoscope/webpack-model/dist/normalize';
+} from '@statoscope/webpack-model/types';
 import { APIFnOptions } from '@statoscope/types/types/validation/api';
 import helpers from '@statoscope/helpers/dist/jora';
 import { WebpackRule } from '../../';

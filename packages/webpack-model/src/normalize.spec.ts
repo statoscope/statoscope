@@ -1,6 +1,6 @@
 import { stringify } from 'flatted';
 import stats from '../../../test/bundles/v5/simple/stats-prod.json';
-import normalize from './normalize';
+import normalize from './handleFile';
 
 test('should work', () => {
   // @ts-ignore

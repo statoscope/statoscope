@@ -12,12 +12,6 @@ import { RuleDescriptor } from '@statoscope/types/types/validation/api';
 import { Report } from '@statoscope/types/types/custom-report';
 import { Webpack } from '../webpack';
 import {
-  moduleNameResource,
-  moduleReasonResource,
-  moduleResource,
-  nodeModule,
-} from './module';
-import {
   ModuleGraphNodeData,
   NodeModuleInstance,
   NormalizedAsset,
@@ -25,11 +19,17 @@ import {
   NormalizedCompilation,
   NormalizedEntrypointItem,
   NormalizedExtension,
-  NormalizedFile,
   NormalizedModule,
   NormalizedPackage,
   NormalizeResult,
-} from './normalize';
+  NormalizedFile,
+} from '../types';
+import {
+  moduleNameResource,
+  moduleReasonResource,
+  moduleResource,
+  nodeModule,
+} from './module';
 import modulesToFoamTree, { Node as FoamTreeNode } from './modules-to-foam-tree';
 import ChunkID = Webpack.ChunkID;
 
@@ -57,7 +57,7 @@ export default function (normalizeResult: NormalizeResult) {
     fileName: string,
     id: string
   ): NormalizedExtension<unknown, unknown> | null => {
-    return normalizeResult.fileResolvers.get(fileName)?.resolveExtension(id) ?? null;
+    return normalizeResult.resolvers.get(fileName)?.resolveExtension(id) ?? null;
   };
 
   const resolveExtensionByCompilation = (
@@ -456,7 +456,7 @@ export default function (normalizeResult: NormalizeResult) {
         throw new Error('[customReports_getItems]: file-parameter is required');
       }
 
-      const ext = normalizeResult.fileResolvers
+      const ext = normalizeResult.resolvers
         .get(file)
         ?.resolveExtension('@statoscope/stats-extension-custom-reports');
       const api = ext?.api as ExtensionCustomReportsAPI | undefined;
@@ -475,7 +475,7 @@ export default function (normalizeResult: NormalizeResult) {
         throw new Error('[customReports_getItem]: id-parameter is required');
       }
 
-      const ext = normalizeResult.fileResolvers
+      const ext = normalizeResult.resolvers
         .get(file)
         ?.resolveExtension('@statoscope/stats-extension-custom-reports');
       const api = ext?.api as ExtensionCustomReportsAPI | undefined;

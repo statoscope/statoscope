@@ -1,10 +1,11 @@
 import { CompilationMap, ModuleData, NormalizationData, Webpack } from '../webpack';
-import Module = Webpack.Module;
+import { collectRawModulesFromArray } from './collector';
 import Compilation = Webpack.Compilation;
 import Chunk = Webpack.Chunk;
 import Reason = Webpack.Reason;
+import RawModule = Webpack.RawModule;
 
-function handleModule(module: Module, modulesData: ModuleData): number {
+function handleModule(module: RawModule, modulesData: ModuleData): number {
   let resolvedId = modulesData.idToIxMap.get(module.identifier);
 
   if (!resolvedId) {
@@ -39,7 +40,11 @@ function handleModule(module: Module, modulesData: ModuleData): number {
 }
 
 function handleChunk(chunk: Chunk, modulesData: ModuleData): void {
-  for (const [id, module] of (chunk.modules || []).entries()) {
+  const modules = collectRawModulesFromArray(chunk.modules ?? []);
+
+  chunk.modules = [...modules.values()];
+
+  for (const [id, module] of chunk.modules.entries()) {
     // @ts-ignore
     chunk.modules![id] = handleModule(module, modulesData);
   }
@@ -59,7 +64,11 @@ function handleCompilation(
     modules: modulesData,
   });
 
-  for (const [id, module] of (compilation.modules || []).entries()) {
+  const modules = collectRawModulesFromArray(compilation.modules ?? []);
+
+  compilation.modules = [...modules.values()];
+
+  for (const [id, module] of compilation.modules.entries()) {
     // @ts-ignore
     compilation.modules![id] = handleModule(module, modulesData);
   }

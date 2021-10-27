@@ -2,7 +2,7 @@ import {
   NormalizedChunk,
   NormalizedCompilation,
   NormalizedEntrypointItem,
-} from '@statoscope/webpack-model/dist/normalize';
+} from '@statoscope/webpack-model/types';
 import helpers from '@statoscope/helpers/dist/jora';
 import networkListType from '@statoscope/helpers/dist/network-type-list';
 import { APIFnOptions } from '@statoscope/types/types/validation/api';

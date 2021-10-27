@@ -1,4 +1,4 @@
-import { NodeModuleInstance } from '@statoscope/webpack-model/dist/normalize';
+import { NodeModuleInstance } from '@statoscope/webpack-model/types';
 import { StatoscopeWidget } from '../../types';
 // @ts-ignore
 import style from './helpers.css';

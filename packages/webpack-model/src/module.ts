@@ -1,8 +1,10 @@
-import { NormalizedModule, NormalizedReason } from './normalize';
+import { Webpack } from '../webpack';
+import { NormalizedModule, NormalizedReason } from '../types';
+import RawModule = Webpack.RawModule;
+import Reason = Webpack.Reason;
 
-export const extractFileRx = /.*(?:^|!|\s+)(\.?\.?[\\/].+)/;
+export const extractFileRx = /!?([^!]+)$/;
 export const concatenatedIdRx = /(.+) \+ \d+ modules$/;
-export const contextIdRx = /(.+) (?:sync|eager|weak|async-weak|lazy|lazy-once)(?:\s|$)/;
 
 export function matchRxValue(rx: RegExp, string: string): string | null {
   const [, match] = string.match(rx) || [];
@@ -20,10 +22,7 @@ export function moduleNameResource(name: string | null): string | null {
       return name;
     }
 
-    const nameResource =
-      matchRxValue(concatenatedIdRx, normalized) ||
-      matchRxValue(contextIdRx, normalized) ||
-      normalized;
+    const nameResource = matchRxValue(concatenatedIdRx, normalized) || normalized;
 
     if (nameResource.startsWith('./') || nameResource.startsWith('.\\')) {
       return nameResource.slice(2);
@@ -35,11 +34,15 @@ export function moduleNameResource(name: string | null): string | null {
   return null;
 }
 
-export function moduleResource(module: NormalizedModule | null): string | null {
+export function moduleResource(
+  module: RawModule | NormalizedModule | null
+): string | null {
   return moduleNameResource(module && module.name);
 }
 
-export function moduleReasonResource(reason: NormalizedReason | null): string | null {
+export function moduleReasonResource(
+  reason: Reason | NormalizedReason | null
+): string | null {
   return moduleNameResource(reason && reason.moduleName);
 }
 export type NodeModule = {

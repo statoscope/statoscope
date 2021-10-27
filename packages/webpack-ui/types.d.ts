@@ -1,7 +1,4 @@
-import {
-  NormalizedFile,
-  RawStatsFileDescriptor,
-} from '@statoscope/webpack-model/dist/normalize';
+import { NormalizedFile, RawStatsFileDescriptor } from '@statoscope/webpack-model/types';
 import { Extension, PrepareFn, Widget } from '@statoscope/types';
 
 export type RawData = RawStatsFileDescriptor | RawStatsFileDescriptor[];

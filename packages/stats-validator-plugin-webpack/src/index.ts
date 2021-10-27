@@ -1,6 +1,6 @@
 import { Prepared, prepareWithJora } from '@statoscope/webpack-model';
 import { jora as joraHelpers } from '@statoscope/helpers';
-import { RawStatsFileDescriptor } from '@statoscope/webpack-model/dist/normalize';
+import { RawStatsFileDescriptor } from '@statoscope/webpack-model/types';
 import { Rule } from '@statoscope/stats-validator/dist/rule';
 import { PluginFn } from '@statoscope/stats-validator/dist/plugin';
 import buildTimeLimits from './rules/build-time-limits';

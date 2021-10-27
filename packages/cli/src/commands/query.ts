@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { Argv } from 'yargs';
 import { prepareWithJora } from '@statoscope/webpack-model';
-import { RawStatsFileDescriptor } from '@statoscope/webpack-model/dist/normalize';
+import { RawStatsFileDescriptor } from '@statoscope/webpack-model/types';
 import { parseChunked, stringifyStream } from '@discoveryjs/json-ext';
 import { waitFinished } from '@statoscope/report-writer/dist/utils';
 

@@ -1,9 +1,10 @@
 import { NormalizationData, Webpack } from '../webpack';
 import Compilation = Webpack.Compilation;
-import Module = Webpack.Module;
+import RawModule = Webpack.RawModule;
 import Chunk = Webpack.Chunk;
+import Module = Webpack.Module;
 
-export type ModulesMap = Map<number, Module>;
+export type ModulesMap = Map<number, RawModule>;
 
 export type CompilationData = {
   id: string;
@@ -19,7 +20,7 @@ export type DenormalizationData = {
   };
 };
 
-function handleModule(module: number, compilationData: CompilationData): Module {
+function handleModule(module: number, compilationData: CompilationData): RawModule {
   const resolvedModule = compilationData.data.modules.get(module);
 
   if (!resolvedModule) {
@@ -30,7 +31,9 @@ function handleModule(module: number, compilationData: CompilationData): Module 
 }
 
 function handleChunk(chunk: Chunk, compilationData: CompilationData): void {
-  for (const [id, module] of (chunk.modules || []).entries()) {
+  for (const [id, module] of (
+    (chunk.modules as Array<number | Module>) || []
+  ).entries()) {
     if (typeof module === 'number') {
       chunk.modules![id] = handleModule(module, compilationData);
     }

@@ -1,8 +1,7 @@
 import { Prepared } from '@statoscope/webpack-model';
-import { NormalizedReason } from '@statoscope/webpack-model/dist/normalize';
+import { NormalizedReason, NormalizedModule } from '@statoscope/webpack-model/types';
 import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
 import { API } from '@statoscope/types/types/validation/api';
-import { NormalizedModule } from '@statoscope/webpack-model/src/normalize';
 import { WebpackRule } from '../../';
 import { ModuleTarget, normalizeModuleTarget, RawTarget } from '../../helpers';
 import { ExcludeItem, normalizeExclude } from '../../limits-helpers';

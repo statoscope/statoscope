@@ -2,10 +2,7 @@ import '@discoveryjs/discovery/dist/discovery.css';
 import '../global.css';
 // @ts-ignore
 import * as discoveryLib from '@discoveryjs/discovery';
-import {
-  NormalizedFile,
-  RawStatsFileDescriptor,
-} from '@statoscope/webpack-model/dist/normalize';
+import { NormalizedFile, RawStatsFileDescriptor } from '@statoscope/webpack-model/types';
 import { WidgetOptions } from '@statoscope/types';
 import settings from '../settings';
 import { Context, InitArg, StatoscopeWidget } from '../../types';

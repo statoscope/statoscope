@@ -1,12 +1,12 @@
 import chalk from 'chalk';
 import { Prepared } from '@statoscope/webpack-model';
 import {
+  NormalizedFile,
   NodeModuleInstance,
   NormalizedCompilation,
-  NormalizedFile,
   NormalizedModule,
   NormalizedPackage,
-} from '@statoscope/webpack-model/dist/normalize';
+} from '@statoscope/webpack-model/types';
 import { API } from '@statoscope/types/types/validation/api';
 import { RuleDataInput } from '@statoscope/stats-validator/dist/rule';
 import {
