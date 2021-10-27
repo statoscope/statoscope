@@ -817,7 +817,7 @@ No changes
 
 - Added webpack plugin
 
-  Now you may use Statoscope as a webpack plugin:
+  Now you could use Statoscope as a webpack plugin:
 
   **webpack.config.js:**
 

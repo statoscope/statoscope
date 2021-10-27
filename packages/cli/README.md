@@ -187,5 +187,5 @@ cat path/to/my-reports.json | statoscope inject-report --input path/to/stats.jso
 
 ## Support
 
-If you are an engineer or a company that is interested in Statoscope improvements, you may support Statoscope by
+If you are an engineer or a company that is interested in Statoscope improvements, you could support Statoscope by
 financial contribution at [OpenCollective](https://opencollective.com/statoscope).

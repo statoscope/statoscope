@@ -42,7 +42,7 @@ init({
 });
 ```
 
-> Also, you may pass an array of stats
+> Also, you could pass an array of stats
 
 ## Use-cases
 
@@ -72,7 +72,7 @@ Also, you can view a chunk map to look at a chunk from the other side:
 
 ### Find package copies
 
-Your bundle may use a few versions of the same package (node module).
+Your bundle could use a few versions of the same package (node module).
 
 Use package tree to find out how many package copies were bundled:
 
@@ -135,7 +135,7 @@ stats: {
 
 It works, but useless, because the result stats is empty.
 
-You may disable some stats-flags to decrease your stats-file size.
+You could disable some stats-flags to decrease your stats-file size.
 Here is a set of minimum useful stats flags:
 
 ```
@@ -182,4 +182,4 @@ stats: {
 
 ## Support
 
-If you are an engineer or a company that is interested in Statoscope improvements, you may support Statoscope by financial contribution at [OpenCollective](https://opencollective.com/statoscope).
+If you are an engineer or a company that is interested in Statoscope improvements, you could support Statoscope by financial contribution at [OpenCollective](https://opencollective.com/statoscope).

@@ -26,5 +26,5 @@ You can try it at [Statoscope sandbox](https://statoscope.tech)
 
 ## Support
 
-If you are an engineer or a company that is interested in Statoscope improvements, you may support Statoscope by
+If you are an engineer or a company that is interested in Statoscope improvements, you could support Statoscope by
 financial contribution at [OpenCollective](https://opencollective.com/statoscope).
