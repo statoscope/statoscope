@@ -81,7 +81,7 @@ If not specified (by default) then `stats` options from your webpack config will
 
 List with the paths to webpack stats that will be loaded into Statoscope along with current compilation stats.
 
-In UI, you may switch between them or diff.
+In UI, you could switch between them or diff.
 
 ```js
 const glob = require('glob');
@@ -253,40 +253,44 @@ stats: {
 
 It works, but useless, because the result stats is empty.
 
-You may disable some stats-flags to decrease your stats-file size.
+You could disable some stats-flags to decrease your stats-file size.
 Here is a set of minimum useful stats flags:
 
 ```jsonc
 stats: {
   all: false, // disable all the stats
-  hash: true, // add compilation hash
-  entrypoints: true, // add entrypoints stats
-  chunks: true, // add chunks stats
-  chunkModules: true, // add modules stats
-  reasons: true, // add modules reasons stats
+  hash: true, // compilation hash
+  entrypoints: true, // entrypoints
+  chunks: true, // chunks
+  chunkModules: true, // modules
+  reasons: true, // modules reasons
 },
 ```
 
-And an example of full stats:
+And an example of more useful stats:
 
 ```jsonc
 stats: {
   all: false, // disable all the stats
-  hash: true, // add compilation hash
-  entrypoints: true, // add entrypoints stats
-  chunks: true, // add chunks stats
-  chunkModules: true, // add modules stats
-  reasons: true, // add modules reasons stats
+  hash: true, // compilation hash
+  entrypoints: true, // entrypoints
+  chunks: true, // chunks
+  chunkModules: true, // modules
+  reasons: true, // modules reasons
 
-  assets: true, // add assets stats
-  chunkOrigins: true, // add chunks origins stats (to find out which modules require a chunk)
-  version: true, // add webpack version
-  builtAt: true, // add build at time
-  timings: true, // add timing information
-  performance: true, // add info about oversized assets
-  source: true, // add module sources (uses to find modules duplicates)
+  nestedModules: true, // concatenated modules
+  usedExports: true, // used exports
+  providedExports: true, // provided imports
+  assets: true, // assets
+  chunkOrigins: true, // chunks origins stats (to find out which modules require a chunk)
+  version: true, // webpack version
+  builtAt: true, // build at time
+  timings: true, // modules timing information
+  performance: true, // info about oversized assets
 },
 ```
+
+> You could also add `source: true`. It adds modules source into stats (to find modules duplicates) but increases stats file size
 
 ### Statoscope shows an absolute path to the modules
 
@@ -300,4 +304,4 @@ stats: {
 
 ## Support
 
-If you are an engineer or a company that is interested in Statoscope improvements, you may support Statoscope by financial contribution at [OpenCollective](https://opencollective.com/statoscope).
+If you are an engineer or a company that is interested in Statoscope improvements, you could support Statoscope by financial contribution at [OpenCollective](https://opencollective.com/statoscope).
