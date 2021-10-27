@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 5.17.0 (27 October 2021)
 
 ### Features
 
