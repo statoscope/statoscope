@@ -8,7 +8,11 @@ import {
   ExecParams,
   NormalizedExecParams,
 } from '@statoscope/types/types/validation/rule';
-import { makeRequireFromPath, resolveAliasPackage } from '@statoscope/config/dist/path';
+import {
+  makeRequireFromPath,
+  PackageAliasPrefixType,
+  resolveAliasPackage,
+} from '@statoscope/config/dist/path';
 import { makeAPI } from './api';
 import { InputFile, PluginFn, PrepareFn } from './plugin';
 import { Rule, RuleDataInput } from './rule';
@@ -36,18 +40,18 @@ export default class Validator {
     this.require = makeRequireFromPath(rootDir);
 
     if (this.config.plugins) {
-      for (const pluginName of this.config.plugins) {
-        const pluginPath = Array.isArray(pluginName) ? pluginName[0] : pluginName;
+      for (const pluginDefinition of this.config.plugins) {
+        const pluginAlias = Array.isArray(pluginDefinition)
+          ? pluginDefinition[0]
+          : pluginDefinition;
         const normalizedPluginPath = resolveAliasPackage(
-          [
-            'stats-validator-plugin',
-            'statoscope-stats-validator-plugin',
-            '@statoscope/stats-validator-plugin',
-          ],
-          pluginPath,
+          PackageAliasPrefixType.plugin,
+          pluginAlias,
           rootDir
         );
-        const pluginAlias = Array.isArray(pluginName) ? pluginName[1] : pluginName;
+        const localPluginAlias = Array.isArray(pluginDefinition)
+          ? pluginDefinition[1]
+          : pluginDefinition;
         const resolvedPluginPath = this.require.resolve(normalizedPluginPath);
         const pluginNS = this.require(resolvedPluginPath);
         const plugin = (pluginNS.default ?? pluginNS) as PluginFn<unknown>;
@@ -55,7 +59,7 @@ export default class Validator {
 
         this.plugins[resolvedPluginPath] = {
           rules: {},
-          aliases: [pluginAlias],
+          aliases: [localPluginAlias],
           prepare: pluginDescription.prepare,
         };
 
