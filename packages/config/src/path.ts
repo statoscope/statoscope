@@ -21,7 +21,8 @@ type PackageName = [string, string];
 const packageAliasPrefixes = new Map<PackageAliasPrefixType, PackageName[]>();
 
 packageAliasPrefixes.set(PackageAliasPrefixType.plugin, [
-  ['@statoscope', 'stats-validator-plugin'], // only used for alias starting with `@statoscope`
+  // only used for alias starting with `@statoscope`, has to be first
+  ['@statoscope', 'stats-validator-plugin'],
   ['', 'statoscope-stats-validator-plugin'],
 ]);
 
@@ -42,23 +43,21 @@ function getFullPackageName([namespace, name]: PackageName): string {
 }
 
 /**
- * Return error message based on the list of package aliases (main and alternatives).
+ * Return error message based on the list of package aliases (provided by the user and alternative).
  */
 function getAliasPackageResolutionError(packageAliases: PackageName[]): string {
   const providedAlias = getFullPackageName(packageAliases[0]);
 
-  let errorMessage = `Can't resolve package ${chalk.yellow.italic(providedAlias)}.`;
-
-  const alternatives = packageAliases
-    .slice(1)
-    .map((packageAlias) => getFullPackageName(packageAlias));
+  let errorMessage = `Can't resolve package ${chalk.yellow.italic(providedAlias)}.\n`;
 
   const { italic: italicChalk } = chalk;
 
-  if (alternatives.length) {
-    errorMessage += ` Also tried the following aliases: ${italicChalk.yellow(
-      alternatives.join(', ')
-    )} none of which worked.\n\n`;
+  if (packageAliases.length > 1) {
+    const alternativeAlias = getFullPackageName(packageAliases[1]);
+
+    errorMessage += `Also tried to resolve it with ${italicChalk.yellow(
+      alternativeAlias
+    )} alias which didn't work either.\n\n`;
   } else {
     errorMessage += '\n\n';
   }
@@ -105,16 +104,31 @@ export function resolveAliasPackage(
     [, packageNamespace = '', packageName] = aliasName.match(packageNameRegex)!;
   }
 
+  // can have from one up to two entries
   const packageAliases: PackageName[] = [
     [packageNamespace, packageName], // original form
   ];
 
   const prefixes = packageAliasPrefixes.get(packageAliasType)!;
 
+  // we don't want to apply namespace specific (@statoscope) prefixes to no namespace or
+  // custom namespaces aliases
+  // hence once we find a namespace match (@statoscope) we skip no-namespace prefixes
+  let skipNoNamespaceAliases = false;
+
   for (const [prefixNamespace, prefix] of prefixes) {
-    if (!prefixNamespace || prefixNamespace === packageNamespace) {
+    if (
+      (!skipNoNamespaceAliases && !prefixNamespace) ||
+      prefixNamespace === packageNamespace
+    ) {
+      // @statoscope prefix is being used
+      if (!skipNoNamespaceAliases && prefixNamespace) {
+        skipNoNamespaceAliases = true;
+      }
+
       if (!packageName.startsWith(prefix)) {
         packageAliases.push([packageNamespace, `${prefix}-${packageName}`]);
+        break;
       }
     }
   }

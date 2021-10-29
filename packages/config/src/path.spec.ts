@@ -75,20 +75,6 @@ describe('resolveAliasPackage', () => {
         ).toMatchInlineSnapshot('"@statoscope/stats-validator-plugin-1"');
       });
 
-      // technically this is a known bug of current implementation
-      // ideally it should not resolve this name
-      test('with @statoscope namespace and name with no-namespace(!) prefix', () => {
-        expect(() => {
-          expect(
-            normalize(
-              resolveAliasPackage(pluginType, '@statoscope/will-find', fixtureDir)
-            )
-          ).toMatchInlineSnapshot(
-            '"@statoscope/statoscope-stats-validator-plugin-will-find"'
-          );
-        });
-      });
-
       test('with random namespace and random name', () => {
         expect(
           normalize(resolveAliasPackage(pluginType, '@foo/1', fixtureDir))
@@ -101,14 +87,22 @@ describe('resolveAliasPackage', () => {
         ).toMatchInlineSnapshot('"statoscope-stats-validator-plugin-1"');
       });
 
-      test("won't resolve wo ns and @statoscope specific prefix", () => {
-        expect(() => resolveAliasPackage(pluginType, 'wont-find', fixtureDir)).toThrow();
+      test("won't resolve without namespace and @statoscope specific prefix", () => {
+        expect(() =>
+          resolveAliasPackage(pluginType, 'wont-find', fixtureDir)
+        ).toThrowErrorMatchingSnapshot();
+      });
+
+      test("won't resolve with @statoscope namespace and name with no (or custom) namespace prefix", () => {
+        expect(() =>
+          resolveAliasPackage(pluginType, '@statoscope/wont-find', fixtureDir)
+        ).toThrowErrorMatchingSnapshot();
       });
 
       test("won't resolve with random namespace and @statoscope specific prefix", () => {
         expect(() =>
           resolveAliasPackage(pluginType, '@foo/wont-find', fixtureDir)
-        ).toThrow();
+        ).toThrowErrorMatchingSnapshot();
       });
     });
   });
@@ -116,7 +110,7 @@ describe('resolveAliasPackage', () => {
   test('throws when package is not found', () => {
     expect(() =>
       resolveAliasPackage(PackageAliasPrefixType.reporter, '@statoscope/2', fixtureDir)
-    ).toThrow();
+    ).toThrowErrorMatchingSnapshot();
   });
 
   describe('relative path support', () => {
@@ -139,7 +133,7 @@ describe('resolveAliasPackage', () => {
           './node_modules/@statoscope/not-there',
           fixtureDir
         )
-      ).toThrow();
+      ).toThrowErrorMatchingSnapshot();
     });
   });
 
@@ -168,7 +162,7 @@ describe('resolveAliasPackage', () => {
           path.join(fixtureDir, './node_modules/@statoscope/not-there'),
           fixtureDir
         )
-      ).toThrow();
+      ).toThrow(); // can't use snapshot here because of the absolute path
     });
   });
 });

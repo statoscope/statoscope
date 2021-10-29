@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`resolveAliasPackage plugins behavior resolves by short package name (which has to be prefixed) won't resolve with @statoscope namespace and name with no (or custom) namespace prefix 1`] = `
+"Can't resolve package @statoscope/wont-find.
+Also tried to resolve it with @statoscope/stats-validator-plugin-wont-find alias which didn't work either.
+
+Try installing the package locally:
+- with npm: npm i -D @statoscope/wont-find (or corresponding package alias)
+- with yarn: yarn add -D @statoscope/wont-find (or corresponding package alias)
+"
+`;
+
+exports[`resolveAliasPackage plugins behavior resolves by short package name (which has to be prefixed) won't resolve with random namespace and @statoscope specific prefix 1`] = `
+"Can't resolve package @foo/wont-find.
+Also tried to resolve it with @foo/statoscope-stats-validator-plugin-wont-find alias which didn't work either.
+
+Try installing the package locally:
+- with npm: npm i -D @foo/wont-find (or corresponding package alias)
+- with yarn: yarn add -D @foo/wont-find (or corresponding package alias)
+"
+`;
+
+exports[`resolveAliasPackage plugins behavior resolves by short package name (which has to be prefixed) won't resolve without namespace and @statoscope specific prefix 1`] = `
+"Can't resolve package wont-find.
+Also tried to resolve it with statoscope-stats-validator-plugin-wont-find alias which didn't work either.
+
+Try installing the package locally:
+- with npm: npm i -D wont-find (or corresponding package alias)
+- with yarn: yarn add -D wont-find (or corresponding package alias)
+"
+`;
+
+exports[`resolveAliasPackage relative path support throws when package is not there 1`] = `"Cannot find module './node_modules/@statoscope/not-there' from 'test/fixtures/config/_'"`;
+
+exports[`resolveAliasPackage throws when package is not found 1`] = `
+"Can't resolve package @statoscope/2.
+Also tried to resolve it with @statoscope/stats-validator-reporter-2 alias which didn't work either.
+
+Try installing the package locally:
+- with npm: npm i -D @statoscope/2 (or corresponding package alias)
+- with yarn: yarn add -D @statoscope/2 (or corresponding package alias)
+"
+`;
