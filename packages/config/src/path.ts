@@ -2,9 +2,9 @@ import path from 'path';
 import module from 'module';
 import chalk from 'chalk';
 
-export enum PackageAliasPrefixType {
-  plugin = 'plugin',
-  reporter = 'reporter',
+export enum PackageAliasType {
+  PLUGIN = 'PLUGIN',
+  REPORTER = 'REPORTER',
 }
 
 export function normalizePath(source: string, rootDir: string): string {
@@ -18,18 +18,22 @@ export function makeRequireFromPath(pathname: string): NodeRequire {
 // package namespace (empty string when not set) followed by the package name (wo namespace)
 type PackageName = [string, string];
 
-const packageAliasPrefixes = new Map<PackageAliasPrefixType, PackageName[]>();
+const packageAliasPrefixes = new Map<PackageAliasType, Record<PrefixType, string>>();
 
-packageAliasPrefixes.set(PackageAliasPrefixType.plugin, [
-  // only used for alias starting with `@statoscope`, has to be first
-  ['@statoscope', 'stats-validator-plugin'],
-  ['', 'statoscope-stats-validator-plugin'],
-]);
+enum PrefixType {
+  STATOSCOPE_NS = '@statoscope',
+  NON_STATOSCOPE_NS = '@NON_STATOSCOPE_NS',
+}
 
-packageAliasPrefixes.set(PackageAliasPrefixType.reporter, [
-  ['@statoscope', 'stats-validator-reporter'],
-  ['', 'statoscope-stats-validator-reporter'],
-]);
+packageAliasPrefixes.set(PackageAliasType.PLUGIN, {
+  [PrefixType.STATOSCOPE_NS]: 'stats-validator-plugin',
+  [PrefixType.NON_STATOSCOPE_NS]: 'statoscope-stats-validator-plugin',
+});
+
+packageAliasPrefixes.set(PackageAliasType.REPORTER, {
+  [PrefixType.STATOSCOPE_NS]: 'stats-validator-reporter',
+  [PrefixType.NON_STATOSCOPE_NS]: 'statoscope-stats-validator-reporter',
+});
 
 /**
  * Concatenate namespace (when provided) with the package name.
@@ -83,7 +87,7 @@ function getAliasPackageResolutionError(packageAliases: PackageName[]): string {
  * @param fromDir - Directory used as "root" while resolving the package.
  */
 export function resolveAliasPackage(
-  packageAliasType: PackageAliasPrefixType,
+  packageAliasType: PackageAliasType,
   aliasName: string,
   fromDir: string
 ): string {
@@ -111,26 +115,13 @@ export function resolveAliasPackage(
 
   const prefixes = packageAliasPrefixes.get(packageAliasType)!;
 
-  // we don't want to apply namespace specific (@statoscope) prefixes to no namespace or
-  // custom namespaces aliases
-  // hence once we find a namespace match (@statoscope) we skip no-namespace prefixes
-  let skipNoNamespaceAliases = false;
+  const prefix =
+    packageNamespace === PrefixType.STATOSCOPE_NS
+      ? prefixes[PrefixType.STATOSCOPE_NS]
+      : prefixes[PrefixType.NON_STATOSCOPE_NS];
 
-  for (const [prefixNamespace, prefix] of prefixes) {
-    if (
-      (!skipNoNamespaceAliases && !prefixNamespace) ||
-      prefixNamespace === packageNamespace
-    ) {
-      // @statoscope prefix is being used
-      if (!skipNoNamespaceAliases && prefixNamespace) {
-        skipNoNamespaceAliases = true;
-      }
-
-      if (!packageName.startsWith(prefix)) {
-        packageAliases.push([packageNamespace, `${prefix}-${packageName}`]);
-        break;
-      }
-    }
+  if (!packageName.startsWith(prefix)) {
+    packageAliases.push([packageNamespace, `${prefix}-${packageName}`]);
   }
 
   const paths = packageAliases.map(([namespace, packageName]) =>

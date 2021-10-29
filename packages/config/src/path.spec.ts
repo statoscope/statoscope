@@ -1,5 +1,5 @@
 import path from 'path';
-import { normalizePath, PackageAliasPrefixType, resolveAliasPackage } from './path';
+import { normalizePath, PackageAliasType, resolveAliasPackage } from './path';
 
 const rootDir = path.resolve(__filename, '../../../..');
 const fixtureDir = path.resolve(__filename, '../../../../test/fixtures/config');
@@ -8,7 +8,7 @@ function normalize(path: string): string {
   return path.replace(rootDir, '');
 }
 
-const { plugin: pluginType } = PackageAliasPrefixType;
+const { PLUGIN: pluginType } = PackageAliasType;
 
 describe('resolveAliasPackage', () => {
   describe('plugins behavior', () => {
@@ -109,7 +109,7 @@ describe('resolveAliasPackage', () => {
 
   test('throws when package is not found', () => {
     expect(() =>
-      resolveAliasPackage(PackageAliasPrefixType.reporter, '@statoscope/2', fixtureDir)
+      resolveAliasPackage(PackageAliasType.REPORTER, '@statoscope/2', fixtureDir)
     ).toThrowErrorMatchingSnapshot();
   });
 

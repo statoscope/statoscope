@@ -3,7 +3,7 @@ import path from 'path';
 import { ReporterConfig } from '@statoscope/types/types/validation/config';
 import { Reporter } from '@statoscope/types/types/validation/reporter';
 import { resolveAliasPackage } from './path';
-import { PackageAliasPrefixType } from './path';
+import { PackageAliasType } from './path';
 
 export type ReporterConstructor<TOptions> = {
   new (options?: TOptions): Reporter;
@@ -12,7 +12,7 @@ export type ReporterConstructor<TOptions> = {
 export function makeReporterInstance(item: ReporterConfig, rootDir: string): Reporter {
   const [reporterAlias, reporterOptions] = typeof item === 'string' ? [item] : item;
   const normalizedReporterPath = resolveAliasPackage(
-    PackageAliasPrefixType.reporter,
+    PackageAliasType.REPORTER,
     reporterAlias,
     rootDir
   );

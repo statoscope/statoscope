@@ -10,7 +10,7 @@ import {
 } from '@statoscope/types/types/validation/rule';
 import {
   makeRequireFromPath,
-  PackageAliasPrefixType,
+  PackageAliasType,
   resolveAliasPackage,
 } from '@statoscope/config/dist/path';
 import { makeAPI } from './api';
@@ -45,7 +45,7 @@ export default class Validator {
           ? pluginDefinition[0]
           : pluginDefinition;
         const normalizedPluginPath = resolveAliasPackage(
-          PackageAliasPrefixType.plugin,
+          PackageAliasType.PLUGIN,
           pluginAlias,
           rootDir
         );
