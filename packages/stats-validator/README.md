@@ -60,7 +60,7 @@ module.export = {
 There are a few ways to how you can specify a plugin name:
 
 - full package name
-- short package name
+- short package name (please see example below)
 - relative or absolute path
 
 Here are the examples with all possible ways:
@@ -73,7 +73,8 @@ module.export = {
     plugins: [
       'statoscope-stats-validator-plugin-foo', // full package name
       '@statoscope/webpack', // short package name, resolves to @statoscope/stats-validator-plugin-webpack
-      'webpack', // short package name, resolves to @statoscope/stats-validator-plugin-webpack or statoscope-stats-validator-plugin-webpack
+      '@foo/my-validator', // short package name, resolves to @foo/statoscope-stats-validator-plugin-my-validator
+      'webpack', // short package name, resolves to statoscope-stats-validator-plugin-webpack
       ['./my/plugin.js', 'my-plugin'], // relative path (relative config path)
       [require.resolve('./my/another/plugin.js'), 'my-another-plugin'] // absolute path
     ],
