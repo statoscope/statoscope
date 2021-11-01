@@ -1,17 +1,22 @@
-export function ruleTemplate(): string {
-  return `import { Rule } from '@statoscope/stats-validator/dist/rule';
-import { Prepared } from '@statoscope/webpack-model';
+import { FileExt } from '.';
 
-//Statoscope Plugins examples:
-https://github.com/statoscope/statoscope/tree/c9d0c148c1e38a87696d79485f37e598110db80c/packages/stats-validator-plugin-webpack#rules
+type Options = {
+  [FileExt.js]: { export?: boolean };
+  [FileExt.ts]: { export?: boolean; import?: boolean };
+};
 
-
-${asyncChunkRule}
-
-export default asyncChunkRule;`;
+export function ruleTemplate<Ft extends FileExt>(
+  fileExt: Ft,
+  options: Options[Ft]
+): string {
+  return fileExt === FileExt.ts ? asyncChunkRuleTs(options) : asyncChunkRuleJs(options);
 }
 
-export const asyncChunkRule = `
+const asyncChunkRuleTs = (opts: Options[FileExt.ts]): string => `${
+  opts.import
+    ? "import type { Rule } from '@statoscope/stats-validator/dist/rule\nimport type{ Prepared } from '@statoscope/webpack-model';\n';"
+    : ''
+}
 type WebpackRule<TParams> = Rule<TParams, Prepared>;
 
 type Params = string[];
@@ -26,4 +31,25 @@ const asyncChunkRule: WebpackRule<Params> = (ruleParams, data, api): void => {
     .forEach((f) => {
       api.message(f.names[0] + ' is not async chunk.');
     });
-};`;
+};
+${opts.export ? '\nmodule.exports = asyncChunkRule;' : ''}`;
+
+const asyncChunkRuleJs = (opts: Options[FileExt.js]): string => `/**
+ * @typedef {import('@statoscope/types/types/validation/api').API} API
+ * @typedef {import('@statoscope/webpack-model').Prepared} Prepared
+ * @param  {string[]} ruleParams
+ * @param  {Prepared} data
+ * @param  {API} api
+ * @returns void
+ */
+const asyncChunkRule = (ruleParams, data, api) => {
+
+  const normalizedParams = ruleParams ? ruleParams : [];
+  const chunks = Array.from(new Set(...data.compilations.map((c) => c.chunks)));
+  chunks
+    .filter((c) => c.names.some((n) => normalizedParams.includes(n) && c.initial !== false))
+    .forEach((f) => {
+      api.message(f.names[0] + " is not async chunk.");
+    });
+};
+${opts.export ? '\nmodule.exports = asyncChunkRule;' : ''}`;

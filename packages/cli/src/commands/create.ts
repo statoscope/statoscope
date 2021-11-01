@@ -1,21 +1,23 @@
 import fs from 'fs';
 import path from 'path';
 import { Argv } from 'yargs';
-import { getTemplate, TemplateName } from './templates';
+import { FileExt, getTemplate, TemplateName } from './templates';
 
 const SUPPORTED_ENTITIES = ['plugin', 'rule', 'reporter'];
+const SUPPORTED_EXT = [FileExt.js, FileExt.ts];
 
 export default function (yargs: Argv): Argv {
   return yargs.command(
     'create [entity] [output]',
     `Generate plugin, rule, reporter file
 Examples:
-Plugin: create plugin --output path/to/folder`,
+default usage: create rule
+Custom path: create plugin --output path/to/folder
+File ext: create rule --ext ts`,
     (yargs) => {
       return yargs
         .positional('entity', {
           describe: 'Entity fir generate: plugin, rule, reporter',
-          alias: 'i',
           type: 'string',
         })
         .positional('output', {
@@ -24,20 +26,29 @@ Plugin: create plugin --output path/to/folder`,
           type: 'string',
           default: './',
         })
-        .demandOption('entity')
-        .demandOption('output');
+        .positional('ext', {
+          describe: 'file extension',
+          type: 'string',
+          default: FileExt.js,
+        })
+        .demandOption('entity');
     },
     async (argv) => {
       if (!SUPPORTED_ENTITIES.includes(argv.entity)) {
         throw new Error(
-          `${argv.input}: generation is not supported. You can generate: plugin, rule, reporter. `
+          `${argv.entity}: generation is not supported. You can generate: plugin, rule, reporter. `
         );
+      }
+
+      if (!SUPPORTED_EXT.includes(argv.ext)) {
+        console.log(`${argv.ext} is not supported. File will be generated with type js.`);
+        argv.ext = FileExt.js;
       }
 
       try {
         fs.writeFile(
-          path.resolve(argv.output, `${argv.input}.ts`),
-          getTemplate(argv.input as TemplateName),
+          path.resolve(argv.output, `${argv.entity}.statoscope.${argv.ext}`),
+          getTemplate(argv.entity as TemplateName, argv.ext as FileExt),
           {
             encoding: 'utf-8',
           },

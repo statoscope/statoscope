@@ -1,20 +1,19 @@
-import { asyncChunkRule } from './rule';
+import { ruleTemplate } from './rule';
+import { FileExt } from '.';
 
-export function pluginTemplate(): string {
-  return `import { PluginFn } from '@statoscope/stats-validator/dist/plugin';
-  import { Rule } from '@statoscope/stats-validator/dist/rule';
-  import { Prepared } from '@statoscope/webpack-model';
+export function pluginTemplate(fileExt: FileExt): string {
+  return fileExt === FileExt.ts ? asyncChunkRulePluginTs : asyncChunkRulePluginJs;
+}
 
-// Statoscope Plugin examples:
-// https://github.com/statoscope/statoscope/blob/master/packages/stats-validator-plugin-webpack/src/index.ts
+export const asyncChunkRulePluginTs = `import type{ PluginFn } from '@statoscope/stats-validator/dist/plugin';
+import type{ Rule } from '@statoscope/stats-validator/dist/rule';
+import type{ Prepared } from '@statoscope/webpack-model';
 
-// How add custom plugin
-// https://github.com/statoscope/statoscope/tree/master/packages/stats-validator
-
+${ruleTemplate(FileExt.ts, {
+  export: false,
+  import: false,
+})}
 const newStatoscopePlugin: PluginFn<Prepared> = () => {
-
-${asyncChunkRule}
-
   return {
     rules: {
       'async-chunk': asyncChunkRule,
@@ -22,5 +21,17 @@ ${asyncChunkRule}
   };
 };
 
-export default newStatoscopePlugin;`;
-}
+module.exports = newStatoscopePlugin;`;
+
+export const asyncChunkRulePluginJs = `${ruleTemplate(FileExt.js, {
+  export: false,
+})}
+const newStatoscopePlugin = () => {
+  return {
+    rules: {
+      "async-chunk": asyncChunkRule,
+    },
+  };
+};
+
+module.exports = newStatoscopePlugin;`;
