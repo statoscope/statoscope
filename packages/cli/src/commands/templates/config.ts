@@ -6,7 +6,7 @@ export function configTemplate(): string {
     // 'statoscope-stats-validator-plugin-foo', // full package name
     // '@statoscope/webpack', // short package name, resolves to @statoscope/stats-validator-plugin-webpack
     // 'webpack', // short package name, resolves to @statoscope/stats-validator-plugin-webpack or statoscope-stats-validator-plugin-webpack
-    // ['./my/plugin.js', 'my-plugin'], // relative path (relative config path)
+    // ['./plugin.statoscope.js', 'my-plugin'], // relative path (relative config path)
     // [require.resolve('./my/another/plugin.js'), 'my-another-plugin'] // absolute path
     ],
     reporters: [
@@ -43,7 +43,7 @@ export function configTemplate(): string {
       ],
       // compares usage of specified packages usage between input and reference stats. Fails if rxjs usage has increased
       '@statoscope/webpack/diff-deprecated-packages': ['error', ['rxjs']],
-      // 'my-plugin/some-rule': ['error'],
+      // 'my-plugin/async-chunk': ['error',['main','init']],
     },
   },
 };
