@@ -5,9 +5,9 @@ export function reporterTemplate(fileExt: FileExt): string {
 }
 
 const reporterJs = `class NewReporter {
-  constructor(){}
+  constructor() {}
 
-  async run(result){
+  async run(result) {
     console.log("Hello from new custom reporter!")
     console.log({result})
   }

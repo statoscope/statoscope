@@ -12,8 +12,8 @@ export default function (yargs: Argv): Argv {
     `Generate plugin, rule, reporter file
 Examples:
 default usage: create rule
-Custom path: create plugin --output path/to/folder
-File ext: create rule --ext ts`,
+create plugin --output path/to/folder # create example-plugin from the template and save it into a specific directory
+create rule --ext ts # create example-rule from the template and save it as typescript source`,
     (yargs) => {
       return yargs
         .positional('entity', {

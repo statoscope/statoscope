@@ -5,9 +5,9 @@ export function pluginTemplate(fileExt: FileExt): string {
   return fileExt === FileExt.ts ? asyncChunkRulePluginTs : asyncChunkRulePluginJs;
 }
 
-export const asyncChunkRulePluginTs = `import type{ PluginFn } from '@statoscope/stats-validator/dist/plugin';
+export const asyncChunkRulePluginTs = `import type { PluginFn } from '@statoscope/stats-validator/dist/plugin';
 import type{ Rule } from '@statoscope/stats-validator/dist/rule';
-import type{ Prepared } from '@statoscope/webpack-model';
+import type { Prepared } from '@statoscope/webpack-model';
 
 ${ruleTemplate(FileExt.ts, {
   export: false,

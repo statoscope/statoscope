@@ -14,7 +14,7 @@ export function ruleTemplate<Ft extends FileExt>(
 
 const asyncChunkRuleTs = (opts: Options[FileExt.ts]): string => `${
   opts.import
-    ? "import type { Rule } from '@statoscope/stats-validator/dist/rule\nimport type{ Prepared } from '@statoscope/webpack-model';\n';"
+    ? "import type { Rule } from '@statoscope/stats-validator/dist/rule\nimport type { Prepared } from '@statoscope/webpack-model';\n';"
     : ''
 }
 type WebpackRule<TParams> = Rule<TParams, Prepared>;
@@ -26,10 +26,10 @@ const asyncChunkRule: WebpackRule<Params> = (ruleParams, data, api): void => {
   const chunks = Array.from(new Set(...data.compilations.map((c) => c.chunks)));
   chunks
     .filter((c) =>
-      c.names.some((n) => normalizedParams.includes(n) && c.initial !== false)
+      c.names.some((n) => normalizedParams.includes(n) && !c.initial)
     )
     .forEach((f) => {
-      api.message(f.names[0] + ' is not async chunk.');
+      api.message(`Chunk ${f.names[0]} should be async.`);
     });
 };
 ${opts.export ? '\nmodule.exports = asyncChunkRule;' : ''}`;
