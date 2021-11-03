@@ -1,5 +1,15 @@
 # Changelog
 
+## 5.18.0 (O3 November 2021)
+
+### Features
+
+- `[config]` - more useful error message if any of plugins or reporters from statoscope config is not installed (#137 by @amalitsky)
+
+### Fixes
+
+- `[webpack-model]` - fix d.ts
+
 ## 5.17.0 (27 October 2021)
 
 ### Features
