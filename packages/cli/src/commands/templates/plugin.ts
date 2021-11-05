@@ -1,37 +1,52 @@
-import { ruleTemplate } from './rule';
-import { FileExt } from '.';
+import { concatTemplateParts, templatePartsByOptions } from './templateParts';
+import { FileExt, RuleTemplatesPartsFromFileExt, Template } from './types';
 
-export function pluginTemplate(fileExt: FileExt): string {
-  return fileExt === FileExt.ts ? asyncChunkRulePluginTs : asyncChunkRulePluginJs;
-}
+export const pluginTemplate: Template = (templateOptions, additionalOptions = {}) => {
+  const plugin = templatePartsByOptions(templateOptions, {
+    js: jsPlugin,
+    ts: tsPlugin,
+  });
 
-export const asyncChunkRulePluginTs = `import type { PluginFn } from '@statoscope/stats-validator/dist/plugin';
-import type{ Rule } from '@statoscope/stats-validator/dist/rule';
-import type { Prepared } from '@statoscope/webpack-model';
+  if (additionalOptions.onlyBody) {
+    return plugin.body;
+  }
 
-${ruleTemplate(FileExt.ts, {
-  export: false,
-  import: false,
-})}
-const newStatoscopePlugin: PluginFn<Prepared> = () => {
-  return {
-    rules: {
-      'async-chunk': asyncChunkRule,
-    },
-  };
+  return concatTemplateParts(plugin);
 };
 
-module.exports = newStatoscopePlugin;`;
-
-export const asyncChunkRulePluginJs = `${ruleTemplate(FileExt.js, {
-  export: false,
-})}
+const jsPlugin: RuleTemplatesPartsFromFileExt[FileExt.js] = {
+  imports: {
+    commonjs: `const asyncChunkRule = require('./rule.statoscope.js')`,
+    esm: `import asyncChunkRule from './rule.statoscope.js';`,
+  },
+  body: `/**
+  * @typedef {import('@statoscope/webpack-model').Prepared} Prepared
+  * @returns {import('@statoscope/stats-validator/dist/plugin').PluginDescription<Prepared>} PluginDescription
+ */
 const newStatoscopePlugin = () => {
   return {
     rules: {
       "async-chunk": asyncChunkRule,
     },
   };
+};`,
+  exports: {
+    commonjs: 'module.exports = newStatoscopePlugin',
+    esm: 'export default newStatoscopePlugin',
+  },
 };
 
-module.exports = newStatoscopePlugin;`;
+const tsPlugin: RuleTemplatesPartsFromFileExt[FileExt.ts] = {
+  imports: `import type { PluginFn } from '@statoscope/stats-validator/dist/plugin';
+import type { Prepared } from '@statoscope/webpack-model';
+import asyncChunkRule from './rule.statoscope.ts';`,
+  body: `
+const newStatoscopePlugin: PluginFn<Prepared> = () => {
+  return {
+    rules: {
+      "async-chunk": asyncChunkRule,
+    },
+  };
+};`,
+  exports: 'export default newStatoscopePlugin',
+};

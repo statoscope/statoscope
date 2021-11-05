@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import { Argv } from 'yargs';
-import { FileExt, getTemplate } from './templates';
+import { getTemplate } from './templates';
+import { FileExt, ModuleType } from './templates/types';
 
 const CONFIG_FILE_NAME = 'statoscope.config.js';
 
@@ -26,7 +27,12 @@ Custom folder: init --output ./src
       try {
         fs.writeFile(
           path.resolve(argv.output, CONFIG_FILE_NAME),
-          getTemplate('config', FileExt.js),
+          getTemplate('config', {
+            output: {
+              module: ModuleType.commonjs,
+              fileExt: FileExt.js,
+            },
+          }),
           {
             encoding: 'utf-8',
           },

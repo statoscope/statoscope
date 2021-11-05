@@ -2,11 +2,7 @@ import { configTemplate } from './config';
 import { pluginTemplate } from './plugin';
 import { reporterTemplate } from './reporter';
 import { ruleTemplate } from './rule';
-
-export const enum FileExt {
-  js = 'js',
-  ts = 'ts',
-}
+import { TemplateOptions } from './types';
 
 const mapper = {
   config: configTemplate,
@@ -17,12 +13,9 @@ const mapper = {
 
 export type TemplateName = keyof typeof mapper;
 
-export function getTemplate(templateName: TemplateName, fileExt: FileExt): string {
-  if (templateName === 'rule') {
-    return mapper.rule(fileExt, {
-      export: true,
-      import: true,
-    });
-  }
-  return mapper[templateName](fileExt);
+export function getTemplate(
+  templateName: TemplateName,
+  templateOptions: TemplateOptions
+): string {
+  return mapper[templateName](templateOptions);
 }

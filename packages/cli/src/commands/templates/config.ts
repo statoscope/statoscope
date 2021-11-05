@@ -1,4 +1,6 @@
-export function configTemplate(): string {
+import { Template } from './types';
+
+export const configTemplate: Template = (): string => {
   return `module.exports = {
   validate: {
     // add webpack plugin with rules
@@ -43,9 +45,10 @@ export function configTemplate(): string {
       ],
       // compares usage of specified packages usage between input and reference stats. Fails if rxjs usage has increased
       '@statoscope/webpack/diff-deprecated-packages': ['error', ['rxjs']],
+      // connect template plugin
       // 'my-plugin/async-chunk': ['error',['main','init']],
     },
   },
 };
 `;
-}
+};
