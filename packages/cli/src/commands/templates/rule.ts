@@ -1,15 +1,11 @@
 import { concatTemplateParts, templatePartsByOptions } from './templateParts';
 import { FileExt, RuleTemplatesPartsFromFileExt, Template } from './types';
 
-export const ruleTemplate: Template = (templateOptions, additionalOptions = {}) => {
+export const ruleTemplate: Template = (templateOptions) => {
   const rule = templatePartsByOptions(templateOptions, {
     js: jsRule,
     ts: tsRule,
   });
-
-  if (additionalOptions.onlyBody) {
-    return rule.body;
-  }
 
   return concatTemplateParts(rule);
 };

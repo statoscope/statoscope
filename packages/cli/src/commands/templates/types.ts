@@ -22,9 +22,10 @@ export type TemplateOptions =
       };
     };
 
-export type Template<
-  TAdditionalOptions extends { onlyBody?: boolean } = { onlyBody?: boolean }
-> = (templateOptions: TemplateOptions, additionalOptions?: TAdditionalOptions) => string;
+export type Template<TAdditionalOptions = undefined> = (
+  templateOptions: TemplateOptions,
+  additionalOptions?: TAdditionalOptions
+) => string;
 
 export type RuleTemplatesPartsFromFileExt = {
   [FileExt.ts]: {
