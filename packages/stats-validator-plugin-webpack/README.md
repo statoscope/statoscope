@@ -1,7 +1,7 @@
 # stats-validator-plugin-webpack
 
 [![npm version](https://badge.fury.io/js/%40statoscope%2Fstats-validator-plugin-webpack.svg)](https://badge.fury.io/js/%40statoscope%2Fstats-validator-plugin-webpack)
-[![Support](https://img.shields.io/badge/-Support-blue)](https://opencollective.com/statoscope)
+[![Financial Contributors on Open Collective](https://opencollective.com/statoscope/all/badge.svg?label=financial+contributors)](https://opencollective.com/statoscope)
 
 Webpack stats validator plugin for @statoscope/stats-validator
 
