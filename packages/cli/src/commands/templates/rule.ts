@@ -11,13 +11,13 @@ export const ruleTemplate: Template = (templateOptions) => {
 };
 
 const jsRuleBody = `/**
-* @typedef {import('@statoscope/types/types/validation/api').API} API
-* @typedef {import('@statoscope/webpack-model').Prepared} Prepared
-* @param  {string[]} ruleParams
-* @param  {Prepared} data
-* @param  {API} api
-* @returns void
-*/
+ * @typedef {import('@statoscope/types/types/validation/api').API} API
+ * @typedef {import('@statoscope/webpack-model').Prepared} Prepared
+ * @param  {string[]} ruleParams
+ * @param  {Prepared} data
+ * @param  {API} api
+ * @returns void
+ */
 const asyncChunkRule = (ruleParams, data, api) => {
   const normalizedParams = ruleParams ? ruleParams : [];
   // we can use jora-queries in rules

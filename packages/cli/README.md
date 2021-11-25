@@ -85,6 +85,52 @@ statoscope validate --input path/to/stats.json
 
 > Learn more on [@staoscope/stats-validator](/packages/stats-validator) and [@statoscope/stats-validator-plugin-webpack](/packages/stats-validator-plugin-webpack)
 
+### init
+
+Create example statoscope.config.js.
+
+`init [...args]`
+
+- `--output` (`-o`) - config file path (`./statoscope.config.js` by default)
+
+**Example:**
+
+```sh
+statoscope init
+```
+
+Creates `statoscope.config.js` in a current directory
+
+```sh
+statoscope init -o some/path/server.statoscope.config.js
+```
+
+Creates `server.statoscope.config.js` in `some/path/`
+
+### create
+
+Generate custom validator plugin/rule/reporter
+
+`create [...args]`
+
+- `--output` (`-o`) - config file path (`./statoscope.config.js` by default)
+
+- `--entity` (`-e`) - Entity to generate (`plugin`, `rule` or `reporter`)
+
+- `--output` (`-o`) - Path to generated code (`./` by default)
+
+- `--type` (`-t`) - Output type (`js` (default) or `ts`)
+
+- `--module` (`-m`) - Output modules type (`commonjs` (default) or `esm`)
+
+**Example:**
+
+```sh
+statoscope create rule -t ts -o ./my-custom-statoscope-rules
+```
+
+Creates custom rule for stats validator in `my-custom-statoscope-rules` directory
+
 ### serve
 
 Start HTTP-server and serve JSON-stats as HTML report

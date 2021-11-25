@@ -8,25 +8,22 @@ const CONFIG_FILE_NAME = 'statoscope.config.js';
 
 export default function (yargs: Argv): Argv {
   return yargs.command(
-    'init [output]',
-    `Generate ${CONFIG_FILE_NAME} file.
-Examples:
-Default: init
-Custom folder: init --output ./src
-    `,
+    'init',
+    `Generate statoscope config file`,
     (yargs) => {
       return yargs
-        .positional('output', {
-          describe: `path to ${CONFIG_FILE_NAME}`,
+        .option('output', {
+          describe: `config file name`,
           type: 'string',
-          default: './',
+          alias: 'o',
+          default: path.resolve(CONFIG_FILE_NAME),
         })
         .demandOption('output');
     },
     async (argv) => {
       try {
         fs.writeFile(
-          path.resolve(argv.output, CONFIG_FILE_NAME),
+          path.resolve(argv.output),
           getTemplate('config', {
             output: {
               module: ModuleType.commonjs,
