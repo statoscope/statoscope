@@ -1,5 +1,13 @@
 # Changelog
 
+## Next
+
+### Feature
+
+- `[webpack-ui]` - smart handling for concat modules container id
+  This improves modules diff. 
+- `[helpers]` - add id modifier to indexer
+
 ## 5.18.0 (O3 November 2021)
 
 ### Features
