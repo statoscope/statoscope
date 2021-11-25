@@ -57,6 +57,7 @@ export declare namespace Webpack {
     origins?: Array<Reason>;
     files: Array<string | File>;
     idHints?: string[];
+    initial: boolean;
   };
 
   type File = {
