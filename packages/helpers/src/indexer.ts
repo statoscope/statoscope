@@ -1,4 +1,4 @@
-import { GetIDFn, getIdWrapper, normalizeId } from './entity-resolver';
+import { GetIDFn, getIdWrapper, IDModifier, normalizeId } from './entity-resolver';
 
 export type IndexAPI<TID, TEntity> = {
   add(entity: TEntity): void;
@@ -10,11 +10,36 @@ export type IndexAPI<TID, TEntity> = {
   removeById(id: TID): void;
 };
 
+export type IndexOptions<TID> = {
+  idModifier?: IDModifier<TID>;
+};
+
+export function sameId<TID>(id: TID): TID {
+  return id;
+}
+
+function makeIdModifier<TID>(modifier: IDModifier<TID> = sameId): IDModifier<TID> {
+  const cache = new Map<TID, TID>();
+
+  return (id): TID => {
+    let cached = cache.get(id);
+
+    if (cached == null) {
+      cached = modifier(id);
+      cache.set(id, cached);
+    }
+
+    return cached;
+  };
+}
+
 export default function makeIndex<TEntity, TID>(
   getId: GetIDFn<TID, TEntity>,
-  source?: TEntity[]
+  source?: TEntity[] | null,
+  options?: IndexOptions<TID>
 ): IndexAPI<TID, TEntity> {
-  const wrappedGet = getIdWrapper(getId);
+  const idModifier = makeIdModifier(options?.idModifier);
+  const wrappedGet = getIdWrapper(getId, idModifier);
   const storage = new Map<TID | string, TEntity>();
   const api: IndexAPI<TID, TEntity> = {
     add(entity: TEntity) {
@@ -24,10 +49,10 @@ export default function makeIndex<TEntity, TID>(
       return storage.has(wrappedGet(entity));
     },
     hasId(id: TID): boolean {
-      return storage.has(normalizeId(id));
+      return storage.has(normalizeId(idModifier(id)));
     },
     get(id: TID): TEntity | null {
-      return storage.get(normalizeId(id)) ?? null;
+      return storage.get(normalizeId(idModifier(id))) ?? null;
     },
     getAll(): TEntity[] {
       return [...storage.values()];
@@ -36,7 +61,7 @@ export default function makeIndex<TEntity, TID>(
       storage.delete(wrappedGet(entity));
     },
     removeById(id: TID) {
-      storage.delete(normalizeId(id));
+      storage.delete(normalizeId(idModifier(id)));
     },
   };
 

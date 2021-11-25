@@ -2,11 +2,19 @@ export function normalizeId<TID>(id: TID): TID | string {
   return typeof id === 'number' || typeof id === 'bigint' ? String(id) : id;
 }
 
+export type IDModifier<TID> = (id: TID) => TID;
+
 export function getIdWrapper<TID, TEntity>(
-  getId: GetIDFn<TID, TEntity>
+  getId: GetIDFn<TID, TEntity>,
+  idModifier?: IDModifier<TID>
 ): GetIDFn<TID | string, TEntity> {
   return (entity): TID | string => {
-    const id = getId(entity);
+    let id = getId(entity);
+
+    if (idModifier) {
+      id = idModifier(id);
+    }
+
     return normalizeId(id);
   };
 }
