@@ -142,6 +142,10 @@ function buildGraph(compilation: NormalizedCompilation): {
   }
 }
 
+function moduleIdModifier(id: string): string {
+  return id.replace(/(.+[|\s])([a-f0-9]+)$/, '$1root');
+}
+
 function handleCompilation(
   compilation: Webpack.Compilation,
   file: NormalizedFile,
@@ -166,14 +170,18 @@ function handleCompilation(
     assets: makeIndex((item) => item.name),
     chunks: makeIndex((item) => item.id),
     entrypoints: makeIndex((item) => item.name),
-    modules: makeIndex((item) => item.identifier),
+    modules: makeIndex((item) => item.identifier, null, {
+      idModifier: moduleIdModifier,
+    }),
     packages: makeIndex((item) => item.name),
   };
   const rawIndexes: ProcessingContext['rawIndexes'] = {
     assets: makeIndex((item) => item.name),
     chunks: makeIndex((item) => item.id),
     entrypoints: makeIndex((item) => item.name),
-    modules: makeIndex((item) => item.identifier),
+    modules: makeIndex((item) => item.identifier, null, {
+      idModifier: moduleIdModifier,
+    }),
   };
   const resolvers: ProcessingContext['resolvers'] = {
     resolveAsset: (id) => indexes.assets.get(id),
