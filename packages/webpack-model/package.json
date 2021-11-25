@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/webpack-model",
-  "version": "5.18.0",
+  "version": "5.19.0",
   "description": "This package contains helpers to process webpack stats",
   "main": "./dist/index.js",
   "scripts": {
@@ -19,12 +19,12 @@
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
     "@statoscope/extensions": "5.14.1",
-    "@statoscope/helpers": "5.14.1",
+    "@statoscope/helpers": "5.19.0",
     "@statoscope/stats": "5.14.1",
-    "@statoscope/stats-extension-compressed": "5.14.1",
-    "@statoscope/stats-extension-custom-reports": "5.14.1",
-    "@statoscope/stats-extension-package-info": "5.14.1",
-    "@statoscope/stats-extension-stats-validation-result": "5.14.1",
+    "@statoscope/stats-extension-compressed": "5.19.0",
+    "@statoscope/stats-extension-custom-reports": "5.19.0",
+    "@statoscope/stats-extension-package-info": "5.19.0",
+    "@statoscope/stats-extension-stats-validation-result": "5.19.0",
     "@statoscope/types": "5.14.1",
     "@types/md5": "^2.3.0",
     "@types/webpack": "^5.0.0",

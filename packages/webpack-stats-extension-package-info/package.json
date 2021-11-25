@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/webpack-stats-extension-package-info",
-  "version": "5.18.0",
+  "version": "5.19.0",
   "description": "Webpack adapter for @statoscope/stats-extension-package-info",
   "main": "./dist/index.js",
   "scripts": {
@@ -19,8 +19,8 @@
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
     "@statoscope/stats": "5.14.1",
-    "@statoscope/stats-extension-package-info": "5.14.1",
-    "@statoscope/webpack-model": "5.18.0",
+    "@statoscope/stats-extension-package-info": "5.19.0",
+    "@statoscope/webpack-model": "5.19.0",
     "@types/webpack": "^5.0.0"
   },
   "peerDependencies": {
