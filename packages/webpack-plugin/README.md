@@ -263,7 +263,8 @@ stats: {
   entrypoints: true, // entrypoints
   chunks: true, // chunks
   chunkModules: true, // modules
-  reasons: true, // modules reasons
+  reasons: true, // modules reasons,
+  ids: true, IDs of modules and chunks (webpack 5)
 },
 ```
 
@@ -277,6 +278,7 @@ stats: {
   chunks: true, // chunks
   chunkModules: true, // modules
   reasons: true, // modules reasons
+  ids: true, IDs of modules and chunks (webpack 5)
 
   nestedModules: true, // concatenated modules
   usedExports: true, // used exports
