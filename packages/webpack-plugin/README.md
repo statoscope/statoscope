@@ -278,7 +278,11 @@ stats: {
   chunks: true, // chunks
   chunkModules: true, // modules
   reasons: true, // modules reasons
-  ids: true, IDs of modules and chunks (webpack 5)
+  ids: true, // IDs of modules and chunks (webpack 5)
+  dependentModules: true, // dependent modules of chunks (webpack 5)
+  chunkRelations: true, // chunk parents, children and siblings (webpack 5)
+  cachedAssets: true, // information about the cached assets (webpack 5)
+
 
   nestedModules: true, // concatenated modules
   usedExports: true, // used exports
