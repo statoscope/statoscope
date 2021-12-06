@@ -242,6 +242,8 @@ $webpackContext: $ext.payload.context;
 
 ### Which stats-flags Statoscope use?
 
+> ⚠️ Most often the default stats settings is enough, but you can also adjust the size of the report by enabling or disabling various stats flags.
+
 Statoscope use only stats that it has. There is only one required flag - `hash`.
 
 ```jsonc
