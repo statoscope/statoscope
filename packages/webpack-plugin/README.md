@@ -118,7 +118,7 @@ Open report after compilation.
 - `file` - open html with report
 - `dir` - open a directory with html file
 
-`dir` by default.
+`file` by default.
 
 #### options.compressor: enum
 
