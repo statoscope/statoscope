@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.19.1 (12 December 2021)
+
+### Fixes
+
+- `[webpack-stats-extension-package-info]` - collect more package versions
+
 ## 5.19.0 (26 November 2021)
 
 ### Feature
