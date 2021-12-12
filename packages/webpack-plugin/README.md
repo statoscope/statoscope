@@ -118,7 +118,7 @@ Open report after compilation.
 - `file` - open html with report
 - `dir` - open a directory with html file
 
-`dir` by default.
+`file` by default.
 
 #### options.compressor: enum
 
@@ -242,6 +242,8 @@ $webpackContext: $ext.payload.context;
 
 ### Which stats-flags Statoscope use?
 
+> ⚠️ Most often the default stats settings is enough, but you can also adjust the size of the report by enabling or disabling various stats flags.
+
 Statoscope use only stats that it has. There is only one required flag - `hash`.
 
 ```jsonc
@@ -263,7 +265,8 @@ stats: {
   entrypoints: true, // entrypoints
   chunks: true, // chunks
   chunkModules: true, // modules
-  reasons: true, // modules reasons
+  reasons: true, // modules reasons,
+  ids: true, IDs of modules and chunks (webpack 5)
 },
 ```
 
@@ -277,6 +280,11 @@ stats: {
   chunks: true, // chunks
   chunkModules: true, // modules
   reasons: true, // modules reasons
+  ids: true, // IDs of modules and chunks (webpack 5)
+  dependentModules: true, // dependent modules of chunks (webpack 5)
+  chunkRelations: true, // chunk parents, children and siblings (webpack 5)
+  cachedAssets: true, // information about the cached assets (webpack 5)
+
 
   nestedModules: true, // concatenated modules
   usedExports: true, // used exports
