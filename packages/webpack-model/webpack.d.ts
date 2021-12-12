@@ -14,6 +14,7 @@ export declare namespace Webpack {
   type ReasonGroup = { type: 'group name here'; children: Reason[] };
 
   type RawModule = {
+    moduleType?: string;
     type: string;
     id: ModuleID;
     identifier: string;

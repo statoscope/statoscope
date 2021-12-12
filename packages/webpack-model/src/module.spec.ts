@@ -1,6 +1,11 @@
 import stats from '../../../test/bundles/v5/simple/stats-prod.json';
 import { NormalizedModule, NormalizedReason } from '../types';
-import { moduleReasonResource, moduleResource, nodeModule } from './module';
+import {
+  moduleNameResource,
+  moduleReasonResource,
+  moduleResource,
+  nodeModule,
+} from './module';
 
 describe('moduleResource', () => {
   test('should work', () => {
@@ -19,11 +24,11 @@ describe('moduleResource', () => {
   });
 });
 
-describe('moduleResource', () => {
+describe('moduleReasonResource', () => {
   test('should work', () => {
     const reasons = [];
 
-    expect(moduleResource(null)).toBeNull();
+    expect(moduleReasonResource(null)).toBeNull();
 
     for (const module of stats.modules as unknown as NormalizedModule[]) {
       for (const reason of module.reasons) {

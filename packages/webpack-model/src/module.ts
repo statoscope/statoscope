@@ -37,6 +37,14 @@ export function moduleNameResource(name: string | null): string | null {
 export function moduleResource(
   module: RawModule | NormalizedModule | null
 ): string | null {
+  if (
+    module?.moduleType &&
+    (module?.moduleType === 'provide-module' ||
+      module?.moduleType === 'consume-shared-module')
+  ) {
+    return module.name;
+  }
+
   return moduleNameResource(module && module.name);
 }
 
