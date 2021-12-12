@@ -12,6 +12,13 @@ const { author, homepage, name, version, description } = require('../package.jso
 
 const pluginName = `${name}@${version}`;
 
+declare interface BaseResolveRequest {
+  descriptionFilePath?: string;
+  descriptionFileRoot?: string;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  descriptionFileData?: object;
+}
+
 export default class WebpackCompressedExtension
   implements StatsExtensionWebpackAdapter<Payload>
 {
@@ -31,6 +38,33 @@ export default class WebpackCompressedExtension
         instancePath: string;
         info: InstanceInfo;
       }> = [];
+      const handleResolverResult = (result: BaseResolveRequest): BaseResolveRequest => {
+        const pkg = result.descriptionFileData as {
+          name: string;
+          version: string;
+        } | null;
+
+        if (pkg && result.descriptionFileRoot) {
+          const instancePath = path.relative(context!, result.descriptionFileRoot);
+
+          items.push({
+            packageName: pkg.name,
+            instancePath,
+            info: { version: pkg.version },
+          });
+
+          // webpack 4 uses absolute path for some modules
+          if (!compilation.chunkGraph && instancePath.match(/^\.\./)) {
+            items.push({
+              packageName: pkg.name,
+              instancePath: result.descriptionFileRoot,
+              info: { version: pkg.version },
+            });
+          }
+        }
+
+        return result;
+      };
       compilation.hooks.afterHash.tap(pluginName, () => {
         for (const item of items) {
           this.generator.handleInstance(
@@ -41,37 +75,12 @@ export default class WebpackCompressedExtension
           );
         }
       });
-      compilation.resolverFactory.hooks.resolver
-        .for('normal')
-        .tap(pluginName, (resolver) => {
-          resolver.hooks.result.tap('MyPlugin', (result) => {
-            const pkg = result.descriptionFileData as {
-              name: string;
-              version: string;
-            } | null;
-
-            if (pkg && result.descriptionFileRoot) {
-              const instancePath = path.relative(context!, result.descriptionFileRoot);
-
-              items.push({
-                packageName: pkg.name,
-                instancePath,
-                info: { version: pkg.version },
-              });
-
-              // webpack 4 uses absolute path for some modules
-              if (!compilation.chunkGraph && instancePath.match(/^\.\./)) {
-                items.push({
-                  packageName: pkg.name,
-                  instancePath: result.descriptionFileRoot,
-                  info: { version: pkg.version },
-                });
-              }
-            }
-
-            return result;
-          });
-        });
+      [
+        compilation.resolverFactory.get('normal'),
+        compilation.resolverFactory.get('normal', { dependencyType: 'esm' }),
+      ].forEach((resolver) => {
+        resolver.hooks.result.tap('MyPlugin', handleResolverResult);
+      });
     });
   }
 }
