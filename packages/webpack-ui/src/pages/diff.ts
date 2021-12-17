@@ -131,6 +131,12 @@ export default function (discovery: StatoscopeWidget): void {
         },
         {
           view: 'alert-warning',
+          when: `settingShowCompressed()`,
+          content:
+            'md:"Note that delta may have changed depending on the `Show compressed size`-option"',
+        },
+        {
+          view: 'alert-warning',
           when: `
           $statA: #.params.hash.resolveStat();
           $statB: #.params.diffWith.resolveStat();

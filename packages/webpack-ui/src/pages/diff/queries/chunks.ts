@@ -97,10 +97,10 @@ $chunksDiff: {
       $chunkBFileSize: $chunkBFileSizes.reduce(=> size + $$, 0);
       ...b,
       modules: {
-          added: $b.chunk.modules
-            .[not identifier in $a.chunk.modules.identifier],
-          removed: $a.chunk.modules
-            .[not identifier in $b.chunk.modules.identifier],
+          added: $b.chunk..modules
+            .[not identifier.resolveModule($statA.compilation.hash) in $a.chunk..modules],
+          removed: $a.chunk..modules
+            .[not identifier.resolveModule($statB.compilation.hash) in $b.chunk..modules],
           changed: $a.chunk.modules.({
             $moduleA: $;
             $moduleB: $moduleA.identifier.resolveModule($statB.compilation.hash);

@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.19.2 (17 December 2021)
+
+### Fixes
+
+- `[webpack-ui]` - fix chunk modules delta
+
 ## 5.19.1 (12 December 2021)
 
 ### Fixes
