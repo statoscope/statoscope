@@ -11,7 +11,7 @@ export type Package = {
   instances: Array<Instance>;
 };
 export type Compilation = {
-  id: string;
+  id: string | null;
   packages: Array<Package>;
 };
 export type Payload = {
@@ -40,7 +40,7 @@ export default class Generator {
   constructor(private adapter?: ExtensionDescriptor) {}
 
   handleInstance(
-    compilationId: string,
+    compilationId: string | null,
     packageName: string,
     instance: string,
     info: InstanceInfo

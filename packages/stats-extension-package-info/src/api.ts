@@ -3,16 +3,16 @@ import makeIndex, { IndexAPI } from '@statoscope/helpers/dist/indexer';
 import { Format, Package, Instance } from './generator';
 
 export type API = {
-  getPackage: (compilationId: string, packageName: string) => Package | null;
+  getPackage: (compilationId: string | null, packageName: string) => Package | null;
   getInstance: (
-    compilationId: string,
+    compilationId: string | null,
     packageName: string,
     instancePath: string
   ) => Instance | null;
 };
 
 const makeAPI: APIFactory<Format, API> = (source) => {
-  const packageIndexes: Map<string, IndexAPI<string, Package>> = new Map();
+  const packageIndexes: Map<string | null, IndexAPI<string, Package>> = new Map();
   const instanceIndexes: Map<Package, IndexAPI<string, Instance>> = new Map();
 
   for (const compilation of source.payload.compilations) {
@@ -30,15 +30,22 @@ const makeAPI: APIFactory<Format, API> = (source) => {
   }
 
   return {
-    getPackage(compilationId: string, packageId: string): Package | null {
-      return packageIndexes.get(compilationId)?.get(packageId) ?? null;
+    getPackage(compilationId: string | null, packageId: string): Package | null {
+      return (
+        packageIndexes.get(compilationId)?.get(packageId) ??
+        packageIndexes.get(null)?.get(packageId) ??
+        null
+      );
     },
     getInstance(
-      compilationId: string,
+      compilationId: string | null,
       packageId: string,
       instancePath: string
     ): Instance | null {
-      const resolvedPackage = packageIndexes.get(compilationId)?.get(packageId) ?? null;
+      const resolvedPackage =
+        packageIndexes.get(compilationId)?.get(packageId) ??
+        packageIndexes.get(null)?.get(packageId) ??
+        null;
 
       if (!resolvedPackage) {
         return null;
