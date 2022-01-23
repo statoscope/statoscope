@@ -1,5 +1,26 @@
 # Changelog
 
+
+## 5.20.0 (23 January 2022)
+
+### Performance
+
+- `[webpack-model]` - huge performance improvement for stats normalization
+
+### Features
+
+- `[webpack-plugin]` - add `normalizeStats` that reduces stats size
+- `[webpack-ui]` - `options` and `data` props for `chart`-view as jora-query
+
+### Fixes
+
+- `[cli]` - minor fix for `generate`-command output
+
+### Other
+
+- `[webpack-ui]` - use the brand new Statoscope logo
+- `[report-writer]` - use logo as loading spinner
+
 ## 5.19.3 (11 January 2022)
 
 ### Fixes
