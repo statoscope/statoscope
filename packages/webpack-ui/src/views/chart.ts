@@ -6,7 +6,7 @@ import styles from './chart.css';
 export default function (discovery: StatoscopeWidget): void {
   discovery.view.define('chart', (el, config, data: Options = {}, context) => {
     // @ts-ignore
-    const chartData = (config.options ?? data) as Options;
+    const chartData = discovery.query(config.options ?? data, data, context) as Options;
     el.classList.add(styles.root);
     try {
       Highcharts.chart(el as HTMLDOMElement, chartData);
