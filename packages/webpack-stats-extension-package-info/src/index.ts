@@ -3,7 +3,6 @@ import { Compiler } from 'webpack';
 import { ExtensionDescriptor } from '@statoscope/stats/spec/extension';
 import Generator, {
   Format,
-  InstanceInfo,
   Payload,
 } from '@statoscope/stats-extension-package-info/dist/generator';
 import { StatsExtensionWebpackAdapter } from '@statoscope/webpack-model';
