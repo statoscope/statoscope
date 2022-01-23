@@ -34,7 +34,7 @@ Multiple stats: generate --input path/to/stats-1.json path/to/stats-2.json --out
         .demandOption('input');
     },
     async (argv) => {
-      const destReportPath = createDestStatReportPath(argv.input, argv.output);
+      argv.output = createDestStatReportPath(argv.input, argv.output);
       const files: Array<TransformFrom | string> = [];
 
       if (argv.reference) {
@@ -48,12 +48,12 @@ Multiple stats: generate --input path/to/stats-1.json path/to/stats-2.json --out
         files.push(...argv.input);
       }
 
-      console.log(`Generating Statoscope report to ${destReportPath} ...`);
-      await transform(files, destReportPath);
+      console.log(`Generating Statoscope report to ${argv.output} ...`);
+      await transform(files, argv.output);
       console.log(`Statoscope report saved to ${argv.output}`);
 
       if (argv.open) {
-        open(destReportPath);
+        open(argv.output);
       }
     }
   );
