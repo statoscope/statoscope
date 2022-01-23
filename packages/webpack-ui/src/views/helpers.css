@@ -2,3 +2,22 @@
   margin-left: 0;
   margin-right: 1ex;
 }
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.header:before {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  content: '';
+  background-image: url(../logo.svg);
+  background-size: cover;
+}
+
+.badges {
+  margin-bottom: 20px;
+}

@@ -48,6 +48,10 @@ function makeConfig(config) {
             test: /node_modules\/@carrotsearch\/foamtree\/foamtree\.js$/,
             use: ['./patch-foam'],
           },
+          {
+            test: /\.(png|svg)/,
+            type: 'asset/inline',
+          },
         ],
       },
       plugins: [

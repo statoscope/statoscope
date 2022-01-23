@@ -17,6 +17,6 @@ export default (data: RawData, element = document.body): StatoscopeWidget => {
     pages: pagesContext.keys().map(pagesContext),
     views: [...viewsContext.keys().map(viewsContext), ...customView],
     prepare,
-    name: `📦 Statoscope ${V || ''}`,
+    name: `Statoscope ${V || ''}`,
   });
 };

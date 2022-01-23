@@ -24,7 +24,17 @@ export default function (discovery: StatoscopeWidget): void {
           content: [
             {
               view: 'page-header',
-              prelude: [
+              content: {
+                className: style.header,
+                view: 'h1',
+                data: '#.name',
+              },
+            },
+            'stats-scheme-validation-error:file',
+            {
+              view: 'block',
+              className: style.badges,
+              content: [
                 {
                   when: 'file.name',
                   view: 'badge',
@@ -51,9 +61,7 @@ export default function (discovery: StatoscopeWidget): void {
                   data: `{prefix:'version',text: file.version}`,
                 },
               ],
-              content: 'h1:#.name',
             },
-            'stats-scheme-validation-error:file',
             {
               view: 'block',
               content: [
