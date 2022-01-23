@@ -30,6 +30,7 @@ export type Options = {
   // todo statoscope 6: remove
   saveTo?: string;
   saveStatsTo?: string;
+  normalizeStats?: boolean;
   saveOnlyStats: boolean;
   additionalStats: string[];
   statsOptions?: Record<string, unknown>;
@@ -125,6 +126,10 @@ export default class StatoscopeWebpackPlugin {
           statoscopeMeta.extensions!.push(generator.get());
         }
 
+        if (options.normalizeStats) {
+          normalizeCompilation(statsObj);
+        }
+
         const webpackStatsStream = stringifyStream(
           statsObj,
           makeReplacer(context, '.', ['context', 'source'])
@@ -142,7 +147,9 @@ export default class StatoscopeWebpackPlugin {
           await waitStreamEnd(statsFileOutputStream);
         }
 
-        normalizeCompilation(statsObj);
+        if (!options.normalizeStats) {
+          normalizeCompilation(statsObj);
+        }
 
         const statsForReport = this.getStatsForHTMLReport({
           filename: resolvedSaveStatsTo,

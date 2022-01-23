@@ -27,6 +27,7 @@ There are some options:
 new StatoscopeWebpackPlugin({
   saveReportTo: 'path/to/report-[name]-[hash].html',
   saveStatsTo: 'path/to/stats-[name]-[hash].json',
+  normalizeStats: false,
   saveOnlyStats: false,
   statsOptions: {
     /* any webpack stats options */
@@ -60,6 +61,14 @@ A path for saving the stats: `stats-[name]-[hash].json`
 `[hash]` replacing by `compilation.hash`
 
 By default don't save anything
+
+#### options.normalizeStats: boolean
+
+Reduce stats size that will be saved into `saveStatsTo`.
+
+`false` by default
+
+> Note that normalized stats will be handled correctly only by Statoscope
 
 #### options.saveOnlyStats: boolean
 
