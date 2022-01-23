@@ -255,22 +255,19 @@ function mergeModules(
   );
   const toReasons = collectRawReasonsFromArray(to.reasons);
   const fromReasons = collectRawReasonsFromArray(from.reasons ?? []);
+  const reasonMap = new Map<string, NormalizedReason>();
 
   to.chunks = [...chunks];
-  to.reasons = [...toReasons.values(), ...fromReasons.values()].reduce((all, current) => {
-    if (
-      !all.find(
-        (r) =>
-          r.moduleIdentifier === current.moduleIdentifier &&
-          r.type === current.type &&
-          r.loc === current.loc
-      )
-    ) {
-      all.push(current as NormalizedReason);
-    }
 
-    return all;
-  }, [] as NormalizedReason[]);
+  for (const current of [...toReasons.values(), ...fromReasons.values()]) {
+    const key = `${current.moduleIdentifier}-${current.type}-${current.loc}`;
+
+    if (!reasonMap.has(key)) {
+      reasonMap.set(key, current as NormalizedReason);
+    }
+  }
+
+  to.reasons = [...reasonMap.values()];
 }
 
 function prepareModule(module: RawModule, context: ProcessingContext): void {

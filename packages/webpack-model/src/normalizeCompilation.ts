@@ -19,24 +19,17 @@ function handleModule(module: RawModule, modulesData: ModuleData): number {
     ];
     const toReasons = collectRawReasonsFromArray(resolvedModule!.reasons ?? []);
     const fromReasons = collectRawReasonsFromArray(module.reasons ?? []);
+    const reasonMap = new Map<string, RawReason>();
 
-    resolvedModule!.reasons = [...toReasons.values(), ...fromReasons.values()].reduce(
-      (all, current) => {
-        if (
-          !all.find(
-            (r) =>
-              r.moduleIdentifier === current.moduleIdentifier &&
-              r.type === current.type &&
-              r.loc === current.loc
-          )
-        ) {
-          all.push(current);
-        }
+    for (const current of [...toReasons.values(), ...fromReasons.values()]) {
+      const key = `${current.moduleIdentifier}-${current.type}-${current.loc}`;
 
-        return all;
-      },
-      [] as RawReason[]
-    );
+      if (!reasonMap.has(key)) {
+        reasonMap.set(key, current);
+      }
+    }
+
+    resolvedModule!.reasons = [...reasonMap.values()];
   }
 
   return resolvedId;
@@ -84,6 +77,11 @@ function handleCompilation(
 export default function normalizeCompilation<T extends Record<string, unknown>>(
   json: T
 ): T {
+  // @ts-ignore
+  if (json.__statoscope?.normalization) {
+    return json;
+  }
+
   const compilationMap: CompilationMap = new Map();
   const compilations: Compilation[] = [json];
   let cursor: Compilation | undefined;
