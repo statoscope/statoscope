@@ -20,7 +20,9 @@
   "dependencies": {
     "@statoscope/stats": "5.14.1",
     "@statoscope/stats-extension-compressed": "5.19.0",
-    "@statoscope/webpack-model": "5.20.0",
+    "@statoscope/webpack-model": "5.20.0"
+  },
+  "devDependencies": {
     "@types/webpack": "^5.0.0"
   },
   "peerDependencies": {
