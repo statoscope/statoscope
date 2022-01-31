@@ -1,6 +1,12 @@
 # Changelog
 
 
+## 5.20.1 (31 January 2022)
+
+### Fixes
+
+- `[webpack-model]` - move @types/webpack into dev deps
+
 ## 5.20.0 (23 January 2022)
 
 ### Performance
