@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/webpack-stats-extension-compressed",
-  "version": "5.20.0",
+  "version": "5.20.1",
   "description": "Webpack adapter for @statoscope/stats-extension-compressed",
   "main": "./dist/index.js",
   "scripts": {
@@ -20,7 +20,7 @@
   "dependencies": {
     "@statoscope/stats": "5.14.1",
     "@statoscope/stats-extension-compressed": "5.19.0",
-    "@statoscope/webpack-model": "5.20.0"
+    "@statoscope/webpack-model": "5.20.1"
   },
   "devDependencies": {
     "@types/webpack": "^5.0.0"
