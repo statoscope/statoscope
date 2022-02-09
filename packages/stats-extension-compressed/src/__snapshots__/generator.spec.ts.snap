@@ -141,6 +141,11 @@ Object {
     1,
     2,
   ],
+  "lastCall": Array [
+    "foo-bar-content",
+    "bar-resource",
+    undefined,
+  ],
   "results": Array [
     Object {
       "type": "return",
@@ -196,6 +201,11 @@ Object {
   ],
   "invocationCallOrder": Array [
     3,
+  ],
+  "lastCall": Array [
+    "bar-foo-content",
+    "foo-resource",
+    undefined,
   ],
   "results": Array [
     Object {

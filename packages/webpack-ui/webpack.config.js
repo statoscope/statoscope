@@ -24,6 +24,7 @@ function makeConfig(config) {
         library: 'Statoscope',
         libraryTarget: 'umd',
         path: path.resolve('dist'),
+        //filename: '[name].[hash].js',
       },
       resolve: {
         extensions: ['.ts', '.js', '.json', '.wasm'],
@@ -49,7 +50,7 @@ function makeConfig(config) {
             use: ['./patch-foam'],
           },
           {
-            test: /\.(png|svg)/,
+            test: /\.(png|svg)$/,
             type: 'asset/inline',
           },
         ],

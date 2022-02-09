@@ -24,24 +24,24 @@
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
     "@statoscope/types": "5.14.1",
-    "highcharts": "^9.2.2"
+    "highcharts": "^9.3.3"
   },
   "devDependencies": {
     "@carrotsearch/foamtree": "3.5.0",
-    "@discoveryjs/discovery": "^1.0.0-beta.61",
-    "@popperjs/core": "^2.10.1",
+    "@discoveryjs/discovery": "^1.0.0-beta.63",
+    "@popperjs/core": "^2.11.2",
     "@statoscope/helpers": "5.19.0",
     "@statoscope/stats": "5.14.1",
     "@statoscope/stats-extension-compressed": "5.19.0",
     "@statoscope/stats-extension-package-info": "5.19.3",
     "@statoscope/stats-extension-stats-validation-result": "5.19.0",
     "@statoscope/webpack-model": "5.20.1",
-    "@types/md5": "^2.3.1",
+    "@types/md5": "^2.3.2",
     "@wdxlab/events": "^1.1.0",
-    "babel-loader": "^8.2.2",
-    "css-loader": "^6.3.0",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.6.0",
     "md5": "^2.3.0",
     "path-browserify": "^1.0.1",
-    "style-loader": "^3.2.1"
+    "style-loader": "^3.3.1"
   }
 }
