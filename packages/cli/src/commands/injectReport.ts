@@ -6,13 +6,10 @@ import Generator, {
 } from '@statoscope/stats-extension-custom-reports/dist/generator';
 import { waitFinished } from '@statoscope/report-writer/dist/utils';
 import { Webpack } from '@statoscope/webpack-model/webpack';
+import { isCustomReport } from '../utils';
 import Compilation = Webpack.Compilation;
 
-export function mergeReports(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  reports: any[],
-  parsed: Compilation
-): Compilation {
+export function mergeReports(reports: unknown[], parsed: Compilation): Compilation {
   parsed.__statoscope ??= {};
   parsed.__statoscope.extensions ??= [];
   const customReportsExtensionIx = parsed.__statoscope.extensions.findIndex(
@@ -34,13 +31,7 @@ export function mergeReports(
   }
 
   for (const report of reports) {
-    if (
-      report &&
-      typeof report === 'object' &&
-      report.constructor === Object &&
-      typeof report.id !== 'undefined' &&
-      typeof report.view !== 'undefined'
-    ) {
+    if (isCustomReport(report)) {
       customReportGenerator.handleReport(report);
     } else {
       throw new Error(
@@ -79,7 +70,6 @@ export default function (yargs: Argv): Argv {
         .demandOption('input');
     },
     async (argv) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const reports = [];
 
       const parsedReports: unknown[] =
@@ -89,13 +79,12 @@ export default function (yargs: Argv): Argv {
       if (parsedReports.length) {
         reports.push(...parsedReports.flat());
       } else {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const stdinReports: any[] = [JSON.parse(fs.readFileSync(0, 'utf-8') || '[]')];
+        const stdinReports: unknown[] = [JSON.parse(fs.readFileSync(0, 'utf-8') || '[]')];
 
         reports.push(...stdinReports.flat());
       }
 
-      const parsed = (await parseChunked(fs.createReadStream(argv.input))) as Compilation;
+      const parsed: Compilation = await parseChunked(fs.createReadStream(argv.input));
       const merged = mergeReports(reports, parsed);
       const outputStream = stringifyStream(merged);
 

@@ -1,6 +1,12 @@
 import open from 'open';
 import { Argv } from 'yargs';
-import { createDestStatReportPath, transform, TransformFrom } from '../utils';
+import { requireConfig } from '@statoscope/config';
+import {
+  createDestStatReportPath,
+  combineCustomReports,
+  transform,
+  TransformFrom,
+} from '../utils';
 
 export default function (yargs: Argv): Argv {
   return yargs.command(
@@ -21,6 +27,16 @@ Multiple stats: generate --input path/to/stats-1.json path/to/stats-2.json --out
           alias: 'r',
           type: 'string',
         })
+        .option('config', {
+          describe: 'path to statoscope config',
+          alias: 'c',
+          type: 'string',
+        })
+        .option('report', {
+          describe: 'path to json-file(s) with custom user report(s)',
+          alias: 'rep',
+          type: 'string',
+        })
         .positional('output', {
           describe: 'path to a report.html',
           alias: 't',
@@ -30,7 +46,7 @@ Multiple stats: generate --input path/to/stats-1.json path/to/stats-2.json --out
           describe: 'open report after done',
           alias: 'o',
         })
-        .array('input')
+        .array(['input', 'report'])
         .demandOption('input');
     },
     async (argv) => {
@@ -48,8 +64,12 @@ Multiple stats: generate --input path/to/stats-1.json path/to/stats-2.json --out
         files.push(...argv.input);
       }
 
+      const { config } = requireConfig(argv.config);
+
+      const customReports = combineCustomReports(config, argv.report);
+
       console.log(`Generating Statoscope report to ${argv.output} ...`);
-      await transform(files, argv.output);
+      await transform(files, argv.output, customReports);
       console.log(`Statoscope report saved to ${argv.output}`);
 
       if (argv.open) {
