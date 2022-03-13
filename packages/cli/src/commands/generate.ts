@@ -32,9 +32,8 @@ Multiple stats: generate --input path/to/stats-1.json path/to/stats-2.json --out
           alias: 'c',
           type: 'string',
         })
-        .option('report', {
+        .option('custom-report', {
           describe: 'path to json-file(s) with custom user report(s)',
-          alias: 'rep',
           type: 'string',
         })
         .positional('output', {
@@ -46,7 +45,7 @@ Multiple stats: generate --input path/to/stats-1.json path/to/stats-2.json --out
           describe: 'open report after done',
           alias: 'o',
         })
-        .array(['input', 'report'])
+        .array(['input', 'custom-report'])
         .demandOption('input');
     },
     async (argv) => {
@@ -66,7 +65,7 @@ Multiple stats: generate --input path/to/stats-1.json path/to/stats-2.json --out
 
       const { config } = requireConfig(argv.config);
 
-      const customReports = combineCustomReports(config, argv.report);
+      const customReports = combineCustomReports(config, argv['custom-report']);
 
       console.log(`Generating Statoscope report to ${argv.output} ...`);
       await transform(files, argv.output, customReports);

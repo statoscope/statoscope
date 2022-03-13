@@ -1,53 +1,10 @@
 import fs from 'fs';
 import { Argv } from 'yargs';
 import { parseChunked, stringifyStream } from '@discoveryjs/json-ext';
-import Generator, {
-  Payload,
-} from '@statoscope/stats-extension-custom-reports/dist/generator';
 import { waitFinished } from '@statoscope/report-writer/dist/utils';
 import { Webpack } from '@statoscope/webpack-model/webpack';
-import { isCustomReport } from '../utils';
+import { mergeCustomReportsIntoCompilation } from '../utils';
 import Compilation = Webpack.Compilation;
-
-export function mergeReports(reports: unknown[], parsed: Compilation): Compilation {
-  parsed.__statoscope ??= {};
-  parsed.__statoscope.extensions ??= [];
-  const customReportsExtensionIx = parsed.__statoscope.extensions.findIndex(
-    (ext) => ext.descriptor.name === '@statoscope/stats-extension-custom-reports'
-  );
-  const customReportsExtension =
-    customReportsExtensionIx > -1
-      ? parsed.__statoscope.extensions[customReportsExtensionIx]
-      : null;
-  const customReportGenerator = new Generator();
-  if (customReportsExtension?.payload) {
-    const payload = customReportsExtension.payload as Payload;
-
-    for (const compilationItem of payload.compilations) {
-      for (const report of compilationItem.reports) {
-        customReportGenerator.handleReport(report);
-      }
-    }
-  }
-
-  for (const report of reports) {
-    if (isCustomReport(report)) {
-      customReportGenerator.handleReport(report);
-    } else {
-      throw new Error(
-        `Can't add a report. A valid report should contain id and view fields`
-      );
-    }
-  }
-
-  if (customReportsExtension) {
-    parsed.__statoscope.extensions.splice(customReportsExtensionIx, 1);
-  }
-
-  parsed.__statoscope.extensions.push(customReportGenerator.get());
-
-  return parsed;
-}
 
 export default function (yargs: Argv): Argv {
   return yargs.command(
@@ -85,7 +42,7 @@ export default function (yargs: Argv): Argv {
       }
 
       const parsed: Compilation = await parseChunked(fs.createReadStream(argv.input));
-      const merged = mergeReports(reports, parsed);
+      const merged = mergeCustomReportsIntoCompilation(parsed, reports);
       const outputStream = stringifyStream(merged);
 
       outputStream.pipe(process.stdout);

@@ -47,12 +47,11 @@ Multiple stats: serve --input path/to/stats-1.json path/to/stats-2.json
           describe: 'open browser after start',
           alias: 'o',
         })
-        .option('report', {
+        .option('custom-report', {
           describe: 'path to json-file(s) with custom user report(s)',
-          alias: 'rep',
           type: 'string',
         })
-        .array(['input', 'report'])
+        .array(['input', 'custom-report'])
         .demandOption('input');
     },
     async (argv) => {
@@ -73,11 +72,11 @@ Multiple stats: serve --input path/to/stats-1.json path/to/stats-2.json
 
       const { config } = requireConfig(argv.config);
 
-      const customReports = combineCustomReports(config, argv.report);
+      const customReports = combineCustomReports(config, argv['custom-report']);
 
       const reportPath = await transform(files, destReportPath, customReports);
 
-      console.log(`Statoscope report generated`);
+      console.log(`Statoscope report generated to ${destReportPath}`);
 
       http
         .createServer((req, res) => {

@@ -143,8 +143,9 @@ Start HTTP-server and serve JSON-stats as HTML report
 - `--host` (`-h`) - server host
 - `--port` (`-p`) - server port
 - `--open` (`-o`) - open browser after server start
-- `--report` (`-rep`) - path to [custom report(s)](/packages/stats-extension-custom-reports/README.md)
+- `--custom-report` - path to [custom report(s)](/packages/stats-extension-custom-reports/README.md)
   to be included into generated HTML report
+- `--config` (`-c`) - path to the statoscope config file with custom user reports
 
 **Example:**
 
@@ -164,8 +165,9 @@ Generate HTML report from JSON-stats.
 - `--reference` (`-r`) - path to a stats-file to compare with (optional). When used, only first file from `input` will be used
 - `--output` (`-t`) - path to generated HTML
 - `--open` (`-o`) - open browser after generate
-- `--report` (`-rep`) - path to [custom report(s)](/packages/stats-extension-custom-reports/README.md)
+- `--custom-report` - path to [custom report(s)](/packages/stats-extension-custom-reports/README.md)
   to be included into generated HTML report
+- `--config` (`-c`) - path to the statoscope config file with custom user reports
 
 **Example:**
 

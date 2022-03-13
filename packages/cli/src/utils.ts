@@ -11,13 +11,58 @@ import normalizeCompilation from '@statoscope/webpack-model/dist/normalizeCompil
 import { Webpack } from '@statoscope/webpack-model/webpack';
 import { Report } from '@statoscope/types/types/custom-report';
 import { Config } from '@statoscope/types/types/config';
-import { mergeReports } from './commands/injectReport';
+import Generator, {
+  Payload,
+} from '@statoscope/stats-extension-custom-reports/dist/generator';
 import Compilation = Webpack.Compilation;
 
 export type TransformFrom = {
   name: string;
   as: string;
 };
+
+export function mergeCustomReportsIntoCompilation(
+  parsed: Webpack.Compilation,
+  reports: unknown[]
+): Webpack.Compilation {
+  parsed.__statoscope ??= {};
+  parsed.__statoscope.extensions ??= [];
+  const customReportsExtensionIx = parsed.__statoscope.extensions.findIndex(
+    (ext) => ext.descriptor.name === '@statoscope/stats-extension-custom-reports'
+  );
+  const customReportsExtension =
+    customReportsExtensionIx > -1
+      ? parsed.__statoscope.extensions[customReportsExtensionIx]
+      : null;
+  const customReportGenerator = new Generator();
+  if (customReportsExtension?.payload) {
+    const payload = customReportsExtension.payload as Payload;
+
+    for (const compilationItem of payload.compilations) {
+      for (const report of compilationItem.reports) {
+        customReportGenerator.handleReport(report);
+      }
+    }
+  }
+
+  for (const report of reports) {
+    if (isCustomReport(report)) {
+      customReportGenerator.handleReport(report);
+    } else {
+      throw new Error(
+        `Can't add a report. A valid report should contain id and view fields`
+      );
+    }
+  }
+
+  if (customReportsExtension) {
+    parsed.__statoscope.extensions.splice(customReportsExtensionIx, 1);
+  }
+
+  parsed.__statoscope.extensions.push(customReportGenerator.get());
+
+  return parsed;
+}
 
 export async function transform(
   from: Array<TransformFrom | string>,
@@ -32,7 +77,7 @@ export async function transform(
     let parsed: Compilation = await parseChunked(fs.createReadStream(filename));
 
     if (customReports.length) {
-      parsed = mergeReports(customReports, parsed);
+      parsed = mergeCustomReportsIntoCompilation(parsed, customReports);
     }
 
     normalizeCompilation(parsed);
@@ -89,14 +134,22 @@ export function combineCustomReports(
   const reports: Report<unknown, unknown>[] = [];
 
   if (reportArg) {
-    const reportsFromFiles: unknown[] = reportArg.map((filepath) =>
-      JSON.parse(fs.readFileSync(filepath, 'utf-8'))
-    );
+    let malformedReport = false;
 
-    for (const report in reportsFromFiles) {
+    const reportsFromFiles: unknown[] = reportArg
+      .map((filepath) => JSON.parse(fs.readFileSync(filepath, 'utf-8')))
+      .flat();
+
+    for (const report of reportsFromFiles) {
       if (isCustomReport(report)) {
         reports.push(report);
+      } else {
+        malformedReport = true;
       }
+    }
+
+    if (malformedReport) {
+      console.warn('One or more custom reports from files passed are malformed');
     }
   }
 
