@@ -26,7 +26,7 @@ const customReportBSrc = path.resolve(
   '../../../../test/fixtures/cli/injectReport/reports/single-report-b.json'
 );
 
-const customReportConfigSrc = path.resolve(
+const customReportsConfigSrc = path.resolve(
   __dirname,
   '../../../../test/fixtures/cli/generate/custom-reports-config.js'
 );
@@ -161,7 +161,7 @@ describe('generate CLI command', () => {
     expect(fs.readFileSync(outputPath, 'utf8')).toMatchSnapshot();
   });
 
-  test('sing  le input with multiple custom report json files', async () => {
+  test('single input with multiple custom report json files', async () => {
     const outputPath = path.join(outputDir, `with-custom-reports-${dateSuffix}.html`);
 
     let y = yargs([
@@ -197,7 +197,7 @@ describe('generate CLI command', () => {
       '--input',
       inputSrc,
       '--config',
-      customReportConfigSrc,
+      customReportsConfigSrc,
       '--output',
       outputPath,
     ]);

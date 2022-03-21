@@ -16,6 +16,9 @@ export type Config = {
     reporters?: ReporterConfig[];
     rules: Record<string, RuleDesc<unknown>>;
   };
+  generate?: {
+    reports?: Report<unknown, unknown>;
+  },
 };
 ```
 

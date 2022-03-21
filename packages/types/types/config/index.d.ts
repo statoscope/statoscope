@@ -4,5 +4,7 @@ import { Report } from '../custom-report';
 export type Config = {
   silent?: boolean;
   validate?: ValidatorConfig;
-  reports?: Report<unknown, unknown>[];
+  generate?: {
+    reports?: Report<unknown, unknown>[];
+  };
 };

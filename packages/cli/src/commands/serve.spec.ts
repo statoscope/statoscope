@@ -2,6 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import http from 'http';
 import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
+import yargs from 'yargs';
+import generate from './generate';
 
 const rootPath = path.resolve(__dirname, '../../../../');
 const inputASrc = path.resolve(
@@ -28,59 +30,41 @@ const customReportBSrc = path.resolve(
   __dirname,
   '../../../../test/fixtures/cli/injectReport/reports/single-report-b.json'
 );
-
-const customReportConfigSrc = path.resolve(
+const customReportsConfigSrc = path.resolve(
   __dirname,
   '../../../../test/fixtures/cli/generate/custom-reports-config.js'
 );
 
 const outputDir = path.join(rootPath, 'test/temp', path.relative(rootPath, __filename));
-const webpackUIFixture = path.join(rootPath, 'test/fixtures/report-writer/injectable.js');
-const statsFixture = path.join(rootPath, 'test/fixtures/report-writer/source.json');
 
-const mockedContent = new Map([
-  [require.resolve('@statoscope/webpack-ui'), webpackUIFixture],
-  [require.resolve('../../../../test/bundles/v5/simple/stats-prod.json'), statsFixture],
-]);
+const dateSuffix = Date.now();
 
 fs.mkdirSync(outputDir, { recursive: true });
 
-jest.mock('fs', () => {
-  const ofs = jest.requireActual('fs');
-  return {
-    ...ofs,
-    readFile(name: string, ...args: unknown[]): unknown {
-      const mocked = mockedContent.get(path.resolve(name));
+/**
+ * Run generate CLI command and return the output file as a string.
+ * Assume that command line param names are the same between `generate` and `serve` commands.
+ */
+async function runGenerateCli(args: string[]): Promise<string> {
+  const outputPath = path.join(outputDir, `single-input-${dateSuffix}.html`);
 
-      if (mocked) {
-        name = mocked;
-      }
+  let y = yargs(['generate', ...args, '--output', outputPath]);
 
-      return ofs.readFile(name, ...args);
-    },
-    readFileSync(name: string, ...args: unknown[]): unknown {
-      const mocked = mockedContent.get(path.resolve(name));
+  y = generate(y);
 
-      if (mocked) {
-        name = mocked;
-      }
+  y.fail((_, error) => {
+    console.error(error);
+  });
 
-      return ofs.readFileSync(name, ...args);
-    },
-    createReadStream(name: string, ...args: unknown[]): unknown {
-      const mocked = mockedContent.get(path.resolve(name));
+  await y.argv;
 
-      if (mocked) {
-        name = mocked;
-      }
-
-      return ofs.createReadStream(name, ...args);
-    },
-  };
-});
+  return fs.readFileSync(outputPath, 'utf8');
+}
 
 /**
  * Spawn a child process, run serve command and resolve with the process once server is up.
+ * Have to use child processes cause otherwise there is no way to stop running webserver without
+ * terminating the main test process itself.
  */
 async function runCliServeAsChildProcess(
   args: string[] = []
@@ -121,6 +105,9 @@ async function runCliServeAsChildProcess(
   return promise;
 }
 
+/**
+ * Load the html from url provided and return it as a string.
+ */
 async function loadHtmlByUrl(url: string): Promise<string> {
   let resolve: (value: string) => void;
   let reject: (value: string) => void;
@@ -161,76 +148,48 @@ describe('serve CLI command', () => {
       return;
     }
 
+    // terminates the child including descendant processes
     // @ts-ignore
     process.kill(-serveProcess.pid);
   });
 
-  test('single input', async () => {
-    serveProcess = await runCliServeAsChildProcess(['--input', inputASrc]);
+  const tests = [
+    {
+      name: 'single input',
+      args: ['--input', inputASrc],
+    },
+    {
+      name: 'multiple inputs',
+      args: ['--input', inputASrc, inputBSrc],
+    },
+    {
+      name: 'single input with a reference',
+      args: ['--input', inputASrc, '--reference', inputBSrc],
+    },
+    {
+      name: 'single input with single custom report in json file',
+      args: ['--input', inputASrc, '--custom-report', customReportMultipleSrc],
+    },
+    {
+      name: 'single input with multiple custom report json files',
+      args: ['--input', inputASrc, '--custom-report', customReportASrc, customReportBSrc],
+    },
+    {
+      name: 'single input with custom reports via config file',
+      args: ['--input', inputASrc, '--config', customReportsConfigSrc],
+    },
+  ];
 
-    const html = await loadHtmlByUrl(reportUrl);
+  test.each(tests)(`$name`, async ({ args }) => {
+    serveProcess = await runCliServeAsChildProcess(args);
 
-    expect(html).toMatchSnapshot();
-  });
+    const promises = [];
 
-  test('multiple inputs', async () => {
-    serveProcess = await runCliServeAsChildProcess(['--input', inputASrc, inputBSrc]);
+    // run these in parallel
+    promises.push(loadHtmlByUrl(reportUrl), runGenerateCli(args));
 
-    const html = await loadHtmlByUrl(reportUrl);
+    const [fromServer, fromFile] = await Promise.all(promises);
 
-    expect(html).toMatchSnapshot();
-  });
-
-  test('single input with a reference', async () => {
-    serveProcess = await runCliServeAsChildProcess([
-      '--input',
-      inputASrc,
-      '--reference',
-      inputBSrc,
-    ]);
-
-    const html = await loadHtmlByUrl(reportUrl);
-
-    expect(html).toMatchSnapshot();
-  });
-
-  test('single input with single custom report in json file', async () => {
-    serveProcess = await runCliServeAsChildProcess([
-      '--input',
-      inputASrc,
-      '--custom-report',
-      customReportMultipleSrc,
-    ]);
-
-    const html = await loadHtmlByUrl(reportUrl);
-
-    expect(html).toMatchSnapshot();
-  });
-
-  test('single input with multiple custom report json files', async () => {
-    serveProcess = await runCliServeAsChildProcess([
-      '--input',
-      inputASrc,
-      '--custom-report',
-      customReportASrc,
-      customReportBSrc,
-    ]);
-
-    const html = await loadHtmlByUrl(reportUrl);
-
-    expect(html).toMatchSnapshot();
-  });
-
-  test('single input with custom reports via config file', async () => {
-    serveProcess = await runCliServeAsChildProcess([
-      '--input',
-      inputASrc,
-      '--config',
-      customReportConfigSrc,
-    ]);
-
-    const html = await loadHtmlByUrl(reportUrl);
-
-    expect(html).toMatchSnapshot();
+    expect(fromServer).toMatch(fromFile);
   });
 });

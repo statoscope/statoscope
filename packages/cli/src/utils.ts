@@ -153,8 +153,8 @@ export function combineCustomReports(
     }
   }
 
-  if (config.reports) {
-    reports.push(...config.reports);
+  if (config.generate?.reports) {
+    reports.push(...config.generate.reports);
   }
 
   return reports;
