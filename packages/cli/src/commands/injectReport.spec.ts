@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { mergeReports } from './injectReport';
+import { mergeCustomReportsIntoCompilation } from '../utils';
 
 const rootPath = path.resolve(__dirname, '../../../../');
 const outputDir = path.join(
@@ -33,7 +33,7 @@ jest.mock('@statoscope/stats-extension-custom-reports/package.json', () => ({
 
 const reports = [
   require.resolve(
-    '../../../../test/fixtures/cli/injectReport/reports/single-report.json'
+    '../../../../test/fixtures/cli/injectReport/reports/single-report-a.json'
   ),
   require.resolve(
     '../../../../test/fixtures/cli/injectReport/reports/multiple-reports.json'
@@ -45,6 +45,8 @@ test.each(stats)('%s,', async (filename) => {
     const parsed = JSON.parse(fs.readFileSync(path.join(statsDir, filename), 'utf-8'));
     const parsedReport = JSON.parse(fs.readFileSync(report, 'utf-8'));
 
-    expect(await mergeReports([parsedReport].flat(), parsed)).toMatchSnapshot();
+    expect(
+      await mergeCustomReportsIntoCompilation(parsed, [parsedReport].flat())
+    ).toMatchSnapshot();
   }
 });

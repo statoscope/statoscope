@@ -2,7 +2,13 @@ import fs from 'fs';
 import http from 'http';
 import { Argv } from 'yargs';
 import open from 'open';
-import { createDestStatReportPath, transform, TransformFrom } from '../utils';
+import { requireConfig } from '@statoscope/config';
+import {
+  combineCustomReports,
+  createDestStatReportPath,
+  transform,
+  TransformFrom,
+} from '../utils';
 
 export default function (yargs: Argv): Argv {
   return yargs.command(
@@ -24,6 +30,11 @@ Multiple stats: serve --input path/to/stats-1.json path/to/stats-2.json
           alias: 'r',
           type: 'string',
         })
+        .option('config', {
+          describe: 'path to statoscope config',
+          alias: 'c',
+          type: 'string',
+        })
         .option('port', {
           alias: 'p',
           default: '8080',
@@ -36,7 +47,11 @@ Multiple stats: serve --input path/to/stats-1.json path/to/stats-2.json
           describe: 'open browser after start',
           alias: 'o',
         })
-        .array('input')
+        .option('custom-report', {
+          describe: 'path to json-file(s) with custom user report(s)',
+          type: 'string',
+        })
+        .array(['input', 'custom-report'])
         .demandOption('input');
     },
     async (argv) => {
@@ -55,8 +70,13 @@ Multiple stats: serve --input path/to/stats-1.json path/to/stats-2.json
         files.push(...argv.input);
       }
 
-      const reportPath = await transform(files, destReportPath);
-      console.log(`Statoscope report generated`);
+      const { config } = requireConfig(argv.config);
+
+      const customReports = combineCustomReports(config, argv['custom-report']);
+
+      const reportPath = await transform(files, destReportPath, customReports);
+
+      console.log(`Statoscope report generated to ${destReportPath}`);
 
       http
         .createServer((req, res) => {
