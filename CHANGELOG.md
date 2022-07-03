@@ -4,6 +4,8 @@
 
 ### Features
 
+- `[cli]` - add `--custom-report` and `--config` args for `generate` and `serve` commands (#157 by @amalitsky)
+- `[config]` - add `generate.reports` field (#157 by @amalitsky)
 - `[webpack-model]` - added helpers:
   - `asset_getSize(asset: NormalizedAsset, hash: string, useCompressed: boolean): Size`
   - `assets_getTotalSize(assets: NormalizedAsset[], hash: string, useCompressed: boolean): Size`

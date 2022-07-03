@@ -14,6 +14,7 @@ export function requireConfig(filename = 'statoscope.config.js'): RequiredConfig
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     config = require(configPath) as Config;
   } catch (e) {
+    console.error(`Error in ${filename}`, e);
     config = {};
   }
 
