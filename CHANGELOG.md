@@ -20,6 +20,10 @@
   - `resolveCompilationByModule(module: NormalizedModule, filename: string): NormalizedCompilation | null`
   - `resolveCompilationByEntrypoint(entry: NormalizedEntrypointItem, filename: string): NormalizedCompilation | null`
 
+### Fixes
+
+- `[webpack-model]` - fix handling chunks with no files (#158 by @amalitsky)
+
 ## 5.20.1 (31 January 2022)
 
 ### Fixes

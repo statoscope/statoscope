@@ -427,6 +427,7 @@ function prepareChunk(chunk: Webpack.Chunk | null, context: ProcessingContext): 
 
   if (chunk.files) {
     normalizedChunk.files = chunk.files
+      .filter(Boolean) // to skip null files, issue #158
       .map((f) => context.rawIndexes.assets.get(typeof f === 'string' ? f : f.name))
       .filter(Boolean) as NormalizedAsset[];
   } else {
