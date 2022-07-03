@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/stats-validator-plugin-webpack",
-  "version": "5.21.0",
+  "version": "5.22.0",
   "description": "Plugin for @statoscope/stats-validator to validate webpack stats",
   "main": "./dist/index.js",
   "scripts": {
@@ -18,11 +18,11 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "@statoscope/helpers": "5.21.0",
-    "@statoscope/stats-extension-compressed": "5.21.0",
-    "@statoscope/stats-validator": "5.21.0",
-    "@statoscope/types": "5.21.0",
-    "@statoscope/webpack-model": "5.21.0",
+    "@statoscope/helpers": "5.22.0",
+    "@statoscope/stats-extension-compressed": "5.22.0",
+    "@statoscope/stats-validator": "5.22.0",
+    "@statoscope/types": "5.22.0",
+    "@statoscope/webpack-model": "5.22.0",
     "chalk": "^4.1.2",
     "semver": "^7.3.7"
   },

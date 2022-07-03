@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/config",
-  "version": "5.21.0",
+  "version": "5.22.0",
   "description": "Statoscope config utils",
   "main": "./dist/index.js",
   "publishConfig": {
@@ -18,7 +18,7 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "@statoscope/types": "5.21.0",
+    "@statoscope/types": "5.22.0",
     "chalk": "^4.1.2"
   }
 }
