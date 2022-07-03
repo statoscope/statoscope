@@ -19,9 +19,9 @@
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
     "@types/archy": "^0.0.32",
-    "@types/semver": "^7.3.6",
+    "@types/semver": "^7.3.10",
     "archy": "~1.0.0",
-    "jora": "^1.0.0-beta.5",
-    "semver": "^7.3.5"
+    "jora": "^1.0.0-beta.6",
+    "semver": "^7.3.7"
   }
 }

@@ -71,6 +71,72 @@ Object {
       undefined,
     ],
   ],
+  "contexts": Array [
+    Object {
+      "compressor": [MockFunction] {
+        "calls": Array [
+          Array [
+            "foo-foo-content",
+            "foo-resource",
+            undefined,
+          ],
+          Array [
+            "foo-bar-content",
+            "bar-resource",
+            undefined,
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": Object {
+              "compressor": "custom-compressor",
+              "size": 100,
+            },
+          },
+          Object {
+            "type": "return",
+            "value": Object {
+              "compressor": "custom-compressor",
+              "size": 100,
+            },
+          },
+        ],
+      },
+    },
+    Object {
+      "compressor": [MockFunction] {
+        "calls": Array [
+          Array [
+            "foo-foo-content",
+            "foo-resource",
+            undefined,
+          ],
+          Array [
+            "foo-bar-content",
+            "bar-resource",
+            undefined,
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": Object {
+              "compressor": "custom-compressor",
+              "size": 100,
+            },
+          },
+          Object {
+            "type": "return",
+            "value": Object {
+              "compressor": "custom-compressor",
+              "size": 100,
+            },
+          },
+        ],
+      },
+    },
+  ],
   "instances": Array [
     Object {
       "compressor": [MockFunction] {
@@ -173,6 +239,31 @@ Object {
       "foo-resource",
       undefined,
     ],
+  ],
+  "contexts": Array [
+    Object {
+      "compressor": [MockFunction] {
+        "calls": Array [
+          Array [
+            "bar-foo-content",
+            "foo-resource",
+            undefined,
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": Object {
+              "compressor": Object {
+                "name": "custom-compressor",
+                "version": "7.7.7",
+              },
+              "size": 100,
+            },
+          },
+        ],
+      },
+    },
   ],
   "instances": Array [
     Object {
