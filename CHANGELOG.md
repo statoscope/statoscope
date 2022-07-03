@@ -1,5 +1,28 @@
 # Changelog
 
+## Next
+
+### Features
+
+- `[webpack-model]` - added helpers:
+  - `asset_getSize(asset: NormalizedAsset, hash: string, useCompressed: boolean): Size`
+  - `assets_getTotalSize(assets: NormalizedAsset[], hash: string, useCompressed: boolean): Size`
+  - `entrypoint_getChunks(entry: NormalizedEntrypointItem): NormalizedChunk[]`
+  - `entrypoint_getInitialChunks(entry: NormalizedEntrypointItem): NormalizedChunk[]`
+  - `entrypoint_getInitialSize(entry: NormalizedEntrypointItem, hash: string, useCompressed: boolean): Size`
+  - `entrypoint_getAsyncChunks(entry: NormalizedEntrypointItem): NormalizedChunk[]`
+  - `entrypoint_getAsyncSize(entry: NormalizedEntrypointItem, hash: string, useCompressed: boolean): Size`
+  - `entrypoint_getAssets(entry: NormalizedEntrypointItem): NormalizedAsset[]`
+  - `entrypoint_getInitialAssets(entry: NormalizedEntrypointItem): NormalizedAsset[]`
+  - `entrypoint_getAsyncAssets(entry: NormalizedEntrypointItem): NormalizedAsset[]`
+  - `resolveCompilationByAsset(asset: NormalizedAsset, filename: string): NormalizedCompilation | null`
+  - `resolveCompilationByChunk(chunk: NormalizedChunk, filename: string): NormalizedCompilation | null`
+  - `resolveCompilationByModule(module: NormalizedModule, filename: string): NormalizedCompilation | null`
+  - `resolveCompilationByEntrypoint(entry: NormalizedEntrypointItem, filename: string): NormalizedCompilation | null`
+
+### Fixes
+
+- `[webpack-model]` - fix handling chunks with no files (#158 by @amalitsky)
 
 ## 5.20.1 (31 January 2022)
 

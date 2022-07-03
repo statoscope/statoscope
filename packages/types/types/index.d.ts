@@ -76,6 +76,10 @@ export type ObjectMarkerOptions<TValue> = {
 
 export type MarkObject<TValue> = (value: TValue) => void;
 
+export type HelpersContext = {
+  query: (request: string, input?: unknown, context?: unknown) => unknown;
+};
+
 export class Widget<TRawData, TData, TContext> {
   dom: Record<string, HTMLElement>;
   view: {
@@ -126,6 +130,8 @@ export class Widget<TRawData, TData, TContext> {
     name: string,
     options: ObjectMarkerOptions<TValue>
   ): MarkObject<TValue>;
+
+  query: HelpersContext['query'];
 
   nav: {
     prepend(config: Omit<ViewConfigData, 'view'>): void;

@@ -91,28 +91,27 @@ export default function (discovery: StatoscopeWidget): void {
               view: 'block',
               data: `
               $statA: $;
+              $hash: $statA.compilation.hash;
+              $entrypoints: $statA.compilation.entrypoints;
             
-              $allChunks: $statA.compilation.entrypoints.data.chunks + $statA.compilation.entrypoints.data.chunks..children;
-              $allAssetsSize: $allChunks.files.[].[not name.shouldExcludeResource()].(getAssetSize($statA.compilation.hash)).reduce(=> size + $$, 0);
-
-              $initialChunks: $allChunks.[initial];
-              $initialAssetsSizes: $initialChunks.files.[].[not name.shouldExcludeResource()].(getAssetSize($statA.compilation.hash));
-              $initialAssetsSize: $initialAssetsSizes.reduce(=> size + $$, 0);
-
-              $initialAssetsDownloadTime: $initialAssetsSizes
+              $totalSize: $entrypoints.data.assets.assets_getTotalSize($hash, settingShowCompressed()).size;
+              $initialAssetSizes: $entrypoints.(entrypoint_getInitialAssets()).(asset_getSize($hash, settingShowCompressed()));
+              $initialSize: $initialAssetSizes.reduce(=> size + $$, 0);
+              
+              $initialAssetsDownloadTime: $initialAssetSizes
                 .reduce(=> settingAssetsInjectType() = 'sync' ? (size + $$) : (size > $$ ? size : $$), 0)
                 .getDownloadTime();
               
               [
                 {
-                  value: $allAssetsSize.formatSize(),
+                  value: $totalSize.formatSize(),
                   label: "Total size",
-                  visible: $statA.compilation.chunks.files
+                  visible: $statA.compilation.assets
                 },
                 {
-                  value: $initialAssetsSize.formatSize(),
+                  value: $initialSize.formatSize(),
                   label: 'Initial size',
-                  visible: $statA.compilation.chunks.files
+                  visible: $statA.compilation.assets
                 },
                 {
                   value: $initialAssetsDownloadTime.formatDuration(),

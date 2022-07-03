@@ -1,3 +1,4 @@
+import { prepareWithJora as prepareWithJoraOriginal } from '@statoscope/helpers/dist/jora';
 import stats from '../../../test/bundles/v5/simple/stats-prod.json';
 import { serializeSolutionPath } from '../../../test/helpers';
 import { NormalizedAsset, NormalizedChunk } from '../types';
@@ -6,7 +7,15 @@ import makeHelpers, { ResolvedStats } from './jora-helpers';
 
 const normalized = normalize({ name: 'stats.js', data: stats });
 const firstFile = normalized.files[0];
-const helpers = makeHelpers(normalized);
+let helpers: ReturnType<typeof makeHelpers>;
+const prepared = prepareWithJoraOriginal(normalized.files, {
+  helpers: {
+    shouldExcludeResource: () => false,
+    ...(helpers = makeHelpers(normalized, {
+      query: (request, input, context) => prepared.query(request, input, context),
+    })),
+  },
+});
 const firstCompilation = firstFile.compilations[0];
 const hash = firstCompilation.hash;
 
@@ -321,5 +330,140 @@ describe('customReports', () => {
     expect(
       helpers.customReports_getItem('top-20-biggest-modules', firstFile.name)
     ).toMatchSnapshot();
+  });
+});
+
+describe('resolverCompilationBy', () => {
+  test('resolveCompilationByAsset', () => {
+    expect(
+      helpers.resolveCompilationByAsset(firstCompilation.assets[0], firstFile.name)
+    ).toBe(firstCompilation);
+  });
+  test('resolveCompilationByChunk', () => {
+    expect(
+      helpers.resolveCompilationByChunk(firstCompilation.chunks[0], firstFile.name)
+    ).toBe(firstCompilation);
+  });
+  test('resolveCompilationByModule', () => {
+    expect(
+      helpers.resolveCompilationByModule(firstCompilation.modules[0], firstFile.name)
+    ).toBe(firstCompilation);
+  });
+  test('resolveCompilationByEntrypoint', () => {
+    expect(
+      helpers.resolveCompilationByEntrypoint(
+        firstCompilation.entrypoints[0],
+        firstFile.name
+      )
+    ).toBe(firstCompilation);
+  });
+});
+
+describe('assets', () => {
+  test('asset_getSize', () => {
+    expect(helpers.asset_getSize(firstCompilation.assets[0], hash, false))
+      .toMatchInlineSnapshot(`
+      Object {
+        "size": 12277,
+      }
+    `);
+    expect(helpers.asset_getSize(firstCompilation.assets[0], hash, true))
+      .toMatchInlineSnapshot(`
+      Object {
+        "compressor": "gzip",
+        "meta": Object {
+          "level": 6,
+        },
+        "size": 8615,
+      }
+    `);
+  });
+  test('assets_getTotalSize', () => {
+    expect(helpers.assets_getTotalSize(firstCompilation.assets, hash, false))
+      .toMatchInlineSnapshot(`
+      Object {
+        "compressor": undefined,
+        "size": 13233,
+      }
+    `);
+    expect(helpers.assets_getTotalSize(firstCompilation.assets, hash, true))
+      .toMatchInlineSnapshot(`
+      Object {
+        "compressor": "gzip",
+        "size": 9231,
+      }
+    `);
+  });
+});
+
+describe('entrypoint', () => {
+  test('entrypoint_getChunks', () => {
+    expect(
+      helpers.entrypoint_getChunks(firstCompilation.entrypoints[0]).map((c) => c.id)
+    ).toEqual([255]);
+  });
+  test('entrypoint_getInitialChunks', () => {
+    expect(
+      helpers
+        .entrypoint_getInitialChunks(firstCompilation.entrypoints[0])
+        .map((c) => c.id)
+    ).toEqual([255]);
+  });
+  test('entrypoint_getInitialSize', () => {
+    expect(
+      helpers.entrypoint_getInitialSize(firstCompilation.entrypoints[0], hash, false)
+    ).toMatchInlineSnapshot(`
+      Object {
+        "size": 799,
+      }
+    `);
+    expect(helpers.entrypoint_getInitialSize(firstCompilation.entrypoints[0], hash, true))
+      .toMatchInlineSnapshot(`
+      Object {
+        "compressor": "gzip",
+        "meta": Object {
+          "level": 6,
+        },
+        "size": 449,
+      }
+    `);
+  });
+  test('entrypoint_getAsyncChunks', () => {
+    expect(
+      helpers.entrypoint_getAsyncChunks(firstCompilation.entrypoints[0]).map((c) => c.id)
+    ).toEqual([]);
+  });
+  test('entrypoint_getAsyncSize', () => {
+    expect(helpers.entrypoint_getAsyncSize(firstCompilation.entrypoints[0], hash, false))
+      .toMatchInlineSnapshot(`
+      Object {
+        "size": 0,
+      }
+    `);
+    expect(helpers.entrypoint_getAsyncSize(firstCompilation.entrypoints[0], hash, true))
+      .toMatchInlineSnapshot(`
+      Object {
+        "size": 0,
+      }
+    `);
+  });
+  test('entrypoint_getAssets', () => {
+    expect(
+      helpers.entrypoint_getAssets(firstCompilation.entrypoints[0]).map((c) => c.name)
+    ).toEqual(['one.js']);
+  });
+  test('entrypoint_getInitialAssets', () => {
+    expect(
+      helpers
+        .entrypoint_getInitialAssets(firstCompilation.entrypoints[0])
+        .map((c) => c.name)
+    ).toEqual(['one.js']);
+  });
+  test('entrypoint_getAsyncAssets', () => {
+    expect(
+      helpers
+        .entrypoint_getAsyncAssets(firstCompilation.entrypoints[0])
+        .map((c) => c.name)
+    ).toEqual([]);
   });
 });

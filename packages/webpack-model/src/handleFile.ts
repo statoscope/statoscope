@@ -99,9 +99,20 @@ export function handleRawFile(
     }) ?? [];
   const indexes = {
     extensions: makeIndex((ext) => ext!.data.descriptor.name, extensions),
+    compilation: {
+      byAsset: new WeakMap(),
+      byChunks: new WeakMap(),
+      byModule: new WeakMap(),
+      byEntrypoint: new WeakMap(),
+    },
   };
   const resolvers: HandledStats['resolvers'] = {
     resolveExtension: (id) => indexes.extensions.get(id),
+    resolveCompilationByAsset: (asset) => indexes.compilation.byAsset.get(asset),
+    resolveCompilationByChunk: (chunk) => indexes.compilation.byChunks.get(chunk),
+    resolveCompilationByModule: (module) => indexes.compilation.byModule.get(module),
+    resolveCompilationByEntrypoint: (entrypoint) =>
+      indexes.compilation.byEntrypoint.get(entrypoint),
   };
   const compilations = handleCompilations(rawStatsFileDescriptor, file, {
     indexes,

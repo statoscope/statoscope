@@ -218,15 +218,19 @@ function handleCompilation(
 
   for (const module of processingContext.indexes.modules.getAll()) {
     normalized.modules.push(module);
+    processingContext.fileContext.indexes.compilation.byModule.set(module, normalized);
   }
   for (const chunk of processingContext.indexes.chunks.getAll()) {
     normalized.chunks.push(chunk);
+    processingContext.fileContext.indexes.compilation.byChunks.set(chunk, normalized);
   }
   for (const asset of processingContext.indexes.assets.getAll()) {
     normalized.assets.push(asset);
+    processingContext.fileContext.indexes.compilation.byAsset.set(asset, normalized);
   }
   for (const entry of processingContext.indexes.entrypoints.getAll()) {
     normalized.entrypoints.push(entry);
+    processingContext.fileContext.indexes.compilation.byEntrypoint.set(entry, normalized);
   }
 
   const graph = buildGraph(normalized);

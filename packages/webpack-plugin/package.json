@@ -18,7 +18,7 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "@discoveryjs/json-ext": "^0.5.5",
+    "@discoveryjs/json-ext": "^0.5.7",
     "@statoscope/report-writer": "5.20.0",
     "@statoscope/stats": "5.14.1",
     "@statoscope/stats-extension-compressed": "5.19.0",
@@ -28,10 +28,10 @@
     "@statoscope/webpack-stats-extension-compressed": "5.20.1",
     "@statoscope/webpack-stats-extension-package-info": "5.20.1",
     "@statoscope/webpack-ui": "5.20.1",
-    "open": "^8.2.1"
+    "open": "^8.4.0"
   },
   "devDependencies": {
-    "@types/node": "^12.20.15",
+    "@types/node": "^12.20.55",
     "@types/webpack": "^5.0.0"
   },
   "peerDependencies": {

@@ -7,7 +7,7 @@ import { API as ExtensionValidationResultAPI } from '@statoscope/stats-extension
 import { API as ExtensionCustomReportsAPI } from '@statoscope/stats-extension-custom-reports/dist/api';
 import Graph, { PathSolution } from '@statoscope/helpers/dist/graph';
 import type { Item } from '@statoscope/stats-extension-stats-validation-result/dist/generator';
-import { RelationItem } from '@statoscope/types/types';
+import { HelpersContext, RelationItem } from '@statoscope/types/types';
 import { RuleDescriptor } from '@statoscope/types/types/validation/api';
 import { Report } from '@statoscope/types/types/custom-report';
 import { Webpack } from '../webpack';
@@ -45,7 +45,7 @@ export type ResolvedRelatedItem =
   | { type: 'package-instance'; item: NodeModuleInstance | null };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
-export default function (normalizeResult: NormalizeResult) {
+export default function (normalizeResult: NormalizeResult, context: HelpersContext) {
   const compilations = normalizeResult.compilations;
   const resolveCompilation = makeEntityResolver(compilations, (item) => item?.data?.hash);
   const resolveFile = makeEntityResolver(
@@ -115,6 +115,41 @@ export default function (normalizeResult: NormalizeResult) {
       return files
         .map((f) => resolverSize?.(hash, f.name) ?? null)
         .reduce((sum, file) => sum + (file?.size ?? 0), 0);
+    },
+    resolveCompilationByAsset(
+      asset: NormalizedAsset,
+      fileName: string
+    ): NormalizedCompilation | null {
+      return (
+        normalizeResult.resolvers.get(fileName)?.resolveCompilationByAsset(asset) ?? null
+      );
+    },
+    resolveCompilationByChunk(
+      chunk: NormalizedChunk,
+      fileName: string
+    ): NormalizedCompilation | null {
+      return (
+        normalizeResult.resolvers.get(fileName)?.resolveCompilationByChunk(chunk) ?? null
+      );
+    },
+    resolveCompilationByModule(
+      module: NormalizedModule,
+      fileName: string
+    ): NormalizedCompilation | null {
+      return (
+        normalizeResult.resolvers.get(fileName)?.resolveCompilationByModule(module) ??
+        null
+      );
+    },
+    resolveCompilationByEntrypoint(
+      entrypoint: NormalizedEntrypointItem,
+      fileName: string
+    ): NormalizedCompilation | null {
+      return (
+        normalizeResult.resolvers
+          .get(fileName)
+          ?.resolveCompilationByEntrypoint(entrypoint) ?? null
+      );
     },
     resolveChunk(id: ChunkID, compilationHash: string): NormalizedChunk | null {
       return resolveCompilation(compilationHash)?.resolvers.resolveChunk(id) || null;
@@ -481,6 +516,90 @@ export default function (normalizeResult: NormalizeResult) {
       const api = ext?.api as ExtensionCustomReportsAPI | undefined;
 
       return api?.getById(id) ?? null;
+    },
+
+    asset_getSize(
+      asset: NormalizedAsset,
+      hash: string,
+      useCompressedSize: boolean
+    ): Size {
+      return this.getAssetSize(asset, hash, useCompressedSize);
+    },
+    assets_getTotalSize(
+      assets: NormalizedAsset[],
+      hash: string,
+      useCompressedSize: boolean
+    ): Size {
+      return context.query(
+        `
+        $hash: #.hash;
+        $useCompressedSize: #.useCompressedSize;
+        .[not name.shouldExcludeResource()].[]
+        .(asset_getSize($hash, $useCompressedSize)) |
+        $ ? .reduce(=> {
+          $current: $;
+          $all: $$;
+          size: $all.size + $current.size,
+          compressor: $all.compressor = $current.compressor ? $all.compressor : 'multiple'
+        }) : {size: 0}`,
+        assets,
+        { useCompressedSize, hash }
+      ) as Size;
+    },
+
+    entrypoint_getChunks(entrypoint: NormalizedEntrypointItem): NormalizedChunk[] {
+      return context.query(
+        `data.chunks + data.chunks..children`,
+        entrypoint
+      ) as NormalizedChunk[];
+    },
+    entrypoint_getInitialChunks(entrypoint: NormalizedEntrypointItem): NormalizedChunk[] {
+      return this.entrypoint_getChunks(entrypoint).filter(
+        (chunk) => chunk.initial
+      ) as NormalizedChunk[];
+    },
+    entrypoint_getInitialSize(
+      entrypoint: NormalizedEntrypointItem,
+      hash: string,
+      useCompressedSize: boolean
+    ): Size {
+      return this.assets_getTotalSize(
+        this.entrypoint_getInitialAssets(entrypoint),
+        hash,
+        useCompressedSize
+      );
+    },
+    entrypoint_getAsyncChunks(entrypoint: NormalizedEntrypointItem): NormalizedChunk[] {
+      return this.entrypoint_getChunks(entrypoint).filter((chunk) => !chunk.initial);
+    },
+    entrypoint_getAsyncSize(
+      entrypoint: NormalizedEntrypointItem,
+      hash: string,
+      useCompressedSize: boolean
+    ): Size {
+      return this.assets_getTotalSize(
+        this.entrypoint_getAsyncAssets(entrypoint),
+        hash,
+        useCompressedSize
+      );
+    },
+    entrypoint_getAssets(entrypoint: NormalizedEntrypointItem): NormalizedAsset[] {
+      return context.query(
+        `(data.chunks + data.chunks..children).files`,
+        entrypoint
+      ) as NormalizedAsset[];
+    },
+    entrypoint_getInitialAssets(entrypoint: NormalizedEntrypointItem): NormalizedAsset[] {
+      return context.query(
+        `(data.chunks + data.chunks..children).[initial].files`,
+        entrypoint
+      ) as NormalizedAsset[];
+    },
+    entrypoint_getAsyncAssets(entrypoint: NormalizedEntrypointItem): NormalizedAsset[] {
+      return context.query(
+        `(data.chunks + data.chunks..children).[not initial].files`,
+        entrypoint
+      ) as NormalizedAsset[];
     },
   };
 }
