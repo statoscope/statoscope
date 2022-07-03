@@ -28,9 +28,9 @@ import settings, {
 import { RawData, StatoscopeWidget, TargetData } from '../../../types';
 
 export default (() =>
-  (rawData: RawData, { addQueryHelpers }: StatoscopeWidget): unknown => {
+  (rawData: RawData, { addQueryHelpers, query }: StatoscopeWidget): unknown => {
     const normalizeResult = normalize(rawData);
-    const wpJoraHelpers = webpackJoraHelpers(normalizeResult);
+    const wpJoraHelpers = webpackJoraHelpers(normalizeResult, { query });
     const commonJoraHelpers = joraHelpers();
 
     addQueryHelpers({

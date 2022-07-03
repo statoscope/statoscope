@@ -47,11 +47,11 @@ export default function (discovery: StatoscopeWidget): void {
             view: 'badge',
             data: `$hash:hash or #.params.hash;
           {
-            $sizes: entrypoint.data.chunks.[initial].files.[].[not name.shouldExcludeResource()].(getAssetSize(hash or #.params.hash));
+            $sizeInfo: entrypoint.entrypoint_getInitialSize(hash or #.params.hash, settingShowCompressed());
             prefix: "initial size",
-            text: $sizes.reduce(=> size + $$, 0).formatSize(),
+            text: $sizeInfo.size.formatSize(),
             color: entrypoint.data.isOverSizeLimit and 0.colorFromH(),
-            hint: [entrypoint.data.isOverSizeLimit ? "oversized": undefined, $sizes.[compressor].size() ? 'compressed' : 'uncompressed'].[]
+            hint: [entrypoint.data.isOverSizeLimit ? "oversized": undefined, $sizeInfo.compressor ? 'compressed' : 'uncompressed'].[]
           }`,
             when: !compact && showSize,
           },
@@ -59,7 +59,7 @@ export default function (discovery: StatoscopeWidget): void {
             // todo: interpolate color from gray(0s) to red(1s)
             view: 'download-badge',
             data: `{
-              $sizes: entrypoint.data.chunks.[initial].files.[].[not name.shouldExcludeResource()].(getAssetSize(hash or #.params.hash));
+              $sizes: entrypoint.entrypoint_getInitialAssets().(asset_getSize(hash or #.params.hash, settingShowCompressed()));
               size: $sizes.reduce(=> settingAssetsInjectType() = 'sync' ? (size + $$) : (size > $$ ? size : $$), 0)
             }`,
             when: !compact && showDownloadTime,

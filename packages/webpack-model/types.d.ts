@@ -145,9 +145,21 @@ export type ProcessingContext = {
 export type HandledFileContext = {
   indexes: {
     extensions: IndexAPI<string, NormalizedExtension<unknown, unknown>>;
+    compilation: {
+      byAsset: WeakMap<NormalizedAsset, NormalizedCompilation>;
+      byChunks: WeakMap<NormalizedChunk, NormalizedCompilation>;
+      byModule: WeakMap<NormalizedModule, NormalizedCompilation>;
+      byEntrypoint: WeakMap<NormalizedEntrypointItem, NormalizedCompilation>;
+    };
   };
   resolvers: {
     resolveExtension: ResolverFn<string, NormalizedExtension<unknown, unknown>>;
+    resolveCompilationByAsset(asset: NormalizedAsset): NormalizedCompilation | null;
+    resolveCompilationByChunk(chunk: NormalizedChunk): NormalizedCompilation | null;
+    resolveCompilationByModule(module: NormalizedModule): NormalizedCompilation | null;
+    resolveCompilationByEntrypoint(
+      entrypoint: NormalizedEntrypointItem
+    ): NormalizedCompilation | null;
   };
 };
 
@@ -171,12 +183,8 @@ export type NormalizedFile = {
 export type HandledStats = {
   file: NormalizedFile;
   compilations: HandledCompilation[];
-  indexes: {
-    extensions: IndexAPI<string, NormalizedExtension<unknown, unknown>>;
-  };
-  resolvers: {
-    resolveExtension: ResolverFn<string, NormalizedExtension<unknown, unknown>>;
-  };
+  indexes: HandledFileContext['indexes'];
+  resolvers: HandledFileContext['resolvers'];
 };
 
 export type NormalizeResult = {

@@ -7,7 +7,7 @@ import CompressedExtensionGenerator, {
   Format,
   Payload,
 } from '@statoscope/stats-extension-compressed/dist/generator';
-import { StatsExtensionWebpackAdapter } from '@statoscope/webpack-model/src';
+import { StatsExtensionWebpackAdapter } from '@statoscope/webpack-model/dist';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { author, homepage, name, version, description } = require('../package.json');
 

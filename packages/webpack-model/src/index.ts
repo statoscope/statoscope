@@ -26,7 +26,12 @@ export function prepareWithJora(
   const normalizeResult = normalize(stats);
   const { files, compilations } = normalizeResult;
   const prepared = prepareWithJoraOriginal(files, {
-    helpers: { ...joraHelpers(normalizeResult), ...options.helpers },
+    helpers: {
+      ...joraHelpers(normalizeResult, {
+        query: (request, input, context) => prepared.query(request, input, context),
+      }),
+      ...options.helpers,
+    },
   });
 
   return {
