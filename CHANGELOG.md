@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 5.21.0 (03 July 2022)
 
 ### Features
 
@@ -24,6 +24,7 @@
 
 ### Fixes
 
+- `[webpack-ui]` - fix dashboard data
 - `[webpack-model]` - fix handling chunks with no files (#158 by @amalitsky)
 
 ## 5.20.1 (31 January 2022)
