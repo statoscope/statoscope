@@ -6,7 +6,7 @@
   "command": {
     "version": {
       "exact": true,
-      "noPush": true
+      "push": false
     },
     "publish": {
       "registry": "https://registry.npmjs.org",
