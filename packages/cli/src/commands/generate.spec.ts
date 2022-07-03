@@ -79,6 +79,15 @@ jest.mock('fs', () => {
   };
 });
 
+jest.mock('../../package.json', () => ({
+  ...jest.requireActual('../../package.json'),
+  version: '8.8.8',
+}));
+jest.mock('@statoscope/stats-extension-custom-reports/package.json', () => ({
+  ...jest.requireActual('@statoscope/stats-extension-custom-reports/package.json'),
+  version: '8.8.8',
+}));
+
 const dateSuffix = Date.now();
 
 describe('generate CLI command', () => {
