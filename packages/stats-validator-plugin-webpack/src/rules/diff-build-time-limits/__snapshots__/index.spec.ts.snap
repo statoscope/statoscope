@@ -9,16 +9,16 @@ Array [
         "payload": Object {
           "context": Object {
             "diff": Object {
-              "absolute": 446,
+              "absolute": 337,
               "ok": false,
-              "percent": 144.336569579288,
+              "percent": 80.622009569378,
             },
             "rule": Object {
               "number": 1,
               "type": "absolute",
             },
             "slowestInputCompilation": "13150ee616278b6770b8",
-            "slowestReferenceCompilation": "34ea3837a1050e206fe0",
+            "slowestReferenceCompilation": "c6133ad65823403ee6df",
           },
         },
         "query": "
@@ -33,7 +33,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"13150ee\\": Build time diff is 755 ms (144.34%). It's over the 1 ms limit",
+    "message": "Entry \\"13150ee\\": Build time diff is 755 ms (80.62%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "13150ee616278b6770b8",

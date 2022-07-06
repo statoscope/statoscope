@@ -2,6 +2,7 @@ import md5 from 'md5';
 import { API as ExtensionPackageInfoAPI } from '@statoscope/stats-extension-package-info/dist/api';
 import Graph, { Node } from '@statoscope/helpers/dist/graph';
 import makeIndex from '@statoscope/helpers/dist/indexer';
+import { StatsChunkOrigin } from 'webpack';
 import { Webpack } from '../webpack';
 import {
   HandledCompilation,
@@ -213,6 +214,7 @@ function handleCompilation(
   prepareEntries(compilation, processingContext);
   prepareModules(processingContext);
   prepareChunks(processingContext);
+  linkChunks(processingContext);
   prepareAssets(processingContext);
   extractPackages(normalized as unknown as Compilation, processingContext);
 
@@ -440,6 +442,7 @@ function prepareChunk(chunk: Webpack.Chunk | null, context: ProcessingContext): 
       (<NormalizedChunk>chunk).isRuntime = true;
     }
   }
+
   if (chunk.children) {
     normalizedChunk.children = chunk.children
       .map((c) => resolveRawChunk(c, context))
@@ -479,12 +482,16 @@ function prepareChunk(chunk: Webpack.Chunk | null, context: ProcessingContext): 
   if (chunk.origins) {
     const origins = [...collectRawReasonsFromArray(chunk.origins).values()];
 
-    origins.forEach(
-      (o) =>
-        ((o as NormalizedReason).resolvedModule = o.moduleIdentifier
-          ? (context.rawIndexes.modules.get(o.moduleIdentifier) as NormalizedModule)
-          : null)
-    );
+    origins.forEach((o) => {
+      if (!o.moduleIdentifier) {
+        (o as NormalizedReason).resolvedEntryName = o.loc;
+        (o as NormalizedReason).resolvedEntry =
+          context.indexes.entrypoints.get(o.loc!) ?? null;
+      }
+      (o as NormalizedReason).resolvedModule = o.moduleIdentifier
+        ? (context.rawIndexes.modules.get(o.moduleIdentifier) as NormalizedModule)
+        : null;
+    });
     chunk.origins = origins;
   } else {
     chunk.origins = [];
@@ -494,6 +501,61 @@ function prepareChunk(chunk: Webpack.Chunk | null, context: ProcessingContext): 
 function prepareChunks(context: ProcessingContext): void {
   for (const chunk of context.rawIndexes.chunks.getAll()) {
     prepareChunk(chunk, context);
+  }
+}
+
+function getChunkMapItem(
+  map: Map<
+    NormalizedChunk,
+    { children: Set<NormalizedChunk>; parents: Set<NormalizedChunk> }
+  >,
+  chunk: NormalizedChunk
+): { children: Set<NormalizedChunk>; parents: Set<NormalizedChunk> } {
+  let mapItem = map.get(chunk);
+  if (!mapItem) {
+    mapItem = {
+      children: new Set(),
+      parents: new Set(),
+    };
+    map.set(chunk, mapItem);
+  }
+  return mapItem;
+}
+
+function linkChunks(context: ProcessingContext): void {
+  const map = new Map<
+    NormalizedChunk,
+    { children: Set<NormalizedChunk>; parents: Set<NormalizedChunk> }
+  >();
+  for (const parentModule of context.indexes.modules.getAll()) {
+    top: for (const dep of parentModule.deps ?? []) {
+      if (!dep.module) {
+        continue;
+      }
+
+      for (const parentChunk of parentModule.chunks) {
+        if (dep.module.chunks.includes(parentChunk)) {
+          continue top;
+        }
+      }
+
+      for (const childChunk of dep.module.chunks) {
+        const childMapItem = getChunkMapItem(map, childChunk);
+
+        for (const parentChunk of parentModule.chunks) {
+          const parentMapItem = getChunkMapItem(map, parentChunk);
+          if (parentChunk !== childChunk) {
+            parentMapItem.children.add(childChunk);
+            childMapItem.parents.add(parentChunk);
+          }
+        }
+      }
+    }
+  }
+
+  for (const [chunk, data] of map) {
+    chunk.children = [...data.children];
+    chunk.parents = [...data.parents];
   }
 }
 

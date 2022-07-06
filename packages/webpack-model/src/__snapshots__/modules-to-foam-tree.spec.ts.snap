@@ -331,6 +331,17 @@ Object {
           "groups": Array [
             Object {
               "groups": Array [],
+              "label": "chunk loaded",
+              "link": Object {
+                "id": "webpack/runtime/chunk loaded",
+                "page": "module",
+              },
+              "path": "webpack/runtime/chunk loaded",
+              "weight": 1772,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [],
               "label": "compat get default export",
               "link": Object {
                 "id": "webpack/runtime/compat get default export",
@@ -403,7 +414,7 @@ Object {
                 "page": "module",
               },
               "path": "webpack/runtime/jsonp chunk loading",
-              "weight": 3139,
+              "weight": 4781,
               "weightCompressor": undefined,
             },
             Object {
@@ -443,21 +454,21 @@ Object {
           "label": "runtime",
           "link": undefined,
           "path": "webpack/runtime",
-          "weight": 8097,
+          "weight": 11511,
           "weightCompressor": undefined,
         },
       ],
       "label": "webpack",
       "link": undefined,
       "path": "webpack",
-      "weight": 8097,
+      "weight": 11511,
       "weightCompressor": undefined,
     },
   ],
   "label": "",
   "link": undefined,
   "path": "/",
-  "weight": 20854.84,
+  "weight": 24268.84,
   "weightCompressor": undefined,
 }
 `;

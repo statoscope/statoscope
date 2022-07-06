@@ -19,6 +19,17 @@ module.exports = {
   stats: {
     context,
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        foo: {
+          chunks: 'all',
+          test: /is-array/,
+          enforce: true,
+        },
+      },
+    },
+  },
   plugins: [
     new Statoscope({
       saveStatsTo:

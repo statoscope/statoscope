@@ -1,14 +1,14 @@
 # Changelog
 
-## 5.21.1 (06 July 2022)
+## 5.22.1 (07 July 2022)
 
 ### Fixes
 
-- `[webpack-ui]` - don't use runtime-chunk children to calculate asset size
-- `[webpack-model]` - don't use runtime-chunk children to calculate asset size
-- `[stats-validator-plugin-webpack]` - don't use runtime-chunk children to calculate asset size
+- `[webpack-model]` - own implementation of chunk connections (fixes bugs of chunks relations accuracy)
 
-## 5.21.0 (03 July 2022)
+## 5.22.0 (03 July 2022)
+
+> This is 5.21 actually 🤦
 
 ### Features
 

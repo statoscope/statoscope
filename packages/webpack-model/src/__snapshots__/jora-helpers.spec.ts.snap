@@ -485,6 +485,17 @@ Object {
           "groups": Array [
             Object {
               "groups": Array [],
+              "label": "chunk loaded",
+              "link": Object {
+                "id": "webpack/runtime/chunk loaded",
+                "page": "module",
+              },
+              "path": "webpack/runtime/chunk loaded",
+              "weight": 886,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [],
               "label": "compat get default export",
               "link": Object {
                 "id": "webpack/runtime/compat get default export",
@@ -557,7 +568,7 @@ Object {
                 "page": "module",
               },
               "path": "webpack/runtime/jsonp chunk loading",
-              "weight": 3139,
+              "weight": 3227,
               "weightCompressor": undefined,
             },
             Object {
@@ -597,21 +608,21 @@ Object {
           "label": "runtime",
           "link": undefined,
           "path": "webpack/runtime",
-          "weight": 7160,
+          "weight": 8134,
           "weightCompressor": undefined,
         },
       ],
       "label": "webpack",
       "link": undefined,
       "path": "webpack",
-      "weight": 7160,
+      "weight": 8134,
       "weightCompressor": undefined,
     },
   ],
   "label": "",
   "link": undefined,
   "path": "/",
-  "weight": 20306.84,
+  "weight": 21280.84,
   "weightCompressor": undefined,
 }
 `;
@@ -947,6 +958,17 @@ Object {
           "groups": Array [
             Object {
               "groups": Array [],
+              "label": "chunk loaded",
+              "link": Object {
+                "id": "webpack/runtime/chunk loaded",
+                "page": "module",
+              },
+              "path": "webpack/runtime/chunk loaded",
+              "weight": 886,
+              "weightCompressor": undefined,
+            },
+            Object {
+              "groups": Array [],
               "label": "compat get default export",
               "link": Object {
                 "id": "webpack/runtime/compat get default export",
@@ -1019,7 +1041,7 @@ Object {
                 "page": "module",
               },
               "path": "webpack/runtime/jsonp chunk loading",
-              "weight": 3139,
+              "weight": 3227,
               "weightCompressor": undefined,
             },
             Object {
@@ -1059,21 +1081,21 @@ Object {
           "label": "runtime",
           "link": undefined,
           "path": "webpack/runtime",
-          "weight": 7160,
+          "weight": 8134,
           "weightCompressor": undefined,
         },
       ],
       "label": "webpack",
       "link": undefined,
       "path": "webpack",
-      "weight": 7160,
+      "weight": 8134,
       "weightCompressor": undefined,
     },
   ],
   "label": "",
   "link": undefined,
   "path": "/",
-  "weight": 20306.84,
+  "weight": 21280.84,
   "weightCompressor": undefined,
 }
 `;
@@ -1409,6 +1431,17 @@ Object {
           "groups": Array [
             Object {
               "groups": Array [],
+              "label": "chunk loaded",
+              "link": Object {
+                "id": "webpack/runtime/chunk loaded",
+                "page": "module",
+              },
+              "path": "webpack/runtime/chunk loaded",
+              "weight": 407,
+              "weightCompressor": "gzip",
+            },
+            Object {
+              "groups": Array [],
               "label": "compat get default export",
               "link": Object {
                 "id": "webpack/runtime/compat get default export",
@@ -1481,7 +1514,7 @@ Object {
                 "page": "module",
               },
               "path": "webpack/runtime/jsonp chunk loading",
-              "weight": 1109,
+              "weight": 1124,
               "weightCompressor": "gzip",
             },
             Object {
@@ -1521,21 +1554,21 @@ Object {
           "label": "runtime",
           "link": undefined,
           "path": "webpack/runtime",
-          "weight": 3417,
+          "weight": 3839,
           "weightCompressor": "gzip",
         },
       ],
       "label": "webpack",
       "link": undefined,
       "path": "webpack",
-      "weight": 3417,
+      "weight": 3839,
       "weightCompressor": "gzip",
     },
   ],
   "label": "",
   "link": undefined,
   "path": "/",
-  "weight": 12890,
+  "weight": 13312,
   "weightCompressor": "multiple compressors",
 }
 `;
@@ -1546,7 +1579,7 @@ Object {
     Object {
       "payload": Object {
         "context": Object {
-          "compilation": "34ea3837a1050e206fe0",
+          "compilation": "c6133ad65823403ee6df",
           "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
         },
       },
@@ -1579,7 +1612,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
           },
         },
@@ -1608,7 +1641,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
           },
         },
@@ -1637,7 +1670,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/sub-module.ts",
           },
         },
@@ -1666,7 +1699,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
           },
         },
@@ -1695,7 +1728,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "asset/resource|./simple/src/test.txt",
           },
         },
@@ -1724,7 +1757,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/dyn.ts",
           },
         },
@@ -1753,7 +1786,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "asset/inline|./simple/src/statoscope.png",
           },
         },
@@ -1782,7 +1815,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
           },
         },
@@ -1811,7 +1844,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
           },
         },
@@ -1851,7 +1884,7 @@ Object {
     "description": "Plugin for @statoscope/stats-validator to validate webpack stats",
     "homepage": "https://github.com/statoscope/statoscope/",
     "name": "@statoscope/stats-validator-plugin-webpack",
-    "version": "5.12.0",
+    "version": "5.22.1-alpha.0",
   },
 }
 `;

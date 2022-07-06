@@ -3,7 +3,7 @@
 exports[`matches 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -14,7 +14,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
           },
         },
@@ -37,7 +37,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -49,7 +49,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
           },
         },
@@ -72,7 +72,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -85,7 +85,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/is-array/index.js",
           },
         },
@@ -108,7 +108,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -120,7 +120,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
           },
         },
@@ -143,7 +143,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -154,7 +154,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "asset/resource|./simple/src/test.txt",
           },
         },
@@ -177,7 +177,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -190,7 +190,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/css-loader/dist/runtime/api.js",
           },
         },
@@ -213,7 +213,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -226,7 +226,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/css-loader/dist/runtime/getUrl.js",
           },
         },
@@ -249,7 +249,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -260,7 +260,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "asset/inline|./simple/src/statoscope.png",
           },
         },
@@ -283,7 +283,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -294,7 +294,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./simple/node_modules/foo/node_modules/bar/index.js",
           },
         },
@@ -317,7 +317,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -328,7 +328,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
           },
         },
@@ -351,7 +351,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -362,7 +362,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
           },
         },
@@ -385,7 +385,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -396,7 +396,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
           },
         },
@@ -419,7 +419,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -431,7 +431,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
           },
         },
@@ -454,7 +454,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -467,7 +467,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/is-array/index.js",
           },
         },
@@ -490,7 +490,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -502,7 +502,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
           },
         },
@@ -525,7 +525,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -536,7 +536,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "asset/resource|./simple/src/test.txt",
           },
         },
@@ -559,7 +559,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -572,7 +572,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/css-loader/dist/runtime/api.js",
           },
         },
@@ -595,7 +595,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -608,7 +608,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/css-loader/dist/runtime/getUrl.js",
           },
         },
@@ -631,7 +631,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -642,7 +642,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "asset/inline|./simple/src/statoscope.png",
           },
         },
@@ -665,7 +665,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -676,7 +676,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./simple/node_modules/foo/node_modules/bar/index.js",
           },
         },
@@ -699,7 +699,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -710,7 +710,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
           },
         },
@@ -733,7 +733,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -744,7 +744,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
           },
         },
@@ -767,7 +767,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -778,7 +778,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
           },
         },
@@ -801,7 +801,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -813,7 +813,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
           },
         },
@@ -836,7 +836,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -849,7 +849,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/is-array/index.js",
           },
         },
@@ -872,7 +872,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -884,7 +884,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
           },
         },
@@ -907,7 +907,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -918,7 +918,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "asset/resource|./simple/src/test.txt",
           },
         },
@@ -941,7 +941,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -954,7 +954,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/css-loader/dist/runtime/api.js",
           },
         },
@@ -977,7 +977,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -990,7 +990,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/css-loader/dist/runtime/getUrl.js",
           },
         },
@@ -1013,7 +1013,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -1024,7 +1024,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "asset/inline|./simple/src/statoscope.png",
           },
         },
@@ -1047,7 +1047,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -1058,7 +1058,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./simple/node_modules/foo/node_modules/bar/index.js",
           },
         },
@@ -1081,7 +1081,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -1092,7 +1092,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
           },
         },
@@ -1115,7 +1115,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -1126,7 +1126,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
           },
         },
@@ -1149,7 +1149,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -1160,7 +1160,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
           },
         },
@@ -1183,7 +1183,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -1195,7 +1195,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
           },
         },
@@ -1218,7 +1218,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -1231,7 +1231,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/is-array/index.js",
           },
         },
@@ -1254,7 +1254,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -1266,7 +1266,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
           },
         },
@@ -1289,7 +1289,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -1300,7 +1300,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "asset/resource|./simple/src/test.txt",
           },
         },
@@ -1323,7 +1323,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -1336,7 +1336,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/css-loader/dist/runtime/api.js",
           },
         },
@@ -1359,7 +1359,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -1372,7 +1372,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/css-loader/dist/runtime/getUrl.js",
           },
         },
@@ -1395,7 +1395,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -1406,7 +1406,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "asset/inline|./simple/src/statoscope.png",
           },
         },
@@ -1429,7 +1429,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -1440,7 +1440,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./simple/node_modules/foo/node_modules/bar/index.js",
           },
         },
@@ -1463,7 +1463,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -1474,7 +1474,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
           },
         },
@@ -1497,7 +1497,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -1508,7 +1508,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
           },
         },

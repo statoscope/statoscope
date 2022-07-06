@@ -3,7 +3,7 @@
 exports[`Alternative packages support doesn't render the list when alternatives aren't provided 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -23,7 +23,7 @@ Array [
         "payload": Object {
           "context": Object {
             "alternatives": undefined,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "description": undefined,
             "package": "foo",
           },
@@ -78,7 +78,7 @@ Array [
 exports[`Alternative packages support doesn't render the list when alternatives aren't provided 2`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -98,7 +98,7 @@ Array [
         "payload": Object {
           "context": Object {
             "alternatives": undefined,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "description": undefined,
             "package": "foo",
           },
@@ -148,7 +148,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -168,7 +168,7 @@ Array [
         "payload": Object {
           "context": Object {
             "alternatives": Array [],
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "description": undefined,
             "package": "foo",
           },
@@ -223,7 +223,7 @@ Array [
 exports[`Alternative packages support renders the list of alternative packages when provided 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -249,7 +249,7 @@ Array [
             "alternatives": Array [
               "bar",
             ],
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "description": undefined,
             "package": "foo",
           },
@@ -304,7 +304,7 @@ Array [
 exports[`Alternative packages support renders the list of alternative packages when provided 2`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -330,7 +330,7 @@ Array [
             "alternatives": Array [
               "bar",
             ],
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "description": undefined,
             "package": "foo",
           },
@@ -380,7 +380,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -411,7 +411,7 @@ Array [
               "bar",
               "bar2",
             ],
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "description": "Completely valid reason not to use foo",
             "package": "foo",
           },
@@ -466,7 +466,7 @@ Array [
 exports[`Alternative packages support renders the list of alternative packages when provided 3`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -492,7 +492,7 @@ Array [
             "alternatives": Array [
               "bar",
             ],
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "description": undefined,
             "package": "foo",
           },
@@ -542,7 +542,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -573,7 +573,7 @@ Array [
               "bar",
               "bar2",
             ],
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "description": "Completely valid reason not to use foo",
             "package": "foo",
           },
@@ -623,7 +623,7 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -649,7 +649,7 @@ Array [
             "alternatives": Array [
               "bar",
             ],
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "description": undefined,
             "package": "foo",
           },
@@ -714,7 +714,7 @@ exports[`basic functionality does not match test 5`] = `Array []`;
 exports[`basic functionality match test 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -734,7 +734,7 @@ Array [
         "payload": Object {
           "context": Object {
             "alternatives": undefined,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "description": undefined,
             "package": "foo",
           },
@@ -789,7 +789,7 @@ Array [
 exports[`basic functionality match test 2`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -809,7 +809,7 @@ Array [
         "payload": Object {
           "context": Object {
             "alternatives": undefined,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "description": undefined,
             "package": "foo",
           },
@@ -864,7 +864,7 @@ Array [
 exports[`basic functionality match test 3`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -884,7 +884,7 @@ Array [
         "payload": Object {
           "context": Object {
             "alternatives": undefined,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "description": undefined,
             "package": "foo",
           },
@@ -939,7 +939,7 @@ Array [
 exports[`basic functionality match test 4`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -961,7 +961,7 @@ Array [
         "payload": Object {
           "context": Object {
             "alternatives": undefined,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "description": "Completely valid reason not to use foo",
             "package": "foo",
           },
@@ -1016,7 +1016,7 @@ Array [
 exports[`basic functionality match test 5`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -1036,7 +1036,7 @@ Array [
         "payload": Object {
           "context": Object {
             "alternatives": undefined,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "description": undefined,
             "package": "foo",
           },
@@ -1091,7 +1091,7 @@ Array [
 exports[`basic functionality match test 6`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -1111,7 +1111,7 @@ Array [
         "payload": Object {
           "context": Object {
             "alternatives": undefined,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "description": undefined,
             "package": "foo",
           },
@@ -1166,7 +1166,7 @@ Array [
 exports[`basic functionality match test 7`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": Array [
@@ -1188,7 +1188,7 @@ Array [
         "payload": Object {
           "context": Object {
             "alternatives": undefined,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "description": "Completely valid reason not to use foo",
             "package": "foo",
           },

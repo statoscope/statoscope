@@ -5,21 +5,21 @@ exports[`exclude asset exclude all 1`] = `Array []`;
 exports[`exclude asset exclude some 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 0,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "one",
-            "initialSize": 449,
+            "initialSize": 973,
             "rule": Object {
               "maxAsyncSize": null,
               "maxInitialSize": null,
               "maxSize": 1,
             },
-            "size": 449,
+            "size": 973,
             "useCompressedSize": undefined,
           },
         },
@@ -38,7 +38,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download size of assets is 0.44 kb. It's over the 0.00 kb limit",
+    "message": "Entry \\"one\\": Download size of assets is 0.95 kb. It's over the 0.00 kb limit",
     "related": Array [
       Object {
         "id": "one",
@@ -47,21 +47,21 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 134,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "two",
-            "initialSize": 8615,
+            "initialSize": 8958,
             "rule": Object {
               "maxAsyncSize": null,
               "maxInitialSize": null,
               "maxSize": 1,
             },
-            "size": 8749,
+            "size": 9092,
             "useCompressedSize": undefined,
           },
         },
@@ -80,7 +80,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size of assets is 8.54 kb. It's over the 0.00 kb limit",
+    "message": "Entry \\"two\\": Download size of assets is 8.88 kb. It's over the 0.00 kb limit",
     "related": Array [
       Object {
         "id": "two",
@@ -94,21 +94,21 @@ Array [
 exports[`exclude entry object 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 0,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "one",
-            "initialSize": 449,
+            "initialSize": 973,
             "rule": Object {
               "maxAsyncSize": null,
               "maxInitialSize": null,
               "maxSize": 1,
             },
-            "size": 449,
+            "size": 973,
             "useCompressedSize": undefined,
           },
         },
@@ -127,7 +127,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download size of assets is 0.44 kb. It's over the 0.00 kb limit",
+    "message": "Entry \\"one\\": Download size of assets is 0.95 kb. It's over the 0.00 kb limit",
     "related": Array [
       Object {
         "id": "one",
@@ -141,21 +141,21 @@ Array [
 exports[`exclude entry regexp 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 0,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "one",
-            "initialSize": 449,
+            "initialSize": 973,
             "rule": Object {
               "maxAsyncSize": null,
               "maxInitialSize": null,
               "maxSize": 1,
             },
-            "size": 449,
+            "size": 973,
             "useCompressedSize": undefined,
           },
         },
@@ -174,7 +174,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download size of assets is 0.44 kb. It's over the 0.00 kb limit",
+    "message": "Entry \\"one\\": Download size of assets is 0.95 kb. It's over the 0.00 kb limit",
     "related": Array [
       Object {
         "id": "one",
@@ -188,21 +188,21 @@ Array [
 exports[`exclude entry string 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 0,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "one",
-            "initialSize": 449,
+            "initialSize": 973,
             "rule": Object {
               "maxAsyncSize": null,
               "maxInitialSize": null,
               "maxSize": 1,
             },
-            "size": 449,
+            "size": 973,
             "useCompressedSize": undefined,
           },
         },
@@ -221,7 +221,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download size of assets is 0.44 kb. It's over the 0.00 kb limit",
+    "message": "Entry \\"one\\": Download size of assets is 0.95 kb. It's over the 0.00 kb limit",
     "related": Array [
       Object {
         "id": "one",
@@ -235,21 +235,21 @@ Array [
 exports[`exclude no exclude 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 0,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "one",
-            "initialSize": 449,
+            "initialSize": 973,
             "rule": Object {
               "maxAsyncSize": null,
               "maxInitialSize": null,
               "maxSize": 1,
             },
-            "size": 449,
+            "size": 973,
             "useCompressedSize": undefined,
           },
         },
@@ -268,7 +268,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download size of assets is 0.44 kb. It's over the 0.00 kb limit",
+    "message": "Entry \\"one\\": Download size of assets is 0.95 kb. It's over the 0.00 kb limit",
     "related": Array [
       Object {
         "id": "one",
@@ -277,21 +277,21 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 134,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "two",
-            "initialSize": 8615,
+            "initialSize": 8958,
             "rule": Object {
               "maxAsyncSize": null,
               "maxInitialSize": null,
               "maxSize": 1,
             },
-            "size": 8749,
+            "size": 9092,
             "useCompressedSize": undefined,
           },
         },
@@ -310,7 +310,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size of assets is 8.54 kb. It's over the 0.00 kb limit",
+    "message": "Entry \\"two\\": Download size of assets is 8.88 kb. It's over the 0.00 kb limit",
     "related": Array [
       Object {
         "id": "two",
@@ -324,21 +324,21 @@ Array [
 exports[`maxAsyncSize global 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 134,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "two",
-            "initialSize": 8615,
+            "initialSize": 8958,
             "rule": Object {
               "maxAsyncSize": 100,
               "maxInitialSize": null,
               "maxSize": null,
             },
-            "size": 8749,
+            "size": 9092,
             "useCompressedSize": undefined,
           },
         },
@@ -375,21 +375,21 @@ exports[`maxAsyncSize not match - override global 1`] = `Array []`;
 exports[`maxAsyncSize override global 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 134,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "two",
-            "initialSize": 8615,
+            "initialSize": 8958,
             "rule": Object {
               "maxAsyncSize": 100,
               "maxInitialSize": null,
               "maxSize": null,
             },
-            "size": 8749,
+            "size": 9092,
             "useCompressedSize": undefined,
           },
         },
@@ -422,21 +422,21 @@ Array [
 exports[`maxAsyncSize with useCompressedSize = false 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 142,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "two",
-            "initialSize": 12277,
+            "initialSize": 12704,
             "rule": Object {
               "maxAsyncSize": 100,
               "maxInitialSize": null,
               "maxSize": null,
             },
-            "size": 12419,
+            "size": 12846,
             "useCompressedSize": false,
           },
         },
@@ -469,21 +469,21 @@ Array [
 exports[`maxInitialSize global 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 0,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "one",
-            "initialSize": 449,
+            "initialSize": 973,
             "rule": Object {
               "maxAsyncSize": null,
               "maxInitialSize": 100,
               "maxSize": null,
             },
-            "size": 449,
+            "size": 973,
             "useCompressedSize": undefined,
           },
         },
@@ -502,7 +502,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download size of initial assets is 0.44 kb. It's over the 0.10 kb limit",
+    "message": "Entry \\"one\\": Download size of initial assets is 0.95 kb. It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "one",
@@ -511,21 +511,21 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 134,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "two",
-            "initialSize": 8615,
+            "initialSize": 8958,
             "rule": Object {
               "maxAsyncSize": null,
               "maxInitialSize": 100,
               "maxSize": null,
             },
-            "size": 8749,
+            "size": 9092,
             "useCompressedSize": undefined,
           },
         },
@@ -544,7 +544,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size of initial assets is 8.41 kb. It's over the 0.10 kb limit",
+    "message": "Entry \\"two\\": Download size of initial assets is 8.75 kb. It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "two",
@@ -562,21 +562,21 @@ exports[`maxInitialSize not match - override global 1`] = `Array []`;
 exports[`maxInitialSize override global 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 0,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "one",
-            "initialSize": 449,
+            "initialSize": 973,
             "rule": Object {
               "maxAsyncSize": null,
               "maxInitialSize": 100,
               "maxSize": null,
             },
-            "size": 449,
+            "size": 973,
             "useCompressedSize": undefined,
           },
         },
@@ -595,7 +595,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download size of initial assets is 0.44 kb. It's over the 0.10 kb limit",
+    "message": "Entry \\"one\\": Download size of initial assets is 0.95 kb. It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "one",
@@ -604,21 +604,21 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 134,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "two",
-            "initialSize": 8615,
+            "initialSize": 8958,
             "rule": Object {
               "maxAsyncSize": null,
               "maxInitialSize": 100,
               "maxSize": null,
             },
-            "size": 8749,
+            "size": 9092,
             "useCompressedSize": undefined,
           },
         },
@@ -637,7 +637,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size of initial assets is 8.41 kb. It's over the 0.10 kb limit",
+    "message": "Entry \\"two\\": Download size of initial assets is 8.75 kb. It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "two",
@@ -651,21 +651,21 @@ Array [
 exports[`maxInitialSize with useCompressedSize = false 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 0,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "one",
-            "initialSize": 799,
+            "initialSize": 1612,
             "rule": Object {
               "maxAsyncSize": null,
               "maxInitialSize": 100,
               "maxSize": null,
             },
-            "size": 799,
+            "size": 1612,
             "useCompressedSize": false,
           },
         },
@@ -684,7 +684,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download size of initial assets is 0.78 kb. It's over the 0.10 kb limit",
+    "message": "Entry \\"one\\": Download size of initial assets is 1.57 kb. It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "one",
@@ -693,21 +693,21 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 142,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "two",
-            "initialSize": 12277,
+            "initialSize": 12704,
             "rule": Object {
               "maxAsyncSize": null,
               "maxInitialSize": 100,
               "maxSize": null,
             },
-            "size": 12419,
+            "size": 12846,
             "useCompressedSize": false,
           },
         },
@@ -726,7 +726,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size of initial assets is 11.99 kb. It's over the 0.10 kb limit",
+    "message": "Entry \\"two\\": Download size of initial assets is 12.41 kb. It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "two",
@@ -740,21 +740,21 @@ Array [
 exports[`maxSize global 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 0,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "one",
-            "initialSize": 449,
+            "initialSize": 973,
             "rule": Object {
               "maxAsyncSize": null,
               "maxInitialSize": null,
               "maxSize": 100,
             },
-            "size": 449,
+            "size": 973,
             "useCompressedSize": undefined,
           },
         },
@@ -773,7 +773,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download size of assets is 0.44 kb. It's over the 0.10 kb limit",
+    "message": "Entry \\"one\\": Download size of assets is 0.95 kb. It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "one",
@@ -782,21 +782,21 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 134,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "two",
-            "initialSize": 8615,
+            "initialSize": 8958,
             "rule": Object {
               "maxAsyncSize": null,
               "maxInitialSize": null,
               "maxSize": 100,
             },
-            "size": 8749,
+            "size": 9092,
             "useCompressedSize": undefined,
           },
         },
@@ -815,7 +815,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size of assets is 8.54 kb. It's over the 0.10 kb limit",
+    "message": "Entry \\"two\\": Download size of assets is 8.88 kb. It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "two",
@@ -833,21 +833,21 @@ exports[`maxSize not match - override global 1`] = `Array []`;
 exports[`maxSize override global 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 0,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "one",
-            "initialSize": 449,
+            "initialSize": 973,
             "rule": Object {
               "maxAsyncSize": null,
               "maxInitialSize": null,
               "maxSize": 100,
             },
-            "size": 449,
+            "size": 973,
             "useCompressedSize": undefined,
           },
         },
@@ -866,7 +866,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download size of assets is 0.44 kb. It's over the 0.10 kb limit",
+    "message": "Entry \\"one\\": Download size of assets is 0.95 kb. It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "one",
@@ -875,21 +875,21 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 134,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "two",
-            "initialSize": 8615,
+            "initialSize": 8958,
             "rule": Object {
               "maxAsyncSize": null,
               "maxInitialSize": null,
               "maxSize": 100,
             },
-            "size": 8749,
+            "size": 9092,
             "useCompressedSize": undefined,
           },
         },
@@ -908,7 +908,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size of assets is 8.54 kb. It's over the 0.10 kb limit",
+    "message": "Entry \\"two\\": Download size of assets is 8.88 kb. It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "two",
@@ -922,21 +922,21 @@ Array [
 exports[`maxSize with useCompressedSize = false 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 0,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "one",
-            "initialSize": 799,
+            "initialSize": 1612,
             "rule": Object {
               "maxAsyncSize": null,
               "maxInitialSize": null,
               "maxSize": 100,
             },
-            "size": 799,
+            "size": 1612,
             "useCompressedSize": false,
           },
         },
@@ -955,7 +955,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download size of assets is 0.78 kb. It's over the 0.10 kb limit",
+    "message": "Entry \\"one\\": Download size of assets is 1.57 kb. It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "one",
@@ -964,21 +964,21 @@ Array [
     ],
   },
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncSize": 142,
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "entry": "two",
-            "initialSize": 12277,
+            "initialSize": 12704,
             "rule": Object {
               "maxAsyncSize": null,
               "maxInitialSize": null,
               "maxSize": 100,
             },
-            "size": 12419,
+            "size": 12846,
             "useCompressedSize": false,
           },
         },
@@ -997,7 +997,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download size of assets is 12.13 kb. It's over the 0.10 kb limit",
+    "message": "Entry \\"two\\": Download size of assets is 12.54 kb. It's over the 0.10 kb limit",
     "related": Array [
       Object {
         "id": "two",

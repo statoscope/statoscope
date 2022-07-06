@@ -6,7 +6,7 @@ Object {
     "context": "/Users/smelukov/github/statoscope/test/bundles/v5",
     "descriptor": Object {
       "name": "@statoscope/stats",
-      "version": "5.7.0",
+      "version": "5.14.1",
     },
     "extensions": Array [
       Object {
@@ -19,7 +19,7 @@ Object {
             "description": "Webpack adapter for @statoscope/stats-extension-package-info",
             "homepage": "https://github.com/statoscope/statoscope/",
             "name": "@statoscope/webpack-stats-extension-package-info",
-            "version": "5.10.2",
+            "version": "5.22.1-alpha.0",
           },
           "author": Object {
             "name": "Sergey Melyukov",
@@ -28,12 +28,12 @@ Object {
           "description": "Statoscope extension for collecting package info (e.g. available versions)",
           "homepage": "https://github.com/statoscope/statoscope/",
           "name": "@statoscope/stats-extension-package-info",
-          "version": "5.9.0",
+          "version": "5.22.0",
         },
         "payload": Object {
           "compilations": Array [
             Object {
-              "id": "34ea3837a1050e206fe0",
+              "id": null,
               "packages": Array [
                 Object {
                   "instances": Array [
@@ -45,6 +45,28 @@ Object {
                     },
                   ],
                   "name": "simple",
+                },
+                Object {
+                  "instances": Array [
+                    Object {
+                      "info": Object {
+                        "version": "8.2.2",
+                      },
+                      "path": "node_modules/babel-loader",
+                    },
+                  ],
+                  "name": "babel-loader",
+                },
+                Object {
+                  "instances": Array [
+                    Object {
+                      "info": Object {
+                        "version": "5.2.7",
+                      },
+                      "path": "node_modules/css-loader",
+                    },
+                  ],
+                  "name": "css-loader",
                 },
                 Object {
                   "instances": Array [
@@ -85,17 +107,6 @@ Object {
                   ],
                   "name": "foo",
                 },
-                Object {
-                  "instances": Array [
-                    Object {
-                      "info": Object {
-                        "version": "5.2.7",
-                      },
-                      "path": "node_modules/css-loader",
-                    },
-                  ],
-                  "name": "css-loader",
-                },
               ],
             },
           ],
@@ -111,7 +122,7 @@ Object {
             "description": "Webpack adapter for @statoscope/stats-extension-compressed",
             "homepage": "https://github.com/statoscope/statoscope/",
             "name": "@statoscope/webpack-stats-extension-compressed",
-            "version": "5.9.0",
+            "version": "5.22.1-alpha.0",
           },
           "author": Object {
             "name": "Sergey Melyukov",
@@ -120,12 +131,12 @@ Object {
           "description": "Statoscope extension for collecting compressed resource sizes",
           "homepage": "https://github.com/statoscope/statoscope/",
           "name": "@statoscope/stats-extension-compressed",
-          "version": "5.9.0",
+          "version": "5.22.0",
         },
         "payload": Object {
           "compilations": Array [
             Object {
-              "id": "34ea3837a1050e206fe0",
+              "id": "c6133ad65823403ee6df",
               "resources": Array [
                 Object {
                   "id": "one.js",
@@ -134,7 +145,7 @@ Object {
                     "meta": Object {
                       "level": 6,
                     },
-                    "size": 449,
+                    "size": 804,
                   },
                 },
                 Object {
@@ -144,7 +155,7 @@ Object {
                     "meta": Object {
                       "level": 6,
                     },
-                    "size": 8615,
+                    "size": 8789,
                   },
                 },
                 Object {
@@ -165,6 +176,16 @@ Object {
                       "level": 6,
                     },
                     "size": 134,
+                  },
+                },
+                Object {
+                  "id": "929.js",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 169,
                   },
                 },
                 Object {
@@ -208,6 +229,16 @@ Object {
                   },
                 },
                 Object {
+                  "id": "webpack/runtime/chunk loaded",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 407,
+                  },
+                },
+                Object {
                   "id": "webpack/runtime/make namespace object",
                   "size": Object {
                     "compressor": "gzip",
@@ -234,7 +265,7 @@ Object {
                     "meta": Object {
                       "level": 6,
                     },
-                    "size": 1109,
+                    "size": 1124,
                   },
                 },
                 Object {
@@ -371,7 +402,7 @@ Object {
           "description": "Statoscope extension to store custom reports in stats",
           "homepage": "https://github.com/statoscope/statoscope/",
           "name": "@statoscope/stats-extension-custom-reports",
-          "version": "5.9.0",
+          "version": "5.22.0",
         },
         "payload": Object {
           "compilations": Array [
@@ -417,7 +448,7 @@ Object {
             "description": "Stats report reporter for @statoscope/stats-validator",
             "homepage": "https://github.com/statoscope/statoscope/",
             "name": "@statoscope/stats-validator-reporter-stats-report",
-            "version": "5.12.0",
+            "version": "5.22.1-alpha.0",
           },
           "author": Object {
             "name": "Sergey Melyukov",
@@ -426,19 +457,19 @@ Object {
           "description": "Statoscope extension that collects stats validation result",
           "homepage": "https://github.com/statoscope/statoscope/",
           "name": "@statoscope/stats-extension-stats-validation-result",
-          "version": "5.9.0",
+          "version": "5.22.0",
         },
         "payload": Object {
           "compilations": Array [
             Object {
-              "id": "34ea3837a1050e206fe0",
+              "id": "c6133ad65823403ee6df",
               "items": Array [
                 Object {
                   "details": Array [
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "34ea3837a1050e206fe0",
+                          "compilation": "c6133ad65823403ee6df",
                           "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
                         },
                       },
@@ -467,7 +498,7 @@ Object {
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "34ea3837a1050e206fe0",
+                          "compilation": "c6133ad65823403ee6df",
                           "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
                         },
                       },
@@ -496,7 +527,7 @@ Object {
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "34ea3837a1050e206fe0",
+                          "compilation": "c6133ad65823403ee6df",
                           "module": "./node_modules/babel-loader/lib/index.js!./simple/src/sub-module.ts",
                         },
                       },
@@ -525,7 +556,7 @@ Object {
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "34ea3837a1050e206fe0",
+                          "compilation": "c6133ad65823403ee6df",
                           "module": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
                         },
                       },
@@ -554,7 +585,7 @@ Object {
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "34ea3837a1050e206fe0",
+                          "compilation": "c6133ad65823403ee6df",
                           "module": "asset/resource|./simple/src/test.txt",
                         },
                       },
@@ -583,7 +614,7 @@ Object {
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "34ea3837a1050e206fe0",
+                          "compilation": "c6133ad65823403ee6df",
                           "module": "./node_modules/babel-loader/lib/index.js!./simple/src/dyn.ts",
                         },
                       },
@@ -612,7 +643,7 @@ Object {
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "34ea3837a1050e206fe0",
+                          "compilation": "c6133ad65823403ee6df",
                           "module": "asset/inline|./simple/src/statoscope.png",
                         },
                       },
@@ -641,7 +672,7 @@ Object {
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "34ea3837a1050e206fe0",
+                          "compilation": "c6133ad65823403ee6df",
                           "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
                         },
                       },
@@ -670,7 +701,7 @@ Object {
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "34ea3837a1050e206fe0",
+                          "compilation": "c6133ad65823403ee6df",
                           "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
                         },
                       },
@@ -699,7 +730,7 @@ Object {
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "34ea3837a1050e206fe0",
+                          "compilation": "c6133ad65823403ee6df",
                           "package": "foo",
                         },
                       },
@@ -707,9 +738,31 @@ Object {
               $input: resolveInputFile();
               {
                 package: #.package.resolvePackage(#.compilation),
+                alternatives: #.alternatives,
+                description: #.description,
               }
               ",
                       "type": "discovery",
+                      "view": Array [
+                        Object {
+                          "content": "text:description",
+                          "view": "block",
+                          "when": "description",
+                        },
+                        Object {
+                          "data": "\\"Consider using alternative packages:\\"",
+                          "view": "text",
+                          "when": "alternatives",
+                        },
+                        Object {
+                          "data": "alternatives",
+                          "item": Object {
+                            "data": "{text: $, href:\\"https://npmjs.com/package/\\"+$}",
+                            "view": "link",
+                          },
+                          "view": "ul",
+                        },
+                      ],
                     },
                   ],
                   "id": 9,
@@ -742,7 +795,7 @@ Object {
                   "description": "Plugin for @statoscope/stats-validator to validate webpack stats",
                   "homepage": "https://github.com/statoscope/statoscope/",
                   "name": "@statoscope/stats-validator-plugin-webpack",
-                  "version": "5.12.0",
+                  "version": "5.22.1-alpha.0",
                 },
               },
               "name": "webpack/restricted-modules",
@@ -758,7 +811,7 @@ Object {
                   "description": "Plugin for @statoscope/stats-validator to validate webpack stats",
                   "homepage": "https://github.com/statoscope/statoscope/",
                   "name": "@statoscope/stats-validator-plugin-webpack",
-                  "version": "5.12.0",
+                  "version": "5.22.1-alpha.0",
                 },
               },
               "name": "webpack/restricted-packages",
@@ -1277,8 +1330,7 @@ Object {
                     "cacheable": true,
                     "cached": false,
                     "chunks": Array [
-                      255,
-                      804,
+                      929,
                     ],
                     "codeGenerated": true,
                     "depth": 1,
@@ -2314,6 +2366,45 @@ Object {
                     "errors": 0,
                     "failed": false,
                     "id": "",
+                    "identifier": "webpack/runtime/chunk loaded",
+                    "index": null,
+                    "index2": null,
+                    "layer": null,
+                    "moduleType": "runtime",
+                    "name": "webpack/runtime/chunk loaded",
+                    "nameForCondition": null,
+                    "optimizationBailout": Array [],
+                    "optional": false,
+                    "orphan": false,
+                    "postOrderIndex": null,
+                    "preOrderIndex": null,
+                    "providedExports": Array [],
+                    "reasons": Array [],
+                    "size": 886,
+                    "sizes": Object {
+                      "runtime": 886,
+                    },
+                    "type": "module",
+                    "usedExports": null,
+                    "warnings": 0,
+                  },
+                ],
+                Array [
+                  16,
+                  Object {
+                    "assets": Array [],
+                    "buildTimeExecuted": false,
+                    "built": false,
+                    "cached": false,
+                    "chunks": Array [
+                      804,
+                      255,
+                    ],
+                    "codeGenerated": true,
+                    "depth": null,
+                    "errors": 0,
+                    "failed": false,
+                    "id": "",
                     "identifier": "webpack/runtime/compat get default export",
                     "index": null,
                     "index2": null,
@@ -2338,7 +2429,7 @@ Object {
                   },
                 ],
                 Array [
-                  16,
+                  17,
                   Object {
                     "assets": Array [],
                     "buildTimeExecuted": false,
@@ -2377,7 +2468,7 @@ Object {
                   },
                 ],
                 Array [
-                  17,
+                  18,
                   Object {
                     "assets": Array [],
                     "buildTimeExecuted": false,
@@ -2415,7 +2506,7 @@ Object {
                   },
                 ],
                 Array [
-                  18,
+                  19,
                   Object {
                     "assets": Array [],
                     "buildTimeExecuted": false,
@@ -2453,7 +2544,7 @@ Object {
                   },
                 ],
                 Array [
-                  19,
+                  20,
                   Object {
                     "assets": Array [],
                     "buildTimeExecuted": false,
@@ -2491,7 +2582,7 @@ Object {
                   },
                 ],
                 Array [
-                  20,
+                  21,
                   Object {
                     "assets": Array [],
                     "buildTimeExecuted": false,
@@ -2530,7 +2621,7 @@ Object {
                   },
                 ],
                 Array [
-                  21,
+                  22,
                   Object {
                     "assets": Array [],
                     "buildTimeExecuted": false,
@@ -2538,6 +2629,7 @@ Object {
                     "cached": false,
                     "chunks": Array [
                       804,
+                      255,
                     ],
                     "codeGenerated": true,
                     "depth": null,
@@ -2558,9 +2650,9 @@ Object {
                     "preOrderIndex": null,
                     "providedExports": Array [],
                     "reasons": Array [],
-                    "size": 3139,
+                    "size": 3227,
                     "sizes": Object {
-                      "runtime": 3139,
+                      "runtime": 3227,
                     },
                     "type": "module",
                     "usedExports": null,
@@ -2568,7 +2660,7 @@ Object {
                   },
                 ],
                 Array [
-                  22,
+                  23,
                   Object {
                     "assets": Array [],
                     "buildTimeExecuted": false,
@@ -2606,7 +2698,7 @@ Object {
                   },
                 ],
                 Array [
-                  23,
+                  24,
                   Object {
                     "assets": Array [],
                     "buildTimeExecuted": false,
@@ -2645,7 +2737,7 @@ Object {
                   },
                 ],
                 Array [
-                  24,
+                  25,
                   Object {
                     "assets": Array [],
                     "buildTimeExecuted": false,
@@ -2684,7 +2776,7 @@ Object {
                 ],
               ],
             },
-            "id": "34ea3837a1050e206fe0",
+            "id": "c6133ad65823403ee6df",
           },
         ],
       },
@@ -2713,12 +2805,12 @@ Object {
       "info": Object {
         "javascriptModule": false,
         "minimized": true,
-        "size": 12277,
+        "size": 12512,
       },
       "isOverSizeLimit": false,
       "name": "two.js",
       "related": Object {},
-      "size": 12277,
+      "size": 12512,
       "type": "asset",
     },
     Object {
@@ -2738,12 +2830,37 @@ Object {
       "info": Object {
         "javascriptModule": false,
         "minimized": true,
-        "size": 799,
+        "size": 1420,
       },
       "isOverSizeLimit": false,
       "name": "one.js",
       "related": Object {},
-      "size": 799,
+      "size": 1420,
+      "type": "asset",
+    },
+    Object {
+      "auxiliaryChunkIdHints": Array [],
+      "auxiliaryChunkNames": Array [],
+      "auxiliaryChunks": Array [],
+      "cached": false,
+      "chunkIdHints": Array [
+        "foo",
+      ],
+      "chunkNames": Array [],
+      "chunks": Array [
+        929,
+      ],
+      "comparedForEmit": true,
+      "emitted": false,
+      "info": Object {
+        "javascriptModule": false,
+        "minimized": true,
+        "size": 192,
+      },
+      "isOverSizeLimit": false,
+      "name": "929.js",
+      "related": Object {},
+      "size": 192,
       "type": "asset",
     },
     Object {
@@ -2804,7 +2921,7 @@ Object {
       "two.js",
     ],
   },
-  "builtAt": 1633808745791,
+  "builtAt": 1657146399732,
   "children": Array [],
   "chunks": Array [
     Object {
@@ -2815,17 +2932,18 @@ Object {
       "files": Array [
         "one.js",
       ],
-      "hash": "e985dc1c85fe01cacabe",
+      "hash": "b6696e9ca45a2a9aff3c",
       "id": 255,
       "idHints": Array [],
       "initial": true,
       "modules": Array [
-        3,
         1,
         15,
         16,
-        20,
-        23,
+        17,
+        21,
+        22,
+        24,
       ],
       "names": Array [
         "one",
@@ -2845,11 +2963,13 @@ Object {
       "runtime": Array [
         "one",
       ],
-      "siblings": Array [],
-      "size": 1688,
+      "siblings": Array [
+        929,
+      ],
+      "size": 3658,
       "sizes": Object {
-        "javascript": 751,
-        "runtime": 937,
+        "javascript": 281,
+        "runtime": 3377,
       },
     },
     Object {
@@ -2864,14 +2984,13 @@ Object {
       "files": Array [
         "two.js",
       ],
-      "hash": "fbe68622199242ffe561",
+      "hash": "405d3d922e38842cfae5",
       "id": 804,
       "idHints": Array [],
       "initial": true,
       "modules": Array [
         11,
         12,
-        3,
         5,
         2,
         13,
@@ -2886,6 +3005,7 @@ Object {
         22,
         23,
         24,
+        25,
       ],
       "names": Array [
         "two",
@@ -2905,12 +3025,14 @@ Object {
       "runtime": Array [
         "two",
       ],
-      "siblings": Array [],
-      "size": 19395.84,
+      "siblings": Array [
+        929,
+      ],
+      "size": 19899.84,
       "sizes": Object {
         "asset": 15,
-        "javascript": 12220.84,
-        "runtime": 7160,
+        "javascript": 11750.84,
+        "runtime": 8134,
       },
     },
     Object {
@@ -2941,6 +3063,7 @@ Object {
       ],
       "parents": Array [
         804,
+        929,
       ],
       "recorded": false,
       "rendered": true,
@@ -2953,21 +3076,79 @@ Object {
         "javascript": 21,
       },
     },
+    Object {
+      "auxiliaryFiles": Array [],
+      "children": Array [
+        848,
+      ],
+      "childrenByOrder": Object {},
+      "entry": false,
+      "files": Array [
+        "929.js",
+      ],
+      "hash": "3d1262dcc9ed015b691f",
+      "id": 929,
+      "idHints": Array [
+        "foo",
+      ],
+      "initial": true,
+      "modules": Array [
+        3,
+      ],
+      "names": Array [],
+      "origins": Array [
+        Object {
+          "loc": "one",
+          "module": "",
+          "moduleIdentifier": "",
+          "moduleName": "",
+          "request": "./src/index.ts",
+        },
+        Object {
+          "loc": "two",
+          "module": "",
+          "moduleIdentifier": "",
+          "moduleName": "",
+          "request": "./src/index2.ts",
+        },
+      ],
+      "parents": Array [],
+      "reason": "split chunk (cache group: foo)",
+      "recorded": false,
+      "rendered": true,
+      "runtime": Array [
+        "one",
+        "two",
+      ],
+      "siblings": Array [
+        255,
+        804,
+      ],
+      "size": 470,
+      "sizes": Object {
+        "javascript": 470,
+      },
+    },
   ],
   "entrypoints": Object {
     "one": Object {
       "assets": Array [
         Object {
+          "name": "929.js",
+          "size": 192,
+        },
+        Object {
           "name": "one.js",
-          "size": 799,
+          "size": 1420,
         },
       ],
-      "assetsSize": 799,
+      "assetsSize": 1612,
       "auxiliaryAssets": Array [],
       "auxiliaryAssetsSize": 0,
       "childAssets": Object {},
       "children": Object {},
       "chunks": Array [
+        929,
         255,
       ],
       "filteredAssets": 0,
@@ -2978,11 +3159,15 @@ Object {
     "two": Object {
       "assets": Array [
         Object {
+          "name": "929.js",
+          "size": 192,
+        },
+        Object {
           "name": "two.js",
-          "size": 12277,
+          "size": 12512,
         },
       ],
-      "assetsSize": 12277,
+      "assetsSize": 12704,
       "auxiliaryAssets": Array [
         Object {
           "name": "196de80223be41153cc7.txt",
@@ -2993,6 +3178,7 @@ Object {
       "childAssets": Object {},
       "children": Object {},
       "chunks": Array [
+        929,
         804,
       ],
       "filteredAssets": 0,
@@ -3003,7 +3189,7 @@ Object {
   },
   "errors": Array [],
   "errorsCount": 0,
-  "hash": "34ea3837a1050e206fe0",
+  "hash": "c6133ad65823403ee6df",
   "modules": Array [
     1,
     2,
@@ -3029,21 +3215,27 @@ Object {
     22,
     23,
     24,
+    25,
   ],
   "namedChunkGroups": Object {
     "one": Object {
       "assets": Array [
         Object {
+          "name": "929.js",
+          "size": 192,
+        },
+        Object {
           "name": "one.js",
-          "size": 799,
+          "size": 1420,
         },
       ],
-      "assetsSize": 799,
+      "assetsSize": 1612,
       "auxiliaryAssets": Array [],
       "auxiliaryAssetsSize": 0,
       "childAssets": Object {},
       "children": Object {},
       "chunks": Array [
+        929,
         255,
       ],
       "filteredAssets": 0,
@@ -3054,11 +3246,15 @@ Object {
     "two": Object {
       "assets": Array [
         Object {
+          "name": "929.js",
+          "size": 192,
+        },
+        Object {
           "name": "two.js",
-          "size": 12277,
+          "size": 12512,
         },
       ],
-      "assetsSize": 12277,
+      "assetsSize": 12704,
       "auxiliaryAssets": Array [
         Object {
           "name": "196de80223be41153cc7.txt",
@@ -3069,6 +3265,7 @@ Object {
       "childAssets": Object {},
       "children": Object {},
       "chunks": Array [
+        929,
         804,
       ],
       "filteredAssets": 0,
@@ -3079,7 +3276,7 @@ Object {
   },
   "outputPath": "./simple/dist-prod",
   "publicPath": "auto",
-  "time": 309,
+  "time": 418,
   "version": "5.53.0",
   "warnings": Array [],
   "warningsCount": 0,

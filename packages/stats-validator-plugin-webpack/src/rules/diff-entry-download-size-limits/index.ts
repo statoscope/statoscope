@@ -159,7 +159,7 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
     .({
       $rule;
       $handleEntry: => {
-        $chunks: data.chunks + data.chunks.[not isRuntime]..children;
+        $chunks: data.chunks + data.chunks..children;
         $initialChunks: $chunks.[initial];
         $asyncChunks: $chunks.[not initial];
         $size: $chunks.$getSizeByChunks($$);

@@ -5,22 +5,22 @@ exports[`exclude asset exclude all 1`] = `Array []`;
 exports[`exclude asset exclude some 1`] = `
 Array [
   Object {
-    "compilation": "9eb9a218218f1ee4ba40",
+    "compilation": "6531875fbf1c01886a20",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncDownloadTime": 0,
-              "downloadTime": 37.88596705386514,
-              "initialDownloadTime": 37.88596705386514,
+              "downloadTime": 52.16096576891447,
+              "initialDownloadTime": 52.16096576891447,
             },
             "before": Object {
               "asyncDownloadTime": 0,
-              "downloadTime": 9.014731959292764,
-              "initialDownloadTime": 9.014731959292764,
+              "downloadTime": 19.53526547080592,
+              "initialDownloadTime": 19.53526547080592,
             },
-            "compilation": "9eb9a218218f1ee4ba40",
+            "compilation": "6531875fbf1c01886a20",
             "diff": Object {
               "asyncDownloadTime": Object {
                 "absolute": 0,
@@ -28,14 +28,14 @@ Array [
                 "percent": 0,
               },
               "downloadTime": Object {
-                "absolute": 28.871235094572373,
+                "absolute": 32.625700298108555,
                 "ok": false,
-                "percent": 320.26726057906455,
+                "percent": 167.0092497430627,
               },
               "initialDownloadTime": Object {
-                "absolute": 28.871235094572373,
+                "absolute": 32.625700298108555,
                 "ok": true,
-                "percent": 320.26726057906455,
+                "percent": 167.0092497430627,
               },
             },
             "entry": "one",
@@ -65,7 +65,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download time diff of assets is 29 ms (320.27%). It's over the 1 ms limit",
+    "message": "Entry \\"one\\": Download time diff of assets is 33 ms (167.01%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "one",
@@ -74,22 +74,22 @@ Array [
     ],
   },
   Object {
-    "compilation": "9eb9a218218f1ee4ba40",
+    "compilation": "6531875fbf1c01886a20",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncDownloadTime": 11.845638877467104,
-              "downloadTime": 257.0503636410362,
-              "initialDownloadTime": 245.2047247635691,
+              "downloadTime": 260.1221988075658,
+              "initialDownloadTime": 248.27655993009867,
             },
             "before": Object {
               "asyncDownloadTime": 2.6903654399671053,
-              "downloadTime": 175.65677040501646,
-              "initialDownloadTime": 172.96640496504935,
+              "downloadTime": 182.54330283717104,
+              "initialDownloadTime": 179.85293739720396,
             },
-            "compilation": "9eb9a218218f1ee4ba40",
+            "compilation": "6531875fbf1c01886a20",
             "diff": Object {
               "asyncDownloadTime": Object {
                 "absolute": 9.1552734375,
@@ -97,14 +97,14 @@ Array [
                 "percent": 340.2985074626866,
               },
               "downloadTime": Object {
-                "absolute": 81.39359323601974,
+                "absolute": 77.57889597039474,
                 "ok": false,
-                "percent": 46.33672419705108,
+                "percent": 42.498900131984165,
               },
               "initialDownloadTime": Object {
-                "absolute": 72.23831979851974,
+                "absolute": 68.42362253289471,
                 "ok": true,
-                "percent": 41.76436448055716,
+                "percent": 38.04420629604821,
               },
             },
             "entry": "two",
@@ -134,7 +134,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time diff of assets is 81 ms (46.34%). It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time diff of assets is 78 ms (42.50%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -148,22 +148,22 @@ Array [
 exports[`maxAsyncDownloadTimeDiff global 1`] = `
 Array [
   Object {
-    "compilation": "9eb9a218218f1ee4ba40",
+    "compilation": "6531875fbf1c01886a20",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncDownloadTime": 11.845638877467104,
-              "downloadTime": 257.0503636410362,
-              "initialDownloadTime": 245.2047247635691,
+              "downloadTime": 274.0759598581414,
+              "initialDownloadTime": 262.2303209806743,
             },
             "before": Object {
               "asyncDownloadTime": 2.6903654399671053,
-              "downloadTime": 175.65677040501646,
-              "initialDownloadTime": 172.96640496504935,
+              "downloadTime": 182.54330283717104,
+              "initialDownloadTime": 179.85293739720396,
             },
-            "compilation": "9eb9a218218f1ee4ba40",
+            "compilation": "6531875fbf1c01886a20",
             "diff": Object {
               "asyncDownloadTime": Object {
                 "absolute": 9.1552734375,
@@ -171,14 +171,14 @@ Array [
                 "percent": 340.2985074626866,
               },
               "downloadTime": Object {
-                "absolute": 81.39359323601974,
+                "absolute": 91.53265702097036,
                 "ok": true,
-                "percent": 46.33672419705108,
+                "percent": 50.142982842058935,
               },
               "initialDownloadTime": Object {
-                "absolute": 72.23831979851974,
+                "absolute": 82.37738358347036,
                 "ok": true,
-                "percent": 41.76436448055716,
+                "percent": 45.802634516633155,
               },
             },
             "entry": "two",
@@ -226,22 +226,22 @@ exports[`maxAsyncDownloadTimeDiff not match - override global 1`] = `Array []`;
 exports[`maxAsyncDownloadTimeDiff override global 1`] = `
 Array [
   Object {
-    "compilation": "9eb9a218218f1ee4ba40",
+    "compilation": "6531875fbf1c01886a20",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncDownloadTime": 11.845638877467104,
-              "downloadTime": 257.0503636410362,
-              "initialDownloadTime": 245.2047247635691,
+              "downloadTime": 274.0759598581414,
+              "initialDownloadTime": 262.2303209806743,
             },
             "before": Object {
               "asyncDownloadTime": 2.6903654399671053,
-              "downloadTime": 175.65677040501646,
-              "initialDownloadTime": 172.96640496504935,
+              "downloadTime": 182.54330283717104,
+              "initialDownloadTime": 179.85293739720396,
             },
-            "compilation": "9eb9a218218f1ee4ba40",
+            "compilation": "6531875fbf1c01886a20",
             "diff": Object {
               "asyncDownloadTime": Object {
                 "absolute": 9.1552734375,
@@ -249,14 +249,14 @@ Array [
                 "percent": 340.2985074626866,
               },
               "downloadTime": Object {
-                "absolute": 81.39359323601974,
+                "absolute": 91.53265702097036,
                 "ok": true,
-                "percent": 46.33672419705108,
+                "percent": 50.142982842058935,
               },
               "initialDownloadTime": Object {
-                "absolute": 72.23831979851974,
+                "absolute": 82.37738358347036,
                 "ok": true,
-                "percent": 41.76436448055716,
+                "percent": 45.802634516633155,
               },
             },
             "entry": "two",
@@ -300,22 +300,22 @@ Array [
 exports[`maxAsyncDownloadTimeDiff with useCompressedSize = false 1`] = `
 Array [
   Object {
-    "compilation": "9eb9a218218f1ee4ba40",
+    "compilation": "6531875fbf1c01886a20",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncDownloadTime": 24.09282483552632,
-              "downloadTime": 608.926070363898,
-              "initialDownloadTime": 584.8332455283717,
+              "downloadTime": 652.0522268194901,
+              "initialDownloadTime": 627.9594019839639,
             },
             "before": Object {
               "asyncDownloadTime": 2.8509842722039473,
-              "downloadTime": 249.34065969366776,
-              "initialDownloadTime": 246.4896754214638,
+              "downloadTime": 257.91368986430916,
+              "initialDownloadTime": 255.06270559210526,
             },
-            "compilation": "9eb9a218218f1ee4ba40",
+            "compilation": "6531875fbf1c01886a20",
             "diff": Object {
               "asyncDownloadTime": Object {
                 "absolute": 21.24184056332237,
@@ -323,14 +323,14 @@ Array [
                 "percent": 745.0704225352114,
               },
               "downloadTime": Object {
-                "absolute": 359.58541067023026,
+                "absolute": 394.13853695518094,
                 "ok": true,
-                "percent": 144.21451002496175,
+                "percent": 152.81799782033323,
               },
               "initialDownloadTime": Object {
-                "absolute": 338.34357010690786,
+                "absolute": 372.8966963918586,
                 "ok": true,
-                "percent": 137.26480410523743,
+                "percent": 146.19804785894212,
               },
             },
             "entry": "two",
@@ -374,22 +374,22 @@ Array [
 exports[`maxDownloadTimeDiff global 1`] = `
 Array [
   Object {
-    "compilation": "9eb9a218218f1ee4ba40",
+    "compilation": "6531875fbf1c01886a20",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncDownloadTime": 0,
-              "downloadTime": 37.88596705386514,
-              "initialDownloadTime": 37.88596705386514,
+              "downloadTime": 66.11472681949013,
+              "initialDownloadTime": 66.11472681949013,
             },
             "before": Object {
               "asyncDownloadTime": 0,
-              "downloadTime": 9.014731959292764,
-              "initialDownloadTime": 9.014731959292764,
+              "downloadTime": 19.53526547080592,
+              "initialDownloadTime": 19.53526547080592,
             },
-            "compilation": "9eb9a218218f1ee4ba40",
+            "compilation": "6531875fbf1c01886a20",
             "diff": Object {
               "asyncDownloadTime": Object {
                 "absolute": 0,
@@ -397,14 +397,14 @@ Array [
                 "percent": 0,
               },
               "downloadTime": Object {
-                "absolute": 28.871235094572373,
+                "absolute": 46.579461348684205,
                 "ok": false,
-                "percent": 320.26726057906455,
+                "percent": 238.4378211716341,
               },
               "initialDownloadTime": Object {
-                "absolute": 28.871235094572373,
+                "absolute": 46.579461348684205,
                 "ok": true,
-                "percent": 320.26726057906455,
+                "percent": 238.4378211716341,
               },
             },
             "entry": "one",
@@ -434,7 +434,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download time diff of assets is 29 ms (320.27%). It's over the 1 ms limit",
+    "message": "Entry \\"one\\": Download time diff of assets is 47 ms (238.44%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "one",
@@ -443,22 +443,22 @@ Array [
     ],
   },
   Object {
-    "compilation": "9eb9a218218f1ee4ba40",
+    "compilation": "6531875fbf1c01886a20",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncDownloadTime": 11.845638877467104,
-              "downloadTime": 257.0503636410362,
-              "initialDownloadTime": 245.2047247635691,
+              "downloadTime": 274.0759598581414,
+              "initialDownloadTime": 262.2303209806743,
             },
             "before": Object {
               "asyncDownloadTime": 2.6903654399671053,
-              "downloadTime": 175.65677040501646,
-              "initialDownloadTime": 172.96640496504935,
+              "downloadTime": 182.54330283717104,
+              "initialDownloadTime": 179.85293739720396,
             },
-            "compilation": "9eb9a218218f1ee4ba40",
+            "compilation": "6531875fbf1c01886a20",
             "diff": Object {
               "asyncDownloadTime": Object {
                 "absolute": 9.1552734375,
@@ -466,14 +466,14 @@ Array [
                 "percent": 340.2985074626866,
               },
               "downloadTime": Object {
-                "absolute": 81.39359323601974,
+                "absolute": 91.53265702097036,
                 "ok": false,
-                "percent": 46.33672419705108,
+                "percent": 50.142982842058935,
               },
               "initialDownloadTime": Object {
-                "absolute": 72.23831979851974,
+                "absolute": 82.37738358347036,
                 "ok": true,
-                "percent": 41.76436448055716,
+                "percent": 45.802634516633155,
               },
             },
             "entry": "two",
@@ -503,7 +503,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time diff of assets is 81 ms (46.34%). It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time diff of assets is 92 ms (50.14%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -521,22 +521,22 @@ exports[`maxDownloadTimeDiff not match - override global 1`] = `Array []`;
 exports[`maxDownloadTimeDiff override global 1`] = `
 Array [
   Object {
-    "compilation": "9eb9a218218f1ee4ba40",
+    "compilation": "6531875fbf1c01886a20",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncDownloadTime": 0,
-              "downloadTime": 37.88596705386514,
-              "initialDownloadTime": 37.88596705386514,
+              "downloadTime": 66.11472681949013,
+              "initialDownloadTime": 66.11472681949013,
             },
             "before": Object {
               "asyncDownloadTime": 0,
-              "downloadTime": 9.014731959292764,
-              "initialDownloadTime": 9.014731959292764,
+              "downloadTime": 19.53526547080592,
+              "initialDownloadTime": 19.53526547080592,
             },
-            "compilation": "9eb9a218218f1ee4ba40",
+            "compilation": "6531875fbf1c01886a20",
             "diff": Object {
               "asyncDownloadTime": Object {
                 "absolute": 0,
@@ -544,14 +544,14 @@ Array [
                 "percent": 0,
               },
               "downloadTime": Object {
-                "absolute": 28.871235094572373,
+                "absolute": 46.579461348684205,
                 "ok": false,
-                "percent": 320.26726057906455,
+                "percent": 238.4378211716341,
               },
               "initialDownloadTime": Object {
-                "absolute": 28.871235094572373,
+                "absolute": 46.579461348684205,
                 "ok": true,
-                "percent": 320.26726057906455,
+                "percent": 238.4378211716341,
               },
             },
             "entry": "one",
@@ -581,7 +581,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download time diff of assets is 29 ms (320.27%). It's over the 1 ms limit",
+    "message": "Entry \\"one\\": Download time diff of assets is 47 ms (238.44%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "one",
@@ -590,22 +590,22 @@ Array [
     ],
   },
   Object {
-    "compilation": "9eb9a218218f1ee4ba40",
+    "compilation": "6531875fbf1c01886a20",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncDownloadTime": 11.845638877467104,
-              "downloadTime": 257.0503636410362,
-              "initialDownloadTime": 245.2047247635691,
+              "downloadTime": 274.0759598581414,
+              "initialDownloadTime": 262.2303209806743,
             },
             "before": Object {
               "asyncDownloadTime": 2.6903654399671053,
-              "downloadTime": 175.65677040501646,
-              "initialDownloadTime": 172.96640496504935,
+              "downloadTime": 182.54330283717104,
+              "initialDownloadTime": 179.85293739720396,
             },
-            "compilation": "9eb9a218218f1ee4ba40",
+            "compilation": "6531875fbf1c01886a20",
             "diff": Object {
               "asyncDownloadTime": Object {
                 "absolute": 9.1552734375,
@@ -613,14 +613,14 @@ Array [
                 "percent": 340.2985074626866,
               },
               "downloadTime": Object {
-                "absolute": 81.39359323601974,
+                "absolute": 91.53265702097036,
                 "ok": false,
-                "percent": 46.33672419705108,
+                "percent": 50.142982842058935,
               },
               "initialDownloadTime": Object {
-                "absolute": 72.23831979851974,
+                "absolute": 82.37738358347036,
                 "ok": true,
-                "percent": 41.76436448055716,
+                "percent": 45.802634516633155,
               },
             },
             "entry": "two",
@@ -650,7 +650,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time diff of assets is 81 ms (46.34%). It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time diff of assets is 92 ms (50.14%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -664,22 +664,22 @@ Array [
 exports[`maxDownloadTimeDiff with useCompressedSize = false 1`] = `
 Array [
   Object {
-    "compilation": "9eb9a218218f1ee4ba40",
+    "compilation": "6531875fbf1c01886a20",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncDownloadTime": 0,
-              "downloadTime": 167.60575143914474,
-              "initialDownloadTime": 167.60575143914474,
+              "downloadTime": 256.1268053556743,
+              "initialDownloadTime": 256.1268053556743,
             },
             "before": Object {
               "asyncDownloadTime": 0,
-              "downloadTime": 16.041805869654606,
-              "initialDownloadTime": 16.041805869654606,
+              "downloadTime": 32.364694695723685,
+              "initialDownloadTime": 32.364694695723685,
             },
-            "compilation": "9eb9a218218f1ee4ba40",
+            "compilation": "6531875fbf1c01886a20",
             "diff": Object {
               "asyncDownloadTime": Object {
                 "absolute": 0,
@@ -687,14 +687,14 @@ Array [
                 "percent": 0,
               },
               "downloadTime": Object {
-                "absolute": 151.56394556949013,
+                "absolute": 223.76211065995062,
                 "ok": false,
-                "percent": 944.8060075093867,
+                "percent": 691.3771712158808,
               },
               "initialDownloadTime": Object {
-                "absolute": 151.56394556949013,
+                "absolute": 223.76211065995062,
                 "ok": true,
-                "percent": 944.8060075093867,
+                "percent": 691.3771712158808,
               },
             },
             "entry": "one",
@@ -724,7 +724,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download time diff of assets is 152 ms (944.81%). It's over the 1 ms limit",
+    "message": "Entry \\"one\\": Download time diff of assets is 224 ms (691.38%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "one",
@@ -733,22 +733,22 @@ Array [
     ],
   },
   Object {
-    "compilation": "9eb9a218218f1ee4ba40",
+    "compilation": "6531875fbf1c01886a20",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncDownloadTime": 24.09282483552632,
-              "downloadTime": 608.926070363898,
-              "initialDownloadTime": 584.8332455283717,
+              "downloadTime": 652.0522268194901,
+              "initialDownloadTime": 627.9594019839639,
             },
             "before": Object {
               "asyncDownloadTime": 2.8509842722039473,
-              "downloadTime": 249.34065969366776,
-              "initialDownloadTime": 246.4896754214638,
+              "downloadTime": 257.91368986430916,
+              "initialDownloadTime": 255.06270559210526,
             },
-            "compilation": "9eb9a218218f1ee4ba40",
+            "compilation": "6531875fbf1c01886a20",
             "diff": Object {
               "asyncDownloadTime": Object {
                 "absolute": 21.24184056332237,
@@ -756,14 +756,14 @@ Array [
                 "percent": 745.0704225352114,
               },
               "downloadTime": Object {
-                "absolute": 359.58541067023026,
+                "absolute": 394.13853695518094,
                 "ok": false,
-                "percent": 144.21451002496175,
+                "percent": 152.81799782033323,
               },
               "initialDownloadTime": Object {
-                "absolute": 338.34357010690786,
+                "absolute": 372.8966963918586,
                 "ok": true,
-                "percent": 137.26480410523743,
+                "percent": 146.19804785894212,
               },
             },
             "entry": "two",
@@ -793,7 +793,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time diff of assets is 360 ms (144.21%). It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time diff of assets is 394 ms (152.82%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -807,22 +807,22 @@ Array [
 exports[`maxInitialDownloadTimeDiff global 1`] = `
 Array [
   Object {
-    "compilation": "9eb9a218218f1ee4ba40",
+    "compilation": "6531875fbf1c01886a20",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncDownloadTime": 0,
-              "downloadTime": 37.88596705386514,
-              "initialDownloadTime": 37.88596705386514,
+              "downloadTime": 66.11472681949013,
+              "initialDownloadTime": 66.11472681949013,
             },
             "before": Object {
               "asyncDownloadTime": 0,
-              "downloadTime": 9.014731959292764,
-              "initialDownloadTime": 9.014731959292764,
+              "downloadTime": 19.53526547080592,
+              "initialDownloadTime": 19.53526547080592,
             },
-            "compilation": "9eb9a218218f1ee4ba40",
+            "compilation": "6531875fbf1c01886a20",
             "diff": Object {
               "asyncDownloadTime": Object {
                 "absolute": 0,
@@ -830,14 +830,14 @@ Array [
                 "percent": 0,
               },
               "downloadTime": Object {
-                "absolute": 28.871235094572373,
+                "absolute": 46.579461348684205,
                 "ok": true,
-                "percent": 320.26726057906455,
+                "percent": 238.4378211716341,
               },
               "initialDownloadTime": Object {
-                "absolute": 28.871235094572373,
+                "absolute": 46.579461348684205,
                 "ok": false,
-                "percent": 320.26726057906455,
+                "percent": 238.4378211716341,
               },
             },
             "entry": "one",
@@ -867,7 +867,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download time diff of initial assets is 29 ms (320.27%). It's over the 1 ms limit",
+    "message": "Entry \\"one\\": Download time diff of initial assets is 47 ms (238.44%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "one",
@@ -876,22 +876,22 @@ Array [
     ],
   },
   Object {
-    "compilation": "9eb9a218218f1ee4ba40",
+    "compilation": "6531875fbf1c01886a20",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncDownloadTime": 11.845638877467104,
-              "downloadTime": 257.0503636410362,
-              "initialDownloadTime": 245.2047247635691,
+              "downloadTime": 274.0759598581414,
+              "initialDownloadTime": 262.2303209806743,
             },
             "before": Object {
               "asyncDownloadTime": 2.6903654399671053,
-              "downloadTime": 175.65677040501646,
-              "initialDownloadTime": 172.96640496504935,
+              "downloadTime": 182.54330283717104,
+              "initialDownloadTime": 179.85293739720396,
             },
-            "compilation": "9eb9a218218f1ee4ba40",
+            "compilation": "6531875fbf1c01886a20",
             "diff": Object {
               "asyncDownloadTime": Object {
                 "absolute": 9.1552734375,
@@ -899,14 +899,14 @@ Array [
                 "percent": 340.2985074626866,
               },
               "downloadTime": Object {
-                "absolute": 81.39359323601974,
+                "absolute": 91.53265702097036,
                 "ok": true,
-                "percent": 46.33672419705108,
+                "percent": 50.142982842058935,
               },
               "initialDownloadTime": Object {
-                "absolute": 72.23831979851974,
+                "absolute": 82.37738358347036,
                 "ok": false,
-                "percent": 41.76436448055716,
+                "percent": 45.802634516633155,
               },
             },
             "entry": "two",
@@ -936,7 +936,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time diff of initial assets is 72 ms (41.76%). It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time diff of initial assets is 82 ms (45.80%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -954,22 +954,22 @@ exports[`maxInitialDownloadTimeDiff not match - override global 1`] = `Array []`
 exports[`maxInitialDownloadTimeDiff override global 1`] = `
 Array [
   Object {
-    "compilation": "9eb9a218218f1ee4ba40",
+    "compilation": "6531875fbf1c01886a20",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncDownloadTime": 0,
-              "downloadTime": 37.88596705386514,
-              "initialDownloadTime": 37.88596705386514,
+              "downloadTime": 66.11472681949013,
+              "initialDownloadTime": 66.11472681949013,
             },
             "before": Object {
               "asyncDownloadTime": 0,
-              "downloadTime": 9.014731959292764,
-              "initialDownloadTime": 9.014731959292764,
+              "downloadTime": 19.53526547080592,
+              "initialDownloadTime": 19.53526547080592,
             },
-            "compilation": "9eb9a218218f1ee4ba40",
+            "compilation": "6531875fbf1c01886a20",
             "diff": Object {
               "asyncDownloadTime": Object {
                 "absolute": 0,
@@ -977,14 +977,14 @@ Array [
                 "percent": 0,
               },
               "downloadTime": Object {
-                "absolute": 28.871235094572373,
+                "absolute": 46.579461348684205,
                 "ok": true,
-                "percent": 320.26726057906455,
+                "percent": 238.4378211716341,
               },
               "initialDownloadTime": Object {
-                "absolute": 28.871235094572373,
+                "absolute": 46.579461348684205,
                 "ok": false,
-                "percent": 320.26726057906455,
+                "percent": 238.4378211716341,
               },
             },
             "entry": "one",
@@ -1014,7 +1014,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download time diff of initial assets is 29 ms (320.27%). It's over the 1 ms limit",
+    "message": "Entry \\"one\\": Download time diff of initial assets is 47 ms (238.44%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "one",
@@ -1023,22 +1023,22 @@ Array [
     ],
   },
   Object {
-    "compilation": "9eb9a218218f1ee4ba40",
+    "compilation": "6531875fbf1c01886a20",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncDownloadTime": 11.845638877467104,
-              "downloadTime": 257.0503636410362,
-              "initialDownloadTime": 245.2047247635691,
+              "downloadTime": 274.0759598581414,
+              "initialDownloadTime": 262.2303209806743,
             },
             "before": Object {
               "asyncDownloadTime": 2.6903654399671053,
-              "downloadTime": 175.65677040501646,
-              "initialDownloadTime": 172.96640496504935,
+              "downloadTime": 182.54330283717104,
+              "initialDownloadTime": 179.85293739720396,
             },
-            "compilation": "9eb9a218218f1ee4ba40",
+            "compilation": "6531875fbf1c01886a20",
             "diff": Object {
               "asyncDownloadTime": Object {
                 "absolute": 9.1552734375,
@@ -1046,14 +1046,14 @@ Array [
                 "percent": 340.2985074626866,
               },
               "downloadTime": Object {
-                "absolute": 81.39359323601974,
+                "absolute": 91.53265702097036,
                 "ok": true,
-                "percent": 46.33672419705108,
+                "percent": 50.142982842058935,
               },
               "initialDownloadTime": Object {
-                "absolute": 72.23831979851974,
+                "absolute": 82.37738358347036,
                 "ok": false,
-                "percent": 41.76436448055716,
+                "percent": 45.802634516633155,
               },
             },
             "entry": "two",
@@ -1083,7 +1083,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time diff of initial assets is 72 ms (41.76%). It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time diff of initial assets is 82 ms (45.80%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -1097,22 +1097,22 @@ Array [
 exports[`maxInitialDownloadTimeDiff with useCompressedSize = false 1`] = `
 Array [
   Object {
-    "compilation": "9eb9a218218f1ee4ba40",
+    "compilation": "6531875fbf1c01886a20",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncDownloadTime": 0,
-              "downloadTime": 167.60575143914474,
-              "initialDownloadTime": 167.60575143914474,
+              "downloadTime": 256.1268053556743,
+              "initialDownloadTime": 256.1268053556743,
             },
             "before": Object {
               "asyncDownloadTime": 0,
-              "downloadTime": 16.041805869654606,
-              "initialDownloadTime": 16.041805869654606,
+              "downloadTime": 32.364694695723685,
+              "initialDownloadTime": 32.364694695723685,
             },
-            "compilation": "9eb9a218218f1ee4ba40",
+            "compilation": "6531875fbf1c01886a20",
             "diff": Object {
               "asyncDownloadTime": Object {
                 "absolute": 0,
@@ -1120,14 +1120,14 @@ Array [
                 "percent": 0,
               },
               "downloadTime": Object {
-                "absolute": 151.56394556949013,
+                "absolute": 223.76211065995062,
                 "ok": true,
-                "percent": 944.8060075093867,
+                "percent": 691.3771712158808,
               },
               "initialDownloadTime": Object {
-                "absolute": 151.56394556949013,
+                "absolute": 223.76211065995062,
                 "ok": false,
-                "percent": 944.8060075093867,
+                "percent": 691.3771712158808,
               },
             },
             "entry": "one",
@@ -1157,7 +1157,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download time diff of initial assets is 152 ms (944.81%). It's over the 1 ms limit",
+    "message": "Entry \\"one\\": Download time diff of initial assets is 224 ms (691.38%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "one",
@@ -1166,22 +1166,22 @@ Array [
     ],
   },
   Object {
-    "compilation": "9eb9a218218f1ee4ba40",
+    "compilation": "6531875fbf1c01886a20",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "after": Object {
               "asyncDownloadTime": 24.09282483552632,
-              "downloadTime": 608.926070363898,
-              "initialDownloadTime": 584.8332455283717,
+              "downloadTime": 652.0522268194901,
+              "initialDownloadTime": 627.9594019839639,
             },
             "before": Object {
               "asyncDownloadTime": 2.8509842722039473,
-              "downloadTime": 249.34065969366776,
-              "initialDownloadTime": 246.4896754214638,
+              "downloadTime": 257.91368986430916,
+              "initialDownloadTime": 255.06270559210526,
             },
-            "compilation": "9eb9a218218f1ee4ba40",
+            "compilation": "6531875fbf1c01886a20",
             "diff": Object {
               "asyncDownloadTime": Object {
                 "absolute": 21.24184056332237,
@@ -1189,14 +1189,14 @@ Array [
                 "percent": 745.0704225352114,
               },
               "downloadTime": Object {
-                "absolute": 359.58541067023026,
+                "absolute": 394.13853695518094,
                 "ok": true,
-                "percent": 144.21451002496175,
+                "percent": 152.81799782033323,
               },
               "initialDownloadTime": Object {
-                "absolute": 338.34357010690786,
+                "absolute": 372.8966963918586,
                 "ok": false,
-                "percent": 137.26480410523743,
+                "percent": 146.19804785894212,
               },
             },
             "entry": "two",
@@ -1226,7 +1226,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time diff of initial assets is 338 ms (137.26%). It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time diff of initial assets is 373 ms (146.20%). It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",

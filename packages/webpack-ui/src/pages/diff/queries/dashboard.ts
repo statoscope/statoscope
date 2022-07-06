@@ -173,8 +173,8 @@ $downloadTimeB: $assetsInitialSizesB
     visible: $value
   },
   {
-    $a: ($statA.compilation.chunks + $statA.compilation.chunks.[not isRuntime]..children).size();
-    $b: ($statB.compilation.chunks + $statB.compilation.chunks.[not isRuntime]..children).size();
+    $a: ($statA.compilation.chunks + $statA.compilation.chunks..children).size();
+    $b: ($statB.compilation.chunks + $statB.compilation.chunks..children).size();
     $value: $b - $a;
     $valueP: $b.percentFrom($a);
     value: $value,

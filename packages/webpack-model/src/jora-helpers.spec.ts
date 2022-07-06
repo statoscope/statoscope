@@ -364,7 +364,7 @@ describe('assets', () => {
     expect(helpers.asset_getSize(firstCompilation.assets[0], hash, false))
       .toMatchInlineSnapshot(`
       Object {
-        "size": 12277,
+        "size": 12512,
       }
     `);
     expect(helpers.asset_getSize(firstCompilation.assets[0], hash, true))
@@ -374,7 +374,7 @@ describe('assets', () => {
         "meta": Object {
           "level": 6,
         },
-        "size": 8615,
+        "size": 8789,
       }
     `);
   });
@@ -383,14 +383,14 @@ describe('assets', () => {
       .toMatchInlineSnapshot(`
       Object {
         "compressor": undefined,
-        "size": 13233,
+        "size": 14281,
       }
     `);
     expect(helpers.assets_getTotalSize(firstCompilation.assets, hash, true))
       .toMatchInlineSnapshot(`
       Object {
         "compressor": "gzip",
-        "size": 9231,
+        "size": 9929,
       }
     `);
   });
@@ -400,31 +400,53 @@ describe('entrypoint', () => {
   test('entrypoint_getChunks', () => {
     expect(
       helpers.entrypoint_getChunks(firstCompilation.entrypoints[0]).map((c) => c.id)
-    ).toEqual([255]);
+    ).toEqual([929, 255]);
+    expect(
+      helpers.entrypoint_getChunks(firstCompilation.entrypoints[1]).map((c) => c.id)
+    ).toEqual([929, 804, 848]);
   });
   test('entrypoint_getInitialChunks', () => {
     expect(
       helpers
         .entrypoint_getInitialChunks(firstCompilation.entrypoints[0])
         .map((c) => c.id)
-    ).toEqual([255]);
+    ).toEqual([929, 255]);
+    expect(
+      helpers
+        .entrypoint_getInitialChunks(firstCompilation.entrypoints[1])
+        .map((c) => c.id)
+    ).toEqual([929, 804]);
   });
   test('entrypoint_getInitialSize', () => {
     expect(
       helpers.entrypoint_getInitialSize(firstCompilation.entrypoints[0], hash, false)
     ).toMatchInlineSnapshot(`
       Object {
-        "size": 799,
+        "compressor": undefined,
+        "size": 1612,
       }
     `);
     expect(helpers.entrypoint_getInitialSize(firstCompilation.entrypoints[0], hash, true))
       .toMatchInlineSnapshot(`
       Object {
         "compressor": "gzip",
-        "meta": Object {
-          "level": 6,
-        },
-        "size": 449,
+        "size": 973,
+      }
+    `);
+
+    expect(
+      helpers.entrypoint_getInitialSize(firstCompilation.entrypoints[1], hash, false)
+    ).toMatchInlineSnapshot(`
+      Object {
+        "compressor": undefined,
+        "size": 12704,
+      }
+    `);
+    expect(helpers.entrypoint_getInitialSize(firstCompilation.entrypoints[1], hash, true))
+      .toMatchInlineSnapshot(`
+      Object {
+        "compressor": "gzip",
+        "size": 8958,
       }
     `);
   });
@@ -432,6 +454,9 @@ describe('entrypoint', () => {
     expect(
       helpers.entrypoint_getAsyncChunks(firstCompilation.entrypoints[0]).map((c) => c.id)
     ).toEqual([]);
+    expect(
+      helpers.entrypoint_getAsyncChunks(firstCompilation.entrypoints[1]).map((c) => c.id)
+    ).toEqual([848]);
   });
   test('entrypoint_getAsyncSize', () => {
     expect(helpers.entrypoint_getAsyncSize(firstCompilation.entrypoints[0], hash, false))
@@ -446,18 +471,43 @@ describe('entrypoint', () => {
         "size": 0,
       }
     `);
+
+    expect(helpers.entrypoint_getAsyncSize(firstCompilation.entrypoints[1], hash, false))
+      .toMatchInlineSnapshot(`
+      Object {
+        "size": 142,
+      }
+    `);
+    expect(helpers.entrypoint_getAsyncSize(firstCompilation.entrypoints[1], hash, true))
+      .toMatchInlineSnapshot(`
+      Object {
+        "compressor": "gzip",
+        "meta": Object {
+          "level": 6,
+        },
+        "size": 134,
+      }
+    `);
   });
   test('entrypoint_getAssets', () => {
     expect(
       helpers.entrypoint_getAssets(firstCompilation.entrypoints[0]).map((c) => c.name)
-    ).toEqual(['one.js']);
+    ).toEqual(['929.js', 'one.js']);
+    expect(
+      helpers.entrypoint_getAssets(firstCompilation.entrypoints[1]).map((c) => c.name)
+    ).toEqual(['929.js', 'two.js', '848.js']);
   });
   test('entrypoint_getInitialAssets', () => {
     expect(
       helpers
         .entrypoint_getInitialAssets(firstCompilation.entrypoints[0])
         .map((c) => c.name)
-    ).toEqual(['one.js']);
+    ).toEqual(['929.js', 'one.js']);
+    expect(
+      helpers
+        .entrypoint_getInitialAssets(firstCompilation.entrypoints[1])
+        .map((c) => c.name)
+    ).toEqual(['929.js', 'two.js']);
   });
   test('entrypoint_getAsyncAssets', () => {
     expect(
@@ -465,5 +515,10 @@ describe('entrypoint', () => {
         .entrypoint_getAsyncAssets(firstCompilation.entrypoints[0])
         .map((c) => c.name)
     ).toEqual([]);
+    expect(
+      helpers
+        .entrypoint_getAsyncAssets(firstCompilation.entrypoints[1])
+        .map((c) => c.name)
+    ).toEqual(['848.js']);
   });
 });

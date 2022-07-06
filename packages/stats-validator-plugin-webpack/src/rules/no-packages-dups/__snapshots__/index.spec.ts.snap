@@ -3,7 +3,7 @@
 exports[`exclude no exclude 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": "- simple/node_modules/bar  1.0.0
@@ -18,7 +18,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "package": "bar",
           },
         },
@@ -60,7 +60,7 @@ exports[`exclude string 1`] = `Array []`;
 exports[`should work 1`] = `
 Array [
   Object {
-    "compilation": "34ea3837a1050e206fe0",
+    "compilation": "c6133ad65823403ee6df",
     "details": Array [
       Object {
         "content": "- simple/node_modules/bar  1.0.0
@@ -75,7 +75,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "34ea3837a1050e206fe0",
+            "compilation": "c6133ad65823403ee6df",
             "package": "bar",
           },
         },

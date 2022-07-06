@@ -126,6 +126,14 @@ Array [
     "after": "simple/src/index2.ts",
     "before": "./simple/src/index2.ts",
   },
+  Object {
+    "after": null,
+    "before": "",
+  },
+  Object {
+    "after": null,
+    "before": "",
+  },
 ]
 `;
 
@@ -188,6 +196,14 @@ Array [
     "before": "./simple/node_modules/foo/node_modules/bar/index.js",
   },
   Object {
+    "after": "webpack/runtime/chunk loaded",
+    "before": "webpack/runtime/chunk loaded",
+  },
+  Object {
+    "after": "webpack/runtime/chunk loaded",
+    "before": "webpack/runtime/chunk loaded",
+  },
+  Object {
     "after": "webpack/runtime/compat get default export",
     "before": "webpack/runtime/compat get default export",
   },
@@ -222,6 +238,10 @@ Array [
   Object {
     "after": "webpack/runtime/hasOwnProperty shorthand",
     "before": "webpack/runtime/hasOwnProperty shorthand",
+  },
+  Object {
+    "after": "webpack/runtime/jsonp chunk loading",
+    "before": "webpack/runtime/jsonp chunk loading",
   },
   Object {
     "after": "webpack/runtime/jsonp chunk loading",
