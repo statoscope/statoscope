@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/cli",
-  "version": "5.22.1-alpha.0",
+  "version": "5.22.1-alpha.1",
   "description": "Statoscope CLI tools",
   "scripts": {
     "build": "../../node_modules/.bin/tsc",
@@ -30,10 +30,10 @@
     "@statoscope/stats-extension-custom-reports": "5.22.0",
     "@statoscope/stats-validator": "5.22.0",
     "@statoscope/stats-validator-reporter-console": "5.22.0",
-    "@statoscope/stats-validator-reporter-stats-report": "5.22.1-alpha.0",
+    "@statoscope/stats-validator-reporter-stats-report": "5.22.1-alpha.1",
     "@statoscope/types": "5.22.0",
-    "@statoscope/webpack-model": "5.22.1-alpha.0",
-    "@statoscope/webpack-ui": "5.22.1-alpha.0",
+    "@statoscope/webpack-model": "5.22.1-alpha.1",
+    "@statoscope/webpack-ui": "5.22.1-alpha.1",
     "@types/yargs": "^17.0.10",
     "open": "^8.4.0",
     "yargs": "^17.5.1"
