@@ -434,6 +434,12 @@ function prepareChunk(chunk: Webpack.Chunk | null, context: ProcessingContext): 
     chunk.files = [];
   }
 
+  if (chunk.sizes) {
+    const keys = Object.keys(chunk.sizes);
+    if (keys.length === 1 && keys[0] === 'runtime') {
+      (<NormalizedChunk>chunk).isRuntime = true;
+    }
+  }
   if (chunk.children) {
     normalizedChunk.children = chunk.children
       .map((c) => resolveRawChunk(c, context))

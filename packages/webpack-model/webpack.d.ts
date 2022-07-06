@@ -52,6 +52,7 @@ export declare namespace Webpack {
     modules?: Module[];
     size: number;
     reason?: string | null;
+    sizes?: Record<string, number | undefined>;
     children?: Array<ChunkID | Chunk>;
     siblings?: Array<ChunkID | Chunk>;
     parents?: Array<ChunkID | Chunk>;

@@ -31,10 +31,10 @@ export function assetItemConfig(getter = '$', hash = '#.params.hash'): AssetItem
     $entrypoints:${hash}.resolveStat().compilation.entrypoints.({
       name,
       data, 
-      chunks: chunks + chunks..children
+      chunks: chunks + chunks.[not isRuntime]..children
     });
     $topLevelAssetChunks:chunks.[files has @];
-    $assetChunks: $topLevelAssetChunks + $topLevelAssetChunks..children.[files has @];
+    $assetChunks: $topLevelAssetChunks + $topLevelAssetChunks.[not isRuntime]..children.[files has @];
     $assetEntrypoints:$entrypoints.[chunks[id in $assetChunks.id]];
     $chunksModules:$assetChunks.(..modules).[not shouldHideModule()];
     $chunksModulesPackages:$chunksModules.(resolvedResource.nodeModule()).[].(name.resolvePackage(${hash})).[];

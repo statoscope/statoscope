@@ -549,7 +549,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
 
     entrypoint_getChunks(entrypoint: NormalizedEntrypointItem): NormalizedChunk[] {
       return context.query(
-        `data.chunks + data.chunks..children`,
+        `data.chunks + data.chunks.[not isRuntime]..children`,
         entrypoint
       ) as NormalizedChunk[];
     },
@@ -585,19 +585,19 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
     },
     entrypoint_getAssets(entrypoint: NormalizedEntrypointItem): NormalizedAsset[] {
       return context.query(
-        `(data.chunks + data.chunks..children).files`,
+        `(data.chunks + data.chunks.[not isRuntime]..children).files`,
         entrypoint
       ) as NormalizedAsset[];
     },
     entrypoint_getInitialAssets(entrypoint: NormalizedEntrypointItem): NormalizedAsset[] {
       return context.query(
-        `(data.chunks + data.chunks..children).[initial].files`,
+        `(data.chunks + data.chunks.[not isRuntime]..children).[initial].files`,
         entrypoint
       ) as NormalizedAsset[];
     },
     entrypoint_getAsyncAssets(entrypoint: NormalizedEntrypointItem): NormalizedAsset[] {
       return context.query(
-        `(data.chunks + data.chunks..children).[not initial].files`,
+        `(data.chunks + data.chunks.[not isRuntime]..children).[not initial].files`,
         entrypoint
       ) as NormalizedAsset[];
     },

@@ -117,7 +117,7 @@ const entryDownloadTimeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
         maxInitialDownloadTime: [$matchedRule.maxInitialDownloadTime, $params.global.maxInitialDownloadTime].useNotNullish(),
         maxAsyncDownloadTime: [$matchedRule.maxAsyncDownloadTime, $params.global.maxAsyncDownloadTime].useNotNullish(),
       };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
+      $chunks: ($entry.data.chunks + $entry.data.chunks.[not isRuntime]..children);
       $initialChunks: $chunks.[initial];
       $asyncChunks: $chunks.[not initial];
       $downloadTime: $chunks.$getSizeByChunks($compilation.hash).getDownloadTime($network);

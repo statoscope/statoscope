@@ -31,6 +31,7 @@ export type NormalizedChunk = Omit<
   children: NormalizedChunk[];
   parents: NormalizedChunk[];
   siblings: NormalizedChunk[];
+  isRuntime?: boolean;
 };
 export type NormalizedEntrypointItem = { name: string; data: NormalizedEntrypoint };
 export type NormalizedEntrypoint = Omit<Entrypoint, 'chunks' | 'assets'> & {

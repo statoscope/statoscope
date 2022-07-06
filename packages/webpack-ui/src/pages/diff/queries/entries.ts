@@ -27,7 +27,7 @@ $intersectedEntrypoints: $statA.compilation.entrypoints.({
 $entryDiff: {
   added: $addedEntrypoints
     .({
-      $chunksAll: entry.data.chunks + entry.data.chunks..children;
+      $chunksAll: entry.data.chunks + entry.data.chunks.[not isRuntime]..children;
       $chunksInitial: $chunksAll.[initial];
       $chunksAsync: $chunksAll.[not initial];
 
@@ -73,7 +73,7 @@ $entryDiff: {
     .sort(entry.isOverSizeLimit asc, diff.[id='initialSize'].pick().b desc),
   removed: $removedEntrypoints
     .({
-      $chunksAll: entry.data.chunks + entry.data.chunks..children;
+      $chunksAll: entry.data.chunks + entry.data.chunks.[not isRuntime]..children;
       $chunksInitial: $chunksAll.[initial];
       $chunksAsync: $chunksAll.[not initial];
 
@@ -122,8 +122,8 @@ $entryDiff: {
       $a: a;
       $b: b;
     
-      $chunksAllA: $a.entry.data.chunks + $a.entry.data.chunks..children;
-      $chunksAllB: $b.entry.data.chunks + $b.entry.data.chunks..children;
+      $chunksAllA: $a.entry.data.chunks + $a.entry.data.chunks.[not isRuntime]..children;
+      $chunksAllB: $b.entry.data.chunks + $b.entry.data.chunks.[not isRuntime]..children;
 
       $chunksInitialA: $chunksAllA.[initial];
       $chunksInitialB: $chunksAllB.[initial];

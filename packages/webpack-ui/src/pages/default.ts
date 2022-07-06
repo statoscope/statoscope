@@ -157,7 +157,7 @@ export default function (discovery: StatoscopeWidget): void {
                   visible: $duplicates
                 },
                 {
-                  value: ($statA.compilation.chunks + $statA.compilation.chunks..children).size(),
+                  value: ($statA.compilation.chunks + $statA.compilation.chunks.[not isRuntime]..children).size(),
                   label: 'Chunks',
                   visible: $statA.compilation.chunks
                 },

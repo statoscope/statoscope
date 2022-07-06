@@ -113,7 +113,7 @@ const entryDownloadSizeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
         maxInitialSize: [$matchedRule.maxInitialSize, $params.global.maxInitialSize].useNotNullish(),
         maxAsyncSize: [$matchedRule.maxAsyncSize, $params.global.maxAsyncSize].useNotNullish(),
       };
-      $chunks: ($entry.data.chunks + $entry.data.chunks..children);
+      $chunks: ($entry.data.chunks + $entry.data.chunks.[not isRuntime]..children);
       $initialChunks: $chunks.[initial];
       $asyncChunks: $chunks.[not initial];
       $size: $chunks.$getSizeByChunks($compilation.hash);

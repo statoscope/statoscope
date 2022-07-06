@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.21.1 (06 July 2022)
+
+### Fixes
+
+- `[webpack-ui]` - don't use runtime-chunk children to calculate asset size
+- `[webpack-model]` - don't use runtime-chunk children to calculate asset size
+- `[stats-validator-plugin-webpack]` - don't use runtime-chunk children to calculate asset size
+
 ## 5.21.0 (03 July 2022)
 
 ### Features
