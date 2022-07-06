@@ -6,7 +6,7 @@ Array [
     "input.json",
   ],
   Array [
-    "c6133ad65823403ee6df",
+    "a5ca8b0ac9b2c1315153",
   ],
   Array [
     "error  Module ./simple/src/index.ts + 3 modules should not be used  webpack/restricted-modules",

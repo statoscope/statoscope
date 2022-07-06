@@ -337,7 +337,7 @@ Object {
                 "page": "module",
               },
               "path": "webpack/runtime/chunk loaded",
-              "weight": 1772,
+              "weight": 886,
               "weightCompressor": undefined,
             },
             Object {
@@ -348,7 +348,7 @@ Object {
                 "page": "module",
               },
               "path": "webpack/runtime/compat get default export",
-              "weight": 534,
+              "weight": 267,
               "weightCompressor": undefined,
             },
             Object {
@@ -359,7 +359,7 @@ Object {
                 "page": "module",
               },
               "path": "webpack/runtime/define property getters",
-              "weight": 616,
+              "weight": 308,
               "weightCompressor": undefined,
             },
             Object {
@@ -403,7 +403,7 @@ Object {
                 "page": "module",
               },
               "path": "webpack/runtime/hasOwnProperty shorthand",
-              "weight": 176,
+              "weight": 88,
               "weightCompressor": undefined,
             },
             Object {
@@ -414,7 +414,7 @@ Object {
                 "page": "module",
               },
               "path": "webpack/runtime/jsonp chunk loading",
-              "weight": 4781,
+              "weight": 3215,
               "weightCompressor": undefined,
             },
             Object {
@@ -436,7 +436,7 @@ Object {
                 "page": "module",
               },
               "path": "webpack/runtime/make namespace object",
-              "weight": 548,
+              "weight": 274,
               "weightCompressor": undefined,
             },
             Object {
@@ -454,21 +454,21 @@ Object {
           "label": "runtime",
           "link": undefined,
           "path": "webpack/runtime",
-          "weight": 11511,
+          "weight": 8122,
           "weightCompressor": undefined,
         },
       ],
       "label": "webpack",
       "link": undefined,
       "path": "webpack",
-      "weight": 11511,
+      "weight": 8122,
       "weightCompressor": undefined,
     },
   ],
   "label": "",
   "link": undefined,
   "path": "/",
-  "weight": 24268.84,
+  "weight": 20879.84,
   "weightCompressor": undefined,
 }
 `;

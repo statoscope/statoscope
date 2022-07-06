@@ -19,7 +19,7 @@ Object {
             "description": "Webpack adapter for @statoscope/stats-extension-package-info",
             "homepage": "https://github.com/statoscope/statoscope/",
             "name": "@statoscope/webpack-stats-extension-package-info",
-            "version": "5.22.1-alpha.0",
+            "version": "5.22.1-alpha.1",
           },
           "author": Object {
             "name": "Sergey Melyukov",
@@ -122,7 +122,7 @@ Object {
             "description": "Webpack adapter for @statoscope/stats-extension-compressed",
             "homepage": "https://github.com/statoscope/statoscope/",
             "name": "@statoscope/webpack-stats-extension-compressed",
-            "version": "5.22.1-alpha.0",
+            "version": "5.22.1-alpha.1",
           },
           "author": Object {
             "name": "Sergey Melyukov",
@@ -136,7 +136,7 @@ Object {
         "payload": Object {
           "compilations": Array [
             Object {
-              "id": "c6133ad65823403ee6df",
+              "id": "a5ca8b0ac9b2c1315153",
               "resources": Array [
                 Object {
                   "id": "one.js",
@@ -145,7 +145,7 @@ Object {
                     "meta": Object {
                       "level": 6,
                     },
-                    "size": 804,
+                    "size": 211,
                   },
                 },
                 Object {
@@ -155,7 +155,7 @@ Object {
                     "meta": Object {
                       "level": 6,
                     },
-                    "size": 8789,
+                    "size": 7141,
                   },
                 },
                 Object {
@@ -166,6 +166,16 @@ Object {
                       "level": 6,
                     },
                     "size": 33,
+                  },
+                },
+                Object {
+                  "id": "runtime.js",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 1583,
                   },
                 },
                 Object {
@@ -229,26 +239,6 @@ Object {
                   },
                 },
                 Object {
-                  "id": "webpack/runtime/chunk loaded",
-                  "size": Object {
-                    "compressor": "gzip",
-                    "meta": Object {
-                      "level": 6,
-                    },
-                    "size": 407,
-                  },
-                },
-                Object {
-                  "id": "webpack/runtime/make namespace object",
-                  "size": Object {
-                    "compressor": "gzip",
-                    "meta": Object {
-                      "level": 6,
-                    },
-                    "size": 186,
-                  },
-                },
-                Object {
                   "id": "webpack/runtime/ensure chunk",
                   "size": Object {
                     "compressor": "gzip",
@@ -256,16 +246,6 @@ Object {
                       "level": 6,
                     },
                     "size": 212,
-                  },
-                },
-                Object {
-                  "id": "webpack/runtime/jsonp chunk loading",
-                  "size": Object {
-                    "compressor": "gzip",
-                    "meta": Object {
-                      "level": 6,
-                    },
-                    "size": 1124,
                   },
                 },
                 Object {
@@ -279,13 +259,23 @@ Object {
                   },
                 },
                 Object {
-                  "id": "webpack/runtime/define property getters",
+                  "id": "webpack/runtime/chunk loaded",
                   "size": Object {
                     "compressor": "gzip",
                     "meta": Object {
                       "level": 6,
                     },
-                    "size": 197,
+                    "size": 407,
+                  },
+                },
+                Object {
+                  "id": "webpack/runtime/jsonp chunk loading",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 1116,
                   },
                 },
                 Object {
@@ -296,6 +286,26 @@ Object {
                       "level": 6,
                     },
                     "size": 192,
+                  },
+                },
+                Object {
+                  "id": "webpack/runtime/make namespace object",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 186,
+                  },
+                },
+                Object {
+                  "id": "webpack/runtime/define property getters",
+                  "size": Object {
+                    "compressor": "gzip",
+                    "meta": Object {
+                      "level": 6,
+                    },
+                    "size": 197,
                   },
                 },
                 Object {
@@ -448,7 +458,7 @@ Object {
             "description": "Stats report reporter for @statoscope/stats-validator",
             "homepage": "https://github.com/statoscope/statoscope/",
             "name": "@statoscope/stats-validator-reporter-stats-report",
-            "version": "5.22.1-alpha.0",
+            "version": "5.22.1-alpha.1",
           },
           "author": Object {
             "name": "Sergey Melyukov",
@@ -462,14 +472,14 @@ Object {
         "payload": Object {
           "compilations": Array [
             Object {
-              "id": "c6133ad65823403ee6df",
+              "id": "a5ca8b0ac9b2c1315153",
               "items": Array [
                 Object {
                   "details": Array [
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "c6133ad65823403ee6df",
+                          "compilation": "a5ca8b0ac9b2c1315153",
                           "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
                         },
                       },
@@ -498,7 +508,7 @@ Object {
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "c6133ad65823403ee6df",
+                          "compilation": "a5ca8b0ac9b2c1315153",
                           "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
                         },
                       },
@@ -527,7 +537,7 @@ Object {
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "c6133ad65823403ee6df",
+                          "compilation": "a5ca8b0ac9b2c1315153",
                           "module": "./node_modules/babel-loader/lib/index.js!./simple/src/sub-module.ts",
                         },
                       },
@@ -556,7 +566,7 @@ Object {
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "c6133ad65823403ee6df",
+                          "compilation": "a5ca8b0ac9b2c1315153",
                           "module": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
                         },
                       },
@@ -585,7 +595,7 @@ Object {
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "c6133ad65823403ee6df",
+                          "compilation": "a5ca8b0ac9b2c1315153",
                           "module": "asset/resource|./simple/src/test.txt",
                         },
                       },
@@ -614,7 +624,7 @@ Object {
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "c6133ad65823403ee6df",
+                          "compilation": "a5ca8b0ac9b2c1315153",
                           "module": "./node_modules/babel-loader/lib/index.js!./simple/src/dyn.ts",
                         },
                       },
@@ -643,7 +653,7 @@ Object {
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "c6133ad65823403ee6df",
+                          "compilation": "a5ca8b0ac9b2c1315153",
                           "module": "asset/inline|./simple/src/statoscope.png",
                         },
                       },
@@ -672,7 +682,7 @@ Object {
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "c6133ad65823403ee6df",
+                          "compilation": "a5ca8b0ac9b2c1315153",
                           "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
                         },
                       },
@@ -701,7 +711,7 @@ Object {
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "c6133ad65823403ee6df",
+                          "compilation": "a5ca8b0ac9b2c1315153",
                           "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
                         },
                       },
@@ -730,7 +740,7 @@ Object {
                     Object {
                       "payload": Object {
                         "context": Object {
-                          "compilation": "c6133ad65823403ee6df",
+                          "compilation": "a5ca8b0ac9b2c1315153",
                           "package": "foo",
                         },
                       },
@@ -795,7 +805,7 @@ Object {
                   "description": "Plugin for @statoscope/stats-validator to validate webpack stats",
                   "homepage": "https://github.com/statoscope/statoscope/",
                   "name": "@statoscope/stats-validator-plugin-webpack",
-                  "version": "5.22.1-alpha.0",
+                  "version": "5.22.1-alpha.1",
                 },
               },
               "name": "webpack/restricted-modules",
@@ -811,7 +821,7 @@ Object {
                   "description": "Plugin for @statoscope/stats-validator to validate webpack stats",
                   "homepage": "https://github.com/statoscope/statoscope/",
                   "name": "@statoscope/stats-validator-plugin-webpack",
-                  "version": "5.22.1-alpha.0",
+                  "version": "5.22.1-alpha.1",
                 },
               },
               "name": "webpack/restricted-packages",
@@ -2358,8 +2368,7 @@ Object {
                     "built": false,
                     "cached": false,
                     "chunks": Array [
-                      804,
-                      255,
+                      666,
                     ],
                     "codeGenerated": true,
                     "depth": null,
@@ -2397,8 +2406,7 @@ Object {
                     "built": false,
                     "cached": false,
                     "chunks": Array [
-                      804,
-                      255,
+                      666,
                     ],
                     "codeGenerated": true,
                     "depth": null,
@@ -2436,8 +2444,7 @@ Object {
                     "built": false,
                     "cached": false,
                     "chunks": Array [
-                      804,
-                      255,
+                      666,
                     ],
                     "codeGenerated": true,
                     "depth": null,
@@ -2475,7 +2482,7 @@ Object {
                     "built": false,
                     "cached": false,
                     "chunks": Array [
-                      804,
+                      666,
                     ],
                     "codeGenerated": true,
                     "depth": null,
@@ -2513,7 +2520,7 @@ Object {
                     "built": false,
                     "cached": false,
                     "chunks": Array [
-                      804,
+                      666,
                     ],
                     "codeGenerated": true,
                     "depth": null,
@@ -2551,7 +2558,7 @@ Object {
                     "built": false,
                     "cached": false,
                     "chunks": Array [
-                      804,
+                      666,
                     ],
                     "codeGenerated": true,
                     "depth": null,
@@ -2589,8 +2596,7 @@ Object {
                     "built": false,
                     "cached": false,
                     "chunks": Array [
-                      804,
-                      255,
+                      666,
                     ],
                     "codeGenerated": true,
                     "depth": null,
@@ -2628,8 +2634,7 @@ Object {
                     "built": false,
                     "cached": false,
                     "chunks": Array [
-                      804,
-                      255,
+                      666,
                     ],
                     "codeGenerated": true,
                     "depth": null,
@@ -2650,9 +2655,9 @@ Object {
                     "preOrderIndex": null,
                     "providedExports": Array [],
                     "reasons": Array [],
-                    "size": 3227,
+                    "size": 3215,
                     "sizes": Object {
-                      "runtime": 3227,
+                      "runtime": 3215,
                     },
                     "type": "module",
                     "usedExports": null,
@@ -2667,7 +2672,7 @@ Object {
                     "built": false,
                     "cached": false,
                     "chunks": Array [
-                      804,
+                      666,
                     ],
                     "codeGenerated": true,
                     "depth": null,
@@ -2705,8 +2710,7 @@ Object {
                     "built": false,
                     "cached": false,
                     "chunks": Array [
-                      804,
-                      255,
+                      666,
                     ],
                     "codeGenerated": true,
                     "depth": null,
@@ -2744,7 +2748,7 @@ Object {
                     "built": false,
                     "cached": false,
                     "chunks": Array [
-                      804,
+                      666,
                     ],
                     "codeGenerated": true,
                     "depth": null,
@@ -2776,7 +2780,7 @@ Object {
                 ],
               ],
             },
-            "id": "c6133ad65823403ee6df",
+            "id": "a5ca8b0ac9b2c1315153",
           },
         ],
       },
@@ -2805,12 +2809,37 @@ Object {
       "info": Object {
         "javascriptModule": false,
         "minimized": true,
-        "size": 12512,
+        "size": 9550,
       },
       "isOverSizeLimit": false,
       "name": "two.js",
       "related": Object {},
-      "size": 12512,
+      "size": 9550,
+      "type": "asset",
+    },
+    Object {
+      "auxiliaryChunkIdHints": Array [],
+      "auxiliaryChunkNames": Array [],
+      "auxiliaryChunks": Array [],
+      "cached": false,
+      "chunkIdHints": Array [],
+      "chunkNames": Array [
+        "runtime",
+      ],
+      "chunks": Array [
+        666,
+      ],
+      "comparedForEmit": true,
+      "emitted": false,
+      "info": Object {
+        "javascriptModule": false,
+        "minimized": true,
+        "size": 3069,
+      },
+      "isOverSizeLimit": false,
+      "name": "runtime.js",
+      "related": Object {},
+      "size": 3069,
       "type": "asset",
     },
     Object {
@@ -2830,12 +2859,12 @@ Object {
       "info": Object {
         "javascriptModule": false,
         "minimized": true,
-        "size": 1420,
+        "size": 265,
       },
       "isOverSizeLimit": false,
       "name": "one.js",
       "related": Object {},
-      "size": 1420,
+      "size": 265,
       "type": "asset",
     },
     Object {
@@ -2917,33 +2946,30 @@ Object {
     "one": Array [
       "one.js",
     ],
+    "runtime": Array [
+      "runtime.js",
+    ],
     "two": Array [
       "two.js",
     ],
   },
-  "builtAt": 1657146399732,
+  "builtAt": 1657148947698,
   "children": Array [],
   "chunks": Array [
     Object {
       "auxiliaryFiles": Array [],
       "children": Array [],
       "childrenByOrder": Object {},
-      "entry": true,
+      "entry": false,
       "files": Array [
         "one.js",
       ],
-      "hash": "b6696e9ca45a2a9aff3c",
+      "hash": "b1b8a67ecb015388468a",
       "id": 255,
       "idHints": Array [],
       "initial": true,
       "modules": Array [
         1,
-        15,
-        16,
-        17,
-        21,
-        22,
-        24,
       ],
       "names": Array [
         "one",
@@ -2961,40 +2987,32 @@ Object {
       "recorded": false,
       "rendered": true,
       "runtime": Array [
-        "one",
+        "runtime",
       ],
       "siblings": Array [
+        666,
         929,
       ],
-      "size": 3658,
+      "size": 281,
       "sizes": Object {
         "javascript": 281,
-        "runtime": 3377,
       },
     },
     Object {
-      "auxiliaryFiles": Array [
-        "196de80223be41153cc7.txt",
-      ],
+      "auxiliaryFiles": Array [],
       "children": Array [
         848,
       ],
       "childrenByOrder": Object {},
       "entry": true,
       "files": Array [
-        "two.js",
+        "runtime.js",
       ],
-      "hash": "405d3d922e38842cfae5",
-      "id": 804,
+      "hash": "fe428a896350ab5e5343",
+      "id": 666,
       "idHints": Array [],
       "initial": true,
       "modules": Array [
-        11,
-        12,
-        5,
-        2,
-        13,
-        7,
         15,
         16,
         17,
@@ -3006,6 +3024,65 @@ Object {
         23,
         24,
         25,
+      ],
+      "names": Array [
+        "runtime",
+      ],
+      "origins": Array [
+        Object {
+          "loc": "one",
+          "module": "",
+          "moduleIdentifier": "",
+          "moduleName": "",
+          "request": "./src/index.ts",
+        },
+        Object {
+          "loc": "two",
+          "module": "",
+          "moduleIdentifier": "",
+          "moduleName": "",
+          "request": "./src/index2.ts",
+        },
+      ],
+      "parents": Array [],
+      "recorded": false,
+      "rendered": true,
+      "runtime": Array [
+        "runtime",
+      ],
+      "siblings": Array [
+        255,
+        804,
+        929,
+      ],
+      "size": 8122,
+      "sizes": Object {
+        "runtime": 8122,
+      },
+    },
+    Object {
+      "auxiliaryFiles": Array [
+        "196de80223be41153cc7.txt",
+      ],
+      "children": Array [
+        848,
+      ],
+      "childrenByOrder": Object {},
+      "entry": false,
+      "files": Array [
+        "two.js",
+      ],
+      "hash": "dab964f0fa465b82d460",
+      "id": 804,
+      "idHints": Array [],
+      "initial": true,
+      "modules": Array [
+        11,
+        12,
+        5,
+        2,
+        13,
+        7,
       ],
       "names": Array [
         "two",
@@ -3023,16 +3100,16 @@ Object {
       "recorded": false,
       "rendered": true,
       "runtime": Array [
-        "two",
+        "runtime",
       ],
       "siblings": Array [
+        666,
         929,
       ],
-      "size": 19899.84,
+      "size": 11765.84,
       "sizes": Object {
         "asset": 15,
         "javascript": 11750.84,
-        "runtime": 8134,
       },
     },
     Object {
@@ -3062,13 +3139,14 @@ Object {
         },
       ],
       "parents": Array [
+        666,
         804,
         929,
       ],
       "recorded": false,
       "rendered": true,
       "runtime": Array [
-        "two",
+        "runtime",
       ],
       "siblings": Array [],
       "size": 21,
@@ -3117,11 +3195,11 @@ Object {
       "recorded": false,
       "rendered": true,
       "runtime": Array [
-        "one",
-        "two",
+        "runtime",
       ],
       "siblings": Array [
         255,
+        666,
         804,
       ],
       "size": 470,
@@ -3134,20 +3212,25 @@ Object {
     "one": Object {
       "assets": Array [
         Object {
+          "name": "runtime.js",
+          "size": 3069,
+        },
+        Object {
           "name": "929.js",
           "size": 192,
         },
         Object {
           "name": "one.js",
-          "size": 1420,
+          "size": 265,
         },
       ],
-      "assetsSize": 1612,
+      "assetsSize": 3526,
       "auxiliaryAssets": Array [],
       "auxiliaryAssetsSize": 0,
       "childAssets": Object {},
       "children": Object {},
       "chunks": Array [
+        666,
         929,
         255,
       ],
@@ -3159,15 +3242,19 @@ Object {
     "two": Object {
       "assets": Array [
         Object {
+          "name": "runtime.js",
+          "size": 3069,
+        },
+        Object {
           "name": "929.js",
           "size": 192,
         },
         Object {
           "name": "two.js",
-          "size": 12512,
+          "size": 9550,
         },
       ],
-      "assetsSize": 12704,
+      "assetsSize": 12811,
       "auxiliaryAssets": Array [
         Object {
           "name": "196de80223be41153cc7.txt",
@@ -3178,6 +3265,7 @@ Object {
       "childAssets": Object {},
       "children": Object {},
       "chunks": Array [
+        666,
         929,
         804,
       ],
@@ -3189,7 +3277,7 @@ Object {
   },
   "errors": Array [],
   "errorsCount": 0,
-  "hash": "c6133ad65823403ee6df",
+  "hash": "a5ca8b0ac9b2c1315153",
   "modules": Array [
     1,
     2,
@@ -3221,20 +3309,25 @@ Object {
     "one": Object {
       "assets": Array [
         Object {
+          "name": "runtime.js",
+          "size": 3069,
+        },
+        Object {
           "name": "929.js",
           "size": 192,
         },
         Object {
           "name": "one.js",
-          "size": 1420,
+          "size": 265,
         },
       ],
-      "assetsSize": 1612,
+      "assetsSize": 3526,
       "auxiliaryAssets": Array [],
       "auxiliaryAssetsSize": 0,
       "childAssets": Object {},
       "children": Object {},
       "chunks": Array [
+        666,
         929,
         255,
       ],
@@ -3246,15 +3339,19 @@ Object {
     "two": Object {
       "assets": Array [
         Object {
+          "name": "runtime.js",
+          "size": 3069,
+        },
+        Object {
           "name": "929.js",
           "size": 192,
         },
         Object {
           "name": "two.js",
-          "size": 12512,
+          "size": 9550,
         },
       ],
-      "assetsSize": 12704,
+      "assetsSize": 12811,
       "auxiliaryAssets": Array [
         Object {
           "name": "196de80223be41153cc7.txt",
@@ -3265,6 +3362,7 @@ Object {
       "childAssets": Object {},
       "children": Object {},
       "chunks": Array [
+        666,
         929,
         804,
       ],
@@ -3276,7 +3374,7 @@ Object {
   },
   "outputPath": "./simple/dist-prod",
   "publicPath": "auto",
-  "time": 418,
+  "time": 416,
   "version": "5.53.0",
   "warnings": Array [],
   "warningsCount": 0,

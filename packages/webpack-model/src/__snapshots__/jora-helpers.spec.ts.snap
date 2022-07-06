@@ -568,7 +568,7 @@ Object {
                 "page": "module",
               },
               "path": "webpack/runtime/jsonp chunk loading",
-              "weight": 3227,
+              "weight": 3215,
               "weightCompressor": undefined,
             },
             Object {
@@ -608,21 +608,21 @@ Object {
           "label": "runtime",
           "link": undefined,
           "path": "webpack/runtime",
-          "weight": 8134,
+          "weight": 8122,
           "weightCompressor": undefined,
         },
       ],
       "label": "webpack",
       "link": undefined,
       "path": "webpack",
-      "weight": 8134,
+      "weight": 8122,
       "weightCompressor": undefined,
     },
   ],
   "label": "",
   "link": undefined,
   "path": "/",
-  "weight": 21280.84,
+  "weight": 21268.84,
   "weightCompressor": undefined,
 }
 `;
@@ -1041,7 +1041,7 @@ Object {
                 "page": "module",
               },
               "path": "webpack/runtime/jsonp chunk loading",
-              "weight": 3227,
+              "weight": 3215,
               "weightCompressor": undefined,
             },
             Object {
@@ -1081,21 +1081,21 @@ Object {
           "label": "runtime",
           "link": undefined,
           "path": "webpack/runtime",
-          "weight": 8134,
+          "weight": 8122,
           "weightCompressor": undefined,
         },
       ],
       "label": "webpack",
       "link": undefined,
       "path": "webpack",
-      "weight": 8134,
+      "weight": 8122,
       "weightCompressor": undefined,
     },
   ],
   "label": "",
   "link": undefined,
   "path": "/",
-  "weight": 21280.84,
+  "weight": 21268.84,
   "weightCompressor": undefined,
 }
 `;
@@ -1514,7 +1514,7 @@ Object {
                 "page": "module",
               },
               "path": "webpack/runtime/jsonp chunk loading",
-              "weight": 1124,
+              "weight": 1116,
               "weightCompressor": "gzip",
             },
             Object {
@@ -1554,21 +1554,21 @@ Object {
           "label": "runtime",
           "link": undefined,
           "path": "webpack/runtime",
-          "weight": 3839,
+          "weight": 3831,
           "weightCompressor": "gzip",
         },
       ],
       "label": "webpack",
       "link": undefined,
       "path": "webpack",
-      "weight": 3839,
+      "weight": 3831,
       "weightCompressor": "gzip",
     },
   ],
   "label": "",
   "link": undefined,
   "path": "/",
-  "weight": 13312,
+  "weight": 13304,
   "weightCompressor": "multiple compressors",
 }
 `;
@@ -1579,7 +1579,7 @@ Object {
     Object {
       "payload": Object {
         "context": Object {
-          "compilation": "c6133ad65823403ee6df",
+          "compilation": "a5ca8b0ac9b2c1315153",
           "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
         },
       },
@@ -1612,7 +1612,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "c6133ad65823403ee6df",
+            "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
           },
         },
@@ -1641,7 +1641,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "c6133ad65823403ee6df",
+            "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
           },
         },
@@ -1670,7 +1670,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "c6133ad65823403ee6df",
+            "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/sub-module.ts",
           },
         },
@@ -1699,7 +1699,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "c6133ad65823403ee6df",
+            "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
           },
         },
@@ -1728,7 +1728,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "c6133ad65823403ee6df",
+            "compilation": "a5ca8b0ac9b2c1315153",
             "module": "asset/resource|./simple/src/test.txt",
           },
         },
@@ -1757,7 +1757,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "c6133ad65823403ee6df",
+            "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/dyn.ts",
           },
         },
@@ -1786,7 +1786,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "c6133ad65823403ee6df",
+            "compilation": "a5ca8b0ac9b2c1315153",
             "module": "asset/inline|./simple/src/statoscope.png",
           },
         },
@@ -1815,7 +1815,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "c6133ad65823403ee6df",
+            "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
           },
         },
@@ -1844,7 +1844,7 @@ Array [
       Object {
         "payload": Object {
           "context": Object {
-            "compilation": "c6133ad65823403ee6df",
+            "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
           },
         },
@@ -1884,7 +1884,7 @@ Object {
     "description": "Plugin for @statoscope/stats-validator to validate webpack stats",
     "homepage": "https://github.com/statoscope/statoscope/",
     "name": "@statoscope/stats-validator-plugin-webpack",
-    "version": "5.22.1-alpha.0",
+    "version": "5.22.1-alpha.1",
   },
 }
 `;

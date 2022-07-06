@@ -20,6 +20,7 @@ module.exports = {
     context,
   },
   optimization: {
+    runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {
         foo: {

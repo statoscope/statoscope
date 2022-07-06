@@ -3,14 +3,14 @@
 exports[`maxBuildTime global 1`] = `
 Array [
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
-            "buildTime": 418,
+            "buildTime": 416,
             "buildTimeOK": false,
-            "compilation": "c6133ad65823403ee6df",
+            "compilation": "a5ca8b0ac9b2c1315153",
             "rule": 1,
           },
         },
@@ -29,10 +29,10 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Compilation \\"c6133ad\\": Build time is 418 ms. It's over the 1 ms limit",
+    "message": "Compilation \\"a5ca8b0\\": Build time is 416 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
-        "id": "c6133ad65823403ee6df",
+        "id": "a5ca8b0ac9b2c1315153",
         "type": "compilation",
       },
     ],

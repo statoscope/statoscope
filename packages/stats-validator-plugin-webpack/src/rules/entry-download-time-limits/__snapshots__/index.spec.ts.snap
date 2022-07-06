@@ -5,16 +5,16 @@ exports[`exclude asset all 1`] = `Array []`;
 exports[`exclude asset some 1`] = `
 Array [
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 19.53526547080592,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 39.41184596011514,
             "entry": "one",
-            "initialDownloadTime": 19.53526547080592,
+            "initialDownloadTime": 39.41184596011514,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": 1,
@@ -38,7 +38,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download time of assets is 20 ms. It's over the 1 ms limit",
+    "message": "Entry \\"one\\": Download time of assets is 39 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "one",
@@ -47,16 +47,16 @@ Array [
     ],
   },
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 2.6903654399671053,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 182.54330283717104,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 181.23827482524672,
             "entry": "two",
-            "initialDownloadTime": 179.85293739720396,
+            "initialDownloadTime": 178.54790938527958,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": 1,
@@ -80,7 +80,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time of assets is 183 ms. It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time of assets is 181 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -94,16 +94,16 @@ Array [
 exports[`exclude entry object 1`] = `
 Array [
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 19.53526547080592,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 39.41184596011514,
             "entry": "one",
-            "initialDownloadTime": 19.53526547080592,
+            "initialDownloadTime": 39.41184596011514,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": 1,
@@ -127,7 +127,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download time of assets is 20 ms. It's over the 1 ms limit",
+    "message": "Entry \\"one\\": Download time of assets is 39 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "one",
@@ -141,16 +141,16 @@ Array [
 exports[`exclude entry regexp 1`] = `
 Array [
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 19.53526547080592,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 39.41184596011514,
             "entry": "one",
-            "initialDownloadTime": 19.53526547080592,
+            "initialDownloadTime": 39.41184596011514,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": 1,
@@ -174,7 +174,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download time of assets is 20 ms. It's over the 1 ms limit",
+    "message": "Entry \\"one\\": Download time of assets is 39 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "one",
@@ -188,16 +188,16 @@ Array [
 exports[`exclude entry string 1`] = `
 Array [
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 19.53526547080592,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 39.41184596011514,
             "entry": "one",
-            "initialDownloadTime": 19.53526547080592,
+            "initialDownloadTime": 39.41184596011514,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": 1,
@@ -221,7 +221,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download time of assets is 20 ms. It's over the 1 ms limit",
+    "message": "Entry \\"one\\": Download time of assets is 39 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "one",
@@ -235,16 +235,16 @@ Array [
 exports[`exclude no exclude 1`] = `
 Array [
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 19.53526547080592,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 39.41184596011514,
             "entry": "one",
-            "initialDownloadTime": 19.53526547080592,
+            "initialDownloadTime": 39.41184596011514,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": 1,
@@ -268,7 +268,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download time of assets is 20 ms. It's over the 1 ms limit",
+    "message": "Entry \\"one\\": Download time of assets is 39 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "one",
@@ -277,16 +277,16 @@ Array [
     ],
   },
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 2.6903654399671053,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 182.54330283717104,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 181.23827482524672,
             "entry": "two",
-            "initialDownloadTime": 179.85293739720396,
+            "initialDownloadTime": 178.54790938527958,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": 1,
@@ -310,7 +310,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time of assets is 183 ms. It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time of assets is 181 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -324,16 +324,16 @@ Array [
 exports[`maxAsyncDownloadTime global 1`] = `
 Array [
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 2.6903654399671053,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 182.54330283717104,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 181.23827482524672,
             "entry": "two",
-            "initialDownloadTime": 179.85293739720396,
+            "initialDownloadTime": 178.54790938527958,
             "rule": Object {
               "maxAsyncDownloadTime": 1,
               "maxDownloadTime": null,
@@ -375,16 +375,16 @@ exports[`maxAsyncDownloadTime not match - override global 1`] = `Array []`;
 exports[`maxAsyncDownloadTime override global 1`] = `
 Array [
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 2.6903654399671053,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 182.54330283717104,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 181.23827482524672,
             "entry": "two",
-            "initialDownloadTime": 179.85293739720396,
+            "initialDownloadTime": 178.54790938527958,
             "rule": Object {
               "maxAsyncDownloadTime": 1,
               "maxDownloadTime": null,
@@ -422,16 +422,16 @@ Array [
 exports[`maxAsyncDownloadTime with useCompressedSize = false 1`] = `
 Array [
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 2.8509842722039473,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 257.91368986430916,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 260.061966745477,
             "entry": "two",
-            "initialDownloadTime": 255.06270559210526,
+            "initialDownloadTime": 257.210982473273,
             "rule": Object {
               "maxAsyncDownloadTime": 1,
               "maxDownloadTime": null,
@@ -469,16 +469,16 @@ Array [
 exports[`maxDownloadTime global 1`] = `
 Array [
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 19.53526547080592,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 39.41184596011514,
             "entry": "one",
-            "initialDownloadTime": 19.53526547080592,
+            "initialDownloadTime": 39.41184596011514,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": 1,
@@ -502,7 +502,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download time of assets is 20 ms. It's over the 1 ms limit",
+    "message": "Entry \\"one\\": Download time of assets is 39 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "one",
@@ -511,16 +511,16 @@ Array [
     ],
   },
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 2.6903654399671053,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 182.54330283717104,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 181.23827482524672,
             "entry": "two",
-            "initialDownloadTime": 179.85293739720396,
+            "initialDownloadTime": 178.54790938527958,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": 1,
@@ -544,7 +544,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time of assets is 183 ms. It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time of assets is 181 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -562,16 +562,16 @@ exports[`maxDownloadTime not match - override global 1`] = `Array []`;
 exports[`maxDownloadTime override global 1`] = `
 Array [
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 19.53526547080592,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 39.41184596011514,
             "entry": "one",
-            "initialDownloadTime": 19.53526547080592,
+            "initialDownloadTime": 39.41184596011514,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": 1,
@@ -595,7 +595,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download time of assets is 20 ms. It's over the 1 ms limit",
+    "message": "Entry \\"one\\": Download time of assets is 39 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "one",
@@ -604,16 +604,16 @@ Array [
     ],
   },
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 2.6903654399671053,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 182.54330283717104,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 181.23827482524672,
             "entry": "two",
-            "initialDownloadTime": 179.85293739720396,
+            "initialDownloadTime": 178.54790938527958,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": 1,
@@ -637,7 +637,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time of assets is 183 ms. It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time of assets is 181 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -651,16 +651,16 @@ Array [
 exports[`maxDownloadTime with useCompressedSize = false 1`] = `
 Array [
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 32.364694695723685,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 70.79275030838816,
             "entry": "one",
-            "initialDownloadTime": 32.364694695723685,
+            "initialDownloadTime": 70.79275030838816,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": 1,
@@ -684,7 +684,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download time of assets is 32 ms. It's over the 1 ms limit",
+    "message": "Entry \\"one\\": Download time of assets is 71 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "one",
@@ -693,16 +693,16 @@ Array [
     ],
   },
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 2.8509842722039473,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 257.91368986430916,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 260.061966745477,
             "entry": "two",
-            "initialDownloadTime": 255.06270559210526,
+            "initialDownloadTime": 257.210982473273,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": 1,
@@ -726,7 +726,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time of assets is 258 ms. It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time of assets is 260 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -740,16 +740,16 @@ Array [
 exports[`maxInitialDownloadTime global 1`] = `
 Array [
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 19.53526547080592,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 39.41184596011514,
             "entry": "one",
-            "initialDownloadTime": 19.53526547080592,
+            "initialDownloadTime": 39.41184596011514,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": null,
@@ -773,7 +773,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download time of initial assets is 20 ms. It's over the 1 ms limit",
+    "message": "Entry \\"one\\": Download time of initial assets is 39 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "one",
@@ -782,16 +782,16 @@ Array [
     ],
   },
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 2.6903654399671053,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 182.54330283717104,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 181.23827482524672,
             "entry": "two",
-            "initialDownloadTime": 179.85293739720396,
+            "initialDownloadTime": 178.54790938527958,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": null,
@@ -815,7 +815,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time of initial assets is 180 ms. It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time of initial assets is 179 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -833,16 +833,16 @@ exports[`maxInitialDownloadTime not match - override global 1`] = `Array []`;
 exports[`maxInitialDownloadTime override global 1`] = `
 Array [
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 19.53526547080592,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 39.41184596011514,
             "entry": "one",
-            "initialDownloadTime": 19.53526547080592,
+            "initialDownloadTime": 39.41184596011514,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": null,
@@ -866,7 +866,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download time of initial assets is 20 ms. It's over the 1 ms limit",
+    "message": "Entry \\"one\\": Download time of initial assets is 39 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "one",
@@ -875,16 +875,16 @@ Array [
     ],
   },
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 2.6903654399671053,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 182.54330283717104,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 181.23827482524672,
             "entry": "two",
-            "initialDownloadTime": 179.85293739720396,
+            "initialDownloadTime": 178.54790938527958,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": null,
@@ -908,7 +908,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time of initial assets is 180 ms. It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time of initial assets is 179 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",
@@ -922,16 +922,16 @@ Array [
 exports[`maxInitialDownloadTime with useCompressedSize = false 1`] = `
 Array [
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 0,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 32.364694695723685,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 70.79275030838816,
             "entry": "one",
-            "initialDownloadTime": 32.364694695723685,
+            "initialDownloadTime": 70.79275030838816,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": null,
@@ -955,7 +955,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"one\\": Download time of initial assets is 32 ms. It's over the 1 ms limit",
+    "message": "Entry \\"one\\": Download time of initial assets is 71 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "one",
@@ -964,16 +964,16 @@ Array [
     ],
   },
   Object {
-    "compilation": "c6133ad65823403ee6df",
+    "compilation": "a5ca8b0ac9b2c1315153",
     "details": Array [
       Object {
         "payload": Object {
           "context": Object {
             "asyncDownloadTime": 2.8509842722039473,
-            "compilation": "c6133ad65823403ee6df",
-            "downloadTime": 257.91368986430916,
+            "compilation": "a5ca8b0ac9b2c1315153",
+            "downloadTime": 260.061966745477,
             "entry": "two",
-            "initialDownloadTime": 255.06270559210526,
+            "initialDownloadTime": 257.210982473273,
             "rule": Object {
               "maxAsyncDownloadTime": null,
               "maxDownloadTime": null,
@@ -997,7 +997,7 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Entry \\"two\\": Download time of initial assets is 255 ms. It's over the 1 ms limit",
+    "message": "Entry \\"two\\": Download time of initial assets is 257 ms. It's over the 1 ms limit",
     "related": Array [
       Object {
         "id": "two",

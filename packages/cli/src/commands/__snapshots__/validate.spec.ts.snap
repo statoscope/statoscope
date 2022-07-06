@@ -6,7 +6,7 @@ Array [
     "input.json",
   ],
   Array [
-    "6531875fbf1c01886a20",
+    "ccac20dc279ee29ab60e",
   ],
   Array [
     "error  Module ./simple/src/index.ts should not be used  webpack/restricted-modules",
@@ -103,7 +103,7 @@ Array [
     "input.json",
   ],
   Array [
-    "6531875fbf1c01886a20",
+    "ccac20dc279ee29ab60e",
   ],
   Array [
     "error  Module ./simple/src/index.ts should not be used  webpack/restricted-modules",

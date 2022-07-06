@@ -444,16 +444,14 @@ function prepareChunk(chunk: Webpack.Chunk | null, context: ProcessingContext): 
   }
 
   if (chunk.children) {
-    normalizedChunk.children = chunk.children
-      .map((c) => resolveRawChunk(c, context))
-      .filter(Boolean) as NormalizedChunk[];
+    chunk.children.forEach((c) => resolveRawChunk(c, context));
 
     for (const children of chunk.children) {
       prepareChunk(resolveRawChunk(children, context), context);
     }
-  } else {
-    chunk.children = [];
   }
+
+  chunk.children = [];
 
   if (chunk.siblings) {
     normalizedChunk.siblings = chunk.siblings
@@ -468,16 +466,14 @@ function prepareChunk(chunk: Webpack.Chunk | null, context: ProcessingContext): 
   }
 
   if (chunk.parents) {
-    normalizedChunk.parents = chunk.parents
-      .map((c) => resolveRawChunk(c, context))
-      .filter(Boolean) as NormalizedChunk[];
+    chunk.parents.forEach((c) => resolveRawChunk(c, context));
 
     for (const parent of chunk.parents) {
       prepareChunk(resolveRawChunk(parent, context), context);
     }
-  } else {
-    chunk.parents = [];
   }
+
+  chunk.parents = [];
 
   if (chunk.origins) {
     const origins = [...collectRawReasonsFromArray(chunk.origins).values()];
