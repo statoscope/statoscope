@@ -3,6 +3,7 @@ import { API as ExtensionPackageInfoAPI } from '@statoscope/stats-extension-pack
 import Graph, { Node } from '@statoscope/helpers/dist/graph';
 import makeIndex from '@statoscope/helpers/dist/indexer';
 import { StatsChunkOrigin } from 'webpack';
+import { or } from 'ajv/dist/compile/codegen';
 import { Webpack } from '../webpack';
 import {
   HandledCompilation,
@@ -355,6 +356,16 @@ function prepareModule(module: RawModule, context: ProcessingContext): void {
 
   for (const item of innerModules.values()) {
     newInnerModules.push(context.rawIndexes.modules.get(item.identifier)!);
+    item.chunks ??= [];
+
+    if (!item.chunks.length) {
+      item.chunks = module.chunks;
+
+      for (const chunk of module.chunks) {
+        (<Chunk>chunk).modules ??= [];
+        (<Chunk>chunk).modules!.push(item);
+      }
+    }
   }
 
   module.modules = newInnerModules;
@@ -523,27 +534,26 @@ function linkChunks(context: ProcessingContext): void {
     NormalizedChunk,
     { children: Set<NormalizedChunk>; parents: Set<NormalizedChunk> }
   >();
-  for (const parentModule of context.indexes.modules.getAll()) {
-    top: for (const dep of parentModule.deps ?? []) {
-      if (!dep.module) {
-        continue;
+  top: for (const childChunk of context.indexes.chunks.getAll()) {
+    const childMapItem = getChunkMapItem(map, childChunk);
+
+    for (const origin of childChunk.origins as NormalizedReason[]) {
+      let targetModule = origin.resolvedModule ?? null;
+
+      if (!targetModule && origin.resolvedEntry) {
+        targetModule = origin.resolvedEntry.data.dep?.module ?? null;
       }
 
-      for (const parentChunk of parentModule.chunks) {
-        if (dep.module.chunks.includes(parentChunk)) {
-          continue top;
-        }
+      if (targetModule?.chunks.includes(childChunk)) {
+        continue top;
       }
 
-      for (const childChunk of dep.module.chunks) {
-        const childMapItem = getChunkMapItem(map, childChunk);
+      for (const parentChunk of targetModule?.chunks ?? []) {
+        const parentMapItem = getChunkMapItem(map, parentChunk);
 
-        for (const parentChunk of parentModule.chunks) {
-          const parentMapItem = getChunkMapItem(map, parentChunk);
-          if (parentChunk !== childChunk) {
-            parentMapItem.children.add(childChunk);
-            childMapItem.parents.add(parentChunk);
-          }
+        if (parentChunk !== childChunk) {
+          parentMapItem.children.add(childChunk);
+          childMapItem.parents.add(parentChunk);
         }
       }
     }

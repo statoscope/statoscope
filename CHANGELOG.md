@@ -1,10 +1,10 @@
 # Changelog
 
-## 5.22.1 (07 July 2022)
+## Next
 
 ### Fixes
 
-- `[webpack-model]` - own implementation of chunk connections (fixes bugs of chunks relations accuracy)
+- `[webpack-model]` - refactor chunk graph building (fixes bugs of chunks relations accuracy)
 
 ## 5.22.0 (03 July 2022)
 
