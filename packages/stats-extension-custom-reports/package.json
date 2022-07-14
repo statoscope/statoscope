@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/stats-extension-custom-reports",
-  "version": "5.22.0",
+  "version": "5.23.0",
   "description": "Statoscope extension to store custom reports in stats",
   "main": "./dist/index.js",
   "scripts": {
@@ -19,7 +19,7 @@
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
     "@statoscope/extensions": "5.14.1",
-    "@statoscope/helpers": "5.22.0",
+    "@statoscope/helpers": "5.23.0",
     "@statoscope/stats": "5.14.1",
     "@statoscope/types": "5.22.0"
   }

@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/webpack-plugin",
-  "version": "5.22.1-alpha.3",
+  "version": "5.23.0",
   "description": "Helpers for webpack part of Statoscope",
   "main": "./dist/index.js",
   "scripts": {
@@ -21,13 +21,13 @@
     "@discoveryjs/json-ext": "^0.5.7",
     "@statoscope/report-writer": "5.22.0",
     "@statoscope/stats": "5.14.1",
-    "@statoscope/stats-extension-compressed": "5.22.0",
-    "@statoscope/stats-extension-custom-reports": "5.22.0",
+    "@statoscope/stats-extension-compressed": "5.23.0",
+    "@statoscope/stats-extension-custom-reports": "5.23.0",
     "@statoscope/types": "5.22.0",
-    "@statoscope/webpack-model": "5.22.1-alpha.3",
-    "@statoscope/webpack-stats-extension-compressed": "5.22.1-alpha.3",
-    "@statoscope/webpack-stats-extension-package-info": "5.22.1-alpha.3",
-    "@statoscope/webpack-ui": "5.22.1-alpha.3",
+    "@statoscope/webpack-model": "5.23.0",
+    "@statoscope/webpack-stats-extension-compressed": "5.23.0",
+    "@statoscope/webpack-stats-extension-package-info": "5.23.0",
+    "@statoscope/webpack-ui": "5.23.0",
     "open": "^8.4.0"
   },
   "devDependencies": {

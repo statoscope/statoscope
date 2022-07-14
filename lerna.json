@@ -2,7 +2,7 @@
   "packages": [
     "packages/*"
   ],
-  "version": "5.22.1-alpha.3",
+  "version": "5.23.0",
   "command": {
     "version": {
       "exact": true,
