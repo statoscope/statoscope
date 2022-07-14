@@ -1,6 +1,12 @@
 # Changelog
 
-## Next
+## 5.23.0 (14 July 2022)
+
+### Deps
+
+- `[helpers]` - Update `jora` to 1.0.0-beta.7
+- `[webpack-ui]` - Update `@discoveryjs/discovery` to 1.0.0-beta.66
+- `[webpack-ui]` - Update `highcharts` to 10.2.0
 
 ### Fixes
 

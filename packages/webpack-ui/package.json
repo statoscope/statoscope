@@ -24,11 +24,11 @@
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
     "@statoscope/types": "5.22.0",
-    "highcharts": "^9.3.3"
+    "highcharts": "^10.2.0"
   },
   "devDependencies": {
-    "@carrotsearch/foamtree": "3.5.0",
-    "@discoveryjs/discovery": "^1.0.0-beta.65",
+    "@carrotsearch/foamtree": "^3.5.0",
+    "@discoveryjs/discovery": "^1.0.0-beta.66",
     "@popperjs/core": "^2.11.5",
     "@statoscope/helpers": "5.22.0",
     "@statoscope/stats": "5.14.1",
