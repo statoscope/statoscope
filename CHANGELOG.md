@@ -1,12 +1,41 @@
 # Changelog
 
+## 5.24.0 (22 July 2022)
+
+### Features
+
+- `[webpack-ui]` - replace `highcharts` by [chart.js](https://www.chartjs.org/)
+  
+  Usage example:
+  ```json
+  {
+    "view": "box",
+    "options": { "height": "400px" },
+    "content": {
+      "view": "chart",
+      "data": "{ any chart.js options here }"
+    }
+  }
+  ```
+- `[webpack-ui]` - add `error`-view:
+  ```json
+  {
+    "view": "error",
+    "message": "Some error message"
+  }
+  ```
+
+### Refactor
+
+- `[webpack-model]` - remove stats validation (increase startup performance)
+
 ## 5.23.0 (14 July 2022)
 
 ### Deps
 
-- `[helpers]` - Update `jora` to 1.0.0-beta.7
-- `[webpack-ui]` - Update `@discoveryjs/discovery` to 1.0.0-beta.66
-- `[webpack-ui]` - Update `highcharts` to 10.2.0
+- `[helpers]` - update `jora` to 1.0.0-beta.7
+- `[webpack-ui]` - update `@discoveryjs/discovery` to 1.0.0-beta.66
+- `[webpack-ui]` - update `highcharts` to 10.2.0
 
 ### Fixes
 
