@@ -25,6 +25,7 @@
   }
   ```
 - `[cli]` - js-files can be used in `customReport`-arg 
+- `[helpers]` - add `options`-parameter into `formatData`-helper just like [Date.toLocaleString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString) 
 
 ### Refactor
 
