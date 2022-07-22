@@ -72,7 +72,7 @@ test('formatSize', () => {
   expect(helpers.formatSize(1024 ** 3 * 2)).toMatchInlineSnapshot(`"2048.00 mb"`);
 });
 test('formatDate', () => {
-  expect(helpers.formatDate(1624731388203, 'en-US')).toMatch(
+  expect(helpers.formatDate(1624731388203, 'en-US', { timeZone: 'UTC' })).toMatch(
     /6\/26\/2021, \d+:\d+:\d+ [AP]M/
   );
 });

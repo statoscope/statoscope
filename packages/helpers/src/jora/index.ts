@@ -131,8 +131,12 @@ export default function helpers() {
       }
       return 'n/a';
     },
-    formatDate(ts: number, locale?: string): string {
-      return new Date(ts).toLocaleString(locale);
+    formatDate(
+      ts: number,
+      locale?: string | string[],
+      options?: Intl.DateTimeFormatOptions
+    ): string {
+      return new Date(ts).toLocaleString(locale, options);
     },
     formatDuration(ms: number): string {
       const sign = Math.sign(ms);
