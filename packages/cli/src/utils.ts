@@ -137,7 +137,7 @@ export function combineCustomReports(
     let malformedReport = false;
 
     const reportsFromFiles: unknown[] = reportArg
-      .map((filepath) => JSON.parse(fs.readFileSync(filepath, 'utf-8')))
+      .map((filepath) => require(path.resolve(filepath)))
       .flat();
 
     for (const report of reportsFromFiles) {

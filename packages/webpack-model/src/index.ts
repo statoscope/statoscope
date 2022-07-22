@@ -6,7 +6,6 @@ import { NormalizedCompilation, NormalizedFile, RawStatsFileDescriptor } from '.
 import joraHelpers from './jora-helpers';
 import normalize from './handleFile';
 
-export { default as validate } from './validate';
 export * as module from './module';
 
 export { StatsExtensionWebpackAdapter } from './stats-extension-webpack-adapter';

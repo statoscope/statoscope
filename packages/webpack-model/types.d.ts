@@ -164,19 +164,11 @@ export type HandledFileContext = {
   };
 };
 
-export type ValidationResult =
-  | {
-      result: false;
-      errors: ErrorObject[];
-    }
-  | { result: true };
-
 export type RawStatsFileDescriptor = { name: string; data: Compilation };
 
 export type NormalizedFile = {
   name: string;
   version: string;
-  validation: ValidationResult;
   compilations: NormalizedCompilation[];
   __statoscope?: { descriptor?: StatsDescriptor; extensions?: Extension<unknown>[] };
 };

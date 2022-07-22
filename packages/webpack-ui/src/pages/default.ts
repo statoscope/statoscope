@@ -30,7 +30,6 @@ export default function (discovery: StatoscopeWidget): void {
                 data: '#.name',
               },
             },
-            'stats-scheme-validation-error:file',
             {
               view: 'block',
               className: style.badges,

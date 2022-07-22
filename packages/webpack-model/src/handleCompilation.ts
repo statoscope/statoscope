@@ -2,8 +2,6 @@ import md5 from 'md5';
 import { API as ExtensionPackageInfoAPI } from '@statoscope/stats-extension-package-info/dist/api';
 import Graph, { Node } from '@statoscope/helpers/dist/graph';
 import makeIndex from '@statoscope/helpers/dist/indexer';
-import { StatsChunkOrigin } from 'webpack';
-import { or } from 'ajv/dist/compile/codegen';
 import { Webpack } from '../webpack';
 import {
   HandledCompilation,

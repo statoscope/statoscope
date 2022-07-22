@@ -26,7 +26,6 @@
     "@statoscope/stats-extension-package-info": "5.23.0",
     "@statoscope/stats-extension-stats-validation-result": "5.23.0",
     "@statoscope/types": "5.22.0",
-    "ajv": "^8.11.0",
     "md5": "^2.3.0"
   },
   "devDependencies": {

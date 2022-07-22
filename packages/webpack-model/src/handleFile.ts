@@ -16,7 +16,6 @@ import {
   RawStatsFileDescriptor,
 } from '../types';
 import handleCompilations from './handleCompilation';
-import validateStats from './validate';
 import denormalizeCompilation from './denormalizeCompilation';
 
 // todo: make it injectable
@@ -77,7 +76,6 @@ export function handleRawFile(
   const file: NormalizedFile = {
     name: rawStatsFileDescriptor.name,
     version: rawStatsFileDescriptor.data.version || 'unknown',
-    validation: validateStats(rawStatsFileDescriptor.data),
     compilations: [],
     __statoscope: rawStatsFileDescriptor.data.__statoscope,
   };
