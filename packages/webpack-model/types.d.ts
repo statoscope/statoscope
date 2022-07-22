@@ -3,7 +3,6 @@ import { Extension } from '@statoscope/stats/spec/extension';
 import { IndexAPI } from '@statoscope/helpers/dist/indexer';
 import Graph from '@statoscope/helpers/dist/graph';
 import { StatsDescriptor } from '@statoscope/stats';
-import { ErrorObject } from 'ajv';
 import { Webpack } from './webpack';
 import ChunkID = Webpack.ChunkID;
 import Entrypoint = Webpack.Entrypoint;
