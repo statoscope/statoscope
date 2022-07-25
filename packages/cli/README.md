@@ -83,7 +83,7 @@ statoscope validate --input path/to/stats.json
 
 4. Analyze results in the console or generated UI-report
 
-> Learn more on [@staoscope/stats-validator](/packages/stats-validator) and [@statoscope/stats-validator-plugin-webpack](/packages/stats-validator-plugin-webpack)
+> Learn more on [@statoscope/stats-validator](/packages/stats-validator) and [@statoscope/stats-validator-plugin-webpack](/packages/stats-validator-plugin-webpack)
 
 ### init
 
