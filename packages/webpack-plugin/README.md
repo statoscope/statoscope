@@ -29,6 +29,7 @@ new StatoscopeWebpackPlugin({
   saveStatsTo: 'path/to/stats-[name]-[hash].json',
   normalizeStats: false,
   saveOnlyStats: false,
+  disableReportCompression: false,
   statsOptions: {
     /* any webpack stats options */
   },
@@ -73,6 +74,12 @@ Reduce stats size that will be saved into `saveStatsTo`.
 #### options.saveOnlyStats: boolean
 
 If `true` then only json with the stats will be generated. HTML report will be omitted.
+
+`false` by default.
+
+#### options.disableReportCompression: boolean
+
+If `true` then html report data compression will be disabled. It increases html size a lot. Use it only when something is wrong with report in a browser.
 
 `false` by default.
 

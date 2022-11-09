@@ -51,6 +51,11 @@ Multiple stats: serve --input path/to/stats-1.json path/to/stats-2.json
           describe: 'path to json-file(s) with custom user report(s)',
           type: 'string',
         })
+        .option('compression', {
+          describe: 'use report compression',
+          type: 'boolean',
+          default: true,
+        })
         .array(['input', 'custom-report'])
         .demandOption('input');
     },
@@ -74,7 +79,12 @@ Multiple stats: serve --input path/to/stats-1.json path/to/stats-2.json
 
       const customReports = combineCustomReports(config, argv['custom-report']);
 
-      const reportPath = await transform(files, destReportPath, customReports);
+      const reportPath = await transform(
+        files,
+        destReportPath,
+        customReports,
+        argv.compression
+      );
 
       console.log(`Statoscope report generated to ${destReportPath}`);
 

@@ -18,7 +18,9 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "@discoveryjs/json-ext": "^0.5.7"
+    "@discoveryjs/json-ext": "^0.5.7",
+    "@types/pako": "^2.0.0",
+    "pako": "^2.0.4"
   },
   "devDependencies": {
     "@types/node": "^12.0.0"

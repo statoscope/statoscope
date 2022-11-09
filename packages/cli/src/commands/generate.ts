@@ -1,5 +1,5 @@
 import open from 'open';
-import { Argv } from 'yargs';
+import { Argv, options } from 'yargs';
 import { requireConfig } from '@statoscope/config';
 import {
   createDestStatReportPath,
@@ -45,6 +45,11 @@ Multiple stats: generate --input path/to/stats-1.json path/to/stats-2.json --out
           describe: 'open report after done',
           alias: 'o',
         })
+        .option('compression', {
+          describe: 'use report compression',
+          type: 'boolean',
+          default: true,
+        })
         .array(['input', 'custom-report'])
         .demandOption('input');
     },
@@ -68,7 +73,7 @@ Multiple stats: generate --input path/to/stats-1.json path/to/stats-2.json --out
       const customReports = combineCustomReports(config, argv['custom-report']);
 
       console.log(`Generating Statoscope report to ${argv.output} ...`);
-      await transform(files, argv.output, customReports);
+      await transform(files, argv.output, customReports, argv.compression);
       console.log(`Statoscope report saved to ${argv.output}`);
 
       if (argv.open) {

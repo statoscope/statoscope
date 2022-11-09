@@ -1,5 +1,12 @@
 # Changelog
 
+## 5.25.0 (09 November 2022)
+
+### Features
+
+- `[webpack-plugin]` - super-huge (up to 30 times) decrease of html-report size
+- `[cli]` - super-huge (up to 30 times) decrease of html-report size
+
 ## 5.24.0 (22 July 2022)
 
 ### Features

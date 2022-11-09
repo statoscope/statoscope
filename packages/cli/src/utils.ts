@@ -67,7 +67,8 @@ export function mergeCustomReportsIntoCompilation(
 export async function transform(
   from: Array<TransformFrom | string>,
   to: string,
-  customReports: Report<unknown, unknown>[] = []
+  customReports: Report<unknown, unknown>[] = [],
+  compression: boolean
 ): Promise<string> {
   const normalizedFrom: FromItem[] = [];
 
@@ -97,6 +98,7 @@ export async function transform(
         init: `function (data) {
           Statoscope.default(data.map((item) => ({ name: item.id, data: item.data })));
         }`,
+        dataCompression: compression,
       },
     },
     normalizedFrom,
