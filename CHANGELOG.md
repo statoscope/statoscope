@@ -1,6 +1,6 @@
 # Changelog
 
-## 5.25.0 (09 November 2022)
+## Next
 
 ### Features
 

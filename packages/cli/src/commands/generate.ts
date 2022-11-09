@@ -1,5 +1,5 @@
 import open from 'open';
-import { Argv, options } from 'yargs';
+import { Argv } from 'yargs';
 import { requireConfig } from '@statoscope/config';
 import {
   createDestStatReportPath,

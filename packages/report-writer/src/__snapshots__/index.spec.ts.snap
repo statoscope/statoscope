@@ -711,10 +711,14 @@ export function decode(bytes) {
                   return jsonExt.parseChunked(() => chunks).then((data) => ({ id, data }));
                 }
                 
-                const gzipped = decodeFromBase64(chunks.join(''));
-                const gzippedBuffer = Uint8Array.from(gzipped);
-                const decodedBuffer = Pako.inflate(gzippedBuffer);
-                const data = BinaryJSON.decode(decodedBuffer);
+                const inflator = new Pako.Inflate();
+                
+                for(const chunk of chunks) {
+                  const decoded = decodeFromBase64(chunk);
+                  inflator.push(decoded);
+                }
+                
+                const data = BinaryJSON.decode(inflator.result);
                 return { id, data };
               })
             );

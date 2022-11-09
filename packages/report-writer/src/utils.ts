@@ -64,11 +64,19 @@ export async function transform(
       htmlWriter.addChunkWriter(stream, id);
     } else {
       const htmlStats = await parseChunked(stream);
-      const binaryJSONBuffer = encodeBinaryJSON(htmlStats);
-      const binaryJSONCompressedBuffer = pako.deflate(binaryJSONBuffer);
-      const htmlStatsStream = Readable.from(
-        Buffer.from(binaryJSONCompressedBuffer).toString('base64')
-      );
+      const binaryJSONArray = encodeBinaryJSON(htmlStats);
+      const binaryJSONCompressedArray = pako.deflate(binaryJSONArray);
+      let readIndex = 0;
+      const htmlStatsStream = new Readable({
+        read(size): void {
+          const chunk = binaryJSONCompressedArray.subarray(readIndex, readIndex + size);
+          readIndex += size;
+          this.push(Buffer.from(chunk).toString('base64'));
+          if (readIndex >= binaryJSONCompressedArray.length) {
+            this.push(null);
+          }
+        },
+      });
 
       htmlWriter.addChunkWriter(htmlStatsStream, id);
     }
