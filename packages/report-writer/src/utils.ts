@@ -1,8 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import { Readable, Writable } from 'stream';
-import { stringifyStream, TReplacer } from '@discoveryjs/json-ext';
-import HTMLWriter, { Options } from './';
+import pako from 'pako';
+import { parseChunked, stringifyStream, TReplacer } from '@discoveryjs/json-ext';
+import HTMLWriter, { encodeBinaryJSON, Options } from './';
 
 export function waitFinished(stream: Readable | Writable): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -23,6 +24,11 @@ export type FromItem =
       type: 'filename';
       filename: string;
       replacer?: TReplacer;
+    }
+  | {
+      type: 'stream';
+      filename: string;
+      stream: Readable;
     };
 
 export async function transform(
@@ -48,11 +54,32 @@ export async function transform(
 
     if (fromItem.type === 'filename') {
       stream = fs.createReadStream(fromItem.filename);
-    } else {
+    } else if (fromItem.type === 'data') {
       stream = stringifyStream(fromItem.data, fromItem.replacer);
+    } else {
+      stream = fromItem.stream;
     }
 
-    htmlWriter.addChunkWriter(stream, id);
+    if (options.writer.dataCompression === false) {
+      htmlWriter.addChunkWriter(stream, id);
+    } else {
+      const htmlStats = await parseChunked(stream);
+      const binaryJSONArray = encodeBinaryJSON(htmlStats);
+      const binaryJSONCompressedArray = pako.deflate(binaryJSONArray);
+      let readIndex = 0;
+      const htmlStatsStream = new Readable({
+        read(size): void {
+          const chunk = binaryJSONCompressedArray.subarray(readIndex, readIndex + size);
+          readIndex += size;
+          this.push(Buffer.from(chunk).toString('base64'));
+          if (readIndex >= binaryJSONCompressedArray.length) {
+            this.push(null);
+          }
+        },
+      });
+
+      htmlWriter.addChunkWriter(htmlStatsStream, id);
+    }
   }
 
   htmlWriter.getStream().pipe(outputStream);

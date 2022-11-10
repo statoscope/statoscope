@@ -19,6 +19,7 @@ module.exports = {
         '@typescript-eslint/ban-ts-comment': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/explicit-function-return-type': 'error',
+        'no-case-declarations': 'off',
       },
       extends: [
         'eslint:recommended',
@@ -51,5 +52,6 @@ module.exports = {
     indent: 'off',
     'no-console': 'off',
     'import/order': 'error',
+    'no-case-declarations': 'off',
   },
 };

@@ -146,6 +146,7 @@ Start HTTP-server and serve JSON-stats as HTML report
 - `--custom-report` - path to [custom report(s)](/packages/stats-extension-custom-reports/README.md)
   to be included into generated HTML report
 - `--config` (`-c`) - path to the statoscope config file with custom user reports
+- `--no-compression` - disable report data compression (It increases html size a lot. Use it only when something is wrong with report in a browser)
 
 **Example:**
 
@@ -168,6 +169,7 @@ Generate HTML report from JSON-stats.
 - `--custom-report` - path to [custom report(s)](/packages/stats-extension-custom-reports/README.md)
   to be included into generated HTML report
 - `--config` (`-c`) - path to the statoscope config file with custom user reports
+- `--no-compression` - disable report data compression (It increases html size a lot. Use it only when something is wrong with report in a browser)
 
 **Example:**
 

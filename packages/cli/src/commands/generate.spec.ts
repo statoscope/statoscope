@@ -122,6 +122,22 @@ describe('generate CLI command', () => {
     expect(fs.readFileSync(outputPath, 'utf8')).toMatchSnapshot();
   });
 
+  test('multiple inputs with no-compression', async () => {
+    const outputPath = path.join(outputDir, `multiple-inputs-${dateSuffix}.html`);
+
+    let y = yargs(['generate', ...inputArgs, '--output', outputPath, '--no-compression']);
+
+    y = generate(y);
+
+    y.fail((_, error) => {
+      console.error(error);
+    });
+
+    await y.argv;
+
+    expect(fs.readFileSync(outputPath, 'utf8')).toMatchSnapshot();
+  });
+
   test('single input with a reference', async () => {
     const outputPath = path.join(outputDir, `with-reference-${dateSuffix}.html`);
 

@@ -4,7 +4,6 @@ import { tmpdir } from 'os';
 import { Readable, Writable } from 'stream';
 import open from 'open';
 import { stringifyStream } from '@discoveryjs/json-ext';
-import HTMLWriter from '@statoscope/report-writer';
 import { Compilation, Compiler } from 'webpack';
 import statsPackage from '@statoscope/stats/package.json';
 import WebpackCompressedExtension from '@statoscope/webpack-stats-extension-compressed';
@@ -12,7 +11,7 @@ import WebpackPackageInfoExtension from '@statoscope/webpack-stats-extension-pac
 import { CompressFunction } from '@statoscope/stats-extension-compressed/dist/generator';
 import normalizeCompilation from '@statoscope/webpack-model/dist/normalizeCompilation';
 import { StatoscopeMeta } from '@statoscope/webpack-model/webpack';
-import { makeReplacer } from '@statoscope/report-writer/dist/utils';
+import { makeReplacer, transform } from '@statoscope/report-writer/dist/utils';
 import { default as CustomReportsExtensionGenerator } from '@statoscope/stats-extension-custom-reports/dist/generator';
 import { Report } from '@statoscope/types/types/custom-report';
 import { StatsExtensionWebpackAdapter } from '@statoscope/webpack-model/dist';
@@ -32,6 +31,7 @@ export type Options = {
   saveStatsTo?: string;
   normalizeStats?: boolean;
   saveOnlyStats: boolean;
+  disableReportCompression?: boolean;
   additionalStats: string[];
   statsOptions?: Record<string, unknown>;
   watchMode: boolean;
@@ -162,13 +162,9 @@ export default class StatoscopeWebpackPlugin {
         const resolvedHTMLReportPath = path.resolve(
           this.interpolate(htmlReportPath, stats.compilation, statsObj.name)
         );
-        const htmlReport = this.makeReport(resolvedHTMLReportPath, statsForReport);
 
         try {
-          await Promise.all([
-            htmlReport.writer?.write(),
-            waitStreamEnd(htmlReport.stream),
-          ]);
+          await this.makeReport(resolvedHTMLReportPath, statsForReport);
 
           if (options.open) {
             if (options.open === 'file') {
@@ -215,21 +211,26 @@ export default class StatoscopeWebpackPlugin {
     }
 
     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-    const outputStream = fs.createWriteStream(outputPath);
-    const writer = new HTMLWriter({
-      scripts: [{ type: 'path', path: require.resolve('@statoscope/webpack-ui') }],
-      init: `function (data) {
-          Statoscope.default(data.map((item) => ({ name: item.id, data: item.data })));
-        }`,
-    });
 
-    writer.getStream().pipe(outputStream);
-
-    for (const { filename, stream } of stats) {
-      writer.addChunkWriter(stream, path.basename(filename));
-    }
-
-    return { writer, stream: outputStream };
+    return transform(
+      {
+        writer: {
+          scripts: [{ type: 'path', path: require.resolve('@statoscope/webpack-ui') }],
+          init: `function (data) {
+            Statoscope.default(data.map((item) => ({ name: item.id, data: item.data })));
+          }`,
+          dataCompression: this.options.disableReportCompression !== true,
+        },
+      },
+      stats.map((value) => {
+        return {
+          type: 'stream',
+          filename: value.filename,
+          stream: value.stream,
+        };
+      }),
+      outputPath
+    );
   }
 
   getHTMLReportPath(): string {

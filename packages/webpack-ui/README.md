@@ -13,6 +13,7 @@ This package contains a UI for analyzing stats of your bundle.
 - 🔄 Stats comparison
 - 📊 Custom reports for your stats
 - 🐘 No stats size limitation
+- 🗜 Smart HTML report compression (up to 200x)
 
 You can try it at [Statoscope sandbox](https://statoscope.tech)
 
