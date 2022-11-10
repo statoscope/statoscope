@@ -38,23 +38,18 @@ This project exists thanks to all the people who contribute. [[Contribute](CONTR
 
 ### Financial Contributors
 
-Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/statoscope/contribute)]
+Become a financial contributor at [OpenCollective](https://opencollective.com/statoscope/contribute) or [GitHub Sponsors](https://github.com/sponsors/statoscope)
 
 #### Individuals
+
+[![eps1lon](https://avatars.githubusercontent.com/u/12292047?s=60&v=4)](https://github.com/eps1lon)
 
 <a href="https://opencollective.com/statoscope"><img src="https://opencollective.com/statoscope/individuals.svg?width=890"></a>
 
 #### Organizations
 
-Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/statoscope/contribute)]
+Support this project with your organization. Your logo will show up here with a link to your website.
 
-<a href="https://opencollective.com/statoscope/organization/0/website"><img src="https://opencollective.com/statoscope/organization/0/avatar.svg"></a>
-<a href="https://opencollective.com/statoscope/organization/1/website"><img src="https://opencollective.com/statoscope/organization/1/avatar.svg"></a>
-<a href="https://opencollective.com/statoscope/organization/2/website"><img src="https://opencollective.com/statoscope/organization/2/avatar.svg"></a>
-<a href="https://opencollective.com/statoscope/organization/3/website"><img src="https://opencollective.com/statoscope/organization/3/avatar.svg"></a>
-<a href="https://opencollective.com/statoscope/organization/4/website"><img src="https://opencollective.com/statoscope/organization/4/avatar.svg"></a>
-<a href="https://opencollective.com/statoscope/organization/5/website"><img src="https://opencollective.com/statoscope/organization/5/avatar.svg"></a>
-<a href="https://opencollective.com/statoscope/organization/6/website"><img src="https://opencollective.com/statoscope/organization/6/avatar.svg"></a>
-<a href="https://opencollective.com/statoscope/organization/7/website"><img src="https://opencollective.com/statoscope/organization/7/avatar.svg"></a>
-<a href="https://opencollective.com/statoscope/organization/8/website"><img src="https://opencollective.com/statoscope/organization/8/avatar.svg"></a>
-<a href="https://opencollective.com/statoscope/organization/9/website"><img src="https://opencollective.com/statoscope/organization/9/avatar.svg"></a>
+[![muckrack](https://avatars.githubusercontent.com/u/2212508?s=60&v=4)](https://github.com/muckrack)
+
+<a href="https://opencollective.com/statoscope"><img src="https://opencollective.com/statoscope/organizations.svg?width=890"></a>

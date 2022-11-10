@@ -183,4 +183,4 @@ stats: {
 
 ## Support
 
-If you are an engineer or a company that is interested in Statoscope improvements, you could support Statoscope by financial contribution at [OpenCollective](https://opencollective.com/statoscope).
+If you are an engineer or a company that is interested in Statoscope improvements, you could support Statoscope by financial contribution at [OpenCollective](https://opencollective.com/statoscope/contribute) or [GitHub Sponsors](https://github.com/sponsors/statoscope).
