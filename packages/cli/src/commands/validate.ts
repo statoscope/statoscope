@@ -30,6 +30,11 @@ Validate multiple stats [DEPRECATED]: validate --validator path/to/validator.js 
             alias: 'c',
             type: 'string',
           })
+          .option('rules', {
+            describe: 'list of available rules',
+            alias: 'rules',
+            type: 'boolean',
+          })
           .option('input', {
             describe: 'path to a stats.json',
             alias: 'i',
@@ -50,7 +55,7 @@ Validate multiple stats [DEPRECATED]: validate --validator path/to/validator.js 
       );
     },
     async (argv) => {
-      if (argv.validator) {
+      if (argv.validator && argv.input) {
         await legacyWebpackValidator({
           validator: argv.validator,
           input: argv.input,
@@ -67,6 +72,14 @@ Validate multiple stats [DEPRECATED]: validate --validator path/to/validator.js 
         validateConfig.warnAsError = true;
       }
 
+      if (argv.rules) {
+        if (validateConfig.rules) {
+          console.table(validateConfig.rules);
+        } else {
+          console.log('Rules not found');
+        }
+      }
+
       const validator = new Validator(validateConfig, rootPath);
       const reporters: Reporter[] = [];
 
@@ -78,6 +91,11 @@ Validate multiple stats [DEPRECATED]: validate --validator path/to/validator.js 
         } else {
           reporters.push(new ConsoleReporter());
         }
+      }
+
+      if (!argv.input) {
+        console.warn('Input not found (ex. --input path/to/stats.json)');
+        return;
       }
 
       const result = await validator.validate(
