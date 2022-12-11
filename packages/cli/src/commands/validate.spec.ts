@@ -130,5 +130,18 @@ describe('with config', () => {
 
       expect(getOutput()).toMatchSnapshot();
     });
+
+    test('rules not found', async () => {
+      let y = yargs(['validate', '--rules']);
+
+      y = validate(y);
+      y.fail((_, error) => {
+        console.error(error);
+      });
+
+      await y.argv;
+
+      expect(getOutput()).toMatchSnapshot();
+    });
   });
 });

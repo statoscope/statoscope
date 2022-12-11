@@ -100,22 +100,52 @@ Array [
 exports[`with config explicit rules 1`] = `
 Array [
   Array [
-    "┌─────────────────────────────────────────┬─────────┬───────────────────────┐
-│                 (index)                 │    0    │           1           │
-├─────────────────────────────────────────┼─────────┼───────────────────────┤
-│        webpack/build-time-limits        │ 'error' │     { global: 1 }     │
-│       webpack/restricted-modules        │ 'error' │    [ /css-tree/ ]     │
-│       webpack/restricted-packages       │ 'error' │     [ 'lodash' ]      │
-│        webpack/no-packages-dups         │ 'error' │                       │
-│   webpack/entry-download-time-limits    │ 'error' │ { global: [Object] }  │
-│   webpack/entry-download-size-limits    │ 'error' │ { global: [Object] }  │
-│        webpack/no-modules-deopts        │ 'warn'  │                       │
-│     webpack/diff-build-time-limits      │ 'error' │ { global: -Infinity } │
-│ webpack/diff-entry-download-size-limits │ 'error' │ { global: [Object] }  │
-│ webpack/diff-entry-download-time-limits │ 'error' │ { global: [Object] }  │
-│     webpack/diff-deprecated-modules     │ 'error' │    [ /css-tree/ ]     │
-│    webpack/diff-deprecated-packages     │ 'error' │     [ /lodash/ ]      │
-└─────────────────────────────────────────┴─────────┴───────────────────────┘",
+    "Provided from webpack/*",
+  ],
+  Array [
+    "    webpack/build-time-limits",
+  ],
+  Array [
+    "    webpack/diff-build-time-limits",
+  ],
+  Array [
+    "    webpack/diff-deprecated-modules",
+  ],
+  Array [
+    "    webpack/diff-deprecated-packages",
+  ],
+  Array [
+    "    webpack/diff-entry-download-size-limits",
+  ],
+  Array [
+    "    webpack/diff-entry-download-time-limits",
+  ],
+  Array [
+    "    webpack/entry-download-size-limits",
+  ],
+  Array [
+    "    webpack/entry-download-time-limits",
+  ],
+  Array [
+    "    webpack/no-modules-deopts",
+  ],
+  Array [
+    "    webpack/no-packages-dups",
+  ],
+  Array [
+    "    webpack/restricted-modules",
+  ],
+  Array [
+    "    webpack/restricted-packages",
+  ],
+  Array [],
+]
+`;
+
+exports[`with config explicit rules not found 1`] = `
+Array [
+  Array [
+    "Rules not found",
   ],
 ]
 `;

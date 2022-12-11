@@ -72,16 +72,32 @@ Validate multiple stats [DEPRECATED]: validate --validator path/to/validator.js 
         validateConfig.warnAsError = true;
       }
 
+      const validator = new Validator(validateConfig, rootPath);
+      const reporters: Reporter[] = [];
+
       if (argv.rules) {
-        if (validateConfig.rules) {
-          console.table(validateConfig.rules);
-        } else {
+        let foundRules = false;
+
+        for (const pluginConfig of Object.values(validator.plugins ?? {})) {
+          for (const alias of pluginConfig.aliases) {
+            const rules = Object.keys(pluginConfig.rules ?? {});
+            if (rules.length) {
+              console.log(`Provided from ${alias}/*`);
+              foundRules = true;
+
+              for (const rule of rules) {
+                console.log(`    ${alias}/${rule}`);
+              }
+
+              console.log();
+            }
+          }
+        }
+
+        if (!foundRules) {
           console.log('Rules not found');
         }
       }
-
-      const validator = new Validator(validateConfig, rootPath);
-      const reporters: Reporter[] = [];
 
       if (config?.silent !== true) {
         if (config?.validate?.reporters) {
