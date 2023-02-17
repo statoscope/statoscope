@@ -10,6 +10,7 @@
 ### Fixes
 
 - `[webpack-model]` - trim long module identifier (closes #200)
+- `[webpack-ui]` - fix descending modules sort on instant lists (related #162)
 
 ## 5.24.0 (22 July 2022)
 
