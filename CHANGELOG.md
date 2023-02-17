@@ -7,6 +7,10 @@
 - `[webpack-plugin]` - super-huge (up to 30 times) decrease of html-report size
 - `[cli]` - super-huge (up to 30 times) decrease of html-report size
 
+### Fixes
+
+- `[webpack-model]` - trim long module identifier (closes #200)
+
 ## 5.24.0 (22 July 2022)
 
 ### Features

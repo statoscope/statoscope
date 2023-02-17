@@ -198,6 +198,9 @@ function handleCompilation(
   };
 
   for (const module of collectRawModules(compilation)) {
+    if (module.identifier.length > 300) {
+      module.identifier = md5(module.identifier);
+    }
     processingContext.rawIndexes.modules.add(module);
   }
   for (const chunk of collectRawChunks(compilation)) {
