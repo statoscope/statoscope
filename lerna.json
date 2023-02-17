@@ -1,8 +1,6 @@
 {
-  "packages": [
-    "packages/*"
-  ],
-  "version": "5.25.0-alpha.0",
+  "packages": ["packages/*"],
+  "version": "5.25.0",
   "command": {
     "version": {
       "exact": true,

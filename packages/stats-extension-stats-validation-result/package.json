@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/stats-extension-stats-validation-result",
-  "version": "5.25.0-alpha.0",
+  "version": "5.25.0",
   "description": "Statoscope extension that collects stats validation result",
   "main": "./dist/index.js",
   "scripts": {
@@ -19,7 +19,7 @@
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
     "@statoscope/extensions": "5.14.1",
-    "@statoscope/helpers": "5.25.0-alpha.0",
+    "@statoscope/helpers": "5.25.0",
     "@statoscope/stats": "5.14.1",
     "@statoscope/types": "5.22.0"
   }
