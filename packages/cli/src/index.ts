@@ -10,6 +10,7 @@ import queryCommand from './commands/query';
 import initCommand from './commands/init';
 import injectReport from './commands/injectReport';
 import createCommand from './commands/create';
+import vrulesCommand from './commands/validationRules';
 
 const commands: Array<(yargs: Argv) => Argv> = [
   serveCommand,
@@ -19,6 +20,7 @@ const commands: Array<(yargs: Argv) => Argv> = [
   injectReport,
   initCommand,
   createCommand,
+  vrulesCommand,
   (yargs): Argv => yargs.strictCommands().demandCommand(1),
 ];
 

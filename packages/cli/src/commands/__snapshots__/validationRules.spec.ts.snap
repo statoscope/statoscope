@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`with config explicit rules 1`] = `Array []`;
+
+exports[`with config explicit rules not found 1`] = `Array []`;

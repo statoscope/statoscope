@@ -30,11 +30,6 @@ Validate multiple stats [DEPRECATED]: validate --validator path/to/validator.js 
             alias: 'c',
             type: 'string',
           })
-          .option('rules', {
-            describe: 'list of available rules',
-            alias: 'rules',
-            type: 'boolean',
-          })
           .option('input', {
             describe: 'path to a stats.json',
             alias: 'i',
@@ -55,7 +50,7 @@ Validate multiple stats [DEPRECATED]: validate --validator path/to/validator.js 
       );
     },
     async (argv) => {
-      if (argv.validator && argv.input) {
+      if (argv.validator) {
         await legacyWebpackValidator({
           validator: argv.validator,
           input: argv.input,
@@ -75,30 +70,6 @@ Validate multiple stats [DEPRECATED]: validate --validator path/to/validator.js 
       const validator = new Validator(validateConfig, rootPath);
       const reporters: Reporter[] = [];
 
-      if (argv.rules) {
-        let foundRules = false;
-
-        for (const pluginConfig of Object.values(validator.plugins ?? {})) {
-          for (const alias of pluginConfig.aliases) {
-            const rules = Object.keys(pluginConfig.rules ?? {});
-            if (rules.length) {
-              console.log(`Provided from ${alias}/*`);
-              foundRules = true;
-
-              for (const rule of rules) {
-                console.log(`    ${alias}/${rule}`);
-              }
-
-              console.log();
-            }
-          }
-        }
-
-        if (!foundRules) {
-          console.log('Rules not found');
-        }
-      }
-
       if (config?.silent !== true) {
         if (config?.validate?.reporters) {
           for (const item of config.validate.reporters) {
@@ -107,11 +78,6 @@ Validate multiple stats [DEPRECATED]: validate --validator path/to/validator.js 
         } else {
           reporters.push(new ConsoleReporter());
         }
-      }
-
-      if (!argv.input) {
-        console.warn('Input not found (ex. --input path/to/stats.json)');
-        return;
       }
 
       const result = await validator.validate(

@@ -85,6 +85,15 @@ statoscope validate --input path/to/stats.json
 
 > Learn more on [@statoscope/stats-validator](/packages/stats-validator) and [@statoscope/stats-validator-plugin-webpack](/packages/stats-validator-plugin-webpack)
 
+### vrules
+
+Shows available validation rules that plugins in `statoscope.config.js` provides.
+
+`vrules [...args]`
+
+- `--config` (`-c`) - path to statoscope config (by default `{pwd}/statoscope.config.js` has used)
+
+
 ### init
 
 Create example statoscope.config.js.

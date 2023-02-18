@@ -1,10 +1,16 @@
 # Changelog
 
+## Next
+
+### Features
+
+- `[cli]`: add `vrules` command that shows available validation rules that plugins in `statoscope.config.js` provides ([#192](https://github.com/statoscope/statoscope/pull/192) by @denisbalyko)
+
 ## 5.25.1 (19 February 2022)
 
 ### Fixes
 
-- `[report-writer]` - fix decompression bug (closes #202)
+- `[report-writer]` - fix decompression bug (closes [#202](https://github.com/statoscope/statoscope/issues/202))
 - `[webpack-model]` - fix assets collection when [CompressionWebpackPlugin](https://github.com/webpack-contrib/compression-webpack-plugin) is used
 - `[webpack-model]` - fix trimming long module ids
 - `[webpack-ui]` - module search now works only for first 500 chars in module name (performance issue)
@@ -19,8 +25,8 @@
 
 ### Fixes
 
-- `[webpack-model]` - trim long module identifier (closes #200)
-- `[webpack-ui]` - fix descending modules sort on instant lists (related #162)
+- `[webpack-model]` - trim long module identifier (closes [#200](https://github.com/statoscope/statoscope/issues/200))
+- `[webpack-ui]` - fix descending modules sort on instant lists (related [#162](https://github.com/statoscope/statoscope/issues/162))
 
 ## 5.24.0 (22 July 2022)
 
