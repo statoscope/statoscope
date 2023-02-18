@@ -97,6 +97,59 @@ Array [
 ]
 `;
 
+exports[`with config explicit rules 1`] = `
+Array [
+  Array [
+    "Provided from webpack/*",
+  ],
+  Array [
+    "    webpack/build-time-limits",
+  ],
+  Array [
+    "    webpack/diff-build-time-limits",
+  ],
+  Array [
+    "    webpack/diff-deprecated-modules",
+  ],
+  Array [
+    "    webpack/diff-deprecated-packages",
+  ],
+  Array [
+    "    webpack/diff-entry-download-size-limits",
+  ],
+  Array [
+    "    webpack/diff-entry-download-time-limits",
+  ],
+  Array [
+    "    webpack/entry-download-size-limits",
+  ],
+  Array [
+    "    webpack/entry-download-time-limits",
+  ],
+  Array [
+    "    webpack/no-modules-deopts",
+  ],
+  Array [
+    "    webpack/no-packages-dups",
+  ],
+  Array [
+    "    webpack/restricted-modules",
+  ],
+  Array [
+    "    webpack/restricted-packages",
+  ],
+  Array [],
+]
+`;
+
+exports[`with config explicit rules not found 1`] = `
+Array [
+  Array [
+    "Rules not found",
+  ],
+]
+`;
+
 exports[`with config explicit single 1`] = `
 Array [
   Array [
