@@ -1,5 +1,15 @@
 # Changelog
 
+## 5.25.1 (19 February 2022)
+
+### Fixes
+
+- `[report-writer]` - fix decompression bug (closes #202)
+- `[webpack-model]` - fix assets collection when [CompressionWebpackPlugin](https://github.com/webpack-contrib/compression-webpack-plugin) is used
+- `[webpack-model]` - fix trimming long module ids
+- `[webpack-ui]` - module search now works only for first 500 chars in module name (performance issue)
+- `[webpack-ui]` - fix incorrect badge for asset modules
+
 ## 5.25.0 (17 February 2022)
 
 ### Features

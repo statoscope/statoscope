@@ -9,6 +9,8 @@ import Asset = Webpack.Asset;
 import Reason = Webpack.Reason;
 import RawReason = Webpack.RawReason;
 import ReasonGroup = Webpack.ReasonGroup;
+import RawAsset = Webpack.RawAsset;
+import AssetGroup = Webpack.AssetGroup;
 
 export function collector<TResult, TID, TEntry = TResult>(
   from: TEntry[],
@@ -69,6 +71,15 @@ export function collectRawModulesFromArray(modules: Module[]): Map<string, RawMo
   );
 }
 
+export function collectRawAssetsFromArray(assets: Asset[]): Map<string, RawAsset> {
+  return collector<RawAsset, string, Asset>(
+    assets,
+    (asset) => asset.type === 'asset' || typeof asset.type === 'undefined',
+    (asset) => (asset as AssetGroup).children,
+    (asset) => asset.name
+  );
+}
+
 export function collectRawReasonsFromArray(modules: Reason[]): Map<number, RawReason> {
   let i = 0;
 
@@ -90,14 +101,8 @@ export function collectRawChunks(compilation: Compilation): Chunk[] {
   return chunks;
 }
 
-export function collectRawAssets(compilation: Compilation): Asset[] {
-  const assets: Asset[] = [];
-
-  for (const asset of compilation.assets ?? []) {
-    assets.push(asset);
-  }
-
-  return assets;
+export function collectRawAssets(compilation: Compilation): RawAsset[] {
+  return [...collectRawAssetsFromArray(compilation.assets ?? []).values()];
 }
 
 export function collectRawEntrypoints(compilation: Compilation): EntrypointItem[] {

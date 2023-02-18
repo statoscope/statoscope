@@ -237,7 +237,7 @@ export default function (discovery: StatoscopeWidget): void {
                             data: `
                             $hash: compilation.hash;
                             compilation.modules.[not shouldHideModule()].[
-                              name~=#.filter or modules and modules.[name~=#.filter]
+                              name[:500]~=#.filter or modules and modules.[name[:500]~=#.filter]
                             ]
                             .sort(getModuleSize($hash).size desc)
                             `,

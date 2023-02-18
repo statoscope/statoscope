@@ -7,11 +7,12 @@ import { Webpack } from './webpack';
 import ChunkID = Webpack.ChunkID;
 import Entrypoint = Webpack.Entrypoint;
 import RawModule = Webpack.RawModule;
-import Asset = Webpack.Asset;
+import RawAsset = Webpack.RawAsset;
 import Chunk = Webpack.Chunk;
 import IssuerPathItem = Webpack.IssuerPathItem;
 import Compilation = Webpack.Compilation;
 import RawReason = Webpack.RawReason;
+import ModuleID = Webpack.ModuleID;
 
 export type CompilationResolvers = {
   resolveModule: ResolverFn<string, NormalizedModule>;
@@ -38,7 +39,7 @@ export type NormalizedEntrypoint = Omit<Entrypoint, 'chunks' | 'assets'> & {
   assets: NormalizedAsset[];
   dep?: NormalizedModuleDependency;
 };
-export type NormalizedAsset = Omit<Asset, 'chunks' | 'files'> & {
+export type NormalizedAsset = Omit<RawAsset, 'chunks' | 'files'> & {
   chunks: NormalizedChunk[];
   files: File[];
 };
@@ -116,7 +117,10 @@ export type EntrypointItem = {
 export type RawIndexes = {
   modules: IndexAPI<string, RawModule>;
   chunks: IndexAPI<ChunkID, Chunk>;
-  assets: IndexAPI<string, Asset>;
+  assets: IndexAPI<string, RawAsset>;
+  chunkAssets: Map<ChunkID, Set<RawAsset>>;
+  longModulesIds: Map<ModuleID, string>;
+  getModuleIdentifier(module: string): string;
   entrypoints: IndexAPI<string, EntrypointItem>;
 };
 

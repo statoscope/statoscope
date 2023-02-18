@@ -230,7 +230,7 @@ function writeHeader(stream: Writable, options: Options): void {
           if (enc3 == null || enc3 == 64) output.pop();
           if (enc4 == null || enc4 == 64) output.pop();
       
-          return output;
+          return Uint8Array.from(output);
         }
       
         return {

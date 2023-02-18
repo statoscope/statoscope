@@ -30,7 +30,7 @@ export default function (discovery: StatoscopeWidget): void {
         [
           {
             view: 'badge',
-            when: 'module.resolvedResource.fileType()',
+            when: 'not module.moduleType~=/^asset\\/?/ and module.resolvedResource.fileType()',
             data: `
           $moduleResource:module.resolvedResource;
           {

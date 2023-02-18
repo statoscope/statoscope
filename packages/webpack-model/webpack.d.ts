@@ -10,12 +10,13 @@ export declare namespace Webpack {
 
   type ModuleID = string | number | null;
 
+  type AssetGroup = { type: 'group name here'; children: Asset[] };
   type ModuleGroup = { type: 'group name here'; children: Module[] };
   type ReasonGroup = { type: 'group name here'; children: Reason[] };
 
   type RawModule = {
     moduleType?: string;
-    type: string;
+    type?: string;
     id: ModuleID;
     identifier: string;
     name: string;
@@ -26,6 +27,7 @@ export declare namespace Webpack {
     modules?: Module[];
     optimizationBailout?: string[];
   };
+  type Asset = AssetGroup | RawAsset;
   type Module = ModuleGroup | RawModule;
   type Reason = ReasonGroup | RawReason;
 
@@ -67,13 +69,14 @@ export declare namespace Webpack {
     size: number;
   };
 
-  type Asset = {
+  type RawAsset = {
     name: string;
     size: number;
     chunks?: Array<ChunkID | Chunk>;
     files?: File[];
     chunkNames?: string[];
     chunkIdHints?: string[];
+    type?: string;
   };
 
   type Compilation = {
@@ -84,7 +87,7 @@ export declare namespace Webpack {
     hash?: string;
     entrypoints?: Record<string, Entrypoint>;
     chunks?: Chunk[];
-    assets?: Asset[];
+    assets?: RawAsset[];
     modules?: Module[];
     children?: Compilation[];
     __statoscope?: StatoscopeMeta;

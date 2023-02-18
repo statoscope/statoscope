@@ -25,13 +25,14 @@ import {
   collectRawModulesFromArray,
   collectRawReasonsFromArray,
 } from './collector';
-import Asset = Webpack.Asset;
+import RawAsset = Webpack.RawAsset;
 import Chunk = Webpack.Chunk;
 import ChunkID = Webpack.ChunkID;
 import RawModule = Webpack.RawModule;
 import Module = Webpack.Module;
 import Compilation = Webpack.Compilation;
 import RawReason = Webpack.RawReason;
+import ModuleID = Webpack.ModuleID;
 
 function getHash(
   compilation: Webpack.Compilation,
@@ -170,7 +171,7 @@ function handleCompilation(
     assets: makeIndex((item) => item.name),
     chunks: makeIndex((item) => item.id),
     entrypoints: makeIndex((item) => item.name),
-    modules: makeIndex((item) => item.identifier, null, {
+    modules: makeIndex((item) => rawIndexes.getModuleIdentifier(item.identifier), null, {
       idModifier: moduleIdModifier,
     }),
     packages: makeIndex((item) => item.name),
@@ -179,9 +180,27 @@ function handleCompilation(
     assets: makeIndex((item) => item.name),
     chunks: makeIndex((item) => item.id),
     entrypoints: makeIndex((item) => item.name),
-    modules: makeIndex((item) => item.identifier, null, {
+    modules: makeIndex((item) => rawIndexes.getModuleIdentifier(item.identifier), null, {
       idModifier: moduleIdModifier,
     }),
+    chunkAssets: new Map(),
+    longModulesIds: new Map(),
+    getModuleIdentifier(identifier) {
+      if (identifier.length >= 300) {
+        let shortId = this.longModulesIds.get(identifier);
+
+        if (shortId) {
+          return shortId;
+        }
+
+        shortId = 'long_module_id_' + md5(identifier);
+        this.longModulesIds.set(identifier, shortId);
+
+        return shortId;
+      }
+
+      return identifier;
+    },
   };
   const resolvers: ProcessingContext['resolvers'] = {
     resolveAsset: (id) => indexes.assets.get(id),
@@ -198,15 +217,27 @@ function handleCompilation(
   };
 
   for (const module of collectRawModules(compilation)) {
-    if (module.identifier.length > 300) {
-      module.identifier = md5(module.identifier);
-    }
+    module.identifier = rawIndexes.getModuleIdentifier(module.identifier);
     processingContext.rawIndexes.modules.add(module);
   }
   for (const chunk of collectRawChunks(compilation)) {
     processingContext.rawIndexes.chunks.add(chunk);
   }
   for (const asset of collectRawAssets(compilation)) {
+    for (let chunkOrId of asset.chunks ?? []) {
+      if (chunkOrId && typeof chunkOrId !== 'string' && typeof chunkOrId !== 'number') {
+        chunkOrId = chunkOrId.id;
+      }
+
+      let assets = processingContext.rawIndexes.chunkAssets.get(chunkOrId);
+
+      if (!assets) {
+        assets = new Set();
+        processingContext.rawIndexes.chunkAssets.set(chunkOrId, assets);
+      }
+
+      assets.add(asset);
+    }
     processingContext.rawIndexes.assets.add(asset);
   }
   for (const entrypoint of collectRawEntrypoints(compilation)) {
@@ -356,6 +387,7 @@ function prepareModule(module: RawModule, context: ProcessingContext): void {
   const newInnerModules = [];
 
   for (const item of innerModules.values()) {
+    item.identifier = context.rawIndexes.getModuleIdentifier(item.identifier);
     newInnerModules.push(context.rawIndexes.modules.get(item.identifier)!);
     item.chunks ??= [];
 
@@ -440,12 +472,23 @@ function prepareChunk(chunk: Webpack.Chunk | null, context: ProcessingContext): 
   }
 
   if (chunk.files) {
-    normalizedChunk.files = chunk.files
+    const assets = chunk.files
       .filter(Boolean) // to skip null files, issue #158
       .map((f) => context.rawIndexes.assets.get(typeof f === 'string' ? f : f.name))
       .filter(Boolean) as NormalizedAsset[];
+    const assetsUniq = new Set(assets);
+
+    for (const asset of context.rawIndexes.chunkAssets.get(chunk.id) ?? []) {
+      assetsUniq.add(asset as NormalizedAsset);
+    }
+
+    normalizedChunk.files = [...assetsUniq];
   } else {
     chunk.files = [];
+
+    for (const asset of context.rawIndexes.chunkAssets.get(chunk.id) ?? []) {
+      chunk.files.push(asset);
+    }
   }
 
   if (chunk.sizes) {
@@ -601,7 +644,7 @@ function prepareEntries(
       entry.assets = entry.assets
         .map(
           (a) =>
-            context.rawIndexes.assets.get(typeof a === 'string' ? a : a.name) as Asset
+            context.rawIndexes.assets.get(typeof a === 'string' ? a : a.name) as RawAsset
         )
         .filter(Boolean);
     }
