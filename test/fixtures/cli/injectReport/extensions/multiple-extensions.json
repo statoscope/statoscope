@@ -1,0 +1,36 @@
+[
+  {
+    "descriptor": {
+      "name": "@statoscope/stats-extension-custom-extension-1"
+    },
+    "payload": {
+      "compilations": [
+        {
+          "reports": [
+            {
+              "id": "baz",
+              "view": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "descriptor": {
+      "name": "@statoscope/stats-extension-custom-extension-2"
+    },
+    "payload": {
+      "compilations": [
+        {
+          "reports": [
+            {
+              "id": "baz",
+              "view": []
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

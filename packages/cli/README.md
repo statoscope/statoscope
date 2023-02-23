@@ -249,6 +249,52 @@ statoscope inject-report --input path/to/stats.json --report path/to/my-reports.
 cat path/to/my-reports.json | statoscope inject-report --input path/to/stats.json > output.json
 ```
 
+### inject-extension
+
+Inject specified extension into stats.
+
+`inject-extension [...args]`
+
+- `--input` (`-i`) - path to the webpack stats file
+- `--extension` (`-e`) - path to one or more json with extension
+
+> Extension could be passed as a single extension or an array with extensions
+
+> Raw JSON could be passed through stdin
+
+**Example:**
+
+**my-extensions.json:**
+
+```json
+[
+  {
+    "descriptor": {
+      "name": "@my/extension-1"
+    },
+    "payload": {
+      "some": "data"
+    }
+  },
+  {
+    "descriptor": {
+      "name": "@my/extension-2"
+    },
+    "payload": {
+      "some": "data"
+    }
+  }
+]
+```
+
+```sh
+statoscope inject-extension --input path/to/stats.json --report path/to/my-extensions.json > output.json
+
+# or
+
+cat path/to/my-extensions.json | statoscope inject-extension --input path/to/stats.json > output.json
+```
+
 ## Support
 
 If you are an engineer or a company that is interested in Statoscope improvements, you could support Statoscope by

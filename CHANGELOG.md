@@ -4,6 +4,7 @@
 
 ### Features
 
+- `[cli]` - add `inject-extension` command that injects custom stats extension
 - `[cli]`: add `vrules` command that shows available validation rules that plugins in `statoscope.config.js` provides ([#192](https://github.com/statoscope/statoscope/pull/192) by @denisbalyko)
 
 ## 5.25.1 (19 February 2022)

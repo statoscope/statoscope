@@ -11,6 +11,7 @@ import normalizeCompilation from '@statoscope/webpack-model/dist/normalizeCompil
 import { Webpack } from '@statoscope/webpack-model/webpack';
 import { Report } from '@statoscope/types/types/custom-report';
 import { Config } from '@statoscope/types/types/config';
+import { Extension } from '@statoscope/stats/spec/extension';
 import Generator, {
   Payload,
 } from '@statoscope/stats-extension-custom-reports/dist/generator';
@@ -60,6 +61,29 @@ export function mergeCustomReportsIntoCompilation(
   }
 
   parsed.__statoscope.extensions.push(customReportGenerator.get());
+
+  return parsed;
+}
+
+export function mergeCustomExtensionsIntoCompilation(
+  parsed: Webpack.Compilation,
+  extensions: Extension<unknown>[]
+): Webpack.Compilation {
+  parsed.__statoscope ??= {};
+  parsed.__statoscope.extensions ??= [];
+
+  for (const ext of extensions) {
+    if (
+      parsed.__statoscope.extensions.some(
+        (e) => e.descriptor.name === ext.descriptor.name
+      )
+    ) {
+      console.log(`Extension ${ext.descriptor.name} already exists. Ignoring`);
+      continue;
+    }
+
+    parsed.__statoscope.extensions.push(ext);
+  }
 
   return parsed;
 }

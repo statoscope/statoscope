@@ -1,0 +1,252 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`stats-with-reports.json, multiple-extensions.json, 1`] = `
+Object {
+  "__statoscope": Object {
+    "extensions": Array [
+      Object {
+        "descriptor": Object {
+          "name": "foo",
+        },
+      },
+      Object {
+        "descriptor": Object {
+          "name": "@statoscope/stats-extension-custom-reports",
+        },
+        "payload": Object {
+          "compilations": Array [
+            Object {
+              "reports": Array [
+                Object {
+                  "id": "baz",
+                  "view": Array [],
+                },
+              ],
+            },
+          ],
+        },
+      },
+      Object {
+        "descriptor": Object {
+          "name": "@statoscope/stats-extension-custom-extension-1",
+        },
+        "payload": Object {
+          "compilations": Array [
+            Object {
+              "reports": Array [
+                Object {
+                  "id": "baz",
+                  "view": Array [],
+                },
+              ],
+            },
+          ],
+        },
+      },
+      Object {
+        "descriptor": Object {
+          "name": "@statoscope/stats-extension-custom-extension-2",
+        },
+        "payload": Object {
+          "compilations": Array [
+            Object {
+              "reports": Array [
+                Object {
+                  "id": "baz",
+                  "view": Array [],
+                },
+              ],
+            },
+          ],
+        },
+      },
+    ],
+  },
+}
+`;
+
+exports[`stats-with-reports.json, single-extension-a.json, 1`] = `
+Object {
+  "__statoscope": Object {
+    "extensions": Array [
+      Object {
+        "descriptor": Object {
+          "name": "foo",
+        },
+      },
+      Object {
+        "descriptor": Object {
+          "name": "@statoscope/stats-extension-custom-reports",
+        },
+        "payload": Object {
+          "compilations": Array [
+            Object {
+              "reports": Array [
+                Object {
+                  "id": "baz",
+                  "view": Array [],
+                },
+              ],
+            },
+          ],
+        },
+      },
+      Object {
+        "descriptor": Object {
+          "name": "@statoscope/stats-extension-custom-extension",
+        },
+        "payload": Object {
+          "compilations": Array [
+            Object {
+              "reports": Array [
+                Object {
+                  "id": "baz",
+                  "view": Array [],
+                },
+              ],
+            },
+          ],
+        },
+      },
+    ],
+  },
+}
+`;
+
+exports[`stats-without-extensions.json, multiple-extensions.json, 1`] = `
+Object {
+  "__statoscope": Object {
+    "extensions": Array [
+      Object {
+        "descriptor": Object {
+          "name": "@statoscope/stats-extension-custom-extension-1",
+        },
+        "payload": Object {
+          "compilations": Array [
+            Object {
+              "reports": Array [
+                Object {
+                  "id": "baz",
+                  "view": Array [],
+                },
+              ],
+            },
+          ],
+        },
+      },
+      Object {
+        "descriptor": Object {
+          "name": "@statoscope/stats-extension-custom-extension-2",
+        },
+        "payload": Object {
+          "compilations": Array [
+            Object {
+              "reports": Array [
+                Object {
+                  "id": "baz",
+                  "view": Array [],
+                },
+              ],
+            },
+          ],
+        },
+      },
+    ],
+  },
+}
+`;
+
+exports[`stats-without-extensions.json, single-extension-a.json, 1`] = `
+Object {
+  "__statoscope": Object {
+    "extensions": Array [
+      Object {
+        "descriptor": Object {
+          "name": "@statoscope/stats-extension-custom-extension",
+        },
+        "payload": Object {
+          "compilations": Array [
+            Object {
+              "reports": Array [
+                Object {
+                  "id": "baz",
+                  "view": Array [],
+                },
+              ],
+            },
+          ],
+        },
+      },
+    ],
+  },
+}
+`;
+
+exports[`stats-without-meta.json, multiple-extensions.json, 1`] = `
+Object {
+  "__statoscope": Object {
+    "extensions": Array [
+      Object {
+        "descriptor": Object {
+          "name": "@statoscope/stats-extension-custom-extension-1",
+        },
+        "payload": Object {
+          "compilations": Array [
+            Object {
+              "reports": Array [
+                Object {
+                  "id": "baz",
+                  "view": Array [],
+                },
+              ],
+            },
+          ],
+        },
+      },
+      Object {
+        "descriptor": Object {
+          "name": "@statoscope/stats-extension-custom-extension-2",
+        },
+        "payload": Object {
+          "compilations": Array [
+            Object {
+              "reports": Array [
+                Object {
+                  "id": "baz",
+                  "view": Array [],
+                },
+              ],
+            },
+          ],
+        },
+      },
+    ],
+  },
+}
+`;
+
+exports[`stats-without-meta.json, single-extension-a.json, 1`] = `
+Object {
+  "__statoscope": Object {
+    "extensions": Array [
+      Object {
+        "descriptor": Object {
+          "name": "@statoscope/stats-extension-custom-extension",
+        },
+        "payload": Object {
+          "compilations": Array [
+            Object {
+              "reports": Array [
+                Object {
+                  "id": "baz",
+                  "view": Array [],
+                },
+              ],
+            },
+          ],
+        },
+      },
+    ],
+  },
+}
+`;

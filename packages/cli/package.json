@@ -27,6 +27,7 @@
     "@statoscope/config": "5.22.0",
     "@statoscope/helpers": "5.25.0",
     "@statoscope/report-writer": "5.25.1",
+    "@statoscope/stats": "5.14.1",
     "@statoscope/stats-extension-custom-reports": "5.25.0",
     "@statoscope/stats-validator": "5.22.0",
     "@statoscope/stats-validator-reporter-console": "5.22.0",
