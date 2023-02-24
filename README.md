@@ -6,6 +6,8 @@
 
 Statoscope is a toolkit for analyzing (with UI-base report) and validate stats of your bundle.
 
+Learn more on [Smashing Magazine](https://www.smashingmagazine.com/2022/02/statoscope-course-intensive-therapy-bundle/).
+
 **Key features:**
 
 - 🌳 Full dependency tree (modules/chunks/assets/entrypoints/packages)
