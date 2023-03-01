@@ -1,0 +1,11 @@
+{
+  "id": "foobar",
+  "data": [
+    3,
+    2,
+    1
+  ],
+  "view": [
+    "struct"
+  ]
+}
