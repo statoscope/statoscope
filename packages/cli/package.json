@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/cli",
-  "version": "5.25.1",
+  "version": "5.26.0",
   "description": "Statoscope CLI tools",
   "scripts": {
     "build": "../../node_modules/.bin/tsc",
