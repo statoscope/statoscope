@@ -17,7 +17,7 @@ Learn more on [Statoscope: A Course Of Intensive Therapy For Your Bundle](https:
 - 🔄 Stats comparison
 - 📊 Custom reports for your stats
 - 🐘 No stats size limitation
-- 🗜 Smart HTML report compression (up to 200x)
+- 🗜 Smart HTML report compression (up to 200x) (learn more on [wiki](https://github.com/statoscope/statoscope/wiki/Statoscope-5.25:-Compressing-stats-with-Binary-JSON))
 
 You can try it at [Statoscope sandbox](https://statoscope.tech)
 
