@@ -288,7 +288,7 @@ Inject specified extension into stats.
 ```
 
 ```sh
-statoscope inject-extension --input path/to/stats.json --report path/to/my-extensions.json > output.json
+statoscope inject-extension --input path/to/stats.json --extension path/to/my-extensions.json > output.json
 
 # or
 

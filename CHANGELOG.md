@@ -1,11 +1,17 @@
 # Changelog
 
+## 5.26.1 (07 March 2023)
+
+### Fixes
+
+- `[cli]` - add inject-extension into cli
+
 ## 5.26.0 (1 March 2023)
 
 ### Features
 
 - `[cli]` - add `inject-extension` command that injects custom stats extension
-- `[cli]`: add `vrules` command that shows available validation rules that plugins in `statoscope.config.js` provides ([#192](https://github.com/statoscope/statoscope/pull/192) by @denisbalyko)
+- `[cli]` - add `vrules` command that shows available validation rules that plugins in `statoscope.config.js` provides ([#192](https://github.com/statoscope/statoscope/pull/192) by @denisbalyko)
 
 ## 5.25.1 (19 February 2023)
 
