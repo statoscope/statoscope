@@ -8,7 +8,8 @@ import generateCommand from './commands/generate';
 import validateCommand from './commands/validate';
 import queryCommand from './commands/query';
 import initCommand from './commands/init';
-import injectReport from './commands/injectReport';
+import injectReportCommand from './commands/injectReport';
+import injectExtensionCommand from './commands/injectExtension';
 import createCommand from './commands/create';
 import vrulesCommand from './commands/validationRules';
 
@@ -17,7 +18,8 @@ const commands: Array<(yargs: Argv) => Argv> = [
   generateCommand,
   validateCommand,
   queryCommand,
-  injectReport,
+  injectReportCommand,
+  injectExtensionCommand,
   initCommand,
   createCommand,
   vrulesCommand,
