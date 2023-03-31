@@ -171,7 +171,7 @@ function handleCompilation(
     assets: makeIndex((item) => item.name),
     chunks: makeIndex((item) => item.id),
     entrypoints: makeIndex((item) => item.name),
-    modules: makeIndex((item) => rawIndexes.getModuleIdentifier(item.identifier), null, {
+    modules: makeIndex((item) => item.identifier, null, {
       idModifier: moduleIdModifier,
     }),
     packages: makeIndex((item) => item.name),
@@ -180,27 +180,10 @@ function handleCompilation(
     assets: makeIndex((item) => item.name),
     chunks: makeIndex((item) => item.id),
     entrypoints: makeIndex((item) => item.name),
-    modules: makeIndex((item) => rawIndexes.getModuleIdentifier(item.identifier), null, {
+    modules: makeIndex((item) => item.identifier, null, {
       idModifier: moduleIdModifier,
     }),
     chunkAssets: new Map(),
-    longModulesIds: new Map(),
-    getModuleIdentifier(identifier) {
-      if (identifier.length >= 300) {
-        let shortId = this.longModulesIds.get(identifier);
-
-        if (shortId) {
-          return shortId;
-        }
-
-        shortId = 'long_module_id_' + md5(identifier);
-        this.longModulesIds.set(identifier, shortId);
-
-        return shortId;
-      }
-
-      return identifier;
-    },
   };
   const resolvers: ProcessingContext['resolvers'] = {
     resolveAsset: (id) => indexes.assets.get(id),
@@ -217,7 +200,6 @@ function handleCompilation(
   };
 
   for (const module of collectRawModules(compilation)) {
-    module.identifier = rawIndexes.getModuleIdentifier(module.identifier);
     processingContext.rawIndexes.modules.add(module);
   }
   for (const chunk of collectRawChunks(compilation)) {
@@ -387,7 +369,6 @@ function prepareModule(module: RawModule, context: ProcessingContext): void {
   const newInnerModules = [];
 
   for (const item of innerModules.values()) {
-    item.identifier = context.rawIndexes.getModuleIdentifier(item.identifier);
     newInnerModules.push(context.rawIndexes.modules.get(item.identifier)!);
     item.chunks ??= [];
 

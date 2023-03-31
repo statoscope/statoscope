@@ -12,7 +12,6 @@ import Chunk = Webpack.Chunk;
 import IssuerPathItem = Webpack.IssuerPathItem;
 import Compilation = Webpack.Compilation;
 import RawReason = Webpack.RawReason;
-import ModuleID = Webpack.ModuleID;
 
 export type CompilationResolvers = {
   resolveModule: ResolverFn<string, NormalizedModule>;
@@ -119,8 +118,6 @@ export type RawIndexes = {
   chunks: IndexAPI<ChunkID, Chunk>;
   assets: IndexAPI<string, RawAsset>;
   chunkAssets: Map<ChunkID, Set<RawAsset>>;
-  longModulesIds: Map<ModuleID, string>;
-  getModuleIdentifier(module: string): string;
   entrypoints: IndexAPI<string, EntrypointItem>;
 };
 
