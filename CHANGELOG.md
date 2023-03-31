@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.26.2 (31 March 2023)
+
+### Fixes
+
+- `[webpack-model]` - temporary revert long-module-id
+
 ## 5.26.1 (07 March 2023)
 
 ### Fixes
