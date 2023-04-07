@@ -87,7 +87,7 @@ export default class Generator {
     } else {
       if (resolvedInstance.info.version !== info.version) {
         throw new Error(
-          `[Instnce version conflict] ${instance} old ${resolvedInstance.info.version} new ${info.version}`
+          `[Instance version conflict] ${instance} old ${resolvedInstance.info.version} new ${info.version}`
         );
       }
     }
