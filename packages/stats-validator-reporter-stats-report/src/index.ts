@@ -23,6 +23,7 @@ export type Options = {
   saveReportTo?: string;
   saveStatsTo?: string;
   open?: boolean;
+  disableReportCompression?: boolean;
 };
 
 export default class ConsoleReporter implements Reporter {
@@ -106,6 +107,7 @@ export default class ConsoleReporter implements Reporter {
             init: `function (data) {
             Statoscope.default(data.map((item) => ({ name: item.id, data: item.data })));
           }`,
+            dataCompression: !this.options.disableReportCompression,
           },
         },
         [
