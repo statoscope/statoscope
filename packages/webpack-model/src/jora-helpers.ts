@@ -601,5 +601,56 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
         entrypoint
       ) as NormalizedAsset[];
     },
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    module_uniq_retained: (() => {
+      const cache = new WeakMap<NormalizedModule, Set<NormalizedModule>>();
+
+      return (module?: NormalizedModule): NormalizedModule[] => {
+        if (!module) {
+          return [];
+        }
+
+        const cached = cache.get(module);
+
+        if (cached) {
+          return [...cached];
+        }
+
+        const passed = new Set<NormalizedModule>();
+        const stack = [module];
+        let cursor: NormalizedModule | undefined;
+
+        while ((cursor = stack.pop())) {
+          if (passed.has(cursor)) {
+            continue;
+          }
+
+          if (
+            cursor.reasons.some(
+              (r) =>
+                r.resolvedModule &&
+                r.resolvedModule !== module &&
+                !passed.has(r.resolvedModule)
+            )
+          ) {
+            continue;
+          }
+
+          passed.add(cursor);
+
+          for (const dep of cursor.deps ?? []) {
+            if (dep.module) {
+              stack.push(dep.module);
+            }
+          }
+        }
+
+        passed.delete(module);
+
+        cache.set(module, passed);
+
+        return [...passed];
+      };
+    })(),
   };
 }

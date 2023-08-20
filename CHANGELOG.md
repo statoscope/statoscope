@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+
+- `[webpack-model]` - add `module_uniq_retained(module)`-helper that returns modules that the module brings into bundle 
+
 ## 5.26.2 (31 March 2023)
 
 ### Fixes

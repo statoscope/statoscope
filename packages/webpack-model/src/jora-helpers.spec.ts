@@ -1,7 +1,13 @@
 import { prepareWithJora as prepareWithJoraOriginal } from '@statoscope/helpers/dist/jora';
 import stats from '../../../test/bundles/v5/simple/stats-prod.json';
 import { serializeSolutionPath } from '../../../test/helpers';
-import { NormalizedAsset, NormalizedChunk } from '../types';
+import {
+  NormalizedAsset,
+  NormalizedChunk,
+  NormalizedModule,
+  NormalizedModuleDependency,
+  NormalizedReason,
+} from '../types';
 import normalize from './handleFile';
 import makeHelpers, { ResolvedStats } from './jora-helpers';
 
@@ -520,5 +526,83 @@ describe('entrypoint', () => {
         .entrypoint_getAsyncAssets(firstCompilation.entrypoints[1])
         .map((c) => c.name)
     ).toEqual(['848.js']);
+  });
+});
+
+describe('module', () => {
+  function handleGraph<T extends Record<string, K | true>, K extends Record<string, K>>(
+    graph: T
+  ): Map<string, NormalizedModule> {
+    const nodeCache = new Map<string, NormalizedModule>();
+    const getNode = (identifier: string): NormalizedModule => {
+      let node = nodeCache.get(identifier);
+
+      if (!node) {
+        node = {
+          identifier: identifier,
+          deps: [],
+          reasons: [],
+        } as unknown as NormalizedModule;
+        nodeCache.set(identifier, node);
+      }
+
+      return node;
+    };
+
+    const iteration = (obj: T | K | true, from?: string): void => {
+      if (obj === true) {
+        return;
+      }
+
+      for (const [key, value] of Object.entries(obj)) {
+        const fromNode = from && getNode(from);
+
+        if (fromNode) {
+          const depNode = getNode(key);
+          fromNode.deps?.push({ module: depNode } as NormalizedModuleDependency);
+          depNode.reasons.push({ resolvedModule: fromNode } as NormalizedReason);
+        }
+
+        iteration(value, key);
+      }
+    };
+
+    iteration(graph);
+
+    return nodeCache;
+  }
+
+  it('module_uniq_retained', () => {
+    const graph = handleGraph({
+      a: {
+        b: true,
+        c: {
+          d: true,
+          g: {
+            h: true,
+          },
+          k: true,
+        },
+      },
+      e: {
+        f: true,
+        g: true,
+        l: true,
+      },
+    });
+
+    expect(
+      helpers
+        .module_uniq_retained(graph.get('a'))
+        .map((n) => n.identifier)
+        .sort()
+    ).toEqual(['b', 'c', 'd', 'k']);
+
+    expect(
+      helpers
+        .module_uniq_retained(graph.get('e'))
+        .map((n) => n.identifier)
+        .sort()
+    ).toEqual(['f', 'l']);
   });
 });

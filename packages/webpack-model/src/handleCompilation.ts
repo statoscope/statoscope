@@ -32,7 +32,6 @@ import RawModule = Webpack.RawModule;
 import Module = Webpack.Module;
 import Compilation = Webpack.Compilation;
 import RawReason = Webpack.RawReason;
-import ModuleID = Webpack.ModuleID;
 
 function getHash(
   compilation: Webpack.Compilation,
