@@ -1,4 +1,6 @@
 /* global require, process */
+// @ts-ignore
+import * as discoveryLib from '@discoveryjs/discovery/dist/discovery';
 import { RawData, StatoscopeWidget } from '../types';
 import prepare from './init/prepare/';
 import initApp from './init/init-app';
@@ -19,4 +21,14 @@ export default (data: RawData, element = document.body): StatoscopeWidget => {
     prepare,
     name: `Statoscope ${V || ''}`,
   });
+};
+
+export const utils = {
+  dataLoad: {
+    loadDataFromStream: discoveryLib.utils.loadDataFromStream,
+    loadDataFromFile: discoveryLib.utils.loadDataFromFile,
+    loadDataFromEvent: discoveryLib.utils.loadDataFromEvent,
+    loadDataFromUrl: discoveryLib.utils.loadDataFromUrl,
+    loadDataFromPush: discoveryLib.utils.loadDataFromPush,
+  },
 };
