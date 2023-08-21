@@ -1,5 +1,5 @@
 import { ViewConfigData } from '@statoscope/types';
-import { diffBadges } from './helpers';
+import { moduleItemConfig } from '../default/modules-tree';
 
 export default function modulesTab(): ViewConfigData[] {
   return [
@@ -40,13 +40,7 @@ export default function modulesTab(): ViewConfigData[] {
             },
           ],
           children: 'data',
-          itemConfig: {
-            children: false,
-            content: [
-              'module-item:{module, hash, compact: true, inline: true, match: #.filter}',
-              diffBadges(),
-            ],
-          },
+          itemConfig: moduleItemConfig('module', 'hash'),
         },
       },
     },

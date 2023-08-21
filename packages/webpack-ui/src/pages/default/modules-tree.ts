@@ -16,6 +16,7 @@ export function moduleItemConfig(getter = '$', hash = '#.params.hash'): ModuleIt
     limit: '= settingListItemsLimit()',
     content: `module-item:{module: ${getter}, hash: ${hash}, match: #.filter}`,
     children: `
+    $hash: ${hash};
     $moduleGraph: ${hash}.getModuleGraph();
     $entrypoints: ${hash}.resolveCompilation().entrypoints;
     $module: ${getter};
@@ -41,6 +42,17 @@ export function moduleItemConfig(getter = '$', hash = '#.params.hash'): ModuleIt
       data: ${getter}.modules.[not shouldHideModule()],
       visible: ${getter}.modules,
       type: 'concatenated'
+    },
+    {
+      $modules: ${getter}.module_retained_modules();
+      title: "Retain modules",
+      data: ${getter}.deps.module.[$ in $modules],
+      visible: $modules,
+      badges: [
+        {prefix: 'subtree total', text: $modules.size()},
+        {prefix: 'subtree size', text: $modules.(getModuleSize($hash)).reduce(=> $$ + size, 0).formatSize()}
+      ],
+      type: 'retain_modules'
     }].[visible]`,
     itemConfig: {
       view: 'switch',
@@ -160,6 +172,32 @@ export function moduleItemConfig(getter = '$', hash = '#.params.hash'): ModuleIt
                 view: 'badge',
                 className: 'hack-badge-margin-left',
                 data: `{text: data.size()}`,
+              },
+            ],
+            children: 'data',
+            limit: '= settingListItemsLimit()',
+            get itemConfig(): ModuleItemConfig {
+              return moduleItemConfig();
+            },
+          },
+        },
+        {
+          when: 'type="retain_modules"',
+          content: {
+            view: 'tree-leaf',
+            content: [
+              'text:title',
+              {
+                when: 'data',
+                view: 'badge',
+                className: 'hack-badge-margin-left',
+                data: `{text: data.size()}`,
+              },
+              {
+                when: 'badges',
+                view: 'inline-list',
+                data: `badges`,
+                item: 'badge',
               },
             ],
             children: 'data',
