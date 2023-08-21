@@ -31,6 +31,7 @@ type Options = {
   saveReportTo?: string; // a path to save HTML report (temporary dir with random file name by default)
   saveStatsTo?: string; // a path to save JSON stats (does not save stats by default)
   open?: boolean; // open generated Statoscope report (false by default)
+  disableReportCompression?: boolean // html report data compression, disable it will increase the size a lot (false by default)
 };
 ```
 
