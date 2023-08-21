@@ -16,6 +16,7 @@
 
   See usage example in [dev.html](packages/webpack-ui/dev.html)
 - `[webpack-ui]` - add `npm run dev` to develop Statoscope UI more easily
+- `[stats-validator-reporter-stats-report]`: add `disableReportCompression`-option, disable it will increase the size a lot (`false` by default) ([#210](https://github.com/statoscope/statoscope/pull/210) by @icy0307)
 
 ## 5.26.2 (31 March 2023)
 
