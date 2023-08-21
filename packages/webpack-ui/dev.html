@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      html, body {
+          padding: 0;
+          margin: 0;
+          height: 100%;
+          border: none;
+          -webkit-text-size-adjust: 100%;
+      }
+
+      .drop-zone {
+          position: absolute;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          top: 20vh;
+          bottom: 20vh;
+          left: 20vh;
+          right: 20vh;
+          border: 5px dashed gray;
+          border-radius: 10px;
+          font: 2em Helvetica, sans-serif;
+      }
+  </style>
+</head>
+<body>
+
+<div class="drop-zone">
+  <div class="text">
+    Drop stats right here 👇
+  </div>
+</div>
+
+<script>
+  const dropZone = document.querySelector(".drop-zone");
+  const dropZoneText = document.querySelector(".drop-zone .text");
+
+  document.addEventListener("dragover", (e) => {
+    e.preventDefault();
+  });
+
+  document.addEventListener("drop", async (e) => {
+    e.preventDefault();
+
+
+    if (e.dataTransfer.files.length) {
+      const rawData = [];
+
+      dropZoneText.textContent = "Loading... ⌛️";
+
+      for (const file of e.dataTransfer.files) {
+        const loadStats = Statoscope.utils.dataLoad.loadDataFromFile(file);
+        const loadResult = await loadStats.result;
+
+        rawData.push({
+          name: file.name,
+          data: loadResult.data
+        });
+      }
+
+      try {
+        console.log(Statoscope.default(rawData));
+
+        dropZone.remove();
+      } catch (e) {
+        dropZoneText.innerHTML = `<pre>Error: ${e.message}\n${e.stack}</pre>`;
+      }
+    }
+  });
+</script>
+</body>
+</html>

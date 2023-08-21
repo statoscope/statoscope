@@ -3,6 +3,7 @@
 const path = require('path');
 const { merge } = require('webpack-merge');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 let Statoscope;
 try {
   Statoscope = require('../webpack-plugin').default;
@@ -13,6 +14,7 @@ try {
 }
 
 const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
+const isDev = mode === 'development';
 
 function makeConfig(config) {
   return merge(
@@ -24,7 +26,11 @@ function makeConfig(config) {
         library: 'Statoscope',
         libraryTarget: 'umd',
         path: path.resolve('dist'),
-        //filename: '[name].[hash].js',
+      },
+      devServer: {
+        devMiddleware: {
+          writeToDisk: true,
+        },
       },
       resolve: {
         extensions: ['.ts', '.js', '.json', '.wasm'],
@@ -56,11 +62,21 @@ function makeConfig(config) {
         ],
       },
       plugins: [
-        new Statoscope({
-          // saveTo: `analyze/statoscope-[name]-[hash].html`,
-          saveStatsTo: `analyze/stats.json`,
-          open: 'file',
+        new webpack.DefinePlugin({
+          'process.env.STATOSCOPE_DEV': JSON.stringify(process.env.STATOSCOPE_DEV),
         }),
+        ...(isDev
+          ? [
+              new HtmlWebpackPlugin({
+                template: 'dev.html',
+              }),
+              new Statoscope({
+                // saveTo: `analyze/statoscope-[name]-[hash].html`,
+                saveStatsTo: `analyze/stats.json`,
+                open: 'file',
+              }),
+            ]
+          : []),
         new webpack.EnvironmentPlugin({
           STATOSCOPE_VERSION: require('./package.json').version,
         }),
