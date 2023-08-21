@@ -1,7 +1,7 @@
 import '@discoveryjs/discovery/dist/discovery.css';
 import '../global.css';
 // @ts-ignore
-import * as discoveryLib from '@discoveryjs/discovery';
+import * as discoveryLib from '@discoveryjs/discovery/dist/discovery';
 import { NormalizedFile, RawStatsFileDescriptor } from '@statoscope/webpack-model/types';
 import { WidgetOptions } from '@statoscope/types';
 import settings from '../settings';
@@ -16,7 +16,8 @@ export default ({
   views,
   pages,
 }: InitArg): StatoscopeWidget => {
-  const discovery = new discoveryLib.App(element, {
+  const discovery = new discoveryLib.App({
+    container: element,
     darkmode: 'disabled',
     setup: {},
     styles: [

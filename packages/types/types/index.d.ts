@@ -46,6 +46,7 @@ interface RenderState {
 type Extension = Extension[] | { [key: string]: Extension };
 
 export interface WidgetOptions {
+  container?: HTMLElement;
   defaultPageId?: string;
   isolateStyleMarker?: string;
   compact?: boolean;
@@ -147,11 +148,7 @@ export class Widget<TRawData, TData, TContext> {
     };
   };
 
-  constructor(
-    container: HTMLElement,
-    defaultPage?: ViewConfig<TData, TContext>,
-    options?: WidgetOptions
-  );
+  constructor(options?: WidgetOptions);
 }
 
 export type RelationItem =

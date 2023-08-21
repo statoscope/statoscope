@@ -5,9 +5,10 @@
   "main": "./dist/main.js",
   "types": "./types.d.ts",
   "scripts": {
-    "build": "npm run typecheck && ../../node_modules/.bin/webpack",
-    "watch": "../../node_modules/.bin/webpack --watch",
-    "build:prod": "NODE_ENV=production ../../node_modules/.bin/webpack",
+    "build": "npm run typecheck && webpack",
+    "watch": "webpack --watch",
+    "dev": "STATOSCOPE_DEV=true webpack serve",
+    "build:prod": "NODE_ENV=production webpack",
     "prepublishOnly": "npm run build:prod",
     "typecheck": "../../node_modules/.bin/tsc --noEmit",
     "lint:custom": "npm run typecheck"
@@ -27,7 +28,7 @@
   },
   "devDependencies": {
     "@carrotsearch/foamtree": "^3.5.0",
-    "@discoveryjs/discovery": "^1.0.0-beta.66",
+    "@discoveryjs/discovery": "^1.0.0-beta.77",
     "@popperjs/core": "^2.11.5",
     "@statoscope/helpers": "5.25.0",
     "@statoscope/stats": "5.14.1",
@@ -40,8 +41,13 @@
     "babel-loader": "^8.2.5",
     "chart.js": "^3.8.0",
     "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.3",
     "md5": "^2.3.0",
     "path-browserify": "^1.0.1",
-    "style-loader": "^3.3.1"
+    "style-loader": "^3.3.1",
+    "webpack": "^5.88.2",
+    "webpack-dev-server": "^4.15.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-merge": "^5.8.0"
   }
 }
