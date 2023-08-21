@@ -20,12 +20,13 @@ function makeConfig(config) {
   return merge(
     {
       mode,
-      devtool: 'source-map',
+      devtool: isDev ? 'eval-source-map' : false,
       entry: './src/',
       output: {
         library: 'Statoscope',
         libraryTarget: 'umd',
         path: path.resolve('dist'),
+        publicPath: '',
       },
       devServer: {
         devMiddleware: {
