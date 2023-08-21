@@ -38,6 +38,7 @@ jest.mock('@statoscope/stats-extension-custom-reports/package.json', () => ({
 }));
 
 const output: string[] = [];
+// eslint-disable-next-line
 let consoleLogSpy: any = null;
 
 beforeEach(() => {
