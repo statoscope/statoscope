@@ -2,7 +2,7 @@ import fs from 'fs';
 import { PassThrough, Readable, Writable } from 'stream';
 import makeChunkToScriptWriter from './chunkToScriptWriter';
 
-export { encode as encodeBinaryJSON } from './binary-json';
+export { encode as encodeBinaryJSON } from './jsonxl.min';
 
 export type InitArg = { id: string; data: unknown }[];
 export type AssetItem =
@@ -34,8 +34,8 @@ const scriptsToInject: ScriptItem[] = [
   },
   {
     type: 'cjs',
-    path: require.resolve('./binary-json'),
-    name: 'BinaryJSON',
+    path: require.resolve('./jsonxl.min'),
+    name: 'JSONXL',
   },
 ];
 
@@ -255,7 +255,7 @@ function writeHeader(stream: Writable, options: Options): void {
                   inflator.push(decoded);
                 }
                 
-                const data = BinaryJSON.decode(inflator.result);
+                const data = JSONXL.decode(inflator.result);
                 return { id, data };
               })
             );
