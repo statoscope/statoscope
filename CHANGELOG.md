@@ -2,9 +2,11 @@
 
 ## Next
 
+### Features
+
 - `[webpack-model]` - add `module_retained_modules(module)`-helper that returns retained modules by specific module
 
-  Other words: retained ones will be removed from bundle along with the module
+  In other words: retained ones will be removed from bundle along with the module
 - `[webpack-ui]` - support `module_retained_modules` in module tree. For example, you can see retained modules in the diff-page
 - `[webpack-ui]` - update discoveryjs from 1.0.0-beta.66 to 1.0.0-beta.77 (see [changelog](https://github.com/discoveryjs/discovery/blob/master/CHANGELOG.md)) 
 - `[webpack-ui]` - add static helpers to load data:
@@ -17,6 +19,11 @@
   See usage example in [dev.html](packages/webpack-ui/dev.html)
 - `[webpack-ui]` - add `npm run dev` to develop Statoscope UI more easily
 - `[stats-validator-reporter-stats-report]`: add `disableReportCompression`-option, disable it will increase the size a lot (`false` by default) ([#210](https://github.com/statoscope/statoscope/pull/210) by @icy0307)
+- `[report-writer]`: use [jsonxl](https://github.com/discoveryjs/jsonxl) to compress stats in binary json (replacement for old solution)
+
+### Performance
+
+- `[webpack-model]` - improve initialization performance
 
 ## 5.26.2 (31 March 2023)
 
