@@ -602,7 +602,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
       ) as NormalizedAsset[];
     },
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    module_uniq_retained: (() => {
+    module_retained_modules: (() => {
       const cache = new WeakMap<NormalizedModule, Set<NormalizedModule>>();
 
       return (module?: NormalizedModule): NormalizedModule[] => {
@@ -626,6 +626,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
           }
 
           if (
+            cursor !== module &&
             cursor.reasons.some(
               (r) =>
                 r.resolvedModule &&

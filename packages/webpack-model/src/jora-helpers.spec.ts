@@ -574,6 +574,9 @@ describe('module', () => {
 
   it('module_uniq_retained', () => {
     const graph = handleGraph({
+      preA: {
+        a: true,
+      },
       a: {
         b: true,
         c: {
@@ -593,14 +596,14 @@ describe('module', () => {
 
     expect(
       helpers
-        .module_uniq_retained(graph.get('a'))
+        .module_retained_modules(graph.get('a'))
         .map((n) => n.identifier)
         .sort()
     ).toEqual(['b', 'c', 'd', 'k']);
 
     expect(
       helpers
-        .module_uniq_retained(graph.get('e'))
+        .module_retained_modules(graph.get('e'))
         .map((n) => n.identifier)
         .sort()
     ).toEqual(['f', 'l']);
