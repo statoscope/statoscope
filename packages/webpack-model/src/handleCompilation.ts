@@ -143,8 +143,16 @@ function buildGraph(compilation: NormalizedCompilation): {
 }
 
 function moduleIdModifier(id: string): string {
-  return id.replace(/(.+[|\s])([a-f0-9]+)$/, '$1root');
+  let cached = moduleIdModifier.cache.get(id);
+
+  if (!cached) {
+    cached = id.replace(/(.+[|\s])([a-f0-9]+)$/, '$1root');
+    moduleIdModifier.cache.set(id, cached);
+  }
+
+  return cached;
 }
+moduleIdModifier.cache = new Map<string, string>();
 
 function handleCompilation(
   compilation: Webpack.Compilation,

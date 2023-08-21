@@ -11,24 +11,39 @@ export function matchRxValue(rx: RegExp, string: string): string | null {
   return match || null;
 }
 
+const resourceNameCache = new Map<string, string>();
+const nodeModuleNameCache = new Map<string, NodeModule | null>();
+
 export function moduleNameResource(name: string | null): string | null {
-  if (name && !name.includes('(ignored)') && !name.startsWith('multi')) {
-    const normalized = matchRxValue(
-      extractFileRx,
-      name.replace('(webpack)', 'node_modules/webpack')
-    );
+  if (name) {
+    const cached = resourceNameCache.get(name);
 
-    if (!normalized) {
-      return name;
+    if (cached) {
+      return cached;
     }
 
-    const nameResource = matchRxValue(concatenatedIdRx, normalized) || normalized;
+    if (!name.includes('(ignored)') && !name.startsWith('multi')) {
+      const normalized = matchRxValue(
+        extractFileRx,
+        name.replace('(webpack)', 'node_modules/webpack')
+      );
 
-    if (nameResource.startsWith('./') || nameResource.startsWith('.\\')) {
-      return nameResource.slice(2);
+      if (!normalized) {
+        resourceNameCache.set(name, name);
+        return name;
+      }
+
+      const nameResource = matchRxValue(concatenatedIdRx, normalized) || normalized;
+
+      if (nameResource.startsWith('./') || nameResource.startsWith('.\\')) {
+        const result = nameResource.slice(2);
+        resourceNameCache.set(name, result);
+        return result;
+      }
+
+      resourceNameCache.set(name, nameResource);
+      return nameResource;
     }
-
-    return nameResource;
   }
 
   return null;
@@ -53,6 +68,7 @@ export function moduleReasonResource(
 ): string | null {
   return moduleNameResource(reason && reason.moduleName);
 }
+
 export type NodeModule = {
   path: string;
   name: string;
@@ -64,11 +80,20 @@ export function nodeModule(path: string | null): NodeModule | null {
     return null;
   }
 
-  const lastNodeModulesRx =
-    /.*(?:^|[/\\])node_modules[/\\](@.+?[/\\][^/\\\s]+|[^/\\\s]+)/;
-  const [input, name] = path.match(lastNodeModulesRx) || [];
-  const isRoot = input
-    ? !/.*(?:^|[/\\])node_modules[/\\].+[/\\]node_modules[/\\]/.test(input)
-    : false;
-  return name ? { path: input, name, isRoot } : null;
+  let cached = nodeModuleNameCache.get(path);
+
+  if (!cached) {
+    const lastNodeModulesRx = /.*node_modules[/\\](?:(@.+?)[/\\])?([^/\\]+)/;
+    const [input, namespace, name] = path.match(lastNodeModulesRx) || [];
+    const isRoot = input
+      ? input.indexOf('node_modules') === input.lastIndexOf('node_modules')
+      : false;
+
+    cached = name
+      ? { path: input, name: [namespace, name].filter(Boolean).join('/'), isRoot }
+      : null;
+    nodeModuleNameCache.set(path, cached);
+  }
+
+  return cached;
 }
