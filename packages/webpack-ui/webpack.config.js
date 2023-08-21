@@ -31,6 +31,9 @@ function makeConfig(config) {
         devMiddleware: {
           writeToDisk: true,
         },
+        client: {
+          overlay: false,
+        },
       },
       resolve: {
         extensions: ['.ts', '.js', '.json', '.wasm'],
