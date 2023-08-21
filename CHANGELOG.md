@@ -2,7 +2,20 @@
 
 ## Next
 
-- `[webpack-model]` - add `module_uniq_retained(module)`-helper that returns modules that the module brings into bundle 
+- `[webpack-model]` - add `module_retained_modules(module)`-helper that returns retained modules by specific module
+
+  Other words: retained ones will be removed from bundle along with the module
+- `[webpack-ui]` - support `module_retained_modules` in module tree. For example, you can see retained modules in the diff-page
+- `[webpack-ui]` - update discoveryjs from 1.0.0-beta.66 to 1.0.0-beta.77 (see [changelog](https://github.com/discoveryjs/discovery/blob/master/CHANGELOG.md)) 
+- `[webpack-ui]` - add static helpers to load data:
+  - `loadDataFromStream`
+  - `loadDataFromFile`
+  - `loadDataFromEvent`
+  - `loadDataFromUrl`
+  - `loadDataFromPush`
+
+  See usage example in [dev.html](packages/webpack-ui/dev.html)
+- `[webpack-ui]` - add `npm run dev` to develop Statoscope UI more easily
 
 ## 5.26.2 (31 March 2023)
 
