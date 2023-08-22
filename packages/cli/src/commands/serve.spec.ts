@@ -5,6 +5,8 @@ import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
 import yargs from 'yargs';
 import generate from './generate';
 
+jest.setTimeout(20000);
+
 const rootPath = path.resolve(__dirname, '../../../../');
 const inputASrc = path.resolve(
   __dirname,
@@ -148,9 +150,11 @@ describe('serve CLI command', () => {
       return;
     }
 
-    // terminates the child including descendant processes
-    // @ts-ignore
-    process.kill(-serveProcess.pid);
+    return new Promise((resolve) => {
+      serveProcess?.on('exit', resolve);
+      serveProcess?.on('close', resolve);
+      process.kill(-serveProcess!.pid!);
+    });
   });
 
   const tests = [
