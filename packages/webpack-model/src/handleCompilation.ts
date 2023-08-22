@@ -641,15 +641,10 @@ function prepareEntries(
   }
 }
 
-function extractPackages(compilation: Compilation, context: ProcessingContext): void {
-  const buildReasonKey = (
-    type: string,
-    moduleIdentifier: string,
-    loc: string
-  ): string => {
-    return [type, moduleIdentifier, loc].join(';');
-  };
-
+export function extractPackages(
+  compilation: Compilation,
+  context: ProcessingContext
+): void {
   const extractModulePackages = (module: RawModule): void => {
     const resource = moduleResource(module);
 
@@ -664,9 +659,6 @@ function extractPackages(compilation: Compilation, context: ProcessingContext): 
 
       if (!resolvedPackage) {
         resolvedPackage = { name: modulePackage.name, instances: [] };
-        (compilation as unknown as NormalizedCompilation).nodeModules.push(
-          resolvedPackage
-        );
         context.indexes.packages.add(resolvedPackage);
       }
 
@@ -698,18 +690,10 @@ function extractPackages(compilation: Compilation, context: ProcessingContext): 
         }
       }
 
-      const instanceReasonsKeys = new Set(
-        instance.reasons.map((reason) => {
-          return buildReasonKey(
-            reason.type,
-            reason.data.moduleIdentifier ?? 'unknown',
-            reason.data.loc ?? 'unknown'
-          );
-        })
-      );
+      const instanceReasonsKeys = new Set(instance.reasons.map((r) => r.data.identifier));
 
       // reasons already ungrouped and normalized
-      const reasons = module.reasons as RawReason[];
+      const reasons = module.reasons as NormalizedReason[];
 
       for (const reason of reasons ?? []) {
         const reasonPackage = nodeModule(moduleReasonResource(reason));
@@ -719,14 +703,13 @@ function extractPackages(compilation: Compilation, context: ProcessingContext): 
         }
 
         const reasonType = 'module';
-        const reasonKey = buildReasonKey(
-          reasonType,
-          reason.moduleIdentifier ?? 'unknown',
-          reason.loc ?? 'unknown'
-        );
+        const reasonKey = reason.moduleIdentifier ?? 'unknown';
 
-        if (!instanceReasonsKeys.has(reasonKey)) {
-          instance.reasons.push({ type: reasonType, data: reason as NormalizedReason });
+        if (!instanceReasonsKeys.has(reasonKey) && reason.resolvedModule) {
+          instance.reasons.push({
+            type: reasonType,
+            data: reason.resolvedModule,
+          });
           instanceReasonsKeys.add(reasonKey);
         }
       }
@@ -735,5 +718,9 @@ function extractPackages(compilation: Compilation, context: ProcessingContext): 
 
   for (const module of context.rawIndexes.modules.getAll()) {
     extractModulePackages(module);
+  }
+
+  for (const packageItem of context.indexes.packages.getAll()) {
+    (compilation as unknown as NormalizedCompilation).nodeModules.push(packageItem);
   }
 }

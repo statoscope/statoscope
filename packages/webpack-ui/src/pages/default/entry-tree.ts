@@ -33,7 +33,7 @@ export function entryItemConfig(getter = '$', hash = '#.params.hash'): EntryItem
     $chunks:$topLevelChunks + $topLevelChunks..children;
     $chunksAllModules:$chunks..modules.[not shouldHideModule()];
     $chunksModules:$chunks.modules.[not shouldHideModule()];
-    $chunksModulesPackages:$chunksAllModules.(resolvedResource.nodeModule()).[].(name.resolvePackage(${hash})).[];
+    $chunksModulesPackages:$chunksAllModules.(resolvedResource.nodeModule()).(name and name.resolvePackage(${hash})).[];
     $chunksPackages:$chunksModulesPackages.({name: name, instances: instances.[modules.[$ in $chunksAllModules]]});
     [{
       title: "Chunks",

@@ -75,7 +75,7 @@ export type NormalizedPackage = {
 export type NodeModuleInstance = {
   path: string;
   isRoot: boolean;
-  reasons: Array<{ type: 'module' | 'entry'; data: NormalizedReason }>;
+  reasons: Array<{ type: 'module'; data: NormalizedModule }>;
   modules: NormalizedModule[];
   version?: string;
 };

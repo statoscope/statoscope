@@ -60,13 +60,13 @@ export function moduleResource(
     return module.name;
   }
 
-  return moduleNameResource(module && module.name);
+  return moduleNameResource(module?.name ?? null);
 }
 
 export function moduleReasonResource(
   reason: RawReason | NormalizedReason | null
 ): string | null {
-  return moduleNameResource(reason && reason.moduleName);
+  return moduleNameResource(reason?.moduleName ?? null);
 }
 
 export type NodeModule = {

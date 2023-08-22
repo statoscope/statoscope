@@ -67,20 +67,20 @@ export function packageInstanceItemConfig(
             view: 'tree-leaf',
             content: 'text:title',
             children: `
-              $reasonsWithModule:data.[type='module'].data.({reason: $, module: resolvedModule}).[module];
+              $reasonsWithModule:data.[type='module'].data.[$];
               [{
                 title: "Chunks",
                 reasons: $reasonsWithModule,
-                children: $reasonsWithModule.module.[not shouldHideModule()].chunks.sort(initial desc, entry desc, size desc),
+                children: $reasonsWithModule.[not shouldHideModule()].chunks.sort(initial desc, entry desc, size desc),
                 type: 'chunk'
               }, {
                 title: "Modules",
-                children: $reasonsWithModule.module.[not shouldHideModule()],
+                children: $reasonsWithModule.[not shouldHideModule()],
                 type: 'module'
               }, {
                 title: "Packages",
                 reasons: $reasonsWithModule,
-                children: $reasonsWithModule.module.(resolvedResource.nodeModule()).name.[],
+                children: $reasonsWithModule.(resolvedResource.nodeModule()).name.[],
                 type: 'package'
               }].[children]`,
             itemConfig: {
@@ -103,7 +103,7 @@ export function packageInstanceItemConfig(
                     itemConfig: {
                       content: `chunk-item:{chunk: value, hash: ${hash}}`,
                       children: `
-                        $chunks:reasons.[module.chunks has @.value];
+                        $chunks:reasons.[chunks has @.value];
                         $chunks.module.({value: $, reasons: $chunks.reason}).sort(value.getModuleSize(${hash}).size desc)
                         `,
                       limit: '= settingListItemsLimit()',
@@ -155,7 +155,7 @@ export function packageInstanceItemConfig(
                         instances: resolvePackage(${hash}).instances.({value: $, reasons: @.reasons, package: $child})
                           .[
                             $foo:value.path;
-                            reasons.reason.(moduleReasonResource().nodeModule()).path has $foo
+                            reasons.(resolvedResource.nodeModule()).path has $foo
                            ]
                       })
                       `,
@@ -175,8 +175,8 @@ export function packageInstanceItemConfig(
                           $instance: $;
                           {
                             $instance,
-                            reasonModules: reasons.[not module.shouldHideModule() and reason.moduleReasonResource().nodeModule().path=$instance.value.path]
-                              .group(<module>).({module:key,reasons:value.reason}).sort(module.getModuleSize(${hash}).size desc)
+                            reasonModules: reasons.[not shouldHideModule() and resolvedResource.nodeModule().path=$instance.value.path]
+                              .sort(getModuleSize(${hash}).size desc)
                           })`,
                       itemConfig: {
                         content: [
@@ -193,7 +193,7 @@ export function packageInstanceItemConfig(
                         children: `reasonModules`,
                         limit: '= settingListItemsLimit()',
                         get itemConfig(): ModuleItemConfig {
-                          return moduleItemConfig('module', hash);
+                          return moduleItemConfig('$', hash);
                         },
                       },
                     },
