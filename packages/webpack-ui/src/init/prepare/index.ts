@@ -97,7 +97,7 @@ export default (() =>
           return false;
         }
 
-        return !!resource.match(/node_modules/);
+        return resource.includes('node_modules');
       },
       shouldHideCompilation(compilation?: NormalizedCompilation) {
         if (!compilation) {
