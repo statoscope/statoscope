@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 5.27.0 (24 August 2023)
 
 ### Features
 
