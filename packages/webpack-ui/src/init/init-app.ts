@@ -19,6 +19,7 @@ export default ({
   const discovery = new discoveryLib.App({
     container: element,
     darkmode: 'disabled',
+    inspector: true,
     setup: {},
     styles: [
       // @ts-ignore
