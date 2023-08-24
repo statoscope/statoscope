@@ -9,12 +9,12 @@
   In other words: retained ones will be removed from bundle along with the module
 - `[webpack-ui]` - support `module_retained_modules` in module tree. For example, you can see retained modules in the diff-page
 - `[webpack-ui]` - update discoveryjs from 1.0.0-beta.66 to 1.0.0-beta.77 (see [changelog](https://github.com/discoveryjs/discovery/blob/master/CHANGELOG.md)) 
-- `[webpack-ui]` - add static helpers to load data:
-  - `loadDataFromStream`
-  - `loadDataFromFile`
-  - `loadDataFromEvent`
-  - `loadDataFromUrl`
-  - `loadDataFromPush`
+- `[webpack-ui]` - expose Discovery namespace
+  ```js
+  import Statoscope from '@statoscope/webpack-ui';
+
+  console.log(Statoscope.Discovery);
+  ```
 
   See usage example in [dev.html](packages/webpack-ui/dev.html)
 - `[webpack-ui]` - add `npm run dev` to develop Statoscope UI more easily
