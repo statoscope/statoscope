@@ -14,7 +14,7 @@ try {
 }
 
 const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
-const isDev = mode === 'development';
+const isDev = mode === 'development' && process.env.STATOSCOPE_DEV;
 
 function makeConfig(config) {
   return merge(

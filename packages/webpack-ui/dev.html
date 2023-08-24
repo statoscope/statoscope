@@ -69,6 +69,20 @@
     dropZone.remove();
   }
 
+  function makeProgressBar() {
+    const progressbar = new ProgressBar({});
+    makeProgressBar.set.add(progressbar);
+    return progressbar;
+  }
+
+  function destroyProgressBars() {
+    for (const progressbar of makeProgressBar.set) {
+      progressbar.el.remove();
+    }
+  }
+
+  makeProgressBar.set = new Set();
+
   const onDragOver = (e) => {
     e.preventDefault();
   };
@@ -84,11 +98,10 @@
       dropZoneText.textContent = "";
 
       await Promise.all([...e.dataTransfer.files].map(async file => {
-        const progressbar = new ProgressBar({});
+        const progressbar = makeProgressBar();
 
         progressContainer.append(progressbar.el);
 
-        debugger
         const loader = Statoscope.Discovery.utils.loadDataFromFile(file, {});
         try {
           await Statoscope.Discovery.utils.syncLoaderWithProgressbar(loader, progressbar);
@@ -101,7 +114,7 @@
           setError(e, file.name);
           throw e;
         }
-      }));
+      })).finally(destroyProgressBars);
 
       try {
         console.log(Statoscope.default(rawData));
