@@ -1,5 +1,5 @@
 import { NormalizedFile, RawStatsFileDescriptor } from '@statoscope/webpack-model/types';
-import { Extension, PrepareFn, Widget } from '@statoscope/types';
+import { DiscoverJS, Extension, PrepareFn, Widget } from '@statoscope/types';
 
 export type RawData = RawStatsFileDescriptor | RawStatsFileDescriptor[];
 
@@ -24,8 +24,10 @@ export type InitArg = {
 
 declare module '@statoscope/webpack-ui' {
   export default function (data: RawData, element: HTMLElement): StatoscopeWidget;
+  export const Discovery: typeof DiscoverJS;
 }
 
 declare module '@statoscope/ui-webpack' {
   export default function (data: RawData, element: HTMLElement): StatoscopeWidget;
+  export const Discovery: typeof DiscoverJS;
 }

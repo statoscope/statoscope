@@ -73,6 +73,8 @@ function makeConfig(config) {
           ? [
               new HtmlWebpackPlugin({
                 template: 'dev.html',
+                scriptLoading: 'blocking',
+                inject: 'head',
               }),
               new Statoscope({
                 // saveTo: `analyze/statoscope-[name]-[hash].html`,

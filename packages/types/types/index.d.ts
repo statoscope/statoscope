@@ -21,23 +21,28 @@ export type ClassNameFn<TData, TContext> = (
 interface ViewOptions {
   tag?: string | false | null;
 }
+
 interface View<TData, TContext> {
   name: string;
   options: ViewOptions;
   render: ViewRenderFn<TData, TContext>;
 }
+
 type ViewConfigData = Record<string, unknown>;
+
 interface Page<TData, TContext> {
   name: string;
   options?: PageOptions;
   render: (el: HTMLElement, data?: TData, context?: TContext) => RenderState;
 }
+
 interface PageOptions {
   reuseEl?: boolean;
   init?: unknown;
   keepScrollOffset?: boolean;
   resolveLink?: string | unknown;
 }
+
 interface RenderState {
   pageEl: HTMLElement;
   renderState: Promise<void>;
@@ -63,7 +68,9 @@ export type RenderContext<TContext> = {
 
 export class PopupView {
   constructor(config: unknown);
+
   toggle(el: HTMLElement, fn: (popupEl: HTMLElement) => void): void;
+
   hide(): void;
 }
 
@@ -127,6 +134,7 @@ export class Widget<TRawData, TData, TContext> {
   ): string;
 
   addQueryHelpers(extensions: { [key: string]: unknown }): void;
+
   defineObjectMarker<TValue>(
     name: string,
     options: ObjectMarkerOptions<TValue>
@@ -166,3 +174,68 @@ export type RelationItem =
       type: 'chunk';
       id: string | number;
     };
+
+declare namespace DiscoverJS {
+  export type ReadonlyPublisher<T> = {
+    subscribe(callback: PublisherCallback<T>, thisArg: any): () => void;
+    subscribeSync(callback: PublisherCallback<T>, thisArg: any): () => void;
+    unsubscribe(callback: PublisherCallback<T>, thisArg: any): void;
+    get value(): T;
+  };
+
+  export type PublisherCallback<T> = (value: T, unsubscribe: () => void) => void;
+
+  export class Publisher<T> {
+    static setValue<T>(publisher: Publisher<T>, value: T): boolean | any[];
+
+    constructor(initValue: T, shouldPublish: (newValue: T, oldValue: T) => boolean);
+
+    get readonly(): boolean;
+
+    subscribe(callback: PublisherCallback<T>, thisArg: any): () => void;
+
+    subscribeSync(callback: PublisherCallback<T>, thisArg: any): () => void;
+
+    unsubscribe(callback: PublisherCallback<T>, thisArg: any): void;
+
+    shouldPublish(newValue: T, oldValue: T): boolean;
+
+    set(value: T): boolean;
+
+    asyncSet(value: T): Promise<boolean>;
+  }
+
+  export type ProgressBarState = { stage: string; progress?: number; error?: boolean };
+  export type ProgressBarTimingEntry = { stage: string; title: string; duration: number };
+
+  export class ProgressBar extends Publisher<ProgressBarState> {
+    el: HTMLDivElement;
+    constructor(options: {
+      onTiming?: (entry: ProgressBarTimingEntry) => void;
+      onFinish?: () => ProgressBarTimingEntry[];
+      delay?: true | number;
+      domReady?: () => Promise<void>;
+    });
+    recordTiming(stage: string, start: number, end?: number): void;
+    setState(state: ProgressBarState): Promise<void>;
+    finish(error: boolean): void;
+    dispose(): void;
+  }
+
+  type LoaderResult<T> = {
+    state: Publisher<ProgressBarState>;
+    result: Promise<{ data: T }>;
+  };
+
+  export const utils: {
+    progressbar: ProgressBar;
+    loadDataFromStream<T>(stream: ReadableStream, options: any): LoaderResult<T>;
+    loadDataFromFile<T>(file: File, options: any): LoaderResult<T>;
+    loadDataFromEvent<T>(event: DragEvent, options: any): LoaderResult<T>;
+    loadDataFromUrl<T>(url: string, options: any): LoaderResult<T>;
+    syncLoaderWithProgressbar<T>(
+      loader: LoaderResult<T>,
+      progressbar: ProgressBar
+    ): Promise<void>;
+  };
+}

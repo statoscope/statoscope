@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>Statoscope dev sandbox</title>
   <style>
       html, body {
           padding: 0;
@@ -22,23 +22,50 @@
           bottom: 20vh;
           left: 20vh;
           right: 20vh;
-          border: 5px dashed gray;
           border-radius: 10px;
           font: 2em Helvetica, sans-serif;
+      }
+
+      .drop-zone.awaiting {
+          border: 5px dashed gray;
+      }
+
+      .progress-container {
+          font-size: 0.5em;
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
       }
   </style>
 </head>
 <body>
 
-<div class="drop-zone">
+<div class="drop-zone awaiting">
   <div class="text">
     Drop stats right here 👇
   </div>
+  <div class="progress-container"></div>
 </div>
 
 <script>
+  /** @type {typeof DiscoverJS.ProgressBar} */
+  const ProgressBar = Statoscope.Discovery.utils.progressbar;
   const dropZone = document.querySelector(".drop-zone");
   const dropZoneText = document.querySelector(".drop-zone .text");
+  const progressContainer = document.querySelector(".progress-container");
+
+  function setError(e, filename) {
+    dropZoneText.innerHTML = `<pre>Error\n${[filename, e.message, e.stack].map(Boolean).join("\n")}</pre>`;
+  }
+
+  function startLoading() {
+    dropZone.classList.remove("awaiting");
+    dropZoneText.innerHTML = "";
+  }
+
+  function successLoading() {
+    dropZone.remove();
+  }
 
   document.addEventListener("dragover", (e) => {
     e.preventDefault();
@@ -47,28 +74,38 @@
   document.addEventListener("drop", async (e) => {
     e.preventDefault();
 
+    startLoading();
 
     if (e.dataTransfer.files.length) {
       const rawData = [];
 
-      dropZoneText.textContent = "Loading... ⌛️";
+      dropZoneText.textContent = "";
 
-      for (const file of e.dataTransfer.files) {
-        const loadStats = Statoscope.utils.dataLoad.loadDataFromFile(file);
-        const loadResult = await loadStats.result;
+      await Promise.all([...e.dataTransfer.files].map(async file => {
+        const progressbar = new ProgressBar({});
 
-        rawData.push({
-          name: file.name,
-          data: loadResult.data
-        });
-      }
+        progressContainer.append(progressbar.el);
+
+        debugger
+        const loader = Statoscope.Discovery.utils.loadDataFromFile(file, {});
+        try {
+          await Statoscope.Discovery.utils.syncLoaderWithProgressbar(loader, progressbar);
+          const loadResult = await loader.result;
+          rawData.push({
+            name: file.name,
+            data: loadResult.data
+          });
+        } catch (e) {
+          setError(e, file.name);
+          throw e;
+        }
+      }));
 
       try {
         console.log(Statoscope.default(rawData));
-
-        dropZone.remove();
+        successLoading();
       } catch (e) {
-        dropZoneText.innerHTML = `<pre>Error: ${e.message}\n${e.stack}</pre>`;
+        setError(e);
       }
     }
   });

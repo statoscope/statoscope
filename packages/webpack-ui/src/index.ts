@@ -4,6 +4,7 @@ import * as discoveryLib from '@discoveryjs/discovery/dist/discovery';
 import { RawData, StatoscopeWidget } from '../types';
 import prepare from './init/prepare/';
 import initApp from './init/init-app';
+import { DiscoverJS } from '@statoscope/types';
 
 const V = process.env.STATOSCOPE_VERSION;
 export default (data: RawData, element = document.body): StatoscopeWidget => {
@@ -23,12 +24,4 @@ export default (data: RawData, element = document.body): StatoscopeWidget => {
   });
 };
 
-export const utils = {
-  dataLoad: {
-    loadDataFromStream: discoveryLib.utils.loadDataFromStream,
-    loadDataFromFile: discoveryLib.utils.loadDataFromFile,
-    loadDataFromEvent: discoveryLib.utils.loadDataFromEvent,
-    loadDataFromUrl: discoveryLib.utils.loadDataFromUrl,
-    loadDataFromPush: discoveryLib.utils.loadDataFromPush,
-  },
-};
+export const Discovery: typeof DiscoverJS = discoveryLib;
