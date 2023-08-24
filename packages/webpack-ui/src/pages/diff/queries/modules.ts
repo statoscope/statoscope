@@ -24,9 +24,8 @@ $modulesDiff: {
           b: $moduleSize
         }
       ]
-      .[a != b]
     })
-    .sort(diff.[type='size'].pick().b desc),
+    .sort(diff[type='size'].b desc),
   removed: $removedModules
     .({
       $moduleSize: module.getModuleSize(hash, $useCompressedSize).size;
@@ -39,29 +38,32 @@ $modulesDiff: {
           b: 0
         }
       ]
-      .[a != b]
     })
-    .sort(diff.[type='size'].pick().a desc),
+    .sort(diff[type='size'].a desc),
   changed: $intersectedModules
     .({
       $a: a;
       $b: b;
-      $moduleASize: $a.module.getModuleSize($a.hash, $useCompressedSize).size;
-      $moduleBSize: $b.module.getModuleSize($b.hash, $useCompressedSize).size;
       ...b,
       diff: [
         {
+          $moduleASize: $a.module.getModuleSize($a.hash, $useCompressedSize).size;
+          $moduleBSize: $b.module.getModuleSize($b.hash, $useCompressedSize).size;
           type: 'size',
           a: $moduleASize,
-          b: $moduleBSize
+          b: $moduleBSize,
+          hasDiff: $moduleASize != $moduleBSize
         },
         {
+          $totalAModules: $a.module.modules.size();
+          $totalBModules: $b.module.modules.size();
           type: 'number',
-          a: $a.module.modules.size(),
-          b: $b.module.modules.size(),
-          plural: { words: ['concated module', 'concated modules'] }
-        }
-      ].[a != b],
+          a: $totalAModules,
+          b: $totalBModules,
+          plural: { words: ['concat module', 'concat modules'] },
+          hasDiff: $totalAModules != $totalBModules
+        },
+      ].[hasDiff],
     })
     .[diff.size()]
 };
