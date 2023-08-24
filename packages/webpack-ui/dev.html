@@ -64,14 +64,16 @@
   }
 
   function successLoading() {
+    document.removeEventListener("dragover", onDragOver);
+    document.removeEventListener("drop", onDrop);
     dropZone.remove();
   }
 
-  document.addEventListener("dragover", (e) => {
+  const onDragOver = (e) => {
     e.preventDefault();
-  });
+  };
 
-  document.addEventListener("drop", async (e) => {
+  const onDrop = async (e) => {
     e.preventDefault();
 
     startLoading();
@@ -108,7 +110,10 @@
         setError(e);
       }
     }
-  });
+  };
+
+  document.addEventListener("dragover", onDragOver);
+  document.addEventListener("drop", onDrop);
 </script>
 </body>
 </html>
