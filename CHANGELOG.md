@@ -20,7 +20,7 @@
 - `[webpack-ui]` - expose Discovery data and view inspector that helps to debug [custom statoscope reports](https://github.com/statoscope/statoscope/blob/master/packages/stats-extension-custom-reports/README.md)
 - `[webpack-ui]` - add `npm run dev` to develop Statoscope UI more easily
 - `[stats-validator-reporter-stats-report]`: add `disableReportCompression`-option, disable it will increase the size a lot (`false` by default) ([#210](https://github.com/statoscope/statoscope/pull/210) by @icy0307)
-- `[report-writer]`: use [jsonxl](https://github.com/discoveryjs/jsonxl) to compress stats in binary json (replacement for old solution)
+- `[report-writer]`: use jsonxl to compress stats in binary json (replacement for old solution)
 
 ### Performance
 
