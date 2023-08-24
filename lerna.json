@@ -1,6 +1,6 @@
 {
   "packages": ["packages/*"],
-  "version": "5.26.2",
+  "version": "5.27.0",
   "command": {
     "version": {
       "exact": true,

@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/stats-extension-package-info",
-  "version": "5.25.0",
+  "version": "5.27.0",
   "description": "Statoscope extension for collecting package info (e.g. available versions)",
   "main": "./dist/index.js",
   "scripts": {
