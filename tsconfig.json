@@ -14,7 +14,18 @@
     "noImplicitReturns": true,
     "resolveJsonModule": true,
     "declaration": true,
-    "incremental": true
+    "incremental": true,
+    "composite": true,
+    "baseUrl": "./packages",
+    "paths": {
+      "@statoscope/*/": [
+        "./packages/*/"
+      ]
+    }
   },
-  "exclude": ["node_modules", "dist", "test"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "test"
+  ]
 }

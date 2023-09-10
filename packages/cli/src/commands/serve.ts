@@ -83,7 +83,7 @@ Multiple stats: serve --input path/to/stats-1.json path/to/stats-2.json
         files,
         destReportPath,
         customReports,
-        argv.compression
+        argv.compression,
       );
 
       console.log(`Statoscope report generated to ${destReportPath}`);
@@ -101,6 +101,6 @@ Multiple stats: serve --input path/to/stats-1.json path/to/stats-2.json
             open(link);
           }
         });
-    }
+    },
   );
 }

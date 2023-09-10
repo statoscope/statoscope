@@ -1,21 +1,20 @@
 {
-  "packages": ["packages/*"],
-  "version": "5.28.0",
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
   "command": {
     "version": {
+      "conventionalCommits": true,
+      "message": "chore(release): %s",
+      "push": false,
       "exact": true,
-      "push": false
-    },
-    "publish": {
-      "registry": "https://registry.npmjs.org",
-      "message": "chore: publish release %s\n",
-      "ignoreChanges": [
-        "packages/*/README.md",
-        "packages/*/package-lock.json",
-        "packages/*/dist",
-        "packages/*/**/*.spec.ts",
-        "packages/*/**/*.snap"
-      ]
+      "changelog": false
     }
-  }
+  },
+  "ignoreChanges": [
+    "packages/*/README.md",
+    "packages/*/package-lock.json",
+    "packages/*/dist",
+    "packages/*/**/*.spec.ts",
+    "packages/*/**/*.snap"
+  ],
+  "version": "5.28.0"
 }

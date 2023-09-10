@@ -2,9 +2,8 @@ import fs from 'fs';
 import { Argv } from 'yargs';
 import { parseChunked, stringifyStream } from '@discoveryjs/json-ext';
 import { waitFinished } from '@statoscope/report-writer/dist/utils';
-import { Webpack } from '@statoscope/webpack-model/webpack';
+import type { Webpack } from '@statoscope/webpack-model/webpack';
 import { mergeCustomReportsIntoCompilation } from '../utils';
-import Compilation = Webpack.Compilation;
 
 export default function (yargs: Argv): Argv {
   return yargs.command(
@@ -41,12 +40,14 @@ export default function (yargs: Argv): Argv {
         reports.push(...stdinReports.flat());
       }
 
-      const parsed: Compilation = await parseChunked(fs.createReadStream(argv.input));
+      const parsed: Webpack.Compilation = await parseChunked(
+        fs.createReadStream(argv.input),
+      );
       const merged = mergeCustomReportsIntoCompilation(parsed, reports);
       const outputStream = stringifyStream(merged);
 
       outputStream.pipe(process.stdout);
       await waitFinished(outputStream);
-    }
+    },
   );
 }

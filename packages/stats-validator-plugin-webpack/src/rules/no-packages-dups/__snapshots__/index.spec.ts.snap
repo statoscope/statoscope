@@ -1,23 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`exclude no exclude 1`] = `
-Array [
-  Object {
+[
+  {
     "compilation": "a5ca8b0ac9b2c1315153",
-    "details": Array [
-      Object {
+    "details": [
+      {
         "content": "- simple/node_modules/bar  1.0.0
 - simple/node_modules/foo/node_modules/bar  2.0.0",
         "type": "text",
       },
-      Object {
+      {
         "content": "- simple/node_modules/bar  1.0.0
 - simple/node_modules/foo/node_modules/bar  2.0.0",
         "type": "tty",
       },
-      Object {
-        "payload": Object {
-          "context": Object {
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "package": "bar",
           },
@@ -33,16 +33,16 @@ Array [
     ],
     "filename": "input.json",
     "message": "Package bar has 2 instances with 2 versions",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "bar",
         "type": "package",
       },
-      Object {
+      {
         "id": "simple/node_modules/bar",
         "type": "package-instance",
       },
-      Object {
+      {
         "id": "simple/node_modules/foo/node_modules/bar",
         "type": "package-instance",
       },
@@ -51,30 +51,30 @@ Array [
 ]
 `;
 
-exports[`exclude object 1`] = `Array []`;
+exports[`exclude object 1`] = `[]`;
 
-exports[`exclude regexp 1`] = `Array []`;
+exports[`exclude regexp 1`] = `[]`;
 
-exports[`exclude string 1`] = `Array []`;
+exports[`exclude string 1`] = `[]`;
 
 exports[`should work 1`] = `
-Array [
-  Object {
+[
+  {
     "compilation": "a5ca8b0ac9b2c1315153",
-    "details": Array [
-      Object {
+    "details": [
+      {
         "content": "- simple/node_modules/bar  1.0.0
 - simple/node_modules/foo/node_modules/bar  2.0.0",
         "type": "text",
       },
-      Object {
+      {
         "content": "- simple/node_modules/bar  1.0.0
 - simple/node_modules/foo/node_modules/bar  2.0.0",
         "type": "tty",
       },
-      Object {
-        "payload": Object {
-          "context": Object {
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "package": "bar",
           },
@@ -90,16 +90,16 @@ Array [
     ],
     "filename": "input.json",
     "message": "Package bar has 2 instances with 2 versions",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "bar",
         "type": "package",
       },
-      Object {
+      {
         "id": "simple/node_modules/bar",
         "type": "package-instance",
       },
-      Object {
+      {
         "id": "simple/node_modules/foo/node_modules/bar",
         "type": "package-instance",
       },

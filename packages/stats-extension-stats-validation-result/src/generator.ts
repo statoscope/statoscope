@@ -46,10 +46,12 @@ export default class Generator {
     this.payload.compilations,
     (item) => item.id,
     null,
-    false
+    false,
   );
 
-  constructor(private adapter?: ExtensionDescriptor) {}
+  constructor(private adapter?: ExtensionDescriptor) {
+    this.descriptor.adapter = this.adapter;
+  }
 
   handleRule(name: string, descriptor: RuleDescriptor): void {
     const existingRule = this.payload.rules.find((rule) => name === rule.name);
@@ -62,7 +64,7 @@ export default class Generator {
   handleEntry(
     ruleName: string,
     entry: TestEntry,
-    type?: NormalizedExecParams['mode']
+    type?: NormalizedExecParams['mode'],
   ): void {
     let compilation = this.resolveCompilation(entry.compilation ?? null);
 

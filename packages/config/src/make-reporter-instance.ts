@@ -14,7 +14,7 @@ export function makeReporterInstance(item: ReporterConfig, rootDir: string): Rep
   const normalizedReporterPath = resolveAliasPackage(
     PackageAliasType.REPORTER,
     reporterAlias,
-    rootDir
+    rootDir,
   );
 
   const rootDirRequire = module.createRequire(path.join(rootDir, '_'));

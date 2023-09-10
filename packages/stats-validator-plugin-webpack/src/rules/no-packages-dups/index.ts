@@ -116,10 +116,10 @@ const noPackagesDups: WebpackRule<Params> = (ruleParams, data, api): void => {
               (instance): RelationItem => ({
                 type: 'package-instance',
                 id: instance.path,
-              })
+              }),
             ),
           ],
-        }
+        },
       );
     }
   }

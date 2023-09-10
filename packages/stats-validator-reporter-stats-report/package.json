@@ -4,8 +4,7 @@
   "description": "Stats report reporter for @statoscope/stats-validator",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "../../node_modules/.bin/tsc",
-    "prepublishOnly": "npm run build"
+    "build": "../../node_modules/.bin/tsc"
   },
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {
@@ -25,6 +24,6 @@
     "@statoscope/types": "5.27.0",
     "@statoscope/webpack-model": "5.28.0",
     "@statoscope/webpack-ui": "5.28.0",
-    "open": "^8.4.0"
+    "open": "~8.4.0"
   }
 }

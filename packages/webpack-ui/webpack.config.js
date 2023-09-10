@@ -43,7 +43,7 @@ function makeConfig(config) {
         },
         alias: {
           [require.resolve(
-            '@statoscope/stats-extension-compressed/dist/generator'
+            '@statoscope/stats-extension-compressed/dist/generator',
           )]: false,
         },
       },
@@ -88,7 +88,7 @@ function makeConfig(config) {
         }),
       ],
     },
-    config
+    config,
   );
 }
 

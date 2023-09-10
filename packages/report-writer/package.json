@@ -4,8 +4,7 @@
   "description": "Statoscope report writer",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "../../node_modules/.bin/tsc",
-    "prepublishOnly": "npm run build"
+    "build": "../../node_modules/.bin/tsc"
   },
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {
@@ -20,9 +19,7 @@
   "dependencies": {
     "@discoveryjs/json-ext": "^0.5.7",
     "@types/pako": "^2.0.0",
-    "pako": "^2.0.4"
-  },
-  "devDependencies": {
-    "@types/node": "^12.0.0"
+    "@types/node": "^18.0.0",
+    "pako": "^2.1.0"
   }
 }

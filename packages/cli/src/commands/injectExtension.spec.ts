@@ -9,15 +9,15 @@ const outputDir = path.join(
   rootPath,
   'test/temp',
   Date.now().toString(),
-  path.relative(rootPath, __filename)
+  path.relative(rootPath, __filename),
 );
 const statsDir = path.resolve(
   __dirname,
-  '../../../../test/fixtures/cli/injectReport/stats/'
+  '../../../../test/fixtures/cli/injectReport/stats/',
 );
 const extDir = path.resolve(
   __dirname,
-  '../../../../test/fixtures/cli/injectReport/extensions/'
+  '../../../../test/fixtures/cli/injectReport/extensions/',
 );
 const stats = [
   'stats-with-reports.json',
@@ -47,7 +47,7 @@ beforeEach(() => {
     .spyOn(process.stdout, 'write')
     .mockImplementation((data, f, cb) => {
       output.push(
-        String(data).replace(process.cwd(), '<pwd>').replace(os.tmpdir(), '<tmp>')
+        String(data).replace(process.cwd(), '<pwd>').replace(os.tmpdir(), '<tmp>'),
       );
       return originalWrite(data, f, cb);
     });

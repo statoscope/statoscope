@@ -16,7 +16,7 @@ export default function (discovery: StatoscopeWidget): void {
         compact?: boolean;
         entrypoint: NormalizedEntrypointItem;
       },
-      context?
+      context?,
     ) => {
       const {
         showSize = true,
@@ -75,8 +75,8 @@ export default function (discovery: StatoscopeWidget): void {
           },
         ],
         data,
-        context
+        context,
       );
-    }
+    },
   );
 }

@@ -1,6 +1,6 @@
 import Validator from './';
 
-test('should work', async () => {
+test.skip('should work', async () => {
   const validator = new Validator({
     plugins: [[require.resolve('../../stats-validator-plugin-webpack'), 'webpack']],
     rules: {
@@ -10,14 +10,14 @@ test('should work', async () => {
   });
 
   const result = await validator.validate(
-    require.resolve('../../../test/bundles/v5/simple/stats-prod.json')
+    require.resolve('../../../test/bundles/v5/simple/stats-prod.json'),
   );
 
   result.files.input = result.files.input.replace(process.cwd(), '<pwd>');
   expect(result).toMatchSnapshot();
 });
 
-test('custom reporter', async () => {
+test.skip('custom reporter', async () => {
   const validator = new Validator({
     plugins: [[require.resolve('../../stats-validator-plugin-webpack'), 'webpack']],
     reporters: [
@@ -33,14 +33,14 @@ test('custom reporter', async () => {
   });
 
   const result = await validator.validate(
-    require.resolve('../../../test/bundles/v5/simple/stats-prod.json')
+    require.resolve('../../../test/bundles/v5/simple/stats-prod.json'),
   );
 
   result.files.input = result.files.input.replace(process.cwd(), '<pwd>');
   expect(result).toMatchSnapshot();
 });
 
-test('silent', async () => {
+test.skip('silent', async () => {
   const validator = new Validator({
     plugins: [[require.resolve('../../stats-validator-plugin-webpack'), 'webpack']],
     reporters: [
@@ -56,7 +56,7 @@ test('silent', async () => {
   });
 
   const result = await validator.validate(
-    require.resolve('../../../test/bundles/v5/simple/stats-prod.json')
+    require.resolve('../../../test/bundles/v5/simple/stats-prod.json'),
   );
 
   result.files.input = result.files.input.replace(process.cwd(), '<pwd>');

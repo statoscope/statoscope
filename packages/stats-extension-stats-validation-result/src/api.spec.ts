@@ -38,7 +38,7 @@ generator.handleEntry(
       { type: 'entry', id: 'foo-bar-entry' },
     ],
   },
-  'warn'
+  'warn',
 );
 
 generator.handleEntry('foo-rule', {

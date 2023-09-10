@@ -1,7 +1,7 @@
 import path from 'path';
 import { Argv } from 'yargs';
 import Validator from '@statoscope/stats-validator';
-import { requireConfig } from '@statoscope/config/dist';
+import { requireConfig } from '@statoscope/config';
 
 export default function (yargs: Argv): Argv {
   return yargs.command(
@@ -40,6 +40,6 @@ export default function (yargs: Argv): Argv {
       if (!foundRules) {
         console.log('Rules not found');
       }
-    }
+    },
   );
 }

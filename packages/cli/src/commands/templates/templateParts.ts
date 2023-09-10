@@ -8,7 +8,7 @@ type TemplateParts = {
 
 export function templatePartsByOptions(
   templateOptions: TemplateOptions,
-  templates: RuleTemplatesPartsFromFileExt
+  templates: RuleTemplatesPartsFromFileExt,
 ): TemplateParts {
   const templateByLangType =
     templateOptions.output.fileExt === FileExt.ts

@@ -36,7 +36,7 @@ function handledTarget(
   target: ModuleTarget,
   ruleParams: NormalizedParams,
   data: RuleDataInput<Prepared>,
-  api: API
+  api: API,
 ): ModuleResultItem[] {
   const query = `
   $input: resolveInputFile();
@@ -106,7 +106,7 @@ const restrictedModules: WebpackRule<Params> = (ruleParams, data, api): void => 
       ? { exclude: [], target: ruleParams.map(normalizeModuleTarget) }
       : {
           exclude: ruleParams.exclude.map((item) =>
-            normalizeExclude(item, 'compilation')
+            normalizeExclude(item, 'compilation'),
           ),
           target: ruleParams.target.map(normalizeModuleTarget),
         }

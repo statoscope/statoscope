@@ -31,10 +31,12 @@ export default class Generator {
     this.payload.compilations,
     (item) => item.id,
     null,
-    false
+    false,
   );
 
-  constructor(private adapter?: ExtensionDescriptor) {}
+  constructor(private adapter?: ExtensionDescriptor) {
+    this.descriptor.adapter = this.adapter;
+  }
 
   handleReport(report: Report<unknown, unknown>): boolean {
     let compilation = this.resolveCompilation(report.compilation ?? null);

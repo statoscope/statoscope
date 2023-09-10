@@ -1,19 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`extractModulePackages 1`] = `
-Array [
-  Object {
-    "instances": Array [
-      Object {
-        "modules": Array [
+[
+  {
+    "instances": [
+      {
+        "modules": [
           "node_modules/is-array/index.js",
         ],
-        "reasons": Array [
-          Object {
+        "reasons": [
+          {
             "data": "simple/src/index.ts",
             "type": "module",
           },
-          Object {
+          {
             "data": "simple/src/index2.ts",
             "type": "module",
           },
@@ -22,14 +22,14 @@ Array [
     ],
     "name": "is-array",
   },
-  Object {
-    "instances": Array [
-      Object {
-        "modules": Array [
+  {
+    "instances": [
+      {
+        "modules": [
           "simple/node_modules/foo/index.js",
         ],
-        "reasons": Array [
-          Object {
+        "reasons": [
+          {
             "data": "simple/src/sub-module.ts",
             "type": "module",
           },
@@ -38,29 +38,29 @@ Array [
     ],
     "name": "foo",
   },
-  Object {
-    "instances": Array [
-      Object {
-        "modules": Array [
+  {
+    "instances": [
+      {
+        "modules": [
           "simple/node_modules/bar/index.js",
         ],
-        "reasons": Array [
-          Object {
+        "reasons": [
+          {
             "data": "simple/src/sub-module.ts",
             "type": "module",
           },
         ],
       },
-      Object {
-        "modules": Array [
+      {
+        "modules": [
           "simple/node_modules/foo/node_modules/bar/index.js",
         ],
-        "reasons": Array [
-          Object {
+        "reasons": [
+          {
             "data": "simple/src/index.ts",
             "type": "module",
           },
-          Object {
+          {
             "data": "simple/node_modules/foo/index.js",
             "type": "module",
           },
@@ -69,15 +69,15 @@ Array [
     ],
     "name": "bar",
   },
-  Object {
-    "instances": Array [
-      Object {
-        "modules": Array [
+  {
+    "instances": [
+      {
+        "modules": [
           "node_modules/css-loader/dist/runtime/api.js",
           "node_modules/css-loader/dist/runtime/getUrl.js",
         ],
-        "reasons": Array [
-          Object {
+        "reasons": [
+          {
             "data": "simple/src/index2.css",
             "type": "module",
           },

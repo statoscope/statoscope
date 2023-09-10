@@ -33,7 +33,7 @@ function handledModules(
   target: ModuleTarget,
   ruleParams: NormalizedParams,
   data: RuleDataInput<Prepared>,
-  api: API
+  api: API,
 ): void {
   // todo make diff lazy
   const query = `
@@ -111,7 +111,7 @@ function handledModules(
               },
             },
           ],
-        }
+        },
       );
     }
   }
@@ -135,7 +135,7 @@ const diffDeprecatedModules: WebpackRule<Params> = (ruleParams, data, api): void
       ? { exclude: [], target: ruleParams.map(normalizeModuleTarget) }
       : {
           exclude: ruleParams.exclude.map((item) =>
-            normalizeExclude(item, 'compilation')
+            normalizeExclude(item, 'compilation'),
           ),
           target: ruleParams.target.map(normalizeModuleTarget),
         }

@@ -17,7 +17,7 @@ export default function (discovery: StatoscopeWidget): void {
         compact?: boolean;
         chunk: NormalizedChunk;
       },
-      context?
+      context?,
     ) => {
       const {
         showSize = true,
@@ -88,8 +88,8 @@ export default function (discovery: StatoscopeWidget): void {
           },
         ],
         data,
-        context
+        context,
       );
-    }
+    },
   );
 }

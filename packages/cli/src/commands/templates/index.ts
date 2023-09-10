@@ -15,7 +15,7 @@ export type TemplateName = keyof typeof mapper;
 
 export function getTemplate(
   templateName: TemplateName,
-  templateOptions: TemplateOptions
+  templateOptions: TemplateOptions,
 ): string {
   return mapper[templateName](templateOptions);
 }

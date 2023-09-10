@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`getItems should return all entry-items 1`] = `
-Array [
-  Object {
-    "details": Array [],
+[
+  {
+    "details": [],
     "id": 0,
     "message": "foo-message",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "foo-foo-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "foo-foo-entry",
         "type": "entry",
       },
@@ -19,24 +19,24 @@ Array [
     "rule": "foo-rule",
     "type": "error",
   },
-  Object {
-    "details": Array [],
+  {
+    "details": [],
     "id": 1,
     "message": "bar-message",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "foo-foo-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "foo-bar-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "foo-foo-entry",
         "type": "entry",
       },
-      Object {
+      {
         "id": "foo-bar-entry",
         "type": "entry",
       },
@@ -48,25 +48,25 @@ Array [
 `;
 
 exports[`getItems should return all entry-items 2`] = `
-Array [
-  Object {
-    "details": Array [],
+[
+  {
+    "details": [],
     "id": 2,
     "message": "bar-message",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "bar-foo-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "bar-bar-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "bar-foo-entry",
         "type": "entry",
       },
-      Object {
+      {
         "id": "bar-bar-entry",
         "type": "entry",
       },
@@ -78,17 +78,17 @@ Array [
 `;
 
 exports[`getItems should return all items 1`] = `
-Array [
-  Object {
-    "details": Array [],
+[
+  {
+    "details": [],
     "id": 0,
     "message": "foo-message",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "foo-foo-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "foo-foo-entry",
         "type": "entry",
       },
@@ -96,24 +96,24 @@ Array [
     "rule": "foo-rule",
     "type": "error",
   },
-  Object {
-    "details": Array [],
+  {
+    "details": [],
     "id": 1,
     "message": "bar-message",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "foo-foo-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "foo-bar-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "foo-foo-entry",
         "type": "entry",
       },
-      Object {
+      {
         "id": "foo-bar-entry",
         "type": "entry",
       },
@@ -125,25 +125,25 @@ Array [
 `;
 
 exports[`getItems should return all items 2`] = `
-Array [
-  Object {
-    "details": Array [],
+[
+  {
+    "details": [],
     "id": 2,
     "message": "bar-message",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "bar-foo-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "bar-bar-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "bar-foo-entry",
         "type": "entry",
       },
-      Object {
+      {
         "id": "bar-bar-entry",
         "type": "entry",
       },
@@ -155,17 +155,17 @@ Array [
 `;
 
 exports[`getItems should return all module-items 1`] = `
-Array [
-  Object {
-    "details": Array [],
+[
+  {
+    "details": [],
     "id": 0,
     "message": "foo-message",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "foo-foo-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "foo-foo-entry",
         "type": "entry",
       },
@@ -173,24 +173,24 @@ Array [
     "rule": "foo-rule",
     "type": "error",
   },
-  Object {
-    "details": Array [],
+  {
+    "details": [],
     "id": 1,
     "message": "bar-message",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "foo-foo-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "foo-bar-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "foo-foo-entry",
         "type": "entry",
       },
-      Object {
+      {
         "id": "foo-bar-entry",
         "type": "entry",
       },
@@ -202,25 +202,25 @@ Array [
 `;
 
 exports[`getItems should return all module-items 2`] = `
-Array [
-  Object {
-    "details": Array [],
+[
+  {
+    "details": [],
     "id": 2,
     "message": "bar-message",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "bar-foo-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "bar-bar-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "bar-foo-entry",
         "type": "entry",
       },
-      Object {
+      {
         "id": "bar-bar-entry",
         "type": "entry",
       },
@@ -232,17 +232,17 @@ Array [
 `;
 
 exports[`getItems should return entry-item with specific id 1`] = `
-Array [
-  Object {
-    "details": Array [],
+[
+  {
+    "details": [],
     "id": 0,
     "message": "foo-message",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "foo-foo-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "foo-foo-entry",
         "type": "entry",
       },
@@ -250,24 +250,24 @@ Array [
     "rule": "foo-rule",
     "type": "error",
   },
-  Object {
-    "details": Array [],
+  {
+    "details": [],
     "id": 1,
     "message": "bar-message",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "foo-foo-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "foo-bar-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "foo-foo-entry",
         "type": "entry",
       },
-      Object {
+      {
         "id": "foo-bar-entry",
         "type": "entry",
       },
@@ -279,25 +279,25 @@ Array [
 `;
 
 exports[`getItems should return entry-item with specific id 2`] = `
-Array [
-  Object {
-    "details": Array [],
+[
+  {
+    "details": [],
     "id": 2,
     "message": "bar-message",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "bar-foo-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "bar-bar-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "bar-foo-entry",
         "type": "entry",
       },
-      Object {
+      {
         "id": "bar-bar-entry",
         "type": "entry",
       },
@@ -309,17 +309,17 @@ Array [
 `;
 
 exports[`getItems should return module-item with specific id 1`] = `
-Array [
-  Object {
-    "details": Array [],
+[
+  {
+    "details": [],
     "id": 0,
     "message": "foo-message",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "foo-foo-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "foo-foo-entry",
         "type": "entry",
       },
@@ -327,24 +327,24 @@ Array [
     "rule": "foo-rule",
     "type": "error",
   },
-  Object {
-    "details": Array [],
+  {
+    "details": [],
     "id": 1,
     "message": "bar-message",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "foo-foo-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "foo-bar-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "foo-foo-entry",
         "type": "entry",
       },
-      Object {
+      {
         "id": "foo-bar-entry",
         "type": "entry",
       },
@@ -356,25 +356,25 @@ Array [
 `;
 
 exports[`getItems should return module-item with specific id 2`] = `
-Array [
-  Object {
-    "details": Array [],
+[
+  {
+    "details": [],
     "id": 1,
     "message": "bar-message",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "foo-foo-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "foo-bar-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "foo-foo-entry",
         "type": "entry",
       },
-      Object {
+      {
         "id": "foo-bar-entry",
         "type": "entry",
       },
@@ -386,25 +386,25 @@ Array [
 `;
 
 exports[`getItems should return module-item with specific id 3`] = `
-Array [
-  Object {
-    "details": Array [],
+[
+  {
+    "details": [],
     "id": 2,
     "message": "bar-message",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "bar-foo-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "bar-bar-module",
         "type": "module",
       },
-      Object {
+      {
         "id": "bar-foo-entry",
         "type": "entry",
       },
-      Object {
+      {
         "id": "bar-bar-entry",
         "type": "entry",
       },

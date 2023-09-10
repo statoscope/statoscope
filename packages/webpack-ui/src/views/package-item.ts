@@ -10,7 +10,7 @@ export default function (discovery: StatoscopeWidget): void {
       el,
       config,
       data?: { inline?: boolean; compact?: boolean; package: NormalizedPackage },
-      context?
+      context?,
     ) => {
       const { inline = false } = data || {};
 
@@ -66,8 +66,8 @@ export default function (discovery: StatoscopeWidget): void {
           },
         ],
         data,
-        context
+        context,
       );
-    }
+    },
   );
 }

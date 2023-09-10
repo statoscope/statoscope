@@ -3,7 +3,6 @@
   "version": "5.27.0",
   "description": "Statoscope types",
   "types": "./types/index.d.ts",
-  "scripts": {},
   "repository": "https://github.com/statoscope/statoscope/",
   "author": {
     "name": "Sergey Melyukov",

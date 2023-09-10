@@ -6,29 +6,29 @@ import generate from './generate';
 const rootPath = path.resolve(__dirname, '../../../../');
 const inputSrc = path.resolve(
   __dirname,
-  '../../../../test/bundles/v5/simple/stats-prod.json'
+  '../../../../test/bundles/v5/simple/stats-prod.json',
 );
 const refSrc = path.resolve(
   __dirname,
-  '../../../../test/bundles/v5/simple/stats-prod.json'
+  '../../../../test/bundles/v5/simple/stats-prod.json',
 );
 
 const customReportMultipleSrc = path.resolve(
   __dirname,
-  '../../../../test/fixtures/cli/injectReport/reports/multiple-reports.json'
+  '../../../../test/fixtures/cli/injectReport/reports/multiple-reports.json',
 );
 const customReportASrc = path.resolve(
   __dirname,
-  '../../../../test/fixtures/cli/injectReport/reports/single-report-a.json'
+  '../../../../test/fixtures/cli/injectReport/reports/single-report-a.json',
 );
 const customReportBSrc = path.resolve(
   __dirname,
-  '../../../../test/fixtures/cli/injectReport/reports/single-report-b.json'
+  '../../../../test/fixtures/cli/injectReport/reports/single-report-b.json',
 );
 
 const customReportsConfigSrc = path.resolve(
   __dirname,
-  '../../../../test/fixtures/cli/generate/custom-reports-config.js'
+  '../../../../test/fixtures/cli/generate/custom-reports-config.js',
 );
 
 const inputFixtures = [inputSrc, inputSrc, inputSrc, inputSrc];
@@ -47,6 +47,7 @@ fs.mkdirSync(outputDir, { recursive: true });
 
 jest.mock('fs', () => {
   const ofs = jest.requireActual('fs');
+  const path = jest.requireActual('path');
   return {
     ...ofs,
     readFile(name: string, ...args: unknown[]): unknown {
@@ -214,7 +215,7 @@ describe('generate CLI command', () => {
   test('single input with custom reports via config file', async () => {
     const outputPath = path.join(
       outputDir,
-      `with-custom-reports-through-config-${dateSuffix}.html`
+      `with-custom-reports-through-config-${dateSuffix}.html`,
     );
 
     let y = yargs([

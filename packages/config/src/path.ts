@@ -60,20 +60,18 @@ function getAliasPackageResolutionError(packageAliases: PackageName[]): string {
     const alternativeAlias = getFullPackageName(packageAliases[1]);
 
     errorMessage += `Also tried to resolve it with ${italicChalk.yellow(
-      alternativeAlias
+      alternativeAlias,
     )} alias which didn't work either.\n\n`;
   } else {
     errorMessage += '\n\n';
   }
 
-  const greyChalk = chalk.bgKeyword('grey');
-
   errorMessage += 'Try installing the package locally:\n';
-  errorMessage += `- with ${italicChalk('npm')}: ${greyChalk(
-    'npm i -D ' + providedAlias
+  errorMessage += `- with ${italicChalk('npm')}: ${chalk.bgGrey(
+    'npm i -D ' + providedAlias,
   )} (or corresponding package alias)\n`;
-  errorMessage += `- with ${italicChalk('yarn')}: ${greyChalk(
-    'yarn add -D ' + providedAlias
+  errorMessage += `- with ${italicChalk('yarn')}: ${chalk.bgGrey(
+    'yarn add -D ' + providedAlias,
   )} (or corresponding package alias)\n`;
 
   return errorMessage;
@@ -89,7 +87,7 @@ function getAliasPackageResolutionError(packageAliases: PackageName[]): string {
 export function resolveAliasPackage(
   packageAliasType: PackageAliasType,
   aliasName: string,
-  fromDir: string
+  fromDir: string,
 ): string {
   const localRequire = makeRequireFromPath(fromDir);
   aliasName = normalizePath(aliasName, fromDir);
@@ -125,7 +123,7 @@ export function resolveAliasPackage(
   }
 
   const paths = packageAliases.map(([namespace, packageName]) =>
-    path.join(namespace, packageName)
+    path.join(namespace, packageName),
   );
 
   for (const path of paths) {

@@ -2,7 +2,19 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "module": "CommonJS",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "rootDir": "./src"
   },
-  "exclude": ["./dist", "**/*.spec.ts"]
+  "include": ["./src"],
+  "exclude": ["**/*.spec.ts", "**/*.test.ts"],
+  "references": [
+    {"path": "../extensions"},
+    {"path": "../helpers"},
+    {"path": "../stats"},
+    {"path": "../stats-extension-compressed"},
+    {"path": "../stats-extension-custom-reports"},
+    {"path": "../stats-extension-package-info"},
+    {"path": "../stats-extension-stats-validation-result"},
+    {"path": "../types"},
+  ]
 }

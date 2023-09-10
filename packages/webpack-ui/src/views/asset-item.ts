@@ -16,7 +16,7 @@ export default function (discovery: StatoscopeWidget): void {
         compact?: boolean;
         asset: NormalizedAsset;
       },
-      context?
+      context?,
     ) => {
       const {
         showSize = true,
@@ -79,8 +79,8 @@ export default function (discovery: StatoscopeWidget): void {
           },
         ],
         data,
-        context
+        context,
       );
-    }
+    },
   );
 }

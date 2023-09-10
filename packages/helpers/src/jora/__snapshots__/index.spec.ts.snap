@@ -1,59 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`graph_getPaths 1`] = `
-Object {
-  "children": Array [
-    Object {
-      "children": Array [
-        Object {
-          "children": Array [],
-          "node": Object {
+{
+  "children": [
+    {
+      "children": [
+        {
+          "children": [],
+          "node": {
             "id": "baz",
           },
         },
       ],
-      "node": Object {
+      "node": {
         "id": "foo",
       },
     },
-    Object {
-      "children": Array [
-        Object {
-          "children": Array [],
-          "node": Object {
+    {
+      "children": [
+        {
+          "children": [],
+          "node": {
             "id": "baz",
           },
         },
       ],
-      "node": Object {
+      "node": {
         "id": "bar",
       },
     },
   ],
-  "node": Object {
+  "node": {
     "id": "target",
   },
 }
 `;
 
 exports[`graph_getPaths 2`] = `
-Object {
-  "children": Array [
-    Object {
-      "children": Array [
-        Object {
-          "children": Array [],
-          "node": Object {
+{
+  "children": [
+    {
+      "children": [
+        {
+          "children": [],
+          "node": {
             "id": "baz",
           },
         },
       ],
-      "node": Object {
+      "node": {
         "id": "foo",
       },
     },
   ],
-  "node": Object {
+  "node": {
     "id": "target",
   },
 }

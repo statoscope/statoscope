@@ -1,22 +1,11 @@
-import { Webpack } from '../webpack';
+import type { Webpack } from '../webpack';
 import type { EntrypointItem } from '../types';
-import Module = Webpack.Module;
-import ModuleGroup = Webpack.ModuleGroup;
-import RawModule = Webpack.RawModule;
-import Compilation = Webpack.Compilation;
-import Chunk = Webpack.Chunk;
-import Asset = Webpack.Asset;
-import Reason = Webpack.Reason;
-import RawReason = Webpack.RawReason;
-import ReasonGroup = Webpack.ReasonGroup;
-import RawAsset = Webpack.RawAsset;
-import AssetGroup = Webpack.AssetGroup;
 
 export function collector<TResult, TID, TEntry = TResult>(
   from: TEntry[],
   isItem: (entry: TEntry) => boolean,
   getChildren: (entry: TEntry) => TEntry[],
-  getId: (item: TResult) => TID
+  getId: (item: TResult) => TID,
 ): Map<TID, TResult> {
   const stack: TEntry[][] = [from];
   let cursor: Array<TEntry> | undefined;
@@ -36,7 +25,7 @@ export function collector<TResult, TID, TEntry = TResult>(
   return collected;
 }
 
-export function collectRawModules(compilation: Compilation): RawModule[] {
+export function collectRawModules(compilation: Webpack.Compilation): Webpack.RawModule[] {
   const collected = collectRawModulesFromArray(compilation.modules ?? []);
 
   for (const chunk of compilation.chunks ?? []) {
@@ -62,37 +51,43 @@ export function collectRawModules(compilation: Compilation): RawModule[] {
   return [...collected.values()];
 }
 
-export function collectRawModulesFromArray(modules: Module[]): Map<string, RawModule> {
-  return collector<RawModule, string, Module>(
+export function collectRawModulesFromArray(
+  modules: Webpack.Module[],
+): Map<string, Webpack.RawModule> {
+  return collector<Webpack.RawModule, string, Webpack.Module>(
     modules,
     (module) => module.type === 'module' || typeof module.type === 'undefined',
-    (module) => (module as ModuleGroup).children,
-    (module) => module.identifier
+    (module) => (module as Webpack.ModuleGroup).children,
+    (module) => module.identifier,
   );
 }
 
-export function collectRawAssetsFromArray(assets: Asset[]): Map<string, RawAsset> {
-  return collector<RawAsset, string, Asset>(
+export function collectRawAssetsFromArray(
+  assets: Webpack.Asset[],
+): Map<string, Webpack.RawAsset> {
+  return collector<Webpack.RawAsset, string, Webpack.Asset>(
     assets,
     (asset) => asset.type === 'asset' || typeof asset.type === 'undefined',
-    (asset) => (asset as AssetGroup).children,
-    (asset) => asset.name
+    (asset) => (asset as Webpack.AssetGroup).children,
+    (asset) => asset.name,
   );
 }
 
-export function collectRawReasonsFromArray(modules: Reason[]): Map<number, RawReason> {
+export function collectRawReasonsFromArray(
+  modules: Webpack.Reason[],
+): Map<number, Webpack.RawReason> {
   let i = 0;
 
-  return collector<RawReason, number, Reason>(
+  return collector<Webpack.RawReason, number, Webpack.Reason>(
     modules,
-    (reason) => (reason as RawReason).moduleIdentifier !== undefined,
-    (reasons) => (reasons as ReasonGroup).children,
-    () => i++
+    (reason) => (reason as Webpack.RawReason).moduleIdentifier !== undefined,
+    (reasons) => (reasons as Webpack.ReasonGroup).children,
+    () => i++,
   );
 }
 
-export function collectRawChunks(compilation: Compilation): Chunk[] {
-  const chunks: Chunk[] = [];
+export function collectRawChunks(compilation: Webpack.Compilation): Webpack.Chunk[] {
+  const chunks: Webpack.Chunk[] = [];
 
   for (const chunk of compilation.chunks ?? []) {
     chunks.push(chunk);
@@ -101,11 +96,13 @@ export function collectRawChunks(compilation: Compilation): Chunk[] {
   return chunks;
 }
 
-export function collectRawAssets(compilation: Compilation): RawAsset[] {
+export function collectRawAssets(compilation: Webpack.Compilation): Webpack.RawAsset[] {
   return [...collectRawAssetsFromArray(compilation.assets ?? []).values()];
 }
 
-export function collectRawEntrypoints(compilation: Compilation): EntrypointItem[] {
+export function collectRawEntrypoints(
+  compilation: Webpack.Compilation,
+): EntrypointItem[] {
   const entrypoints: EntrypointItem[] = [];
 
   for (const [name, data] of Object.entries(compilation.entrypoints ?? {})) {

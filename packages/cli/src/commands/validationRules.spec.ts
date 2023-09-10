@@ -5,7 +5,7 @@ import validate from './validate';
 
 const configWithRulesFixturePath = path.resolve(
   __dirname,
-  '../../../../test/fixtures/cli/validate/config2.js'
+  '../../../../test/fixtures/cli/validate/config2.js',
 );
 
 const output: string[][] = [];
@@ -17,8 +17,8 @@ beforeEach(() => {
     .mockImplementation((...args: string[]) => {
       output.push(
         args.map((o) =>
-          String(o).replace(process.cwd(), '<pwd>').replace(os.tmpdir(), '<tmp>')
-        )
+          String(o).replace(process.cwd(), '<pwd>').replace(os.tmpdir(), '<tmp>'),
+        ),
       );
     });
 });

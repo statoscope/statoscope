@@ -118,9 +118,9 @@ const buildTimeLimits: WebpackRule<Params> = (ruleParams, data, api): void => {
         `Compilation "${
           item.compilation.name ?? item.compilation.hash.slice(0, 7)
         }": Build time is ${h.formatDuration(
-          item.buildTime
+          item.buildTime,
         )}. It's over the ${h.formatDuration(item.rule)} limit`,
-        options
+        options,
       );
     }
   }

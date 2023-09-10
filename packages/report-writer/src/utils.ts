@@ -36,10 +36,10 @@ export async function transform(
     writer: Options;
   },
   from: Array<string | FromItem>,
-  to: string
+  to: string,
 ): Promise<string> {
   const normalizedFrom: FromItem[] = from.map((item) =>
-    typeof item === 'string' ? { type: 'filename', filename: item } : item
+    typeof item === 'string' ? { type: 'filename', filename: item } : item,
   );
   const toDir = path.dirname(to);
   if (!fs.existsSync(toDir)) {
@@ -93,7 +93,7 @@ export async function transform(
 export function makeReplacer(
   from?: string,
   to = '',
-  ignoreKeys: string[] = []
+  ignoreKeys: string[] = [],
 ): TReplacer | undefined {
   if (!from) {
     return;

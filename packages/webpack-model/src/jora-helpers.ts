@@ -10,7 +10,7 @@ import type { Item } from '@statoscope/stats-extension-stats-validation-result/d
 import { HelpersContext, RelationItem } from '@statoscope/types/types';
 import { RuleDescriptor } from '@statoscope/types/types/validation/api';
 import { Report } from '@statoscope/types/types/custom-report';
-import { Webpack } from '../webpack';
+import type { Webpack } from '../webpack';
 import {
   ModuleGraphNodeData,
   NodeModuleInstance,
@@ -31,7 +31,6 @@ import {
   nodeModule,
 } from './module';
 import modulesToFoamTree, { Node as FoamTreeNode } from './modules-to-foam-tree';
-import ChunkID = Webpack.ChunkID;
 
 export type ResolvedStats = { file: NormalizedFile; compilation: NormalizedCompilation };
 
@@ -50,19 +49,19 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
   const resolveCompilation = makeEntityResolver(compilations, (item) => item?.data?.hash);
   const resolveFile = makeEntityResolver(
     compilations.map((c) => c.file),
-    (item) => item.name
+    (item) => item.name,
   );
 
   const resolveExtension = (
     fileName: string,
-    id: string
+    id: string,
   ): NormalizedExtension<unknown, unknown> | null => {
     return normalizeResult.resolvers.get(fileName)?.resolveExtension(id) ?? null;
   };
 
   const resolveExtensionByCompilation = (
     hash: string,
-    id: string
+    id: string,
   ): NormalizedExtension<unknown, unknown> | null => {
     const fileName = resolveCompilation(hash)?.file.name;
 
@@ -91,7 +90,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
     getTotalFilesSize: (
       asset: NormalizedAsset,
       hash?: string,
-      compressed?: boolean
+      compressed?: boolean,
     ): number => {
       const files: Webpack.File[] = asset.files.length
         ? asset.files
@@ -107,7 +106,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
 
       const ext = resolveExtensionByCompilation(
         hash,
-        '@statoscope/stats-extension-compressed'
+        '@statoscope/stats-extension-compressed',
       );
 
       const resolverSize = ext?.api as ExtensionCompressedAPI | undefined;
@@ -118,7 +117,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
     },
     resolveCompilationByAsset(
       asset: NormalizedAsset,
-      fileName: string
+      fileName: string,
     ): NormalizedCompilation | null {
       return (
         normalizeResult.resolvers.get(fileName)?.resolveCompilationByAsset(asset) ?? null
@@ -126,7 +125,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
     },
     resolveCompilationByChunk(
       chunk: NormalizedChunk,
-      fileName: string
+      fileName: string,
     ): NormalizedCompilation | null {
       return (
         normalizeResult.resolvers.get(fileName)?.resolveCompilationByChunk(chunk) ?? null
@@ -134,7 +133,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
     },
     resolveCompilationByModule(
       module: NormalizedModule,
-      fileName: string
+      fileName: string,
     ): NormalizedCompilation | null {
       return (
         normalizeResult.resolvers.get(fileName)?.resolveCompilationByModule(module) ??
@@ -143,7 +142,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
     },
     resolveCompilationByEntrypoint(
       entrypoint: NormalizedEntrypointItem,
-      fileName: string
+      fileName: string,
     ): NormalizedCompilation | null {
       return (
         normalizeResult.resolvers
@@ -151,7 +150,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
           ?.resolveCompilationByEntrypoint(entrypoint) ?? null
       );
     },
-    resolveChunk(id: ChunkID, compilationHash: string): NormalizedChunk | null {
+    resolveChunk(id: Webpack.ChunkID, compilationHash: string): NormalizedChunk | null {
       return resolveCompilation(compilationHash)?.resolvers.resolveChunk(id) || null;
     },
     resolveAsset(id: string, compilationHash: string): NormalizedAsset | null {
@@ -165,7 +164,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
     },
     resolveEntrypoint(
       id: string,
-      compilationHash: string
+      compilationHash: string,
     ): NormalizedEntrypointItem | null {
       return resolveCompilation(compilationHash)?.resolvers.resolveEntrypoint(id) || null;
     },
@@ -188,13 +187,13 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
     },
     resolveExtension(
       id: string,
-      fileName: string
+      fileName: string,
     ): NormalizedExtension<unknown, unknown> | null {
       return resolveExtension(fileName, id);
     },
     resolveExtensionByCompilation(
       id: string,
-      hash: string
+      hash: string,
     ): NormalizedExtension<unknown, unknown> | null {
       return resolveExtensionByCompilation(hash, id);
     },
@@ -209,7 +208,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
 
       const ext = resolveExtensionByCompilation(
         hash,
-        '@statoscope/stats-extension-compressed'
+        '@statoscope/stats-extension-compressed',
       );
 
       const resolverSize = ext?.api as ExtensionCompressedAPI | undefined;
@@ -231,7 +230,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
 
       const ext = resolveExtensionByCompilation(
         hash,
-        '@statoscope/stats-extension-compressed'
+        '@statoscope/stats-extension-compressed',
       );
       const resolverSize = ext?.api as ExtensionCompressedAPI | undefined;
 
@@ -244,7 +243,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
     getPackageInstanceInfo(
       packageName: string,
       instancePath: string,
-      hash: string
+      hash: string,
     ): Instance | null {
       if (!hash) {
         throw new Error('[getPackageInstanceInfo]: hash-parameter is required');
@@ -252,7 +251,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
 
       const ext = resolveExtensionByCompilation(
         hash,
-        '@statoscope/stats-extension-package-info'
+        '@statoscope/stats-extension-package-info',
       );
       const api = ext?.api as ExtensionPackageInfoAPI | undefined;
 
@@ -286,7 +285,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
       module?: NormalizedModule | null,
       graph?: Graph<ModuleGraphNodeData>,
       entrypoints?: NormalizedEntrypointItem[],
-      max = Infinity
+      max = Infinity,
     ): NormalizedEntrypointItem[] {
       if (!module || !graph || !entrypoints) {
         return [];
@@ -325,7 +324,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
           }
 
           return false;
-        }
+        },
       );
     },
 
@@ -333,7 +332,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
       from?: NormalizedModule,
       graph?: Graph<ModuleGraphNodeData>,
       to?: NormalizedModule,
-      max = Infinity
+      max = Infinity,
     ): PathSolution<ModuleGraphNodeData> | null {
       if (!from || !to || !graph) {
         return null;
@@ -351,7 +350,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
     modulesToFoamTree(
       modules: NormalizedModule[],
       hash?: string,
-      compressed?: boolean
+      compressed?: boolean,
     ): FoamTreeNode {
       if (compressed && !hash) {
         throw new Error('[modulesToFoamTree]: hash-parameter is required');
@@ -369,7 +368,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
     validation_getItems(
       hash?: string,
       relatedType?: RelationItem['type'] | null,
-      relatedId?: string | number
+      relatedId?: string | number,
     ): Item[] {
       if (!hash) {
         throw new Error('[validation_getItems]: hash-parameter is required');
@@ -377,7 +376,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
 
       const ext = resolveExtensionByCompilation(
         hash,
-        '@statoscope/stats-extension-stats-validation-result'
+        '@statoscope/stats-extension-stats-validation-result',
       );
       const api = ext?.api as ExtensionValidationResultAPI | undefined;
 
@@ -397,7 +396,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
 
       const ext = resolveExtensionByCompilation(
         hash,
-        '@statoscope/stats-extension-stats-validation-result'
+        '@statoscope/stats-extension-stats-validation-result',
       );
       const api = ext?.api as ExtensionValidationResultAPI | undefined;
 
@@ -406,7 +405,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
 
     validation_resolveRelatedItem(
       item?: RelationItem,
-      hash?: string
+      hash?: string,
     ): ResolvedRelatedItem {
       if (!item) {
         throw new Error('[validation_resolveRelatedItem]: item-parameter is required');
@@ -474,7 +473,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
 
       const ext = resolveExtensionByCompilation(
         hash,
-        '@statoscope/stats-extension-stats-validation-result'
+        '@statoscope/stats-extension-stats-validation-result',
       );
       const api = ext?.api as ExtensionValidationResultAPI | undefined;
 
@@ -485,7 +484,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
       file: string,
       hash?: string | null,
       relatedType?: RelationItem['type'] | null,
-      relatedId?: string | number
+      relatedId?: string | number,
     ): Report<unknown, unknown>[] {
       if (!file) {
         throw new Error('[customReports_getItems]: file-parameter is required');
@@ -521,14 +520,14 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
     asset_getSize(
       asset: NormalizedAsset,
       hash: string,
-      useCompressedSize: boolean
+      useCompressedSize: boolean,
     ): Size {
       return this.getAssetSize(asset, hash, useCompressedSize);
     },
     assets_getTotalSize(
       assets: NormalizedAsset[],
       hash: string,
-      useCompressedSize: boolean
+      useCompressedSize: boolean,
     ): Size {
       return context.query(
         `
@@ -543,30 +542,30 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
           compressor: $all.compressor = $current.compressor ? $all.compressor : 'multiple'
         }) : {size: 0}`,
         assets,
-        { useCompressedSize, hash }
+        { useCompressedSize, hash },
       ) as Size;
     },
 
     entrypoint_getChunks(entrypoint: NormalizedEntrypointItem): NormalizedChunk[] {
       return context.query(
         `data.chunks + data.chunks..children`,
-        entrypoint
+        entrypoint,
       ) as NormalizedChunk[];
     },
     entrypoint_getInitialChunks(entrypoint: NormalizedEntrypointItem): NormalizedChunk[] {
       return this.entrypoint_getChunks(entrypoint).filter(
-        (chunk) => chunk.initial
+        (chunk) => chunk.initial,
       ) as NormalizedChunk[];
     },
     entrypoint_getInitialSize(
       entrypoint: NormalizedEntrypointItem,
       hash: string,
-      useCompressedSize: boolean
+      useCompressedSize: boolean,
     ): Size {
       return this.assets_getTotalSize(
         this.entrypoint_getInitialAssets(entrypoint),
         hash,
-        useCompressedSize
+        useCompressedSize,
       );
     },
     entrypoint_getAsyncChunks(entrypoint: NormalizedEntrypointItem): NormalizedChunk[] {
@@ -575,30 +574,30 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
     entrypoint_getAsyncSize(
       entrypoint: NormalizedEntrypointItem,
       hash: string,
-      useCompressedSize: boolean
+      useCompressedSize: boolean,
     ): Size {
       return this.assets_getTotalSize(
         this.entrypoint_getAsyncAssets(entrypoint),
         hash,
-        useCompressedSize
+        useCompressedSize,
       );
     },
     entrypoint_getAssets(entrypoint: NormalizedEntrypointItem): NormalizedAsset[] {
       return context.query(
         `(data.chunks + data.chunks..children).files`,
-        entrypoint
+        entrypoint,
       ) as NormalizedAsset[];
     },
     entrypoint_getInitialAssets(entrypoint: NormalizedEntrypointItem): NormalizedAsset[] {
       return context.query(
         `(data.chunks + data.chunks..children).[initial].files`,
-        entrypoint
+        entrypoint,
       ) as NormalizedAsset[];
     },
     entrypoint_getAsyncAssets(entrypoint: NormalizedEntrypointItem): NormalizedAsset[] {
       return context.query(
         `(data.chunks + data.chunks..children).[not initial].files`,
-        entrypoint
+        entrypoint,
       ) as NormalizedAsset[];
     },
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -631,7 +630,7 @@ export default function (normalizeResult: NormalizeResult, context: HelpersConte
               (r) =>
                 r.resolvedModule &&
                 r.resolvedModule !== module &&
-                !passed.has(r.resolvedModule)
+                !passed.has(r.resolvedModule),
             )
           ) {
             continue;

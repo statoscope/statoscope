@@ -4,7 +4,7 @@ import Validator from '@statoscope/stats-validator';
 import ConsoleReporter from '@statoscope/stats-validator-reporter-console';
 import { Reporter } from '@statoscope/types/types/validation/reporter';
 import { makeReporterInstance } from '@statoscope/config/dist/make-reporter-instance';
-import { requireConfig } from '@statoscope/config/dist';
+import { requireConfig } from '@statoscope/config';
 import legacyWebpackValidator from './legacyWebpackValidator';
 
 export default function (yargs: Argv): Argv {
@@ -82,7 +82,7 @@ Validate multiple stats [DEPRECATED]: validate --validator path/to/validator.js 
 
       const result = await validator.validate(
         path.resolve(argv.input[0]),
-        argv.reference ? path.resolve(argv.reference) : void 0
+        argv.reference ? path.resolve(argv.reference) : void 0,
       );
 
       for (const rule of result.rules) {
@@ -97,6 +97,6 @@ Validate multiple stats [DEPRECATED]: validate --validator path/to/validator.js 
       for (const reporter of reporters) {
         await reporter.run(result);
       }
-    }
+    },
   );
 }

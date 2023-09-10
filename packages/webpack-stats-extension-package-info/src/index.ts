@@ -59,7 +59,7 @@ export default class WebpackCompressedExtension
           null,
           item.packageName,
           item.instancePath,
-          item.info
+          item.info,
         );
         // webpack 4 uses absolute path for some modules
         // @ts-ignore
@@ -74,7 +74,7 @@ export default class WebpackCompressedExtension
             null,
             item.packageName,
             item.instancePath,
-            item.info
+            item.info,
           );
         }
       }

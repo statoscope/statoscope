@@ -58,7 +58,7 @@ describe('nodeModule', () => {
     expect(nodeModule('./node_modules/foo/node_modules/@bar/baz/src')).toMatchSnapshot();
 
     expect(
-      nodeModule('./node_modules/@foo/bar/node_modules/@baz/quux/src')
+      nodeModule('./node_modules/@foo/bar/node_modules/@baz/quux/src'),
     ).toMatchSnapshot();
   });
 });

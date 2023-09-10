@@ -1,7 +1,5 @@
-import { Webpack } from '../webpack';
+import type { Webpack } from '../webpack';
 import { NormalizedModule, NormalizedReason } from '../types';
-import RawModule = Webpack.RawModule;
-import RawReason = Webpack.RawReason;
 
 export const extractFileRx = /!?([^!]+)$/;
 export const concatenatedIdRx = /(.+) \+ \d+ modules$/;
@@ -25,7 +23,7 @@ export function moduleNameResource(name: string | null): string | null {
     if (!name.includes('(ignored)') && !name.startsWith('multi')) {
       const normalized = matchRxValue(
         extractFileRx,
-        name.replace('(webpack)', 'node_modules/webpack')
+        name.replace('(webpack)', 'node_modules/webpack'),
       );
 
       if (!normalized) {
@@ -50,7 +48,7 @@ export function moduleNameResource(name: string | null): string | null {
 }
 
 export function moduleResource(
-  module: RawModule | NormalizedModule | null
+  module: Webpack.RawModule | NormalizedModule | null,
 ): string | null {
   if (
     module?.moduleType &&
@@ -64,7 +62,7 @@ export function moduleResource(
 }
 
 export function moduleReasonResource(
-  reason: RawReason | NormalizedReason | null
+  reason: Webpack.RawReason | NormalizedReason | null,
 ): string | null {
   return moduleNameResource(reason?.moduleName ?? null);
 }
@@ -90,7 +88,11 @@ export function nodeModule(path: string | null): NodeModule | null {
       : false;
 
     cached = name
-      ? { path: input, name: [namespace, name].filter(Boolean).join('/'), isRoot }
+      ? <NodeModule>{
+          path: input,
+          name: [namespace, name].filter(Boolean).join('/'),
+          isRoot,
+        }
       : null;
     nodeModuleNameCache.set(path, cached);
   }

@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`maxBuildTime global 1`] = `
-Array [
-  Object {
+[
+  {
     "compilation": "a5ca8b0ac9b2c1315153",
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "buildTime": 416,
             "buildTimeOK": false,
             "compilation": "a5ca8b0ac9b2c1315153",
@@ -29,9 +29,9 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Compilation \\"a5ca8b0\\": Build time is 416 ms. It's over the 1 ms limit",
-    "related": Array [
-      Object {
+    "message": "Compilation "a5ca8b0": Build time is 416 ms. It's over the 1 ms limit",
+    "related": [
+      {
         "id": "a5ca8b0ac9b2c1315153",
         "type": "compilation",
       },
@@ -40,4 +40,4 @@ Array [
 ]
 `;
 
-exports[`maxBuildTime not match - global 1`] = `Array []`;
+exports[`maxBuildTime not match - global 1`] = `[]`;

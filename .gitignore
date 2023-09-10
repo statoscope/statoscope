@@ -3,6 +3,7 @@
 node_modules/
 dist/
 dist-test/
+tmp/
 *.log
 *.lock
 .DS_store

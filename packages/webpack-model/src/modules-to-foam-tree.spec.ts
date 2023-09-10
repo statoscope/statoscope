@@ -11,7 +11,7 @@ test('should work', () => {
       modules as unknown as NormalizedModule[],
       (m): Size => ({
         size: m.size,
-      })
-    )
+      }),
+    ),
   ).toMatchSnapshot();
 });

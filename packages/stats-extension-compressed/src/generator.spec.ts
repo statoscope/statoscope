@@ -15,25 +15,25 @@ describe('preset compressor', () => {
       'foo-compilation',
       'foo-resource',
       'foo-foo-content',
-      'gzip'
+      'gzip',
     );
     generator.handleResource(
       'foo-compilation',
       'bar-resource',
       'foo-bar-content'.repeat(10),
-      'gzip'
+      'gzip',
     );
     generator.handleResource(
       'bar-compilation',
       'foo-resource',
       'bar-foo-content'.repeat(100),
-      'gzip'
+      'gzip',
     );
     generator.handleResource(
       'bar-compilation',
       'bar-resource',
       'bar-foo-content'.repeat(100),
-      ['gzip', { level: 1 }]
+      ['gzip', { level: 1 }],
     );
 
     expect(generator.get()).toMatchSnapshot();
@@ -47,8 +47,8 @@ describe('preset compressor', () => {
         'foo-compilation',
         'foo-resource',
         'foo-foo-content',
-        'foo'
-      )
+        'foo',
+      ),
     ).toThrow('Unknown compress foo');
   });
 });
@@ -67,19 +67,19 @@ test('custom compressor', () => {
     'foo-compilation',
     'foo-resource',
     'foo-foo-content',
-    mockedCompressor1
+    mockedCompressor1,
   );
   generator.handleResource(
     'foo-compilation',
     'bar-resource',
     'foo-bar-content',
-    mockedCompressor1
+    mockedCompressor1,
   );
   generator.handleResource(
     'bar-compilation',
     'foo-resource',
     'bar-foo-content',
-    mockedCompressor2
+    mockedCompressor2,
   );
 
   expect(generator.get()).toMatchSnapshot();

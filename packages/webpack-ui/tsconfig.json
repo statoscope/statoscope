@@ -4,5 +4,13 @@
     "noEmit": true,
     "isolatedModules": true
   },
-  "exclude": ["./dist"]
+  "include": ["./src"],
+  "references": [
+    {"path": "../helpers"},
+    {"path": "../stats"},
+    {"path": "../stats-extension-compressed"},
+    {"path": "../stats-extension-package-info"},
+    {"path": "../stats-extension-stats-validation-result"},
+    {"path": "../webpack-model"},
+  ]
 }

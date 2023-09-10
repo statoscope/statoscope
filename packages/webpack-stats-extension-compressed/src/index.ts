@@ -7,7 +7,7 @@ import CompressedExtensionGenerator, {
   Format,
   Payload,
 } from '@statoscope/stats-extension-compressed/dist/generator';
-import { StatsExtensionWebpackAdapter } from '@statoscope/webpack-model/dist';
+import { StatsExtensionWebpackAdapter } from '@statoscope/webpack-model';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { author, homepage, name, version, description } = require('../package.json');
 
@@ -35,7 +35,7 @@ export default class WebpackCompressedExtension
 
         // webpack 4
         let readFile = promisify(
-          cursor.compiler.inputFileSystem.readFile.bind(cursor.compiler.inputFileSystem)
+          cursor.compiler.inputFileSystem.readFile.bind(cursor.compiler.inputFileSystem),
         );
 
         // webpack 5
@@ -45,8 +45,8 @@ export default class WebpackCompressedExtension
         ) {
           readFile = promisify(
             cursor.compiler.outputFileSystem.readFile.bind(
-              cursor.compiler.outputFileSystem
-            )
+              cursor.compiler.outputFileSystem,
+            ),
           );
         }
 
@@ -64,7 +64,7 @@ export default class WebpackCompressedExtension
               cursor.hash as string,
               name,
               content,
-              this.compressor
+              this.compressor,
             );
           } catch (e) {
             console.warn(`Can't read the asset ${name}`);
@@ -94,7 +94,7 @@ export default class WebpackCompressedExtension
               modulesCursor.identifier(),
               // @ts-ignore
               modulesCursor.content,
-              this.compressor
+              this.compressor,
             );
           } else if (cursor.chunkGraph) {
             // webpack 5
@@ -107,7 +107,7 @@ export default class WebpackCompressedExtension
                 const source = cursor.codeGenerationResults.getSource(
                   modulesCursor,
                   runtimeChunk.runtime,
-                  type
+                  type,
                 );
                 if (!source) {
                   continue;
@@ -126,7 +126,7 @@ export default class WebpackCompressedExtension
               const source = cursor.moduleTemplates.javascript.render(
                 modulesCursor,
                 cursor.dependencyTemplates,
-                { chunk: modulesCursor.getChunks()[0] }
+                { chunk: modulesCursor.getChunks()[0] },
               );
               const content = source.source();
               concatenated = Buffer.concat([
@@ -146,7 +146,7 @@ export default class WebpackCompressedExtension
             cursor.hash as string,
             modulesCursor.identifier(),
             concatenated,
-            this.compressor
+            this.compressor,
           );
         }
       }

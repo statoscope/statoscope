@@ -15,6 +15,6 @@ it('extractModulePackages', () => {
           data: r.data.resolvedResource,
         })),
       })),
-    }))
+    })),
   ).toMatchSnapshot();
 });

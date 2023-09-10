@@ -15,7 +15,7 @@ test('should work', async () => {
     },
   });
   const result = await validator.validate(
-    require.resolve('../../../test/bundles/v5/simple/stats-prod.json')
+    require.resolve('../../../test/bundles/v5/simple/stats-prod.json'),
   );
   let saveReportTo = path.join(outputDir, 'should-work.html');
   let reporter = new Reporter({

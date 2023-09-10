@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should work 1`] = `
-Object {
-  "descriptor": Object {
-    "adapter": Object {
+{
+  "descriptor": {
+    "adapter": {
       "name": "test-adapter",
       "version": "7.7.7",
     },
-    "author": Object {
+    "author": {
       "name": "Sergey Melyukov",
       "url": "https://twitter.com/smelukov",
     },
@@ -16,21 +16,21 @@ Object {
     "name": "@statoscope/stats-extension-stats-validation-result",
     "version": "8.8.8",
   },
-  "payload": Object {
-    "compilations": Array [
-      Object {
+  "payload": {
+    "compilations": [
+      {
         "id": "foo-compilation",
-        "items": Array [
-          Object {
-            "details": Array [],
+        "items": [
+          {
+            "details": [],
             "id": 0,
             "message": "foo-message",
-            "related": Array [
-              Object {
+            "related": [
+              {
                 "id": "foo-foo-module",
                 "type": "module",
               },
-              Object {
+              {
                 "id": "foo-foo-entry",
                 "type": "entry",
               },
@@ -38,24 +38,24 @@ Object {
             "rule": "foo-rule",
             "type": "warn",
           },
-          Object {
-            "details": Array [],
+          {
+            "details": [],
             "id": 1,
             "message": "bar-message",
-            "related": Array [
-              Object {
+            "related": [
+              {
                 "id": "foo-foo-module",
                 "type": "module",
               },
-              Object {
+              {
                 "id": "foo-bar-module",
                 "type": "module",
               },
-              Object {
+              {
                 "id": "foo-foo-entry",
                 "type": "entry",
               },
-              Object {
+              {
                 "id": "foo-bar-entry",
                 "type": "entry",
               },
@@ -65,27 +65,27 @@ Object {
           },
         ],
       },
-      Object {
+      {
         "id": "bar-compilation",
-        "items": Array [
-          Object {
-            "details": Array [],
+        "items": [
+          {
+            "details": [],
             "id": 2,
             "message": "bar-message",
-            "related": Array [
-              Object {
+            "related": [
+              {
                 "id": "bar-foo-module",
                 "type": "module",
               },
-              Object {
+              {
                 "id": "bar-bar-module",
                 "type": "module",
               },
-              Object {
+              {
                 "id": "bar-foo-entry",
                 "type": "entry",
               },
-              Object {
+              {
                 "id": "bar-bar-entry",
                 "type": "entry",
               },
@@ -96,11 +96,11 @@ Object {
         ],
       },
     ],
-    "rules": Array [
-      Object {
-        "descriptor": Object {
+    "rules": [
+      {
+        "descriptor": {
           "description": "foo-description",
-          "package": Object {
+          "package": {
             "homepage": "https://statoscope.tech",
             "name": "foo-package",
             "version": "1.0.0",

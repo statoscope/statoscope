@@ -2,7 +2,7 @@ import md5 from 'md5';
 import { API as ExtensionPackageInfoAPI } from '@statoscope/stats-extension-package-info/dist/api';
 import Graph, { Node } from '@statoscope/helpers/dist/graph';
 import makeIndex from '@statoscope/helpers/dist/indexer';
-import { Webpack } from '../webpack';
+import type { Webpack } from '../webpack';
 import {
   HandledCompilation,
   HandledFileContext,
@@ -25,17 +25,10 @@ import {
   collectRawModulesFromArray,
   collectRawReasonsFromArray,
 } from './collector';
-import RawAsset = Webpack.RawAsset;
-import Chunk = Webpack.Chunk;
-import ChunkID = Webpack.ChunkID;
-import RawModule = Webpack.RawModule;
-import Module = Webpack.Module;
-import Compilation = Webpack.Compilation;
-import RawReason = Webpack.RawReason;
 
 function getHash(
   compilation: Webpack.Compilation,
-  parent?: NormalizedCompilation | null
+  parent?: NormalizedCompilation | null,
 ): string {
   if (compilation.hash) {
     return compilation.hash;
@@ -51,7 +44,7 @@ function getHash(
 export default function handleCompilations(
   rawStatsFileDescriptor: RawStatsFileDescriptor,
   file: NormalizedFile,
-  fileContext: HandledFileContext
+  fileContext: HandledFileContext,
 ): HandledCompilation[] {
   const compilations: HandledCompilation[] = [];
 
@@ -72,7 +65,7 @@ export default function handleCompilations(
       cursor.compilation,
       file,
       cursor.parent,
-      fileContext
+      fileContext,
     );
 
     if (cursor.parent) {
@@ -108,7 +101,7 @@ function buildGraph(compilation: NormalizedCompilation): {
 
   function handleModuleNode(
     graph: Graph<ModuleGraphNodeData>,
-    module: NormalizedModule
+    module: NormalizedModule,
   ): Node<ModuleGraphNodeData> {
     if (globalHandled.has(module)) {
       return graph.getNode(module.identifier)!;
@@ -158,7 +151,7 @@ function handleCompilation(
   compilation: Webpack.Compilation,
   file: NormalizedFile,
   parent: NormalizedCompilation | null,
-  fileContext: HandledFileContext
+  fileContext: HandledFileContext,
 ): HandledCompilation {
   const normalized: NormalizedCompilation = {
     time: compilation.time,
@@ -238,7 +231,7 @@ function handleCompilation(
   prepareChunks(processingContext);
   linkChunks(processingContext);
   prepareAssets(processingContext);
-  extractPackages(normalized as unknown as Compilation, processingContext);
+  extractPackages(normalized as unknown as Webpack.Compilation, processingContext);
 
   for (const module of processingContext.indexes.modules.getAll()) {
     normalized.modules.push(module);
@@ -271,9 +264,9 @@ function handleCompilation(
 }
 
 function mergeModules(
-  from: RawModule,
+  from: Webpack.RawModule,
   to: NormalizedModule,
-  context: ProcessingContext
+  context: ProcessingContext,
 ): void {
   const chunks = new Set(
     [...(to.chunks ?? []), ...(from.chunks ?? [])].reduce<NormalizedChunk[]>((acc, c) => {
@@ -285,7 +278,7 @@ function mergeModules(
       }
 
       return acc;
-    }, [])
+    }, []),
   );
   const toReasons = collectRawReasonsFromArray(to.reasons);
   const fromReasons = collectRawReasonsFromArray(from.reasons ?? []);
@@ -304,7 +297,7 @@ function mergeModules(
   to.reasons = [...reasonMap.values()];
 }
 
-function prepareModule(module: RawModule, context: ProcessingContext): void {
+function prepareModule(module: Webpack.RawModule, context: ProcessingContext): void {
   if (context.indexes.modules.hasId(module.identifier)) {
     return;
   }
@@ -320,8 +313,8 @@ function prepareModule(module: RawModule, context: ProcessingContext): void {
     normalizedModule.issuerPath.map(
       (i) =>
         (i.resolvedModule = context.rawIndexes.modules.get(
-          i.identifier
-        ) as NormalizedModule | null)
+          i.identifier,
+        ) as NormalizedModule | null),
     );
   } else {
     module.issuerPath = [];
@@ -376,7 +369,7 @@ function prepareModule(module: RawModule, context: ProcessingContext): void {
     mergeModules(module, existingModule, context);
   }
 
-  (module as RawModule).modules ??= [];
+  (module as Webpack.RawModule).modules ??= [];
 
   const innerModules = collectRawModulesFromArray(module.modules!);
   const newInnerModules = [];
@@ -389,8 +382,8 @@ function prepareModule(module: RawModule, context: ProcessingContext): void {
       item.chunks = module.chunks;
 
       for (const chunk of module.chunks) {
-        (<Chunk>chunk).modules ??= [];
-        (<Chunk>chunk).modules!.push(item);
+        (<Webpack.Chunk>chunk).modules ??= [];
+        (<Webpack.Chunk>chunk).modules!.push(item);
       }
     }
   }
@@ -399,8 +392,8 @@ function prepareModule(module: RawModule, context: ProcessingContext): void {
 }
 
 function normalizeReason(
-  reason: RawReason,
-  context: ProcessingContext
+  reason: Webpack.RawReason,
+  context: ProcessingContext,
 ): NormalizedReason {
   const normalizedReason = reason as unknown as NormalizedReason;
 
@@ -436,11 +429,11 @@ function prepareModules(context: ProcessingContext): void {
 }
 
 function resolveRawChunk(
-  chunk: Chunk | ChunkID,
-  context: ProcessingContext
-): Chunk | null {
+  chunk: Webpack.Chunk | Webpack.ChunkID,
+  context: ProcessingContext,
+): Webpack.Chunk | null {
   return context.rawIndexes.chunks.get(
-    typeof chunk === 'string' || typeof chunk === 'number' ? chunk : chunk.id
+    typeof chunk === 'string' || typeof chunk === 'number' ? chunk : chunk.id,
   );
 }
 
@@ -459,8 +452,8 @@ function prepareChunk(chunk: Webpack.Chunk | null, context: ProcessingContext): 
 
   if (chunk.modules) {
     chunk.modules = [...context.indexes.modules.getAll()].filter((m) =>
-      m.chunks.find((c) => c.id === chunk.id)
-    ) as Module[];
+      m.chunks.find((c) => c.id === chunk.id),
+    ) as Webpack.Module[];
   } else {
     chunk.modules = [];
   }
@@ -554,7 +547,7 @@ function getChunkMapItem(
     NormalizedChunk,
     { children: Set<NormalizedChunk>; parents: Set<NormalizedChunk> }
   >,
-  chunk: NormalizedChunk
+  chunk: NormalizedChunk,
 ): { children: Set<NormalizedChunk>; parents: Set<NormalizedChunk> } {
   let mapItem = map.get(chunk);
   if (!mapItem) {
@@ -612,7 +605,7 @@ function prepareAssets(context: ProcessingContext): void {
     if (asset.chunks) {
       asset.chunks = asset.chunks
         .map((c) => resolveRawChunk(c, context))
-        .filter(Boolean) as Chunk[];
+        .filter(Boolean) as Webpack.Chunk[];
     } else {
       asset.chunks = [];
     }
@@ -623,7 +616,7 @@ function prepareAssets(context: ProcessingContext): void {
 
 function prepareEntries(
   compilation: Webpack.Compilation,
-  context: ProcessingContext
+  context: ProcessingContext,
 ): void {
   for (const name in compilation.entrypoints) {
     const entry = compilation.entrypoints[name];
@@ -631,14 +624,16 @@ function prepareEntries(
     if (entry.chunks) {
       entry.chunks = entry.chunks
         .map((c) => resolveRawChunk(c, context))
-        .filter(Boolean) as Chunk[];
+        .filter(Boolean) as Webpack.Chunk[];
     }
 
     if (entry.assets) {
       entry.assets = entry.assets
         .map(
           (a) =>
-            context.rawIndexes.assets.get(typeof a === 'string' ? a : a.name) as RawAsset
+            context.rawIndexes.assets.get(
+              typeof a === 'string' ? a : a.name,
+            ) as Webpack.RawAsset,
         )
         .filter(Boolean);
     }
@@ -648,10 +643,10 @@ function prepareEntries(
 }
 
 export function extractPackages(
-  compilation: Compilation,
-  context: ProcessingContext
+  compilation: Webpack.Compilation,
+  context: ProcessingContext,
 ): void {
-  const extractModulePackages = (module: RawModule): void => {
+  const extractModulePackages = (module: Webpack.RawModule): void => {
     const resource = moduleResource(module);
 
     if (!resource) {
@@ -669,12 +664,12 @@ export function extractPackages(
       }
 
       let instance = resolvedPackage.instances.find(
-        ({ path }) => path === modulePackage.path
+        ({ path }) => path === modulePackage.path,
       );
 
       if (!instance) {
         const packageInfoExt = context.fileContext.resolvers.resolveExtension(
-          '@statoscope/stats-extension-package-info'
+          '@statoscope/stats-extension-package-info',
         );
         const api = packageInfoExt?.api as ExtensionPackageInfoAPI | undefined;
 

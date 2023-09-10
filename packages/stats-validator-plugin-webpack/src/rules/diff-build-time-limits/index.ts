@@ -80,7 +80,7 @@ const h = helpers();
 const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
   ruleParams,
   data,
-  api
+  api,
 ): void => {
   api.setRuleDescriptor({
     description:
@@ -182,7 +182,7 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
         result.slowestInputCompilation.name ??
         result.slowestInputCompilation.hash.slice(0, 7)
       }": Build time diff is ${h.formatDuration(
-        result.slowestInputCompilation.time!
+        result.slowestInputCompilation.time!,
       )} (${result.diff.percent.toFixed(2)}%). It's over the ${
         normalizedLimit.type === 'absolute'
           ? h.formatDuration(normalizedLimit.number)

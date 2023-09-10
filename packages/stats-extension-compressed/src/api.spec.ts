@@ -8,13 +8,13 @@ test('should work', () => {
     'foo-compilation',
     'bar-resource',
     'foo-bar-content'.repeat(10),
-    'gzip'
+    'gzip',
   );
   generator.handleResource(
     'bar-compilation',
     'foo-resource',
     'bar-foo-content'.repeat(100),
-    'gzip'
+    'gzip',
   );
 
   const data = generator.get();
@@ -23,30 +23,30 @@ test('should work', () => {
   expect(api('foo', 'bar')).toBeNull();
   expect(api('foo-compilation', 'bar')).toBeNull();
   expect(api('foo-compilation', 'foo-resource')).toMatchInlineSnapshot(`
-Object {
-  "compressor": "gzip",
-  "meta": Object {
-    "level": 6,
-  },
-  "size": 33,
-}
-`);
+    {
+      "compressor": "gzip",
+      "meta": {
+        "level": 6,
+      },
+      "size": 33,
+    }
+  `);
   expect(api('foo-compilation', 'bar-resource')).toMatchInlineSnapshot(`
-Object {
-  "compressor": "gzip",
-  "meta": Object {
-    "level": 6,
-  },
-  "size": 38,
-}
-`);
+    {
+      "compressor": "gzip",
+      "meta": {
+        "level": 6,
+      },
+      "size": 38,
+    }
+  `);
   expect(api('bar-compilation', 'foo-resource')).toMatchInlineSnapshot(`
-Object {
-  "compressor": "gzip",
-  "meta": Object {
-    "level": 6,
-  },
-  "size": 48,
-}
-`);
+    {
+      "compressor": "gzip",
+      "meta": {
+        "level": 6,
+      },
+      "size": 48,
+    }
+  `);
 });

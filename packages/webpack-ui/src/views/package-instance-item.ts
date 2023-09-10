@@ -10,7 +10,7 @@ export default function (discovery: StatoscopeWidget): void {
       el,
       config,
       data?: { inline?: boolean; compact?: boolean; instance: NodeModuleInstance },
-      context?
+      context?,
     ) => {
       const { inline = false } = data || {};
 
@@ -56,8 +56,8 @@ export default function (discovery: StatoscopeWidget): void {
           },
         ],
         data,
-        context
+        context,
       );
-    }
+    },
   );
 }

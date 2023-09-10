@@ -49,7 +49,7 @@ export default function (discovery: StatoscopeWidget): void {
                   view: (
                     el: HTMLDivElement,
                     config: unknown,
-                    data: RuleDescriptor
+                    data: RuleDescriptor,
                   ): void => {
                     el.style.display = 'inline-block';
                     el.style.marginLeft = '5px';
@@ -84,7 +84,7 @@ export default function (discovery: StatoscopeWidget): void {
         ],
       },
       data,
-      context
+      context,
     );
   });
 }

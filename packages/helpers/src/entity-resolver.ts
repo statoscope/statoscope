@@ -6,7 +6,7 @@ export type IDModifier<TID> = (id: TID) => TID;
 
 export function getIdWrapper<TID, TEntity>(
   getId: GetIDFn<TID, TEntity>,
-  idModifier?: IDModifier<TID>
+  idModifier?: IDModifier<TID>,
 ): GetIDFn<TID | string, TEntity> {
   return (entity): TID | string => {
     let id = getId(entity);
@@ -22,7 +22,7 @@ export function getIdWrapper<TID, TEntity>(
 function warnCache<TID, TEntity>(
   entities: Entities<TEntity>,
   getId: GetIDFn<TID, TEntity>,
-  cache: Map<TID | string, TEntity>
+  cache: Map<TID | string, TEntity>,
 ): void {
   cache.clear();
 
@@ -63,7 +63,7 @@ export default function makeResolver<TID, TEntity, TReturn = TEntity>(
   entities: Entities<TEntity>,
   getId: (entity: TEntity) => TID,
   get?: ((entity: TEntity) => TReturn) | null,
-  locked = true
+  locked = true,
 ): Resolver<TID, TReturn> {
   const wrappedGetId = getIdWrapper(getId);
   const cache: Map<TID | string, TEntity> = new Map();

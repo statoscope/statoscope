@@ -30,7 +30,7 @@ test('should work', () => {
         { type: 'entry', id: 'foo-foo-entry' },
       ],
     },
-    'warn'
+    'warn',
   );
 
   generator.handleEntry('foo-rule', {

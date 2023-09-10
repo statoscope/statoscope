@@ -1,0 +1,109 @@
+{
+  "$schema": "node_modules/nx/schemas/nx-schema.json",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx-cloud",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "test",
+          "lint"
+        ],
+        "accessToken": "ZDc1YzhjZDEtM2Q2Yy00MWIxLTg1YWMtNWY0MWFhN2Q0YTM0fHJlYWQtd3JpdGU="
+      }
+    }
+  },
+  "namedInputs": {
+    "default": [
+      "{projectRoot}/**/*"
+    ],
+    "prod": [
+      "!{projectRoot}/**/*.spec.ts",
+      "!{projectRoot}/__test__/**/*"
+    ],
+    "production": [
+      "default"
+    ]
+  },
+  "targetDefaults": {
+    "build": {
+      "dependsOn": [
+        "prebuild",
+        "^build"
+      ],
+      "inputs": [
+        "prod",
+        "^prod"
+      ],
+      "outputs": [
+        "{projectRoot}/dist"
+      ],
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "{projectRoot}/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "dependsOn": [
+        "build"
+      ],
+      "inputs": [
+        "default",
+        "{workspaceRoot}/scripts/jest/**",
+        "{workspaceRoot}/jest.config.ts",
+        "{workspaceRoot}/jest.preset.js"
+      ],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ]
+    },
+    "test:update": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "{projectRoot}/jest.config.ts",
+        "passWithNoTests": true,
+        "updateSnapshot": true
+      },
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ]
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "{projectRoot}/**/*.[jt]s"
+        ]
+      },
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.js",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore"
+      ]
+    },
+    "lint:fix": {
+      "executor": "@nx/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "{projectRoot}/**/*.[jt]s"
+        ],
+        "fix": true
+      }
+    }
+  },
+  "affected": {
+    "defaultBase": "master"
+  }
+}

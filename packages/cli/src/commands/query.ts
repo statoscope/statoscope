@@ -42,6 +42,6 @@ export default function (yargs: Argv): Argv {
 
       outputStream.pipe(process.stdout);
       await waitFinished(outputStream);
-    }
+    },
   );
 }

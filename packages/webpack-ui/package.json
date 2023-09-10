@@ -8,10 +8,9 @@
     "build": "npm run typecheck && webpack",
     "watch": "webpack --watch",
     "dev": "STATOSCOPE_DEV=true webpack serve",
-    "build:prod": "NODE_ENV=production webpack",
+    "build:prod": "NODE_ENV=production npm run typecheck && webpack",
     "prepublishOnly": "npm run build:prod",
-    "typecheck": "../../node_modules/.bin/tsc --noEmit",
-    "lint:custom": "npm run typecheck"
+    "typecheck": "../../node_modules/.bin/tsc --noEmit"
   },
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {
@@ -24,30 +23,30 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
+    "@types/md5": "^2.3.2",
     "@statoscope/types": "5.27.0"
   },
   "devDependencies": {
     "@carrotsearch/foamtree": "^3.5.0",
     "@discoveryjs/discovery": "^1.0.0-beta.78",
-    "@popperjs/core": "^2.11.5",
+    "@popperjs/core": "^2.11.8",
     "@statoscope/helpers": "5.28.0",
     "@statoscope/stats": "5.14.1",
     "@statoscope/stats-extension-compressed": "5.28.0",
     "@statoscope/stats-extension-package-info": "5.28.0",
     "@statoscope/stats-extension-stats-validation-result": "5.28.0",
     "@statoscope/webpack-model": "5.28.0",
-    "@types/md5": "^2.3.2",
     "@wdxlab/events": "^1.1.0",
-    "babel-loader": "^8.2.5",
-    "chart.js": "^3.8.0",
-    "css-loader": "^6.7.1",
+    "babel-loader": "^9.1.3",
+    "chart.js": "^3.9.1",
+    "css-loader": "^6.8.1",
     "html-webpack-plugin": "^5.5.3",
     "md5": "^2.3.0",
     "path-browserify": "^1.0.1",
-    "style-loader": "^3.3.1",
+    "style-loader": "^3.3.3",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",
-    "webpack-merge": "^5.8.0"
+    "webpack-merge": "^5.9.0"
   }
 }

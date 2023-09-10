@@ -140,7 +140,7 @@ export default async function (argv: {
       compilations: prepared.compilations,
       query: prepared.query,
     },
-    api
+    api,
   );
 
   for (const [filename, items] of Object.entries(storage)) {

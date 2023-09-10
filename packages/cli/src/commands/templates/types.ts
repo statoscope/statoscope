@@ -24,7 +24,7 @@ export type TemplateOptions =
 
 export type Template<TAdditionalOptions = undefined> = (
   templateOptions: TemplateOptions,
-  additionalOptions?: TAdditionalOptions
+  additionalOptions?: TAdditionalOptions,
 ) => string;
 
 export type RuleTemplatesPartsFromFileExt = {

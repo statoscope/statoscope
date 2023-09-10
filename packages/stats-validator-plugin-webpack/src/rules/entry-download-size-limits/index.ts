@@ -50,10 +50,10 @@ function formatError(
   type: 'assets' | 'initial assets' | 'async assets',
   entry: NormalizedEntrypointItem,
   size: number,
-  limit: number
+  limit: number,
 ): string {
   return `Entry "${entry.name}": Download size of ${type} is ${h.formatSize(
-    size
+    size,
   )}. It's over the ${h.formatSize(limit)} limit`;
 }
 
@@ -178,7 +178,7 @@ const entryDownloadSizeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
       if (!entryItem.sizeOK) {
         api.message(
           formatError('assets', entryItem.entry, entryItem.size, entryItem.rule.maxSize!),
-          options
+          options,
         );
       }
 
@@ -188,9 +188,9 @@ const entryDownloadSizeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
             'initial assets',
             entryItem.entry,
             entryItem.initialSize,
-            entryItem.rule.maxInitialSize!
+            entryItem.rule.maxInitialSize!,
           ),
-          options
+          options,
         );
       }
 
@@ -200,9 +200,9 @@ const entryDownloadSizeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
             'async assets',
             entryItem.entry,
             entryItem.asyncSize,
-            entryItem.rule.maxAsyncSize!
+            entryItem.rule.maxAsyncSize!,
           ),
-          options
+          options,
         );
       }
     }

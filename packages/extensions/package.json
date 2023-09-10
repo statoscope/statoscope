@@ -7,8 +7,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "../../node_modules/.bin/tsc",
-    "prepublishOnly": "npm run build"
+    "build": "../../node_modules/.bin/tsc"
   },
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {

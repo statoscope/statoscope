@@ -1,10 +1,6 @@
-import { NormalizationData, Webpack } from '../webpack';
-import Compilation = Webpack.Compilation;
-import RawModule = Webpack.RawModule;
-import Chunk = Webpack.Chunk;
-import Module = Webpack.Module;
+import { NormalizationData, type Webpack } from '../webpack';
 
-export type ModulesMap = Map<number, RawModule>;
+export type ModulesMap = Map<number, Webpack.RawModule>;
 
 export type CompilationData = {
   id: string;
@@ -20,7 +16,10 @@ export type DenormalizationData = {
   };
 };
 
-function handleModule(module: number, compilationData: CompilationData): RawModule {
+function handleModule(
+  module: number,
+  compilationData: CompilationData,
+): Webpack.RawModule {
   const resolvedModule = compilationData.data.modules.get(module);
 
   if (!resolvedModule) {
@@ -30,9 +29,9 @@ function handleModule(module: number, compilationData: CompilationData): RawModu
   return resolvedModule;
 }
 
-function handleChunk(chunk: Chunk, compilationData: CompilationData): void {
+function handleChunk(chunk: Webpack.Chunk, compilationData: CompilationData): void {
   for (const [id, module] of (
-    (chunk.modules as Array<number | Module>) || []
+    (chunk.modules as Array<number | Webpack.Module>) || []
   ).entries()) {
     if (typeof module === 'number') {
       chunk.modules![id] = handleModule(module, compilationData);
@@ -41,11 +40,11 @@ function handleChunk(chunk: Chunk, compilationData: CompilationData): void {
 }
 
 function handleCompilation(
-  compilation: Compilation,
-  denormalizationData: DenormalizationData
+  compilation: Webpack.Compilation,
+  denormalizationData: DenormalizationData,
 ): void {
   const compilationData = denormalizationData.data.compilations.find(
-    (c) => c.id === (compilation.hash || compilation.name)
+    (c) => c.id === (compilation.hash || compilation.name),
   );
 
   if (!compilationData) {
@@ -63,7 +62,9 @@ function handleCompilation(
   }
 }
 
-export default function denormalizeCompilation<T extends Compilation>(json: T): T {
+export default function denormalizeCompilation<T extends Webpack.Compilation>(
+  json: T,
+): T {
   if (!json.__statoscope?.normalization) {
     return json;
   }
@@ -79,13 +80,13 @@ export default function denormalizeCompilation<T extends Compilation>(json: T): 
               modules: new Map(compilation.data.modules),
             },
           };
-        }
+        },
       ),
     },
   };
 
-  const compilations: Compilation[] = [json];
-  let cursor: Compilation | undefined;
+  const compilations: Webpack.Compilation[] = [json];
+  let cursor: Webpack.Compilation | undefined;
 
   while ((cursor = compilations.pop())) {
     handleCompilation(cursor, denormalizationData);

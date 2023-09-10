@@ -42,7 +42,7 @@ function makeNode(data: NodeData, size: Size, path: string): Node {
 function handleModule(
   root: Node,
   module: NormalizedModule,
-  getModuleSize: GetModuleSizeFN
+  getModuleSize: GetModuleSizeFN,
 ): void {
   const resource = moduleResource(module);
 
@@ -94,7 +94,7 @@ function handleModule(
   apply(
     root,
     parts,
-    module.modules && module.modules.length ? { size: 0 } : getModuleSize(module)
+    module.modules && module.modules.length ? { size: 0 } : getModuleSize(module),
   );
 }
 
@@ -124,7 +124,7 @@ function apply(root: Node, parts: NodeData[], size: Size): void {
         [...stack, part]
           .map((item) => item.label)
           .filter(Boolean)
-          .join('/')
+          .join('/'),
       );
       cursor.groups.push(node);
     }
@@ -139,7 +139,7 @@ function apply(root: Node, parts: NodeData[], size: Size): void {
 export type GetModuleSizeFN = (module: NormalizedModule) => Size;
 export default function modulesToFoamTree(
   modules: NormalizedModule[],
-  getModuleSize: GetModuleSizeFN
+  getModuleSize: GetModuleSizeFN,
 ): Node {
   const root = makeNode({ label: '' }, { size: 0 }, '/');
 

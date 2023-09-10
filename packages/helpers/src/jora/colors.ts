@@ -15,7 +15,7 @@ export function colorFromH(h: string | number): string {
 export function getHSLValue(
   h: string | number,
   s: string | number,
-  l: string | number
+  l: string | number,
 ): string {
   return `hsl(${h}, ${s}%, ${l}%)`;
 }

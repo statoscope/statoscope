@@ -47,7 +47,7 @@ export default class Validator {
         const normalizedPluginPath = resolveAliasPackage(
           PackageAliasType.PLUGIN,
           pluginAlias,
-          rootDir
+          rootDir,
         );
         const localPluginAlias = Array.isArray(pluginDefinition)
           ? pluginDefinition[1]
@@ -156,7 +156,7 @@ export default class Validator {
   async execRule(
     rule: Rule<unknown, unknown>,
     params: unknown,
-    data: RuleDataInput<unknown>
+    data: RuleDataInput<unknown>,
   ): Promise<API> {
     const api = makeAPI();
     await rule(params, data, api);

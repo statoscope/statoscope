@@ -32,7 +32,7 @@ const helpers = makeJoraHelpers();
 
 export function normalizeExclude<TType>(
   item: string | RegExp | ExcludeItem<TType>,
-  defaultType: TType
+  defaultType: TType,
 ): ExcludeItem<TType> {
   if (typeof item === 'string' || item instanceof RegExp) {
     return {
@@ -45,7 +45,7 @@ export function normalizeExclude<TType>(
 }
 
 export function serializeExclude<TType>(
-  item: ExcludeItem<TType>
+  item: ExcludeItem<TType>,
 ): SerializedExcludeItem<TType> {
   return { type: item.type, name: helpers.serializeStringOrRegexp(item.name)! };
 }

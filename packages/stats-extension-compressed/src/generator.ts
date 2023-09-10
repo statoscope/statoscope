@@ -15,7 +15,7 @@ export type Size = {
 export type CompressFunction<TOptions = any> = (
   source: Buffer | string,
   filename: string,
-  options?: TOptions
+  options?: TOptions,
 ) => Size;
 
 export type Format = Extension<Payload>;
@@ -64,16 +64,18 @@ export default class Generator {
     this.payload.compilations,
     (item) => item.id,
     null,
-    false
+    false,
   );
 
-  constructor(private adapter?: ExtensionDescriptor) {}
+  constructor(private adapter?: ExtensionDescriptor) {
+    this.descriptor.adapter = this.adapter;
+  }
 
   handleResource(
     compilationId: string,
     resourceId: string,
     source: Buffer | string,
-    compressor: CompressorOrPreset
+    compressor: CompressorOrPreset,
   ): void {
     let compilation = this.resolveCompilation(compilationId);
     let sizeResolver: Resolver<string, Resource> | undefined;
@@ -95,7 +97,7 @@ export default class Generator {
       const size = resolvedCompressor.compressor(
         source,
         resourceId,
-        resolvedCompressor.params
+        resolvedCompressor.params,
       );
       compilation.resources.push({ id: resourceId, size });
     }

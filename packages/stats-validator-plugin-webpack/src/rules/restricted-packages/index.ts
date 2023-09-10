@@ -50,7 +50,7 @@ function handleTarget(
   target: PackageTarget,
   ruleParams: NormalizedParams,
   data: RuleDataInput<Prepared>,
-  api: API
+  api: API,
 ): PackageResultItem[] {
   const query = `
   $input: resolveInputFile();
@@ -149,10 +149,10 @@ function handleTarget(
           related: [
             { type: 'package', id: packageItem.package.name },
             ...instances.map(
-              (item) => ({ type: 'package-instance', id: item.path } as const)
+              (item) => ({ type: 'package-instance', id: item.path }) as const,
             ),
           ],
-        }
+        },
       );
     }
   }
@@ -169,7 +169,7 @@ function handleTarget(
 function makeDetailsContent(
   target: PackageTarget,
   instances: NodeModuleInstance[],
-  tty = false
+  tty = false,
 ): string[] {
   const { description } = target;
 
@@ -180,7 +180,7 @@ function makeDetailsContent(
     'Instances:',
     ...instances.map(
       (instance) =>
-        `- ${instance.path}  ${instance.version ? ctx.yellow(instance.version) : ''}`
+        `- ${instance.path}  ${instance.version ? ctx.yellow(instance.version) : ''}`,
     ),
   ];
 
@@ -214,7 +214,7 @@ const restrictedPackages: WebpackRule<Params> = (ruleParams, data, api): void =>
       ? { exclude: [], target: ruleParams.map(normalizePackageTarget) }
       : {
           exclude: ruleParams.exclude.map((item) =>
-            normalizeExclude(item, 'compilation')
+            normalizeExclude(item, 'compilation'),
           ),
           target: ruleParams.target.map(normalizePackageTarget),
         }

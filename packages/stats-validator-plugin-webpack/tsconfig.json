@@ -2,7 +2,16 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "module": "CommonJS",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "rootDir": "./src"
   },
-  "exclude": ["./dist", "**/*.spec.ts"]
+  "include": ["./src"],
+  "exclude": ["**/*.spec.ts", "**/*.test.ts"],
+  "references": [
+    {"path": "../helpers"},
+    {"path": "../stats-extension-compressed"},
+    {"path": "../stats-validator"},
+    {"path": "../types"},
+    {"path": "../webpack-model"},
+  ]
 }

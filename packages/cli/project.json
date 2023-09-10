@@ -1,0 +1,16 @@
+{
+  "name": "cli",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/cli/src",
+  "targets": {
+    "test": {},
+    "test:update": {},
+    "lint": {},
+    "lint:fix": {},
+    "build": {
+      "options": {
+        "assets": ["{projectRoot}/bin/**", "{projectRoot}/.npmignore"]
+      }
+    }
+  }
+}

@@ -30,7 +30,7 @@ export type Params = {
 function handled(
   ruleParams: NormalizedParams,
   data: RuleDataInput<Prepared>,
-  api: API
+  api: API,
 ): ModuleResultItem[] {
   const query = `
   $input: resolveInputFile();

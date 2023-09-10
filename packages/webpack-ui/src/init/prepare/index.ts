@@ -43,7 +43,7 @@ export default (() =>
         return wpJoraHelpers.modulesToFoamTree(
           modules,
           hash,
-          settings.get(SETTING_SHOW_COMPRESSED, SETTING_SHOW_COMPRESSED_DEFAULT).get()
+          settings.get(SETTING_SHOW_COMPRESSED, SETTING_SHOW_COMPRESSED_DEFAULT).get(),
         );
       },
       getModuleSize(module: NormalizedModule, hash: string, compressed?: boolean): Size {
@@ -52,7 +52,9 @@ export default (() =>
           hash,
           typeof compressed === 'boolean'
             ? compressed
-            : settings.get(SETTING_SHOW_COMPRESSED, SETTING_SHOW_COMPRESSED_DEFAULT).get()
+            : settings
+                .get(SETTING_SHOW_COMPRESSED, SETTING_SHOW_COMPRESSED_DEFAULT)
+                .get(),
         );
       },
       getAssetSize(asset: NormalizedAsset, hash: string, compressed?: boolean): Size {
@@ -61,13 +63,15 @@ export default (() =>
           hash,
           typeof compressed === 'boolean'
             ? compressed
-            : settings.get(SETTING_SHOW_COMPRESSED, SETTING_SHOW_COMPRESSED_DEFAULT).get()
+            : settings
+                .get(SETTING_SHOW_COMPRESSED, SETTING_SHOW_COMPRESSED_DEFAULT)
+                .get(),
         );
       },
       getPackageInstanceInfo(
         packageName: string,
         instancePath: string,
-        hash: string
+        hash: string,
       ): Instance | null {
         return wpJoraHelpers.getPackageInstanceInfo(packageName, instancePath, hash);
       },
@@ -132,7 +136,7 @@ export default (() =>
         return settings
           .get(
             SETTING_EXCLUDE_RESOURCES_FROM_SIZE_CALC,
-            SETTING_EXCLUDE_RESOURCES_FROM_SIZE_CALC_DEFAULT
+            SETTING_EXCLUDE_RESOURCES_FROM_SIZE_CALC_DEFAULT,
           )
           .get();
       },

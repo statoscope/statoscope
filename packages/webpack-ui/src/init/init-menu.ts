@@ -93,8 +93,8 @@ function addStatsList(discovery: StatoscopeWidget): void {
             ...discovery.getRenderContext(),
             widget: discovery,
             hide: () => popup.hide(),
-          }
-        )
+          },
+        ),
       );
     },
   });
@@ -131,8 +131,8 @@ function addReportsList(discovery: StatoscopeWidget): void {
             ...discovery.getRenderContext(),
             widget: discovery,
             hide: () => popup.hide(),
-          }
-        )
+          },
+        ),
       );
     },
   });
@@ -144,7 +144,7 @@ function addSettings(discovery: StatoscopeWidget): void {
       title: 'Hide node_modules',
       key: SETTING_HIDE_NODE_MODULES,
       defaultValue: SETTING_HIDE_NODE_MODULES_DEFAULT,
-    })
+    }),
   );
 
   discovery.nav.menu.append(
@@ -152,7 +152,7 @@ function addSettings(discovery: StatoscopeWidget): void {
       title: 'Hide child compilations',
       key: SETTING_HIDE_CHILD_COMPILATIONS,
       defaultValue: SETTING_HIDE_CHILD_COMPILATIONS_DEFAULT,
-    })
+    }),
   );
 
   discovery.nav.menu.append(
@@ -161,7 +161,7 @@ function addSettings(discovery: StatoscopeWidget): void {
       hint: 'Makes sense only when @statoscope/webpack-plugin used',
       key: SETTING_SHOW_COMPRESSED,
       defaultValue: SETTING_SHOW_COMPRESSED_DEFAULT,
-    })
+    }),
   );
 
   discovery.nav.menu.append(
@@ -177,8 +177,8 @@ function addSettings(discovery: StatoscopeWidget): void {
         { value: '20', text: '20' },
         { value: '50', text: '50' },
         { value: '100', text: '100' },
-      ]
-    )
+      ],
+    ),
   );
 
   discovery.nav.menu.append(
@@ -191,8 +191,8 @@ function addSettings(discovery: StatoscopeWidget): void {
       },
       networkTypeList.map((item) => item.name),
       'settingNetworkType()',
-      'getNetworkTypeInfo().getNetworkTypeName()'
-    )
+      'getNetworkTypeInfo().getNetworkTypeName()',
+    ),
   );
 
   discovery.nav.menu.append(
@@ -204,8 +204,8 @@ function addSettings(discovery: StatoscopeWidget): void {
         key: SETTING_ASSETS_INJECT_TYPE,
         defaultValue: SETTING_ASSETS_INJECT_TYPE_DEFAULT,
       },
-      ['sync', 'async']
-    )
+      ['sync', 'async'],
+    ),
   );
 
   discovery.nav.menu.append(
@@ -217,7 +217,7 @@ function addSettings(discovery: StatoscopeWidget): void {
         key: SETTING_EXCLUDE_RESOURCES_FROM_SIZE_CALC,
         defaultValue: SETTING_EXCLUDE_RESOURCES_FROM_SIZE_CALC_DEFAULT,
       },
-      'regexp'
-    )
+      'regexp',
+    ),
   );
 }

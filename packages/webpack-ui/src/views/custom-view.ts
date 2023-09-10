@@ -32,7 +32,7 @@ export default function (discovery: StatoscopeWidget): void {
         data: unknown;
         view: ViewConfig<unknown, unknown>;
       },
-      context?
+      context?,
     ) => {
       const { view = [], data } = theData || {};
       let normalizedView = view;
@@ -72,12 +72,12 @@ To see the report this script should be executed in your browser.
       function renderReport(view: string): void {
         updateSessionStorage(view);
         const normalizedView = Function(
-          `const view = ${view.trim()}; return typeof view === 'function' ? view() : view;`
+          `const view = ${view.trim()}; return typeof view === 'function' ? view() : view;`,
         )() as ViewConfig<unknown, unknown>;
 
         el.innerHTML = '';
         discovery.view.render(el, normalizedView, data, context);
       }
-    }
+    },
   );
 }

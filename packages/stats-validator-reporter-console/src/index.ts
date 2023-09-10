@@ -71,7 +71,7 @@ export default class ConsoleReporter implements Reporter {
             }
 
             console.log(
-              `${decorate(type)}  ${result.item.message}  ${chalkCtx.cyan(rule)}`
+              `${decorate(type)}  ${result.item.message}  ${chalkCtx.cyan(rule)}`,
             );
 
             if (result.item.details) {
@@ -132,7 +132,7 @@ export default class ConsoleReporter implements Reporter {
 
     if (error || warn) {
       console.log(
-        chalkCtx.yellow(`${error + warn} problems (${error} errors, ${warn} warnings)`)
+        chalkCtx.yellow(`${error + warn} problems (${error} errors, ${warn} warnings)`),
       );
     }
   }
