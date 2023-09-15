@@ -276,10 +276,16 @@ function mergeModules(
   context: ProcessingContext
 ): void {
   const chunks = new Set(
-    [...(to.chunks ?? []), ...(from.chunks ?? [])]
-      .map((c) => (typeof c === 'string' || typeof c === 'number' ? c : c.id))
-      .map((c) => context.rawIndexes.chunks.get(c) as NormalizedChunk | null)
-      .filter(Boolean) as NormalizedChunk[]
+    [...(to.chunks ?? []), ...(from.chunks ?? [])].reduce<NormalizedChunk[]>((acc, c) => {
+      const id = typeof c === 'string' || typeof c === 'number' ? c : c.id;
+      const chunk = context.rawIndexes.chunks.get(id) as NormalizedChunk | null;
+
+      if (chunk) {
+        acc.push(chunk);
+      }
+
+      return acc;
+    }, [])
   );
   const toReasons = collectRawReasonsFromArray(to.reasons);
   const fromReasons = collectRawReasonsFromArray(from.reasons ?? []);
