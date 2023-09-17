@@ -162,9 +162,9 @@ export function combineCustomReports(
   if (reportArg) {
     let malformedReport = false;
 
-    const reportsFromFiles: unknown[] = reportArg
-      .map((filepath) => require(path.resolve(filepath)))
-      .flat();
+    const reportsFromFiles: unknown[] = reportArg.flatMap((filepath) =>
+      require(path.resolve(filepath))
+    );
 
     for (const report of reportsFromFiles) {
       if (isCustomReport(report)) {
