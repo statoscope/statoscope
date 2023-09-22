@@ -51,6 +51,7 @@ function handleModule(
   }
 
   const parts: NodeData[] = resource.split(/[/\\]/).map((label) => ({ label }));
+  const partsLabels = parts.map((part) => part.label);
   let currentPackage = null;
 
   for (const [i, part] of parts.entries()) {
@@ -74,8 +75,7 @@ function handleModule(
               }
             : undefined,
           params: {
-            instance: parts
-              .map((part) => part.label)
+            instance: partsLabels
               .slice(0, i + 1)
               .join('/'),
           },
