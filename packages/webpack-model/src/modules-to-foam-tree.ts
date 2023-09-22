@@ -50,8 +50,8 @@ function handleModule(
     return;
   }
 
-  const parts: NodeData[] = resource.split(/[/\\]/).map((label) => ({ label }));
-  const partsLabels = parts.map((part) => part.label);
+  const partsLabels = resource.split(/[/\\]/);
+  const parts: NodeData[] = partsLabels.map((label) => ({ label }));
   let currentPackage = null;
 
   for (const [i, part] of parts.entries()) {
