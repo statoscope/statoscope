@@ -75,9 +75,7 @@ function handleModule(
               }
             : undefined,
           params: {
-            instance: partsLabels
-              .slice(0, i + 1)
-              .join('/'),
+            instance: partsLabels.slice(0, i + 1).join('/'),
           },
         };
         currentPackage = null;
