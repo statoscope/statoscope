@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/cli",
-  "version": "5.27.0",
+  "version": "5.28.0",
   "description": "Statoscope CLI tools",
   "scripts": {
     "build": "../../node_modules/.bin/tsc",
@@ -25,16 +25,16 @@
   "dependencies": {
     "@discoveryjs/json-ext": "^0.5.7",
     "@statoscope/config": "5.27.0",
-    "@statoscope/helpers": "5.25.0",
+    "@statoscope/helpers": "5.28.0",
     "@statoscope/report-writer": "5.27.0",
     "@statoscope/stats": "5.14.1",
-    "@statoscope/stats-extension-custom-reports": "5.27.0",
+    "@statoscope/stats-extension-custom-reports": "5.28.0",
     "@statoscope/stats-validator": "5.27.0",
     "@statoscope/stats-validator-reporter-console": "5.27.0",
-    "@statoscope/stats-validator-reporter-stats-report": "5.27.0",
+    "@statoscope/stats-validator-reporter-stats-report": "5.28.0",
     "@statoscope/types": "5.27.0",
-    "@statoscope/webpack-model": "5.27.0",
-    "@statoscope/webpack-ui": "5.27.0",
+    "@statoscope/webpack-model": "5.28.0",
+    "@statoscope/webpack-ui": "5.28.0",
     "@types/yargs": "^17.0.10",
     "open": "^8.4.0",
     "yargs": "^17.5.1"
