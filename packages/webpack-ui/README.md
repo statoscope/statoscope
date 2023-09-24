@@ -11,7 +11,7 @@ This package contains a UI for analyzing stats of your bundle.
 - 🗺 Size map (entrypoints/chunks/packages)
 - 🕵️ Packages copies and duplicates of modules detection
 - 🔄 Stats comparison
-- 📊 Custom reports for your stats
+- 📊 Custom reports for your stats (with [jora QL](https://discoveryjs.github.io/jora/))
 - 🐘 No stats size limitation
 - 🗜 Smart HTML report compression (up to 200x)
 

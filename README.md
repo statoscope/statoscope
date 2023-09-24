@@ -15,7 +15,7 @@ Learn more on [Statoscope: A Course Of Intensive Therapy For Your Bundle](https:
 - 🕵️ Packages copies and duplicates of modules detection
 - 🧪 Stats validation with a bunch of useful rules (e.g. on CLI)
 - 🔄 Stats comparison
-- 📊 Custom reports for your stats
+- 📊 Custom reports for your stats (with [jora QL](https://discoveryjs.github.io/jora/))
 - 🐘 No stats size limitation
 - 🗜 Smart HTML report compression (up to 200x) (learn more on [wiki](https://github.com/statoscope/statoscope/wiki/Statoscope-5.25:-Compressing-stats-with-Binary-JSON))
 

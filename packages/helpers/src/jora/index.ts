@@ -346,8 +346,10 @@ export type Options = {
 
 export function prepareWithJora(input: unknown, options: Options = {}): Prepared {
   const j = jora.setup({
-    ...helpers(),
-    ...options.helpers,
+    methods: {
+      ...helpers(),
+      ...options.helpers,
+    },
   });
 
   const rootContext = {};

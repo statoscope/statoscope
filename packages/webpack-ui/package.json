@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@carrotsearch/foamtree": "^3.5.0",
-    "@discoveryjs/discovery": "^1.0.0-beta.77",
+    "@discoveryjs/discovery": "^1.0.0-beta.78",
     "@popperjs/core": "^2.11.5",
     "@statoscope/helpers": "5.25.0",
     "@statoscope/stats": "5.14.1",

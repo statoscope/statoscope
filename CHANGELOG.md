@@ -1,5 +1,14 @@
 # Changelog
 
+## 5.28.0 (24 September 2023)
+
+### Features
+
+- update jora from 1.0.0-beta.7 to 1.0.0-beta.8 (see [changelog](https://github.com/discoveryjs/jora/releases/tag/v1.0.0-beta.8))
+  
+  lots of new methods and [assertions](https://discoveryjs.github.io/jora/#article:jora-syntax-assertions)-feature
+- update discoveryjs from 1.0.0-beta.77 to 1.0.0-beta.78
+
 ## 5.27.0 (24 August 2023)
 
 ### Features
