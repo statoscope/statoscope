@@ -9,6 +9,9 @@
   lots of new methods and [assertions](https://discoveryjs.github.io/jora/#article:jora-syntax-assertions)-feature
 - update discoveryjs from 1.0.0-beta.77 to 1.0.0-beta.78
 
+### Performance
+- some refactoring by @Connormiha
+
 ## 5.27.0 (24 August 2023)
 
 ### Features
