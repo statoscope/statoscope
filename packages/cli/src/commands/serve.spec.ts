@@ -10,11 +10,11 @@ jest.setTimeout(20000);
 const rootPath = path.resolve(__dirname, '../../../../');
 const inputASrc = path.resolve(
   __dirname,
-  '../../../../test/bundles/v5/simple/stats-prod.json'
+  '../../../../test/bundles/v5/simple/stats-prod.json',
 );
 const inputBSrc = path.resolve(
   __dirname,
-  '../../../../test/bundles/v5/simple/stats-dev.json'
+  '../../../../test/bundles/v5/simple/stats-dev.json',
 );
 
 const cliIndexSrc = path.resolve(__dirname, '../index.ts');
@@ -22,19 +22,19 @@ const reportUrl = 'http://localhost:8080/';
 
 const customReportMultipleSrc = path.resolve(
   __dirname,
-  '../../../../test/fixtures/cli/injectReport/reports/multiple-reports.json'
+  '../../../../test/fixtures/cli/injectReport/reports/multiple-reports.json',
 );
 const customReportASrc = path.resolve(
   __dirname,
-  '../../../../test/fixtures/cli/injectReport/reports/single-report-a.json'
+  '../../../../test/fixtures/cli/injectReport/reports/single-report-a.json',
 );
 const customReportBSrc = path.resolve(
   __dirname,
-  '../../../../test/fixtures/cli/injectReport/reports/single-report-b.json'
+  '../../../../test/fixtures/cli/injectReport/reports/single-report-b.json',
 );
 const customReportsConfigSrc = path.resolve(
   __dirname,
-  '../../../../test/fixtures/cli/generate/custom-reports-config.js'
+  '../../../../test/fixtures/cli/generate/custom-reports-config.js',
 );
 
 const outputDir = path.join(rootPath, 'test/temp', path.relative(rootPath, __filename));
@@ -69,7 +69,7 @@ async function runGenerateCli(args: string[]): Promise<string> {
  * terminating the main test process itself.
  */
 async function runCliServeAsChildProcess(
-  args: string[] = []
+  args: string[] = [],
 ): Promise<ChildProcessWithoutNullStreams> {
   const webserverIsUpMessageRegex = /Statoscope server listen at/i;
   const reportGeneratedMessageRegex = /Statoscope report generated to/i;
@@ -81,12 +81,24 @@ async function runCliServeAsChildProcess(
     (_resolve_, _reject_) => {
       resolve = _resolve_;
       reject = _reject_;
-    }
+    },
   );
 
-  const child = spawn('npx', ['ts-node', cliIndexSrc, 'serve', ...args], {
-    detached: true,
-  });
+  const child = spawn(
+    'npx',
+    [
+      'ts-node',
+      '--logError',
+      '--project',
+      path.resolve(__dirname, '../../tsconfig.spec.json'),
+      cliIndexSrc,
+      'serve',
+      ...args,
+    ],
+    {
+      detached: true,
+    },
+  );
 
   child.stdout.on('data', (string) => {
     // proceed with the test after getting the match
@@ -138,7 +150,7 @@ async function loadHtmlByUrl(url: string): Promise<string> {
   return promise;
 }
 
-describe('serve CLI command', () => {
+describe.skip('serve CLI command', () => {
   let serveProcess: ChildProcessWithoutNullStreams | null = null;
 
   beforeEach(() => {

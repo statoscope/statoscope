@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches 1`] = `
-Array [
-  Object {
+[
+  {
     "compilation": undefined,
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "after": 1,
             "before": 0,
-            "diff": Array [
-              Object {
+            "diff": [
+              {
                 "active": true,
                 "explanation": "",
                 "loc": "one",
@@ -50,23 +50,23 @@ Array [
     ],
     "filename": "input.json",
     "message": "Usage of ./simple/src/index.ts + 3 modules was increased from 0 to 1",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
         "type": "module",
       },
     ],
   },
-  Object {
+  {
     "compilation": undefined,
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "after": 1,
             "before": 0,
-            "diff": Array [
-              Object {
+            "diff": [
+              {
                 "active": true,
                 "explanation": "",
                 "loc": "two",
@@ -105,23 +105,23 @@ Array [
     ],
     "filename": "input.json",
     "message": "Usage of ./simple/src/index2.ts + 1 modules was increased from 0 to 1",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
         "type": "module",
       },
     ],
   },
-  Object {
+  {
     "compilation": undefined,
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "after": 4,
             "before": 2,
-            "diff": Array [
-              Object {
+            "diff": [
+              {
                 "active": true,
                 "explanation": "",
                 "loc": "2:0-31",
@@ -136,7 +136,7 @@ Array [
                 "type": "harmony side effect evaluation",
                 "userRequest": "is-array",
               },
-              Object {
+              {
                 "active": true,
                 "explanation": "",
                 "loc": "4:17-24",
@@ -151,7 +151,7 @@ Array [
                 "type": "harmony import specifier",
                 "userRequest": "is-array",
               },
-              Object {
+              {
                 "active": true,
                 "explanation": "",
                 "loc": "2:0-31",
@@ -166,7 +166,7 @@ Array [
                 "type": "harmony side effect evaluation",
                 "userRequest": "is-array",
               },
-              Object {
+              {
                 "active": true,
                 "explanation": "",
                 "loc": "10:30-37",
@@ -204,23 +204,23 @@ Array [
     ],
     "filename": "input.json",
     "message": "Usage of ./node_modules/is-array/index.js was increased from 2 to 4",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "./node_modules/is-array/index.js",
         "type": "module",
       },
     ],
   },
-  Object {
+  {
     "compilation": undefined,
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "after": 1,
             "before": 0,
-            "diff": Array [
-              Object {
+            "diff": [
+              {
                 "active": true,
                 "explanation": "",
                 "loc": "5:0-16",
@@ -236,7 +236,7 @@ Array [
                 "userRequest": "extLib",
               },
             ],
-            "module": "external var \\"extLib\\"",
+            "module": "external var "extLib"",
           },
         },
         "query": "
@@ -257,24 +257,24 @@ Array [
       },
     ],
     "filename": "input.json",
-    "message": "Usage of external \\"extLib\\" was increased from 0 to 1",
-    "related": Array [
-      Object {
-        "id": "external var \\"extLib\\"",
+    "message": "Usage of external "extLib" was increased from 0 to 1",
+    "related": [
+      {
+        "id": "external var "extLib"",
         "type": "module",
       },
     ],
   },
-  Object {
+  {
     "compilation": undefined,
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "after": 1,
             "before": 0,
-            "diff": Array [
-              Object {
+            "diff": [
+              {
                 "active": true,
                 "explanation": "",
                 "loc": "6:12-50",
@@ -312,23 +312,23 @@ Array [
     ],
     "filename": "input.json",
     "message": "Usage of ./simple/src/test.txt was increased from 0 to 1",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "asset/resource|./simple/src/test.txt",
         "type": "module",
       },
     ],
   },
-  Object {
+  {
     "compilation": undefined,
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "after": 2,
             "before": 0,
-            "diff": Array [
-              Object {
+            "diff": [
+              {
                 "active": true,
                 "explanation": "",
                 "loc": "4:0-61",
@@ -343,7 +343,7 @@ Array [
                 "type": "harmony side effect evaluation",
                 "userRequest": "./statoscope.png",
               },
-              Object {
+              {
                 "active": true,
                 "explanation": "",
                 "loc": "6:73-102",
@@ -381,23 +381,23 @@ Array [
     ],
     "filename": "input.json",
     "message": "Usage of ./simple/src/statoscope.png was increased from 0 to 2",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "asset/inline|./simple/src/statoscope.png",
         "type": "module",
       },
     ],
   },
-  Object {
+  {
     "compilation": undefined,
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "after": 2,
             "before": 1,
-            "diff": Array [
-              Object {
+            "diff": [
+              {
                 "active": false,
                 "explanation": "",
                 "loc": "1:0-22",
@@ -435,8 +435,8 @@ Array [
     ],
     "filename": "input.json",
     "message": "Usage of ./simple/node_modules/foo/node_modules/bar/index.js was increased from 1 to 2",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "./simple/node_modules/foo/node_modules/bar/index.js",
         "type": "module",
       },
@@ -445,4 +445,4 @@ Array [
 ]
 `;
 
-exports[`not matches 1`] = `Array []`;
+exports[`not matches 1`] = `[]`;

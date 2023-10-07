@@ -30,15 +30,15 @@ test('should work', () => {
   expect(api.getInstance('foo-compilation', 'bar', 'baz')).toBeNull();
   expect(api.getInstance('foo-compilation', 'foo-package', 'bar')).toBeNull();
   expect(
-    api.getInstance('foo-compilation', 'foo-package', 'foo-instance')
+    api.getInstance('foo-compilation', 'foo-package', 'foo-instance'),
   ).toMatchSnapshot();
   expect(
-    api.getInstance('foo-compilation', 'foo-package', 'bar-instance')
+    api.getInstance('foo-compilation', 'foo-package', 'bar-instance'),
   ).toMatchSnapshot();
   expect(
-    api.getInstance('foo-compilation', 'bar-package', 'bar-instance')
+    api.getInstance('foo-compilation', 'bar-package', 'bar-instance'),
   ).toMatchSnapshot();
   expect(
-    api.getInstance('bar-compilation', 'foo-package', 'bar-instance')
+    api.getInstance('bar-compilation', 'foo-package', 'bar-instance'),
   ).toMatchSnapshot();
 });

@@ -11,8 +11,8 @@ beforeEach(() => {
     .mockImplementation((...args: string[]) => {
       output.push(
         args.map((o) =>
-          String(o).replace(process.cwd(), '<pwd>').replace(os.tmpdir(), '<tmp>')
-        )
+          String(o).replace(process.cwd(), '<pwd>').replace(os.tmpdir(), '<tmp>'),
+        ),
       );
     });
 });
@@ -31,7 +31,7 @@ test('should work', async () => {
     },
   });
   const result = await validator.validate(
-    require.resolve('../../../test/bundles/v5/simple/stats-prod.json')
+    require.resolve('../../../test/bundles/v5/simple/stats-prod.json'),
   );
   const reporter = new Reporter();
   await reporter.run(result);

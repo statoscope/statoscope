@@ -37,11 +37,11 @@ export default function (yargs: Argv): Argv {
             if (err) {
               throw err;
             }
-          }
+          },
         );
       } catch (err) {
         console.error(err);
       }
-    }
+    },
   );
 }

@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should work 1`] = `
-Object {
-  "descriptor": Object {
-    "adapter": Object {
+{
+  "descriptor": {
+    "adapter": {
       "name": "test-adapter",
       "version": "7.7.7",
     },
-    "author": Object {
+    "author": {
       "name": "Sergey Melyukov",
       "url": "https://twitter.com/smelukov",
     },
@@ -16,21 +16,21 @@ Object {
     "name": "@statoscope/stats-extension-package-info",
     "version": "8.8.8",
   },
-  "payload": Object {
-    "compilations": Array [
-      Object {
+  "payload": {
+    "compilations": [
+      {
         "id": "foo-compilation",
-        "packages": Array [
-          Object {
-            "instances": Array [
-              Object {
-                "info": Object {
+        "packages": [
+          {
+            "instances": [
+              {
+                "info": {
                   "version": "1.0.0",
                 },
                 "path": "foo-instance",
               },
-              Object {
-                "info": Object {
+              {
+                "info": {
                   "version": "2.0.0",
                 },
                 "path": "bar-instance",
@@ -38,10 +38,10 @@ Object {
             ],
             "name": "foo-package",
           },
-          Object {
-            "instances": Array [
-              Object {
-                "info": Object {
+          {
+            "instances": [
+              {
+                "info": {
                   "version": "3.0.0",
                 },
                 "path": "bar-instance",
@@ -51,13 +51,13 @@ Object {
           },
         ],
       },
-      Object {
+      {
         "id": "bar-compilation",
-        "packages": Array [
-          Object {
-            "instances": Array [
-              Object {
-                "info": Object {
+        "packages": [
+          {
+            "instances": [
+              {
+                "info": {
                   "version": "4.0.0",
                 },
                 "path": "bar-instance",

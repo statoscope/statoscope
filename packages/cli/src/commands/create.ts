@@ -47,20 +47,20 @@ create reporter # create example-reporter from the template`,
     async (argv) => {
       if (!SUPPORTED_ENTITIES.includes(argv.entity)) {
         throw new Error(
-          `${argv.entity}: generation is not supported. You can generate: plugin, rule, reporter. `
+          `${argv.entity}: generation is not supported. You can generate: plugin, rule, reporter. `,
         );
       }
 
       if (!SUPPORTED_EXT.includes(argv.type)) {
         console.log(
-          `${argv.type} is not supported. File will be generated with type js.`
+          `${argv.type} is not supported. File will be generated with type js.`,
         );
         argv.type = FileExt.js;
       }
 
       if (argv.type === FileExt.ts && argv.module === ModuleType.commonjs) {
         console.log(
-          `The module type will be changed to esm. Only the esm module is used to extend the ts file.`
+          `The module type will be changed to esm. Only the esm module is used to extend the ts file.`,
         );
         argv.module = ModuleType.esm;
       }
@@ -76,7 +76,7 @@ create reporter # create example-reporter from the template`,
                 fileExt: argv.type,
                 module: argv.module,
               },
-            } as TemplateOptions
+            } as TemplateOptions,
           ),
           {
             encoding: 'utf-8',
@@ -85,13 +85,13 @@ create reporter # create example-reporter from the template`,
             if (err) {
               throw err;
             }
-          }
+          },
         );
 
         console.log(`Template created: ${file}`);
       } catch (err) {
         console.error(err);
       }
-    }
+    },
   );
 }

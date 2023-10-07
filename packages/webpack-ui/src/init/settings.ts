@@ -17,8 +17,8 @@ export function makeSettingItem<TType>(
   render: (
     settingValue: Value<TType>,
     setting: SettingOptions<TType>,
-    hide: () => void
-  ) => ViewConfig<unknown, unknown>
+    hide: () => void,
+  ) => ViewConfig<unknown, unknown>,
 ): ViewConfigData {
   return {
     view: 'block',
@@ -28,7 +28,7 @@ export function makeSettingItem<TType>(
       el: HTMLElement,
       opts: unknown,
       data: unknown,
-      { hide }: { hide(): void }
+      { hide }: { hide(): void },
     ): void => {
       const settingValue = settings.get(setting.key, setting.defaultValue);
 
@@ -47,7 +47,7 @@ export function makeSettingItem<TType>(
             },
           ],
           null,
-          { widget: discovery }
+          { widget: discovery },
         );
       }
     },
@@ -56,7 +56,7 @@ export function makeSettingItem<TType>(
 
 export function makeBooleanSetting(
   discovery: StatoscopeWidget,
-  setting: SettingOptions<boolean>
+  setting: SettingOptions<boolean>,
 ): ViewConfigData {
   return makeSettingItem(discovery, setting, (settingValue, setting, hide) => {
     return [
@@ -99,7 +99,7 @@ export function makeBooleanSetting(
 export function makeToggleSetting<TType>(
   discovery: StatoscopeWidget,
   setting: SettingOptions<TType>,
-  items: Array<{ value: TType; text: string } | string>
+  items: Array<{ value: TType; text: string } | string>,
 ): ViewConfigData {
   return makeSettingItem(discovery, setting, (settingValue, setting, hide) => {
     return [
@@ -147,7 +147,7 @@ export function makeSelectSetting<TType>(
   setting: SettingOptions<TType>,
   items: TType[],
   valueHandler: string,
-  textHandler: string
+  textHandler: string,
 ): ViewConfigData {
   return makeSettingItem(discovery, setting, (settingValue, setting, hide) => {
     return [
@@ -194,7 +194,7 @@ export function makeSelectSetting<TType>(
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function makeDebounceFn<TArgs extends any[], TFn extends (...args: TArgs) => void>(
   fn: TFn,
-  timeout = 1000
+  timeout = 1000,
 ): (...args: TArgs) => void {
   let timer: NodeJS.Timeout | null = null;
   return (...args): void => {
@@ -206,7 +206,7 @@ export function makeDebounceFn<TArgs extends any[], TFn extends (...args: TArgs)
 export function makeStringSetting(
   discovery: StatoscopeWidget,
   setting: SettingOptions<string>,
-  placeholder = ''
+  placeholder = '',
 ): ViewConfigData {
   return makeSettingItem(discovery, setting, (settingValue, setting) => {
     return [

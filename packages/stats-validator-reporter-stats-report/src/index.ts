@@ -85,7 +85,7 @@ export default class ConsoleReporter implements Reporter {
       const statsFileStream = fs.createWriteStream(statsPath);
       const statStream: Readable = stringifyStream(
         parsedInput,
-        makeReplacer(parsedInput.__statoscope.context, '.', ['context', 'source'])
+        makeReplacer(parsedInput.__statoscope.context, '.', ['context', 'source']),
       );
       statStream.pipe(statsFileStream);
       await waitFinished(statsFileStream);
@@ -132,7 +132,7 @@ export default class ConsoleReporter implements Reporter {
               }
             : null,
         ].filter(Boolean) as FromItem[],
-        reportPath
+        reportPath,
       );
       console.log(`Statoscope report saved into ${reportFilename}`);
 

@@ -7,7 +7,7 @@ export type API = {
   getInstance: (
     compilationId: string | null,
     packageName: string,
-    instancePath: string
+    instancePath: string,
   ) => Instance | null;
 };
 
@@ -18,13 +18,13 @@ const makeAPI: APIFactory<Format, API> = (source) => {
   for (const compilation of source.payload.compilations) {
     packageIndexes.set(
       compilation.id,
-      makeIndex((r) => r.name, compilation.packages)
+      makeIndex((r) => r.name, compilation.packages),
     );
 
     for (const packageItem of compilation.packages) {
       instanceIndexes.set(
         packageItem,
-        makeIndex((r) => r.path, packageItem.instances)
+        makeIndex((r) => r.path, packageItem.instances),
       );
     }
   }
@@ -40,7 +40,7 @@ const makeAPI: APIFactory<Format, API> = (source) => {
     getInstance(
       compilationId: string | null,
       packageId: string,
-      instancePath: string
+      instancePath: string,
     ): Instance | null {
       const resolvedPackage =
         packageIndexes.get(compilationId)?.get(packageId) ??

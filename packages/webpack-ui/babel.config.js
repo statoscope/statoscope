@@ -5,7 +5,6 @@ module.exports = (api) => {
 
   return {
     presets: [
-      '@babel/typescript',
       [
         '@babel/env',
         {
@@ -13,6 +12,7 @@ module.exports = (api) => {
           modules: false,
         },
       ],
+      '@babel/typescript',
     ],
   };
 };

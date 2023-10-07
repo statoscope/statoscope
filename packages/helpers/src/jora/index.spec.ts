@@ -6,7 +6,7 @@ import make, { prepareWithJora } from './';
 const helpers = make();
 
 test('stringify', () => {
-  expect(helpers.stringify({ foo: 123 })).toMatchInlineSnapshot(`"{\\"foo\\":123}"`);
+  expect(helpers.stringify({ foo: 123 })).toMatchInlineSnapshot(`"{"foo":123}"`);
 });
 test('typeof', () => {
   expect(helpers.typeof('123')).toBe('string');
@@ -31,20 +31,20 @@ test('useNotNullish', () => {
 });
 test('serializeStringOrRegexp', () => {
   expect(helpers.serializeStringOrRegexp('foo')).toMatchInlineSnapshot(`
-    Object {
+    {
       "content": "foo",
       "type": "string",
     }
   `);
   expect(helpers.serializeStringOrRegexp(/bar/)).toMatchInlineSnapshot(`
-    Object {
+    {
       "content": "bar",
       "flags": "",
       "type": "regexp",
     }
   `);
   expect(helpers.serializeStringOrRegexp(/bar/i)).toMatchInlineSnapshot(`
-    Object {
+    {
       "content": "bar",
       "flags": "i",
       "type": "regexp",
@@ -53,13 +53,13 @@ test('serializeStringOrRegexp', () => {
 });
 test('deserializeStringOrRegexp', () => {
   expect(helpers.deserializeStringOrRegexp(helpers.serializeStringOrRegexp('foo'))).toBe(
-    'foo'
+    'foo',
   );
   expect('bar').toMatch(
-    helpers.deserializeStringOrRegexp(helpers.serializeStringOrRegexp(/bar/))!
+    helpers.deserializeStringOrRegexp(helpers.serializeStringOrRegexp(/bar/))!,
   );
   expect('BAr').toMatch(
-    helpers.deserializeStringOrRegexp(helpers.serializeStringOrRegexp(/bar/i))!
+    helpers.deserializeStringOrRegexp(helpers.serializeStringOrRegexp(/bar/i))!,
   );
 });
 test('toNumber', () => {
@@ -73,7 +73,7 @@ test('formatSize', () => {
 });
 test('formatDate', () => {
   expect(helpers.formatDate(1624731388203, 'en-US', { timeZone: 'UTC' })).toMatch(
-    /6\/26\/2021, \d+:\d+:\d+ [AP]M/
+    /6\/26\/2021,\s\d+:\d+:\d+\s[AP]M/,
   );
 });
 test('formatDuration', () => {
@@ -137,21 +137,21 @@ test('pluralRus', () => {
 });
 test('pluralWithValueRus', () => {
   expect(
-    helpers.pluralWithValueRus(0, ['модуль', 'модуля', 'модулей'])
+    helpers.pluralWithValueRus(0, ['модуль', 'модуля', 'модулей']),
   ).toMatchInlineSnapshot(`"0 модулей"`);
   expect(
-    helpers.pluralWithValueRus(1, ['модуль', 'модуля', 'модулей'])
+    helpers.pluralWithValueRus(1, ['модуль', 'модуля', 'модулей']),
   ).toMatchInlineSnapshot(`"1 модуль"`);
   expect(
-    helpers.pluralWithValueRus(2, ['модуль', 'модуля', 'модулей'])
+    helpers.pluralWithValueRus(2, ['модуль', 'модуля', 'модулей']),
   ).toMatchInlineSnapshot(`"2 модуля"`);
   expect(
-    helpers.pluralWithValueRus(5, ['модуль', 'модуля', 'модулей'])
+    helpers.pluralWithValueRus(5, ['модуль', 'модуля', 'модулей']),
   ).toMatchInlineSnapshot(`"5 модулей"`);
 });
 test('getNetworkTypeInfo', () => {
   expect(helpers.getNetworkTypeInfo(TYPE_DC_HSPA_PLUS.name)).toMatchInlineSnapshot(`
-    Object {
+    {
       "name": "DC-HSPA+",
       "type": "3G",
       "typicalSpeed": 1048576,
@@ -160,7 +160,7 @@ test('getNetworkTypeInfo', () => {
 });
 test('getNetworkTypeName', () => {
   expect(helpers.getNetworkTypeName(TYPE_DC_HSPA_PLUS)).toMatchInlineSnapshot(
-    `"3G: DC-HSPA+ (8 MBit/s)"`
+    `"3G: DC-HSPA+ (8 MBit/s)"`,
   );
 });
 test('getDownloadTime', () => {
@@ -173,28 +173,28 @@ test('getDownloadTime', () => {
 
 test('formatDiff', () => {
   expect(helpers.formatDiff({ type: 'number', a: 10, b: 20 })).toMatchInlineSnapshot(
-    `"10"`
+    `"10"`,
   );
   expect(helpers.formatDiff({ type: 'number', a: 20, b: 10 })).toMatchInlineSnapshot(
-    `"-10"`
+    `"-10"`,
   );
   expect(
-    helpers.formatDiff({ type: 'version', a: '1.1.2', b: '2.0.0' })
+    helpers.formatDiff({ type: 'version', a: '1.1.2', b: '2.0.0' }),
   ).toMatchInlineSnapshot(`"major upgrade from 1.1.2"`);
   expect(
-    helpers.formatDiff({ type: 'version', a: '2.1.2', b: '1.0.0' })
+    helpers.formatDiff({ type: 'version', a: '2.1.2', b: '1.0.0' }),
   ).toMatchInlineSnapshot(`"major downgrade from 2.1.2"`);
   expect(helpers.formatDiff({ type: 'size', a: 50, b: 100 })).toMatchInlineSnapshot(
-    `"0.05 kb"`
+    `"0.05 kb"`,
   );
   expect(helpers.formatDiff({ type: 'size', a: 100, b: 50 })).toMatchInlineSnapshot(
-    `"-0.05 kb"`
+    `"-0.05 kb"`,
   );
   expect(helpers.formatDiff({ type: 'time', a: 50, b: 100 })).toMatchInlineSnapshot(
-    `"50 ms"`
+    `"50 ms"`,
   );
   expect(helpers.formatDiff({ type: 'time', a: 100, b: 50 })).toMatchInlineSnapshot(
-    `"-50 ms"`
+    `"-50 ms"`,
   );
 });
 test('isMatch', () => {
@@ -209,7 +209,7 @@ test('isMatch', () => {
 test('exclude', () => {
   expect(helpers.exclude(['1', '2', '2', '3', '4444', '5'], { exclude: ['2', /4/] }))
     .toMatchInlineSnapshot(`
-    Array [
+    [
       "1",
       "3",
       "5",
@@ -217,7 +217,7 @@ test('exclude', () => {
   `);
   expect(helpers.exclude(['1', '2', '2', '3', '4444', '5'], { exclude: [] }))
     .toMatchInlineSnapshot(`
-    Array [
+    [
       "1",
       "2",
       "2",
@@ -237,17 +237,17 @@ test('exclude', () => {
         { foo: '5' },
       ],
 
-      { exclude: ['2', /4/], get: (item) => item.foo }
-    )
+      { exclude: ['2', /4/], get: (item) => item.foo },
+    ),
   ).toMatchInlineSnapshot(`
-    Array [
-      Object {
+    [
+      {
         "foo": "1",
       },
-      Object {
+      {
         "foo": "3",
       },
-      Object {
+      {
         "foo": "5",
       },
     ]
@@ -258,14 +258,14 @@ test('diff_normalizeLimit', () => {
   expect(helpers.diff_normalizeLimit()).toBeNull();
   expect(helpers.diff_normalizeLimit(null)).toBeNull();
   expect(helpers.diff_normalizeLimit(10)).toMatchInlineSnapshot(`
-    Object {
+    {
       "number": 10,
       "type": "absolute",
     }
   `);
   expect(helpers.diff_normalizeLimit({ type: 'absolute', number: 10 }))
     .toMatchInlineSnapshot(`
-    Object {
+    {
       "number": 10,
       "type": "absolute",
     }
@@ -279,26 +279,26 @@ test('diff_isLTETheLimit', () => {
   expect(
     helpers.diff_isLTETheLimit(
       { percent: 10, absolute: 100 },
-      { type: 'absolute', number: 100 }
-    )
+      { type: 'absolute', number: 100 },
+    ),
   ).toBe(true);
   expect(
     helpers.diff_isLTETheLimit(
       { percent: 10, absolute: 100 },
-      { type: 'absolute', number: 99 }
-    )
+      { type: 'absolute', number: 99 },
+    ),
   ).toBe(false);
   expect(
     helpers.diff_isLTETheLimit(
       { percent: 10, absolute: 100 },
-      { type: 'percent', number: 10 }
-    )
+      { type: 'percent', number: 10 },
+    ),
   ).toBe(true);
   expect(
     helpers.diff_isLTETheLimit(
       { percent: 10, absolute: 100 },
-      { type: 'percent', number: 9 }
-    )
+      { type: 'percent', number: 9 },
+    ),
   ).toBe(false);
 });
 
@@ -341,14 +341,14 @@ test('semverDiff', () => {
 test('semverParse', () => {
   expect(helpers.semverParse('1.0.0')).toMatchInlineSnapshot(`
     SemVer {
-      "build": Array [],
+      "build": [],
       "includePrerelease": false,
       "loose": false,
       "major": 1,
       "minor": 0,
-      "options": Object {},
+      "options": {},
       "patch": 0,
-      "prerelease": Array [],
+      "prerelease": [],
       "raw": "1.0.0",
       "version": "1.0.0",
     }
@@ -386,10 +386,10 @@ test('graph_getPaths', () => {
   graph.addChild(bar, target);
 
   expect(
-    serializeSolutionPath(helpers.graph_getPaths(baz, graph, target)!)
+    serializeSolutionPath(helpers.graph_getPaths(baz, graph, target)!),
   ).toMatchSnapshot();
   expect(
-    serializeSolutionPath(helpers.graph_getPaths(baz, graph, target, 1)!)
+    serializeSolutionPath(helpers.graph_getPaths(baz, graph, target, 1)!),
   ).toMatchSnapshot();
 });
 
@@ -408,7 +408,7 @@ test('prepareWithJora', () => {
           return v.toUpperCase();
         },
       },
-    }
+    },
   );
   expect(prepared.query('foo.bar()')).toBe('TEXT');
 });

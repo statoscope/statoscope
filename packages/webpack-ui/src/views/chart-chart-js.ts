@@ -24,8 +24,8 @@ export default function (discovery: StatoscopeWidget): void {
             ...data,
             options: { ...data.options, maintainAspectRatio: false },
           }),
-        100
+        100,
       );
-    }
+    },
   );
 }

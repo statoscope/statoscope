@@ -30,7 +30,7 @@ Try installing the package locally:
 "
 `;
 
-exports[`resolveAliasPackage relative path support throws when package is not there 1`] = `"Cannot find module './node_modules/@statoscope/not-there' from 'test/fixtures/config/_'"`;
+exports[`resolveAliasPackage relative path support throws when package is not there 1`] = `"Cannot find module './node_modules/@statoscope/not-there' from '../../test/fixtures/config/_'"`;
 
 exports[`resolveAliasPackage throws when package is not found 1`] = `
 "Can't resolve package @statoscope/2.

@@ -34,16 +34,18 @@ export default class Generator {
     this.payload.compilations,
     (item) => item.id,
     null,
-    false
+    false,
   );
 
-  constructor(private adapter?: ExtensionDescriptor) {}
+  constructor(private adapter?: ExtensionDescriptor) {
+    this.descriptor.adapter = this.adapter;
+  }
 
   handleInstance(
     compilationId: string | null,
     packageName: string,
     instance: string,
-    info: InstanceInfo
+    info: InstanceInfo,
   ): void {
     let compilation = this.resolveCompilation(compilationId);
     let packageResolver: Resolver<string, Package> | undefined;
@@ -59,7 +61,7 @@ export default class Generator {
         compilation.packages,
         (item) => item.name,
         null,
-        false
+        false,
       );
       this.packageResolvers.set(compilation, packageResolver);
       this.payload.compilations.push(compilation);
@@ -74,7 +76,7 @@ export default class Generator {
       compilation.packages.push(resolvedPackage);
       this.instanceResolvers.set(
         resolvedPackage,
-        makeResolver(instances, (item) => item.path, null, false)
+        makeResolver(instances, (item) => item.path, null, false),
       );
     }
 
@@ -87,7 +89,7 @@ export default class Generator {
     } else {
       if (resolvedInstance.info.version !== info.version) {
         throw new Error(
-          `[Instance version conflict] ${instance} old ${resolvedInstance.info.version} new ${info.version}`
+          `[Instance version conflict] ${instance} old ${resolvedInstance.info.version} new ${info.version}`,
         );
       }
     }

@@ -36,7 +36,7 @@ function makeIdModifier<TID>(modifier: IDModifier<TID> = sameId): IDModifier<TID
 export default function makeIndex<TEntity, TID>(
   getId: GetIDFn<TID, TEntity>,
   source?: TEntity[] | null,
-  options?: IndexOptions<TID>
+  options?: IndexOptions<TID>,
 ): IndexAPI<TID, TEntity> {
   const idModifier = makeIdModifier(options?.idModifier);
   const wrappedGet = getIdWrapper(getId, idModifier);

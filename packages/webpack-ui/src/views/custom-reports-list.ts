@@ -50,7 +50,7 @@ export default function (discovery: StatoscopeWidget): void {
         },
       ],
       data,
-      context
+      context,
     );
   });
 }

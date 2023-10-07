@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should work 1`] = `
-Object {
-  "instances": Array [
-    Object {
-      "info": Object {
+{
+  "instances": [
+    {
+      "info": {
         "version": "1.0.0",
       },
       "path": "foo-instance",
     },
-    Object {
-      "info": Object {
+    {
+      "info": {
         "version": "2.0.0",
       },
       "path": "bar-instance",
@@ -21,10 +21,10 @@ Object {
 `;
 
 exports[`should work 2`] = `
-Object {
-  "instances": Array [
-    Object {
-      "info": Object {
+{
+  "instances": [
+    {
+      "info": {
         "version": "3.0.0",
       },
       "path": "bar-instance",
@@ -35,10 +35,10 @@ Object {
 `;
 
 exports[`should work 3`] = `
-Object {
-  "instances": Array [
-    Object {
-      "info": Object {
+{
+  "instances": [
+    {
+      "info": {
         "version": "4.0.0",
       },
       "path": "bar-instance",
@@ -49,8 +49,8 @@ Object {
 `;
 
 exports[`should work 4`] = `
-Object {
-  "info": Object {
+{
+  "info": {
     "version": "1.0.0",
   },
   "path": "foo-instance",
@@ -58,8 +58,8 @@ Object {
 `;
 
 exports[`should work 5`] = `
-Object {
-  "info": Object {
+{
+  "info": {
     "version": "2.0.0",
   },
   "path": "bar-instance",
@@ -67,8 +67,8 @@ Object {
 `;
 
 exports[`should work 6`] = `
-Object {
-  "info": Object {
+{
+  "info": {
     "version": "3.0.0",
   },
   "path": "bar-instance",
@@ -76,8 +76,8 @@ Object {
 `;
 
 exports[`should work 7`] = `
-Object {
-  "info": Object {
+{
+  "info": {
     "version": "4.0.0",
   },
   "path": "bar-instance",

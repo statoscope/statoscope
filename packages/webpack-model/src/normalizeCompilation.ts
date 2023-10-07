@@ -1,11 +1,7 @@
-import { CompilationMap, ModuleData, NormalizationData, Webpack } from '../webpack';
+import { CompilationMap, ModuleData, NormalizationData, type Webpack } from '../webpack';
 import { collectRawModulesFromArray, collectRawReasonsFromArray } from './collector';
-import Compilation = Webpack.Compilation;
-import Chunk = Webpack.Chunk;
-import RawModule = Webpack.RawModule;
-import RawReason = Webpack.RawReason;
 
-function handleModule(module: RawModule, modulesData: ModuleData): number {
+function handleModule(module: Webpack.RawModule, modulesData: ModuleData): number {
   let resolvedId = modulesData.idToIxMap.get(module.identifier);
 
   if (!resolvedId) {
@@ -19,7 +15,7 @@ function handleModule(module: RawModule, modulesData: ModuleData): number {
     ];
     const toReasons = collectRawReasonsFromArray(resolvedModule!.reasons ?? []);
     const fromReasons = collectRawReasonsFromArray(module.reasons ?? []);
-    const reasonMap = new Map<string, RawReason>();
+    const reasonMap = new Map<string, Webpack.RawReason>();
 
     for (const current of [...toReasons.values(), ...fromReasons.values()]) {
       const key = `${current.moduleIdentifier}-${current.type}-${current.loc}`;
@@ -35,7 +31,7 @@ function handleModule(module: RawModule, modulesData: ModuleData): number {
   return resolvedId;
 }
 
-function handleChunk(chunk: Chunk, modulesData: ModuleData): void {
+function handleChunk(chunk: Webpack.Chunk, modulesData: ModuleData): void {
   const modules = collectRawModulesFromArray(chunk.modules ?? []);
 
   chunk.modules = [...modules.values()];
@@ -47,8 +43,8 @@ function handleChunk(chunk: Chunk, modulesData: ModuleData): void {
 }
 
 function handleCompilation(
-  compilation: Compilation,
-  compilationMap: CompilationMap
+  compilation: Webpack.Compilation,
+  compilationMap: CompilationMap,
 ): void {
   const modulesData: ModuleData = {
     ixToModuleMap: new Map(),
@@ -75,7 +71,7 @@ function handleCompilation(
 }
 
 export default function normalizeCompilation<T extends Record<string, unknown>>(
-  json: T
+  json: T,
 ): T {
   // @ts-ignore
   if (json.__statoscope?.normalization) {
@@ -83,8 +79,8 @@ export default function normalizeCompilation<T extends Record<string, unknown>>(
   }
 
   const compilationMap: CompilationMap = new Map();
-  const compilations: Compilation[] = [json];
-  let cursor: Compilation | undefined;
+  const compilations: Webpack.Compilation[] = [json];
+  let cursor: Webpack.Compilation | undefined;
 
   while ((cursor = compilations.pop())) {
     handleCompilation(cursor, compilationMap);

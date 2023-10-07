@@ -1,18 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`stats-with-reports.json, 1`] = `
-Object {
-  "__statoscope": Object {
-    "extensions": Array [
-      Object {
-        "descriptor": Object {
+{
+  "__statoscope": {
+    "extensions": [
+      {
+        "descriptor": {
           "name": "foo",
         },
       },
-      Object {
-        "descriptor": Object {
+      {
+        "descriptor": {
           "adapter": undefined,
-          "author": Object {
+          "author": {
             "name": "Sergey Melyukov",
             "url": "https://twitter.com/smelukov",
           },
@@ -21,23 +21,23 @@ Object {
           "name": "@statoscope/stats-extension-custom-reports",
           "version": "8.8.8",
         },
-        "payload": Object {
-          "compilations": Array [
-            Object {
+        "payload": {
+          "compilations": [
+            {
               "id": null,
-              "reports": Array [
-                Object {
+              "reports": [
+                {
                   "id": "baz",
-                  "view": Array [],
+                  "view": [],
                 },
-                Object {
-                  "data": Array [
+                {
+                  "data": [
                     1,
                     2,
                     3,
                   ],
                   "id": "foo",
-                  "view": Array [
+                  "view": [
                     "struct",
                   ],
                 },
@@ -52,18 +52,18 @@ Object {
 `;
 
 exports[`stats-with-reports.json, 2`] = `
-Object {
-  "__statoscope": Object {
-    "extensions": Array [
-      Object {
-        "descriptor": Object {
+{
+  "__statoscope": {
+    "extensions": [
+      {
+        "descriptor": {
           "name": "foo",
         },
       },
-      Object {
-        "descriptor": Object {
+      {
+        "descriptor": {
           "adapter": undefined,
-          "author": Object {
+          "author": {
             "name": "Sergey Melyukov",
             "url": "https://twitter.com/smelukov",
           },
@@ -72,34 +72,34 @@ Object {
           "name": "@statoscope/stats-extension-custom-reports",
           "version": "8.8.8",
         },
-        "payload": Object {
-          "compilations": Array [
-            Object {
+        "payload": {
+          "compilations": [
+            {
               "id": null,
-              "reports": Array [
-                Object {
+              "reports": [
+                {
                   "id": "baz",
-                  "view": Array [],
+                  "view": [],
                 },
-                Object {
-                  "data": Array [
+                {
+                  "data": [
                     1,
                     2,
                     3,
                   ],
                   "id": "foo",
-                  "view": Array [
+                  "view": [
                     "list",
                   ],
                 },
-                Object {
-                  "data": Array [
+                {
+                  "data": [
                     4,
                     5,
                     6,
                   ],
                   "id": "bar",
-                  "view": Array [
+                  "view": [
                     "list",
                   ],
                 },
@@ -114,13 +114,13 @@ Object {
 `;
 
 exports[`stats-without-extensions.json, 1`] = `
-Object {
-  "__statoscope": Object {
-    "extensions": Array [
-      Object {
-        "descriptor": Object {
+{
+  "__statoscope": {
+    "extensions": [
+      {
+        "descriptor": {
           "adapter": undefined,
-          "author": Object {
+          "author": {
             "name": "Sergey Melyukov",
             "url": "https://twitter.com/smelukov",
           },
@@ -129,19 +129,19 @@ Object {
           "name": "@statoscope/stats-extension-custom-reports",
           "version": "8.8.8",
         },
-        "payload": Object {
-          "compilations": Array [
-            Object {
+        "payload": {
+          "compilations": [
+            {
               "id": null,
-              "reports": Array [
-                Object {
-                  "data": Array [
+              "reports": [
+                {
+                  "data": [
                     1,
                     2,
                     3,
                   ],
                   "id": "foo",
-                  "view": Array [
+                  "view": [
                     "struct",
                   ],
                 },
@@ -156,13 +156,13 @@ Object {
 `;
 
 exports[`stats-without-extensions.json, 2`] = `
-Object {
-  "__statoscope": Object {
-    "extensions": Array [
-      Object {
-        "descriptor": Object {
+{
+  "__statoscope": {
+    "extensions": [
+      {
+        "descriptor": {
           "adapter": undefined,
-          "author": Object {
+          "author": {
             "name": "Sergey Melyukov",
             "url": "https://twitter.com/smelukov",
           },
@@ -171,30 +171,30 @@ Object {
           "name": "@statoscope/stats-extension-custom-reports",
           "version": "8.8.8",
         },
-        "payload": Object {
-          "compilations": Array [
-            Object {
+        "payload": {
+          "compilations": [
+            {
               "id": null,
-              "reports": Array [
-                Object {
-                  "data": Array [
+              "reports": [
+                {
+                  "data": [
                     1,
                     2,
                     3,
                   ],
                   "id": "foo",
-                  "view": Array [
+                  "view": [
                     "list",
                   ],
                 },
-                Object {
-                  "data": Array [
+                {
+                  "data": [
                     4,
                     5,
                     6,
                   ],
                   "id": "bar",
-                  "view": Array [
+                  "view": [
                     "list",
                   ],
                 },
@@ -209,13 +209,13 @@ Object {
 `;
 
 exports[`stats-without-meta.json, 1`] = `
-Object {
-  "__statoscope": Object {
-    "extensions": Array [
-      Object {
-        "descriptor": Object {
+{
+  "__statoscope": {
+    "extensions": [
+      {
+        "descriptor": {
           "adapter": undefined,
-          "author": Object {
+          "author": {
             "name": "Sergey Melyukov",
             "url": "https://twitter.com/smelukov",
           },
@@ -224,19 +224,19 @@ Object {
           "name": "@statoscope/stats-extension-custom-reports",
           "version": "8.8.8",
         },
-        "payload": Object {
-          "compilations": Array [
-            Object {
+        "payload": {
+          "compilations": [
+            {
               "id": null,
-              "reports": Array [
-                Object {
-                  "data": Array [
+              "reports": [
+                {
+                  "data": [
                     1,
                     2,
                     3,
                   ],
                   "id": "foo",
-                  "view": Array [
+                  "view": [
                     "struct",
                   ],
                 },
@@ -251,13 +251,13 @@ Object {
 `;
 
 exports[`stats-without-meta.json, 2`] = `
-Object {
-  "__statoscope": Object {
-    "extensions": Array [
-      Object {
-        "descriptor": Object {
+{
+  "__statoscope": {
+    "extensions": [
+      {
+        "descriptor": {
           "adapter": undefined,
-          "author": Object {
+          "author": {
             "name": "Sergey Melyukov",
             "url": "https://twitter.com/smelukov",
           },
@@ -266,30 +266,30 @@ Object {
           "name": "@statoscope/stats-extension-custom-reports",
           "version": "8.8.8",
         },
-        "payload": Object {
-          "compilations": Array [
-            Object {
+        "payload": {
+          "compilations": [
+            {
               "id": null,
-              "reports": Array [
-                Object {
-                  "data": Array [
+              "reports": [
+                {
+                  "data": [
                     1,
                     2,
                     3,
                   ],
                   "id": "foo",
-                  "view": Array [
+                  "view": [
                     "list",
                   ],
                 },
-                Object {
-                  "data": Array [
+                {
+                  "data": [
                     4,
                     5,
                     6,
                   ],
                   "id": "bar",
-                  "view": Array [
+                  "view": [
                     "list",
                   ],
                 },
@@ -304,18 +304,18 @@ Object {
 `;
 
 exports[`stats-without-reports.json, 1`] = `
-Object {
-  "__statoscope": Object {
-    "extensions": Array [
-      Object {
-        "descriptor": Object {
+{
+  "__statoscope": {
+    "extensions": [
+      {
+        "descriptor": {
           "name": "foo",
         },
       },
-      Object {
-        "descriptor": Object {
+      {
+        "descriptor": {
           "adapter": undefined,
-          "author": Object {
+          "author": {
             "name": "Sergey Melyukov",
             "url": "https://twitter.com/smelukov",
           },
@@ -324,19 +324,19 @@ Object {
           "name": "@statoscope/stats-extension-custom-reports",
           "version": "8.8.8",
         },
-        "payload": Object {
-          "compilations": Array [
-            Object {
+        "payload": {
+          "compilations": [
+            {
               "id": null,
-              "reports": Array [
-                Object {
-                  "data": Array [
+              "reports": [
+                {
+                  "data": [
                     1,
                     2,
                     3,
                   ],
                   "id": "foo",
-                  "view": Array [
+                  "view": [
                     "struct",
                   ],
                 },
@@ -351,18 +351,18 @@ Object {
 `;
 
 exports[`stats-without-reports.json, 2`] = `
-Object {
-  "__statoscope": Object {
-    "extensions": Array [
-      Object {
-        "descriptor": Object {
+{
+  "__statoscope": {
+    "extensions": [
+      {
+        "descriptor": {
           "name": "foo",
         },
       },
-      Object {
-        "descriptor": Object {
+      {
+        "descriptor": {
           "adapter": undefined,
-          "author": Object {
+          "author": {
             "name": "Sergey Melyukov",
             "url": "https://twitter.com/smelukov",
           },
@@ -371,30 +371,30 @@ Object {
           "name": "@statoscope/stats-extension-custom-reports",
           "version": "8.8.8",
         },
-        "payload": Object {
-          "compilations": Array [
-            Object {
+        "payload": {
+          "compilations": [
+            {
               "id": null,
-              "reports": Array [
-                Object {
-                  "data": Array [
+              "reports": [
+                {
+                  "data": [
                     1,
                     2,
                     3,
                   ],
                   "id": "foo",
-                  "view": Array [
+                  "view": [
                     "list",
                   ],
                 },
-                Object {
-                  "data": Array [
+                {
+                  "data": [
                     4,
                     5,
                     6,
                   ],
                   "id": "bar",
-                  "view": Array [
+                  "view": [
                     "list",
                   ],
                 },

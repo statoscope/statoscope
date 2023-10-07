@@ -11,7 +11,7 @@ export default function (discovery: StatoscopeWidget): void {
         // @ts-ignore
         { view: `chart-${config.engine ?? 'chart-js'}` },
         data,
-        context
+        context,
       );
     } catch (e) {
       // @ts-ignore

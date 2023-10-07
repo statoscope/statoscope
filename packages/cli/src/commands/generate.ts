@@ -79,6 +79,6 @@ Multiple stats: generate --input path/to/stats-1.json path/to/stats-2.json --out
       if (argv.open) {
         open(argv.output);
       }
-    }
+    },
   );
 }

@@ -36,7 +36,7 @@ export function packageItemConfig(hash = '#.params.hash'): PackageItemConfig {
 export type PackageInstanceItemConfig = Record<string, unknown>;
 
 export function packageInstanceItemConfig(
-  hash = '#.params.hash'
+  hash = '#.params.hash',
 ): PackageInstanceItemConfig {
   return {
     content: [

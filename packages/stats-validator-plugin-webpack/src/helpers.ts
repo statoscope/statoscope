@@ -29,7 +29,7 @@ export const packageRx = /^(@.+?[/\\][^/\\\s@]+|[^/\\\s@]+)(?:@(.+))?/;
 
 export function makePackageTarget(
   name: string | RegExp,
-  version?: string
+  version?: string,
 ): PackageTarget {
   return {
     name,

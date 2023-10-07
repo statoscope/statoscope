@@ -35,7 +35,7 @@ function handleTarget(
   target: PackageTarget,
   ruleParams: NormalizedParams,
   data: RuleDataInput<Prepared>,
-  api: API
+  api: API,
 ): void {
   const query = `
   $after: resolveInputFile();
@@ -143,7 +143,7 @@ function handleTarget(
               },
             },
           ],
-        }
+        },
       );
     }
   }
@@ -167,7 +167,7 @@ const diffDeprecatedPackages: WebpackRule<Params> = (ruleParams, data, api): voi
       ? { exclude: [], target: ruleParams.map(normalizePackageTarget) }
       : {
           exclude: ruleParams.exclude.map((item) =>
-            normalizeExclude(item, 'compilation')
+            normalizeExclude(item, 'compilation'),
           ),
           target: ruleParams.target.map(normalizePackageTarget),
         }

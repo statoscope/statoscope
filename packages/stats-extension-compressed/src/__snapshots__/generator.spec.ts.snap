@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`custom compressor 1`] = `
-Object {
-  "descriptor": Object {
-    "adapter": Object {
+{
+  "descriptor": {
+    "adapter": {
       "name": "test-adapter",
       "version": "7.7.7",
     },
-    "author": Object {
+    "author": {
       "name": "Sergey Melyukov",
       "url": "https://twitter.com/smelukov",
     },
@@ -16,34 +16,34 @@ Object {
     "name": "@statoscope/stats-extension-compressed",
     "version": "8.8.8",
   },
-  "payload": Object {
-    "compilations": Array [
-      Object {
+  "payload": {
+    "compilations": [
+      {
         "id": "foo-compilation",
-        "resources": Array [
-          Object {
+        "resources": [
+          {
             "id": "foo-resource",
-            "size": Object {
+            "size": {
               "compressor": "custom-compressor",
               "size": 100,
             },
           },
-          Object {
+          {
             "id": "bar-resource",
-            "size": Object {
+            "size": {
               "compressor": "custom-compressor",
               "size": 100,
             },
           },
         ],
       },
-      Object {
+      {
         "id": "bar-compilation",
-        "resources": Array [
-          Object {
+        "resources": [
+          {
             "id": "foo-resource",
-            "size": Object {
-              "compressor": Object {
+            "size": {
+              "compressor": {
                 "name": "custom-compressor",
                 "version": "7.7.7",
               },
@@ -58,45 +58,45 @@ Object {
 `;
 
 exports[`custom compressor 2`] = `
-Object {
-  "calls": Array [
-    Array [
+{
+  "calls": [
+    [
       "foo-foo-content",
       "foo-resource",
       undefined,
     ],
-    Array [
+    [
       "foo-bar-content",
       "bar-resource",
       undefined,
     ],
   ],
-  "contexts": Array [
-    Object {
+  "contexts": [
+    {
       "compressor": [MockFunction] {
-        "calls": Array [
-          Array [
+        "calls": [
+          [
             "foo-foo-content",
             "foo-resource",
             undefined,
           ],
-          Array [
+          [
             "foo-bar-content",
             "bar-resource",
             undefined,
           ],
         ],
-        "results": Array [
-          Object {
+        "results": [
+          {
             "type": "return",
-            "value": Object {
+            "value": {
               "compressor": "custom-compressor",
               "size": 100,
             },
           },
-          Object {
+          {
             "type": "return",
-            "value": Object {
+            "value": {
               "compressor": "custom-compressor",
               "size": 100,
             },
@@ -104,97 +104,31 @@ Object {
         ],
       },
     },
-    Object {
+    {
       "compressor": [MockFunction] {
-        "calls": Array [
-          Array [
+        "calls": [
+          [
             "foo-foo-content",
             "foo-resource",
             undefined,
           ],
-          Array [
+          [
             "foo-bar-content",
             "bar-resource",
             undefined,
           ],
         ],
-        "results": Array [
-          Object {
+        "results": [
+          {
             "type": "return",
-            "value": Object {
+            "value": {
               "compressor": "custom-compressor",
               "size": 100,
             },
           },
-          Object {
+          {
             "type": "return",
-            "value": Object {
-              "compressor": "custom-compressor",
-              "size": 100,
-            },
-          },
-        ],
-      },
-    },
-  ],
-  "instances": Array [
-    Object {
-      "compressor": [MockFunction] {
-        "calls": Array [
-          Array [
-            "foo-foo-content",
-            "foo-resource",
-            undefined,
-          ],
-          Array [
-            "foo-bar-content",
-            "bar-resource",
-            undefined,
-          ],
-        ],
-        "results": Array [
-          Object {
-            "type": "return",
-            "value": Object {
-              "compressor": "custom-compressor",
-              "size": 100,
-            },
-          },
-          Object {
-            "type": "return",
-            "value": Object {
-              "compressor": "custom-compressor",
-              "size": 100,
-            },
-          },
-        ],
-      },
-    },
-    Object {
-      "compressor": [MockFunction] {
-        "calls": Array [
-          Array [
-            "foo-foo-content",
-            "foo-resource",
-            undefined,
-          ],
-          Array [
-            "foo-bar-content",
-            "bar-resource",
-            undefined,
-          ],
-        ],
-        "results": Array [
-          Object {
-            "type": "return",
-            "value": Object {
-              "compressor": "custom-compressor",
-              "size": 100,
-            },
-          },
-          Object {
-            "type": "return",
-            "value": Object {
+            "value": {
               "compressor": "custom-compressor",
               "size": 100,
             },
@@ -203,26 +137,92 @@ Object {
       },
     },
   ],
-  "invocationCallOrder": Array [
+  "instances": [
+    {
+      "compressor": [MockFunction] {
+        "calls": [
+          [
+            "foo-foo-content",
+            "foo-resource",
+            undefined,
+          ],
+          [
+            "foo-bar-content",
+            "bar-resource",
+            undefined,
+          ],
+        ],
+        "results": [
+          {
+            "type": "return",
+            "value": {
+              "compressor": "custom-compressor",
+              "size": 100,
+            },
+          },
+          {
+            "type": "return",
+            "value": {
+              "compressor": "custom-compressor",
+              "size": 100,
+            },
+          },
+        ],
+      },
+    },
+    {
+      "compressor": [MockFunction] {
+        "calls": [
+          [
+            "foo-foo-content",
+            "foo-resource",
+            undefined,
+          ],
+          [
+            "foo-bar-content",
+            "bar-resource",
+            undefined,
+          ],
+        ],
+        "results": [
+          {
+            "type": "return",
+            "value": {
+              "compressor": "custom-compressor",
+              "size": 100,
+            },
+          },
+          {
+            "type": "return",
+            "value": {
+              "compressor": "custom-compressor",
+              "size": 100,
+            },
+          },
+        ],
+      },
+    },
+  ],
+  "invocationCallOrder": [
     1,
     2,
   ],
-  "lastCall": Array [
+  "lastCall": [
     "foo-bar-content",
     "bar-resource",
     undefined,
   ],
-  "results": Array [
-    Object {
+  "results": [
+    {
       "type": "return",
-      "value": Object {
+      "value": {
         "compressor": "custom-compressor",
         "size": 100,
       },
     },
-    Object {
+    {
       "type": "return",
-      "value": Object {
+      "value": {
         "compressor": "custom-compressor",
         "size": 100,
       },
@@ -232,29 +232,29 @@ Object {
 `;
 
 exports[`custom compressor 3`] = `
-Object {
-  "calls": Array [
-    Array [
+{
+  "calls": [
+    [
       "bar-foo-content",
       "foo-resource",
       undefined,
     ],
   ],
-  "contexts": Array [
-    Object {
+  "contexts": [
+    {
       "compressor": [MockFunction] {
-        "calls": Array [
-          Array [
+        "calls": [
+          [
             "bar-foo-content",
             "foo-resource",
             undefined,
           ],
         ],
-        "results": Array [
-          Object {
+        "results": [
+          {
             "type": "return",
-            "value": Object {
-              "compressor": Object {
+            "value": {
+              "compressor": {
                 "name": "custom-compressor",
                 "version": "7.7.7",
               },
@@ -265,21 +265,21 @@ Object {
       },
     },
   ],
-  "instances": Array [
-    Object {
+  "instances": [
+    {
       "compressor": [MockFunction] {
-        "calls": Array [
-          Array [
+        "calls": [
+          [
             "bar-foo-content",
             "foo-resource",
             undefined,
           ],
         ],
-        "results": Array [
-          Object {
+        "results": [
+          {
             "type": "return",
-            "value": Object {
-              "compressor": Object {
+            "value": {
+              "compressor": {
                 "name": "custom-compressor",
                 "version": "7.7.7",
               },
@@ -290,19 +290,19 @@ Object {
       },
     },
   ],
-  "invocationCallOrder": Array [
+  "invocationCallOrder": [
     3,
   ],
-  "lastCall": Array [
+  "lastCall": [
     "bar-foo-content",
     "foo-resource",
     undefined,
   ],
-  "results": Array [
-    Object {
+  "results": [
+    {
       "type": "return",
-      "value": Object {
-        "compressor": Object {
+      "value": {
+        "compressor": {
           "name": "custom-compressor",
           "version": "7.7.7",
         },
@@ -314,13 +314,13 @@ Object {
 `;
 
 exports[`preset compressor gzip 1`] = `
-Object {
-  "descriptor": Object {
-    "adapter": Object {
+{
+  "descriptor": {
+    "adapter": {
       "name": "test-adapter",
       "version": "7.7.7",
     },
-    "author": Object {
+    "author": {
       "name": "Sergey Melyukov",
       "url": "https://twitter.com/smelukov",
     },
@@ -329,26 +329,26 @@ Object {
     "name": "@statoscope/stats-extension-compressed",
     "version": "8.8.8",
   },
-  "payload": Object {
-    "compilations": Array [
-      Object {
+  "payload": {
+    "compilations": [
+      {
         "id": "foo-compilation",
-        "resources": Array [
-          Object {
+        "resources": [
+          {
             "id": "foo-resource",
-            "size": Object {
+            "size": {
               "compressor": "gzip",
-              "meta": Object {
+              "meta": {
                 "level": 6,
               },
               "size": 33,
             },
           },
-          Object {
+          {
             "id": "bar-resource",
-            "size": Object {
+            "size": {
               "compressor": "gzip",
-              "meta": Object {
+              "meta": {
                 "level": 6,
               },
               "size": 38,
@@ -356,24 +356,24 @@ Object {
           },
         ],
       },
-      Object {
+      {
         "id": "bar-compilation",
-        "resources": Array [
-          Object {
+        "resources": [
+          {
             "id": "foo-resource",
-            "size": Object {
+            "size": {
               "compressor": "gzip",
-              "meta": Object {
+              "meta": {
                 "level": 6,
               },
               "size": 48,
             },
           },
-          Object {
+          {
             "id": "bar-resource",
-            "size": Object {
+            "size": {
               "compressor": "gzip",
-              "meta": Object {
+              "meta": {
                 "level": 6,
               },
               "size": 51,

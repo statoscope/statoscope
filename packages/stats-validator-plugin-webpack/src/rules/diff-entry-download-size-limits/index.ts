@@ -64,12 +64,12 @@ function formatError(
   type: 'assets' | 'initial assets' | 'async assets',
   entry: NormalizedEntrypointItem,
   limit: number | Limit,
-  diff: ValueDiff
+  diff: ValueDiff,
 ): string {
   const normalizedLimit: Limit =
     typeof limit === 'number' ? { type: 'absolute', number: limit } : limit;
   return `Entry "${entry.name}": Download size diff of ${type} is ${h.formatSize(
-    diff.absolute
+    diff.absolute,
   )} (${diff.percent.toFixed(2)}%). It's over the ${
     normalizedLimit.type === 'absolute'
       ? h.formatSize(normalizedLimit.number)
@@ -80,7 +80,7 @@ function formatError(
 const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
   ruleParams,
   data,
-  api
+  api,
 ): void => {
   api.setRuleDescriptor({
     description:
@@ -266,9 +266,9 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
             'assets',
             entryItem.after.entry,
             entryItem.rule.maxSizeDiff!,
-            entryItem.diff.size
+            entryItem.diff.size,
           ),
-          options
+          options,
         );
       }
 
@@ -278,9 +278,9 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
             'initial assets',
             entryItem.after.entry,
             entryItem.rule.maxInitialSizeDiff!,
-            entryItem.diff.initialSize
+            entryItem.diff.initialSize,
           ),
-          options
+          options,
         );
       }
 
@@ -290,9 +290,9 @@ const diffEntryDownloadSizeLimits: WebpackRule<Params> = (
             'async assets',
             entryItem.after.entry,
             entryItem.rule.maxAsyncSizeDiff!,
-            entryItem.diff.asyncSize
+            entryItem.diff.asyncSize,
           ),
-          options
+          options,
         );
       }
     }

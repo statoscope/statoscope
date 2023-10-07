@@ -4,8 +4,7 @@
   "description": "Statoscope extension to store custom reports in stats",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "../../node_modules/.bin/tsc",
-    "prepublishOnly": "npm run build"
+    "build": "../../node_modules/.bin/tsc"
   },
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {

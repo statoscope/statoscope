@@ -4,8 +4,7 @@
   "description": "Plugin for @statoscope/stats-validator to validate webpack stats",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "../../node_modules/.bin/tsc",
-    "prepublishOnly": "npm run build"
+    "build": "../../node_modules/.bin/tsc"
   },
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {
@@ -23,10 +22,8 @@
     "@statoscope/stats-validator": "5.27.0",
     "@statoscope/types": "5.27.0",
     "@statoscope/webpack-model": "5.28.0",
+    "@types/semver": "^7.5.1",
     "chalk": "^4.1.2",
-    "semver": "^7.3.7"
-  },
-  "devDependencies": {
-    "@types/semver": "^7.3.10"
+    "semver": "^7.5.4"
   }
 }

@@ -4,25 +4,17 @@ import { IndexAPI } from '@statoscope/helpers/dist/indexer';
 import Graph from '@statoscope/helpers/dist/graph';
 import { StatsDescriptor } from '@statoscope/stats';
 import { Webpack } from './webpack';
-import ChunkID = Webpack.ChunkID;
-import Entrypoint = Webpack.Entrypoint;
-import RawModule = Webpack.RawModule;
-import RawAsset = Webpack.RawAsset;
-import Chunk = Webpack.Chunk;
-import IssuerPathItem = Webpack.IssuerPathItem;
-import Compilation = Webpack.Compilation;
-import RawReason = Webpack.RawReason;
 
 export type CompilationResolvers = {
   resolveModule: ResolverFn<string, NormalizedModule>;
-  resolveChunk: ResolverFn<ChunkID, NormalizedChunk>;
+  resolveChunk: ResolverFn<Webpack.ChunkID, NormalizedChunk>;
   resolveAsset: ResolverFn<string, NormalizedAsset>;
   resolvePackage: ResolverFn<string, NormalizedPackage>;
   resolveEntrypoint: ResolverFn<string, NormalizedEntrypointItem>;
 };
 
 export type NormalizedChunk = Omit<
-  Chunk,
+  Webpack.Chunk,
   'modules' | 'files' | 'children' | 'parents' | 'siblings'
 > & {
   modules: NormalizedModule[];
@@ -33,21 +25,21 @@ export type NormalizedChunk = Omit<
   isRuntime?: boolean;
 };
 export type NormalizedEntrypointItem = { name: string; data: NormalizedEntrypoint };
-export type NormalizedEntrypoint = Omit<Entrypoint, 'chunks' | 'assets'> & {
+export type NormalizedEntrypoint = Omit<Webpack.Entrypoint, 'chunks' | 'assets'> & {
   chunks: NormalizedChunk[];
   assets: NormalizedAsset[];
   dep?: NormalizedModuleDependency;
 };
-export type NormalizedAsset = Omit<RawAsset, 'chunks' | 'files'> & {
+export type NormalizedAsset = Omit<Webpack.RawAsset, 'chunks' | 'files'> & {
   chunks: NormalizedChunk[];
   files: File[];
 };
-export type NormalizedIssuerPathItem = IssuerPathItem & {
+export type NormalizedIssuerPathItem = Webpack.IssuerPathItem & {
   resolvedModule: NormalizedModule | null;
   resolvedEntry?: NormalizedEntrypointItem | null;
   resolvedEntryName?: string | null;
 };
-export type NormalizedReason = RawReason & {
+export type NormalizedReason = Webpack.RawReason & {
   resolvedModule: NormalizedModule | null;
   resolvedEntry?: NormalizedEntrypointItem | null;
   resolvedEntryName?: string | null;
@@ -58,7 +50,7 @@ export type NormalizedModuleDependency = {
   reason: NormalizedReason;
 };
 export type NormalizedModule = Omit<
-  RawModule,
+  Webpack.RawModule,
   'chunks' | 'reasons' | 'modules' | 'issuerPath'
 > & {
   resolvedResource: string | null;
@@ -102,7 +94,7 @@ export type NormalizedExtension<TPayload, TAPI> = {
 
 export type CompilationIndexes = {
   modules: IndexAPI<string, NormalizedModule>;
-  chunks: IndexAPI<ChunkID, NormalizedChunk>;
+  chunks: IndexAPI<Webpack.ChunkID, NormalizedChunk>;
   assets: IndexAPI<string, NormalizedAsset>;
   packages: IndexAPI<string, NormalizedPackage>;
   entrypoints: IndexAPI<string, NormalizedEntrypointItem>;
@@ -110,14 +102,14 @@ export type CompilationIndexes = {
 
 export type EntrypointItem = {
   name: string;
-  data: Entrypoint;
+  data: Webpack.Entrypoint;
 };
 
 export type RawIndexes = {
-  modules: IndexAPI<string, RawModule>;
-  chunks: IndexAPI<ChunkID, Chunk>;
-  assets: IndexAPI<string, RawAsset>;
-  chunkAssets: Map<ChunkID, Set<RawAsset>>;
+  modules: IndexAPI<string, Webpack.RawModule>;
+  chunks: IndexAPI<Webpack.ChunkID, Webpack.Chunk>;
+  assets: IndexAPI<string, Webpack.RawAsset>;
+  chunkAssets: Map<Webpack.ChunkID, Set<Webpack.RawAsset>>;
   entrypoints: IndexAPI<string, EntrypointItem>;
 };
 
@@ -159,12 +151,12 @@ export type HandledFileContext = {
     resolveCompilationByChunk(chunk: NormalizedChunk): NormalizedCompilation | null;
     resolveCompilationByModule(module: NormalizedModule): NormalizedCompilation | null;
     resolveCompilationByEntrypoint(
-      entrypoint: NormalizedEntrypointItem
+      entrypoint: NormalizedEntrypointItem,
     ): NormalizedCompilation | null;
   };
 };
 
-export type RawStatsFileDescriptor = { name: string; data: Compilation };
+export type RawStatsFileDescriptor = { name: string; data: Webpack.Compilation };
 
 export type NormalizedFile = {
   name: string;

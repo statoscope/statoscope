@@ -8,14 +8,13 @@ import {
 } from '@statoscope/report-writer/dist/utils';
 import { parseChunked } from '@discoveryjs/json-ext';
 import normalizeCompilation from '@statoscope/webpack-model/dist/normalizeCompilation';
-import { Webpack } from '@statoscope/webpack-model/webpack';
+import type { Webpack } from '@statoscope/webpack-model/webpack';
 import { Report } from '@statoscope/types/types/custom-report';
 import { Config } from '@statoscope/types/types/config';
 import { Extension } from '@statoscope/stats/spec/extension';
 import Generator, {
   Payload,
 } from '@statoscope/stats-extension-custom-reports/dist/generator';
-import Compilation = Webpack.Compilation;
 
 export type TransformFrom = {
   name: string;
@@ -24,12 +23,12 @@ export type TransformFrom = {
 
 export function mergeCustomReportsIntoCompilation(
   parsed: Webpack.Compilation,
-  reports: unknown[]
+  reports: unknown[],
 ): Webpack.Compilation {
   parsed.__statoscope ??= {};
   parsed.__statoscope.extensions ??= [];
   const customReportsExtensionIx = parsed.__statoscope.extensions.findIndex(
-    (ext) => ext.descriptor.name === '@statoscope/stats-extension-custom-reports'
+    (ext) => ext.descriptor.name === '@statoscope/stats-extension-custom-reports',
   );
   const customReportsExtension =
     customReportsExtensionIx > -1
@@ -51,7 +50,7 @@ export function mergeCustomReportsIntoCompilation(
       customReportGenerator.handleReport(report);
     } else {
       throw new Error(
-        `Can't add a report. A valid report should contain id and view fields`
+        `Can't add a report. A valid report should contain id and view fields`,
       );
     }
   }
@@ -67,7 +66,7 @@ export function mergeCustomReportsIntoCompilation(
 
 export function mergeCustomExtensionsIntoCompilation(
   parsed: Webpack.Compilation,
-  extensions: Extension<unknown>[]
+  extensions: Extension<unknown>[],
 ): Webpack.Compilation {
   parsed.__statoscope ??= {};
   parsed.__statoscope.extensions ??= [];
@@ -75,7 +74,7 @@ export function mergeCustomExtensionsIntoCompilation(
   for (const ext of extensions) {
     if (
       parsed.__statoscope.extensions.some(
-        (e) => e.descriptor.name === ext.descriptor.name
+        (e) => e.descriptor.name === ext.descriptor.name,
       )
     ) {
       console.log(`Extension ${ext.descriptor.name} already exists. Ignoring`);
@@ -92,14 +91,14 @@ export async function transform(
   from: Array<TransformFrom | string>,
   to: string,
   customReports: Report<unknown, unknown>[] = [],
-  compression: boolean
+  compression: boolean,
 ): Promise<string> {
   const normalizedFrom: FromItem[] = [];
 
   for (const item of from) {
     const filename = typeof item === 'string' ? item : item.name;
     const as = typeof item === 'string' ? item : item.as;
-    let parsed: Compilation = await parseChunked(fs.createReadStream(filename));
+    let parsed: Webpack.Compilation = await parseChunked(fs.createReadStream(filename));
 
     if (customReports.length) {
       parsed = mergeCustomReportsIntoCompilation(parsed, customReports);
@@ -126,7 +125,7 @@ export async function transform(
       },
     },
     normalizedFrom,
-    to
+    to,
   );
 }
 
@@ -155,7 +154,7 @@ export function isCustomReport(report: unknown): report is Report<unknown, unkno
  */
 export function combineCustomReports(
   config: Config,
-  reportArg: string[] = []
+  reportArg: string[] = [],
 ): Report<unknown, unknown>[] {
   const reports: Report<unknown, unknown>[] = [];
 
@@ -163,7 +162,7 @@ export function combineCustomReports(
     let malformedReport = false;
 
     const reportsFromFiles: unknown[] = reportArg.flatMap((filepath) =>
-      require(path.resolve(filepath))
+      require(path.resolve(filepath)),
     );
 
     for (const report of reportsFromFiles) {

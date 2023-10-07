@@ -1,53 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should work 1`] = `
-Array [
-  Array [
+[
+  [
     "input.json",
   ],
-  Array [
+  [
     "a5ca8b0ac9b2c1315153",
   ],
-  Array [
+  [
     "error  Module ./simple/src/index.ts + 3 modules should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/index2.ts + 1 modules should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/sub-module.ts should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/index2.css should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/test.txt should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/dyn.ts should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/statoscope.png should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/index.ts should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/index2.ts should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  foo@1.0.0 should not be used  webpack/restricted-packages",
   ],
-  Array [
+  [
     "Instances:",
   ],
-  Array [
+  [
     "- simple/node_modules/foo  1.0.0",
   ],
-  Array [
+  [
     "",
   ],
-  Array [
+  [
     "10 problems (10 errors, 0 warnings)",
   ],
 ]

@@ -5,11 +5,11 @@ import Writer from './';
 
 const injectablePath = path.resolve(
   __dirname,
-  '../../../test/fixtures/report-writer/injectable.js'
+  '../../../test/fixtures/report-writer/injectable.js',
 );
 const sourcePath = path.resolve(
   __dirname,
-  '../../../test/fixtures/report-writer/source.json'
+  '../../../test/fixtures/report-writer/source.json',
 );
 
 function finishedPromise(stream: Readable | Writable): Promise<void> {

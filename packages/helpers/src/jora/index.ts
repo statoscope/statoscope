@@ -103,7 +103,7 @@ export default function helpers() {
       return { type: 'string', content: value };
     },
     deserializeStringOrRegexp(
-      value?: SerializedStringOrRegexp | null
+      value?: SerializedStringOrRegexp | null,
     ): string | RegExp | null {
       if (value == null) {
         return null;
@@ -134,7 +134,7 @@ export default function helpers() {
     formatDate(
       ts: number,
       locale?: string | string[],
-      options?: Intl.DateTimeFormatOptions
+      options?: Intl.DateTimeFormatOptions,
     ): string {
       return new Date(ts).toLocaleString(locale, options);
     },
@@ -208,7 +208,7 @@ export default function helpers() {
     },
     getNetworkTypeName(networkType: Item): string | null {
       return `${networkType.type}: ${networkType.name} (${parseFloat(
-        (networkType.typicalSpeed / bytesInMBit).toFixed(1)
+        (networkType.typicalSpeed / bytesInMBit).toFixed(1),
       )} MBit/s)`;
     },
     getDownloadTime(size: number, networkType: string): number {
@@ -282,7 +282,7 @@ export default function helpers() {
       params?: {
         exclude?: Array<string | RegExp>;
         get?: (arg: TItem) => string | undefined;
-      }
+      },
     ): TItem[] {
       return items.filter((item) => {
         for (const excludeItem of params?.exclude ?? []) {
@@ -306,7 +306,7 @@ export default function helpers() {
       from?: GraphNode<TData>,
       graph?: Graph<TData>,
       to?: GraphNode<TData>,
-      max = Infinity
+      max = Infinity,
     ): PathSolution<TData> | null {
       if (!from || !to || !graph) {
         return null;
@@ -358,7 +358,7 @@ export function prepareWithJora(input: unknown, options: Options = {}): Prepared
     query: (
       query: string,
       data: unknown = input,
-      context: unknown = rootContext
+      context: unknown = rootContext,
     ): unknown => j(query)(data || input, context),
   };
 }

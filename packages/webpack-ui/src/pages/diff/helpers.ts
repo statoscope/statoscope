@@ -4,7 +4,7 @@ import styles from './helpers.css';
 
 export function statsSelect(
   value: string,
-  onChange: (value: string) => void
+  onChange: (value: string) => void,
 ): ViewConfigData {
   return {
     view: 'select',

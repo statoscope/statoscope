@@ -11,7 +11,7 @@ import { ByNameFilterItem, ExcludeItem, normalizeExclude } from '../../limits-he
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const version = require('../../../package.json');
 
-type NetworkType = typeof networkListType[number]['name'];
+type NetworkType = (typeof networkListType)[number]['name'];
 
 export type Limits = {
   maxDownloadTime?: number;
@@ -51,10 +51,10 @@ function formatError(
   type: 'assets' | 'initial assets' | 'async assets',
   entry: NormalizedEntrypointItem,
   downloadTime: number,
-  limit: number
+  limit: number,
 ): string {
   return `Entry "${entry.name}": Download time of ${type} is ${h.formatDuration(
-    downloadTime
+    downloadTime,
   )}. It's over the ${h.formatDuration(limit)} limit`;
 }
 
@@ -185,9 +185,9 @@ const entryDownloadTimeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
             'assets',
             entryItem.entry,
             entryItem.downloadTime,
-            entryItem.rule.maxDownloadTime!
+            entryItem.rule.maxDownloadTime!,
           ),
-          options
+          options,
         );
       }
 
@@ -197,9 +197,9 @@ const entryDownloadTimeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
             'initial assets',
             entryItem.entry,
             entryItem.initialDownloadTime,
-            entryItem.rule.maxInitialDownloadTime!
+            entryItem.rule.maxInitialDownloadTime!,
           ),
-          options
+          options,
         );
       }
 
@@ -209,9 +209,9 @@ const entryDownloadTimeLimits: WebpackRule<Params> = (ruleParams, data, api): vo
             'async assets',
             entryItem.entry,
             entryItem.asyncDownloadTime,
-            entryItem.rule.maxAsyncDownloadTime!
+            entryItem.rule.maxAsyncDownloadTime!,
           ),
-          options
+          options,
         );
       }
     }

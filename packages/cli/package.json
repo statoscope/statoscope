@@ -3,8 +3,7 @@
   "version": "5.28.0",
   "description": "Statoscope CLI tools",
   "scripts": {
-    "build": "../../node_modules/.bin/tsc",
-    "prepublishOnly": "npm run build"
+    "build": "../../node_modules/.bin/tsc"
   },
   "bin": {
     "statoscope": "./bin/cli.js"
@@ -36,7 +35,7 @@
     "@statoscope/webpack-model": "5.28.0",
     "@statoscope/webpack-ui": "5.28.0",
     "@types/yargs": "^17.0.10",
-    "open": "^8.4.0",
-    "yargs": "^17.5.1"
+    "open": "~8.4.0",
+    "yargs": "^17.7.2"
   }
 }

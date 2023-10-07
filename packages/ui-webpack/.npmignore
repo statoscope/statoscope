@@ -1,0 +1,4 @@
+*
+!bin
+!dist/**/*.{js,d.ts,json}
+**/*.spec.{js,d.ts}

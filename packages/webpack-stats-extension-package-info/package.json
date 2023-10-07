@@ -4,8 +4,7 @@
   "description": "Webpack adapter for @statoscope/stats-extension-package-info",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "../../node_modules/.bin/tsc",
-    "prepublishOnly": "npm run build"
+    "build": "../../node_modules/.bin/tsc"
   },
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {
@@ -20,9 +19,7 @@
   "dependencies": {
     "@statoscope/stats": "5.14.1",
     "@statoscope/stats-extension-package-info": "5.28.0",
-    "@statoscope/webpack-model": "5.28.0"
-  },
-  "devDependencies": {
+    "@statoscope/webpack-model": "5.28.0",
     "@types/webpack": "^5.0.0"
   },
   "peerDependencies": {

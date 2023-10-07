@@ -27,6 +27,7 @@ declare module '@statoscope/webpack-ui' {
   export const Discovery: typeof DiscoverJS;
 }
 
+// @ts-ignore
 declare module '@statoscope/ui-webpack' {
   export default function (data: RawData, element: HTMLElement): StatoscopeWidget;
   export const Discovery: typeof DiscoverJS;

@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should not add existing report 1`] = `
-Object {
-  "descriptor": Object {
-    "adapter": Object {
+{
+  "descriptor": {
+    "adapter": {
       "name": "test-adapter",
       "version": "7.7.7",
     },
-    "author": Object {
+    "author": {
       "name": "Sergey Melyukov",
       "url": "https://twitter.com/smelukov",
     },
@@ -16,17 +16,17 @@ Object {
     "name": "@statoscope/stats-extension-custom-reports",
     "version": "8.8.8",
   },
-  "payload": Object {
-    "compilations": Array [
-      Object {
+  "payload": {
+    "compilations": [
+      {
         "id": null,
-        "reports": Array [
-          Object {
+        "reports": [
+          {
             "context": "context",
             "data": "data",
             "id": "foo",
             "name": "name",
-            "view": Array [
+            "view": [
               "some-ui",
             ],
           },
@@ -38,13 +38,13 @@ Object {
 `;
 
 exports[`should work 1`] = `
-Object {
-  "descriptor": Object {
-    "adapter": Object {
+{
+  "descriptor": {
+    "adapter": {
       "name": "test-adapter",
       "version": "7.7.7",
     },
-    "author": Object {
+    "author": {
       "name": "Sergey Melyukov",
       "url": "https://twitter.com/smelukov",
     },
@@ -53,38 +53,38 @@ Object {
     "name": "@statoscope/stats-extension-custom-reports",
     "version": "8.8.8",
   },
-  "payload": Object {
-    "compilations": Array [
-      Object {
+  "payload": {
+    "compilations": [
+      {
         "id": null,
-        "reports": Array [
-          Object {
+        "reports": [
+          {
             "context": "context",
             "data": "data",
             "id": "foo",
             "name": "name",
-            "view": Array [
+            "view": [
               "some-ui",
             ],
           },
         ],
       },
-      Object {
+      {
         "id": "foo-compilation",
-        "reports": Array [
-          Object {
+        "reports": [
+          {
             "compilation": "foo-compilation",
             "context": "context2",
             "data": "data2",
             "id": "foo2",
             "name": "name2",
-            "relations": Array [
-              Object {
+            "relations": [
+              {
                 "id": "foo",
                 "type": "module",
               },
             ],
-            "view": Array [
+            "view": [
               "some-ui2",
             ],
           },

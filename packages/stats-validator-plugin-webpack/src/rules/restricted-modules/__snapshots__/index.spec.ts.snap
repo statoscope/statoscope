@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches 1`] = `
-Array [
-  Object {
+[
+  {
     "compilation": "a5ca8b0ac9b2c1315153",
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
           },
@@ -23,19 +23,19 @@ Array [
     ],
     "filename": "input.json",
     "message": "Module ./simple/src/index.ts + 3 modules should not be used",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
         "type": "module",
       },
     ],
   },
-  Object {
+  {
     "compilation": "a5ca8b0ac9b2c1315153",
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
           },
@@ -51,19 +51,19 @@ Array [
     ],
     "filename": "input.json",
     "message": "Module ./simple/src/index2.ts + 1 modules should not be used",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
         "type": "module",
       },
     ],
   },
-  Object {
+  {
     "compilation": "a5ca8b0ac9b2c1315153",
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/sub-module.ts",
           },
@@ -79,19 +79,19 @@ Array [
     ],
     "filename": "input.json",
     "message": "Module ./simple/src/sub-module.ts should not be used",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "./node_modules/babel-loader/lib/index.js!./simple/src/sub-module.ts",
         "type": "module",
       },
     ],
   },
-  Object {
+  {
     "compilation": "a5ca8b0ac9b2c1315153",
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
           },
@@ -107,19 +107,19 @@ Array [
     ],
     "filename": "input.json",
     "message": "Module ./simple/src/index2.css should not be used",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
         "type": "module",
       },
     ],
   },
-  Object {
+  {
     "compilation": "a5ca8b0ac9b2c1315153",
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "module": "asset/resource|./simple/src/test.txt",
           },
@@ -135,19 +135,19 @@ Array [
     ],
     "filename": "input.json",
     "message": "Module ./simple/src/test.txt should not be used",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "asset/resource|./simple/src/test.txt",
         "type": "module",
       },
     ],
   },
-  Object {
+  {
     "compilation": "a5ca8b0ac9b2c1315153",
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/dyn.ts",
           },
@@ -163,19 +163,19 @@ Array [
     ],
     "filename": "input.json",
     "message": "Module ./simple/src/dyn.ts should not be used",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "./node_modules/babel-loader/lib/index.js!./simple/src/dyn.ts",
         "type": "module",
       },
     ],
   },
-  Object {
+  {
     "compilation": "a5ca8b0ac9b2c1315153",
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "module": "asset/inline|./simple/src/statoscope.png",
           },
@@ -191,19 +191,19 @@ Array [
     ],
     "filename": "input.json",
     "message": "Module ./simple/src/statoscope.png should not be used",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "asset/inline|./simple/src/statoscope.png",
         "type": "module",
       },
     ],
   },
-  Object {
+  {
     "compilation": "a5ca8b0ac9b2c1315153",
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
           },
@@ -219,19 +219,19 @@ Array [
     ],
     "filename": "input.json",
     "message": "Module ./simple/src/index.ts should not be used",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
         "type": "module",
       },
     ],
   },
-  Object {
+  {
     "compilation": "a5ca8b0ac9b2c1315153",
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
           },
@@ -247,8 +247,8 @@ Array [
     ],
     "filename": "input.json",
     "message": "Module ./simple/src/index2.ts should not be used",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
         "type": "module",
       },
@@ -257,4 +257,4 @@ Array [
 ]
 `;
 
-exports[`not matches 1`] = `Array []`;
+exports[`not matches 1`] = `[]`;

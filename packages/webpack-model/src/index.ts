@@ -8,7 +8,7 @@ import normalize from './handleFile';
 
 export * as module from './module';
 
-export { StatsExtensionWebpackAdapter } from './stats-extension-webpack-adapter';
+export type { StatsExtensionWebpackAdapter } from './stats-extension-webpack-adapter';
 
 export { joraHelpers, normalize };
 
@@ -20,7 +20,7 @@ export type Prepared = {
 
 export function prepareWithJora(
   stats: RawStatsFileDescriptor | RawStatsFileDescriptor[],
-  options: Options = {}
+  options: Options = {},
 ): Prepared {
   const normalizeResult = normalize(stats);
   const { files, compilations } = normalizeResult;

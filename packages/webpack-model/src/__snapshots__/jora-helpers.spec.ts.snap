@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`customReports customReports_getItem 1`] = `
-Object {
-  "data": Object {
-    "some": Object {
+{
+  "data": {
+    "some": {
       "custom": "data",
     },
   },
   "id": "top-20-biggest-modules",
   "name": "Top 20 biggest modules",
-  "view": Array [
+  "view": [
     "struct",
-    Object {
+    {
       "data": "#.stats.compilations.(
             $compilation: $;
             modules.({
@@ -28,18 +28,18 @@ Object {
 `;
 
 exports[`customReports customReports_getItems 1`] = `
-Array [
-  Object {
-    "data": Object {
-      "some": Object {
+[
+  {
+    "data": {
+      "some": {
         "custom": "data",
       },
     },
     "id": "top-20-biggest-modules",
     "name": "Top 20 biggest modules",
-    "view": Array [
+    "view": [
       "struct",
-      Object {
+      {
         "data": "#.stats.compilations.(
             $compilation: $;
             modules.({
@@ -53,17 +53,17 @@ Array [
       },
     ],
   },
-  Object {
-    "data": Object {
-      "some": Object {
+  {
+    "data": {
+      "some": {
         "custom": "data",
       },
     },
     "id": "top-20-biggest-modules",
     "name": "Top 20 biggest modules",
-    "view": Array [
+    "view": [
       "struct",
-      Object {
+      {
         "data": "#.stats.compilations.(
             $compilation: $;
             modules.({
@@ -81,18 +81,18 @@ Array [
 `;
 
 exports[`customReports customReports_getItems 2`] = `
-Array [
-  Object {
-    "data": Object {
-      "some": Object {
+[
+  {
+    "data": {
+      "some": {
         "custom": "data",
       },
     },
     "id": "top-20-biggest-modules",
     "name": "Top 20 biggest modules",
-    "view": Array [
+    "view": [
       "struct",
-      Object {
+      {
         "data": "#.stats.compilations.(
             $compilation: $;
             modules.({
@@ -110,18 +110,18 @@ Array [
 `;
 
 exports[`customReports customReports_getItems 3`] = `
-Array [
-  Object {
-    "data": Object {
-      "some": Object {
+[
+  {
+    "data": {
+      "some": {
         "custom": "data",
       },
     },
     "id": "top-20-biggest-modules",
     "name": "Top 20 biggest modules",
-    "view": Array [
+    "view": [
       "struct",
-      Object {
+      {
         "data": "#.stats.compilations.(
             $compilation: $;
             modules.({
@@ -139,32 +139,32 @@ Array [
 `;
 
 exports[`moduleGraph_getPaths 1`] = `
-Object {
-  "children": Array [
-    Object {
-      "children": Array [],
-      "node": Object {
+{
+  "children": [
+    {
+      "children": [],
+      "node": {
         "id": "./node_modules/is-array/index.js",
       },
     },
   ],
-  "node": Object {
+  "node": {
     "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
   },
 }
 `;
 
 exports[`modulesToFoamTree 1`] = `
-Object {
-  "groups": Array [
-    Object {
-      "groups": Array [
-        Object {
-          "groups": Array [
-            Object {
-              "groups": Array [],
+{
+  "groups": [
+    {
+      "groups": [
+        {
+          "groups": [
+            {
+              "groups": [],
               "label": "index.ts",
-              "link": Object {
+              "link": {
                 "id": "292",
                 "page": "module",
               },
@@ -172,10 +172,10 @@ Object {
               "weight": 226,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "sub-module.ts",
-              "link": Object {
+              "link": {
                 "id": "./node_modules/babel-loader/lib/index.js!./simple/src/sub-module.ts",
                 "page": "module",
               },
@@ -183,10 +183,10 @@ Object {
               "weight": 190,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "index2.ts",
-              "link": Object {
+              "link": {
                 "id": "503",
                 "page": "module",
               },
@@ -194,10 +194,10 @@ Object {
               "weight": 552,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "index2.css",
-              "link": Object {
+              "link": {
                 "id": "945",
                 "page": "module",
               },
@@ -205,10 +205,10 @@ Object {
               "weight": 644,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "test.txt",
-              "link": Object {
+              "link": {
                 "id": "47",
                 "page": "module",
               },
@@ -216,10 +216,10 @@ Object {
               "weight": 42,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "dyn.ts",
-              "link": Object {
+              "link": {
                 "id": "848",
                 "page": "module",
               },
@@ -227,10 +227,10 @@ Object {
               "weight": 21,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "statoscope.png",
-              "link": Object {
+              "link": {
                 "id": "523",
                 "page": "module",
               },
@@ -245,14 +245,14 @@ Object {
           "weight": 9986.84,
           "weightCompressor": undefined,
         },
-        Object {
-          "groups": Array [
-            Object {
-              "groups": Array [
-                Object {
-                  "groups": Array [],
+        {
+          "groups": [
+            {
+              "groups": [
+                {
+                  "groups": [],
                   "label": "index.js",
-                  "link": Object {
+                  "link": {
                     "id": "./simple/node_modules/foo/index.js",
                     "page": "module",
                   },
@@ -260,14 +260,14 @@ Object {
                   "weight": 96,
                   "weightCompressor": undefined,
                 },
-                Object {
-                  "groups": Array [
-                    Object {
-                      "groups": Array [
-                        Object {
-                          "groups": Array [],
+                {
+                  "groups": [
+                    {
+                      "groups": [
+                        {
+                          "groups": [],
                           "label": "index.js",
-                          "link": Object {
+                          "link": {
                             "id": "./simple/node_modules/foo/node_modules/bar/index.js",
                             "page": "module",
                           },
@@ -277,16 +277,16 @@ Object {
                         },
                       ],
                       "label": "bar",
-                      "link": Object {
+                      "link": {
                         "id": "bar",
-                        "package": Object {
-                          "instance": Object {
+                        "package": {
+                          "instance": {
                             "path": "simple/node_modules/foo/node_modules/bar",
                           },
                           "name": "bar",
                         },
                         "page": "package",
-                        "params": Object {
+                        "params": {
                           "instance": "simple/node_modules/foo/node_modules/bar",
                         },
                       },
@@ -303,16 +303,16 @@ Object {
                 },
               ],
               "label": "foo",
-              "link": Object {
+              "link": {
                 "id": "foo",
-                "package": Object {
-                  "instance": Object {
+                "package": {
+                  "instance": {
                     "path": "simple/node_modules/foo",
                   },
                   "name": "foo",
                 },
                 "page": "package",
-                "params": Object {
+                "params": {
                   "instance": "simple/node_modules/foo",
                 },
               },
@@ -320,12 +320,12 @@ Object {
               "weight": 121,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [
-                Object {
-                  "groups": Array [],
+            {
+              "groups": [
+                {
+                  "groups": [],
                   "label": "index.js",
-                  "link": Object {
+                  "link": {
                     "id": "./simple/node_modules/bar/index.js",
                     "page": "module",
                   },
@@ -335,16 +335,16 @@ Object {
                 },
               ],
               "label": "bar",
-              "link": Object {
+              "link": {
                 "id": "bar",
-                "package": Object {
-                  "instance": Object {
+                "package": {
+                  "instance": {
                     "path": "simple/node_modules/bar",
                   },
                   "name": "bar",
                 },
                 "page": "package",
-                "params": Object {
+                "params": {
                   "instance": "simple/node_modules/bar",
                 },
               },
@@ -366,25 +366,25 @@ Object {
       "weight": 10157.84,
       "weightCompressor": undefined,
     },
-    Object {
-      "groups": Array [],
-      "label": "external \\"extLib\\"",
-      "link": Object {
-        "id": "external var \\"extLib\\"",
+    {
+      "groups": [],
+      "label": "external "extLib"",
+      "link": {
+        "id": "external var "extLib"",
         "page": "module",
       },
-      "path": "external \\"extLib\\"",
+      "path": "external "extLib"",
       "weight": 84,
       "weightCompressor": undefined,
     },
-    Object {
-      "groups": Array [
-        Object {
-          "groups": Array [
-            Object {
-              "groups": Array [],
+    {
+      "groups": [
+        {
+          "groups": [
+            {
+              "groups": [],
               "label": "index.js",
-              "link": Object {
+              "link": {
                 "id": "929",
                 "page": "module",
               },
@@ -394,16 +394,16 @@ Object {
             },
           ],
           "label": "is-array",
-          "link": Object {
+          "link": {
             "id": "is-array",
-            "package": Object {
-              "instance": Object {
+            "package": {
+              "instance": {
                 "path": "node_modules/is-array",
               },
               "name": "is-array",
             },
             "page": "package",
-            "params": Object {
+            "params": {
               "instance": "node_modules/is-array",
             },
           },
@@ -411,16 +411,16 @@ Object {
           "weight": 470,
           "weightCompressor": undefined,
         },
-        Object {
-          "groups": Array [
-            Object {
-              "groups": Array [
-                Object {
-                  "groups": Array [
-                    Object {
-                      "groups": Array [],
+        {
+          "groups": [
+            {
+              "groups": [
+                {
+                  "groups": [
+                    {
+                      "groups": [],
                       "label": "api.js",
-                      "link": Object {
+                      "link": {
                         "id": "476",
                         "page": "module",
                       },
@@ -428,10 +428,10 @@ Object {
                       "weight": 1605,
                       "weightCompressor": undefined,
                     },
-                    Object {
-                      "groups": Array [],
+                    {
+                      "groups": [],
                       "label": "getUrl.js",
-                      "link": Object {
+                      "link": {
                         "id": "678",
                         "page": "module",
                       },
@@ -455,16 +455,16 @@ Object {
             },
           ],
           "label": "css-loader",
-          "link": Object {
+          "link": {
             "id": "css-loader",
-            "package": Object {
-              "instance": Object {
+            "package": {
+              "instance": {
                 "path": "node_modules/css-loader",
               },
               "name": "css-loader",
             },
             "page": "package",
-            "params": Object {
+            "params": {
               "instance": "node_modules/css-loader",
             },
           },
@@ -479,14 +479,14 @@ Object {
       "weight": 2905,
       "weightCompressor": undefined,
     },
-    Object {
-      "groups": Array [
-        Object {
-          "groups": Array [
-            Object {
-              "groups": Array [],
+    {
+      "groups": [
+        {
+          "groups": [
+            {
+              "groups": [],
               "label": "chunk loaded",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/chunk loaded",
                 "page": "module",
               },
@@ -494,10 +494,10 @@ Object {
               "weight": 886,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "compat get default export",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/compat get default export",
                 "page": "module",
               },
@@ -505,10 +505,10 @@ Object {
               "weight": 267,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "define property getters",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/define property getters",
                 "page": "module",
               },
@@ -516,10 +516,10 @@ Object {
               "weight": 308,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "ensure chunk",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/ensure chunk",
                 "page": "module",
               },
@@ -527,10 +527,10 @@ Object {
               "weight": 326,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "get javascript chunk filename",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/get javascript chunk filename",
                 "page": "module",
               },
@@ -538,10 +538,10 @@ Object {
               "weight": 167,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "global",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/global",
                 "page": "module",
               },
@@ -549,10 +549,10 @@ Object {
               "weight": 221,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "hasOwnProperty shorthand",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/hasOwnProperty shorthand",
                 "page": "module",
               },
@@ -560,10 +560,10 @@ Object {
               "weight": 88,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "jsonp chunk loading",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/jsonp chunk loading",
                 "page": "module",
               },
@@ -571,10 +571,10 @@ Object {
               "weight": 3215,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "load script",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/load script",
                 "page": "module",
               },
@@ -582,10 +582,10 @@ Object {
               "weight": 1503,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "make namespace object",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/make namespace object",
                 "page": "module",
               },
@@ -593,10 +593,10 @@ Object {
               "weight": 274,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "publicPath",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/publicPath",
                 "page": "module",
               },
@@ -628,16 +628,16 @@ Object {
 `;
 
 exports[`modulesToFoamTree 2`] = `
-Object {
-  "groups": Array [
-    Object {
-      "groups": Array [
-        Object {
-          "groups": Array [
-            Object {
-              "groups": Array [],
+{
+  "groups": [
+    {
+      "groups": [
+        {
+          "groups": [
+            {
+              "groups": [],
               "label": "index.ts",
-              "link": Object {
+              "link": {
                 "id": "292",
                 "page": "module",
               },
@@ -645,10 +645,10 @@ Object {
               "weight": 226,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "sub-module.ts",
-              "link": Object {
+              "link": {
                 "id": "./node_modules/babel-loader/lib/index.js!./simple/src/sub-module.ts",
                 "page": "module",
               },
@@ -656,10 +656,10 @@ Object {
               "weight": 190,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "index2.ts",
-              "link": Object {
+              "link": {
                 "id": "503",
                 "page": "module",
               },
@@ -667,10 +667,10 @@ Object {
               "weight": 552,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "index2.css",
-              "link": Object {
+              "link": {
                 "id": "945",
                 "page": "module",
               },
@@ -678,10 +678,10 @@ Object {
               "weight": 644,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "test.txt",
-              "link": Object {
+              "link": {
                 "id": "47",
                 "page": "module",
               },
@@ -689,10 +689,10 @@ Object {
               "weight": 42,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "dyn.ts",
-              "link": Object {
+              "link": {
                 "id": "848",
                 "page": "module",
               },
@@ -700,10 +700,10 @@ Object {
               "weight": 21,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "statoscope.png",
-              "link": Object {
+              "link": {
                 "id": "523",
                 "page": "module",
               },
@@ -718,14 +718,14 @@ Object {
           "weight": 9986.84,
           "weightCompressor": undefined,
         },
-        Object {
-          "groups": Array [
-            Object {
-              "groups": Array [
-                Object {
-                  "groups": Array [],
+        {
+          "groups": [
+            {
+              "groups": [
+                {
+                  "groups": [],
                   "label": "index.js",
-                  "link": Object {
+                  "link": {
                     "id": "./simple/node_modules/foo/index.js",
                     "page": "module",
                   },
@@ -733,14 +733,14 @@ Object {
                   "weight": 96,
                   "weightCompressor": undefined,
                 },
-                Object {
-                  "groups": Array [
-                    Object {
-                      "groups": Array [
-                        Object {
-                          "groups": Array [],
+                {
+                  "groups": [
+                    {
+                      "groups": [
+                        {
+                          "groups": [],
                           "label": "index.js",
-                          "link": Object {
+                          "link": {
                             "id": "./simple/node_modules/foo/node_modules/bar/index.js",
                             "page": "module",
                           },
@@ -750,16 +750,16 @@ Object {
                         },
                       ],
                       "label": "bar",
-                      "link": Object {
+                      "link": {
                         "id": "bar",
-                        "package": Object {
-                          "instance": Object {
+                        "package": {
+                          "instance": {
                             "path": "simple/node_modules/foo/node_modules/bar",
                           },
                           "name": "bar",
                         },
                         "page": "package",
-                        "params": Object {
+                        "params": {
                           "instance": "simple/node_modules/foo/node_modules/bar",
                         },
                       },
@@ -776,16 +776,16 @@ Object {
                 },
               ],
               "label": "foo",
-              "link": Object {
+              "link": {
                 "id": "foo",
-                "package": Object {
-                  "instance": Object {
+                "package": {
+                  "instance": {
                     "path": "simple/node_modules/foo",
                   },
                   "name": "foo",
                 },
                 "page": "package",
-                "params": Object {
+                "params": {
                   "instance": "simple/node_modules/foo",
                 },
               },
@@ -793,12 +793,12 @@ Object {
               "weight": 121,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [
-                Object {
-                  "groups": Array [],
+            {
+              "groups": [
+                {
+                  "groups": [],
                   "label": "index.js",
-                  "link": Object {
+                  "link": {
                     "id": "./simple/node_modules/bar/index.js",
                     "page": "module",
                   },
@@ -808,16 +808,16 @@ Object {
                 },
               ],
               "label": "bar",
-              "link": Object {
+              "link": {
                 "id": "bar",
-                "package": Object {
-                  "instance": Object {
+                "package": {
+                  "instance": {
                     "path": "simple/node_modules/bar",
                   },
                   "name": "bar",
                 },
                 "page": "package",
-                "params": Object {
+                "params": {
                   "instance": "simple/node_modules/bar",
                 },
               },
@@ -839,25 +839,25 @@ Object {
       "weight": 10157.84,
       "weightCompressor": undefined,
     },
-    Object {
-      "groups": Array [],
-      "label": "external \\"extLib\\"",
-      "link": Object {
-        "id": "external var \\"extLib\\"",
+    {
+      "groups": [],
+      "label": "external "extLib"",
+      "link": {
+        "id": "external var "extLib"",
         "page": "module",
       },
-      "path": "external \\"extLib\\"",
+      "path": "external "extLib"",
       "weight": 84,
       "weightCompressor": undefined,
     },
-    Object {
-      "groups": Array [
-        Object {
-          "groups": Array [
-            Object {
-              "groups": Array [],
+    {
+      "groups": [
+        {
+          "groups": [
+            {
+              "groups": [],
               "label": "index.js",
-              "link": Object {
+              "link": {
                 "id": "929",
                 "page": "module",
               },
@@ -867,16 +867,16 @@ Object {
             },
           ],
           "label": "is-array",
-          "link": Object {
+          "link": {
             "id": "is-array",
-            "package": Object {
-              "instance": Object {
+            "package": {
+              "instance": {
                 "path": "node_modules/is-array",
               },
               "name": "is-array",
             },
             "page": "package",
-            "params": Object {
+            "params": {
               "instance": "node_modules/is-array",
             },
           },
@@ -884,16 +884,16 @@ Object {
           "weight": 470,
           "weightCompressor": undefined,
         },
-        Object {
-          "groups": Array [
-            Object {
-              "groups": Array [
-                Object {
-                  "groups": Array [
-                    Object {
-                      "groups": Array [],
+        {
+          "groups": [
+            {
+              "groups": [
+                {
+                  "groups": [
+                    {
+                      "groups": [],
                       "label": "api.js",
-                      "link": Object {
+                      "link": {
                         "id": "476",
                         "page": "module",
                       },
@@ -901,10 +901,10 @@ Object {
                       "weight": 1605,
                       "weightCompressor": undefined,
                     },
-                    Object {
-                      "groups": Array [],
+                    {
+                      "groups": [],
                       "label": "getUrl.js",
-                      "link": Object {
+                      "link": {
                         "id": "678",
                         "page": "module",
                       },
@@ -928,16 +928,16 @@ Object {
             },
           ],
           "label": "css-loader",
-          "link": Object {
+          "link": {
             "id": "css-loader",
-            "package": Object {
-              "instance": Object {
+            "package": {
+              "instance": {
                 "path": "node_modules/css-loader",
               },
               "name": "css-loader",
             },
             "page": "package",
-            "params": Object {
+            "params": {
               "instance": "node_modules/css-loader",
             },
           },
@@ -952,14 +952,14 @@ Object {
       "weight": 2905,
       "weightCompressor": undefined,
     },
-    Object {
-      "groups": Array [
-        Object {
-          "groups": Array [
-            Object {
-              "groups": Array [],
+    {
+      "groups": [
+        {
+          "groups": [
+            {
+              "groups": [],
               "label": "chunk loaded",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/chunk loaded",
                 "page": "module",
               },
@@ -967,10 +967,10 @@ Object {
               "weight": 886,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "compat get default export",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/compat get default export",
                 "page": "module",
               },
@@ -978,10 +978,10 @@ Object {
               "weight": 267,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "define property getters",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/define property getters",
                 "page": "module",
               },
@@ -989,10 +989,10 @@ Object {
               "weight": 308,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "ensure chunk",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/ensure chunk",
                 "page": "module",
               },
@@ -1000,10 +1000,10 @@ Object {
               "weight": 326,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "get javascript chunk filename",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/get javascript chunk filename",
                 "page": "module",
               },
@@ -1011,10 +1011,10 @@ Object {
               "weight": 167,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "global",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/global",
                 "page": "module",
               },
@@ -1022,10 +1022,10 @@ Object {
               "weight": 221,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "hasOwnProperty shorthand",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/hasOwnProperty shorthand",
                 "page": "module",
               },
@@ -1033,10 +1033,10 @@ Object {
               "weight": 88,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "jsonp chunk loading",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/jsonp chunk loading",
                 "page": "module",
               },
@@ -1044,10 +1044,10 @@ Object {
               "weight": 3215,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "load script",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/load script",
                 "page": "module",
               },
@@ -1055,10 +1055,10 @@ Object {
               "weight": 1503,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "make namespace object",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/make namespace object",
                 "page": "module",
               },
@@ -1066,10 +1066,10 @@ Object {
               "weight": 274,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "publicPath",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/publicPath",
                 "page": "module",
               },
@@ -1101,16 +1101,16 @@ Object {
 `;
 
 exports[`modulesToFoamTree 3`] = `
-Object {
-  "groups": Array [
-    Object {
-      "groups": Array [
-        Object {
-          "groups": Array [
-            Object {
-              "groups": Array [],
+{
+  "groups": [
+    {
+      "groups": [
+        {
+          "groups": [
+            {
+              "groups": [],
               "label": "index.ts",
-              "link": Object {
+              "link": {
                 "id": "292",
                 "page": "module",
               },
@@ -1118,10 +1118,10 @@ Object {
               "weight": 226,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "sub-module.ts",
-              "link": Object {
+              "link": {
                 "id": "./node_modules/babel-loader/lib/index.js!./simple/src/sub-module.ts",
                 "page": "module",
               },
@@ -1129,10 +1129,10 @@ Object {
               "weight": 190,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "index2.ts",
-              "link": Object {
+              "link": {
                 "id": "503",
                 "page": "module",
               },
@@ -1140,10 +1140,10 @@ Object {
               "weight": 552,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "index2.css",
-              "link": Object {
+              "link": {
                 "id": "945",
                 "page": "module",
               },
@@ -1151,10 +1151,10 @@ Object {
               "weight": 438,
               "weightCompressor": "gzip",
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "test.txt",
-              "link": Object {
+              "link": {
                 "id": "47",
                 "page": "module",
               },
@@ -1162,10 +1162,10 @@ Object {
               "weight": 99,
               "weightCompressor": "gzip",
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "dyn.ts",
-              "link": Object {
+              "link": {
                 "id": "848",
                 "page": "module",
               },
@@ -1173,10 +1173,10 @@ Object {
               "weight": 160,
               "weightCompressor": "gzip",
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "statoscope.png",
-              "link": Object {
+              "link": {
                 "id": "523",
                 "page": "module",
               },
@@ -1191,14 +1191,14 @@ Object {
           "weight": 7882,
           "weightCompressor": "multiple compressors",
         },
-        Object {
-          "groups": Array [
-            Object {
-              "groups": Array [
-                Object {
-                  "groups": Array [],
+        {
+          "groups": [
+            {
+              "groups": [
+                {
+                  "groups": [],
                   "label": "index.js",
-                  "link": Object {
+                  "link": {
                     "id": "./simple/node_modules/foo/index.js",
                     "page": "module",
                   },
@@ -1206,14 +1206,14 @@ Object {
                   "weight": 96,
                   "weightCompressor": undefined,
                 },
-                Object {
-                  "groups": Array [
-                    Object {
-                      "groups": Array [
-                        Object {
-                          "groups": Array [],
+                {
+                  "groups": [
+                    {
+                      "groups": [
+                        {
+                          "groups": [],
                           "label": "index.js",
-                          "link": Object {
+                          "link": {
                             "id": "./simple/node_modules/foo/node_modules/bar/index.js",
                             "page": "module",
                           },
@@ -1223,16 +1223,16 @@ Object {
                         },
                       ],
                       "label": "bar",
-                      "link": Object {
+                      "link": {
                         "id": "bar",
-                        "package": Object {
-                          "instance": Object {
+                        "package": {
+                          "instance": {
                             "path": "simple/node_modules/foo/node_modules/bar",
                           },
                           "name": "bar",
                         },
                         "page": "package",
-                        "params": Object {
+                        "params": {
                           "instance": "simple/node_modules/foo/node_modules/bar",
                         },
                       },
@@ -1249,16 +1249,16 @@ Object {
                 },
               ],
               "label": "foo",
-              "link": Object {
+              "link": {
                 "id": "foo",
-                "package": Object {
-                  "instance": Object {
+                "package": {
+                  "instance": {
                     "path": "simple/node_modules/foo",
                   },
                   "name": "foo",
                 },
                 "page": "package",
-                "params": Object {
+                "params": {
                   "instance": "simple/node_modules/foo",
                 },
               },
@@ -1266,12 +1266,12 @@ Object {
               "weight": 121,
               "weightCompressor": undefined,
             },
-            Object {
-              "groups": Array [
-                Object {
-                  "groups": Array [],
+            {
+              "groups": [
+                {
+                  "groups": [],
                   "label": "index.js",
-                  "link": Object {
+                  "link": {
                     "id": "./simple/node_modules/bar/index.js",
                     "page": "module",
                   },
@@ -1281,16 +1281,16 @@ Object {
                 },
               ],
               "label": "bar",
-              "link": Object {
+              "link": {
                 "id": "bar",
-                "package": Object {
-                  "instance": Object {
+                "package": {
+                  "instance": {
                     "path": "simple/node_modules/bar",
                   },
                   "name": "bar",
                 },
                 "page": "package",
-                "params": Object {
+                "params": {
                   "instance": "simple/node_modules/bar",
                 },
               },
@@ -1312,25 +1312,25 @@ Object {
       "weight": 8053,
       "weightCompressor": "multiple compressors",
     },
-    Object {
-      "groups": Array [],
-      "label": "external \\"extLib\\"",
-      "link": Object {
-        "id": "external var \\"extLib\\"",
+    {
+      "groups": [],
+      "label": "external "extLib"",
+      "link": {
+        "id": "external var "extLib"",
         "page": "module",
       },
-      "path": "external \\"extLib\\"",
+      "path": "external "extLib"",
       "weight": 84,
       "weightCompressor": undefined,
     },
-    Object {
-      "groups": Array [
-        Object {
-          "groups": Array [
-            Object {
-              "groups": Array [],
+    {
+      "groups": [
+        {
+          "groups": [
+            {
+              "groups": [],
               "label": "index.js",
-              "link": Object {
+              "link": {
                 "id": "929",
                 "page": "module",
               },
@@ -1340,16 +1340,16 @@ Object {
             },
           ],
           "label": "is-array",
-          "link": Object {
+          "link": {
             "id": "is-array",
-            "package": Object {
-              "instance": Object {
+            "package": {
+              "instance": {
                 "path": "node_modules/is-array",
               },
               "name": "is-array",
             },
             "page": "package",
-            "params": Object {
+            "params": {
               "instance": "node_modules/is-array",
             },
           },
@@ -1357,16 +1357,16 @@ Object {
           "weight": 268,
           "weightCompressor": "gzip",
         },
-        Object {
-          "groups": Array [
-            Object {
-              "groups": Array [
-                Object {
-                  "groups": Array [
-                    Object {
-                      "groups": Array [],
+        {
+          "groups": [
+            {
+              "groups": [
+                {
+                  "groups": [
+                    {
+                      "groups": [],
                       "label": "api.js",
-                      "link": Object {
+                      "link": {
                         "id": "476",
                         "page": "module",
                       },
@@ -1374,10 +1374,10 @@ Object {
                       "weight": 662,
                       "weightCompressor": "gzip",
                     },
-                    Object {
-                      "groups": Array [],
+                    {
+                      "groups": [],
                       "label": "getUrl.js",
-                      "link": Object {
+                      "link": {
                         "id": "678",
                         "page": "module",
                       },
@@ -1401,16 +1401,16 @@ Object {
             },
           ],
           "label": "css-loader",
-          "link": Object {
+          "link": {
             "id": "css-loader",
-            "package": Object {
-              "instance": Object {
+            "package": {
+              "instance": {
                 "path": "node_modules/css-loader",
               },
               "name": "css-loader",
             },
             "page": "package",
-            "params": Object {
+            "params": {
               "instance": "node_modules/css-loader",
             },
           },
@@ -1425,14 +1425,14 @@ Object {
       "weight": 1336,
       "weightCompressor": "gzip",
     },
-    Object {
-      "groups": Array [
-        Object {
-          "groups": Array [
-            Object {
-              "groups": Array [],
+    {
+      "groups": [
+        {
+          "groups": [
+            {
+              "groups": [],
               "label": "chunk loaded",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/chunk loaded",
                 "page": "module",
               },
@@ -1440,10 +1440,10 @@ Object {
               "weight": 407,
               "weightCompressor": "gzip",
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "compat get default export",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/compat get default export",
                 "page": "module",
               },
@@ -1451,10 +1451,10 @@ Object {
               "weight": 192,
               "weightCompressor": "gzip",
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "define property getters",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/define property getters",
                 "page": "module",
               },
@@ -1462,10 +1462,10 @@ Object {
               "weight": 197,
               "weightCompressor": "gzip",
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "ensure chunk",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/ensure chunk",
                 "page": "module",
               },
@@ -1473,10 +1473,10 @@ Object {
               "weight": 212,
               "weightCompressor": "gzip",
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "get javascript chunk filename",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/get javascript chunk filename",
                 "page": "module",
               },
@@ -1484,10 +1484,10 @@ Object {
               "weight": 154,
               "weightCompressor": "gzip",
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "global",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/global",
                 "page": "module",
               },
@@ -1495,10 +1495,10 @@ Object {
               "weight": 155,
               "weightCompressor": "gzip",
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "hasOwnProperty shorthand",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/hasOwnProperty shorthand",
                 "page": "module",
               },
@@ -1506,10 +1506,10 @@ Object {
               "weight": 97,
               "weightCompressor": "gzip",
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "jsonp chunk loading",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/jsonp chunk loading",
                 "page": "module",
               },
@@ -1517,10 +1517,10 @@ Object {
               "weight": 1116,
               "weightCompressor": "gzip",
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "load script",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/load script",
                 "page": "module",
               },
@@ -1528,10 +1528,10 @@ Object {
               "weight": 683,
               "weightCompressor": "gzip",
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "make namespace object",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/make namespace object",
                 "page": "module",
               },
@@ -1539,10 +1539,10 @@ Object {
               "weight": 186,
               "weightCompressor": "gzip",
             },
-            Object {
-              "groups": Array [],
+            {
+              "groups": [],
               "label": "publicPath",
-              "link": Object {
+              "link": {
                 "id": "webpack/runtime/publicPath",
                 "page": "module",
               },
@@ -1574,11 +1574,11 @@ Object {
 `;
 
 exports[`validation validation_getItem 1`] = `
-Object {
-  "details": Array [
-    Object {
-      "payload": Object {
-        "context": Object {
+{
+  "details": [
+    {
+      "payload": {
+        "context": {
           "compilation": "a5ca8b0ac9b2c1315153",
           "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
         },
@@ -1594,8 +1594,8 @@ Object {
   ],
   "id": 0,
   "message": "Module ./simple/src/index.ts + 3 modules should not be used",
-  "related": Array [
-    Object {
+  "related": [
+    {
       "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
       "type": "module",
     },
@@ -1606,12 +1606,12 @@ Object {
 `;
 
 exports[`validation validation_getItems 1`] = `
-Array [
-  Object {
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+[
+  {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
           },
@@ -1627,8 +1627,8 @@ Array [
     ],
     "id": 0,
     "message": "Module ./simple/src/index.ts + 3 modules should not be used",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts|0b0c5dd45d404db9de8e4f112da38650",
         "type": "module",
       },
@@ -1636,11 +1636,11 @@ Array [
     "rule": "webpack/restricted-modules",
     "type": "error",
   },
-  Object {
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+  {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
           },
@@ -1656,8 +1656,8 @@ Array [
     ],
     "id": 1,
     "message": "Module ./simple/src/index2.ts + 1 modules should not be used",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts|c68ca0e747ab40a1e23e6b9e5f0d6325",
         "type": "module",
       },
@@ -1665,11 +1665,11 @@ Array [
     "rule": "webpack/restricted-modules",
     "type": "error",
   },
-  Object {
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+  {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/sub-module.ts",
           },
@@ -1685,8 +1685,8 @@ Array [
     ],
     "id": 2,
     "message": "Module ./simple/src/sub-module.ts should not be used",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "./node_modules/babel-loader/lib/index.js!./simple/src/sub-module.ts",
         "type": "module",
       },
@@ -1694,11 +1694,11 @@ Array [
     "rule": "webpack/restricted-modules",
     "type": "error",
   },
-  Object {
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+  {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
           },
@@ -1714,8 +1714,8 @@ Array [
     ],
     "id": 3,
     "message": "Module ./simple/src/index2.css should not be used",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "./node_modules/css-loader/dist/cjs.js!./simple/src/index2.css",
         "type": "module",
       },
@@ -1723,11 +1723,11 @@ Array [
     "rule": "webpack/restricted-modules",
     "type": "error",
   },
-  Object {
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+  {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "module": "asset/resource|./simple/src/test.txt",
           },
@@ -1743,8 +1743,8 @@ Array [
     ],
     "id": 4,
     "message": "Module ./simple/src/test.txt should not be used",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "asset/resource|./simple/src/test.txt",
         "type": "module",
       },
@@ -1752,11 +1752,11 @@ Array [
     "rule": "webpack/restricted-modules",
     "type": "error",
   },
-  Object {
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+  {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/dyn.ts",
           },
@@ -1772,8 +1772,8 @@ Array [
     ],
     "id": 5,
     "message": "Module ./simple/src/dyn.ts should not be used",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "./node_modules/babel-loader/lib/index.js!./simple/src/dyn.ts",
         "type": "module",
       },
@@ -1781,11 +1781,11 @@ Array [
     "rule": "webpack/restricted-modules",
     "type": "error",
   },
-  Object {
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+  {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "module": "asset/inline|./simple/src/statoscope.png",
           },
@@ -1801,8 +1801,8 @@ Array [
     ],
     "id": 6,
     "message": "Module ./simple/src/statoscope.png should not be used",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "asset/inline|./simple/src/statoscope.png",
         "type": "module",
       },
@@ -1810,11 +1810,11 @@ Array [
     "rule": "webpack/restricted-modules",
     "type": "error",
   },
-  Object {
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+  {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
           },
@@ -1830,8 +1830,8 @@ Array [
     ],
     "id": 7,
     "message": "Module ./simple/src/index.ts should not be used",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index.ts",
         "type": "module",
       },
@@ -1839,11 +1839,11 @@ Array [
     "rule": "webpack/restricted-modules",
     "type": "error",
   },
-  Object {
-    "details": Array [
-      Object {
-        "payload": Object {
-          "context": Object {
+  {
+    "details": [
+      {
+        "payload": {
+          "context": {
             "compilation": "a5ca8b0ac9b2c1315153",
             "module": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
           },
@@ -1859,8 +1859,8 @@ Array [
     ],
     "id": 8,
     "message": "Module ./simple/src/index2.ts should not be used",
-    "related": Array [
-      Object {
+    "related": [
+      {
         "id": "./node_modules/babel-loader/lib/index.js!./simple/src/index2.ts",
         "type": "module",
       },
@@ -1871,13 +1871,13 @@ Array [
 ]
 `;
 
-exports[`validation validation_getItems 2`] = `Array []`;
+exports[`validation validation_getItems 2`] = `[]`;
 
 exports[`validation validation_resolveRule 1`] = `
-Object {
+{
   "description": "Ensures that bundle doesn't use specified modules",
-  "package": Object {
-    "author": Object {
+  "package": {
+    "author": {
       "name": "Sergey Melyukov",
       "url": "https://twitter.com/smelukov",
     },

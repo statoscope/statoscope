@@ -40,7 +40,7 @@ test('getter', () => {
   const resolve = make(
     [foo, bar],
     (item) => item.id,
-    (item) => item.data
+    (item) => item.data,
   );
 
   expect(resolve(3)).toBeNull();
@@ -57,7 +57,7 @@ describe('locking', () => {
       list,
       (item) => item.id,
       (item) => item.data,
-      false
+      false,
     );
 
     list.push(foo);
@@ -75,7 +75,7 @@ describe('locking', () => {
     const resolve = make(
       list,
       (item) => item.id,
-      (item) => item.data
+      (item) => item.data,
     );
 
     list.push(foo);

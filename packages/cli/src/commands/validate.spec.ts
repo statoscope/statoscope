@@ -5,27 +5,27 @@ import validate from './validate';
 
 const configFixturePath = path.resolve(
   __dirname,
-  '../../../../test/fixtures/cli/validate/config.js'
+  '../../../../test/fixtures/cli/validate/config.js',
 );
 
 const configWithReportersFixturePath = path.resolve(
   __dirname,
-  '../../../../test/fixtures/cli/validate/config-with-reporters.js'
+  '../../../../test/fixtures/cli/validate/config-with-reporters.js',
 );
 
 const configReferenceFixturePath = path.resolve(
   __dirname,
-  '../../../../test/fixtures/cli/validate/config-reference.js'
+  '../../../../test/fixtures/cli/validate/config-reference.js',
 );
 
 const inputFixturePath = path.resolve(
   __dirname,
-  '../../../../test/bundles/v5/simple/stats-dev.json'
+  '../../../../test/bundles/v5/simple/stats-dev.json',
 );
 
 const referenceFixturePath = path.resolve(
   __dirname,
-  '../../../../test/bundles/v4/simple/stats-dev.json'
+  '../../../../test/bundles/v4/simple/stats-dev.json',
 );
 
 const output: string[][] = [];
@@ -37,8 +37,8 @@ beforeEach(() => {
     .mockImplementation((...args: string[]) => {
       output.push(
         args.map((o) =>
-          String(o).replace(process.cwd(), '<pwd>').replace(os.tmpdir(), '<tmp>')
-        )
+          String(o).replace(process.cwd(), '<pwd>').replace(os.tmpdir(), '<tmp>'),
+        ),
       );
     });
 });

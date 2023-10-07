@@ -4,8 +4,7 @@
   "description": "This package contains helpers to process webpack stats",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "../../node_modules/.bin/tsc",
-    "prepublishOnly": "npm run build"
+    "build": "../../node_modules/.bin/tsc"
   },
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {
@@ -26,11 +25,11 @@
     "@statoscope/stats-extension-package-info": "5.28.0",
     "@statoscope/stats-extension-stats-validation-result": "5.28.0",
     "@statoscope/types": "5.27.0",
+    "@types/md5": "^2.3.2",
+    "@types/webpack": "^5.0.0",
     "md5": "^2.3.0"
   },
   "devDependencies": {
-    "@types/md5": "^2.3.0",
-    "@types/webpack": "^5.0.0",
-    "flatted": "^3.1.1"
+    "flatted": "^3.2.7"
   }
 }

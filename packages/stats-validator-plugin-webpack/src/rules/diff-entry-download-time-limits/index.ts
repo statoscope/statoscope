@@ -11,7 +11,7 @@ import { ByNameFilterItem, ExcludeItem, normalizeExclude } from '../../limits-he
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const version = require('../../../package.json');
 
-type NetworkType = typeof networkListType[number]['name'];
+type NetworkType = (typeof networkListType)[number]['name'];
 
 export type Limits = {
   maxDownloadTimeDiff?: number | Limit;
@@ -104,12 +104,12 @@ function formatError(
   type: 'assets' | 'initial assets' | 'async assets',
   entry: NormalizedEntrypointItem,
   limit: number | Limit,
-  diff: ValueDiff
+  diff: ValueDiff,
 ): string {
   const normalizedLimit: Limit =
     typeof limit === 'number' ? { type: 'absolute', number: limit } : limit;
   return `Entry "${entry.name}": Download time diff of ${type} is ${h.formatDuration(
-    diff.absolute
+    diff.absolute,
   )} (${diff.percent.toFixed(2)}%). It's over the ${
     normalizedLimit.type === 'absolute'
       ? h.formatDuration(normalizedLimit.number)
@@ -120,7 +120,7 @@ function formatError(
 const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
   ruleParams,
   data,
-  api
+  api,
 ): void => {
   api.setRuleDescriptor({
     description:
@@ -306,9 +306,9 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
             'assets',
             entryItem.after.entry,
             entryItem.rule.maxDownloadTimeDiff!,
-            entryItem.diff.downloadTime
+            entryItem.diff.downloadTime,
           ),
-          options
+          options,
         );
       }
 
@@ -318,9 +318,9 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
             'initial assets',
             entryItem.after.entry,
             entryItem.rule.maxInitialDownloadTimeDiff!,
-            entryItem.diff.initialDownloadTime
+            entryItem.diff.initialDownloadTime,
           ),
-          options
+          options,
         );
       }
 
@@ -330,9 +330,9 @@ const diffEntryDownloadTimeLimits: WebpackRule<Params> = (
             'async assets',
             entryItem.after.entry,
             entryItem.rule.maxAsyncDownloadTimeDiff!,
-            entryItem.diff.asyncDownloadTime
+            entryItem.diff.asyncDownloadTime,
           ),
-          options
+          options,
         );
       }
     }

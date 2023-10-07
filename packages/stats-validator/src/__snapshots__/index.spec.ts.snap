@@ -1,32 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`custom reporter 1`] = `
-Object {
-  "files": Object {
+{
+  "files": {
     "input": "<pwd>/test/bundles/v5/simple/stats-prod.json",
     "reference": undefined,
   },
-  "rules": Array [
-    Object {
-      "api": Object {
+  "rules": [
+    {
+      "api": {
         "getRuleDescriptor": [Function],
         "getStorage": [Function],
         "message": [Function],
         "setRuleDescriptor": [Function],
       },
-      "execParams": Object {
+      "execParams": {
         "mode": "error",
       },
       "name": "webpack/restricted-modules",
     },
-    Object {
-      "api": Object {
+    {
+      "api": {
         "getRuleDescriptor": [Function],
         "getStorage": [Function],
         "message": [Function],
         "setRuleDescriptor": [Function],
       },
-      "execParams": Object {
+      "execParams": {
         "mode": "error",
       },
       "name": "webpack/restricted-packages",
@@ -36,32 +36,32 @@ Object {
 `;
 
 exports[`should work 1`] = `
-Object {
-  "files": Object {
+{
+  "files": {
     "input": "<pwd>/test/bundles/v5/simple/stats-prod.json",
     "reference": undefined,
   },
-  "rules": Array [
-    Object {
-      "api": Object {
+  "rules": [
+    {
+      "api": {
         "getRuleDescriptor": [Function],
         "getStorage": [Function],
         "message": [Function],
         "setRuleDescriptor": [Function],
       },
-      "execParams": Object {
+      "execParams": {
         "mode": "error",
       },
       "name": "webpack/restricted-modules",
     },
-    Object {
-      "api": Object {
+    {
+      "api": {
         "getRuleDescriptor": [Function],
         "getStorage": [Function],
         "message": [Function],
         "setRuleDescriptor": [Function],
       },
-      "execParams": Object {
+      "execParams": {
         "mode": "error",
       },
       "name": "webpack/restricted-packages",
@@ -71,32 +71,32 @@ Object {
 `;
 
 exports[`silent 1`] = `
-Object {
-  "files": Object {
+{
+  "files": {
     "input": "<pwd>/test/bundles/v5/simple/stats-prod.json",
     "reference": undefined,
   },
-  "rules": Array [
-    Object {
-      "api": Object {
+  "rules": [
+    {
+      "api": {
         "getRuleDescriptor": [Function],
         "getStorage": [Function],
         "message": [Function],
         "setRuleDescriptor": [Function],
       },
-      "execParams": Object {
+      "execParams": {
         "mode": "error",
       },
       "name": "webpack/restricted-modules",
     },
-    Object {
-      "api": Object {
+    {
+      "api": {
         "getRuleDescriptor": [Function],
         "getStorage": [Function],
         "message": [Function],
         "setRuleDescriptor": [Function],
       },
-      "execParams": Object {
+      "execParams": {
         "mode": "error",
       },
       "name": "webpack/restricted-packages",

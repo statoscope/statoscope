@@ -136,7 +136,7 @@ test.each([
   'chunkName: $name',
   ({ chunk, name }) => {
     expect(helpers.chunkName(chunk as NormalizedChunk)).toBe(name);
-  }
+  },
 );
 
 test.each([
@@ -172,7 +172,7 @@ test.each([
   'assetChunkName: $name',
   ({ asset, name }) => {
     expect(helpers.assetChunkName(asset as NormalizedAsset)).toBe(name);
-  }
+  },
 );
 
 test('getTotalFilesSize', () => {
@@ -185,9 +185,9 @@ test('getTotalFilesSize', () => {
             { name: 'one', size: 100 },
             { name: 'two', size: 50 },
           ],
-        } as Partial<NormalizedAsset>
-      )
-    )
+        } as Partial<NormalizedAsset>,
+      ),
+    ),
   ).toBe(150);
   const [asset] = firstCompilation.assets;
   const sizeA = helpers.getTotalFilesSize(asset, hash, true);
@@ -200,13 +200,13 @@ test('getTotalFilesSize', () => {
 
 test('getPackageInstanceInfo', () => {
   const packageItem = firstCompilation.nodeModules.find(
-    (item) => item.name === 'is-array'
+    (item) => item.name === 'is-array',
   )!;
   expect(
-    helpers.getPackageInstanceInfo(packageItem.name, packageItem.instances[0].path, hash)
+    helpers.getPackageInstanceInfo(packageItem.name, packageItem.instances[0].path, hash),
   ).toMatchInlineSnapshot(`
-    Object {
-      "info": Object {
+    {
+      "info": {
         "version": "1.0.1",
       },
       "path": "node_modules/is-array",
@@ -229,7 +229,7 @@ test('resolveExtension', () => {
   expect(helpers.resolveExtension('foo', firstFile.name)).toBeNull();
   const ext = helpers.resolveExtension(
     '@statoscope/stats-extension-compressed',
-    firstFile.name
+    firstFile.name,
   );
   expect(ext!.data).not.toBeNull();
   expect(ext!.api).not.toBeNull();
@@ -239,7 +239,7 @@ test('resolveExtensionByCompilation', () => {
   expect(helpers.resolveExtensionByCompilation('foo', hash)).toBeNull();
   const ext = helpers.resolveExtensionByCompilation(
     '@statoscope/stats-extension-compressed',
-    hash
+    hash,
   );
   expect(ext!.data).not.toBeNull();
   expect(ext!.api).not.toBeNull();
@@ -252,13 +252,13 @@ test('moduleGraph_getEntrypoints', () => {
   expect(
     helpers
       .moduleGraph_getEntrypoints(module, graph, firstCompilation.entrypoints)
-      .map((entry) => entry.name)
+      .map((entry) => entry.name),
   ).toEqual(['one', 'two']);
 });
 
 test('moduleGraph_getPaths', () => {
   const fromModule = firstCompilation.nodeModules.find(
-    (item) => item.name === 'is-array'
+    (item) => item.name === 'is-array',
   )!.instances[0].modules[0];
   const toModule = firstCompilation.entrypoints[0].data.dep!.module!;
   const graph = helpers.getModuleGraph(hash)!;
@@ -270,22 +270,22 @@ test('moduleGraph_getPaths', () => {
 test('modulesToFoamTree', () => {
   expect(helpers.modulesToFoamTree(firstCompilation.modules)).toMatchSnapshot();
   expect(
-    helpers.modulesToFoamTree(firstCompilation.modules, hash, false)
+    helpers.modulesToFoamTree(firstCompilation.modules, hash, false),
   ).toMatchSnapshot();
   expect(
-    helpers.modulesToFoamTree(firstCompilation.modules, hash, true)
+    helpers.modulesToFoamTree(firstCompilation.modules, hash, true),
   ).toMatchSnapshot();
 });
 
 describe('validation', () => {
   test('validation_getItems', () => {
     expect(helpers.validation_getItems(hash, 'entry', './src/statoscope.png')).toEqual(
-      []
+      [],
     );
     expect(helpers.validation_getItems(hash, 'module')).toMatchSnapshot();
     expect(helpers.validation_getItems(hash, 'module', './src/foo.png')).toEqual([]);
     expect(
-      helpers.validation_getItems(hash, 'module', './src/statoscope.png')
+      helpers.validation_getItems(hash, 'module', './src/statoscope.png'),
     ).toMatchSnapshot();
   });
   test('validation_getItem', () => {
@@ -294,7 +294,7 @@ describe('validation', () => {
   });
   test('validation_resolveRelatedItem', () => {
     expect(
-      helpers.validation_resolveRelatedItem({ id: 'foo', type: 'module' }, hash).item
+      helpers.validation_resolveRelatedItem({ id: 'foo', type: 'module' }, hash).item,
     ).toBeNull();
     expect(
       helpers.validation_resolveRelatedItem(
@@ -302,8 +302,8 @@ describe('validation', () => {
           id: 'asset/inline|./simple/src/statoscope.png',
           type: 'module',
         },
-        hash
-      ).item
+        hash,
+      ).item,
     ).not.toBeNull();
     expect(
       helpers.validation_resolveRelatedItem(
@@ -311,16 +311,16 @@ describe('validation', () => {
           id: 'simple/node_modules/foo',
           type: 'package-instance',
         },
-        hash
+        hash,
         // @ts-ignore
-      ).item?.path
+      ).item?.path,
     ).toBe('simple/node_modules/foo');
   });
 
   test('validation_resolveRule', () => {
     expect(helpers.validation_resolveRule('foo', hash)).toBeNull();
     expect(
-      helpers.validation_resolveRule('webpack/restricted-modules', hash)
+      helpers.validation_resolveRule('webpack/restricted-modules', hash),
     ).toMatchSnapshot();
   });
 });
@@ -334,7 +334,7 @@ describe('customReports', () => {
   test('customReports_getItem', () => {
     expect(helpers.customReports_getItem('foo', firstFile.name)).toBeNull();
     expect(
-      helpers.customReports_getItem('top-20-biggest-modules', firstFile.name)
+      helpers.customReports_getItem('top-20-biggest-modules', firstFile.name),
     ).toMatchSnapshot();
   });
 });
@@ -342,25 +342,25 @@ describe('customReports', () => {
 describe('resolverCompilationBy', () => {
   test('resolveCompilationByAsset', () => {
     expect(
-      helpers.resolveCompilationByAsset(firstCompilation.assets[0], firstFile.name)
+      helpers.resolveCompilationByAsset(firstCompilation.assets[0], firstFile.name),
     ).toBe(firstCompilation);
   });
   test('resolveCompilationByChunk', () => {
     expect(
-      helpers.resolveCompilationByChunk(firstCompilation.chunks[0], firstFile.name)
+      helpers.resolveCompilationByChunk(firstCompilation.chunks[0], firstFile.name),
     ).toBe(firstCompilation);
   });
   test('resolveCompilationByModule', () => {
     expect(
-      helpers.resolveCompilationByModule(firstCompilation.modules[0], firstFile.name)
+      helpers.resolveCompilationByModule(firstCompilation.modules[0], firstFile.name),
     ).toBe(firstCompilation);
   });
   test('resolveCompilationByEntrypoint', () => {
     expect(
       helpers.resolveCompilationByEntrypoint(
         firstCompilation.entrypoints[0],
-        firstFile.name
-      )
+        firstFile.name,
+      ),
     ).toBe(firstCompilation);
   });
 });
@@ -369,15 +369,15 @@ describe('assets', () => {
   test('asset_getSize', () => {
     expect(helpers.asset_getSize(firstCompilation.assets[0], hash, false))
       .toMatchInlineSnapshot(`
-      Object {
+      {
         "size": 9550,
       }
     `);
     expect(helpers.asset_getSize(firstCompilation.assets[0], hash, true))
       .toMatchInlineSnapshot(`
-      Object {
+      {
         "compressor": "gzip",
-        "meta": Object {
+        "meta": {
           "level": 6,
         },
         "size": 7141,
@@ -387,14 +387,14 @@ describe('assets', () => {
   test('assets_getTotalSize', () => {
     expect(helpers.assets_getTotalSize(firstCompilation.assets, hash, false))
       .toMatchInlineSnapshot(`
-      Object {
+      {
         "compressor": undefined,
         "size": 13233,
       }
     `);
     expect(helpers.assets_getTotalSize(firstCompilation.assets, hash, true))
       .toMatchInlineSnapshot(`
-      Object {
+      {
         "compressor": "gzip",
         "size": 9271,
       }
@@ -405,52 +405,52 @@ describe('assets', () => {
 describe('entrypoint', () => {
   test('entrypoint_getChunks', () => {
     expect(
-      helpers.entrypoint_getChunks(firstCompilation.entrypoints[0]).map((c) => c.id)
+      helpers.entrypoint_getChunks(firstCompilation.entrypoints[0]).map((c) => c.id),
     ).toEqual([666, 929, 255]);
     expect(
-      helpers.entrypoint_getChunks(firstCompilation.entrypoints[1]).map((c) => c.id)
+      helpers.entrypoint_getChunks(firstCompilation.entrypoints[1]).map((c) => c.id),
     ).toEqual([666, 929, 804, 848]);
   });
   test('entrypoint_getInitialChunks', () => {
     expect(
       helpers
         .entrypoint_getInitialChunks(firstCompilation.entrypoints[0])
-        .map((c) => c.id)
+        .map((c) => c.id),
     ).toEqual([666, 929, 255]);
     expect(
       helpers
         .entrypoint_getInitialChunks(firstCompilation.entrypoints[1])
-        .map((c) => c.id)
+        .map((c) => c.id),
     ).toEqual([666, 929, 804]);
   });
   test('entrypoint_getInitialSize', () => {
     expect(
-      helpers.entrypoint_getInitialSize(firstCompilation.entrypoints[0], hash, false)
+      helpers.entrypoint_getInitialSize(firstCompilation.entrypoints[0], hash, false),
     ).toMatchInlineSnapshot(`
-      Object {
+      {
         "compressor": undefined,
         "size": 3526,
       }
     `);
     expect(helpers.entrypoint_getInitialSize(firstCompilation.entrypoints[0], hash, true))
       .toMatchInlineSnapshot(`
-      Object {
+      {
         "compressor": "gzip",
         "size": 1963,
       }
     `);
 
     expect(
-      helpers.entrypoint_getInitialSize(firstCompilation.entrypoints[1], hash, false)
+      helpers.entrypoint_getInitialSize(firstCompilation.entrypoints[1], hash, false),
     ).toMatchInlineSnapshot(`
-      Object {
+      {
         "compressor": undefined,
         "size": 12811,
       }
     `);
     expect(helpers.entrypoint_getInitialSize(firstCompilation.entrypoints[1], hash, true))
       .toMatchInlineSnapshot(`
-      Object {
+      {
         "compressor": "gzip",
         "size": 8893,
       }
@@ -458,37 +458,37 @@ describe('entrypoint', () => {
   });
   test('entrypoint_getAsyncChunks', () => {
     expect(
-      helpers.entrypoint_getAsyncChunks(firstCompilation.entrypoints[0]).map((c) => c.id)
+      helpers.entrypoint_getAsyncChunks(firstCompilation.entrypoints[0]).map((c) => c.id),
     ).toEqual([]);
     expect(
-      helpers.entrypoint_getAsyncChunks(firstCompilation.entrypoints[1]).map((c) => c.id)
+      helpers.entrypoint_getAsyncChunks(firstCompilation.entrypoints[1]).map((c) => c.id),
     ).toEqual([848]);
   });
   test('entrypoint_getAsyncSize', () => {
     expect(helpers.entrypoint_getAsyncSize(firstCompilation.entrypoints[0], hash, false))
       .toMatchInlineSnapshot(`
-      Object {
+      {
         "size": 0,
       }
     `);
     expect(helpers.entrypoint_getAsyncSize(firstCompilation.entrypoints[0], hash, true))
       .toMatchInlineSnapshot(`
-      Object {
+      {
         "size": 0,
       }
     `);
 
     expect(helpers.entrypoint_getAsyncSize(firstCompilation.entrypoints[1], hash, false))
       .toMatchInlineSnapshot(`
-      Object {
+      {
         "size": 142,
       }
     `);
     expect(helpers.entrypoint_getAsyncSize(firstCompilation.entrypoints[1], hash, true))
       .toMatchInlineSnapshot(`
-      Object {
+      {
         "compressor": "gzip",
-        "meta": Object {
+        "meta": {
           "level": 6,
         },
         "size": 134,
@@ -497,41 +497,41 @@ describe('entrypoint', () => {
   });
   test('entrypoint_getAssets', () => {
     expect(
-      helpers.entrypoint_getAssets(firstCompilation.entrypoints[0]).map((c) => c.name)
+      helpers.entrypoint_getAssets(firstCompilation.entrypoints[0]).map((c) => c.name),
     ).toEqual(['runtime.js', '929.js', 'one.js']);
     expect(
-      helpers.entrypoint_getAssets(firstCompilation.entrypoints[1]).map((c) => c.name)
+      helpers.entrypoint_getAssets(firstCompilation.entrypoints[1]).map((c) => c.name),
     ).toEqual(['runtime.js', '929.js', 'two.js', '848.js']);
   });
   test('entrypoint_getInitialAssets', () => {
     expect(
       helpers
         .entrypoint_getInitialAssets(firstCompilation.entrypoints[0])
-        .map((c) => c.name)
+        .map((c) => c.name),
     ).toEqual(['runtime.js', '929.js', 'one.js']);
     expect(
       helpers
         .entrypoint_getInitialAssets(firstCompilation.entrypoints[1])
-        .map((c) => c.name)
+        .map((c) => c.name),
     ).toEqual(['runtime.js', '929.js', 'two.js']);
   });
   test('entrypoint_getAsyncAssets', () => {
     expect(
       helpers
         .entrypoint_getAsyncAssets(firstCompilation.entrypoints[0])
-        .map((c) => c.name)
+        .map((c) => c.name),
     ).toEqual([]);
     expect(
       helpers
         .entrypoint_getAsyncAssets(firstCompilation.entrypoints[1])
-        .map((c) => c.name)
+        .map((c) => c.name),
     ).toEqual(['848.js']);
   });
 });
 
 describe('module', () => {
   function handleGraph<T extends Record<string, K | true>, K extends Record<string, K>>(
-    graph: T
+    graph: T,
   ): Map<string, NormalizedModule> {
     const nodeCache = new Map<string, NormalizedModule>();
     const getNode = (identifier: string): NormalizedModule => {
@@ -598,14 +598,14 @@ describe('module', () => {
       helpers
         .module_retained_modules(graph.get('a'))
         .map((n) => n.identifier)
-        .sort()
+        .sort(),
     ).toEqual(['b', 'c', 'd', 'k']);
 
     expect(
       helpers
         .module_retained_modules(graph.get('e'))
         .map((n) => n.identifier)
-        .sort()
+        .sort(),
     ).toEqual(['f', 'l']);
   });
 });

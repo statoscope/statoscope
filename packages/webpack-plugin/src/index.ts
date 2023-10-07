@@ -14,7 +14,7 @@ import { StatoscopeMeta } from '@statoscope/webpack-model/webpack';
 import { makeReplacer, transform } from '@statoscope/report-writer/dist/utils';
 import { default as CustomReportsExtensionGenerator } from '@statoscope/stats-extension-custom-reports/dist/generator';
 import { Report } from '@statoscope/types/types/custom-report';
-import { StatsExtensionWebpackAdapter } from '@statoscope/webpack-model/dist';
+import { StatsExtensionWebpackAdapter } from '@statoscope/webpack-model';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { name, version } = require('../package.json');

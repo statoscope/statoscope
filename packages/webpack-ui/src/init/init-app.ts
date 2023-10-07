@@ -68,7 +68,7 @@ export default ({
 
     if (!context.params.hash) {
       const targetHash = discovery.data[0]?.compilations.find(
-        (compilation) => !compilation.isChild
+        (compilation) => !compilation.isChild,
       )?.hash;
       const link = discovery.encodePageHash(context.page, context.id, {
         ...context.params,

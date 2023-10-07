@@ -24,29 +24,29 @@ const extensionContainer = new Container();
 extensionContainer.register(
   ExtensionCompressedPackage.name,
   ExtensionCompressedPackage.version,
-  ExtensionCompressedAPIFactory
+  ExtensionCompressedAPIFactory,
 );
 
 extensionContainer.register(
   ExtensionPackageInfoPackage.name,
   ExtensionPackageInfoPackage.version,
-  ExtensionPackageInfoAPIFactory
+  ExtensionPackageInfoAPIFactory,
 );
 
 extensionContainer.register(
   ExtensionValidationResultPackage.name,
   ExtensionValidationResultPackage.version,
-  ExtensionValidationResultAPIFactory
+  ExtensionValidationResultAPIFactory,
 );
 
 extensionContainer.register(
   ExtensionCustomReportsPackage.name,
   ExtensionCustomReportsPackage.version,
-  ExtensionCustomReportsAPIFactory
+  ExtensionCustomReportsAPIFactory,
 );
 
 export default function handleFile(
-  rawData: RawStatsFileDescriptor | RawStatsFileDescriptor[]
+  rawData: RawStatsFileDescriptor | RawStatsFileDescriptor[],
 ): NormalizeResult {
   const files = [];
   const compilations = [];
@@ -69,7 +69,7 @@ export default function handleFile(
 }
 
 export function handleRawFile(
-  rawStatsFileDescriptor: RawStatsFileDescriptor
+  rawStatsFileDescriptor: RawStatsFileDescriptor,
 ): HandledStats {
   denormalizeCompilation(rawStatsFileDescriptor.data);
 

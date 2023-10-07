@@ -30,7 +30,7 @@ export type PopupAPI<TData> = {
 
 export default <TData, TContext>(
   discovery: StatoscopeWidget,
-  view: ViewConfig<TData, TContext>
+  view: ViewConfig<TData, TContext>,
 ): PopupAPI<TData> => {
   function render(el: HTMLElement, newData: TData): void {
     if (newData !== data) {

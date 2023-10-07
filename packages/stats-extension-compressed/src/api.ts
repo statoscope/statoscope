@@ -10,7 +10,7 @@ const makeAPI: APIFactory<Format, API> = (source) => {
   for (const compilation of source.payload.compilations) {
     sizeIndexes.set(
       compilation.id,
-      makeIndex((r) => r.id, compilation.resources)
+      makeIndex((r) => r.id, compilation.resources),
     );
   }
 

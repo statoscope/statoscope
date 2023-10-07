@@ -4,7 +4,6 @@
   "description": "This package is an alias for @statoscope/webpack-plugin and @statoscope/webpack-plugin",
   "main": "./plugin/index.js",
   "browser": "./src/index.js",
-  "scripts": {},
   "repository": "https://github.com/statoscope/statoscope.git",
   "author": {
     "name": "Sergey Melyukov",

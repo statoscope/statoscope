@@ -1,6 +1,6 @@
 *
 !bin
 !dist/**/*.{js,d.ts,json}
-!webpack.d.ts
 !types.d.ts
+!webpack.d.ts
 **/*.spec.{js,d.ts}

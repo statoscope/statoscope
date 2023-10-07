@@ -1,144 +1,144 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`with config explicit reference 1`] = `
-Array [
-  Array [
+[
+  [
     "input.json",
   ],
-  Array [
+  [
     "ccac20dc279ee29ab60e",
   ],
-  Array [
+  [
     "error  Module ./simple/src/index.ts should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/index2.ts should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/sub-module.ts should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/index2.css should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/test.txt should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/dyn.ts should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/statoscope.png should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  foo@1.0.0 should not be used  webpack/restricted-packages",
   ],
-  Array [
+  [
     "Instances:",
   ],
-  Array [
+  [
     "- simple/node_modules/foo  1.0.0",
   ],
-  Array [
+  [
     "unknown compilation",
   ],
-  Array [
+  [
     "error  Usage of ./node_modules/is-array/index.js was increased from 2 to 4  webpack/diff-deprecated-modules",
   ],
-  Array [
-    "error  Usage of external \\"extLib\\" was increased from 0 to 1  webpack/diff-deprecated-modules",
+  [
+    "error  Usage of external "extLib" was increased from 0 to 1  webpack/diff-deprecated-modules",
   ],
-  Array [
+  [
     "error  Usage of ./simple/src/test.txt was increased from 0 to 1  webpack/diff-deprecated-modules",
   ],
-  Array [
+  [
     "error  Usage of ./simple/src/statoscope.png was increased from 0 to 2  webpack/diff-deprecated-modules",
   ],
-  Array [
+  [
     "error  Usage of is-array was increased from 2 to 4  webpack/diff-deprecated-packages",
   ],
-  Array [
+  [
     "",
   ],
-  Array [
+  [
     "13 problems (13 errors, 0 warnings)",
   ],
 ]
 `;
 
 exports[`with config explicit reporter 1`] = `
-Array [
-  Array [
+[
+  [
     "undefined",
   ],
-  Array [
+  [
     "Module ./simple/src/index.ts should not be used",
   ],
-  Array [
+  [
     "Module ./simple/src/index2.ts should not be used",
   ],
-  Array [
+  [
     "Module ./simple/src/sub-module.ts should not be used",
   ],
-  Array [
+  [
     "Module ./simple/src/index2.css should not be used",
   ],
-  Array [
+  [
     "Module ./simple/src/test.txt should not be used",
   ],
-  Array [
+  [
     "Module ./simple/src/dyn.ts should not be used",
   ],
-  Array [
+  [
     "Module ./simple/src/statoscope.png should not be used",
   ],
-  Array [
+  [
     "foo@1.0.0 should not be used",
   ],
 ]
 `;
 
 exports[`with config explicit single 1`] = `
-Array [
-  Array [
+[
+  [
     "input.json",
   ],
-  Array [
+  [
     "ccac20dc279ee29ab60e",
   ],
-  Array [
+  [
     "error  Module ./simple/src/index.ts should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/index2.ts should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/sub-module.ts should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/index2.css should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/test.txt should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/dyn.ts should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  Module ./simple/src/statoscope.png should not be used  webpack/restricted-modules",
   ],
-  Array [
+  [
     "error  foo@1.0.0 should not be used  webpack/restricted-packages",
   ],
-  Array [
+  [
     "Instances:",
   ],
-  Array [
+  [
     "- simple/node_modules/foo  1.0.0",
   ],
-  Array [
+  [
     "",
   ],
-  Array [
+  [
     "8 problems (8 errors, 0 warnings)",
   ],
 ]

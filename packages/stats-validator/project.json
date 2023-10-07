@@ -1,0 +1,13 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "stats-validator",
+  "projectType": "library",
+  "implicitDependencies": ["!stats-validator-plugin-webpack"],
+  "targets": {
+    "test": {},
+    "test:update": {},
+    "lint": {},
+    "lint:fix": {},
+    "build": {}
+  }
+}

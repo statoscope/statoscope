@@ -8,7 +8,7 @@ export type API = {
   getItems: (
     compilationId: string | null,
     type?: RelationItem['type'] | null,
-    relatedId?: string | number
+    relatedId?: string | number,
   ) => Item[];
   getItemById(id: number): Item | null;
   getRule(id: string): RuleDescriptor | null;
@@ -87,7 +87,7 @@ const makeAPI: APIFactory<Format, API> = (source) => {
     getItems: (
       compilationId: string | null,
       type?: RelationItem['type'] | null,
-      relatedId?: string | number
+      relatedId?: string | number,
     ): Item[] => {
       if (relatedId) {
         if (!type) {
