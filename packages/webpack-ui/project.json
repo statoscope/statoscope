@@ -9,8 +9,11 @@
       "options": {
         "script": "build"
       },
-      "inputs": ["default", "{projectRoot}/webpack.config.js"],
-      "outputs": ["dist/{projectRoot}/dist"]
+      "inputs": [
+        "prod",
+        "{projectRoot}/webpack.config.js",
+        "^prod"
+      ]
     },
     "lint": {},
     "lint:fix": {}

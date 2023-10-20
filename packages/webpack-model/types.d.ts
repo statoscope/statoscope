@@ -109,7 +109,6 @@ export type RawIndexes = {
   modules: IndexAPI<string, Webpack.RawModule>;
   chunks: IndexAPI<Webpack.ChunkID, Webpack.Chunk>;
   assets: IndexAPI<string, Webpack.RawAsset>;
-  chunkAssets: Map<Webpack.ChunkID, Set<Webpack.RawAsset>>;
   entrypoints: IndexAPI<string, EntrypointItem>;
 };
 

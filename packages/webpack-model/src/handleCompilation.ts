@@ -183,7 +183,6 @@ function handleCompilation(
     modules: makeIndex((item) => item.identifier, null, {
       idModifier: moduleIdModifier,
     }),
-    chunkAssets: new Map(),
   };
   const resolvers: ProcessingContext['resolvers'] = {
     resolveAsset: (id) => indexes.assets.get(id),
@@ -206,20 +205,6 @@ function handleCompilation(
     processingContext.rawIndexes.chunks.add(chunk);
   }
   for (const asset of collectRawAssets(compilation)) {
-    for (let chunkOrId of asset.chunks ?? []) {
-      if (chunkOrId && typeof chunkOrId !== 'string' && typeof chunkOrId !== 'number') {
-        chunkOrId = chunkOrId.id;
-      }
-
-      let assets = processingContext.rawIndexes.chunkAssets.get(chunkOrId);
-
-      if (!assets) {
-        assets = new Set();
-        processingContext.rawIndexes.chunkAssets.set(chunkOrId, assets);
-      }
-
-      assets.add(asset);
-    }
     processingContext.rawIndexes.assets.add(asset);
   }
   for (const entrypoint of collectRawEntrypoints(compilation)) {
@@ -459,23 +444,12 @@ function prepareChunk(chunk: Webpack.Chunk | null, context: ProcessingContext): 
   }
 
   if (chunk.files) {
-    const assets = chunk.files
+    normalizedChunk.files = chunk.files
       .filter(Boolean) // to skip null files, issue #158
       .map((f) => context.rawIndexes.assets.get(typeof f === 'string' ? f : f.name))
       .filter(Boolean) as NormalizedAsset[];
-    const assetsUniq = new Set(assets);
-
-    for (const asset of context.rawIndexes.chunkAssets.get(chunk.id) ?? []) {
-      assetsUniq.add(asset as NormalizedAsset);
-    }
-
-    normalizedChunk.files = [...assetsUniq];
   } else {
     chunk.files = [];
-
-    for (const asset of context.rawIndexes.chunkAssets.get(chunk.id) ?? []) {
-      chunk.files.push(asset);
-    }
   }
 
   if (chunk.sizes) {

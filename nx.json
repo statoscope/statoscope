@@ -20,9 +20,6 @@
     "prod": [
       "!{projectRoot}/**/*.spec.ts",
       "!{projectRoot}/__test__/**/*"
-    ],
-    "production": [
-      "default"
     ]
   },
   "targetDefaults": {
