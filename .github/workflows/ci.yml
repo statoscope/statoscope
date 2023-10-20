@@ -3,8 +3,8 @@ name: CI
 on:
   push:
     branches:
-      - tmp_disabled
-  # pull_request:
+      - master
+  pull_request:
 
 jobs:
   misc:

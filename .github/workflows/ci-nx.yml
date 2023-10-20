@@ -3,7 +3,7 @@ name: CI NX
 on:
   push:
     branches:
-      - master
+      - tmp-disabled
   pull_request:
 
 # Needed for nx-set-shas within nx-cloud-main.yml, when run on the main branch
