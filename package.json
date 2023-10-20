@@ -15,7 +15,7 @@
     "lint:fix": "lerna run lint:fix",
     "build": "lerna run build",
     "all": "lerna run build,test,lint",
-    "prepublishOnly": "npm run all"
+    "prepublishOnly": "NODE_ENV=production npm run all"
   },
   "repository": "https://github.com/statoscope/statoscope",
   "author": {

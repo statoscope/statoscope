@@ -9,7 +9,6 @@
     "watch": "webpack --watch",
     "dev": "STATOSCOPE_DEV=true webpack serve",
     "build:prod": "NODE_ENV=production npm run typecheck && webpack",
-    "prepublishOnly": "npm run build:prod",
     "typecheck": "../../node_modules/.bin/tsc --noEmit"
   },
   "repository": "https://github.com/statoscope/statoscope.git",
