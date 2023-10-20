@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/stats-validator",
-  "version": "5.27.0",
+  "version": "5.28.1",
   "description": "Statoscope stats validator",
   "main": "./dist/index.js",
   "scripts": {
@@ -18,8 +18,8 @@
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
     "@discoveryjs/json-ext": "^0.5.7",
-    "@statoscope/config": "5.27.0",
-    "@statoscope/stats": "5.14.1",
-    "@statoscope/types": "5.27.0"
+    "@statoscope/config": "5.28.1",
+    "@statoscope/stats": "5.28.1",
+    "@statoscope/types": "5.28.1"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/stats-extension-custom-reports",
-  "version": "5.28.0",
+  "version": "5.28.1",
   "description": "Statoscope extension to store custom reports in stats",
   "main": "./dist/index.js",
   "scripts": {
@@ -17,9 +17,9 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "@statoscope/extensions": "5.14.1",
-    "@statoscope/helpers": "5.28.0",
-    "@statoscope/stats": "5.14.1",
-    "@statoscope/types": "5.27.0"
+    "@statoscope/extensions": "5.28.1",
+    "@statoscope/helpers": "5.28.1",
+    "@statoscope/stats": "5.28.1",
+    "@statoscope/types": "5.28.1"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/ui-webpack",
-  "version": "5.28.0",
+  "version": "5.28.1",
   "description": "This package is an alias for @statoscope/webpack-plugin and @statoscope/webpack-plugin",
   "main": "./plugin/index.js",
   "browser": "./src/index.js",
@@ -19,7 +19,7 @@
   "license": "MIT",
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
-    "@statoscope/webpack-plugin": "5.28.0",
-    "@statoscope/webpack-ui": "5.28.0"
+    "@statoscope/webpack-plugin": "5.28.1",
+    "@statoscope/webpack-ui": "5.28.1"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/stats",
-  "version": "5.14.1",
+  "version": "5.28.1",
   "description": "Statoscope stats spec",
   "types": "./spec/index.d.ts",
   "repository": "https://github.com/statoscope/statoscope/",

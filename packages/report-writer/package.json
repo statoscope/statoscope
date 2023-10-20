@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/report-writer",
-  "version": "5.27.0",
+  "version": "5.28.1",
   "description": "Statoscope report writer",
   "main": "./dist/index.js",
   "scripts": {
@@ -18,8 +18,8 @@
   "homepage": "https://github.com/statoscope/statoscope/",
   "dependencies": {
     "@discoveryjs/json-ext": "^0.5.7",
-    "@types/pako": "^2.0.0",
     "@types/node": "^18.0.0",
+    "@types/pako": "^2.0.0",
     "pako": "^2.1.0"
   }
 }

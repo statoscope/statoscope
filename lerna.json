@@ -16,5 +16,5 @@
     "packages/*/**/*.spec.ts",
     "packages/*/**/*.snap"
   ],
-  "version": "5.28.0"
+  "version": "5.28.1"
 }
