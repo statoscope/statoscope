@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.28.1 (20 October 2023)
+
+### Fixes
+
+- `[webpack-model]` - revert chunk-asset linking logic from 5.25.1
+
 ## 5.28.0 (24 September 2023)
 
 ### Features
