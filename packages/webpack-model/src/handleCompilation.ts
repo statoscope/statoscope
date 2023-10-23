@@ -360,15 +360,17 @@ function prepareModule(module: Webpack.RawModule, context: ProcessingContext): v
   const newInnerModules = [];
 
   for (const item of innerModules.values()) {
-    newInnerModules.push(context.rawIndexes.modules.get(item.identifier)!);
-    item.chunks ??= [];
+    const innerModule = context.rawIndexes.modules.get(item.identifier)!;
 
-    if (!item.chunks.length) {
-      item.chunks = module.chunks;
+    newInnerModules.push(innerModule);
+    innerModule.chunks ??= [];
+
+    if (!innerModule.chunks.length) {
+      innerModule.chunks = module.chunks;
 
       for (const chunk of module.chunks) {
         (<Webpack.Chunk>chunk).modules ??= [];
-        (<Webpack.Chunk>chunk).modules!.push(item);
+        (<Webpack.Chunk>chunk).modules!.push(innerModule);
       }
     }
   }
