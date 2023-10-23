@@ -1,5 +1,12 @@
 # Changelog
 
+
+## 5.28.2 (23 October 2023)
+
+### Fixes
+
+- `[webpack-model]` - fix collecting chunks in concat modules content (incorrect list of chunks may occur with this bug) (#223)
+
 ## 5.28.1 (20 October 2023)
 
 ### Fixes
