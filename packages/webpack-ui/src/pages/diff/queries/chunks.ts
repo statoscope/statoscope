@@ -106,14 +106,14 @@ $chunksDiff: {
             $moduleB: $moduleA.identifier.resolveModule($statB.compilation.hash);
             a: {module: $moduleA, hash: $statA.compilation.hash},
             b: {module: $moduleB, hash: $statB.compilation.hash},
-          }).({
+          }).[b.module].({
             $a: a;
             $b: b;
             ...b.module,            
             diff: [{
               type: 'size',
-              a: $a.getModuleSize(hash or #.params.hash).size,
-              b: $b.getModuleSize(hash or #.params.hash).size,
+              a: $a.module.getModuleSize($a.hash, $useCompressedSize).size,
+              b: $b.module.getModuleSize($b.hash, $useCompressedSize).size,
             }].[a != b]
           }).[diff]
       },
