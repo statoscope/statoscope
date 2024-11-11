@@ -419,6 +419,10 @@ function resolveRawChunk(
   chunk: Webpack.Chunk | Webpack.ChunkID,
   context: ProcessingContext,
 ): Webpack.Chunk | null {
+  if (chunk === null) {
+    return null;
+  }
+
   return context.rawIndexes.chunks.get(
     typeof chunk === 'string' || typeof chunk === 'number' ? chunk : chunk.id,
   );
