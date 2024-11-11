@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/webpack-stats-extension-package-info",
-  "version": "5.28.2",
+  "version": "5.28.3",
   "description": "Webpack adapter for @statoscope/stats-extension-package-info",
   "main": "./dist/index.js",
   "scripts": {
@@ -19,7 +19,7 @@
   "dependencies": {
     "@statoscope/stats": "5.28.1",
     "@statoscope/stats-extension-package-info": "5.28.1",
-    "@statoscope/webpack-model": "5.28.2",
+    "@statoscope/webpack-model": "5.28.3",
     "@types/webpack": "^5.0.0"
   },
   "peerDependencies": {
