@@ -60,11 +60,11 @@ const noPackagesDups: WebpackRule<Params> = (ruleParams, data, api): void => {
       exclude: $exclude.[type='package'].name,
       get: <name>,
     })
-    .[instances.size() > 1]
     .({
       ...$,
-      instances: instances.sort(isRoot desc, path.size() asc)
+      instances: instances.[modules.[moduleType not in ['provide-module', 'consume-shared-module']]].sort(isRoot desc, path.size() asc)
     })
+    .[instances.size() > 1]
     .sort(instances.size() desc, name asc)
   })
   .[packages]`;

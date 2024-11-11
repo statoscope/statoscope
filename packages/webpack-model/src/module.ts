@@ -81,6 +81,9 @@ export function nodeModule(path: string | null): NodeModule | null {
   let cached = nodeModuleNameCache.get(path);
 
   if (!cached) {
+    const isMFModule =
+      path.startsWith('consume shared module') ||
+      path.startsWith('provide shared module');
     const lastNodeModulesRx = /.*node_modules[/\\](?:(@.+?)[/\\])?([^/\\]+)/;
     const [input, namespace, name] = path.match(lastNodeModulesRx) || [];
     const isRoot = input
@@ -89,7 +92,7 @@ export function nodeModule(path: string | null): NodeModule | null {
 
     cached = name
       ? <NodeModule>{
-          path: input,
+          path: isMFModule ? path : input,
           name: [namespace, name].filter(Boolean).join('/'),
           isRoot,
         }

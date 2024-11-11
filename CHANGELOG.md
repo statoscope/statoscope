@@ -1,6 +1,13 @@
 # Changelog
 
 
+## 5.28.3 (11 November 2024) (it's alive 🤘)
+
+### Fixes
+
+- `[webpack-model]` - fix node_modules instance path for module-federation modules
+- `[stats-validator-plugin-webpack]` - fix `no-packages-dups`-rule to work with module-federation modules
+
 ## 5.28.2 (23 October 2023)
 
 ### Fixes

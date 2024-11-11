@@ -341,7 +341,7 @@ exports[`preset compressor gzip 1`] = `
               "meta": {
                 "level": 6,
               },
-              "size": 33,
+              "size": 35,
             },
           },
           {
