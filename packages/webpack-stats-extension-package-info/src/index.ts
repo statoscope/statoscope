@@ -29,6 +29,12 @@ export default class WebpackCompressedExtension
   }
 
   handleCompiler(compiler: Compiler, context?: string): void {
+    const isRspack = 'rspackVersion' in compiler.webpack;
+    // todo: support later
+    if (isRspack) {
+      return;
+    }
+
     // @ts-ignore
     context ??= compiler.options.stats?.context ?? compiler.context;
     compiler.hooks.compilation.tap(pluginName, (compilation): void => {

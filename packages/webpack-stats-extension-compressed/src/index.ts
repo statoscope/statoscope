@@ -13,6 +13,8 @@ const { author, homepage, name, version, description } = require('../package.jso
 
 const pluginName = `${name}@${version}`;
 
+type CodeGenerationResult = ReturnType<Module['codeGeneration']>;
+
 export default class WebpackCompressedExtension
   implements StatsExtensionWebpackAdapter<Payload>
 {
@@ -26,6 +28,26 @@ export default class WebpackCompressedExtension
   }
 
   handleCompiler(compiler: Compiler): void {
+    const isRspack = 'rspackVersion' in compiler.webpack;
+    const rspackCodeGenerationResults: Map<string, CodeGenerationResult> = new Map();
+
+    if (isRspack) {
+      compiler.hooks.thisCompilation.tap(pluginName, (compilation) => {
+        rspackCodeGenerationResults.clear();
+
+        compilation.hooks.executeModule.tap(
+          pluginName,
+          ({ moduleObject, codeGenerationResult }) => {
+            if (!moduleObject) {
+              return;
+            }
+
+            rspackCodeGenerationResults.set(moduleObject.id, codeGenerationResult);
+          },
+        );
+      });
+    }
+
     compiler.hooks.done.tapAsync(pluginName, async (stats, cb) => {
       const stack: Compilation[] = [stats.compilation];
       let cursor: Compilation | undefined;
@@ -97,26 +119,47 @@ export default class WebpackCompressedExtension
               this.compressor,
             );
           } else if (cursor.chunkGraph) {
-            // webpack 5
-            for (const type of modulesCursor.getSourceTypes()) {
-              const runtimeChunk = cursor.chunkGraph
-                .getModuleChunks(modulesCursor)
-                .find((chunk) => chunk.runtime);
+            // webpack 5 and rspack
 
-              if (runtimeChunk) {
-                const source = cursor.codeGenerationResults.getSource(
-                  modulesCursor,
-                  runtimeChunk.runtime,
-                  type,
-                );
-                if (!source) {
-                  continue;
-                }
-                const content = source.source();
+            if (isRspack) {
+              // Identifier contains source type and path, but keys in rspackCodeGenerationResults don't contain the source type.
+              const id = modulesCursor.identifier().split('|')[1];
+              const codeGenerationResult = rspackCodeGenerationResults.get(id);
+              if (!codeGenerationResult || !('get' in codeGenerationResult)) {
+                continue;
+              }
+              // @ts-ignore
+              const content = codeGenerationResult.get('javascript') as
+                | undefined
+                | string
+                | Buffer;
+              if (content) {
                 concatenated = Buffer.concat([
                   concatenated,
                   content instanceof Buffer ? content : Buffer.from(content),
                 ]);
+              }
+            } else {
+              for (const type of modulesCursor.getSourceTypes()) {
+                const runtimeChunk = cursor.chunkGraph
+                  .getModuleChunks(modulesCursor)
+                  .find((chunk) => chunk.runtime);
+
+                if (runtimeChunk) {
+                  const source = cursor.codeGenerationResults.getSource(
+                    modulesCursor,
+                    runtimeChunk.runtime,
+                    type,
+                  );
+                  if (!source) {
+                    continue;
+                  }
+                  const content = source.source();
+                  concatenated = Buffer.concat([
+                    concatenated,
+                    content instanceof Buffer ? content : Buffer.from(content),
+                  ]);
+                }
               }
             }
           } else {
