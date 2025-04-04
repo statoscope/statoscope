@@ -1,6 +1,6 @@
 {
   "name": "@statoscope/webpack-stats-extension-package-info",
-  "version": "5.28.3",
+  "version": "5.29.0",
   "description": "Webpack adapter for @statoscope/stats-extension-package-info",
   "main": "./dist/index.js",
   "scripts": {
@@ -19,14 +19,14 @@
   "dependencies": {
     "@statoscope/stats": "5.28.1",
     "@statoscope/stats-extension-package-info": "5.28.1",
-    "@statoscope/webpack-model": "5.28.3",
+    "@statoscope/webpack-model": "5.29.0",
     "@types/webpack": "^5.0.0"
   },
   "devDependencies": {
     "@rspack/core": "^1.0.0"
   },
   "peerDependencies": {
-    "webpack": "^4.0.0 || ^5.0.0",
-    "@rspack/core": "^1.0.0"
+    "@rspack/core": "^1.0.0",
+    "webpack": "^4.0.0 || ^5.0.0"
   }
 }
