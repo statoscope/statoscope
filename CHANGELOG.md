@@ -1,5 +1,20 @@
 # Changelog
 
+## 5.29.0 (04 April 2025)
+
+### Improvements
+
+- `[webpack-stats-extension-compressed]`: support rspack (@dgaponov at #239)
+- `[webpack-stats-extension-compressed]`: support rspack (@dgaponov at #239)
+- `[webpack-ui]`: show bundler type and version (webpack or rspack)
+- `[webpack-model]`: support `rspackVersion` field in compilation type
+- `[webpack-model]`: add `bundler` field in normalized file
+- `[webpack-stats-extension-package-info]`: support rspack
+
+### Fixes
+
+- `[webpack-ui]` - fix changed modules size in diff-page (@ildar-icoosoft at #233)
+- `[webpack-model]`: null-chunks handling (@gear54rus at #235)
 
 ## 5.28.3 (11 November 2024) (it's alive 🤘)
 
