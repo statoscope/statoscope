@@ -1,5 +1,6 @@
 import path from 'path';
 import { Compiler } from 'webpack';
+import { Compiler as RSCompiler } from '@rspack/core';
 import { ExtensionDescriptor } from '@statoscope/stats/spec/extension';
 import Generator, {
   Format,
@@ -29,18 +30,22 @@ export default class WebpackCompressedExtension
   }
 
   handleCompiler(compiler: Compiler, context?: string): void {
+    const isRspack = 'rspackVersion' in compiler.webpack;
+
     // @ts-ignore
     context ??= compiler.options.stats?.context ?? compiler.context;
     compiler.hooks.compilation.tap(pluginName, (compilation): void => {
-      compilation.resolverFactory.hooks.resolver.intercept({
-        // @ts-ignore
-        factory(key: string, hook) {
-          hook!.tap('MyPlugin', (resolver) => {
-            resolver.hooks.result.tap('MyPlugin', handleResolverResult);
-          });
-          return hook;
-        },
-      });
+      if (!isRspack) {
+        compilation.resolverFactory.hooks.resolver.intercept({
+          // @ts-ignore
+          factory(key: string, hook) {
+            hook!.tap('MyPlugin', (resolver) => {
+              resolver.hooks.result.tap('MyPlugin', handleResolverResult);
+            });
+            return hook;
+          },
+        });
+      }
     });
     const handleResolverResult = (result: BaseResolveRequest): BaseResolveRequest => {
       const pkg = result.descriptionFileData as {
@@ -81,14 +86,27 @@ export default class WebpackCompressedExtension
       return result;
     };
 
-    compiler.resolverFactory.hooks.resolver.intercept({
-      // @ts-ignore
-      factory(key: string, hook) {
-        hook!.tap('MyPlugin', (resolver) => {
-          resolver.hooks.result.tap('MyPlugin', handleResolverResult);
+    if (isRspack) {
+      const rscompiler = compiler as unknown as RSCompiler;
+      rscompiler.hooks.normalModuleFactory.tap(pluginName, (normalModuleFactory) => {
+        normalModuleFactory.hooks.createModule.tap(pluginName, (data) => {
+          handleResolverResult({
+            descriptionFileRoot: data.resourceResolveData.descriptionFilePath,
+            descriptionFilePath: data.resourceResolveData.descriptionFilePath,
+            descriptionFileData: data.resourceResolveData.descriptionFileData,
+          });
         });
-        return hook;
-      },
-    });
+      });
+    } else {
+      compiler.resolverFactory.hooks.resolver.intercept({
+        // @ts-ignore
+        factory(key: string, hook) {
+          hook!.tap('MyPlugin', (resolver) => {
+            resolver.hooks.result.tap('MyPlugin', handleResolverResult);
+          });
+          return hook;
+        },
+      });
+    }
   }
 }

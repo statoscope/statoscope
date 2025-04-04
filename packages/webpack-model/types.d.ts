@@ -159,6 +159,7 @@ export type RawStatsFileDescriptor = { name: string; data: Webpack.Compilation }
 
 export type NormalizedFile = {
   name: string;
+  bundler: 'rspack' | 'webpack';
   version: string;
   compilations: NormalizedCompilation[];
   __statoscope?: { descriptor?: StatsDescriptor; extensions?: Extension<unknown>[] };
