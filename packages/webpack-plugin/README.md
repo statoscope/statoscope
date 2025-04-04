@@ -1,9 +1,9 @@
-# Statoscope webpack-plugin
+# Statoscope webpack/rspack-plugin
 
 [![npm version](https://badge.fury.io/js/%40statoscope%2Fwebpack-plugin.svg)](https://badge.fury.io/js/%40statoscope%2Fwebpack-plugin)
 [![Financial Contributors on Open Collective](https://opencollective.com/statoscope/all/badge.svg?label=financial+contributors)](https://opencollective.com/statoscope)
 
-This webpack-plugin generates statoscope HTML-report from webpack-stats.
+This webpack/rspack-plugin generates statoscope HTML-report from webpack/rspack-stats.
 
 ## Installation
 
@@ -18,7 +18,27 @@ npm install @statoscope/webpack-plugin --save-dev
 ```js
 const StatoscopeWebpackPlugin = require('@statoscope/webpack-plugin').default;
 
-config.plugins.push(new StatoscopeWebpackPlugin());
+module.exports = {
+  // ...
+  plugins: [
+    // ...
+    new StatoscopeWebpackPlugin()
+  ]
+};
+```
+
+**rspack.config.ts:**
+
+```js
+import StatoscopeWebpackPlugin from '@statoscope/webpack-plugin';
+
+export default {
+    // ...
+    plugins: [
+        // ...
+        new StatoscopeWebpackPlugin()
+    ]
+};
 ```
 
 There are some options:

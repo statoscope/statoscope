@@ -28,7 +28,9 @@ See [@statoscope/webpack-plugin](https://github.com/statoscope/statoscope/tree/m
 **1\.** Collect the bundle stats with:
 
 ```sh
-webpack --json > stats.json
+webpack --json stats.json
+#or
+rspack --json stats.json
 ```
 
 **2\.** Pass stats file to Statoscope
