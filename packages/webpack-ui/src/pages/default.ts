@@ -57,7 +57,7 @@ export default function (discovery: StatoscopeWidget): void {
                 {
                   when: 'file.version',
                   view: 'badge',
-                  data: `{prefix:'version',text: file.version}`,
+                  data: `{prefix: file.bundler, text: file.version}`,
                 },
               ],
             },

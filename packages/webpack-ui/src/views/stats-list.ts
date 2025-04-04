@@ -18,6 +18,7 @@ export default function (discovery: StatoscopeWidget): void {
         {
           data: `#.stats.compilations.hash.(resolveStat()).[not compilation.shouldHideCompilation()].({
             text: file.name or compilation.hash.slice(0, 7),
+            bundler: file.bundler,
             version: file.version,
             fileName: file.name,
             href: #.id.pageLink(#.page, { ...#.params, hash: compilation.hash }),
@@ -51,7 +52,7 @@ export default function (discovery: StatoscopeWidget): void {
               {
                 view: 'badge',
                 when: 'version',
-                data: `{prefix: 'webpack', text: version}`,
+                data: `{prefix: bundler, text: version}`,
               },
               {
                 view: 'badge',

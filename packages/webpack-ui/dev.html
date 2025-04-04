@@ -4,42 +4,52 @@
   <meta charset="UTF-8">
   <title>Statoscope dev sandbox</title>
   <style>
-      html, body {
-          padding: 0;
-          margin: 0;
-          height: 100%;
-          border: none;
-          -webkit-text-size-adjust: 100%;
-      }
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      border: none;
+      -webkit-text-size-adjust: 100%;
+    }
 
-      .drop-zone {
-          position: absolute;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          top: 20vh;
-          bottom: 20vh;
-          left: 20vh;
-          right: 20vh;
-          border-radius: 10px;
-          font: 2em Helvetica, sans-serif;
-      }
+    .discovery {
+      height: 100vh;
+    }
 
-      .drop-zone.awaiting {
-          border: 5px dashed gray;
-      }
+    .drop-zone {
+      cursor: pointer;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      top: 20vh;
+      bottom: 20vh;
+      left: 20vh;
+      right: 20vh;
+      border-radius: 10px;
+      font: 2em Helvetica, sans-serif;
+    }
 
-      .progress-container {
-          font-size: 0.5em;
-          display: flex;
-          flex-direction: column;
-          gap: 15px;
-      }
+    .drop-zone.awaiting {
+      border: 5px dashed gray;
+    }
+
+    .progress-container {
+      font-size: 0.5em;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .file-input {
+      display: none;
+    }
   </style>
 </head>
 <body>
-
+<input class="file-input" type="file"/>
 <div class="drop-zone awaiting">
   <div class="text">
     Drop stats right here 👇
@@ -53,6 +63,7 @@
   const dropZone = document.querySelector(".drop-zone");
   const dropZoneText = document.querySelector(".drop-zone .text");
   const progressContainer = document.querySelector(".progress-container");
+  const fileInput = document.querySelector(".file-input");
 
   function setError(e, filename) {
     dropZoneText.innerHTML = `<pre>Error\n${[filename, e.message, e.stack].map(Boolean).join("\n")}</pre>`;
@@ -81,23 +92,14 @@
     }
   }
 
-  makeProgressBar.set = new Set();
-
-  const onDragOver = (e) => {
-    e.preventDefault();
-  };
-
-  const onDrop = async (e) => {
-    e.preventDefault();
-
-    startLoading();
-
-    if (e.dataTransfer.files.length) {
+  async function loadFiles(files) {
+    if (files.length) {
+      startLoading();
       const rawData = [];
 
       dropZoneText.textContent = "";
 
-      await Promise.all([...e.dataTransfer.files].map(async file => {
+      await Promise.all([...files].map(async file => {
         const progressbar = makeProgressBar();
 
         progressContainer.append(progressbar.el);
@@ -123,10 +125,24 @@
         setError(e);
       }
     }
+  }
+
+  makeProgressBar.set = new Set();
+
+  const onDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const onDrop = (e) => {
+    e.preventDefault();
+
+    loadFiles(e.dataTransfer.files);
   };
 
   document.addEventListener("dragover", onDragOver);
   document.addEventListener("drop", onDrop);
+  dropZone.addEventListener('click', () => fileInput.click());
+  fileInput.addEventListener('change', () => loadFiles(fileInput.files))
 </script>
 </body>
 </html>

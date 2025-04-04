@@ -6,9 +6,13 @@
   "types": "./types.d.ts",
   "scripts": {
     "build": "npm run typecheck && webpack",
+    "build:rspack": "npm run typecheck && rspack build",
     "watch": "webpack --watch",
+    "watch:rspack": "rspack --watch",
     "dev": "STATOSCOPE_DEV=true webpack serve",
+    "dev:rspack": "STATOSCOPE_DEV=true rspack serve",
     "build:prod": "NODE_ENV=production npm run typecheck && webpack",
+    "build:rspack:prod": "NODE_ENV=production npm run typecheck && rspack build",
     "typecheck": "../../node_modules/.bin/tsc --noEmit"
   },
   "repository": "https://github.com/statoscope/statoscope.git",
@@ -29,6 +33,8 @@
     "@carrotsearch/foamtree": "^3.5.0",
     "@discoveryjs/discovery": "^1.0.0-beta.78",
     "@popperjs/core": "^2.11.8",
+    "@rspack/cli": "^1.3.2",
+    "@rspack/core": "^1.3.2",
     "@statoscope/helpers": "5.28.1",
     "@statoscope/stats": "5.28.1",
     "@statoscope/stats-extension-compressed": "5.28.1",
