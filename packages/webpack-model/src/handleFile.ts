@@ -75,7 +75,11 @@ export function handleRawFile(
 
   const file: NormalizedFile = {
     name: rawStatsFileDescriptor.name,
-    version: rawStatsFileDescriptor.data.version || 'unknown',
+    bundler: rawStatsFileDescriptor.data.rspackVersion ? 'rspack' : 'webpack',
+    version:
+      rawStatsFileDescriptor.data.rspackVersion ||
+      rawStatsFileDescriptor.data.version ||
+      'unknown',
     compilations: [],
     __statoscope: rawStatsFileDescriptor.data.__statoscope,
   };

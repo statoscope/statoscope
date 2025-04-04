@@ -28,7 +28,7 @@ test('should work', () => {
       "meta": {
         "level": 6,
       },
-      "size": 33,
+      "size": 35,
     }
   `);
   expect(api('foo-compilation', 'bar-resource')).toMatchInlineSnapshot(`

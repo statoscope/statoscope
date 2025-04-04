@@ -82,6 +82,7 @@ export declare namespace Webpack {
   type Compilation = {
     time?: number;
     builtAt?: number;
+    rspackVersion?: string;
     version?: string;
     name?: string;
     hash?: string;
