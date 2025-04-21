@@ -145,12 +145,6 @@ export default function modulesToFoamTree(
 
   for (const module of modules) {
     handleModule(root, module, getModuleSize);
-
-    if (module.modules) {
-      for (const innerModule of module.modules) {
-        handleModule(root, innerModule, getModuleSize);
-      }
-    }
   }
 
   return root;
