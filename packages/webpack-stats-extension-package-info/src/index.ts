@@ -1,6 +1,6 @@
 import path from 'path';
-import { Compiler } from 'webpack';
-import { Compiler as RSCompiler } from '@rspack/core';
+import type { Compiler } from 'webpack';
+import type { Compiler as RSCompiler } from '@rspack/core';
 import { ExtensionDescriptor } from '@statoscope/stats/spec/extension';
 import Generator, {
   Format,
