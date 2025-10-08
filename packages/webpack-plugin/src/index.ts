@@ -88,10 +88,16 @@ export default class StatoscopeWebpackPlugin {
       extension.handleCompiler(compiler, context);
     }
 
+    const logger = compiler.getInfrastructureLogger(pluginName);
+
     compiler.hooks.done.tapAsync(
       { stage: STATOSCOPE_STAGE_COMPILER_DONE, name: pluginName },
       async (stats, cb) => {
         if (compiler.watchMode && !options.watchMode) {
+          logger.info(
+            `webpack/rspack compiler is in watch mode, Statoscope report will not be generated.` +
+              ` To enable report generation in watch mode set "watchMode" option to "true".`,
+          );
           return cb();
         }
 
@@ -132,14 +138,14 @@ export default class StatoscopeWebpackPlugin {
 
         const webpackStatsStream = stringifyStream(
           statsObj,
-          makeReplacer(context, '.', ['context', 'source'])
+          makeReplacer(context, '.', ['context', 'source']),
         );
         let statsFileOutputStream: Writable | undefined;
         let resolvedSaveStatsTo: string | undefined;
 
         if (options.saveStatsTo) {
           resolvedSaveStatsTo = path.resolve(
-            this.interpolate(options.saveStatsTo, stats.compilation, statsObj.name)
+            this.interpolate(options.saveStatsTo, stats.compilation, statsObj.name),
           );
           fs.mkdirSync(path.dirname(resolvedSaveStatsTo), { recursive: true });
           statsFileOutputStream = fs.createWriteStream(resolvedSaveStatsTo);
@@ -155,12 +161,12 @@ export default class StatoscopeWebpackPlugin {
           filename: resolvedSaveStatsTo,
           stream: stringifyStream(
             statsObj,
-            makeReplacer(context, '.', ['context', 'source'])
+            makeReplacer(context, '.', ['context', 'source']),
           ),
         });
         const htmlReportPath = this.getHTMLReportPath();
         const resolvedHTMLReportPath = path.resolve(
-          this.interpolate(htmlReportPath, stats.compilation, statsObj.name)
+          this.interpolate(htmlReportPath, stats.compilation, statsObj.name),
         );
 
         try {
@@ -178,7 +184,7 @@ export default class StatoscopeWebpackPlugin {
         } catch (e) {
           cb(e as Error);
         }
-      }
+      },
     );
   }
 
@@ -229,7 +235,7 @@ export default class StatoscopeWebpackPlugin {
           stream: value.stream,
         };
       }),
-      outputPath
+      outputPath,
     );
   }
 
