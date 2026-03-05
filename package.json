@@ -54,7 +54,7 @@
     "eslint-plugin-prettier": "^5.0.0",
     "husky": "^8.0.3",
     "jest": "^29.7.0",
-    "lerna": "^7.3.0",
+    "lerna": "^9.0.5",
     "lint-staged": "^14.0.1",
     "nx": "^16.10.0",
     "nx-cloud": "^16.4.0",
