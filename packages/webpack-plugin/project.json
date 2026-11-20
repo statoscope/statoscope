@@ -3,6 +3,7 @@
   "name": "webpack-plugin",
   "projectType": "library",
   "targets": {
+    "test": {},
     "build": {}
   }
 }
