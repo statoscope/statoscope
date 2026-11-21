@@ -8,7 +8,7 @@ import { Compilation, Compiler } from 'webpack';
 import statsPackage from '@statoscope/stats/package.json';
 import WebpackCompressedExtension from '@statoscope/webpack-stats-extension-compressed';
 import WebpackPackageInfoExtension from '@statoscope/webpack-stats-extension-package-info';
-import { CompressFunction } from '@statoscope/stats-extension-compressed/dist/generator';
+import { CompressorOrPreset } from '@statoscope/stats-extension-compressed/dist/generator';
 import normalizeCompilation from '@statoscope/webpack-model/dist/normalizeCompilation';
 import { StatoscopeMeta } from '@statoscope/webpack-model/webpack';
 import { makeReplacer, transform } from '@statoscope/report-writer/dist/utils';
@@ -36,7 +36,7 @@ export type Options = {
   statsOptions?: Record<string, unknown>;
   watchMode: boolean;
   open: false | 'dir' | 'file';
-  compressor: false | 'gzip' | CompressFunction;
+  compressor: false | CompressorOrPreset;
   reports?: Report<unknown, unknown>[];
   extensions: StatsExtensionWebpackAdapter<unknown>[];
 };
